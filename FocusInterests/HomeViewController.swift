@@ -17,6 +17,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "FOCUS PINS"
+        
+        navigationController?.navigationBar.barTintColor = UIColor.primaryGreen()
+        
         segmentedControl.backgroundColor = UIColor.primaryGreen()
         segmentedControl.tintColor = UIColor.white
         segmentedControl.setImage(UIImage(named: "users"), forSegmentAt: 0)
@@ -26,10 +31,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cellNib = UINib(nibName: "HomViewControllerCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "HomeCell")
         
-        let item1 = ItemOfInterest(itemName: "Barre Burger Bar", features: [Constants.dummyItemsOfInterest.feature2, Constants.dummyItemsOfInterest.feature4, Constants.dummyItemsOfInterest.feature6], mainImage: UIImage(named: "Shroom"), distance: "8.5 mi")
-        let item2 = ItemOfInterest(itemName: "Jill's Pottery Studio", features: [Constants.dummyItemsOfInterest.feature5, Constants.dummyItemsOfInterest.feature1], mainImage: UIImage(named: "lady"), distance: "3.9 mi")
-        let item3 = ItemOfInterest(itemName: "The Fireworks Store", features: [Constants.dummyItemsOfInterest.feature3, Constants.dummyItemsOfInterest.feature4, Constants.dummyItemsOfInterest.feature5], mainImage: UIImage(named: "tinyB"), distance: "0.5 mi")
-        let item4 = ItemOfInterest(itemName: "Downtown Ducati", features: [Constants.dummyItemsOfInterest.feature3, Constants.dummyItemsOfInterest.feature1], mainImage: UIImage(named: "Humes"), distance: "8.4 mi")
+        let item1 = ItemOfInterest(itemName: "Barre Burger Bar", features: [Constants.dummyFeatures.feature2, Constants.dummyFeatures.feature4, Constants.dummyFeatures.feature6], mainImage: UIImage(named: "Shroom"), distance: "8.5 mi")
+        let item2 = ItemOfInterest(itemName: "Jill's Pottery Studio", features: [Constants.dummyFeatures.feature5, Constants.dummyFeatures.feature1], mainImage: UIImage(named: "lady"), distance: "3.9 mi")
+        let item3 = ItemOfInterest(itemName: "The Fireworks Store", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature4, Constants.dummyFeatures.feature5], mainImage: UIImage(named: "tinyB"), distance: "0.5 mi")
+        let item4 = ItemOfInterest(itemName: "Downtown Ducati", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature1], mainImage: UIImage(named: "Humes"), distance: "8.4 mi")
         
         items = [item1, item2, item3, item4]
         
@@ -44,6 +49,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     @IBAction func segmentedControlChanged(_ sender: Any) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            self.title = "People"
+        } else if segmentedControl.selectedSegmentIndex == 1 {
+            self.title = "Places"
+        } else {
+            self.title = "Events"
+        }
     }
 
     // TableView Datasource
@@ -59,7 +71,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // TableView Delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 78
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

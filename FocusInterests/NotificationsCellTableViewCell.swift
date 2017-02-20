@@ -10,6 +10,11 @@ import UIKit
 
 class NotificationsCellTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var cellImage: UIImageView!
+    @IBOutlet weak var cellTitleLabel: UILabel!
+    @IBOutlet weak var cellActionLabel: UILabel!
+    @IBOutlet weak var eventLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +27,11 @@ class NotificationsCellTableViewCell: UITableViewCell {
     }
     
     func configure(notification: Notification) {
-        
+        self.cellImage.image = notification.sender?.userImage
+        self.cellImage.roundedImage()
+        self.cellTitleLabel.text = notification.sender?.username!
+        self.cellActionLabel.text = notification.type?.rawValue
+        self.eventLabel.text = notification.item?.itemName!
     }
     
 }

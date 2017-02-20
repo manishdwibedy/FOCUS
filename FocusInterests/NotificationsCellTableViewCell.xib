@@ -64,6 +64,12 @@
                     <constraint firstAttribute="trailingMargin" secondItem="PcR-ld-VhR" secondAttribute="trailing" id="zld-8F-hNP"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="cellActionLabel" destination="KxZ-Lt-Esb" id="5Tm-Wy-Vqf"/>
+                <outlet property="cellImage" destination="Svd-Z3-ERp" id="U2u-1a-rFy"/>
+                <outlet property="cellTitleLabel" destination="nQE-Pc-yQY" id="gG5-Lv-1ea"/>
+                <outlet property="eventLabel" destination="PcR-ld-VhR" id="RhW-de-hfc"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="39"/>
         </tableViewCell>
     </objects>

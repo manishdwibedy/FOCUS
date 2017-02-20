@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import GoogleMaps
+import GooglePlaces
 
 class MapViewController: UIViewController {
     @IBOutlet weak var toolbar: UIToolbar!
@@ -15,6 +17,8 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.primaryGreen()
         toolbar.barTintColor = UIColor.primaryGreen()
     }
 }

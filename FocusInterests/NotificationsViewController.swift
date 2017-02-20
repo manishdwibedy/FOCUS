@@ -14,8 +14,13 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        self.title = "NOTIFICATIONS"
+        
+        notifications = [Constants.notifications.notification1, Constants.notifications.notification2, Constants.notifications.notification3]
+        
+        navigationController?.navigationBar.barTintColor = UIColor.primaryGreen()
 
         let cellNib = UINib(nibName: "NotificationsCellTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: Constants.tableCellReuseIDs.notificationCellId)
@@ -38,6 +43,15 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.tableCellReuseIDs.notificationCellId) as? NotificationsCellTableViewCell
         cell!.configure(notification: (notifications?[indexPath.row])!)
         return cell!
+    }
+    
+    // TableView Delegate 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 78
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

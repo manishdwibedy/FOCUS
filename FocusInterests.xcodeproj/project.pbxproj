@@ -15,9 +15,12 @@
 		D21317FD1E5B507C00140323 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317FC1E5B507C00140323 /* Feature.swift */; };
 		D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */; };
 		D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */; };
+		D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C61E5B7E7800025EE9 /* SettingsViewController.swift */; };
+		D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D230D8C71E5B7E7800025EE9 /* SettingsViewController.xib */; };
+		D230D8CB1E5B868C00025EE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8CA1E5B868C00025EE9 /* User.swift */; };
+		D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8CC1E5B875300025EE9 /* Interest.swift */; };
 		D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252205C1E5A3C9E00EC2014 /* MapViewController.swift */; };
 		D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220601E5A436300EC2014 /* TabBar+Extensions.swift */; };
-		D25220641E5A4E0F00EC2014 /* Header.m in Sources */ = {isa = PBXBuildFile; fileRef = D25220631E5A4E0F00EC2014 /* Header.m */; };
 		D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220651E5A586900EC2014 /* BaseTabBarController.swift */; };
 		D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220671E5A846100EC2014 /* NotificationsViewController.swift */; };
 		D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */; };
@@ -67,10 +70,13 @@
 		D21317FC1E5B507C00140323 /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		D230D8C61E5B7E7800025EE9 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D230D8C71E5B7E7800025EE9 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		D230D8CA1E5B868C00025EE9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D230D8CC1E5B875300025EE9 /* Interest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interest.swift; sourceTree = "<group>"; };
 		D252205C1E5A3C9E00EC2014 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D25220601E5A436300EC2014 /* TabBar+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TabBar+Extensions.swift"; sourceTree = "<group>"; };
 		D25220621E5A4E0E00EC2014 /* FocusInterests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FocusInterests-Bridging-Header.h"; sourceTree = "<group>"; };
-		D25220631E5A4E0F00EC2014 /* Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Header.m; sourceTree = "<group>"; };
 		D25220651E5A586900EC2014 /* BaseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		D25220671E5A846100EC2014 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -153,6 +159,8 @@
 				D25220701E5A895E00EC2014 /* Notifications.swift */,
 				D21317FA1E5B4F7B00140323 /* ItemOfInterest.swift */,
 				D21317FC1E5B507C00140323 /* Feature.swift */,
+				D230D8CA1E5B868C00025EE9 /* User.swift */,
+				D230D8CC1E5B875300025EE9 /* Interest.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -195,7 +203,6 @@
 				D2B9B04B1E5A047C0002F1B1 /* LaunchScreen.storyboard */,
 				D2B9B04E1E5A047C0002F1B1 /* Info.plist */,
 				D2B9B0461E5A047C0002F1B1 /* FocusInterests.xcdatamodeld */,
-				D25220631E5A4E0F00EC2014 /* Header.m */,
 				D25220621E5A4E0E00EC2014 /* FocusInterests-Bridging-Header.h */,
 			);
 			path = FocusInterests;
@@ -245,6 +252,8 @@
 				D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */,
 				D252205C1E5A3C9E00EC2014 /* MapViewController.swift */,
 				D25220671E5A846100EC2014 /* NotificationsViewController.swift */,
+				D230D8C61E5B7E7800025EE9 /* SettingsViewController.swift */,
+				D230D8C71E5B7E7800025EE9 /* SettingsViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -395,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
+				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
@@ -570,7 +580,6 @@
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
-				D25220641E5A4E0F00EC2014 /* Header.m in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
@@ -578,6 +587,9 @@
 				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
+				D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */,
+				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,
+				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
