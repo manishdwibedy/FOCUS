@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
 		96F2D75D974CE24C9A358244 /* Pods_FocusInterestsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */; };
+		D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317F61E5B47D300140323 /* HomViewControllerCell.swift */; };
+		D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21317F71E5B47D300140323 /* HomViewControllerCell.xib */; };
+		D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317FA1E5B4F7B00140323 /* ItemOfInterest.swift */; };
+		D21317FD1E5B507C00140323 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317FC1E5B507C00140323 /* Feature.swift */; };
+		D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */; };
+		D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */; };
 		D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252205C1E5A3C9E00EC2014 /* MapViewController.swift */; };
 		D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220601E5A436300EC2014 /* TabBar+Extensions.swift */; };
 		D25220641E5A4E0F00EC2014 /* Header.m in Sources */ = {isa = PBXBuildFile; fileRef = D25220631E5A4E0F00EC2014 /* Header.m */; };
@@ -55,6 +61,12 @@
 		4DCECAEA41CAC4F1781A9ADD /* Pods-FocusInterests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.release.xcconfig"; sourceTree = "<group>"; };
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterestsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D21317F61E5B47D300140323 /* HomViewControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomViewControllerCell.swift; sourceTree = "<group>"; };
+		D21317F71E5B47D300140323 /* HomViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomViewControllerCell.xib; sourceTree = "<group>"; };
+		D21317FA1E5B4F7B00140323 /* ItemOfInterest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemOfInterest.swift; sourceTree = "<group>"; };
+		D21317FC1E5B507C00140323 /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
+		D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		D252205C1E5A3C9E00EC2014 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D25220601E5A436300EC2014 /* TabBar+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TabBar+Extensions.swift"; sourceTree = "<group>"; };
 		D25220621E5A4E0E00EC2014 /* FocusInterests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FocusInterests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -139,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				D25220701E5A895E00EC2014 /* Notifications.swift */,
+				D21317FA1E5B4F7B00140323 /* ItemOfInterest.swift */,
+				D21317FC1E5B507C00140323 /* Feature.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -211,6 +225,7 @@
 				D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */,
 				D25220601E5A436300EC2014 /* TabBar+Extensions.swift */,
 				D25220651E5A586900EC2014 /* BaseTabBarController.swift */,
+				D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -219,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				D25220731E5A8A7400EC2014 /* Constants.swift */,
+				D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -238,6 +254,8 @@
 			children = (
 				D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */,
 				D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */,
+				D21317F61E5B47D300140323 /* HomViewControllerCell.swift */,
+				D21317F71E5B47D300140323 /* HomViewControllerCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -380,6 +398,7 @@
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
+				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,16 +562,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
+				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
 				D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */,
 				D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
+				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				D25220641E5A4E0F00EC2014 /* Header.m in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
+				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
+				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,
+				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
