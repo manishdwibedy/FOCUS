@@ -10,9 +10,11 @@ import Foundation
 import UIKit
 
 class MapViewController: UIViewController {
+    @IBOutlet weak var toolbar: UIToolbar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.setBarColor()
+        
+        toolbar.barTintColor = UIColor.primaryGreen()
     }
 }

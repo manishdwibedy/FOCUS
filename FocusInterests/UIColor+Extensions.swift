@@ -12,7 +12,7 @@ import UIKit
 extension UIColor {
     
     class func primaryGreen() -> UIColor {
-        let primaryGreen = UIColor(colorLiteralRed: 22.0/255, green: 167.0/255, blue: 12.0/277.0, alpha: 1)
+        let primaryGreen = UIColor(colorLiteralRed: 43.0/255, green: 197.0/255, blue: 12.0/277.0, alpha: 1)
         return primaryGreen
     }
 }

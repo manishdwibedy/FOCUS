@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationCell" rowHeight="76" id="KGk-i7-Jjw" customClass="NotificationsCellTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="319" height="76"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="319" height="75"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Svd-Z3-ERp">
+                        <rect key="frame" x="8" y="4" width="68" height="68"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="68" id="cIC-5h-g91"/>
+                            <constraint firstAttribute="height" constant="68" id="oer-0r-v61"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-Pc-yQY">
+                        <rect key="frame" x="84" y="4" width="227" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="zSC-Od-DMg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxZ-Lt-Esb">
+                        <rect key="frame" x="84" y="28" width="227" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcR-ld-VhR">
+                        <rect key="frame" x="84" y="51" width="227" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="nQE-Pc-yQY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="1xj-AF-IWU"/>
+                    <constraint firstItem="KxZ-Lt-Esb" firstAttribute="top" secondItem="nQE-Pc-yQY" secondAttribute="bottom" constant="2" id="CMp-Rs-FN4"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="Svd-Z3-ERp" secondAttribute="leading" id="Cs3-WW-CGz"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="KxZ-Lt-Esb" secondAttribute="trailing" id="HDM-iy-7UW"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Svd-Z3-ERp" secondAttribute="bottom" constant="-4" id="O3M-Dr-G9s"/>
+                    <constraint firstItem="PcR-ld-VhR" firstAttribute="top" secondItem="KxZ-Lt-Esb" secondAttribute="bottom" constant="2" id="OyB-qg-PSD"/>
+                    <constraint firstItem="nQE-Pc-yQY" firstAttribute="leading" secondItem="Svd-Z3-ERp" secondAttribute="trailing" constant="8" id="SPO-YD-nFl"/>
+                    <constraint firstItem="Svd-Z3-ERp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="bzc-rq-ltY"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="nQE-Pc-yQY" secondAttribute="trailing" id="iND-43-Og1"/>
+                    <constraint firstItem="KxZ-Lt-Esb" firstAttribute="leading" secondItem="Svd-Z3-ERp" secondAttribute="trailing" constant="8" id="jPT-HR-AoS"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="PcR-ld-VhR" secondAttribute="bottom" constant="-4" id="r0V-TW-kvy"/>
+                    <constraint firstItem="PcR-ld-VhR" firstAttribute="leading" secondItem="Svd-Z3-ERp" secondAttribute="trailing" constant="8" id="tQS-PZ-qyK"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="PcR-ld-VhR" secondAttribute="trailing" id="zld-8F-hNP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="33.5" y="39"/>
+        </tableViewCell>
+    </objects>
+</document>

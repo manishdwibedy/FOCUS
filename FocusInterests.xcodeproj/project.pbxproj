@@ -10,9 +10,14 @@
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
 		96F2D75D974CE24C9A358244 /* Pods_FocusInterestsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */; };
 		D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252205C1E5A3C9E00EC2014 /* MapViewController.swift */; };
-		D252205F1E5A3D0D00EC2014 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252205E1E5A3D0D00EC2014 /* NotificationsViewController.swift */; };
 		D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220601E5A436300EC2014 /* TabBar+Extensions.swift */; };
 		D25220641E5A4E0F00EC2014 /* Header.m in Sources */ = {isa = PBXBuildFile; fileRef = D25220631E5A4E0F00EC2014 /* Header.m */; };
+		D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220651E5A586900EC2014 /* BaseTabBarController.swift */; };
+		D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220671E5A846100EC2014 /* NotificationsViewController.swift */; };
+		D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */; };
+		D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */; };
+		D25220711E5A895E00EC2014 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220701E5A895E00EC2014 /* Notifications.swift */; };
+		D25220741E5A8A7400EC2014 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220731E5A8A7400EC2014 /* Constants.swift */; };
 		D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B03F1E5A047C0002F1B1 /* AppDelegate.swift */; };
 		D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */; };
 		D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2B9B0431E5A047C0002F1B1 /* Main.storyboard */; };
@@ -51,10 +56,15 @@
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterestsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D252205C1E5A3C9E00EC2014 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		D252205E1E5A3D0D00EC2014 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		D25220601E5A436300EC2014 /* TabBar+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TabBar+Extensions.swift"; sourceTree = "<group>"; };
 		D25220621E5A4E0E00EC2014 /* FocusInterests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FocusInterests-Bridging-Header.h"; sourceTree = "<group>"; };
 		D25220631E5A4E0F00EC2014 /* Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Header.m; sourceTree = "<group>"; };
+		D25220651E5A586900EC2014 /* BaseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		D25220671E5A846100EC2014 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsCellTableViewCell.swift; sourceTree = "<group>"; };
+		D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationsCellTableViewCell.xib; sourceTree = "<group>"; };
+		D25220701E5A895E00EC2014 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		D25220731E5A8A7400EC2014 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D2B9B03C1E5A047C0002F1B1 /* FocusInterests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusInterests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B9B03F1E5A047C0002F1B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +135,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D252206F1E5A894300EC2014 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D25220701E5A895E00EC2014 /* Notifications.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		D2B9B0331E5A047C0002F1B1 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +168,7 @@
 		D2B9B03E1E5A047C0002F1B1 /* FocusInterests */ = {
 			isa = PBXGroup;
 			children = (
+				D252206F1E5A894300EC2014 /* Models */,
 				D2B9B0751E5A0A410002F1B1 /* Google */,
 				D2B9B0741E5A0A320002F1B1 /* Amazon */,
 				D2B9B0731E5A0A270002F1B1 /* Views */,
@@ -191,6 +210,7 @@
 			children = (
 				D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */,
 				D25220601E5A436300EC2014 /* TabBar+Extensions.swift */,
+				D25220651E5A586900EC2014 /* BaseTabBarController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -198,6 +218,7 @@
 		D2B9B0711E5A0A160002F1B1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D25220731E5A8A7400EC2014 /* Constants.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -207,7 +228,7 @@
 			children = (
 				D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */,
 				D252205C1E5A3C9E00EC2014 /* MapViewController.swift */,
-				D252205E1E5A3D0D00EC2014 /* NotificationsViewController.swift */,
+				D25220671E5A846100EC2014 /* NotificationsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -215,6 +236,8 @@
 		D2B9B0731E5A0A270002F1B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */,
+				D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -353,6 +376,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
@@ -518,14 +542,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
+				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
 				D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */,
+				D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				D25220641E5A4E0F00EC2014 /* Header.m in Sources */,
-				D252205F1E5A3D0D00EC2014 /* NotificationsViewController.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
+				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
+				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

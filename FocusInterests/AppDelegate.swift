@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        UITabBar.appearance().tintColor = UIColor.primaryGreen()
-        UITabBar.appearance().backgroundColor = UIColor.primaryGreen()
+        
+        UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
+        
         
         let googleMapsAPIKey = "AIzaSyCcfvYP6NRSYLJkvf3SAmIGBiQfdLWRqEM"
         GMSServices.provideAPIKey(googleMapsAPIKey)

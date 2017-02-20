@@ -12,7 +12,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UITabBar.appearance().backgroundColor = UIColor.primaryGreen()
+        let nav = self.tabBarController as! CustomTabController
+        nav.setBarColor()
+        
     }
 
     override func didReceiveMemoryWarning() {

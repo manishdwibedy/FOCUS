@@ -1,5 +1,5 @@
 //
-//  TabBar+Extensions.swift
+//  Constants.swift
 //  FocusInterests
 //
 //  Created by jonathan thornburg on 2/19/17.
@@ -7,9 +7,10 @@
 //
 
 import Foundation
-import UIKit
 
-extension UITabBar {
+struct Constants {
     
-    
+    struct tableCellReuseIDs {
+        public static let notificationCellId = "NotificationCell"
+    }
 }

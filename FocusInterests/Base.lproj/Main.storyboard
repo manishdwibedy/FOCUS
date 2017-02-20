@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="818" y="139"/>
         </scene>
-        <!--Pins-->
+        <!--Map View Controller-->
         <scene sceneID="Xqm-b7-zmW">
             <objects>
-                <viewController id="VEY-4A-vsU" sceneMemberID="viewController">
+                <viewController id="VEY-4A-vsU" customClass="MapViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qds-eU-oPP"/>
                         <viewControllerLayoutGuide type="bottom" id="eXg-e1-3g9"/>
@@ -41,28 +42,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05W-Qw-2Y5" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="154" width="375" height="464"/>
+                                <rect key="frame" x="0.0" y="198" width="375" height="420"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHX-SD-GQM">
+                                <rect key="frame" x="-4" y="64" width="383" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="v9R-1g-YLv"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="nHX-SD-GQM" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leadingMargin" constant="-20" id="0T6-zl-kzm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nHX-SD-GQM" secondAttribute="trailing" constant="-20" id="2vv-Vk-ySY"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="05W-Qw-2Y5" secondAttribute="bottom" id="OYA-LD-a0t"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="PiH-md-xD6"/>
                             <constraint firstAttribute="trailing" secondItem="05W-Qw-2Y5" secondAttribute="trailing" id="QHX-A2-EoY"/>
+                            <constraint firstItem="nHX-SD-GQM" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="gtS-Dd-M7L"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" constant="134" id="ooj-Re-caJ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Pins" image="location" selectedImage="location" id="Ua7-A1-F28"/>
+                    <navigationItem key="navigationItem" id="pq0-gQ-8Y0"/>
+                    <connections>
+                        <outlet property="toolbar" destination="nHX-SD-GQM" id="EIt-Ze-3K9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FtO-Ym-EPy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="805.54722638680664"/>
+            <point key="canvasLocation" x="2015.2" y="805.54722638680664"/>
         </scene>
-        <!--Notifications-->
+        <!--Notifications View Controller-->
         <scene sceneID="K4W-gl-rgU">
             <objects>
-                <viewController id="Pet-Om-GPn" sceneMemberID="viewController">
+                <viewController id="Pet-Om-GPn" customClass="NotificationsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uof-15-ToU"/>
                         <viewControllerLayoutGuide type="bottom" id="U0p-d6-5AN"/>
@@ -70,18 +83,33 @@
                     <view key="view" contentMode="scaleToFill" id="9ji-Sd-OMG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qb9-gz-EmJ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="U0p-d6-5AN" firstAttribute="top" secondItem="Qb9-gz-EmJ" secondAttribute="bottom" id="2CF-Bx-2sO"/>
+                            <constraint firstItem="Qb9-gz-EmJ" firstAttribute="top" secondItem="uof-15-ToU" secondAttribute="bottom" id="Y00-cZ-wSq"/>
+                            <constraint firstItem="Qb9-gz-EmJ" firstAttribute="leading" secondItem="9ji-Sd-OMG" secondAttribute="leading" id="egj-Ut-2Xh"/>
+                            <constraint firstAttribute="trailing" secondItem="Qb9-gz-EmJ" secondAttribute="trailing" id="ziN-IQ-yoO"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
+                    <navigationItem key="navigationItem" id="ZfN-7A-JU4"/>
+                    <connections>
+                        <outlet property="tableView" destination="Qb9-gz-EmJ" id="hvO-cx-jfj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebc-Eh-QSj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-553" y="806"/>
+            <point key="canvasLocation" x="168.80000000000001" y="805.54722638680664"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Custom Tab Controller-->
         <scene sceneID="pBE-b2-Xh1">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="1Yr-9D-iDO" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="1Yr-9D-iDO" customClass="CustomTabController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="D0p-Ug-QEa">
                         <autoresizingMask key="autoresizingMask"/>
@@ -89,13 +117,51 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="yH6-bT-Rif"/>
-                        <segue destination="VEY-4A-vsU" kind="relationship" relationship="viewControllers" id="buw-V5-vNW"/>
-                        <segue destination="Pet-Om-GPn" kind="relationship" relationship="viewControllers" id="Uj9-fU-xk7"/>
+                        <segue destination="3SY-x9-QeC" kind="relationship" relationship="viewControllers" id="buw-V5-vNW"/>
+                        <segue destination="Qpo-3D-Prx" kind="relationship" relationship="viewControllers" id="Uj9-fU-xk7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuo-o9-ZwO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+        <!--Pins-->
+        <scene sceneID="FZf-5N-1nW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3SY-x9-QeC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Pins" image="location" selectedImage="location" id="Ua7-A1-F28"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2wp-HT-HcO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VEY-4A-vsU" kind="relationship" relationship="rootViewController" id="RCW-Jw-tzY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0nJ-4b-nDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="805.54722638680664"/>
+        </scene>
+        <!--Notifications-->
+        <scene sceneID="4M2-WN-Dgo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpo-3D-Prx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ePA-XN-yOt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Pet-Om-GPn" kind="relationship" relationship="rootViewController" id="mPW-AK-As3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C5b-eD-hva" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-554.39999999999998" y="805.54722638680664"/>
         </scene>
     </scenes>
     <resources>
