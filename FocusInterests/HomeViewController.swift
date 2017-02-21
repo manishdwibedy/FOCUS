@@ -42,6 +42,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nav.setBarColor()
         self.title = "HOME"
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
+
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

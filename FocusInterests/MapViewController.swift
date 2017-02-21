@@ -21,4 +21,9 @@ class MapViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.primaryGreen()
         toolbar.barTintColor = UIColor.primaryGreen()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
+        
+    }
 }
