@@ -27,6 +27,8 @@
 		D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */; };
 		D25220711E5A895E00EC2014 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220701E5A895E00EC2014 /* Notifications.swift */; };
 		D25220741E5A8A7400EC2014 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220731E5A8A7400EC2014 /* Constants.swift */; };
+		D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */; };
+		D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */; };
 		D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B03F1E5A047C0002F1B1 /* AppDelegate.swift */; };
 		D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */; };
 		D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2B9B0431E5A047C0002F1B1 /* Main.storyboard */; };
@@ -83,6 +85,8 @@
 		D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationsCellTableViewCell.xib; sourceTree = "<group>"; };
 		D25220701E5A895E00EC2014 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D25220731E5A8A7400EC2014 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
 		D2B9B03C1E5A047C0002F1B1 /* FocusInterests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusInterests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B9B03F1E5A047C0002F1B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 				D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */,
 				D21317F61E5B47D300140323 /* HomViewControllerCell.swift */,
 				D21317F71E5B47D300140323 /* HomViewControllerCell.xib */,
+				D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */,
+				D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
+				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +587,7 @@
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
+				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,

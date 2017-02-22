@@ -48,6 +48,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     }
 
+    @IBAction func didTapSettings(_ sender: Any) {
+        
+        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+        present(vc, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

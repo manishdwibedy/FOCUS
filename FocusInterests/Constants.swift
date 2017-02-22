@@ -62,4 +62,8 @@ struct Constants {
         public static let notification3 = Notification(type: NotificationType.Tag, sender: Constants.dummyUsers.yoon, item: Constants.dummyItemsOInterest.item3)
         
     }
+    
+    struct settings {
+        public static let cellTitles = ["Choose Interests", "Invite Friends", "Change Username & Password", "Tutorial", "Help", "Terms", "Logout"]
+    }
 }

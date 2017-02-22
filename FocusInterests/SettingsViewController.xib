@@ -32,7 +32,11 @@
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwq-I2-gDG">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <items>
-                        <barButtonItem title="Item" id="t9h-du-PNr"/>
+                        <barButtonItem title="DIsmiss" id="t9h-du-PNr">
+                            <connections>
+                                <action selector="didTapDismiss:" destination="-1" id="lc6-VF-ncN"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9bk-Fb-arF">

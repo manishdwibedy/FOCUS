@@ -34,7 +34,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mnx-wc-s2E">
-                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="515"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="WiD-EY-n7M"/>
@@ -54,7 +54,16 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mnx-wc-s2E" secondAttribute="bottom" id="v0V-fd-cv4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="a7O-jY-J8E"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="a7O-jY-J8E">
+                        <barButtonItem key="rightBarButtonItem" image="gears" id="HiV-8X-RgZ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="didTapSettings:" destination="BYZ-38-t0r" id="Znm-i0-QAe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="segmentedControl" destination="gt4-IT-Y8q" id="bSM-1T-48U"/>
                         <outlet property="tableView" destination="mnx-wc-s2E" id="0lK-QN-2fO"/>
@@ -171,7 +180,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3SY-x9-QeC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Pins" image="location" selectedImage="location" id="Ua7-A1-F28"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2wp-HT-HcO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2wp-HT-HcO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -190,7 +199,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpo-3D-Prx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ePA-XN-yOt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ePA-XN-yOt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -209,7 +218,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zwr-f5-bIi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home-1" id="xTg-4h-XeN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="acD-ii-E6E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="acD-ii-E6E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -225,6 +234,7 @@
     </scenes>
     <resources>
         <image name="Home-1" width="25" height="25"/>
+        <image name="gears" width="25" height="25"/>
         <image name="location" width="25" height="25"/>
         <image name="loudspeaker" width="25" height="25"/>
     </resources>
