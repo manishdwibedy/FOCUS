@@ -27,8 +27,11 @@
 		D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */; };
 		D25220711E5A895E00EC2014 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220701E5A895E00EC2014 /* Notifications.swift */; };
 		D25220741E5A8A7400EC2014 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220731E5A8A7400EC2014 /* Constants.swift */; };
+		D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */; };
 		D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */; };
 		D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */; };
+		D28EAFC01E5E7C8E001EA7E5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */; };
+		D2A173551E5E911500C7724B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A173541E5E911500C7724B /* SignUpViewController.swift */; };
 		D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B03F1E5A047C0002F1B1 /* AppDelegate.swift */; };
 		D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */; };
 		D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2B9B0431E5A047C0002F1B1 /* Main.storyboard */; };
@@ -85,8 +88,11 @@
 		D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationsCellTableViewCell.xib; sourceTree = "<group>"; };
 		D25220701E5A895E00EC2014 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D25220731E5A8A7400EC2014 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLoginVC.swift; sourceTree = "<group>"; };
 		D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
+		D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		D2A173541E5E911500C7724B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D2B9B03C1E5A047C0002F1B1 /* FocusInterests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusInterests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B9B03F1E5A047C0002F1B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +175,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		D28EAFBE1E5E7C4C001EA7E5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
+				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		D2B9B0331E5A047C0002F1B1 = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +209,7 @@
 		D2B9B03E1E5A047C0002F1B1 /* FocusInterests */ = {
 			isa = PBXGroup;
 			children = (
+				D28EAFBE1E5E7C4C001EA7E5 /* Resources */,
 				D252206F1E5A894300EC2014 /* Models */,
 				D2B9B0751E5A0A410002F1B1 /* Google */,
 				D2B9B0741E5A0A320002F1B1 /* Amazon */,
@@ -202,7 +218,6 @@
 				D2B9B0711E5A0A160002F1B1 /* Utilities */,
 				D2B9B0701E5A0A0B0002F1B1 /* Extensions */,
 				D2B9B03F1E5A047C0002F1B1 /* AppDelegate.swift */,
-				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
 				D2B9B0491E5A047C0002F1B1 /* Assets.xcassets */,
 				D2B9B04B1E5A047C0002F1B1 /* LaunchScreen.storyboard */,
 				D2B9B04E1E5A047C0002F1B1 /* Info.plist */,
@@ -258,6 +273,8 @@
 				D25220671E5A846100EC2014 /* NotificationsViewController.swift */,
 				D230D8C61E5B7E7800025EE9 /* SettingsViewController.swift */,
 				D230D8C71E5B7E7800025EE9 /* SettingsViewController.xib */,
+				D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */,
+				D2A173541E5E911500C7724B /* SignUpViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -409,6 +426,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28EAFC01E5E7C8E001EA7E5 /* Login.storyboard in Resources */,
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
@@ -578,11 +596,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2A173551E5E911500C7724B /* SignUpViewController.swift in Sources */,
 				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
 				D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */,
+				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
 				D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,

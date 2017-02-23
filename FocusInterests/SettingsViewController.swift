@@ -13,16 +13,18 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var statusBarFillView: UIView!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var dismissButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         let switchNib = UINib(nibName: "SwitchCell", bundle: nil)
         tableView.register(switchNib, forCellReuseIdentifier: "SwitchCell")
         statusBarFillView.backgroundColor = UIColor.primaryGreen()
-        toolBar.backgroundColor = UIColor.primaryGreen()
-        tableView.delegate = self
+        toolBar.barTintColor = UIColor.primaryGreen()
+        let attr = [NSForegroundColorAttributeName:UIColor.white]
+        dismissButton.setTitleTextAttributes(attr, for: .normal)
         tableView.reloadData()
     }
     
@@ -45,18 +47,21 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < Constants.settings.cellTitles.count {
+        
+        if indexPath.row == Constants.settings.cellTitles.count {
+            let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
+            swCell?.titleLabel.text = "Privacy"
+            return swCell!
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
             cell?.textLabel?.text = Constants.settings.cellTitles[indexPath.row]
-            return cell!
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
-            
-            cell?.titleLabel.text = "Privacy"
+            cell?.accessoryType = .disclosureIndicator
             return cell!
         }
     }
     
     // TableView delegate
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
