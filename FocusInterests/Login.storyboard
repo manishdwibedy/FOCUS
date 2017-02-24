@@ -119,8 +119,15 @@
                                 <state key="normal" title="SIGN UP"/>
                                 <connections>
                                     <action selector="signUpTapped:" destination="zv8-uT-pG3" eventType="touchUpInside" id="OpJ-IQ-rg3"/>
+                                    <segue destination="rtI-dR-CVB" kind="show" identifier="SignUpSegue" id="n7e-wI-foU"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YVo-lX-LrU">
+                                <rect key="frame" x="53" y="99" width="269" height="102"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="102" id="1p8-vO-l3z"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -129,7 +136,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="rtR-U5-KYi" secondAttribute="trailing" constant="15" id="9LT-oS-xoc"/>
                             <constraint firstItem="hNJ-Xo-AO4" firstAttribute="leading" secondItem="1S5-nP-LJv" secondAttribute="leadingMargin" constant="72" id="JlL-Uh-NVX"/>
                             <constraint firstItem="rtR-U5-KYi" firstAttribute="leading" secondItem="1S5-nP-LJv" secondAttribute="leadingMargin" constant="14" id="NTS-TX-TXe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YVo-lX-LrU" secondAttribute="trailing" constant="37" id="NZw-L0-Ugq"/>
                             <constraint firstItem="rtR-U5-KYi" firstAttribute="top" secondItem="Q6g-IM-KPv" secondAttribute="bottom" constant="288" id="P2S-8t-9p0"/>
+                            <constraint firstItem="YVo-lX-LrU" firstAttribute="top" secondItem="Q6g-IM-KPv" secondAttribute="bottom" constant="79" id="dN1-rX-3Ym"/>
+                            <constraint firstItem="YVo-lX-LrU" firstAttribute="leading" secondItem="1S5-nP-LJv" secondAttribute="leadingMargin" constant="37" id="iD9-Xs-lzb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hNJ-Xo-AO4" secondAttribute="trailing" constant="72" id="lUr-ia-FYm"/>
                             <constraint firstItem="ZQM-ZT-rlB" firstAttribute="top" secondItem="hNJ-Xo-AO4" secondAttribute="bottom" constant="15" id="r0l-6m-oTH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZQM-ZT-rlB" secondAttribute="trailing" constant="72" id="zE3-cS-JdY"/>

@@ -63,5 +63,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     // TableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 0 {
+            let chooseVC = InterestsPickerViewController(nibName: "InterestsPickerViewController", bundle: nil)
+            self.present(chooseVC, animated: true, completion: nil)
+        }
     }
 }
