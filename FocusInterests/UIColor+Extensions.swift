@@ -20,4 +20,9 @@ extension UIColor {
         let appBlue = UIColor(colorLiteralRed: 40 / 255.0, green: 40 / 255.0, blue: 172 / 255.0, alpha: 1)
         return appBlue
     }
+    
+    class func appTextFPlaceholder() -> UIColor {
+        let appTextFPlaceholder = UIColor(colorLiteralRed: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
+        return appTextFPlaceholder
+    }
 }

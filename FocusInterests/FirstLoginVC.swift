@@ -16,6 +16,9 @@ protocol LoginDelegate {
 class FirstLoginViewController: BaseViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var uNameText: UITextField!
+    @IBOutlet weak var pWordText: UITextField!
+    @IBOutlet weak var logoImage: UIImageView!
     
     let appD = UIApplication.shared.delegate as! AppDelegate
     var delegate: LoginDelegate?
@@ -23,8 +26,14 @@ class FirstLoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        logoImage.alpha = 0
+        
+        animateLogo()
+        
         self.delegate = appD
         
+        UITextField.whitePlaceholder(text: Constants.textfieldPlaceholers.logVCUname, textField: uNameText)
+        UITextField.whitePlaceholder(text: Constants.textfieldPlaceholers.logVCPword, textField: pWordText)
         loginButton.backgroundColor = UIColor.primaryGreen()
         loginButton.setTitleColor(UIColor.white, for: .normal)
         signUpButton.backgroundColor = UIColor.appBlue()
@@ -38,6 +47,12 @@ class FirstLoginViewController: BaseViewController {
     
     @IBAction func signUpTapped(_ sender: Any) {
         
+    }
+    
+    func animateLogo() {
+        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseIn, animations: {
+            self.logoImage.alpha = 1
+        }, completion: nil)
     }
     
     func ifLoggedIn() {

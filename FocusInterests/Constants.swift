@@ -82,5 +82,17 @@ struct Constants {
     struct defaultsKeys {
         public static let loggedIn = "isLoggedIn"
     }
+    
+    struct textfieldPlaceholers {
+        public static let logVCUname = "Username"
+        public static let logVCPword = "Password"
+        public static let signFName = "First name"
+        public static let signLName = "Last name"
+        public static let signEmail = "Email"
+        public static let signPword = "Password"
+        public static let signUName = "Choose Username"
+        public static let signLocation = "Location"
+        public static let signPhoto = "Upload Photo"
+    }
 }
 
