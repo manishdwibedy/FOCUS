@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FirstLoginViewController: UIViewController {
+class FirstLoginViewController: BaseViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
@@ -27,6 +27,10 @@ class FirstLoginViewController: UIViewController {
     }
     
     @IBAction func signUpTapped(_ sender: Any) {
+        
+    }
+    
+    func ifLoggedIn() {
         
     }
 }

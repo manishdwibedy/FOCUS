@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InterestsPickerViewController: UIViewController {
+class InterestsPickerViewController: BaseViewController {
     
     @IBOutlet weak var button5: UIButton!
     @IBOutlet weak var button4: UIButton!

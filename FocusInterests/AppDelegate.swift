@@ -15,15 +15,13 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let defaults = UserDefaults.standard
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
         
-        
-        let googleMapsAPIKey = "AIzaSyCcfvYP6NRSYLJkvf3SAmIGBiQfdLWRqEM"
-        GMSServices.provideAPIKey(googleMapsAPIKey)
-        
+        GMSServices.provideAPIKey(Constants.keys.googleMapsAPIKey)
         
         return true
     }

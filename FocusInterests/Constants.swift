@@ -15,6 +15,18 @@ struct Constants {
         public static let notificationCellId = "NotificationCell"
     }
     
+    struct otherIds {
+        public static let loginSB = "Login"
+        public static let openingLoginVC = "FirstLoginViewController"
+        public static let mainSB = "Main"
+        public static let openingMainVC = "OpeningTabBarController"
+        
+    }
+    
+    struct keys {
+        public static let googleMapsAPIKey = "AIzaSyCcfvYP6NRSYLJkvf3SAmIGBiQfdLWRqEM"
+    }
+    
     struct dummyFeatures {
         
         public static let feature1 = Feature(featureName: "Babies")
@@ -66,4 +78,9 @@ struct Constants {
     struct settings {
         public static let cellTitles = ["Choose Interests", "Invite Friends", "Change Username & Password", "Tutorial", "Help", "Terms", "Logout"]
     }
+    
+    struct defaultsKeys {
+        public static let loggedIn = "isLoggedIn"
+    }
 }
+

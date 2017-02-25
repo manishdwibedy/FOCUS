@@ -157,7 +157,7 @@
         <!--Custom Tab Controller-->
         <scene sceneID="pBE-b2-Xh1">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="1Yr-9D-iDO" customClass="CustomTabController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="OpeningTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="1Yr-9D-iDO" customClass="CustomTabController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="D0p-Ug-QEa">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NotificationsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     var notifications: [Notification]?
 

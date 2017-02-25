@@ -11,12 +11,11 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-class MapViewController: UIViewController {
+class MapViewController: BaseViewController {
     @IBOutlet weak var toolbar: UIToolbar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         self.navigationController?.navigationBar.barTintColor = UIColor.primaryGreen()
         toolbar.barTintColor = UIColor.primaryGreen()

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: BaseViewController {
     @IBOutlet weak var LogoImage: UIImageView!
     @IBOutlet weak var firstNameText: UITextField!
     @IBOutlet weak var lastNameText: UITextField!
