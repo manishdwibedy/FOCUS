@@ -19,6 +19,8 @@ class SignUpViewController: BaseViewController {
     @IBOutlet weak var locationText: UITextField!
     @IBOutlet weak var uploadPhotoText: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,5 +29,8 @@ class SignUpViewController: BaseViewController {
         
     }
     @IBAction func signUpButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: Constants.otherIds.mainSB, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: Constants.otherIds.openingMainVC)
+        present(vc, animated: true, completion: nil)
     }
 }

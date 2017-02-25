@@ -8,16 +8,24 @@
 
 import UIKit
 
+protocol LogoutDelegate {
+    func logout()
+}
+
 class SettingsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var statusBarFillView: UIView!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dismissButton: UIBarButtonItem!
+    
+    var delegate: LogoutDelegate?
+    let appD = UIApplication.shared.delegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        delegate = appD as! LogoutDelegate?
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         let switchNib = UINib(nibName: "SwitchCell", bundle: nil)
         tableView.register(switchNib, forCellReuseIdentifier: "SwitchCell")
@@ -66,6 +74,9 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         if indexPath.row == 0 {
             let chooseVC = InterestsPickerViewController(nibName: "InterestsPickerViewController", bundle: nil)
             self.present(chooseVC, animated: true, completion: nil)
+        }
+        if indexPath.row == 6 {
+            self.delegate?.logout()
         }
     }
 }

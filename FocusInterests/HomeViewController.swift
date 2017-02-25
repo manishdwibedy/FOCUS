@@ -38,8 +38,8 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
         
         items = [item1, item2, item3, item4]
         
-        let nav = self.tabBarController as! CustomTabController
-        nav.setBarColor()
+        let nav = self.tabBarController as? CustomTabController
+        nav?.setBarColor()
         self.title = "HOME"
     }
     

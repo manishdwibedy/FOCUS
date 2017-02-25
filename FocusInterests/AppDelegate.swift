@@ -12,7 +12,7 @@ import GoogleMaps
 import GooglePlaces
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDelegate {
 
     var window: UIWindow?
     let defaults = UserDefaults.standard
@@ -24,6 +24,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(Constants.keys.googleMapsAPIKey)
         
         return true
+    }
+    
+    func login() {
+        let storyboard = UIStoryboard(name: Constants.otherIds.mainSB, bundle: nil)
+        let tabContr = storyboard.instantiateInitialViewController() as! CustomTabController
+        self.window?.rootViewController = tabContr
+        self.window?.makeKeyAndVisible()
+    }
+    
+    func logout() {
+        defaults.set(false, forKey: Constants.defaultsKeys.loggedIn)
+        let storyboard = UIStoryboard(name: Constants.otherIds.loginSB, bundle: nil)
+        let vc = storyboard.instantiateInitialViewController() as! FirstLoginViewController
+        self.window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

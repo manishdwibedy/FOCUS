@@ -13,11 +13,11 @@ class BaseViewController: UIViewController {
     
     let defaults = UserDefaults.standard
     
-    func presentOneOptionAlert(title: String, message: String) {
+    func presentOneOptionAlert(title: String, message: String, presenter: UIViewController) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         alert.view.tintColor = UIColor.primaryGreen()
-        present(alert, animated: true, completion: nil)
+        presenter.present(alert, animated: true, completion: nil)
     }
 }
