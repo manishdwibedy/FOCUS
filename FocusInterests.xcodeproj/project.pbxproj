@@ -15,6 +15,8 @@
 		D21317FD1E5B507C00140323 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317FC1E5B507C00140323 /* Feature.swift */; };
 		D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21975441E61F20D00ED3345 /* BaseViewController.swift */; };
 		D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21975461E6229F100ED3345 /* UITextField+Extensions.swift */; };
+		D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21975481E62406200ED3345 /* ChooseInterestsCell.swift */; };
+		D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21975491E62406200ED3345 /* ChooseInterestsCell.xib */; };
 		D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */; };
 		D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */; };
 		D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C61E5B7E7800025EE9 /* SettingsViewController.swift */; };
@@ -79,6 +81,8 @@
 		D21317FC1E5B507C00140323 /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		D21975441E61F20D00ED3345 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D21975461E6229F100ED3345 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
+		D21975481E62406200ED3345 /* ChooseInterestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseInterestsCell.swift; sourceTree = "<group>"; };
+		D21975491E62406200ED3345 /* ChooseInterestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseInterestsCell.xib; sourceTree = "<group>"; };
 		D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		D230D8C61E5B7E7800025EE9 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -300,6 +304,8 @@
 				D21317F71E5B47D300140323 /* HomViewControllerCell.xib */,
 				D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */,
 				D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */,
+				D21975481E62406200ED3345 /* ChooseInterestsCell.swift */,
+				D21975491E62406200ED3345 /* ChooseInterestsCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -397,7 +403,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 5XL94NV2G5;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					D2B9B0521E5A047C0002F1B1 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -444,6 +450,7 @@
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
+				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
@@ -623,6 +630,7 @@
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
+				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
@@ -790,8 +798,10 @@
 				DEVELOPMENT_TEAM = 5XL94NV2G5;
 				INFOPLIST_FILE = FocusInterests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.FocusInterests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.singlefocus.FocusInterests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "fbb329e3-2c4a-453a-a884-fb183fc2c749";
+				PROVISIONING_PROFILE_SPECIFIER = "Focus Provisioning Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "FocusInterests/FocusInterests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -807,8 +817,10 @@
 				DEVELOPMENT_TEAM = 5XL94NV2G5;
 				INFOPLIST_FILE = FocusInterests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.FocusInterests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.singlefocus.FocusInterests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "fbb329e3-2c4a-453a-a884-fb183fc2c749";
+				PROVISIONING_PROFILE_SPECIFIER = "Focus Provisioning Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "FocusInterests/FocusInterests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

@@ -22,9 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splashBackgrnd" translatesAutoresizingMaskIntoConstraints="NO" id="gnv-kC-weH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashBackgrnd" translatesAutoresizingMaskIntoConstraints="NO" id="gnv-kC-weH">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNJ-Xo-AO4">
                                 <rect key="frame" x="88" y="440" width="199" height="43"/>
@@ -131,7 +130,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="gnv-kC-weH" secondAttribute="trailing" constant="-20" id="0dZ-U5-adb"/>
+                            <constraint firstItem="zhv-Pt-UPB" firstAttribute="top" secondItem="gnv-kC-weH" secondAttribute="bottom" id="1Zu-5j-bVP"/>
                             <constraint firstItem="hNJ-Xo-AO4" firstAttribute="top" secondItem="rtR-U5-KYi" secondAttribute="bottom" constant="20" id="3ru-xx-d7g"/>
+                            <constraint firstItem="gnv-kC-weH" firstAttribute="top" secondItem="Q6g-IM-KPv" secondAttribute="bottom" constant="-20" id="4Ls-z0-TcM"/>
                             <constraint firstItem="ZQM-ZT-rlB" firstAttribute="leading" secondItem="1S5-nP-LJv" secondAttribute="leadingMargin" constant="72" id="8kj-qc-saJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rtR-U5-KYi" secondAttribute="trailing" constant="15" id="9LT-oS-xoc"/>
                             <constraint firstItem="hNJ-Xo-AO4" firstAttribute="leading" secondItem="1S5-nP-LJv" secondAttribute="leadingMargin" constant="72" id="JlL-Uh-NVX"/>
@@ -143,6 +145,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="hNJ-Xo-AO4" secondAttribute="trailing" constant="72" id="lUr-ia-FYm"/>
                             <constraint firstItem="ZQM-ZT-rlB" firstAttribute="top" secondItem="hNJ-Xo-AO4" secondAttribute="bottom" constant="15" id="r0l-6m-oTH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZQM-ZT-rlB" secondAttribute="trailing" constant="72" id="zE3-cS-JdY"/>
+                            <constraint firstItem="gnv-kC-weH" firstAttribute="leading" secondItem="1S5-nP-LJv" secondAttribute="leadingMargin" constant="-20" id="zu7-fq-2au"/>
                         </constraints>
                     </view>
                     <connections>
@@ -358,16 +361,24 @@
                             <constraint firstAttribute="trailingMargin" secondItem="2L7-GU-x4e" secondAttribute="trailing" constant="82" id="1Pn-8n-kGI"/>
                             <constraint firstItem="c9I-Al-Uvi" firstAttribute="leading" secondItem="XCH-pJ-N20" secondAttribute="leadingMargin" constant="30" id="560-DE-f7v"/>
                             <constraint firstItem="slF-Fp-E8V" firstAttribute="top" secondItem="RXP-Lq-lHK" secondAttribute="bottom" constant="158" id="5ct-8n-Lmr"/>
+                            <constraint firstAttribute="bottom" secondItem="gTh-Vh-ks8" secondAttribute="bottom" constant="-1" id="CAb-W5-Wap"/>
                             <constraint firstItem="gTh-Vh-ks8" firstAttribute="top" secondItem="XCH-pJ-N20" secondAttribute="top" constant="-1" id="Lfu-M0-MqS"/>
                             <constraint firstAttribute="bottom" secondItem="gTh-Vh-ks8" secondAttribute="bottom" constant="-1" id="M0n-D5-oN6"/>
+                            <constraint firstAttribute="trailing" secondItem="gTh-Vh-ks8" secondAttribute="trailing" constant="-1" id="NiQ-Xq-BHK"/>
+                            <constraint firstItem="gTh-Vh-ks8" firstAttribute="top" secondItem="XCH-pJ-N20" secondAttribute="top" constant="-1" id="Re4-Ax-15Q"/>
+                            <constraint firstItem="gTh-Vh-ks8" firstAttribute="leading" secondItem="XCH-pJ-N20" secondAttribute="leading" constant="-1" id="Src-OC-Kk9"/>
                             <constraint firstAttribute="trailing" secondItem="gTh-Vh-ks8" secondAttribute="trailing" constant="-1" id="Svp-R7-Izc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="slF-Fp-E8V" secondAttribute="trailing" constant="33" id="Ubk-Yr-miy"/>
                             <constraint firstItem="c9I-Al-Uvi" firstAttribute="top" secondItem="RXP-Lq-lHK" secondAttribute="bottom" constant="35" id="YEK-bf-dxq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="c9I-Al-Uvi" secondAttribute="trailing" constant="30" id="afY-z6-1P5"/>
                             <constraint firstItem="slF-Fp-E8V" firstAttribute="leading" secondItem="XCH-pJ-N20" secondAttribute="leadingMargin" constant="32" id="bfm-9q-VMz"/>
                             <constraint firstItem="gTh-Vh-ks8" firstAttribute="leading" secondItem="XCH-pJ-N20" secondAttribute="leading" constant="-1" id="eUI-TJ-YIp"/>
+                            <constraint firstAttribute="bottom" secondItem="gTh-Vh-ks8" secondAttribute="bottom" constant="-1" id="lJL-ev-wHo"/>
+                            <constraint firstAttribute="trailing" secondItem="gTh-Vh-ks8" secondAttribute="trailing" constant="-1" id="pfU-JJ-wxH"/>
+                            <constraint firstItem="gTh-Vh-ks8" firstAttribute="leading" secondItem="XCH-pJ-N20" secondAttribute="leading" constant="-1" id="poz-Dr-RYk"/>
                             <constraint firstItem="2L7-GU-x4e" firstAttribute="top" secondItem="slF-Fp-E8V" secondAttribute="bottom" constant="20" id="qfj-aA-J8q"/>
                             <constraint firstItem="2L7-GU-x4e" firstAttribute="leading" secondItem="XCH-pJ-N20" secondAttribute="leadingMargin" constant="83" id="tNS-I4-q4d"/>
+                            <constraint firstItem="gTh-Vh-ks8" firstAttribute="top" secondItem="XCH-pJ-N20" secondAttribute="top" constant="-1" id="vda-Hp-kF6"/>
                         </constraints>
                     </view>
                     <connections>
