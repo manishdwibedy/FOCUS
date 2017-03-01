@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum InterestCategory {
     
@@ -21,8 +22,9 @@ class Interest {
     
     var name: String?
     var category: InterestCategory?
+    var image: UIImage?
     
-    init(name: String?, category: InterestCategory?) {
+    init(name: String?, category: InterestCategory?, image: UIImage?) {
         self.name = name
         self.category = category
     }

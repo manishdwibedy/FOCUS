@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InterestsPickerViewController: BaseViewController {
+class InterestsPickerViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var button5: UIButton!
     @IBOutlet weak var button4: UIButton!
@@ -22,9 +22,14 @@ class InterestsPickerViewController: BaseViewController {
     @IBOutlet weak var segmentedController: UISegmentedControl!
     
     var fakeTabBar = [UIButton]()
+    var tablePopulator = [["category" : InterestCategory.Sports, "interests" : [Constants.interests.basketball, Constants.interests.football, Constants.interests.soccer]], ["category" : InterestCategory.Art, "interests" : [Constants.interests.music, Constants.interests.modernArt, Constants.interests.museums]], ["category" : InterestCategory.Nightlife, "interests" : [Constants.interests.bars, Constants.interests.clubs, Constants.interests.events]], ["category" : InterestCategory.Food, "interests" : [Constants.interests.french, Constants.interests.italian, Constants.interests.mexican]], ["category" : InterestCategory.Shopping, "interests" : [Constants.interests.clothing, Constants.interests.electronics, Constants.interests.furniture]]]
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let cellNib = UINib(nibName: "ChooseInterestsCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: Constants.tableCellReuseIDs.chooseInterestId)
         
         fakeTabBar = [button1, button2, button3, button4, button5]
         for button in fakeTabBar {
@@ -35,6 +40,8 @@ class InterestsPickerViewController: BaseViewController {
         fakeNavBarView.backgroundColor = UIColor.primaryGreen()
         submitButton.setTitleColor(UIColor.white, for: .normal)
         cancelButton.setTitleColor(UIColor.white, for: .normal)
+        
+        tableView.delegate = self
     }
 
     @IBAction func didTapCancel(_ sender: Any) {
@@ -68,4 +75,62 @@ class InterestsPickerViewController: BaseViewController {
         print("button5tapped")
     }
     
+    // TableView Datasource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tablePopulator.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.tableCellReuseIDs.chooseInterestId) as? ChooseInterestsCell
+        return cell!
+    }
+    
+    // TableViewDelegate
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let tableViewCell = cell as? ChooseInterestsCell else { return }
+        
+        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let hView = UIView()
+        hView.backgroundColor = UIColor.primaryGreen()
+        let label = UILabel(frame: CGRect(x: 0, y: hView.frame.midY, width: 200, height: 35))
+        label.textColor = UIColor.white
+        label.font = UIFont(name: "Futura", size: 20)
+        hView.addSubview(label)
+        let dict = tablePopulator[section]
+        let enm = dict["category"] as? InterestCategory
+        label.text = String(describing: enm!)
+        return hView
+    }
+    
+    // CollectionViewDataSource
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let dict =  tablePopulator[section]
+        let arr = dict["interests"] as? [Interest]
+        return arr!.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.tableCellReuseIDs.collectionCellId, for: indexPath) as? CellCollectionCellCollectionViewCell
+        cell?.imageView.backgroundColor = UIColor.randomColorGenerator()
+        let dict = tablePopulator[indexPath.section]
+        let arr = dict["interests"] as? [Interest]
+        cell?.label.text = arr?[indexPath.row].name!
+        
+        return cell!
+    }
 }

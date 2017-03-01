@@ -17,6 +17,8 @@
 		D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21975461E6229F100ED3345 /* UITextField+Extensions.swift */; };
 		D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21975481E62406200ED3345 /* ChooseInterestsCell.swift */; };
 		D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21975491E62406200ED3345 /* ChooseInterestsCell.xib */; };
+		D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D219754C1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift */; };
+		D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D219754D1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib */; };
 		D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */; };
 		D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */; };
 		D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8C61E5B7E7800025EE9 /* SettingsViewController.swift */; };
@@ -83,6 +85,8 @@
 		D21975461E6229F100ED3345 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		D21975481E62406200ED3345 /* ChooseInterestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseInterestsCell.swift; sourceTree = "<group>"; };
 		D21975491E62406200ED3345 /* ChooseInterestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseInterestsCell.xib; sourceTree = "<group>"; };
+		D219754C1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellCollectionCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		D219754D1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellCollectionCellCollectionViewCell.xib; sourceTree = "<group>"; };
 		D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		D230D8C61E5B7E7800025EE9 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -306,6 +310,8 @@
 				D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */,
 				D21975481E62406200ED3345 /* ChooseInterestsCell.swift */,
 				D21975491E62406200ED3345 /* ChooseInterestsCell.xib */,
+				D219754C1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift */,
+				D219754D1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
+				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
 			);
@@ -640,6 +647,7 @@
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 				D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */,
 				D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */,
+				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,
 				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,
 			);
@@ -795,6 +803,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5XL94NV2G5;
 				INFOPLIST_FILE = FocusInterests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -814,13 +823,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 5XL94NV2G5;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FocusInterests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.singlefocus.FocusInterests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fbb329e3-2c4a-453a-a884-fb183fc2c749";
-				PROVISIONING_PROFILE_SPECIFIER = "Focus Provisioning Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FocusInterests/FocusInterests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

@@ -25,4 +25,12 @@ extension UIColor {
         let appTextFPlaceholder = UIColor(colorLiteralRed: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
         return appTextFPlaceholder
     }
+    
+    class func randomColorGenerator() -> UIColor {
+        let blueValue = Float(Int(arc4random() % 255)) / 255.0
+        let greenValue = Float(Int(arc4random() % 255)) / 255.0
+        let redValue = Float(Int(arc4random() % 255)) / 255.0
+        let randomColor = UIColor(colorLiteralRed: redValue, green: greenValue, blue: blueValue, alpha: 1)
+        return randomColor
+    }
 }

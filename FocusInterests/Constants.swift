@@ -13,6 +13,8 @@ struct Constants {
     
     struct tableCellReuseIDs {
         public static let notificationCellId = "NotificationCell"
+        public static let chooseInterestId = "ChooseInterest"
+        public static let collectionCellId = "CollectionCell"
     }
     
     struct otherIds {
@@ -39,21 +41,23 @@ struct Constants {
     }
     
     struct interests {
-        public static let football = Interest(name: "Football", category: InterestCategory.Sports)
-        public static let basketball = Interest(name: "Basketball", category: InterestCategory.Sports)
-        public static let soccer = Interest(name: "Soccer", category: InterestCategory.Sports)
-        public static let music = Interest(name: "Music", category: InterestCategory.Art)
-        public static let modernArt = Interest(name: "Modern Art", category: InterestCategory.Art)
-        public static let museums = Interest(name: "Museums", category: InterestCategory.Art)
-        public static let bars = Interest(name: "Bars", category: InterestCategory.Nightlife)
-        public static let clubs = Interest(name: "Clubs", category: InterestCategory.Nightlife)
-        public static let events = Interest(name: "Events", category: InterestCategory.Nightlife)
-        public static let italian = Interest(name: "Italian", category: InterestCategory.Food)
-        public static let mexican = Interest(name: "Mexican", category: InterestCategory.Food)
-        public static let french = Interest(name: "French", category: InterestCategory.Food)
-        public static let clothing = Interest(name: "Clothing", category: InterestCategory.Shopping)
-        public static let electronics = Interest(name: "Electronics", category: InterestCategory.Shopping)
-        public static let furniture = Interest(name: "Furniture", category: InterestCategory.Shopping)
+        public static let football = Interest(name: "Football", category: InterestCategory.Sports, image: nil)
+        public static let basketball = Interest(name: "Basketball", category: InterestCategory.Sports, image: nil)
+        public static let soccer = Interest(name: "Soccer", category: InterestCategory.Sports, image: nil)
+        public static let bike = Interest(name: "Bike", category: InterestCategory.Sports, image: nil)
+        public static let music = Interest(name: "Music", category: InterestCategory.Art, image: nil)
+        public static let modernArt = Interest(name: "Modern Art", category: InterestCategory.Art, image: nil)
+        public static let murals = Interest(name: "Murals", category: InterestCategory.Art, image: nil)
+        public static let museums = Interest(name: "Museums", category: InterestCategory.Art, image: nil)
+        public static let bars = Interest(name: "Bars", category: InterestCategory.Nightlife, image: nil)
+        public static let clubs = Interest(name: "Clubs", category: InterestCategory.Nightlife, image: nil)
+        public static let events = Interest(name: "Events", category: InterestCategory.Nightlife, image: nil)
+        public static let italian = Interest(name: "Italian", category: InterestCategory.Food, image: nil)
+        public static let mexican = Interest(name: "Mexican", category: InterestCategory.Food, image: nil)
+        public static let french = Interest(name: "French", category: InterestCategory.Food, image: nil)
+        public static let clothing = Interest(name: "Clothing", category: InterestCategory.Shopping, image: nil)
+        public static let electronics = Interest(name: "Electronics", category: InterestCategory.Shopping, image: nil)
+        public static let furniture = Interest(name: "Furniture", category: InterestCategory.Shopping, image: nil)
     }
     
     struct dummyItemsOInterest {
@@ -94,5 +98,6 @@ struct Constants {
         public static let signLocation = "Location"
         public static let signPhoto = "Upload Photo"
     }
+    
 }
 
