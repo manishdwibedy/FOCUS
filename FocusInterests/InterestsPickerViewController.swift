@@ -93,7 +93,7 @@ class InterestsPickerViewController: BaseViewController, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let tableViewCell = cell as? ChooseInterestsCell else { return }
         
-        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
+        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.section)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -107,7 +107,7 @@ class InterestsPickerViewController: BaseViewController, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let hView = UIView()
         hView.backgroundColor = UIColor.primaryGreen()
-        let label = UILabel(frame: CGRect(x: 0, y: hView.frame.midY, width: 200, height: 35))
+        let label = UILabel(frame: CGRect(x: 20, y: hView.frame.midY, width: 200, height: 35))
         label.textColor = UIColor.white
         label.font = UIFont(name: "Futura", size: 20)
         hView.addSubview(label)
@@ -119,7 +119,7 @@ class InterestsPickerViewController: BaseViewController, UITableViewDataSource, 
     
     // CollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let dict =  tablePopulator[section]
+        let dict =  tablePopulator[collectionView.tag]
         let arr = dict["interests"] as? [Interest]
         return arr!.count
     }
@@ -127,7 +127,8 @@ class InterestsPickerViewController: BaseViewController, UITableViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.tableCellReuseIDs.collectionCellId, for: indexPath) as? CellCollectionCellCollectionViewCell
         cell?.imageView.backgroundColor = UIColor.randomColorGenerator()
-        let dict = tablePopulator[indexPath.section]
+        print("collectionview.tag: \(collectionView.tag)")
+        let dict = tablePopulator[collectionView.tag]
         let arr = dict["interests"] as? [Interest]
         cell?.label.text = arr?[indexPath.row].name!
         
