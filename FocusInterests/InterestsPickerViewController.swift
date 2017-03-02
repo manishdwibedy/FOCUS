@@ -108,6 +108,7 @@ class InterestsPickerViewController: BaseViewController, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.tableCellReuseIDs.chooseInterestId) as? ChooseInterestsCell
+        cell?.selectionStyle = .none
         return cell!
     }
     
