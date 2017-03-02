@@ -59,36 +59,31 @@
                             <rect key="frame" x="7" y="80" width="361" height="47"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ei-9I-w0r">
-                                    <rect key="frame" x="0.0" y="0.0" width="46" height="47"/>
-                                    <state key="normal" title="Button"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="47"/>
                                     <connections>
                                         <action selector="button1Tapped:" destination="-1" eventType="touchUpInside" id="hKP-Ej-erA"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-NQ-ZYP">
-                                    <rect key="frame" x="79" y="0.0" width="46" height="47"/>
-                                    <state key="normal" title="Button"/>
+                                    <rect key="frame" x="83" y="0.0" width="30" height="47"/>
                                     <connections>
                                         <action selector="button2Tapped:" destination="-1" eventType="touchUpInside" id="saN-Vg-Rsh"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWd-iW-akg">
-                                    <rect key="frame" x="157.5" y="0.0" width="46" height="47"/>
-                                    <state key="normal" title="Button"/>
+                                    <rect key="frame" x="165.5" y="0.0" width="30" height="47"/>
                                     <connections>
                                         <action selector="button3Tapped:" destination="-1" eventType="touchUpInside" id="aWu-rY-BDQ"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cua-k0-03f">
-                                    <rect key="frame" x="236.5" y="0.0" width="46" height="47"/>
-                                    <state key="normal" title="Button"/>
+                                    <rect key="frame" x="248.5" y="0.0" width="30" height="47"/>
                                     <connections>
                                         <action selector="button4Tapped:" destination="-1" eventType="touchUpInside" id="ZgT-gS-1cF"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KW2-41-vVb">
-                                    <rect key="frame" x="315" y="0.0" width="46" height="47"/>
-                                    <state key="normal" title="Button"/>
+                                    <rect key="frame" x="331" y="0.0" width="30" height="47"/>
                                     <connections>
                                         <action selector="button5Tapped:" destination="-1" eventType="touchUpInside" id="kfW-yD-Zx7"/>
                                     </connections>
@@ -122,7 +117,7 @@
                     </connections>
                 </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Oxj-GO-IXm">
-                    <rect key="frame" x="0.0" y="160" width="375" height="507"/>
+                    <rect key="frame" x="0.0" y="156" width="375" height="511"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="5KL-sc-ACq"/>
@@ -140,7 +135,7 @@
                 <constraint firstAttribute="trailing" secondItem="1dd-BG-0ZB" secondAttribute="trailing" constant="38" id="Q5f-Pe-miI"/>
                 <constraint firstItem="Oxj-GO-IXm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Va3-es-2bv"/>
                 <constraint firstItem="pXm-as-its" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YaJ-Og-YXi"/>
-                <constraint firstItem="Oxj-GO-IXm" firstAttribute="top" secondItem="1dd-BG-0ZB" secondAttribute="bottom" constant="8" id="ajo-79-FeI"/>
+                <constraint firstItem="Oxj-GO-IXm" firstAttribute="top" secondItem="1dd-BG-0ZB" secondAttribute="bottom" constant="4" id="ajo-79-FeI"/>
                 <constraint firstItem="1dd-BG-0ZB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="37" id="sxf-bB-qGy"/>
                 <constraint firstItem="1dd-BG-0ZB" firstAttribute="top" secondItem="CNL-We-8AY" secondAttribute="bottom" constant="-3" id="tEi-JZ-JMm"/>
             </constraints>

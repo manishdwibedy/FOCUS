@@ -42,6 +42,28 @@ class InterestsPickerViewController: BaseViewController, UITableViewDataSource, 
         cancelButton.setTitleColor(UIColor.white, for: .normal)
         
         tableView.delegate = self
+        
+        let userIm = UIImage(named: "userunfilled")
+        let mailIm = UIImage(named: "mail")
+        let worldIm = UIImage(named: "world")
+        let lockIm = UIImage(named: "lock")
+        let searchIm = UIImage(named: "search-1")
+        let tUser = userIm?.withRenderingMode(.alwaysTemplate)
+        let tMail = mailIm?.withRenderingMode(.alwaysTemplate)
+        let tWorld = worldIm?.withRenderingMode(.alwaysTemplate)
+        let tLock = lockIm?.withRenderingMode(.alwaysTemplate)
+        let tSearch = searchIm?.withRenderingMode(.alwaysTemplate)
+        button1.setImage(tUser, for: .normal)
+        button1.tintColor = UIColor.white
+        button2.setImage(tMail, for: .normal)
+        button2.tintColor = UIColor.white
+        button3.setImage(tWorld, for: .normal)
+        button3.tintColor = UIColor.white
+        button4.setImage(tLock, for: .normal)
+        button4.tintColor = UIColor.white
+        button5.setImage(tSearch, for: .normal)
+        button5.tintColor = UIColor.white
+        
     }
 
     @IBAction func didTapCancel(_ sender: Any) {
