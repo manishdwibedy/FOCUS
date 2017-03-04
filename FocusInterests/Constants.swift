@@ -43,7 +43,7 @@ struct Constants {
     struct interests {
         public static let football = Interest(name: "Football", category: InterestCategory.Sports, image: nil)
         public static let basketball = Interest(name: "Basketball", category: InterestCategory.Sports, image: nil)
-        public static let soccer = Interest(name: "Soccer", category: InterestCategory.Sports, image: nil)
+        public static let soccer = Interest(name: "Soccer", category: InterestCategory.Sports, image: UIImage(named: "blackSoccer"))
         public static let bike = Interest(name: "Bike", category: InterestCategory.Sports, image: nil)
         public static let music = Interest(name: "Music", category: InterestCategory.Art, image: nil)
         public static let modernArt = Interest(name: "Modern Art", category: InterestCategory.Art, image: nil)

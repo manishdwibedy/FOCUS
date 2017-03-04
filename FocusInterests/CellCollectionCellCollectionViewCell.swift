@@ -16,11 +16,13 @@ class CellCollectionCellCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.backgroundView?.backgroundColor = UIColor.white
     }
     
     func configure(interest: Interest) {
-        imageView.backgroundColor = UIColor.randomColorGenerator()
+        imageView.backgroundColor = UIColor.lightGray
+        if let pic = interest.image {
+            imageView.image = pic
+        }
         label.text = interest.name!
     }
 

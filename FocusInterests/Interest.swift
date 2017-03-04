@@ -27,5 +27,6 @@ class Interest {
     init(name: String?, category: InterestCategory?, image: UIImage?) {
         self.name = name
         self.category = category
+        self.image = image
     }
 }

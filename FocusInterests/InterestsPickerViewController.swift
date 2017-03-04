@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InterestsPickerViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class InterestsPickerViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var button5: UIButton!
     @IBOutlet weak var button4: UIButton!
@@ -149,12 +149,22 @@ class InterestsPickerViewController: BaseViewController, UITableViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.tableCellReuseIDs.collectionCellId, for: indexPath) as? CellCollectionCellCollectionViewCell
-        cell?.imageView.backgroundColor = UIColor.randomColorGenerator()
         print("collectionview.tag: \(collectionView.tag)")
         let dict = tablePopulator[collectionView.tag]
         let arr = dict["interests"] as? [Interest]
-        cell?.label.text = arr?[indexPath.row].name!
-        
+        cell?.configure(interest: (arr![indexPath.row]))
         return cell!
     }
+    
+    // CollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellsAcross: CGFloat = 1
+        let spaceBetweenCells: CGFloat = 1
+        let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
+        print(indexPath.row)
+        return CGSize(width: (dim / 3) - 7, height: dim / 2)
+        
+    }
+
 }

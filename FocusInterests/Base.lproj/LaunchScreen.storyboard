@@ -21,16 +21,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CroppedSplashScrn" translatesAutoresizingMaskIntoConstraints="NO" id="k7U-Vm-1En">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashscreenimage" translatesAutoresizingMaskIntoConstraints="NO" id="Yhs-dL-kfq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="k7U-Vm-1En" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="38l-pI-d2R"/>
-                            <constraint firstAttribute="trailing" secondItem="k7U-Vm-1En" secondAttribute="trailing" id="ADd-3a-RCk"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="k7U-Vm-1En" secondAttribute="bottom" id="U6w-RB-gQD"/>
-                            <constraint firstItem="k7U-Vm-1En" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="yWg-Hi-Spr"/>
+                            <constraint firstItem="Yhs-dL-kfq" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="B6s-Sf-yHC"/>
+                            <constraint firstItem="Yhs-dL-kfq" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="FKn-fb-2t9"/>
+                            <constraint firstAttribute="trailing" secondItem="Yhs-dL-kfq" secondAttribute="trailing" id="MAn-lW-qJR"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Yhs-dL-kfq" secondAttribute="bottom" id="d9j-IQ-ovU"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -40,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CroppedSplashScrn" width="524" height="934"/>
+        <image name="splashscreenimage" width="578" height="1024"/>
     </resources>
 </document>
