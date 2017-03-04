@@ -19,7 +19,6 @@ class CellCollectionCellCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(interest: Interest) {
-        imageView.backgroundColor = UIColor.lightGray
         if let pic = interest.image {
             imageView.image = pic
         }

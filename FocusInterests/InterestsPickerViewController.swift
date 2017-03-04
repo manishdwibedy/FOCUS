@@ -31,6 +31,9 @@ class InterestsPickerViewController: BaseViewController, UITableViewDataSource, 
         let cellNib = UINib(nibName: "ChooseInterestsCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: Constants.tableCellReuseIDs.chooseInterestId)
         
+        segmentedController.backgroundColor = UIColor.primaryGreen()
+        segmentedController.tintColor = UIColor.white
+        
         fakeTabBar = [button1, button2, button3, button4, button5]
         for button in fakeTabBar {
             button.setTitleColor(UIColor.white, for: .normal)
