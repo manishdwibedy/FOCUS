@@ -137,10 +137,21 @@ class InterestsPickerViewController: BaseViewController, UITableViewDataSource, 
         label.textColor = UIColor.white
         label.font = UIFont(name: "Futura", size: 20)
         hView.addSubview(label)
+        let addBtn = UIButton(frame: CGRect(x: self.view.frame.width - 50, y: 5, width: 30, height: 30))
+        let oImage = UIImage(named: "plus")
+        let tImage = oImage?.withRenderingMode(.alwaysTemplate)
+        addBtn.tintColor = UIColor.white
+        addBtn.setImage(tImage!, for: .normal)
+        addBtn.addTarget(self, action: #selector(InterestsPickerViewController.addInterest), for: .touchUpInside)
+        hView.addSubview(addBtn)
         let dict = tablePopulator[section]
         let enm = dict["category"] as? InterestCategory
         label.text = String(describing: enm!)
         return hView
+    }
+    
+    func addInterest() {
+        print("Button # )")
     }
     
     // CollectionViewDataSource

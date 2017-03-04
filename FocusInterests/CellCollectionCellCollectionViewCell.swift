@@ -15,7 +15,13 @@ class CellCollectionCellCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        imageView.image = nil
+        label.text = nil
+    }
+    
+    override func prepareForReuse() {
+        imageView.image = nil
+        label.text = nil
     }
     
     func configure(interest: Interest) {
@@ -26,3 +32,4 @@ class CellCollectionCellCollectionViewCell: UICollectionViewCell {
     }
 
 }
+
