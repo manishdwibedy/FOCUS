@@ -398,6 +398,46 @@
             </objects>
             <point key="canvasLocation" x="1152.8" y="-144.3778110944528"/>
         </scene>
+        <!--New LoginVC-->
+        <scene sceneID="qe3-VC-llf">
+            <objects>
+                <viewController id="96E-b6-SZp" customClass="NewLoginVC" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C9c-UQ-Gw1"/>
+                        <viewControllerLayoutGuide type="bottom" id="yWE-Kn-qDP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VD4-BT-GoK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJa-nJ-iBn">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAu-iI-GX1" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="96" y="245" width="183" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="Gky-Mx-YMv"/>
+                                    <constraint firstAttribute="width" constant="183" id="NTE-NF-ckv"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HJa-nJ-iBn" firstAttribute="top" secondItem="VD4-BT-GoK" secondAttribute="top" constant="-2" id="A8M-2o-FPK"/>
+                            <constraint firstItem="HJa-nJ-iBn" firstAttribute="leading" secondItem="VD4-BT-GoK" secondAttribute="leading" constant="-2" id="LeN-xr-AtZ"/>
+                            <constraint firstItem="HJa-nJ-iBn" firstAttribute="top" secondItem="VD4-BT-GoK" secondAttribute="top" constant="-2" id="OKW-Gn-bDp"/>
+                            <constraint firstItem="EAu-iI-GX1" firstAttribute="top" secondItem="C9c-UQ-Gw1" secondAttribute="bottom" constant="225" id="YwF-So-5bg"/>
+                            <constraint firstItem="yWE-Kn-qDP" firstAttribute="top" secondItem="HJa-nJ-iBn" secondAttribute="bottom" constant="-2" id="kCs-6E-VKZ"/>
+                            <constraint firstAttribute="trailing" secondItem="HJa-nJ-iBn" secondAttribute="trailing" constant="-2" id="rTX-wO-1nQ"/>
+                            <constraint firstItem="EAu-iI-GX1" firstAttribute="centerX" secondItem="VD4-BT-GoK" secondAttribute="centerX" id="udG-tm-NAt"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0em-l7-YrE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1152.8" y="536.58170914542734"/>
+        </scene>
     </scenes>
     <resources>
         <image name="logo" width="983" height="288"/>

@@ -16,6 +16,9 @@ pod 'GooglePlaces'
   pod 'Firebase/Storage'
   pod 'Firebase/Crash'
   pod 'Firebase/Database'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
 end
 
 target 'FocusInterestsTests' do
@@ -29,6 +32,9 @@ pod 'GooglePlaces'
   pod 'Firebase/Storage'
   pod 'Firebase/Crash'
   pod 'Firebase/Database'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
 end
 
 target 'FocusInterestsUITests' do
@@ -42,5 +48,8 @@ pod 'GooglePlaces'
   pod 'Firebase/Storage'
   pod 'Firebase/Crash'
   pod 'Firebase/Database'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
 end
 
