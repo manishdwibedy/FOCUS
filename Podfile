@@ -10,7 +10,11 @@ target 'FocusInterests' do
 pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
-
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Crash'
 end
 
 target 'FocusInterestsTests' do
@@ -18,6 +22,11 @@ target 'FocusInterestsTests' do
 pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Crash'
 
 end
 
@@ -26,6 +35,11 @@ target 'FocusInterestsUITests' do
 pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Crash'
 
 end
 
