@@ -15,6 +15,7 @@ pod 'GooglePlaces'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Crash'
+  pod 'Firebase/Database'
 end
 
 target 'FocusInterestsTests' do
@@ -27,7 +28,7 @@ pod 'GooglePlaces'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Crash'
-
+  pod 'Firebase/Database'
 end
 
 target 'FocusInterestsUITests' do
@@ -40,6 +41,6 @@ pod 'GooglePlaces'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Crash'
-
+  pod 'Firebase/Database'
 end
 

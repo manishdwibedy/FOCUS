@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import GoogleMaps
 import GooglePlaces
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDelegate {
@@ -22,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
         
         GMSServices.provideAPIKey(Constants.keys.googleMapsAPIKey)
+        
+        FIRApp.configure()
         
         return true
     }

@@ -25,7 +25,10 @@
 		D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D230D8C71E5B7E7800025EE9 /* SettingsViewController.xib */; };
 		D230D8CB1E5B868C00025EE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8CA1E5B868C00025EE9 /* User.swift */; };
 		D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230D8CC1E5B875300025EE9 /* Interest.swift */; };
-		D23E01371E6BA7C900E735F5 /* GoogleService-Info-4.plist in Resources */ = {isa = PBXBuildFile; fileRef = D23E01361E6BA7C900E735F5 /* GoogleService-Info-4.plist */; };
+		D23E01371E6BA7C900E735F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */; };
+		D23E01391E6BAD0A00E735F5 /* FirebaseUpstream.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23E01381E6BAD0A00E735F5 /* FirebaseUpstream.swift */; };
+		D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23E013A1E6BAD2100E735F5 /* FirebaseDownstream.swift */; };
+		D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23E013C1E6BB0AE00E735F5 /* FocusUser.swift */; };
 		D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252205C1E5A3C9E00EC2014 /* MapViewController.swift */; };
 		D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220601E5A436300EC2014 /* TabBar+Extensions.swift */; };
 		D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220651E5A586900EC2014 /* BaseTabBarController.swift */; };
@@ -94,7 +97,10 @@
 		D230D8C71E5B7E7800025EE9 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		D230D8CA1E5B868C00025EE9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D230D8CC1E5B875300025EE9 /* Interest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interest.swift; sourceTree = "<group>"; };
-		D23E01361E6BA7C900E735F5 /* GoogleService-Info-4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-4.plist"; sourceTree = "<group>"; };
+		D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D23E01381E6BAD0A00E735F5 /* FirebaseUpstream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUpstream.swift; sourceTree = "<group>"; };
+		D23E013A1E6BAD2100E735F5 /* FirebaseDownstream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDownstream.swift; sourceTree = "<group>"; };
+		D23E013C1E6BB0AE00E735F5 /* FocusUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusUser.swift; sourceTree = "<group>"; };
 		D252205C1E5A3C9E00EC2014 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D25220601E5A436300EC2014 /* TabBar+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TabBar+Extensions.swift"; sourceTree = "<group>"; };
 		D25220621E5A4E0E00EC2014 /* FocusInterests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FocusInterests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 				D21317FC1E5B507C00140323 /* Feature.swift */,
 				D230D8CA1E5B868C00025EE9 /* User.swift */,
 				D230D8CC1E5B875300025EE9 /* Interest.swift */,
+				D23E013C1E6BB0AE00E735F5 /* FocusUser.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -197,8 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
-				D23E01361E6BA7C900E735F5 /* GoogleService-Info-4.plist */,
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
+				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -329,6 +336,8 @@
 		D2B9B0751E5A0A410002F1B1 /* Google */ = {
 			isa = PBXGroup;
 			children = (
+				D23E01381E6BAD0A00E735F5 /* FirebaseUpstream.swift */,
+				D23E013A1E6BAD2100E735F5 /* FirebaseDownstream.swift */,
 			);
 			name = Google;
 			sourceTree = "<group>";
@@ -461,7 +470,7 @@
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
-				D23E01371E6BA7C900E735F5 /* GoogleService-Info-4.plist in Resources */,
+				D23E01371E6BA7C900E735F5 /* GoogleService-Info.plist in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
@@ -650,9 +659,12 @@
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 				D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */,
+				D23E01391E6BAD0A00E735F5 /* FirebaseUpstream.swift in Sources */,
 				D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */,
+				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
 				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,
+				D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */,
 				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

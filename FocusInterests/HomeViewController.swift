@@ -18,6 +18,10 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let newUser = FocusUser(userName: "Bill Brasky", firebaseId: "", imageString: "https://billyb.com", currentLocation: nil, interests: [Constants.interests.bars])
+        
+        FirebaseUpstream.sharedInstance.addToUsers(focusUser: newUser)
+        
         self.title = "FOCUS PINS"
         
         navigationController?.navigationBar.barTintColor = UIColor.primaryGreen()
