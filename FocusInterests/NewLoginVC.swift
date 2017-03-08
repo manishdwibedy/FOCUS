@@ -10,10 +10,25 @@ import Foundation
 import UIKit
 import FacebookLogin
 import FBSDKCoreKit
+import FirebaseAuth
 
 class NewLoginVC: UIViewController {
     
+    let handle = FIRAuth.auth()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        handle?.addStateDidChangeListener({ (auth, user) in
+            if let u = user {
+                print("user uid: \(u.uid)")
+            }
+        })
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        handle?.removeStateDidChangeListener(handle!)
     }
 }
