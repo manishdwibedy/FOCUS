@@ -19,6 +19,7 @@ pod 'GooglePlaces'
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
+  pod 'Google/SignIn'
 end
 
 target 'FocusInterestsTests' do
@@ -35,6 +36,7 @@ pod 'GooglePlaces'
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
+  pod 'Google/SignIn'
 end
 
 target 'FocusInterestsUITests' do
@@ -51,5 +53,6 @@ pod 'GooglePlaces'
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
+  pod 'Google/SignIn'
 end
 

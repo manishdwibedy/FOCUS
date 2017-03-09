@@ -12,9 +12,10 @@ import GoogleMaps
 import GooglePlaces
 import Firebase
 import FBSDKCoreKit
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     let defaults = UserDefaults.standard
@@ -24,12 +25,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
         
         GMSServices.provideAPIKey(Constants.keys.googleMapsAPIKey)
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google Services: \(configureError)")
+        GIDSignIn.sharedInstance().delegate = self
         
         FIRApp.configure()
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         return true
+    }
+    
+    // Google signin handler
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if error == nil {
+            let userId = user.userID
+            let idToken = user.authentication.idToken
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+        } else {
+            print("There was a Google signin error: \(error.localizedDescription)")
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // user has backgrounded the app...
     }
     
     func login() {
@@ -42,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     func logout() {
         defaults.set(false, forKey: Constants.defaultsKeys.loggedIn)
         let storyboard = UIStoryboard(name: Constants.otherIds.loginSB, bundle: nil)
-        let vc = storyboard.instantiateInitialViewController() as! FirstLoginViewController
+        let vc = storyboard.instantiateInitialViewController() as! NewLoginVC
         self.window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
     }

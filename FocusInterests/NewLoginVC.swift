@@ -11,13 +11,16 @@ import UIKit
 import FacebookLogin
 import FBSDKCoreKit
 import FirebaseAuth
+import GoogleSignIn
 
-class NewLoginVC: UIViewController {
+class NewLoginVC: UIViewController, GIDSignInUIDelegate {
     
     let handle = FIRAuth.auth()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
