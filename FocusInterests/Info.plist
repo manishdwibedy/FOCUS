@@ -21,7 +21,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb[APP_ID]</string>
+				<string>fb1363838290342964</string>
 			</array>
 		</dict>
 		<dict>
@@ -36,9 +36,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>[APP_ID]</string>
+	<string>1363838290342964</string>
 	<key>FacebookDisplayName</key>
-	<string>[APP_NAME]</string>
+	<string>TrailLocator</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
