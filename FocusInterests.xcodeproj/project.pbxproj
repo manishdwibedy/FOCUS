@@ -42,6 +42,7 @@
 		D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */; };
 		D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */; };
 		D28EAFC01E5E7C8E001EA7E5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */; };
+		D296F5D31E75BB69007EC393 /* AuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D296F5D21E75BB69007EC393 /* AuthApi.swift */; };
 		D2A173551E5E911500C7724B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A173541E5E911500C7724B /* SignUpViewController.swift */; };
 		D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B03F1E5A047C0002F1B1 /* AppDelegate.swift */; };
 		D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */; };
@@ -116,6 +117,7 @@
 		D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
 		D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		D296F5D21E75BB69007EC393 /* AuthApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthApi.swift; sourceTree = "<group>"; };
 		D2A173541E5E911500C7724B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D2B9B03C1E5A047C0002F1B1 /* FocusInterests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusInterests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B9B03F1E5A047C0002F1B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		D296F5D11E75BB3B007EC393 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D296F5D21E75BB69007EC393 /* AuthApi.swift */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
 		D2B9B0331E5A047C0002F1B1 = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +247,7 @@
 		D2B9B03E1E5A047C0002F1B1 /* FocusInterests */ = {
 			isa = PBXGroup;
 			children = (
+				D296F5D11E75BB3B007EC393 /* Authentication */,
 				D28EAFBE1E5E7C4C001EA7E5 /* Resources */,
 				D252206F1E5A894300EC2014 /* Models */,
 				D2B9B0751E5A0A410002F1B1 /* Google */,
@@ -659,6 +670,7 @@
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
 				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,
+				D296F5D31E75BB69007EC393 /* AuthApi.swift in Sources */,
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 				D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */,

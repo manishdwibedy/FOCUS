@@ -19,8 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
 
     var window: UIWindow?
     let defaults = UserDefaults.standard
+   
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        //defaults.set("notLoggedIn", forKey: "Login")
         
         UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
         
@@ -29,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google Services: \(configureError)")
         GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         
         FIRApp.configure()
         

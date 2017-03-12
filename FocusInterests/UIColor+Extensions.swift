@@ -33,4 +33,9 @@ extension UIColor {
         let randomColor = UIColor(colorLiteralRed: redValue, green: greenValue, blue: blueValue, alpha: 1)
         return randomColor
     }
+    
+    class func veryLightGrey() -> UIColor {
+        let color = UIColor(colorLiteralRed: 220/255, green: 220/255, blue: 220/255, alpha: 1)
+        return color
+    }
 }
