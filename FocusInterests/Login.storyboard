@@ -459,10 +459,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5J-wA-IYL">
-                                <rect key="frame" x="-4" y="720" width="383" height="300"/>
+                                <rect key="frame" x="-4" y="720" width="383" height="400"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g5A-4w-M1w">
-                                        <rect key="frame" x="66.5" y="66" width="250" height="50"/>
+                                        <rect key="frame" x="66.5" y="90" width="250" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="gZg-tb-ocb"/>
                                             <constraint firstAttribute="width" constant="250" id="s7V-yn-dF2"/>
@@ -472,7 +472,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2YZ-47-bps">
-                                        <rect key="frame" x="66.5" y="143" width="250" height="50"/>
+                                        <rect key="frame" x="66.5" y="167" width="250" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="2ro-L7-N8f"/>
                                             <constraint firstAttribute="height" constant="50" id="fB5-dJ-cMW"/>
@@ -482,7 +482,7 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9M-BQ-yT3">
-                                        <rect key="frame" x="66" y="220" width="250" height="50"/>
+                                        <rect key="frame" x="66" y="244" width="250" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="M4e-1M-K4A"/>
                                             <constraint firstAttribute="width" constant="250" id="VT5-fw-fVt"/>
@@ -495,15 +495,41 @@
                                             <action selector="submitEmailTapped:" destination="96E-b6-SZp" eventType="touchUpInside" id="LRO-Pb-62k"/>
                                         </connections>
                                     </button>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="d25-YL-q5g">
+                                        <rect key="frame" x="91.5" y="30" width="200" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="pbq-PA-BhP"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Login"/>
+                                            <segment title="Signup"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segValChanged:" destination="96E-b6-SZp" eventType="valueChanged" id="0R2-lw-htm"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="if5-av-Jc5">
+                                        <rect key="frame" x="327" y="362" width="48" height="30"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelEmailTapped:" destination="96E-b6-SZp" eventType="touchUpInside" id="rm4-Ks-52s"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="2YZ-47-bps" firstAttribute="centerX" secondItem="g5J-wA-IYL" secondAttribute="centerX" id="7Sk-jG-OCJ"/>
                                     <constraint firstItem="2YZ-47-bps" firstAttribute="top" secondItem="g5A-4w-M1w" secondAttribute="bottom" constant="27" id="8vE-rm-AKk"/>
-                                    <constraint firstItem="g5A-4w-M1w" firstAttribute="top" secondItem="g5J-wA-IYL" secondAttribute="top" constant="66" id="LTr-21-gsY"/>
+                                    <constraint firstAttribute="bottom" secondItem="if5-av-Jc5" secondAttribute="bottom" constant="8" id="CDo-1Y-87L"/>
+                                    <constraint firstItem="d25-YL-q5g" firstAttribute="top" secondItem="g5J-wA-IYL" secondAttribute="top" constant="30" id="agJ-Dy-d6u"/>
                                     <constraint firstItem="O9M-BQ-yT3" firstAttribute="centerX" secondItem="g5J-wA-IYL" secondAttribute="centerX" id="eKD-hn-oD4"/>
                                     <constraint firstItem="O9M-BQ-yT3" firstAttribute="top" secondItem="2YZ-47-bps" secondAttribute="bottom" constant="27" id="f4a-Cl-7io"/>
-                                    <constraint firstAttribute="height" constant="300" id="tFj-vh-MQy"/>
+                                    <constraint firstItem="d25-YL-q5g" firstAttribute="centerX" secondItem="g5J-wA-IYL" secondAttribute="centerX" id="fha-Jq-ZNp"/>
+                                    <constraint firstAttribute="trailing" secondItem="if5-av-Jc5" secondAttribute="trailing" constant="8" id="oqC-X9-Epj"/>
+                                    <constraint firstAttribute="height" constant="400" id="tFj-vh-MQy"/>
+                                    <constraint firstItem="g5A-4w-M1w" firstAttribute="top" secondItem="d25-YL-q5g" secondAttribute="bottom" constant="32" id="uhY-6t-rfq"/>
                                     <constraint firstItem="g5A-4w-M1w" firstAttribute="centerX" secondItem="g5J-wA-IYL" secondAttribute="centerX" id="wQb-3y-Tbk"/>
                                 </constraints>
                             </view>
@@ -554,6 +580,7 @@
                         <outlet property="loggedInLabel" destination="7bA-sZ-w0U" id="EJu-cM-f9R"/>
                         <outlet property="logoutButton" destination="N2S-1G-69y" id="eGA-Zg-bhK"/>
                         <outlet property="passwordTextField" destination="2YZ-47-bps" id="fyt-X4-6cQ"/>
+                        <outlet property="segmentedC" destination="d25-YL-q5g" id="KLm-GT-8PR"/>
                         <outlet property="submitEmailButton" destination="O9M-BQ-yT3" id="thz-b0-j59"/>
                     </connections>
                 </viewController>
