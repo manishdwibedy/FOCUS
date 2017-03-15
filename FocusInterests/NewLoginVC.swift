@@ -13,13 +13,13 @@ import FBSDKCoreKit
 import FirebaseAuth
 import GoogleSignIn
 
+
 class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var segmentedC: UISegmentedControl!
     @IBOutlet weak var loggedInLabel: UILabel!
     @IBOutlet weak var faceBookButton: UIButton!
     @IBOutlet weak var googleLoginButton: GIDSignInButton!
-    @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var emailMovementConstraint: NSLayoutConstraint!
     @IBOutlet weak var emailPwordButton: UIButton!
@@ -33,6 +33,9 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     let defaults = UserDefaults.standard
     var email: String?
     var password: String?
+    var signUp = false
+    var delegate: LoginDelegate?
+    let appD = UIApplication.shared.delegate as! AppDelegate
     
     
     override func viewDidLoad() {
@@ -43,6 +46,8 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         passwordTextField.delegate = self
         emailTextField.tag = 0
         passwordTextField.tag = 1
+        
+        self.delegate = appD
         
         emailView.backgroundColor = UIColor.primaryGreen()
         
@@ -73,10 +78,6 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         faceBookButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         faceBookButton.addSubview(fbImage)
         print("This user is logged in: \(FBSDKAccessToken.current())")
-        
-        logoutButton.backgroundColor = UIColor.primaryGreen()
-        logoutButton.layer.cornerRadius = 20
-        logoutButton.clipsToBounds = true
         
         emailPwordButton.backgroundColor = UIColor.primaryGreen()
         emailPwordButton.layer.cornerRadius = 2
@@ -132,21 +133,6 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     override func viewDidDisappear(_ animated: Bool) {
         handle?.removeStateDidChangeListener(handle!)
     }
-    @IBAction func logoutTapped(_ sender: Any) {
-        
-        loginView.logOut()
-        FBSDKAccessToken.setCurrent(nil)
-        FBSDKProfile.setCurrent(nil)
-        AuthApi.setDefaultsForLogout()
-        defaults.set("notLoggedIn", forKey: "Login")
-        GIDSignIn.sharedInstance().signOut()
-        do {
-            try handle?.signOut()
-        } catch let error as NSError {
-            print("error logging out of firebase: \(error.localizedDescription)")
-        }
-        checkForLoggedIn()
-    }
     
     @IBAction func emailPwordTapped(_ sender: Any) {
         UIView.animate(withDuration: 0.7, animations: {
@@ -157,36 +143,63 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     }
     
     @IBAction func segValChanged(_ sender: Any) {
-        
+        if segmentedC.selectedSegmentIndex == 0 {
+            signUp = false
+        } else {
+            signUp = true
+        }
     }
     
     @IBAction func submitEmailTapped(_ sender: Any) {
         guard let eml = self.email, let pwrd = self.password else {
             return
         }
-        FIRAuth.auth()?.createUser(withEmail: eml, password: pwrd, completion: { (user, error) in
-            if error != nil {
-                self.showLoginFailedAlert(loginType: "email & password")
-                print("and here is the error: \(error?.localizedDescription)")
-            } else {
-                if user != nil {
-                    FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
-                        if error != nil {
-                            self.showLoginFailedAlert(loginType: "email")
-                            print("there has been an error with email login: \(error?.localizedDescription)")
-                        } else {
-                            if let id = user?.uid {
-                                AuthApi.set(firebaseUid: id)
+        if signUp {
+            FIRAuth.auth()?.createUser(withEmail: eml, password: pwrd, completion: { (user, error) in
+                if error != nil {
+                    self.showLoginFailedAlert(loginType: "email & password")
+                    print("and here is the error: \(error?.localizedDescription)")
+                } else {
+                    if user != nil {
+                        FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
+                            if error != nil {
+                                self.showLoginFailedAlert(loginType: "email")
+                                print("there has been an error with email login: \(error?.localizedDescription)")
+                            } else {
+                                if let id = user?.uid {
+                                    AuthApi.set(firebaseUid: id)
+                                }
+                                self.emailMovementConstraint.constant = 700
+                                self.defaults.set(user!.uid, forKey: "firebaseEmailLogin")
+                                self.checkForLoggedIn()
+                                self.delegate?.login()
                             }
-                            self.emailMovementConstraint.constant = 700
-                            self.defaults.set(user!.uid, forKey: "firebaseEmailLogin")
-                            self.checkForLoggedIn()
-                            
-                        }
-                    })
+                        })
+                    } else {
+                        self.showLoginFailedAlert(loginType: "email")
+                    }
                 }
-            }
-        })
+            })
+        } else {
+            FIRAuth.auth()?.signIn(withEmail: eml, password: pwrd, completion: { (user, error) in
+                if error != nil {
+                    self.showLoginFailedAlert(loginType: "email")
+                    print("there has been an error with email login: \(error?.localizedDescription)")
+                } else {
+                    if user != nil {
+                        if let id = user?.uid {
+                            AuthApi.set(firebaseUid: id)
+                        }
+                        self.emailMovementConstraint.constant = 700
+                        self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
+                        self.checkForLoggedIn()
+                        self.delegate?.login()
+                    } else {
+                        self.showLoginFailedAlert(loginType: "email")
+                    }
+                }
+            })
+        }
     }
     @IBAction func cancelEmailTapped(_ sender: Any) {
         UIView.animate(withDuration: 0.8, animations: {
@@ -228,6 +241,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                                 AuthApi.set(firebaseUid: fireId)
                                 self.defaults.set("facebook", forKey: "Login")
                                 AuthApi.set(facebookToken: FBSDKAccessToken.current().tokenString)
+                                self.delegate?.login()
                             }
                             
                             self.checkForLoggedIn()
@@ -257,6 +271,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                 if let u = user {
                    let fireId = u.uid
                     AuthApi.set(firebaseUid: fireId)
+                    self.delegate?.login()
                 } else {
                     self.showLoginFailedAlert(loginType: "our server")
                 }

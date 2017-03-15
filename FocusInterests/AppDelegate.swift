@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        //defaults.set("notLoggedIn", forKey: "Login")
+        print(defaults.object(forKey: "Login") as! String)
         
         UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
         
@@ -38,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        checkForLogin()
+        
         return true
     }
     
@@ -46,6 +48,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
     }
 
+    func checkForLogin() {
+        if defaults.object(forKey:"Login") as! String == "notLoggedIn" {
+            
+            self.logout()
+        } else if defaults.object(forKey: "Login") == nil {
+            self.logout()
+        } else {
+            login()
+        }
+    }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error == nil {

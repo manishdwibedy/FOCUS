@@ -413,20 +413,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashBackgrnd" translatesAutoresizingMaskIntoConstraints="NO" id="HJa-nJ-iBn">
                                 <rect key="frame" x="-2" y="0.0" width="379" height="669"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2S-1G-69y">
-                                <rect key="frame" x="67" y="467" width="240" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Nug-3b-xgu"/>
-                                    <constraint firstAttribute="width" constant="240" id="gsc-3N-njY"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Logout of Focus">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="logoutTapped:" destination="96E-b6-SZp" eventType="touchUpInside" id="kHl-jc-M4i"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jj7-ar-r5p">
                                 <rect key="frame" x="67" y="218" width="240" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -557,7 +543,6 @@
                             <constraint firstItem="HJa-nJ-iBn" firstAttribute="top" secondItem="VD4-BT-GoK" secondAttribute="top" id="OKW-Gn-bDp"/>
                             <constraint firstItem="SYq-wM-VbM" firstAttribute="top" secondItem="Eza-fa-hv1" secondAttribute="bottom" constant="14" id="OaE-v1-dsN"/>
                             <constraint firstItem="Eza-fa-hv1" firstAttribute="top" secondItem="jj7-ar-r5p" secondAttribute="bottom" constant="14" id="SmY-X9-la8"/>
-                            <constraint firstItem="N2S-1G-69y" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="UNV-FC-QcP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g5J-wA-IYL" secondAttribute="trailing" constant="-20" id="dh4-0e-oDJ"/>
                             <constraint firstItem="SYq-wM-VbM" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="e2U-Tn-nUm"/>
                             <constraint firstItem="Eza-fa-hv1" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="gCi-tg-6St"/>
@@ -567,7 +552,6 @@
                             <constraint firstAttribute="trailing" secondItem="HJa-nJ-iBn" secondAttribute="trailing" constant="-2" id="rTX-wO-1nQ"/>
                             <constraint firstItem="jj7-ar-r5p" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="ugU-Fg-zSb"/>
                             <constraint firstItem="HJa-nJ-iBn" firstAttribute="top" secondItem="jj7-ar-r5p" secondAttribute="bottom" constant="-258" id="y4H-LL-RP8"/>
-                            <constraint firstItem="yWE-Kn-qDP" firstAttribute="top" secondItem="N2S-1G-69y" secondAttribute="bottom" constant="160" id="zjw-kr-Dxf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -578,7 +562,6 @@
                         <outlet property="faceBookButton" destination="jj7-ar-r5p" id="ewL-mD-KY5"/>
                         <outlet property="googleLoginButton" destination="Eza-fa-hv1" id="CM0-da-1Zz"/>
                         <outlet property="loggedInLabel" destination="7bA-sZ-w0U" id="EJu-cM-f9R"/>
-                        <outlet property="logoutButton" destination="N2S-1G-69y" id="eGA-Zg-bhK"/>
                         <outlet property="passwordTextField" destination="2YZ-47-bps" id="fyt-X4-6cQ"/>
                         <outlet property="segmentedC" destination="d25-YL-q5g" id="KLm-GT-8PR"/>
                         <outlet property="submitEmailButton" destination="O9M-BQ-yT3" id="thz-b0-j59"/>

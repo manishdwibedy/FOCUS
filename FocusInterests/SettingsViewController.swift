@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 protocol LogoutDelegate {
     func logout()
 }
 
-class SettingsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class SettingsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, GIDSignInDelegate {
 
     @IBOutlet weak var statusBarFillView: UIView!
     @IBOutlet weak var toolBar: UIToolbar!
@@ -21,10 +22,15 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     
     var delegate: LogoutDelegate?
     let appD = UIApplication.shared.delegate
+    var fBManager: FBSDKLoginManager?
+    var googleHandle: GIDSignIn?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        googleHandle = GIDSignIn()
+        googleHandle?.delegate = self
+        fBManager = FBSDKLoginManager()
         delegate = appD as! LogoutDelegate?
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         let switchNib = UINib(nibName: "SwitchCell", bundle: nil)
@@ -75,8 +81,23 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             let chooseVC = InterestsPickerViewController(nibName: "InterestsPickerViewController", bundle: nil)
             self.present(chooseVC, animated: true, completion: nil)
         }
-        if indexPath.row == 6 {
+        if indexPath.row == 6 {fBManager!.logOut()
+            FBSDKAccessToken.setCurrent(nil)
+            FBSDKProfile.setCurrent(nil)
+            AuthApi.setDefaultsForLogout()
+            defaults.set("notLoggedIn", forKey: "Login")
+            GIDSignIn.sharedInstance().signOut()
+            do {
+                try googleHandle!.signOut()
+            } catch let error as NSError {
+                print("error logging out of firebase: \(error.localizedDescription)")
+            }
             self.delegate?.logout()
         }
+    }
+    
+    // required google function
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
     }
 }
