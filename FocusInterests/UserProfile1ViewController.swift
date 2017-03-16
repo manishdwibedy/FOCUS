@@ -9,11 +9,19 @@
 import UIKit
 
 class UserProfile1ViewController: UIViewController {
+    
+    @IBOutlet weak var FakeToolBar: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bottomBar: UIToolbar!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIApplication.shared.statusBarStyle = .lightContent
 
-        // Do any additional setup after loading the view.
+        FakeToolBar.backgroundColor = UIColor.primaryGreen()
+        bottomBar.backgroundColor = UIColor.primaryGreen()
     }
 
     override func didReceiveMemoryWarning() {

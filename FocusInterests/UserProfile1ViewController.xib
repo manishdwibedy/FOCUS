@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserProfile1ViewController" customModule="FocusInterests" customModuleProvider="target">
             <connections>
+                <outlet property="FakeToolBar" destination="nCZ-AP-9rp" id="XOv-if-bJt"/>
+                <outlet property="bottomBar" destination="Jbf-d6-s4e" id="yRt-cd-xie"/>
+                <outlet property="tableView" destination="M1a-5F-xnH" id="JL6-G9-p4x"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
