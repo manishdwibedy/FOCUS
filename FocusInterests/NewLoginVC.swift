@@ -41,7 +41,6 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIApplication.shared.statusBarStyle = .lightContent
         emailTextField.delegate = self
         passwordTextField.delegate = self
         emailTextField.tag = 0
@@ -201,6 +200,12 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
             })
         }
     }
+    
+    func presentOwnUserProfile() {
+        let destination = UserProfile1ViewController(nibName: "UserProfileViewController", bundle: nil)
+        present(destination, animated: true, completion: nil)
+    }
+    
     @IBAction func cancelEmailTapped(_ sender: Any) {
         UIView.animate(withDuration: 0.8, animations: {
             self.emailMovementConstraint.constant = 700

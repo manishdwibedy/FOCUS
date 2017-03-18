@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-enum InterestCategory {
+enum InterestCategory: String {
     
-    case Sports
-    case Art
-    case Nightlife
-    case Food
-    case Shopping
+    case Sports = "sports"
+    case Art = "art"
+    case Nightlife = "nightlife"
+    case Food = "food"
+    case Shopping = "shopping"
 }
 
 class Interest {
@@ -23,10 +23,12 @@ class Interest {
     var name: String?
     var category: InterestCategory?
     var image: UIImage?
+    var imageString: String?
     
-    init(name: String?, category: InterestCategory?, image: UIImage?) {
+    init(name: String?, category: InterestCategory?, image: UIImage?, imageString: String?) {
         self.name = name
         self.category = category
         self.image = image
+        self.imageString = imageString
     }
 }

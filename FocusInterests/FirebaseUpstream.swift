@@ -19,8 +19,12 @@ class FirebaseUpstream {
     var ref = FIRDatabase.database().reference()
     
     func addToUsers(focusUser: FocusUser) {
-        let id = ref.childByAutoId().key
+
         var dict = [String : AnyObject]()
+        
+        if let fireId = focusUser.firebaseId {
+            dict["firebaseUserId"] = fireId as AnyObject
+        }
         if let uName = focusUser.userName {
             dict["username"] = uName as AnyObject
         } else {
@@ -36,14 +40,19 @@ class FirebaseUpstream {
         } else {
             dict["current_location"] = "" as AnyObject
         }
-        
-        // create func that takes array of Interests and returns array of comma-separated strings
-        if let interests = focusUser.interests {
-            dict["interests"] = "There'll be an array of interest names here" as AnyObject
-        } else {
-            dict["interests"] = "" as AnyObject
-        }
-        let pathString = "users/\(id)"
+
+        let pathString = "users/\(focusUser.firebaseId!)"
         ref.child(pathString).setValue(dict)
+    }
+    
+    func addInterestWithUser(interest: Interest, currentUserId: String) {
+        var dict = [String : AnyObject]()
+        
+        let id = ref.childByAutoId().key
+        
+    }
+    
+    func uploadProfileImage(image: UIImage, user: FocusUser) {
+        
     }
 }

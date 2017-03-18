@@ -8,7 +8,11 @@
 
 import UIKit
 
-class UserProfile1ViewController: UIViewController {
+enum ReuseIdentifiers: String {
+    case UserImage = "UserImageCell"
+}
+
+class UserProfile1ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var FakeToolBar: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -18,10 +22,15 @@ class UserProfile1ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        
         UIApplication.shared.statusBarStyle = .lightContent
 
         FakeToolBar.backgroundColor = UIColor.primaryGreen()
         bottomBar.backgroundColor = UIColor.primaryGreen()
+        let imageCellNib = UINib(nibName: "UserPhotoCell", bundle: nil)
+        tableView.register(imageCellNib, forCellReuseIdentifier: ReuseIdentifiers.UserImage.rawValue)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,15 +38,23 @@ class UserProfile1ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Tableviewdatasource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.UserImage.rawValue) as? UserPhotoCell
+            return cell!
+        }
+        return UITableViewCell()
+    }
 }
