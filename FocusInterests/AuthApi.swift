@@ -12,9 +12,13 @@ struct AuthApi {
     
     static let defaults = UserDefaults.standard
     
+    static func set(loggedIn: LoginTypes) {
+        defaults.set(loggedIn.rawValue, forKey: "Login")
+    }
+    
     static func set(firebaseUid: String?) {
         if let id = firebaseUid {
-            defaults.set(id, forKey: "fireBaseUid")
+            defaults.set(id, forKey: "firebaseUid")
         }
     }
     

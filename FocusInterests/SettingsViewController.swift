@@ -20,8 +20,6 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dismissButton: UIBarButtonItem!
     
-    var delegate: LogoutDelegate?
-    let appD = UIApplication.shared.delegate
     var fBManager: FBSDKLoginManager?
     var googleHandle: GIDSignIn?
     
@@ -31,7 +29,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         googleHandle = GIDSignIn()
         googleHandle?.delegate = self
         fBManager = FBSDKLoginManager()
-        delegate = appD as! LogoutDelegate?
+        logoutDelegate = appD
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         let switchNib = UINib(nibName: "SwitchCell", bundle: nil)
         tableView.register(switchNib, forCellReuseIdentifier: "SwitchCell")
@@ -87,12 +85,8 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             AuthApi.setDefaultsForLogout()
             defaults.set("notLoggedIn", forKey: "Login")
             GIDSignIn.sharedInstance().signOut()
-            do {
-                try googleHandle!.signOut()
-            } catch let error as NSError {
-                print("error logging out of firebase: \(error.localizedDescription)")
-            }
-            self.delegate?.logout()
+            googleHandle!.signOut()
+            self.logoutDelegate?.logout()
         }
     }
     

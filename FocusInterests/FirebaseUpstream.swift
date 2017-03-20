@@ -16,7 +16,8 @@ class FirebaseUpstream {
     
     fileprivate init() {}
     
-    var ref = FIRDatabase.database().reference()
+    let ref = FIRDatabase.database().reference()
+    let storageRef = FIRStorage.storage().reference()
     
     func addToUsers(focusUser: FocusUser) {
 
@@ -52,7 +53,26 @@ class FirebaseUpstream {
         
     }
     
-    func uploadProfileImage(image: UIImage, user: FocusUser) {
+    func uploadProfileImage(image: UIImage, completion: @escaping (String) -> Void) {
         
+        if let uid = AuthApi.getFirebaseUid() {
+            let storeChild = storageRef.child("profileImage\(uid)")
+            if let uploadData = UIImagePNGRepresentation(image) {
+                storeChild.put(uploadData, metadata: nil, completion: { (metaData, error) in
+                    if error != nil {
+                        print(error?.localizedDescription)
+                        return
+                    }
+                    
+                    if let url = metaData?.downloadURL() {
+                        DispatchQueue.main.async(execute: {
+                            completion(String(describing: url))
+                        })
+                    }
+                    
+                })
+            }
+
+        }
     }
 }

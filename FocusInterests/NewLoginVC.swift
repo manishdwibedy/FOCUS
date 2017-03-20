@@ -13,6 +13,11 @@ import FBSDKCoreKit
 import FirebaseAuth
 import GoogleSignIn
 
+enum LoginTypes: String {
+    case Email = "email"
+    case Facebook = "facebook"
+    case Google = "google"
+}
 
 class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
@@ -87,28 +92,32 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     
     
     func checkForLoggedIn() {
-        let loggedIn = defaults.object(forKey: "Login") as! String
-        
-        switch loggedIn {
-        case "notLoggedIn":
-            loggedInLabel.text = "You're not logged in."
-            faceBookButton.isEnabled = true
-            self.faceBookButton.alpha = 1
-            googleLoginButton.isEnabled = true
-            emailPwordButton.isEnabled = true
-            emailPwordButton.alpha = 1
-        case "facebook":
-            loggedInLabel.text = "You're logged in with Facebook"
-            setUIForLogged()
-        case "google":
-            loggedInLabel.text = "You're logged in with Google"
-            setUIForLogged()
-        case "firebaseEmailLogin":
-            loggedInLabel.text = "You're logged in with email"
-            setUIForLogged()
-        default:
-            break
+        if let loggedIn = defaults.object(forKey: "Login") as? String {
+            switch loggedIn {
+            case "notLoggedIn":
+                loggedInLabel.text = "You're not logged in."
+                faceBookButton.isEnabled = true
+                self.faceBookButton.alpha = 1
+                googleLoginButton.isEnabled = true
+                emailPwordButton.isEnabled = true
+                emailPwordButton.alpha = 1
+            case "facebook":
+                loggedInLabel.text = "You're logged in with Facebook"
+                setUIForLogged()
+            case "google":
+                loggedInLabel.text = "You're logged in with Google"
+                setUIForLogged()
+            case "firebaseEmailLogin":
+                loggedInLabel.text = "You're logged in with email"
+                setUIForLogged()
+            default:
+                break
+            }
+
+        } else {
+            loggedInLabel.text = "You've never logged in."
         }
+        
     }
     
     func setUIForLogged() {
@@ -128,6 +137,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         })
          checkForLoggedIn()
     }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         handle?.removeStateDidChangeListener(handle!)
@@ -171,7 +181,8 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                                 self.emailMovementConstraint.constant = 700
                                 self.defaults.set(user!.uid, forKey: "firebaseEmailLogin")
                                 self.checkForLoggedIn()
-                                self.delegate?.login()
+                                AuthApi.set(loggedIn: LoginTypes.Email)
+                                self.presentOwnUserProfile()
                             }
                         })
                     } else {
@@ -192,7 +203,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                         self.emailMovementConstraint.constant = 700
                         self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
                         self.checkForLoggedIn()
-                        self.delegate?.login()
+                        self.presentOwnUserProfile()
                     } else {
                         self.showLoginFailedAlert(loginType: "email")
                     }
@@ -202,7 +213,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     }
     
     func presentOwnUserProfile() {
-        let destination = UserProfile1ViewController(nibName: "UserProfileViewController", bundle: nil)
+        let destination = UserProfile1ViewController(nibName: "UserProfile1ViewController", bundle: nil)
         present(destination, animated: true, completion: nil)
     }
     
@@ -244,9 +255,9 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                             if let u = user {
                                 let fireId = u.uid
                                 AuthApi.set(firebaseUid: fireId)
-                                self.defaults.set("facebook", forKey: "Login")
+                                AuthApi.set(loggedIn: .Facebook)
                                 AuthApi.set(facebookToken: FBSDKAccessToken.current().tokenString)
-                                self.delegate?.login()
+                                self.presentOwnUserProfile()
                             }
                             
                             self.checkForLoggedIn()
@@ -276,7 +287,8 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                 if let u = user {
                    let fireId = u.uid
                     AuthApi.set(firebaseUid: fireId)
-                    self.delegate?.login()
+                    AuthApi.set(loggedIn: .Google)
+                    self.presentOwnUserProfile()
                 } else {
                     self.showLoginFailedAlert(loginType: "our server")
                 }

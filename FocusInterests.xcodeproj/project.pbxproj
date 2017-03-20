@@ -38,6 +38,8 @@
 		D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */; };
 		D25220711E5A895E00EC2014 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220701E5A895E00EC2014 /* Notifications.swift */; };
 		D25220741E5A8A7400EC2014 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220731E5A8A7400EC2014 /* Constants.swift */; };
+		D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AACCC1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift */; };
+		D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */; };
 		D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */; };
 		D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */; };
 		D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */; };
@@ -53,6 +55,8 @@
 		D2B9B0581E5A047C0002F1B1 /* FocusInterestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0571E5A047C0002F1B1 /* FocusInterestsTests.swift */; };
 		D2B9B0631E5A047C0002F1B1 /* FocusInterestsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0621E5A047C0002F1B1 /* FocusInterestsUITests.swift */; };
 		D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */; };
+		D2D0A3EC1E7F49ED00B43689 /* UserDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0A3EA1E7F49ED00B43689 /* UserDescriptionCell.swift */; };
+		D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D0A3EB1E7F49ED00B43689 /* UserDescriptionCell.xib */; };
 		D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D876B91E5FDAC500FC782E /* InterestsPickerViewController.swift */; };
 		D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D876BA1E5FDAC500FC782E /* InterestsPickerViewController.xib */; };
 		D2ECAC541E7A255B006FFA1A /* UserProfile1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ECAC521E7A255B006FFA1A /* UserProfile1ViewController.swift */; };
@@ -117,6 +121,8 @@
 		D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationsCellTableViewCell.xib; sourceTree = "<group>"; };
 		D25220701E5A895E00EC2014 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D25220731E5A8A7400EC2014 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D25AACCC1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserProfile1ViewController+UIImagePickerC.swift"; sourceTree = "<group>"; };
+		D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPermissionsChecker.swift; sourceTree = "<group>"; };
 		D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLoginVC.swift; sourceTree = "<group>"; };
 		D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
@@ -139,6 +145,8 @@
 		D2B9B0621E5A047C0002F1B1 /* FocusInterestsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusInterestsUITests.swift; sourceTree = "<group>"; };
 		D2B9B0641E5A047C0002F1B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		D2D0A3EA1E7F49ED00B43689 /* UserDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionCell.swift; sourceTree = "<group>"; };
+		D2D0A3EB1E7F49ED00B43689 /* UserDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDescriptionCell.xib; sourceTree = "<group>"; };
 		D2D876B91E5FDAC500FC782E /* InterestsPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestsPickerViewController.swift; sourceTree = "<group>"; };
 		D2D876BA1E5FDAC500FC782E /* InterestsPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestsPickerViewController.xib; sourceTree = "<group>"; };
 		D2ECAC521E7A255B006FFA1A /* UserProfile1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile1ViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +219,14 @@
 				D23E013C1E6BB0AE00E735F5 /* FocusUser.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		D25AACCB1E7D8F34005DE49F /* UserProfile1+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D25AACCC1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift */,
+			);
+			name = "UserProfile1+Extensions";
 			sourceTree = "<group>";
 		};
 		D28EAFBE1E5E7C4C001EA7E5 /* Resources */ = {
@@ -312,6 +328,7 @@
 			children = (
 				D25220731E5A8A7400EC2014 /* Constants.swift */,
 				D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */,
+				D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -345,6 +362,8 @@
 				D219754D1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib */,
 				D2ECAC561E7CD9F8006FFA1A /* UserPhotoCell.swift */,
 				D2ECAC571E7CD9F8006FFA1A /* UserPhotoCell.xib */,
+				D2D0A3EA1E7F49ED00B43689 /* UserDescriptionCell.swift */,
+				D2D0A3EB1E7F49ED00B43689 /* UserDescriptionCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -374,6 +393,7 @@
 				D230D8C71E5B7E7800025EE9 /* SettingsViewController.xib */,
 				D2ECAC521E7A255B006FFA1A /* UserProfile1ViewController.swift */,
 				D2ECAC531E7A255B006FFA1A /* UserProfile1ViewController.xib */,
+				D25AACCB1E7D8F34005DE49F /* UserProfile1+Extensions */,
 			);
 			name = NibVCs;
 			sourceTree = "<group>";
@@ -507,6 +527,7 @@
 				D2ECAC591E7CD9F8006FFA1A /* UserPhotoCell.xib in Resources */,
 				D2ECAC551E7A255B006FFA1A /* UserProfile1ViewController.xib in Resources */,
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
+				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
@@ -680,10 +701,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2A173551E5E911500C7724B /* SignUpViewController.swift in Sources */,
+				D2D0A3EC1E7F49ED00B43689 /* UserDescriptionCell.swift in Sources */,
 				D2ECAC581E7CD9F8006FFA1A /* UserPhotoCell.swift in Sources */,
+				D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */,
 				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
+				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
 				D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */,

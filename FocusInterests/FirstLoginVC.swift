@@ -20,9 +20,6 @@ class FirstLoginViewController: BaseViewController {
     @IBOutlet weak var pWordText: UITextField!
     @IBOutlet weak var logoImage: UIImageView!
     
-    let appD = UIApplication.shared.delegate as! AppDelegate
-    var delegate: LoginDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +27,7 @@ class FirstLoginViewController: BaseViewController {
         
         animateLogo()
         
-        self.delegate = appD
+        self.loginDelegate = appD
         
         UITextField.whitePlaceholder(text: Constants.textfieldPlaceholers.logVCUname, textField: uNameText)
         UITextField.whitePlaceholder(text: Constants.textfieldPlaceholers.logVCPword, textField: pWordText)
@@ -57,7 +54,7 @@ class FirstLoginViewController: BaseViewController {
     
     func ifLoggedIn() {
         if defaults.bool(forKey: Constants.defaultsKeys.loggedIn) {
-            delegate?.login()
+            loginDelegate?.login()
         }
     }
     

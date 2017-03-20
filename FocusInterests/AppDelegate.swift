@@ -19,11 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
 
     var window: UIWindow?
     let defaults = UserDefaults.standard
-   
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        print(defaults.object(forKey: "Login") as! String)
+        FIRApp.configure()
         
         UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
         
@@ -33,8 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         assert(configureError == nil, "Error configuring Google Services: \(configureError)")
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
-        
-        FIRApp.configure()
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
@@ -49,24 +47,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     }
 
     func checkForLogin() {
-        if defaults.object(forKey:"Login") as! String == "notLoggedIn" {
-            
-            self.logout()
+        if let loggedIn = defaults.object(forKey: "Login") as? String {
+            if loggedIn == "notLoggedIn" {
+                logout()
+            } else {
+                login()
+            }
         } else if defaults.object(forKey: "Login") == nil {
             self.logout()
-        } else {
-            login()
         }
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if error == nil {
+        if error == nil { /*
             let userId = user.userID
             let idToken = user.authentication.idToken
             let fullName = user.profile.name
             let givenName = user.profile.givenName
             let familyName = user.profile.familyName
             let email = user.profile.email
+ */
         } else {
             print("There was a Google signin error: \(error.localizedDescription)")
         }

@@ -12,6 +12,9 @@ import UIKit
 class BaseViewController: UIViewController {
     
     let defaults = UserDefaults.standard
+    let appD = UIApplication.shared.delegate as! AppDelegate
+    var loginDelegate: LoginDelegate?
+    var logoutDelegate: LogoutDelegate?
     
     func presentOneOptionAlert(title: String, message: String, presenter: UIViewController) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
