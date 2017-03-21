@@ -18,6 +18,11 @@ protocol EditDelegate {
     func makeStatic()
 }
 
+protocol ImageEditDelegate {
+    func makeEditable()
+    func makeStatic()
+}
+
 protocol DescriptionDelegate {
     func update(description: String)
 }
@@ -26,7 +31,7 @@ protocol CellImageDelegate {
     func set(image: UIImage)
 }
 
-class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var textViewContainer: UIView!
@@ -41,6 +46,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     @IBOutlet weak var usernameTopConstraint: NSLayoutConstraint!
     var inEditMode = false
     var editDelegate: EditDelegate?
+    var imageEditDelegate: ImageEditDelegate?
     var cellImageDelegate: CellImageDelegate?
     let pickerController = UIImagePickerController()
     var profileImageUrl: String?
@@ -54,6 +60,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         
         loginDelegate = appD
         tableView.delegate = self
+        userNameTextField.delegate = self
         
         UIApplication.shared.statusBarStyle = .lightContent
 
@@ -96,26 +103,37 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         if inEditMode {
             inEditMode = false
             editDelegate?.makeStatic()
+            imageEditDelegate?.makeStatic()
             editButton.setTitle("Edit", for: .normal)
+            UserNameLabel.layer.borderColor = UIColor.primaryGreen().cgColor
+            UserNameLabel.gestureRecognizers = []
         } else {
             inEditMode = true
             editDelegate?.makeEditable()
+            imageEditDelegate?.makeEditable()
             editButton.setTitle("Done", for: .normal)
             UserNameLabel.isUserInteractionEnabled = true
             let tapGr = UITapGestureRecognizer(target: self, action: #selector(UserProfile1ViewController.animateUsernameText))
             UserNameLabel.addGestureRecognizer(tapGr)
+            UserNameLabel.layer.cornerRadius = 5
+            UserNameLabel.clipsToBounds = true
+            UserNameLabel.layer.borderWidth = 1
+            UserNameLabel.layer.borderColor = UIColor.white.cgColor
+            user = FocusUser()
         }
     }
     
     @IBAction func saveDescription(_ sender: Any) {
         descriptionDelegate?.update(description: textView.text)
+        textView.resignFirstResponder()
         animate(constraint: textViewLeading, finishingConstant: 408.0)
         animate(constraint: textViewTrailing, finishingConstant: 392.0)
+        user!.setDescription(description: textView.text)
     }
     
     // Helpers
     func animateUsernameText() {
-        animate(constraint: usernameTopConstraint, finishingConstant: 15)
+        animate(constraint: usernameTopConstraint, finishingConstant: 19)
     }
     
     // Tableviewdatasource
@@ -138,11 +156,12 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.UserImage.rawValue) as? UserPhotoCell
-            self.editDelegate = cell!
+            self.imageEditDelegate = cell!
             self.cellImageDelegate = cell!
             return cell!
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.UserDescription.rawValue) as? UserDescriptionCell
+            self.editDelegate = cell!
             self.descriptionDelegate = cell!
             cell?.descriptionLabel.text = "I am a fake user. But I'm interested in whether or not the words in this string will wrap for a means of line-break and stretch the cell's height."
             return cell!
@@ -169,5 +188,13 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         default:
             break
         }
+    }
+    
+    // TextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        animate(constraint: usernameTopConstraint, finishingConstant: -60.0)
+        UserNameLabel.text = textField.text
+        return true
     }
 }

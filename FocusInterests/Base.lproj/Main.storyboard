@@ -56,7 +56,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="a7O-jY-J8E">
-                        <barButtonItem key="rightBarButtonItem" image="gears" id="HiV-8X-RgZ">
+                        <barButtonItem key="rightBarButtonItem" image="settingsGear" id="HiV-8X-RgZ">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="didTapSettings:" destination="BYZ-38-t0r" id="Znm-i0-QAe"/>
@@ -234,8 +234,8 @@
     </scenes>
     <resources>
         <image name="Home-1" width="25" height="25"/>
-        <image name="gears" width="25" height="25"/>
         <image name="location" width="25" height="25"/>
         <image name="loudspeaker" width="25" height="25"/>
+        <image name="settingsGear" width="32" height="32"/>
     </resources>
 </document>

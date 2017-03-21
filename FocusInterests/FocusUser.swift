@@ -15,6 +15,7 @@ class FocusUser {
     var firebaseId: String?
     var imageString: String?
     var currentLocation: CLLocationCoordinate2D?
+    var description: String?
     var interests = [Interest]()
     
     init(fakeDict: (String, AnyObject)) {
@@ -28,8 +29,14 @@ class FocusUser {
         self.currentLocation = currentLocation
     }
     
+    init(){}
+    
     func fromFakeDict(fakeDict: (String, AnyObject)) {
         
+    }
+    
+    func setCurrentLocation(location: CLLocationCoordinate2D) {
+        self.currentLocation = location
     }
     
     func getCurrentLocation() -> CLLocationCoordinate2D? {
@@ -38,5 +45,37 @@ class FocusUser {
     
     func setInterests(interests: [Interest]) {
         self.interests.append(contentsOf: interests)
+    }
+    
+    func getInterests() -> [Interest]? {
+        return self.interests
+    }
+    
+    func setUsername(username: String) {
+        self.userName = username
+    }
+    
+    func getUsername() -> String? {
+        return userName
+    }
+    
+    func setImageString(imageString: String) {
+        self.imageString = imageString
+    }
+    
+    func getImageString() -> String? {
+        return imageString
+    }
+    
+    func setFirebaseId(firebaseId: String) {
+        self.firebaseId = firebaseId
+    }
+    
+    func getFirebaseId() -> String? {
+        return firebaseId
+    }
+    
+    func setDescription(description: String) {
+        self.description = description
     }
 }

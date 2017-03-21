@@ -8,12 +8,12 @@
 
 import UIKit
 
-class UserDescriptionCell: UITableViewCell, DescriptionDelegate {
+class UserDescriptionCell: UITableViewCell, DescriptionDelegate, EditDelegate {
 
     @IBOutlet weak var descriptionLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.isUserInteractionEnabled = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,6 +24,14 @@ class UserDescriptionCell: UITableViewCell, DescriptionDelegate {
     
     func update(description: String) {
         descriptionLabel.text = description
+    }
+    
+    func makeStatic() {
+        self.isUserInteractionEnabled = false
+    }
+    
+    func makeEditable() {
+        self.isUserInteractionEnabled = true
     }
     
 }

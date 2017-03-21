@@ -49,10 +49,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Edit username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zl4-xn-e6h">
-                            <rect key="frame" x="87.5" y="0.0" width="200" height="44"/>
+                            <rect key="frame" x="60" y="0.0" width="255" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="VKx-Kn-M1t"/>
-                                <constraint firstAttribute="width" constant="200" id="z7l-d2-Mre"/>
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -126,12 +125,13 @@
                 <constraint firstAttribute="trailing" secondItem="nCZ-AP-9rp" secondAttribute="trailing" id="CSn-IB-gJC"/>
                 <constraint firstItem="nCZ-AP-9rp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="EcZ-GO-IVe"/>
                 <constraint firstItem="m1d-Wl-rZl" firstAttribute="top" secondItem="M1a-5F-xnH" secondAttribute="bottom" id="MkX-oF-VbY"/>
-                <constraint firstItem="Zl4-xn-e6h" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PA8-SY-TOB"/>
                 <constraint firstAttribute="trailing" secondItem="M1a-5F-xnH" secondAttribute="trailing" id="Tqz-nI-mqN"/>
                 <constraint firstAttribute="bottom" secondItem="m1d-Wl-rZl" secondAttribute="bottom" id="Upg-h7-540"/>
                 <constraint firstItem="i4J-Ml-f3h" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Z3T-2Z-V2t"/>
                 <constraint firstItem="i4J-Ml-f3h" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="68" id="aCV-8k-DCl"/>
+                <constraint firstAttribute="trailing" secondItem="Zl4-xn-e6h" secondAttribute="trailing" constant="60" id="cF8-aN-XMy"/>
                 <constraint firstItem="M1a-5F-xnH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cQv-Ip-61u"/>
+                <constraint firstItem="Zl4-xn-e6h" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="dGD-4c-o90"/>
                 <constraint firstAttribute="trailing" secondItem="m1d-Wl-rZl" secondAttribute="trailing" id="dfC-eO-Z5U"/>
                 <constraint firstItem="Zl4-xn-e6h" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gTD-nt-9X9"/>
                 <constraint firstItem="M1a-5F-xnH" firstAttribute="top" secondItem="nCZ-AP-9rp" secondAttribute="bottom" id="oe5-sT-2mq"/>
