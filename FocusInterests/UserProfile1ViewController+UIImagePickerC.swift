@@ -18,7 +18,7 @@ extension UserProfile1ViewController: UIImagePickerControllerDelegate, UINavigat
         if let userImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
             self.cellImageDelegate?.set(image: userImage)
             FirebaseUpstream.sharedInstance.uploadProfileImage(image: userImage, completion: { (url) in
-                self.profileImageUrl = url
+                self.user?.setImageString(imageString: String(describing: url))
             })
 
         }

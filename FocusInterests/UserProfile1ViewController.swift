@@ -18,11 +18,6 @@ protocol EditDelegate {
     func makeStatic()
 }
 
-protocol ImageEditDelegate {
-    func makeEditable()
-    func makeStatic()
-}
-
 protocol DescriptionDelegate {
     func update(description: String)
 }
@@ -46,7 +41,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     @IBOutlet weak var usernameTopConstraint: NSLayoutConstraint!
     var inEditMode = false
     var editDelegate: EditDelegate?
-    var imageEditDelegate: ImageEditDelegate?
+    var imageEditDelegate: EditDelegate?
     var cellImageDelegate: CellImageDelegate?
     let pickerController = UIImagePickerController()
     var profileImageUrl: String?
@@ -107,6 +102,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             editButton.setTitle("Edit", for: .normal)
             UserNameLabel.layer.borderColor = UIColor.primaryGreen().cgColor
             UserNameLabel.gestureRecognizers = []
+            user!.firebaseId = AuthApi.getFirebaseUid()
+            FirebaseUpstream.sharedInstance.addToUsers(focusUser: user!)
         } else {
             inEditMode = true
             editDelegate?.makeEditable()
@@ -195,6 +192,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         textField.resignFirstResponder()
         animate(constraint: usernameTopConstraint, finishingConstant: -60.0)
         UserNameLabel.text = textField.text
+        user?.setUsername(username: textField.text!)
         return true
     }
 }

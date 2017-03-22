@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserPhotoCell: UITableViewCell, ImageEditDelegate, CellImageDelegate {
+class UserPhotoCell: UITableViewCell, EditDelegate, CellImageDelegate {
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var uploadPhoto: UILabel!

@@ -41,6 +41,11 @@ class FirebaseUpstream {
         } else {
             dict["current_location"] = "" as AnyObject
         }
+        if let description = focusUser.description {
+            dict["description"] = description as AnyObject
+        } else {
+            dict["description"] = "" as AnyObject
+        }
 
         let pathString = "users/\(focusUser.firebaseId!)"
         ref.child(pathString).setValue(dict)
