@@ -26,7 +26,7 @@ protocol CellImageDelegate {
     func set(image: UIImage)
 }
 
-class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var textViewContainer: UIView!
@@ -47,9 +47,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     var profileImageUrl: String?
     var descriptionDelegate: DescriptionDelegate?
     var user: FocusUser?
+    var descript = "I am a fake user. But I'm interested in whether or not the words in this string will wrap for a means of line-break and stretch the cell's height."
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,9 +66,11 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         let descriptionCellNib = UINib(nibName: ReuseIdentifiers.UserDescription.rawValue, bundle: nil)
         tableView.register(descriptionCellNib, forCellReuseIdentifier: ReuseIdentifiers.UserDescription.rawValue)
         usernameTopConstraint.constant = -60
+        userNameTextField.autocapitalizationType = .words
+        userNameTextField.clearButtonMode = .whileEditing
         
         // So cells can stretch if needed
-        tableView.estimatedRowHeight = 60
+        tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
@@ -121,16 +122,19 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     }
     
     @IBAction func saveDescription(_ sender: Any) {
+        descript = textView.text
         descriptionDelegate?.update(description: textView.text)
         textView.resignFirstResponder()
         animate(constraint: textViewLeading, finishingConstant: 408.0)
         animate(constraint: textViewTrailing, finishingConstant: 392.0)
         user!.setDescription(description: textView.text)
+        tableView.reloadData()
     }
     
     // Helpers
     func animateUsernameText() {
         animate(constraint: usernameTopConstraint, finishingConstant: 19)
+        userNameTextField.becomeFirstResponder()
     }
     
     // Tableviewdatasource
@@ -160,7 +164,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.UserDescription.rawValue) as? UserDescriptionCell
             self.editDelegate = cell!
             self.descriptionDelegate = cell!
-            cell?.descriptionLabel.text = "I am a fake user. But I'm interested in whether or not the words in this string will wrap for a means of line-break and stretch the cell's height."
+            cell?.descriptionLabel.text = descript
             return cell!
         default:
             return UITableViewCell()
@@ -178,12 +182,55 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
         case 0:
+            user?.setUsername(username: userNameTextField.text!)
+            userNameTextField.resignFirstResponder()
+            UserNameLabel.text = userNameTextField.text
+            animate(constraint: usernameTopConstraint, finishingConstant: -60)
             showPickerActionSheet()
         case 1:
             animate(constraint: textViewLeading, finishingConstant: 8.0)
             animate(constraint: textViewTrailing, finishingConstant: 8.0)
+            user?.setUsername(username: userNameTextField.text!)
+            UserNameLabel.text = userNameTextField.text
+            animate(constraint: usernameTopConstraint, finishingConstant: -60)
+            userNameTextField.resignFirstResponder()
+            textView.becomeFirstResponder()
         default:
             break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 2:
+            return 50
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let blank = UIView()
+        blank.frame.size.height = 0
+        switch section {
+        case 2:
+            let hView = UIView()
+            hView.backgroundColor = UIColor.lightGray
+            let following = UILabel(frame: CGRect(x: 20, y: 10, width: 100, height: 30))
+            following.text = "Following"
+            following.textAlignment = .left
+            following.textColor = UIColor.white
+            following.font = UIFont(name: "Futura", size: 20)
+            hView.addSubview(following)
+            let followers = UILabel(frame: CGRect(x: 220, y: 10, width: 100, height: 30))
+            following.text = "Following"
+            following.textAlignment = .right
+            following.textColor = UIColor.white
+            following.font = UIFont(name: "Futura", size: 20)
+            hView.addSubview(followers)
+            return hView
+        default:
+            return blank
         }
     }
     
@@ -193,6 +240,11 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         animate(constraint: usernameTopConstraint, finishingConstant: -60.0)
         UserNameLabel.text = textField.text
         user?.setUsername(username: textField.text!)
+        return true
+    }
+    
+    // TextView delegate
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         return true
     }
 }
