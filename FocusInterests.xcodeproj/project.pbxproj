@@ -38,6 +38,8 @@
 		D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */; };
 		D25220711E5A895E00EC2014 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220701E5A895E00EC2014 /* Notifications.swift */; };
 		D25220741E5A8A7400EC2014 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220731E5A8A7400EC2014 /* Constants.swift */; };
+		D25370D21E885EE40071B115 /* FollowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25370D01E885EE40071B115 /* FollowCell.swift */; };
+		D25370D31E885EE40071B115 /* FollowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25370D11E885EE40071B115 /* FollowCell.xib */; };
 		D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AACCC1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift */; };
 		D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */; };
 		D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */; };
@@ -121,6 +123,8 @@
 		D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationsCellTableViewCell.xib; sourceTree = "<group>"; };
 		D25220701E5A895E00EC2014 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D25220731E5A8A7400EC2014 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D25370D01E885EE40071B115 /* FollowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowCell.swift; sourceTree = "<group>"; };
+		D25370D11E885EE40071B115 /* FollowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowCell.xib; sourceTree = "<group>"; };
 		D25AACCC1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserProfile1ViewController+UIImagePickerC.swift"; sourceTree = "<group>"; };
 		D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPermissionsChecker.swift; sourceTree = "<group>"; };
 		D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLoginVC.swift; sourceTree = "<group>"; };
@@ -364,6 +368,8 @@
 				D2ECAC571E7CD9F8006FFA1A /* UserPhotoCell.xib */,
 				D2D0A3EA1E7F49ED00B43689 /* UserDescriptionCell.swift */,
 				D2D0A3EB1E7F49ED00B43689 /* UserDescriptionCell.xib */,
+				D25370D01E885EE40071B115 /* FollowCell.swift */,
+				D25370D11E885EE40071B115 /* FollowCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -525,6 +531,7 @@
 			files = (
 				D28EAFC01E5E7C8E001EA7E5 /* Login.storyboard in Resources */,
 				D2ECAC591E7CD9F8006FFA1A /* UserPhotoCell.xib in Resources */,
+				D25370D31E885EE40071B115 /* FollowCell.xib in Resources */,
 				D2ECAC551E7A255B006FFA1A /* UserProfile1ViewController.xib in Resources */,
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
@@ -710,6 +717,7 @@
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
+				D25370D21E885EE40071B115 /* FollowCell.swift in Sources */,
 				D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */,
 				D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,

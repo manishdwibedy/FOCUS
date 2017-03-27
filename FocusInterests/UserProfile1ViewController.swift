@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol UserProfileCell {
+    func configureFor(user: FocusUser)
+}
+
 enum ReuseIdentifiers: String {
     case UserImage = "UserPhotoCell"
     case UserDescription = "UserDescriptionCell"
+    case FollowCell = "FollowCell"
 }
 
 protocol EditDelegate {
@@ -48,6 +53,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     var descriptionDelegate: DescriptionDelegate?
     var user: FocusUser?
     var descript = "I am a fake user. But I'm interested in whether or not the words in this string will wrap for a means of line-break and stretch the cell's height."
+    var fakeFollowers: [FocusUser]?
+    var fakeFollowings: [FocusUser]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +72,10 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         tableView.register(imageCellNib, forCellReuseIdentifier: ReuseIdentifiers.UserImage.rawValue)
         let descriptionCellNib = UINib(nibName: ReuseIdentifiers.UserDescription.rawValue, bundle: nil)
         tableView.register(descriptionCellNib, forCellReuseIdentifier: ReuseIdentifiers.UserDescription.rawValue)
+        let followNib = UINib(nibName: ReuseIdentifiers.FollowCell.rawValue, bundle: nil)
+        tableView.register(followNib, forCellReuseIdentifier: ReuseIdentifiers.FollowCell.rawValue)
+        /*let followCell = UINib(nibName: ReuseIdentifiers.FollowCell.rawValue, bundle: nil)
+        tableView.register(followCell, forCellReuseIdentifier: ReuseIdentifiers.FollowCell.rawValue)*/
         usernameTopConstraint.constant = -60
         userNameTextField.autocapitalizationType = .words
         userNameTextField.clearButtonMode = .whileEditing
@@ -87,6 +98,33 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         textView.clipsToBounds = true
         textViewLeading.constant = 408
         textViewTrailing.constant = 392
+        
+        pullUser()
+    }
+    
+    func pullUser() {
+        self.user = FocusUser()
+        FirebaseDownstream.shared.getCurrentUser { (dict) in
+            if let dct = dict {
+                let modDict: [String : AnyObject] = dct as! [String : AnyObject]
+                if let uName = modDict["username"] as? String {
+                    self.user?.setUsername(username: uName)
+                    self.UserNameLabel.text = uName
+                }
+                if let descr = modDict["description"] as? String {
+                    self.user?.setDescription(description: descr)
+                }
+                if let imString = modDict["image_string"] as? String {
+                    self.user?.setImageString(imageString: imString)
+                }
+                /*
+                if let loc = modDict["current_location"] as? String {
+                    self.user?.setCurrentLocation(location: <#T##CLLocationCoordinate2D#>)
+                }
+                 */
+            }
+        }
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -139,7 +177,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     
     // Tableviewdatasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -148,6 +186,10 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             return 1
         case 1:
             return 1
+        case 2:
+            return Constants.FollowArrays.followers.count
+        case 3:
+            return Constants.FollowArrays.followings.count
         default:
             return 0
         }
@@ -165,6 +207,14 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             self.editDelegate = cell!
             self.descriptionDelegate = cell!
             cell?.descriptionLabel.text = descript
+            return cell!
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.FollowCell.rawValue) as? FollowCell
+            cell?.configureFor(user: Constants.FollowArrays.followers[indexPath.row])
+            return cell!
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.FollowCell.rawValue) as? FollowCell
+            cell?.configureFor(user: Constants.FollowArrays.followings[indexPath.row])
             return cell!
         default:
             return UITableViewCell()
@@ -204,6 +254,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         switch section {
         case 2:
             return 50
+        case 3:
+            return 50
         default:
             return 0
         }
@@ -215,19 +267,23 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         switch section {
         case 2:
             let hView = UIView()
-            hView.backgroundColor = UIColor.lightGray
-            let following = UILabel(frame: CGRect(x: 20, y: 10, width: 100, height: 30))
-            following.text = "Following"
-            following.textAlignment = .left
-            following.textColor = UIColor.white
-            following.font = UIFont(name: "Futura", size: 20)
-            hView.addSubview(following)
-            let followers = UILabel(frame: CGRect(x: 220, y: 10, width: 100, height: 30))
-            following.text = "Following"
-            following.textAlignment = .right
-            following.textColor = UIColor.white
-            following.font = UIFont(name: "Futura", size: 20)
+            hView.backgroundColor = UIColor.primaryGreen()
+            let followers = UILabel(frame: CGRect(x: tableView.center.x - 50, y: 10, width: 100, height: 30))
+            followers.text = "Followers"
+            followers.textAlignment = .center
+            followers.textColor = UIColor.white
+            followers.font = UIFont(name: "Futura", size: 22)
             hView.addSubview(followers)
+            return hView
+        case 3:
+            let hView = UIView()
+            hView.backgroundColor = UIColor.primaryGreen()
+            let following = UILabel(frame: CGRect(x: tableView.center.x - 50, y: 10, width: 100, height: 30))
+            following.text = "Following"
+            following.textAlignment = .center
+            following.textColor = UIColor.white
+            following.font = UIFont(name: "Futura", size: 22)
+            hView.addSubview(following)
             return hView
         default:
             return blank

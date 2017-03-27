@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserDescriptionCell: UITableViewCell, DescriptionDelegate, EditDelegate {
+class UserDescriptionCell: UITableViewCell, DescriptionDelegate, EditDelegate, UserProfileCell {
 
     @IBOutlet weak var descriptionLabel: UILabel!
     override func awakeFromNib() {
@@ -22,6 +22,10 @@ class UserDescriptionCell: UITableViewCell, DescriptionDelegate, EditDelegate {
         // Configure the view for the selected state
     }
     
+    func configureFor(user: FocusUser) {
+        
+    }
+    
     func update(description: String) {
         descriptionLabel.text = description
     }
@@ -33,5 +37,7 @@ class UserDescriptionCell: UITableViewCell, DescriptionDelegate, EditDelegate {
     func makeEditable() {
         self.isUserInteractionEnabled = true
     }
+    
+    
     
 }

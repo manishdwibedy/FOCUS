@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserPhotoCell: UITableViewCell, EditDelegate, CellImageDelegate {
+class UserPhotoCell: UITableViewCell, EditDelegate, CellImageDelegate, UserProfileCell {
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var uploadPhoto: UILabel!
@@ -41,6 +41,10 @@ class UserPhotoCell: UITableViewCell, EditDelegate, CellImageDelegate {
     func set(image: UIImage) {
         self.userImage.backgroundColor = UIColor.primaryGreen()
         self.userImage.image = image
+    }
+    
+    func configureFor(user: FocusUser) {
+        
     }
     
     // delegate methods

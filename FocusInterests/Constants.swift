@@ -72,6 +72,23 @@ struct Constants {
         public static let yoon = User(username: "Yoon", uuid: "ashf94uhw9e8hf39", userImage: UIImage(named: "Lopart"), interests: [Constants.interests.football, Constants.interests.soccer, Constants.interests.clothing])
     }
     
+    struct dummyFocusUsers {
+        public static let mary = FocusUser(userName: "Mary Jones", firebaseId: nil, imageString: nil, currentLocation: nil)
+        public static let bill = FocusUser(userName: "Bill Brasky", firebaseId: nil, imageString: nil, currentLocation: nil)
+        public static let ellie = FocusUser(userName: "Ellie Jacoby", firebaseId: nil, imageString: nil, currentLocation: nil)
+        public static let albert = FocusUser(userName: "Albert Schloss", firebaseId: nil, imageString: nil, currentLocation: nil)
+        public static let amanda = FocusUser(userName: "Amanda Thornburg", firebaseId: nil, imageString: nil, currentLocation: nil)
+        public static let Joe = FocusUser(userName: "Joe Hynes", firebaseId: nil, imageString: nil, currentLocation: nil)
+        public static let chris = FocusUser(userName: "Chris Hynes", firebaseId: nil, imageString: nil, currentLocation: nil)
+        public static let patty = FocusUser(userName: "Patricia Blackmore", firebaseId: nil, imageString: nil, currentLocation: nil)
+        
+    }
+    
+    struct FollowArrays {
+        public static let followers = [dummyFocusUsers.albert, dummyFocusUsers.mary, dummyFocusUsers.chris, dummyFocusUsers.Joe, dummyFocusUsers.amanda]
+        public static let followings = [dummyFocusUsers.ellie, dummyFocusUsers.albert, dummyFocusUsers.bill, dummyFocusUsers.mary, dummyFocusUsers.chris, dummyFocusUsers.patty]
+    }
+    
     struct notifications {
         public static let notification1 = Notification(type: NotificationType.Invite, sender: Constants.dummyUsers.al, item: Constants.dummyItemsOInterest.item2)
         public static let notification2 = Notification(type: NotificationType.Like, sender: Constants.dummyUsers.mary, item: Constants.dummyItemsOInterest.item1)

@@ -18,6 +18,10 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        FirebaseDownstream.shared.getCurrentUser { (user) in
+            
+        }
+        
         self.title = "FOCUS PINS"
         
         navigationController?.navigationBar.barTintColor = UIColor.primaryGreen()

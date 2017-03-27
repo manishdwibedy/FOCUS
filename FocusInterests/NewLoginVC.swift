@@ -280,12 +280,12 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         print("my email: \(user.profile.email)")
         if let id = user.authentication.accessToken, let idToken = user.authentication.idToken {
             AuthApi.set(googleToken: id)
-    
+            
             let credential = FIRGoogleAuthProvider.credential(withIDToken: idToken,
                                                               accessToken: id)
             FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
                 if let u = user {
-                   let fireId = u.uid
+                    let fireId = u.uid
                     AuthApi.set(firebaseUid: fireId)
                     AuthApi.set(loggedIn: .Google)
                     self.presentOwnUserProfile()
