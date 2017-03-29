@@ -16,6 +16,7 @@ enum ReuseIdentifiers: String {
     case UserImage = "UserPhotoCell"
     case UserDescription = "UserDescriptionCell"
     case FollowCell = "FollowCell"
+    case SocialGroupCell = "SocialCrowdCell"
 }
 
 protocol EditDelegate {
@@ -53,9 +54,6 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     var descriptionDelegate: DescriptionDelegate?
     var user: FocusUser?
     var descript = "I am a fake user. But I'm interested in whether or not the words in this string will wrap for a means of line-break and stretch the cell's height."
-    var fakeFollowers: [FocusUser]?
-    var fakeFollowings: [FocusUser]?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,8 +72,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         tableView.register(descriptionCellNib, forCellReuseIdentifier: ReuseIdentifiers.UserDescription.rawValue)
         let followNib = UINib(nibName: ReuseIdentifiers.FollowCell.rawValue, bundle: nil)
         tableView.register(followNib, forCellReuseIdentifier: ReuseIdentifiers.FollowCell.rawValue)
-        /*let followCell = UINib(nibName: ReuseIdentifiers.FollowCell.rawValue, bundle: nil)
-        tableView.register(followCell, forCellReuseIdentifier: ReuseIdentifiers.FollowCell.rawValue)*/
+        let socialNib = UINib(nibName: ReuseIdentifiers.SocialGroupCell.rawValue, bundle: nil)
+        tableView.register(socialNib, forCellReuseIdentifier: ReuseIdentifiers.SocialGroupCell.rawValue)
         usernameTopConstraint.constant = -60
         userNameTextField.autocapitalizationType = .words
         userNameTextField.clearButtonMode = .whileEditing
@@ -135,6 +133,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     // IBActions
     @IBAction func editTapped(_ sender: Any) {
         if inEditMode {
+            user?.setDescription(description: textView.text)
             inEditMode = false
             editDelegate?.makeStatic()
             imageEditDelegate?.makeStatic()
@@ -165,7 +164,12 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         textView.resignFirstResponder()
         animate(constraint: textViewLeading, finishingConstant: 408.0)
         animate(constraint: textViewTrailing, finishingConstant: 392.0)
-        user!.setDescription(description: textView.text)
+        
+        var des = textView.text
+        if textView.text == "" {
+            des = descript
+        }
+        user!.setDescription(description: des!)
         tableView.reloadData()
     }
     
@@ -177,7 +181,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     
     // Tableviewdatasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -187,9 +191,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         case 1:
             return 1
         case 2:
-            return Constants.FollowArrays.followers.count
-        case 3:
-            return Constants.FollowArrays.followings.count
+            return 1
         default:
             return 0
         }
@@ -201,6 +203,9 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.UserImage.rawValue) as? UserPhotoCell
             self.imageEditDelegate = cell!
             self.cellImageDelegate = cell!
+            if let imStr = self.user?.imageString {
+                cell?.userImage.download(urlString: imStr)
+            }
             return cell!
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.UserDescription.rawValue) as? UserDescriptionCell
@@ -209,12 +214,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             cell?.descriptionLabel.text = descript
             return cell!
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.FollowCell.rawValue) as? FollowCell
-            cell?.configureFor(user: Constants.FollowArrays.followers[indexPath.row])
-            return cell!
-        case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.FollowCell.rawValue) as? FollowCell
-            cell?.configureFor(user: Constants.FollowArrays.followings[indexPath.row])
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.SocialGroupCell.rawValue) as? SocialCrowdCell
+            cell?.configureFor(followers: Constants.FollowArrays.followers, followed: Constants.FollowArrays.followings)
             return cell!
         default:
             return UITableViewCell()
@@ -234,17 +235,27 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         case 0:
             user?.setUsername(username: userNameTextField.text!)
             userNameTextField.resignFirstResponder()
-            UserNameLabel.text = userNameTextField.text
+            if userNameTextField.text != "" {
+                UserNameLabel.text = userNameTextField.text
+            }
             animate(constraint: usernameTopConstraint, finishingConstant: -60)
             showPickerActionSheet()
         case 1:
             animate(constraint: textViewLeading, finishingConstant: 8.0)
             animate(constraint: textViewTrailing, finishingConstant: 8.0)
             user?.setUsername(username: userNameTextField.text!)
-            UserNameLabel.text = userNameTextField.text
+            if userNameTextField.text != "" {
+                UserNameLabel.text = userNameTextField.text
+            }
             animate(constraint: usernameTopConstraint, finishingConstant: -60)
             userNameTextField.resignFirstResponder()
             textView.becomeFirstResponder()
+        case 2:
+            let vc = SocialGroupViewController(nibName: "SocialGroupViewController", bundle: nil)
+            vc.followers = Constants.FollowArrays.followers
+            vc.following = Constants.FollowArrays.followings
+            vc.username = (self.user?.userName)!
+            present(vc, animated: true, completion: nil)
         default:
             break
         }
@@ -253,8 +264,6 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 2:
-            return 50
-        case 3:
             return 50
         default:
             return 0
@@ -268,21 +277,18 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         case 2:
             let hView = UIView()
             hView.backgroundColor = UIColor.primaryGreen()
-            let followers = UILabel(frame: CGRect(x: tableView.center.x - 50, y: 10, width: 100, height: 30))
+            let followers = UILabel(frame: CGRect(x: 10, y: 10, width: 100, height: 30))
             followers.text = "Followers"
             followers.textAlignment = .center
             followers.textColor = UIColor.white
             followers.font = UIFont(name: "Futura", size: 22)
             hView.addSubview(followers)
-            return hView
-        case 3:
-            let hView = UIView()
-            hView.backgroundColor = UIColor.primaryGreen()
-            let following = UILabel(frame: CGRect(x: tableView.center.x - 50, y: 10, width: 100, height: 30))
-            following.text = "Following"
-            following.textAlignment = .center
+            let center = ((UIScreen.main.bounds.size.width / 2) + 5)
+            let following = UILabel(frame: CGRect(x: center, y: 10, width: 100, height: 30))
             following.textColor = UIColor.white
+            following.text = "Following"
             following.font = UIFont(name: "Futura", size: 22)
+            following.textAlignment = .center
             hView.addSubview(following)
             return hView
         default:
