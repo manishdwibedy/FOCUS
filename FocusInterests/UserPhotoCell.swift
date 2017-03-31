@@ -27,8 +27,10 @@ class UserPhotoCell: UITableViewCell, EditDelegate, CellImageDelegate, UserProfi
         
     }
     
-    func actEditable() {
-        self.userImage.image = nil
+    func actEditable(currentString: String) {
+        if currentString == "" {
+            self.userImage.image = nil
+        } 
         self.isUserInteractionEnabled = true
         self.uploadPhoto.isHidden = false
     }
@@ -48,8 +50,8 @@ class UserPhotoCell: UITableViewCell, EditDelegate, CellImageDelegate, UserProfi
     }
     
     // delegate methods
-    func makeEditable() {
-        actEditable()
+    func makeEditable(currentString: String) {
+        actEditable(currentString: currentString)
     }
     
     func makeStatic() {

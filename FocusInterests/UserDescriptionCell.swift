@@ -34,7 +34,8 @@ class UserDescriptionCell: UITableViewCell, DescriptionDelegate, EditDelegate, U
         self.isUserInteractionEnabled = false
     }
     
-    func makeEditable() {
+    func makeEditable(currentString: String) {
+        self.descriptionLabel.text = currentString
         self.isUserInteractionEnabled = true
     }
     

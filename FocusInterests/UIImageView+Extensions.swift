@@ -18,27 +18,39 @@ extension UIImageView {
     }
     
     func download(urlString: String) {
-        let url = URL(string: urlString)
-        let urlRequest = URLRequest(url: url!)
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
-            if error != nil {
-                print("There has been an image download error: \(error?.localizedDescription)")
-                return
-            } else {
-                if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 {
-                        if let dta = data {
-                            let img = UIImage(data: dta)
-                            self.image = img!
+        if let url = URL(string: urlString) {
+            let urlRequest = URLRequest(url: url)
+            let urlSession = URLSession(configuration: .default)
+            let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
+                if error != nil {
+                    print("There has been an image download error: \(error?.localizedDescription)")
+                    return
+                } else {
+                    if let httpResponse = response as? HTTPURLResponse {
+                        if httpResponse.statusCode == 200 {
+                            if let dta = data {
+                                let img = UIImage(data: dta)
+                                self.image = img!
+                            }
+                        } else {
+                            print("The status code was not 200: \(httpResponse.statusCode)")
                         }
-                    } else {
-                        print("The status code was not 200: \(httpResponse.statusCode)")
                     }
                 }
             }
+            task.resume()
         }
-        task.resume()
         
+    }
+}
+
+extension UIImage {
+    
+    func resized(withPercentage percentage: CGFloat) -> UIImage? {
+        let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
+        UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: canvasSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }

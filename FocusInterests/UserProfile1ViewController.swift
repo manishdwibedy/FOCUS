@@ -20,7 +20,7 @@ enum ReuseIdentifiers: String {
 }
 
 protocol EditDelegate {
-    func makeEditable()
+    func makeEditable(currentString: String)
     func makeStatic()
 }
 
@@ -111,10 +111,16 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                 }
                 if let descr = modDict["description"] as? String {
                     self.user?.setDescription(description: descr)
+                    self.descript = descr
+                    self.descriptionDelegate?.update(description: descr)
                 }
                 if let imString = modDict["image_string"] as? String {
                     self.user?.setImageString(imageString: imString)
                 }
+                
+                
+                
+                self.tableView.reloadData()
                 /*
                 if let loc = modDict["current_location"] as? String {
                     self.user?.setCurrentLocation(location: <#T##CLLocationCoordinate2D#>)
@@ -122,7 +128,6 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                  */
             }
         }
-        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -133,7 +138,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     // IBActions
     @IBAction func editTapped(_ sender: Any) {
         if inEditMode {
-            user?.setDescription(description: textView.text)
+            
             inEditMode = false
             editDelegate?.makeStatic()
             imageEditDelegate?.makeStatic()
@@ -144,8 +149,16 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             FirebaseUpstream.sharedInstance.addToUsers(focusUser: user!)
         } else {
             inEditMode = true
-            editDelegate?.makeEditable()
-            imageEditDelegate?.makeEditable()
+            if let str = user?.description {
+                editDelegate?.makeEditable(currentString: str)
+            } else {
+                editDelegate?.makeEditable(currentString: "No Description yet.")
+            }
+            if let imStr = user?.imageString {
+                imageEditDelegate?.makeEditable(currentString: imStr)
+            } else {
+                imageEditDelegate?.makeEditable(currentString: "")
+            }
             editButton.setTitle("Done", for: .normal)
             UserNameLabel.isUserInteractionEnabled = true
             let tapGr = UITapGestureRecognizer(target: self, action: #selector(UserProfile1ViewController.animateUsernameText))
@@ -154,7 +167,6 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             UserNameLabel.clipsToBounds = true
             UserNameLabel.layer.borderWidth = 1
             UserNameLabel.layer.borderColor = UIColor.white.cgColor
-            user = FocusUser()
         }
     }
     
@@ -203,7 +215,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.UserImage.rawValue) as? UserPhotoCell
             self.imageEditDelegate = cell!
             self.cellImageDelegate = cell!
-            if let imStr = self.user?.imageString {
+            if let imStr = user?.imageString {
                 cell?.userImage.download(urlString: imStr)
             }
             return cell!
