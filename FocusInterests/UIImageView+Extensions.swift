@@ -17,7 +17,7 @@ extension UIImageView {
         self.clipsToBounds = true
     }
     
-    func download(urlString: String) {
+    func download(urlString: String, completion: @escaping (UIImage?) -> Void) {
         if let url = URL(string: urlString) {
             let urlRequest = URLRequest(url: url)
             let urlSession = URLSession(configuration: .default)
@@ -31,6 +31,9 @@ extension UIImageView {
                             if let dta = data {
                                 let img = UIImage(data: dta)
                                 self.image = img!
+                                DispatchQueue.main.async(execute: { 
+                                    completion(img)
+                                })
                             }
                         } else {
                             print("The status code was not 200: \(httpResponse.statusCode)")

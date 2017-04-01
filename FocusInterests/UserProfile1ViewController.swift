@@ -137,6 +137,9 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     
     // IBActions
     @IBAction func editTapped(_ sender: Any) {
+        animate(constraint: textViewLeading, finishingConstant: 408.0)
+        animate(constraint: textViewTrailing, finishingConstant: 392.0)
+        animate(constraint: usernameTopConstraint, finishingConstant: -60.0)
         if inEditMode {
             
             inEditMode = false
@@ -170,6 +173,10 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         }
     }
     
+    @IBAction func cancelDescription(_ sender: Any) {
+        animate(constraint: textViewLeading, finishingConstant: 408.0)
+        animate(constraint: textViewTrailing, finishingConstant: 392.0)
+    }
     @IBAction func saveDescription(_ sender: Any) {
         descript = textView.text
         descriptionDelegate?.update(description: textView.text)
@@ -216,7 +223,11 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             self.imageEditDelegate = cell!
             self.cellImageDelegate = cell!
             if let imStr = user?.imageString {
-                cell?.userImage.download(urlString: imStr)
+                cell?.userImage.download(urlString: imStr, completion: { (imag) in
+                    if let im = imag {
+                        self.cellImageDelegate?.set(image: im)
+                    }
+                })
             }
             return cell!
         case 1:
@@ -312,8 +323,11 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         animate(constraint: usernameTopConstraint, finishingConstant: -60.0)
-        UserNameLabel.text = textField.text
-        user?.setUsername(username: textField.text!)
+        if textField.text != "" {
+            UserNameLabel.text = textField.text
+            user?.setUsername(username: textField.text!)
+        }
+        userNameTextField.text = ""
         return true
     }
     

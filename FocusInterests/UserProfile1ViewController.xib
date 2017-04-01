@@ -94,7 +94,7 @@
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxQ-nV-I0S">
-                            <rect key="frame" x="154" y="276" width="50" height="34"/>
+                            <rect key="frame" x="289" y="276" width="50" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="7mD-aS-V4Z"/>
                             </constraints>
@@ -106,15 +106,26 @@
                                 <action selector="saveDescription:" destination="-1" eventType="touchUpInside" id="n3E-da-5YB"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acW-D2-r7m">
+                            <rect key="frame" x="20" y="279" width="63" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelDescription:" destination="-1" eventType="touchUpInside" id="vIJ-c2-Pfb"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="gxQ-nV-I0S" secondAttribute="bottom" id="8MY-aJ-B14"/>
                         <constraint firstItem="gxQ-nV-I0S" firstAttribute="top" secondItem="klS-bd-a4O" secondAttribute="bottom" constant="8" id="BAn-kp-5NW"/>
                         <constraint firstItem="klS-bd-a4O" firstAttribute="top" secondItem="i4J-Ml-f3h" secondAttribute="top" constant="20" id="Boe-rI-rtA"/>
+                        <constraint firstAttribute="trailing" secondItem="gxQ-nV-I0S" secondAttribute="trailing" constant="20" id="Mhb-dd-WzP"/>
                         <constraint firstAttribute="trailing" secondItem="klS-bd-a4O" secondAttribute="trailing" constant="20" id="QA0-yc-SRQ"/>
                         <constraint firstItem="klS-bd-a4O" firstAttribute="leading" secondItem="i4J-Ml-f3h" secondAttribute="leading" constant="20" id="Rjg-fU-90P"/>
-                        <constraint firstItem="gxQ-nV-I0S" firstAttribute="centerX" secondItem="i4J-Ml-f3h" secondAttribute="centerX" id="mlG-s4-cKh"/>
                         <constraint firstAttribute="height" constant="310" id="vTy-RD-lyV"/>
                     </constraints>
                 </view>

@@ -41,6 +41,7 @@ class UserPhotoCell: UITableViewCell, EditDelegate, CellImageDelegate, UserProfi
     }
     
     func set(image: UIImage) {
+        self.userImage.image = nil
         self.userImage.backgroundColor = UIColor.primaryGreen()
         self.userImage.image = image
     }
