@@ -17,6 +17,7 @@ enum ReuseIdentifiers: String {
     case UserDescription = "UserDescriptionCell"
     case FollowCell = "FollowCell"
     case SocialGroupCell = "SocialCrowdCell"
+    case DisplayInterestCell = "DisplayInterestCell"
 }
 
 protocol EditDelegate {
@@ -74,6 +75,9 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         tableView.register(followNib, forCellReuseIdentifier: ReuseIdentifiers.FollowCell.rawValue)
         let socialNib = UINib(nibName: ReuseIdentifiers.SocialGroupCell.rawValue, bundle: nil)
         tableView.register(socialNib, forCellReuseIdentifier: ReuseIdentifiers.SocialGroupCell.rawValue)
+        let interestsNib = UINib(nibName: ReuseIdentifiers.DisplayInterestCell.rawValue, bundle: nil)
+        tableView.register(interestsNib, forCellReuseIdentifier: ReuseIdentifiers.DisplayInterestCell.rawValue)
+        
         usernameTopConstraint.constant = -60
         userNameTextField.autocapitalizationType = .words
         userNameTextField.clearButtonMode = .whileEditing
