@@ -10,6 +10,7 @@ import UIKit
 
 class DisplayInterestsCell: UITableViewCell {
 
+    @IBOutlet weak var label: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,12 +22,11 @@ class DisplayInterestsCell: UITableViewCell {
     // Configure the view for the selected state
     }
     
-    func layoutButtons() {
-        var even: CGFloat = 40.0
-        var odd: CGFloat = (self.frame.width - 90)
-        var y = 40
-        for n in 0..<FirebaseDownstream.shared.giantInterestMap.keys.count {
-            //Logic for button placement 
+    func configureFor(user: FocusUser) {
+        if user.interests.count > 0 {
+            
+        } else {
+            label.text = "I have not selected interests yet."
         }
     }
     

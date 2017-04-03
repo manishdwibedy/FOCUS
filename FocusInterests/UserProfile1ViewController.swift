@@ -17,7 +17,7 @@ enum ReuseIdentifiers: String {
     case UserDescription = "UserDescriptionCell"
     case FollowCell = "FollowCell"
     case SocialGroupCell = "SocialCrowdCell"
-    case DisplayInterestCell = "DisplayInterestCell"
+    case DisplayInterestCell = "DisplayInterestsCell"
 }
 
 protocol EditDelegate {
@@ -35,6 +35,11 @@ protocol CellImageDelegate {
 
 class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate {
     
+    @IBOutlet weak var interestsViewWidthConstraints: NSLayoutConstraint!
+    @IBOutlet weak var interestViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var interestsViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var viewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var interestsView: UIView!
     @IBOutlet weak var UserNameLabel: UILabel!
     @IBOutlet weak var textViewContainer: UIView!
     @IBOutlet weak var textView: UITextView!
@@ -83,10 +88,12 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         userNameTextField.clearButtonMode = .whileEditing
         
         // So cells can stretch if needed
-        tableView.estimatedRowHeight = 44
+        tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
+        
+        animateInterestViewIn()
         
         // Configure textViewContainer
         textViewContainer.layer.cornerRadius = 10
@@ -132,6 +139,10 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                  */
             }
         }
+    }
+    
+    func presentIntPicker() {
+        print("Hi There!")
     }
 
     override func didReceiveMemoryWarning() {
@@ -204,7 +215,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     
     // Tableviewdatasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -215,6 +226,9 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             return 1
         case 2:
             return 1
+        case 3:
+            return 1
+            
         default:
             return 0
         }
@@ -243,6 +257,12 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.SocialGroupCell.rawValue) as? SocialCrowdCell
             cell?.configureFor(followers: Constants.FollowArrays.followers, followed: Constants.FollowArrays.followings)
+            return cell!
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.DisplayInterestCell.rawValue) as? DisplayInterestsCell
+            if let u = self.user {
+                cell?.configureFor(user: u)
+            }
             return cell!
         default:
             return UITableViewCell()
@@ -292,6 +312,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         switch section {
         case 2:
             return 50
+        case 3:
+            return 50
         default:
             return 0
         }
@@ -300,6 +322,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let blank = UIView()
         blank.frame.size.height = 0
+        let center = ((UIScreen.main.bounds.size.width / 2) + 5)
         switch section {
         case 2:
             let hView = UIView()
@@ -310,13 +333,29 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             followers.textColor = UIColor.white
             followers.font = UIFont(name: "Futura", size: 22)
             hView.addSubview(followers)
-            let center = ((UIScreen.main.bounds.size.width / 2) + 5)
             let following = UILabel(frame: CGRect(x: center, y: 10, width: 100, height: 30))
             following.textColor = UIColor.white
             following.text = "Following"
             following.font = UIFont(name: "Futura", size: 22)
             following.textAlignment = .center
             hView.addSubview(following)
+            return hView
+        case 3:
+            let hView = UIView()
+            hView.backgroundColor = UIColor.primaryGreen()
+            let label = UILabel(frame: CGRect(x: 10, y: 10, width: 130, height: 30))
+            label.text = "My Interests"
+            label.textAlignment = .center
+            label.textColor = UIColor.white
+            label.font = UIFont(name: "Futura", size: 22)
+            hView.addSubview(label)
+            let button = UIButton(frame: CGRect(x: self.view.frame.width - 60, y: 5, width: 40, height: 40))
+            let plus = UIImage(named: "plus")
+            let renderPlus = plus?.withRenderingMode(.alwaysTemplate)
+            button.setImage(renderPlus!, for: .normal)
+            button.tintColor = UIColor.white
+            button.addTarget(self, action: #selector(UserProfile1ViewController.presentIntPicker), for: .touchUpInside)
+            hView.addSubview(button)
             return hView
         default:
             return blank

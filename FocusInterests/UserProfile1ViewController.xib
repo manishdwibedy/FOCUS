@@ -15,6 +15,10 @@
                 <outlet property="UserNameLabel" destination="iPy-XW-WgW" id="QfE-6J-KUJ"/>
                 <outlet property="bottomBar" destination="m1d-Wl-rZl" id="vYX-wC-h2Q"/>
                 <outlet property="editButton" destination="9mr-yH-N4l" id="2Te-5p-ZVw"/>
+                <outlet property="interestViewHeightConstraint" destination="k61-5W-UZX" id="dMU-ZV-xdh"/>
+                <outlet property="interestsView" destination="Fmm-K5-vcx" id="5GD-jk-RRY"/>
+                <outlet property="interestsViewLeadingConstraint" destination="k61-5W-UZX" id="tVf-R8-x0T"/>
+                <outlet property="interestsViewWidthConstraints" destination="WrJ-kM-EBW" id="Huz-Us-ZMa"/>
                 <outlet property="tableView" destination="M1a-5F-xnH" id="JL6-G9-p4x"/>
                 <outlet property="textView" destination="klS-bd-a4O" id="c4A-LU-JEM"/>
                 <outlet property="textViewContainer" destination="i4J-Ml-f3h" id="o1l-zv-CZN"/>
@@ -23,6 +27,7 @@
                 <outlet property="userNameTextField" destination="Zl4-xn-e6h" id="zTB-to-JP9"/>
                 <outlet property="usernameTopConstraint" destination="gTD-nt-9X9" id="z2i-PB-z5P"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewTopConstraint" destination="bbl-kM-74X" id="bqm-dN-Ewm"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -129,6 +134,14 @@
                         <constraint firstAttribute="height" constant="310" id="vTy-RD-lyV"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fmm-K5-vcx">
+                    <rect key="frame" x="400" y="700" width="50" height="50"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="WrJ-kM-EBW"/>
+                        <constraint firstAttribute="height" constant="50" id="k61-5W-UZX"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -140,6 +153,7 @@
                 <constraint firstAttribute="bottom" secondItem="m1d-Wl-rZl" secondAttribute="bottom" id="Upg-h7-540"/>
                 <constraint firstItem="i4J-Ml-f3h" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Z3T-2Z-V2t"/>
                 <constraint firstItem="i4J-Ml-f3h" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="68" id="aCV-8k-DCl"/>
+                <constraint firstItem="Fmm-K5-vcx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="700" id="bbl-kM-74X"/>
                 <constraint firstAttribute="trailing" secondItem="Zl4-xn-e6h" secondAttribute="trailing" constant="60" id="cF8-aN-XMy"/>
                 <constraint firstItem="M1a-5F-xnH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cQv-Ip-61u"/>
                 <constraint firstItem="Zl4-xn-e6h" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="dGD-4c-o90"/>
@@ -147,6 +161,7 @@
                 <constraint firstItem="Zl4-xn-e6h" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gTD-nt-9X9"/>
                 <constraint firstItem="M1a-5F-xnH" firstAttribute="top" secondItem="nCZ-AP-9rp" secondAttribute="bottom" id="oe5-sT-2mq"/>
                 <constraint firstAttribute="trailing" secondItem="i4J-Ml-f3h" secondAttribute="trailing" constant="8" id="tRz-1G-caD"/>
+                <constraint firstItem="Fmm-K5-vcx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="400" id="yoP-MQ-0vH"/>
                 <constraint firstItem="nCZ-AP-9rp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zhG-X7-rNN"/>
             </constraints>
             <point key="canvasLocation" x="34.5" y="54.5"/>

@@ -44,6 +44,7 @@
 		D25370D31E885EE40071B115 /* FollowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25370D11E885EE40071B115 /* FollowCell.xib */; };
 		D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AACCC1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift */; };
 		D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */; };
+		D25D5D341E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25D5D331E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift */; };
 		D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */; };
 		D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */; };
 		D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */; };
@@ -135,6 +136,7 @@
 		D25370D11E885EE40071B115 /* FollowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowCell.xib; sourceTree = "<group>"; };
 		D25AACCC1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserProfile1ViewController+UIImagePickerC.swift"; sourceTree = "<group>"; };
 		D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPermissionsChecker.swift; sourceTree = "<group>"; };
+		D25D5D331E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserProfile1ViewController+ViewAnimator.swift"; sourceTree = "<group>"; };
 		D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLoginVC.swift; sourceTree = "<group>"; };
 		D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				D25AACCC1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift */,
+				D25D5D331E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift */,
 			);
 			name = "UserProfile1+Extensions";
 			sourceTree = "<group>";
@@ -751,6 +754,7 @@
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
+				D25D5D341E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
