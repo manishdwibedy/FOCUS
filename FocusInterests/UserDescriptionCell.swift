@@ -14,6 +14,8 @@ class UserDescriptionCell: UITableViewCell, DescriptionDelegate, EditDelegate, U
     override func awakeFromNib() {
         super.awakeFromNib()
         self.isUserInteractionEnabled = false
+        descriptionLabel.font = UIFont(name: "Futura", size: 18)
+        descriptionLabel.textColor = UIColor.black
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -60,6 +60,8 @@
 		D2B9B0581E5A047C0002F1B1 /* FocusInterestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0571E5A047C0002F1B1 /* FocusInterestsTests.swift */; };
 		D2B9B0631E5A047C0002F1B1 /* FocusInterestsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0621E5A047C0002F1B1 /* FocusInterestsUITests.swift */; };
 		D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */; };
+		D2C785521E9337B700BFF0E3 /* InterestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C785501E9337B700BFF0E3 /* InterestListViewController.swift */; };
+		D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C785511E9337B700BFF0E3 /* InterestListViewController.xib */; };
 		D2D0A3EC1E7F49ED00B43689 /* UserDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D0A3EA1E7F49ED00B43689 /* UserDescriptionCell.swift */; };
 		D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D0A3EB1E7F49ED00B43689 /* UserDescriptionCell.xib */; };
 		D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D876B91E5FDAC500FC782E /* InterestsPickerViewController.swift */; };
@@ -159,6 +161,8 @@
 		D2B9B0621E5A047C0002F1B1 /* FocusInterestsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusInterestsUITests.swift; sourceTree = "<group>"; };
 		D2B9B0641E5A047C0002F1B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		D2C785501E9337B700BFF0E3 /* InterestListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestListViewController.swift; sourceTree = "<group>"; };
+		D2C785511E9337B700BFF0E3 /* InterestListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestListViewController.xib; sourceTree = "<group>"; };
 		D2D0A3EA1E7F49ED00B43689 /* UserDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionCell.swift; sourceTree = "<group>"; };
 		D2D0A3EB1E7F49ED00B43689 /* UserDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDescriptionCell.xib; sourceTree = "<group>"; };
 		D2D876B91E5FDAC500FC782E /* InterestsPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestsPickerViewController.swift; sourceTree = "<group>"; };
@@ -421,6 +425,8 @@
 				D25AACCB1E7D8F34005DE49F /* UserProfile1+Extensions */,
 				D2FDB6981E89F73800D62DC2 /* SocialGroupViewController.swift */,
 				D2FDB6991E89F73800D62DC2 /* SocialGroupViewController.xib */,
+				D2C785501E9337B700BFF0E3 /* InterestListViewController.swift */,
+				D2C785511E9337B700BFF0E3 /* InterestListViewController.xib */,
 			);
 			name = NibVCs;
 			sourceTree = "<group>";
@@ -566,6 +572,7 @@
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				D23E01371E6BA7C900E735F5 /* GoogleService-Info.plist in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
+				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
@@ -731,6 +738,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2C785521E9337B700BFF0E3 /* InterestListViewController.swift in Sources */,
 				D2A173551E5E911500C7724B /* SignUpViewController.swift in Sources */,
 				D2D0A3EC1E7F49ED00B43689 /* UserDescriptionCell.swift in Sources */,
 				D2ECAC581E7CD9F8006FFA1A /* UserPhotoCell.swift in Sources */,

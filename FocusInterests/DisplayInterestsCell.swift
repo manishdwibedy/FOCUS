@@ -13,7 +13,8 @@ class DisplayInterestsCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        label.font = UIFont(name: "Futura", size: 18)
+        label.textColor = UIColor.black
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,8 +24,21 @@ class DisplayInterestsCell: UITableViewCell {
     }
     
     func configureFor(user: FocusUser) {
+        var interestNames = [String]()
+        var str = ""
         if user.interests.count > 0 {
-            
+            for interest in user.interests {
+                interestNames.append(interest.name!)
+            }
+            var n = 0
+            for word in interestNames {
+                if n % 2 == 0 {
+                    str.append(word)
+                } else {
+                    str.append("\t\t\(word)\n")
+                }
+                n += 1
+            }
         } else {
             label.text = "I have not selected interests yet."
         }

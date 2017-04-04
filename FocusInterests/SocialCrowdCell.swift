@@ -42,8 +42,8 @@ class SocialCrowdCell: UITableViewCell {
         leftLabel.text = ingString
         rightLabel.font = UIFont(name: "Futura", size: 18)
         leftLabel.font = UIFont(name: "Futura", size: 18)
-        rightLabel.textColor = UIColor.darkGray
-        leftLabel.textColor = UIColor.darkGray
+        rightLabel.textColor = UIColor.black
+        leftLabel.textColor = UIColor.black
     }
     
 }

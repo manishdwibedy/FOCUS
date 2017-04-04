@@ -33,7 +33,7 @@ protocol CellImageDelegate {
     func set(image: UIImage)
 }
 
-class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate {
+class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, InterestPickerDelegate {
     
     @IBOutlet weak var interestsViewWidthConstraints: NSLayoutConstraint!
     @IBOutlet weak var interestViewHeightConstraint: NSLayoutConstraint!
@@ -143,6 +143,10 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     
     func presentIntPicker() {
         print("Hi There!")
+    }
+    
+    func add(interests: [Interest]) {
+        
     }
 
     override func didReceiveMemoryWarning() {
