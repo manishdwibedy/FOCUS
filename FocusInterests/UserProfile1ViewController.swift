@@ -142,7 +142,9 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     }
     
     func presentIntPicker() {
-        print("Hi There!")
+        let vc = InterestListViewController(nibName: "InterestListViewController", bundle: nil)
+        vc.user = self.user
+        present(vc, animated: true, completion: nil)
     }
     
     func add(interests: [Interest]) {
