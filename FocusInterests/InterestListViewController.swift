@@ -33,9 +33,10 @@ class InterestListViewController: UIViewController, UITableViewDataSource, UITab
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "interestCellChoice")
+        let cellNib = UINib(nibName: ReuseIdentifiers.SelectedInterestCell.rawValue, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: ReuseIdentifiers.SelectedInterestCell.rawValue)
         
-        titleLabel.font = UIFont(name: "Futura", size: 20)
+        titleLabel.font = UIFont(name: "Futura", size: 22)
         titleLabel.text = "Interests"
         
         let buttonFont = UIFont(name: "Futura", size: 17)
@@ -70,10 +71,16 @@ class InterestListViewController: UIViewController, UITableViewDataSource, UITab
     
     // TableViewDatasource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "interestCellChoice")
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.SelectedInterestCell.rawValue) as? SelectedInterestCell
+        if (cell?.isSelected)! {
+            cell?.backgroundColor = UIColor.red
+        }
         if let name = container[indexPath.section].0?[indexPath.row] {
             cell?.textLabel?.text = name.name!
         }
+        let redView = UIView()
+        redView.backgroundColor = UIColor.red
+        cell?.selectedBackgroundView = redView
         return cell!
     }
     
@@ -87,6 +94,20 @@ class InterestListViewController: UIViewController, UITableViewDataSource, UITab
     // TableViewDelegate
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? SelectedInterestCell
+        cell?.accessoryType = .checkmark
+        cell?.tintColor = UIColor.white
+        cell?.textLabel?.textColor = UIColor.white
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? SelectedInterestCell
+        cell?.accessoryType = .none
+        cell?.tintColor = UIColor.black
+        cell?.textLabel?.textColor = UIColor.black
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

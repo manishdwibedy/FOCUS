@@ -18,6 +18,7 @@ enum ReuseIdentifiers: String {
     case FollowCell = "FollowCell"
     case SocialGroupCell = "SocialCrowdCell"
     case DisplayInterestCell = "DisplayInterestsCell"
+    case SelectedInterestCell = "SelectedInterestCell"
 }
 
 protocol EditDelegate {

@@ -13,6 +13,8 @@
 		D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21317F71E5B47D300140323 /* HomViewControllerCell.xib */; };
 		D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317FA1E5B4F7B00140323 /* ItemOfInterest.swift */; };
 		D21317FD1E5B507C00140323 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317FC1E5B507C00140323 /* Feature.swift */; };
+		D216482A1E9735AC00AE021B /* SelectedInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21648281E9735AC00AE021B /* SelectedInterestCell.swift */; };
+		D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21648291E9735AC00AE021B /* SelectedInterestCell.xib */; };
 		D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21975441E61F20D00ED3345 /* BaseViewController.swift */; };
 		D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21975461E6229F100ED3345 /* UITextField+Extensions.swift */; };
 		D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21975481E62406200ED3345 /* ChooseInterestsCell.swift */; };
@@ -106,6 +108,8 @@
 		D21317F71E5B47D300140323 /* HomViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomViewControllerCell.xib; sourceTree = "<group>"; };
 		D21317FA1E5B4F7B00140323 /* ItemOfInterest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemOfInterest.swift; sourceTree = "<group>"; };
 		D21317FC1E5B507C00140323 /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
+		D21648281E9735AC00AE021B /* SelectedInterestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedInterestCell.swift; sourceTree = "<group>"; };
+		D21648291E9735AC00AE021B /* SelectedInterestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectedInterestCell.xib; sourceTree = "<group>"; };
 		D21975441E61F20D00ED3345 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D21975461E6229F100ED3345 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		D21975481E62406200ED3345 /* ChooseInterestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseInterestsCell.swift; sourceTree = "<group>"; };
@@ -393,6 +397,8 @@
 				D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */,
 				D24716811E90504B00FF389D /* DisplayInterestsCell.swift */,
 				D24716821E90504B00FF389D /* DisplayInterestsCell.xib */,
+				D21648281E9735AC00AE021B /* SelectedInterestCell.swift */,
+				D21648291E9735AC00AE021B /* SelectedInterestCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -565,6 +571,7 @@
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
+				D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */,
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
@@ -774,6 +781,7 @@
 				D2ECAC541E7A255B006FFA1A /* UserProfile1ViewController.swift in Sources */,
 				D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */,
 				D227AD2F1E6CBD5A000FB9DD /* NewLoginVC.swift in Sources */,
+				D216482A1E9735AC00AE021B /* SelectedInterestCell.swift in Sources */,
 				D23E01391E6BAD0A00E735F5 /* FirebaseUpstream.swift in Sources */,
 				D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */,
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
