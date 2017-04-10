@@ -62,6 +62,10 @@ class InterestListViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func confirmInterests(_ sender: Any) {
+        user?.setInterests(interests: interests)
+        for interest in interests {
+            FirebaseUpstream.sharedInstance.addInterestWithUser(interest: interest, currentUserId: AuthApi.getFirebaseUid()!)
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -101,6 +105,9 @@ class InterestListViewController: UIViewController, UITableViewDataSource, UITab
         cell?.accessoryType = .checkmark
         cell?.tintColor = UIColor.white
         cell?.textLabel?.textColor = UIColor.white
+        let name = container[indexPath.section].0?[indexPath.row]
+        print("Fucker: \(self.interests.count)")
+        self.interests.append(name!)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -112,6 +119,8 @@ class InterestListViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
+        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.borderWidth = 2
         view.backgroundColor = UIColor.primaryGreen()
         let label = UILabel(frame: CGRect(x: 50, y: 5, width: self.view.frame.width - 100, height: 40))
         label.font = UIFont(name: "Futura", size: 19)

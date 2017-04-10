@@ -112,6 +112,10 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         pullUser()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
     func pullUser() {
         self.user = FocusUser()
         FirebaseDownstream.shared.getCurrentUser { (dict) in

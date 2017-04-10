@@ -52,10 +52,13 @@ class FirebaseUpstream {
     }
     
     func addInterestWithUser(interest: Interest, currentUserId: String) {
-        var dict = [String : AnyObject]()
+        let dict = ["\(interest.name!)-\(interest.category!.rawValue)" : true]
+        let userDict = [AuthApi.getFirebaseUid()! : true]
+        let pathUser = "users/\(currentUserId)/interests/\(interest.name!)-\(interest.category!)"
+        let pathInterest = "interests/\(interest.name!)-\(interest.category!)"
         
-        let id = ref.childByAutoId().key
-        
+        ref.child(pathUser).setValue(dict)
+        ref.child(pathInterest).setValue(userDict)
     }
     
     func uploadProfileImage(image: UIImage, completion: @escaping (String) -> Void) {
