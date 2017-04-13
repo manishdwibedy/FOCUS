@@ -134,8 +134,6 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                     self.user?.setImageString(imageString: imString)
                 }
                 
-                
-                
                 self.tableView.reloadData()
                 /*
                 if let loc = modDict["current_location"] as? String {

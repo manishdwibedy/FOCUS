@@ -25,6 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         
         FIRApp.configure()
         
+        FirebaseDownstream.shared.getCurrentUserInterests { (interests) in
+            for interest in interests! {
+                print("\(interest.name!) - \(interest.category!)")
+            }
+        }
+        
         UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
         
         GMSServices.provideAPIKey(Constants.keys.googleMapsAPIKey)
