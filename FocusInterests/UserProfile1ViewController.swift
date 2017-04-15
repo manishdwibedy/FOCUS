@@ -34,6 +34,10 @@ protocol CellImageDelegate {
     func set(image: UIImage)
 }
 
+protocol InterestDelegate {
+    func passInterests(interests: [Interest])
+}
+
 class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, InterestPickerDelegate {
     
     @IBOutlet weak var interestsViewWidthConstraints: NSLayoutConstraint!
@@ -59,6 +63,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     let pickerController = UIImagePickerController()
     var profileImageUrl: String?
     var descriptionDelegate: DescriptionDelegate?
+    var interestDelegate: InterestDelegate?
     var user: FocusUser?
     var descript = "I am a fake user. But I'm interested in whether or not the words in this string will wrap for a means of line-break and stretch the cell's height."
     override func viewDidLoad() {
@@ -140,6 +145,14 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                     self.user?.setCurrentLocation(location: <#T##CLLocationCoordinate2D#>)
                 }
                  */
+            }
+        }
+    }
+    
+    func getInterests() {
+        FirebaseDownstream.shared.getCurrentUserInterests { (interests) in
+            if let ints = interests {
+                self.user!.interests = ints
             }
         }
     }
@@ -269,6 +282,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             return cell!
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.DisplayInterestCell.rawValue) as? DisplayInterestsCell
+            self.interestDelegate = cell
             if let u = self.user {
                 cell?.configureFor(user: u)
             }

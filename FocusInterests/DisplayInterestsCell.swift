@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DisplayInterestsCell: UITableViewCell {
+class DisplayInterestsCell: UITableViewCell, InterestDelegate {
 
     @IBOutlet weak var label: UILabel!
     override func awakeFromNib() {
@@ -42,6 +42,10 @@ class DisplayInterestsCell: UITableViewCell {
         } else {
             label.text = "I have not selected interests yet."
         }
+    }
+    
+    func passInterests(interests: [Interest]) {
+        
     }
     
 }
