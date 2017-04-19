@@ -90,5 +90,7 @@
 	<string>Focus would like access to your device&apos;s camera for certain features.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Focus would like access to your device&apos;s photo library for this feature.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Focus would like access to your device&apos;s current position</string>
 </dict>
 </plist>

@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
         
         GMSServices.provideAPIKey(Constants.keys.googleMapsAPIKey)
+        GMSPlacesClient.provideAPIKey(Constants.keys.googleMapsAPIKey)
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google Services: \(configureError)")

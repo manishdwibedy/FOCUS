@@ -123,6 +123,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="05W-Qw-2Y5" id="x3W-XA-QMw"/>
                         <outlet property="toolbar" destination="nHX-SD-GQM" id="EIt-Ze-3K9"/>
                     </connections>
                 </viewController>
