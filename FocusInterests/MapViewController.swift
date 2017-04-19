@@ -12,7 +12,7 @@ import GoogleMaps
 import GooglePlaces
 import MapKit
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate {
+class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -36,7 +36,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
+        mapView.delegate = self
+        
         placesClient = GMSPlacesClient.shared()
+        
+        let position = CLLocationCoordinate2D(latitude: 34.031833, longitude: -118.290725)
+        let marker = GMSMarker(position: position)
+        marker.title = "Hello World"
+        marker.map = mapView
+
         
         if let added = createdEvent{
             let marker = GMSMarker()
@@ -55,6 +63,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         
     }
     
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView?{
+        let index:Int! = Int(marker.accessibilityLabel!)
+        let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+        infoWindow.name.text = "some sample address"
+//        infoWindow.name.text = createdEvent?.title
+        infoWindow.address.text  = createdEvent?.place?.formattedAddress
+        return infoWindow
+    }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
