@@ -41,11 +41,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         if let added = createdEvent{
             let marker = GMSMarker()
             
-            
-            
-            marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-            marker.title = "Sydney"
-            marker.snippet = "Australia"
+            marker.position = added.place!.coordinate
+            marker.title = added.title!
+            marker.snippet = added.description!
+            marker.icon = UIImage(named: "addUser")
+
             marker.map = mapView
         }
     }

@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import GooglePlaces
 
 class CreateEventViewController: UIViewController {
 
-    @IBOutlet weak var when: UITextField!
     var event: Event?
+    var place: GMSPlace?
     let datePicker = UIDatePicker()
+    
+    @IBOutlet weak var desc: UITextView!
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var address: UITextField!
+    @IBOutlet weak var time: UITextField!
+    @IBOutlet weak var isPrivate: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +35,7 @@ class CreateEventViewController: UIViewController {
     }
     
     @IBAction func createPin(_ sender: UIButton) {
-        self.event = Event(title: "Dummy", description: "desc", place: "2656 Ellendale Pl. ", date: Date(), time: "8:00PM" )
+        self.event = Event(title: name.text!, description: desc.text!, place: self.place!, date: self.datePicker.date)
     }
 
     func showDateTime(){
@@ -37,16 +44,24 @@ class CreateEventViewController: UIViewController {
         
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(dateTimeSelected))
         toolbar.setItems([done], animated: false)
-        when.inputAccessoryView = toolbar
-        when.inputView = datePicker
+        time.inputAccessoryView = toolbar
         
+        time.inputView = datePicker
+    }
+    
+    @IBAction func addPlace(_ sender: UITextField) {
+        let autocompleteController = GMSAutocompleteViewController()
+        
+        autocompleteController.delegate = self
+        
+        present(autocompleteController, animated: true, completion: nil)
     }
     
     func dateTimeSelected(){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, h:mm a"
 
-        self.when.text = "\(dateFormatter.string(from: self.datePicker.date))"
+        self.time.text = "\(dateFormatter.string(from: self.datePicker.date))"
         self.view.endEditing(true)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,3 +71,68 @@ class CreateEventViewController: UIViewController {
         }
     }
 }
+
+extension CreateEventViewController: GMSAutocompleteViewControllerDelegate {
+    
+    
+    
+    // Handle the user's selection.
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        self.place = place
+        self.address.text = place.formattedAddress!
+        
+        print("Place name: \(place.name)")
+        
+        print("Place address: \(place.formattedAddress)")
+        
+        print("Place attributions: \(place.attributions)")
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        
+        // TODO: handle the error.
+        
+        print("Error: ", error.localizedDescription)
+        
+    }
+    
+    
+    
+    // User canceled the operation.
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    // Turn the network activity indicator on and off again.
+    
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+    }
+    
+    
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        
+    }
+    
+    
+    
+}
+
+

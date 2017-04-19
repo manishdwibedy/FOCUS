@@ -7,19 +7,18 @@
 //
 
 import Foundation
+import GooglePlaces
 
 class Event{
     let title: String?
     let description: String?
-    let place: String?
+    let place: GMSPlace?
     let date: Date?
-    let time: String?
     
-    init(title: String, description: String, place: String, date: Date, time: String) {
+    init(title: String, description: String, place: GMSPlace, date: Date) {
         self.title = title
         self.description = description
         self.place = place
         self.date = date
-        self.time = time
     }
 }

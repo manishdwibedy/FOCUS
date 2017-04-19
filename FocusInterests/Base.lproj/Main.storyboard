@@ -172,6 +172,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="addPlace:" destination="sUH-jM-snE" eventType="touchDown" id="Wri-uK-KqH"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWj-lk-Kra">
                                 <rect key="frame" x="31" y="152" width="70" height="21"/>
@@ -260,7 +263,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="when" destination="YV0-sR-Jvh" id="Phs-MC-IEg"/>
+                        <outlet property="address" destination="kn2-5d-RS7" id="3ew-3n-kha"/>
+                        <outlet property="desc" destination="aKw-bk-vTN" id="cek-zV-obE"/>
+                        <outlet property="isPrivate" destination="Gk5-IX-U6F" id="rfo-Dw-yek"/>
+                        <outlet property="name" destination="7gF-tt-26S" id="eeK-yd-2Bn"/>
+                        <outlet property="time" destination="YV0-sR-Jvh" id="Nam-qU-Yd1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgX-A1-RpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
