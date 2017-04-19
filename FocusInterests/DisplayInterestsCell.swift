@@ -9,6 +9,8 @@
 import UIKit
 
 class DisplayInterestsCell: UITableViewCell, InterestDelegate {
+    
+    var interestNames = [String]()
 
     @IBOutlet weak var label: UILabel!
     override func awakeFromNib() {
@@ -23,13 +25,11 @@ class DisplayInterestsCell: UITableViewCell, InterestDelegate {
     // Configure the view for the selected state
     }
     
-    func configureFor(user: FocusUser) {
-        var interestNames = [String]()
-        var str = ""
-        if user.interests.count > 0 {
-            for interest in user.interests {
-                interestNames.append(interest.name!)
-            }
+    func configure() {
+        
+        if self.interestNames.count > 0 {
+            var str = ""
+            
             var n = 0
             for word in interestNames {
                 if n % 2 == 0 {
@@ -39,13 +39,15 @@ class DisplayInterestsCell: UITableViewCell, InterestDelegate {
                 }
                 n += 1
             }
+
         } else {
             label.text = "I have not selected interests yet."
         }
     }
     
-    func passInterests(interests: [Interest]) {
-        
+    func passInterests(interests: [String]) {
+        self.interestNames = interests
+        configure()
     }
     
 }
