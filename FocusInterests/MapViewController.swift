@@ -37,6 +37,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         
         placesClient = GMSPlacesClient.shared()
+        
+        if let added = createdEvent{
+            let marker = GMSMarker()
+            
+            
+            
+            marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
+            marker.title = "Sydney"
+            marker.snippet = "Australia"
+            marker.map = mapView
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
