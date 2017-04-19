@@ -14,6 +14,8 @@ import GooglePlaces
 class MapViewController: BaseViewController {
     @IBOutlet weak var toolbar: UIToolbar!
     
+    var createdEvent: Event?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
