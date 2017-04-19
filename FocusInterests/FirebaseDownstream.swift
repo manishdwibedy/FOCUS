@@ -38,28 +38,32 @@ class FirebaseDownstream {
     
     func getCurrentUserInterests(completion: @escaping ([Interest]?) -> Void) {
         let userId = AuthApi.getFirebaseUid()
-        ref.child("users").child(userId!).child("interests").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let value = snapshot.value as? NSDictionary {
-                var returnableInterests = [Interest]()
-                for (k,_) in value {
-                    let key1 = k as! String
-                    let kl = key1.lowercased()
-                    let strArr = kl.components(separatedBy: "-")
-                    if let mapArr: [Interest] = self.giantInterestMap[strArr[1]] {
-                        for interest in mapArr {
-                            if interest.name! == strArr[0] {
-                                returnableInterests.append(interest)
+        
+        if let id = userId{
+            ref.child("users").child(id).child("interests").observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? NSDictionary {
+                    var returnableInterests = [Interest]()
+                    for (k,_) in value {
+                        let key1 = k as! String
+                        let kl = key1.lowercased()
+                        let strArr = kl.components(separatedBy: "-")
+                        if let mapArr: [Interest] = self.giantInterestMap[strArr[1]] {
+                            for interest in mapArr {
+                                if interest.name! == strArr[0] {
+                                    returnableInterests.append(interest)
+                                }
                             }
+                            
                         }
-
                     }
+                    DispatchQueue.main.async(execute: {
+                        completion(returnableInterests)
+                    })
                 }
-                DispatchQueue.main.async(execute: { 
-                    completion(returnableInterests)
-                })
-            }
-            
-        })
+                
+            })
+        }
+        
     }
     
 }
