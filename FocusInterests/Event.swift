@@ -30,12 +30,18 @@ class Event{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, h:mm a"
         
-        let shortAddress = "\(self.place?.addressComponents?[0].name), \(self.place?.addressComponents?[0].name)"
+        let locality = self.place?.addressComponents?[0].name
+        let street = self.place?.addressComponents?[1].name
+        let shortAddress = "\(locality!), \(street!)"
+        
         let event = [
             "title": self.title!,
             "description": self.description!,
             "fullAddress": (self.place?.formattedAddress)!,
             "shortAddress": shortAddress,
+            
+            "latitude": String((self.place?.coordinate.latitude)!),
+            "longitude": String((self.place?.coordinate.longitude)!),
             "date": "\(dateFormatter.string(from: self.date!))",
             
             // creating dummy events by mary

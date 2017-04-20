@@ -11,6 +11,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import MapKit
+import FirebaseDatabase
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
@@ -22,6 +23,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var currentLocation: CLLocation?
     var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 15.0
+    let eventsRef = FIRDatabase.database().reference().child("events")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +42,25 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         placesClient = GMSPlacesClient.shared()
         
+        
+        self.eventsRef.observe(FIRDataEventType.value, with: { (snapshot) in
+            let events = snapshot.value as? [String : Any] ?? [:]
+            
+            for (_, event) in events{
+                let info = event as? [String:String]
+                print(info?["title"])
+                print(info?["description"])
+            }
+            print(events)
+            // ...
+        })
+        
         let position = CLLocationCoordinate2D(latitude: 34.031833, longitude: -118.290725)
         let marker = GMSMarker(position: position)
         marker.title = "Hello World"
         marker.map = mapView
 
+        
         
         if let added = createdEvent{
             let marker = GMSMarker()
