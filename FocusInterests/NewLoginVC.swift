@@ -160,6 +160,10 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     }
     
     @IBAction func submitEmailTapped(_ sender: Any) {
+        if emailTextField.text != "" && passwordTextField.text != "" {
+            self.email = emailTextField.text
+            self.password = passwordTextField.text                      
+        }
         guard let eml = self.email, let pwrd = self.password else {
             return
         }
