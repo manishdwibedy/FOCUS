@@ -37,9 +37,18 @@ class CreateEventViewController: UIViewController {
     }
     
     @IBAction func createPin(_ sender: UIButton) {
-        self.event = Event(title: name.text!, description: desc.text!, place: self.place!, date: self.datePicker.date, creator: AuthApi.getFirebaseUid()!)
         
-        self.event?.saveToDB(ref: self.eventRef)
+        let locality = self.place?.addressComponents?[0].name
+        let street = self.place?.addressComponents?[1].name
+        let shortAddress = "\(locality!), \(street!)"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, h:mm a"
+        
+        
+        let event = Event(title: name.text!, description: desc.text!, fullAddress: (self.place?.formattedAddress)!, shortAddress: shortAddress, latitude: String(describing: self.place?.coordinate.latitude), longitude: String(describing: self.place?.coordinate.latitude), date: dateFormatter.string(from: self.datePicker.date), creator: AuthApi.getFirebaseUid()!)
+        
+        event.saveToDB(ref: self.eventRef)
     }
 
     func showDateTime(){

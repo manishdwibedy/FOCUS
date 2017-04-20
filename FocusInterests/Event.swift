@@ -12,14 +12,20 @@ import FirebaseDatabase
 class Event{
     let title: String?
     let description: String?
-    let place: GMSPlace?
-    let date: Date?
+    let fullAddress: String?
+    let shortAddress: String?
+    let latitude: String?
+    let longitude: String?
+    let date: String?
     let creator: String?
     
-    init(title: String, description: String, place: GMSPlace, date: Date, creator: String) {
+    init(title: String, description: String, fullAddress: String, shortAddress: String, latitude: String, longitude: String, date: String, creator: String) {
         self.title = title
         self.description = description
-        self.place = place
+        self.fullAddress = fullAddress
+        self.shortAddress = shortAddress
+        self.latitude = latitude
+        self.longitude = longitude
         self.date = date
         self.creator = creator
     }
@@ -27,28 +33,22 @@ class Event{
     func saveToDB(ref: FIRDatabaseReference){
         let newEvent = ref.childByAutoId()
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, h:mm a"
-        
-        let locality = self.place?.addressComponents?[0].name
-        let street = self.place?.addressComponents?[1].name
-        let shortAddress = "\(locality!), \(street!)"
-        
         let event = [
             "title": self.title!,
             "description": self.description!,
-            "fullAddress": (self.place?.formattedAddress)!,
-            "shortAddress": shortAddress,
-            
-            "latitude": String((self.place?.coordinate.latitude)!),
-            "longitude": String((self.place?.coordinate.longitude)!),
-            "date": "\(dateFormatter.string(from: self.date!))",
+            "fullAddress": self.fullAddress!,
+            "shortAddress": self.shortAddress!,
+            "latitude": self.latitude!,
+            "longitude": self.longitude!,
+            "date": self.date!,
             
             // creating dummy events by mary
             "creator": Constants.dummyUsers.mary.uuid!
             
+            
+            
             // Original creator
-//            "creator": AuthApi.getFirebaseUid()!
+//            "creator": self.creator
         ] as [String : String]
         newEvent.setValue(event)
     }

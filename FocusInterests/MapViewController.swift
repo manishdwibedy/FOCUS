@@ -24,6 +24,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 15.0
     let eventsRef = FIRDatabase.database().reference().child("events")
+    var events = [Event]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,30 +49,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             for (_, event) in events{
                 let info = event as? [String:String]
-                print(info?["title"])
-                print(info?["description"])
+                let event = Event(title: (info?["title"])!, description: (info?["description"])!, fullAddress: (info?["fullAddress"])!, shortAddress: (info?["shortAddress"])!, latitude: (info?["latitude"])!, longitude: (info?["longitude"])!, date: (info?["date"])!, creator: (info?["creator"])!
+                )
+        
+                
+                
+                let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                let marker = GMSMarker(position: position)
+                marker.icon = UIImage(named: "addUser")
+                marker.title = event.title
+                marker.map = self.mapView
+                marker.accessibilityLabel = String(describing: self.events.count)
+                self.events.append(event)
             }
-            print(events)
-            // ...
         })
-        
-        let position = CLLocationCoordinate2D(latitude: 34.031833, longitude: -118.290725)
-        let marker = GMSMarker(position: position)
-        marker.title = "Hello World"
-        marker.map = mapView
-
-        
-        
-        if let added = createdEvent{
-            let marker = GMSMarker()
-            
-            marker.position = added.place!.coordinate
-            marker.title = added.title!
-            marker.snippet = added.description!
-            marker.icon = UIImage(named: "addUser")
-
-            marker.map = mapView
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,8 +73,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView?{
         let index:Int! = Int(marker.accessibilityLabel!)
         let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
-        infoWindow.name.text = "some sample address"
-        infoWindow.address.text  = createdEvent?.place?.formattedAddress
+        let event = self.events[index]
+        infoWindow.name.text = event.title
+        infoWindow.address.text  = event.shortAddress
+        infoWindow.time.text = event.date?.components(separatedBy: ",")[1]
+        infoWindow.attendees.text = "No one joining"
         return infoWindow
     }
     
