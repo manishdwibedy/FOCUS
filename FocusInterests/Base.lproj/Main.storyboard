@@ -125,6 +125,7 @@
                     <connections>
                         <outlet property="mapView" destination="05W-Qw-2Y5" id="x3W-XA-QMw"/>
                         <outlet property="toolbar" destination="nHX-SD-GQM" id="EIt-Ze-3K9"/>
+                        <segue destination="frg-C7-nnG" kind="show" identifier="show_event_details" id="aXM-w5-5lD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FtO-Ym-EPy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -273,6 +274,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgX-A1-RpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2693.5999999999999" y="895.50224887556226"/>
+        </scene>
+        <!--Event Detail View Controller-->
+        <scene sceneID="w7U-yx-VUh">
+            <objects>
+                <viewController id="frg-C7-nnG" customClass="EventDetailViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2lJ-Jl-PgX"/>
+                        <viewControllerLayoutGuide type="bottom" id="DQS-c9-vnX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KXd-ap-N68">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6q5-bj-tsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2313" y="1644"/>
         </scene>
         <!--Notifications View Controller-->
         <scene sceneID="K4W-gl-rgU">

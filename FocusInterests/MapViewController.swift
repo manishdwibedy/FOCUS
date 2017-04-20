@@ -81,6 +81,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         return infoWindow
     }
     
+    
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        let index:Int! = Int(marker.accessibilityLabel!)
+        let event = self.events[index]
+        self.performSegue(withIdentifier: "show_event_details", sender: event)
+    }
+    
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
@@ -138,5 +145,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
         print("Error: \(error)")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "show_event_detail"{
+            let destinationVC = segue.destination as! EventDetailViewController
+            destinationVC.event = sender as! Event?
+        }
+        
     }
 }
