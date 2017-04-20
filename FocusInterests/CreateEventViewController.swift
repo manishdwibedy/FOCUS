@@ -8,12 +8,14 @@
 
 import UIKit
 import GooglePlaces
+import FirebaseDatabase
 
 class CreateEventViewController: UIViewController {
 
     var event: Event?
     var place: GMSPlace?
     let datePicker = UIDatePicker()
+    let eventRef = FIRDatabase.database().reference().child("events")
     
     @IBOutlet weak var desc: UITextView!
     @IBOutlet weak var name: UITextField!
@@ -35,7 +37,9 @@ class CreateEventViewController: UIViewController {
     }
     
     @IBAction func createPin(_ sender: UIButton) {
-        self.event = Event(title: name.text!, description: desc.text!, place: self.place!, date: self.datePicker.date)
+        self.event = Event(title: name.text!, description: desc.text!, place: self.place!, date: self.datePicker.date, creator: AuthApi.getFirebaseUid()!)
+        
+        self.event?.saveToDB(ref: self.eventRef)
     }
 
     func showDateTime(){
@@ -73,8 +77,6 @@ class CreateEventViewController: UIViewController {
 }
 
 extension CreateEventViewController: GMSAutocompleteViewControllerDelegate {
-    
-    
     
     // Handle the user's selection.
     

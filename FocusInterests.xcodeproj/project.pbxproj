@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */; };
 		5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D51EA7285C007E8D99 /* Event.swift */; };
+		5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapInfoView.xib */; };
+		5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapInfoView.swift */; };
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
 		96F2D75D974CE24C9A358244 /* Pods_FocusInterestsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */; };
 		D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317F61E5B47D300140323 /* HomViewControllerCell.swift */; };
@@ -106,6 +108,8 @@
 		4DCECAEA41CAC4F1781A9ADD /* Pods-FocusInterests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.release.xcconfig"; sourceTree = "<group>"; };
 		5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		5B51C8D51EA7285C007E8D99 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		5BE31E871EA75E6A004768F0 /* MapInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapInfoView.xib; sourceTree = "<group>"; };
+		5BE31E891EA76094004768F0 /* MapInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterestsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21317F61E5B47D300140323 /* HomViewControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomViewControllerCell.swift; sourceTree = "<group>"; };
@@ -395,6 +399,8 @@
 				D219754D1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib */,
 				D2ECAC561E7CD9F8006FFA1A /* UserPhotoCell.swift */,
 				D2ECAC571E7CD9F8006FFA1A /* UserPhotoCell.xib */,
+				5BE31E871EA75E6A004768F0 /* MapInfoView.xib */,
+				5BE31E891EA76094004768F0 /* MapInfoView.swift */,
 				D2D0A3EA1E7F49ED00B43689 /* UserDescriptionCell.swift */,
 				D2D0A3EB1E7F49ED00B43689 /* UserDescriptionCell.xib */,
 				D25370D01E885EE40071B115 /* FollowCell.swift */,
@@ -575,6 +581,7 @@
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
+				5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */,
@@ -760,6 +767,7 @@
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
+				5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */,
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,

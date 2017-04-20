@@ -67,7 +67,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let index:Int! = Int(marker.accessibilityLabel!)
         let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
         infoWindow.name.text = "some sample address"
-//        infoWindow.name.text = createdEvent?.title
         infoWindow.address.text  = createdEvent?.place?.formattedAddress
         return infoWindow
     }
