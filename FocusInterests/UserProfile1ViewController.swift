@@ -1,4 +1,4 @@
-//
+ //
 //  UserProfile1ViewController.swift
 //  FocusInterests
 //
@@ -35,7 +35,7 @@ protocol CellImageDelegate {
 }
 
 protocol InterestDelegate {
-    func passInterests(interests: [Interest])
+    func passInterests(interests: [String])
 }
 
 class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, InterestPickerDelegate {
@@ -139,12 +139,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                     self.user?.setImageString(imageString: imString)
                 }
                 
-                self.tableView.reloadData()
-                /*
-                if let loc = modDict["current_location"] as? String {
-                    self.user?.setCurrentLocation(location: <#T##CLLocationCoordinate2D#>)
-                }
-                 */
+                self.getInterests()
             }
         }
     }
@@ -153,7 +148,13 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         FirebaseDownstream.shared.getCurrentUserInterests { (interests) in
             if let ints = interests {
                 self.user!.interests = ints
+                var interestNames = [String]()
+                for interest in self.user!.interests {
+                    interestNames.append(interest.name!)
+                }
+                self.interestDelegate?.passInterests(interests: interestNames)
             }
+            self.tableView.reloadData()
         }
     }
     
@@ -283,9 +284,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.DisplayInterestCell.rawValue) as? DisplayInterestsCell
             self.interestDelegate = cell
-            if let u = self.user {
-                cell?.configureFor(user: u)
-            }
+            
             return cell!
         default:
             return UITableViewCell()
