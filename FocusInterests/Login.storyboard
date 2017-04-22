@@ -434,16 +434,6 @@
                                     <constraint firstAttribute="height" constant="50" id="yRL-fi-k7C"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bA-sZ-w0U">
-                                <rect key="frame" x="62" y="164" width="250" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="9VA-dp-U1W"/>
-                                    <constraint firstAttribute="height" constant="40" id="cLO-5C-Lhl"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5J-wA-IYL">
                                 <rect key="frame" x="-4" y="720" width="383" height="400"/>
                                 <subviews>
@@ -536,7 +526,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="jj7-ar-r5p" firstAttribute="top" secondItem="7bA-sZ-w0U" secondAttribute="bottom" constant="14" id="3SE-1i-7In"/>
                             <constraint firstItem="HJa-nJ-iBn" firstAttribute="top" secondItem="VD4-BT-GoK" secondAttribute="top" id="A8M-2o-FPK"/>
                             <constraint firstItem="g5J-wA-IYL" firstAttribute="top" secondItem="C9c-UQ-Gw1" secondAttribute="bottom" constant="700" id="GRc-2n-vIh"/>
                             <constraint firstItem="HJa-nJ-iBn" firstAttribute="leading" secondItem="VD4-BT-GoK" secondAttribute="leading" constant="-2" id="LeN-xr-AtZ"/>
@@ -548,7 +537,6 @@
                             <constraint firstItem="Eza-fa-hv1" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="gCi-tg-6St"/>
                             <constraint firstItem="g5J-wA-IYL" firstAttribute="leading" secondItem="VD4-BT-GoK" secondAttribute="leadingMargin" constant="-20" id="gkx-2C-8Kp"/>
                             <constraint firstItem="yWE-Kn-qDP" firstAttribute="top" secondItem="HJa-nJ-iBn" secondAttribute="bottom" constant="-2" id="kCs-6E-VKZ"/>
-                            <constraint firstItem="7bA-sZ-w0U" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="kYc-Dn-Rz3"/>
                             <constraint firstAttribute="trailing" secondItem="HJa-nJ-iBn" secondAttribute="trailing" constant="-2" id="rTX-wO-1nQ"/>
                             <constraint firstItem="jj7-ar-r5p" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="ugU-Fg-zSb"/>
                             <constraint firstItem="HJa-nJ-iBn" firstAttribute="top" secondItem="jj7-ar-r5p" secondAttribute="bottom" constant="-258" id="y4H-LL-RP8"/>
@@ -561,7 +549,6 @@
                         <outlet property="emailView" destination="g5J-wA-IYL" id="iKA-uv-Ir0"/>
                         <outlet property="faceBookButton" destination="jj7-ar-r5p" id="ewL-mD-KY5"/>
                         <outlet property="googleLoginButton" destination="Eza-fa-hv1" id="CM0-da-1Zz"/>
-                        <outlet property="loggedInLabel" destination="7bA-sZ-w0U" id="EJu-cM-f9R"/>
                         <outlet property="passwordTextField" destination="2YZ-47-bps" id="fyt-X4-6cQ"/>
                         <outlet property="segmentedC" destination="d25-YL-q5g" id="KLm-GT-8PR"/>
                         <outlet property="submitEmailButton" destination="O9M-BQ-yT3" id="thz-b0-j59"/>

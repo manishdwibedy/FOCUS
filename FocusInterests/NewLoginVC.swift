@@ -22,7 +22,6 @@ enum LoginTypes: String {
 class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var segmentedC: UISegmentedControl!
-    @IBOutlet weak var loggedInLabel: UILabel!
     @IBOutlet weak var faceBookButton: UIButton!
     @IBOutlet weak var googleLoginButton: GIDSignInButton!
     @IBOutlet weak var emailView: UIView!
@@ -61,7 +60,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         submitEmailButton.backgroundColor = UIColor.veryLightGrey()
         submitEmailButton.setAttributedTitle(attrStr, for: .normal)
         
-       let icon = UIImage(named: "facebook")
+        let icon = UIImage(named: "facebook")
         let tinted = icon?.withRenderingMode(.alwaysTemplate)
         
         let fbImage = UIImageView(frame: CGRect(x: 5, y: 5, width: 30, height: 30))
@@ -86,38 +85,14 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         emailPwordButton.backgroundColor = UIColor.primaryGreen()
         emailPwordButton.layer.cornerRadius = 2
         segmentedC.tintColor = UIColor.white
-        checkForLoggedIn()
     }
     
     
     
-    func checkForLoggedIn() {
-        if let loggedIn = defaults.object(forKey: "Login") as? String {
-            switch loggedIn {
-            case "notLoggedIn":
-                loggedInLabel.text = "You're not logged in."
-                faceBookButton.isEnabled = true
-                self.faceBookButton.alpha = 1
-                googleLoginButton.isEnabled = true
-                emailPwordButton.isEnabled = true
-                emailPwordButton.alpha = 1
-            case "facebook":
-                loggedInLabel.text = "You're logged in with Facebook"
-                setUIForLogged()
-            case "google":
-                loggedInLabel.text = "You're logged in with Google"
-                setUIForLogged()
-            case "firebaseEmailLogin":
-                loggedInLabel.text = "You're logged in with email"
-                setUIForLogged()
-            default:
-                break
-            }
-
-        } else {
-            loggedInLabel.text = "You've never logged in."
+    func checkForSignedUp() {
+        if let uid = AuthApi.getFirebaseUid() {
+            print("User logged in with id: \(uid)")
         }
-        
     }
     
     func setUIForLogged() {
@@ -135,7 +110,6 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                 print("user uid: \(u.uid)")
             }
         })
-         checkForLoggedIn()
     }
     
     
@@ -184,7 +158,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                                 }
                                 self.emailMovementConstraint.constant = 700
                                 self.defaults.set(user!.uid, forKey: "firebaseEmailLogin")
-                                self.checkForLoggedIn()
+                                self.checkForSignedUp()
                                 AuthApi.set(loggedIn: LoginTypes.Email)
                                 self.presentOwnUserProfile()
                             }
@@ -206,7 +180,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                         }
                         self.emailMovementConstraint.constant = 700
                         self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
-                        self.checkForLoggedIn()
+                        self.showNotVerifiedAlert()
                         self.presentOwnUserProfile()
                     } else {
                         self.showLoginFailedAlert(loginType: "email")
@@ -214,6 +188,48 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                 }
             })
         }
+    }
+    
+    func showNotVerifiedAlert() {
+        let alert = UIAlertController(title: "You haven't confirmed your email.", message: "We can send you another if you like. To access Focus, please click the link in the email we have sent.", preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "Send", style: .default) { (action) in
+            FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
+                if error == nil {
+                    let label = UILabel(frame: CGRect(x: 40, y: 80, width: self.view.frame.width - 80, height: 40))
+                    label.backgroundColor = UIColor.darkGray
+                    label.font = UIFont(name: "Futura", size: 20)
+                    label.textColor = UIColor.white
+                    label.textAlignment = .center
+                    label.text = "The email has been sent."
+                    label.layer.cornerRadius = 10
+                    label.clipsToBounds = true
+                    label.alpha = 0
+                    self.view.addSubview(label)
+                    UIView.animate(withDuration: 0.3, animations: {
+                        label.alpha = 1
+                    }, completion: { (success) in
+                        let time = DispatchTime.now() + 5
+                        DispatchQueue.main.asyncAfter(deadline: time, execute: { 
+                            UIView.animate(withDuration: 0.3, animations: { 
+                                label.alpha = 0
+                            })
+                            label.removeFromSuperview()
+                        })
+                    })
+                }
+            })
+        }
+        let action2 = UIAlertAction(title: "No thanks", style: .default, handler: nil)
+        alert.addAction(action1)
+        alert.addAction(action2)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func promptToConfirm() {
+        let alert = UIAlertController(title: "Confirmation sent", message: "Please check your email and click the link in message that will arrive momentarily", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func presentOwnUserProfile() {
@@ -264,7 +280,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                                 self.presentOwnUserProfile()
                             }
                             
-                            self.checkForLoggedIn()
+                            self.checkForSignedUp()
                             if let error = error {
                                 self.showLoginFailedAlert(loginType: "our server")
                                 return
@@ -301,9 +317,8 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
             self.showLoginFailedAlert(loginType: "Google")
         }
         self.defaults.set("google", forKey: "Login")
-        checkForLoggedIn()
+        checkForSignedUp()
     }
-
     
     func showLoginFailedAlert(loginType: String) {
         let alert = UIAlertController(title: "Login error", message: "There has been an error logging in with \(loginType). Please try again.", preferredStyle: .alert)

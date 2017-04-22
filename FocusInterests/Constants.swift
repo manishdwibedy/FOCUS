@@ -90,10 +90,10 @@ struct Constants {
     }
     
     struct notifications {
-        public static let notification1 = Notification(type: NotificationType.Invite, sender: Constants.dummyUsers.al, item: Constants.dummyItemsOInterest.item2)
-        public static let notification2 = Notification(type: NotificationType.Like, sender: Constants.dummyUsers.mary, item: Constants.dummyItemsOInterest.item1)
-        public static let notification3 = Notification(type: NotificationType.Tag, sender: Constants.dummyUsers.yoon, item: Constants.dummyItemsOInterest.item3)
-        
+       
+        public static let notification1 = FocusNotification(type: NotificationType.Invite, sender: Constants.dummyUsers.al, item: Constants.dummyItemsOInterest.item2)
+        public static let notification2 = FocusNotification(type: NotificationType.Like, sender: Constants.dummyUsers.mary, item: Constants.dummyItemsOInterest.item1)
+        public static let notification3 = FocusNotification(type: NotificationType.Tag, sender: Constants.dummyUsers.yoon, item: Constants.dummyItemsOInterest.item3)
     }
     
     struct settings {
