@@ -21,6 +21,7 @@ enum LoginTypes: String {
 
 class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentedC: UISegmentedControl!
     @IBOutlet weak var faceBookButton: UIButton!
     @IBOutlet weak var googleLoginButton: GIDSignInButton!
@@ -40,10 +41,13 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     var signUp = false
     var delegate: LoginDelegate?
     let appD = UIApplication.shared.delegate as! AppDelegate
+    var user: FIRUser?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.isHidden = true
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -85,6 +89,17 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         emailPwordButton.backgroundColor = UIColor.primaryGreen()
         emailPwordButton.layer.cornerRadius = 2
         segmentedC.tintColor = UIColor.white
+        if FIRAuth.auth()?.currentUser == nil {
+            signUp = true
+            segmentedC.selectedSegmentIndex = 1
+            emailTextField.placeholder = "Enter a valid email."
+            passwordTextField.placeholder = "Select a password."
+        } else {
+            signUp = false
+            segmentedC.selectedSegmentIndex = 0
+            emailTextField.placeholder = "Enter your email."
+            passwordTextField.placeholder = "Enter you password."
+        }
     }
     
     
@@ -148,18 +163,32 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                     print("and here is the error: \(error?.localizedDescription)")
                 } else {
                     if user != nil {
+                        self.user = user
                         FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
                             if error != nil {
                                 self.showLoginFailedAlert(loginType: "email")
                                 print("there has been an error with email login: \(error?.localizedDescription)")
                             } else {
+                                AuthApi.setEmailConfirmationSent()
                                 if let id = user?.uid {
                                     AuthApi.set(firebaseUid: id)
                                 }
-                                self.emailMovementConstraint.constant = 700
+                                UIView.animate(withDuration: 0.8, animations: {
+                                    self.emailMovementConstraint.constant = 700
+                                    self.view.layoutIfNeeded()
+                                }) { (t) in
+                                    if t {
+                                        self.emailTextField.text = ""
+                                        self.passwordTextField.text = ""
+                                    }
+                                }
                                 self.defaults.set(user!.uid, forKey: "firebaseEmailLogin")
-                                self.checkForSignedUp()
                                 AuthApi.set(loggedIn: LoginTypes.Email)
+                                self.showActivityIndicator()
+                                self.promptToConfirm()
+                                if (user?.isEmailVerified)! {
+                                    print("Email verified")
+                                }
                                 self.presentOwnUserProfile()
                             }
                         })
@@ -178,51 +207,25 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                         if let id = user?.uid {
                             AuthApi.set(firebaseUid: id)
                         }
-                        self.emailMovementConstraint.constant = 700
+                        UIView.animate(withDuration: 0.8, animations: {
+                            self.emailMovementConstraint.constant = 700
+                            self.view.layoutIfNeeded()
+                        }) { (t) in
+                            if t {
+                                self.emailTextField.text = ""
+                                self.passwordTextField.text = ""
+                            }
+                        }
                         self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
-                        self.showNotVerifiedAlert()
                         self.presentOwnUserProfile()
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
                     } else {
                         self.showLoginFailedAlert(loginType: "email")
                     }
                 }
             })
         }
-    }
-    
-    func showNotVerifiedAlert() {
-        let alert = UIAlertController(title: "You haven't confirmed your email.", message: "We can send you another if you like. To access Focus, please click the link in the email we have sent.", preferredStyle: .alert)
-        let action1 = UIAlertAction(title: "Send", style: .default) { (action) in
-            FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
-                if error == nil {
-                    let label = UILabel(frame: CGRect(x: 40, y: 80, width: self.view.frame.width - 80, height: 40))
-                    label.backgroundColor = UIColor.darkGray
-                    label.font = UIFont(name: "Futura", size: 20)
-                    label.textColor = UIColor.white
-                    label.textAlignment = .center
-                    label.text = "The email has been sent."
-                    label.layer.cornerRadius = 10
-                    label.clipsToBounds = true
-                    label.alpha = 0
-                    self.view.addSubview(label)
-                    UIView.animate(withDuration: 0.3, animations: {
-                        label.alpha = 1
-                    }, completion: { (success) in
-                        let time = DispatchTime.now() + 5
-                        DispatchQueue.main.asyncAfter(deadline: time, execute: { 
-                            UIView.animate(withDuration: 0.3, animations: { 
-                                label.alpha = 0
-                            })
-                            label.removeFromSuperview()
-                        })
-                    })
-                }
-            })
-        }
-        let action2 = UIAlertAction(title: "No thanks", style: .default, handler: nil)
-        alert.addAction(action1)
-        alert.addAction(action2)
-        self.present(alert, animated: true, completion: nil)
     }
     
     func promptToConfirm() {
@@ -259,7 +262,20 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         faceBookButton.isEnabled = true
         googleLoginButton.isEnabled = true
     }
+    
+    func showActivityIndicator() {
+        activityIndicator.isHidden = false
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.backgroundColor = UIColor.black
+        activityIndicator.layer.cornerRadius = 5
+        activityIndicator.clipsToBounds = true
+        activityIndicator.color = UIColor.white
+        activityIndicator.startAnimating()
+    }
+    
     @IBAction func faceBookLoginClicked(_ sender: Any) {
+       
+        showActivityIndicator()
         loginView.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if error != nil {
                 print(error?.localizedDescription)
@@ -277,7 +293,10 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                                 AuthApi.set(firebaseUid: fireId)
                                 AuthApi.set(loggedIn: .Facebook)
                                 AuthApi.set(facebookToken: FBSDKAccessToken.current().tokenString)
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                                 self.presentOwnUserProfile()
+                                
                             }
                             
                             self.checkForSignedUp()
@@ -297,6 +316,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     
     // GIDSignInDelegate
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        showActivityIndicator()
         print("my email: \(user.profile.email)")
         if let id = user.authentication.accessToken, let idToken = user.authentication.idToken {
             AuthApi.set(googleToken: id)
@@ -308,6 +328,8 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                     let fireId = u.uid
                     AuthApi.set(firebaseUid: fireId)
                     AuthApi.set(loggedIn: .Google)
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
                     self.presentOwnUserProfile()
                 } else {
                     self.showLoginFailedAlert(loginType: "our server")

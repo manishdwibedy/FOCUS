@@ -523,6 +523,12 @@
                                     <action selector="emailPwordTapped:" destination="96E-b6-SZp" eventType="touchUpInside" id="bxS-2m-L4c"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NOP-vY-eer">
+                                <rect key="frame" x="163" y="408" width="49" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Jbh-Id-qAJ"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -532,17 +538,21 @@
                             <constraint firstItem="HJa-nJ-iBn" firstAttribute="top" secondItem="VD4-BT-GoK" secondAttribute="top" id="OKW-Gn-bDp"/>
                             <constraint firstItem="SYq-wM-VbM" firstAttribute="top" secondItem="Eza-fa-hv1" secondAttribute="bottom" constant="14" id="OaE-v1-dsN"/>
                             <constraint firstItem="Eza-fa-hv1" firstAttribute="top" secondItem="jj7-ar-r5p" secondAttribute="bottom" constant="14" id="SmY-X9-la8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NOP-vY-eer" secondAttribute="trailing" constant="147" id="U9T-yV-jAe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g5J-wA-IYL" secondAttribute="trailing" constant="-20" id="dh4-0e-oDJ"/>
                             <constraint firstItem="SYq-wM-VbM" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="e2U-Tn-nUm"/>
                             <constraint firstItem="Eza-fa-hv1" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="gCi-tg-6St"/>
                             <constraint firstItem="g5J-wA-IYL" firstAttribute="leading" secondItem="VD4-BT-GoK" secondAttribute="leadingMargin" constant="-20" id="gkx-2C-8Kp"/>
                             <constraint firstItem="yWE-Kn-qDP" firstAttribute="top" secondItem="HJa-nJ-iBn" secondAttribute="bottom" constant="-2" id="kCs-6E-VKZ"/>
+                            <constraint firstItem="NOP-vY-eer" firstAttribute="leading" secondItem="VD4-BT-GoK" secondAttribute="leadingMargin" constant="147" id="nb9-kZ-SDJ"/>
                             <constraint firstAttribute="trailing" secondItem="HJa-nJ-iBn" secondAttribute="trailing" constant="-2" id="rTX-wO-1nQ"/>
+                            <constraint firstItem="NOP-vY-eer" firstAttribute="top" secondItem="SYq-wM-VbM" secondAttribute="bottom" constant="32" id="sOI-Ac-CoX"/>
                             <constraint firstItem="jj7-ar-r5p" firstAttribute="centerX" secondItem="HJa-nJ-iBn" secondAttribute="centerX" id="ugU-Fg-zSb"/>
                             <constraint firstItem="HJa-nJ-iBn" firstAttribute="top" secondItem="jj7-ar-r5p" secondAttribute="bottom" constant="-258" id="y4H-LL-RP8"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="NOP-vY-eer" id="2iH-pO-A6W"/>
                         <outlet property="emailMovementConstraint" destination="GRc-2n-vIh" id="SA8-8r-Bdk"/>
                         <outlet property="emailPwordButton" destination="SYq-wM-VbM" id="Xz7-XU-2lJ"/>
                         <outlet property="emailTextField" destination="g5A-4w-M1w" id="7Ef-UG-SdD"/>

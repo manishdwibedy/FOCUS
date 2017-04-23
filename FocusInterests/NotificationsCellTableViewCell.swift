@@ -26,7 +26,7 @@ class NotificationsCellTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(notification: Notification) {
+    func configure(notification: FocusNotification) {
         self.cellImage.image = notification.sender?.userImage
         self.cellImage.roundedImage()
         self.cellTitleLabel.text = notification.sender?.username!
