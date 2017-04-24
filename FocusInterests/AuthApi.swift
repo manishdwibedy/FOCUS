@@ -77,7 +77,7 @@ struct AuthApi {
     }
     
     static func getEmailConfirmationSent() -> Bool {
-        return defaults.bool(forKey: "emailConfirmationSent")
+        return defaults.bool(forKey: "s")
     }
     
     static func setEmailConfirmed(confirmed: Bool) {
@@ -87,4 +87,14 @@ struct AuthApi {
     static func getEmailConfirmed() -> Bool {
         return defaults.bool(forKey: "emailConfirmed")
     }
+    
+    static func setPassword(password: String) {
+        defaults.set(password, forKey: "password")
+    }
+    
+    static func getPassword() -> String? {
+        let pword: String? = defaults.object(forKey: "password") as? String
+        return pword
+    }
+    
 }

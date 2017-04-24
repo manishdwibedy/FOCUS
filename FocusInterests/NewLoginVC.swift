@@ -102,7 +102,10 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         }
     }
     
-    
+    func addEmpty(userWith Id: String) {
+        let user = FocusUser(userName: nil, firebaseId: Id, imageString: nil, currentLocation: nil)
+        FirebaseUpstream.sharedInstance.addToUsers(focusUser: user)
+    }
     
     func checkForSignedUp() {
         if let uid = AuthApi.getFirebaseUid() {
@@ -156,6 +159,9 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         guard let eml = self.email, let pwrd = self.password else {
             return
         }
+        
+        AuthApi.setPassword(password: pwrd)
+        
         if signUp {
             FIRAuth.auth()?.createUser(withEmail: eml, password: pwrd, completion: { (user, error) in
                 if error != nil {
@@ -164,6 +170,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                 } else {
                     if user != nil {
                         self.user = user
+                        self.addEmpty(userWith: user!.uid)
                         FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
                             if error != nil {
                                 self.showLoginFailedAlert(loginType: "email")
@@ -189,7 +196,6 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                                 if (user?.isEmailVerified)! {
                                     print("Email verified")
                                 }
-                                self.presentOwnUserProfile()
                             }
                         })
                     } else {
@@ -230,7 +236,9 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     
     func promptToConfirm() {
         let alert = UIAlertController(title: "Confirmation sent", message: "Please check your email and click the link in message that will arrive momentarily", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        let action = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+            self.presentOwnUserProfile()
+        }
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
@@ -290,6 +298,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                             if let u = user {
                                 let fireId = u.uid
+                                self.addEmpty(userWith: fireId)
                                 AuthApi.set(firebaseUid: fireId)
                                 AuthApi.set(loggedIn: .Facebook)
                                 AuthApi.set(facebookToken: FBSDKAccessToken.current().tokenString)
@@ -326,6 +335,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
             FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
                 if let u = user {
                     let fireId = u.uid
+                    self.addEmpty(userWith: fireId)
                     AuthApi.set(firebaseUid: fireId)
                     AuthApi.set(loggedIn: .Google)
                     self.activityIndicator.stopAnimating()

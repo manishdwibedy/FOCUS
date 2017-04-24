@@ -39,7 +39,7 @@ protocol InterestDelegate {
     func passInterests(interests: [String])
 }
 
-class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, InterestPickerDelegate {
+class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var interestsViewWidthConstraints: NSLayoutConstraint!
     @IBOutlet weak var interestViewHeightConstraint: NSLayoutConstraint!
@@ -67,6 +67,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     var interestDelegate: InterestDelegate?
     var user: FocusUser?
     var descript = "I am a fake user. But I'm interested in whether or not the words in this string will wrap for a means of line-break and stretch the cell's height."
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,10 +97,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         userNameTextField.clearButtonMode = .whileEditing
         
         // So cells can stretch if needed
-        tableView.estimatedRowHeight = 80
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.setNeedsLayout()
-        tableView.layoutIfNeeded()
+        cellStretcher()
         
         animateInterestViewIn()
         
@@ -136,15 +135,25 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                 if let descr = modDict["description"] as? String {
                     self.user?.setDescription(description: descr)
                     self.descript = descr
+                    print(self.descript)
                     self.descriptionDelegate?.update(description: descr)
+                    self.cellStretcher()
                 }
                 if let imString = modDict["image_string"] as? String {
                     self.user?.setImageString(imageString: imString)
                 }
                 
                 self.getInterests()
+                self.tableView.reloadData()
             }
         }
+    }
+    
+    func cellStretcher() {
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
     }
     
     func getInterests() {
@@ -154,6 +163,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                 var interestNames = [String]()
                 for interest in self.user!.interests {
                     interestNames.append(interest.name!)
+                    print(interest.name!)
+                    
                 }
                 self.interestDelegate?.passInterests(interests: interestNames)
             }
@@ -183,6 +194,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         animate(constraint: usernameTopConstraint, finishingConstant: -60.0)
         if inEditMode {
             
+            
+            
             inEditMode = false
             editDelegate?.makeStatic()
             imageEditDelegate?.makeStatic()
@@ -190,11 +203,16 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             UserNameLabel.layer.borderColor = UIColor.primaryGreen().cgColor
             UserNameLabel.gestureRecognizers = []
             user!.firebaseId = AuthApi.getFirebaseUid()
-            if (FIRAuth.auth()?.currentUser?.isEmailVerified)! {
-                FirebaseUpstream.sharedInstance.addToUsers(focusUser: user!)
-            } else {
-                self.showNotVerified()
-            }
+            FirebaseDownstream.shared.isUserEmailVerified(completion: { (verified) in
+                if verified {
+                    print("v...e...r...i...f...i...e...d")
+                    FirebaseUpstream.sharedInstance.addToUsers(focusUser: self.user!)
+                    self.loginDelegate?.login()
+                } else {
+                    print("not verified.")
+                    self.showNotVerified()
+                }
+            })
         } else {
             inEditMode = true
             if let str = user?.description {

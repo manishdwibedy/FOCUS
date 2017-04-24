@@ -39,6 +39,7 @@ class DisplayInterestsCell: UITableViewCell, InterestDelegate {
                 }
                 n += 1
             }
+            self.label.text = str
 
         } else {
             label.text = "I have not selected interests yet."
