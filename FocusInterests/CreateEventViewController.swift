@@ -15,7 +15,6 @@ class CreateEventViewController: UIViewController {
     var event: Event?
     var place: GMSPlace?
     let datePicker = UIDatePicker()
-    let eventRef = FIRDatabase.database().reference().child("events")
     
     @IBOutlet weak var desc: UITextView!
     @IBOutlet weak var name: UITextField!
@@ -38,17 +37,18 @@ class CreateEventViewController: UIViewController {
     
     @IBAction func createPin(_ sender: UIButton) {
         
-        let locality = self.place?.addressComponents?[0].name
-        let street = self.place?.addressComponents?[1].name
-        let shortAddress = "\(locality!), \(street!)"
+        if place != nil{
+            let locality = self.place?.addressComponents?[0].name
+            let street = self.place?.addressComponents?[1].name
+            let shortAddress = "\(locality!), \(street!)"
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, h:mm a"
+            
+            
+            self.event = Event(title: name.text!, description: desc.text!, fullAddress: (self.place?.formattedAddress)!, shortAddress: shortAddress, latitude: (self.place?.coordinate.latitude.debugDescription)!, longitude: (self.place?.coordinate.longitude.debugDescription)!, date: dateFormatter.string(from: self.datePicker.date), creator: AuthApi.getFirebaseUid()!)
+        }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, h:mm a"
-        
-        
-        let event = Event(title: name.text!, description: desc.text!, fullAddress: (self.place?.formattedAddress)!, shortAddress: shortAddress, latitude: String(describing: self.place?.coordinate.latitude), longitude: String(describing: self.place?.coordinate.latitude), date: dateFormatter.string(from: self.datePicker.date), creator: AuthApi.getFirebaseUid()!)
-        
-        event.saveToDB(ref: self.eventRef)
     }
 
     func showDateTime(){
@@ -78,9 +78,9 @@ class CreateEventViewController: UIViewController {
         self.view.endEditing(true)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "show_event"{
-            let destinationVC = segue.destination as! MapViewController
-            destinationVC.createdEvent = self.event
+        if segue.identifier == "add_event_icon"{
+            let destinationVC = segue.destination as! EventIconViewController
+            destinationVC.event = self.event
         }
     }
 }

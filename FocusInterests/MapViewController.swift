@@ -23,7 +23,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var currentLocation: CLLocation?
     var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 15.0
-    let eventsRef = FIRDatabase.database().reference().child("events")
     var events = [Event]()
     
     override func viewDidLoad() {
@@ -43,8 +42,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         placesClient = GMSPlacesClient.shared()
         
-        
-        self.eventsRef.observe(FIRDataEventType.value, with: { (snapshot) in
+        Constants.DB.event.observe(FIRDataEventType.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             
             for (_, event) in events{

@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
+import FirebaseStorage
 
 struct Constants {
     
@@ -116,5 +118,12 @@ struct Constants {
         public static let signPhoto = "Upload Photo"
     }
     
+    struct DB {
+        public static let event = FIRDatabase.database().reference().child("events")
+    }
+    
+    struct storage{
+        public static let event = FIRStorage.storage().reference().child("events")
+    }
 }
 

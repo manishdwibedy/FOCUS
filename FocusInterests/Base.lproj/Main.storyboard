@@ -227,7 +227,7 @@
                                 <state key="normal" title="Create Pin"/>
                                 <connections>
                                     <action selector="createPin:" destination="sUH-jM-snE" eventType="touchUpInside" id="whw-yx-bTb"/>
-                                    <segue destination="VEY-4A-vsU" kind="show" identifier="show_event" id="JBu-OW-rN9"/>
+                                    <segue destination="njs-0K-F5R" kind="show" identifier="add_event_icon" id="vPl-jE-WFb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -274,6 +274,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgX-A1-RpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2693.5999999999999" y="895.50224887556226"/>
+        </scene>
+        <!--Event Icon View Controller-->
+        <scene sceneID="BTj-D2-XPa">
+            <objects>
+                <viewController id="njs-0K-F5R" customClass="EventIconViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="77k-Bi-1RN"/>
+                        <viewControllerLayoutGuide type="bottom" id="AvY-XE-aly"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ykJ-zm-eve">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6Y-wF-a3h">
+                                <rect key="frame" x="0.0" y="603" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Library" id="6YL-Az-saH">
+                                        <connections>
+                                            <action selector="chooseFromGallery:" destination="njs-0K-F5R" id="2lY-xQ-7OQ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="wEl-cY-FYA"/>
+                                    <barButtonItem title="Camera" id="LH5-gy-3YS">
+                                        <connections>
+                                            <action selector="chooseFromCamera:" destination="njs-0K-F5R" id="xEV-Ju-ayH"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zCI-PA-Vmf">
+                                <rect key="frame" x="37" y="183.5" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="KQR-K1-UWy"/>
+                                    <constraint firstAttribute="width" constant="300" id="SRN-hG-ViL"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AvY-XE-aly" firstAttribute="top" secondItem="X6Y-wF-a3h" secondAttribute="bottom" constant="20" id="3lJ-Jm-yPb"/>
+                            <constraint firstAttribute="trailing" secondItem="X6Y-wF-a3h" secondAttribute="trailing" id="NSt-jo-ysP"/>
+                            <constraint firstItem="X6Y-wF-a3h" firstAttribute="leading" secondItem="ykJ-zm-eve" secondAttribute="leading" id="VaA-Hd-fVw"/>
+                            <constraint firstItem="zCI-PA-Vmf" firstAttribute="centerY" secondItem="ykJ-zm-eve" secondAttribute="centerY" id="ajQ-Kj-Hl7"/>
+                            <constraint firstItem="zCI-PA-Vmf" firstAttribute="centerX" secondItem="ykJ-zm-eve" secondAttribute="centerX" id="mbX-0O-giQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="eventIcon" destination="zCI-PA-Vmf" id="5F4-gW-rYa"/>
+                        <segue destination="VEY-4A-vsU" kind="show" identifier="show_events" id="d0a-SU-oiH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Smo-NS-x5Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3448.8000000000002" y="891.90404797601207"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="w7U-yx-VUh">
@@ -416,6 +470,6 @@
         <image name="settingsGear" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JBu-OW-rN9"/>
+        <segue reference="d0a-SU-oiH"/>
     </inferredMetricsTieBreakers>
 </document>

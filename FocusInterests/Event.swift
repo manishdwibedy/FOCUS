@@ -30,7 +30,7 @@ class Event{
         self.creator = creator
     }
     
-    func saveToDB(ref: FIRDatabaseReference){
+    func saveToDB(ref: FIRDatabaseReference) -> String{
         let newEvent = ref.childByAutoId()
         
         let event = [
@@ -51,5 +51,7 @@ class Event{
 //            "creator": self.creator
         ] as [String : String]
         newEvent.setValue(event)
+        
+        return newEvent.key
     }
 }
