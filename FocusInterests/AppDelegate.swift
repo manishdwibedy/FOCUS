@@ -8,16 +8,94 @@
 
 import UIKit
 import CoreData
+import GoogleMaps
+import GooglePlaces
+import Firebase
+import FBSDKCoreKit
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
-
+    let defaults = UserDefaults.standard
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        FIRApp.configure()
+        
+        FirebaseDownstream.shared.getCurrentUserInterests { (interests) in
+            for interest in interests! {
+                print("\(interest.name!) - \(interest.category!)")
+            }
+        }
+        
+        UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
+        
+        GMSServices.provideAPIKey(Constants.keys.googleMapsAPIKey)
+        GMSPlacesClient.provideAPIKey(Constants.keys.googleMapsAPIKey)
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google Services: \(configureError)")
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        checkForLogin()
+        
         return true
+    }
+    
+    // Google signin handler
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+
+    func checkForLogin() {
+        if let loggedIn = defaults.object(forKey: "Login") as? String {
+            if loggedIn == "notLoggedIn" {
+                logout()
+            } else {
+                login()
+            }
+        } else if defaults.object(forKey: "Login") == nil {
+            self.logout()
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if error == nil { /*
+            let userId = user.userID
+            let idToken = user.authentication.idToken
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+ */
+        } else {
+            print("There was a Google signin error: \(error.localizedDescription)")
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // user has backgrounded the app...
+    }
+    
+    func login() {
+        let storyboard = UIStoryboard(name: Constants.otherIds.mainSB, bundle: nil)
+        let tabContr = storyboard.instantiateInitialViewController() as! CustomTabController
+        self.window?.rootViewController = tabContr
+        self.window?.makeKeyAndVisible()
+    }
+    
+    func logout() {
+        defaults.set(false, forKey: Constants.defaultsKeys.loggedIn)
+        let storyboard = UIStoryboard(name: Constants.otherIds.loginSB, bundle: nil)
+        let vc = storyboard.instantiateInitialViewController() as! NewLoginVC
+        self.window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -31,7 +109,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        let name = Notification.Name(rawValue: "backFromConfirmation")
+        let hasConfirmedNotification = Notification(name: name, object: nil)
+        NotificationCenter.default.post(hasConfirmedNotification)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
