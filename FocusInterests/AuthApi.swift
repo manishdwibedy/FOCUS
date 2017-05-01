@@ -71,4 +71,30 @@ struct AuthApi {
         defaults.set(nil, forKey: "facebookAccessToken")
         defaults.set(nil, forKey: "googleAccessToken")
     }
+    
+    static func setEmailConfirmationSent() {
+        defaults.set(true, forKey: "emailConfirmationSent")
+    }
+    
+    static func getEmailConfirmationSent() -> Bool {
+        return defaults.bool(forKey: "s")
+    }
+    
+    static func setEmailConfirmed(confirmed: Bool) {
+        defaults.set(confirmed, forKey: "emailConfirmed")
+    }
+    
+    static func getEmailConfirmed() -> Bool {
+        return defaults.bool(forKey: "emailConfirmed")
+    }
+    
+    static func setPassword(password: String) {
+        defaults.set(password, forKey: "password")
+    }
+    
+    static func getPassword() -> String? {
+        let pword: String? = defaults.object(forKey: "password") as? String
+        return pword
+    }
+    
 }

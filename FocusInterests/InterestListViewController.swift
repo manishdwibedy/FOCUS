@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol InterestPickerDelegate {
-    func add(interests: [Interest])
-}
-
 class InterestListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -20,7 +16,6 @@ class InterestListViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var fakeNavBar: UIView!
     
-    var delegate: InterestPickerDelegate?
     var user: FocusUser?
     var choices = [Interest]()
     var interests = [Interest]()
@@ -106,7 +101,6 @@ class InterestListViewController: UIViewController, UITableViewDataSource, UITab
         cell?.tintColor = UIColor.white
         cell?.textLabel?.textColor = UIColor.white
         let name = container[indexPath.section].0?[indexPath.row]
-        print("Fucker: \(self.interests.count)")
         self.interests.append(name!)
     }
     

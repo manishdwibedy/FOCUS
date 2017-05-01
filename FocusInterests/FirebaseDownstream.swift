@@ -66,4 +66,15 @@ class FirebaseDownstream {
         
     }
     
+    func isUserEmailVerified(completion: @escaping (Bool) -> Void) {
+        guard let email = FIRAuth.auth()?.currentUser?.email, let password = AuthApi.getPassword() else { return }
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? String())
+            } else {
+                completion(user!.isEmailVerified)
+            }
+        })
+    }
+    
 }

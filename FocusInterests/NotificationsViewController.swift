@@ -10,7 +10,7 @@ import UIKit
 
 class NotificationsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var notifications: [Notification]?
+    var notifications: [FocusNotification]?
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {

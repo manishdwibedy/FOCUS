@@ -109,7 +109,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        let name = Notification.Name(rawValue: "backFromConfirmation")
+        let hasConfirmedNotification = Notification(name: name, object: nil)
+        NotificationCenter.default.post(hasConfirmedNotification)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

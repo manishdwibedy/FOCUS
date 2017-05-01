@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol UserProfileCell {
     func configureFor(user: FocusUser)
@@ -38,7 +39,7 @@ protocol InterestDelegate {
     func passInterests(interests: [String])
 }
 
-class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, InterestPickerDelegate {
+class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var interestsViewWidthConstraints: NSLayoutConstraint!
     @IBOutlet weak var interestViewHeightConstraint: NSLayoutConstraint!
@@ -66,6 +67,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     var interestDelegate: InterestDelegate?
     var user: FocusUser?
     var descript = "I am a fake user. But I'm interested in whether or not the words in this string will wrap for a means of line-break and stretch the cell's height."
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,10 +97,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         userNameTextField.clearButtonMode = .whileEditing
         
         // So cells can stretch if needed
-        tableView.estimatedRowHeight = 80
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.setNeedsLayout()
-        tableView.layoutIfNeeded()
+        cellStretcher()
         
         animateInterestViewIn()
         
@@ -118,7 +118,9 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        if (FIRAuth.auth()?.currentUser?.isEmailVerified)! {
+            print("Email verified")
+        }
     }
     
     func pullUser() {
@@ -133,15 +135,25 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                 if let descr = modDict["description"] as? String {
                     self.user?.setDescription(description: descr)
                     self.descript = descr
+                    print(self.descript)
                     self.descriptionDelegate?.update(description: descr)
+                    self.cellStretcher()
                 }
                 if let imString = modDict["image_string"] as? String {
                     self.user?.setImageString(imageString: imString)
                 }
                 
                 self.getInterests()
+                self.tableView.reloadData()
             }
         }
+    }
+    
+    func cellStretcher() {
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
     }
     
     func getInterests() {
@@ -151,6 +163,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
                 var interestNames = [String]()
                 for interest in self.user!.interests {
                     interestNames.append(interest.name!)
+                    print(interest.name!)
+                    
                 }
                 self.interestDelegate?.passInterests(interests: interestNames)
             }
@@ -180,6 +194,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
         animate(constraint: usernameTopConstraint, finishingConstant: -60.0)
         if inEditMode {
             
+            
+            
             inEditMode = false
             editDelegate?.makeStatic()
             imageEditDelegate?.makeStatic()
@@ -187,7 +203,16 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             UserNameLabel.layer.borderColor = UIColor.primaryGreen().cgColor
             UserNameLabel.gestureRecognizers = []
             user!.firebaseId = AuthApi.getFirebaseUid()
-            FirebaseUpstream.sharedInstance.addToUsers(focusUser: user!)
+            FirebaseDownstream.shared.isUserEmailVerified(completion: { (verified) in
+                if verified {
+                    print("v...e...r...i...f...i...e...d")
+                    FirebaseUpstream.sharedInstance.addToUsers(focusUser: self.user!)
+                    self.loginDelegate?.login()
+                } else {
+                    print("not verified.")
+                    self.showNotVerified()
+                }
+            })
         } else {
             inEditMode = true
             if let str = user?.description {
@@ -209,6 +234,24 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             UserNameLabel.layer.borderWidth = 1
             UserNameLabel.layer.borderColor = UIColor.white.cgColor
         }
+    }
+    
+    func showNotVerified() {
+        let alert = UIAlertController(title: "Not Verified", message: "To submit profile changes, you must click the link in the email you received when you registered. Would you like us to send another copy?", preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "Yes", style: .default) { (act) in
+            FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
+                if error == nil {
+                    let promptAlert = UIAlertController(title: "Email sent", message: "Please find the email and click the link.", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                    promptAlert.addAction(ok)
+                    self.present(promptAlert, animated: true, completion: nil)
+                }
+            })
+        }
+        let action2 = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        alert.addAction(action1)
+        alert.addAction(action2)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func cancelDescription(_ sender: Any) {

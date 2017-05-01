@@ -14,7 +14,7 @@ enum NotificationType: String {
 
 import Foundation
 
-class Notification {
+class FocusNotification {
     
     var type: NotificationType?
     var sender: User?
