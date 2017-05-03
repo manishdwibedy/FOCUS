@@ -304,7 +304,7 @@
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zCI-PA-Vmf">
-                                <rect key="frame" x="37" y="183.5" width="300" height="300"/>
+                                <rect key="frame" x="37" y="184" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="KQR-K1-UWy"/>
                                     <constraint firstAttribute="width" constant="300" id="SRN-hG-ViL"/>
@@ -394,6 +394,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="zwr-f5-bIi" kind="relationship" relationship="viewControllers" id="yH6-bT-Rif"/>
