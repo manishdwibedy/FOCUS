@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="96E-b6-SZp">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Nwf-t9-YbQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -568,9 +569,94 @@
             </objects>
             <point key="canvasLocation" x="1152.8" y="536.58170914542734"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="42e-DM-Jw4">
+            <objects>
+                <viewController id="Nwf-t9-YbQ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lEF-pk-Jwk"/>
+                        <viewControllerLayoutGuide type="bottom" id="vbA-Iy-ofu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HGh-z7-isQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background with Logo" translatesAutoresizingMaskIntoConstraints="NO" id="rYh-al-mS7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gAi-0z-bvM" userLabel="loginButtons">
+                                <rect key="frame" x="70.5" y="266" width="234" height="138"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e17-3M-27h" customClass="FBSDKLoginButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="234" height="46"/>
+                                        <state key="normal" title="Button" image="SignIn"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GR-aV-BUI">
+                                        <rect key="frame" x="0.0" y="46" width="234" height="46"/>
+                                        <state key="normal" title="Button" image="signInWithFacebook"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIn-Zo-tGG">
+                                        <rect key="frame" x="0.0" y="92" width="234" height="46"/>
+                                        <state key="normal" title="Button" image="GoogleSignIn"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fN9-Iw-Dhb" userLabel="textFields">
+                                <rect key="frame" x="70.5" y="186" width="234" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Username, Email or Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zDm-Rb-XWz">
+                                        <rect key="frame" x="0.0" y="0.0" width="234" height="21"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jhs-w0-osX">
+                                        <rect key="frame" x="0.0" y="29" width="234" height="21"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyn-1i-2GQ">
+                                <rect key="frame" x="112" y="445" width="151" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="New? Sign Up">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yyn-1i-2GQ" firstAttribute="centerX" secondItem="rYh-al-mS7" secondAttribute="centerX" id="4GC-et-Aop"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rYh-al-mS7" secondAttribute="trailing" constant="-16" id="G3g-AP-yPq"/>
+                            <constraint firstItem="gAi-0z-bvM" firstAttribute="top" secondItem="fN9-Iw-Dhb" secondAttribute="bottom" constant="30" id="KZY-1i-qaZ"/>
+                            <constraint firstItem="yyn-1i-2GQ" firstAttribute="top" secondItem="gAi-0z-bvM" secondAttribute="bottom" constant="41" id="Opw-2k-Pkk"/>
+                            <constraint firstItem="fN9-Iw-Dhb" firstAttribute="width" secondItem="gAi-0z-bvM" secondAttribute="width" id="SIc-P2-4I6"/>
+                            <constraint firstItem="rYh-al-mS7" firstAttribute="height" secondItem="HGh-z7-isQ" secondAttribute="height" id="Vaj-UE-uhx"/>
+                            <constraint firstItem="rYh-al-mS7" firstAttribute="top" secondItem="fN9-Iw-Dhb" secondAttribute="bottom" constant="-236" id="a2S-KK-auk"/>
+                            <constraint firstItem="rYh-al-mS7" firstAttribute="width" secondItem="HGh-z7-isQ" secondAttribute="width" id="a3O-1t-RGp"/>
+                            <constraint firstItem="fN9-Iw-Dhb" firstAttribute="width" secondItem="rYh-al-mS7" secondAttribute="height" multiplier="234:667" id="eno-q7-aNw"/>
+                            <constraint firstItem="rYh-al-mS7" firstAttribute="leading" secondItem="HGh-z7-isQ" secondAttribute="leadingMargin" constant="-16" id="jjM-Pp-hWp"/>
+                            <constraint firstItem="vbA-Iy-ofu" firstAttribute="top" secondItem="rYh-al-mS7" secondAttribute="bottom" id="n3Y-LN-GFR"/>
+                            <constraint firstItem="rYh-al-mS7" firstAttribute="top" secondItem="lEF-pk-Jwk" secondAttribute="bottom" constant="-20" id="pVr-D6-aWP"/>
+                            <constraint firstItem="fN9-Iw-Dhb" firstAttribute="leading" secondItem="gAi-0z-bvM" secondAttribute="leading" id="pbC-pU-IsL"/>
+                            <constraint firstItem="fN9-Iw-Dhb" firstAttribute="centerX" secondItem="HGh-z7-isQ" secondAttribute="centerX" id="sPE-F3-9El"/>
+                            <constraint firstItem="fN9-Iw-Dhb" firstAttribute="trailing" secondItem="gAi-0z-bvM" secondAttribute="trailing" id="tZr-AY-WeI"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bi4-gb-HQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="350" y="537"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Background with Logo" width="374" height="667"/>
+        <image name="GoogleSignIn" width="252" height="46"/>
+        <image name="SignIn" width="252" height="46"/>
         <image name="logo" width="983" height="288"/>
+        <image name="signInWithFacebook" width="252" height="46"/>
         <image name="splashBackgrnd" width="576" height="1024"/>
     </resources>
 </document>
