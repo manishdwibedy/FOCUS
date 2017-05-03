@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -652,11 +653,71 @@
             </objects>
             <point key="canvasLocation" x="350" y="537"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="mU0-8M-eC7">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yum-uS-gpM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="8P8-kk-dh6" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vZ6-ia-lvT"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ekv-Gj-4bL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WKd-gR-SQg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundGradient" translatesAutoresizingMaskIntoConstraints="NO" id="KHc-Js-wTB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SN9-GF-NRZ">
+                                <rect key="frame" x="93" y="116" width="228" height="95"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hnt-i7-qSc">
+                                        <rect key="frame" x="0.0" y="0.0" width="228" height="29"/>
+                                        <segments>
+                                            <segment title="Phone Number"/>
+                                            <segment title="Email"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="694-lq-czT">
+                                        <rect key="frame" x="0.0" y="36" width="228" height="21"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0f-h5-cCA">
+                                        <rect key="frame" x="0.0" y="65" width="228" height="30"/>
+                                        <state key="normal" title="Next"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="694-lq-czT" firstAttribute="width" secondItem="hnt-i7-qSc" secondAttribute="width" id="wuJ-w2-290"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SN9-GF-NRZ" firstAttribute="centerX" secondItem="WKd-gR-SQg" secondAttribute="centerX" id="1SQ-ZO-Qn4"/>
+                            <constraint firstItem="KHc-Js-wTB" firstAttribute="leading" secondItem="WKd-gR-SQg" secondAttribute="leading" id="DVF-Gb-tlo"/>
+                            <constraint firstItem="SN9-GF-NRZ" firstAttribute="top" secondItem="vZ6-ia-lvT" secondAttribute="bottom" constant="96" id="H74-Pl-ofE"/>
+                            <constraint firstItem="Ekv-Gj-4bL" firstAttribute="top" secondItem="KHc-Js-wTB" secondAttribute="bottom" id="NiH-X1-WxK"/>
+                            <constraint firstAttribute="trailing" secondItem="KHc-Js-wTB" secondAttribute="trailing" id="RcL-dv-ZQM"/>
+                            <constraint firstItem="KHc-Js-wTB" firstAttribute="top" secondItem="vZ6-ia-lvT" secondAttribute="bottom" constant="-20" id="eXP-5y-CFN"/>
+                            <constraint firstItem="hnt-i7-qSc" firstAttribute="width" secondItem="KHc-Js-wTB" secondAttribute="width" multiplier="0.55" id="qro-5J-BkH"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="300"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="349.27536231884062" y="1247.2826086956522"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Background with Logo" width="374" height="667"/>
         <image name="GoogleSignIn" width="252" height="46"/>
         <image name="SignIn" width="252" height="46"/>
+        <image name="backgroundGradient" width="374" height="667"/>
         <image name="logo" width="983" height="288"/>
         <image name="signInWithFacebook" width="252" height="46"/>
         <image name="splashBackgrnd" width="576" height="1024"/>
