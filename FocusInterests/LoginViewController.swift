@@ -43,6 +43,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         handle?.addStateDidChangeListener({ (auth, user) in
             if let u = user {
                 print("user uid: \(u.uid)")
+                self.showHomeVC()
             }
         })
     }
@@ -84,7 +85,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                     self.emailTextField.text = ""
                     self.passwordTextField.text = ""
                     self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
-                    self.presentOwnUserProfile()
+                    self.showHomeVC()
                 } else {
                     self.showLoginFailedAlert(loginType: "email")
                 }
@@ -107,15 +108,18 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     func promptToConfirm() {
         let alert = UIAlertController(title: "Confirmation sent", message: "Please check your email and click the link in message that will arrive momentarily", preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .cancel) { (action) in
-            self.presentOwnUserProfile()
+            self.showHomeVC()
         }
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
     
-    func presentOwnUserProfile() {
-        let destination = UserProfile1ViewController(nibName: "UserProfile1ViewController", bundle: nil)
-        present(destination, animated: true, completion: nil)
+    func showHomeVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        let vc = storyboard.instantiateViewController(withIdentifier: "OpeningTabBarController") as! CustomTabController
+
+        present(vc, animated: true, completion: nil)
     }
     
     func showLoginFailedAlert(loginType: String) {
@@ -158,7 +162,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                     self.addEmpty(userWith: fireId)
                     AuthApi.set(firebaseUid: fireId)
                     AuthApi.set(loggedIn: .Google)
-                    self.presentOwnUserProfile()
+                    self.showHomeVC()
                 } else {
                     self.showLoginFailedAlert(loginType: "our server")
                 }
