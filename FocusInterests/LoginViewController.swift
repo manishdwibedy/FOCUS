@@ -37,6 +37,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         loginView.loginBehavior = .web
+        
+        emailTextField.setBottomBorder()
+        passwordTextField.setBottomBorder()
     }
     
     override func viewWillAppear(_ animated: Bool) {
