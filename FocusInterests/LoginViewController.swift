@@ -185,6 +185,10 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     
     // GIDSignInDelegate
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        guard let user = user else{
+            return
+        }
+        
         print("my email: \(user.profile.email)")
         if let id = user.authentication.accessToken, let idToken = user.authentication.idToken {
             AuthApi.set(googleToken: id)

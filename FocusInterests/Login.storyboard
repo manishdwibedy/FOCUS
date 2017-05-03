@@ -620,21 +620,21 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="gAi-0z-bvM" userLabel="loginButtons">
                                                 <rect key="frame" x="0.0" y="0.0" width="252" height="150"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e17-3M-27h">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e17-3M-27h" userLabel="Email Login">
                                                         <rect key="frame" x="0.0" y="0.0" width="252" height="46"/>
                                                         <state key="normal" title="Email" image="SignIn"/>
                                                         <connections>
                                                             <action selector="emailLogin:" destination="Nwf-t9-YbQ" eventType="touchUpInside" id="JKT-EH-VZB"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GR-aV-BUI">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GR-aV-BUI" userLabel="Facebook Login">
                                                         <rect key="frame" x="0.0" y="52" width="252" height="46"/>
                                                         <state key="normal" image="signInWithFacebook"/>
                                                         <connections>
                                                             <action selector="facebookLogin:" destination="Nwf-t9-YbQ" eventType="touchUpInside" id="kJA-fR-yVN"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3q-LM-7ga">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3q-LM-7ga" userLabel="Google Login">
                                                         <rect key="frame" x="0.0" y="104" width="252" height="46"/>
                                                         <state key="normal" title="Button" image="GoogleSignIn"/>
                                                         <connections>
