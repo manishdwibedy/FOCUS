@@ -45,17 +45,30 @@ class InvitationViewController: UIViewController {
 
     func retrieveContactsWithStore(store: CNContactStore) {
         do {
-            let groups = try store.groups(matching: nil)
-            let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groups[0].identifier)
-            //let predicate = CNContact.predicateForContactsMatchingName("John")
-            let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactEmailAddressesKey] as [Any]
             
-            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as! [CNKeyDescriptor])
+            let contactStore = CNContactStore()
+            let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
+            let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
             
-            for contact in contacts{
+            try? contactStore.enumerateContacts(with: request1) { (contact, error) in
                 print("\(contact.givenName) \(contact.familyName)")
+                print(contact.phoneNumbers)
+                print(contact.imageData)
             }
-            self.objects = contacts
+            
+//            
+//            let groups = try store.groups(matching: nil)
+//            let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groups[0].identifier)
+//            CNContact.pre
+//            //let predicate = CNContact.predicateForContactsMatchingName("John")
+//            let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactEmailAddressesKey] as [Any]
+//            
+//            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as! [CNKeyDescriptor])
+//            
+//            for contact in contacts{
+//                print("\(contact.givenName) \(contact.familyName)")
+//            }
+//            self.objects = contacts
             
         } catch {
             print(error)
