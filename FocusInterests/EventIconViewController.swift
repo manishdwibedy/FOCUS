@@ -67,6 +67,11 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
         
         if let data = imageData{
             let imageRef = Constants.storage.event.child("\(id!).jpg")
+            
+            // Create file metadata including the content type
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
             let _ = imageRef.put(data, metadata: nil) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
