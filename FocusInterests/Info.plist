@@ -67,6 +67,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Login</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Focus would like access to your device&apos;s contacts for certain features.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

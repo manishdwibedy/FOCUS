@@ -322,7 +322,6 @@
                     </view>
                     <connections>
                         <outlet property="eventIcon" destination="zCI-PA-Vmf" id="5F4-gW-rYa"/>
-                        <segue destination="VEY-4A-vsU" kind="show" identifier="show_events" id="d0a-SU-oiH"/>
                         <segue destination="8iz-CO-W0M" kind="show" identifier="event_invite" id="Euy-jb-ntd"/>
                     </connections>
                 </viewController>
@@ -330,10 +329,10 @@
             </objects>
             <point key="canvasLocation" x="3448.8000000000002" y="891.90404797601207"/>
         </scene>
-        <!--View Controller-->
+        <!--Invitation View Controller-->
         <scene sceneID="5nc-df-OSN">
             <objects>
-                <viewController id="8iz-CO-W0M" sceneMemberID="viewController">
+                <viewController id="8iz-CO-W0M" customClass="InvitationViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AY4-Mr-ewI"/>
                         <viewControllerLayoutGuide type="bottom" id="mOR-F6-y64"/>
@@ -343,6 +342,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="VEY-4A-vsU" kind="show" identifier="show_events" id="t7w-Nc-Hr1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qHr-BC-OZ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -494,6 +496,6 @@
         <image name="settingsGear" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="d0a-SU-oiH"/>
+        <segue reference="t7w-Nc-Hr1"/>
     </inferredMetricsTieBreakers>
 </document>
