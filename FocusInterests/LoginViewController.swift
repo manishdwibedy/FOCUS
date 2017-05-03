@@ -131,6 +131,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     }
     
     @IBAction func googleLogin(_ sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
     }
     
     
