@@ -94,6 +94,40 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     }
 
     @IBAction func facebookLogin(_ sender: UIButton) {
+        loginView.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+                self.showLoginFailedAlert(loginType: "Facebook")
+            } else {
+                if let res = result {
+                    if res.isCancelled {
+                        return
+                    }
+                    if let tokenString = FBSDKAccessToken.current().tokenString {
+                        let credential = FIRFacebookAuthProvider.credential(withAccessToken: tokenString)
+                        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                            if let u = user {
+                                let fireId = u.uid
+                                self.addEmpty(userWith: fireId)
+                                AuthApi.set(firebaseUid: fireId)
+                                AuthApi.set(loggedIn: .Facebook)
+                                AuthApi.set(facebookToken: FBSDKAccessToken.current().tokenString)
+                                self.showHomeVC()
+                            }
+                            
+                            self.checkForSignedUp()
+                            if let error = error {
+                                self.showLoginFailedAlert(loginType: "our server")
+                                return
+                            }
+                        }
+                    } else {
+                        self.showLoginFailedAlert(loginType: "Facebook")
+                    }
+                    
+                }
+            }
+        }
     }
     
     @IBAction func googleLogin(_ sender: UIButton) {
