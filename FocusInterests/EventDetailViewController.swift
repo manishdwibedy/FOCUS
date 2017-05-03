@@ -32,15 +32,11 @@ class EventDetailViewController: UIViewController {
                 return
             }
             
-            //Now you can start downloading the image or any file from the storage using URLSession.
             self.image.sd_setImage(with: url, placeholderImage: placeholderImage)
+            self.image.setShowActivityIndicator(true)
+            self.image.setIndicatorStyle(.gray)
             
         })
-        // Load the image using SDWebImage
-        
-//        image.sd_setImage(with: reference.fullPath, placeholderImage: placeholderImage)
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
