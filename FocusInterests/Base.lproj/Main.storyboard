@@ -361,7 +361,20 @@
                     <view key="view" contentMode="scaleToFill" id="KXd-ap-N68">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_event" translatesAutoresizingMaskIntoConstraints="NO" id="yaq-Pu-Qsf">
+                                <rect key="frame" x="16" y="28" width="343" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="1vy-2c-eHc"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yaq-Pu-Qsf" firstAttribute="top" secondItem="2lJ-Jl-PgX" secondAttribute="bottom" constant="8" id="Q9o-mC-smS"/>
+                            <constraint firstItem="yaq-Pu-Qsf" firstAttribute="leading" secondItem="KXd-ap-N68" secondAttribute="leadingMargin" id="c9b-Eo-SG5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yaq-Pu-Qsf" secondAttribute="trailing" id="jrw-hc-FnO"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6q5-bj-tsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -437,7 +450,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3SY-x9-QeC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Pins" image="location" selectedImage="location" id="Ua7-A1-F28"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2wp-HT-HcO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2wp-HT-HcO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -456,7 +469,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpo-3D-Prx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ePA-XN-yOt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ePA-XN-yOt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -475,7 +488,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zwr-f5-bIi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home-1" id="xTg-4h-XeN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="acD-ii-E6E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="acD-ii-E6E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -491,6 +504,7 @@
     </scenes>
     <resources>
         <image name="Home-1" width="25" height="25"/>
+        <image name="empty_event" width="1280" height="800"/>
         <image name="location" width="25" height="25"/>
         <image name="loudspeaker" width="25" height="25"/>
         <image name="settingsGear" width="32" height="32"/>
