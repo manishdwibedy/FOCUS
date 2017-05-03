@@ -570,10 +570,10 @@
             </objects>
             <point key="canvasLocation" x="1152.8" y="536.58170914542734"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="42e-DM-Jw4">
             <objects>
-                <viewController id="Nwf-t9-YbQ" sceneMemberID="viewController">
+                <viewController id="Nwf-t9-YbQ" customClass="LoginViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lEF-pk-Jwk"/>
                         <viewControllerLayoutGuide type="bottom" id="vbA-Iy-ofu"/>
@@ -620,17 +620,26 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="gAi-0z-bvM" userLabel="loginButtons">
                                                 <rect key="frame" x="0.0" y="0.0" width="252" height="150"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e17-3M-27h" customClass="FBSDKLoginButton">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e17-3M-27h">
                                                         <rect key="frame" x="0.0" y="0.0" width="252" height="46"/>
-                                                        <state key="normal" image="SignIn"/>
+                                                        <state key="normal" title="Email" image="SignIn"/>
+                                                        <connections>
+                                                            <action selector="emailLogin:" destination="Nwf-t9-YbQ" eventType="touchUpInside" id="JKT-EH-VZB"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GR-aV-BUI">
                                                         <rect key="frame" x="0.0" y="52" width="252" height="46"/>
                                                         <state key="normal" image="signInWithFacebook"/>
+                                                        <connections>
+                                                            <action selector="facebookLogin:" destination="Nwf-t9-YbQ" eventType="touchUpInside" id="kJA-fR-yVN"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIn-Zo-tGG">
                                                         <rect key="frame" x="0.0" y="104" width="252" height="46"/>
                                                         <state key="normal" image="GoogleSignIn"/>
+                                                        <connections>
+                                                            <action selector="googleLogin:" destination="Nwf-t9-YbQ" eventType="touchUpInside" id="eYg-OH-LEy"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -661,6 +670,10 @@
                             <constraint firstItem="rYh-al-mS7" firstAttribute="leading" secondItem="HGh-z7-isQ" secondAttribute="leading" id="tMP-C3-KIG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="zDm-Rb-XWz" id="AJK-jJ-mnd"/>
+                        <outlet property="passwordTextField" destination="jhs-w0-osX" id="t49-ZR-M2k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bi4-gb-HQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -101,8 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         defaults.set(false, forKey: Constants.defaultsKeys.loggedIn)
         let storyboard = UIStoryboard(name: Constants.otherIds.loginSB, bundle: nil)
         
-        // Till we have a dedicated VC
-        let vc = storyboard.instantiateInitialViewController()// as! NewLoginVC
+        let vc = storyboard.instantiateInitialViewController() as! LoginViewController
         self.window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
     }
