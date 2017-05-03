@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import FacebookCore
 
 class InvitationViewController: UIViewController {
 
@@ -18,6 +19,8 @@ class InvitationViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.getContacts()
+        
+        self.getFacebookFriends()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,23 +58,30 @@ class InvitationViewController: UIViewController {
                 print(contact.phoneNumbers)
                 print(contact.imageData)
             }
-            
-//            
-//            let groups = try store.groups(matching: nil)
-//            let predicate = CNContact.predicateForContactsInGroup(withIdentifier: groups[0].identifier)
-//            CNContact.pre
-//            //let predicate = CNContact.predicateForContactsMatchingName("John")
-//            let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactEmailAddressesKey] as [Any]
-//            
-//            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch as! [CNKeyDescriptor])
-//            
-//            for contact in contacts{
-//                print("\(contact.givenName) \(contact.familyName)")
-//            }
-//            self.objects = contacts
-            
         } catch {
             print(error)
         }
+    }
+    
+    func getFacebookFriends(){
+        let params = ["fields": "id, first_name, last_name, middle_name, name, email, picture"]
+        let token = AccessToken(authenticationToken: AuthApi.getFacebookToken()!)
+        
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "me/taggable_friends", parameters: params, accessToken: token)) { httpResponse, result in
+            switch result {
+            case .success(let response):
+                //                print("Graph Request Succeeded: \(response)")
+                let friends = response.dictionaryValue?["data"] as! [[String : AnyObject]]
+                
+                for friend in friends{
+                    print("\(String(describing: friend["first_name"]!)) \(String(describing: friend["last_name"]!) )")
+                    print(String(describing: friend["id"]!))
+                }
+            case .failed(let error):
+                print("Graph Request Failed: \(error)")
+            }
+        }
+        connection.start()
     }
 }
