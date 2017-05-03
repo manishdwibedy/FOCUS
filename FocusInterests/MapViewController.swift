@@ -45,10 +45,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         Constants.DB.event.observe(FIRDataEventType.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             
-            for (_, event) in events{
+            for (id, event) in events{
                 let info = event as? [String:String]
-                let event = Event(title: (info?["title"])!, description: (info?["description"])!, fullAddress: (info?["fullAddress"])!, shortAddress: (info?["shortAddress"])!, latitude: (info?["latitude"])!, longitude: (info?["longitude"])!, date: (info?["date"])!, creator: (info?["creator"])!
-                )
+                let event = Event(title: (info?["title"])!, description: (info?["description"])!, fullAddress: (info?["fullAddress"])!, shortAddress: (info?["shortAddress"])!, latitude: (info?["latitude"])!, longitude: (info?["longitude"])!, date: (info?["date"])!, creator: (info?["creator"])!, id: id)
         
                 
                 
@@ -146,9 +145,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "show_event_detail"{
+        if segue.identifier == "show_event_details"{
             let destinationVC = segue.destination as! EventDetailViewController
-            destinationVC.event = sender as! Event?
+            destinationVC.event = sender as! Event
         }
         
     }

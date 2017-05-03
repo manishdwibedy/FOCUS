@@ -362,7 +362,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_event" translatesAutoresizingMaskIntoConstraints="NO" id="yaq-Pu-Qsf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yaq-Pu-Qsf">
                                 <rect key="frame" x="16" y="28" width="343" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="1vy-2c-eHc"/>
@@ -376,6 +376,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="yaq-Pu-Qsf" secondAttribute="trailing" id="jrw-hc-FnO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="image" destination="yaq-Pu-Qsf" id="yXz-Jy-TIo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6q5-bj-tsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -504,7 +507,6 @@
     </scenes>
     <resources>
         <image name="Home-1" width="25" height="25"/>
-        <image name="empty_event" width="1280" height="800"/>
         <image name="location" width="25" height="25"/>
         <image name="loudspeaker" width="25" height="25"/>
         <image name="settingsGear" width="32" height="32"/>
