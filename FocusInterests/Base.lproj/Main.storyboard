@@ -323,11 +323,30 @@
                     <connections>
                         <outlet property="eventIcon" destination="zCI-PA-Vmf" id="5F4-gW-rYa"/>
                         <segue destination="VEY-4A-vsU" kind="show" identifier="show_events" id="d0a-SU-oiH"/>
+                        <segue destination="8iz-CO-W0M" kind="show" identifier="event_invite" id="Euy-jb-ntd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Smo-NS-x5Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3448.8000000000002" y="891.90404797601207"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="5nc-df-OSN">
+            <objects>
+                <viewController id="8iz-CO-W0M" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AY4-Mr-ewI"/>
+                        <viewControllerLayoutGuide type="bottom" id="mOR-F6-y64"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2GP-qC-BZH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qHr-BC-OZ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4254" y="885"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="w7U-yx-VUh">

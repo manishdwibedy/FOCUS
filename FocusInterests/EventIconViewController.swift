@@ -24,7 +24,7 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
         picker.delegate = self
         
         self.navigationItem.title = "Choose Icon"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.createPin(sender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.createPin(sender:)))
 //
     }
 
@@ -76,7 +76,7 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
                 let _ = metadata.downloadURL
             }
         }
-        self.performSegue(withIdentifier: "show_events", sender: nil)
+        self.performSegue(withIdentifier: "event_invite", sender: nil)
     }
     /*
     // MARK: - Navigation
