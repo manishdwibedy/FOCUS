@@ -49,10 +49,18 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
                 if error != nil {
                     print("error occurred creating a user: \(error!.localizedDescription)")
                 }
+                
+                if let validUser = user {
+                    AuthApi.set(userEmail: email)
+                    AuthApi.set(firebaseUid: validUser.uid)
+                    AuthApi.setPassword(password: validPassword)
+                    AuthApi.set(loggedIn: .Email)
+                }
             })
         default:
             return
         }
+        
     }
     
     

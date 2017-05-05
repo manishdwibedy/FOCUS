@@ -18,7 +18,7 @@ enum LoginTypes: String {
     case Google = "google"
 }
 
-class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
@@ -38,8 +38,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         GIDSignIn.sharedInstance().delegate = self
         loginView.loginBehavior = .web
         
-        emailTextField.setBottomBorder()
-        passwordTextField.setBottomBorder()
+        setUpTextFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,6 +136,12 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         GIDSignIn.sharedInstance().signIn()
     }
     
+    func setUpTextFields(){
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.emailTextField.setBottomBorder()
+        self.passwordTextField.setBottomBorder()
+    }
     
     func addEmpty(userWith Id: String) {
         let user = FocusUser(userName: nil, firebaseId: Id, imageString: nil, currentLocation: nil)
@@ -219,5 +224,12 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     // MARK: - Navigation
     
     @IBAction func unwindFromSignUP(sender: UIStoryboardSegue){}
+    
+    // MARK - TextField Delegate Methods
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
 }
