@@ -34,12 +34,20 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
     
     @IBAction func finishBttnPressed(_ sender: Any) {
         print("bttn was pressed")
+        guard let validPassword = self.passwordTextField.text else { return }
         switch typeOfSignUp {
         case "phone":
             let formatedString = formatPhoneString(phoneNumber: usersEmailOrPhone)
-            FIRAuth.auth()!.createUser(withEmail: formatedString, password: "", completion: { (user, error) in
+            FIRAuth.auth()!.createUser(withEmail: formatedString, password: validPassword, completion: { (user, error) in
                 if error != nil {
                     print(error!.localizedDescription)
+                }
+            })
+        case "email":
+            let email = self.usersEmailOrPhone
+            FIRAuth.auth()!.createUser(withEmail: email, password: validPassword, completion: { (user, error) in
+                if error != nil {
+                    print("error occurred creating a user: \(error!.localizedDescription)")
                 }
             })
         default:
