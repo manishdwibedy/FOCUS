@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
+		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
 		5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */; };
 		5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D51EA7285C007E8D99 /* Event.swift */; };
 		5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */; };
@@ -105,6 +107,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSignUpViewController.swift; sourceTree = "<group>"; };
+		04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondSignUpViewController.swift; sourceTree = "<group>"; };
 		0CC6A3DFD312CA4DD5401EF6 /* Pods-FocusInterestsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsTests/Pods-FocusInterestsTests.release.xcconfig"; sourceTree = "<group>"; };
 		11005219457ED87053955663 /* Pods-FocusInterestsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1D4CE272CED31DDB7E9DA974 /* Pods-FocusInterestsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsTests/Pods-FocusInterestsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -235,6 +239,15 @@
 				35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		04FD5D1F1EBBDF9B00D7FFB7 /* SignUpVCS */ = {
+			isa = PBXGroup;
+			children = (
+				04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */,
+				04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */,
+			);
+			name = SignUpVCS;
 			sourceTree = "<group>";
 		};
 		5BA37C6F1EB9E8940091189E /* Event */ = {
@@ -396,6 +409,7 @@
 				D25220671E5A846100EC2014 /* NotificationsViewController.swift */,
 				D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */,
 				D2A173541E5E911500C7724B /* SignUpViewController.swift */,
+				04FD5D1F1EBBDF9B00D7FFB7 /* SignUpVCS */,
 				D21975441E61F20D00ED3345 /* BaseViewController.swift */,
 				D227AD2E1E6CBD5A000FB9DD /* NewLoginVC.swift */,
 				5BA37C6F1EB9E8940091189E /* Event */,
@@ -797,6 +811,7 @@
 				D2FDB69A1E89F73800D62DC2 /* SocialGroupViewController.swift in Sources */,
 				D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */,
 				D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */,
+				04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
 				5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */,
 				D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */,
@@ -819,6 +834,7 @@
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 				5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */,
 				D2ECAC541E7A255B006FFA1A /* UserProfile1ViewController.swift in Sources */,
+				04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */,
 				D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */,
 				D227AD2F1E6CBD5A000FB9DD /* NewLoginVC.swift in Sources */,
 				D216482A1E9735AC00AE021B /* SelectedInterestCell.swift in Sources */,
