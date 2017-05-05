@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
 
@@ -28,10 +29,22 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         self.finishButton.isEnabled = false
         formatTextFields()
         setTextFieldDelegates()
+        testSegueFromFirstSignUpVC()
     }
     
     @IBAction func finishBttnPressed(_ sender: Any) {
         print("bttn was pressed")
+        switch typeOfSignUp {
+        case "phone":
+            let formatedString = formatPhoneString(phoneNumber: usersEmailOrPhone)
+            FIRAuth.auth()!.createUser(withEmail: formatedString, password: "", completion: { (user, error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                }
+            })
+        default:
+            return
+        }
     }
     
     
@@ -41,6 +54,11 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
     
     func formatTextFields(){
         let _ = [fullNameTextField, passwordTextField, userNameTextField].map{$0?.setBottomBorder()}
+    }
+    
+    func testSegueFromFirstSignUpVC(){
+        print(typeOfSignUp)
+        print("\(usersEmailOrPhone)")
     }
     
     func checkAllTextFieldsAreFilled(){

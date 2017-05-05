@@ -13,6 +13,7 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
     
     @IBOutlet weak var phoneOrEmailTextField: UITextField!
     @IBOutlet weak var phoneEmailSwitcher: UISegmentedControl!
+    var typeOfSignUpSelected = "phone"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,20 +35,26 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "finishSignUp" {
-            let destinationVC = SecondSignUpViewController()
-            guard let validEntry = phoneOrEmailTextField.text else { return }
-            switch self.phoneEmailSwitcher.selectedSegmentIndex {
-            case 0:
-                destinationVC.typeOfSignUp = "phone"
-            case 1:
-                destinationVC.typeOfSignUp = "email"
-            default:
-                return
+            if let destinationVC = segue.destination as? SecondSignUpViewController {
+                guard let validEntry = phoneOrEmailTextField.text else { return }
+                switch self.phoneEmailSwitcher.selectedSegmentIndex {
+                case 0:
+                    self.typeOfSignUpSelected = "phone"
+                case 1:
+                    self.typeOfSignUpSelected = "email"
+                default:
+                    return
+                }
+                destinationVC.typeOfSignUp = self.typeOfSignUpSelected
+                destinationVC.usersEmailOrPhone = validEntry
             }
-            destinationVC.usersEmailOrPhone = validEntry
         }
     }
-    
+    // MARK - TextField Delegate Methods
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     @IBAction func unwindToFirstSignUpVC(sender: UIStoryboardSegue){}
 }
