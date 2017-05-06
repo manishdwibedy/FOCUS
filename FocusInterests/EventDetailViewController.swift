@@ -10,7 +10,8 @@ import UIKit
 import SDWebImage
 
 class EventDetailViewController: UIViewController {
-
+    @IBOutlet weak var likeCount: UILabel!
+    
     var event: Event?
     
     @IBOutlet weak var image: UIImageView!
@@ -43,8 +44,16 @@ class EventDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func inviteEvent(_ sender: UIButton) {
+    }
     
+    @IBAction func likeEvent(_ sender: UIButton) {
+        let eventRef = Constants.DB.event.child("\(event!.id!)")
+        if eventRef.child("likes").exi
+    }
 
+    @IBAction func attendEvent(_ sender: UIButton) {
+    }
     /*
     // MARK: - Navigation
 

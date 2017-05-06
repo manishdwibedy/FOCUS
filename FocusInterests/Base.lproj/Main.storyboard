@@ -371,18 +371,37 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lD-gN-L9G">
                                 <rect key="frame" x="26" y="238" width="30" height="30"/>
                                 <state key="normal" title="Like"/>
+                                <connections>
+                                    <action selector="likeEvent:" destination="frg-C7-nnG" eventType="touchUpInside" id="zB1-vQ-qoj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6B-f0-Sep">
                                 <rect key="frame" x="312" y="238" width="37" height="30"/>
                                 <state key="normal" title="Invite"/>
+                                <connections>
+                                    <action selector="inviteEvent:" destination="frg-C7-nnG" eventType="touchUpInside" id="tKk-at-UAC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJN-cn-f1f">
                                 <rect key="frame" x="236" y="238" width="46" height="30"/>
                                 <state key="normal" title="Attend"/>
+                                <connections>
+                                    <action selector="attendEvent:" destination="frg-C7-nnG" eventType="touchUpInside" id="HfV-Dc-R9r"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfr-mv-OAg">
+                                <rect key="frame" x="66" y="243" width="50" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Kn6-C1-c1h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Kfr-mv-OAg" firstAttribute="leading" secondItem="7lD-gN-L9G" secondAttribute="trailing" constant="10" id="0tm-Pc-yZs"/>
                             <constraint firstItem="7lD-gN-L9G" firstAttribute="top" secondItem="yaq-Pu-Qsf" secondAttribute="bottom" constant="10" id="1el-cm-4FT"/>
                             <constraint firstItem="yaq-Pu-Qsf" firstAttribute="top" secondItem="2lJ-Jl-PgX" secondAttribute="bottom" constant="8" id="Q9o-mC-smS"/>
                             <constraint firstItem="7lD-gN-L9G" firstAttribute="leading" secondItem="KXd-ap-N68" secondAttribute="leadingMargin" constant="10" id="bkE-ZG-p3w"/>
@@ -390,12 +409,14 @@
                             <constraint firstItem="TJN-cn-f1f" firstAttribute="top" secondItem="yaq-Pu-Qsf" secondAttribute="bottom" constant="10" id="crP-ta-2Gd"/>
                             <constraint firstItem="g6B-f0-Sep" firstAttribute="top" secondItem="yaq-Pu-Qsf" secondAttribute="bottom" constant="10" id="iqo-t1-nM6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yaq-Pu-Qsf" secondAttribute="trailing" id="jrw-hc-FnO"/>
+                            <constraint firstItem="Kfr-mv-OAg" firstAttribute="top" secondItem="yaq-Pu-Qsf" secondAttribute="bottom" constant="15" id="paJ-Hb-fKc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g6B-f0-Sep" secondAttribute="trailing" constant="10" id="seT-LO-AyH"/>
                             <constraint firstItem="g6B-f0-Sep" firstAttribute="leading" secondItem="TJN-cn-f1f" secondAttribute="trailing" constant="30" id="wR8-bY-Fvo"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="image" destination="yaq-Pu-Qsf" id="yXz-Jy-TIo"/>
+                        <outlet property="likeCount" destination="Kfr-mv-OAg" id="V7t-Nd-40h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6q5-bj-tsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -471,7 +492,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3SY-x9-QeC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Pins" image="location" selectedImage="location" id="Ua7-A1-F28"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2wp-HT-HcO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2wp-HT-HcO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -490,7 +511,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpo-3D-Prx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ePA-XN-yOt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ePA-XN-yOt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -509,7 +530,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zwr-f5-bIi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home-1" id="xTg-4h-XeN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="acD-ii-E6E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="acD-ii-E6E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -530,6 +551,6 @@
         <image name="settingsGear" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="t7w-Nc-Hr1"/>
+        <segue reference="RCW-Jw-tzY"/>
     </inferredMetricsTieBreakers>
 </document>
