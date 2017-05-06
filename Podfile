@@ -21,7 +21,7 @@ target 'FocusInterests' do
     pod 'FacebookShare'
     pod 'Google/SignIn'
     pod 'SDWebImage', '~>3.8'
-
+    pod 'JSQMessagesViewController'
 end
 
 target 'FocusInterestsTests' do
@@ -39,6 +39,8 @@ target 'FocusInterestsTests' do
     pod 'FacebookLogin'
     pod 'FacebookShare'
     pod 'Google/SignIn'
+    pod 'JSQMessagesViewController'
+
 end
 
 target 'FocusInterestsUITests' do
@@ -56,5 +58,7 @@ target 'FocusInterestsUITests' do
     pod 'FacebookLogin'
     pod 'FacebookShare'
     pod 'Google/SignIn'
+    pod 'JSQMessagesViewController'
+
 end
 
