@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VEY-4A-vsU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mnx-Qg-K9a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -73,7 +73,7 @@
             </objects>
             <point key="canvasLocation" x="1805.5999999999999" y="138.98050974512745"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="Xqm-b7-zmW">
             <objects>
                 <viewController id="VEY-4A-vsU" customClass="MapViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -86,7 +86,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05W-Qw-2Y5" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIq-Pr-ji4" customClass="MapNavigationView" customModule="FocusInterests" customModuleProvider="target">
@@ -117,6 +117,7 @@
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="x8H-nN-16x"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Map" id="3OO-d0-w3J"/>
                     <navigationItem key="navigationItem" id="pq0-gQ-8Y0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1bK-wR-02e">
                             <connections>
@@ -291,7 +292,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6Y-wF-a3h">
-                                <rect key="frame" x="0.0" y="603" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="554" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="Library" id="6YL-Az-saH">
                                         <connections>
@@ -352,6 +353,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qHr-BC-OZ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4254" y="885"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="9nB-XK-GZ8">
+            <objects>
+                <tabBarController id="mnx-Qg-K9a" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="dub-iB-gLl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="VEY-4A-vsU" kind="relationship" relationship="viewControllers" id="QCV-Df-Bcq"/>
+                        <segue destination="NVa-of-gag" kind="relationship" relationship="viewControllers" id="WBc-Zd-ffX"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xPQ-ml-5o3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="169" y="1227"/>
+        </scene>
+        <!--Event-->
+        <scene sceneID="afx-HK-Arb">
+            <objects>
+                <viewController id="NVa-of-gag" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jms-Yy-2KE"/>
+                        <viewControllerLayoutGuide type="bottom" id="7e8-bD-bTl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kS3-xb-o5l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Event" id="zzB-6F-pzo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kgS-vL-cfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1067" y="1582"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="w7U-yx-VUh">
@@ -462,7 +501,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebc-Eh-QSj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="220" y="938"/>
+            <point key="canvasLocation" x="-1055" y="1466"/>
         </scene>
         <!--Custom Tab Controller-->
         <scene sceneID="pBE-b2-Xh1">
@@ -494,7 +533,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpo-3D-Prx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ePA-XN-yOt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ePA-XN-yOt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -505,7 +544,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C5b-eD-hva" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-554.39999999999998" y="805.54722638680664"/>
+            <point key="canvasLocation" x="-1055" y="636"/>
         </scene>
         <!--Home-->
         <scene sceneID="Ue8-T9-YgP">
@@ -513,7 +552,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zwr-f5-bIi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home-1" id="xTg-4h-XeN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="acD-ii-E6E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="acD-ii-E6E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -532,4 +571,7 @@
         <image name="loudspeaker" width="25" height="25"/>
         <image name="settingsGear" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="QCV-Df-Bcq"/>
+    </inferredMetricsTieBreakers>
 </document>
