@@ -10,8 +10,8 @@ import UIKit
 import JSQMessagesViewController
 
 class ChatViewController: JSQMessagesViewController {
-    let user1 = User(username: "Name 1", uuid: "1", userImage: nil, interests: nil)
-    let user2 = User(username: "Name 2", uuid: "2", userImage: nil, interests: nil)
+    let user1 = User(username: "Steve", uuid: "1", userImage: nil, interests: nil)
+    let user2 = User(username: "Tim", uuid: "2", userImage: nil, interests: nil)
     
     var messages = [JSQMessage]()
     
@@ -25,11 +25,18 @@ class ChatViewController: JSQMessagesViewController {
         
         
         self.messages = getMessages()
+        self.inputToolbar.contentView.leftBarButtonItem = nil;
+        self.showTypingIndicator = true
+        self.showLoadEarlierMessagesHeader = true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
+        print("load earlier")
     }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
@@ -48,11 +55,16 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
-        return 15
+        return 35
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
+        return 30
+    }
+    
+    
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
+        return JSQMessagesAvatarImage(avatarImage: UIImage(named:"tinyB"), highlightedImage: nil, placeholderImage: UIImage(named:"tinyB"))
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
@@ -74,11 +86,18 @@ class ChatViewController: JSQMessagesViewController {
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
         return messages[indexPath.row]
     }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+
+        return NSAttributedString(string: "asdasda")
+    }
+    
+    
 
     func getMessages() -> [JSQMessage] {
         var messages = [JSQMessage]()
         
-        let message1 = JSQMessage(senderId: "1", displayName: "Steve", text: "Hey Tim how are you?")
+        let message1 = JSQMessage(senderId: "1", displayName: "Steve", text: "Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?")
         let message2 = JSQMessage(senderId: "2", displayName: "Tim", text: "Fine thanks, and you?")
         
         messages.append(message1!)
