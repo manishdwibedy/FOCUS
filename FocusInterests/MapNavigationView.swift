@@ -26,5 +26,20 @@ class MapNavigationView: UIView {
         Bundle.main.loadNibNamed("MapNavigationView", owner: self, options: nil)
         self.addSubview(self.view)
     }
+    @IBAction func profileButtonPressed(_ sender: UIButton) {
+        print("profile")
+    }
+    
+    @IBAction func messagesButtonPressed(_ sender: UIButton) {
+        print("message")
+    }
+    
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        print("search")
+    }
+    
+    @IBAction func notificationsButtonPressed(_ sender: UIButton) {
+        print("notifications")
+    }
 
 }
