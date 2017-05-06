@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xAD-e6-F87">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-En-2Gc">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
@@ -64,17 +64,15 @@
                                 <constraint firstAttribute="height" constant="90" id="02f-eu-E7X"/>
                             </constraints>
                         </stackView>
-                        <searchBar alpha="0.0" contentMode="redraw" searchBarStyle="minimal" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="clg-Ba-1dC">
+                        <searchBar alpha="0.0" contentMode="redraw" searchBarStyle="prominent" placeholder="Search" translucent="NO" backgroundImage="4GreenCircles" translatesAutoresizingMaskIntoConstraints="NO" id="clg-Ba-1dC">
                             <rect key="frame" x="0.0" y="90" width="375" height="44"/>
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="KYq-w7-dkT"/>
                             </connections>
                         </searchBar>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Utc-Ov-lxP">
-                            <rect key="frame" x="0.0" y="134" width="375" height="30"/>
-                            <state key="normal" title="Button"/>
-                        </button>
                     </subviews>
                 </stackView>
             </subviews>
@@ -88,6 +86,7 @@
         </view>
     </objects>
     <resources>
+        <image name="4GreenCircles" width="48" height="48"/>
         <image name="Bell" width="48" height="48"/>
         <image name="MessageBubble" width="58" height="58"/>
         <image name="Search" width="46" height="48"/>

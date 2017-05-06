@@ -26,7 +26,11 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     func commonInit(){
         Bundle.main.loadNibNamed("MapNavigationView", owner: self, options: nil)
         self.addSubview(self.view)
+        
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = UIColor.darkGray
     }
+    
     @IBAction func profileButtonPressed(_ sender: UIButton) {
         print("profile")
     }
@@ -41,6 +45,8 @@ class MapNavigationView: UIView, UISearchBarDelegate {
         }
         else{
             searchBar.alpha = 0
+            searchBar.text = ""
+            searchBar.resignFirstResponder()
         }
     }
     
