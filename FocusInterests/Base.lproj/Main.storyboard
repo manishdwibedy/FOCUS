@@ -95,24 +95,13 @@
                                     <constraint firstAttribute="height" constant="90" id="ENT-vO-Ph2"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="MFT-mO-gT7">
-                                <rect key="frame" x="0.0" y="130" width="375" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
                         </subviews>
                         <constraints>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="2x6-qQ-iyw"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="3r4-0c-HZ5"/>
                             <constraint firstAttribute="trailing" secondItem="05W-Qw-2Y5" secondAttribute="trailing" id="DHn-cC-Nm9"/>
                             <constraint firstAttribute="trailing" secondItem="bIq-Pr-ji4" secondAttribute="trailing" id="H69-6o-iu0"/>
-                            <constraint firstItem="MFT-mO-gT7" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="bRn-x9-9lL"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="05W-Qw-2Y5" secondAttribute="bottom" id="dIH-f6-lgF"/>
-                            <constraint firstAttribute="trailing" secondItem="MFT-mO-gT7" secondAttribute="trailing" id="efF-5Z-PjN"/>
-                            <constraint firstItem="MFT-mO-gT7" firstAttribute="top" secondItem="bIq-Pr-ji4" secondAttribute="bottom" constant="20" id="l2F-fk-7Ae"/>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="wlW-Ae-CCd"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="x8H-nN-16x"/>
                         </constraints>
