@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MapNavigationView: UIView {
+class MapNavigationView: UIView, UISearchBarDelegate {
 
     @IBOutlet var view: MapNavigationView!
     
@@ -48,4 +48,11 @@ class MapNavigationView: UIView {
         print("notifications")
     }
 
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("searching.. \(searchBar.text)")
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("cancel")
+    }
 }
