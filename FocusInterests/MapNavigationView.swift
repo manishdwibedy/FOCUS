@@ -8,8 +8,13 @@
 
 import UIKit
 
-class MapNavigationView: UIView, UISearchBarDelegate {
+protocol NavigationInteraction {
+    func messagesClicked()
+}
 
+class MapNavigationView: UIView, UISearchBarDelegate {
+    var delegate: NavigationInteraction?
+    
     @IBOutlet var view: MapNavigationView!
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -36,7 +41,7 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     }
     
     @IBAction func messagesButtonPressed(_ sender: UIButton) {
-        print("message")
+        delegate?.messagesClicked()
     }
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {

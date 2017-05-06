@@ -13,7 +13,8 @@ import GooglePlaces
 import MapKit
 import FirebaseDatabase
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction {
+    
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -25,6 +26,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var zoomLevel: Float = 15.0
     var events = [Event]()
     
+    @IBOutlet weak var navigationView: MapNavigationView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +39,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         locationManager.delegate = self
         
         mapView.delegate = self
+        navigationView.delegate = self
         
         placesClient = GMSPlacesClient.shared()
         
@@ -142,6 +145,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         print("Error: \(error)")
     }
     
+    func messagesClicked() {
+        let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
+        
+        self.present(VC, animated:true, completion:nil)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show_event_details"{
             let destinationVC = segue.destination as! EventDetailViewController

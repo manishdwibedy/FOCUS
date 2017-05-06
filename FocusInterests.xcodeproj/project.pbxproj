@@ -16,6 +16,7 @@
 		5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */; };
 		5BA37C751EBD4DFB0091189E /* MapNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C741EBD4DFB0091189E /* MapNavigationView.swift */; };
 		5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C761EBD63BE0091189E /* HomePageViewController.swift */; };
+		5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C781EBDB7EA0091189E /* Messages.storyboard */; };
 		5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapInfoView.swift */; };
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
@@ -122,6 +123,7 @@
 		5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapNavigationView.xib; sourceTree = "<group>"; };
 		5BA37C741EBD4DFB0091189E /* MapNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapNavigationView.swift; sourceTree = "<group>"; };
 		5BA37C761EBD63BE0091189E /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		5BA37C781EBDB7EA0091189E /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		5BE31E871EA75E6A004768F0 /* MapInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
 				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
+				5BA37C781EBDB7EA0091189E /* Messages.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				D23E01371E6BA7C900E735F5 /* GoogleService-Info.plist in Resources */,
+				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
 				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
