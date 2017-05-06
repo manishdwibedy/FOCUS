@@ -13,7 +13,7 @@
         <scene sceneID="I3R-J9-Vsb">
             <objects>
                 <navigationController storyboardIdentifier="Home" id="5uk-yf-boc" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5jN-Kp-ofZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="5jN-Kp-ofZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -25,20 +25,25 @@
             </objects>
             <point key="canvasLocation" x="-1381" y="-99"/>
         </scene>
-        <!--View Controller-->
+        <!--Messages-->
         <scene sceneID="7RK-hS-LH0">
             <objects>
-                <viewController id="Tuo-yx-ZBR" sceneMemberID="viewController">
+                <viewController id="Tuo-yx-ZBR" customClass="MessagesViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iVz-J0-1uP"/>
                         <viewControllerLayoutGuide type="bottom" id="PR1-KI-tQr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GTP-pp-8Uk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="y6a-51-Oc8">
+                    <navigationItem key="navigationItem" title="Messages" id="y6a-51-Oc8">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="zry-pc-vKa">
+                            <connections>
+                                <action selector="goBack:" destination="Tuo-yx-ZBR" id="lxv-BP-HYo"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="3KZ-FJ-2Ib"/>
                     </navigationItem>
                 </viewController>
