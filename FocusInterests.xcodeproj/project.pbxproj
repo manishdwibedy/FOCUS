@@ -17,6 +17,8 @@
 		5BA37C751EBD4DFB0091189E /* MapNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C741EBD4DFB0091189E /* MapNavigationView.swift */; };
 		5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C761EBD63BE0091189E /* HomePageViewController.swift */; };
 		5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C781EBDB7EA0091189E /* Messages.storyboard */; };
+		5BA37C7B1EBDBF200091189E /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C7A1EBDBF200091189E /* MessagesViewController.swift */; };
+		5BA37C7E1EBDC1C70091189E /* CustomTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C7D1EBDC1C70091189E /* CustomTabController.swift */; };
 		5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapInfoView.swift */; };
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
@@ -47,8 +49,6 @@
 		D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24716811E90504B00FF389D /* DisplayInterestsCell.swift */; };
 		D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24716821E90504B00FF389D /* DisplayInterestsCell.xib */; };
 		D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252205C1E5A3C9E00EC2014 /* MapViewController.swift */; };
-		D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220601E5A436300EC2014 /* TabBar+Extensions.swift */; };
-		D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220651E5A586900EC2014 /* BaseTabBarController.swift */; };
 		D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220671E5A846100EC2014 /* NotificationsViewController.swift */; };
 		D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */; };
 		D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */; };
@@ -124,6 +124,8 @@
 		5BA37C741EBD4DFB0091189E /* MapNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapNavigationView.swift; sourceTree = "<group>"; };
 		5BA37C761EBD63BE0091189E /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		5BA37C781EBDB7EA0091189E /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		5BA37C7A1EBDBF200091189E /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		5BA37C7D1EBDC1C70091189E /* CustomTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabController.swift; sourceTree = "<group>"; };
 		5BE31E871EA75E6A004768F0 /* MapInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -154,9 +156,7 @@
 		D24716811E90504B00FF389D /* DisplayInterestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayInterestsCell.swift; sourceTree = "<group>"; };
 		D24716821E90504B00FF389D /* DisplayInterestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayInterestsCell.xib; sourceTree = "<group>"; };
 		D252205C1E5A3C9E00EC2014 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		D25220601E5A436300EC2014 /* TabBar+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TabBar+Extensions.swift"; sourceTree = "<group>"; };
 		D25220621E5A4E0E00EC2014 /* FocusInterests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FocusInterests-Bridging-Header.h"; sourceTree = "<group>"; };
-		D25220651E5A586900EC2014 /* BaseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		D25220671E5A846100EC2014 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsCellTableViewCell.swift; sourceTree = "<group>"; };
 		D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationsCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -254,6 +254,14 @@
 				5BA37C701EB9EADB0091189E /* InvitationViewController.swift */,
 			);
 			name = Event;
+			sourceTree = "<group>";
+		};
+		5BA37C7C1EBDBF250091189E /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				5BA37C7A1EBDBF200091189E /* MessagesViewController.swift */,
+			);
+			name = Message;
 			sourceTree = "<group>";
 		};
 		7F9A9D423DCD1AC11F3A8085 /* Pods */ = {
@@ -379,10 +387,9 @@
 			isa = PBXGroup;
 			children = (
 				D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */,
-				D25220601E5A436300EC2014 /* TabBar+Extensions.swift */,
-				D25220651E5A586900EC2014 /* BaseTabBarController.swift */,
 				D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */,
 				D21975461E6229F100ED3345 /* UITextField+Extensions.swift */,
+				5BA37C7D1EBDC1C70091189E /* CustomTabController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -410,6 +417,7 @@
 				D227AD2E1E6CBD5A000FB9DD /* NewLoginVC.swift */,
 				5BA37C6F1EB9E8940091189E /* Event */,
 				5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */,
+				5BA37C7C1EBDBF250091189E /* Message */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -804,22 +812,22 @@
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
 				5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */,
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
+				5BA37C7B1EBDBF200091189E /* MessagesViewController.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
 				D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */,
 				D25370D21E885EE40071B115 /* FollowCell.swift in Sources */,
 				D2FDB69A1E89F73800D62DC2 /* SocialGroupViewController.swift in Sources */,
 				D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */,
-				D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
 				5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */,
-				D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
+				5BA37C7E1EBDC1C70091189E /* CustomTabController.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				D25D5D341E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
