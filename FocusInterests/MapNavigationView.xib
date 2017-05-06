@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapNavigationView" customModule="FocusInterests" customModuleProvider="target">
             <connections>
+                <outlet property="searchBar" destination="clg-Ba-1dC" id="pCU-Ia-ING"/>
                 <outlet property="view" destination="iN0-l3-epB" id="U5P-E7-gRU"/>
             </connections>
         </placeholder>

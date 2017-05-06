@@ -12,6 +12,7 @@ class MapNavigationView: UIView {
 
     @IBOutlet var view: MapNavigationView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
@@ -35,7 +36,12 @@ class MapNavigationView: UIView {
     }
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {
-        print("search")
+        if searchBar.alpha == 0{
+            searchBar.alpha = 1
+        }
+        else{
+            searchBar.alpha = 0
+        }
     }
     
     @IBAction func notificationsButtonPressed(_ sender: UIButton) {
