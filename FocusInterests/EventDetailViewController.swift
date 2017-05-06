@@ -49,7 +49,7 @@ class EventDetailViewController: UIViewController {
     
     @IBAction func likeEvent(_ sender: UIButton) {
         let eventRef = Constants.DB.event.child("\(event!.id!)")
-        if eventRef.child("likes").exi
+//        if eventRef.child("likes").exi
     }
 
     @IBAction func attendEvent(_ sender: UIButton) {
