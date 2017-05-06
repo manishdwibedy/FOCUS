@@ -44,23 +44,27 @@
                                 <action selector="goBack:" destination="Tuo-yx-ZBR" id="lxv-BP-HYo"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3KZ-FJ-2Ib"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3KZ-FJ-2Ib">
+                            <connections>
+                                <segue destination="sg1-OE-hfb" kind="show" id="l2c-p0-BHu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kr-nr-gZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-416" y="-99"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="hcf-Nx-xt7">
             <objects>
-                <viewController id="sg1-OE-hfb" sceneMemberID="viewController">
+                <viewController id="sg1-OE-hfb" customClass="ChatViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g0m-Bw-Z4G"/>
                         <viewControllerLayoutGuide type="bottom" id="6vd-HE-0n2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fMv-44-lwF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
