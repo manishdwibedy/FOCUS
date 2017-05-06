@@ -308,7 +308,7 @@
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zCI-PA-Vmf">
-                                <rect key="frame" x="37" y="183.5" width="300" height="300"/>
+                                <rect key="frame" x="37" y="184" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="KQR-K1-UWy"/>
                                     <constraint firstAttribute="width" constant="300" id="SRN-hG-ViL"/>
@@ -354,15 +354,16 @@
             </objects>
             <point key="canvasLocation" x="4254" y="885"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Home Page View Controller-->
         <scene sceneID="9nB-XK-GZ8">
             <objects>
-                <tabBarController id="mnx-Qg-K9a" sceneMemberID="viewController">
+                <tabBarController id="mnx-Qg-K9a" customClass="HomePageViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="dub-iB-gLl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.46274509803921571" green="0.51764705882352935" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.46274509803921571" green="0.51764705882352935" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="VEY-4A-vsU" kind="relationship" relationship="viewControllers" id="QCV-Df-Bcq"/>
