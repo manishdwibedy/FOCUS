@@ -117,7 +117,9 @@
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="x8H-nN-16x"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="3OO-d0-w3J"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="3OO-d0-w3J">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="pq0-gQ-8Y0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1bK-wR-02e">
                             <connections>
@@ -387,7 +389,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Event" id="zzB-6F-pzo"/>
+                    <tabBarItem key="tabBarItem" title="Event" id="zzB-6F-pzo">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kgS-vL-cfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
