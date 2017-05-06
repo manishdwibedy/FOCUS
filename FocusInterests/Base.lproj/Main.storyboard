@@ -107,7 +107,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="MAP" id="3OO-d0-w3J">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="pq0-gQ-8Y0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1bK-wR-02e">
@@ -382,7 +382,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="EVENTS" id="zzB-6F-pzo">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kgS-vL-cfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -403,7 +403,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="PLACES" id="j78-l6-5zn">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTO-VR-5ey" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -424,7 +424,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="CHECK" id="uNS-SH-yLT">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w4y-UH-f2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -445,7 +445,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="PEOPLE" id="7Va-kq-Vgc">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-10"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgf-OB-eZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
