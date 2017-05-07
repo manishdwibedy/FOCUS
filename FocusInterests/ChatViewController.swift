@@ -31,6 +31,7 @@ class ChatViewController: JSQMessagesViewController {
             self.user["firebaseUserId"]!: self.user["username"]!
         ]
         self.inputToolbar.contentView.leftBarButtonItem = nil;
+        self.showLoadEarlierMessagesHeader = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +44,36 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
-        print("load earlier")
+        
+        let endDate = self.messages[0].date.timeIntervalSince1970
+        let roundedEndDate = round(self.messages[0].date.timeIntervalSince1970)
+        var earlierMessage = [JSQMessage]()
+        
+        messageContentRef.child(self.messageID!).queryEnding(atValue: roundedEndDate).queryOrdered(byChild: "date").queryLimited(toLast: 2).observeSingleEvent(of: .value, with: {(snapshot) in
+            let messages = snapshot.value as? [String:[String:Any]]
+            
+            
+            for (_,message_data) in messages!{
+                let id = message_data["sender_id"] as! String
+                let name = self.names[(message_data["sender_id"]! as! String)]
+                let date = Date(timeIntervalSince1970: TimeInterval(message_data["date"] as! Double))
+                let text = message_data["text"] as! String
+                
+                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text)
+                
+                if date.timeIntervalSince1970 < endDate{
+                    earlierMessage.append(message!)
+                }
+            }
+            if earlierMessage.count == 0{
+                self.showLoadEarlierMessagesHeader = false
+            }
+            
+            self.messages = earlierMessage + self.messages
+            
+            self.collectionView.reloadData()
+            }
+        )
     }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
@@ -106,15 +136,17 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     func getMessages(){
-        var messages_list = [JSQMessage]()
-        
         messageContentRef.child(self.messageID!).queryOrdered(byChild: "date").queryLimited(toLast: 2).observe(.childAdded, with: {(snapshot) in
-            let message_data = snapshot.value as? [String:String]
+            let message_data = snapshot.value as? [String:Any]
+        
+            let id = message_data?["sender_id"] as! String
+            let name = self.names[(message_data?["sender_id"]! as! String)]
+            let date = Date(timeIntervalSince1970: TimeInterval(message_data?["date"] as! Double))
+            let text = message_data?["text"] as! String
             
+            let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text)
             
-            let message = JSQMessage(senderId: message_data?["sender_id"], displayName: self.names[(message_data?["sender_id"]!)!], text: message_data?["text"])
             self.messages.append(message!)
-            
             
             self.collectionView.reloadData()
 
@@ -125,9 +157,10 @@ class ChatViewController: JSQMessagesViewController {
         let conversion = self.messageContentRef.child(self.messageID!)
         
         let newMessage = conversion.childByAutoId()
-        let messageDictionary = [
+        let messageDictionary: [String: Any] = [
             "sender_id" : AuthApi.getFirebaseUid(),
             "text" : message.text,
+            "date": Date().timeIntervalSince1970
             ]
         
         newMessage.setValue(messageDictionary)
@@ -155,7 +188,7 @@ class ChatViewController: JSQMessagesViewController {
             let messageDictionary = [[
                 "sender_id" : AuthApi.getFirebaseUid(),
                 "text" : message.text,
-                "date": Date()
+                "date": Date().timeIntervalSince1970
             ]]
             
             self.messageID = newMessage.key
@@ -169,8 +202,12 @@ class ChatViewController: JSQMessagesViewController {
     func addMessageID(){
         let one = self.messagesRef.child(self.senderId).child(user["firebaseUserId"]!)
         let two = self.messagesRef.child(user["firebaseUserId"]!).child(self.senderId)
-        one.setValue(["messageID": self.messageID])
-        two.setValue(["messageID": self.messageID])
+        
+        let content = [
+            "messageID": self.messageID
+        ]
+        one.setValue(content)
+        two.setValue(content)
         
     }
 
