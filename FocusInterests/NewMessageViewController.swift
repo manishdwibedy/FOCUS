@@ -122,14 +122,20 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         self.tableView.reloadData()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "show_chat"{
+            let VC = segue.destination as! ChatViewController
+            
+            let user: [String:String]
+            if searching{
+                user = self.filtered[sender as! Int]
+            }
+            else{
+                user = self.users[sender as! Int]
+            }
+            VC.user = user
+        }
     }
-    */
-
 }

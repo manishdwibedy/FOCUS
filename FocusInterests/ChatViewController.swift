@@ -10,8 +10,7 @@ import UIKit
 import JSQMessagesViewController
 
 class ChatViewController: JSQMessagesViewController {
-    let user1 = User(username: "Steve", uuid: "1", userImage: nil, interests: nil)
-    let user2 = User(username: "Tim", uuid: "2", userImage: nil, interests: nil)
+    var user = [String:String]()
     
     var messages = [JSQMessage]()
     
@@ -20,14 +19,12 @@ class ChatViewController: JSQMessagesViewController {
 
         // tell JSQMessagesViewController
         // who is the current user
-        self.senderId = user1.uuid
-        self.senderDisplayName = user2.username
+        self.senderId = AuthApi.getFirebaseUid()
+        self.senderDisplayName = "Dummy Name"
         
         
         self.messages = getMessages()
         self.inputToolbar.contentView.leftBarButtonItem = nil;
-        self.showTypingIndicator = true
-        self.showLoadEarlierMessagesHeader = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,7 +69,7 @@ class ChatViewController: JSQMessagesViewController {
         
         let message = messages[indexPath.row]
         
-        if self.user1.uuid == message.senderId {
+        if self.senderId == message.senderId {
             return bubbleFactory?.outgoingMessagesBubbleImage(with: .green)
         } else {
             return bubbleFactory?.incomingMessagesBubbleImage(with: .blue)
@@ -92,8 +89,6 @@ class ChatViewController: JSQMessagesViewController {
         return NSAttributedString(string: "asdasda")
     }
     
-    
-
     func getMessages() -> [JSQMessage] {
         var messages = [JSQMessage]()
         
