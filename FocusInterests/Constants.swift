@@ -120,6 +120,10 @@ struct Constants {
     
     struct DB {
         public static let event = FIRDatabase.database().reference().child("events")
+        
+        public static let user = FIRDatabase.database().reference().child("users")
+        
+        
     }
     
     struct storage{

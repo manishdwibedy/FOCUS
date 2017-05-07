@@ -7,15 +7,25 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class NewMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
+    let userRef = Constants.DB.user
+    var users = [[String: String]]()
+    
+    var usersInMemory: Set<String> = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView()
         self.setupSearchBar()
+        
+        self.usersInMemory.insert(AuthApi.getFirebaseUid()!)
+        loadInitialTable()
+        loadRestUsers()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,12 +44,12 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "User \(indexPath.row + 1)"
+        cell.textLabel?.text = self.users[indexPath.row]["username"]
         return cell
     }
     
@@ -47,6 +57,37 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         self.performSegue(withIdentifier: "show_chat", sender: indexPath.row)
     }
     
+    func loadInitialTable(){
+        self.userRef.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let users = snapshot.value as? [String:[String:String]]
+            
+            for (id, user) in users!{
+                if !self.usersInMemory.contains(id){
+                    self.users.append(user)
+                    self.usersInMemory.insert(id)
+                }
+            }
+            self.tableView.reloadData()
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func loadRestUsers(){
+        
+        userRef.observe(FIRDataEventType.value, with: { (snapshot) in
+            // Get user value
+            let users = snapshot.value as? [String:[String:String]]
+            
+            for (id, user) in users!{
+                if !self.usersInMemory.contains(id){
+                    self.users.append(user)
+                    self.usersInMemory.insert(id)
+                }
+            }
+        })
+    }
     /*
     // MARK: - Navigation
 
