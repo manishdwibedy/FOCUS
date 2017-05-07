@@ -64,7 +64,7 @@
                                 <constraint firstAttribute="height" constant="90" id="02f-eu-E7X"/>
                             </constraints>
                         </stackView>
-                        <searchBar alpha="0.0" contentMode="redraw" searchBarStyle="prominent" placeholder="Search" translucent="NO" backgroundImage="4GreenCircles" translatesAutoresizingMaskIntoConstraints="NO" id="clg-Ba-1dC">
+                        <searchBar alpha="0.0" contentMode="redraw" searchBarStyle="prominent" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clg-Ba-1dC">
                             <rect key="frame" x="0.0" y="90" width="375" height="44"/>
                             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                             <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -86,7 +86,6 @@
         </view>
     </objects>
     <resources>
-        <image name="4GreenCircles" width="48" height="48"/>
         <image name="Bell" width="48" height="48"/>
         <image name="MessageBubble" width="58" height="58"/>
         <image name="Search" width="46" height="48"/>
