@@ -168,8 +168,8 @@ class ChatViewController: JSQMessagesViewController {
     
     func getMessageID(){
         messagesRef.child(self.senderId).child(self.user["firebaseUserId"]!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let val = snapshot.value as! [String:String]
-            if let ID = val["messageID"]{
+            let val = snapshot.value as? [String:String]
+            if let ID = val?["messageID"]{
                 self.messageID = ID
                 self.getMessages()
             }
