@@ -9,13 +9,14 @@
 import UIKit
 import FirebaseDatabase
 
-class NewMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class NewMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     let userRef = Constants.DB.user
     var users = [[String: String]]()
-    
     var usersInMemory: Set<String> = []
+    var filtered = [[String: String]]()
+    var searching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +40,27 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         search.placeholder = "Search..."
         let textFieldInsideSearchBar = search.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.backgroundColor = UIColor.lightGray
-        
+        search.delegate = self
         self.navigationItem.titleView = search
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searching{
+            return self.filtered.count
+        }
         return self.users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = self.users[indexPath.row]["username"]
+        
+        if !searching{
+            cell.textLabel?.text = self.users[indexPath.row]["username"]
+        }
+        else{
+            cell.textLabel?.text = self.filtered[indexPath.row]["username"]
+        }
+        
         return cell
     }
     
@@ -87,6 +98,29 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                 }
             }
         })
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searching = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searching = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searching = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searching = false;
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let searchPredicate = NSPredicate(format: "username CONTAINS[C] %@", searchText)
+        self.filtered = (self.users as NSArray).filtered(using: searchPredicate) as! [[String : String]]
+        
+        self.tableView.reloadData()
     }
     /*
     // MARK: - Navigation
