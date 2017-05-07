@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewMessageViewController: UIViewController, UITableViewDataSource {
+class NewMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -41,6 +41,10 @@ class NewMessageViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "User \(indexPath.row + 1)"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "show_chat", sender: indexPath.row)
     }
     
     /*
