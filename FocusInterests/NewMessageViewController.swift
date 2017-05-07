@@ -14,6 +14,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.tableFooterView = UIView()
         self.setupSearchBar()
     }
 
@@ -38,9 +39,10 @@ class NewMessageViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "User \(indexPath.row)"
+        cell.textLabel?.text = "User \(indexPath.row + 1)"
         return cell
     }
+    
     /*
     // MARK: - Navigation
 
