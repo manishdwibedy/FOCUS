@@ -263,9 +263,9 @@
 		5BA37C7C1EBDBF250091189E /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				5BA37C7A1EBDBF200091189E /* MessagesViewController.swift */,
 				5BA37C811EBE9DE30091189E /* NewMessageViewController.swift */,
 				5BA37C7F1EBDC4D90091189E /* ChatViewController.swift */,
-				5BA37C7A1EBDBF200091189E /* MessagesViewController.swift */,
 			);
 			name = Message;
 			sourceTree = "<group>";

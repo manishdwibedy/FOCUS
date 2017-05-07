@@ -8,7 +8,8 @@
 
 import UIKit
 
-class NewMessageViewController: UIViewController {
+class NewMessageViewController: UIViewController, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,15 @@ class NewMessageViewController: UIViewController {
         self.navigationItem.titleView = search
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = "User \(indexPath.row)"
+        return cell
+    }
     /*
     // MARK: - Navigation
 
