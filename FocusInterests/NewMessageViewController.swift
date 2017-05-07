@@ -127,7 +127,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show_chat"{
             let VC = segue.destination as! ChatViewController
-            
+            searching = false
             let user: [String:String]
             if searching{
                 user = self.filtered[sender as! Int]

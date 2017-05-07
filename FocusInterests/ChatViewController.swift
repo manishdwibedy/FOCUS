@@ -8,11 +8,15 @@
 
 import UIKit
 import JSQMessagesViewController
+import FirebaseDatabase
 
 class ChatViewController: JSQMessagesViewController {
     var user = [String:String]()
-    
     var messages = [JSQMessage]()
+    let messagesRef = Constants.DB.messages
+    let messageContentRef = Constants.DB.message_content
+    var messageID: String?
+    var names = [String:String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +26,15 @@ class ChatViewController: JSQMessagesViewController {
         self.senderId = AuthApi.getFirebaseUid()
         self.senderDisplayName = "Dummy Name"
         
-        
-        self.messages = getMessages()
+        self.names = [
+            self.senderId: self.senderDisplayName,
+            self.user["firebaseUserId"]!: self.user["username"]!
+        ]
         self.inputToolbar.contentView.leftBarButtonItem = nil;
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getMessageID()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +49,12 @@ class ChatViewController: JSQMessagesViewController {
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
         
+        if messages.count == 0{
+            self.startConversion(message!)
+        }
+        else{
+            self.continueConversion(message!)
+        }
         messages.append(message!)
         
         finishSendingMessage()
@@ -89,16 +105,85 @@ class ChatViewController: JSQMessagesViewController {
         return NSAttributedString(string: "asdasda")
     }
     
-    func getMessages() -> [JSQMessage] {
-        var messages = [JSQMessage]()
+    func getMessages(){
+        var messages_list = [JSQMessage]()
         
-        let message1 = JSQMessage(senderId: "1", displayName: "Steve", text: "Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?Hey Tim how are you?")
-        let message2 = JSQMessage(senderId: "2", displayName: "Tim", text: "Fine thanks, and you?")
+//        messageContentRef.child(self.messageID!).observeSingleEvent(of: .value, with: {
+//            (snapshot) in
+//            let messages = snapshot.value as? [String:[String:String]]
+//            
+//            for (_,message) in messages!{
+//                let message = JSQMessage(senderId: message["sender_id"], displayName: self.names[message["sender_id"]!], text: message["text"])
+//                messages_list.append(message!)
+//            }
+//            self.messages = messages_list
+//            self.collectionView.reloadData()
+//        })
         
-        messages.append(message1!)
-        messages.append(message2!)
+        messageContentRef.child(self.messageID!).observe(.childAdded, with: {(snapshot) in
+            let message_data = snapshot.value as? [String:String]
+            
+            
+            let message = JSQMessage(senderId: message_data?["sender_id"], displayName: self.names[(message_data?["sender_id"]!)!], text: message_data?["text"])
+            self.messages.append(message!)
+            
+            
+            self.collectionView.reloadData()
+
+        })
+    }
+    
+    func continueConversion(_ message: JSQMessage){
+        let conversion = self.messageContentRef.child(self.messageID!)
         
-        return messages
+        let newMessage = conversion.childByAutoId()
+        let messageDictionary = [
+            "sender_id" : AuthApi.getFirebaseUid(),
+            "text" : message.text,
+            ]
+        
+        newMessage.setValue(messageDictionary)
+    }
+    
+    func getMessageID(){
+        messagesRef.child(self.senderId).child(self.user["firebaseUserId"]!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let val = snapshot.value as! [String:String]
+            if let ID = val["messageID"]{
+                self.messageID = ID
+                self.getMessages()
+            }
+            else{
+                self.messageID = nil
+            }
+            
+            
+        })
+    }
+    
+    func startConversion(_ message: JSQMessage){
+        if self.messageID == nil{
+            
+            let newMessage = messageContentRef.childByAutoId()
+            let messageDictionary = [[
+                "sender_id" : AuthApi.getFirebaseUid(),
+                "text" : message.text,
+                "date": Date()
+            ]]
+            
+            self.messageID = newMessage.key
+            newMessage.setValue(messageDictionary)
+            
+            self.addMessageID()
+        }
+        
+    }
+    
+    func addMessageID(){
+        let one = self.messagesRef.child(self.senderId).child(user["firebaseUserId"]!)
+        let two = self.messagesRef.child(user["firebaseUserId"]!).child(self.senderId)
+        one.setValue(["messageID": self.messageID])
+        two.setValue(["messageID": self.messageID])
+        
     }
 
     /*
