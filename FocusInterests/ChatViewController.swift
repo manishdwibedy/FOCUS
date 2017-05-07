@@ -108,19 +108,7 @@ class ChatViewController: JSQMessagesViewController {
     func getMessages(){
         var messages_list = [JSQMessage]()
         
-//        messageContentRef.child(self.messageID!).observeSingleEvent(of: .value, with: {
-//            (snapshot) in
-//            let messages = snapshot.value as? [String:[String:String]]
-//            
-//            for (_,message) in messages!{
-//                let message = JSQMessage(senderId: message["sender_id"], displayName: self.names[message["sender_id"]!], text: message["text"])
-//                messages_list.append(message!)
-//            }
-//            self.messages = messages_list
-//            self.collectionView.reloadData()
-//        })
-        
-        messageContentRef.child(self.messageID!).observe(.childAdded, with: {(snapshot) in
+        messageContentRef.child(self.messageID!).queryOrdered(byChild: "date").queryLimited(toLast: 2).observe(.childAdded, with: {(snapshot) in
             let message_data = snapshot.value as? [String:String]
             
             
