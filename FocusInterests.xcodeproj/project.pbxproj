@@ -22,7 +22,6 @@
 		5BA37C801EBDC4D90091189E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C7F1EBDC4D90091189E /* ChatViewController.swift */; };
 		5BA37C821EBE9DE30091189E /* NewMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C811EBE9DE30091189E /* NewMessageViewController.swift */; };
 		5BA37C841EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C831EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift */; };
-		5BA37C861EBF15500091189E /* MyMessagesLoadEarlierHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C851EBF15500091189E /* MyMessagesLoadEarlierHeaderView.xib */; };
 		5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapInfoView.swift */; };
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
@@ -133,7 +132,6 @@
 		5BA37C7F1EBDC4D90091189E /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		5BA37C811EBE9DE30091189E /* NewMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageViewController.swift; sourceTree = "<group>"; };
 		5BA37C831EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesLoadEarlierHeaderView.swift; sourceTree = "<group>"; };
-		5BA37C851EBF15500091189E /* MyMessagesLoadEarlierHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMessagesLoadEarlierHeaderView.xib; sourceTree = "<group>"; };
 		5BE31E871EA75E6A004768F0 /* MapInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -401,7 +399,6 @@
 				D21975461E6229F100ED3345 /* UITextField+Extensions.swift */,
 				5BA37C7D1EBDC1C70091189E /* CustomTabController.swift */,
 				5BA37C831EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift */,
-				5BA37C851EBF15500091189E /* MyMessagesLoadEarlierHeaderView.xib */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -649,7 +646,6 @@
 				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
-				5BA37C861EBF15500091189E /* MyMessagesLoadEarlierHeaderView.xib in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

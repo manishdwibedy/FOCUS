@@ -24,14 +24,13 @@ class ChatViewController: JSQMessagesViewController {
         // tell JSQMessagesViewController
         // who is the current user
         self.senderId = AuthApi.getFirebaseUid()
-        self.senderDisplayName = "Dummy Name"
+        self.senderDisplayName = "USER 1"
         
         self.names = [
             self.senderId: self.senderDisplayName,
             self.user["firebaseUserId"]!: self.user["username"]!
         ]
         self.inputToolbar.contentView.leftBarButtonItem = nil;
-        self.showLoadEarlierMessagesHeader = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,7 +148,9 @@ class ChatViewController: JSQMessagesViewController {
             self.messages.append(message!)
             
             self.collectionView.reloadData()
-
+            
+            self.showLoadEarlierMessagesHeader = true
+            
         })
     }
     
