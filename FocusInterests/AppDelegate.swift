@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     
     func login() {
         let storyboard = UIStoryboard(name: Constants.otherIds.mainSB, bundle: nil)
-        let tabContr = storyboard.instantiateInitialViewController() as! CustomTabController
+        let tabContr = storyboard.instantiateInitialViewController() as! UITabBarController
         self.window?.rootViewController = tabContr
         self.window?.makeKeyAndVisible()
     }

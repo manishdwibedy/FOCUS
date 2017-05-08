@@ -28,8 +28,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.primaryGreen()
-        toolbar.barTintColor = UIColor.primaryGreen()
         
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
