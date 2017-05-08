@@ -34,6 +34,13 @@ class MapNavigationView: UIView, UISearchBarDelegate {
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.backgroundColor = UIColor.darkGray
+        
+        for view in searchBar.subviews.last!.subviews {
+            if view.isKind(of: NSClassFromString("UISearchBarBackground")!)
+            {
+                view.removeFromSuperview()
+            }
+        }
     }
     
     @IBAction func profileButtonPressed(_ sender: UIButton) {
