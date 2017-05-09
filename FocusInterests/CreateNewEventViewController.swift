@@ -23,7 +23,6 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         interestTableView.dataSource = self
         interestTableView.delegate = self
-        interestTableView.register(InterestTableViewCell.self, forCellReuseIdentifier: "cell")
         formatTextFields()
     }
     
@@ -59,13 +58,32 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        switch section {
+        case 0 :
+            return 3
+        case 1:
+            return 3
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
+        switch indexPath.section {
+        case 0:
+            let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
+            return cell
+            
+        case 1:
+            let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
+            return cell
+            
+        default:
+            let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
+            
+            return cell
+        }
         
-        return cell
     }
 
 }

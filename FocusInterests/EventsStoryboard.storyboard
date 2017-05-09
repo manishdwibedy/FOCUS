@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -73,7 +74,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lM-E0-Roc">
-                                        <rect key="frame" x="169" y="864.5" width="37" height="36"/>
+                                        <rect key="frame" x="169" y="841" width="37" height="36"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <state key="normal" title="Next">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -155,31 +156,35 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="im7-yd-Slf" userLabel="interestStackView">
-                                        <rect key="frame" x="8" y="540" width="359.5" height="288"/>
+                                        <rect key="frame" x="10" y="540" width="356" height="285"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwe-FK-Q1t">
-                                                <rect key="frame" x="134.5" y="0.0" width="90.5" height="33"/>
+                                                <rect key="frame" x="133" y="0.0" width="90.5" height="33"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DK1-Jl-3Sz">
-                                                <rect key="frame" x="0.0" y="41" width="359.5" height="247"/>
+                                                <rect key="frame" x="0.0" y="41" width="356" height="244"/>
                                                 <subviews>
                                                     <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="search" translatesAutoresizingMaskIntoConstraints="NO" id="i7C-4y-5CM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="359.5" height="44"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="356" height="44"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </searchBar>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="4mD-gv-r8q">
-                                                        <rect key="frame" x="0.0" y="44" width="359.5" height="203"/>
+                                                        <rect key="frame" x="0.0" y="44" width="356" height="200"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="200" id="Ucv-1D-eWM"/>
+                                                            <constraint firstAttribute="width" secondItem="4mD-gv-r8q" secondAttribute="height" multiplier="89:50" id="oZl-fl-pPb"/>
+                                                        </constraints>
                                                         <color key="separatorColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Bb7-5e-n8E" customClass="InterestTableViewCell" customModule="FocusInterests" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="56" width="359" height="44"/>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Bb7-5e-n8E" customClass="InterestTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="55.5" width="356" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bb7-5e-n8E" id="KJK-tA-lBd">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="359.5" height="44"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="356" height="44"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected Interest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcQ-5l-4Pk">
@@ -189,7 +194,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GreenCircle" translatesAutoresizingMaskIntoConstraints="NO" id="M99-wo-CqW">
-                                                                            <rect key="frame" x="307" y="4.5" width="34" height="34"/>
+                                                                            <rect key="frame" x="303.5" y="4.5" width="34" height="34"/>
                                                                         </imageView>
                                                                     </subviews>
                                                                     <constraints>
@@ -207,14 +212,18 @@
                                                         </prototypes>
                                                     </tableView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="i7C-4y-5CM" firstAttribute="width" secondItem="4mD-gv-r8q" secondAttribute="width" id="OBH-uK-YaC"/>
+                                                    <constraint firstItem="i7C-4y-5CM" firstAttribute="bottom" secondItem="4mD-gv-r8q" secondAttribute="top" id="Thw-3S-pg2"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.38021743297576904" green="0.44974535703659058" blue="0.50739836692810059" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="2lM-E0-Roc" firstAttribute="top" secondItem="im7-yd-Slf" secondAttribute="bottom" constant="36" id="34e-nN-zA4"/>
                                     <constraint firstAttribute="bottom" secondItem="2lM-E0-Roc" secondAttribute="bottom" constant="246" id="8Ow-U6-nTe"/>
+                                    <constraint firstItem="DK1-Jl-3Sz" firstAttribute="bottom" secondItem="2lM-E0-Roc" secondAttribute="top" constant="-16" id="B3f-7g-Bai"/>
                                     <constraint firstItem="jvR-p8-idX" firstAttribute="top" secondItem="Pss-56-fhv" secondAttribute="bottom" constant="48" id="CxL-ig-Du1"/>
                                     <constraint firstItem="Pss-56-fhv" firstAttribute="leading" secondItem="dIH-Pg-PIk" secondAttribute="leading" constant="9" id="E6z-Fg-Yl0"/>
                                     <constraint firstItem="jvR-p8-idX" firstAttribute="centerX" secondItem="dIH-Pg-PIk" secondAttribute="centerX" id="LiT-Lp-gmg"/>
@@ -229,10 +238,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="bottom" secondItem="bS8-UJ-PiN" secondAttribute="top" id="DQk-LV-BU6"/>
+                            <constraint firstItem="DK1-Jl-3Sz" firstAttribute="centerX" secondItem="BxB-qZ-pRY" secondAttribute="centerX" id="S28-tR-ylC"/>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="top" secondItem="BxB-qZ-pRY" secondAttribute="top" id="YVT-KD-fYo"/>
                             <constraint firstItem="Pss-56-fhv" firstAttribute="centerX" secondItem="BxB-qZ-pRY" secondAttribute="centerX" id="i3J-xe-5sO"/>
                             <constraint firstItem="Z2l-7t-2Co" firstAttribute="width" secondItem="BxB-qZ-pRY" secondAttribute="width" multiplier="0.95" id="peu-eW-V40"/>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="leading" secondItem="BxB-qZ-pRY" secondAttribute="leading" id="srZ-sO-D3M"/>
+                            <constraint firstItem="DK1-Jl-3Sz" firstAttribute="width" secondItem="BxB-qZ-pRY" secondAttribute="width" multiplier="0.95" id="uRS-yb-uAK"/>
                             <constraint firstAttribute="trailing" secondItem="dIH-Pg-PIk" secondAttribute="trailing" id="vwO-qm-9hL"/>
                         </constraints>
                     </view>
