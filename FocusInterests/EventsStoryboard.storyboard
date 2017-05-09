@@ -189,7 +189,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GreenCircle" translatesAutoresizingMaskIntoConstraints="NO" id="M99-wo-CqW">
-                                                                            <rect key="frame" x="307" y="5" width="34" height="34"/>
+                                                                            <rect key="frame" x="307" y="4.5" width="34" height="34"/>
                                                                         </imageView>
                                                                     </subviews>
                                                                     <constraints>
@@ -199,6 +199,10 @@
                                                                         <constraint firstItem="AcQ-5l-4Pk" firstAttribute="leading" secondItem="KJK-tA-lBd" secondAttribute="leadingMargin" constant="7" id="a5L-5M-Teu"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="checkMarkImageView" destination="M99-wo-CqW" id="hG3-qU-5ci"/>
+                                                                    <outlet property="selectedInterestLabel" destination="AcQ-5l-4Pk" id="F7w-g5-CJP"/>
+                                                                </connections>
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
