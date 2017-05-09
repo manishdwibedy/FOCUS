@@ -11,13 +11,22 @@ import Firebase
 
 class allCommentsVC: UIViewController {
     
+    @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     var parentEvent: Event?
+    var parentVC: EventDetailViewController?
     let ref = FIRDatabase.database().reference()
     let commentList = NSMutableArray()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        commentTextField.layer.borderWidth = 1
+        commentTextField.layer.cornerRadius = 5
+        commentTextField.clipsToBounds = true
+        commentTextField.layer.borderColor = UIColor.white.cgColor
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
 
         ref.child("events").child((parentEvent?.id)!).child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -42,6 +51,34 @@ class allCommentsVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        commentTextField.resignFirstResponder()
+        parentVC?.scrollView.frame.origin.y = 0
+        UIView.animate(withDuration: 0.2,delay: 0.0,options: UIViewAnimationOptions.curveEaseIn,
+                       animations: { () -> Void in
+                        self.parentVC?.blur.alpha = 0
+                        
+        }, completion: { (finished) -> Void in
+            self.parentVC?.blur.removeFromSuperview()
+        })
+    }
+    
+    
+    @IBAction func post(_ sender: Any) {
+        ref.child("events").child((parentEvent?.id)!).child("comments").childByAutoId().updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!])
+        commentTextField.resignFirstResponder()
+        commentTextField.text = ""
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            self.scrollView.frame.origin.y = -((keyboardHeight))
+            
+            
+        }
     }
     
     

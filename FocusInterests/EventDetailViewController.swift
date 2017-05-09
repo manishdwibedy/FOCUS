@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import Firebase
 
-class EventDetailViewController: UIViewController {
+class EventDetailViewController: UIViewController,UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var hostInfoLabel: UITextView!
@@ -23,6 +23,7 @@ class EventDetailViewController: UIViewController {
     var event: Event?
     @IBOutlet weak var image: UIImageView!
     let ref = FIRDatabase.database().reference()
+    var blur: UIVisualEffectView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Reference to an image file in Firebase Storage
@@ -58,6 +59,9 @@ class EventDetailViewController: UIViewController {
         hostInfoLabel.text = (event?.fullAddress)! + "\n\n"
         hostInfoLabel.text = hostInfoLabel.text! + (event?.date)! + "\n"
         descriptionLabel.text = event?.description
+        
+        
+        
         
         
         ref.child("users").child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -128,12 +132,45 @@ class EventDetailViewController: UIViewController {
     
     
     @IBAction func moreComments(_ sender: Any) {
+        /*
         let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "allComments") as! allCommentsVC
         controller.parentEvent = event
         self.present(controller, animated: true, completion: nil)
-
+        */
+        scrollView.contentOffset = CGPoint(x: 0, y: 0)
+        let popController = UIStoryboard(name: "EventDetails", bundle: nil).instantiateViewController(withIdentifier: "allComments") as! allCommentsVC
+        popController.parentEvent = event
+        popController.parentVC = self
+        popController.modalPresentationStyle = UIModalPresentationStyle.popover
+        popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+        popController.popoverPresentationController?.delegate = self
+        popController.popoverPresentationController?.sourceView = sender as? UIView
+        popController.popoverPresentationController?.sourceRect = self.view.bounds
+        self.present(popController, animated: true, completion: nil)
+        
+        
+        let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light)
+        blur = UIVisualEffectView(effect: darkBlur)
+        blur.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.contentSize.height)
+        blur.alpha = 0
+        self.scrollView.addSubview(blur)
+        UIView.animate(withDuration: 0.2,delay: 0.0,options: UIViewAnimationOptions.curveEaseIn,
+                       animations: { () -> Void in
+                        self.blur.alpha = 1
+                        
+        }, completion: { (finished) -> Void in
+            
+        })
     }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+        
+        
+
+    
     
     
     func keyboardWillShow(notification: NSNotification) {
