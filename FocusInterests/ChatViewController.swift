@@ -10,13 +10,14 @@ import UIKit
 import JSQMessagesViewController
 import FirebaseDatabase
 
-class ChatViewController: JSQMessagesViewController {
+class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var user = [String:String]()
     var messages = [JSQMessage]()
     let messagesRef = Constants.DB.messages
     let messageContentRef = Constants.DB.message_content
     var messageID: String?
     var names = [String:String]()
+    var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,6 @@ class ChatViewController: JSQMessagesViewController {
         getMessageID()
         
         self.navigationItem.title = self.user["username"]!
-        self.inputToolbar.contentView.leftBarButtonItem = nil;
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -143,6 +143,54 @@ class ChatViewController: JSQMessagesViewController {
         return NSAttributedString(string: "asdasda")
     }
     
+    override func didPressAccessoryButton(_ sender: UIButton!) {
+        
+        let alertController = UIAlertController(title: "Add media", message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let OKAction = UIAlertAction(title: "Add image from gallery", style: .default) { action in
+            self.addImage()
+        }
+        alertController.addAction(OKAction)
+        
+        self.present(alertController, animated: true) {
+            // ...
+        }
+        
+
+    }
+    
+    func addImage(){
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.dismiss(animated: true, completion: { () -> Void in
+
+        })
+
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+        let image = JSQPhotoMediaItem(image: chosenImage)
+        let message = JSQMessage(senderId: self.senderId, senderDisplayName: self.senderDisplayName, date: Date(), media: image)
+        
+        self.messages.append(message!)
+        self.collectionView.reloadData()
+        self.scrollToBottom(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("cancelled")
+    }
+    
     func getMessages(){
         messageContentRef.child(self.messageID!).queryOrdered(byChild: "date").queryLimited(toLast: 2).observe(.childAdded, with: {(snapshot) in
             let message_data = snapshot.value as? [String:Any]
@@ -155,8 +203,8 @@ class ChatViewController: JSQMessagesViewController {
             let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text)
             
             self.messages.append(message!)
-            
             self.collectionView.reloadData()
+            self.scrollToBottom(animated: true)
             
             self.showLoadEarlierMessagesHeader = true
             
