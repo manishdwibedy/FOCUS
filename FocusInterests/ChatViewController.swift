@@ -104,6 +104,23 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         finishSendingMessage()
     }
     
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+        
+        let message = messages[indexPath.row]
+        
+        if self.senderId == message.senderId {
+            cell.messageBubbleTopLabel.textInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 45)
+            cell.cellBottomLabel.textInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 45)
+        } else {
+            cell.messageBubbleTopLabel.textInsets = UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
+            cell.cellBottomLabel.textInsets = UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
+        }
+        
+        return cell
+    }
+    
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
         let message = messages[indexPath.row]
         let messageUsername = message.senderDisplayName
