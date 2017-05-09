@@ -175,8 +175,8 @@
                                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                         <color key="separatorColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Bb7-5e-n8E">
-                                                                <rect key="frame" x="0.0" y="55.5" width="359.5" height="44"/>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Bb7-5e-n8E" customClass="InterestTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="56" width="359" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bb7-5e-n8E" id="KJK-tA-lBd">
                                                                     <rect key="frame" x="0.0" y="0.0" width="359.5" height="44"/>
@@ -200,8 +200,8 @@
                                                                     </constraints>
                                                                 </tableViewCellContentView>
                                                                 <connections>
-                                                                    <outlet property="checkMarkImageView" destination="M99-wo-CqW" id="hG3-qU-5ci"/>
-                                                                    <outlet property="selectedInterestLabel" destination="AcQ-5l-4Pk" id="F7w-g5-CJP"/>
+                                                                    <outlet property="checkMarkImageView" destination="M99-wo-CqW" id="n4D-sx-kRJ"/>
+                                                                    <outlet property="selectedInterestLabel" destination="AcQ-5l-4Pk" id="6tZ-Ug-sWY"/>
                                                                 </connections>
                                                             </tableViewCell>
                                                         </prototypes>

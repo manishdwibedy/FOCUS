@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */; };
 		042FB3781EC11DD2006C643D /* EventsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042FB3771EC11DD2006C643D /* EventsStoryboard.storyboard */; };
 		042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */; };
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
@@ -113,6 +114,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestTableViewCell.swift; sourceTree = "<group>"; };
 		042FB3771EC11DD2006C643D /* EventsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventsStoryboard.storyboard; sourceTree = "<group>"; };
 		042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewEventViewController.swift; sourceTree = "<group>"; };
 		04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSignUpViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 		5BA37C6F1EB9E8940091189E /* Event */ = {
 			isa = PBXGroup;
 			children = (
+				042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */,
 				5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */,
 				5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */,
 				5B7DC2001EA866D700A1471E /* EventIconViewController.swift */,
@@ -841,6 +844,7 @@
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
+				042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
