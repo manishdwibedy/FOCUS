@@ -91,7 +91,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         let index:Int! = Int(marker.accessibilityLabel!)
         let event = self.events[index]
-        self.performSegue(withIdentifier: "show_event_details", sender: event)
+        //self.performSegue(withIdentifier: "show_event_details", sender: event)
+        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+        controller.event = event
+        self.present(controller, animated: true, completion: nil)
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
