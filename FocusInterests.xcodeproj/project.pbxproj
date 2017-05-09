@@ -95,6 +95,7 @@
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */; };
+		FF522C631EC24CE900D27A9E /* allCommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF522C621EC24CE900D27A9E /* allCommentsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +218,7 @@
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventDetails.storyboard; sourceTree = "<group>"; };
+		FF522C621EC24CE900D27A9E /* allCommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allCommentsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +275,7 @@
 				042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */,
 				5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */,
 				5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */,
+				FF522C621EC24CE900D27A9E /* allCommentsVC.swift */,
 				5B7DC2001EA866D700A1471E /* EventIconViewController.swift */,
 				5BA37C701EB9EADB0091189E /* InvitationViewController.swift */,
 			);
@@ -844,6 +847,7 @@
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
 				5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */,
 				D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */,
+				FF522C631EC24CE900D27A9E /* allCommentsVC.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
