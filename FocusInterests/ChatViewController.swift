@@ -30,7 +30,14 @@ class ChatViewController: JSQMessagesViewController {
             self.senderId: self.senderDisplayName,
             self.user["firebaseUserId"]!: self.user["username"]!
         ]
+        
+        self.navigationItem.title = self.user["username"]!
         self.inputToolbar.contentView.leftBarButtonItem = nil;
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.messagesRef.removeAllObservers()
+        self.messageContentRef.removeAllObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
