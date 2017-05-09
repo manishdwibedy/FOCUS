@@ -155,15 +155,12 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         }
         alertController.addAction(OKAction)
         
-        self.present(alertController, animated: true) {
-            // ...
-        }
-        
+        self.present(alertController, animated: true)
 
     }
     
     func addImage(){
-        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
