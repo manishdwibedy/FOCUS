@@ -33,7 +33,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         ]
         
         self.inputToolbar.contentView.textView.backgroundColor = UIColor.lightGray
+        self.inputToolbar.contentView.textView.textColor = UIColor.white
         self.inputToolbar.backgroundColor = UIColor.green
+        self.inputToolbar.contentView.textView.placeHolderTextColor = UIColor.white
         self.inputToolbar.contentView.textView.placeHolder = "Enter the message"
         
         getMessageID()
@@ -110,7 +112,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
-        return 35
+        return 25
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
