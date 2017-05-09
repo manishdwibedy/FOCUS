@@ -32,6 +32,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             self.user["firebaseUserId"]!: self.user["username"]!
         ]
         
+        self.inputToolbar.contentView.textView.backgroundColor = UIColor.lightGray
+        self.inputToolbar.backgroundColor = UIColor.green
+        self.inputToolbar.contentView.textView.placeHolder = "Enter the message"
+        
         getMessageID()
         
         self.navigationItem.title = self.user["username"]!
@@ -160,6 +164,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     func addImage(){
+        
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             
             imagePicker.delegate = self
