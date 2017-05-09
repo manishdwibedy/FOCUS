@@ -29,26 +29,18 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     func formatTextFields(){
         let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, descriptionTextField].map{$0.setRoundedBorder()}
         
-        eventDateTextField.attributedPlaceholder = formatAttributedPlaceholder(placeholder: "Date")
-        locationTextField.attributedPlaceholder = formatAttributedPlaceholder(placeholder: "Location")
-        eventTimeTextField.attributedPlaceholder = formatAttributedPlaceholder(placeholder: "Time")
-        eventNameTextField.attributedPlaceholder = formatAttributedPlaceholder(placeholder: "Event Name")
-        descriptionTextField.attributedPlaceholder = formatAttributedPlaceholder(placeholder: "Description")
+        eventDateTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Date")
+        locationTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Location")
+        eventTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Time")
+        eventNameTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Event Name")
+        descriptionTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Description")
         
-        
-        locationTextField.rightViewMode = UITextFieldViewMode.always
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        let image = UIImage(named: "location")
-        imageView.image = image
-        imageView.contentMode = .center
-        if let size = imageView.image?.size {
-            imageView.frame = CGRect(x: 0.0, y: 0.0, width: size.width + 10.0, height: size.height)
-        }
-        locationTextField.rightView = imageView
-        
+        eventDateTextField.setRightIcon(iconString: "Calendar-50")
+        locationTextField.setRightIcon(iconString: "location")
+        eventTimeTextField.setRightIcon(iconString: "Clock-25")
     }
     
-    func formatAttributedPlaceholder(placeholder text: String) -> NSAttributedString {
+    func formatPlaceholder(placeholder text: String) -> NSAttributedString {
         let newString = NSAttributedString(string: text, attributes: [NSForegroundColorAttributeName: UIColor.white])
         return newString
     }
