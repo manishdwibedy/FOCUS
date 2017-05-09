@@ -30,7 +30,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="90"/>
                                     <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                     <inset key="imageEdgeInsets" minX="50" minY="50" maxX="50" maxY="50"/>
-                                    <state key="normal" backgroundImage="UserPhoto"/>
+                                    <state key="normal" backgroundImage="UserProfile"/>
                                     <connections>
                                         <action selector="profileButtonPressed:" destination="-1" eventType="touchUpInside" id="Ff1-rb-4Ff"/>
                                     </connections>
@@ -38,7 +38,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd">
                                     <rect key="frame" x="94" y="0.0" width="93.5" height="90"/>
                                     <inset key="imageEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
-                                    <state key="normal" backgroundImage="MessageBubble"/>
+                                    <state key="normal" backgroundImage="Messages"/>
                                     <connections>
                                         <action selector="messagesButtonPressed:" destination="-1" eventType="touchUpInside" id="HhF-9i-eZZ"/>
                                     </connections>
@@ -54,7 +54,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-MD-iuK">
                                     <rect key="frame" x="281.5" y="0.0" width="93.5" height="90"/>
                                     <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                    <state key="normal" image="Bell"/>
+                                    <state key="normal" image="Notifications"/>
                                     <connections>
                                         <action selector="notificationsButtonPressed:" destination="-1" eventType="touchUpInside" id="e6r-GR-iuC"/>
                                     </connections>
@@ -87,9 +87,9 @@
     </objects>
     <resources>
         <image name="4GreenCircles" width="48" height="48"/>
-        <image name="Bell" width="48" height="48"/>
-        <image name="MessageBubble" width="58" height="58"/>
+        <image name="Messages" width="500" height="500"/>
+        <image name="Notifications" width="518" height="518"/>
         <image name="Search" width="46" height="48"/>
-        <image name="UserPhoto" width="102" height="102"/>
+        <image name="UserProfile" width="612" height="792"/>
     </resources>
 </document>
