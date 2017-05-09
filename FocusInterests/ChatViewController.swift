@@ -31,6 +31,8 @@ class ChatViewController: JSQMessagesViewController {
             self.user["firebaseUserId"]!: self.user["username"]!
         ]
         
+        getMessageID()
+        
         self.navigationItem.title = self.user["username"]!
         self.inputToolbar.contentView.leftBarButtonItem = nil;
     }
@@ -41,7 +43,7 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getMessageID()
+        
     }
 
     override func didReceiveMemoryWarning() {
