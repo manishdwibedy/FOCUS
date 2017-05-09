@@ -28,4 +28,11 @@ extension UITextField {
         self.layer.layoutSublayers()
         self.layer.masksToBounds = true
     }
+    
+    func setRoundedBorder(){
+        self.borderStyle = .none
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 1.0
+        self.layer.cornerRadius = 15.0
+    }
 }
