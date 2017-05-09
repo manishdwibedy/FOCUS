@@ -32,7 +32,6 @@ class EventDetailViewController: UIViewController {
                 print(error?.localizedDescription)
                 return
             }
-            
             self.image.sd_setImage(with: url, placeholderImage: placeholderImage)
             self.image.setShowActivityIndicator(true)
             self.image.setIndicatorStyle(.gray)
