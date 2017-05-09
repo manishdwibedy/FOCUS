@@ -52,6 +52,7 @@ class EventDetailViewController: UIViewController {
         commentTextField.clipsToBounds = true
         commentTextField.layer.borderColor = UIColor.white.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
         
         eventTitleLabel.text = event?.title
         hostInfoLabel.text = (event?.fullAddress)! + "\n\n"
@@ -74,7 +75,7 @@ class EventDetailViewController: UIViewController {
         })
         
         
-        ref.child("events").child((event?.id)!).child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("events").child((event?.id)!).child("comments").queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
@@ -121,6 +122,17 @@ class EventDetailViewController: UIViewController {
     
     @IBAction func postComment(_ sender: Any) {
         ref.child("events").child((event?.id)!).child("comments").childByAutoId().updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!])
+        commentTextField.resignFirstResponder()
+        commentTextField.text = ""
+    }
+    
+    
+    @IBAction func moreComments(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "allComments") as! allCommentsVC
+        controller.parentEvent = event
+        self.present(controller, animated: true, completion: nil)
+
     }
     
     
@@ -179,8 +191,8 @@ class EventDetailViewController: UIViewController {
             
             let line = CAShapeLayer()
             let linePath = UIBezierPath()
-            linePath.move(to: CGPoint(x: 0, y: self.view.frame.height))
-            linePath.addLine(to: CGPoint(x: self.view.frame.width, y: self.view.frame.height))
+            linePath.move(to: CGPoint(x: 10, y: self.view.frame.height))
+            linePath.addLine(to: CGPoint(x: self.view.frame.width-20, y: self.view.frame.height))
             line.path = linePath.cgPath
             line.strokeColor = UIColor.white.cgColor
             line.lineWidth = 1

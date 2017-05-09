@@ -275,9 +275,9 @@
 				042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */,
 				5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */,
 				5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */,
+				FF522C621EC24CE900D27A9E /* allCommentsVC.swift */,
 				5B7DC2001EA866D700A1471E /* EventIconViewController.swift */,
 				5BA37C701EB9EADB0091189E /* InvitationViewController.swift */,
-				FF522C621EC24CE900D27A9E /* allCommentsVC.swift */,
 			);
 			name = Event;
 			sourceTree = "<group>";

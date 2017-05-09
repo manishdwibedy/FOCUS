@@ -94,6 +94,9 @@
                                                 <state key="normal" title="more...">
                                                     <color key="titleColor" red="0.79479298857868019" green="0.79479298857868019" blue="0.79479298857868019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="moreComments:" destination="AZe-9E-xBf" eventType="touchUpInside" id="7gD-su-Nxm"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.97192192803506172" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -223,13 +226,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6FU-wF-Ian">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FU-wF-Ian">
+                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.17601923450000001" green="0.28374994100000001" blue="0.3749801713" alpha="0.95090432359999999" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6FU-wF-Ian" secondAttribute="trailing" id="HxG-4w-aJ6"/>
+                            <constraint firstItem="6FU-wF-Ian" firstAttribute="top" secondItem="1KB-Zf-zk3" secondAttribute="bottom" constant="8" symbolic="YES" id="O6N-dC-zX1"/>
+                            <constraint firstItem="6FU-wF-Ian" firstAttribute="bottom" secondItem="zKl-Pd-ypi" secondAttribute="top" id="TRX-Mj-pPM"/>
+                            <constraint firstItem="6FU-wF-Ian" firstAttribute="leading" secondItem="Mkh-SY-OoJ" secondAttribute="leading" id="mx3-WZ-etB"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="6FU-wF-Ian" id="YkT-TH-PcV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wfr-e2-2jJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
