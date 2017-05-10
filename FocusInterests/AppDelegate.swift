@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        checkForLogin()
+        //checkForLogin()
         
         return true
     }

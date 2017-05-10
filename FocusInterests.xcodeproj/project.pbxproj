@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */; };
 		042FB3781EC11DD2006C643D /* EventsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042FB3771EC11DD2006C643D /* EventsStoryboard.storyboard */; };
 		042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */; };
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
@@ -93,6 +94,8 @@
 		D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */; };
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
+		FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */; };
+		FF522C631EC24CE900D27A9E /* allCommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF522C621EC24CE900D27A9E /* allCommentsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +116,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestTableViewCell.swift; sourceTree = "<group>"; };
 		042FB3771EC11DD2006C643D /* EventsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventsStoryboard.storyboard; sourceTree = "<group>"; };
 		042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewEventViewController.swift; sourceTree = "<group>"; };
 		04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSignUpViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 		D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialCrowdCell.xib; sourceTree = "<group>"; };
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventDetails.storyboard; sourceTree = "<group>"; };
+		FF522C621EC24CE900D27A9E /* allCommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allCommentsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,9 +271,11 @@
 		5BA37C6F1EB9E8940091189E /* Event */ = {
 			isa = PBXGroup;
 			children = (
-				5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */,
 				042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */,
+				042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */,
+				5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */,
 				5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */,
+				FF522C621EC24CE900D27A9E /* allCommentsVC.swift */,
 				5B7DC2001EA866D700A1471E /* EventIconViewController.swift */,
 				5BA37C701EB9EADB0091189E /* InvitationViewController.swift */,
 			);
@@ -315,6 +323,7 @@
 			children = (
 				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
 				042FB3771EC11DD2006C643D /* EventsStoryboard.storyboard */,
+				FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */,
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
 				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
 			);
@@ -578,7 +587,7 @@
 				TargetAttributes = {
 					D2B9B03B1E5A047C0002F1B1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 5XL94NV2G5;
+						DevelopmentTeam = E4GLMWHV4Z;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -642,6 +651,7 @@
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
+				FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				D23E01371E6BA7C900E735F5 /* GoogleService-Info.plist in Resources */,
@@ -837,10 +847,12 @@
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
 				5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */,
 				D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */,
+				FF522C631EC24CE900D27A9E /* allCommentsVC.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
+				042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
@@ -1023,14 +1035,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FocusInterests/FocusInterests.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5XL94NV2G5;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = E4GLMWHV4Z;
 				INFOPLIST_FILE = FocusInterests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.singlefocus.FocusInterests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fbb329e3-2c4a-453a-a884-fb183fc2c749";
-				PROVISIONING_PROFILE_SPECIFIER = "Focus Provisioning Profile";
+				PROVISIONING_PROFILE = "f5d818d7-2bbd-40af-b2db-ff6d2d50c81d";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
 				SWIFT_OBJC_BRIDGING_HEADER = "FocusInterests/FocusInterests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1044,14 +1057,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FocusInterests/FocusInterests.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = E4GLMWHV4Z;
 				INFOPLIST_FILE = FocusInterests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.singlefocus.FocusInterests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f5d818d7-2bbd-40af-b2db-ff6d2d50c81d";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
 				SWIFT_OBJC_BRIDGING_HEADER = "FocusInterests/FocusInterests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
