@@ -11,6 +11,7 @@ import JSQMessagesViewController
 import FirebaseDatabase
 import FirebaseStorage
 import SDWebImage
+import Agrume
 
 class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var user = [String:String]()
@@ -190,6 +191,22 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
 
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAt indexPath: IndexPath!) {
+        let message = self.messages[indexPath.row]
+        
+        if message.isMediaMessage{
+            let media = message.media
+            
+            if (media?.isKind(of: JSQPhotoMediaItem.self))!{
+                let imageMedia = media as! JSQPhotoMediaItem
+                
+                let agrume = Agrume(image: imageMedia.image, backgroundBlurStyle: UIBlurEffectStyle.dark, backgroundColor: .black)
+                agrume.statusBarStyle = .lightContent
+                agrume.showFrom(self)
+            }
+        }
+        
+    }
     func addImage(){
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
