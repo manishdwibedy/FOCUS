@@ -9,6 +9,7 @@
 import UIKit
 import JSQMessagesViewController
 import FirebaseDatabase
+import FirebaseStorage
 
 class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var user = [String:String]()
@@ -208,6 +209,28 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         let image = JSQPhotoMediaItem(image: chosenImage)
         let message = JSQMessage(senderId: self.senderId, senderDisplayName: self.senderDisplayName, date: Date(), media: image)
         
+        let imageData = UIImagePNGRepresentation(chosenImage)
+
+        if let data = imageData{
+            
+            let messageID = self.addImage(message!)
+            let imageRef = Constants.storage.messages.child("\(messageID).jpg")
+            
+            // Create file metadata including the content type
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            let _ = imageRef.put(data, metadata: metadata) { (metadata, error) in
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                // Metadata contains file metadata such as size, content-type, and download URL.
+                let _ = metadata.downloadURL
+            }
+        }
+
+        
         self.messages.append(message!)
         self.collectionView.reloadData()
         self.scrollToBottom(animated: true)
@@ -224,13 +247,37 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             let id = message_data?["sender_id"] as! String
             let name = self.names[(message_data?["sender_id"]! as! String)]
             let date = Date(timeIntervalSince1970: TimeInterval(message_data?["date"] as! Double))
-            let text = message_data?["text"] as! String
             
-            let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text)
+            var message: JSQMessage?
+            if let text = message_data?["text"]{
+                message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text as! String)
+                
+                self.messages.append(message!)
+                self.collectionView.reloadData()
+                self.scrollToBottom(animated: true)
+            }
+            else{
+                let islandRef = Constants.storage.messages.child("\(snapshot.key).jpg")
+                
+                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                islandRef.data(withMaxSize: 20 * 1024 * 1024) { data, error in
+                    if let error = error {
+                        // Uh-oh, an error occurred!
+                    }
+                    else {
+                        // Data for "images/island.jpg" is returned
+                        let image = JSQPhotoMediaItem(image: UIImage(data: data!))
+
+                        let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image as! JSQMessageMediaData!)
+                        
+                        self.messages.append(message!)
+                        self.collectionView.reloadData()
+                        self.scrollToBottom(animated: true)
+                    }
+                }
+            }
             
-            self.messages.append(message!)
-            self.collectionView.reloadData()
-            self.scrollToBottom(animated: true)
+            
             
             self.showLoadEarlierMessagesHeader = true
             
@@ -248,6 +295,21 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             ]
         
         newMessage.setValue(messageDictionary)
+    }
+    
+    func addImage(_ message: JSQMessage) -> String{
+        
+        let conversion = self.messageContentRef.child(self.messageID!)
+        
+        let newMessage = conversion.childByAutoId()
+        let messageDictionary: [String: Any] = [
+            "sender_id" : AuthApi.getFirebaseUid(),
+            "image" : true,
+            "date": Date().timeIntervalSince1970
+        ]
+        
+        newMessage.setValue(messageDictionary)
+        return newMessage.key
     }
     
     func getMessageID(){

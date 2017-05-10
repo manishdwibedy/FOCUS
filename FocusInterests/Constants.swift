@@ -130,6 +130,7 @@ struct Constants {
     
     struct storage{
         public static let event = FIRStorage.storage().reference().child("events")
+        public static let messages = FIRStorage.storage().reference().child("messages")
     }
 }
 
