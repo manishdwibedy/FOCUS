@@ -155,7 +155,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     func showHomeVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-        let vc = storyboard.instantiateViewController(withIdentifier: "OpeningTabBarController") as! CustomTabController
+        let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
 
         present(vc, animated: true, completion: nil)
     }
