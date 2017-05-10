@@ -12,6 +12,9 @@ import FirebaseDatabase
 
 class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var event: Event?
+    var place: GMSPlace?
+    
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -91,7 +94,16 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
 extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        //
+        self.place = place
+        self.locationTextField.text = place.formattedAddress!
+        
+        print("Place name: \(place.name)")
+        
+        print("Place address: \(place.formattedAddress)")
+        
+        print("Place attributions: \(place.attributions)")
+        
+        dismiss(animated: true, completion: nil)
     }
     
     
