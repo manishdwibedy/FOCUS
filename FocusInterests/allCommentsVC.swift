@@ -39,21 +39,25 @@ class allCommentsVC: UIViewController {
                     let dict = value?[key] as! NSDictionary
                     let comm = commentView()
                     comm.addData(image: UIImage(), fromUID: dict["fromUID"] as! String, commment: dict["comment"] as! String)
-                    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: comm.frame.origin.y + comm.view.frame.height + 25)
                     self.scrollView.addSubview(comm)
-                    print(comm.frame)
                     if self.commentList.count != 0
                     {
                         let last = self.commentList[self.commentList.count-1] as! commentView
                         comm.frame.origin.y = last.frame.origin.y + last.view.frame.height + 10
                     }
-                    print(comm.frame)
+                    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: comm.frame.origin.y + comm.view.frame.height + 25)
                     self.commentList.add(comm)
-                    
+                    //self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
                 }
             }
             
+
         })
+    }
+    
+    func load()
+    {
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,8 +80,25 @@ class allCommentsVC: UIViewController {
     
     @IBAction func post(_ sender: Any) {
         ref.child("events").child((parentEvent?.id)!).child("comments").childByAutoId().updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!])
+        
+        
+        let comm = commentView()
+        comm.addData(image: UIImage(), fromUID: AuthApi.getFirebaseUid()!, commment: commentTextField.text!)
+        self.scrollView.addSubview(comm)
+        if self.commentList.count != 0
+        {
+            let last = self.commentList[self.commentList.count-1] as! commentView
+            comm.frame.origin.y = last.frame.origin.y + last.view.frame.height + 10
+        }
+        self.commentList.add(comm)
+        self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
         commentTextField.resignFirstResponder()
+        self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: comm.frame.origin.y + comm.view.frame.height + 25)
         commentTextField.text = ""
+        self.scrollView.frame.origin.y = 0
+        parentVC?.scrollView.frame.origin.y = 0
+        
+        
     }
     
     func keyboardWillShow(notification: NSNotification) {

@@ -148,6 +148,7 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
         let popController = UIStoryboard(name: "EventDetails", bundle: nil).instantiateViewController(withIdentifier: "allComments") as! allCommentsVC
         popController.parentEvent = event
         popController.parentVC = self
+        popController.load()
         popController.modalPresentationStyle = UIModalPresentationStyle.popover
         popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
         popController.popoverPresentationController?.delegate = self
