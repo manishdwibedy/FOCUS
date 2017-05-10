@@ -19,6 +19,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     var messageID: String?
     var names = [String:String]()
     var imagePicker = UIImagePickerController()
+    var imageMapper = [String:Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -257,9 +258,13 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 self.scrollToBottom(animated: true)
             }
             else{
+                let image = JSQPhotoMediaItem(image: UIImage(named: "empty_event"))
+                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
+                self.imageMapper[snapshot.key] = self.messages.count
+                
                 let islandRef = Constants.storage.messages.child("\(snapshot.key).jpg")
                 
-                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                // Download in memory with a maximum allowed size of 2MB (20 * 1024 * 1024 bytes)
                 islandRef.data(withMaxSize: 20 * 1024 * 1024) { data, error in
                     if let error = error {
                         // Uh-oh, an error occurred!
@@ -267,14 +272,17 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                     else {
                         // Data for "images/island.jpg" is returned
                         let image = JSQPhotoMediaItem(image: UIImage(data: data!))
-
-                        let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image as! JSQMessageMediaData!)
+                        let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
                         
-                        self.messages.append(message!)
+                        let index = self.imageMapper[snapshot.key]
+                        self.messages[index!] = message!
                         self.collectionView.reloadData()
-                        self.scrollToBottom(animated: true)
                     }
+                    
                 }
+                self.messages.append(message!)
+                self.collectionView.reloadData()
+                self.scrollToBottom(animated: true)
             }
             
             
