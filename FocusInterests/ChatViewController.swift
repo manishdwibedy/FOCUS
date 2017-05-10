@@ -210,6 +210,19 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         }
         
     }
+    
+    override func textViewDidChange(_ textView: UITextView) {
+        super.textViewDidBeginEditing(textView)
+        let len = textView.text.characters.count
+        
+        if len == 0{
+            Constants.DB.user.child("\(self.senderId!)/typing").setValue(false)
+        }
+        else{
+            Constants.DB.user.child("\(self.senderId!)/typing").setValue(true)
+        }
+    }
+    
     func addImage(){
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
