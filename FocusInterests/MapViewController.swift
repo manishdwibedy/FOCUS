@@ -148,6 +148,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         self.present(VC, animated:true, completion:nil)
     }
+    
+    func notificationsClicked() {
+        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show_event_details"{
             let destinationVC = segue.destination as! EventDetailViewController

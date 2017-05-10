@@ -10,6 +10,7 @@ import UIKit
 
 protocol NavigationInteraction {
     func messagesClicked()
+    func notificationsClicked()
 }
 
 class MapNavigationView: UIView, UISearchBarDelegate {
@@ -63,7 +64,7 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     }
     
     @IBAction func notificationsButtonPressed(_ sender: UIButton) {
-        print("notifications")
+        delegate?.notificationsClicked()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
