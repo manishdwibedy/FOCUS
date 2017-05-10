@@ -13,7 +13,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
 
     let userRef = Constants.DB.user
-    var users = [[String: String]]()
+    var users = [[String: Any]]()
     var usersInMemory: Set<String> = []
     var filtered = [[String: String]]()
     var searching = false
@@ -55,7 +55,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         if !searching{
-            cell.textLabel?.text = self.users[indexPath.row]["username"]
+            cell.textLabel?.text = self.users[indexPath.row]["username"] as! String?
         }
         else{
             cell.textLabel?.text = self.filtered[indexPath.row]["username"]
@@ -71,7 +71,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     func loadInitialTable(){
         self.userRef.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            let users = snapshot.value as? [String:[String:String]]
+            let users = snapshot.value as? [String:[String:Any]]
             
             for (id, user) in users!{
                 if !self.usersInMemory.contains(id){
@@ -89,7 +89,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         userRef.observe(FIRDataEventType.value, with: { (snapshot) in
             // Get user value
-            let users = snapshot.value as? [String:[String:String]]
+            let users = snapshot.value as? [String:[String:Any]]
             
             for (id, user) in users!{
                 if !self.usersInMemory.contains(id){
@@ -128,7 +128,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         if segue.identifier == "show_chat"{
             let VC = segue.destination as! ChatViewController
             searching = false
-            let user: [String:String]
+            let user: [String:Any]
             if searching{
                 user = self.filtered[sender as! Int]
             }

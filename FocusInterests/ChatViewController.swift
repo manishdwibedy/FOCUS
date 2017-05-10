@@ -14,7 +14,7 @@ import SDWebImage
 import Agrume
 
 class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    var user = [String:String]()
+    var user = [String:Any]()
     var messages = [JSQMessage]()
     let messagesRef = Constants.DB.messages
     let messageContentRef = Constants.DB.message_content
@@ -33,7 +33,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         
         self.names = [
             self.senderId: self.senderDisplayName,
-            self.user["firebaseUserId"]!: self.user["username"]!
+            self.user["firebaseUserId"]! as! String: self.user["username"]! as! String
         ]
         
         self.inputToolbar.contentView.textView.backgroundColor = UIColor.lightGray
@@ -44,7 +44,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         
         getMessageID()
         
-        self.navigationItem.title = self.user["username"]!
+        self.navigationItem.title = self.user["username"]! as! String
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,7 +53,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        Constants.DB.user.child(self.user["firebaseUserId"]! as! String).child("typing").observe(.value, with: {(snapshot) in
+            let typing = snapshot.value as! Bool
+            self.showTypingIndicator = typing
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -349,7 +352,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     func getMessageID(){
-        messagesRef.child(self.senderId).child(self.user["firebaseUserId"]!).observeSingleEvent(of: .value, with: { (snapshot) in
+        messagesRef.child(self.senderId).child(self.user["firebaseUserId"]! as! String).observeSingleEvent(of: .value, with: { (snapshot) in
             let val = snapshot.value as? [String:String]
             if let ID = val?["messageID"]{
                 self.messageID = ID
@@ -382,8 +385,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     func addMessageID(){
-        let one = self.messagesRef.child(self.senderId).child(user["firebaseUserId"]!)
-        let two = self.messagesRef.child(user["firebaseUserId"]!).child(self.senderId)
+        let one = self.messagesRef.child(self.senderId).child(user["firebaseUserId"]! as! String)
+        let two = self.messagesRef.child(user["firebaseUserId"]! as! String).child(self.senderId)
         
         let content = [
             "messageID": self.messageID
