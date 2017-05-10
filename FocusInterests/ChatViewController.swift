@@ -162,8 +162,13 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+        
+        let message = messages[indexPath.row]
+        let date = message.date
 
-        return NSAttributedString(string: "asdasda")
+        let formatter = DateFormatter()
+
+        return NSAttributedString(string: formatter.timeSince(from: date!, numericDates: false))
     }
     
     override func didPressAccessoryButton(_ sender: UIButton!) {
