@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GooglePlaces
+import FirebaseDatabase
 
 class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -24,6 +26,13 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         interestTableView.dataSource = self
         interestTableView.delegate = self
         formatTextFields()
+    }
+    
+    
+    @IBAction func addEventLocation(_ sender: UITextField) {
+        let autoCompleteController = GMSAutocompleteViewController()
+        autoCompleteController.delegate = self
+        present(autoCompleteController, animated: true, completion: nil)
     }
     
     func formatTextFields(){
@@ -77,5 +86,37 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         }
         
     }
-
 }
+
+extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        //
+    }
+    
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // to do: handle error
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+    
+}
+
+
+
+
+
+
+
