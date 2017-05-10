@@ -13,8 +13,11 @@ import Firebase
 class EventDetailViewController: UIViewController,UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var eventTitleLabel: UILabel!
-    @IBOutlet weak var hostInfoLabel: UITextView!
+    @IBOutlet weak var hostNameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UITextView!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
+    @IBOutlet weak var navBarView: UIView!
     
     @IBOutlet weak var commentsView: UIView!
     
@@ -26,6 +29,10 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
     var blur: UIVisualEffectView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        // add nav bar
+        let bar = MapNavigationView()
+        self.navBarView.addSubview(bar)
+        
         // Reference to an image file in Firebase Storage
         
         self.navigationItem.title = self.event?.title
@@ -48,6 +55,7 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
             
         })
         image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
         commentTextField.layer.borderWidth = 1
         commentTextField.layer.cornerRadius = 5
         commentTextField.clipsToBounds = true
@@ -56,13 +64,9 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
         
         eventTitleLabel.text = event?.title
-        hostInfoLabel.text = (event?.fullAddress)! + "\n\n"
-        hostInfoLabel.text = hostInfoLabel.text! + (event?.date)! + "\n"
+        timeLabel.text = event?.date
+        addressLabel.text = event?.fullAddress
         descriptionLabel.text = event?.description
-        
-        
-        
-        
         
         ref.child("users").child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
