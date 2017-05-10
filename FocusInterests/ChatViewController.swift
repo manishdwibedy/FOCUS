@@ -10,6 +10,7 @@ import UIKit
 import JSQMessagesViewController
 import FirebaseDatabase
 import FirebaseStorage
+import SDWebImage
 
 class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var user = [String:String]()
@@ -265,24 +266,51 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
                 self.imageMapper[snapshot.key] = self.messages.count
                 
-                let islandRef = Constants.storage.messages.child("\(snapshot.key).jpg")
+                let imageRef = Constants.storage.messages.child("\(snapshot.key).jpg")
                 
                 // Download in memory with a maximum allowed size of 2MB (20 * 1024 * 1024 bytes)
-                islandRef.data(withMaxSize: 20 * 1024 * 1024) { data, error in
-                    if let error = error {
-                        // Uh-oh, an error occurred!
-                    }
-                    else {
-                        // Data for "images/island.jpg" is returned
-                        let image = JSQPhotoMediaItem(image: UIImage(data: data!))
-                        let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
-                        
-                        let index = self.imageMapper[snapshot.key]
-                        self.messages[index!] = message!
-                        self.collectionView.reloadData()
+                imageRef.downloadURL(completion: {(url, error) in
+                    if let error = error{
+                        print("Error occurred: \(error.localizedDescription)")
                     }
                     
-                }
+                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                        (receivedSize :Int, ExpectedSize :Int) in
+                        
+                    }, completed: {
+                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                        
+                        if image != nil && finished{
+                            let JSQimage = JSQPhotoMediaItem(image: image)
+                            let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
+                            
+                            let index = self.imageMapper[snapshot.key]
+                            self.messages[index!] = message!
+                            self.collectionView.reloadData()
+                        }
+                        
+                    })
+                    
+                    
+
+                })
+                
+//                
+//                imageRef.data(withMaxSize: 20 * 1024 * 1024) { data, error in
+//                    if let error = error {
+//                        // Uh-oh, an error occurred!
+//                    }
+//                    else {
+//                        // Data for "images/island.jpg" is returned
+//                        let image = JSQPhotoMediaItem(image: UIImage(data: data!))
+//                        let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
+//                        
+//                        let index = self.imageMapper[snapshot.key]
+//                        self.messages[index!] = message!
+//                        self.collectionView.reloadData()
+//                    }
+//                    
+//                }
                 self.messages.append(message!)
                 self.collectionView.reloadData()
                 self.scrollToBottom(animated: true)
