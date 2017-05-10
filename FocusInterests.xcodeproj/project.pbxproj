@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */; };
-		042FB3781EC11DD2006C643D /* EventsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042FB3771EC11DD2006C643D /* EventsStoryboard.storyboard */; };
+		042FB3781EC11DD2006C643D /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042FB3771EC11DD2006C643D /* CreateEvent.storyboard */; };
 		042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */; };
+		04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04920F6C1EC277D4007D0B10 /* EventTextField.swift */; };
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
 		5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */; };
@@ -117,8 +118,9 @@
 
 /* Begin PBXFileReference section */
 		042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestTableViewCell.swift; sourceTree = "<group>"; };
-		042FB3771EC11DD2006C643D /* EventsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventsStoryboard.storyboard; sourceTree = "<group>"; };
+		042FB3771EC11DD2006C643D /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewEventViewController.swift; sourceTree = "<group>"; };
+		04920F6C1EC277D4007D0B10 /* EventTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTextField.swift; sourceTree = "<group>"; };
 		04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSignUpViewController.swift; sourceTree = "<group>"; };
 		04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondSignUpViewController.swift; sourceTree = "<group>"; };
 		0CC6A3DFD312CA4DD5401EF6 /* Pods-FocusInterestsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsTests/Pods-FocusInterestsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */,
 				042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */,
 				5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */,
+				04920F6C1EC277D4007D0B10 /* EventTextField.swift */,
 				5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */,
 				FF522C621EC24CE900D27A9E /* allCommentsVC.swift */,
 				5B7DC2001EA866D700A1471E /* EventIconViewController.swift */,
@@ -322,7 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
-				042FB3771EC11DD2006C643D /* EventsStoryboard.storyboard */,
+				042FB3771EC11DD2006C643D /* CreateEvent.storyboard */,
 				FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */,
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
 				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
@@ -643,7 +646,7 @@
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */,
-				042FB3781EC11DD2006C643D /* EventsStoryboard.storyboard in Resources */,
+				042FB3781EC11DD2006C643D /* CreateEvent.storyboard in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */,
@@ -879,6 +882,7 @@
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,
 				D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */,
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
+				04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */,
 				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,
 				5BA37C751EBD4DFB0091189E /* MapNavigationView.swift in Sources */,
 			);
