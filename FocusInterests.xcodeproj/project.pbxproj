@@ -97,6 +97,8 @@
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */; };
 		FF522C631EC24CE900D27A9E /* allCommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF522C621EC24CE900D27A9E /* allCommentsVC.swift */; };
+		FF522CA91EC383B200D27A9E /* commentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF522CA81EC383B200D27A9E /* commentView.xib */; };
+		FF522CAB1EC383D600D27A9E /* commentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF522CAA1EC383D600D27A9E /* commentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +223,8 @@
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventDetails.storyboard; sourceTree = "<group>"; };
 		FF522C621EC24CE900D27A9E /* allCommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allCommentsVC.swift; sourceTree = "<group>"; };
+		FF522CA81EC383B200D27A9E /* commentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentView.xib; sourceTree = "<group>"; };
+		FF522CAA1EC383D600D27A9E /* commentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,6 +463,8 @@
 				D21975491E62406200ED3345 /* ChooseInterestsCell.xib */,
 				D219754C1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift */,
 				D219754D1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib */,
+				FF522CAA1EC383D600D27A9E /* commentView.swift */,
+				FF522CA81EC383B200D27A9E /* commentView.xib */,
 				D2ECAC561E7CD9F8006FFA1A /* UserPhotoCell.swift */,
 				D2ECAC571E7CD9F8006FFA1A /* UserPhotoCell.xib */,
 				5BE31E871EA75E6A004768F0 /* MapInfoView.xib */,
@@ -657,6 +663,7 @@
 				FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
+				FF522CA91EC383B200D27A9E /* commentView.xib in Resources */,
 				D23E01371E6BA7C900E735F5 /* GoogleService-Info.plist in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
 				5B59063F1EC18CFF00466AAC /* map_style.json in Resources */,
@@ -884,6 +891,7 @@
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
 				04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */,
 				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,
+				FF522CAB1EC383D600D27A9E /* commentView.swift in Sources */,
 				5BA37C751EBD4DFB0091189E /* MapNavigationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

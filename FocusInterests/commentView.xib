@@ -6,51 +6,19 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="commentView" customModule="FocusInterests" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="commentView" customModule="FocusInterests" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="360" height="100"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Ur-3h-q2R">
-                    <rect key="frame" x="7" y="15" width="70" height="70"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="Ory-Zs-cdg"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcm-bn-1Z1">
-                    <rect key="frame" x="91" y="15" width="40" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="siC-w5-8VV">
-                    <rect key="frame" x="91" y="44" width="261" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="3Ur-3h-q2R" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="5xL-dA-qnL"/>
-                <constraint firstItem="3Ur-3h-q2R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="86Z-Ni-WFC"/>
-                <constraint firstItem="3Ur-3h-q2R" firstAttribute="top" secondItem="xcm-bn-1Z1" secondAttribute="top" id="ITX-Ty-eFt"/>
-                <constraint firstItem="xcm-bn-1Z1" firstAttribute="leading" secondItem="3Ur-3h-q2R" secondAttribute="trailing" constant="14" id="Ssa-Gn-UwI"/>
-                <constraint firstItem="siC-w5-8VV" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="VHj-4I-S3D"/>
-                <constraint firstItem="3Ur-3h-q2R" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="a6W-qM-WXv"/>
-                <constraint firstItem="xcm-bn-1Z1" firstAttribute="leading" secondItem="siC-w5-8VV" secondAttribute="leading" id="ify-2K-DTM"/>
-                <constraint firstItem="siC-w5-8VV" firstAttribute="top" secondItem="xcm-bn-1Z1" secondAttribute="bottom" constant="8" symbolic="YES" id="r7p-ib-MLT"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="50" y="87"/>
         </view>
     </objects>
 </document>
