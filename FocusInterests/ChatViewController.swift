@@ -288,29 +288,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                             self.messages[index!] = message!
                             self.collectionView.reloadData()
                         }
-                        
                     })
-                    
-                    
-
                 })
                 
-//                
-//                imageRef.data(withMaxSize: 20 * 1024 * 1024) { data, error in
-//                    if let error = error {
-//                        // Uh-oh, an error occurred!
-//                    }
-//                    else {
-//                        // Data for "images/island.jpg" is returned
-//                        let image = JSQPhotoMediaItem(image: UIImage(data: data!))
-//                        let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
-//                        
-//                        let index = self.imageMapper[snapshot.key]
-//                        self.messages[index!] = message!
-//                        self.collectionView.reloadData()
-//                    }
-//                    
-//                }
                 self.messages.append(message!)
                 self.collectionView.reloadData()
                 self.scrollToBottom(animated: true)
