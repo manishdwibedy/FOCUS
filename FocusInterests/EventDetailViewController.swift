@@ -92,11 +92,13 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary
-                    let comm = comment(frame: self.commentsView.frame,fromUID: dict["fromUID"] as! String, comment: dict["comment"] as! String)
-                    self.commentsView.addSubview(comm.view)
-                    //self.commentsView.frame.size = CGSize(width: self.commentsView.frame.width, height: comm.view.frame.height)
-                    // self.commentTextField.frame.origin.y = self.commentsView.frame.origin.y + self.commentsView.frame.height + 10
-                    //self.commentTextField.updateConstraints()
+                    //let comm = comment(frame: self.commentsView.frame,fromUID: dict["fromUID"] as! String, comment: dict["comment"] as! String)
+                    //self.commentsView.addSubview(comm.view)
+                    let comm = commentView()
+                    comm.addData(image: UIImage(), fromUID: dict["fromUID"] as! String, commment: dict["comment"] as! String)
+                    self.commentsView.addSubview(comm)
+                    
+                    
                     
                 }
             }

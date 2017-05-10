@@ -37,10 +37,18 @@ class allCommentsVC: UIViewController {
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary
-                    let comm = comment(frame: self.scrollView.frame,fromUID: dict["fromUID"] as! String, comment: dict["comment"] as! String, parent: self)
+                    let comm = commentView()
+                    comm.addData(image: UIImage(), fromUID: dict["fromUID"] as! String, commment: dict["comment"] as! String)
+                    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: comm.frame.origin.y + comm.view.frame.height + 25)
+                    self.scrollView.addSubview(comm)
+                    print(comm.frame)
+                    if self.commentList.count != 0
+                    {
+                        let last = self.commentList[self.commentList.count-1] as! commentView
+                        comm.frame.origin.y = last.frame.origin.y + last.view.frame.height + 10
+                    }
+                    print(comm.frame)
                     self.commentList.add(comm)
-                    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: comm.view.frame.origin.y + comm.view.frame.height + 25)
-                    self.scrollView.addSubview(comm.view)
                     
                 }
             }
