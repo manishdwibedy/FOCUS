@@ -26,8 +26,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // tell JSQMessagesViewController
-        // who is the current user
+        let _ = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+
         self.senderId = AuthApi.getFirebaseUid()
         self.senderDisplayName = "USER 1"
         
@@ -45,6 +45,13 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         getMessageID()
         
         self.navigationItem.title = self.user["username"]! as! String
+        super.collectionView.keyboardDismissMode = .interactive
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
