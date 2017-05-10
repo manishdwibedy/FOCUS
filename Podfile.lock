@@ -1,4 +1,5 @@
 PODS:
+  - Agrume (3.2.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -117,6 +118,7 @@ PODS:
   - SDWebImage/Core (3.8.2)
 
 DEPENDENCIES:
+  - Agrume (from `https://github.com/JanGorman/Agrume.git`)
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -133,7 +135,17 @@ DEPENDENCIES:
   - JSQMessagesViewController
   - SDWebImage (~> 3.8)
 
+EXTERNAL SOURCES:
+  Agrume:
+    :git: https://github.com/JanGorman/Agrume.git
+
+CHECKOUT OPTIONS:
+  Agrume:
+    :commit: 50ce3665bb7ae946dbed32d3e86306dd32a65b32
+    :git: https://github.com/JanGorman/Agrume.git
+
 SPEC CHECKSUMS:
+  Agrume: abf26210c3371bc6c74bbf2ced7a19d937bf8f0a
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
@@ -163,6 +175,6 @@ SPEC CHECKSUMS:
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 5094bd71137c9ca546357c94230769fe01f645d3
+PODFILE CHECKSUM: 08cc77b30a3b74b7cb335ee968108d5107c60b3d
 
 COCOAPODS: 1.2.0.beta.1

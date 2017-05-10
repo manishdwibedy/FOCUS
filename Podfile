@@ -22,6 +22,8 @@ target 'FocusInterests' do
     pod 'Google/SignIn'
     pod 'SDWebImage', '~>3.8'
     pod 'JSQMessagesViewController'
+    pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
+
 end
 
 target 'FocusInterestsTests' do
@@ -40,6 +42,7 @@ target 'FocusInterestsTests' do
     pod 'FacebookShare'
     pod 'Google/SignIn'
     pod 'JSQMessagesViewController'
+    pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
 
 end
 
@@ -59,6 +62,7 @@ target 'FocusInterestsUITests' do
     pod 'FacebookShare'
     pod 'Google/SignIn'
     pod 'JSQMessagesViewController'
+    pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
 
 end
 
