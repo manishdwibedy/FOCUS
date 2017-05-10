@@ -210,7 +210,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         let image = JSQPhotoMediaItem(image: chosenImage)
         let message = JSQMessage(senderId: self.senderId, senderDisplayName: self.senderDisplayName, date: Date(), media: image)
         
-        let imageData = UIImagePNGRepresentation(chosenImage)
+        // reducing the size of the image
+        let reducedImage = chosenImage.resizeWithWidth(width: 750)
+        let imageData = UIImagePNGRepresentation(reducedImage!)
+        
 
         if let data = imageData{
             
