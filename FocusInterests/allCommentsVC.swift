@@ -35,7 +35,8 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
         
-        ref.child("events").child((parentEvent?.id)!).child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+        let fullRef = ref.child("events").child((parentEvent?.id)!).child("comments")
+        fullRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
@@ -44,20 +45,18 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary
-                    let comm = commentView()
-                    comm.addData(image: UIImage(), fromUID: dict["fromUID"] as! String, commment: dict["comment"] as! String)
-                    self.commentsCList.add(dict["comment"] as! String)
-                    /*
-                    self.tableView.beginUpdates()
-                    self.tableView.insertRows(at: [IndexPath(row: self.commentsList.count-1, section: 0)], with: .automatic)
-                    self.tableView.endUpdates()
-                    */
+                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int)
+                    self.commentsCList.add(data)
+                    
                     
                 }
             }
             self.tableView.reloadData()
-            let oldLastCellIndexPath = NSIndexPath(row: self.commentsCList.count-1, section: 0)
-            self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
+            if self.commentsCList.count != 0
+            {
+                let oldLastCellIndexPath = NSIndexPath(row: self.commentsCList.count-1, section: 0)
+                self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
+            }
 
         })
     }
@@ -68,10 +67,10 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // create a new cell if needed or reuse an old one
         let cell:commentCell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! commentCell!
-        
-        cell.commentLabel.text = commentsCList[indexPath.row] as! String
+        cell.data = (commentsCList[indexPath.row] as! commentCellData)
+        cell.commentLabel.text = (commentsCList[indexPath.row] as! commentCellData).comment
+        cell.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
         return cell
     }
     
@@ -104,8 +103,11 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     
     @IBAction func post(_ sender: Any) {
         let unixDate = NSDate().timeIntervalSince1970
-        ref.child("events").child((parentEvent?.id)!).child("comments").childByAutoId().updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "liked":"0", "date": NSNumber(value: Double(unixDate))])
-        commentsCList.add(commentTextField.text!)
+        let fullRef = ref.child("events").child((parentEvent?.id)!).child("comments").childByAutoId()
+        fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
+    
+        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0)
+        self.commentsCList.add(data)
         tableView.beginUpdates()
         tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
         tableView.endUpdates()
