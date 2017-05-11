@@ -9,17 +9,24 @@
 import UIKit
 import Firebase
 
-class allCommentsVC: UIViewController {
+class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var commentTextField: UITextField!
-    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var tableView: UITableView!
     var parentEvent: Event?
     var parentVC: EventDetailViewController?
     let ref = FIRDatabase.database().reference()
     let commentList = NSMutableArray()
+    let commentsCList = NSMutableArray()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        let nib = UINib(nibName: "commentCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "cell")
         
         commentTextField.layer.borderWidth = 1
         commentTextField.layer.cornerRadius = 5
@@ -27,7 +34,7 @@ class allCommentsVC: UIViewController {
         commentTextField.layer.borderColor = UIColor.white.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
-
+        
         ref.child("events").child((parentEvent?.id)!).child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
@@ -39,24 +46,41 @@ class allCommentsVC: UIViewController {
                     let dict = value?[key] as! NSDictionary
                     let comm = commentView()
                     comm.addData(image: UIImage(), fromUID: dict["fromUID"] as! String, commment: dict["comment"] as! String)
-                    self.scrollView.addSubview(comm)
-                    if self.commentList.count != 0
-                    {
-                        let last = self.commentList[self.commentList.count-1] as! commentView
-                        comm.frame.origin.y = last.frame.origin.y + last.view.frame.height + 10
-                    }
-                    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: comm.frame.origin.y + comm.view.frame.height + 25)
-                    self.commentList.add(comm)
-                    //self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+                    self.commentsCList.add(dict["comment"] as! String)
+                    /*
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: [IndexPath(row: self.commentsList.count-1, section: 0)], with: .automatic)
+                    self.tableView.endUpdates()
+                    */
+                    
                 }
             }
-            
+            self.tableView.reloadData()
+            let oldLastCellIndexPath = NSIndexPath(row: self.commentsCList.count-1, section: 0)
+            self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
 
         })
     }
     
-    func load()
-    {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return commentsCList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // create a new cell if needed or reuse an old one
+        let cell:commentCell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! commentCell!
+        
+        cell.commentLabel.text = commentsCList[indexPath.row] as! String
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You tapped cell number \(indexPath.row).")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
         
     }
 
@@ -80,23 +104,16 @@ class allCommentsVC: UIViewController {
     
     @IBAction func post(_ sender: Any) {
         ref.child("events").child((parentEvent?.id)!).child("comments").childByAutoId().updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!])
-        
-        
-        let comm = commentView()
-        comm.addData(image: UIImage(), fromUID: AuthApi.getFirebaseUid()!, commment: commentTextField.text!)
-        self.scrollView.addSubview(comm)
-        if self.commentList.count != 0
-        {
-            let last = self.commentList[self.commentList.count-1] as! commentView
-            comm.frame.origin.y = last.frame.origin.y + last.view.frame.height + 10
-        }
-        self.commentList.add(comm)
-        self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+        commentsCList.add(commentTextField.text!)
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
+        tableView.endUpdates()
         commentTextField.resignFirstResponder()
-        self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: comm.frame.origin.y + comm.view.frame.height + 25)
         commentTextField.text = ""
-        self.scrollView.frame.origin.y = 0
         parentVC?.scrollView.frame.origin.y = 0
+        self.view.frame.origin.y = 0
+        let oldLastCellIndexPath = NSIndexPath(row: commentsCList.count-1, section: 0)
+        self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
         
         
     }
@@ -104,63 +121,14 @@ class allCommentsVC: UIViewController {
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
-            self.scrollView.frame.origin.y = -((keyboardHeight))
-            
+            self.view.frame.origin.y = -keyboardHeight
+                       
             
         }
     }
     
     
-    class comment
-    {
-        
-        let view = UIView()
-        let commentLabel = UILabel()
-        let fromLabel = UILabel()
-        let ref = FIRDatabase.database().reference()
-        init(frame:CGRect,fromUID:String, comment: String, parent: allCommentsVC) {
-            self.view.frame.size = CGSize(width: frame.width, height: 60)
-            if parent.commentList.count != 0
-            {
-                let last = parent.commentList[parent.commentList.count-1] as! comment
-                self.view.frame.origin.y = last.view.frame.origin.y + last.view.frame.height + 5
-            }
-            commentLabel.text = comment
-            ref.child("users").child(fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil
-                {
-                    self.fromLabel.text = value?["username"] as? String
-                }
-                
-            })
-            
-            self.fromLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: self.view.frame.height/2)
-            self.fromLabel.font = UIFont(name: "Helvetica-Light", size: 17)
-            self.fromLabel.textAlignment = .left
-            self.fromLabel.backgroundColor = UIColor.clear
-            self.fromLabel.textColor = UIColor.white
-            self.view.addSubview(self.fromLabel)
-            
-            self.commentLabel.frame = CGRect(x: 20, y: self.fromLabel.frame.height, width: frame.width, height: (self.view.frame.height/2))
-            self.commentLabel.font = UIFont(name: "Helvetica-Light", size: 17)
-            self.commentLabel.textAlignment = .left
-            self.commentLabel.backgroundColor = UIColor.clear
-            self.commentLabel.textColor = UIColor.white
-            self.view.addSubview(self.commentLabel)
-            
-            let line = CAShapeLayer()
-            let linePath = UIBezierPath()
-            linePath.move(to: CGPoint(x: 10, y: self.view.frame.height))
-            linePath.addLine(to: CGPoint(x: self.view.frame.width-20, y: self.view.frame.height))
-            line.path = linePath.cgPath
-            line.strokeColor = UIColor.white.cgColor
-            line.lineWidth = 1
-            line.lineJoin = kCALineJoinRound
-            self.view.layer.addSublayer(line)
-            
-        }
-    }
+    
 
 
 }

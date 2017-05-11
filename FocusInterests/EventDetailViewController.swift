@@ -145,16 +145,11 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
         self.present(controller, animated: true, completion: nil)
         */
         scrollView.contentOffset = CGPoint(x: 0, y: 0)
-        let popController = UIStoryboard(name: "EventDetails", bundle: nil).instantiateViewController(withIdentifier: "allComments") as! allCommentsVC
-        popController.parentEvent = event
-        popController.parentVC = self
-        popController.load()
-        popController.modalPresentationStyle = UIModalPresentationStyle.popover
-        popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
-        popController.popoverPresentationController?.delegate = self
-        popController.popoverPresentationController?.sourceView = sender as? UIView
-        popController.popoverPresentationController?.sourceRect = self.view.bounds
-        self.present(popController, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "allComments") as! allCommentsVC
+        ivc.parentVC = self
+        ivc.parentEvent = event
+        self.present(ivc, animated: true, completion: { _ in })
         
         
         let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light)
