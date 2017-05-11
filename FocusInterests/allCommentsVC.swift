@@ -36,12 +36,10 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
         
         let fullRef = ref.child("events").child((parentEvent?.id)!).child("comments")
-        fullRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        fullRef.queryLimited(toFirst: 10).queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                print(value!)
-                
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary

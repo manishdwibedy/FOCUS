@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import Firebase
 
-class EventDetailViewController: UIViewController,UIPopoverPresentationControllerDelegate {
+class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var hostNameLabel: UILabel!
@@ -19,7 +19,7 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var navBarView: UIView!
     
-    @IBOutlet weak var commentsView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var commentTextField: UITextField!
@@ -27,12 +27,18 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
     @IBOutlet weak var image: UIImageView!
     let ref = FIRDatabase.database().reference()
     var blur: UIVisualEffectView!
+    let commentsCList = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
         // add nav bar
         let bar = MapNavigationView()
         self.navBarView.addSubview(bar)
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        let nib = UINib(nibName: "commentCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "cell")
         // Reference to an image file in Firebase Storage
         
         self.navigationItem.title = self.event?.title
@@ -82,8 +88,8 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
             
         })
         
-        
-        ref.child("events").child((event?.id)!).child("comments").queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { (snapshot) in
+        let fullRef = ref.child("events").child((event?.id)!).child("comments")
+        fullRef.queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
@@ -92,15 +98,19 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary
-                    //let comm = comment(frame: self.commentsView.frame,fromUID: dict["fromUID"] as! String, comment: dict["comment"] as! String)
-                    //self.commentsView.addSubview(comm.view)
-                    let comm = commentView()
-                    comm.addData(image: UIImage(), fromUID: dict["fromUID"] as! String, commment: dict["comment"] as! String)
-                    self.commentsView.addSubview(comm)
+                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int)
+                    self.commentsCList.add(data)
                     
                     
                     
                 }
+            }
+            
+            self.tableView.reloadData()
+            if self.commentsCList.count != 0
+            {
+                let oldLastCellIndexPath = NSIndexPath(row: self.commentsCList.count-1, section: 0)
+                self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
             }
             
         })
@@ -131,9 +141,22 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
     }
     
     @IBAction func postComment(_ sender: Any) {
-        ref.child("events").child((event?.id)!).child("comments").childByAutoId().updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!])
+        let unixDate = NSDate().timeIntervalSince1970
+        let fullRef = ref.child("events").child((event?.id)!).child("comments").childByAutoId()
+        fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
+        
+        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0)
+        self.commentsCList.removeObject(at: 0)
+        self.commentsCList.add(data)
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
+        tableView.endUpdates()
         commentTextField.resignFirstResponder()
         commentTextField.text = ""
+        self.scrollView.frame.origin.y = 0
+        self.view.frame.origin.y = 0
+        let oldLastCellIndexPath = NSIndexPath(row: commentsCList.count-1, section: 0)
+        self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
     }
     
     
@@ -196,49 +219,25 @@ class EventDetailViewController: UIViewController,UIPopoverPresentationControlle
      */
     
     
-    class comment
-    {
-        let ref = FIRDatabase.database().reference()
-        let view = UIView()
-        let commentLabel = UILabel()
-        let fromLabel = UILabel()
-        init(frame:CGRect,fromUID:String, comment: String) {
-            self.view.frame.size = CGSize(width: frame.width, height: 60)
-            commentLabel.text = comment
-            ref.child("users").child(fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil
-                {
-                    self.fromLabel.text = value?["username"] as? String
-                }
-                
-            })
-            
-            self.fromLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: self.view.frame.height/2)
-            self.fromLabel.font = UIFont(name: "Helvetica-Light", size: 17)
-            self.fromLabel.textAlignment = .left
-            self.fromLabel.backgroundColor = UIColor.clear
-            self.fromLabel.textColor = UIColor.white
-            self.view.addSubview(self.fromLabel)
-            
-            self.commentLabel.frame = CGRect(x: 20, y: self.fromLabel.frame.height, width: frame.width, height: (self.view.frame.height/2))
-            self.commentLabel.font = UIFont(name: "Helvetica-Light", size: 17)
-            self.commentLabel.textAlignment = .left
-            self.commentLabel.backgroundColor = UIColor.clear
-            self.commentLabel.textColor = UIColor.white
-            self.view.addSubview(self.commentLabel)
-            
-            let line = CAShapeLayer()
-            let linePath = UIBezierPath()
-            linePath.move(to: CGPoint(x: 10, y: self.view.frame.height))
-            linePath.addLine(to: CGPoint(x: self.view.frame.width-20, y: self.view.frame.height))
-            line.path = linePath.cgPath
-            line.strokeColor = UIColor.white.cgColor
-            line.lineWidth = 1
-            line.lineJoin = kCALineJoinRound
-            self.view.layer.addSublayer(line)
-            
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return commentsCList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell:commentCell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! commentCell!
+        cell.data = (commentsCList[indexPath.row] as! commentCellData)
+        cell.commentLabel.text = (commentsCList[indexPath.row] as! commentCellData).comment
+        cell.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You tapped cell number \(indexPath.row).")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
         
     }
     

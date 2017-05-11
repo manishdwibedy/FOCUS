@@ -33,6 +33,11 @@ class commentCell: UITableViewCell {
         likeCount.text = String(newLike)
     }
     
+    func checkForLike()
+    {
+        
+    }
+    
     
 }
 
