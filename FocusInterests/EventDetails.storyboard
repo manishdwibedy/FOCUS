@@ -421,9 +421,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FU-wF-Ian">
-                                <rect key="frame" x="7" y="57" width="361" height="566"/>
-                            </scrollView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FqS-zx-6nW">
                                 <rect key="frame" x="7" y="629" width="298" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.97192192803506172" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -434,7 +431,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxp-tQ-GXd">
                                 <rect key="frame" x="321" y="629" width="31" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="31" id="aG2-Xu-5MF"/>
+                                    <constraint firstAttribute="width" constant="31" id="Ai6-Kx-Hc7"/>
                                 </constraints>
                                 <state key="normal" title="Post"/>
                                 <connections>
@@ -447,25 +444,30 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NV2-on-cRJ">
+                                <rect key="frame" x="7" y="57" width="360" height="564"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.0035624755349816838" green="0.80395383883248728" blue="0.37541098387195382" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.17601923450000001" green="0.28374994100000001" blue="0.3749801713" alpha="0.95090432359999999" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6FU-wF-Ian" firstAttribute="leading" secondItem="Mkh-SY-OoJ" secondAttribute="leadingMargin" constant="-9" id="0A1-lO-22U"/>
-                            <constraint firstItem="vsr-LJ-ybH" firstAttribute="top" secondItem="1KB-Zf-zk3" secondAttribute="bottom" constant="8" symbolic="YES" id="0jt-JW-yrj"/>
-                            <constraint firstItem="6FU-wF-Ian" firstAttribute="leading" secondItem="FqS-zx-6nW" secondAttribute="leading" id="3Tn-DS-PJM"/>
-                            <constraint firstItem="FqS-zx-6nW" firstAttribute="top" secondItem="6FU-wF-Ian" secondAttribute="bottom" constant="6" id="8uY-gV-Ifb"/>
-                            <constraint firstItem="vsr-LJ-ybH" firstAttribute="centerX" secondItem="Mkh-SY-OoJ" secondAttribute="centerX" id="DK4-2I-chw"/>
-                            <constraint firstItem="FqS-zx-6nW" firstAttribute="top" secondItem="vxp-tQ-GXd" secondAttribute="top" id="HLL-Ak-91b"/>
-                            <constraint firstItem="vxp-tQ-GXd" firstAttribute="leading" secondItem="FqS-zx-6nW" secondAttribute="trailing" constant="16" id="MPj-sZ-DXM"/>
-                            <constraint firstItem="6FU-wF-Ian" firstAttribute="top" secondItem="vsr-LJ-ybH" secondAttribute="bottom" constant="8" symbolic="YES" id="QcC-EN-7NT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vxp-tQ-GXd" secondAttribute="trailing" constant="7" id="dsa-y4-Gcq"/>
-                            <constraint firstItem="vsr-LJ-ybH" firstAttribute="centerX" secondItem="6FU-wF-Ian" secondAttribute="centerX" id="jB6-J3-RjA"/>
-                            <constraint firstItem="zKl-Pd-ypi" firstAttribute="top" secondItem="FqS-zx-6nW" secondAttribute="bottom" constant="8" symbolic="YES" id="lcf-Ag-Swr"/>
+                            <constraint firstItem="NV2-on-cRJ" firstAttribute="centerX" secondItem="Mkh-SY-OoJ" secondAttribute="centerX" id="CKA-2Q-6xy"/>
+                            <constraint firstItem="NV2-on-cRJ" firstAttribute="leading" secondItem="Mkh-SY-OoJ" secondAttribute="leadingMargin" constant="-9" id="Rle-7V-Q3C"/>
+                            <constraint firstItem="zKl-Pd-ypi" firstAttribute="top" secondItem="FqS-zx-6nW" secondAttribute="bottom" constant="8" symbolic="YES" id="W7P-3x-97K"/>
+                            <constraint firstItem="FqS-zx-6nW" firstAttribute="top" secondItem="NV2-on-cRJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Ycg-Tn-hXh"/>
+                            <constraint firstItem="vxp-tQ-GXd" firstAttribute="leading" secondItem="FqS-zx-6nW" secondAttribute="trailing" constant="16" id="aD1-Dp-ktM"/>
+                            <constraint firstItem="vsr-LJ-ybH" firstAttribute="centerX" secondItem="Mkh-SY-OoJ" secondAttribute="centerX" id="aJC-wX-lpa"/>
+                            <constraint firstItem="vsr-LJ-ybH" firstAttribute="top" secondItem="1KB-Zf-zk3" secondAttribute="bottom" constant="8" symbolic="YES" id="awu-cx-fzO"/>
+                            <constraint firstItem="NV2-on-cRJ" firstAttribute="top" secondItem="vsr-LJ-ybH" secondAttribute="bottom" constant="8" symbolic="YES" id="d9H-EJ-06T"/>
+                            <constraint firstItem="FqS-zx-6nW" firstAttribute="top" secondItem="vxp-tQ-GXd" secondAttribute="top" id="fsl-ZC-TG6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vxp-tQ-GXd" secondAttribute="trailing" constant="7" id="iYZ-G0-gD4"/>
+                            <constraint firstItem="NV2-on-cRJ" firstAttribute="leading" secondItem="FqS-zx-6nW" secondAttribute="leading" id="nDl-82-nEl"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="commentTextField" destination="FqS-zx-6nW" id="hsL-eb-6FP"/>
-                        <outlet property="scrollView" destination="6FU-wF-Ian" id="YkT-TH-PcV"/>
+                        <outlet property="tableView" destination="NV2-on-cRJ" id="Xl9-RT-JND"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wfr-e2-2jJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
