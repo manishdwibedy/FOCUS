@@ -24,7 +24,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
@@ -80,6 +80,9 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="createPin:" destination="3TX-Ww-Aks" eventType="touchUpInside" id="XQe-x6-E6i"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-56-fhv" userLabel="textField stackViews">
                                         <rect key="frame" x="9" y="45" width="357" height="381"/>
@@ -90,7 +93,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="VS9-U7-j86"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -121,7 +124,7 @@
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
-                                                    <action selector="addEventLocation:" destination="3TX-Ww-Aks" eventType="touchUpInside" id="i1c-lR-U9P"/>
+                                                    <action selector="addEventLocation:" destination="3TX-Ww-Aks" eventType="touchDown" id="JmV-di-Fad"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vbf-5v-kMg">
@@ -131,6 +134,9 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="addEventDate:" destination="3TX-Ww-Aks" eventType="touchDown" id="JCT-xL-2Yo"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VLy-M0-SHl">
                                                 <rect key="frame" x="0.0" y="230" width="357" height="45"/>
@@ -138,6 +144,9 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="addEventTime:" destination="3TX-Ww-Aks" eventType="touchDown" id="hxk-fd-78V"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Description                                        " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BEB-uo-x4K">
                                                 <rect key="frame" x="0.0" y="291" width="357" height="90"/>
@@ -259,6 +268,7 @@
                         <outlet property="eventTimeTextField" destination="VLy-M0-SHl" id="WG2-3G-huo"/>
                         <outlet property="interestTableView" destination="4mD-gv-r8q" id="C0Y-M9-0VQ"/>
                         <outlet property="locationTextField" destination="Z2l-7t-2Co" id="swX-ke-M5l"/>
+                        <outlet property="publicOrPrivateSwitch" destination="EH1-4f-id0" id="cmZ-l0-HyP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTE-OT-ThV" userLabel="First Responder" sceneMemberID="firstResponder"/>
