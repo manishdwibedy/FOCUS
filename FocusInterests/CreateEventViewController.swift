@@ -25,18 +25,15 @@ class CreateEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         self.navigationItem.title = "Create Pin"
         showDateTime()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func createPin(_ sender: UIButton) {
-        
         if place != nil{
             let locality = self.place?.addressComponents?[0].name
             let street = self.place?.addressComponents?[1].name

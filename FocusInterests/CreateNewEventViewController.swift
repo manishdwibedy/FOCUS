@@ -14,6 +14,10 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     var event: Event?
     var place: GMSPlace?
+    let datePicker = UIDatePicker()
+    let timePicker = UIDatePicker()
+    let dateFormatter = DateFormatter()
+    let timeFormatter = DateFormatter()
     
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -23,12 +27,18 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var descriptionTextField: UITextField!
     
     @IBOutlet weak var interestTableView: UITableView!
-
+    
+    @IBOutlet weak var publicOrPrivateSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         interestTableView.dataSource = self
         interestTableView.delegate = self
         formatTextFields()
+        self.timePicker.datePickerMode = .time
+        self.datePicker.datePickerMode = .date
+        self.dateFormatter.dateFormat = "MMM d yyyy"
+        self.timeFormatter.dateFormat = "h:mm a"
     }
     
     
@@ -36,6 +46,61 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
         present(autoCompleteController, animated: true, completion: nil)
+    }
+    
+    @IBAction func addEventDate(_ sender: UITextField) {
+        showDatePicker()
+    }
+    
+    @IBAction func addEventTime(_ sender: UITextField) {
+        showTimePicker()
+    }
+    
+    @IBAction func createPin(_ sender: UIButton) {
+        guard let validPlace = self.place else { return }
+        let locality = validPlace.addressComponents?[0].name
+        let street = validPlace.addressComponents?[1].name
+        let shortAddress = "\(locality!), \(street!)"
+        
+        guard let validLocation = self.place else { return }
+        guard let validName = eventNameTextField.text else { return }
+        guard let validDescrip = descriptionTextField.text else { return }
+        
+        guard let validDate = eventDateTextField.text else { return }
+        guard let validTime = eventTimeTextField.text else { return }
+        let dateString = validDate + validTime
+        
+        guard let creator = AuthApi.getFirebaseUid() else { return }
+        
+        self.event = Event(title: validName, description: validDescrip, fullAddress: validLocation.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
+    }
+    
+    func showDatePicker(){
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(dateSelected))
+        toolbar.setItems([done], animated: false)
+        eventDateTextField.inputAccessoryView = toolbar
+        eventDateTextField.inputView = datePicker
+    }
+    
+    func showTimePicker(){
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(timeSelected))
+        toolbar.setItems([done], animated: false)
+        eventTimeTextField.inputAccessoryView = toolbar
+        eventTimeTextField.inputView = timePicker
+    }
+    
+    func dateSelected(){
+        self.eventDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
+        self.view.endEditing(true)
+    }
+    
+    func timeSelected(){
+        self.eventTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
+        self.view.endEditing(true)
     }
     
     func formatTextFields(){
@@ -62,32 +127,12 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0 :
-            return 3
-        case 1:
-            return 3
-        default:
-            return 0
-        }
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
-            return cell
-            
-        case 1:
-            let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
-            return cell
-            
-        default:
-            let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
-            
-            return cell
-        }
-        
+        let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
+        return cell
     }
 }
 
