@@ -103,7 +103,8 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     
     
     @IBAction func post(_ sender: Any) {
-        ref.child("events").child((parentEvent?.id)!).child("comments").childByAutoId().updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!])
+        let unixDate = NSDate().timeIntervalSince1970
+        ref.child("events").child((parentEvent?.id)!).child("comments").childByAutoId().updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "liked":"0", "date": NSNumber(value: Double(unixDate))])
         commentsCList.add(commentTextField.text!)
         tableView.beginUpdates()
         tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
