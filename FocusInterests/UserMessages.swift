@@ -11,13 +11,15 @@ import Foundation
 class UserMessages{
     let id: String
     let name: String
-    let unreadMessages: Bool
+    var readMessages: Bool
     let messageID: String
+    var lastMessageDate: Date
     
-    init(id: String, name: String, messageID: String, unreadMessages: Bool){
+    init(id: String, name: String, messageID: String, readMessages: Bool, lastMessageDate: Date){
         self.id = id
         self.name = name
         self.messageID = messageID
-        self.unreadMessages = unreadMessages
+        self.readMessages = readMessages
+        self.lastMessageDate = lastMessageDate
     }
 }
