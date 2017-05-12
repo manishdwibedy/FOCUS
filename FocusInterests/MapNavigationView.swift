@@ -16,8 +16,12 @@ protocol NavigationInteraction {
 class MapNavigationView: UIView, UISearchBarDelegate {
     var delegate: NavigationInteraction?
     
+    @IBOutlet weak var userProfileButton: UIButton!
     @IBOutlet var view: MapNavigationView!
+    @IBOutlet weak var messagesButton: UIButton!
     
+    @IBOutlet weak var notificationsButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -42,6 +46,11 @@ class MapNavigationView: UIView, UISearchBarDelegate {
                 view.removeFromSuperview()
             }
         }
+//        
+//        userProfileButton.contentMode = .center
+//        userProfileButton.imageView?.contentMode = .scaleAspectFit
+//        userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100)
+
     }
     
     @IBAction func profileButtonPressed(_ sender: UIButton) {

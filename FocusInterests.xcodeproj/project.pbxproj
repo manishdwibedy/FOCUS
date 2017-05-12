@@ -11,6 +11,7 @@
 		5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D51EA7285C007E8D99 /* Event.swift */; };
 		5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */; };
 		5B5906461EC3CB0400466AAC /* UserMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906451EC3CB0400466AAC /* UserMessages.swift */; };
+		5B5906481EC576CA00466AAC /* map_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5906471EC576CA00466AAC /* map_style.json */; };
 		5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
@@ -123,6 +124,7 @@
 		5B51C8D51EA7285C007E8D99 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		5B5906451EC3CB0400466AAC /* UserMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessages.swift; sourceTree = "<group>"; };
+		5B5906471EC576CA00466AAC /* map_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map_style.json; sourceTree = "<group>"; };
 		5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 		D2B9B0701E5A0A0B0002F1B1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5B5906471EC576CA00466AAC /* map_style.json */,
 				D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */,
 				D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */,
 				D21975461E6229F100ED3345 /* UITextField+Extensions.swift */,
@@ -649,6 +652,7 @@
 				D23E01371E6BA7C900E735F5 /* GoogleService-Info.plist in Resources */,
 				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
+				5B5906481EC576CA00466AAC /* map_style.json in Resources */,
 				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
