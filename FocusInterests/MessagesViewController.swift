@@ -73,18 +73,23 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 
             let message = snapshot.value as? [String:Any]
             
-            let date = Date(timeIntervalSince1970: message?["date"] as! Double)
+            if let unix = message?["date"] as? Double{
+                let date = Date(timeIntervalSince1970: unix)
+                
+                self.usersRef.child(snapshot.key).observeSingleEvent(of: .value, with: {(snapshot) in
+                    let user_info = snapshot.value as! [String:Any]
+                    let username = user_info["username"] as! String
+                    
+                    let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date)
+                    self.messageMapper[snapshot.key] = userMessage
+                    self.userInfo[snapshot.key] = user_info
+                    self.messages.append(userMessage)
+                    
+                })
+            }
             
-            self.usersRef.child(snapshot.key).observeSingleEvent(of: .value, with: {(snapshot) in
-                let user_info = snapshot.value as! [String:Any]
-                let username = user_info["username"] as! String
-                
-                let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date)
-                self.messageMapper[snapshot.key] = userMessage
-                self.userInfo[snapshot.key] = user_info
-                self.messages.append(userMessage)
-                
-            })
+            
+            
         })
         
     }
