@@ -26,8 +26,6 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let _ = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-
         self.senderId = AuthApi.getFirebaseUid()
         self.senderDisplayName = "USER 1"
         
@@ -46,12 +44,6 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         
         self.navigationItem.title = self.user["username"]! as! String
         super.collectionView.keyboardDismissMode = .interactive
-    }
-    
-    //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -218,17 +210,17 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         
     }
     
-    override func textViewDidChange(_ textView: UITextView) {
-        super.textViewDidBeginEditing(textView)
-        let len = textView.text.characters.count
-        
-        if len == 0{
-            Constants.DB.user.child("\(self.senderId!)/typing").setValue(false)
-        }
-        else{
-            Constants.DB.user.child("\(self.senderId!)/typing").setValue(true)
-        }
-    }
+//    override func textViewDidChange(_ textView: UITextView) {
+//        super.textViewDidBeginEditing(textView)
+//        let len = textView.text.characters.count
+//        
+//        if len == 0{
+//            Constants.DB.user.child("\(self.senderId!)/typing").setValue(false)
+//        }
+//        else{
+//            Constants.DB.user.child("\(self.senderId!)/typing").setValue(true)
+//        }
+//    }
     
     func addImage(){
         
@@ -373,8 +365,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     
     func getMessageID(){
         messagesRef.child(self.senderId).child(self.user["firebaseUserId"]! as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-            let val = snapshot.value as? [String:String]
-            if let ID = val?["messageID"]{
+            let val = snapshot.value as? [String:Any]
+            if let ID = val?["messageID"] as? String{
                 self.messageID = ID
                 self.getMessages()
             }
@@ -409,8 +401,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         let two = self.messagesRef.child(user["firebaseUserId"]! as! String).child(self.senderId)
         
         let content = [
-            "messageID": self.messageID
-        ]
+            "messageID": self.messageID,
+            "date": Date().timeIntervalSince1970,
+            "read": false
+        ] as [String : Any]
         one.setValue(content)
         two.setValue(content)
         
