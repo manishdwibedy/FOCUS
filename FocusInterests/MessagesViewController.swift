@@ -10,15 +10,24 @@ import UIKit
 
 class MessagesViewController: UIViewController {
 
-    let messageRef = Constants.DB.messages
+    var messageRef: UInt = 0
     let usersRef = Constants.DB.user
     var messages = [UserMessages]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        loadInitialTable()
+//        loadInitialTable()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadTable()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Constants.DB.messages.removeObserver(withHandle: self.messageRef)
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,22 +39,22 @@ class MessagesViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func loadInitialTable(){
-        self.messageRef.child(AuthApi.getFirebaseUid()!).queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
+    func loadTable(){
+        messageRef = Constants.DB.messages.child(AuthApi.getFirebaseUid()!).queryOrdered(byChild: "unread").queryLimited(toLast: 20).observe(.childAdded, with: {(snapshot) in
+            
             let users = snapshot.value as? [String:[String:Any]]
+            
             
             for (userID, message_data) in users!{
                 self.usersRef.child(userID).child("username").observeSingleEvent(of: .value, with: {(snapshot) in
                     let username = snapshot.value as! String
                     let user = UserMessages(id: userID, name: username, messageID: message_data["messageID"] as! String, unreadMessages: message_data["unread"] as! Bool)
                     self.messages.append(user)
+                    
                 })
             }
-//            self.tableView.reloadData()
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+        })
+        
     }
 
     /*
