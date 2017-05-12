@@ -106,6 +106,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         else{
             self.continueConversion(message!)
         }
+        self.collectionView.reloadData()
         updateDateRead()
         finishSendingMessage()
     }
@@ -383,17 +384,18 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     func startConversion(_ message: JSQMessage){
         if self.messageID == nil{
             
-            let newMessage = messageContentRef.childByAutoId()
-            let messageDictionary = [[
-                "sender_id" : AuthApi.getFirebaseUid(),
-                "text" : message.text,
-                "date": Date().timeIntervalSince1970
-            ]]
+            let threadID = messageContentRef.childByAutoId()
+            let newMessage = threadID.childByAutoId()
             
-            self.messageID = newMessage.key
+            let messageDictionary = [
+                                "sender_id" : AuthApi.getFirebaseUid(),
+                                "text" : message.text,
+                                "date": Date().timeIntervalSince1970
+                            ] as [String : Any]
+            self.messageID = threadID.key
             newMessage.setValue(messageDictionary)
-            
             self.addMessageID()
+            self.getMessages()
         }
         
     }
