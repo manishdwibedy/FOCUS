@@ -9,12 +9,15 @@
 import UIKit
 import FirebaseDatabase
 
-class MessagesViewController: UIViewController, UITableViewDataSource {
+class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var messageRef: UInt = 0
     let usersRef = Constants.DB.user
+    var userInfo = [String:[String:Any]]()
+    var messageMapper = [String: UserMessages]()
     private var _messages = [UserMessages]()
+    
     var messages: [UserMessages]{
         get{
             return _messages
@@ -31,7 +34,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource {
             tableView.reloadData()
         }
     }
-    var messageMapper = [String: UserMessages]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +46,11 @@ class MessagesViewController: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadTable()
+        
+        if self.messages.count == 0{
+            loadTable()
+        }
+        
         listenForChanges()
     }
     
@@ -74,6 +81,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource {
                 
                 let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date)
                 self.messageMapper[snapshot.key] = userMessage
+                self.userInfo[snapshot.key] = user_info
                 self.messages.append(userMessage)
                 
             })
@@ -123,6 +131,20 @@ class MessagesViewController: UIViewController, UITableViewDataSource {
             cell.detailTextLabel?.font = UIFont.italicSystemFont(ofSize: 15.0)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = self.messages[indexPath.row]
+        let user_info = self.userInfo[message.id]
+        self.performSegue(withIdentifier: "show_user_chat", sender: user_info)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "show_user_chat"{
+            let VC = segue.destination as! ChatViewController
+            VC.user = sender as! [String:Any]
+        }
+        
     }
     /*
     // MARK: - Navigation

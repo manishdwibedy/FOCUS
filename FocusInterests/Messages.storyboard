@@ -68,6 +68,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Tuo-yx-ZBR" id="f69-TK-GVS"/>
+                                    <outlet property="delegate" destination="Tuo-yx-ZBR" id="yfw-TY-Ae4"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -95,6 +96,7 @@
                     <connections>
                         <outlet property="searchDisplayController" destination="stH-Ul-pLo" id="EFu-MF-IdL"/>
                         <outlet property="tableView" destination="2jU-QM-3Yi" id="EVf-WC-zvd"/>
+                        <segue destination="sg1-OE-hfb" kind="show" identifier="show_user_chat" id="JoM-WG-iMF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kr-nr-gZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -150,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFT-4p-B8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="309.60000000000002" y="-100.29985007496252"/>
+            <point key="canvasLocation" x="846" y="-99"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="hcf-Nx-xt7">
@@ -168,7 +170,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="69g-gY-an3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1097" y="-99"/>
+            <point key="canvasLocation" x="847" y="824"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="JoM-WG-iMF"/>
+    </inferredMetricsTieBreakers>
 </document>
