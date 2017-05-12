@@ -43,6 +43,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         placesClient = GMSPlacesClient.shared()
         
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: "map_style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                NSLog("Unable to find style.json")
+            }
+        } catch {
+            NSLog("One or more of the map styles failed to load. \(error)")
+        }
+        
         Constants.DB.event.observe(FIRDataEventType.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             
