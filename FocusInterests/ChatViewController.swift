@@ -411,8 +411,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
 
     func updateDateRead(){
-        messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/date").setValue(Date().timeIntervalSince1970)
-        messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/read").setValue(false)
+        messagesRef.child("\(self.user["firebaseUserId"]! as! String)/\(self.senderId!)/date").setValue(Date().timeIntervalSince1970)
+        messagesRef.child("\(self.user["firebaseUserId"]! as! String)/\(self.senderId!)/read").setValue(false)
     }
     
     func markUnread(){
