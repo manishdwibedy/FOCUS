@@ -19,6 +19,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var navBarView: UIView!
     @IBOutlet weak var likeOut: UIButton!
+    @IBOutlet weak var attendOut: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -135,6 +136,18 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         })
         
+        //attending
+        ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.attendOut.isEnabled = false
+                self.attendOut.setTitle("Attending", for: UIControlState.normal)
+            }
+            
+        })
+        self.attendOut.titleLabel?.textAlignment = .left
+        
         
         
     }
@@ -156,6 +169,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func attendEvent(_ sender: UIButton) {
+        let fullRef = ref.child("events").child((event?.id)!)
+        fullRef.child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+        self.attendOut.isEnabled = false
+        self.attendOut.setTitle("Attending", for: UIControlState.normal)
     }
     
     @IBAction func mapEvent(_ sender: Any) {
