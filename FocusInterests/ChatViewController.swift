@@ -40,6 +40,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         self.inputToolbar.contentView.textView.placeHolderTextColor = UIColor.white
         self.inputToolbar.contentView.textView.placeHolder = "Enter the message"
         
+        markUnread()
         getMessageID()
         
         self.navigationItem.title = self.user["username"]! as! String
@@ -413,6 +414,12 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/date").setValue(Date().timeIntervalSince1970)
         messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/read").setValue(false)
     }
+    
+    func markUnread(){
+        messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/read").setValue(true)
+    }
+    
+    
     
     /*
     // MARK: - Navigation
