@@ -67,20 +67,16 @@ class MessagesViewController: UIViewController, UITableViewDataSource {
             let message = snapshot.value as? [String:Any]
             
             let date = Date(timeIntervalSince1970: message?["date"] as! Double)
-            let userMessage = UserMessages(id: snapshot.key, name: snapshot.key, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date)
-            self.messageMapper[snapshot.key] = userMessage
-            self.messages.append(userMessage)
-//            let users = snapshot.value as? [String:[String:Any]]
-//            
-//            
-//            for (userID, message_data) in users!{
-//                self.usersRef.child(userID).child("username").observeSingleEvent(of: .value, with: {(snapshot) in
-//                    let username = snapshot.value as! String
-//                    let user = UserMessages(id: userID, name: username, messageID: message_data["messageID"] as! String, unreadMessages: message_data["read"] as! Bool)
-//                    self.messages.append(user)
-//                    
-//                })
-//            }
+            
+            self.usersRef.child(snapshot.key).observeSingleEvent(of: .value, with: {(snapshot) in
+                let user_info = snapshot.value as! [String:Any]
+                let username = user_info["username"] as! String
+                
+                let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date)
+                self.messageMapper[snapshot.key] = userMessage
+                self.messages.append(userMessage)
+                
+            })
         })
         
     }
@@ -121,6 +117,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource {
         if !message.readMessages{
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
             cell.detailTextLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
+        }
+        else{
+            cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 15)
+            cell.detailTextLabel?.font = UIFont.italicSystemFont(ofSize: 15.0)
         }
         return cell
     }
