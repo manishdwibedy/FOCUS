@@ -105,7 +105,6 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         else{
             self.continueConversion(message!)
         }
-        messages.append(message!)
         updateDateRead()
         finishSendingMessage()
     }
