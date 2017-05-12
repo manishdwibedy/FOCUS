@@ -106,7 +106,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             self.continueConversion(message!)
         }
         messages.append(message!)
-        
+        updateDateRead()
         finishSendingMessage()
     }
     
@@ -267,7 +267,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             }
         }
 
-        
+        updateDateRead()
         self.messages.append(message!)
         self.collectionView.reloadData()
         self.scrollToBottom(animated: true)
@@ -410,6 +410,11 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         
     }
 
+    func updateDateRead(){
+        messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/date").setValue(Date().timeIntervalSince1970)
+        messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/read").setValue(false)
+    }
+    
     /*
     // MARK: - Navigation
 
