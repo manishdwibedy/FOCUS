@@ -13,7 +13,7 @@
         <scene sceneID="I3R-J9-Vsb">
             <objects>
                 <navigationController storyboardIdentifier="Home" id="5uk-yf-boc" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="5jN-Kp-ofZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5jN-Kp-ofZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -86,7 +86,7 @@
                                 <action selector="goBack:" destination="Tuo-yx-ZBR" id="lxv-BP-HYo"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3KZ-FJ-2Ib">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="3KZ-FJ-2Ib">
                             <connections>
                                 <segue destination="sET-e3-YSM" kind="show" id="Bgx-6B-0DV"/>
                             </connections>
