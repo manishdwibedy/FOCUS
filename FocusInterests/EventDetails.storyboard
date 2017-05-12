@@ -449,7 +449,7 @@
                                 <color key="sectionIndexBackgroundColor" red="0.0035624755349816838" green="0.80395383883248728" blue="0.37541098387195382" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.17601923450000001" green="0.28374994100000001" blue="0.3749801713" alpha="0.95090432359999999" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.17601923450000001" green="0.28374994100000001" blue="0.3749801713" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="NV2-on-cRJ" firstAttribute="centerX" secondItem="Mkh-SY-OoJ" secondAttribute="centerX" id="CKA-2Q-6xy"/>
                             <constraint firstItem="NV2-on-cRJ" firstAttribute="leading" secondItem="Mkh-SY-OoJ" secondAttribute="leadingMargin" constant="-9" id="Rle-7V-Q3C"/>

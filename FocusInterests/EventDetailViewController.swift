@@ -89,7 +89,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         })
         
         let fullRef = ref.child("events").child((event?.id)!).child("comments")
-        fullRef.queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { (snapshot) in
+        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
@@ -161,12 +161,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     
     @IBAction func moreComments(_ sender: Any) {
-        /*
-        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "allComments") as! allCommentsVC
-        controller.parentEvent = event
-        self.present(controller, animated: true, completion: nil)
-        */
         scrollView.contentOffset = CGPoint(x: 0, y: 0)
         let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "allComments") as! allCommentsVC
@@ -175,18 +169,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.present(ivc, animated: true, completion: { _ in })
         
         
-        let darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light)
-        blur = UIVisualEffectView(effect: darkBlur)
-        blur.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.contentSize.height)
-        blur.alpha = 0
-        self.scrollView.addSubview(blur)
-        UIView.animate(withDuration: 0.2,delay: 0.0,options: UIViewAnimationOptions.curveEaseIn,
-                       animations: { () -> Void in
-                        self.blur.alpha = 1
-                        
-        }, completion: { (finished) -> Void in
-            
-        })
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -229,6 +211,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         cell.data = (commentsCList[indexPath.row] as! commentCellData)
         cell.commentLabel.text = (commentsCList[indexPath.row] as! commentCellData).comment
         cell.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
+        cell.checkForLike()
         return cell
     }
     
@@ -237,7 +220,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        return 65
         
     }
     

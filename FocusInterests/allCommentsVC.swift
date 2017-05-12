@@ -36,7 +36,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
         
         let fullRef = ref.child("events").child((parentEvent?.id)!).child("comments")
-        fullRef.queryLimited(toFirst: 10).queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
@@ -69,6 +69,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         cell.data = (commentsCList[indexPath.row] as! commentCellData)
         cell.commentLabel.text = (commentsCList[indexPath.row] as! commentCellData).comment
         cell.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
+        cell.checkForLike()
         return cell
     }
     
@@ -77,7 +78,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        return 65
         
     }
 
