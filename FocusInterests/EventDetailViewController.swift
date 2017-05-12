@@ -18,6 +18,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var navBarView: UIView!
+    @IBOutlet weak var likeOut: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -115,8 +116,24 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         })
         
+        //check for likes
+        ref.child("events").child((event?.id)!).child("likeAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.likeCount.text = String(value?["num"] as! Int)
+            }
+        })
         
-        
+        ref.child("events").child((event?.id)!).child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
+                self.likeOut.isEnabled = false
+            }
+            
+        })
         
         
         
@@ -130,8 +147,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func likeEvent(_ sender: UIButton) {
-        let eventRef = Constants.DB.event.child("\(event!.id!)")
-        //        if eventRef.child("likes").exi
+        let fullRef = ref.child("events").child((event?.id)!)
+        let newLike = Int(likeCount.text!)! + 1
+        fullRef.child("likeAmount").updateChildValues(["num":newLike])
+        fullRef.child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+        likeCount.text = String(newLike)
+        
     }
     
     @IBAction func attendEvent(_ sender: UIButton) {
@@ -216,7 +237,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

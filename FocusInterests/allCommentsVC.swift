@@ -74,7 +74,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
