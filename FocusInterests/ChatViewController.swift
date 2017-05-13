@@ -267,11 +267,11 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 }
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 let _ = metadata.downloadURL
+                
             }
         }
-
-        updateDateRead()
         self.messages.append(message!)
+        updateDateRead()
         self.collectionView.reloadData()
         self.scrollToBottom(animated: true)
     }
@@ -303,11 +303,12 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 
                 let imageRef = Constants.storage.messages.child("\(snapshot.key).jpg")
                 
-                // Download in memory with a maximum allowed size of 2MB (20 * 1024 * 1024 bytes)
                 imageRef.downloadURL(completion: {(url, error) in
                     if let error = error{
                         print("Error occurred: \(error.localizedDescription)")
                     }
+                    
+                    self.messages.append(message!)
                     
                     SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
                         (receivedSize :Int, ExpectedSize :Int) in
@@ -322,11 +323,12 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                             let index = self.imageMapper[snapshot.key]
                             self.messages[index!] = message!
                             self.collectionView.reloadData()
+                            
                         }
                     })
                 })
                 
-                self.messages.append(message!)
+                
                 self.collectionView.reloadData()
                 self.scrollToBottom(animated: true)
             }
@@ -353,17 +355,38 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     
     func addImage(_ message: JSQMessage) -> String{
         
-        let conversion = self.messageContentRef.child(self.messageID!)
+        if self.messageID == nil{
+            
+            let threadID = messageContentRef.childByAutoId()
+            let newMessage = threadID.childByAutoId()
+            
+            let messageDictionary: [String: Any] = [
+                "sender_id" : AuthApi.getFirebaseUid(),
+                "image" : true,
+                "date": Date().timeIntervalSince1970
+            ]
+            
+            self.messageID = threadID.key
+            newMessage.setValue(messageDictionary)
+            self.addMessageID()
+            self.getMessages()
+            return newMessage.key
+        }
+        else{
+            let conversion = self.messageContentRef.child(self.messageID!)
+            
+            let newMessage = conversion.childByAutoId()
+            let messageDictionary: [String: Any] = [
+                "sender_id" : AuthApi.getFirebaseUid(),
+                "image" : true,
+                "date": Date().timeIntervalSince1970
+            ]
+            
+            newMessage.setValue(messageDictionary)
+            return newMessage.key
+        }
         
-        let newMessage = conversion.childByAutoId()
-        let messageDictionary: [String: Any] = [
-            "sender_id" : AuthApi.getFirebaseUid(),
-            "image" : true,
-            "date": Date().timeIntervalSince1970
-        ]
         
-        newMessage.setValue(messageDictionary)
-        return newMessage.key
     }
     
     func getMessageID(){
