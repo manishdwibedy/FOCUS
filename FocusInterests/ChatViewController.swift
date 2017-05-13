@@ -22,6 +22,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     var names = [String:String]()
     var imagePicker = UIImagePickerController()
     var imageMapper = [String:Int]()
+    var gotImages = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -270,6 +271,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 
             }
         }
+        gotImages = true
         self.messages.append(message!)
         updateDateRead()
         self.collectionView.reloadData()
@@ -297,37 +299,39 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 self.scrollToBottom(animated: true)
             }
             else{
-                let image = JSQPhotoMediaItem(image: UIImage(named: "empty_event"))
-                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
-                self.imageMapper[snapshot.key] = self.messages.count
-                
-                let imageRef = Constants.storage.messages.child("\(snapshot.key).jpg")
-                
-                imageRef.downloadURL(completion: {(url, error) in
-                    if let error = error{
-                        print("Error occurred: \(error.localizedDescription)")
-                    }
+                if !self.gotImages || id != self.senderId{
+                    let image = JSQPhotoMediaItem(image: UIImage(named: "empty_event"))
+                    let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
+                    self.imageMapper[snapshot.key] = self.messages.count
                     
+                    // show the placeholder image
                     self.messages.append(message!)
                     
-                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                        (receivedSize :Int, ExpectedSize :Int) in
-                        
-                    }, completed: {
-                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                        
-                        if image != nil && finished{
-                            let JSQimage = JSQPhotoMediaItem(image: image)
-                            let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
-                            
-                            let index = self.imageMapper[snapshot.key]
-                            self.messages[index!] = message!
-                            self.collectionView.reloadData()
-                            
+                    let imageRef = Constants.storage.messages.child("\(snapshot.key).jpg")
+                    
+                    imageRef.downloadURL(completion: {(url, error) in
+                        if let error = error{
+                            print("Error occurred: \(error.localizedDescription)")
                         }
+                        
+                        SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                            (receivedSize :Int, ExpectedSize :Int) in
+                            
+                        }, completed: {
+                            (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                            
+                            if image != nil && finished{
+                                let JSQimage = JSQPhotoMediaItem(image: image)
+                                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
+                                
+                                let index = self.imageMapper[snapshot.key]
+                                self.messages[index!] = message!
+                                self.collectionView.reloadData()
+                                
+                            }
+                        })
                     })
-                })
-                
+                }
                 
                 self.collectionView.reloadData()
                 self.scrollToBottom(animated: true)
