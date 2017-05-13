@@ -12,6 +12,7 @@ class commentCell: UITableViewCell {
 
     @IBOutlet weak var commentLabel: UITextView!
     @IBOutlet weak var likeCount: UILabel!
+    @IBOutlet weak var likeOut: UIButton!
     
     var data: commentCellData!
     override func awakeFromNib() {
@@ -31,6 +32,21 @@ class commentCell: UITableViewCell {
         data.commentFirePath.child("like").updateChildValues(["num":newLike])
         data.commentFirePath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
         likeCount.text = String(newLike)
+        self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
+    }
+    
+    func checkForLike()
+    {
+        data.commentFirePath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
+                self.likeOut.isEnabled = false
+            }
+            
+        })
+        
     }
     
     
