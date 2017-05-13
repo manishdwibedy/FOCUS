@@ -18,6 +18,10 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     let timePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
+    @IBOutlet weak var guestListBttn: UIButton!
+    @IBOutlet weak var showGuestFriendsBttn: UIButton!
+    
+    
     
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -42,11 +46,37 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
+    @IBAction func showGuestListBttn(_ sender: UIButton) {
+        if self.guestListBttn.isSelected == false {
+            self.guestListBttn.isSelected = true
+            self.guestListBttn.setBackgroundImage(UIImage(named: "Check Box Selected"), for: .selected)
+        } else {
+            self.guestListBttn.isSelected = false
+            self.guestListBttn.setBackgroundImage(UIImage(named: "Check Box Deselected"), for: .normal)
+        }
+        
+    }
+    
+    @IBAction func allowForInvitingFriendsBttn(_ sender: UIButton) {
+        if self.showGuestFriendsBttn.isSelected == true {
+            self.showGuestFriendsBttn.isSelected = false
+            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Check Box Deselected"), for: .normal)
+        } else {
+            self.showGuestFriendsBttn.isSelected = true
+            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Check Box Selected"), for: .normal)
+        }
+        
+    }
+    
+    
     @IBAction func addEventLocation(_ sender: UITextField) {
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
         present(autoCompleteController, animated: true, completion: nil)
     }
+    
+    
+    
     
     @IBAction func addEventDate(_ sender: UITextField) {
         showDatePicker()

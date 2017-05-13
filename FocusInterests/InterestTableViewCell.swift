@@ -13,6 +13,8 @@ class InterestTableViewCell: UITableViewCell {
     @IBOutlet weak var checkMarkImageView: UIImageView!
     @IBOutlet weak var selectedInterestLabel: UILabel!
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
