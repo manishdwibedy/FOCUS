@@ -15,6 +15,10 @@
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
 		5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */; };
 		5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D51EA7285C007E8D99 /* Event.swift */; };
+		5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */; };
+		5B5906461EC3CB0400466AAC /* UserMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906451EC3CB0400466AAC /* UserMessages.swift */; };
+		5B5906481EC576CA00466AAC /* map_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5906471EC576CA00466AAC /* map_style.json */; };
+		5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */; };
 		5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
@@ -22,6 +26,12 @@
 		5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */; };
 		5BA37C751EBD4DFB0091189E /* MapNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C741EBD4DFB0091189E /* MapNavigationView.swift */; };
 		5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C761EBD63BE0091189E /* HomePageViewController.swift */; };
+		5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C781EBDB7EA0091189E /* Messages.storyboard */; };
+		5BA37C7B1EBDBF200091189E /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C7A1EBDBF200091189E /* MessagesViewController.swift */; };
+		5BA37C7E1EBDC1C70091189E /* CustomTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C7D1EBDC1C70091189E /* CustomTabController.swift */; };
+		5BA37C801EBDC4D90091189E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C7F1EBDC4D90091189E /* ChatViewController.swift */; };
+		5BA37C821EBE9DE30091189E /* NewMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C811EBE9DE30091189E /* NewMessageViewController.swift */; };
+		5BA37C841EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C831EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift */; };
 		5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapInfoView.swift */; };
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
@@ -52,8 +62,6 @@
 		D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24716811E90504B00FF389D /* DisplayInterestsCell.swift */; };
 		D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D24716821E90504B00FF389D /* DisplayInterestsCell.xib */; };
 		D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252205C1E5A3C9E00EC2014 /* MapViewController.swift */; };
-		D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220601E5A436300EC2014 /* TabBar+Extensions.swift */; };
-		D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220651E5A586900EC2014 /* BaseTabBarController.swift */; };
 		D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25220671E5A846100EC2014 /* NotificationsViewController.swift */; };
 		D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */; };
 		D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */; };
@@ -133,6 +141,10 @@
 		4DCECAEA41CAC4F1781A9ADD /* Pods-FocusInterests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.release.xcconfig"; sourceTree = "<group>"; };
 		5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		5B51C8D51EA7285C007E8D99 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		5B5906451EC3CB0400466AAC /* UserMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessages.swift; sourceTree = "<group>"; };
+		5B5906471EC576CA00466AAC /* map_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map_style.json; sourceTree = "<group>"; };
+		5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +152,12 @@
 		5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapNavigationView.xib; sourceTree = "<group>"; };
 		5BA37C741EBD4DFB0091189E /* MapNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapNavigationView.swift; sourceTree = "<group>"; };
 		5BA37C761EBD63BE0091189E /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		5BA37C781EBDB7EA0091189E /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		5BA37C7A1EBDBF200091189E /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		5BA37C7D1EBDC1C70091189E /* CustomTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabController.swift; sourceTree = "<group>"; };
+		5BA37C7F1EBDC4D90091189E /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		5BA37C811EBE9DE30091189E /* NewMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageViewController.swift; sourceTree = "<group>"; };
+		5BA37C831EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesLoadEarlierHeaderView.swift; sourceTree = "<group>"; };
 		5BE31E871EA75E6A004768F0 /* MapInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -170,9 +188,7 @@
 		D24716811E90504B00FF389D /* DisplayInterestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayInterestsCell.swift; sourceTree = "<group>"; };
 		D24716821E90504B00FF389D /* DisplayInterestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayInterestsCell.xib; sourceTree = "<group>"; };
 		D252205C1E5A3C9E00EC2014 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		D25220601E5A436300EC2014 /* TabBar+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TabBar+Extensions.swift"; sourceTree = "<group>"; };
 		D25220621E5A4E0E00EC2014 /* FocusInterests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FocusInterests-Bridging-Header.h"; sourceTree = "<group>"; };
-		D25220651E5A586900EC2014 /* BaseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		D25220671E5A846100EC2014 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsCellTableViewCell.swift; sourceTree = "<group>"; };
 		D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationsCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -291,6 +307,16 @@
 			name = Event;
 			sourceTree = "<group>";
 		};
+		5BA37C7C1EBDBF250091189E /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				5BA37C7A1EBDBF200091189E /* MessagesViewController.swift */,
+				5BA37C811EBE9DE30091189E /* NewMessageViewController.swift */,
+				5BA37C7F1EBDC4D90091189E /* ChatViewController.swift */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
 		7F9A9D423DCD1AC11F3A8085 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +340,7 @@
 				D230D8CC1E5B875300025EE9 /* Interest.swift */,
 				D23E013C1E6BB0AE00E735F5 /* FocusUser.swift */,
 				5B51C8D51EA7285C007E8D99 /* Event.swift */,
+				5B5906451EC3CB0400466AAC /* UserMessages.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -335,6 +362,7 @@
 				FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */,
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
 				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
+				5BA37C781EBDB7EA0091189E /* Messages.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -415,10 +443,12 @@
 			isa = PBXGroup;
 			children = (
 				D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */,
-				D25220601E5A436300EC2014 /* TabBar+Extensions.swift */,
-				D25220651E5A586900EC2014 /* BaseTabBarController.swift */,
 				D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */,
 				D21975461E6229F100ED3345 /* UITextField+Extensions.swift */,
+				5BA37C7D1EBDC1C70091189E /* CustomTabController.swift */,
+				5BA37C831EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift */,
+				5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */,
+				5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -426,6 +456,7 @@
 		D2B9B0711E5A0A160002F1B1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5B5906471EC576CA00466AAC /* map_style.json */,
 				D25220731E5A8A7400EC2014 /* Constants.swift */,
 				D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */,
 				D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */,
@@ -447,6 +478,7 @@
 				D227AD2E1E6CBD5A000FB9DD /* NewLoginVC.swift */,
 				5BA37C6F1EB9E8940091189E /* Event */,
 				5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */,
+				5BA37C7C1EBDBF250091189E /* Message */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -669,7 +701,9 @@
 				FF522CAF1EC3E2DD00D27A9E /* commentCell.xib in Resources */,
 				FF522CA91EC383B200D27A9E /* commentView.xib in Resources */,
 				D23E01371E6BA7C900E735F5 /* GoogleService-Info.plist in Resources */,
+				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
+				5B5906481EC576CA00466AAC /* map_style.json in Resources */,
 				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
@@ -843,6 +877,7 @@
 				D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */,
 				5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */,
 				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
+				5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */,
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
@@ -858,6 +893,7 @@
 				D25220611E5A436300EC2014 /* TabBar+Extensions.swift in Sources */,
 				04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
+				5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */,
 				5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */,
 				D25220661E5A586900EC2014 /* BaseTabBarController.swift in Sources */,
 				FF522C631EC24CE900D27A9E /* allCommentsVC.swift in Sources */,
@@ -869,6 +905,8 @@
 				042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
+				5BA37C821EBE9DE30091189E /* NewMessageViewController.swift in Sources */,
+				5BA37C7E1EBDC1C70091189E /* CustomTabController.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				D25D5D341E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
@@ -886,6 +924,7 @@
 				D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */,
 				D227AD2F1E6CBD5A000FB9DD /* NewLoginVC.swift in Sources */,
 				D216482A1E9735AC00AE021B /* SelectedInterestCell.swift in Sources */,
+				5B5906461EC3CB0400466AAC /* UserMessages.swift in Sources */,
 				D23E01391E6BAD0A00E735F5 /* FirebaseUpstream.swift in Sources */,
 				D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */,
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,

@@ -13,7 +13,8 @@ import GooglePlaces
 import MapKit
 import FirebaseDatabase
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction {
+    
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -25,6 +26,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var zoomLevel: Float = 15.0
     var events = [Event]()
     
+    @IBOutlet weak var navigationView: MapNavigationView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +39,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         locationManager.delegate = self
         
         mapView.delegate = self
+        navigationView.delegate = self
         
         placesClient = GMSPlacesClient.shared()
         
@@ -58,8 +61,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 let info = event as? [String:Any]
                 let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id)
         
-                
-                
                 let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
                 let marker = GMSMarker(position: position)
                 marker.icon = UIImage(named: "addUser")
@@ -155,6 +156,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
         print("Error: \(error)")
+    }
+    
+    func messagesClicked() {
+        let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
+        
+        self.present(VC, animated:true, completion:nil)
+    }
+    
+    func notificationsClicked() {
+        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

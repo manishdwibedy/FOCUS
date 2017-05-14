@@ -8,10 +8,20 @@
 
 import UIKit
 
-class MapNavigationView: UIView, UISearchBarDelegate {
+protocol NavigationInteraction {
+    func messagesClicked()
+    func notificationsClicked()
+}
 
-    @IBOutlet var view: MapNavigationView!
+class MapNavigationView: UIView, UISearchBarDelegate {
+    var delegate: NavigationInteraction?
     
+    @IBOutlet weak var userProfileButton: UIButton!
+    @IBOutlet var view: MapNavigationView!
+    @IBOutlet weak var messagesButton: UIButton!
+    
+    @IBOutlet weak var notificationsButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,6 +39,18 @@ class MapNavigationView: UIView, UISearchBarDelegate {
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.backgroundColor = UIColor.darkGray
+        
+        for view in searchBar.subviews.last!.subviews {
+            if view.isKind(of: NSClassFromString("UISearchBarBackground")!)
+            {
+                view.removeFromSuperview()
+            }
+        }
+//        
+//        userProfileButton.contentMode = .center
+//        userProfileButton.imageView?.contentMode = .scaleAspectFit
+//        userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100)
+
     }
     
     @IBAction func profileButtonPressed(_ sender: UIButton) {
@@ -36,7 +58,7 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     }
     
     @IBAction func messagesButtonPressed(_ sender: UIButton) {
-        print("message")
+        delegate?.messagesClicked()
     }
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {
@@ -51,7 +73,7 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     }
     
     @IBAction func notificationsButtonPressed(_ sender: UIButton) {
-        print("notifications")
+        delegate?.notificationsClicked()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
