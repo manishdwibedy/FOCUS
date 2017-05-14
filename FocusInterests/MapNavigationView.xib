@@ -27,52 +27,11 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-En-2Gc" userLabel="icons">
                     <rect key="frame" x="10" y="25" width="355" height="50"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-En-2Gc">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzW-Ah-j3P">
-                                    <rect key="frame" x="0.0" y="0.0" width="94" height="90"/>
-                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                    <inset key="imageEdgeInsets" minX="50" minY="50" maxX="50" maxY="50"/>
-                                    <state key="normal" backgroundImage="UserProfile"/>
-                                    <connections>
-                                        <action selector="profileButtonPressed:" destination="-1" eventType="touchUpInside" id="Ff1-rb-4Ff"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd">
-                                    <rect key="frame" x="94" y="0.0" width="93.5" height="90"/>
-                                    <inset key="imageEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
-                                    <state key="normal" backgroundImage="Messages"/>
-                                    <connections>
-                                        <action selector="messagesButtonPressed:" destination="-1" eventType="touchUpInside" id="HhF-9i-eZZ"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIv-Ib-jcv">
-                                    <rect key="frame" x="187.5" y="0.0" width="94" height="90"/>
-                                    <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                    <state key="normal" image="Search"/>
-                                    <connections>
-                                        <action selector="searchButtonPressed:" destination="-1" eventType="touchUpInside" id="T3a-4h-zpO"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-MD-iuK">
-                                    <rect key="frame" x="281.5" y="0.0" width="93.5" height="90"/>
-                                    <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                    <state key="normal" image="Notifications"/>
-                                    <connections>
-                                        <action selector="notificationsButtonPressed:" destination="-1" eventType="touchUpInside" id="e6r-GR-iuC"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="90" id="02f-eu-E7X"/>
-                            </constraints>
-                        </stackView>
-                        <searchBar alpha="0.0" contentMode="redraw" searchBarStyle="prominent" placeholder="Search" translucent="NO" backgroundImage="4GreenCircles" translatesAutoresizingMaskIntoConstraints="NO" id="clg-Ba-1dC">
-                            <rect key="frame" x="0.0" y="90" width="375" height="44"/>
-                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                            <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <textInputTraits key="textInputTraits"/>
+                        <button opaque="NO" contentMode="scaleAspectFit" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzW-Ah-j3P">
+                            <rect key="frame" x="0.0" y="0.0" width="59" height="50"/>
+                            <edgeInsets key="layoutMargins" top="8" left="22" bottom="8" right="8"/>
+                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                            <state key="normal" backgroundImage="UserProfile"/>
                             <connections>
                                 <action selector="profileButtonPressed:" destination="-1" eventType="touchUpInside" id="Ff1-rb-4Ff"/>
                             </connections>
@@ -129,10 +88,9 @@
         </view>
     </objects>
     <resources>
-        <image name="4GreenCircles" width="48" height="48"/>
-        <image name="Messages" width="500" height="500"/>
-        <image name="Notifications" width="518" height="518"/>
-        <image name="Search" width="46" height="48"/>
-        <image name="UserProfile" width="612" height="792"/>
+        <image name="Messages" width="80" height="62"/>
+        <image name="Notification" width="66" height="66"/>
+        <image name="Search" width="78" height="76"/>
+        <image name="UserProfile" width="67" height="77"/>
     </resources>
 </document>

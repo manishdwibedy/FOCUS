@@ -11,13 +11,13 @@ import FirebaseDatabase
 
 class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var tableView: UITableView!
     var messageRef: UInt = 0
     let usersRef = Constants.DB.user
     var userInfo = [String:[String:Any]]()
     var messageMapper = [String: UserMessages]()
     private var _messages = [UserMessages]()
     
+    @IBOutlet weak var messageTable: UITableView!
     var messages: [UserMessages]{
         get{
             return _messages
@@ -31,7 +31,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                 return !$0.readMessages && $1.readMessages
                 
             }
-            tableView.reloadData()
+            messageTable.reloadData()
         }
     }
     
@@ -39,7 +39,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.tableFooterView = UIView()
+        messageTable.tableFooterView = UIView()
         // Do any additional setup after loading the view.
 //        loadInitialTable()
     }
