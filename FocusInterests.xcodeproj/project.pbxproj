@@ -12,6 +12,7 @@
 		5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */; };
 		5B5906461EC3CB0400466AAC /* UserMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906451EC3CB0400466AAC /* UserMessages.swift */; };
 		5B5906481EC576CA00466AAC /* map_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5906471EC576CA00466AAC /* map_style.json */; };
+		5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */; };
 		5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
@@ -125,6 +126,7 @@
 		5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		5B5906451EC3CB0400466AAC /* UserMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessages.swift; sourceTree = "<group>"; };
 		5B5906471EC576CA00466AAC /* map_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map_style.json; sourceTree = "<group>"; };
+		5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				5BA37C7D1EBDC1C70091189E /* CustomTabController.swift */,
 				5BA37C831EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift */,
 				5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */,
+				5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -826,6 +829,7 @@
 				D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */,
 				5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */,
 				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
+				5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */,
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,

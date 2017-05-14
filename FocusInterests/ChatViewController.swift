@@ -70,27 +70,68 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         let endDate = self.messages[0].date.timeIntervalSince1970
         let roundedEndDate = round(self.messages[0].date.timeIntervalSince1970)
         var earlierMessage = [JSQMessage]()
+        var earlierId = [String]()
         
         messageContentRef.child(self.messageID!).queryEnding(atValue: roundedEndDate).queryOrdered(byChild: "date").queryLimited(toLast: 2).observeSingleEvent(of: .value, with: {(snapshot) in
+            
             let messages = snapshot.value as? [String:[String:Any]]
             
-            
-            for (_,message_data) in messages!{
+            for (messageID,message_data) in messages!{
                 let id = message_data["sender_id"] as! String
                 let name = self.names[(message_data["sender_id"]! as! String)]
                 let date = Date(timeIntervalSince1970: TimeInterval(message_data["date"] as! Double))
-                let text = message_data["text"] as! String
                 
-                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text)
+                var message: JSQMessage?
+                if let text = message_data["text"] as? String{
+                    message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text)
+                    
+                }
+                else{
+                    let image = JSQPhotoMediaItem(image: UIImage(named: "empty_event"))
+                    message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
+                    let imageRef = Constants.storage.messages.child("\(messageID).jpg")
+                    
+                    imageRef.downloadURL(completion: {(url, error) in
+                        if let error = error{
+                            print("Error occurred: \(error.localizedDescription)")
+                        }
+                        
+                        SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                            (receivedSize :Int, ExpectedSize :Int) in
+                            
+                        }, completed: {
+                            (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                            
+                            if image != nil && finished{
+                                let JSQimage = JSQPhotoMediaItem(image: image)
+                                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
+                                
+                                let index = self.imageMapper[messageID]
+                                self.messages[index!] = message!
+                                self.collectionView.reloadData()
+                                
+                            }
+                        })
+                    })
+                }
                 
                 if date.timeIntervalSince1970 < endDate{
                     earlierMessage.append(message!)
+                    earlierId.append(messageID)
                 }
             }
             if earlierMessage.count == 0{
                 self.showLoadEarlierMessagesHeader = false
             }
             
+            var earlierMapper = [String:Int]()
+            for (index, message) in earlierMessage.enumerated(){
+                earlierMapper[earlierId[index]] = index
+            }
+            for (key, index) in self.imageMapper{
+                self.imageMapper[key] = index + earlierMessage.count
+            }
+            self.imageMapper.update(other: earlierMapper)
             self.messages = earlierMessage + self.messages
             
             self.collectionView.reloadData()
