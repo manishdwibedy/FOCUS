@@ -31,7 +31,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="59" height="50"/>
                             <edgeInsets key="layoutMargins" top="8" left="22" bottom="8" right="8"/>
                             <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                            <state key="normal" backgroundImage="UserProfile"/>
+                            <state key="normal" backgroundImage="User_Profile"/>
                             <connections>
                                 <action selector="profileButtonPressed:" destination="-1" eventType="touchUpInside" id="Ff1-rb-4Ff"/>
                             </connections>
@@ -55,7 +55,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-MD-iuK">
                             <rect key="frame" x="296.5" y="0.0" width="58.5" height="50"/>
                             <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                            <state key="normal" backgroundImage="Notification"/>
+                            <state key="normal" backgroundImage="Notifications"/>
                             <connections>
                                 <action selector="notificationsButtonPressed:" destination="-1" eventType="touchUpInside" id="e6r-GR-iuC"/>
                             </connections>
@@ -89,8 +89,8 @@
     </objects>
     <resources>
         <image name="Messages" width="80" height="62"/>
-        <image name="Notification" width="66" height="66"/>
+        <image name="Notifications" width="66" height="66"/>
         <image name="Search" width="78" height="76"/>
-        <image name="UserProfile" width="67" height="77"/>
+        <image name="User_Profile" width="67" height="77"/>
     </resources>
 </document>
