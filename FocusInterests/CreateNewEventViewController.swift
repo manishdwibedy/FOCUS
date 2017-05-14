@@ -21,8 +21,6 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var guestListBttn: UIButton!
     @IBOutlet weak var showGuestFriendsBttn: UIButton!
     
-    
-    
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -45,6 +43,30 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.timeFormatter.dateFormat = "h:mm a"
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToCreateEventIcon" {
+            guard let validPlace = self.place else { return }
+            let locality = validPlace.addressComponents?[0].name
+            let street = validPlace.addressComponents?[1].name
+            let shortAddress = "\(locality!), \(street!)"
+            
+            guard let validLocation = self.place else { return }
+            guard let validName = eventNameTextField.text else { return }
+            guard let validDescrip = descriptionTextField.text else { return }
+            
+            guard let validDate = eventDateTextField.text else { return }
+            guard let validTime = eventTimeTextField.text else { return }
+            let dateString = validDate + validTime
+            
+            guard let creator = AuthApi.getFirebaseUid() else { return }
+            
+            self.event = Event(title: validName, description: validDescrip, fullAddress: validLocation.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
+            
+            let destination = segue.destination as! EventIconViewController
+            destination.event = self.event!
+        }
+       
+    }
     
     @IBAction func showGuestListBttn(_ sender: UIButton) {
         if self.guestListBttn.isSelected == false {
@@ -54,7 +76,6 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             self.guestListBttn.isSelected = false
             self.guestListBttn.setBackgroundImage(UIImage(named: "Check Box Deselected"), for: .normal)
         }
-        
     }
     
     @IBAction func allowForInvitingFriendsBttn(_ sender: UIButton) {
@@ -65,18 +86,13 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             self.showGuestFriendsBttn.isSelected = true
             self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Check Box Selected"), for: .normal)
         }
-        
     }
-    
     
     @IBAction func addEventLocation(_ sender: UITextField) {
         let autoCompleteController = GMSAutocompleteViewController()
         autoCompleteController.delegate = self
         present(autoCompleteController, animated: true, completion: nil)
     }
-    
-    
-    
     
     @IBAction func addEventDate(_ sender: UITextField) {
         showDatePicker()
@@ -86,24 +102,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         showTimePicker()
     }
     
-    @IBAction func createPin(_ sender: UIButton) {
-        guard let validPlace = self.place else { return }
-        let locality = validPlace.addressComponents?[0].name
-        let street = validPlace.addressComponents?[1].name
-        let shortAddress = "\(locality!), \(street!)"
-        
-        guard let validLocation = self.place else { return }
-        guard let validName = eventNameTextField.text else { return }
-        guard let validDescrip = descriptionTextField.text else { return }
-        
-        guard let validDate = eventDateTextField.text else { return }
-        guard let validTime = eventTimeTextField.text else { return }
-        let dateString = validDate + validTime
-        
-        guard let creator = AuthApi.getFirebaseUid() else { return }
-        
-        self.event = Event(title: validName, description: validDescrip, fullAddress: validLocation.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
-    }
+    
     
     func showDatePicker(){
         let toolbar = UIToolbar()

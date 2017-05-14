@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mnx-Qg-K9a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mnx-Qg-K9a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -271,10 +271,10 @@
             </objects>
             <point key="canvasLocation" x="2693.5999999999999" y="895.50224887556226"/>
         </scene>
-        <!--Event Icon View Controller-->
+        <!--View Controller-->
         <scene sceneID="BTj-D2-XPa">
             <objects>
-                <viewController id="njs-0K-F5R" customClass="EventIconViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="njs-0K-F5R" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="77k-Bi-1RN"/>
                         <viewControllerLayoutGuide type="bottom" id="AvY-XE-aly"/>
@@ -602,7 +602,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zwr-f5-bIi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home-1" id="xTg-4h-XeN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="acD-ii-E6E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="acD-ii-E6E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

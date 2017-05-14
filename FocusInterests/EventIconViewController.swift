@@ -9,38 +9,45 @@
 import UIKit
 import FirebaseStorage
 
-class EventIconViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-
+class EventIconViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarDelegate{
+    
     var event: Event?
     let picker = UIImagePickerController()
     var imageData: Data?
     let storage = FIRStorage.storage()
-
+    @IBOutlet weak var tabBar: UITabBar!
+    
+    @IBOutlet weak var cameraTabBttn: UITabBarItem!
+    @IBOutlet weak var photoLibraryTabItem: UITabBarItem!
+    @IBOutlet weak var videoTabItem: UITabBarItem!
+    @IBOutlet weak var skipTabItem: UITabBarItem!
+    
     @IBOutlet weak var eventIcon: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         picker.delegate = self
+        tabBar.delegate = self
         
         self.navigationItem.title = "Choose Icon"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.createPin(sender:)))
-//
+        
+        let attributes = [
+            NSFontAttributeName:UIFont(name: "American Typewriter", size: 18),
+            NSForegroundColorAttributeName:UIColor.white
+        ]
+        UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .selected)
+        setupTabBar()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @IBAction func chooseFromGallery(_ sender: UIBarButtonItem) {
+    
+    private func chooseFromGallery(){
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         present(picker, animated: true, completion: nil)
     }
     
-    @IBAction func chooseFromCamera(_ sender: UIBarButtonItem) {
+    private func chooseFromCamera(){
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.allowsEditing = false
             picker.sourceType = UIImagePickerControllerSourceType.camera
@@ -49,6 +56,25 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
             present(picker,animated: true,completion: nil)
         }
     }
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        switch item {
+        case cameraTabBttn:
+            chooseFromCamera()
+        case photoLibraryTabItem:
+            chooseFromGallery()
+        case videoTabItem:
+            break
+            // to do
+        case skipTabItem:
+            break
+            //to do
+        default:
+            return
+        }
+        
+    }
+    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
@@ -83,14 +109,28 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
         }
         self.performSegue(withIdentifier: "event_invite", sender: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func setupTabBar() {
+        
+        let itemWidth = floor(self.tabBar.frame.size.width / CGFloat(self.tabBar.items!.count))
+        
+        // this is the separator width.  0.5px matches the line at the top of the tab bar
+        let separatorWidth: CGFloat = 0.5
+        
+        // iterate through the items in the Tab Bar, except the last one
+        for i in 0...(self.tabBar.items!.count - 2) {
+            // make a new separator at the end of each tab bar item
+            let separator = UIView(frame: CGRect(x: itemWidth * CGFloat(i + 1) - CGFloat(separatorWidth / 2), y: 0.2 * self.tabBar.frame.size.height, width: CGFloat(separatorWidth), height: self.tabBar.frame.size.height * 0.6))
+            
+            // set the color to light gray (default line color for tab bar)
+            separator.backgroundColor = UIColor.white
+            
+            self.tabBar.addSubview(separator)
+        }
     }
-    */
-
+    
+    
+    
+    
+    
 }
