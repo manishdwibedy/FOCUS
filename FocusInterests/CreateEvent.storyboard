@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3TX-Ww-Aks">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3TX-Ww-Aks">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Create New Event View Controller-->
+        <!--EVENTS-->
         <scene sceneID="nxf-sN-yWf">
             <objects>
                 <viewController id="3TX-Ww-Aks" customClass="CreateNewEventViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="851"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
                                         <rect key="frame" x="86" y="474" width="204" height="50"/>
@@ -199,7 +199,7 @@
                                                         <color key="separatorColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Bb7-5e-n8E" customClass="InterestTableViewCell" customModule="FocusInterests" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="55.5" width="356" height="44"/>
+                                                                <rect key="frame" x="0.0" y="56" width="356" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bb7-5e-n8E" id="KJK-tA-lBd">
                                                                     <rect key="frame" x="0.0" y="0.0" width="356" height="44"/>
@@ -266,6 +266,10 @@
                             <constraint firstAttribute="trailing" secondItem="dIH-Pg-PIk" secondAttribute="trailing" id="vwO-qm-9hL"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="EVENTS" id="5WR-MM-iAM">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
@@ -324,7 +328,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="585"/>
                             </imageView>
                             <tabBar contentMode="center" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYp-gC-F9o">
-                                <rect key="frame" x="0.0" y="851" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="802" width="375" height="49"/>
                                 <color key="backgroundColor" red="0.38021743297576904" green="0.44974535703659058" blue="0.50739836692810059" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <tabBarItem title="Camera" id="J0e-iP-mO6"/>
