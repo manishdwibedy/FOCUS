@@ -12,12 +12,20 @@ import FirebaseDatabase
 
 class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var publicLabel: UILabel!
+    @IBOutlet weak var privateLabel: UILabel!
+    
     var event: Event?
     var place: GMSPlace?
     let datePicker = UIDatePicker()
     let timePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
+    
+    
+    @IBOutlet weak var canInviteFriendsLabel: UILabel!
+    @IBOutlet weak var showGuestListLabel: UILabel!
+    
     @IBOutlet weak var guestListBttn: UIButton!
     @IBOutlet weak var showGuestFriendsBttn: UIButton!
     
@@ -27,9 +35,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var eventTimeTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
-    
     @IBOutlet weak var interestTableView: UITableView!
-    
     @IBOutlet weak var publicOrPrivateSwitch: UISwitch!
     
     override func viewDidLoad() {
@@ -41,6 +47,18 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d yyyy"
         self.timeFormatter.dateFormat = "h:mm a"
+    }
+    
+    
+    @IBAction func PrivOrPubSwtchChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            self.privateLabel.textColor = UIColor.primaryGreen()
+            self.publicLabel.textColor = UIColor.white
+        } else /* the switch is set to public */ {
+            self.privateLabel.textColor = UIColor.white
+            self.publicLabel.textColor = UIColor.primaryGreen()
+            //to do - hide labels & bttns
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,6 +91,8 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                 return
             }
             nextVC.event = validEvent
+            self.event = nil
+            let _ = [eventNameTextField, eventDateTextField, description, eventTimeTextField, locationTextField].map{$0.text = nil}
         }
     }
     

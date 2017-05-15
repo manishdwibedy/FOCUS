@@ -114,6 +114,9 @@
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EH1-4f-id0">
                                                         <rect key="frame" x="75.5" y="0.0" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="PrivOrPubSwtchChanged:" destination="3TX-Ww-Aks" eventType="valueChanged" id="Dsh-hi-aUe"/>
+                                                        </connections>
                                                     </switch>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHt-Do-t7D">
                                                         <rect key="frame" x="140.5" y="0.0" width="67" height="31"/>
@@ -241,7 +244,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.38039215686274508" green="0.45098039215686275" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="2lM-E0-Roc" secondAttribute="bottom" constant="246" id="8Ow-U6-nTe"/>
+                                    <constraint firstAttribute="bottom" secondItem="2lM-E0-Roc" secondAttribute="bottom" constant="100" id="8Ow-U6-nTe"/>
                                     <constraint firstItem="DK1-Jl-3Sz" firstAttribute="bottom" secondItem="2lM-E0-Roc" secondAttribute="top" constant="-16" id="B3f-7g-Bai"/>
                                     <constraint firstItem="jvR-p8-idX" firstAttribute="top" secondItem="Pss-56-fhv" secondAttribute="bottom" constant="48" id="CxL-ig-Du1"/>
                                     <constraint firstItem="Pss-56-fhv" firstAttribute="leading" secondItem="dIH-Pg-PIk" secondAttribute="leading" constant="9" id="E6z-Fg-Yl0"/>
@@ -273,6 +276,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
+                        <outlet property="canInviteFriendsLabel" destination="xe7-7I-sEu" id="CYD-4M-gEl"/>
                         <outlet property="descriptionTextField" destination="BEB-uo-x4K" id="4xc-hq-8Bx"/>
                         <outlet property="eventDateTextField" destination="Vbf-5v-kMg" id="Mph-iO-bXH"/>
                         <outlet property="eventNameTextField" destination="SUQ-U7-3Hm" id="VKn-jV-rK2"/>
@@ -280,8 +284,11 @@
                         <outlet property="guestListBttn" destination="Gh9-Vi-Du2" id="2AE-Ud-0Y8"/>
                         <outlet property="interestTableView" destination="4mD-gv-r8q" id="C0Y-M9-0VQ"/>
                         <outlet property="locationTextField" destination="Z2l-7t-2Co" id="swX-ke-M5l"/>
+                        <outlet property="privateLabel" destination="NHt-Do-t7D" id="hJw-RW-5Fy"/>
+                        <outlet property="publicLabel" destination="LCG-dE-mWN" id="3o9-5Z-Tey"/>
                         <outlet property="publicOrPrivateSwitch" destination="EH1-4f-id0" id="cmZ-l0-HyP"/>
                         <outlet property="showGuestFriendsBttn" destination="M06-h9-y9B" id="5Gw-Av-sIw"/>
+                        <outlet property="showGuestListLabel" destination="Utt-as-Bjf" id="tTp-HJ-NAz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTE-OT-ThV" userLabel="First Responder" sceneMemberID="firstResponder"/>
