@@ -11,6 +11,7 @@ import UIKit
 protocol NavigationInteraction {
     func messagesClicked()
     func notificationsClicked()
+    func userProfileClicked()
 }
 
 class MapNavigationView: UIView, UISearchBarDelegate {
@@ -54,7 +55,7 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     }
     
     @IBAction func profileButtonPressed(_ sender: UIButton) {
-        print("profile")
+        delegate?.userProfileClicked()
     }
     
     @IBAction func messagesButtonPressed(_ sender: UIButton) {
