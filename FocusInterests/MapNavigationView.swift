@@ -24,6 +24,9 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     @IBOutlet weak var notificationsButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    var showSearchBar = true
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
@@ -63,13 +66,18 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     }
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {
-        if searchBar.alpha == 0{
-            searchBar.alpha = 1
+        if showSearchBar{
+            if searchBar.alpha == 0{
+                searchBar.alpha = 1
+            }
+            else{
+                searchBar.alpha = 0
+                searchBar.text = ""
+                searchBar.resignFirstResponder()
+            }
         }
         else{
-            searchBar.alpha = 0
-            searchBar.text = ""
-            searchBar.resignFirstResponder()
+            print("show search!!")
         }
     }
     
