@@ -159,7 +159,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func userProfileClicked() {
+        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UIViewController
         
+        self.present(VC, animated:true, completion:nil)
     }
     
     func messagesClicked() {
