@@ -165,6 +165,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         fullRef.child("likeAmount").updateChildValues(["num":newLike])
         fullRef.child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
         likeCount.text = String(newLike)
+        likeOut.isEnabled = false
         
     }
     
@@ -184,11 +185,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
         
         let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0)
-        self.commentsCList.removeObject(at: 0)
+        if self.commentsCList.count != 0
+        {
+            self.commentsCList.removeObject(at: 0)
+        }
         self.commentsCList.add(data)
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
-        tableView.endUpdates()
+        tableView.reloadData()
+        //tableView.beginUpdates()
+        //tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
+        //tableView.endUpdates()
         commentTextField.resignFirstResponder()
         commentTextField.text = ""
         self.scrollView.frame.origin.y = 0

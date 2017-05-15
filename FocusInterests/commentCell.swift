@@ -17,7 +17,7 @@ class commentCell: UITableViewCell {
     var data: commentCellData!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,6 +33,7 @@ class commentCell: UITableViewCell {
         data.commentFirePath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
         likeCount.text = String(newLike)
         self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
+        likeOut.isEnabled = false
     }
     
     func checkForLike()
