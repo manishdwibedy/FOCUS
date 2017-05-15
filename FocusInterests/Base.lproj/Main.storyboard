@@ -128,6 +128,16 @@
             </objects>
             <point key="canvasLocation" x="1805.5999999999999" y="895.50224887556226"/>
         </scene>
+        <!--people_search-->
+        <scene sceneID="x3J-zP-2Fw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="people" referencedIdentifier="people_search" id="4DZ-sJ-6ta" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="LKS-Lz-ohj"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ei1-33-FMq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1814" y="1444"/>
+        </scene>
         <!--Create Event View Controller-->
         <scene sceneID="hxJ-0a-gjo">
             <objects>
@@ -359,7 +369,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="VEY-4A-vsU" kind="relationship" relationship="viewControllers" id="QCV-Df-Bcq"/>
-                        <segue destination="esb-V1-r7Y" kind="relationship" relationship="viewControllers" id="cuX-Ey-yAO"/>
+                        <segue destination="4DZ-sJ-6ta" kind="relationship" relationship="viewControllers" id="aFC-3v-mpp"/>
                         <segue destination="Yad-Gc-gnb" kind="relationship" relationship="viewControllers" id="fuo-Lr-oae"/>
                         <segue destination="pGe-zV-pGS" kind="relationship" relationship="viewControllers" id="DJq-LJ-6jN"/>
                         <segue destination="FSH-QB-bWv" kind="relationship" relationship="viewControllers" id="g0W-wD-Shp"/>
@@ -420,27 +430,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JV7-Qi-Uc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-319" y="1850"/>
-        </scene>
-        <!--PEOPLE-->
-        <scene sceneID="UeO-n1-Rfr">
-            <objects>
-                <viewController id="esb-V1-r7Y" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hk6-Me-VHJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="zE2-BW-G0n"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="YNg-zY-h7O">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="PEOPLE" id="7Va-kq-Vgc">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lgf-OB-eZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2410" y="1846"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="w7U-yx-VUh">
