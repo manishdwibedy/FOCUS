@@ -12,7 +12,7 @@
         <!--PEOPLE-->
         <scene sceneID="fc1-JG-hUE">
             <objects>
-                <viewController storyboardIdentifier="people_search" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ROe-LM-BG9" customClass="PeopleSearchViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="people" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ROe-LM-BG9" customClass="PeopleSearchViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fpm-QQ-Da1"/>
                         <viewControllerLayoutGuide type="bottom" id="JkQ-Bw-RIt"/>

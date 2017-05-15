@@ -128,10 +128,10 @@
             </objects>
             <point key="canvasLocation" x="1805.5999999999999" y="895.50224887556226"/>
         </scene>
-        <!--people_search-->
+        <!--people-->
         <scene sceneID="x3J-zP-2Fw">
             <objects>
-                <viewControllerPlaceholder storyboardName="people" referencedIdentifier="people_search" id="4DZ-sJ-6ta" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="search_people" referencedIdentifier="people" id="4DZ-sJ-6ta" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="LKS-Lz-ohj"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ei1-33-FMq" userLabel="First Responder" sceneMemberID="firstResponder"/>
