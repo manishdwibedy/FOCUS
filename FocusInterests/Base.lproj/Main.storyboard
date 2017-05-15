@@ -371,34 +371,13 @@
                         <segue destination="VEY-4A-vsU" kind="relationship" relationship="viewControllers" id="QCV-Df-Bcq"/>
                         <segue destination="4DZ-sJ-6ta" kind="relationship" relationship="viewControllers" id="aFC-3v-mpp"/>
                         <segue destination="Yad-Gc-gnb" kind="relationship" relationship="viewControllers" id="fuo-Lr-oae"/>
-                        <segue destination="pGe-zV-pGS" kind="relationship" relationship="viewControllers" id="DJq-LJ-6jN"/>
+                        <segue destination="b5i-xY-EUY" kind="relationship" relationship="viewControllers" id="AqH-oJ-cPB"/>
                         <segue destination="FSH-QB-bWv" kind="relationship" relationship="viewControllers" id="g0W-wD-Shp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPQ-ml-5o3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="678" y="1009"/>
-        </scene>
-        <!--PLACES-->
-        <scene sceneID="FQN-7I-Qoq">
-            <objects>
-                <viewController id="pGe-zV-pGS" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vqS-yI-HBG"/>
-                        <viewControllerLayoutGuide type="bottom" id="Qub-v2-Lb5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nX5-Sd-E2L">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="PLACES" id="j78-l6-5zn">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gTO-VR-5ey" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="767" y="2138"/>
         </scene>
         <!--CHECK-->
         <scene sceneID="pT4-1V-rkX">
@@ -430,6 +409,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JV7-Qi-Uc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-319" y="1850"/>
+        </scene>
+        <!--search_place-->
+        <scene sceneID="UtR-ux-scg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="search_place" id="b5i-xY-EUY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="8LE-7s-vUa"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jFT-ie-lv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="673" y="1819"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="w7U-yx-VUh">
@@ -572,7 +561,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpo-3D-Prx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ePA-XN-yOt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ePA-XN-yOt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
