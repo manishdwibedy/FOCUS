@@ -10,7 +10,7 @@ import UIKit
 import GooglePlaces
 import FirebaseDatabase
 
-class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var publicLabel: UILabel!
     @IBOutlet weak var privateLabel: UILabel!
@@ -43,12 +43,16 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         interestTableView.dataSource = self
         interestTableView.delegate = self
         formatTextFields()
+        setTextFieldDelegates()
         self.timePicker.datePickerMode = .time
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d yyyy"
         self.timeFormatter.dateFormat = "h:mm a"
     }
     
+    func setTextFieldDelegates(){
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, descriptionTextField].map{$0.delegate = self}
+    }
     
     @IBAction func PrivOrPubSwtchChanged(_ sender: UISwitch) {
         if sender.isOn {
@@ -92,7 +96,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             }
             nextVC.event = validEvent
             self.event = nil
-            let _ = [eventNameTextField, eventDateTextField, description, eventTimeTextField, locationTextField].map{$0.text = nil}
+            let _ = [eventNameTextField, eventDateTextField, descriptionTextField, eventTimeTextField, locationTextField].map{$0.text = nil}
         }
     }
     
@@ -233,7 +237,13 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-    
+}
+
+extension CreateNewEventViewController {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
 }
 
