@@ -10,6 +10,7 @@
 		042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */; };
 		042FB3781EC11DD2006C643D /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042FB3771EC11DD2006C643D /* CreateEvent.storyboard */; };
 		042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */; };
+		0486B0861EC96473007E4CCC /* CreateEventMerge.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486B0851EC96473007E4CCC /* CreateEventMerge.storyboard */; };
 		04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04920F6C1EC277D4007D0B10 /* EventTextField.swift */; };
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
@@ -131,6 +132,7 @@
 		042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestTableViewCell.swift; sourceTree = "<group>"; };
 		042FB3771EC11DD2006C643D /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewEventViewController.swift; sourceTree = "<group>"; };
+		0486B0851EC96473007E4CCC /* CreateEventMerge.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEventMerge.storyboard; sourceTree = "<group>"; };
 		04920F6C1EC277D4007D0B10 /* EventTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTextField.swift; sourceTree = "<group>"; };
 		04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSignUpViewController.swift; sourceTree = "<group>"; };
 		04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondSignUpViewController.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			children = (
 				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
 				042FB3771EC11DD2006C643D /* CreateEvent.storyboard */,
+				0486B0851EC96473007E4CCC /* CreateEventMerge.storyboard */,
 				FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */,
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
 				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
@@ -631,11 +634,14 @@
 				TargetAttributes = {
 					D2B9B03B1E5A047C0002F1B1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = E4GLMWHV4Z;
+						DevelopmentTeam = 66JH2JK5HD;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -695,6 +701,7 @@
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
+				0486B0861EC96473007E4CCC /* CreateEventMerge.storyboard in Resources */,
 				FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
@@ -1091,15 +1098,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FocusInterests/FocusInterests.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = E4GLMWHV4Z;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				INFOPLIST_FILE = FocusInterests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.singlefocus.FocusInterests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.singlefocus.focus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f5d818d7-2bbd-40af-b2db-ff6d2d50c81d";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FocusInterests/FocusInterests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1113,15 +1122,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FocusInterests/FocusInterests.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = E4GLMWHV4Z;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				INFOPLIST_FILE = FocusInterests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.singlefocus.FocusInterests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.singlefocus.focus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f5d818d7-2bbd-40af-b2db-ff6d2d50c81d";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FocusInterests/FocusInterests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
