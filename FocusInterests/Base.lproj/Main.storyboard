@@ -128,10 +128,10 @@
             </objects>
             <point key="canvasLocation" x="1805.5999999999999" y="895.50224887556226"/>
         </scene>
-        <!--people-->
+        <!--search_people-->
         <scene sceneID="x3J-zP-2Fw">
             <objects>
-                <viewControllerPlaceholder storyboardName="search_people" referencedIdentifier="people" id="4DZ-sJ-6ta" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="search_people" id="4DZ-sJ-6ta" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="LKS-Lz-ohj"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ei1-33-FMq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -572,7 +572,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpo-3D-Prx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ePA-XN-yOt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ePA-XN-yOt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
