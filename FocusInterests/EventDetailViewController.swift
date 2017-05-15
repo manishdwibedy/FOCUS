@@ -86,7 +86,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         })
         
         let fullRef = ref.child("events").child((event?.id)!).child("comments")
-        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { (snapshot) in
+        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 3).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
