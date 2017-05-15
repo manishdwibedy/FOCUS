@@ -17,7 +17,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var addressLabel: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
-    @IBOutlet weak var navBarView: UIView!
     @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var attendOut: UIButton!
     
@@ -28,13 +27,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var event: Event?
     @IBOutlet weak var image: UIImageView!
     let ref = FIRDatabase.database().reference()
-    var blur: UIVisualEffectView!
     let commentsCList = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // add nav bar
-        let bar = MapNavigationView()
-        self.navBarView.addSubview(bar)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -268,8 +263,31 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     
+    @IBAction func back(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+        
+    }
     
     
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

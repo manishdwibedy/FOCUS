@@ -90,13 +90,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     override func viewDidDisappear(_ animated: Bool) {
         commentTextField.resignFirstResponder()
         parentVC?.scrollView.frame.origin.y = 0
-        UIView.animate(withDuration: 0.2,delay: 0.0,options: UIViewAnimationOptions.curveEaseIn,
-                       animations: { () -> Void in
-                        self.parentVC?.blur.alpha = 0
-                        
-        }, completion: { (finished) -> Void in
-            self.parentVC?.blur.removeFromSuperview()
-        })
+        
     }
     
     
@@ -130,6 +124,10 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     }
     
     
+    @IBAction func back(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+    }
     
 
 
