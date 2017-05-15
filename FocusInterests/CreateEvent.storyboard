@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3TX-Ww-Aks">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3TX-Ww-Aks">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -88,7 +87,7 @@
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="gKL-1f-I2f" kind="show" identifier="goToCreateEventIcon" id="lsl-Zw-XNm"/>
+                                            <segue destination="eqH-re-POU" kind="show" identifier="goToCreateEventIcon" id="lsl-Zw-XNm"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-56-fhv" userLabel="textField stackViews">
@@ -200,7 +199,7 @@
                                                         <color key="separatorColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Bb7-5e-n8E" customClass="InterestTableViewCell" customModule="FocusInterests" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="56" width="356" height="44"/>
+                                                                <rect key="frame" x="0.0" y="55.5" width="356" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bb7-5e-n8E" id="KJK-tA-lBd">
                                                                     <rect key="frame" x="0.0" y="0.0" width="356" height="44"/>
@@ -298,45 +297,38 @@
                         <viewControllerLayoutGuide type="bottom" id="x2N-eM-M3F"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bOU-eS-8QM">
-                        <rect key="frame" x="0.0" y="64" width="375" height="836"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WXL-sw-Mxx">
                                 <rect key="frame" x="0.0" y="64" width="375" height="392"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SEGUE WAS SUCCESSFUL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2K-Sr-F60">
-                                <rect key="frame" x="166" y="630" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.38039215686274508" green="0.45098039215686275" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajl-2Z-7Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2310" y="166"/>
+            <point key="canvasLocation" x="2239" y="116"/>
         </scene>
         <!--Choose Photo-->
         <scene sceneID="CBP-hS-V5B">
             <objects>
-                <viewController title="Choose Photo" id="eqH-re-POU" customClass="EventIconViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eqH-re-POU" customClass="EventIconViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oej-a1-N8D"/>
                         <viewControllerLayoutGuide type="bottom" id="eYW-PJ-Iy8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y9s-5u-ROX">
-                        <rect key="frame" x="0.0" y="64" width="375" height="836"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R4F-Bp-KfS">
-                                <rect key="frame" x="0.0" y="44" width="375" height="543.5"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="585"/>
                             </imageView>
                             <tabBar contentMode="center" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYp-gC-F9o">
-                                <rect key="frame" x="0.0" y="787" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="802" width="375" height="49"/>
                                 <color key="backgroundColor" red="0.38021743297576904" green="0.44974535703659058" blue="0.50739836692810059" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <tabBarItem title="" image="CAMERA" id="J0e-iP-mO6">
@@ -358,7 +350,7 @@
                                 </connections>
                             </tabBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PxG-Ud-Sgu">
-                                <rect key="frame" x="169" y="603.5" width="37" height="36"/>
+                                <rect key="frame" x="169" y="665" width="37" height="36"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -370,7 +362,6 @@
                         <constraints>
                             <constraint firstItem="R4F-Bp-KfS" firstAttribute="height" secondItem="Y9s-5u-ROX" secondAttribute="height" multiplier="0.65" id="2OX-GP-o4i"/>
                             <constraint firstItem="PxG-Ud-Sgu" firstAttribute="centerX" secondItem="R4F-Bp-KfS" secondAttribute="centerX" id="67e-26-2ub"/>
-                            <constraint firstItem="R4F-Bp-KfS" firstAttribute="top" secondItem="Oej-a1-N8D" secondAttribute="bottom" constant="44" id="7rE-yp-TWw"/>
                             <constraint firstItem="R4F-Bp-KfS" firstAttribute="leading" secondItem="Y9s-5u-ROX" secondAttribute="leading" id="B5R-oQ-5XB"/>
                             <constraint firstItem="PxG-Ud-Sgu" firstAttribute="top" secondItem="R4F-Bp-KfS" secondAttribute="bottom" constant="16" id="F5P-Ae-YlV"/>
                             <constraint firstAttribute="trailing" secondItem="R4F-Bp-KfS" secondAttribute="trailing" id="Kgb-Fg-LTS"/>
@@ -378,6 +369,7 @@
                             <constraint firstAttribute="trailing" secondItem="kYp-gC-F9o" secondAttribute="trailing" id="UEG-HK-aDw"/>
                             <constraint firstItem="eYW-PJ-Iy8" firstAttribute="top" secondItem="kYp-gC-F9o" secondAttribute="bottom" id="YvR-wd-XAz"/>
                             <constraint firstItem="R4F-Bp-KfS" firstAttribute="width" secondItem="Y9s-5u-ROX" secondAttribute="width" id="cOe-DR-dIj"/>
+                            <constraint firstItem="R4F-Bp-KfS" firstAttribute="top" secondItem="Oej-a1-N8D" secondAttribute="bottom" constant="44" id="z91-WW-wDk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Choose Photo" id="v8d-2Y-X28">
@@ -400,7 +392,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4aQ-k2-RNC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="g7R-jE-ZyN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1576.8" y="116.94152923538232"/>
+            <point key="canvasLocation" x="1492" y="116"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vXT-MV-4RX">
@@ -433,4 +425,7 @@
         <image name="SKIP" width="30" height="11"/>
         <image name="VIDEO" width="41" height="11"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="lsl-Zw-XNm"/>
+    </inferredMetricsTieBreakers>
 </document>

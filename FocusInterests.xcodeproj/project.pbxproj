@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */; };
-		042FB3781EC11DD2006C643D /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042FB3771EC11DD2006C643D /* CreateEvent.storyboard */; };
 		042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */; };
-		0486B0861EC96473007E4CCC /* CreateEventMerge.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486B0851EC96473007E4CCC /* CreateEventMerge.storyboard */; };
+		0486B0861EC96473007E4CCC /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486B0851EC96473007E4CCC /* CreateEvent.storyboard */; };
 		04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04920F6C1EC277D4007D0B10 /* EventTextField.swift */; };
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
@@ -130,9 +129,8 @@
 
 /* Begin PBXFileReference section */
 		042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestTableViewCell.swift; sourceTree = "<group>"; };
-		042FB3771EC11DD2006C643D /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewEventViewController.swift; sourceTree = "<group>"; };
-		0486B0851EC96473007E4CCC /* CreateEventMerge.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEventMerge.storyboard; sourceTree = "<group>"; };
+		0486B0851EC96473007E4CCC /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		04920F6C1EC277D4007D0B10 /* EventTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTextField.swift; sourceTree = "<group>"; };
 		04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSignUpViewController.swift; sourceTree = "<group>"; };
 		04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondSignUpViewController.swift; sourceTree = "<group>"; };
@@ -360,8 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
-				042FB3771EC11DD2006C643D /* CreateEvent.storyboard */,
-				0486B0851EC96473007E4CCC /* CreateEventMerge.storyboard */,
+				0486B0851EC96473007E4CCC /* CreateEvent.storyboard */,
 				FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */,
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
 				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
@@ -693,7 +690,6 @@
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */,
-				042FB3781EC11DD2006C643D /* CreateEvent.storyboard in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */,
@@ -701,7 +697,7 @@
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
-				0486B0861EC96473007E4CCC /* CreateEventMerge.storyboard in Resources */,
+				0486B0861EC96473007E4CCC /* CreateEvent.storyboard in Resources */,
 				FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
