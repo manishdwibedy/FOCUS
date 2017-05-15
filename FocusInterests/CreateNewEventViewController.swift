@@ -163,6 +163,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
         return cell
     }
+    
+    // MARK: - Navigation
+    @IBAction func unwindFromCreateEventIcon(sender: UIStoryboardSegue){}
 }
 
 extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
