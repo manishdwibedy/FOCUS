@@ -8,14 +8,10 @@
 
 import UIKit
 
-class PeopleSearchViewController: UIViewController, NavigationInteraction {
+class PeopleSearchViewController: UIViewController {
 
-    @IBOutlet weak var navigation: MapNavigationView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigation.backgroundColor = UIColor.black
-        navigation.showSearchBar = false
-        navigation.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -24,23 +20,6 @@ class PeopleSearchViewController: UIViewController, NavigationInteraction {
         // Dispose of any resources that can be recreated.
     }
     
-    func userProfileClicked() {
-        let VC:UIViewController = UIStoryboard(name: "people", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UITabBarController
-        
-        self.present(VC, animated:true, completion:nil)
-    }
-    
-    func messagesClicked() {
-        let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
-        
-        self.present(VC, animated:true, completion:nil)
-    }
-    
-    func notificationsClicked() {
-        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
-        self.present(vc, animated: true, completion: nil)
-    }
-
     /*
     // MARK: - Navigation
 
