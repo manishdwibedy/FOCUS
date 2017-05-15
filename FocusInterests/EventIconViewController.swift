@@ -92,6 +92,7 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
             let _ = imageRef.put(data, metadata: nil) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
+                    print("\(error!)")
                     return
                 }
                 // Metadata contains file metadata such as size, content-type, and download URL.

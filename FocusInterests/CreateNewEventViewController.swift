@@ -45,27 +45,43 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToCreateEventIcon" {
-            guard let validPlace = self.place else { return }
+            guard let validPlace = self.place else {
+                presentNotification(title: "Choose a location", message: "Please choose a location for this event.")
+                return
+            }
             let locality = validPlace.addressComponents?[0].name
             let street = validPlace.addressComponents?[1].name
             let shortAddress = "\(locality!), \(street!)"
             
-            guard let validLocation = self.place else { return }
-            guard let validName = eventNameTextField.text else { return }
-            guard let validDescrip = descriptionTextField.text else { return }
+            let validName = eventNameTextField.text ?? ""
+            let validDescrip = descriptionTextField.text ?? ""
             
-            guard let validDate = eventDateTextField.text else { return }
-            guard let validTime = eventTimeTextField.text else { return }
+            guard let validDate = eventDateTextField.text,
+                let validTime = eventTimeTextField.text else {
+                    presentNotification(title: "Choose a date and time.", message: "Please choose a date and time for this event.")
+                    return
+                }
             let dateString = validDate + validTime
-            
             guard let creator = AuthApi.getFirebaseUid() else { return }
             
-            self.event = Event(title: validName, description: validDescrip, fullAddress: validLocation.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
+            self.event = Event(title: validName, description: validDescrip, fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
             
-            let destination = segue.destination as! EventIconViewController
-            destination.event = self.event!
+            let destination = segue.destination as! UINavigationController
+            let nextVC = destination.viewControllers[0] as! EventIconViewController
+            guard let validEvent = self.event else {
+                print("no event sent to eventIcon VC")
+                return
+            }
+            nextVC.event = validEvent
         }
-       
+    }
+    
+    private func presentNotification(title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
+        alert.view.tintColor = UIColor.primaryGreen()
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func showGuestListBttn(_ sender: UIButton) {
@@ -101,8 +117,6 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func addEventTime(_ sender: UITextField) {
         showTimePicker()
     }
-    
-    
     
     func showDatePicker(){
         let toolbar = UIToolbar()
