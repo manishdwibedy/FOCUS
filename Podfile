@@ -24,6 +24,7 @@ target 'FocusInterests' do
     pod 'JSQMessagesViewController'
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
     pod 'Alamofire'
+    pod 'SwiftyJSON'
 end
 
 target 'FocusInterestsTests' do
@@ -44,6 +45,7 @@ target 'FocusInterestsTests' do
     pod 'JSQMessagesViewController'
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
     pod 'Alamofire'
+    pod 'SwiftyJSON'
 end
 
 target 'FocusInterestsUITests' do
@@ -64,5 +66,6 @@ target 'FocusInterestsUITests' do
     pod 'JSQMessagesViewController'
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
     pod 'Alamofire'
+    pod 'SwiftyJSON'
 end
 

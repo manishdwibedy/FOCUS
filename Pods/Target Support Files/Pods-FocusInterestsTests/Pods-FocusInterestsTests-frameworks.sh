@@ -104,6 +104,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JSQMessagesViewController-iOS10.2/JSQMessagesViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer-iOS10.2/JSQSystemSoundPlayer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf-iOS10.2/Protobuf.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS10.2/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Agrume-iOS10.2/Agrume.framework"
@@ -121,6 +122,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JSQMessagesViewController-iOS10.2/JSQMessagesViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer-iOS10.2/JSQSystemSoundPlayer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf-iOS10.2/Protobuf.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS10.2/SwiftyJSON.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
