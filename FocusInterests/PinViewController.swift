@@ -16,8 +16,13 @@ class PinViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        for category in self.categories!{
+        for (index, category) in self.categories!.enumerated(){
             let textLabel = UILabel()
+            
+            if index == 0{
+                textLabel.textColor = UIColor.green
+            }
+            
             textLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
             textLabel.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
             textLabel.text  = category.name
