@@ -248,12 +248,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 let address_json = business.1["location"]["display_address"].arrayValue
                 let phone = business.1["display_phone"].stringValue
                 let distance = business.1["distance"].doubleValue
+                let categories_json = business.1["categories"].arrayValue
                 
                 var address = [String]()
                 for raw_address in address_json{
                     address.append(raw_address.stringValue)
                 }
-                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance)
+                
+                var categories = [Category]()
+                for raw_category in categories_json as [JSON]{
+                    let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                    categories.append(category)
+                }
+                
+                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories)
                 
                 let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
                 let marker = GMSMarker(position: position)
@@ -267,8 +275,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     self.places.append(place)
                     print(marker.accessibilityLabel)
                 }
-                
-
             }
         }
     }
