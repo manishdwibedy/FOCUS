@@ -12,6 +12,8 @@ class PlaceViewController: UIViewController {
 
     var place: Place?
     
+    @IBOutlet weak var ratingView: UIView!
+    @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -32,6 +34,19 @@ class PlaceViewController: UIViewController {
     
     @IBAction func backPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func valueChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.pinView.alpha = 1
+                self.ratingView.alpha = 0
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.pinView.alpha = 0
+                self.ratingView.alpha = 1
+            })
+        }
     }
 
     /*

@@ -140,7 +140,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         else{
             let index:Int! = Int(parts![1])
-            let place = self.places[index]
+            let place = self.places[index % self.places.count]
             let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
             controller.place = place
