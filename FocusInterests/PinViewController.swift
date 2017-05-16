@@ -9,14 +9,18 @@
 import UIKit
 
 class PinViewController: UIViewController {
-    var categories: [Category]?
+    var place: Place?
     @IBOutlet weak var interestStackView: UIStackView!
     
+    @IBOutlet weak var hourLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var cityStateLabel: UILabel!
+    @IBOutlet weak var streetAddress: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        for (index, category) in self.categories!.enumerated(){
+        for (index, category) in (self.place?.categories.enumerated())!{
             let textLabel = UILabel()
             
             if index == 0{
@@ -30,7 +34,10 @@ class PinViewController: UIViewController {
             
             interestStackView.addArrangedSubview(textLabel)
             interestStackView.translatesAutoresizingMaskIntoConstraints = false;
-       }
+        }
+        streetAddress.text = place?.address[0]
+        cityStateLabel.text = place?.address[1]
+        phoneLabel.text = place?.phone
     }
 
     override func didReceiveMemoryWarning() {

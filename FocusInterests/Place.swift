@@ -22,6 +22,7 @@ class Place: Equatable{
     let phone: String
     let distance: Double
     let categories: [Category]
+    var hours: [Hours]?
     
     init(id:String, name:String, image_url: String, isClosed: Bool, reviewCount: Int, rating: Float, latitude: Double, longitude: Double, price: String, address: [String], phone: String, distance: Double, categories: [Category]){
         self.id = id
@@ -39,6 +40,10 @@ class Place: Equatable{
         self.categories = categories
     }
     
+    func setHours(hours: [Hours]){
+        self.hours = hours
+    }
+    
     static func == (lhs: Place, rhs: Place) -> Bool {
         return lhs.id == rhs.id
     }
@@ -47,4 +52,10 @@ class Place: Equatable{
 struct Category {
     let name: String
     let alias: String
+}
+
+struct Hours{
+    let start: String
+    let end: String
+    let day: String
 }

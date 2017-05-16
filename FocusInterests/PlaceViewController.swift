@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class PlaceViewController: UIViewController {
 
@@ -53,7 +55,7 @@ class PlaceViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pinInfo"{
             let pin = segue.destination as! PinViewController
-            pin.categories = place?.categories
+            pin.place = self.place
         }
     }
     

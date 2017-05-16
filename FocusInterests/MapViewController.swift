@@ -28,6 +28,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var zoomLevel: Float = 15.0
     var events = [Event]()
     var places = [Place]()
+    var placeMapping = [String: Place]()
     
     @IBOutlet weak var navigationView: MapNavigationView!
     override func viewDidLoad() {
@@ -271,14 +272,38 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 marker.accessibilityLabel = "place_\(self.places.count)"
                 
                 if !self.places.contains(place){
-                    
                     self.places.append(place)
-                    print(marker.accessibilityLabel)
+                    self.placeMapping[place.id] = place
+                    self.getPlaceHours(id: place.id)
                 }
             }
         }
     }
     
+    func getPlaceHours(id: String){
+        let url = "https://api.yelp.com/v3/businesses/\(id)"
+        
+        let headers: HTTPHeaders = [
+            "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+            "cache-contro": "no-cache"
+        ]
+        
+        Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
+            let json = JSON(data: response.data!)
+            
+            if json["hours"].arrayValue.count > 0{
+                let open_hours = json["hours"].arrayValue[0].dictionaryValue
+                var hours = [Hours]()
+                for hour in (open_hours["open"]?.arrayValue)!{
+                    let hour = Hours(start: hour["start"].stringValue, end: hour["end"].stringValue, day: hour["day"].stringValue)
+                    hours.append(hour)
+                }
+                let place = self.placeMapping[id]
+                place?.setHours(hours: hours)
+            }
+            
+        }
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show_event_details"{
             let destinationVC = segue.destination as! EventDetailViewController
