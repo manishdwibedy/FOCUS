@@ -19,18 +19,19 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var attendOut: UIButton!
-    
+    @IBOutlet weak var navTitle: UINavigationItem!
+    @IBOutlet weak var navBackOut: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var commentTextField: UITextField!
+    
     var event: Event?
     @IBOutlet weak var image: UIImageView!
     let ref = FIRDatabase.database().reference()
     let commentsCList = NSMutableArray()
+    var keyboardUp = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -65,8 +66,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         commentTextField.layer.borderColor = UIColor.white.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
         
-        eventTitleLabel.text = event?.title
+        navTitle.title = event?.title
         timeLabel.text = event?.date
         addressLabel.text = event?.fullAddress
         descriptionLabel.text = event?.description
@@ -219,10 +222,22 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
-            self.scrollView.frame.origin.y = -((keyboardHeight))
+            
+            self.scrollView.contentOffset.y = ((keyboardHeight)) + commentTextField.frame.height + 20
+            
             
             
         }
+    }
+    
+    func keyboardDidShow(notification: NSNotification) {
+        keyboardUp = true
+        navBackOut.title = "Cancel"
+        
+    }
+    func keyboardDidHide(notification: NSNotification) {
+        keyboardUp = false
+        navBackOut.title = "Back"
     }
     
     
@@ -261,10 +276,20 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     
-    @IBAction func back(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    
+    
+    @IBAction func navBack(_ sender: Any) {
+        if keyboardUp == false
+        {
+            dismiss(animated: true, completion: nil)
+        }else
+        {
+            commentTextField.resignFirstResponder()
+            commentTextField.text = ""
+        }
         
     }
+    
     
     
     
