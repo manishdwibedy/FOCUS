@@ -36,15 +36,16 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
         
         let fullRef = ref.child("events").child((parentEvent?.id)!).child("comments")
-        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { (snapshot) in
+        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 25).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary
-                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int)
+                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int, date: Date(timeIntervalSince1970: TimeInterval(dict["date"] as! Double)))
                     self.commentsCList.add(data)
+                    print(dict["comment"] as! String)
                     
                     
                 }
@@ -99,7 +100,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         let fullRef = ref.child("events").child((parentEvent?.id)!).child("comments").childByAutoId()
         fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
     
-        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0)
+        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
         self.commentsCList.add(data)
         tableView.beginUpdates()
         tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
@@ -128,6 +129,9 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    
     
 
 

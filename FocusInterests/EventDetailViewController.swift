@@ -90,12 +90,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                print(value!)
-                
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary
-                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int)
+                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int, date: Date(timeIntervalSince1970: TimeInterval(dict["date"] as! Double)))
                     self.commentsCList.add(data)
                     
                     
@@ -179,7 +177,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         let fullRef = ref.child("events").child((event?.id)!).child("comments").childByAutoId()
         fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
         
-        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0)
+        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
         if self.commentsCList.count != 0
         {
             self.commentsCList.removeObject(at: 0)

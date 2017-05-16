@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" editable="NO" text="comment" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yco-yJ-cBW">
-                        <rect key="frame" x="56" y="5" width="249" height="56"/>
+                        <rect key="frame" x="56" y="5" width="249" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -46,11 +46,19 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RB-L1-Zih">
+                        <rect key="frame" x="206" y="49" width="99" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0035624755349816838" green="0.80395383883248728" blue="0.37541098387195382" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="commentLabel" destination="Yco-yJ-cBW" id="kYx-YT-fVg"/>
+                <outlet property="dateLabel" destination="7RB-L1-Zih" id="XUY-5B-nIY"/>
                 <outlet property="likeCount" destination="BIu-P8-hD2" id="6Q6-RZ-hDD"/>
                 <outlet property="likeOut" destination="o9d-SK-l7h" id="nF5-rc-04m"/>
             </connections>
