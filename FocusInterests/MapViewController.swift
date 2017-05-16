@@ -72,6 +72,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let token = AuthApi.getYelpToken(){
+            fetchPlaces(token: token)
+        }
+        else{
+            getYelpToken(completion: {token in
+                self.fetchPlaces(token: token)
+            })
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
         
@@ -167,6 +180,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func notificationsClicked() {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    func fetchPlaces(token: String){
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
