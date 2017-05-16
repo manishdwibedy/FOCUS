@@ -11,11 +11,18 @@ import UIKit
 class PlaceViewController: UIViewController {
 
     var place: Place?
+    
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = place?.name
+        navigationBar.topItem?.title = place?.name
+        ratingLabel.text = "\(place!.rating)"
+        
+        imageView.sd_setImage(with: URL(string: (place?.image_url)!), placeholderImage: nil)
     }
 
     override func didReceiveMemoryWarning() {

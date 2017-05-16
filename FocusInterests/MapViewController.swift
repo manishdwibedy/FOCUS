@@ -113,7 +113,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         else{
             let index:Int! = Int(parts![1])
             let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
-            let place = self.places[index]
+            let place = self.places[index % self.places.count]
             infoWindow.name.text = place.name
             infoWindow.address.text  = "\(place.address[0]), \(place.address[1])"
             infoWindow.time.text = ""
@@ -127,6 +127,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         
         let accessibilityLabel = marker.accessibilityLabel
+        
         
         let parts = accessibilityLabel?.components(separatedBy: "_")
         if parts?[0] == "event"{
@@ -262,7 +263,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 marker.accessibilityLabel = "place_\(self.places.count)"
                 
                 if !self.places.contains(place){
+                    
                     self.places.append(place)
+                    print(marker.accessibilityLabel)
                 }
                 
 
