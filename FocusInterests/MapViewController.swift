@@ -12,6 +12,8 @@ import GoogleMaps
 import GooglePlaces
 import MapKit
 import FirebaseDatabase
+import Alamofire
+import SwiftyJSON
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction {
     
@@ -25,6 +27,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 15.0
     var events = [Event]()
+    var places = [Place]()
     
     @IBOutlet weak var navigationView: MapNavigationView!
     override func viewDidLoad() {
@@ -66,7 +69,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 marker.icon = UIImage(named: "addUser")
                 marker.title = event.title
                 marker.map = self.mapView
-                marker.accessibilityLabel = String(describing: self.events.count)
+                marker.accessibilityLabel = "event_\(self.events.count)"
                 self.events.append(event)
             }
         })
@@ -76,11 +79,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         super.viewWillAppear(animated)
         
         if let token = AuthApi.getYelpToken(){
-            fetchPlaces(token: token)
+//            fetchPlaces(token: token)
         }
         else{
             getYelpToken(completion: {token in
-                self.fetchPlaces(token: token)
+//                self.fetchPlaces(token: token)
             })
         }
     }
@@ -91,14 +94,30 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView?{
-        let index:Int! = Int(marker.accessibilityLabel!)
-        let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
-        let event = self.events[index]
-        infoWindow.name.text = event.title
-        infoWindow.address.text  = event.shortAddress
-        infoWindow.time.text = event.date?.components(separatedBy: ",")[1]
-        infoWindow.attendees.text = "No one joining"
-        return infoWindow
+        let accessibilityLabel = marker.accessibilityLabel
+        
+        let parts = accessibilityLabel?.components(separatedBy: "_")
+        if parts?[0] == "event"{
+            let index:Int! = Int(parts![1])
+            let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+            let event = self.events[index]
+            infoWindow.name.text = event.title
+            infoWindow.address.text  = event.shortAddress
+            infoWindow.time.text = event.date?.components(separatedBy: ",")[1]
+            infoWindow.attendees.text = "No one joining"
+            return infoWindow
+        }
+        else{
+            let index:Int! = Int(parts![1])
+            let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+            let place = self.places[index]
+            infoWindow.name.text = place.name
+            infoWindow.address.text  = "\(place.address[0]), \(place.address[1])"
+            infoWindow.time.text = ""
+            infoWindow.attendees.text = "No one joining"
+            return infoWindow
+        }
+        
     }
     
     
@@ -138,7 +157,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
                                               zoom: 15)
-        
+        self.currentLocation = location
+        print("got location")
+        self.fetchPlaces(token: AuthApi.getYelpToken()!)
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
@@ -183,7 +204,50 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func fetchPlaces(token: String){
+        let url = "https://api.yelp.com/v3/businesses/search"
+        let parameters: [String: Double] = [
+            "latitude" : Double(self.currentLocation!.coordinate.latitude),
+            "longitude" : Double(self.currentLocation!.coordinate.longitude)
+        ]
         
+        let headers: HTTPHeaders = [
+            "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+            "cache-contro": "no-cache"
+        ]
+
+        Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
+            let json = JSON(data: response.data!)
+            
+            for business in json["businesses"]{
+                let id = business.1["id"].stringValue
+                let name = business.1["name"].stringValue
+                let image_url = business.1["image_url"].stringValue
+                let isClosed = business.1["is_closed"].boolValue
+                let reviewCount = business.1["review_count"].intValue
+                let rating = business.1["rating"].floatValue
+                let latitude = business.1["coordinates"]["latitude"].doubleValue
+                let longitude = business.1["coordinates"]["longitude"].doubleValue
+                let price = business.1["price"].stringValue
+                let address_json = business.1["location"]["display_address"].arrayValue
+                let phone = business.1["display_phone"].stringValue
+                let distance = business.1["distance"].doubleValue
+                
+                var address = [String]()
+                for raw_address in address_json{
+                    address.append(raw_address.stringValue)
+                }
+                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance)
+                
+                let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+                let marker = GMSMarker(position: position)
+                marker.icon = UIImage(named: "place_icon")
+                marker.title = place.name
+                marker.map = self.mapView
+                marker.accessibilityLabel = "place_\(self.places.count)"
+                self.places.append(place)
+
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
