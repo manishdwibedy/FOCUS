@@ -28,6 +28,7 @@
 		5B959FD81ECAD12500094FE6 /* map.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FD71ECAD12500094FE6 /* map.gpx */; };
 		5B959FDA1ECADFA300094FE6 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FD91ECADFA300094FE6 /* PinViewController.swift */; };
 		5B959FDC1ECB918C00094FE6 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FDB1ECB918C00094FE6 /* Notifications.storyboard */; };
+		5B959FDE1ECB928300094FE6 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FDD1ECB928300094FE6 /* NotificationViewController.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
 		5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C701EB9EADB0091189E /* InvitationViewController.swift */; };
 		5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */; };
@@ -160,6 +161,7 @@
 		5B959FD71ECAD12500094FE6 /* map.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map.gpx; sourceTree = "<group>"; };
 		5B959FD91ECADFA300094FE6 /* PinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
 		5B959FDB1ECB918C00094FE6 /* Notifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
+		5B959FDD1ECB928300094FE6 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5BA37C701EB9EADB0091189E /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapNavigationView.xib; sourceTree = "<group>"; };
@@ -311,6 +313,14 @@
 				5B959FD91ECADFA300094FE6 /* PinViewController.swift */,
 			);
 			name = Place;
+			sourceTree = "<group>";
+		};
+		5B959FDF1ECB928E00094FE6 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				5B959FDD1ECB928300094FE6 /* NotificationViewController.swift */,
+			);
+			name = Notification;
 			sourceTree = "<group>";
 		};
 		5BA37C6F1EB9E8940091189E /* Event */ = {
@@ -505,6 +515,7 @@
 				5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */,
 				5BA37C7C1EBDBF250091189E /* Message */,
 				5B959FD61ECAC9F400094FE6 /* Place */,
+				5B959FDF1ECB928E00094FE6 /* Notification */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -930,6 +941,7 @@
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
+				5B959FDE1ECB928300094FE6 /* NotificationViewController.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				FF522CAE1EC3E2DD00D27A9E /* commentCell.swift in Sources */,
 				042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */,

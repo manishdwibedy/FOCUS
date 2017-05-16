@@ -217,7 +217,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func notificationsClicked() {
-        let VC:UIViewController = UIStoryboard(name: "Notifications", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
+        let VC = UIStoryboard(name: "Notifications", bundle: nil).instantiateViewController(withIdentifier: "Home") as! NotificationViewController
         
         self.present(VC, animated:true, completion:nil)
 //        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
