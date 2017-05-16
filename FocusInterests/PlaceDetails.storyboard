@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4C0-xu-no6">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Place View Controller-->
+        <scene sceneID="IwE-my-4m9">
+            <objects>
+                <viewController storyboardIdentifier="home" id="4C0-xu-no6" customClass="PlaceViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lUX-hZ-ugx"/>
+                        <viewControllerLayoutGuide type="bottom" id="xcv-fR-PhP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RKS-cE-1LS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ns3-qv-thK">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="QAW-oI-5i8"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Place" id="PNj-U0-rjw">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="zmR-LE-8XY"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aTU-Jh-k6R">
+                                <rect key="frame" x="-4" y="64" width="383" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="QQU-E0-yEH"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJ5-QH-SFh">
+                                <rect key="frame" x="173" y="244" width="30" height="20"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Check Box Selected" translatesAutoresizingMaskIntoConstraints="NO" id="MTy-nd-9XC">
+                                        <rect key="frame" x="0.0" y="5" width="10" height="10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="MTy-nd-9XC" secondAttribute="height" multiplier="1:1" id="2Kr-FM-Q5C"/>
+                                            <constraint firstAttribute="width" constant="10" id="gpo-Wz-elc"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqV-pM-Mg8">
+                                        <rect key="frame" x="12.5" y="1.5" width="17.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="nqV-pM-Mg8" firstAttribute="centerY" secondItem="OJ5-QH-SFh" secondAttribute="centerY" id="4iQ-Un-GaT"/>
+                                    <constraint firstAttribute="width" constant="30" id="I98-gu-p51"/>
+                                    <constraint firstAttribute="height" constant="20" id="bAq-2a-Y3A"/>
+                                    <constraint firstAttribute="trailing" secondItem="nqV-pM-Mg8" secondAttribute="trailing" id="bD8-8g-Nu5"/>
+                                    <constraint firstItem="MTy-nd-9XC" firstAttribute="leading" secondItem="OJ5-QH-SFh" secondAttribute="leading" id="odw-K0-IHP"/>
+                                    <constraint firstItem="MTy-nd-9XC" firstAttribute="centerY" secondItem="OJ5-QH-SFh" secondAttribute="centerY" id="qkq-w2-8YO"/>
+                                </constraints>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="p7m-m4-tKV">
+                                <rect key="frame" x="-4" y="264" width="383" height="29"/>
+                                <segments>
+                                    <segment title="PIN"/>
+                                    <segment title="RATING"/>
+                                </segments>
+                                <color key="tintColor" red="0.46274509800000002" green="0.51764705879999995" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aTU-Jh-k6R" firstAttribute="top" secondItem="ns3-qv-thK" secondAttribute="bottom" id="4rO-nH-rW7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="p7m-m4-tKV" secondAttribute="trailing" constant="-20" id="583-Pg-SwT"/>
+                            <constraint firstItem="p7m-m4-tKV" firstAttribute="top" secondItem="OJ5-QH-SFh" secondAttribute="bottom" id="Cnd-zk-1Eo"/>
+                            <constraint firstItem="OJ5-QH-SFh" firstAttribute="centerX" secondItem="RKS-cE-1LS" secondAttribute="centerX" id="Dhh-Ih-Z7G"/>
+                            <constraint firstItem="p7m-m4-tKV" firstAttribute="leading" secondItem="RKS-cE-1LS" secondAttribute="leadingMargin" constant="-20" id="Wyo-HT-yQr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aTU-Jh-k6R" secondAttribute="trailing" constant="-20" id="cIS-ba-dSS"/>
+                            <constraint firstItem="ns3-qv-thK" firstAttribute="leading" secondItem="RKS-cE-1LS" secondAttribute="leading" id="gzF-Ra-t3s"/>
+                            <constraint firstItem="ns3-qv-thK" firstAttribute="top" secondItem="lUX-hZ-ugx" secondAttribute="bottom" id="q83-7H-TGe"/>
+                            <constraint firstAttribute="trailing" secondItem="ns3-qv-thK" secondAttribute="trailing" id="u4E-OF-lI6"/>
+                            <constraint firstItem="aTU-Jh-k6R" firstAttribute="leading" secondItem="RKS-cE-1LS" secondAttribute="leadingMargin" constant="-20" id="w41-bz-qx3"/>
+                            <constraint firstItem="OJ5-QH-SFh" firstAttribute="bottom" secondItem="aTU-Jh-k6R" secondAttribute="bottom" id="xax-o6-AZC"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VTE-pi-zdd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-191.19999999999999" y="178.56071964017991"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Check Box Selected" width="37" height="37"/>
+    </resources>
+</document>

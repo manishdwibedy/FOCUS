@@ -140,10 +140,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         else{
             let index:Int! = Int(parts![1])
             let place = self.places[index]
-            
+            let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+            controller.place = place
+            self.present(controller, animated: true, completion: nil)
         }
-        
-        
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -273,6 +274,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if segue.identifier == "show_event_details"{
             let destinationVC = segue.destination as! EventDetailViewController
             destinationVC.event = sender as! Event
+        }
+        else if segue.identifier == ""{
+            let destinationVC = segue.destination as! PlaceViewController
+            destinationVC.place = sender as! Place
         }
         
     }
