@@ -236,7 +236,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
             let json = JSON(data: response.data!)
             
-            for business in json["businesses"]{
+            let initial = self.places.count
+            for (index, business) in json["businesses"].enumerated(){
                 let id = business.1["id"].stringValue
                 let name = business.1["name"].stringValue
                 let image_url = business.1["image_url"].stringValue
@@ -264,14 +265,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories)
                 
-                let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
-                let marker = GMSMarker(position: position)
-                marker.icon = UIImage(named: "place_icon")
-                marker.title = place.name
-                marker.map = self.mapView
-                marker.accessibilityLabel = "place_\(self.places.count)"
-                
                 if !self.places.contains(place){
+                    
+                    let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+                    let marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: "place_icon")
+                    marker.title = place.name
+                    marker.map = self.mapView
+                    marker.accessibilityLabel = "place_\(initial + index)"
+                    
                     self.places.append(place)
                     self.placeMapping[place.id] = place
                     self.getPlaceHours(id: place.id)
