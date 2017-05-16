@@ -57,5 +57,5 @@ struct Category {
 struct Hours{
     let start: String
     let end: String
-    let day: String
+    let day: Int
 }

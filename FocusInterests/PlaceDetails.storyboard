@@ -173,9 +173,9 @@
                                         <rect key="frame" x="0.0" y="80" width="375" height="420"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dH7-9c-Q24" userLabel="Information">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZL-lD-5VQ">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Street Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZL-lD-5VQ">
                                                         <rect key="frame" x="10" y="10" width="355" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -187,34 +187,32 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIK-LS-xRL">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIK-LS-xRL">
                                                         <rect key="frame" x="10" y="81" width="355" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idb-b1-chv">
-                                                        <rect key="frame" x="10" y="122" width="355" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8EY-28-xIf">
+                                                        <rect key="frame" x="10" y="115" width="355" height="0.0"/>
+                                                    </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="8EY-28-xIf" firstAttribute="leading" secondItem="dH7-9c-Q24" secondAttribute="leading" constant="10" id="1CV-jH-kki"/>
                                                     <constraint firstItem="aZL-lD-5VQ" firstAttribute="leading" secondItem="dH7-9c-Q24" secondAttribute="leading" constant="10" id="32n-NG-Xuj"/>
-                                                    <constraint firstItem="Idb-b1-chv" firstAttribute="leading" secondItem="dH7-9c-Q24" secondAttribute="leading" constant="10" id="3Eg-ke-DQy"/>
                                                     <constraint firstItem="dIK-LS-xRL" firstAttribute="top" secondItem="aZL-lD-5VQ" secondAttribute="bottom" constant="50" id="6nh-D0-rLv"/>
                                                     <constraint firstAttribute="trailing" secondItem="1c3-f9-8xC" secondAttribute="trailing" constant="10" id="DsL-av-snc"/>
                                                     <constraint firstItem="dIK-LS-xRL" firstAttribute="leading" secondItem="dH7-9c-Q24" secondAttribute="leading" constant="10" id="HkJ-7F-dQI"/>
                                                     <constraint firstAttribute="trailing" secondItem="aZL-lD-5VQ" secondAttribute="trailing" constant="10" id="I2a-Iw-Ofz"/>
                                                     <constraint firstItem="aZL-lD-5VQ" firstAttribute="top" secondItem="dH7-9c-Q24" secondAttribute="top" constant="10" id="Tsy-Lf-CN2"/>
-                                                    <constraint firstItem="Idb-b1-chv" firstAttribute="top" secondItem="dIK-LS-xRL" secondAttribute="bottom" constant="20" id="WJV-kx-Lhp"/>
+                                                    <constraint firstAttribute="bottom" secondItem="8EY-28-xIf" secondAttribute="bottom" constant="15" id="Zdg-IW-bfk"/>
                                                     <constraint firstItem="1c3-f9-8xC" firstAttribute="leading" secondItem="dH7-9c-Q24" secondAttribute="leading" constant="10" id="coh-D4-GEN"/>
                                                     <constraint firstItem="1c3-f9-8xC" firstAttribute="top" secondItem="dH7-9c-Q24" secondAttribute="top" constant="35" id="dKs-4m-lu2"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Idb-b1-chv" secondAttribute="trailing" constant="10" id="qV5-5z-GS3"/>
                                                     <constraint firstAttribute="trailing" secondItem="dIK-LS-xRL" secondAttribute="trailing" constant="10" id="qV6-HY-jQs"/>
-                                                    <constraint firstAttribute="height" constant="150" id="sea-b8-me6"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8EY-28-xIf" secondAttribute="trailing" constant="10" id="qb7-fh-RB9"/>
+                                                    <constraint firstAttribute="height" constant="130" id="sea-b8-me6"/>
+                                                    <constraint firstItem="8EY-28-xIf" firstAttribute="top" secondItem="dIK-LS-xRL" secondAttribute="bottom" constant="20" id="soy-q5-m92"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -250,7 +248,8 @@
                     <size key="freeformSize" width="375" height="500"/>
                     <connections>
                         <outlet property="cityStateLabel" destination="1c3-f9-8xC" id="Tjw-d5-ech"/>
-                        <outlet property="hourLabel" destination="Idb-b1-chv" id="I8j-RR-vtD"/>
+                        <outlet property="hoursStackView" destination="8EY-28-xIf" id="YjF-Hv-Hg9"/>
+                        <outlet property="infoScreenHeight" destination="sea-b8-me6" id="Htv-ht-9SG"/>
                         <outlet property="interestStackView" destination="35i-c3-WJX" id="has-aL-ZhX"/>
                         <outlet property="phoneLabel" destination="dIK-LS-xRL" id="ieX-9A-dfr"/>
                         <outlet property="streetAddress" destination="aZL-lD-5VQ" id="zhr-r7-J7E"/>

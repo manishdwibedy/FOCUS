@@ -44,3 +44,38 @@ func getYelpToken(completion: @escaping (_ result: String) -> Void){
         
     }
 }
+
+let days = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"]
+
+func getOpenHours(_ hours: [Hours]) -> [String]{
+    var result = [String]()
+    
+    var last_day_start = hours[0].day
+    var last_day_end = hours[0].day
+    var last_start = hours[0].start
+    var last_end = hours[0].end
+    
+    
+    for (_, hour) in hours.dropFirst().enumerated(){
+        
+        // last day matches to the current day
+        if hour.start == last_start && hour.end == last_end && hour.day == last_day_end + 1{
+            last_day_end = hour.day
+        }
+            //last day doesn't match to the current day
+        else{
+            // if only day was there a
+            if last_day_end == last_day_start{
+                result.append("\(days[last_day_start]) \(last_start) - \(last_end)")
+            }
+            else{
+                result.append("\(days[last_day_start]) - \(days[last_day_end]) \(last_start) - \(last_end)")
+            }
+            last_day_start = hour.day
+            last_day_end = hour.day
+            last_start = hour.start
+            last_end = hour.end
+        }
+    }
+    return result
+}

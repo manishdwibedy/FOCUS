@@ -12,10 +12,13 @@ class PinViewController: UIViewController {
     var place: Place?
     @IBOutlet weak var interestStackView: UIStackView!
     
-    @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityStateLabel: UILabel!
     @IBOutlet weak var streetAddress: UILabel!
+    
+    @IBOutlet weak var hoursStackView: UIStackView!
+    
+    @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,8 +30,6 @@ class PinViewController: UIViewController {
                 textLabel.textColor = UIColor.green
             }
             
-            textLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-            textLabel.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
             textLabel.text  = category.name
             textLabel.textAlignment = .center
             
@@ -38,6 +39,20 @@ class PinViewController: UIViewController {
         streetAddress.text = place?.address[0]
         cityStateLabel.text = place?.address[1]
         phoneLabel.text = place?.phone
+        
+        
+        let hours = getOpenHours((place?.hours)!)
+        infoScreenHeight.constant += CGFloat(20 * hours.count)
+        
+        for (_, hour) in (hours.enumerated()){
+            let textLabel = UILabel()
+        
+            textLabel.text  = hour
+            textLabel.textAlignment = .left
+            
+            hoursStackView.addArrangedSubview(textLabel)
+            hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -297,7 +297,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 let open_hours = json["hours"].arrayValue[0].dictionaryValue
                 var hours = [Hours]()
                 for hour in (open_hours["open"]?.arrayValue)!{
-                    let hour = Hours(start: hour["start"].stringValue, end: hour["end"].stringValue, day: hour["day"].stringValue)
+                    let hour = Hours(start: hour["start"].stringValue, end: hour["end"].stringValue, day: hour["day"].intValue)
                     hours.append(hour)
                 }
                 let place = self.placeMapping[id]
