@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Place{
+class Place: Equatable{
     let id: String
     let name: String
     let image_url: String
@@ -35,5 +35,9 @@ class Place{
         self.address = address
         self.phone = phone
         self.distance = distance
+    }
+    
+    static func == (lhs: Place, rhs: Place) -> Bool {
+        return lhs.id == rhs.id
     }
 }

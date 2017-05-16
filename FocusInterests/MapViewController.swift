@@ -57,6 +57,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             NSLog("One or more of the map styles failed to load. \(error)")
         }
         
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        
         Constants.DB.event.observe(FIRDataEventType.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             
@@ -244,7 +247,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 marker.title = place.name
                 marker.map = self.mapView
                 marker.accessibilityLabel = "place_\(self.places.count)"
-                self.places.append(place)
+                
+                if !self.places.contains(place){
+                    self.places.append(place)
+                }
+                
 
             }
         }
