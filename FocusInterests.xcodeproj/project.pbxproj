@@ -26,6 +26,7 @@
 		5B959FD31ECAC6E000094FE6 /* PlaceDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FD21ECAC6E000094FE6 /* PlaceDetails.storyboard */; };
 		5B959FD51ECAC9EF00094FE6 /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FD41ECAC9EF00094FE6 /* PlaceViewController.swift */; };
 		5B959FD81ECAD12500094FE6 /* map.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FD71ECAD12500094FE6 /* map.gpx */; };
+		5B959FDA1ECADFA300094FE6 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FD91ECADFA300094FE6 /* PinViewController.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
 		5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C701EB9EADB0091189E /* InvitationViewController.swift */; };
 		5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */; };
@@ -156,6 +157,7 @@
 		5B959FD21ECAC6E000094FE6 /* PlaceDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceDetails.storyboard; sourceTree = "<group>"; };
 		5B959FD41ECAC9EF00094FE6 /* PlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
 		5B959FD71ECAD12500094FE6 /* map.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = map.gpx; sourceTree = "<group>"; };
+		5B959FD91ECADFA300094FE6 /* PinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5BA37C701EB9EADB0091189E /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapNavigationView.xib; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				5B959FD41ECAC9EF00094FE6 /* PlaceViewController.swift */,
+				5B959FD91ECADFA300094FE6 /* PinViewController.swift */,
 			);
 			name = Place;
 			sourceTree = "<group>";
@@ -953,6 +956,7 @@
 				D23E01391E6BAD0A00E735F5 /* FirebaseUpstream.swift in Sources */,
 				5B59064E1EC7E60D00466AAC /* MessagesViewController.swift in Sources */,
 				D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */,
+				5B959FDA1ECADFA300094FE6 /* PinViewController.swift in Sources */,
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
 				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,

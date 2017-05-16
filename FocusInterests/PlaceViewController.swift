@@ -35,6 +35,7 @@ class PlaceViewController: UIViewController {
     @IBAction func backPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func valueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             UIView.animate(withDuration: 0.5, animations: {
@@ -49,6 +50,13 @@ class PlaceViewController: UIViewController {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pinInfo"{
+            let pin = segue.destination as! PinViewController
+            pin.categories = place?.categories
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
