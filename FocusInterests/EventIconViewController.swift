@@ -31,6 +31,40 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
         setupTabBar()
     }
     
+    // MARK: - Tab Bar Delegate Method
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        switch item {
+        case cameraTabBttn:
+            chooseFromCamera()
+        case photoLibraryTabItem:
+            chooseFromGallery()
+        case videoTabItem:
+            break
+        // to do
+        case skipTabItem:
+            skipPickingImage()
+        default:
+            return
+        }
+    }
+    
+    // MARK: ImagePickerController Delegate Methods
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+        eventIcon.contentMode = .scaleAspectFit //3
+        eventIcon.image = chosenImage //4
+        self.imageData = UIImagePNGRepresentation(chosenImage)
+        dismiss(animated:true, completion: nil)
+    }
+    
+    // MARK: - Helper Functions
+    
     private func chooseFromGallery(){
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
@@ -46,37 +80,6 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
             picker.modalPresentationStyle = .fullScreen
             present(picker,animated: true,completion: nil)
         }
-    }
-    
-    // MARK: - Tab Bar Delegate Method
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        switch item {
-        case cameraTabBttn:
-            chooseFromCamera()
-        case photoLibraryTabItem:
-            chooseFromGallery()
-        case videoTabItem:
-            break
-        // to do
-        case skipTabItem:
-            skipPickingImage()
-        default:
-            return
-        }
-        
-    }
-    
-    // MARK: ImagePickerController Delegate Methods
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
-        eventIcon.contentMode = .scaleAspectFit //3
-        eventIcon.image = chosenImage //4
-        self.imageData = UIImagePNGRepresentation(chosenImage)
-        dismiss(animated:true, completion: nil)
     }
     
     func createPin(sender: UIBarButtonItem){
@@ -108,6 +111,7 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     // MARK: - UI Set Up
+    
     private func setupTabBar() {
         // lines 115-121 create seperators between each tab bar item
         let itemWidth = floor(self.tabBar.frame.size.width / CGFloat(self.tabBar.items!.count))
@@ -132,6 +136,9 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
     }
     
+    // MARK: - Navigation
+    
+    @IBAction func unwindFromSendInvites(sender: UIStoryboardSegue){}
     
     
 }

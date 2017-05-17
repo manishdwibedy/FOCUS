@@ -33,14 +33,11 @@ class InvitationViewController: UIViewController {
         let store = CNContactStore()
         
         if CNContactStore.authorizationStatus(for: .contacts) == .notDetermined {
-
-            
             store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
                 print(isGranted)
                 print(error)
                 self.retrieveContactsWithStore(store: store)
             }
-
         } else if CNContactStore.authorizationStatus(for: .contacts) == .authorized {
             self.retrieveContactsWithStore(store: store)
         }
