@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PinViewController: UIViewController, InviteUsers {
+class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
     var place: Place?
     
     @IBOutlet weak var categoriesStackView: UIStackView!
@@ -18,6 +18,7 @@ class PinViewController: UIViewController, InviteUsers {
     
     @IBOutlet weak var hoursStackView: UIStackView!
     
+    @IBOutlet weak var table: UITableView!
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -69,6 +70,21 @@ class PinViewController: UIViewController, InviteUsers {
         }
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = Bundle.main.loadNibNamed("PinTableViewCell", owner: self, options: nil)?.first as! PinTableViewCell
+        cell.username.text = "hello"
+        cell.comment.text = "asasasasa"
+        cell.focus.text = "dummy"
+        cell.time.text = "Just now"
+        cell.userImage.image = UIImage(named: "addUser")
+        return cell
+    }
+    
     func inviteUser(name: String) {
         print("clicked \(name)")
     }

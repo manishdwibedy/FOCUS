@@ -29,6 +29,8 @@
 		5B959FDA1ECADFA300094FE6 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FD91ECADFA300094FE6 /* PinViewController.swift */; };
 		5B959FE11ECBA62B00094FE6 /* InviteUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FE01ECBA62B00094FE6 /* InviteUserView.xib */; };
 		5B959FE31ECBA6C600094FE6 /* InviteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FE21ECBA6C600094FE6 /* InviteUserView.swift */; };
+		5B959FE81ECC14D200094FE6 /* PinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FE61ECC14D200094FE6 /* PinTableViewCell.swift */; };
+		5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FE71ECC14D200094FE6 /* PinTableViewCell.xib */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
 		5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C701EB9EADB0091189E /* InvitationViewController.swift */; };
 		5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */; };
@@ -162,6 +164,8 @@
 		5B959FD91ECADFA300094FE6 /* PinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
 		5B959FE01ECBA62B00094FE6 /* InviteUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteUserView.xib; sourceTree = "<group>"; };
 		5B959FE21ECBA6C600094FE6 /* InviteUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteUserView.swift; sourceTree = "<group>"; };
+		5B959FE61ECC14D200094FE6 /* PinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinTableViewCell.swift; sourceTree = "<group>"; };
+		5B959FE71ECC14D200094FE6 /* PinTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinTableViewCell.xib; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5BA37C701EB9EADB0091189E /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapNavigationView.xib; sourceTree = "<group>"; };
@@ -311,6 +315,8 @@
 			children = (
 				5B959FD41ECAC9EF00094FE6 /* PlaceViewController.swift */,
 				5B959FD91ECADFA300094FE6 /* PinViewController.swift */,
+				5B959FE61ECC14D200094FE6 /* PinTableViewCell.swift */,
+				5B959FE71ECC14D200094FE6 /* PinTableViewCell.xib */,
 			);
 			name = Place;
 			sourceTree = "<group>";
@@ -731,6 +737,7 @@
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				0486B0861EC96473007E4CCC /* CreateEvent.storyboard in Resources */,
 				FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */,
+				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				FF522CAF1EC3E2DD00D27A9E /* commentCell.xib in Resources */,
@@ -932,6 +939,7 @@
 				FF522C631EC24CE900D27A9E /* allCommentsVC.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
+				5B959FE81ECC14D200094FE6 /* PinTableViewCell.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				FF522CAE1EC3E2DD00D27A9E /* commentCell.swift in Sources */,
