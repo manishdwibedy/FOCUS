@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="125" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u83-fG-Eui">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u83-fG-Eui">
                     <rect key="frame" x="12.666666666666664" y="20" width="100" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="hGJ-Ey-sVj"/>
@@ -36,10 +36,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYQ-ob-V4k">
-                    <rect key="frame" x="15" y="161" width="95" height="48"/>
-                    <state key="normal" title="Invite" backgroundImage="4GreenCircles">
-                        <color key="titleColor" red="1" green="0.27871278199999999" blue="0.18309285789999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
+                    <rect key="frame" x="15" y="161" width="95" height="30"/>
+                    <state key="normal" title="Invite"/>
+                    <connections>
+                        <action selector="invite:" destination="-1" eventType="touchUpInside" id="6nZ-6S-kBD"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
@@ -53,9 +54,7 @@
                 <constraint firstAttribute="trailing" secondItem="4TO-YW-pJM" secondAttribute="trailing" constant="15" id="ym8-qu-hqa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="59.5" y="86"/>
         </view>
     </objects>
-    <resources>
-        <image name="4GreenCircles" width="48" height="48"/>
-    </resources>
 </document>

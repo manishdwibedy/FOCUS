@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PinViewController: UIViewController, inviteUsers, UIGestureRecognizerDelegate {
+class PinViewController: UIViewController, InviteUsers {
     var place: Place?
     
     @IBOutlet weak var categoriesStackView: UIStackView!
@@ -62,20 +62,18 @@ class PinViewController: UIViewController, inviteUsers, UIGestureRecognizerDeleg
         
         for (index, user) in invite.enumerated(){
             let view = inviteUserStackView.arrangedSubviews[index] as! InviteUserView
-            view.delegate = self
             view.userName.text = user
-            view.image.image = UIImage(named: "addUser")
-            view.inviteButton.setTitle("Hey", for: .normal)
-            view.inviteButton.addTarget(self, action: Selector("inviteUser:"), for: .touchUpInside)
+            view.delegate = self
             
-            let tap = UITapGestureRecognizer(target: self, action: Selector("inviteUser:"))
-            tap.delegate = self
-            view.addGestureRecognizer(tap)
-
+            view.image.image = UIImage(named: "addUser")
         }
     }
 
-    func inviteUser() {
+    func inviteUser(name: String) {
+        print("clicked \(name)")
+    }
+    func inviteUser(_ sender: Any) {
+        //let view = sender.view
         print("inviting user...")
     }
     override func didReceiveMemoryWarning() {

@@ -247,27 +247,41 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79C-UR-Hhq">
-                                                <rect key="frame" x="10" y="280.5" width="355" height="200"/>
+                                                <rect key="frame" x="10" y="280.5" width="355" height="240"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="3p6-HE-tdh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="200"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="240"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Shn-Jk-7de" customClass="InviteUserView" customModule="FocusInterests" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="66.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="118.5" height="240"/>
                                                             </view>
                                                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHQ-HO-9SL" customClass="InviteUserView" customModule="FocusInterests" customModuleProvider="target">
-                                                                <rect key="frame" x="118.5" y="0.0" width="118" height="67"/>
+                                                                <rect key="frame" x="118.5" y="0.0" width="118" height="240"/>
                                                             </view>
                                                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHb-of-K1U" customClass="InviteUserView" customModule="FocusInterests" customModuleProvider="target">
-                                                                <rect key="frame" x="236.5" y="0.0" width="118.5" height="66.5"/>
+                                                                <rect key="frame" x="236.5" y="0.0" width="118.5" height="240"/>
                                                             </view>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="GHb-of-K1U" secondAttribute="bottom" id="1Cg-ww-blS"/>
+                                                            <constraint firstItem="wHQ-HO-9SL" firstAttribute="leading" secondItem="Shn-Jk-7de" secondAttribute="trailing" id="6kL-8h-4zl"/>
+                                                            <constraint firstAttribute="bottom" secondItem="wHQ-HO-9SL" secondAttribute="bottom" id="BQV-Gk-zky"/>
+                                                            <constraint firstItem="GHb-of-K1U" firstAttribute="top" secondItem="3p6-HE-tdh" secondAttribute="top" id="GZl-ot-zCh"/>
+                                                            <constraint firstAttribute="trailing" secondItem="GHb-of-K1U" secondAttribute="trailing" id="JFm-1Y-Izn"/>
+                                                            <constraint firstItem="wHQ-HO-9SL" firstAttribute="top" secondItem="3p6-HE-tdh" secondAttribute="top" id="Ojd-E8-eze"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Shn-Jk-7de" secondAttribute="bottom" id="R3h-ng-UdS"/>
+                                                            <constraint firstItem="Shn-Jk-7de" firstAttribute="leading" secondItem="3p6-HE-tdh" secondAttribute="leading" id="TQQ-S3-PWO"/>
+                                                            <constraint firstItem="GHb-of-K1U" firstAttribute="leading" secondItem="wHQ-HO-9SL" secondAttribute="trailing" id="Tl8-FO-ky1"/>
+                                                            <constraint firstItem="GHb-of-K1U" firstAttribute="leading" secondItem="wHQ-HO-9SL" secondAttribute="trailing" id="Wj8-3B-tQj"/>
+                                                            <constraint firstItem="wHQ-HO-9SL" firstAttribute="leading" secondItem="Shn-Jk-7de" secondAttribute="trailing" id="fO7-6H-btR"/>
+                                                            <constraint firstItem="Shn-Jk-7de" firstAttribute="top" secondItem="3p6-HE-tdh" secondAttribute="top" id="u4y-RA-wpT"/>
+                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="3p6-HE-tdh" firstAttribute="leading" secondItem="79C-UR-Hhq" secondAttribute="leading" id="7Da-Es-Y3L"/>
                                                     <constraint firstAttribute="trailing" secondItem="3p6-HE-tdh" secondAttribute="trailing" id="SKt-bf-8k2"/>
-                                                    <constraint firstAttribute="height" constant="200" id="UpW-SE-gIg"/>
+                                                    <constraint firstAttribute="height" constant="240" id="UpW-SE-gIg"/>
                                                     <constraint firstItem="3p6-HE-tdh" firstAttribute="top" secondItem="79C-UR-Hhq" secondAttribute="top" id="jAk-4m-XJA"/>
                                                     <constraint firstAttribute="bottom" secondItem="3p6-HE-tdh" secondAttribute="bottom" id="nRN-bv-ZJh"/>
                                                 </constraints>
