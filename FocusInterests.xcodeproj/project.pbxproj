@@ -11,6 +11,7 @@
 		042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */; };
 		0486B0861EC96473007E4CCC /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486B0851EC96473007E4CCC /* CreateEvent.storyboard */; };
 		04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04920F6C1EC277D4007D0B10 /* EventTextField.swift */; };
+		04E5E42B1ECBA4B800F2F1E0 /* SendInvitationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E5E42A1ECBA4B800F2F1E0 /* SendInvitationsViewController.swift */; };
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
 		5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */; };
@@ -132,6 +133,7 @@
 		042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewEventViewController.swift; sourceTree = "<group>"; };
 		0486B0851EC96473007E4CCC /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		04920F6C1EC277D4007D0B10 /* EventTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTextField.swift; sourceTree = "<group>"; };
+		04E5E42A1ECBA4B800F2F1E0 /* SendInvitationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendInvitationsViewController.swift; sourceTree = "<group>"; };
 		04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSignUpViewController.swift; sourceTree = "<group>"; };
 		04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondSignUpViewController.swift; sourceTree = "<group>"; };
 		0CC6A3DFD312CA4DD5401EF6 /* Pods-FocusInterestsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsTests/Pods-FocusInterestsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				FF522C621EC24CE900D27A9E /* allCommentsVC.swift */,
 				5B7DC2001EA866D700A1471E /* EventIconViewController.swift */,
 				5BA37C701EB9EADB0091189E /* InvitationViewController.swift */,
+				04E5E42A1ECBA4B800F2F1E0 /* SendInvitationsViewController.swift */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -892,6 +895,7 @@
 				D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */,
 				D25370D21E885EE40071B115 /* FollowCell.swift in Sources */,
 				D2FDB69A1E89F73800D62DC2 /* SocialGroupViewController.swift in Sources */,
+				04E5E42B1ECBA4B800F2F1E0 /* SendInvitationsViewController.swift in Sources */,
 				D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */,
 				04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
