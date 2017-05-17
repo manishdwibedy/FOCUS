@@ -88,10 +88,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
     func inviteUser(name: String) {
         print("clicked \(name)")
     }
-    func inviteUser(_ sender: Any) {
-        //let view = sender.view
-        print("inviting user...")
-    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
