@@ -12,6 +12,8 @@ import Firebase
 class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var navBackOut: UIBarButtonItem!
+    @IBOutlet weak var postOut: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     var parentEvent: Event?
@@ -19,6 +21,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     let ref = FIRDatabase.database().reference()
     let commentList = NSMutableArray()
     let commentsCList = NSMutableArray()
+    var keyboardUp = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,17 +37,20 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         commentTextField.layer.borderColor = UIColor.white.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
         
         let fullRef = ref.child("events").child((parentEvent?.id)!).child("comments")
-        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { (snapshot) in
+        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 25).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary
-                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int)
+                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int, date: Date(timeIntervalSince1970: TimeInterval(dict["date"] as! Double)))
                     self.commentsCList.add(data)
+                    print(dict["comment"] as! String)
                     
                     
                 }
@@ -99,7 +105,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         let fullRef = ref.child("events").child((parentEvent?.id)!).child("comments").childByAutoId()
         fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
     
-        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0)
+        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
         self.commentsCList.add(data)
         tableView.beginUpdates()
         tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
@@ -117,17 +123,39 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
-            self.view.frame.origin.y = -keyboardHeight
-                       
+            self.commentTextField.frame.origin.y = self.view.frame.height - self.commentTextField.frame.height - 10 - keyboardHeight
+            self.postOut.frame.origin.y = self.view.frame.height - self.postOut.frame.height - 10 - keyboardHeight
+            self.tableView.frame.size = CGSize(width: self.tableView.frame.width, height: self.commentTextField.frame.origin.y - self.tableView.frame.origin.y-10)
             
         }
     }
     
-    
-    @IBAction func back(_ sender: Any) {
+    func keyboardDidShow(notification: NSNotification) {
+        keyboardUp = true
+        navBackOut.title = "Cancel"
+        let oldLastCellIndexPath = NSIndexPath(row: commentsCList.count-1, section: 0)
+        self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
         
-        dismiss(animated: true, completion: nil)
     }
+    func keyboardDidHide(notification: NSNotification) {
+        keyboardUp = false
+        navBackOut.title = "Back"
+    }
+
+    
+    
+    @IBAction func navBack(_ sender: Any) {
+        
+        if keyboardUp == false
+        {
+            dismiss(animated: true, completion: nil)
+        }else
+        {
+            commentTextField.resignFirstResponder()
+            commentTextField.text = ""
+        }
+    }
+    
     
 
 

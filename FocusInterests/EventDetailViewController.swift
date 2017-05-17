@@ -19,18 +19,19 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var attendOut: UIButton!
-    
+    @IBOutlet weak var navTitle: UINavigationItem!
+    @IBOutlet weak var navBackOut: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var commentTextField: UITextField!
+    
     var event: Event?
     @IBOutlet weak var image: UIImageView!
     let ref = FIRDatabase.database().reference()
     let commentsCList = NSMutableArray()
+    var keyboardUp = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -65,8 +66,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         commentTextField.layer.borderColor = UIColor.white.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
         
-        eventTitleLabel.text = event?.title
+        navTitle.title = event?.title
         timeLabel.text = event?.date
         addressLabel.text = event?.fullAddress
         descriptionLabel.text = event?.description
@@ -90,12 +93,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                print(value!)
-                
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary
-                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int)
+                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int, date: Date(timeIntervalSince1970: TimeInterval(dict["date"] as! Double)))
                     self.commentsCList.add(data)
                     
                     
@@ -179,7 +180,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         let fullRef = ref.child("events").child((event?.id)!).child("comments").childByAutoId()
         fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
         
-        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0)
+        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
         if self.commentsCList.count != 0
         {
             self.commentsCList.removeObject(at: 0)
@@ -221,10 +222,27 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
-            self.scrollView.frame.origin.y = -((keyboardHeight))
+            //self.scrollView.contentOffset.y = ((keyboardHeight)) + self.commentTextField.frame.height + 100
+            
             
             
         }
+    }
+    
+    func keyboardDidShow(notification: NSNotification) {
+        keyboardUp = true
+        navBackOut.title = "Cancel"
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            //self.scrollView.contentOffset.y = (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60
+            
+            scrollView.setContentOffset(CGPoint(x: 0, y: (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60), animated: true)
+        }
+        
+    }
+    func keyboardDidHide(notification: NSNotification) {
+        keyboardUp = false
+        navBackOut.title = "Back"
     }
     
     
@@ -263,10 +281,20 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     
-    @IBAction func back(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    
+    
+    @IBAction func navBack(_ sender: Any) {
+        if keyboardUp == false
+        {
+            dismiss(animated: true, completion: nil)
+        }else
+        {
+            commentTextField.resignFirstResponder()
+            commentTextField.text = ""
+        }
         
     }
+    
     
     
     
