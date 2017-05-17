@@ -25,11 +25,13 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var commentTextField: UITextField!
     
+    @IBOutlet weak var guestButtonOut: UIButton!
     var event: Event?
     @IBOutlet weak var image: UIImageView!
     let ref = FIRDatabase.database().reference()
     let commentsCList = NSMutableArray()
     var keyboardUp = false
+    var attendingAmount = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -132,6 +134,16 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         })
         
+        // attending amount
+        ref.child("events").child((event?.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.attendingAmount = value?["amount"] as! Int
+                self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
+            }
+        })
+        
         //attending
         ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -166,8 +178,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func attendEvent(_ sender: UIButton) {
+        let newAmount = attendingAmount + 1
+        attendingAmount = newAmount
+        self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
         let fullRef = ref.child("events").child((event?.id)!)
         fullRef.child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+        fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
         self.attendOut.isEnabled = false
         self.attendOut.setTitle("Attending", for: UIControlState.normal)
     }
@@ -280,6 +296,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
     }
     
+    
+    
+    @IBAction func guestButton(_ sender: Any) {
+    }
+   
     
     
     

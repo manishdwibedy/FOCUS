@@ -10,6 +10,8 @@ import UIKit
 
 class attendeeVC: UIViewController {
 
+    @IBOutlet weak var navTitle: UINavigationBar!
+    @IBOutlet weak var navBackOut: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,5 +33,8 @@ class attendeeVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func navBack(_ sender: Any) {
+    }
+   
 
 }
