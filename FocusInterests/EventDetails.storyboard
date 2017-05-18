@@ -535,7 +535,7 @@
                         <outlet property="attendingLabel" destination="87Q-qp-9XK" id="roU-li-jL6"/>
                         <outlet property="guestListLabel" destination="H4J-6H-4vy" id="fea-hG-yCy"/>
                         <outlet property="navBackOut" destination="hUp-fM-j5B" id="Lpg-az-L6O"/>
-                        <outlet property="navTitle" destination="1kx-pU-LGr" id="mBb-Bc-ey1"/>
+                        <outlet property="navTitle" destination="ySY-T1-B5v" id="uRZ-yU-7J6"/>
                         <outlet property="tableView" destination="Ztl-Rd-EcI" id="bgw-p6-GLY"/>
                     </connections>
                 </viewController>

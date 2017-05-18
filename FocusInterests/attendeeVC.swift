@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var navTitle: UINavigationBar!
+    @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var navBackOut: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var guestListLabel: UILabel!
@@ -29,6 +29,7 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let nib = UINib(nibName: "FollowProfileCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "FollowProfileCell")
         
+        navTitle.title = parentEvent?.title
         guestListLabel.text = (parentEvent?.title)! + " Guest List"
         let fullRef = ref.child("events").child((parentEvent?.id)!).child("attendingList")
         fullRef.observeSingleEvent(of: .value, with: { (snapshot) in
