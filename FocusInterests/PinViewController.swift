@@ -21,6 +21,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var suggestPlacesStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -67,6 +70,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
             view.delegate = self
             
             view.image.image = UIImage(named: "addUser")
+        }
+        
+        let places = ["place1", "place2", "place3"]
+        
+        for (index, place) in places.enumerated(){
+            let view = suggestPlacesStackView.arrangedSubviews[index] as! SuggestPlaceView
+            view.name.text = place
+            view.imageView.image = UIImage(named: "addUser")
+            
+            
         }
     }
 
