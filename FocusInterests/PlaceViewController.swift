@@ -75,32 +75,35 @@ class PlaceViewController: UIViewController {
         let comments = place.child((self.place?.id)!).child("comments")
         
         comments.queryOrdered(byChild: "date").queryLimited(toLast: 5).observeSingleEvent(of: .value, with: {snapshot in
-            let comments = snapshot.value as! [String: [String: Any]]
             
-            for (_, comment) in comments.enumerated(){
-                print(comment.key)
-                let id = comment.value["user"] as! String
-                let commentText = comment.value["comment"] as! String
-                let rating = comment.value["rating"] as! Double
-                let date = comment.value["date"] as! Double
-                
-                let placeComment = PlaceRating(uid: id, date: Date(timeIntervalSince1970: date), rating: rating)
-                
-                Constants.DB.user.child(id).observeSingleEvent(of: .value, with: {snapshot in
-                    let value = snapshot.value as! [String: Any]
-                    let username = value["username"] as! String
-                    placeComment.setUsername(username: username)
+            if let comments = snapshot.value as? [String: [String: Any]]{
+                for (_, comment) in comments.enumerated(){
+                    print(comment.key)
+                    let id = comment.value["user"] as! String
+                    let commentText = comment.value["comment"] as! String
+                    let rating = comment.value["rating"] as! Double
+                    let date = comment.value["date"] as! Double
                     
-                    self.delegate?.gotComments(comments: self.rating)
-                })
-                
-                
-                
-                if commentText.characters.count > 0{
-                    placeComment.addComment(comment: commentText)
+                    let placeComment = PlaceRating(uid: id, date: Date(timeIntervalSince1970: date), rating: rating)
+                    
+                    Constants.DB.user.child(id).observeSingleEvent(of: .value, with: {snapshot in
+                        let value = snapshot.value as! [String: Any]
+                        let username = value["username"] as! String
+                        placeComment.setUsername(username: username)
+                        
+                        self.delegate?.gotComments(comments: self.rating)
+                    })
+                    
+                    
+                    
+                    if commentText.characters.count > 0{
+                        placeComment.addComment(comment: commentText)
+                    }
+                    self.rating.append(placeComment)
                 }
-                self.rating.append(placeComment)
             }
+            
+            
         })
     }
     
