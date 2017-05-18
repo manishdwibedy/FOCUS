@@ -25,6 +25,7 @@ target 'FocusInterests' do
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
     pod 'Alamofire'
     pod 'SwiftyJSON'
+    pod 'Cosmos', '~> 9.0'
 end
 
 target 'FocusInterestsTests' do
@@ -46,7 +47,9 @@ target 'FocusInterestsTests' do
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
     pod 'Alamofire'
     pod 'SwiftyJSON'
+    pod 'Cosmos', '~> 9.0'
 end
+
 
 target 'FocusInterestsUITests' do
 
@@ -67,5 +70,6 @@ target 'FocusInterestsUITests' do
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
     pod 'Alamofire'
     pod 'SwiftyJSON'
+    pod 'Cosmos', '~> 9.0'
 end
 
