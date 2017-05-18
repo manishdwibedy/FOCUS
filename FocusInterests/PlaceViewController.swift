@@ -80,9 +80,13 @@ class PlaceViewController: UIViewController {
                 for (_, comment) in comments.enumerated(){
                     print(comment.key)
                     let id = comment.value["user"] as! String
-                    let commentText = comment.value["comment"] as! String
+                    var commentText = comment.value["comment"] as! String
                     let rating = comment.value["rating"] as! Double
                     let date = comment.value["date"] as! Double
+                    
+                    if commentText.characters.count == 0{
+                        commentText = "No comment was provided."
+                    }
                     
                     let placeComment = PlaceRating(uid: id, date: Date(timeIntervalSince1970: date), rating: rating)
                     
