@@ -57,6 +57,10 @@ class PlaceViewController: UIViewController {
             let pin = segue.destination as! PinViewController
             pin.place = self.place
         }
+        else if segue.identifier == "rating"{
+            let rating = segue.destination as! RatingViewController
+            rating.place = self.place
+        }
     }
     
     /*

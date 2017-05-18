@@ -92,7 +92,7 @@
                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bz3-43-V4a" userLabel="Rating View">
                                 <rect key="frame" x="0.0" y="292" width="375" height="375"/>
                                 <connections>
-                                    <segue destination="ahA-Wd-kLn" kind="embed" id="BtS-af-Iq0"/>
+                                    <segue destination="ahA-Wd-kLn" kind="embed" identifier="rating" id="BtS-af-Iq0"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -459,9 +459,12 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9P-yw-vi1">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9P-yw-vi1">
                                         <rect key="frame" x="274" y="45" width="49" height="30"/>
                                         <state key="normal" title="Submit"/>
+                                        <connections>
+                                            <action selector="ratingSubmitted:" destination="ahA-Wd-kLn" eventType="touchUpInside" id="ACr-Mw-PI9"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Please enter your comments here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bln-g0-qfw">
                                         <rect key="frame" x="10" y="60" width="254" height="50"/>
@@ -496,7 +499,7 @@
                     <connections>
                         <outlet property="comment" destination="bln-g0-qfw" id="1b6-bV-Zkl"/>
                         <outlet property="rating" destination="CBJ-ZN-IGs" id="9mz-k0-LWa"/>
-                        <outlet property="ratingSubmitted" destination="U9P-yw-vi1" id="fGU-aA-sW5"/>
+                        <outlet property="submitRatingButton" destination="U9P-yw-vi1" id="Kba-Of-pnZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xo7-dy-KwA" userLabel="First Responder" sceneMemberID="firstResponder"/>

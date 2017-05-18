@@ -12,8 +12,11 @@ import Cosmos
 class RatingViewController: UIViewController, UITextViewDelegate{
 
     @IBOutlet weak var rating: CosmosView!
-    
     @IBOutlet weak var comment: UITextView!
+    var place: Place?
+    @IBOutlet weak var submitRatingButton: UIButton!
+    var ratingID: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,6 +31,10 @@ class RatingViewController: UIViewController, UITextViewDelegate{
         //tap.cancelsTouchesInView = false
         
         view.addGestureRecognizer(tap)
+        
+        rating.didFinishTouchingCosmos = { rating in
+            self.submitRatingButton.isEnabled = true
+        }
     }
     
     //Calls this function when the tap is recognized.
@@ -56,8 +63,33 @@ class RatingViewController: UIViewController, UITextViewDelegate{
         }
         return true
     }
+    
+    
+    @IBAction func ratingSubmitted(_ sender: UIButton) {
+        let place = Constants.DB.places
+        let comments = place.child((self.place?.id)!).child("comments")
         
-    @IBOutlet weak var ratingSubmitted: UIButton!
+        let comment = comments.childByAutoId()
+        
+        if let rating = self.ratingID{
+            comments.child(rating).setValue([
+                "rating": self.rating.rating,
+                "comment": self.comment.text,
+                "date": Date().timeIntervalSince1970,
+                "user": AuthApi.getFirebaseUid()!
+                ])
+        }
+        else{
+            comment.setValue([
+                "rating": self.rating.rating,
+                "comment": self.comment.text,
+                "date": Date().timeIntervalSince1970,
+                "user": AuthApi.getFirebaseUid()!
+                ])
+            self.ratingID = comment.key
+        }
+        
+    }
     /*
     // MARK: - Navigation
 
