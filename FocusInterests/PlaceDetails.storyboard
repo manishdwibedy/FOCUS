@@ -489,14 +489,14 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k9g-Au-vyF">
-                                <rect key="frame" x="26" y="140" width="323" height="225"/>
+                                <rect key="frame" x="-4" y="140" width="383" height="235"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Ul6-Ld-wT6" customClass="RatingViewCell" customModule="FocusInterests" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="323" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="383" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ul6-Ld-wT6" id="orb-RD-hP3">
-                                            <rect key="frame" x="0.0" y="0.0" width="323" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -509,12 +509,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kzs-zd-iwk" firstAttribute="top" secondItem="QTQ-wz-4Bg" secondAttribute="bottom" constant="10" id="Dwc-xz-1d1"/>
-                            <constraint firstItem="inU-ND-c0d" firstAttribute="top" secondItem="k9g-Au-vyF" secondAttribute="bottom" constant="10" id="MP7-4m-AEk"/>
+                            <constraint firstItem="inU-ND-c0d" firstAttribute="top" secondItem="k9g-Au-vyF" secondAttribute="bottom" id="MP7-4m-AEk"/>
                             <constraint firstItem="kzs-zd-iwk" firstAttribute="leading" secondItem="a2P-SI-ITQ" secondAttribute="leadingMargin" constant="10" id="OTO-Vs-wv8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="k9g-Au-vyF" secondAttribute="trailing" constant="10" id="SVx-Gh-qHn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="k9g-Au-vyF" secondAttribute="trailing" constant="-20" id="SVx-Gh-qHn"/>
                             <constraint firstItem="k9g-Au-vyF" firstAttribute="top" secondItem="kzs-zd-iwk" secondAttribute="bottom" constant="10" id="aZX-BH-1Hs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kzs-zd-iwk" secondAttribute="trailing" constant="10" id="dB0-nB-1q1"/>
-                            <constraint firstItem="k9g-Au-vyF" firstAttribute="leading" secondItem="a2P-SI-ITQ" secondAttribute="leadingMargin" constant="10" id="ltY-42-8JD"/>
+                            <constraint firstItem="k9g-Au-vyF" firstAttribute="leading" secondItem="a2P-SI-ITQ" secondAttribute="leadingMargin" constant="-20" id="ltY-42-8JD"/>
                         </constraints>
                     </view>
                     <connections>
