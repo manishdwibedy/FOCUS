@@ -24,6 +24,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var inviteOut: UIButton!
+    @IBOutlet weak var mapOut: UIButton!
     
     @IBOutlet weak var guestButtonOut: UIButton!
     var event: Event?
@@ -36,6 +38,18 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        attendOut.layer.cornerRadius = 6
+        attendOut.clipsToBounds = true
+        
+        inviteOut.layer.cornerRadius = 6
+        inviteOut.clipsToBounds = true
+        
+        mapOut.layer.cornerRadius = 6
+        mapOut.clipsToBounds = true
+        
+        
+        
         
         let nib = UINib(nibName: "commentCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
@@ -140,9 +154,18 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             if value != nil
             {
                 self.attendingAmount = value?["amount"] as! Int
-                self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
+                let text = String(self.attendingAmount) + " guests"
+                
+                
+                let textRange = NSMakeRange(0, text.characters.count)
+                let attributedText = NSMutableAttributedString(string: text)
+                attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
+                self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
+                
             }
         })
+        
+        
         
         //attending
         ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -299,6 +322,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     
     @IBAction func guestButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "attendeeVC") as! attendeeVC
+        ivc.parentVC = self
+        ivc.parentEvent = event
+        self.present(ivc, animated: true, completion: { _ in })
     }
    
     

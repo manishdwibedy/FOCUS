@@ -109,6 +109,8 @@
 		FF522CAB1EC383D600D27A9E /* commentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF522CAA1EC383D600D27A9E /* commentView.swift */; };
 		FF522CAE1EC3E2DD00D27A9E /* commentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF522CAC1EC3E2DD00D27A9E /* commentCell.swift */; };
 		FF522CAF1EC3E2DD00D27A9E /* commentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF522CAD1EC3E2DD00D27A9E /* commentCell.xib */; };
+		FF7947781ECD0DD400A2640C /* FollowProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7947761ECD0DD400A2640C /* FollowProfileCell.swift */; };
+		FF7947791ECD0DD400A2640C /* FollowProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7947771ECD0DD400A2640C /* FollowProfileCell.xib */; };
 		FF9821FF1ECA99B30093FF35 /* attendeeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9821FE1ECA99B30093FF35 /* attendeeVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -246,6 +248,8 @@
 		FF522CAA1EC383D600D27A9E /* commentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentView.swift; sourceTree = "<group>"; };
 		FF522CAC1EC3E2DD00D27A9E /* commentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commentCell.swift; sourceTree = "<group>"; };
 		FF522CAD1EC3E2DD00D27A9E /* commentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentCell.xib; sourceTree = "<group>"; };
+		FF7947761ECD0DD400A2640C /* FollowProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowProfileCell.swift; sourceTree = "<group>"; };
+		FF7947771ECD0DD400A2640C /* FollowProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowProfileCell.xib; sourceTree = "<group>"; };
 		FF9821FE1ECA99B30093FF35 /* attendeeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = attendeeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -498,6 +502,8 @@
 				D21317F71E5B47D300140323 /* HomViewControllerCell.xib */,
 				D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */,
 				D28EAFBB1E5D30C3001EA7E5 /* SwitchCell.xib */,
+				FF7947761ECD0DD400A2640C /* FollowProfileCell.swift */,
+				FF7947771ECD0DD400A2640C /* FollowProfileCell.xib */,
 				D21975481E62406200ED3345 /* ChooseInterestsCell.swift */,
 				D21975491E62406200ED3345 /* ChooseInterestsCell.xib */,
 				D219754C1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift */,
@@ -694,6 +700,7 @@
 				D2ECAC551E7A255B006FFA1A /* UserProfile1ViewController.xib in Resources */,
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
+				FF7947791ECD0DD400A2640C /* FollowProfileCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
@@ -923,6 +930,7 @@
 				5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */,
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
 				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,
+				FF7947781ECD0DD400A2640C /* FollowProfileCell.swift in Sources */,
 				D296F5D31E75BB69007EC393 /* AuthApi.swift in Sources */,
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */,
