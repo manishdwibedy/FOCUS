@@ -37,7 +37,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
             }
             
             textLabel.text  = category.name
-            textLabel.textAlignment = .left
+            textLabel.textAlignment = .left 
             
             categoriesStackView.addArrangedSubview(textLabel)
             categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
