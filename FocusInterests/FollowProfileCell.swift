@@ -41,13 +41,46 @@ class FollowProfileCell: UITableViewCell {
             {
                 self.usernameLabel.text = value?["username"] as? String
                 self.data.username = (value?["username"] as? String)!
+                self.ifFollowing(uid: self.data.uid, completionIt: {(boolV) -> () in
+                
+                    if boolV == true
+                    {
+                        self.followOut.isEnabled = false
+                        self.followOut.layer.borderColor = UIColor.white.cgColor
+                        self.followOut.layer.borderWidth = 1
+                        self.followOut.backgroundColor = UIColor.clear
+                        self.followOut.setTitle("Following", for: UIControlState.normal)
+                    }
+                })
             }
         })
+    }
+    
+    func ifFollowing(uid:String,completionIt: @escaping (_ result: Bool)->())
+    {
+        ref.child("users").child(AuthApi.getFirebaseUid()!).child("following").queryOrdered(byChild: "UID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                completionIt(true)
+            }else
+            {
+                completionIt(false)
+            }
+           
+        })
+       
     }
     
     
     @IBAction func follow(_ sender: Any) {
         
+        ref.child("users").child(AuthApi.getFirebaseUid()!).child("following").childByAutoId().updateChildValues(["UID": data.uid])
+        followOut.isEnabled = false
+        followOut.layer.borderColor = UIColor.white.cgColor
+        followOut.layer.borderWidth = 1
+        followOut.backgroundColor = UIColor.clear
+        followOut.setTitle("Following", for: UIControlState.normal)
         
     }
     
