@@ -42,6 +42,7 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     newData.uid = (value?[key] as! NSDictionary)["UID"] as! String
                     self.attendeeList.add(newData)
             
+            
                 }
             }
         })
@@ -68,6 +69,10 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell:FollowProfileCell = self.tableView.dequeueReusableCell(withIdentifier: "FollowProfileCell") as! FollowProfileCell!
         cell.data = attendeeList[indexPath.row] as! followProfileCellData
         cell.loadData()
+        if cell.data.uid == AuthApi.getFirebaseUid()
+        {
+            cell.followOut.isHidden = true
+        }
         return cell
     }
     
