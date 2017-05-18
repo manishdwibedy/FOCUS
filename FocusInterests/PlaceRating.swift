@@ -13,7 +13,7 @@ class PlaceRating{
     let date: Date
     let rating: Double
     var comment: String? = nil
-    
+    var username: String? = nil
     init(uid: String, date: Date, rating: Double) {
         self.uid = uid
         self.date = date
@@ -22,5 +22,9 @@ class PlaceRating{
     
     func addComment(comment: String) {
         self.comment = comment
+    }
+    
+    func setUsername(username: String){
+        self.username = username
     }
 }

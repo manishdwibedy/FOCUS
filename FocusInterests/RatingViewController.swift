@@ -123,6 +123,12 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
                 
                 let placeComment = PlaceRating(uid: id, date: Date(timeIntervalSince1970: date), rating: rating)
                 
+                Constants.DB.user.child(id).observeSingleEvent(of: .value, with: {snapshot in
+                    let value = snapshot.value as! [String: Any]
+                    let username = value["username"] as! String
+                    placeComment.setUsername(username: username)
+                })
+                
                 if commentText.characters.count > 0{
                     placeComment.addComment(comment: commentText)
                 }
@@ -140,6 +146,13 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
         let cell = Bundle.main.loadNibNamed("RatingViewCell", owner: self, options: nil)?.first as! RatingViewCell
         let comment = self.ratings[indexPath.row]
         
+        if let username = comment.username{
+            cell.userName.text = username
+        }
+        else{
+            
+        }
+//        cell.userName.text = comment.username
         cell.rating.rating = comment.rating
         cell.comments.text = comment.comment
         cell.time.text = DateFormatter().timeSince(from: comment.date, numericDates: true)
