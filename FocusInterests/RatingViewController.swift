@@ -9,14 +9,14 @@
 import UIKit
 import Cosmos
 
-class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDataSource{
+class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, Comments{
 
     @IBOutlet weak var rating: CosmosView!
     @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var submitRatingButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
-    
+    var placeVC: PlaceViewController? = nil
     
     var place: Place?
     var ratingID: String?
@@ -24,6 +24,8 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        placeVC?.delegate = self
 
         // Do any additional setup after loading the view.
         rating.settings.fillMode = .half
@@ -44,7 +46,6 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getLatestComments()
     }
     
     //Calls this function when the tap is recognized.
@@ -107,37 +108,6 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
         
     }
     
-    func getLatestComments(){
-        let place = Constants.DB.places
-        let comments = place.child((self.place?.id)!).child("comments")
-        
-        comments.queryOrdered(byChild: "date").queryLimited(toLast: 5).observeSingleEvent(of: .value, with: {snapshot in
-            let comments = snapshot.value as! [String: [String: Any]]
-            
-            for (id, comment) in comments.enumerated(){
-                print(comment.key)
-                let id = comment.value["user"] as! String
-                let commentText = comment.value["comment"] as! String
-                let rating = comment.value["rating"] as! Double
-                let date = comment.value["date"] as! Double
-                
-                let placeComment = PlaceRating(uid: id, date: Date(timeIntervalSince1970: date), rating: rating)
-                
-                Constants.DB.user.child(id).observeSingleEvent(of: .value, with: {snapshot in
-                    let value = snapshot.value as! [String: Any]
-                    let username = value["username"] as! String
-                    placeComment.setUsername(username: username)
-                })
-                
-                if commentText.characters.count > 0{
-                    placeComment.addComment(comment: commentText)
-                }
-                self.ratings.append(placeComment)
-            }
-            self.tableView.reloadData()
-        })
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.ratings.count
     }
@@ -146,13 +116,13 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
         let cell = Bundle.main.loadNibNamed("RatingViewCell", owner: self, options: nil)?.first as! RatingViewCell
         let comment = self.ratings[indexPath.row]
         
-        if let username = comment.username{
-            cell.userName.text = username
+        if let user = comment.username{
+            cell.userName.text = "By: \(user)"
         }
         else{
-            
+            cell.userName.text = "hello"
         }
-//        cell.userName.text = comment.username
+        
         cell.rating.rating = comment.rating
         cell.comments.text = comment.comment
         cell.time.text = DateFormatter().timeSince(from: comment.date, numericDates: true)
@@ -162,6 +132,11 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
         }
         return cell
         
+    }
+    
+    func gotComments(comments: [PlaceRating]) {
+        self.ratings = comments
+        self.tableView.reloadData()
     }
     /*
     // MARK: - Navigation
