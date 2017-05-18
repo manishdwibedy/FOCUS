@@ -413,6 +413,7 @@
                         <outlet property="streetAddress" destination="aZL-lD-5VQ" id="zhr-r7-J7E"/>
                         <outlet property="suggestPlacesStackView" destination="MXe-hX-m6X" id="0mS-tH-5Vq"/>
                         <outlet property="table" destination="0im-DM-qTP" id="efW-zb-zki"/>
+                        <outlet property="viewHeight" destination="anx-wn-iOa" id="w1y-us-9cd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfy-HE-dyA" userLabel="First Responder" sceneMemberID="firstResponder"/>

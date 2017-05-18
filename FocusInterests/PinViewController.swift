@@ -21,6 +21,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
+    @IBOutlet weak var viewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var suggestPlacesStackView: UIStackView!
     
@@ -47,7 +48,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
         
         if let open_hours = place?.hours{
             let hours = getOpenHours(open_hours)
-            infoScreenHeight.constant += CGFloat(20 * hours.count)
+            infoScreenHeight.constant += CGFloat(25 * hours.count)
+            viewHeight.constant += CGFloat(25 * hours.count)
             
             for (_, hour) in (hours.enumerated()){
                 let textLabel = UILabel()
