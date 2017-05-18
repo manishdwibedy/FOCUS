@@ -102,6 +102,7 @@
 		D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB6991E89F73800D62DC2 /* SocialGroupViewController.xib */; };
 		D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */; };
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
+		E79E807C1ECCF7EF00DC2EA3 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79E807B1ECCF7EF00DC2EA3 /* UserProfileViewController.swift */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */; };
 		FF522C631EC24CE900D27A9E /* allCommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF522C621EC24CE900D27A9E /* allCommentsVC.swift */; };
@@ -237,6 +238,7 @@
 		D2FDB6991E89F73800D62DC2 /* SocialGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialGroupViewController.xib; sourceTree = "<group>"; };
 		D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialCrowdCell.swift; sourceTree = "<group>"; };
 		D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialCrowdCell.xib; sourceTree = "<group>"; };
+		E79E807B1ECCF7EF00DC2EA3 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventDetails.storyboard; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 			children = (
 				D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */,
 				5BA37C761EBD63BE0091189E /* HomePageViewController.swift */,
+				E79E807B1ECCF7EF00DC2EA3 /* UserProfileViewController.swift */,
 				D252205C1E5A3C9E00EC2014 /* MapViewController.swift */,
 				D25220671E5A846100EC2014 /* NotificationsViewController.swift */,
 				D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */,
@@ -882,6 +885,7 @@
 				D2D0A3EC1E7F49ED00B43689 /* UserDescriptionCell.swift in Sources */,
 				D2ECAC581E7CD9F8006FFA1A /* UserPhotoCell.swift in Sources */,
 				D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */,
+				E79E807C1ECCF7EF00DC2EA3 /* UserProfileViewController.swift in Sources */,
 				5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */,
 				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
 				5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */,
