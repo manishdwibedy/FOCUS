@@ -9,13 +9,18 @@
 import UIKit
 import Cosmos
 
-class RatingViewController: UIViewController, UITextViewDelegate{
+class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDataSource{
 
     @IBOutlet weak var rating: CosmosView!
     @IBOutlet weak var comment: UITextView!
-    var place: Place?
     @IBOutlet weak var submitRatingButton: UIButton!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    var place: Place?
     var ratingID: String?
+    var ratings = [PlaceRating]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +40,11 @@ class RatingViewController: UIViewController, UITextViewDelegate{
         rating.didFinishTouchingCosmos = { rating in
             self.submitRatingButton.isEnabled = true
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getLatestComments()
     }
     
     //Calls this function when the tap is recognized.
@@ -71,10 +81,16 @@ class RatingViewController: UIViewController, UITextViewDelegate{
         
         let comment = comments.childByAutoId()
         
+        var commentText = ""
+        
+        if self.comment.textColor != UIColor.lightGray{
+            commentText = self.comment.text
+        }
+        
         if let rating = self.ratingID{
             comments.child(rating).setValue([
                 "rating": self.rating.rating,
-                "comment": self.comment.text,
+                "comment": commentText,
                 "date": Date().timeIntervalSince1970,
                 "user": AuthApi.getFirebaseUid()!
                 ])
@@ -82,12 +98,56 @@ class RatingViewController: UIViewController, UITextViewDelegate{
         else{
             comment.setValue([
                 "rating": self.rating.rating,
-                "comment": self.comment.text,
+                "comment": commentText,
                 "date": Date().timeIntervalSince1970,
                 "user": AuthApi.getFirebaseUid()!
                 ])
             self.ratingID = comment.key
         }
+        
+    }
+    
+    func getLatestComments(){
+        let place = Constants.DB.places
+        let comments = place.child((self.place?.id)!).child("comments")
+        
+        comments.queryOrdered(byChild: "date").queryLimited(toLast: 5).observeSingleEvent(of: .value, with: {snapshot in
+            let comments = snapshot.value as! [String: [String: Any]]
+            
+            for (id, comment) in comments.enumerated(){
+                print(comment.key)
+                let id = comment.value["user"] as! String
+                let commentText = comment.value["comment"] as! String
+                let rating = comment.value["rating"] as! Double
+                let date = comment.value["date"] as! Double
+                
+                let placeComment = PlaceRating(uid: id, date: Date(timeIntervalSince1970: date), rating: rating)
+                
+                if commentText.characters.count > 0{
+                    placeComment.addComment(comment: commentText)
+                }
+                self.ratings.append(placeComment)
+            }
+            self.tableView.reloadData()
+        })
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.ratings.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Bundle.main.loadNibNamed("RatingViewCell", owner: self, options: nil)?.first as! RatingViewCell
+        let comment = self.ratings[indexPath.row]
+        
+        cell.rating.rating = comment.rating
+        cell.comments.text = comment.comment
+        cell.time.text = DateFormatter().timeSince(from: comment.date, numericDates: true)
+        
+        if let commentText = comment.comment{
+            cell.comments.text = commentText
+        }
+        return cell
         
     }
     /*

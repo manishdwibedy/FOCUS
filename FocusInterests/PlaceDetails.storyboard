@@ -488,18 +488,40 @@
                                     <constraint firstAttribute="trailing" secondItem="CBJ-ZN-IGs" secondAttribute="trailing" constant="50" id="zYR-sE-pzp"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k9g-Au-vyF">
+                                <rect key="frame" x="26" y="140" width="323" height="225"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Ul6-Ld-wT6" customClass="RatingViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="323" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ul6-Ld-wT6" id="orb-RD-hP3">
+                                            <rect key="frame" x="0.0" y="0.0" width="323" height="99"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ahA-Wd-kLn" id="TOH-ja-jmh"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kzs-zd-iwk" firstAttribute="top" secondItem="QTQ-wz-4Bg" secondAttribute="bottom" constant="10" id="Dwc-xz-1d1"/>
+                            <constraint firstItem="inU-ND-c0d" firstAttribute="top" secondItem="k9g-Au-vyF" secondAttribute="bottom" constant="10" id="MP7-4m-AEk"/>
                             <constraint firstItem="kzs-zd-iwk" firstAttribute="leading" secondItem="a2P-SI-ITQ" secondAttribute="leadingMargin" constant="10" id="OTO-Vs-wv8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="k9g-Au-vyF" secondAttribute="trailing" constant="10" id="SVx-Gh-qHn"/>
+                            <constraint firstItem="k9g-Au-vyF" firstAttribute="top" secondItem="kzs-zd-iwk" secondAttribute="bottom" constant="10" id="aZX-BH-1Hs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kzs-zd-iwk" secondAttribute="trailing" constant="10" id="dB0-nB-1q1"/>
+                            <constraint firstItem="k9g-Au-vyF" firstAttribute="leading" secondItem="a2P-SI-ITQ" secondAttribute="leadingMargin" constant="10" id="ltY-42-8JD"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="comment" destination="bln-g0-qfw" id="1b6-bV-Zkl"/>
                         <outlet property="rating" destination="CBJ-ZN-IGs" id="9mz-k0-LWa"/>
                         <outlet property="submitRatingButton" destination="U9P-yw-vi1" id="Kba-Of-pnZ"/>
+                        <outlet property="tableView" destination="k9g-Au-vyF" id="caO-zI-xMC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xo7-dy-KwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
