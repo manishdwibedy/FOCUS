@@ -78,11 +78,20 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
             let view = suggestPlacesStackView.arrangedSubviews[index] as! SuggestPlaceView
             view.name.text = place
             view.imageView.image = UIImage(named: "addUser")
+            view.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
             
+            view.addGestureRecognizer(tap)
             
         }
     }
 
+    // function which is triggered when handleTap is called
+    func handleTap(_ sender: UITapGestureRecognizer) {
+        let view = sender.view as! SuggestPlaceView
+        print("Tapped \(view.name.text)")
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
