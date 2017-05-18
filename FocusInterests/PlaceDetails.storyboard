@@ -322,7 +322,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MXe-hX-m6X">
-                                                        <rect key="frame" x="10" y="50" width="335" height="150"/>
+                                                        <rect key="frame" x="10" y="50.5" width="335" height="150"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxq-Uf-020" customClass="SuggestPlaceView" customModule="FocusInterests" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="111.5" height="150"/>
@@ -417,12 +417,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfy-HE-dyA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-527.20000000000005" y="893.25337331334345"/>
+            <point key="canvasLocation" x="-558" y="1119"/>
         </scene>
-        <!--View Controller-->
+        <!--Rating View Controller-->
         <scene sceneID="AO6-ce-YwT">
             <objects>
-                <viewController id="ahA-Wd-kLn" sceneMemberID="viewController">
+                <viewController id="ahA-Wd-kLn" customClass="RatingViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QTQ-wz-4Bg"/>
                         <viewControllerLayoutGuide type="bottom" id="inU-ND-c0d"/>
@@ -430,8 +430,74 @@
                     <view key="view" contentMode="scaleToFill" id="a2P-SI-ITQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzs-zd-iwk" userLabel="Rating View">
+                                <rect key="frame" x="26" y="10" width="323" height="120"/>
+                                <subviews>
+                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="CBJ-ZN-IGs" customClass="CosmosView" customModule="Cosmos">
+                                        <rect key="frame" x="10" y="10" width="263" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                <real key="value" value="40"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                <color key="value" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minTouchRating">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9P-yw-vi1">
+                                        <rect key="frame" x="274" y="45" width="49" height="30"/>
+                                        <state key="normal" title="Submit"/>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Please enter your comments here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bln-g0-qfw">
+                                        <rect key="frame" x="10" y="60" width="254" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="U9P-yw-vi1" firstAttribute="leading" secondItem="bln-g0-qfw" secondAttribute="trailing" constant="10" id="9ce-DU-GYB"/>
+                                    <constraint firstAttribute="trailing" secondItem="U9P-yw-vi1" secondAttribute="trailing" id="Je7-Zb-ZLO"/>
+                                    <constraint firstItem="CBJ-ZN-IGs" firstAttribute="leading" secondItem="kzs-zd-iwk" secondAttribute="leading" constant="10" id="Q4J-wR-4OB"/>
+                                    <constraint firstItem="CBJ-ZN-IGs" firstAttribute="top" secondItem="kzs-zd-iwk" secondAttribute="top" constant="10" id="a7p-oJ-Ou8"/>
+                                    <constraint firstItem="U9P-yw-vi1" firstAttribute="centerY" secondItem="kzs-zd-iwk" secondAttribute="centerY" id="d0y-QZ-k9K"/>
+                                    <constraint firstAttribute="height" constant="120" id="h7f-JM-zhv"/>
+                                    <constraint firstItem="bln-g0-qfw" firstAttribute="top" secondItem="CBJ-ZN-IGs" secondAttribute="bottom" constant="10" id="obg-hB-LeE"/>
+                                    <constraint firstItem="bln-g0-qfw" firstAttribute="leading" secondItem="kzs-zd-iwk" secondAttribute="leading" constant="10" id="yur-qL-gyx"/>
+                                    <constraint firstAttribute="bottom" secondItem="bln-g0-qfw" secondAttribute="bottom" constant="10" id="zHx-YJ-zZl"/>
+                                    <constraint firstAttribute="trailing" secondItem="CBJ-ZN-IGs" secondAttribute="trailing" constant="50" id="zYR-sE-pzp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kzs-zd-iwk" firstAttribute="top" secondItem="QTQ-wz-4Bg" secondAttribute="bottom" constant="10" id="Dwc-xz-1d1"/>
+                            <constraint firstItem="kzs-zd-iwk" firstAttribute="leading" secondItem="a2P-SI-ITQ" secondAttribute="leadingMargin" constant="10" id="OTO-Vs-wv8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kzs-zd-iwk" secondAttribute="trailing" constant="10" id="dB0-nB-1q1"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="comment" destination="bln-g0-qfw" id="1b6-bV-Zkl"/>
+                        <outlet property="rating" destination="CBJ-ZN-IGs" id="9mz-k0-LWa"/>
+                        <outlet property="ratingSubmitted" destination="U9P-yw-vi1" id="fGU-aA-sW5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xo7-dy-KwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

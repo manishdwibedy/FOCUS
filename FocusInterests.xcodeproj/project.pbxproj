@@ -33,6 +33,7 @@
 		5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FE71ECC14D200094FE6 /* PinTableViewCell.xib */; };
 		5B959FEB1ECD23C200094FE6 /* SuggestPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FEA1ECD23C200094FE6 /* SuggestPlaceView.xib */; };
 		5B959FED1ECD23D800094FE6 /* SuggestPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FEC1ECD23D800094FE6 /* SuggestPlaceView.swift */; };
+		5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FEE1ECD2DF300094FE6 /* RatingViewController.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
 		5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C701EB9EADB0091189E /* InvitationViewController.swift */; };
 		5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */; };
@@ -170,6 +171,7 @@
 		5B959FE71ECC14D200094FE6 /* PinTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinTableViewCell.xib; sourceTree = "<group>"; };
 		5B959FEA1ECD23C200094FE6 /* SuggestPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuggestPlaceView.xib; sourceTree = "<group>"; };
 		5B959FEC1ECD23D800094FE6 /* SuggestPlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestPlaceView.swift; sourceTree = "<group>"; };
+		5B959FEE1ECD2DF300094FE6 /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5BA37C701EB9EADB0091189E /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapNavigationView.xib; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				5B959FD91ECADFA300094FE6 /* PinViewController.swift */,
 				5B959FE61ECC14D200094FE6 /* PinTableViewCell.swift */,
 				5B959FE71ECC14D200094FE6 /* PinTableViewCell.xib */,
+				5B959FEE1ECD2DF300094FE6 /* RatingViewController.swift */,
 			);
 			name = Place;
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 				D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */,
 				5B959FED1ECD23D800094FE6 /* SuggestPlaceView.swift in Sources */,
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
+				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */,
 				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,
 				5BA37C801EBDC4D90091189E /* ChatViewController.swift in Sources */,
