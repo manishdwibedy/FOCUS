@@ -11,6 +11,7 @@
 		042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */; };
 		0486B0861EC96473007E4CCC /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486B0851EC96473007E4CCC /* CreateEvent.storyboard */; };
 		04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04920F6C1EC277D4007D0B10 /* EventTextField.swift */; };
+		04B596D11ECE5C7A00AE476F /* InviteFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B596D01ECE5C7A00AE476F /* InviteFriendTableViewCell.swift */; };
 		04E5E42B1ECBA4B800F2F1E0 /* SendInvitationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E5E42A1ECBA4B800F2F1E0 /* SendInvitationsViewController.swift */; };
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
@@ -136,6 +137,7 @@
 		042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewEventViewController.swift; sourceTree = "<group>"; };
 		0486B0851EC96473007E4CCC /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		04920F6C1EC277D4007D0B10 /* EventTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTextField.swift; sourceTree = "<group>"; };
+		04B596D01ECE5C7A00AE476F /* InviteFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendTableViewCell.swift; sourceTree = "<group>"; };
 		04E5E42A1ECBA4B800F2F1E0 /* SendInvitationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendInvitationsViewController.swift; sourceTree = "<group>"; };
 		04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSignUpViewController.swift; sourceTree = "<group>"; };
 		04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondSignUpViewController.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				5B7DC2001EA866D700A1471E /* EventIconViewController.swift */,
 				5BA37C701EB9EADB0091189E /* InvitationViewController.swift */,
 				04E5E42A1ECBA4B800F2F1E0 /* SendInvitationsViewController.swift */,
+				04B596D01ECE5C7A00AE476F /* InviteFriendTableViewCell.swift */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -951,6 +954,7 @@
 				D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */,
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
 				04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */,
+				04B596D11ECE5C7A00AE476F /* InviteFriendTableViewCell.swift in Sources */,
 				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,
 				5BA37C801EBDC4D90091189E /* ChatViewController.swift in Sources */,
 				5BA37C841EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift in Sources */,
