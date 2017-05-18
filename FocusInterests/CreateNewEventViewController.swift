@@ -84,7 +84,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                     presentNotification(title: "Choose a date and time.", message: "Please choose a date and time for this event.")
                     return
                 }
-            let dateString = validDate + validTime
+            let dateString = "\(validDate), \(validTime)"
             guard let creator = AuthApi.getFirebaseUid() else { return }
             
             self.event = Event(title: validName, description: validDescrip, fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
