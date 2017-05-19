@@ -56,6 +56,10 @@ class UserProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func settingsButtonTapped(_ sender: UIBarButtonItem) {
+        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
