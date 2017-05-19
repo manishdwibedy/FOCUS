@@ -90,11 +90,19 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     // TableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 0 {
-            let chooseVC = InterestsPickerViewController(nibName: "InterestsPickerViewController", bundle: nil)
-            self.present(chooseVC, animated: true, completion: nil)
-        }
-        if indexPath.row == Constants.settings.cellTitles.count - 1 {
+        switch indexPath.row{
+        case 0:
+            let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
+            self.present(selectInterests, animated: true, completion: nil)
+        case 4:
+            let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
+            if (swCell?.cellSwitch.isOn)!{
+                swCell?.cellSwitch.setOn(false, animated: true)
+            }
+            else{
+                swCell?.cellSwitch.setOn(false, animated: true)
+            }
+        case Constants.settings.cellTitles.count - 1:
             fBManager!.logOut()
             FBSDKAccessToken.setCurrent(nil)
             FBSDKProfile.setCurrent(nil)
@@ -104,7 +112,11 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             googleHandle!.signOut()
             try! FIRAuth.auth()!.signOut()
             self.logoutDelegate?.logout()
+        default: break
+            
+            
         }
+        
     }
     
     // required google function
