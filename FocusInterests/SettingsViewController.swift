@@ -113,11 +113,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 try! FIRAuth.auth()!.signOut()
                 self.logoutDelegate?.logout()
             default: break
-        }
-            
-            
-        }
-        
+        }        
     }
     
     // required google function
