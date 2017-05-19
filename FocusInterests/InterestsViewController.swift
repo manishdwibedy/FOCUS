@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import FacebookCore
+import FBSDKCoreKit
 
-class InterestsViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+class InterestsViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UITableViewDelegate {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -56,6 +58,7 @@ class InterestsViewController: UIViewController, UITableViewDataSource, UISearch
         }
         
         tableView.dataSource = self
+        tableView.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -113,6 +116,11 @@ class InterestsViewController: UIViewController, UITableViewDataSource, UISearch
             cell.backgroundColor = self.backgroundColor
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
