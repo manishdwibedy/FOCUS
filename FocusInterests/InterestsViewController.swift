@@ -8,13 +8,15 @@
 
 import UIKit
 
-class InterestsViewController: UIViewController, UITableViewDataSource {
+class InterestsViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var interests = [String]()
+    var interests = [Interest]()
     let backgroundColor = UIColor.init(red: 22/255, green: 42/255, blue: 64/255, alpha: 1)
+    var filtered = [Interest]()
+    var searching = false
     
     
     override func viewDidLoad() {
@@ -22,6 +24,7 @@ class InterestsViewController: UIViewController, UITableViewDataSource {
 
         // Do any additional setup after loading the view.
         
+        searchBar.delegate = self
         
         let interestCell = UINib(nibName: "InterestViewCell", bundle: nil)
         tableView.register(interestCell, forCellReuseIdentifier: "cell")
@@ -47,8 +50,11 @@ class InterestsViewController: UIViewController, UITableViewDataSource {
         }
         
         for i in 1...10{
-            interests.append("Interest \(i)")
+            let interest = Interest(name: "Interest \(i)", category: nil, image: nil, imageString: nil)
+            interests.append(interest)
+            filtered.append(interest)
         }
+        
         tableView.dataSource = self
     }
     
@@ -62,11 +68,14 @@ class InterestsViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return interests.count + 3
+        if self.searching{
+            return self.filtered.count
+        }
+        return self.filtered.count + 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0{
+        if !searching && indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestViewCell
             cell.interestName.text = "All My interests"
             cell.interestName.font = .boldSystemFont(ofSize: 16.0)
@@ -74,7 +83,7 @@ class InterestsViewController: UIViewController, UITableViewDataSource {
             cell.backgroundColor = self.backgroundColor
             return cell
         }
-        else if indexPath.row == 1{
+        else if !searching && indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "label", for: indexPath)
             cell.textLabel?.text = "Clear All"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -82,7 +91,7 @@ class InterestsViewController: UIViewController, UITableViewDataSource {
             cell.backgroundColor = self.backgroundColor
             return cell
         }
-        else if indexPath.row == 2{
+        else if !searching && indexPath.row == 2{
             let cell = tableView.dequeueReusableCell(withIdentifier: "label", for: indexPath)
             cell.textLabel?.text = "Top"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -92,7 +101,13 @@ class InterestsViewController: UIViewController, UITableViewDataSource {
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestViewCell
-            cell.interestName.text = self.interests[indexPath.row - 3]
+            if searching{
+                cell.interestName.text = self.filtered[indexPath.row].name
+            }
+            else{
+                cell.interestName.text = self.filtered[indexPath.row - 3].name
+            }
+            
             cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
             cell.interestName.textColor = UIColor.white
             cell.backgroundColor = self.backgroundColor
@@ -100,6 +115,35 @@ class InterestsViewController: UIViewController, UITableViewDataSource {
         }
     }
 
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searching = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searching = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searching = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searching = false;
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.characters.count > 0{
+            self.filtered = self.interests.filter { ($0.name?.contains(searchText))! }
+            self.searching = true
+        }
+        else{
+            self.searching = false;
+            self.filtered = self.interests
+        }
+        
+        self.tableView.reloadData()
+    }
+    
     /*
     // MARK: - Navigation
 
