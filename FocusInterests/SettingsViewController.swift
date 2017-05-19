@@ -94,6 +94,9 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             case 0:
                 let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
                 self.present(selectInterests, animated: true, completion: nil)
+            case 1:
+                let inviteFriendsVC = InviteFriendsViewController(nibName: "InviteFriendsViewController", bundle: nil)
+                self.present(inviteFriendsVC, animated: true, completion: nil)
             case 4:
                 let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
                 if (swCell?.cellSwitch.isOn)!{
