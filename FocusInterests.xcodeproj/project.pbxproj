@@ -107,6 +107,9 @@
 		D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */; };
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
+		FF0F9D581ECFA0C6004E2C90 /* search_place.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* search_place.swift */; };
+		FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */; };
+		FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */; };
 		FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */; };
 		FF522C631EC24CE900D27A9E /* allCommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF522C621EC24CE900D27A9E /* allCommentsVC.swift */; };
 		FF522CA91EC383B200D27A9E /* commentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF522CA81EC383B200D27A9E /* commentView.xib */; };
@@ -247,6 +250,9 @@
 		D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialCrowdCell.xib; sourceTree = "<group>"; };
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF0F9D571ECFA0C6004E2C90 /* search_place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = search_place.swift; sourceTree = "<group>"; };
+		FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
+		FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPlaceCell.xib; sourceTree = "<group>"; };
 		FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventDetails.storyboard; sourceTree = "<group>"; };
 		FF522C621EC24CE900D27A9E /* allCommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allCommentsVC.swift; sourceTree = "<group>"; };
 		FF522CA81EC383B200D27A9E /* commentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentView.xib; sourceTree = "<group>"; };
@@ -502,6 +508,7 @@
 				5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */,
 				5BA37C7C1EBDBF250091189E /* Message */,
 				5BAB87A91EC97BB20064E5EC /* People */,
+				FF0F9D571ECFA0C6004E2C90 /* search_place.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -539,6 +546,8 @@
 				D24716821E90504B00FF389D /* DisplayInterestsCell.xib */,
 				D21648281E9735AC00AE021B /* SelectedInterestCell.swift */,
 				D21648291E9735AC00AE021B /* SelectedInterestCell.xib */,
+				FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */,
+				FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -724,6 +733,7 @@
 				D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */,
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
+				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
@@ -916,6 +926,8 @@
 				042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
+				FF0F9D581ECFA0C6004E2C90 /* search_place.swift in Sources */,
+				FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */,
 				D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */,
 				D25370D21E885EE40071B115 /* FollowCell.swift in Sources */,
 				D2FDB69A1E89F73800D62DC2 /* SocialGroupViewController.swift in Sources */,

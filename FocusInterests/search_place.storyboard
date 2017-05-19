@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9LA-Yp-djj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9LA-Yp-djj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--PLACE-->
         <scene sceneID="MiT-pm-cHb">
             <objects>
-                <viewController id="9LA-Yp-djj" sceneMemberID="viewController">
+                <viewController id="9LA-Yp-djj" customClass="search_place" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Bn-Yr-2ig"/>
                         <viewControllerLayoutGuide type="bottom" id="qo6-RG-5nr"/>
@@ -20,16 +21,59 @@
                     <view key="view" contentMode="scaleToFill" id="jIo-bt-XOn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eRW-87-xqd">
+                                <rect key="frame" x="16" y="117" width="343" height="493"/>
+                                <color key="backgroundColor" red="0.94768053756476689" green="0.94768053756476689" blue="0.94768053756476689" alpha="0.53785211267605637" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.90792702065610653" green="0.87262839241657231" blue="0.91347555051813467" alpha="0.5542748679577465" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1q-Ba-90U">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="ySq-LI-AmF"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.093528874218463898" green="0.17284265160560608" blue="0.26158365607261658" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Title" id="IJI-Ig-vYz"/>
+                                </items>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="e5N-ur-DBG">
+                                <rect key="frame" x="0.0" y="73" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.26147657632827759" green="0.32378756999969482" blue="0.39543044567108154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="T1q-Ba-90U" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leading" id="3Is-4z-t1n"/>
+                            <constraint firstItem="qo6-RG-5nr" firstAttribute="top" secondItem="eRW-87-xqd" secondAttribute="bottom" constant="8" symbolic="YES" id="5kg-ON-Pxe"/>
+                            <constraint firstItem="T1q-Ba-90U" firstAttribute="trailing" secondItem="e5N-ur-DBG" secondAttribute="trailing" id="I2i-8K-bAe"/>
+                            <constraint firstItem="e5N-ur-DBG" firstAttribute="centerX" secondItem="eRW-87-xqd" secondAttribute="centerX" id="L7K-OZ-jhP"/>
+                            <constraint firstItem="eRW-87-xqd" firstAttribute="top" secondItem="e5N-ur-DBG" secondAttribute="bottom" id="O7y-Bp-b5n"/>
+                            <constraint firstItem="e5N-ur-DBG" firstAttribute="top" secondItem="T1q-Ba-90U" secondAttribute="bottom" constant="9" id="WNh-BA-Og1"/>
+                            <constraint firstItem="eRW-87-xqd" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leadingMargin" id="WrM-x8-vZC"/>
+                            <constraint firstItem="T1q-Ba-90U" firstAttribute="top" secondItem="jIo-bt-XOn" secondAttribute="top" id="Xao-1f-yK5"/>
+                            <constraint firstAttribute="trailing" secondItem="T1q-Ba-90U" secondAttribute="trailing" id="w9d-2d-5Hn"/>
+                            <constraint firstItem="T1q-Ba-90U" firstAttribute="leading" secondItem="e5N-ur-DBG" secondAttribute="leading" id="xiH-UI-YcC"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="PLACE" id="tr5-NQ-jBJ">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="navTitle" destination="IJI-Ig-vYz" id="VXX-My-xZM"/>
+                        <outlet property="searchBar" destination="e5N-ur-DBG" id="Dvr-6Q-jjN"/>
+                        <outlet property="tableView" destination="eRW-87-xqd" id="yvW-s4-IcY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qa6-S9-KsT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-143" y="89"/>
+            <point key="canvasLocation" x="-143.19999999999999" y="88.605697151424295"/>
         </scene>
     </scenes>
 </document>
