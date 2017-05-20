@@ -16,3 +16,19 @@ func featuresToString(features: [Feature]) -> String {
     let joinedStr = strArray.joined(separator: ", ")
     return joinedStr
 }
+
+func changeTimeZone(of date: Date, from sourceTimeZone: TimeZone, to destinationTimeZone: TimeZone) -> Date{
+    let str: String = date.description
+    let fromDF: DateFormatter = DateFormatter()
+    fromDF.timeZone = TimeZone(abbreviation: "GMT")
+    fromDF.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+    let gmtDate: Date = fromDF.date(from: str)!
+    let date_string = fromDF.string(from: gmtDate)
+    print(gmtDate)
+    
+    let toDF: DateFormatter = DateFormatter()
+    toDF.timeZone = TimeZone(abbreviation: "PDT")
+    toDF.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+    let estDate: Date = toDF.date(from: date_string)!
+    return(estDate)
+}
