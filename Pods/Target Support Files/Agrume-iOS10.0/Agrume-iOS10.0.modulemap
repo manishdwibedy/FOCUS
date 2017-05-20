@@ -1,0 +1,6 @@
+framework module Agrume {
+  umbrella header "Agrume-iOS10.0-umbrella.h"
+
+  export *
+  module * { export * }
+}

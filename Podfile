@@ -23,7 +23,7 @@ target 'FocusInterests' do
     pod 'SDWebImage', '~>3.8'
     pod 'JSQMessagesViewController'
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
-
+    pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 end
 
 target 'FocusInterestsTests' do
@@ -43,7 +43,6 @@ target 'FocusInterestsTests' do
     pod 'Google/SignIn'
     pod 'JSQMessagesViewController'
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
-
 end
 
 target 'FocusInterestsUITests' do
@@ -63,6 +62,5 @@ target 'FocusInterestsUITests' do
     pod 'Google/SignIn'
     pod 'JSQMessagesViewController'
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
-
+    
 end
-

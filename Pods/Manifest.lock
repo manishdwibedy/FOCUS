@@ -70,6 +70,8 @@ PODS:
   - FirebaseStorage (1.0.6):
     - FirebaseAnalytics (~> 3.7)
     - GTMSessionFetcher/Core (~> 1.1)
+  - GeoFire (2.0.0):
+    - Firebase/Database (~> 3.2)
   - Google/Core (3.0.3):
     - FirebaseAnalytics (~> 3.2)
   - Google/SignIn (3.0.3):
@@ -128,6 +130,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Messaging
   - Firebase/Storage
+  - GeoFire (from `https://github.com/firebase/geofire-objc.git`)
   - Google/SignIn
   - GoogleMaps
   - GooglePlacePicker
@@ -138,11 +141,16 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   Agrume:
     :git: https://github.com/JanGorman/Agrume.git
+  GeoFire:
+    :git: https://github.com/firebase/geofire-objc.git
 
 CHECKOUT OPTIONS:
   Agrume:
     :commit: 50ce3665bb7ae946dbed32d3e86306dd32a65b32
     :git: https://github.com/JanGorman/Agrume.git
+  GeoFire:
+    :commit: dbb8d193f5ee1371837800d0502bd29cba779da4
+    :git: https://github.com/firebase/geofire-objc.git
 
 SPEC CHECKSUMS:
   Agrume: abf26210c3371bc6c74bbf2ced7a19d937bf8f0a
@@ -162,6 +170,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FirebaseMessaging: df8267f378580a24174ce7861233aa11d5c90109
   FirebaseStorage: 63628572a5fde258f8e933b5fb42697468da0158
+  GeoFire: ef73103b88eb026c27212c40ea16757d6ad362ea
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
   GooglePlacePicker: 345b1aabd42c9d6d9bf2369c1bae1234d903e764
@@ -175,6 +184,6 @@ SPEC CHECKSUMS:
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 08cc77b30a3b74b7cb335ee968108d5107c60b3d
+PODFILE CHECKSUM: a26a95ea0cea1f73c6ac21b6061f0e141439c355
 
 COCOAPODS: 1.2.0.beta.1
