@@ -23,7 +23,7 @@ target 'FocusInterests' do
     pod 'SDWebImage', '~>3.8'
     pod 'JSQMessagesViewController'
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
-
+    pod 'Solar'
 end
 
 target 'FocusInterestsTests' do

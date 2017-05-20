@@ -116,6 +116,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - Solar (2.0.0)
 
 DEPENDENCIES:
   - Agrume (from `https://github.com/JanGorman/Agrume.git`)
@@ -134,6 +135,7 @@ DEPENDENCIES:
   - GooglePlaces
   - JSQMessagesViewController
   - SDWebImage (~> 3.8)
+  - Solar
 
 EXTERNAL SOURCES:
   Agrume:
@@ -174,7 +176,8 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  Solar: ea092f7660c1b58d2b754227decb61a1c6710826
 
-PODFILE CHECKSUM: 08cc77b30a3b74b7cb335ee968108d5107c60b3d
+PODFILE CHECKSUM: 12b9de553035a8d63442d501a199346a67b23f97
 
 COCOAPODS: 1.2.0.beta.1
