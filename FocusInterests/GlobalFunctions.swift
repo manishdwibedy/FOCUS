@@ -19,10 +19,10 @@ func featuresToString(features: [Feature]) -> String {
 }
 
 func changeTimeZone(of date: Date, from sourceTimeZone: TimeZone, to destinationTimeZone: TimeZone) -> Date{
-    let str: String = date.description
+    let str: String = date.description(with: nil)
     let fromDF: DateFormatter = DateFormatter()
     fromDF.timeZone = TimeZone(abbreviation: "GMT")
-    fromDF.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+    fromDF.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
     let gmtDate: Date = fromDF.date(from: str)!
     let date_string = fromDF.string(from: gmtDate)
     print(gmtDate)
