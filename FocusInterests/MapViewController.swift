@@ -12,6 +12,7 @@ import GoogleMaps
 import GooglePlaces
 import MapKit
 import FirebaseDatabase
+import GeoFire
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction {
     
@@ -54,6 +55,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             NSLog("One or more of the map styles failed to load. \(error)")
         }
         
+        let geofireRef = FIRDatabase.database().reference()
+        let geoFire = GeoFire(firebaseRef: geofireRef.child("event_locations"))
+
+        
         Constants.DB.event.observe(FIRDataEventType.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             
@@ -68,8 +73,27 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 marker.map = self.mapView
                 marker.accessibilityLabel = String(describing: self.events.count)
                 self.events.append(event)
+                
+                let latitude = Double((info?["latitude"])! as! String)
+                let longitude = Double((info?["longitude"])! as! String)
+                
+                geoFire?.setLocation(CLLocation(latitude: latitude!, longitude: longitude!), forKey: id)
+
+
             }
         })
+        
+        let center = CLLocation(latitude: 34.0287878, longitude: -118.288861)
+        if let circleQuery = geoFire?.query(at: center, withRadius: 1.0) {
+            _ = circleQuery.observe(.keyEntered) { (key, location) in
+                print("Key '\(key)' entered the search area and is at location '\(location)'")
+            }
+            
+            circleQuery.observeReady{
+                print("All initial data has been loaded and events have been fired for circle query!")
+            }
+        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
