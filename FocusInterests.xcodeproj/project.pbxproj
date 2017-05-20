@@ -22,6 +22,7 @@
 		5B5906481EC576CA00466AAC /* map_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5906471EC576CA00466AAC /* map_style.json */; };
 		5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */; };
 		5B59064E1EC7E60D00466AAC /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */; };
+		5B71D5451ED0FCC10093A3F5 /* MapCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D5441ED0FCC10093A3F5 /* MapCluster.swift */; };
 		5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
@@ -153,6 +154,7 @@
 		5B5906471EC576CA00466AAC /* map_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map_style.json; sourceTree = "<group>"; };
 		5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		5B71D5441ED0FCC10093A3F5 /* MapCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCluster.swift; sourceTree = "<group>"; };
 		5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				D23E013C1E6BB0AE00E735F5 /* FocusUser.swift */,
 				5B51C8D51EA7285C007E8D99 /* Event.swift */,
 				5B5906451EC3CB0400466AAC /* UserMessages.swift */,
+				5B71D5441ED0FCC10093A3F5 /* MapCluster.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
+				5B71D5451ED0FCC10093A3F5 /* MapCluster.swift in Sources */,
 				5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */,
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
 				042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */,
