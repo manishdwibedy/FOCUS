@@ -24,6 +24,8 @@ target 'FocusInterests' do
     pod 'JSQMessagesViewController'
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
     pod 'Solar'
+    pod 'Fabric'
+    pod 'TwitterKit'
 end
 
 target 'FocusInterestsTests' do

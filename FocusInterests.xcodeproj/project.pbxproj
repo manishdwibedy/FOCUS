@@ -582,6 +582,7 @@
 				D2B9B03A1E5A047C0002F1B1 /* Resources */,
 				DFC07EFB984B1B82B7EC51A4 /* [CP] Embed Pods Frameworks */,
 				50DDF487D77F4A7527CF8F8B /* [CP] Copy Pods Resources */,
+				5B71D5431ED02F690093A3F5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -821,6 +822,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		5B71D5431ED02F690093A3F5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 0d682f4533db1e6cc0c9ca6cfe0f27d73f01b260 a714c3703a5ba0776b777106107951ac9f95d212b82f19fd3be724b8f57f8fe4";
 		};
 		9BF2880351749F6941762599 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
