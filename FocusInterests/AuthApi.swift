@@ -46,9 +46,20 @@ struct AuthApi {
         defaults.set(facebookToken, forKey: "facebookAccessToken")
     }
     
+    static func set(twitterToken: String?) {
+        defaults.set(twitterToken, forKey: "twitterAccessToken")
+    }
+    
     static func getFacebookToken() -> String? {
         if let facebookToken = defaults.object(forKey: "facebookAccessToken") as? String {
             return facebookToken
+        }
+        return nil
+    }
+    
+    static func getTwitterToken() -> String? {
+        if let twitterToken = defaults.object(forKey: "twitterAccessToken") as? String {
+            return twitterToken
         }
         return nil
     }
