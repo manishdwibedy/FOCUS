@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FacebookShare
 
 func featuresToString(features: [Feature]) -> String {
     var strArray = [String]()
@@ -31,4 +32,18 @@ func changeTimeZone(of date: Date, from sourceTimeZone: TimeZone, to destination
     toDF.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
     let estDate: Date = toDF.date(from: date_string)!
     return(estDate)
+}
+
+func shareOnMessenger(url: URL) throws{
+    
+    let content = LinkShareContent(url: url)
+    
+    let shareDialog = MessageDialog(content: content)
+    shareDialog.completion = { result in
+        print(result)
+        
+    }
+    
+    try shareDialog.show()
+    
 }
