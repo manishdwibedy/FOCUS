@@ -26,6 +26,7 @@ target 'FocusInterests' do
     pod 'Alamofire'
     pod 'SwiftyJSON'
     pod 'Cosmos', '~> 9.0'
+    
 end
 
 target 'FocusInterestsTests' do
