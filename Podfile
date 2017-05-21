@@ -27,6 +27,8 @@ target 'FocusInterests' do
     pod 'Fabric'
     pod 'TwitterKit'
     pod 'Alamofire'
+    pod 'OhhAuth'
+
 end
 
 target 'FocusInterestsTests' do
