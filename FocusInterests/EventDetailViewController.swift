@@ -19,20 +19,37 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var attendOut: UIButton!
-    
+    @IBOutlet weak var navTitle: UINavigationItem!
+    @IBOutlet weak var navBackOut: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var inviteOut: UIButton!
+    @IBOutlet weak var mapOut: UIButton!
+    
+    @IBOutlet weak var guestButtonOut: UIButton!
     var event: Event?
     @IBOutlet weak var image: UIImageView!
     let ref = FIRDatabase.database().reference()
     let commentsCList = NSMutableArray()
+    var keyboardUp = false
+    var attendingAmount = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        attendOut.layer.cornerRadius = 6
+        attendOut.clipsToBounds = true
+        
+        inviteOut.layer.cornerRadius = 6
+        inviteOut.clipsToBounds = true
+        
+        mapOut.layer.cornerRadius = 6
+        mapOut.clipsToBounds = true
+        
+        
+        
         
         let nib = UINib(nibName: "commentCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
@@ -65,8 +82,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         commentTextField.layer.borderColor = UIColor.white.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
         
-        eventTitleLabel.text = event?.title
+        navTitle.title = event?.title
         timeLabel.text = event?.date
         addressLabel.text = event?.fullAddress
         descriptionLabel.text = event?.description
@@ -90,12 +109,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                print(value!)
-                
                 for (key,_) in value!
                 {
                     let dict = value?[key] as! NSDictionary
-                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int)
+                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int, date: Date(timeIntervalSince1970: TimeInterval(dict["date"] as! Double)))
                     self.commentsCList.add(data)
                     
                     
@@ -131,6 +148,25 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         })
         
+        // attending amount
+        ref.child("events").child((event?.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.attendingAmount = value?["amount"] as! Int
+                let text = String(self.attendingAmount) + " guests"
+                
+                
+                let textRange = NSMakeRange(0, text.characters.count)
+                let attributedText = NSMutableAttributedString(string: text)
+                attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
+                self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
+                
+            }
+        })
+        
+        
+        
         //attending
         ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -165,8 +201,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func attendEvent(_ sender: UIButton) {
+        let newAmount = attendingAmount + 1
+        attendingAmount = newAmount
+        self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
         let fullRef = ref.child("events").child((event?.id)!)
         fullRef.child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+        fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
         self.attendOut.isEnabled = false
         self.attendOut.setTitle("Attending", for: UIControlState.normal)
     }
@@ -179,7 +219,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         let fullRef = ref.child("events").child((event?.id)!).child("comments").childByAutoId()
         fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
         
-        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0)
+        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
         if self.commentsCList.count != 0
         {
             self.commentsCList.removeObject(at: 0)
@@ -221,10 +261,27 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
-            self.scrollView.frame.origin.y = -((keyboardHeight))
+            //self.scrollView.contentOffset.y = ((keyboardHeight)) + self.commentTextField.frame.height + 100
+            
             
             
         }
+    }
+    
+    func keyboardDidShow(notification: NSNotification) {
+        keyboardUp = true
+        navBackOut.title = "Cancel"
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            //self.scrollView.contentOffset.y = (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60
+            
+            scrollView.setContentOffset(CGPoint(x: 0, y: (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60), animated: true)
+        }
+        
+    }
+    func keyboardDidHide(notification: NSNotification) {
+        keyboardUp = false
+        navBackOut.title = "Back"
     }
     
     
@@ -263,10 +320,30 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     
-    @IBAction func back(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    
+    @IBAction func guestButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "attendeeVC") as! attendeeVC
+        ivc.parentVC = self
+        ivc.parentEvent = event
+        self.present(ivc, animated: true, completion: { _ in })
+    }
+   
+    
+    
+    
+    @IBAction func navBack(_ sender: Any) {
+        if keyboardUp == false
+        {
+            dismiss(animated: true, completion: nil)
+        }else
+        {
+            commentTextField.resignFirstResponder()
+            commentTextField.text = ""
+        }
         
     }
+    
     
     
     

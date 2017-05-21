@@ -13,6 +13,7 @@ class commentCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UITextView!
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var likeOut: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var data: commentCellData!
     override func awakeFromNib() {
@@ -48,6 +49,38 @@ class commentCell: UITableViewCell {
             
         })
         
+        self.dateLabel.text = getTimeSince(date: data.date)
+        
+    }
+    
+    
+    
+    func getTimeSince(date:Date) -> String
+    {
+        var returnString = ""
+        let now = Date()
+        let seconds = now.timeIntervalSince(date)
+        let minutes = seconds/60
+        let hours = minutes/60
+        let days = hours/24
+        if Int(days) >= 1
+        {
+            returnString = String(Int(days)) + " days ago"
+            
+        }else if Int(hours) >= 1
+        {
+            returnString = String(Int(hours)) + " hours ago"
+            
+        }else if Int(minutes) >= 1
+        {
+            returnString = String(Int(minutes)) + " minutes ago"
+            
+        }else if seconds < 60
+        {
+            returnString = "seconds ago"
+        }
+ 
+        return returnString
     }
     
     
@@ -59,11 +92,13 @@ class commentCellData
     var comment = String()
     var commentFirePath: FIRDatabaseReference!
     var likeCount = Int()
+    var date = Date()
     
-    init(from:String,comment:String,commentFirePath: FIRDatabaseReference, likeCount: Int) {
+    init(from:String,comment:String,commentFirePath: FIRDatabaseReference, likeCount: Int, date:Date) {
         self.from = from
         self.comment = comment
         self.commentFirePath = commentFirePath
         self.likeCount = likeCount
+        self.date = date
     }
 }
