@@ -19,6 +19,8 @@
 		5B59064E1EC7E60D00466AAC /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */; };
 		5B634C811ED1960000EBCC29 /* MapCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B634C801ED1960000EBCC29 /* MapCluster.swift */; };
 		5B634C831ED196BE00EBCC29 /* MyCustomRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B634C821ED196BE00EBCC29 /* MyCustomRenderer.swift */; };
+		5B634C841ED19A6300EBCC29 /* GMUPoint.h in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9631ED1906800A82104 /* GMUPoint.h */; };
+		5B634C851ED19A6900EBCC29 /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9641ED1906800A82104 /* GMUPoint.m */; };
 		5B6AFA631ED1906900A82104 /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9361ED1906800A82104 /* GMUGridBasedClusterAlgorithm.m */; };
 		5B6AFA641ED1906900A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9381ED1906800A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
 		5B6AFA651ED1906900A82104 /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF93A1ED1906800A82104 /* GMUSimpleClusterAlgorithm.m */; };
@@ -35,7 +37,6 @@
 		5B6AFA701ED1906900A82104 /* GMUGroundOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF95E1ED1906800A82104 /* GMUGroundOverlay.m */; };
 		5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9601ED1906800A82104 /* GMULineString.m */; };
 		5B6AFA721ED1906900A82104 /* GMUPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9621ED1906800A82104 /* GMUPlacemark.m */; };
-		5B6AFA731ED1906900A82104 /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9641ED1906800A82104 /* GMUPoint.m */; };
 		5B6AFA741ED1906900A82104 /* GMUPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9661ED1906800A82104 /* GMUPolygon.m */; };
 		5B6AFA751ED1906900A82104 /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9681ED1906800A82104 /* GMUStyle.m */; };
 		5B6AFA761ED1906900A82104 /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF96D1ED1906800A82104 /* GQTPointQuadTree.m */; };
@@ -414,7 +415,6 @@
 		0085AC0114E4C6EBA442C025 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5B6AF7541ED1906700A82104 /* google-maps-ios-utils-master */,
 				F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */,
 				8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */,
 				35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */,
@@ -436,7 +436,8 @@
 			children = (
 				5B6AF9311ED1906800A82104 /* src */,
 			);
-			path = "google-maps-ios-utils-master";
+			name = "google-maps-ios-utils-master";
+			path = "../google-maps-ios-utils-master";
 			sourceTree = "<group>";
 		};
 		5B6AF9311ED1906800A82104 /* src */ = {
@@ -742,6 +743,7 @@
 		D2B9B0701E5A0A0B0002F1B1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5B6AF7541ED1906700A82104 /* google-maps-ios-utils-master */,
 				D2B9B0781E5A0AC80002F1B1 /* UIColor+Extensions.swift */,
 				D230D8C21E5B749C00025EE9 /* UIImageView+Extensions.swift */,
 				D21975461E6229F100ED3345 /* UITextField+Extensions.swift */,
@@ -1231,6 +1233,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B634C851ED19A6900EBCC29 /* GMUPoint.m in Sources */,
+				5B634C841ED19A6300EBCC29 /* GMUPoint.h in Sources */,
 				D2C785521E9337B700BFF0E3 /* InterestListViewController.swift in Sources */,
 				5B6AFA6D1ED1906900A82104 /* GMUKMLParser.m in Sources */,
 				D2A173551E5E911500C7724B /* SignUpViewController.swift in Sources */,
@@ -1290,7 +1294,6 @@
 				5BA37C7E1EBDC1C70091189E /* CustomTabController.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				5B6AFA6A1ED1906900A82104 /* GMUDefaultClusterRenderer.m in Sources */,
-				5B6AFA731ED1906900A82104 /* GMUPoint.m in Sources */,
 				D25D5D341E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
 				5B6AFA721ED1906900A82104 /* GMUPlacemark.m in Sources */,
@@ -1489,6 +1492,7 @@
 			baseConfigurationReference = EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FocusInterests/FocusInterests.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1518,6 +1522,7 @@
 			baseConfigurationReference = 4DCECAEA41CAC4F1781A9ADD /* Pods-FocusInterests.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FocusInterests/FocusInterests.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
