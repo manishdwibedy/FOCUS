@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="429" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Ya0-NI-rmK">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FamHalloween" translatesAutoresizingMaskIntoConstraints="NO" id="Ya0-NI-rmK">
                         <rect key="frame" x="8" y="8" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="1wE-6Y-8yn"/>
@@ -121,6 +121,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="UserPhoto" width="102" height="102"/>
+        <image name="FamHalloween" width="1552" height="1546"/>
     </resources>
 </document>
