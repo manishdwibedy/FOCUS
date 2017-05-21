@@ -26,6 +26,7 @@ target 'FocusInterests' do
     pod 'Solar'
     pod 'Fabric'
     pod 'TwitterKit'
+    pod 'Alamofire'
 end
 
 target 'FocusInterestsTests' do
