@@ -44,6 +44,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         interestTableView.delegate = self
         formatTextFields()
         setTextFieldDelegates()
+        self.interestTableView.delaysContentTouches = false
         self.timePicker.datePickerMode = .time
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d yyyy"
@@ -83,7 +84,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                     presentNotification(title: "Choose a date and time.", message: "Please choose a date and time for this event.")
                     return
                 }
-            let dateString = validDate + validTime
+            let dateString = "\(validDate), \(validTime)"
             guard let creator = AuthApi.getFirebaseUid() else { return }
             
             self.event = Event(title: validName, description: validDescrip, fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
@@ -198,7 +199,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
+        let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
+        //cell.contentView.isUserInteractionEnabled = false
+        cell.bringSubview(toFront: cell.checkmarkBttn)
         return cell
     }
     
@@ -240,9 +243,10 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
 }
 
 extension CreateNewEventViewController {
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
 }

@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */; };
-		042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */; };
-		0486B0861EC96473007E4CCC /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486B0851EC96473007E4CCC /* CreateEvent.storyboard */; };
 		04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04920F6C1EC277D4007D0B10 /* EventTextField.swift */; };
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
@@ -20,6 +17,11 @@
 		5B5906481EC576CA00466AAC /* map_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5906471EC576CA00466AAC /* map_style.json */; };
 		5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */; };
 		5B59064E1EC7E60D00466AAC /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */; };
+		5B71D6F41ED17F2B0093A3F5 /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B71D6F31ED17F2B0093A3F5 /* CreateEvent.storyboard */; };
+		5B71D6F61ED180930093A3F5 /* CreateNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6F51ED180930093A3F5 /* CreateNewEventViewController.swift */; };
+		5B71D6F81ED180F00093A3F5 /* InterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6F71ED180F00093A3F5 /* InterestTableViewCell.swift */; };
+		5B71D6FA1ED181D10093A3F5 /* SendInvitationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6F91ED181D10093A3F5 /* SendInvitationsViewController.swift */; };
+		5B71D6FC1ED1820E0093A3F5 /* InviteFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6FB1ED1820E0093A3F5 /* InviteFriendTableViewCell.swift */; };
 		5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FCC1ECA9EBE00094FE6 /* Place.swift */; };
@@ -151,9 +153,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestTableViewCell.swift; sourceTree = "<group>"; };
-		042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewEventViewController.swift; sourceTree = "<group>"; };
-		0486B0851EC96473007E4CCC /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		04920F6C1EC277D4007D0B10 /* EventTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTextField.swift; sourceTree = "<group>"; };
 		04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSignUpViewController.swift; sourceTree = "<group>"; };
 		04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondSignUpViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +168,11 @@
 		5B5906471EC576CA00466AAC /* map_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map_style.json; sourceTree = "<group>"; };
 		5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		5B71D6F31ED17F2B0093A3F5 /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
+		5B71D6F51ED180930093A3F5 /* CreateNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewEventViewController.swift; sourceTree = "<group>"; };
+		5B71D6F71ED180F00093A3F5 /* InterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestTableViewCell.swift; sourceTree = "<group>"; };
+		5B71D6F91ED181D10093A3F5 /* SendInvitationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendInvitationsViewController.swift; sourceTree = "<group>"; };
+		5B71D6FB1ED1820E0093A3F5 /* InviteFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendTableViewCell.swift; sourceTree = "<group>"; };
 		5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5B959FCC1ECA9EBE00094FE6 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -363,14 +367,16 @@
 		5BA37C6F1EB9E8940091189E /* Event */ = {
 			isa = PBXGroup;
 			children = (
-				042FB3B51EC13A6C006C643D /* CreateNewEventViewController.swift */,
-				042A1D5B1EC19862009BA9F3 /* InterestTableViewCell.swift */,
+				5B71D6F51ED180930093A3F5 /* CreateNewEventViewController.swift */,
+				5B71D6F71ED180F00093A3F5 /* InterestTableViewCell.swift */,
 				5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */,
 				04920F6C1EC277D4007D0B10 /* EventTextField.swift */,
 				5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */,
 				FF522C621EC24CE900D27A9E /* allCommentsVC.swift */,
 				5B7DC2001EA866D700A1471E /* EventIconViewController.swift */,
 				5BA37C701EB9EADB0091189E /* InvitationViewController.swift */,
+				5B71D6F91ED181D10093A3F5 /* SendInvitationsViewController.swift */,
+				5B71D6FB1ED1820E0093A3F5 /* InviteFriendTableViewCell.swift */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -436,7 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
-				0486B0851EC96473007E4CCC /* CreateEvent.storyboard */,
+				5B71D6F31ED17F2B0093A3F5 /* CreateEvent.storyboard */,
 				FF522C1C1EC2010A00D27A9E /* EventDetails.storyboard */,
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
 				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
@@ -799,7 +805,6 @@
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
-				0486B0861EC96473007E4CCC /* CreateEvent.storyboard in Resources */,
 				FF522C1D1EC2010A00D27A9E /* EventDetails.storyboard in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
@@ -811,6 +816,7 @@
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
 				5B5906481EC576CA00466AAC /* map_style.json in Resources */,
 				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
+				5B71D6F41ED17F2B0093A3F5 /* CreateEvent.storyboard in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				5B959FEB1ECD23C200094FE6 /* SuggestPlaceView.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
@@ -979,6 +985,7 @@
 			files = (
 				D2C785521E9337B700BFF0E3 /* InterestListViewController.swift in Sources */,
 				D2A173551E5E911500C7724B /* SignUpViewController.swift in Sources */,
+				5B71D6F81ED180F00093A3F5 /* InterestTableViewCell.swift in Sources */,
 				D2D0A3EC1E7F49ED00B43689 /* UserDescriptionCell.swift in Sources */,
 				D2ECAC581E7CD9F8006FFA1A /* UserPhotoCell.swift in Sources */,
 				D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */,
@@ -990,7 +997,6 @@
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
 				5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */,
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
-				042FB3B61EC13A6C006C643D /* CreateNewEventViewController.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
 				FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */,
@@ -1000,6 +1006,7 @@
 				D2FDB69A1E89F73800D62DC2 /* SocialGroupViewController.swift in Sources */,
 				D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */,
 				04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */,
+				5B71D6FA1ED181D10093A3F5 /* SendInvitationsViewController.swift in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
 				5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */,
 				5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */,
@@ -1011,7 +1018,6 @@
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				FF522CAE1EC3E2DD00D27A9E /* commentCell.swift in Sources */,
-				042A1D5C1EC19862009BA9F3 /* InterestTableViewCell.swift in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
 				5B959FF21ECD452C00094FE6 /* RatingViewCell.swift in Sources */,
@@ -1024,6 +1030,7 @@
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
 				5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */,
+				5B71D6FC1ED1820E0093A3F5 /* InviteFriendTableViewCell.swift in Sources */,
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
 				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,
 				D296F5D31E75BB69007EC393 /* AuthApi.swift in Sources */,
@@ -1031,6 +1038,7 @@
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				5BAB87AD1EC97BED0064E5EC /* PeopleSearchViewController.swift in Sources */,
 				D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */,
+				5B71D6F61ED180930093A3F5 /* CreateNewEventViewController.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 				5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */,
 				D2ECAC541E7A255B006FFA1A /* UserProfile1ViewController.swift in Sources */,
