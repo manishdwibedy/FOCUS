@@ -13,6 +13,8 @@ import GooglePlaces
 import MapKit
 import FirebaseDatabase
 import Solar
+import TwitterKit
+import FirebaseAuth
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction, GMUClusterManagerDelegate, GMUClusterRendererDelegate {
     
@@ -225,8 +227,40 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func notificationsClicked() {
-        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
-        self.present(vc, animated: true, completion: nil)
+//        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+//        self.present(vc, animated: true, completion: nil)
+    
+        if AuthApi.getTwitterToken() == nil{
+            Twitter.sharedInstance().logIn { session, error in
+                if (session != nil)
+                {
+                    print("signed in as \(session!.userName)");
+                    if (session != nil) {
+                        let authToken = session?.authToken
+                        let authTokenSecret = session?.authTokenSecret
+                        let credential = FIRTwitterAuthProvider.credential(withToken: authToken!, secret: authTokenSecret!)
+                        
+                        let user = FIRAuth.auth()?.currentUser
+                        user?.link(with: credential, completion: { (user, error) in
+                            if let error = error {
+                                // ...
+                                return
+                            }
+                            AuthApi.set(twitterToken: authToken!)
+                        })
+                        
+                    }
+                }
+                else
+                {
+                    print("error: \(error!.localizedDescription)");
+                }
+            }
+        }
+        else{
+            
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
