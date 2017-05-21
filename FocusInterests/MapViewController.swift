@@ -13,10 +13,6 @@ import GooglePlaces
 import MapKit
 import FirebaseDatabase
 import Solar
-import TwitterKit
-import FirebaseAuth
-import Alamofire
-import OhhAuth
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction, GMUClusterManagerDelegate, GMUClusterRendererDelegate {
     
@@ -229,61 +225,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func notificationsClicked() {
-//        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
-//        self.present(vc, animated: true, completion: nil)
-    
-        if AuthApi.getTwitterToken() == nil{
-            Twitter.sharedInstance().logIn { session, error in
-                if (session != nil)
-                {
-                    print("signed in as \(session!.userName)");
-                    if (session != nil) {
-                        let authToken = session?.authToken
-                        let authTokenSecret = session?.authTokenSecret
-                        let credential = FIRTwitterAuthProvider.credential(withToken: authToken!, secret: authTokenSecret!)
-                        
-                        let user = FIRAuth.auth()?.currentUser
-                        
-                        user?.link(with: credential, completion: { (user, error) in
-                            if let error = error {
-                                // ...
-                                return
-                            }
-                            AuthApi.set(twitterToken: authToken!)
-                            AuthApi.set(twitterTokenSecret: authTokenSecret!)
-                        })
-                        
-                    }
-                }
-                else
-                {
-                    print("error: \(error!.localizedDescription)");
-                }
-            }
-        }
-        else{
-            
-            let cc = (key: Constants.Twitter.consumerKey, secret: Constants.Twitter.consumerSecret)
-            let uc = (key: AuthApi.getTwitterToken()!, secret: AuthApi.gettwitterTokenSecret()!)
-            
-            var req = URLRequest(url: URL(string: "https://api.twitter.com/1.1/statuses/update.json")!)
-            
-            let paras = ["status": "Hey Twitter! \u{1F6A7} Take a look at this sweet UUID: \(UUID())"]
-            
-            req.oAuthSign(method: "POST", urlFormParameters: paras, consumerCredentials: cc, userCredentials: uc)
-            
-            let task = URLSession(configuration: .ephemeral).dataTask(with: req) { (data, response, error) in
-                
-                if let error = error {
-                    print(error)
-                }
-                else if let data = data {
-                    print(String(data: data, encoding: .utf8) ?? "Does not look like a utf8 response :(")
-                }
-            }
-            task.resume()
-        }
-        
+        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -293,24 +236,4 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
     }
-    
-//    let kCameraLatitude = 34.03
-//    let kCameraLongitude = -118.28
-//    
-//    private func generateClusterItems() {
-//        let extent = 0.2
-//        for index in 1...100 {
-//            let lat = kCameraLatitude + extent * randomScale()
-//            let lng = kCameraLongitude + extent * randomScale()
-//            let name = "Item \(index)"
-//            let icon = UIImage(named: "addUser")
-//            let item = MapCluster(position: CLLocationCoordinate2DMake(lat, lng), name: name, icon: icon!)
-//            clusterManager.add(item)
-//        }
-//    }
-//    
-//    /// Returns a random value between -1.0 and 1.0.
-//    private func randomScale() -> Double {
-//        return Double(arc4random()) / Double(UINT32_MAX) * 2.0 - 1.0
-//    }
 }

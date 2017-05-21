@@ -45,6 +45,7 @@
 		5B71D6EC1ED10A3A0093A3F5 /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6D51ED10A3A0093A3F5 /* GQTPointQuadTree.m */; };
 		5B71D6ED1ED10A3A0093A3F5 /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6D71ED10A3A0093A3F5 /* GQTPointQuadTreeChild.m */; };
 		5B71D6EF1ED112B40093A3F5 /* MyCustomRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6EE1ED112B40093A3F5 /* MyCustomRenderer.swift */; };
+		5B71D6F11ED144B20093A3F5 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6F01ED144B20093A3F5 /* Share.swift */; };
 		5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
@@ -235,6 +236,7 @@
 		5B71D6D71ED10A3A0093A3F5 /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTreeChild.m; sourceTree = "<group>"; };
 		5B71D6D81ED10A3A0093A3F5 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
 		5B71D6EE1ED112B40093A3F5 /* MyCustomRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomRenderer.swift; sourceTree = "<group>"; };
+		5B71D6F01ED144B20093A3F5 /* Share.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -677,6 +679,7 @@
 				D25220731E5A8A7400EC2014 /* Constants.swift */,
 				D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */,
 				D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */,
+				5B71D6F01ED144B20093A3F5 /* Share.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1163,6 +1166,7 @@
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				D25D5D341E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
+				5B71D6F11ED144B20093A3F5 /* Share.swift in Sources */,
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
 				5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */,
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
