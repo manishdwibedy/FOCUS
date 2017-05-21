@@ -22,6 +22,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     var createdEvent: Event?
     
+    
+    
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var placesClient: GMSPlacesClient!
