@@ -433,6 +433,7 @@
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
 				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
 				5BA37C781EBDB7EA0091189E /* Messages.storyboard */,
+				5B959FD21ECAC6E000094FE6 /* PlaceDetails.storyboard */,
 				5BAB87A31EC961AB0064E5EC /* UserProfile.storyboard */,
 				5BAB87A51EC972890064E5EC /* search_people.storyboard */,
 				5BAB87AE1EC984400064E5EC /* search_event.storyboard */,
@@ -554,6 +555,7 @@
 				5BA37C6F1EB9E8940091189E /* Event */,
 				5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */,
 				5BA37C7C1EBDBF250091189E /* Message */,
+				5B959FD61ECAC9F400094FE6 /* Place */,
 				5BAB87A91EC97BB20064E5EC /* People */,
 				FF0F9D571ECFA0C6004E2C90 /* search_place.swift */,
 			);
@@ -595,6 +597,8 @@
 				D24716821E90504B00FF389D /* DisplayInterestsCell.xib */,
 				D21648281E9735AC00AE021B /* SelectedInterestCell.swift */,
 				D21648291E9735AC00AE021B /* SelectedInterestCell.xib */,
+				5B959FE01ECBA62B00094FE6 /* InviteUserView.xib */,
+				5B959FE21ECBA6C600094FE6 /* InviteUserView.swift */,
 				FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */,
 				FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */,
 			);
@@ -768,6 +772,7 @@
 				D25370D31E885EE40071B115 /* FollowCell.xib in Resources */,
 				D2ECAC551E7A255B006FFA1A /* UserProfile1ViewController.xib in Resources */,
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
+				5B959FD31ECAC6E000094FE6 /* PlaceDetails.storyboard in Resources */,
 				5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
