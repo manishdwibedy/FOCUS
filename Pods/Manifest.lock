@@ -1,11 +1,13 @@
 PODS:
   - Agrume (3.2.1)
+  - Alamofire (4.4.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - Cosmos (9.0.0)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.15)
@@ -116,9 +118,12 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Agrume (from `https://github.com/JanGorman/Agrume.git`)
+  - Alamofire
+  - Cosmos (~> 9.0)
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -134,6 +139,7 @@ DEPENDENCIES:
   - GooglePlaces
   - JSQMessagesViewController
   - SDWebImage (~> 3.8)
+  - SwiftyJSON
 
 EXTERNAL SOURCES:
   Agrume:
@@ -146,7 +152,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Agrume: abf26210c3371bc6c74bbf2ced7a19d937bf8f0a
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Cosmos: 33eee62b2a0418452aef470f711f83c3ea061b7b
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
@@ -174,7 +182,8 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 08cc77b30a3b74b7cb335ee968108d5107c60b3d
+PODFILE CHECKSUM: 9553508c00bdf25ed1ccdd01bd6d3a3796122de2
 
 COCOAPODS: 1.2.0.beta.1

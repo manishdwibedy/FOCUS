@@ -43,14 +43,7 @@ class Event{
             "latitude": self.latitude!,
             "longitude": self.longitude!,
             "date": self.date!,
-            
-            // creating dummy events by mary
-            "creator": Constants.dummyUsers.mary.uuid!
-            
-            
-            
-            // Original creator
-//            "creator": self.creator
+            "creator": self.creator!
         ] as [String : String]
         newEvent.setValue(event)
         

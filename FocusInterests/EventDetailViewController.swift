@@ -17,7 +17,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var addressLabel: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
-    @IBOutlet weak var navBarView: UIView!
     @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var attendOut: UIButton!
     
@@ -28,13 +27,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var event: Event?
     @IBOutlet weak var image: UIImageView!
     let ref = FIRDatabase.database().reference()
-    var blur: UIVisualEffectView!
     let commentsCList = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // add nav bar
-        let bar = MapNavigationView()
-        self.navBarView.addSubview(bar)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -91,7 +86,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         })
         
         let fullRef = ref.child("events").child((event?.id)!).child("comments")
-        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { (snapshot) in
+        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 3).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
@@ -165,6 +160,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         fullRef.child("likeAmount").updateChildValues(["num":newLike])
         fullRef.child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
         likeCount.text = String(newLike)
+        likeOut.isEnabled = false
         
     }
     
@@ -184,11 +180,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
         
         let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0)
-        self.commentsCList.removeObject(at: 0)
+        if self.commentsCList.count != 0
+        {
+            self.commentsCList.removeObject(at: 0)
+        }
         self.commentsCList.add(data)
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
-        tableView.endUpdates()
+        tableView.reloadData()
+        //tableView.beginUpdates()
+        //tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
+        //tableView.endUpdates()
         commentTextField.resignFirstResponder()
         commentTextField.text = ""
         self.scrollView.frame.origin.y = 0
@@ -263,8 +263,31 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     
+    @IBAction func back(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+        
+    }
     
     
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

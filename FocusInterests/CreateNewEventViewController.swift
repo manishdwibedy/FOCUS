@@ -10,7 +10,10 @@ import UIKit
 import GooglePlaces
 import FirebaseDatabase
 
-class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    
+    @IBOutlet weak var publicLabel: UILabel!
+    @IBOutlet weak var privateLabel: UILabel!
     
     var event: Event?
     var place: GMSPlace?
@@ -18,6 +21,11 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     let timePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
+    
+    
+    @IBOutlet weak var canInviteFriendsLabel: UILabel!
+    @IBOutlet weak var showGuestListLabel: UILabel!
+    
     @IBOutlet weak var guestListBttn: UIButton!
     @IBOutlet weak var showGuestFriendsBttn: UIButton!
     
@@ -27,9 +35,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var eventTimeTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
-    
     @IBOutlet weak var interestTableView: UITableView!
-    
     @IBOutlet weak var publicOrPrivateSwitch: UISwitch!
     
     override func viewDidLoad() {
@@ -37,35 +43,69 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         interestTableView.dataSource = self
         interestTableView.delegate = self
         formatTextFields()
+        setTextFieldDelegates()
         self.timePicker.datePickerMode = .time
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d yyyy"
         self.timeFormatter.dateFormat = "h:mm a"
     }
     
+    func setTextFieldDelegates(){
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, descriptionTextField].map{$0.delegate = self}
+    }
+    
+    @IBAction func PrivOrPubSwtchChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            self.privateLabel.textColor = UIColor.primaryGreen()
+            self.publicLabel.textColor = UIColor.white
+        } else /* the switch is set to public */ {
+            self.privateLabel.textColor = UIColor.white
+            self.publicLabel.textColor = UIColor.primaryGreen()
+            //to do - hide labels & bttns
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToCreateEventIcon" {
-            guard let validPlace = self.place else { return }
+            guard let validPlace = self.place else {
+                presentNotification(title: "Choose a location", message: "Please choose a location for this event.")
+                return
+            }
             let locality = validPlace.addressComponents?[0].name
             let street = validPlace.addressComponents?[1].name
             let shortAddress = "\(locality!), \(street!)"
             
-            guard let validLocation = self.place else { return }
-            guard let validName = eventNameTextField.text else { return }
-            guard let validDescrip = descriptionTextField.text else { return }
+            let validName = eventNameTextField.text ?? ""
+            let validDescrip = descriptionTextField.text ?? ""
             
-            guard let validDate = eventDateTextField.text else { return }
-            guard let validTime = eventTimeTextField.text else { return }
+            guard let validDate = eventDateTextField.text,
+                let validTime = eventTimeTextField.text else {
+                    presentNotification(title: "Choose a date and time.", message: "Please choose a date and time for this event.")
+                    return
+                }
             let dateString = validDate + validTime
-            
             guard let creator = AuthApi.getFirebaseUid() else { return }
             
-            self.event = Event(title: validName, description: validDescrip, fullAddress: validLocation.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
+            self.event = Event(title: validName, description: validDescrip, fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
             
-            let destination = segue.destination as! EventIconViewController
-            destination.event = self.event!
+            let destination = segue.destination as! UINavigationController
+            let nextVC = destination.viewControllers[0] as! EventIconViewController
+            guard let validEvent = self.event else {
+                print("no event sent to eventIcon VC")
+                return
+            }
+            nextVC.event = validEvent
+            self.event = nil
+            let _ = [eventNameTextField, eventDateTextField, descriptionTextField, eventTimeTextField, locationTextField].map{$0.text = nil}
         }
-       
+    }
+    
+    private func presentNotification(title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
+        alert.view.tintColor = UIColor.primaryGreen()
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func showGuestListBttn(_ sender: UIButton) {
@@ -101,8 +141,6 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func addEventTime(_ sender: UITextField) {
         showTimePicker()
     }
-    
-    
     
     func showDatePicker(){
         let toolbar = UIToolbar()
@@ -163,6 +201,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         let cell = interestTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InterestTableViewCell
         return cell
     }
+    
+    // MARK: - Navigation
+    @IBAction func unwindFromCreateEventIcon(sender: UIStoryboardSegue){}
 }
 
 extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
@@ -196,7 +237,13 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-    
+}
+
+extension CreateNewEventViewController {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
 }
 

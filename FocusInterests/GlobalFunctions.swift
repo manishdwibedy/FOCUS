@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 
 func featuresToString(features: [Feature]) -> String {
     var strArray = [String]()
@@ -15,4 +17,65 @@ func featuresToString(features: [Feature]) -> String {
     }
     let joinedStr = strArray.joined(separator: ", ")
     return joinedStr
+}
+
+func getYelpToken(completion: @escaping (_ result: String) -> Void){
+    let url = "https://api.yelp.com/oauth2/token"
+    let parameters: [String: String] = [
+        "client_id" : "vFAIR9-9TE52_DCWXHrXew",
+        "client_secret" : "Bb3UszmDi1zoFMsWqhnodGrOhK3s8SBKaV6SK2gdn3sE3txhVOxSjGHdcFsitovD",
+        "grant_type": "client_credentials"
+        
+        
+    ]
+    
+    let headers: HTTPHeaders = [
+        "content-type": "application/x-www-form-urlencoded",
+        "cache-contro": "no-cache"
+    ]
+    
+    Alamofire.request(url, method: .post, parameters:parameters, headers: headers).responseJSON { response in
+        let json = JSON(data: response.data!)
+        let token = json["access_token"].stringValue
+        
+        AuthApi.set(yelpAccessToken: token)
+        
+        completion(token)
+        
+    }
+}
+
+let days = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"]
+
+func getOpenHours(_ hours: [Hours]) -> [String]{
+    var result = [String]()
+    
+    var last_day_start = hours[0].day
+    var last_day_end = hours[0].day
+    var last_start = hours[0].start
+    var last_end = hours[0].end
+    
+    
+    for (_, hour) in hours.dropFirst().enumerated(){
+        
+        // last day matches to the current day
+        if hour.start == last_start && hour.end == last_end && hour.day == last_day_end + 1{
+            last_day_end = hour.day
+        }
+            //last day doesn't match to the current day
+        else{
+            // if only day was there a
+            if last_day_end == last_day_start{
+                result.append("\(days[last_day_start]) \(last_start) - \(last_end)")
+            }
+            else{
+                result.append("\(days[last_day_start]) - \(days[last_day_end]) \(last_start) - \(last_end)")
+            }
+            last_day_start = hour.day
+            last_day_end = hour.day
+            last_start = hour.start
+            last_end = hour.end
+        }
+    }
+    return result
 }
