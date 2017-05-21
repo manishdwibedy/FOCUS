@@ -26,7 +26,7 @@ class Share{
         try shareDialog.show()
     }
     
-    static func loginTwitter(){
+    static func loginAndShareTwitter(withStatus text: String){
         Twitter.sharedInstance().logIn { session, error in
             if (session != nil)
             {
@@ -45,6 +45,7 @@ class Share{
                         }
                         AuthApi.set(twitterToken: authToken!)
                         AuthApi.set(twitterTokenSecret: authTokenSecret!)
+                        postToTwitter(withStatus: text)
                     })
                     
                 }

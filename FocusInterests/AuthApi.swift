@@ -53,6 +53,28 @@ struct AuthApi {
         return nil
     }
     
+    static func set(twitterToken: String?) {
+        defaults.set(twitterToken, forKey: "twitterAccessToken")
+    }
+    
+    static func set(twitterTokenSecret: String?) {
+        defaults.set(twitterTokenSecret, forKey: "twitterAccessTokenSecret")
+    }
+
+    static func getTwitterToken() -> String? {
+        if let twitterToken = defaults.object(forKey: "twitterAccessToken") as? String {
+            return twitterToken
+        }
+        return nil
+    }
+    
+    static func gettwitterTokenSecret() -> String? {
+        if let twitterTokenSecret = defaults.object(forKey: "twitterAccessTokenSecret") as? String {
+            return twitterTokenSecret
+        }
+        return nil
+    }
+    
     static func set(googleToken: String?) {
         if let token = googleToken {
             defaults.set(token, forKey: "googleAccessToken")
