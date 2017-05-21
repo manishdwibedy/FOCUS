@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        Twitter.sharedInstance().start(withConsumerKey: "kDcg3AljHuqwQkS7ZYvo6aqzz", consumerSecret: "SibT0zEI9tnoqwQddABKMzf6nel16oCoHDvti8fFWYKWufFHIp")
+        Twitter.sharedInstance().start(withConsumerKey: Constants.Twitter.consumerKey, consumerSecret: Constants.Twitter.consumerSecret)
         Fabric.with([Twitter.self])
         
         checkForLogin()

@@ -15,6 +15,8 @@ import FirebaseDatabase
 import Solar
 import TwitterKit
 import FirebaseAuth
+import Alamofire
+import OhhAuth
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction, GMUClusterManagerDelegate, GMUClusterRendererDelegate {
     
@@ -241,12 +243,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         let credential = FIRTwitterAuthProvider.credential(withToken: authToken!, secret: authTokenSecret!)
                         
                         let user = FIRAuth.auth()?.currentUser
+                        
                         user?.link(with: credential, completion: { (user, error) in
                             if let error = error {
                                 // ...
                                 return
                             }
                             AuthApi.set(twitterToken: authToken!)
+                            AuthApi.set(twitterTokenSecret: authTokenSecret!)
                         })
                         
                     }
@@ -259,6 +263,25 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         else{
             
+            let cc = (key: Constants.Twitter.consumerKey, secret: Constants.Twitter.consumerSecret)
+            let uc = (key: AuthApi.getTwitterToken()!, secret: AuthApi.gettwitterTokenSecret()!)
+            
+            var req = URLRequest(url: URL(string: "https://api.twitter.com/1.1/statuses/update.json")!)
+            
+            let paras = ["status": "Hey Twitter! \u{1F6A7} Take a look at this sweet UUID: \(UUID())"]
+            
+            req.oAuthSign(method: "POST", urlFormParameters: paras, consumerCredentials: cc, userCredentials: uc)
+            
+            let task = URLSession(configuration: .ephemeral).dataTask(with: req) { (data, response, error) in
+                
+                if let error = error {
+                    print(error)
+                }
+                else if let data = data {
+                    print(String(data: data, encoding: .utf8) ?? "Does not look like a utf8 response :(")
+                }
+            }
+            task.resume()
         }
         
     }
