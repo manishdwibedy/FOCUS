@@ -30,6 +30,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var places = [Place]()
     var placeMapping = [String: Place]()
     
+    var searchPlacesTab: SearchPlacesViewController?  = nil
+    
     @IBOutlet weak var navigationView: MapNavigationView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +79,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 self.events.append(event)
             }
         })
+        
+        self.searchPlacesTab = self.tabBarController?.viewControllers?[3] as? SearchPlacesViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -283,6 +287,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     self.places.append(place)
                     self.placeMapping[place.id] = place
                     self.getPlaceHours(id: place.id)
+                    
+                    self.searchPlacesTab?.places.append(place)
+                    
+
                 }
             }
         }

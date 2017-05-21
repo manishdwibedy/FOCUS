@@ -16,6 +16,7 @@ class SearchPlaceCell: UITableViewCell {
     @IBOutlet weak var followButtonOut: UIButton!
     @IBOutlet weak var inviteButtonOut: UIButton!
     @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     
     override func awakeFromNib() {
