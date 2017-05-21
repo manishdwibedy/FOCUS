@@ -31,8 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
             }
         }
         
-        UINavigationBar.appearance().backgroundColor = UIColor.primaryGreen()
-        
         GMSServices.provideAPIKey(Constants.keys.googleMapsAPIKey)
         GMSPlacesClient.provideAPIKey(Constants.keys.googleMapsAPIKey)
         var configureError: NSError?
@@ -50,7 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     
     // Google signin handler
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        let googleDidHandle = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(
+            app,
+            open: url,
+            sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        return googleDidHandle || facebookDidHandle
     }
 
     func checkForLogin() {
@@ -85,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     
     func login() {
         let storyboard = UIStoryboard(name: Constants.otherIds.mainSB, bundle: nil)
-        let tabContr = storyboard.instantiateInitialViewController() as! CustomTabController
+        let tabContr = storyboard.instantiateInitialViewController() as! UITabBarController
         self.window?.rootViewController = tabContr
         self.window?.makeKeyAndVisible()
     }
@@ -93,7 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     func logout() {
         defaults.set(false, forKey: Constants.defaultsKeys.loggedIn)
         let storyboard = UIStoryboard(name: Constants.otherIds.loginSB, bundle: nil)
-        let vc = storyboard.instantiateInitialViewController() as! NewLoginVC
+        
+        let vc = storyboard.instantiateInitialViewController() as! LoginViewController
         self.window?.rootViewController = vc
         self.window?.makeKeyAndVisible()
     }

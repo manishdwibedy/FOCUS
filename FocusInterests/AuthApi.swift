@@ -66,10 +66,18 @@ struct AuthApi {
         return nil
     }
     
+    static func getYelpToken() -> String?{
+        if let token = defaults.object(forKey: "yelpAccessToken") as? String {
+            return token
+        }
+        return nil
+    }
+    
     static func setDefaultsForLogout() {
         defaults.set(nil, forKey: "userEmail")
         defaults.set(nil, forKey: "facebookAccessToken")
         defaults.set(nil, forKey: "googleAccessToken")
+        defaults.set(nil, forKey: "yelpAccessToken")
     }
     
     static func setEmailConfirmationSent() {
@@ -91,6 +99,11 @@ struct AuthApi {
     static func setPassword(password: String) {
         defaults.set(password, forKey: "password")
     }
+    
+    static func set(yelpAccessToken: String) {
+        defaults.set(yelpAccessToken, forKey: "yelpAccessToken")
+    }
+
     
     static func getPassword() -> String? {
         let pword: String? = defaults.object(forKey: "password") as? String

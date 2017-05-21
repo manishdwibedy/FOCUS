@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="KGk-i7-Jjw" customClass="RatingViewCell" customModule="FocusInterests" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addUser" translatesAutoresizingMaskIntoConstraints="NO" id="YoY-zn-2BL">
+                        <rect key="frame" x="10" y="25" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Jm1-4H-8tO"/>
+                            <constraint firstAttribute="width" constant="50" id="WRa-kl-xxS"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mba-TZ-z9r">
+                        <rect key="frame" x="70" y="10" width="120" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="eyS-Zp-XmO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 hours ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjv-b5-T6H">
+                        <rect key="frame" x="202" y="10" width="100" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="T32-1u-VfP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Jue-oc-IKk" customClass="CosmosView" customModule="Cosmos">
+                        <rect key="frame" x="70" y="30" width="100" height="11"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="U7s-L1-dvY"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                <real key="value" value="11"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="azi-DG-34T">
+                        <rect key="frame" x="70" y="51" width="232" height="30.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="azi-DG-34T" firstAttribute="leading" secondItem="YoY-zn-2BL" secondAttribute="trailing" constant="10" id="0HD-na-jna"/>
+                    <constraint firstItem="Jjv-b5-T6H" firstAttribute="top" secondItem="mba-TZ-z9r" secondAttribute="top" id="7Wh-EV-MDO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="azi-DG-34T" secondAttribute="bottom" constant="10" id="OBK-yd-fx7"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="azi-DG-34T" secondAttribute="trailing" constant="10" id="PtR-ir-d9R"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Jjv-b5-T6H" secondAttribute="trailing" constant="10" id="Y1L-4R-Yib"/>
+                    <constraint firstItem="Jue-oc-IKk" firstAttribute="top" secondItem="mba-TZ-z9r" secondAttribute="bottom" constant="2" id="aPe-R7-Bl1"/>
+                    <constraint firstItem="YoY-zn-2BL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="fif-LC-FpU"/>
+                    <constraint firstItem="mba-TZ-z9r" firstAttribute="leading" secondItem="YoY-zn-2BL" secondAttribute="trailing" constant="10" id="gcy-cd-Y1A"/>
+                    <constraint firstItem="mba-TZ-z9r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="hOJ-gf-LdD"/>
+                    <constraint firstItem="azi-DG-34T" firstAttribute="top" secondItem="Jue-oc-IKk" secondAttribute="bottom" constant="10" id="kc0-Id-pQA"/>
+                    <constraint firstItem="YoY-zn-2BL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="v6N-lR-Wcz"/>
+                    <constraint firstItem="Jue-oc-IKk" firstAttribute="leading" secondItem="YoY-zn-2BL" secondAttribute="trailing" constant="10" id="xjx-12-yQF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="comments" destination="azi-DG-34T" id="DAs-kY-E9Y"/>
+                <outlet property="rating" destination="Jue-oc-IKk" id="tiS-th-mu2"/>
+                <outlet property="time" destination="Jjv-b5-T6H" id="zAr-CF-75s"/>
+                <outlet property="userImage" destination="YoY-zn-2BL" id="mbU-7M-swQ"/>
+                <outlet property="userName" destination="mba-TZ-z9r" id="hVs-em-ObZ"/>
+            </connections>
+            <point key="canvasLocation" x="70" y="89"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="addUser" width="40" height="40"/>
+    </resources>
+</document>

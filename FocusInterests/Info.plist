@@ -21,7 +21,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1363838290342964</string>
+				<string>fb124579808092963</string>
 			</array>
 		</dict>
 		<dict>
@@ -34,11 +34,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
-	<string>1363838290342964</string>
+	<string>124579808092963</string>
 	<key>FacebookDisplayName</key>
-	<string>TrailLocator</string>
+	<string>FOCUS</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -63,10 +63,18 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Focus would like access to your device's camera for certain features.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Focus would like access to your device's contacts for certain features.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Focus would like access to your device's current position</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Focus would like access to your device's photo library for this feature.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Login</string>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -86,11 +94,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>Focus would like access to your device&apos;s camera for certain features.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Focus would like access to your device&apos;s photo library for this feature.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Focus would like access to your device&apos;s current position</string>
 </dict>
 </plist>

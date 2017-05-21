@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapNavigationView" customModule="FocusInterests" customModuleProvider="target">
+            <connections>
+                <outlet property="messagesButton" destination="CZk-k0-NPd" id="H8k-Qo-Cfh"/>
+                <outlet property="notificationsButton" destination="NJp-MD-iuK" id="Yqv-8p-p7N"/>
+                <outlet property="searchBar" destination="clg-Ba-1dC" id="pCU-Ia-ING"/>
+                <outlet property="searchButton" destination="BIv-Ib-jcv" id="j1h-jV-t0f"/>
+                <outlet property="userProfileButton" destination="yzW-Ah-j3P" id="Lu9-Wz-VAX"/>
+                <outlet property="view" destination="iN0-l3-epB" id="U5P-E7-gRU"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-En-2Gc" userLabel="icons">
+                    <rect key="frame" x="10" y="25" width="355" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleAspectFit" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzW-Ah-j3P">
+                            <rect key="frame" x="0.0" y="0.0" width="59" height="50"/>
+                            <edgeInsets key="layoutMargins" top="8" left="22" bottom="8" right="8"/>
+                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                            <state key="normal" backgroundImage="User_Profile"/>
+                            <connections>
+                                <action selector="profileButtonPressed:" destination="-1" eventType="touchUpInside" id="Ff1-rb-4Ff"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd">
+                            <rect key="frame" x="99" y="0.0" width="58.5" height="50"/>
+                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                            <state key="normal" backgroundImage="Messages"/>
+                            <connections>
+                                <action selector="messagesButtonPressed:" destination="-1" eventType="touchUpInside" id="HhF-9i-eZZ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIv-Ib-jcv">
+                            <rect key="frame" x="197.5" y="0.0" width="59" height="50"/>
+                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                            <state key="normal" backgroundImage="Search"/>
+                            <connections>
+                                <action selector="searchButtonPressed:" destination="-1" eventType="touchUpInside" id="T3a-4h-zpO"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-MD-iuK">
+                            <rect key="frame" x="296.5" y="0.0" width="58.5" height="50"/>
+                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                            <state key="normal" backgroundImage="Notifications"/>
+                            <connections>
+                                <action selector="notificationsButtonPressed:" destination="-1" eventType="touchUpInside" id="e6r-GR-iuC"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="02f-eu-E7X"/>
+                    </constraints>
+                </stackView>
+                <searchBar alpha="0.0" contentMode="redraw" searchBarStyle="prominent" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clg-Ba-1dC">
+                    <rect key="frame" x="0.0" y="76" width="375" height="44"/>
+                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                    <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="KYq-w7-dkT"/>
+                    </connections>
+                </searchBar>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="clg-Ba-1dC" secondAttribute="bottom" constant="10" id="24r-VM-Ozx"/>
+                <constraint firstItem="clg-Ba-1dC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Qof-PQ-KbI"/>
+                <constraint firstItem="iQC-En-2Gc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="XvQ-fh-Xq8"/>
+                <constraint firstAttribute="trailing" secondItem="clg-Ba-1dC" secondAttribute="trailing" id="kan-tF-DsH"/>
+                <constraint firstItem="iQC-En-2Gc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="rya-3E-jRa"/>
+                <constraint firstAttribute="trailing" secondItem="iQC-En-2Gc" secondAttribute="trailing" constant="10" id="wSq-Jz-C3f"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-84.5" y="363"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Messages" width="80" height="62"/>
+        <image name="Notifications" width="66" height="66"/>
+        <image name="Search" width="78" height="76"/>
+        <image name="User_Profile" width="67" height="77"/>
+    </resources>
+</document>

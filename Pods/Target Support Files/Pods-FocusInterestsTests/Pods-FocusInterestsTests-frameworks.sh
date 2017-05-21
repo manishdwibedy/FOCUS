@@ -59,7 +59,7 @@ code_sign_if_enabled() {
   if [ -n "${EXPANDED_CODE_SIGN_IDENTITY}" -a "${CODE_SIGNING_REQUIRED}" != "NO" -a "${CODE_SIGNING_ALLOWED}" != "NO" ]; then
     # Use the current code_sign_identitiy
     echo "Code Signing $1 with Identity ${EXPANDED_CODE_SIGN_IDENTITY_NAME}"
-    local code_sign_cmd="/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements '$1'"
+    local code_sign_cmd="/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements "$1""
 
     if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
       code_sign_cmd="$code_sign_cmd &"
@@ -89,30 +89,42 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKShareKit/FBSDKShareKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FacebookCore/FacebookCore.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FacebookLogin/FacebookLogin.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FacebookShare/FacebookShare.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Agrume-iOS10.2/Agrume.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS10.2/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Bolts-iOS10.2/Bolts.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Cosmos-iOS10.2/Cosmos.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit-iOS10.2/FBSDKCoreKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit-iOS10.2/FBSDKLoginKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKShareKit-iOS10.2/FBSDKShareKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FacebookCore-iOS10.2/FacebookCore.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FacebookLogin-iOS10.2/FacebookLogin.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FacebookShare-iOS10.2/FacebookShare.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2-iOS10.2/GTMOAuth2.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher-iOS10.2/GTMSessionFetcher.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-iOS10.2/GoogleToolboxForMac.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JSQMessagesViewController-iOS10.2/JSQMessagesViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer-iOS10.2/JSQSystemSoundPlayer.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Protobuf-iOS10.2/Protobuf.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS10.2/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKShareKit/FBSDKShareKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FacebookCore/FacebookCore.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FacebookLogin/FacebookLogin.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FacebookShare/FacebookShare.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Agrume-iOS10.2/Agrume.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS10.2/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Bolts-iOS10.2/Bolts.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Cosmos-iOS10.2/Cosmos.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit-iOS10.2/FBSDKCoreKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit-iOS10.2/FBSDKLoginKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKShareKit-iOS10.2/FBSDKShareKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FacebookCore-iOS10.2/FacebookCore.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FacebookLogin-iOS10.2/FacebookLogin.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FacebookShare-iOS10.2/FacebookShare.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2-iOS10.2/GTMOAuth2.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher-iOS10.2/GTMSessionFetcher.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-iOS10.2/GoogleToolboxForMac.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JSQMessagesViewController-iOS10.2/JSQMessagesViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer-iOS10.2/JSQSystemSoundPlayer.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Protobuf-iOS10.2/Protobuf.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS10.2/SwiftyJSON.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

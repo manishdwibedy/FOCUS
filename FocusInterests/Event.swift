@@ -18,8 +18,9 @@ class Event{
     let longitude: String?
     let date: String?
     let creator: String?
+    var id: String?
     
-    init(title: String, description: String, fullAddress: String, shortAddress: String, latitude: String, longitude: String, date: String, creator: String) {
+    init(title: String, description: String, fullAddress: String, shortAddress: String, latitude: String, longitude: String, date: String, creator: String, id: String? = nil) {
         self.title = title
         self.description = description
         self.fullAddress = fullAddress
@@ -28,6 +29,7 @@ class Event{
         self.longitude = longitude
         self.date = date
         self.creator = creator
+        self.id = id
     }
     
     func saveToDB(ref: FIRDatabaseReference) -> String{
@@ -41,14 +43,7 @@ class Event{
             "latitude": self.latitude!,
             "longitude": self.longitude!,
             "date": self.date!,
-            
-            // creating dummy events by mary
-            "creator": Constants.dummyUsers.mary.uuid!
-            
-            
-            
-            // Original creator
-//            "creator": self.creator
+            "creator": self.creator!
         ] as [String : String]
         newEvent.setValue(event)
         

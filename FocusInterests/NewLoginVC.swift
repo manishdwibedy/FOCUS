@@ -12,12 +12,12 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import FirebaseAuth
 import GoogleSignIn
-
-enum LoginTypes: String {
-    case Email = "email"
-    case Facebook = "facebook"
-    case Google = "google"
-}
+//
+//enum LoginTypes: String {
+//    case Email = "email"
+//    case Facebook = "facebook"
+//    case Google = "google"
+//}
 
 class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
