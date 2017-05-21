@@ -180,6 +180,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                               longitude: location.coordinate.longitude,
                                               zoom: 15)
         self.currentLocation = location
+        self.searchPlacesTab?.location = location
         print("got location")
         self.fetchPlaces(token: AuthApi.getYelpToken()!)
         if mapView.isHidden {
