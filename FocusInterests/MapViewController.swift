@@ -15,14 +15,14 @@ import FirebaseDatabase
 import Alamofire
 import SwiftyJSON
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction {
-    
+class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     
     var createdEvent: Event?
     
-    
+    private var clusterManager: GMUClusterManager!
+
     
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
@@ -65,6 +65,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
+        // Set up the cluster manager with default icon generator and renderer.
+        let iconGenerator = GMUDefaultClusterIconGenerator()
+        
+        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+        
+        let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
+        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
+        
         Constants.DB.event.observe(FIRDataEventType.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             
@@ -73,13 +81,23 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id)
         
                 let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                let marker = GMSMarker(position: position)
-                marker.icon = UIImage(named: "addUser")
-                marker.title = event.title
-                marker.map = self.mapView
-                marker.accessibilityLabel = "event_\(self.events.count)"
+//                let marker = GMSMarker(position: position)
+//                marker.icon = UIImage(named: "addUser")
+//                marker.title = event.title
+//                marker.map = self.mapView
+//                marker.accessibilityLabel = "event_\(self.events.count)"
                 self.events.append(event)
+                
+                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "addUser")!, id: String(describing: self.events.count))
+                self.clusterManager.add(item)
             }
+            
+            // Call cluster() after items have been added to perform the clustering and rendering on map.
+            self.clusterManager.cluster()
+            
+            // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
+            self.clusterManager.setDelegate(self, mapDelegate: self)
+            
         })
         
         self.searchPlacesTab = self.tabBarController?.viewControllers?[3] as? SearchPlacesViewController
@@ -215,6 +233,29 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager.stopUpdatingLocation()
         print("Error: \(error)")
+    }
+    
+    // MARK: - GMUClusterManagerDelegate
+    
+    func clusterManager(clusterManager: GMUClusterManager, didTapCluster cluster: GMUCluster) {
+        let newCamera = GMSCameraPosition.camera(withTarget: cluster.position,
+                                                 zoom: mapView.camera.zoom + 1)
+        let update = GMSCameraUpdate.setCamera(newCamera)
+        mapView.moveCamera(update)
+    }
+    
+    // MARK: - GMUMapViewDelegate
+    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+        if let poiItem = marker.userData as? MapCluster {
+            NSLog("Did tap marker for cluster item \(poiItem.name)")
+        } else {
+            NSLog("Did tap a normal marker")
+        }
+        return false
+    }
+    
+    func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
+        marker.icon = UIImage(named: "addUser")
     }
     
     func userProfileClicked() {
