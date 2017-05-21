@@ -44,6 +44,7 @@
 		5B71D6EB1ED10A3A0093A3F5 /* GMUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6D01ED10A3A0093A3F5 /* GMUStyle.m */; };
 		5B71D6EC1ED10A3A0093A3F5 /* GQTPointQuadTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6D51ED10A3A0093A3F5 /* GQTPointQuadTree.m */; };
 		5B71D6ED1ED10A3A0093A3F5 /* GQTPointQuadTreeChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6D71ED10A3A0093A3F5 /* GQTPointQuadTreeChild.m */; };
+		5B71D6EF1ED112B40093A3F5 /* MyCustomRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D6EE1ED112B40093A3F5 /* MyCustomRenderer.swift */; };
 		5B7DC1FF1EA8630500A1471E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
@@ -233,6 +234,7 @@
 		5B71D6D61ED10A3A0093A3F5 /* GQTPointQuadTreeChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeChild.h; sourceTree = "<group>"; };
 		5B71D6D71ED10A3A0093A3F5 /* GQTPointQuadTreeChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GQTPointQuadTreeChild.m; sourceTree = "<group>"; };
 		5B71D6D81ED10A3A0093A3F5 /* GQTPointQuadTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GQTPointQuadTreeItem.h; sourceTree = "<group>"; };
+		5B71D6EE1ED112B40093A3F5 /* MyCustomRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomRenderer.swift; sourceTree = "<group>"; };
 		5B7DC1FE1EA8630500A1471E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -749,6 +751,7 @@
 			children = (
 				D23E01381E6BAD0A00E735F5 /* FirebaseUpstream.swift */,
 				D23E013A1E6BAD2100E735F5 /* FirebaseDownstream.swift */,
+				5B71D6EE1ED112B40093A3F5 /* MyCustomRenderer.swift */,
 			);
 			name = Google;
 			sourceTree = "<group>";
@@ -1186,6 +1189,7 @@
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
 				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,
 				5B71D6E91ED10A3A0093A3F5 /* GMUPoint.m in Sources */,
+				5B71D6EF1ED112B40093A3F5 /* MyCustomRenderer.swift in Sources */,
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,
 				D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */,
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
