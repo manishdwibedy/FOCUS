@@ -27,6 +27,9 @@ target 'FocusInterests' do
     pod 'SwiftyJSON'
     pod 'Cosmos', '~> 9.0'
     pod 'Solar'
+    pod 'Fabric'
+    pod 'TwitterKit'
+    pod 'OhhAuth'
 end
 
 target 'FocusInterestsTests' do
