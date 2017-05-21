@@ -118,6 +118,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - Solar (2.0.0)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -139,6 +140,7 @@ DEPENDENCIES:
   - GooglePlaces
   - JSQMessagesViewController
   - SDWebImage (~> 3.8)
+  - Solar
   - SwiftyJSON
 
 EXTERNAL SOURCES:
@@ -182,8 +184,9 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  Solar: ea092f7660c1b58d2b754227decb61a1c6710826
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 9553508c00bdf25ed1ccdd01bd6d3a3796122de2
+PODFILE CHECKSUM: 48b3b45807c1ae5945675bf39a33941461035d3e
 
 COCOAPODS: 1.2.0.beta.1

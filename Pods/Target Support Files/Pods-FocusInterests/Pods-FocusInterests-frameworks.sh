@@ -106,6 +106,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer-iOS10.0/JSQSystemSoundPlayer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf-iOS10.0/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Solar/Solar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS10.0/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -126,6 +127,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer-iOS10.0/JSQSystemSoundPlayer.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf-iOS10.0/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Solar/Solar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS10.0/SwiftyJSON.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
