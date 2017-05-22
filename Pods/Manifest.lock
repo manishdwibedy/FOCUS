@@ -115,6 +115,7 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
+  - Magnetic (1.0.6)
   - OhhAuth (1.0.0)
   - Protobuf (3.2.0)
   - SDWebImage (3.8.2):
@@ -146,6 +147,7 @@ DEPENDENCIES:
   - GooglePlacePicker
   - GooglePlaces
   - JSQMessagesViewController
+  - Magnetic
   - OhhAuth
   - SDWebImage (~> 3.8)
   - Solar
@@ -192,6 +194,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  Magnetic: 5d8e4ce3d3e6cf496af1035580971a1d17e966f3
   OhhAuth: 82863d7a9aa2a749eb2c65551281c01f3facf501
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -200,6 +203,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 205dd77a49a64aa4024460db3cd72d9a675e6fdb
+PODFILE CHECKSUM: 8b33fddc8e759625934960ad8b6b1b019c362003
 
 COCOAPODS: 1.2.0.beta.1

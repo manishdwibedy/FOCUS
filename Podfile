@@ -30,6 +30,8 @@ target 'FocusInterests' do
     pod 'Fabric'
     pod 'TwitterKit'
     pod 'OhhAuth'
+    pod 'Magnetic'
+
 end
 
 target 'FocusInterestsTests' do
