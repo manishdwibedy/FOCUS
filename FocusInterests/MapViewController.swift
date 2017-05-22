@@ -78,7 +78,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //                marker.accessibilityLabel = "event_\(self.events.count)"
                 self.events.append(event)
                 
-                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "addUser")!, id: String(describing: self.events.count))
+                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "addUser")!, id: String(describing: self.events.count), type: "event")
                 self.clusterManager.add(item)
             }
             
@@ -112,30 +112,42 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView?{
-        let accessibilityLabel = marker.accessibilityLabel
+        let data = marker.userData as? MapCluster
         
-        let parts = accessibilityLabel?.components(separatedBy: "_")
-        if parts?[0] == "event"{
-            let index:Int! = Int(parts![1])
-            let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
-            let event = self.events[index]
-            infoWindow.name.text = event.title
-            infoWindow.address.text  = event.shortAddress
-            infoWindow.time.text = event.date?.components(separatedBy: ",")[1]
-            infoWindow.attendees.text = "No one joining"
-            return infoWindow
+        if let markerData = data{
+            if data?.type == "event"{
+                let index:Int! = Int(data!.id)
+                let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+                let event = self.events[index]
+                infoWindow.name.text = event.title
+                infoWindow.address.text  = event.shortAddress
+                infoWindow.time.text = event.date?.components(separatedBy: ",")[1]
+                infoWindow.attendees.text = "No one joining"
+                return infoWindow
+            }
+            else{
+                let index:Int! = Int(data!.id)
+                let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+                let place = self.places[index]
+                infoWindow.name.text = place.name
+                infoWindow.address.text  = place.address[0]
+                infoWindow.time.text = "\(place.rating) (\(place.reviewCount))"
+                
+                let categoryString = place.categories.map(){ $0.name }.joined(separator: ", ")
+                
+                infoWindow.attendees.text = categoryString
+                return infoWindow
+            }
         }
         else{
-            let index:Int! = Int(parts![1])
-            let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
-            let place = self.places[index % self.places.count]
-            infoWindow.name.text = place.name
-            infoWindow.address.text  = "\(place.address[0]), \(place.address[1])"
-            infoWindow.time.text = ""
-            infoWindow.attendees.text = "No one joining"
-            return infoWindow
+            let newCamera = GMSCameraPosition.camera(withTarget: marker.position,
+                                                     zoom: mapView.camera.zoom + 1)
+            let update = GMSCameraUpdate.setCamera(newCamera)
+            mapView.moveCamera(update)
+            
+            print("cluster click")
+            return nil
         }
-        
     }
     
     
@@ -242,29 +254,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         print("Error: \(error)")
     }
     
-    // MARK: - GMUClusterManagerDelegate
-    
-    func clusterManager(clusterManager: GMUClusterManager, didTapCluster cluster: GMUCluster) {
-        let newCamera = GMSCameraPosition.camera(withTarget: cluster.position,
-                                                 zoom: mapView.camera.zoom + 1)
-        let update = GMSCameraUpdate.setCamera(newCamera)
-        mapView.moveCamera(update)
-    }
-    
-    // MARK: - GMUMapViewDelegate
-    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
-        if let poiItem = marker.userData as? MapCluster {
-            NSLog("Did tap marker for cluster item \(poiItem.name)")
-        } else {
-            NSLog("Did tap a normal marker")
-        }
-        return false
-    }
-    
-    func renderer(_ renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
-        marker.icon = UIImage(named: "addUser")
-    }
-    
     func userProfileClicked() {
         let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UIViewController
         
@@ -329,12 +318,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if !self.places.contains(place){
                     
                     let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
-                    let marker = GMSMarker(position: position)
-                    marker.icon = UIImage(named: "place_icon")
-                    marker.title = place.name
-                    marker.map = self.mapView
-                    marker.accessibilityLabel = "place_\(initial + index)"
                     
+                    let item = MapCluster(position: position, name: place.name, icon: UIImage(named: "place_icon")!, id: String(self.places.count), type: "place")
+                    self.clusterManager.add(item)
                     self.places.append(place)
                     self.placeMapping[place.id] = place
                     self.getPlaceHours(id: place.id)
@@ -344,6 +330,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
                 }
             }
+            self.clusterManager.cluster()
         }
     }
     

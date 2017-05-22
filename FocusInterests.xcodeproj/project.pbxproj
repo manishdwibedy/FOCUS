@@ -18,7 +18,7 @@
 		5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */; };
 		5B59064E1EC7E60D00466AAC /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */; };
 		5B634C811ED1960000EBCC29 /* MapCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B634C801ED1960000EBCC29 /* MapCluster.swift */; };
-		5B634C831ED196BE00EBCC29 /* MyCustomRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B634C821ED196BE00EBCC29 /* MyCustomRenderer.swift */; };
+		5B634C831ED196BE00EBCC29 /* CustomClusterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B634C821ED196BE00EBCC29 /* CustomClusterRenderer.swift */; };
 		5B634C841ED19A6300EBCC29 /* GMUPoint.h in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9631ED1906800A82104 /* GMUPoint.h */; };
 		5B634C851ED19A6900EBCC29 /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9641ED1906800A82104 /* GMUPoint.m */; };
 		5B634C871ED2584F00EBCC29 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B634C861ED2584F00EBCC29 /* Share.swift */; };
@@ -197,7 +197,7 @@
 		5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		5B634C801ED1960000EBCC29 /* MapCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCluster.swift; sourceTree = "<group>"; };
-		5B634C821ED196BE00EBCC29 /* MyCustomRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomRenderer.swift; sourceTree = "<group>"; };
+		5B634C821ED196BE00EBCC29 /* CustomClusterRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomClusterRenderer.swift; sourceTree = "<group>"; };
 		5B634C861ED2584F00EBCC29 /* Share.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		5B6AF9341ED1906800A82104 /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
 		5B6AF9351ED1906800A82104 /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGridBasedClusterAlgorithm.h; sourceTree = "<group>"; };
@@ -776,7 +776,7 @@
 				D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */,
 				5BA37C761EBD63BE0091189E /* HomePageViewController.swift */,
 				D252205C1E5A3C9E00EC2014 /* MapViewController.swift */,
-				5B634C821ED196BE00EBCC29 /* MyCustomRenderer.swift */,
+				5B634C821ED196BE00EBCC29 /* CustomClusterRenderer.swift */,
 				D25220671E5A846100EC2014 /* NotificationsViewController.swift */,
 				D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */,
 				D2A173541E5E911500C7724B /* SignUpViewController.swift */,
@@ -1291,7 +1291,7 @@
 				5B6AFA741ED1906900A82104 /* GMUPolygon.m in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
 				5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */,
-				5B634C831ED196BE00EBCC29 /* MyCustomRenderer.swift in Sources */,
+				5B634C831ED196BE00EBCC29 /* CustomClusterRenderer.swift in Sources */,
 				5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				5B959FF51ECD48CB00094FE6 /* PlaceRating.swift in Sources */,

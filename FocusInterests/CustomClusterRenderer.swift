@@ -28,7 +28,7 @@ class CustomClusterRenderer: GMUDefaultClusterRenderer {
         marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         
         if clusterIcon == nil{
-            marker.icon = UIImage(named: "addUser")
+            marker.icon = getCustomUIImageItem(userData: userData)
         }
         marker.map = mapView
         if animated {
@@ -47,12 +47,5 @@ class CustomClusterRenderer: GMUDefaultClusterRenderer {
         }
         return UIImage()
     }
-    
-//    override func shouldRender(as cluster: GMUCluster, atZoom zoom: Float) -> Bool {
-//        print("Zoom Level is \(zoom) , and result is \(zoom<=14)")
-//        return zoom <= 14;
-//    }
-    
-    
 }
 
