@@ -152,26 +152,26 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        let data = marker.userData as? MapCluster
         
-        let accessibilityLabel = marker.accessibilityLabel
-        
-        
-        let parts = accessibilityLabel?.components(separatedBy: "_")
-        if parts?[0] == "event"{
-            let index:Int! = Int(parts![1])
-            let event = self.events[index]
-            let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
-            controller.event = event
-            self.present(controller, animated: true, completion: nil)
-        }
-        else{
-            let index:Int! = Int(parts![1])
-            let place = self.places[index % self.places.count]
-            let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
-            controller.place = place
-            self.present(controller, animated: true, completion: nil)
+        if let markerData = data{
+            if data?.type == "event"{
+                let index:Int! = Int(data!.id)
+                let event = self.events[index]
+                let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+                controller.event = event
+                self.present(controller, animated: true, completion: nil)
+                
+            }
+            else{
+                let index:Int! = Int(data!.id)
+                let place = self.places[index]
+                let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+                controller.place = place
+                self.present(controller, animated: true, completion: nil)
+            }
         }
     }
     

@@ -43,7 +43,13 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
             categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
         }
         streetAddress.text = place?.address[0]
-        cityStateLabel.text = place?.address[1]
+        if place?.address.count == 2{
+            cityStateLabel.text = place?.address[1]
+        }
+        else{
+            cityStateLabel.text = ""
+        }
+        
         phoneLabel.text = place?.phone
         
         if let open_hours = place?.hours{
