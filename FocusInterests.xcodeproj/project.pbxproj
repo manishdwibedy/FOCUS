@@ -10,6 +10,13 @@
 		04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04920F6C1EC277D4007D0B10 /* EventTextField.swift */; };
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
+		5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E841ED276970075B57A /* InterestsViewController.swift */; };
+		5B251E891ED276970075B57A /* InterestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E851ED276970075B57A /* InterestsViewController.xib */; };
+		5B251E8A1ED276970075B57A /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E861ED276970075B57A /* InviteFriendsViewController.swift */; };
+		5B251E8B1ED276970075B57A /* InviteFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E871ED276970075B57A /* InviteFriendsViewController.xib */; };
+		5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */; };
+		5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */; };
+		5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E901ED278A70075B57A /* UserProfileViewController.swift */; };
 		5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */; };
 		5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D51EA7285C007E8D99 /* Event.swift */; };
 		5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */; };
@@ -189,6 +196,13 @@
 		1D4CE272CED31DDB7E9DA974 /* Pods-FocusInterestsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsTests/Pods-FocusInterestsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterestsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DCECAEA41CAC4F1781A9ADD /* Pods-FocusInterests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.release.xcconfig"; sourceTree = "<group>"; };
+		5B251E841ED276970075B57A /* InterestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestsViewController.swift; sourceTree = "<group>"; };
+		5B251E851ED276970075B57A /* InterestsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestsViewController.xib; sourceTree = "<group>"; };
+		5B251E861ED276970075B57A /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
+		5B251E871ED276970075B57A /* InviteFriendsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsViewController.xib; sourceTree = "<group>"; };
+		5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestViewCell.swift; sourceTree = "<group>"; };
+		5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestViewCell.xib; sourceTree = "<group>"; };
+		5B251E901ED278A70075B57A /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		5B51C8D51EA7285C007E8D99 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
@@ -775,11 +789,16 @@
 			children = (
 				D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */,
 				5BA37C761EBD63BE0091189E /* HomePageViewController.swift */,
+				5B251E901ED278A70075B57A /* UserProfileViewController.swift */,
 				D252205C1E5A3C9E00EC2014 /* MapViewController.swift */,
 				5B634C821ED196BE00EBCC29 /* CustomClusterRenderer.swift */,
 				D25220671E5A846100EC2014 /* NotificationsViewController.swift */,
 				D28C899F1E5E862E009DB8C1 /* FirstLoginVC.swift */,
 				D2A173541E5E911500C7724B /* SignUpViewController.swift */,
+				5B251E841ED276970075B57A /* InterestsViewController.swift */,
+				5B251E851ED276970075B57A /* InterestsViewController.xib */,
+				5B251E861ED276970075B57A /* InviteFriendsViewController.swift */,
+				5B251E871ED276970075B57A /* InviteFriendsViewController.xib */,
 				04FD5D1F1EBBDF9B00D7FFB7 /* SignUpVCS */,
 				D21975441E61F20D00ED3345 /* BaseViewController.swift */,
 				D227AD2E1E6CBD5A000FB9DD /* NewLoginVC.swift */,
@@ -834,6 +853,8 @@
 				5B959FE21ECBA6C600094FE6 /* InviteUserView.swift */,
 				FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */,
 				FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */,
+				5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */,
+				5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1038,11 +1059,13 @@
 				D2ECAC591E7CD9F8006FFA1A /* UserPhotoCell.xib in Resources */,
 				D25370D31E885EE40071B115 /* FollowCell.xib in Resources */,
 				D2ECAC551E7A255B006FFA1A /* UserProfile1ViewController.xib in Resources */,
+				5B251E8B1ED276970075B57A /* InviteFriendsViewController.xib in Resources */,
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
 				5B959FD31ECAC6E000094FE6 /* PlaceDetails.storyboard in Resources */,
 				5B71D6FE1ED182D40093A3F5 /* EventDetails.storyboard in Resources */,
 				5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
+				5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */,
 				5BAB87A41EC961AB0064E5EC /* UserProfile.storyboard in Resources */,
@@ -1056,6 +1079,7 @@
 				5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */,
 				5B959FD81ECAD12500094FE6 /* map.gpx in Resources */,
 				5B959FE11ECBA62B00094FE6 /* InviteUserView.xib in Resources */,
+				5B251E891ED276970075B57A /* InterestsViewController.xib in Resources */,
 				D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */,
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
@@ -1259,6 +1283,7 @@
 				D2D0A3EC1E7F49ED00B43689 /* UserDescriptionCell.swift in Sources */,
 				D2ECAC581E7CD9F8006FFA1A /* UserPhotoCell.swift in Sources */,
 				D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */,
+				5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */,
 				5B6AFA641ED1906900A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */,
 				5B6AFA761ED1906900A82104 /* GQTPointQuadTree.m in Sources */,
@@ -1278,6 +1303,7 @@
 				FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */,
 				FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */,
 				D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */,
+				5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */,
 				D25370D21E885EE40071B115 /* FollowCell.swift in Sources */,
 				5B6AFA6B1ED1906900A82104 /* GMUGeoJSONParser.m in Sources */,
 				D2FDB69A1E89F73800D62DC2 /* SocialGroupViewController.swift in Sources */,
@@ -1301,6 +1327,7 @@
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
 				5B634C871ED2584F00EBCC29 /* Share.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
+				5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */,
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
@@ -1350,6 +1377,7 @@
 				5B959FED1ECD23D800094FE6 /* SuggestPlaceView.swift in Sources */,
 				5B6AFA691ED1906900A82104 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				5B6AFA6C1ED1906900A82104 /* GMUGeometryRenderer.m in Sources */,
+				5B251E8A1ED276970075B57A /* InviteFriendsViewController.swift in Sources */,
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
 				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */,
