@@ -58,5 +58,20 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         return cell
     }
     
+    func postOnTwitter(text: String){
+        if AuthApi.getTwitterToken() == nil{
+            do{
+                try Share.loginAndShareTwitter(withStatus: text)
+            }
+            catch{
+                
+            }
+            
+        }
+        else{
+            Share.postToTwitter(withStatus: text)
+        }
+    }
+    
 
 }

@@ -131,5 +131,10 @@ struct Constants {
         public static let event = FIRStorage.storage().reference().child("events")
         public static let messages = FIRStorage.storage().reference().child("messages")
     }
+    
+    struct Twitter{
+        public static let consumerKey = "kDcg3AljHuqwQkS7ZYvo6aqzz"
+        public static let consumerSecret = "SibT0zEI9tnoqwQddABKMzf6nel16oCoHDvti8fFWYKWufFHIp"
+    }
 }
 

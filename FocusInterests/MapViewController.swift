@@ -14,6 +14,7 @@ import MapKit
 import FirebaseDatabase
 import Alamofire
 import SwiftyJSON
+import Solar
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
@@ -50,17 +51,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         navigationView.delegate = self
         
         placesClient = GMSPlacesClient.shared()
-        
-        do {
-            // Set the map style by passing the URL of the local file.
-            if let styleURL = Bundle.main.url(forResource: "map_style", withExtension: "json") {
-                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-            } else {
-                NSLog("Unable to find style.json")
-            }
-        } catch {
-            NSLog("One or more of the map styles failed to load. \(error)")
-        }
         
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
@@ -199,6 +189,23 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
                                               zoom: 15)
+        
+        let current = changeTimeZone(of: Date(), from: TimeZone(abbreviation: "GMT")!, to: TimeZone.current)
+        
+        let solar = Solar(for: current, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        
+        if (solar?.isNighttime)!{
+            do {
+                // Set the map style by passing the URL of the local file.
+                if let styleURL = Bundle.main.url(forResource: "map_style", withExtension: "json") {
+                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
+            }
+        }
         self.currentLocation = location
         self.searchPlacesTab?.location = location
         print("got location")
