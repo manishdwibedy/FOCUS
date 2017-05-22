@@ -18,6 +18,7 @@ class SearchPlaceCell: UITableViewCell {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     
+    var placeID = String()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +27,36 @@ class SearchPlaceCell: UITableViewCell {
         followButtonOut.clipsToBounds = true
         inviteButtonOut.layer.cornerRadius = 6
         inviteButtonOut.clipsToBounds = true
+        
+       
+        
+ 
+
+    }
+    
+    func checkForFollow(id:String)
+    {
+        print(id)
+        Constants.DB.following_place.child(id).child("userIDList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                
+                self.followButtonOut.layer.borderColor = UIColor.white.cgColor
+                self.followButtonOut.layer.borderWidth = 1
+                self.followButtonOut.backgroundColor = UIColor.clear
+                self.followButtonOut.setTitle("Following", for: UIControlState.normal)
+                self.followButtonOut.isEnabled = false
+            }else
+            {
+                self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
+                self.followButtonOut.layer.borderWidth = 0
+                self.followButtonOut.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
+                self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
+                self.followButtonOut.isEnabled = true
+
+            }
+        })
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -35,6 +66,12 @@ class SearchPlaceCell: UITableViewCell {
     }
     
     @IBAction func followButton(_ sender: Any) {
+        Constants.DB.following_place.child(placeID).child("userIDList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+        self.followButtonOut.layer.borderColor = UIColor.white.cgColor
+        self.followButtonOut.layer.borderWidth = 1
+        self.followButtonOut.backgroundColor = UIColor.clear
+        self.followButtonOut.setTitle("Following", for: UIControlState.normal)
+        self.followButtonOut.isEnabled = false
     }
    
     @IBAction func inviteButton(_ sender: Any) {
