@@ -165,6 +165,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
                 controller.place = place
+                controller.currentLocation = self.currentLocation
                 self.present(controller, animated: true, completion: nil)
             }
         }
@@ -360,16 +361,5 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
         }
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "show_event_details"{
-            let destinationVC = segue.destination as! EventDetailViewController
-            destinationVC.event = sender as! Event
-        }
-        else if segue.identifier == ""{
-            let destinationVC = segue.destination as! PlaceViewController
-            destinationVC.place = sender as! Place
-        }
-        
     }
 }

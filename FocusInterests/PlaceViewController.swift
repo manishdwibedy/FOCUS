@@ -10,13 +10,21 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-protocol Comments {
+protocol CommentsDelegate {
     func gotComments(comments: [PlaceRating])
 }
+
+protocol SuggestPlacesDelegate {
+    func gotSuggestedPlaces(places: [Place])
+}
+
 class PlaceViewController: UIViewController {
-    var delegate: Comments?
+    var commentsDelegate: CommentsDelegate?
+    var suggestPlacesDelegate: SuggestPlacesDelegate?
+    
     var place: Place?
     var rating = [PlaceRating]()
+    var currentLocation: CLLocation?
     
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var pinView: UIView!
@@ -34,6 +42,7 @@ class PlaceViewController: UIViewController {
         ratingBackground.layer.cornerRadius = 5
         imageView.sd_setImage(with: URL(string: (place?.image_url)!), placeholderImage: nil)
         self.getLatestComments()
+        fetchSuggestedPlaces(token: AuthApi.getYelpToken()!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,6 +71,7 @@ class PlaceViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pinInfo"{
             let pin = segue.destination as! PinViewController
+            pin.placeVC = self
             pin.place = self.place
         }
         else if segue.identifier == "rating"{
@@ -97,7 +107,7 @@ class PlaceViewController: UIViewController {
                         let username = value["username"] as! String
                         placeComment.setUsername(username: username)
                         
-                        self.delegate?.gotComments(comments: self.rating)
+                        self.commentsDelegate?.gotComments(comments: self.rating)
                     })
                     
                     
@@ -111,6 +121,64 @@ class PlaceViewController: UIViewController {
             
             
         })
+    }
+    
+    func fetchSuggestedPlaces(token: String){
+        let url = "https://api.yelp.com/v3/businesses/search"
+        
+        let categories = self.place?.categories.map { $0.alias }.joined(separator: ",")
+
+        let parameters: [String: Any] = [
+            "latitude" : Double(self.currentLocation!.coordinate.latitude),
+            "longitude" : Double(self.currentLocation!.coordinate.longitude),
+            "categories": categories!,
+            "limit": 3
+        ]
+        
+        let headers: HTTPHeaders = [
+            "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+            "cache-contro": "no-cache"
+        ]
+    
+        Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
+            var suggestedPlaces = [Place]()
+            let json = JSON(data: response.data!)
+            
+            for (index, business) in json["businesses"].enumerated(){
+                let id = business.1["id"].stringValue
+                let name = business.1["name"].stringValue
+                let image_url = business.1["image_url"].stringValue
+                let isClosed = business.1["is_closed"].boolValue
+                let reviewCount = business.1["review_count"].intValue
+                let rating = business.1["rating"].floatValue
+                let latitude = business.1["coordinates"]["latitude"].doubleValue
+                let longitude = business.1["coordinates"]["longitude"].doubleValue
+                let price = business.1["price"].stringValue
+                let address_json = business.1["location"]["display_address"].arrayValue
+                let phone = business.1["display_phone"].stringValue
+                let distance = business.1["distance"].doubleValue
+                let categories_json = business.1["categories"].arrayValue
+                
+                var address = [String]()
+                for raw_address in address_json{
+                    address.append(raw_address.stringValue)
+                }
+                
+                var categories = [Category]()
+                for raw_category in categories_json as [JSON]{
+                    let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                    categories.append(category)
+                }
+                
+                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories)
+                
+                if !suggestedPlaces.contains(place){
+                    suggestedPlaces.append(place)
+                }
+            }
+            
+            self.suggestPlacesDelegate?.gotSuggestedPlaces(places: suggestedPlaces)
+        }
     }
     
     /*

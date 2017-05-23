@@ -8,26 +8,27 @@
 
 import UIKit
 
-class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
+class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, SuggestPlacesDelegate {
     var place: Place?
     
     @IBOutlet weak var categoriesStackView: UIStackView!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityStateLabel: UILabel!
     @IBOutlet weak var streetAddress: UILabel!
-    
     @IBOutlet weak var hoursStackView: UIStackView!
-    
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var suggestPlacesStackView: UIStackView!
+    
+    var placeVC: PlaceViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        placeVC?.suggestPlacesDelegate = self
+        
         // Do any additional setup after loading the view.
         for (index, category) in (self.place?.categories.enumerated())!{
             let textLabel = UILabel()
@@ -91,20 +92,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
             
             view.image.image = UIImage(named: "addUser")
         }
-        
-        let places = ["place1", "place2", "place3"]
-        
-        for (index, place) in places.enumerated(){
-            let view = suggestPlacesStackView.arrangedSubviews[index] as! SuggestPlaceView
-            view.name.text = place
-            view.name.textColor = .white
-            view.imageView.image = UIImage(named: "addUser")
-            view.isUserInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-            
-            view.addGestureRecognizer(tap)
-            
-        }
     }
 
     // function which is triggered when handleTap is called
@@ -137,7 +124,19 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func gotSuggestedPlaces(places: [Place]) {
+        for (index, place) in places.enumerated(){
+            let view = suggestPlacesStackView.arrangedSubviews[index] as! SuggestPlaceView
+            view.name.text = place.name
+            view.name.textColor = .white
+            view.imageView.sd_setImage(with: URL(string: place.image_url), placeholderImage: UIImage(named: "addUser"))
+            view.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+            
+            view.addGestureRecognizer(tap)
+            
+        }
+    }
     /*
     // MARK: - Navigation
 

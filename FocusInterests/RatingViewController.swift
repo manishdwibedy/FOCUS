@@ -10,7 +10,7 @@ import UIKit
 import Cosmos
 import FirebaseDatabase
 
-class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, Comments{
+class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, CommentsDelegate{
 
     @IBOutlet weak var rating: CosmosView!
     @IBOutlet weak var comment: UITextView!
@@ -26,7 +26,7 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        placeVC?.delegate = self
+        placeVC?.commentsDelegate = self
 
         // Do any additional setup after loading the view.
         rating.settings.fillMode = .half
