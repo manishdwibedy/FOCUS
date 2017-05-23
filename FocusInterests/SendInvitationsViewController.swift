@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Contacts
 import FirebaseStorage
 
 class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -17,7 +18,9 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     var event: Event?
     var image: Data?
     var selectedFriend = [Bool]()
-
+    let store = CNContactStore()
+    var contacts = [CNContact]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         formatNavBar()
@@ -25,15 +28,55 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
         
-        for _ in 0...3{
-            selectedFriend.append(false)
+        if CNContactStore.authorizationStatus(for: .contacts) == .authorized{
+            inviteFromContactsBttn.isEnabled = false
+            self.retrieveContactsWithStore(store: self.store)
         }
+        else{
+            
+        }
+        
         friendsTableView.tableFooterView = UIView()
     }
     
+    func setSelectedFriends(){
+        for _ in 0...contacts.count{
+            selectedFriend.append(false)
+        }
+    }
     
     @IBAction func inviteFromContacts(_ sender: UIButton) {
-        
+        if CNContactStore.authorizationStatus(for: .contacts) == .notDetermined {
+            
+            
+            self.store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
+                self.retrieveContactsWithStore(store: self.store)
+            }
+            
+        } else if CNContactStore.authorizationStatus(for: .contacts) == .authorized {
+            self.retrieveContactsWithStore(store: store)
+        }
+    }
+    
+    func retrieveContactsWithStore(store: CNContactStore) {
+        self.contacts.removeAll()
+        do {
+            
+            let contactStore = CNContactStore()
+            let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
+            let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
+            
+            try? contactStore.enumerateContacts(with: request1) { (contact, error) in
+                print("\(contact.givenName) \(contact.familyName)")
+                print(contact.phoneNumbers)
+                print(contact.imageData)
+                self.contacts.append(contact)
+            }
+            self.setSelectedFriends()
+            friendsTableView.reloadData()
+        } catch {
+            print(error)
+        }
     }
     
     @IBAction func createEvents(_ sender: UIButton) {
@@ -73,7 +116,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     // MARK: - Tableview Delegate Methods
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return contacts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -81,6 +124,12 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         cell.friendIconImageView.layer.cornerRadius = 50.0
         cell.friendIconImageView.clipsToBounds = true
+        let friend = self.contacts[indexPath.row]
+        
+        cell.friendLabel.text = "\(friend.givenName) \(friend.familyName)"
+        if let data = friend.imageData{
+            cell.friendIconImageView.image = UIImage(data: data)
+        }
         
         if selectedFriend[indexPath.row]{
             cell.selectedFriend.image = UIImage(named: "Interest_Filled")
