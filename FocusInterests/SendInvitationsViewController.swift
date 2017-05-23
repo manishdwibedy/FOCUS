@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var inviteFromContactsBttn: UIButton!
     @IBOutlet weak var createEventBttn: UIButton!
     @IBOutlet weak var friendsTableView: UITableView!
-    
+    var event: Event?
+    var image: Data?
     
 
     override func viewDidLoad() {
@@ -29,6 +31,25 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     @IBAction func createEvents(_ sender: UIButton) {
+        let id = self.event?.saveToDB(ref: Constants.DB.event)
+        
+        if let data = self.image{
+            let imageRef = Constants.storage.event.child("\(id!).jpg")
+            
+            // Create file metadata including the content type
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            let _ = imageRef.put(data, metadata: metadata) { (metadata, error) in
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    print("\(error!)")
+                    return
+                }
+                // Metadata contains file metadata such as size, content-type, and download URL.
+                let _ = metadata.downloadURL
+            }
+        }
     }
 
     private func formatNavBar(){
@@ -74,4 +95,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
 
+    @IBAction func backPressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

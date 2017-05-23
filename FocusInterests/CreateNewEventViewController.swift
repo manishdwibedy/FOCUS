@@ -90,7 +90,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToCreateEventIcon" {
+        if segue.identifier == "chooseIcon" {
             guard let validPlace = self.place else {
                 presentNotification(title: "Choose a location", message: "Please choose a location for this event.")
                 return
@@ -99,18 +99,22 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             let street = validPlace.addressComponents?[1].name
             let shortAddress = "\(locality!), \(street!)"
             
-            let validName = eventNameTextField.text ?? ""
-            //let validDescrip = descriptionTextField.text ?? ""
+            guard let name = eventNameTextField.text, !name.isEmpty else{
+                presentNotification(title: "Choose a name", message: "Please choose a name for this event.")
+                return
+            }
             
-            guard let validDate = eventDateTextField.text,
-                let validTime = eventTimeTextField.text else {
+            let validDescrip = eventDescriptionTextView.text ?? ""
+            
+            guard let validDate = eventDateTextField.text, !validDate.isEmpty,
+                let validTime = eventTimeTextField.text, !validTime.isEmpty else {
                     presentNotification(title: "Choose a date and time.", message: "Please choose a date and time for this event.")
                     return
                 }
             let dateString = "\(validDate), \(validTime)"
             guard let creator = AuthApi.getFirebaseUid() else { return }
             
-            self.event = Event(title: validName, description: "", fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
+            self.event = Event(title: name, description: "", fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
             
             let destination = segue.destination as! UINavigationController
             let nextVC = destination.viewControllers[0] as! EventIconViewController
@@ -265,6 +269,10 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             textView.layer.borderWidth = 1.0
             textView.layer.cornerRadius = 15.00
         }
+    }
+    
+    @IBAction func chooseIcon(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "chooseIcon", sender: nil)
     }
 }
 
