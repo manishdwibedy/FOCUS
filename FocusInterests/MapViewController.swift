@@ -71,14 +71,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id)
         
                 let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-//                let marker = GMSMarker(position: position)
-//                marker.icon = UIImage(named: "addUser")
-//                marker.title = event.title
-//                marker.map = self.mapView
-//                marker.accessibilityLabel = "event_\(self.events.count)"
                 self.events.append(event)
                 
-                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "addUser")!, id: String(describing: self.events.count), type: "event")
+                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "Event")!, id: String(describing: self.events.count), type: "event")
                 self.clusterManager.add(item)
             }
             
