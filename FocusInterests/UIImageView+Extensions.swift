@@ -13,9 +13,15 @@ extension UIImageView {
     
     func roundedImage() {
 
-        self.layer.cornerRadius = self.frame.height / 2
+        self.layer.cornerRadius = self.frame.width / 2
         self.clipsToBounds = true
     }
+    
+    func addBorder(width: CGFloat, color : UIColor){
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+    }
+    
     
     func download(urlString: String, completion: @escaping (UIImage?) -> Void) {
         if let url = URL(string: urlString) {

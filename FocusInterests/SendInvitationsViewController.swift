@@ -122,8 +122,9 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = friendsTableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! InviteFriendTableViewCell
         
-        cell.friendIconImageView.layer.cornerRadius = 50.0
-        cell.friendIconImageView.clipsToBounds = true
+        cell.friendIconImageView.roundedImage()
+        cell.friendIconImageView.addBorder(width: 2, color: UIColor.black)
+        
         let friend = self.contacts[indexPath.row]
         
         cell.friendLabel.text = "\(friend.givenName) \(friend.familyName)"
