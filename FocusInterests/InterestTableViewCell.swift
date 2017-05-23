@@ -11,15 +11,11 @@ import UIKit
 class InterestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var selectedInterestLabel: UILabel!
-    @IBOutlet weak var checkmarkBttn: UIButton!
+    
+    @IBOutlet weak var checkedInterest: UIImageView!
+   
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    
 }

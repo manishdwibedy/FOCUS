@@ -48,7 +48,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJ5-QH-SFh">
                                 <rect key="frame" x="163" y="234" width="50" height="20"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Check Box Selected" translatesAutoresizingMaskIntoConstraints="NO" id="MTy-nd-9XC">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Interest_Filled" translatesAutoresizingMaskIntoConstraints="NO" id="MTy-nd-9XC">
                                         <rect key="frame" x="0.0" y="3" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MTy-nd-9XC" secondAttribute="height" multiplier="1:1" id="2Kr-FM-Q5C"/>
@@ -531,6 +531,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Check Box Selected" width="37" height="37"/>
+        <image name="Interest_Filled" width="37" height="37"/>
     </resources>
 </document>

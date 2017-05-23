@@ -21,6 +21,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     let timePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
+    var checkInterests = [Bool]()
     
     
     @IBOutlet weak var canInviteFriendsLabel: UILabel!
@@ -55,7 +56,16 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         
         eventDescriptionTextView.delegate = self
         eventDescriptionTextView.text = "Description"
-        eventDescriptionTextView.textColor = .white        
+        eventDescriptionTextView.textColor = .white
+        
+        let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestTableView.bounds.size.width, height: self.interestTableView.bounds.size.height))
+        backgroundView.backgroundColor = UIColor.lightGray
+        interestTableView.backgroundView = backgroundView
+        
+        for _ in 0...5{
+            checkInterests.append(false)
+        }
+        
     }
     
     func setTextFieldDelegates(){
@@ -125,20 +135,20 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func showGuestListBttn(_ sender: UIButton) {
         if self.guestListBttn.isSelected == false {
             self.guestListBttn.isSelected = true
-            self.guestListBttn.setBackgroundImage(UIImage(named: "Check Box Selected"), for: .selected)
+            self.guestListBttn.setBackgroundImage(UIImage(named: "Interest_filled"), for: .selected)
         } else {
             self.guestListBttn.isSelected = false
-            self.guestListBttn.setBackgroundImage(UIImage(named: "Check Box Deselected"), for: .normal)
+            self.guestListBttn.setBackgroundImage(UIImage(named: "Interest_blank"), for: .normal)
         }
     }
     
     @IBAction func allowForInvitingFriendsBttn(_ sender: UIButton) {
         if self.showGuestFriendsBttn.isSelected == true {
             self.showGuestFriendsBttn.isSelected = false
-            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Check Box Deselected"), for: .normal)
+            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Interest_blank"), for: .normal)
         } else {
             self.showGuestFriendsBttn.isSelected = true
-            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Check Box Selected"), for: .normal)
+            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Interest_filled"), for: .normal)
         }
     }
     
@@ -205,18 +215,38 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return checkInterests.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
-        //cell.contentView.isUserInteractionEnabled = false
-        cell.bringSubview(toFront: cell.checkmarkBttn)
+        
+        if checkInterests[indexPath.row]{
+            cell.checkedInterest.image = UIImage(named: "Interest_Filled")
+        }
+        else{
+            cell.checkedInterest.image = UIImage(named: "Interest_blank")
+        }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        checkInterests[indexPath.row] = !checkInterests[indexPath.row]
+        if checkInterests[indexPath.row]{
+            cell.checkedInterest.image = UIImage(named: "Interest_Filled")
+        }
+        else{
+            cell.checkedInterest.image = UIImage(named: "Interest_blank")
+        }
+        interestTableView.reloadData()
     }
     
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
