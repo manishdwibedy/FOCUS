@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="951"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="907"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
                                         <rect key="frame" x="86" y="474" width="204" height="50"/>
@@ -262,17 +262,34 @@
                                     <constraint firstAttribute="trailing" secondItem="Pss-56-fhv" secondAttribute="trailing" constant="9" id="voO-rJ-lSL"/>
                                 </constraints>
                             </scrollView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEY-9z-tRP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="39s-ho-Js3"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem title="Create Event" id="bvf-PE-UOy">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="bgd-Jq-DTn">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="bottom" secondItem="bS8-UJ-PiN" secondAttribute="top" id="DQk-LV-BU6"/>
                             <constraint firstItem="DK1-Jl-3Sz" firstAttribute="centerX" secondItem="BxB-qZ-pRY" secondAttribute="centerX" id="S28-tR-ylC"/>
-                            <constraint firstItem="dIH-Pg-PIk" firstAttribute="top" secondItem="BxB-qZ-pRY" secondAttribute="top" id="YVT-KD-fYo"/>
+                            <constraint firstItem="dIH-Pg-PIk" firstAttribute="top" secondItem="BxB-qZ-pRY" secondAttribute="top" constant="44" id="YVT-KD-fYo"/>
+                            <constraint firstItem="fEY-9z-tRP" firstAttribute="top" secondItem="BxB-qZ-pRY" secondAttribute="top" id="ZT9-yD-GSj"/>
                             <constraint firstItem="Pss-56-fhv" firstAttribute="centerX" secondItem="BxB-qZ-pRY" secondAttribute="centerX" id="i3J-xe-5sO"/>
+                            <constraint firstAttribute="trailing" secondItem="fEY-9z-tRP" secondAttribute="trailing" id="i6p-7v-hXm"/>
                             <constraint firstItem="Z2l-7t-2Co" firstAttribute="width" secondItem="BxB-qZ-pRY" secondAttribute="width" multiplier="0.95" id="peu-eW-V40"/>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="leading" secondItem="BxB-qZ-pRY" secondAttribute="leading" id="srZ-sO-D3M"/>
                             <constraint firstItem="DK1-Jl-3Sz" firstAttribute="width" secondItem="BxB-qZ-pRY" secondAttribute="width" multiplier="0.95" id="uRS-yb-uAK"/>
                             <constraint firstAttribute="trailing" secondItem="dIH-Pg-PIk" secondAttribute="trailing" id="vwO-qm-9hL"/>
+                            <constraint firstItem="fEY-9z-tRP" firstAttribute="leading" secondItem="BxB-qZ-pRY" secondAttribute="leading" id="w7Y-Iv-fBJ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="EVENTS" id="5WR-MM-iAM">
