@@ -44,8 +44,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
-                                        <rect key="frame" x="86" y="474" width="204" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
+                                        <rect key="frame" x="86" y="368" width="204" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wNf-XX-soV">
                                                 <rect key="frame" x="0.0" y="0.0" width="132" height="25"/>
@@ -96,8 +96,8 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lM-E0-Roc">
-                                        <rect key="frame" x="169" y="841" width="37" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lM-E0-Roc">
+                                        <rect key="frame" x="169" y="735" width="37" height="36"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <state key="normal" title="Next">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -107,8 +107,8 @@
                                             <segue destination="gKL-1f-I2f" kind="show" identifier="goToCreateEventIcon" id="bWm-3k-nNS"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-56-fhv" userLabel="textField stackViews">
-                                        <rect key="frame" x="9" y="45" width="357" height="381"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-56-fhv" userLabel="textField stackViews">
+                                        <rect key="frame" x="9" y="45" width="357" height="361"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SUQ-U7-3Hm">
                                                 <rect key="frame" x="0.0" y="0.0" width="357" height="45"/>
@@ -174,27 +174,30 @@
                                                     <action selector="addEventTime:" destination="3TX-Ww-Aks" eventType="touchDown" id="hxk-fd-78V"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Description                                        " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BEB-uo-x4K">
-                                                <rect key="frame" x="0.0" y="291" width="357" height="90"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                            </textField>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jhD-9V-7l9">
+                                                <rect key="frame" x="0.0" y="291" width="357" height="70"/>
+                                                <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="uGk-kp-fEa"/>
+                                                </constraints>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="BEB-uo-x4K" firstAttribute="width" secondItem="VLy-M0-SHl" secondAttribute="width" id="L9M-fG-1Gs"/>
+                                            <constraint firstAttribute="trailing" secondItem="jhD-9V-7l9" secondAttribute="trailing" id="BCq-P1-mfb"/>
+                                            <constraint firstItem="jhD-9V-7l9" firstAttribute="leading" secondItem="Pss-56-fhv" secondAttribute="leading" id="RWK-aW-xRw"/>
                                             <constraint firstItem="VLy-M0-SHl" firstAttribute="width" secondItem="Vbf-5v-kMg" secondAttribute="width" id="UJF-p4-Cvb"/>
                                             <constraint firstItem="SUQ-U7-3Hm" firstAttribute="height" secondItem="Z2l-7t-2Co" secondAttribute="height" id="W4h-mv-VX6"/>
                                             <constraint firstItem="SUQ-U7-3Hm" firstAttribute="width" secondItem="Z2l-7t-2Co" secondAttribute="width" id="Zwv-up-9GT"/>
                                             <constraint firstItem="VLy-M0-SHl" firstAttribute="height" secondItem="Vbf-5v-kMg" secondAttribute="height" id="ajz-O6-UIi"/>
-                                            <constraint firstItem="BEB-uo-x4K" firstAttribute="height" secondItem="Vbf-5v-kMg" secondAttribute="height" multiplier="2" id="bsn-po-4wX"/>
                                             <constraint firstItem="Vbf-5v-kMg" firstAttribute="width" secondItem="Z2l-7t-2Co" secondAttribute="width" id="gas-Kj-iWY"/>
                                             <constraint firstItem="Vbf-5v-kMg" firstAttribute="height" secondItem="Z2l-7t-2Co" secondAttribute="height" id="qw1-ci-HdZ"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="im7-yd-Slf" userLabel="interestStackView">
-                                        <rect key="frame" x="10" y="540" width="356" height="285"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="im7-yd-Slf" userLabel="interestStackView">
+                                        <rect key="frame" x="10" y="434" width="356" height="285"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwe-FK-Q1t">
                                                 <rect key="frame" x="133" y="0.0" width="90.5" height="33"/>
@@ -303,8 +306,8 @@
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="canInviteFriendsLabel" destination="xe7-7I-sEu" id="CYD-4M-gEl"/>
-                        <outlet property="descriptionTextField" destination="BEB-uo-x4K" id="4xc-hq-8Bx"/>
                         <outlet property="eventDateTextField" destination="Vbf-5v-kMg" id="Mph-iO-bXH"/>
+                        <outlet property="eventDescriptionTextView" destination="jhD-9V-7l9" id="XNB-hN-u0X"/>
                         <outlet property="eventNameTextField" destination="SUQ-U7-3Hm" id="VKn-jV-rK2"/>
                         <outlet property="eventTimeTextField" destination="VLy-M0-SHl" id="WG2-3G-huo"/>
                         <outlet property="guestListBttn" destination="Gh9-Vi-Du2" id="2AE-Ud-0Y8"/>

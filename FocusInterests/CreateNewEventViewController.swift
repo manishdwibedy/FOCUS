@@ -34,7 +34,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var eventTimeTextField: UITextField!
-    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var eventDescriptionTextView: UITextView!
     @IBOutlet weak var interestTableView: UITableView!
     @IBOutlet weak var publicOrPrivateSwitch: UISwitch!
     
@@ -52,7 +52,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func setTextFieldDelegates(){
-        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, descriptionTextField].map{$0.delegate = self}
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField].map{$0.delegate = self}
     }
     
     @IBAction func PrivOrPubSwtchChanged(_ sender: UISwitch) {
@@ -77,7 +77,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             let shortAddress = "\(locality!), \(street!)"
             
             let validName = eventNameTextField.text ?? ""
-            let validDescrip = descriptionTextField.text ?? ""
+            //let validDescrip = descriptionTextField.text ?? ""
             
             guard let validDate = eventDateTextField.text,
                 let validTime = eventTimeTextField.text else {
@@ -87,7 +87,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             let dateString = "\(validDate), \(validTime)"
             guard let creator = AuthApi.getFirebaseUid() else { return }
             
-            self.event = Event(title: validName, description: validDescrip, fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
+            self.event = Event(title: validName, description: "", fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
             
             let destination = segue.destination as! UINavigationController
             let nextVC = destination.viewControllers[0] as! EventIconViewController
@@ -97,7 +97,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             }
             nextVC.event = validEvent
             self.event = nil
-            let _ = [eventNameTextField, eventDateTextField, descriptionTextField, eventTimeTextField, locationTextField].map{$0.text = nil}
+            let _ = [eventNameTextField, eventDateTextField, eventTimeTextField, locationTextField].map{$0.text = nil}
         }
     }
     
@@ -172,13 +172,14 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func formatTextFields(){
-        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, descriptionTextField].map{$0.setRoundedBorder()}
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventDescriptionTextView].map{
+            self.addRoundBorder(view: $0)
+        }
         
         eventDateTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Date")
         locationTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Location")
         eventTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Time")
         eventNameTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Event Name")
-        descriptionTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Description")
         
         eventDateTextField.setRightIcon(iconString: "Calendar-50")
         locationTextField.setRightIcon(iconString: "location")
@@ -211,6 +212,17 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     // MARK: - Navigation
     @IBAction func unwindFromCreateEventIcon(sender: UIStoryboardSegue){}
+    
+    func addRoundBorder(view: Any){
+        if let textField = view as? UITextField{
+            textField.setRoundedBorder()
+        }
+        else if let textView = view as? UITextView{
+            textView.layer.borderColor = UIColor.white.cgColor
+            textView.layer.borderWidth = 1.0
+            textView.layer.cornerRadius = 15.00
+        }
+    }
 }
 
 extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
