@@ -37,7 +37,10 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var eventDescriptionTextView: UITextView!
     @IBOutlet weak var interestTableView: UITableView!
     @IBOutlet weak var publicOrPrivateSwitch: UISwitch!
+    @IBOutlet weak var guestSettingsStackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var interestTopConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         interestTableView.dataSource = self
@@ -63,10 +66,16 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         if sender.isOn {
             self.privateLabel.textColor = UIColor.primaryGreen()
             self.publicLabel.textColor = UIColor.white
+            
+            guestSettingsStackView.isHidden = false
+            interestTopConstraint.constant = 16
+            
         } else /* the switch is set to public */ {
             self.privateLabel.textColor = UIColor.white
             self.publicLabel.textColor = UIColor.primaryGreen()
-            //to do - hide labels & bttns
+            
+            guestSettingsStackView.isHidden = true
+            interestTopConstraint.constant = -70
         }
     }
     

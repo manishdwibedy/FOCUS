@@ -44,8 +44,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
-                                        <rect key="frame" x="86" y="368" width="204" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
+                                        <rect key="frame" x="86" y="454" width="204" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wNf-XX-soV">
                                                 <rect key="frame" x="0.0" y="0.0" width="132" height="25"/>
@@ -96,8 +96,8 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lM-E0-Roc">
-                                        <rect key="frame" x="169" y="735" width="37" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lM-E0-Roc">
+                                        <rect key="frame" x="169" y="821" width="37" height="36"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <state key="normal" title="Next">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -107,7 +107,7 @@
                                             <segue destination="gKL-1f-I2f" kind="show" identifier="goToCreateEventIcon" id="bWm-3k-nNS"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-56-fhv" userLabel="textField stackViews">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-56-fhv" userLabel="textField stackViews">
                                         <rect key="frame" x="9" y="45" width="357" height="361"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SUQ-U7-3Hm">
@@ -196,8 +196,8 @@
                                             <constraint firstItem="Vbf-5v-kMg" firstAttribute="height" secondItem="Z2l-7t-2Co" secondAttribute="height" id="qw1-ci-HdZ"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="im7-yd-Slf" userLabel="interestStackView">
-                                        <rect key="frame" x="10" y="434" width="356" height="285"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="im7-yd-Slf" userLabel="interestStackView">
+                                        <rect key="frame" x="10" y="520" width="356" height="285"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwe-FK-Q1t">
                                                 <rect key="frame" x="133" y="0.0" width="90.5" height="33"/>
@@ -311,11 +311,14 @@
                         <outlet property="eventNameTextField" destination="SUQ-U7-3Hm" id="VKn-jV-rK2"/>
                         <outlet property="eventTimeTextField" destination="VLy-M0-SHl" id="WG2-3G-huo"/>
                         <outlet property="guestListBttn" destination="Gh9-Vi-Du2" id="2AE-Ud-0Y8"/>
+                        <outlet property="guestSettingsStackView" destination="jvR-p8-idX" id="RR2-Dt-eEq"/>
                         <outlet property="interestTableView" destination="4mD-gv-r8q" id="C0Y-M9-0VQ"/>
+                        <outlet property="interestTopConstraint" destination="sEg-zu-sgE" id="LVs-lX-Jmx"/>
                         <outlet property="locationTextField" destination="Z2l-7t-2Co" id="swX-ke-M5l"/>
                         <outlet property="privateLabel" destination="NHt-Do-t7D" id="hJw-RW-5Fy"/>
                         <outlet property="publicLabel" destination="LCG-dE-mWN" id="3o9-5Z-Tey"/>
                         <outlet property="publicOrPrivateSwitch" destination="EH1-4f-id0" id="cmZ-l0-HyP"/>
+                        <outlet property="scrollView" destination="dIH-Pg-PIk" id="6JT-2U-iNa"/>
                         <outlet property="showGuestFriendsBttn" destination="M06-h9-y9B" id="5Gw-Av-sIw"/>
                         <outlet property="showGuestListLabel" destination="Utt-as-Bjf" id="tTp-HJ-NAz"/>
                     </connections>
