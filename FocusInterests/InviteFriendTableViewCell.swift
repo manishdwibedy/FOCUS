@@ -11,7 +11,7 @@ import UIKit
 class InviteFriendTableViewCell: UITableViewCell {
     
     
-    @IBOutlet weak var selectFriendBttn: UIButton!
+    @IBOutlet weak var selectedFriend: UIImageView!
     @IBOutlet weak var friendLabel: UILabel!
     @IBOutlet weak var friendIconImageView: UIImageView!
     

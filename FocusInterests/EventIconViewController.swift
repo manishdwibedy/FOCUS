@@ -25,7 +25,6 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        formatNavBar()
     }
     
     private func chooseFromGallery(){
@@ -78,13 +77,6 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
     private func skipPickingImage(){
         let _ = self.event?.saveToDB(ref: Constants.DB.event)
         self.performSegue(withIdentifier: "event_invite", sender: nil)
-    }
-    
-    private func formatNavBar(){
-        self.navigationItem.title = "Choose Photo"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.createPin(sender:)))
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

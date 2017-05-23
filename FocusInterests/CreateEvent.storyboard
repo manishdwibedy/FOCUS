@@ -121,19 +121,19 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fjs-tb-4TG">
                                                 <rect key="frame" x="75" y="61" width="207.5" height="31"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCG-dE-mWN">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Public" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCG-dE-mWN">
                                                         <rect key="frame" x="0.0" y="0.0" width="59.5" height="31"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EH1-4f-id0">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EH1-4f-id0">
                                                         <rect key="frame" x="75.5" y="0.0" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="PrivOrPubSwtchChanged:" destination="3TX-Ww-Aks" eventType="valueChanged" id="Dsh-hi-aUe"/>
                                                         </connections>
                                                     </switch>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHt-Do-t7D">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHt-Do-t7D">
                                                         <rect key="frame" x="140.5" y="0.0" width="67" height="31"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
                                                         <color key="textColor" red="0.29744771122932434" green="0.84957212209701538" blue="0.39237204194068909" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -314,12 +314,12 @@
                         <outlet property="scrollView" destination="dIH-Pg-PIk" id="6JT-2U-iNa"/>
                         <outlet property="showGuestFriendsBttn" destination="M06-h9-y9B" id="5Gw-Av-sIw"/>
                         <outlet property="showGuestListLabel" destination="Utt-as-Bjf" id="tTp-HJ-NAz"/>
-                        <segue destination="gKL-1f-I2f" kind="show" identifier="chooseIcon" id="Mlq-zn-IJ2"/>
+                        <segue destination="eqH-re-POU" kind="show" identifier="chooseIcon" id="eLh-9t-fEY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTE-OT-ThV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-162.40000000000001" y="116.94152923538232"/>
+            <point key="canvasLocation" x="641" y="264"/>
         </scene>
         <!--Send Invites-->
         <scene sceneID="Rv5-r4-cOe">
@@ -330,19 +330,11 @@
                         <viewControllerLayoutGuide type="bottom" id="x2N-eM-M3F"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bOU-eS-8QM">
-                        <rect key="frame" x="0.0" y="64" width="375" height="936"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Wi-z1-U0g">
-                                <rect key="frame" x="0.0" y="848" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <barButtonItem image="SKIP" id="IiK-fD-ZZL"/>
-                                    <barButtonItem image="CAMERA" id="gHC-lQ-pXA"/>
-                                </items>
-                            </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xYK-Z5-9fw">
-                                <rect key="frame" x="12" y="56" width="352" height="421"/>
+                                <rect key="frame" x="12" y="76" width="352" height="450"/>
                                 <color key="backgroundColor" red="0.60570269823074341" green="0.6423715353012085" blue="0.68222624063491821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="friendCell" rowHeight="80" id="BWL-74-tbW" customClass="InviteFriendTableViewCell" customModule="FocusInterests" customModuleProvider="target">
@@ -364,21 +356,21 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8M-UM-02H">
-                                                    <rect key="frame" x="301" y="21" width="43" height="36"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Interest_blank" translatesAutoresizingMaskIntoConstraints="NO" id="Ayh-dW-fTy">
+                                                    <rect key="frame" x="312" y="30" width="20" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Y8M-UM-02H" secondAttribute="height" multiplier="43:36" id="hTK-w5-QOi"/>
+                                                        <constraint firstAttribute="height" constant="20" id="Xcm-5X-ek5"/>
+                                                        <constraint firstAttribute="width" constant="20" id="xbK-WX-Hp5"/>
                                                     </constraints>
-                                                    <state key="normal" image="Interest_blank"/>
-                                                </button>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="nHb-9I-exV" firstAttribute="leading" secondItem="xgp-qb-Tqu" secondAttribute="trailing" constant="8" id="5rC-5G-E1A"/>
-                                                <constraint firstItem="Y8M-UM-02H" firstAttribute="centerY" secondItem="r0u-vn-4dA" secondAttribute="centerY" id="9S1-VJ-YwT"/>
                                                 <constraint firstItem="xgp-qb-Tqu" firstAttribute="leading" secondItem="r0u-vn-4dA" secondAttribute="leadingMargin" constant="14" id="And-IN-3zW"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Y8M-UM-02H" secondAttribute="trailing" constant="0.5" id="BF5-oe-J2D"/>
                                                 <constraint firstItem="nHb-9I-exV" firstAttribute="centerY" secondItem="xgp-qb-Tqu" secondAttribute="centerY" id="Lyn-rv-AbN"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ayh-dW-fTy" secondAttribute="trailing" constant="20" id="Lyr-v9-hXq"/>
+                                                <constraint firstItem="Ayh-dW-fTy" firstAttribute="centerY" secondItem="r0u-vn-4dA" secondAttribute="centerY" id="RKB-Ua-S1y"/>
                                                 <constraint firstItem="xgp-qb-Tqu" firstAttribute="height" secondItem="r0u-vn-4dA" secondAttribute="height" multiplier="0.85" id="YKh-HW-kfH"/>
                                                 <constraint firstItem="xgp-qb-Tqu" firstAttribute="centerY" secondItem="r0u-vn-4dA" secondAttribute="centerY" id="yYV-FV-K3P"/>
                                             </constraints>
@@ -387,19 +379,19 @@
                                         <connections>
                                             <outlet property="friendIconImageView" destination="xgp-qb-Tqu" id="iCt-cO-OSO"/>
                                             <outlet property="friendLabel" destination="nHb-9I-exV" id="AsQ-1Q-5yw"/>
-                                            <outlet property="selectFriendBttn" destination="Y8M-UM-02H" id="HH5-UI-2ve"/>
+                                            <outlet property="selectedFriend" destination="Ayh-dW-fTy" id="Y1f-cI-MWz"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="search" translatesAutoresizingMaskIntoConstraints="NO" id="mgJ-uV-SCX">
-                                <rect key="frame" x="12" y="4" width="352" height="44"/>
+                                <rect key="frame" x="12" y="24" width="352" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="barTintColor" red="0.27617677678124486" green="0.55892013355429615" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOW-h4-9D4">
-                                <rect key="frame" x="12" y="495" width="352" height="36"/>
+                                <rect key="frame" x="12" y="544" width="352" height="36"/>
                                 <color key="backgroundColor" red="0.9999127984046936" green="1" blue="0.99988144636154175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                 <state key="normal" title="Invite from contacts">
@@ -410,7 +402,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="cH0-eX-avl">
-                                <rect key="frame" x="21" y="547" width="335" height="80"/>
+                                <rect key="frame" x="21" y="596" width="335" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkf-H4-8mB">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="28"/>
@@ -473,7 +465,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1J-5a-eAR">
-                                <rect key="frame" x="12" y="643" width="352" height="34"/>
+                                <rect key="frame" x="12" y="692" width="352" height="34"/>
                                 <color key="backgroundColor" red="0.48284244537353516" green="0.7880750298500061" blue="0.004606305155903101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                 <state key="normal" title="Create Event">
@@ -511,7 +503,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Back" id="432-B6-aAk">
                             <connections>
                                 <action selector="backPressed:" destination="xxR-Li-4ZG" id="OUA-1l-4Ig"/>
-                                <segue destination="4Fn-F7-KCZ" kind="unwind" unwindAction="unwindFromSendInvitesWithSender:" id="wNM-Gw-reQ"/>
+                                <segue destination="eqH-re-POU" kind="show" id="xLC-aX-MY4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -523,11 +515,10 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajl-2Z-7Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="4Fn-F7-KCZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2357.5999999999999" y="116.94152923538232"/>
         </scene>
-        <!--Choose Photo-->
+        <!--Event Icon View Controller-->
         <scene sceneID="CBP-hS-V5B">
             <objects>
                 <viewController id="eqH-re-POU" customClass="EventIconViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -536,11 +527,40 @@
                         <viewControllerLayoutGuide type="bottom" id="eYW-PJ-Iy8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y9s-5u-ROX">
-                        <rect key="frame" x="0.0" y="64" width="375" height="936"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7SC-b0-CUZ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="u6y-y9-eXZ"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Choose Photo" id="CrN-gp-l0g">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="eI6-SM-B8p">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <segue destination="3TX-Ww-Aks" kind="show" id="2ap-a4-F96"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Next" id="zn9-gd-rbk">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <segue destination="xxR-Li-4ZG" kind="show" id="amW-Q6-Hfg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-WG-8rv">
+                                <rect key="frame" x="0.0" y="64" width="375" height="843"/>
+                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXV-Yc-qSe">
-                                <rect key="frame" x="0.0" y="848" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="907" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="Camera" id="5Ww-Fo-APP">
                                         <connections>
@@ -561,69 +581,39 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-WG-8rv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="848"/>
-                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.21931624412536621" green="0.28463909029960632" blue="0.36367475986480713" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="NBd-WG-8rv" firstAttribute="leading" secondItem="Y9s-5u-ROX" secondAttribute="leading" id="6GD-tK-TKa"/>
                             <constraint firstItem="tXV-Yc-qSe" firstAttribute="top" secondItem="NBd-WG-8rv" secondAttribute="bottom" id="9NU-N4-tJ2"/>
                             <constraint firstAttribute="trailing" secondItem="tXV-Yc-qSe" secondAttribute="trailing" id="E5N-cU-mCq"/>
                             <constraint firstItem="eYW-PJ-Iy8" firstAttribute="top" secondItem="tXV-Yc-qSe" secondAttribute="bottom" id="Gcg-XB-s7o"/>
+                            <constraint firstItem="7SC-b0-CUZ" firstAttribute="top" secondItem="Oej-a1-N8D" secondAttribute="bottom" id="N7A-IB-TPL"/>
                             <constraint firstAttribute="trailing" secondItem="NBd-WG-8rv" secondAttribute="trailing" id="R9z-qs-OFd"/>
+                            <constraint firstAttribute="trailing" secondItem="7SC-b0-CUZ" secondAttribute="trailing" id="RjQ-vO-GXE"/>
                             <constraint firstItem="tXV-Yc-qSe" firstAttribute="leading" secondItem="Y9s-5u-ROX" secondAttribute="leading" id="eTP-bh-9P3"/>
-                            <constraint firstItem="NBd-WG-8rv" firstAttribute="top" secondItem="Oej-a1-N8D" secondAttribute="bottom" id="vSa-x6-bXA"/>
+                            <constraint firstItem="7SC-b0-CUZ" firstAttribute="leading" secondItem="Y9s-5u-ROX" secondAttribute="leading" id="m8Z-Cg-7cx"/>
+                            <constraint firstItem="NBd-WG-8rv" firstAttribute="top" secondItem="Oej-a1-N8D" secondAttribute="bottom" constant="44" id="y9f-tH-KAC"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Choose Photo" id="v8d-2Y-X28">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="lrv-bG-cZc">
-                            <connections>
-                                <segue destination="g7R-jE-ZyN" kind="unwind" unwindAction="unwindFromCreateEventIconWithSender:" id="k9h-OC-LB6"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="eventIcon" destination="NBd-WG-8rv" id="aqa-7x-oBC"/>
                         <segue destination="xxR-Li-4ZG" kind="show" identifier="event_invite" id="Ich-4n-xap"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4aQ-k2-RNC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="g7R-jE-ZyN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1492" y="115.14242878560721"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="vXT-MV-4RX">
-            <objects>
-                <navigationController storyboardIdentifier="ChooseIconNav" automaticallyAdjustsScrollViewInsets="NO" id="gKL-1f-I2f" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="hrA-di-1iu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.076368845999240875" green="0.1586151123046875" blue="0.25454530119895935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eqH-re-POU" kind="relationship" relationship="rootViewController" id="ulN-US-mKe"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bqs-1G-MXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="660" y="192"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="CAMERA" width="56" height="11"/>
         <image name="Interest_blank" width="37" height="36"/>
-        <image name="SKIP" width="30" height="11"/>
         <image name="Twitter_Logo_White_On_Image" width="250" height="204"/>
         <image name="backgroundGradient" width="374" height="667"/>
         <image name="whiteFBIcon" width="128" height="128"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="xLC-aX-MY4"/>
+        <segue reference="amW-Q6-Hfg"/>
+    </inferredMetricsTieBreakers>
 </document>

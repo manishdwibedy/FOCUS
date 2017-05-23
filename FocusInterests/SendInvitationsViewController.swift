@@ -16,7 +16,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var friendsTableView: UITableView!
     var event: Event?
     var image: Data?
-    
+    var selectedFriend = [Bool]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,10 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         formatSubViews()
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
+        
+        for _ in 0...3{
+            selectedFriend.append(false)
+        }
     }
     
     
@@ -76,7 +80,28 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         cell.friendIconImageView.layer.cornerRadius = 50.0
         cell.friendIconImageView.clipsToBounds = true
         
+        if selectedFriend[indexPath.row]{
+            cell.selectedFriend.image = UIImage(named: "Interest_Filled")
+        }
+        else{
+            cell.selectedFriend.image = UIImage(named: "Interest_blank")
+        }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = friendsTableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! InviteFriendTableViewCell
+        
+        self.selectedFriend[indexPath.row] = !self.selectedFriend[indexPath.row]
+        
+        if selectedFriend[indexPath.row]{
+            cell.selectedFriend.image = UIImage(named: "Interest_Filled")
+        }
+        else{
+            cell.selectedFriend.image = UIImage(named: "Interest_blank")
+        }
+        tableView.reloadData()
     }
     
     func postOnTwitter(text: String){
@@ -96,6 +121,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     
 
     @IBAction func backPressed(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+
     }
 }

@@ -22,7 +22,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
     var checkInterests = [Bool]()
-    
+    let validatedFields = false
     
     @IBOutlet weak var canInviteFriendsLabel: UILabel!
     @IBOutlet weak var showGuestListLabel: UILabel!
@@ -40,8 +40,8 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var publicOrPrivateSwitch: UISwitch!
     @IBOutlet weak var guestSettingsStackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var interestTopConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         interestTableView.dataSource = self
@@ -90,7 +90,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "chooseIcon" {
+        if segue.identifier == "chooseIcon" && validatedFields {
             guard let validPlace = self.place else {
                 presentNotification(title: "Choose a location", message: "Please choose a location for this event.")
                 return
