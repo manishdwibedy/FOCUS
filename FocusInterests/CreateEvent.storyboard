@@ -121,19 +121,19 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fjs-tb-4TG">
                                                 <rect key="frame" x="75" y="61" width="207.5" height="31"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Public" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCG-dE-mWN">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCG-dE-mWN">
                                                         <rect key="frame" x="0.0" y="0.0" width="59.5" height="31"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EH1-4f-id0">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EH1-4f-id0">
                                                         <rect key="frame" x="75.5" y="0.0" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="PrivOrPubSwtchChanged:" destination="3TX-Ww-Aks" eventType="valueChanged" id="Dsh-hi-aUe"/>
                                                         </connections>
                                                     </switch>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHt-Do-t7D">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHt-Do-t7D">
                                                         <rect key="frame" x="140.5" y="0.0" width="67" height="31"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
                                                         <color key="textColor" red="0.29744771122932434" green="0.84957212209701538" blue="0.39237204194068909" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -276,7 +276,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.086274509799999996" green="0.1647058824" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="top" secondItem="r8e-iM-PkH" secondAttribute="bottom" constant="44" id="A9f-1G-6QL"/>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="bottom" secondItem="bS8-UJ-PiN" secondAttribute="top" id="DQk-LV-BU6"/>
@@ -333,8 +333,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpU-5M-zQz">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Psu-K6-VKd"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Send Invites" id="bud-7Q-lA8">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Rgt-k2-Cuc">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <segue destination="eqH-re-POU" kind="show" id="pdH-Ex-mw2"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="search" translatesAutoresizingMaskIntoConstraints="NO" id="mgJ-uV-SCX">
+                                <rect key="frame" x="12" y="64" width="352" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" red="0.27617677678124486" green="0.55892013355429615" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xYK-Z5-9fw">
-                                <rect key="frame" x="12" y="76" width="352" height="450"/>
+                                <rect key="frame" x="12" y="116" width="352" height="450"/>
                                 <color key="backgroundColor" red="0.60570269823074341" green="0.6423715353012085" blue="0.68222624063491821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="friendCell" rowHeight="80" id="BWL-74-tbW" customClass="InviteFriendTableViewCell" customModule="FocusInterests" customModuleProvider="target">
@@ -384,14 +410,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="search" translatesAutoresizingMaskIntoConstraints="NO" id="mgJ-uV-SCX">
-                                <rect key="frame" x="12" y="24" width="352" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="barTintColor" red="0.27617677678124486" green="0.55892013355429615" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOW-h4-9D4">
-                                <rect key="frame" x="12" y="544" width="352" height="36"/>
+                                <rect key="frame" x="12" y="584" width="352" height="36"/>
                                 <color key="backgroundColor" red="0.9999127984046936" green="1" blue="0.99988144636154175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                 <state key="normal" title="Invite from contacts">
@@ -402,7 +422,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="cH0-eX-avl">
-                                <rect key="frame" x="21" y="596" width="335" height="80"/>
+                                <rect key="frame" x="21" y="636" width="335" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkf-H4-8mB">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="28"/>
@@ -465,7 +485,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1J-5a-eAR">
-                                <rect key="frame" x="12" y="692" width="352" height="34"/>
+                                <rect key="frame" x="12" y="732" width="352" height="34"/>
                                 <color key="backgroundColor" red="0.48284244537353516" green="0.7880750298500061" blue="0.004606305155903101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                 <state key="normal" title="Create Event">
@@ -478,7 +498,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.38039215686274508" green="0.45098039215686275" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mgJ-uV-SCX" firstAttribute="top" secondItem="7iv-yV-Zt5" secondAttribute="bottom" constant="4" id="4YY-HN-z8I"/>
+                            <constraint firstAttribute="trailing" secondItem="kpU-5M-zQz" secondAttribute="trailing" id="47B-7e-ues"/>
                             <constraint firstItem="xYK-Z5-9fw" firstAttribute="height" secondItem="bOU-eS-8QM" secondAttribute="height" multiplier="0.45" id="6aF-uw-00P"/>
                             <constraint firstItem="mgJ-uV-SCX" firstAttribute="centerX" secondItem="bOU-eS-8QM" secondAttribute="centerX" id="8US-F4-yos"/>
                             <constraint firstItem="SOW-h4-9D4" firstAttribute="width" secondItem="xYK-Z5-9fw" secondAttribute="width" id="8vd-2G-U2v"/>
@@ -495,19 +515,13 @@
                             <constraint firstItem="xYK-Z5-9fw" firstAttribute="width" secondItem="bOU-eS-8QM" secondAttribute="width" multiplier="0.94" id="e4r-jG-Yff"/>
                             <constraint firstItem="SOW-h4-9D4" firstAttribute="trailing" secondItem="xYK-Z5-9fw" secondAttribute="trailing" id="eQr-jV-TGl"/>
                             <constraint firstItem="cH0-eX-avl" firstAttribute="centerX" secondItem="SOW-h4-9D4" secondAttribute="centerX" id="gOo-78-QlD"/>
+                            <constraint firstItem="kpU-5M-zQz" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leading" id="gpZ-Cs-7QY"/>
+                            <constraint firstItem="mgJ-uV-SCX" firstAttribute="top" secondItem="kpU-5M-zQz" secondAttribute="bottom" id="qj2-SX-Hhh"/>
+                            <constraint firstItem="kpU-5M-zQz" firstAttribute="top" secondItem="7iv-yV-Zt5" secondAttribute="bottom" id="uL5-td-br9"/>
                             <constraint firstItem="e1J-5a-eAR" firstAttribute="top" secondItem="cH0-eX-avl" secondAttribute="bottom" constant="16" id="uQ0-Bd-zGj"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Send Invites" id="eIH-gZ-6B7">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="432-B6-aAk">
-                            <connections>
-                                <action selector="backPressed:" destination="xxR-Li-4ZG" id="OUA-1l-4Ig"/>
-                                <segue destination="eqH-re-POU" kind="show" id="xLC-aX-MY4"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="createEventBttn" destination="e1J-5a-eAR" id="2FW-GH-NLO"/>
                         <outlet property="friendsTableView" destination="xYK-Z5-9fw" id="8UA-V4-9uP"/>
@@ -582,6 +596,7 @@
                                 </items>
                             </toolbar>
                         </subviews>
+                        <color key="backgroundColor" red="0.086274509799999996" green="0.1647058824" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="NBd-WG-8rv" firstAttribute="leading" secondItem="Y9s-5u-ROX" secondAttribute="leading" id="6GD-tK-TKa"/>
                             <constraint firstItem="tXV-Yc-qSe" firstAttribute="top" secondItem="NBd-WG-8rv" secondAttribute="bottom" id="9NU-N4-tJ2"/>
@@ -613,7 +628,7 @@
         <image name="whiteFBIcon" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xLC-aX-MY4"/>
+        <segue reference="eLh-9t-fEY"/>
         <segue reference="amW-Q6-Hfg"/>
     </inferredMetricsTieBreakers>
 </document>

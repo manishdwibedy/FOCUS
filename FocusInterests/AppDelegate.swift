@@ -45,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         
         Fabric.with([Twitter.self])
         
+        UIApplication.shared.statusBarStyle = .default
+
+        
         checkForLogin()
         
         return true
