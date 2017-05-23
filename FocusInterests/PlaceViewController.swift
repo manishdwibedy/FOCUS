@@ -23,13 +23,15 @@ class PlaceViewController: UIViewController {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var ratingBackground: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         navigationBar.topItem?.title = place?.name
         ratingLabel.text = "\(place!.rating)"
-        
+        ratingBackground.layer.cornerRadius = 5
         imageView.sd_setImage(with: URL(string: (place?.image_url)!), placeholderImage: nil)
         self.getLatestComments()
     }

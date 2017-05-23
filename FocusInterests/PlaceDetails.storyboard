@@ -46,29 +46,29 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJ5-QH-SFh">
-                                <rect key="frame" x="163" y="234" width="50" height="20"/>
+                                <rect key="frame" x="153" y="224" width="70" height="30"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Interest_Filled" translatesAutoresizingMaskIntoConstraints="NO" id="MTy-nd-9XC">
-                                        <rect key="frame" x="0.0" y="3" width="15" height="15"/>
+                                        <rect key="frame" x="5" y="8" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MTy-nd-9XC" secondAttribute="height" multiplier="1:1" id="2Kr-FM-Q5C"/>
                                             <constraint firstAttribute="width" constant="15" id="gpo-Wz-elc"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqV-pM-Mg8">
-                                        <rect key="frame" x="21" y="-3" width="29" height="27"/>
+                                        <rect key="frame" x="36" y="2" width="29" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="nqV-pM-Mg8" firstAttribute="centerY" secondItem="OJ5-QH-SFh" secondAttribute="centerY" id="4iQ-Un-GaT"/>
-                                    <constraint firstAttribute="width" constant="50" id="I98-gu-p51"/>
-                                    <constraint firstAttribute="height" constant="20" id="bAq-2a-Y3A"/>
-                                    <constraint firstAttribute="trailing" secondItem="nqV-pM-Mg8" secondAttribute="trailing" id="bD8-8g-Nu5"/>
-                                    <constraint firstItem="MTy-nd-9XC" firstAttribute="leading" secondItem="OJ5-QH-SFh" secondAttribute="leading" id="odw-K0-IHP"/>
+                                    <constraint firstAttribute="width" constant="70" id="I98-gu-p51"/>
+                                    <constraint firstAttribute="height" constant="30" id="bAq-2a-Y3A"/>
+                                    <constraint firstAttribute="trailing" secondItem="nqV-pM-Mg8" secondAttribute="trailing" constant="5" id="bD8-8g-Nu5"/>
+                                    <constraint firstItem="MTy-nd-9XC" firstAttribute="leading" secondItem="OJ5-QH-SFh" secondAttribute="leading" constant="5" id="odw-K0-IHP"/>
                                     <constraint firstItem="MTy-nd-9XC" firstAttribute="centerY" secondItem="OJ5-QH-SFh" secondAttribute="centerY" id="qkq-w2-8YO"/>
                                 </constraints>
                             </view>
@@ -123,6 +123,7 @@
                         <outlet property="imageView" destination="aTU-Jh-k6R" id="9kB-f2-xdo"/>
                         <outlet property="navigationBar" destination="ns3-qv-thK" id="SVc-bE-Al6"/>
                         <outlet property="pinView" destination="HKb-au-v47" id="dPg-RG-D2v"/>
+                        <outlet property="ratingBackground" destination="OJ5-QH-SFh" id="84M-8J-ecF"/>
                         <outlet property="ratingLabel" destination="nqV-pM-Mg8" id="JHs-RX-fEs"/>
                         <outlet property="ratingView" destination="bz3-43-V4a" id="dUY-ln-jq5"/>
                     </connections>
@@ -155,7 +156,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="35i-c3-WJX">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="35i-c3-WJX">
                                                 <rect key="frame" x="0.0" y="25" width="355" height="56"/>
                                             </stackView>
                                         </subviews>
