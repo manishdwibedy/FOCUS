@@ -205,6 +205,10 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         return cell
     }
     
+    @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Navigation
     @IBAction func unwindFromCreateEventIcon(sender: UIStoryboardSegue){}
 }

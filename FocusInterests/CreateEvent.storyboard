@@ -24,8 +24,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEY-9z-tRP">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="39s-ho-Js3"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem title="Create Event" id="bvf-PE-UOy">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="bgd-Jq-DTn">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backButtonPressed:" destination="3TX-Ww-Aks" id="ShG-tn-Y2W"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
-                                <rect key="frame" x="0.0" y="44" width="375" height="907"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
                                         <rect key="frame" x="86" y="474" width="204" height="50"/>
@@ -262,27 +279,13 @@
                                     <constraint firstAttribute="trailing" secondItem="Pss-56-fhv" secondAttribute="trailing" constant="9" id="voO-rJ-lSL"/>
                                 </constraints>
                             </scrollView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEY-9z-tRP">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="39s-ho-Js3"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <items>
-                                    <navigationItem title="Create Event" id="bvf-PE-UOy">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="bgd-Jq-DTn">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dIH-Pg-PIk" firstAttribute="top" secondItem="r8e-iM-PkH" secondAttribute="bottom" constant="44" id="A9f-1G-6QL"/>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="bottom" secondItem="bS8-UJ-PiN" secondAttribute="top" id="DQk-LV-BU6"/>
                             <constraint firstItem="DK1-Jl-3Sz" firstAttribute="centerX" secondItem="BxB-qZ-pRY" secondAttribute="centerX" id="S28-tR-ylC"/>
-                            <constraint firstItem="dIH-Pg-PIk" firstAttribute="top" secondItem="BxB-qZ-pRY" secondAttribute="top" constant="44" id="YVT-KD-fYo"/>
-                            <constraint firstItem="fEY-9z-tRP" firstAttribute="top" secondItem="BxB-qZ-pRY" secondAttribute="top" id="ZT9-yD-GSj"/>
+                            <constraint firstItem="fEY-9z-tRP" firstAttribute="top" secondItem="BxB-qZ-pRY" secondAttribute="top" constant="20" id="ZT9-yD-GSj"/>
                             <constraint firstItem="Pss-56-fhv" firstAttribute="centerX" secondItem="BxB-qZ-pRY" secondAttribute="centerX" id="i3J-xe-5sO"/>
                             <constraint firstAttribute="trailing" secondItem="fEY-9z-tRP" secondAttribute="trailing" id="i6p-7v-hXm"/>
                             <constraint firstItem="Z2l-7t-2Co" firstAttribute="width" secondItem="BxB-qZ-pRY" secondAttribute="width" multiplier="0.95" id="peu-eW-V40"/>
