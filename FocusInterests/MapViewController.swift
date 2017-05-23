@@ -221,7 +221,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.currentLocation = location
         self.searchPlacesTab?.location = location
         print("got location")
-        self.fetchPlaces(token: AuthApi.getYelpToken()!)
+        if let token = AuthApi.getYelpToken(){
+            self.fetchPlaces(token: token)
+        }
+        else{
+            getYelpToken(completion: {(token) in
+                self.fetchPlaces(token: token)
+            })
+        }
+        
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
