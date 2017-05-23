@@ -28,10 +28,12 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         for _ in 0...3{
             selectedFriend.append(false)
         }
+        friendsTableView.tableFooterView = UIView()
     }
     
     
     @IBAction func inviteFromContacts(_ sender: UIButton) {
+        
     }
     
     @IBAction func createEvents(_ sender: UIButton) {
