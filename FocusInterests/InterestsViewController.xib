@@ -11,8 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InterestsViewController" customModule="FocusInterests" customModuleProvider="target">
             <connections>
-                <outlet property="searchBar" destination="NoW-Co-yYN" id="e3u-TV-4n4"/>
-                <outlet property="tableView" destination="gaG-dc-Y78" id="IdU-HM-Z4S"/>
+                <outlet property="magneticView" destination="j0z-Cz-jYY" id="ZoW-X4-ohh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,40 +31,58 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </textAttributes>
                     <items>
-                        <navigationItem title="Interests shown on Map" id="Qjm-ZA-NXy">
+                        <navigationItem title="Choose Interests" id="Qjm-ZA-NXy">
                             <barButtonItem key="leftBarButtonItem" title="Back" id="TdH-N7-i01">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="-1" id="4Zr-Wl-uv2"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" title="Save" id="kN3-J4-lVH">
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </barButtonItem>
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoW-Co-yYN">
-                    <rect key="frame" x="-10" y="54" width="395" height="44"/>
-                    <color key="barTintColor" red="0.086274509799999996" green="0.1647058824" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gaG-dc-Y78">
-                    <rect key="frame" x="0.0" y="88" width="375" height="579"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7q-fo-LSB">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap once on the interests you like, or twice on the ones you love. Press and hold the ones you don't." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qrp-e4-OmM">
+                            <rect key="frame" x="10" y="10" width="355" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="r4J-AB-mcb"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0z-Cz-jYY" customClass="MagneticView" customModule="Magnetic">
+                            <rect key="frame" x="0.0" y="50" width="375" height="553"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="qrp-e4-OmM" firstAttribute="top" secondItem="P7q-fo-LSB" secondAttribute="top" constant="10" id="78i-cA-Qa2"/>
+                        <constraint firstAttribute="trailing" secondItem="qrp-e4-OmM" secondAttribute="trailing" constant="10" id="FjP-yO-dDn"/>
+                        <constraint firstAttribute="trailing" secondItem="j0z-Cz-jYY" secondAttribute="trailing" id="KLG-4T-aEB"/>
+                        <constraint firstItem="j0z-Cz-jYY" firstAttribute="top" secondItem="qrp-e4-OmM" secondAttribute="bottom" id="OHq-26-bmZ"/>
+                        <constraint firstItem="j0z-Cz-jYY" firstAttribute="leading" secondItem="P7q-fo-LSB" secondAttribute="leading" id="aAw-15-jEn"/>
+                        <constraint firstItem="qrp-e4-OmM" firstAttribute="leading" secondItem="P7q-fo-LSB" secondAttribute="leading" constant="10" id="sAg-Z8-STc"/>
+                        <constraint firstAttribute="bottom" secondItem="j0z-Cz-jYY" secondAttribute="bottom" id="uTP-7l-M5E"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="gaG-dc-Y78" firstAttribute="top" secondItem="NoW-Co-yYN" secondAttribute="bottom" constant="-10" id="PWw-M3-fkx"/>
-                <constraint firstItem="gaG-dc-Y78" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VAR-Yh-vvE"/>
+                <constraint firstAttribute="trailing" secondItem="P7q-fo-LSB" secondAttribute="trailing" id="1vZ-kZ-cjN"/>
+                <constraint firstItem="P7q-fo-LSB" firstAttribute="top" secondItem="1vZ-p8-MEN" secondAttribute="bottom" id="3Id-r4-yok"/>
                 <constraint firstAttribute="trailing" secondItem="1vZ-p8-MEN" secondAttribute="trailing" id="apO-32-7zD"/>
+                <constraint firstAttribute="bottom" secondItem="P7q-fo-LSB" secondAttribute="bottom" id="cI9-Af-wKT"/>
                 <constraint firstItem="1vZ-p8-MEN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cze-e5-e3J"/>
-                <constraint firstAttribute="trailing" secondItem="NoW-Co-yYN" secondAttribute="trailing" constant="-10" id="fGP-mg-Lcl"/>
                 <constraint firstItem="1vZ-p8-MEN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="iBy-RX-aSc"/>
-                <constraint firstAttribute="bottom" secondItem="gaG-dc-Y78" secondAttribute="bottom" id="nz0-a2-IUC"/>
-                <constraint firstAttribute="trailing" secondItem="gaG-dc-Y78" secondAttribute="trailing" id="pWy-qj-eD0"/>
-                <constraint firstItem="NoW-Co-yYN" firstAttribute="top" secondItem="1vZ-p8-MEN" secondAttribute="bottom" constant="-10" id="t1e-at-bxz"/>
-                <constraint firstItem="NoW-Co-yYN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-10" id="zBW-6Z-iAL"/>
+                <constraint firstItem="P7q-fo-LSB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pHK-fR-Aee"/>
             </constraints>
-            <point key="canvasLocation" x="72.5" y="59.5"/>
+            <point key="canvasLocation" x="72" y="59"/>
         </view>
     </objects>
 </document>
