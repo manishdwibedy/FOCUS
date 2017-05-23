@@ -29,7 +29,7 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
 
         // Do any additional setup after loading the view.
         rating.settings.fillMode = .half
-        comment.textColor = UIColor.lightGray
+        comment.textColor = UIColor.white
         comment.delegate = self
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RatingViewController.dismissKeyboard))
@@ -42,6 +42,8 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
         rating.didFinishTouchingCosmos = { rating in
             self.submitRatingButton.isEnabled = true
         }
+        
+        tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,14 +65,14 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
     func textViewDidBeginEditing(_ textView: UITextView) {
         if comment.textColor == UIColor.lightGray {
             comment.text = nil
-            comment.textColor = UIColor.black
+            comment.textColor = UIColor.white
         }
     }
 
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         if comment.text.isEmpty {
             comment.text = "Please enter your comments here..."
-            comment.textColor = UIColor.lightGray
+            comment.textColor = UIColor.white
         }
         return true
     }

@@ -25,17 +25,18 @@
                             <constraint firstAttribute="width" constant="68" id="3B8-ce-qcw"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-s1-KSi">
                         <rect key="frame" x="80" y="9" width="195" height="30"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="195" id="3l7-go-jCA"/>
                             <constraint firstAttribute="height" constant="30" id="VUZ-Bk-Ytq"/>
                         </constraints>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="8"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
@@ -45,7 +46,7 @@
                             <constraint firstAttribute="width" constant="70" id="coB-zG-2S2"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukg-I0-H6s">
@@ -55,7 +56,7 @@
                             <constraint firstAttribute="width" constant="40" id="siM-N4-Rng"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="6"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K8V-7h-AhP">
@@ -66,6 +67,7 @@
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="b2d-s1-KSi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="3N0-0z-H8P"/>
                     <constraint firstAttribute="bottom" secondItem="IoM-cH-wCD" secondAttribute="bottom" constant="5" id="9GR-SH-NsU"/>
@@ -79,6 +81,7 @@
                     <constraint firstItem="b2d-s1-KSi" firstAttribute="leading" secondItem="K8V-7h-AhP" secondAttribute="trailing" constant="15" id="vhQ-yv-bQ4"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="comment" destination="b2d-s1-KSi" id="hEl-r1-wkz"/>
                 <outlet property="focus" destination="hp0-WH-AZB" id="hhO-9Y-KhM"/>
