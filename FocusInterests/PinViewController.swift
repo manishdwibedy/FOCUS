@@ -32,12 +32,22 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
         for (index, category) in (self.place?.categories.enumerated())!{
             let textLabel = UILabel()
             
+            textLabel.textColor = .white
+            textLabel.text  = category.name
+            textLabel.textAlignment = .left
+            
+            
             if index == 0{
-                textLabel.textColor = UIColor.green
+                textLabel.text = textLabel.text! + " ●"
+                
+                var primaryFocus = NSMutableAttributedString(string: textLabel.text!)
+                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(textLabel.text?.characters.count)! - 1,length:1))
+                textLabel.attributedText = primaryFocus
+
+
+
             }
             
-            textLabel.text  = category.name
-            textLabel.textAlignment = .left 
             
             categoriesStackView.addArrangedSubview(textLabel)
             categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
@@ -62,6 +72,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
                 
                 textLabel.text  = hour
                 textLabel.textAlignment = .left
+                textLabel.textColor = .white
                 
                 hoursStackView.addArrangedSubview(textLabel)
                 hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
@@ -75,6 +86,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
         for (index, user) in invite.enumerated(){
             let view = inviteUserStackView.arrangedSubviews[index] as! InviteUserView
             view.userName.text = user
+            view.userName.textColor = .white
             view.delegate = self
             
             view.image.image = UIImage(named: "addUser")
@@ -85,6 +97,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource {
         for (index, place) in places.enumerated(){
             let view = suggestPlacesStackView.arrangedSubviews[index] as! SuggestPlaceView
             view.name.text = place
+            view.name.textColor = .white
             view.imageView.image = UIImage(named: "addUser")
             view.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
