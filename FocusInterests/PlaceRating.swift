@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PlaceRating{
+class PlaceRating: Equatable{
     let uid: String
     let date: Date
     let rating: Double
@@ -26,5 +26,9 @@ class PlaceRating{
     
     func setUsername(username: String){
         self.username = username
+    }
+    
+    static func ==(lhs:PlaceRating, rhs:PlaceRating) -> Bool {
+        return lhs.uid == rhs.uid
     }
 }

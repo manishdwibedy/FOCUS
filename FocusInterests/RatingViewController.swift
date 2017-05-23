@@ -8,6 +8,7 @@
 
 import UIKit
 import Cosmos
+import FirebaseDatabase
 
 class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, Comments{
 
@@ -49,6 +50,7 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+
     
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
@@ -137,9 +139,20 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
     }
     
     func gotComments(comments: [PlaceRating]) {
-        self.ratings = comments
+        var placeRatings = comments
+        let dummyUserComment = PlaceRating(uid: AuthApi.getFirebaseUid()!, date: Date(), rating: 5.0)
+        
+        if let index = placeRatings.index(of: dummyUserComment){
+            let userComment = placeRatings[index]
+            rating.rating = userComment.rating
+            comment.text = userComment.comment
+            placeRatings.remove(at: index)
+        }
+        
+        self.ratings = placeRatings
         self.tableView.reloadData()
     }
+    
     /*
     // MARK: - Navigation
 
