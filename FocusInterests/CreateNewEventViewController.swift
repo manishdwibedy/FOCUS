@@ -10,7 +10,7 @@ import UIKit
 import GooglePlaces
 import FirebaseDatabase
 
-class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var publicLabel: UILabel!
     @IBOutlet weak var privateLabel: UILabel!
@@ -49,6 +49,10 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d yyyy"
         self.timeFormatter.dateFormat = "h:mm a"
+        
+        eventDescriptionTextView.delegate = self
+        eventDescriptionTextView.text = "Description"
+        eventDescriptionTextView.textColor = .white        
     }
     
     func setTextFieldDelegates(){
@@ -263,6 +267,24 @@ extension CreateNewEventViewController {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView)
+    {
+        if (textView.text == "Description")
+        {
+            textView.text = ""
+        }
+        textView.becomeFirstResponder() //Optional
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView)
+    {
+        if (textView.text == "")
+        {
+            textView.text = "Description"
+        }
+        textView.resignFirstResponder()
     }
     
 }
