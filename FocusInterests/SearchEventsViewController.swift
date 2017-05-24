@@ -31,7 +31,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.dataSource = self
         tableView.layer.cornerRadius = 6
         tableView.clipsToBounds = true
-        let nib = UINib(nibName: "SearchPlaceCell", bundle: nil)
+        
+        let nib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
         
         self.searchBar.delegate = self
@@ -56,9 +57,10 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:SearchPlaceCell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell!
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchEventTableViewCell!
+        
         let event = filtered[indexPath.row]
-        cell.placeNameLabel.text = event.title
+        cell?.name.text = event.title
         
         var addressComponents = event.fullAddress?.components(separatedBy: ",")
         let streetAddress = addressComponents?[0]
@@ -67,12 +69,14 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let city = addressComponents?.joined(separator: ", ")
         
         
-        cell.addressTextView.text = "\(streetAddress!)\n \(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
-        cell.addressTextView.textContainer.maximumNumberOfLines = 6
+        cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
+        cell?.address.textContainer.maximumNumberOfLines = 6
 
-        cell.ratingLabel.text = "\(event.attendeeCount) guests"
-        cell.categoryLabel.text = "Category"
-        cell.checkForFollow(id: event.id!)
+
+        cell?.guestCount.text = "\(event.attendeeCount) guests"
+        cell?.interest.text = "Category"
+        cell?.price.text = "Price"
+        //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
         
         let reference = Constants.storage.event.child("\(event.id!).jpg")
@@ -83,19 +87,37 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         reference.downloadURL(completion: { (url, error) in
             
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
                 return
             }
         
-            cell.placeImage.sd_setImage(with: url, placeholderImage: placeHolderImage)
+            cell?.eventImage?.sd_setImage(with: url, placeholderImage: placeHolderImage)
             
-            cell.placeImage.setShowActivityIndicator(true)
-            cell.placeImage.setIndicatorStyle(.gray)
+            cell?.eventImage?.setShowActivityIndicator(true)
+            cell?.eventImage?.setIndicatorStyle(.gray)
             
         })
-        cell.followButtonOut.setTitle("Attend", for: .normal)
         
-        return cell
+        
+        cell?.attendButton.tag = indexPath.row
+        cell?.attendButton.addTarget(self, action: #selector(self.attendEvent), for: UIControlEvents.touchUpInside)
+
+        cell?.inviteButton.tag = indexPath.row
+        cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
+        
+        return cell!
+    }
+    
+    func attendEvent(sender:UIButton){
+        let buttonRow = sender.tag
+
+        print("attending event \(self.events[buttonRow].title) ")
+    }
+    
+    func inviteUser(sender:UIButton){
+        let buttonRow = sender.tag
+        
+        print("invite user to event \(self.events[buttonRow].title) ")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -120,6 +142,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         
     }
+    
     @IBAction func showCreateEvent(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
