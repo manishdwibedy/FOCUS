@@ -54,13 +54,13 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rHJ-wx-hzQ">
-                                <rect key="frame" x="11" y="182" width="353" height="428"/>
+                                <rect key="frame" x="10" y="182" width="355" height="428"/>
                                 <color key="backgroundColor" red="0.94768053760000004" green="0.94768053760000004" blue="0.94768053760000004" alpha="0.5378521127" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.90792702069999998" green="0.87262839240000001" blue="0.91347555049999996" alpha="0.55427486800000003" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yai-Q7-VQn">
-                                <rect key="frame" x="11" y="162" width="392" height="25"/>
+                                <rect key="frame" x="10" y="162" width="394" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnZ-Vj-jtc">
                                         <rect key="frame" x="10" y="2" width="43.5" height="17"/>
@@ -80,8 +80,8 @@
                         <color key="backgroundColor" red="0.26147657629999999" green="0.32378757000000002" blue="0.39543044570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yai-Q7-VQn" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="5" id="2sb-bs-K9J"/>
-                            <constraint firstItem="rHJ-wx-hzQ" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" constant="11" id="770-TG-fuO"/>
-                            <constraint firstAttribute="trailing" secondItem="rHJ-wx-hzQ" secondAttribute="trailing" constant="11" id="Bfx-zj-Qyz"/>
+                            <constraint firstItem="rHJ-wx-hzQ" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" constant="10" id="770-TG-fuO"/>
+                            <constraint firstAttribute="trailing" secondItem="rHJ-wx-hzQ" secondAttribute="trailing" constant="10" id="Bfx-zj-Qyz"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="trailing" secondItem="z8z-95-lev" secondAttribute="trailing" id="CnO-vu-R07"/>
                             <constraint firstAttribute="trailing" secondItem="Uw4-jh-WA0" secondAttribute="trailing" id="Elz-B2-Rg1"/>
                             <constraint firstItem="yai-Q7-VQn" firstAttribute="leading" secondItem="rHJ-wx-hzQ" secondAttribute="leading" id="MaV-Mh-Kci"/>
