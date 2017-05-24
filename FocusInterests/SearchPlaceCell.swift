@@ -19,6 +19,7 @@ class SearchPlaceCell: UITableViewCell {
     @IBOutlet weak var categoryLabel: UILabel!
     
     var placeID = String()
+    var parentVC: SearchPlacesViewController!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -75,6 +76,10 @@ class SearchPlaceCell: UITableViewCell {
     }
    
     @IBAction func inviteButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "search_place", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "invitePlaceCV") as! invitePlaceCV
+        ivc.parentCell = self
+        parentVC.present(ivc, animated: true, completion: { _ in })
     }
     
     

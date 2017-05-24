@@ -54,6 +54,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:SearchPlaceCell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell!
+        cell.parentVC = self
         let place = filtered[indexPath.row]
         cell.placeNameLabel.text = place.name
         
