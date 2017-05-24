@@ -49,6 +49,20 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
 		userScrollView.contentSize = CGSize(width: 375, height: 1600)
         // Do any additional setup after loading the view.
+        
+        self.displayUserData()
+
+    }
+    
+    func displayUserData() {
+        FirebaseDownstream.shared.getCurrentUser { (dictionnary) in
+            if dictionnary != nil {
+                print(dictionnary!)
+                let username = dictionnary!["username"] as! String
+                print(username)
+            }
+
+        }
     }
 
     override func didReceiveMemoryWarning() {
