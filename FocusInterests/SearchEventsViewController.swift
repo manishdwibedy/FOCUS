@@ -39,6 +39,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         createEventButton.roundCorners(radius: 10)
         tableHeader.topCornersRounded(radius: 10)
+        
+        filtered = events
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +100,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
         })
         
+        cell?.attendButton.roundCorners(radius: 10)
+        cell?.inviteButton.roundCorners(radius: 10)
         
         cell?.attendButton.tag = indexPath.row
         cell?.attendButton.addTarget(self, action: #selector(self.attendEvent), for: UIControlEvents.touchUpInside)
@@ -133,7 +137,22 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         if(searchText.characters.count > 0){
             self.filtered.removeAll()
 
-        
+            let ref = Constants.DB.event
+            let query = ref.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
+                let events = snapshot.value as? [String : Any] ?? [:]
+                
+                for (id, event) in events{
+                    let info = event as? [String:Any]
+                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id)
+                    
+                    if let attending = info?["attendingList"] as? [String:Any]{
+                        event.setAttendessCount(count: attending.count)
+                    }
+                    
+                    self.filtered.append(event)
+                }
+                self.tableView.reloadData()
+            })
         }
         else{
             self.filtered = self.events
