@@ -31,7 +31,7 @@ target 'FocusInterests' do
     pod 'TwitterKit'
     pod 'OhhAuth'
     pod 'Magnetic'
-    #pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+    pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 
 end
 
