@@ -37,7 +37,7 @@ class CreateEventViewController: UIViewController {
         if place != nil{
             let locality = self.place?.addressComponents?[0].name
             let street = self.place?.addressComponents?[1].name
-            let shortAddress = "\(locality!), \(street!)"
+            _ = "\(locality!), \(street!)"
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM d, h:mm a"

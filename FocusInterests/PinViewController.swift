@@ -51,7 +51,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             if index == 0{
                 textLabel.text = textLabel.text! + " ●"
                 
-                var primaryFocus = NSMutableAttributedString(string: textLabel.text!)
+                let primaryFocus = NSMutableAttributedString(string: textLabel.text!)
                 primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(textLabel.text?.characters.count)! - 1,length:1))
                 textLabel.attributedText = primaryFocus
                 

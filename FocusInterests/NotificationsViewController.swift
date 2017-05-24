@@ -25,11 +25,6 @@ class NotificationsViewController: BaseViewController, UITableViewDataSource, UI
         let cellNib = UINib(nibName: "NotificationsCellTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: Constants.tableCellReuseIDs.notificationCellId)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
-        
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

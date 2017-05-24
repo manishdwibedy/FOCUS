@@ -103,8 +103,8 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
             Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
                 let json = JSON(data: response.data!)
                 
-                let initial = self.places.count
-                for (index, business) in json["businesses"].enumerated(){
+                _ = self.places.count
+                for (_, business) in json["businesses"].enumerated(){
                     let id = business.1["id"].stringValue
                     let name = business.1["name"].stringValue
                     let image_url = business.1["image_url"].stringValue

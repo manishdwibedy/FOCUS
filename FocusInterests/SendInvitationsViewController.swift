@@ -67,9 +67,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
             
             try? contactStore.enumerateContacts(with: request1) { (contact, error) in
-                print("\(contact.givenName) \(contact.familyName)")
-                print(contact.phoneNumbers)
-                print(contact.imageData)
                 self.contacts.append(contact)
             }
             self.setSelectedFriends()

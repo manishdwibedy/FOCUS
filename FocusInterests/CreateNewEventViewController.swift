@@ -116,7 +116,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chooseIcon" && validatedFields {
-            if let event = self.event{
+            if self.event != nil{
                 guard let name = eventNameTextField.text, !name.isEmpty else{
                     presentNotification(title: "Choose a name", message: "Please choose a name for this event.")
                     return

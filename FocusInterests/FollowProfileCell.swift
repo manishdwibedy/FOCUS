@@ -36,7 +36,6 @@ class FollowProfileCell: UITableViewCell {
         print(data.uid)
         ref.child("users").child(data.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            print(value)
             if value != nil
             {
                 self.usernameLabel.text = value?["username"] as? String
