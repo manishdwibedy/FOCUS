@@ -87,20 +87,37 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         reference.downloadURL(completion: { (url, error) in
             
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
                 return
             }
         
-            cell?.imageView?.sd_setImage(with: url, placeholderImage: placeHolderImage)
+            cell?.eventImage?.sd_setImage(with: url, placeholderImage: placeHolderImage)
             
-            cell?.imageView?.setShowActivityIndicator(true)
-            cell?.imageView?.setIndicatorStyle(.gray)
+            cell?.eventImage?.setShowActivityIndicator(true)
+            cell?.eventImage?.setIndicatorStyle(.gray)
             
         })
         
         
+        cell?.attendButton.tag = indexPath.row
+        cell?.attendButton.addTarget(self, action: #selector(self.attendEvent), for: UIControlEvents.touchUpInside)
+
+        cell?.inviteButton.tag = indexPath.row
+        cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
         
         return cell!
+    }
+    
+    func attendEvent(sender:UIButton){
+        let buttonRow = sender.tag
+
+        print("attending event \(self.events[buttonRow].title) ")
+    }
+    
+    func inviteUser(sender:UIButton){
+        let buttonRow = sender.tag
+        
+        print("invite user to event \(self.events[buttonRow].title) ")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -125,6 +142,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         
     }
+    
     @IBAction func showCreateEvent(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)

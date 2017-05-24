@@ -50,7 +50,7 @@
                             <constraint firstAttribute="width" constant="65" id="xlg-eA-6NU"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="Follow">
+                        <state key="normal" title="Attend">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -117,9 +117,11 @@
             <color key="backgroundColor" red="0.90792702069999998" green="0.87262839240000001" blue="0.91347555049999996" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="address" destination="N3n-Fh-fvf" id="ktZ-nN-pcq"/>
+                <outlet property="attendButton" destination="grX-ft-eBZ" id="lSN-5V-N4u"/>
                 <outlet property="eventImage" destination="H0b-mV-xrM" id="tBx-aS-oSm"/>
                 <outlet property="guestCount" destination="wLD-te-UJm" id="wP8-mH-0xl"/>
                 <outlet property="interest" destination="p3N-sR-ozX" id="51Q-92-OsR"/>
+                <outlet property="inviteButton" destination="FAk-rc-9Hs" id="TqX-2A-gg2"/>
                 <outlet property="name" destination="UxW-oS-L2a" id="DnE-AO-GIU"/>
                 <outlet property="price" destination="djv-ET-Cuh" id="LEv-DI-AK8"/>
             </connections>

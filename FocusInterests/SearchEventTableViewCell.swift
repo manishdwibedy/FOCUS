@@ -17,6 +17,8 @@ class SearchEventTableViewCell: UITableViewCell {
     @IBOutlet weak var guestCount: UILabel!
     @IBOutlet weak var price: UILabel!
     
+    @IBOutlet weak var inviteButton: UIButton!
+    @IBOutlet weak var attendButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
