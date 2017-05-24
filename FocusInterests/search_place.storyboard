@@ -21,12 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eRW-87-xqd">
-                                <rect key="frame" x="11" y="122" width="353" height="488"/>
-                                <color key="backgroundColor" red="0.94768053756476689" green="0.94768053756476689" blue="0.94768053756476689" alpha="0.53785211267605637" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexBackgroundColor" red="0.90792702065610653" green="0.87262839241657231" blue="0.91347555051813467" alpha="0.5542748679577465" colorSpace="custom" customColorSpace="sRGB"/>
-                            </tableView>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1q-Ba-90U">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <constraints>
@@ -45,18 +39,48 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nuo-vv-mCk">
+                                <rect key="frame" x="5" y="122" width="403" height="25"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Places" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Se5-23-vgT">
+                                        <rect key="frame" x="10" y="0.0" width="393" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="148-Zv-srC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.63137254901960782" green="0.66274509803921566" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Se5-23-vgT" secondAttribute="trailing" id="Jvs-It-tvn"/>
+                                    <constraint firstAttribute="height" constant="25" id="NaY-ZU-eZf"/>
+                                    <constraint firstItem="Se5-23-vgT" firstAttribute="leading" secondItem="nuo-vv-mCk" secondAttribute="leading" constant="10" id="Th7-P0-z1O"/>
+                                    <constraint firstItem="Se5-23-vgT" firstAttribute="top" secondItem="nuo-vv-mCk" secondAttribute="top" id="axT-Za-H5o"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eRW-87-xqd">
+                                <rect key="frame" x="5" y="142" width="365" height="468"/>
+                                <color key="backgroundColor" red="0.55294117649999996" green="0.58431372550000005" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.55294117647058827" green="0.58431372549019611" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.26147657632827759" green="0.32378756999969482" blue="0.39543044567108154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leading" id="3Is-4z-t1n"/>
-                            <constraint firstItem="eRW-87-xqd" firstAttribute="top" secondItem="e5N-ur-DBG" secondAttribute="bottom" constant="5" id="AM6-bT-8ze"/>
+                            <constraint firstItem="nuo-vv-mCk" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leading" constant="5" id="4fC-VY-a6n"/>
+                            <constraint firstItem="eRW-87-xqd" firstAttribute="top" secondItem="e5N-ur-DBG" secondAttribute="bottom" constant="25" id="BF1-ev-0IZ"/>
+                            <constraint firstItem="nuo-vv-mCk" firstAttribute="trailing" secondItem="eRW-87-xqd" secondAttribute="trailing" constant="38" id="Bm3-OB-Doy"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="trailing" secondItem="e5N-ur-DBG" secondAttribute="trailing" id="I2i-8K-bAe"/>
-                            <constraint firstAttribute="trailing" secondItem="eRW-87-xqd" secondAttribute="trailing" constant="11" id="Um1-jC-Ysx"/>
+                            <constraint firstItem="nuo-vv-mCk" firstAttribute="top" secondItem="e5N-ur-DBG" secondAttribute="bottom" constant="5" id="KMx-zJ-Hlo"/>
+                            <constraint firstAttribute="trailing" secondItem="eRW-87-xqd" secondAttribute="trailing" constant="5" id="Um1-jC-Ysx"/>
                             <constraint firstItem="e5N-ur-DBG" firstAttribute="top" secondItem="T1q-Ba-90U" secondAttribute="bottom" constant="9" id="WNh-BA-Og1"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="top" secondItem="jIo-bt-XOn" secondAttribute="top" id="Xao-1f-yK5"/>
                             <constraint firstItem="qo6-RG-5nr" firstAttribute="top" secondItem="eRW-87-xqd" secondAttribute="bottom" constant="8" id="cFI-13-vBa"/>
                             <constraint firstAttribute="trailing" secondItem="T1q-Ba-90U" secondAttribute="trailing" id="w9d-2d-5Hn"/>
-                            <constraint firstItem="eRW-87-xqd" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leading" constant="11" id="whe-fG-3Ea"/>
+                            <constraint firstItem="eRW-87-xqd" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leading" constant="5" id="whe-fG-3Ea"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="leading" secondItem="e5N-ur-DBG" secondAttribute="leading" id="xiH-UI-YcC"/>
                         </constraints>
                     </view>
@@ -67,6 +91,7 @@
                     <connections>
                         <outlet property="navTitle" destination="IJI-Ig-vYz" id="VXX-My-xZM"/>
                         <outlet property="searchBar" destination="e5N-ur-DBG" id="Dvr-6Q-jjN"/>
+                        <outlet property="tableHeader" destination="nuo-vv-mCk" id="Osl-Nl-SDD"/>
                         <outlet property="tableView" destination="eRW-87-xqd" id="yvW-s4-IcY"/>
                     </connections>
                 </viewController>

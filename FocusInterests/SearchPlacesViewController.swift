@@ -17,6 +17,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
+    @IBOutlet weak var tableHeader: UIView!
     
     var places = [Place]()
     var filtered = [Place]()
@@ -33,7 +34,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
 
         self.searchBar.delegate = self
-        // Do any additional setup after loading the view.
+        tableHeader.topCornersRounded(radius: 10)
     }
     
     override func viewWillAppear(_ animated: Bool) {

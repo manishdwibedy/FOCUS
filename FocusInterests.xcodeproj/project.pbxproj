@@ -69,6 +69,8 @@
 		5B7BB1E31ED51069001E60FF /* SuggestPlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E11ED51069001E60FF /* SuggestPlaceTableViewCell.swift */; };
 		5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E21ED51069001E60FF /* SuggestPlaceTableViewCell.xib */; };
 		5B7BB1E61ED51E9E001E60FF /* SearchEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E51ED51E9E001E60FF /* SearchEventsViewController.swift */; };
+		5B7BB1E81ED53FB1001E60FF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E71ED53FB1001E60FF /* UIView+Extensions.swift */; };
+		5B7BB1EA1ED54677001E60FF /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E91ED54677001E60FF /* UITableView+Extensions.swift */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FCC1ECA9EBE00094FE6 /* Place.swift */; };
 		5B959FD31ECAC6E000094FE6 /* PlaceDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FD21ECAC6E000094FE6 /* PlaceDetails.storyboard */; };
@@ -295,6 +297,8 @@
 		5B7BB1E11ED51069001E60FF /* SuggestPlaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestPlaceTableViewCell.swift; sourceTree = "<group>"; };
 		5B7BB1E21ED51069001E60FF /* SuggestPlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuggestPlaceTableViewCell.xib; sourceTree = "<group>"; };
 		5B7BB1E51ED51E9E001E60FF /* SearchEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventsViewController.swift; sourceTree = "<group>"; };
+		5B7BB1E71ED53FB1001E60FF /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		5B7BB1E91ED54677001E60FF /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5B959FCC1ECA9EBE00094FE6 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		5B959FD21ECAC6E000094FE6 /* PlaceDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceDetails.storyboard; sourceTree = "<group>"; };
@@ -782,6 +786,8 @@
 				5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */,
 				5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */,
 				5B7BB1DF1ED50EA0001E60FF /* UIButton+Extensions.swift */,
+				5B7BB1E71ED53FB1001E60FF /* UIView+Extensions.swift */,
+				5B7BB1E91ED54677001E60FF /* UITableView+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1347,6 +1353,7 @@
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */,
 				5B7BB1DE1ED50CDD001E60FF /* SuggestPlacesViewController.swift in Sources */,
+				5B7BB1E81ED53FB1001E60FF /* UIView+Extensions.swift in Sources */,
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
@@ -1374,6 +1381,7 @@
 				5BAB87AD1EC97BED0064E5EC /* PeopleSearchViewController.swift in Sources */,
 				D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */,
 				5B71D6F61ED180930093A3F5 /* CreateNewEventViewController.swift in Sources */,
+				5B7BB1EA1ED54677001E60FF /* UITableView+Extensions.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 				5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */,
 				5B6AFA651ED1906900A82104 /* GMUSimpleClusterAlgorithm.m in Sources */,
