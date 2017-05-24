@@ -60,22 +60,41 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let event = filtered[indexPath.row]
         cell.placeNameLabel.text = event.title
         
-//        if event..count > 0{
-//            if event.address.count == 1{
-//                cell.addressTextView.text = "\(event.address[0])"
-//            }
-//            else{
-//                cell.addressTextView.text = "\(event.address[0])\n\(event.address[1])"
-//            }
-//        }
-//        
-//        event.shortAddress
+        var addressComponents = event.fullAddress?.components(separatedBy: ",")
+        let streetAddress = addressComponents?[0]
         
-//        cell.ratingLabel.text = "\(event.rating) (\(event.reviewCount) ratings)"
-//        cell.categoryLabel.text = event.categories[0].name
-//        cell.checkForFollow(id: event.id)
-//        let placeHolderImage = UIImage(named: "empty_event")
-//        cell.placeImage.sd_setImage(with: URL(string :event.image_url), placeholderImage: placeHolderImage)
+        addressComponents?.remove(at: 0)
+        let city = addressComponents?.joined(separator: ", ")
+        
+        
+        cell.addressTextView.text = "\(streetAddress!)\n \(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
+        cell.addressTextView.textContainer.maximumNumberOfLines = 6
+
+        cell.ratingLabel.text = "\(event.attendeeCount) guests"
+        cell.categoryLabel.text = "Category"
+        cell.checkForFollow(id: event.id!)
+        let placeHolderImage = UIImage(named: "empty_event")
+        
+        let reference = Constants.storage.event.child("\(event.id!).jpg")
+        
+        // Placeholder image
+        let placeholderImage = UIImage(named: "empty_event")
+        
+        reference.downloadURL(completion: { (url, error) in
+            
+            if error != nil {
+                print(error?.localizedDescription)
+                return
+            }
+        
+            cell.placeImage.sd_setImage(with: url, placeholderImage: placeHolderImage)
+            
+            cell.placeImage.setShowActivityIndicator(true)
+            cell.placeImage.setIndicatorStyle(.gray)
+            
+        })
+        cell.followButtonOut.setTitle("Attend", for: .normal)
+        
         return cell
     }
     
@@ -91,58 +110,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(searchText.characters.count > 0){
             self.filtered.removeAll()
-            let url = "https://api.yelp.com/v3/businesses/search"
-            
-            let headers: HTTPHeaders = [
-                "authorization": "Bearer \(AuthApi.getYelpToken()!)",
-                "cache-contro": "no-cache"
-            ]
-            
-            let parameters = [
-                "term": searchText,
-                "latitude": location?.coordinate.latitude,
-                "longitude": location?.coordinate.longitude,
-                "radius": 1000
-                ] as [String : Any]
-            
-            Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
-                let json = JSON(data: response.data!)
-                
-                let initial = self.events.count
-                for (index, business) in json["businesses"].enumerated(){
-                    let id = business.1["id"].stringValue
-                    let name = business.1["name"].stringValue
-                    let image_url = business.1["image_url"].stringValue
-                    let isClosed = business.1["is_closed"].boolValue
-                    let reviewCount = business.1["review_count"].intValue
-                    let rating = business.1["rating"].floatValue
-                    let latitude = business.1["coordinates"]["latitude"].doubleValue
-                    let longitude = business.1["coordinates"]["longitude"].doubleValue
-                    let price = business.1["price"].stringValue
-                    let address_json = business.1["location"]["display_address"].arrayValue
-                    let phone = business.1["display_phone"].stringValue
-                    let distance = business.1["distance"].doubleValue
-                    let categories_json = business.1["categories"].arrayValue
-                    
-                    var address = [String]()
-                    for raw_address in address_json{
-                        address.append(raw_address.stringValue)
-                    }
-                    
-                    var categories = [Category]()
-                    for raw_category in categories_json as [JSON]{
-                        let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
-                        categories.append(category)
-                    }
-                    
-                    let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories)
-                    
-//                    if !self.filtered.contains(place){
-//                        self.filtered.append(place)
-//                    }
-                }
-                self.tableView.reloadData()
-            }
+
+        
         }
         else{
             self.filtered = self.events

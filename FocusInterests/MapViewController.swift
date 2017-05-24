@@ -33,7 +33,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var places = [Place]()
     var placeMapping = [String: Place]()
     
-    var searchPlacesTab: SearchPlacesViewController?  = nil
+    var searchPlacesTab: SearchPlacesViewController? = nil
+    var searchEventsTab: SearchEventsViewController? = nil
     
     @IBOutlet weak var navigationView: MapNavigationView!
     override func viewDidLoad() {
@@ -70,11 +71,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 let info = event as? [String:Any]
                 let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id)
         
+                if let attending = info?["attendingList"] as? [String:Any]{
+                    event.setAttendessCount(count: attending.count)
+                }
+                
                 let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
                 self.events.append(event)
                 
                 let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "Event")!, id: String(describing: self.events.count), type: "event")
                 self.clusterManager.add(item)
+                self.searchEventsTab?.events.append(event)
             }
             
             // Call cluster() after items have been added to perform the clustering and rendering on map.
@@ -86,6 +92,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         })
         
         self.searchPlacesTab = self.tabBarController?.viewControllers?[3] as? SearchPlacesViewController
+        self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
     }
     
     override func viewWillAppear(_ animated: Bool) {

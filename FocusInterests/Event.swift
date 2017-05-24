@@ -19,6 +19,7 @@ class Event{
     let date: String?
     let creator: String?
     var id: String?
+    var attendeeCount = 0
     
     init(title: String, description: String, fullAddress: String, shortAddress: String, latitude: String, longitude: String, date: String, creator: String, id: String? = nil) {
         self.title = title
@@ -48,5 +49,9 @@ class Event{
         newEvent.setValue(event)
         
         return newEvent.key
+    }
+    
+    func setAttendessCount(count: Int){
+        attendeeCount = count
     }
 }
