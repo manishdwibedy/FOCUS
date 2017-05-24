@@ -31,7 +31,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.dataSource = self
         tableView.layer.cornerRadius = 6
         tableView.clipsToBounds = true
-        let nib = UINib(nibName: "SearchPlaceCell", bundle: nil)
+        
+        let nib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
         
         self.searchBar.delegate = self
@@ -56,9 +57,10 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:SearchPlaceCell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell!
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchEventTableViewCell!
+        
         let event = filtered[indexPath.row]
-        cell.placeNameLabel.text = event.title
+        cell?.name.text = event.title
         
         var addressComponents = event.fullAddress?.components(separatedBy: ",")
         let streetAddress = addressComponents?[0]
@@ -67,12 +69,14 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let city = addressComponents?.joined(separator: ", ")
         
         
-        cell.addressTextView.text = "\(streetAddress!)\n \(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
-        cell.addressTextView.textContainer.maximumNumberOfLines = 6
+        cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
+        cell?.address.textContainer.maximumNumberOfLines = 6
 
-        cell.ratingLabel.text = "\(event.attendeeCount) guests"
-        cell.categoryLabel.text = "Category"
-        cell.checkForFollow(id: event.id!)
+
+        cell?.guestCount.text = "\(event.attendeeCount) guests"
+        cell?.interest.text = "Category"
+        cell?.price.text = "Price"
+        //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
         
         let reference = Constants.storage.event.child("\(event.id!).jpg")
@@ -87,15 +91,16 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 return
             }
         
-            cell.placeImage.sd_setImage(with: url, placeholderImage: placeHolderImage)
+            cell?.imageView?.sd_setImage(with: url, placeholderImage: placeHolderImage)
             
-            cell.placeImage.setShowActivityIndicator(true)
-            cell.placeImage.setIndicatorStyle(.gray)
+            cell?.imageView?.setShowActivityIndicator(true)
+            cell?.imageView?.setIndicatorStyle(.gray)
             
         })
-        cell.followButtonOut.setTitle("Attend", for: .normal)
         
-        return cell
+        
+        
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
