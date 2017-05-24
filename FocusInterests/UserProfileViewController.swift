@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class UserProfileViewController: UIViewController {
 
@@ -49,6 +50,34 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
 		userScrollView.contentSize = CGSize(width: 375, height: 1600)
         // Do any additional setup after loading the view.
+        
+        self.displayUserData()
+
+    }
+    
+    func displayUserData() {
+        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
+            if dictionnary != nil {
+                print(dictionnary!)
+                let username_str = dictionnary!["username"] as! String
+                let description_str = dictionnary!["description"] as! String
+                
+                self.userName.text = username_str
+                self.descriptionText.text = description_str
+                
+                
+                /* Profile pic
+                 
+                let image_string = dictionnary!["image_string"] as! String
+                
+
+                
+                imageView.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
+                 
+                 */
+            }
+
+        }
     }
 
     override func didReceiveMemoryWarning() {
