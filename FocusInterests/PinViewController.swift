@@ -98,6 +98,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     func handleTap(_ sender: UITapGestureRecognizer) {
         let view = sender.view as! SuggestPlaceView
         print("Tapped \(view.name.text)")
+        self.performSegue(withIdentifier: "show_suggestions", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,6 +138,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             view.addGestureRecognizer(tap)
             
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
     }
     /*
     // MARK: - Navigation

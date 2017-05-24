@@ -64,6 +64,10 @@
 		5B71D70D1ED184880093A3F5 /* FollowProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D70B1ED184880093A3F5 /* FollowProfileCell.swift */; };
 		5B71D70E1ED184880093A3F5 /* FollowProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B71D70C1ED184880093A3F5 /* FollowProfileCell.xib */; };
 		5B71D7101ED184D30093A3F5 /* allCommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B71D70F1ED184D30093A3F5 /* allCommentsVC.swift */; };
+		5B7BB1DE1ED50CDD001E60FF /* SuggestPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1DD1ED50CDD001E60FF /* SuggestPlacesViewController.swift */; };
+		5B7BB1E01ED50EA0001E60FF /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1DF1ED50EA0001E60FF /* UIButton+Extensions.swift */; };
+		5B7BB1E31ED51069001E60FF /* SuggestPlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E11ED51069001E60FF /* SuggestPlaceTableViewCell.swift */; };
+		5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E21ED51069001E60FF /* SuggestPlaceTableViewCell.xib */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FCC1ECA9EBE00094FE6 /* Place.swift */; };
 		5B959FD31ECAC6E000094FE6 /* PlaceDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FD21ECAC6E000094FE6 /* PlaceDetails.storyboard */; };
@@ -285,6 +289,10 @@
 		5B71D70B1ED184880093A3F5 /* FollowProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowProfileCell.swift; sourceTree = "<group>"; };
 		5B71D70C1ED184880093A3F5 /* FollowProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowProfileCell.xib; sourceTree = "<group>"; };
 		5B71D70F1ED184D30093A3F5 /* allCommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allCommentsVC.swift; sourceTree = "<group>"; };
+		5B7BB1DD1ED50CDD001E60FF /* SuggestPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestPlacesViewController.swift; sourceTree = "<group>"; };
+		5B7BB1DF1ED50EA0001E60FF /* UIButton+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		5B7BB1E11ED51069001E60FF /* SuggestPlaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestPlaceTableViewCell.swift; sourceTree = "<group>"; };
+		5B7BB1E21ED51069001E60FF /* SuggestPlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuggestPlaceTableViewCell.xib; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5B959FCC1ECA9EBE00094FE6 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		5B959FD21ECAC6E000094FE6 /* PlaceDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceDetails.storyboard; sourceTree = "<group>"; };
@@ -586,6 +594,9 @@
 				5B959FEE1ECD2DF300094FE6 /* RatingViewController.swift */,
 				5B959FF01ECD452C00094FE6 /* RatingViewCell.swift */,
 				5B959FF11ECD452C00094FE6 /* RatingViewCell.xib */,
+				5B7BB1DD1ED50CDD001E60FF /* SuggestPlacesViewController.swift */,
+				5B7BB1E11ED51069001E60FF /* SuggestPlaceTableViewCell.swift */,
+				5B7BB1E21ED51069001E60FF /* SuggestPlaceTableViewCell.xib */,
 			);
 			name = Place;
 			sourceTree = "<group>";
@@ -767,6 +778,7 @@
 				5BA37C831EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift */,
 				5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */,
 				5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */,
+				5B7BB1DF1ED50EA0001E60FF /* UIButton+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1087,6 +1099,7 @@
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
+				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				D23E01371E6BA7C900E735F5 /* GoogleService-Info.plist in Resources */,
 				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
@@ -1293,6 +1306,7 @@
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
+				5B7BB1E01ED50EA0001E60FF /* UIButton+Extensions.swift in Sources */,
 				5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */,
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
@@ -1328,6 +1342,7 @@
 				5B634C871ED2584F00EBCC29 /* Share.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */,
+				5B7BB1DE1ED50CDD001E60FF /* SuggestPlacesViewController.swift in Sources */,
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
@@ -1348,6 +1363,7 @@
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
 				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,
 				5B6AFA751ED1906900A82104 /* GMUStyle.m in Sources */,
+				5B7BB1E31ED51069001E60FF /* SuggestPlaceTableViewCell.swift in Sources */,
 				D296F5D31E75BB69007EC393 /* AuthApi.swift in Sources */,
 				5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */,
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
