@@ -130,9 +130,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             view.name.text = place.name
             view.name.textColor = .white
             view.imageView.sd_setImage(with: URL(string: place.image_url), placeholderImage: UIImage(named: "addUser"))
+            view.imageView.roundedImage()
+            
             view.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-            
             view.addGestureRecognizer(tap)
             
         }
