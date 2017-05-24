@@ -420,6 +420,7 @@
                         <outlet property="infoScreenHeight" destination="sea-b8-me6" id="Htv-ht-9SG"/>
                         <outlet property="inviteUserStackView" destination="3p6-HE-tdh" id="3Zu-4S-STa"/>
                         <outlet property="phoneLabel" destination="dIK-LS-xRL" id="ieX-9A-dfr"/>
+                        <outlet property="scrollView" destination="JLy-a0-Na0" id="rDe-Wg-dvN"/>
                         <outlet property="streetAddress" destination="aZL-lD-5VQ" id="zhr-r7-J7E"/>
                         <outlet property="suggestPlacesStackView" destination="MXe-hX-m6X" id="0mS-tH-5Vq"/>
                         <outlet property="table" destination="0im-DM-qTP" id="efW-zb-zki"/>

@@ -22,15 +22,25 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var suggestPlacesStackView: UIStackView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     var placeVC: PlaceViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         placeVC?.suggestPlacesDelegate = self
+        loadInfoScreen(place: self.place!)
         
+    }
+    
+    func loadInfoScreen(place: Place){
         // Do any additional setup after loading the view.
-        for (index, category) in (self.place?.categories.enumerated())!{
+        
+        for view in categoriesStackView.subviews{
+            view.removeFromSuperview()
+        }
+        
+        for (index, category) in (place.categories.enumerated()){
             let textLabel = UILabel()
             
             textLabel.textColor = .white
@@ -44,26 +54,26 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
                 var primaryFocus = NSMutableAttributedString(string: textLabel.text!)
                 primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(textLabel.text?.characters.count)! - 1,length:1))
                 textLabel.attributedText = primaryFocus
-
-
-
+                
+                
+                
             }
-            
             
             categoriesStackView.addArrangedSubview(textLabel)
             categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
         }
-        streetAddress.text = place?.address[0]
-        if place?.address.count == 2{
-            cityStateLabel.text = place?.address[1]
+        streetAddress.text = place.address[0]
+        if place
+            .address.count == 2{
+            cityStateLabel.text = place.address[1]
         }
         else{
             cityStateLabel.text = ""
         }
         
-        phoneLabel.text = place?.phone
+        phoneLabel.text = place.phone
         
-        if let open_hours = place?.hours{
+        if let open_hours = place.hours{
             let hours = getOpenHours(open_hours)
             infoScreenHeight.constant += CGFloat(25 * hours.count)
             viewHeight.constant += CGFloat(25 * hours.count)
@@ -79,8 +89,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
                 hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
             }
         }
-        
-        
         
         let invite = ["user1", "user2", "user3"]
         
@@ -99,6 +107,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         let view = sender.view as! SuggestPlaceView
         print("Tapped \(view.name.text)")
         placeVC?.loadPlace(place: view.place!)
+        self.loadInfoScreen(place: view.place!)
+        
+        self.scrollView.setContentOffset(CGPoint(x: 0,y: -self.scrollView.contentInset.top), animated: true)
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
