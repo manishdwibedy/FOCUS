@@ -41,8 +41,11 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNT-Vt-zjc">
-                                <rect key="frame" x="271" y="117" width="88" height="30"/>
+                                <rect key="frame" x="239" y="127" width="120" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="PZo-ye-xfF"/>
+                                </constraints>
                                 <state key="normal" title="Create Event">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -51,7 +54,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rHJ-wx-hzQ">
-                                <rect key="frame" x="16" y="142" width="343" height="468"/>
+                                <rect key="frame" x="16" y="167" width="343" height="443"/>
                                 <color key="backgroundColor" red="0.94768053760000004" green="0.94768053760000004" blue="0.94768053760000004" alpha="0.5378521127" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.90792702069999998" green="0.87262839240000001" blue="0.91347555049999996" alpha="0.55427486800000003" colorSpace="custom" customColorSpace="sRGB"/>
@@ -66,10 +69,10 @@
                             <constraint firstItem="rHJ-wx-hzQ" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leadingMargin" id="Niw-9i-yWM"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="leading" secondItem="z8z-95-lev" secondAttribute="leading" id="SOZ-2p-8s1"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="Wh7-vU-Ioc"/>
-                            <constraint firstItem="rHJ-wx-hzQ" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="-5" id="Zq8-yk-PtP"/>
+                            <constraint firstItem="rHJ-wx-hzQ" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="10" id="Zq8-yk-PtP"/>
                             <constraint firstItem="z8z-95-lev" firstAttribute="top" secondItem="Uw4-jh-WA0" secondAttribute="bottom" constant="9" id="aGM-7s-D1y"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="top" secondItem="eF4-Ev-ETy" secondAttribute="top" id="cl3-Qa-CAV"/>
-                            <constraint firstItem="ZNT-Vt-zjc" firstAttribute="top" secondItem="z8z-95-lev" secondAttribute="bottom" id="qPg-YH-1fV"/>
+                            <constraint firstItem="ZNT-Vt-zjc" firstAttribute="top" secondItem="z8z-95-lev" secondAttribute="bottom" constant="10" id="qPg-YH-1fV"/>
                             <constraint firstItem="ZNT-Vt-zjc" firstAttribute="trailing" secondItem="eF4-Ev-ETy" secondAttribute="trailingMargin" id="yyE-oh-59d"/>
                         </constraints>
                     </view>
