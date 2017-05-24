@@ -18,6 +18,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
     
+    @IBOutlet weak var tableHeader: UIView!
     @IBOutlet weak var createEventButton: UIButton!
     var events = [Event]()
     var filtered = [Event]()
@@ -36,6 +37,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         self.searchBar.delegate = self
         
         createEventButton.roundCorners(radius: 10)
+        tableHeader.topCornersRounded(radius: 10)
     }
     
     override func viewWillAppear(_ animated: Bool) {
