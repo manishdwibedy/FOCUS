@@ -68,6 +68,7 @@
 		5B7BB1E01ED50EA0001E60FF /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1DF1ED50EA0001E60FF /* UIButton+Extensions.swift */; };
 		5B7BB1E31ED51069001E60FF /* SuggestPlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E11ED51069001E60FF /* SuggestPlaceTableViewCell.swift */; };
 		5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E21ED51069001E60FF /* SuggestPlaceTableViewCell.xib */; };
+		5B7BB1E61ED51E9E001E60FF /* SearchEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7BB1E51ED51E9E001E60FF /* SearchEventsViewController.swift */; };
 		5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7DC2001EA866D700A1471E /* EventIconViewController.swift */; };
 		5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FCC1ECA9EBE00094FE6 /* Place.swift */; };
 		5B959FD31ECAC6E000094FE6 /* PlaceDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FD21ECAC6E000094FE6 /* PlaceDetails.storyboard */; };
@@ -293,6 +294,7 @@
 		5B7BB1DF1ED50EA0001E60FF /* UIButton+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		5B7BB1E11ED51069001E60FF /* SuggestPlaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestPlaceTableViewCell.swift; sourceTree = "<group>"; };
 		5B7BB1E21ED51069001E60FF /* SuggestPlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuggestPlaceTableViewCell.xib; sourceTree = "<group>"; };
+		5B7BB1E51ED51E9E001E60FF /* SearchEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventsViewController.swift; sourceTree = "<group>"; };
 		5B7DC2001EA866D700A1471E /* EventIconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventIconViewController.swift; sourceTree = "<group>"; };
 		5B959FCC1ECA9EBE00094FE6 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		5B959FD21ECAC6E000094FE6 /* PlaceDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceDetails.storyboard; sourceTree = "<group>"; };
@@ -580,6 +582,7 @@
 			isa = PBXGroup;
 			children = (
 				FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */,
+				5B7BB1E51ED51E9E001E60FF /* SearchEventsViewController.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -1309,6 +1312,7 @@
 				5B7BB1E01ED50EA0001E60FF /* UIButton+Extensions.swift in Sources */,
 				5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */,
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
+				5B7BB1E61ED51E9E001E60FF /* SearchEventsViewController.swift in Sources */,
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				5B71D7051ED1837A0093A3F5 /* commentCell.swift in Sources */,

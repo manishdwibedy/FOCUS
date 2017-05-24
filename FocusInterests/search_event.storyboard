@@ -13,7 +13,7 @@
         <!--EVENT-->
         <scene sceneID="7vf-IH-Tml">
             <objects>
-                <viewController id="xPx-tM-EtF" customClass="SearchPlacesViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xPx-tM-EtF" customClass="SearchEventsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wns-oX-1iq"/>
                         <viewControllerLayoutGuide type="bottom" id="qym-sJ-mVv"/>
@@ -46,6 +46,9 @@
                                 <state key="normal" title="Create Event">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="showCreateEvent:" destination="xPx-tM-EtF" eventType="touchUpInside" id="f0n-Xj-yY6"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rHJ-wx-hzQ">
                                 <rect key="frame" x="16" y="142" width="343" height="468"/>
@@ -75,6 +78,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="createEventButton" destination="ZNT-Vt-zjc" id="cy0-BN-nMr"/>
                         <outlet property="navTitle" destination="31z-0O-JgZ" id="s98-9U-3hs"/>
                         <outlet property="searchBar" destination="z8z-95-lev" id="42p-1d-s8M"/>
                         <outlet property="tableView" destination="rHJ-wx-hzQ" id="MnE-MQ-TIf"/>

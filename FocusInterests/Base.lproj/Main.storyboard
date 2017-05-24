@@ -400,10 +400,10 @@
             </objects>
             <point key="canvasLocation" x="1626" y="2138"/>
         </scene>
-        <!--CreateEvent-->
+        <!--search_event-->
         <scene sceneID="wfn-tH-Gep">
             <objects>
-                <viewControllerPlaceholder storyboardName="CreateEvent" id="FSH-QB-bWv" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="search_event" id="FSH-QB-bWv" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="EVENTS" id="1iN-cF-jaL"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JV7-Qi-Uc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -580,7 +580,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zwr-f5-bIi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home-1" id="xTg-4h-XeN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="acD-ii-E6E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="acD-ii-E6E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

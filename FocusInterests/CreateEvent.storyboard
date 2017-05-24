@@ -12,10 +12,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--EVENTS-->
+        <!--Create New Event View Controller-->
         <scene sceneID="nxf-sN-yWf">
             <objects>
-                <viewController id="3TX-Ww-Aks" customClass="CreateNewEventViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="createEvent" id="3TX-Ww-Aks" customClass="CreateNewEventViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r8e-iM-PkH"/>
                         <viewControllerLayoutGuide type="bottom" id="bS8-UJ-PiN"/>
@@ -291,9 +291,6 @@
                             <constraint firstItem="fEY-9z-tRP" firstAttribute="leading" secondItem="BxB-qZ-pRY" secondAttribute="leading" id="w7Y-Iv-fBJ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="EVENTS" id="5WR-MM-iAM">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
@@ -628,7 +625,7 @@
         <image name="whiteFBIcon" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pdH-Ex-mw2"/>
+        <segue reference="eLh-9t-fEY"/>
         <segue reference="amW-Q6-Hfg"/>
     </inferredMetricsTieBreakers>
 </document>
