@@ -60,6 +60,10 @@ struct Constants {
         public static let clothing = Interest(name: "Clothing", category: InterestCategory.Shopping, image: nil, imageString: nil)
         public static let electronics = Interest(name: "Electronics", category: InterestCategory.Shopping, image: nil, imageString: nil)
         public static let furniture = Interest(name: "Furniture", category: InterestCategory.Shopping, image: nil, imageString: nil)
+        
+        
+        public static let interest_list = [interests.football, interests.basketball, interests.soccer, interests.bike, interests.music, interests.modernArt]
+        
     }
     
     struct dummyItemsOInterest {
