@@ -34,7 +34,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
         
         self.searchBar.delegate = self
-        // Do any additional setup after loading the view.
+        
+        createEventButton.roundCorners(radius: 10)
     }
     
     override func viewWillAppear(_ animated: Bool) {
