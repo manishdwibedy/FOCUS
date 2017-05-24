@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class UserProfileViewController: UIViewController {
 
@@ -55,11 +56,25 @@ class UserProfileViewController: UIViewController {
     }
     
     func displayUserData() {
-        FirebaseDownstream.shared.getCurrentUser { (dictionnary) in
+        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
             if dictionnary != nil {
                 print(dictionnary!)
-                let username = dictionnary!["username"] as! String
-                print(username)
+                let username_str = dictionnary!["username"] as! String
+                let description_str = dictionnary!["description"] as! String
+                
+                self.userName.text = username_str
+                self.descriptionText.text = description_str
+                
+                
+                /* Profile pic
+                 
+                let image_string = dictionnary!["image_string"] as! String
+                
+
+                
+                imageView.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
+                 
+                 */
             }
 
         }
