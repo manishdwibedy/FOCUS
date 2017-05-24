@@ -80,6 +80,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     @IBAction func createEvents(_ sender: UIButton) {
+        Event.clearCache()
         let id = self.event?.saveToDB(ref: Constants.DB.event)
         
         if let data = self.image{
