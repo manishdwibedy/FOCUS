@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eRW-87-xqd">
-                                <rect key="frame" x="16" y="117" width="343" height="493"/>
+                                <rect key="frame" x="11" y="122" width="353" height="488"/>
                                 <color key="backgroundColor" red="0.94768053756476689" green="0.94768053756476689" blue="0.94768053756476689" alpha="0.53785211267605637" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.90792702065610653" green="0.87262839241657231" blue="0.91347555051813467" alpha="0.5542748679577465" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,14 +49,14 @@
                         <color key="backgroundColor" red="0.26147657632827759" green="0.32378756999969482" blue="0.39543044567108154" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leading" id="3Is-4z-t1n"/>
-                            <constraint firstItem="qo6-RG-5nr" firstAttribute="top" secondItem="eRW-87-xqd" secondAttribute="bottom" constant="8" symbolic="YES" id="5kg-ON-Pxe"/>
+                            <constraint firstItem="eRW-87-xqd" firstAttribute="top" secondItem="e5N-ur-DBG" secondAttribute="bottom" constant="5" id="AM6-bT-8ze"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="trailing" secondItem="e5N-ur-DBG" secondAttribute="trailing" id="I2i-8K-bAe"/>
-                            <constraint firstItem="e5N-ur-DBG" firstAttribute="centerX" secondItem="eRW-87-xqd" secondAttribute="centerX" id="L7K-OZ-jhP"/>
-                            <constraint firstItem="eRW-87-xqd" firstAttribute="top" secondItem="e5N-ur-DBG" secondAttribute="bottom" id="O7y-Bp-b5n"/>
+                            <constraint firstAttribute="trailing" secondItem="eRW-87-xqd" secondAttribute="trailing" constant="11" id="Um1-jC-Ysx"/>
                             <constraint firstItem="e5N-ur-DBG" firstAttribute="top" secondItem="T1q-Ba-90U" secondAttribute="bottom" constant="9" id="WNh-BA-Og1"/>
-                            <constraint firstItem="eRW-87-xqd" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leadingMargin" id="WrM-x8-vZC"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="top" secondItem="jIo-bt-XOn" secondAttribute="top" id="Xao-1f-yK5"/>
+                            <constraint firstItem="qo6-RG-5nr" firstAttribute="top" secondItem="eRW-87-xqd" secondAttribute="bottom" constant="8" id="cFI-13-vBa"/>
                             <constraint firstAttribute="trailing" secondItem="T1q-Ba-90U" secondAttribute="trailing" id="w9d-2d-5Hn"/>
+                            <constraint firstItem="eRW-87-xqd" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leading" constant="11" id="whe-fG-3Ea"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="leading" secondItem="e5N-ur-DBG" secondAttribute="leading" id="xiH-UI-YcC"/>
                         </constraints>
                     </view>
