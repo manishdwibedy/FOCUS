@@ -7,9 +7,6 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - ChameleonFramework/Default (2.1.0)
-  - ChameleonFramework/Swift (2.1.0):
-    - ChameleonFramework/Default
   - Cosmos (9.0.0)
   - Fabric (1.6.11)
   - FacebookCore (0.2.0):
@@ -134,7 +131,6 @@ PODS:
 DEPENDENCIES:
   - Agrume (from `https://github.com/JanGorman/Agrume.git`)
   - Alamofire
-  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Cosmos (~> 9.0)
   - Fabric
   - FacebookCore
@@ -161,22 +157,16 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   Agrume:
     :git: https://github.com/JanGorman/Agrume.git
-  ChameleonFramework:
-    :git: https://github.com/ViccAlexander/Chameleon.git
 
 CHECKOUT OPTIONS:
   Agrume:
     :commit: 50ce3665bb7ae946dbed32d3e86306dd32a65b32
     :git: https://github.com/JanGorman/Agrume.git
-  ChameleonFramework:
-    :commit: acc480fbe023c6e5fe40f68593f4a70a8c4c7ad5
-    :git: https://github.com/ViccAlexander/Chameleon.git
 
 SPEC CHECKSUMS:
   Agrume: abf26210c3371bc6c74bbf2ced7a19d937bf8f0a
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Cosmos: 33eee62b2a0418452aef470f711f83c3ea061b7b
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
@@ -213,6 +203,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: e11b76ce0b7e25a0fe14789fbf063d975a926910
+PODFILE CHECKSUM: e3aeaf043a7ad00c5cc13801b2b3f9d383a8ff7c
 
 COCOAPODS: 1.2.0.beta.1
