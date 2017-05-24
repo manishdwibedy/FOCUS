@@ -38,7 +38,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Title" id="IJI-Ig-vYz"/>
+                                    <navigationItem title="Places" id="IJI-Ig-vYz"/>
                                 </items>
                             </navigationBar>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="e5N-ur-DBG">
