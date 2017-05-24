@@ -13,6 +13,7 @@ class SuggestPlaceView: UIView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet var view: UIView!
+    var place: Place?
 
     override init(frame: CGRect) {
         super.init(frame: frame)

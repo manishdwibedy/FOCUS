@@ -98,7 +98,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     func handleTap(_ sender: UITapGestureRecognizer) {
         let view = sender.view as! SuggestPlaceView
         print("Tapped \(view.name.text)")
-        self.performSegue(withIdentifier: "show_suggestions", sender: nil)
+        placeVC?.loadPlace(place: view.place!)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -128,6 +128,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     func gotSuggestedPlaces(places: [Place]) {
         for (index, place) in places.enumerated(){
             let view = suggestPlacesStackView.arrangedSubviews[index] as! SuggestPlaceView
+            view.place = place
             view.name.text = place.name
             view.name.textColor = .white
             view.imageView.sd_setImage(with: URL(string: place.image_url), placeholderImage: UIImage(named: "addUser"))

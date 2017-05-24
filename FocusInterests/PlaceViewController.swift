@@ -37,12 +37,8 @@ class PlaceViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationBar.topItem?.title = place?.name
-        ratingLabel.text = "\(place!.rating)"
         ratingBackground.layer.cornerRadius = 5
-        imageView.sd_setImage(with: URL(string: (place?.image_url)!), placeholderImage: nil)
-        self.getLatestComments()
-        fetchSuggestedPlaces(token: AuthApi.getYelpToken()!)
+        self.loadPlace(place: self.place!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,6 +78,15 @@ class PlaceViewController: UIViewController {
         }
     }
     
+    func loadPlace(place: Place){
+        navigationBar.topItem?.title = place.name
+        ratingLabel.text = "\(place.rating)"
+        
+        imageView.sd_setImage(with: URL(string: (place.image_url)), placeholderImage: nil)
+        self.getLatestComments()
+        fetchSuggestedPlaces(token: AuthApi.getYelpToken()!)
+        
+    }
     func getLatestComments(){
         let place = Constants.DB.places
         let comments = place.child((self.place?.id)!).child("comments")
