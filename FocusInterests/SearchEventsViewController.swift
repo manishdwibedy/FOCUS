@@ -100,6 +100,16 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
         })
         
+        //attending
+        Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                cell?.attendButton.setTitle("Attending", for: UIControlState.normal)
+            }
+            
+        })
+        
         cell?.attendButton.roundCorners(radius: 10)
         cell?.inviteButton.roundCorners(radius: 10)
         
@@ -114,8 +124,47 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func attendEvent(sender:UIButton){
         let buttonRow = sender.tag
-
-        print("attending event \(self.events[buttonRow].title) ")
+        let event = self.events[buttonRow]
+        
+        if sender.title(for: .normal) == "Attend"{
+            print("attending event \(event.title) ")
+            
+            Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+            
+            
+            Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    let attendingAmount = value?["amount"] as! Int
+                    Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount + 1])
+                }
+            })
+            
+            sender.setTitle("Attending", for: .normal)
+        }
+        else{
+            Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                
+                for (id,_) in value!{
+                    Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
+                }
+                
+            })
+            
+            Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    let attendingAmount = value?["amount"] as! Int
+                    Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
+                }
+            })
+            
+            sender.setTitle("Attend", for: .normal)
+        }
+        
     }
     
     func inviteUser(sender:UIButton){
