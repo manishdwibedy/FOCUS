@@ -138,6 +138,16 @@
             </objects>
             <point key="canvasLocation" x="1814" y="1444"/>
         </scene>
+        <!--Pin-->
+        <scene sceneID="Nnu-K9-sIW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Pin" id="Ole-J7-YI8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="qcP-8k-Fia"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aks-2I-R3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1386" y="1671"/>
+        </scene>
         <!--Create Event View Controller-->
         <scene sceneID="hxJ-0a-gjo">
             <objects>
@@ -370,7 +380,7 @@
                     <connections>
                         <segue destination="VEY-4A-vsU" kind="relationship" relationship="viewControllers" id="QCV-Df-Bcq"/>
                         <segue destination="4DZ-sJ-6ta" kind="relationship" relationship="viewControllers" id="aFC-3v-mpp"/>
-                        <segue destination="Yad-Gc-gnb" kind="relationship" relationship="viewControllers" id="fuo-Lr-oae"/>
+                        <segue destination="Ole-J7-YI8" kind="relationship" relationship="viewControllers" id="STk-b6-Zx6"/>
                         <segue destination="b5i-xY-EUY" kind="relationship" relationship="viewControllers" id="AqH-oJ-cPB"/>
                         <segue destination="FSH-QB-bWv" kind="relationship" relationship="viewControllers" id="g0W-wD-Shp"/>
                     </connections>
@@ -378,27 +388,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPQ-ml-5o3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="678" y="1009"/>
-        </scene>
-        <!--CHECK-->
-        <scene sceneID="pT4-1V-rkX">
-            <objects>
-                <viewController id="Yad-Gc-gnb" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6go-K8-YJ9"/>
-                        <viewControllerLayoutGuide type="bottom" id="i0q-Dg-eP5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GS1-cG-HLc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="CHECK" id="uNS-SH-yLT">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w4y-UH-f2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1626" y="2138"/>
         </scene>
         <!--search_event-->
         <scene sceneID="wfn-tH-Gep">
@@ -414,7 +403,7 @@
         <scene sceneID="UtR-ux-scg">
             <objects>
                 <viewControllerPlaceholder storyboardName="search_place" id="b5i-xY-EUY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="8LE-7s-vUa"/>
+                    <tabBarItem key="tabBarItem" title="PLACE" id="8LE-7s-vUa"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFT-ie-lv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -580,7 +569,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zwr-f5-bIi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home-1" id="xTg-4h-XeN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="acD-ii-E6E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="acD-ii-E6E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
