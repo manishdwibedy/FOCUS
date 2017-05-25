@@ -15,6 +15,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var changeLocationOut: UIButton!
+    @IBOutlet weak var pinTextView: UITextView!
+    @IBOutlet weak var cancelOut: UIButton!
+    @IBOutlet weak var pinOut: UIButton!
     
     var imageArray = [UIImage]()
     
@@ -35,6 +38,34 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width + hieghtAdjustment)
         
+        cancelOut.layer.cornerRadius = 6
+        cancelOut.clipsToBounds = true
+        
+        pinOut.layer.cornerRadius = 6
+        pinOut.clipsToBounds = true
+        
+        changeLocationOut.layer.cornerRadius = 6
+        changeLocationOut.clipsToBounds = true
+        changeLocationOut.layer.borderColor = UIColor.white.cgColor
+        changeLocationOut.layer.borderWidth = 1
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardDidShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardDidHide, object: nil)
+        
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle = UIBarStyle.blackTranslucent
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(keyboardDone))
+        done.tintColor = UIColor(red: 112/255, green: 201/255, blue: 1/255, alpha: 1)
+        
+        doneToolbar.items = [flexSpace, done]
+        doneToolbar.sizeToFit()
+        
+        pinTextView.inputAccessoryView = doneToolbar
+        
+        
         getPhotos()
 
         
@@ -47,6 +78,20 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     @IBAction func changeLocation(_ sender: Any) {
     }
+    
+    
+    @IBAction func camera(_ sender: Any) {
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+    }
+    
+    @IBAction func pin(_ sender: Any) {
+    }
+    
+    
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageArray.count
@@ -96,6 +141,32 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
        
         
     }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            
+            pinTextView.text = ""
+            pinTextView.font = UIFont(name: "HelveticaNeue", size: 20)
+        
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            if pinTextView.text == ""
+            {
+                pinTextView.text = "What are you up to?"
+                pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)
+            }
+            
+        }
+    }
+    
+    func keyboardDone()
+    {
+       pinTextView.resignFirstResponder()
+    }
+
     
     
     

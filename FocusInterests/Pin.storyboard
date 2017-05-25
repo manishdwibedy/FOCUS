@@ -64,7 +64,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What are you up to?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IIB-I7-1sg">
                                 <rect key="frame" x="16" y="151.5" width="343" height="206.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfT-IG-bgE">
@@ -72,6 +72,9 @@
                                 <state key="normal" title="Camera">
                                     <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="camera:" destination="r5X-Z6-if9" eventType="touchUpInside" id="3Fu-ba-wol"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y9L-9E-i9r">
                                 <rect key="frame" x="177" y="366" width="182" height="30"/>
@@ -102,6 +105,9 @@
                                 <state key="normal" title="Pin">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pin:" destination="r5X-Z6-if9" eventType="touchUpInside" id="2ea-1V-icN"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="A0j-it-CBu">
                                 <rect key="frame" x="0.0" y="434" width="375" height="184"/>
@@ -146,6 +152,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancel:" destination="r5X-Z6-if9" eventType="touchUpInside" id="5jM-hD-WHG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -182,9 +191,12 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cancelOut" destination="uye-eQ-vsG" id="ZVL-0o-LoF"/>
                         <outlet property="changeLocationOut" destination="Odg-wd-kdR" id="HGk-xP-N0Y"/>
                         <outlet property="collectionView" destination="A0j-it-CBu" id="b4r-kk-qCU"/>
                         <outlet property="locationLabel" destination="5eI-xS-jZm" id="VKF-8R-VIb"/>
+                        <outlet property="pinOut" destination="jNi-Ij-b57" id="HdE-g9-dAH"/>
+                        <outlet property="pinTextView" destination="IIB-I7-1sg" id="reF-1K-rBg"/>
                         <outlet property="profileImage" destination="K7V-u7-6WN" id="gGp-6Q-6mQ"/>
                     </connections>
                 </viewController>
