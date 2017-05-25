@@ -21,14 +21,14 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
         let nib = UINib(nibName: "inviteCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "inviteCell")
 
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").observeSingleEvent(of: .value, with: { (snapshot) in
+        Constants.DB.user.queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
                 for (key,_) in value!
                 {
                     let newData = inviteData()
-                    newData.UID = (value?[key] as! NSDictionary)["UID"] as! String
+                    newData.UID = (value?[key] as! NSDictionary)["firebaseUserId"] as! String
                     self.inviteCellData.append(newData)
                 }
             }

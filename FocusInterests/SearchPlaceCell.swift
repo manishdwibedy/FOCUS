@@ -38,7 +38,7 @@ class SearchPlaceCell: UITableViewCell {
     func checkForFollow(id:String)
     {
         print(id)
-        Constants.DB.following_place.child(id).child("userIDList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+        Constants.DB.following_place.child(id).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
@@ -55,10 +55,9 @@ class SearchPlaceCell: UITableViewCell {
                 self.followButtonOut.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
                 self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
                 self.followButtonOut.isEnabled = true
-
+                
             }
-        })
-    }
+        })    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -67,7 +66,10 @@ class SearchPlaceCell: UITableViewCell {
     }
     
     @IBAction func followButton(_ sender: Any) {
-        Constants.DB.following_place.child(placeID).child("userIDList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+         let time = NSDate().timeIntervalSince1970
+        Constants.DB.following_place.child(placeID).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":placeID, "time":time])
+        Constants.DB.places.child(placeID).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
         self.followButtonOut.layer.borderColor = UIColor.white.cgColor
         self.followButtonOut.layer.borderWidth = 1
         self.followButtonOut.backgroundColor = UIColor.clear
