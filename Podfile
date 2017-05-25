@@ -32,6 +32,7 @@ target 'FocusInterests' do
     pod 'OhhAuth'
     pod 'Magnetic'
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+    pod 'SCLAlertView'
 
 end
 

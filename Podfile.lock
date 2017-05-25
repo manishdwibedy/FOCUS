@@ -121,6 +121,7 @@ PODS:
   - Magnetic (1.0.6)
   - OhhAuth (1.0.0)
   - Protobuf (3.2.0)
+  - SCLAlertView (0.7.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -153,6 +154,7 @@ DEPENDENCIES:
   - JSQMessagesViewController
   - Magnetic
   - OhhAuth
+  - SCLAlertView
   - SDWebImage (~> 3.8)
   - Solar
   - SwiftyJSON
@@ -207,12 +209,13 @@ SPEC CHECKSUMS:
   Magnetic: 5d8e4ce3d3e6cf496af1035580971a1d17e966f3
   OhhAuth: 82863d7a9aa2a749eb2c65551281c01f3facf501
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   Solar: ea092f7660c1b58d2b754227decb61a1c6710826
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: e11b76ce0b7e25a0fe14789fbf063d975a926910
+PODFILE CHECKSUM: 494c02d7639f94d21fbd0059942f905a10bae883
 
 COCOAPODS: 1.2.0.beta.1

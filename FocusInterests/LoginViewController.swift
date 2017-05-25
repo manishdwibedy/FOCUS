@@ -11,6 +11,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import FirebaseAuth
 import GoogleSignIn
+import SCLAlertView
 
 enum LoginTypes: String {
     case Email = "email"
@@ -210,7 +211,32 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                     AuthApi.set(firebaseUid: fireId)
                     AuthApi.set(loggedIn: .Google)
                     AuthApi.set(googleToken: id)
-                    self.showHomeVC()
+                    
+                    let userRef = Constants.DB.user.child(fireId).observeSingleEvent(of: .value, with: {(snapshot) in
+                    
+                        let info = snapshot.value as? [String:Any]
+                        
+                        guard let fullName = info?["fullname"] as? String, !fullName.isEmpty else{
+                            
+                            let appearance = SCLAlertView.SCLAppearance(
+                                showCloseButton: false
+                            )
+                            let alert = SCLAlertView(appearance: appearance)
+                            
+                            let fullName = alert.addTextField("Enter your name")
+                            alert.addButton("Done") {
+                                Constants.DB.user.child("\(fireId)/fullname").setValue(fullName.text!)
+                            }
+                            alert.showEdit("Enter your full name", subTitle: "Please enter your full name")
+                            
+
+                            return
+                            
+                        }
+                        self.showHomeVC()
+                        
+                    })
+                    
                 } else {
                     self.showLoginFailedAlert(loginType: "our server")
                 }
@@ -230,6 +256,10 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func askFullName(){
+        
     }
 
 }
