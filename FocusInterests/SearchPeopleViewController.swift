@@ -53,7 +53,9 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 let user = User(username: info?["username"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil)
                 
-                self.people.append(user)
+                if user.uuid != AuthApi.getFirebaseUid(){
+                    self.people.append(user)
+                }
             }
             self.filtered = self.people
             self.tableView.reloadData()
@@ -89,8 +91,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
 //        
 //        cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
 //        cell?.address.textContainer.maximumNumberOfLines = 6
-        
-        
+        cell?.ID = people.uuid!
+        cell?.checkFollow()
         cell?.interest.text = "Category"
         //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
@@ -160,7 +162,9 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                     
                     let user = User(username: info?["username"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil)
                     
-                    self.filtered.append(user)
+                    if user.uuid != AuthApi.getFirebaseUid(){
+                        self.filtered.append(user)
+                    }
                 }
                 self.tableView.reloadData()
             })

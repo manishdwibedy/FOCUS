@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="429" height="135"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mns-GT-1Sv" id="n0I-2n-AQA">
-                <rect key="frame" x="0.0" y="0.0" width="429" height="134.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="429" height="134"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FamHalloween" translatesAutoresizingMaskIntoConstraints="NO" id="Jrp-IZ-pa4">
@@ -56,6 +56,9 @@
                         <state key="normal" title="Follow">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="followUser:" destination="mns-GT-1Sv" eventType="touchUpInside" id="LHS-Md-uHU"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHh-7b-rCo">
                         <rect key="frame" x="68" y="100.5" width="100" height="14"/>
@@ -78,6 +81,9 @@
                         <state key="normal" title="Invite">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="inviteUser:" destination="mns-GT-1Sv" eventType="touchUpInside" id="BGF-5L-f0x"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpm-zK-R8B">
                         <rect key="frame" x="160" y="101" width="31" height="14.5"/>

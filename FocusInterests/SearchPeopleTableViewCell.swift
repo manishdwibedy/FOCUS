@@ -19,6 +19,9 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var inviteButton: UIButton!
 
     @IBOutlet weak var fullName: UILabel!
+
+    var ID = ""
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,4 +33,41 @@ class SearchPeopleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func checkFollow(){
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                
+                self.followButton.layer.borderColor = UIColor.white.cgColor
+                self.followButton.layer.borderWidth = 1
+                self.followButton.backgroundColor = UIColor.clear
+                self.followButton.setTitle("Following", for: UIControlState.normal)
+            }else
+            {
+                self.followButton.layer.borderColor = UIColor.clear.cgColor
+                self.followButton.layer.borderWidth = 0
+                self.followButton.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
+                self.followButton.setTitle("Follow", for: UIControlState.normal)
+            }
+        })
+    }
+    
+    @IBAction func followUser(_ sender: UIButton) {
+        let time = NSDate().timeIntervalSince1970
+
+    
+      Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").childByAutoId().updateChildValues(["UID":ID, "time":Double(time)])
+        
+        Constants.DB.user.child(ID).child("followers").child("people").childByAutoId().updateChildValues(["ID":AuthApi.getFirebaseUid()!, "time":time])
+        
+        self.followButton.layer.borderColor = UIColor.white.cgColor
+        self.followButton.layer.borderWidth = 1
+        self.followButton.backgroundColor = UIColor.clear
+        self.followButton.setTitle("Following", for: UIControlState.normal)
+        self.followButton.isEnabled = false
+    }
+    
+    @IBAction func inviteUser(_ sender: UIButton) {
+    }
 }
