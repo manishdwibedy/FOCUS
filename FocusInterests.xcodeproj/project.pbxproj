@@ -20,6 +20,9 @@
 		5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */; };
 		5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B4303A41ED55F6400B63D56 /* SearchEventTableViewCell.xib */; };
 		5B519E751ED667D000B36110 /* Pin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B519E741ED667D000B36110 /* Pin.storyboard */; };
+		5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */; };
+		5B519E7A1ED677D800B36110 /* SearchPeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */; };
+		5B519E7B1ED677D800B36110 /* SearchPeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B519E791ED677D800B36110 /* SearchPeopleTableViewCell.xib */; };
 		5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */; };
 		5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D51EA7285C007E8D99 /* Event.swift */; };
 		5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */; };
@@ -220,6 +223,9 @@
 		5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventTableViewCell.swift; sourceTree = "<group>"; };
 		5B4303A41ED55F6400B63D56 /* SearchEventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchEventTableViewCell.xib; sourceTree = "<group>"; };
 		5B519E741ED667D000B36110 /* Pin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pin.storyboard; sourceTree = "<group>"; };
+		5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleViewController.swift; sourceTree = "<group>"; };
+		5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleTableViewCell.swift; sourceTree = "<group>"; };
+		5B519E791ED677D800B36110 /* SearchPeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPeopleTableViewCell.xib; sourceTree = "<group>"; };
 		5B51C8D31EA722D2007E8D99 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		5B51C8D51EA7285C007E8D99 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
@@ -602,6 +608,7 @@
 				FF69ABF91ED649120044BE51 /* invitePlaceCV.swift */,
 				FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */,
 				5B7BB1E51ED51E9E001E60FF /* SearchEventsViewController.swift */,
+				5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -895,6 +902,8 @@
 				FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */,
 				5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */,
 				5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */,
+				5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */,
+				5B519E791ED677D800B36110 /* SearchPeopleTableViewCell.xib */,
 				5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */,
 				5B4303A41ED55F6400B63D56 /* SearchEventTableViewCell.xib */,
 			);
@@ -1125,6 +1134,7 @@
 				5B251E891ED276970075B57A /* InterestsViewController.xib in Resources */,
 				D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */,
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
+				5B519E7B1ED677D800B36110 /* SearchPeopleTableViewCell.xib in Resources */,
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */,
@@ -1345,6 +1355,7 @@
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
 				5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */,
 				5B7BB1E61ED51E9E001E60FF /* SearchEventsViewController.swift in Sources */,
+				5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */,
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				5B71D7051ED1837A0093A3F5 /* commentCell.swift in Sources */,
@@ -1403,6 +1414,7 @@
 				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,
 				5B6AFA751ED1906900A82104 /* GMUStyle.m in Sources */,
 				5B7BB1E31ED51069001E60FF /* SuggestPlaceTableViewCell.swift in Sources */,
+				5B519E7A1ED677D800B36110 /* SearchPeopleTableViewCell.swift in Sources */,
 				D296F5D31E75BB69007EC393 /* AuthApi.swift in Sources */,
 				5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */,
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
