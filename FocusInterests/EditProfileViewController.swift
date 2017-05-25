@@ -8,12 +8,25 @@
 
 import UIKit
 
-class EditProfileViewController: UITableViewController {
+class EditProfileViewController: UIViewController {
 
+    @IBOutlet weak var genderTf: UITextField!
+    @IBOutlet weak var phoneTf: UITextField!
+    @IBOutlet weak var emailTf: UITextField!
+    @IBOutlet weak var infoTf: UITextField!
+    @IBOutlet weak var websiteTf: UITextField!
+    @IBOutlet weak var usernameTf: UITextField!
+    @IBOutlet weak var nameTf: UITextField!
+    @IBOutlet weak var profilePhotoView: UIImageView!
+    
+    var userId: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.fillDataFromUser()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,14 +34,95 @@ class EditProfileViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func fillDataFromUser() {
+        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
+            if dictionnary != nil {
+                print(dictionnary!)
+                
+                
+                // SET USERID
+                
+                self.userId = dictionnary!["firebaseUserId"] as? String ?? nil
+                
+                guard (self.userId != nil) else {
+                    self.dismiss(animated: true, completion: nil)
+                    return
+                }
+                
+                // GET STRING
+                let username_str = dictionnary!["username"] as? String ?? ""
+                let description_str = dictionnary!["description"] as? String ?? ""
+                let gender_str = dictionnary!["gender"] as? String ?? ""
+                let name_str = dictionnary!["name"] as? String ?? ""
+                let website_str = dictionnary!["website"] as? String ?? ""
+                //let email_str = dictionnary!["email"] as? String ?? ""
+                //let phone_str = dictionnary!["phone_nbr"] as? String ?? ""
+
+                
+                
+                // SET CONTENT
+                self.usernameTf.text = username_str
+                self.infoTf.text = description_str
+                self.genderTf.text = gender_str
+                self.nameTf.text = name_str
+                self.websiteTf.text = website_str
+                
+                // SET PROFILE PHOTO
+                let image_str = dictionnary!["image_string"] as! String
+                self.profilePhotoView.roundedImage()
+                self.profilePhotoView.sd_setImage(with: URL(string: image_str), placeholderImage: UIImage(named: "empty_event"))
+                
+                
+            }
+            
+        }
+
+    }
+    
 
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func doneAction(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        
+        FirebaseUpstream.sharedInstance.uploadProfileImage_(image: profilePhotoView.image!) { [unowned self] (returnUrl) in
+            
+            let url = returnUrl as String
+            
+            let focusUser = FocusUser(userName: self.usernameTf.text, firebaseId: self.userId, imageString: url, currentLocation: nil, name: self.nameTf.text, website: self.websiteTf.text, email: self.emailTf.text, gender: self.genderTf.text, phone: self.phoneTf.text, description: self.infoTf.text)
+            
+            
+            FirebaseUpstream.sharedInstance.addToUsers_(focusUser: focusUser)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func changePhotoAction(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {
+            action in
+            picker.sourceType = .camera
+            self.present(picker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {
+            action in
+            picker.sourceType = .photoLibrary
+            self.present(picker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
 
     }
+    
+    @IBAction func editAction(_ sender: Any) {
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -39,4 +133,20 @@ class EditProfileViewController: UITableViewController {
     }
     */
 
+}
+
+extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    {
+        profilePhotoView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        profilePhotoView.backgroundColor = UIColor.clear
+        profilePhotoView.contentMode = UIViewContentMode.scaleAspectFit
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
