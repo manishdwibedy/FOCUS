@@ -36,8 +36,6 @@ class InvitationViewController: UIViewController {
 
             
             store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
-                print(isGranted)
-                print(error)
                 self.retrieveContactsWithStore(store: store)
             }
 
@@ -47,20 +45,18 @@ class InvitationViewController: UIViewController {
     }
 
     func retrieveContactsWithStore(store: CNContactStore) {
-        do {
-            
+//        do {
+        
             let contactStore = CNContactStore()
             let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
             let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
             
-            try? contactStore.enumerateContacts(with: request1) { (contact, error) in
-                print("\(contact.givenName) \(contact.familyName)")
-                print(contact.phoneNumbers)
-                print(contact.imageData)
-            }
-        } catch {
-            print(error)
-        }
+//            try? contactStore.enumerateContacts(with: request1) { (contact, error) in
+//                
+//            }
+//        } catch {
+//            print(error)
+//        }
     }
     
     func getFacebookFriends(){

@@ -44,7 +44,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         markUnread()
         getMessageID()
         
-        self.navigationItem.title = self.user["username"]! as! String
+        self.navigationItem.title = self.user["username"]! as? String
         super.collectionView.keyboardDismissMode = .interactive
     }
     

@@ -39,7 +39,7 @@ class Share{
                     let user = FIRAuth.auth()?.currentUser
                     
                     user?.link(with: credential, completion: { (user, error) in
-                        if let error = error {
+                        if error != nil {
                             // ...
                             return
                         }

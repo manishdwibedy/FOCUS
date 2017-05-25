@@ -22,7 +22,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
     var checkInterests = [Bool]()
-    let validatedFields = false
+    let validatedFields = true
     
     @IBOutlet weak var canInviteFriendsLabel: UILabel!
     @IBOutlet weak var showGuestListLabel: UILabel!
@@ -62,10 +62,35 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         backgroundView.backgroundColor = UIColor.lightGray
         interestTableView.backgroundView = backgroundView
         
-        for _ in 0...5{
+        
+        
+        for _ in 0..<Constants.interests.interest_list.count{
             checkInterests.append(false)
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let cached = Event.fetchEvent() {
+            self.event = cached
+            eventNameTextField.text = cached.title
+            eventDescriptionTextView.text = cached.eventDescription! ?? ""
+            locationTextField.text = cached.fullAddress
+            
+            let dateTime = cached.date?.components(separatedBy: ",")
+            eventDateTextField.text = dateTime?[0]
+            eventTimeTextField.text = dateTime?[0]
+            
+            let interests = cached.category?.components(separatedBy: ",")
+            
+            for (index, interest) in Constants.interests.interest_list.enumerated(){
+                if (interests?.contains(interest.name!))!{
+                    checkInterests[index] = true
+                }
+            }
+            interestTableView.reloadData()
+            Event.clearCache()
+        }
     }
     
     func setTextFieldDelegates(){
@@ -91,39 +116,77 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chooseIcon" && validatedFields {
-            guard let validPlace = self.place else {
-                presentNotification(title: "Choose a location", message: "Please choose a location for this event.")
-                return
-            }
-            let locality = validPlace.addressComponents?[0].name
-            let street = validPlace.addressComponents?[1].name
-            let shortAddress = "\(locality!), \(street!)"
-            
-            guard let name = eventNameTextField.text, !name.isEmpty else{
-                presentNotification(title: "Choose a name", message: "Please choose a name for this event.")
-                return
-            }
-            
-            let validDescrip = eventDescriptionTextView.text ?? ""
-            
-            guard let validDate = eventDateTextField.text, !validDate.isEmpty,
-                let validTime = eventTimeTextField.text, !validTime.isEmpty else {
-                    presentNotification(title: "Choose a date and time.", message: "Please choose a date and time for this event.")
+            if self.event != nil{
+                guard let name = eventNameTextField.text, !name.isEmpty else{
+                    presentNotification(title: "Choose a name", message: "Please choose a name for this event.")
                     return
                 }
-            let dateString = "\(validDate), \(validTime)"
-            guard let creator = AuthApi.getFirebaseUid() else { return }
-            
-            self.event = Event(title: name, description: "", fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator)
-            
-            let destination = segue.destination as! UINavigationController
-            let nextVC = destination.viewControllers[0] as! EventIconViewController
-            guard let validEvent = self.event else {
-                print("no event sent to eventIcon VC")
-                return
+                
+                let validDescrip = eventDescriptionTextView.text ?? ""
+                
+                guard let validDate = eventDateTextField.text, !validDate.isEmpty,
+                    let validTime = eventTimeTextField.text, !validTime.isEmpty else {
+                        presentNotification(title: "Choose a date and time.", message: "Please choose a date and time for this event.")
+                        return
+                }
+                let dateString = "\(validDate), \(validTime)"
+                guard let creator = AuthApi.getFirebaseUid() else { return }
+                
+                let interests = zip(checkInterests,Constants.interests.interest_list ).filter { $0.0 }.map { $1.name! }
+                
+                guard !interests.isEmpty else{
+                    presentNotification(title: "Choose a interest", message: "Please choose atleast one interest for this event.")
+                    return
+                }
+                self.event?.title = eventNameTextField.text
+                self.event?.eventDescription = validDescrip
+                self.event?.date = dateString
+                self.event?.category = interests.joined(separator: ";")
+                
+                
             }
-            nextVC.event = validEvent
-            self.event = nil
+            else{
+                guard let validPlace = self.place else {
+                    presentNotification(title: "Choose a location", message: "Please choose a location for this event.")
+                    return
+                }
+                let locality = validPlace.addressComponents?[0].name
+                let street = validPlace.addressComponents?[1].name
+                let shortAddress = "\(locality!), \(street!)"
+                
+                
+                guard let name = eventNameTextField.text, !name.isEmpty else{
+                    presentNotification(title: "Choose a name", message: "Please choose a name for this event.")
+                    return
+                }
+                
+                let validDescrip = eventDescriptionTextView.text ?? ""
+                
+                guard let validDate = eventDateTextField.text, !validDate.isEmpty,
+                    let validTime = eventTimeTextField.text, !validTime.isEmpty else {
+                        presentNotification(title: "Choose a date and time.", message: "Please choose a date and time for this event.")
+                        return
+                }
+                let dateString = "\(validDate), \(validTime)"
+                guard let creator = AuthApi.getFirebaseUid() else { return }
+                
+                let interests = zip(checkInterests,Constants.interests.interest_list ).filter { $0.0 }.map { $1.name! }
+                
+                guard !interests.isEmpty else{
+                    presentNotification(title: "Choose a interest", message: "Please choose atleast one interest for this event.")
+                    return
+                }
+                
+                
+                self.event = Event(title: name, description: "", fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"))
+            
+            }
+            
+            Event.cacheEvent(event: self.event!)
+            let destination = segue.destination as! EventIconViewController
+            destination.event = self.event
+            
+            
             let _ = [eventNameTextField, eventDateTextField, eventTimeTextField, locationTextField].map{$0.text = nil}
         }
     }
@@ -229,6 +292,8 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
         
+        cell.selectedInterestLabel.text = Constants.interests.interest_list[indexPath.row].name
+        
         if checkInterests[indexPath.row]{
             cell.checkedInterest.image = UIImage(named: "Interest_Filled")
         }
@@ -254,6 +319,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
+        Event.clearCache()
         self.dismiss(animated: true, completion: nil)
     }
     

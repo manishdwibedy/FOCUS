@@ -59,7 +59,7 @@ code_sign_if_enabled() {
   if [ -n "${EXPANDED_CODE_SIGN_IDENTITY}" -a "${CODE_SIGNING_REQUIRED}" != "NO" -a "${CODE_SIGNING_ALLOWED}" != "NO" ]; then
     # Use the current code_sign_identitiy
     echo "Code Signing $1 with Identity ${EXPANDED_CODE_SIGN_IDENTITY_NAME}"
-    local code_sign_cmd="/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements '$1'"
+    local code_sign_cmd="/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements "$1""
 
     if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
       code_sign_cmd="$code_sign_cmd &"
@@ -108,6 +108,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Magnetic/Magnetic.framework"
   install_framework "$BUILT_PRODUCTS_DIR/OhhAuth/OhhAuth.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf-iOS10.0/Protobuf.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Solar/Solar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS10.0/SwiftyJSON.framework"
@@ -132,6 +133,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Magnetic/Magnetic.framework"
   install_framework "$BUILT_PRODUCTS_DIR/OhhAuth/OhhAuth.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf-iOS10.0/Protobuf.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Solar/Solar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS10.0/SwiftyJSON.framework"

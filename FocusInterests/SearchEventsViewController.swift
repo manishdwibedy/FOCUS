@@ -84,7 +84,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let reference = Constants.storage.event.child("\(event.id!).jpg")
         
         // Placeholder image
-        let placeholderImage = UIImage(named: "empty_event")
+        _ = UIImage(named: "empty_event")
         
         reference.downloadURL(completion: { (url, error) in
             
@@ -97,6 +97,16 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
             cell?.eventImage?.setShowActivityIndicator(true)
             cell?.eventImage?.setIndicatorStyle(.gray)
+            
+        })
+        
+        //attending
+        Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                cell?.attendButton.setTitle("Attending", for: UIControlState.normal)
+            }
             
         })
         
@@ -114,14 +124,61 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func attendEvent(sender:UIButton){
         let buttonRow = sender.tag
-
-        print("attending event \(self.events[buttonRow].title) ")
+        let event = self.events[buttonRow]
+        
+        if sender.title(for: .normal) == "Attend"{
+            print("attending event \(event.title) ")
+            
+            Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+            
+            
+            Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    let attendingAmount = value?["amount"] as! Int
+                    Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount + 1])
+                }
+            })
+            
+            sender.setTitle("Attending", for: .normal)
+        }
+        else{
+            Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                
+                for (id,_) in value!{
+                    Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
+                }
+                
+            })
+            
+            Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    let attendingAmount = value?["amount"] as! Int
+                    Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
+                }
+            })
+            
+            sender.setTitle("Attend", for: .normal)
+        }
+        
     }
     
     func inviteUser(sender:UIButton){
         let buttonRow = sender.tag
         
-        print("invite user to event \(self.events[buttonRow].title) ")
+        let event = self.events[buttonRow]
+        print("invite user to event \(event.title) ")
+        
+        let storyboard = UIStoryboard(name: "search_place", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "invitePlaceCV") as! invitePlaceCV
+        ivc.type = "event"
+        ivc.id = event.id!
+        self.present(ivc, animated: true, completion: { _ in })
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -143,7 +200,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 for (id, event) in events{
                     let info = event as? [String:Any]
-                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id)
+                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
                     
                     if let attending = info?["attendingList"] as? [String:Any]{
                         event.setAttendessCount(count: attending.count)

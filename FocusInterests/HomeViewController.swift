@@ -47,11 +47,6 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
         self.title = "HOME"
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
-
-    }
-
     @IBAction func didTapSettings(_ sender: Any) {
         
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)

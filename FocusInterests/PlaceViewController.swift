@@ -149,7 +149,7 @@ class PlaceViewController: UIViewController {
             var suggestedPlaces = [Place]()
             let json = JSON(data: response.data!)
             
-            for (index, business) in json["businesses"].enumerated(){
+            for (_, business) in json["businesses"].enumerated(){
                 let id = business.1["id"].stringValue
                 let name = business.1["name"].stringValue
                 let image_url = business.1["image_url"].stringValue

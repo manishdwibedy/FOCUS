@@ -69,7 +69,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             for (id, event) in events{
                 let info = event as? [String:Any]
-                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id)
+                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
         
                 if let attending = info?["attendingList"] as? [String:Any]{
                     event.setAttendessCount(count: attending.count)
@@ -178,6 +178,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
     }
     
+    
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
@@ -273,6 +274,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func messagesClicked() {
         let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
+        
+//        let newPerson = Event(title: "t", description: "d", fullAddress: "", shortAddress: "", latitude: "", longitude: "", date: "", creator: "", category: "")
+//        let encodedData = NSKeyedArchiver.archivedData(withRootObject: newPerson)
+//        UserDefaults.standard.set(encodedData, forKey: "people")
+//        
+//        // retrieving a value for a key
+//        if let data = UserDefaults.standard.data(forKey: "people"),
+//            let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? Event {
+//            print(myPeopleList)
+//        } else {
+//            print("There is an issue")
+//        }
         
         self.present(VC, animated:true, completion:nil)
     }

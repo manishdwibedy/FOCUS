@@ -37,13 +37,13 @@ class CreateEventViewController: UIViewController {
         if place != nil{
             let locality = self.place?.addressComponents?[0].name
             let street = self.place?.addressComponents?[1].name
-            let shortAddress = "\(locality!), \(street!)"
+            _ = "\(locality!), \(street!)"
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM d, h:mm a"
             
             
-            self.event = Event(title: name.text!, description: desc.text!, fullAddress: (self.place?.formattedAddress)!, shortAddress: shortAddress, latitude: (self.place?.coordinate.latitude.debugDescription)!, longitude: (self.place?.coordinate.longitude.debugDescription)!, date: dateFormatter.string(from: self.datePicker.date), creator: AuthApi.getFirebaseUid()!)
+//            self.event = Event(title: name.text!, description: desc.text!, fullAddress: (self.place?.formattedAddress)!, shortAddress: shortAddress, latitude: (self.place?.coordinate.latitude.debugDescription)!, longitude: (self.place?.coordinate.longitude.debugDescription)!, date: dateFormatter.string(from: self.datePicker.date), creator: AuthApi.getFirebaseUid()!, category: )
         }
         
     }

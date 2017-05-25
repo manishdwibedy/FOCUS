@@ -27,7 +27,7 @@ class InviteFriendsViewController: UIViewController {
     
     @IBAction func buttonClicked(_ sender: Any) {
         
-        if let FBtoken = AuthApi.getFacebookToken(){
+        if AuthApi.getFacebookToken() != nil{
             self.getFacebookFriends()
         }
         else{
@@ -43,7 +43,7 @@ class InviteFriendsViewController: UIViewController {
                         if let tokenString = FBSDKAccessToken.current().tokenString {
                             let credential = FIRFacebookAuthProvider.credential(withAccessToken: tokenString)
                             FIRAuth.auth()?.currentUser?.link(with: credential) { (user, error) in
-                                if let error = error {
+                                if error != nil {
                                     
                                     self.showLoginFailedAlert(loginType: "Facebook")
                                     return
@@ -80,7 +80,7 @@ class InviteFriendsViewController: UIViewController {
                 let friends = response.dictionaryValue?["data"] as! [[String : AnyObject]]
 
                 let paging = response.dictionaryValue?["paging"] as! [String : AnyObject]
-                let nextPage = paging["next"] as! String
+                _ = paging["next"] as! String
 
                 for friend in friends{
                     print("\(String(describing: friend["first_name"]!)) \(String(describing: friend["last_name"]!) )")

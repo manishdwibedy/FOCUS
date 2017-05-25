@@ -309,7 +309,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                             }
                             
                             self.checkForSignedUp()
-                            if let error = error {
+                            if error != nil {
                                 self.showLoginFailedAlert(loginType: "our server")
                                 return
                             }

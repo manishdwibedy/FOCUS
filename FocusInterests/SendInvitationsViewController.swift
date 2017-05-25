@@ -67,9 +67,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
             
             try? contactStore.enumerateContacts(with: request1) { (contact, error) in
-                print("\(contact.givenName) \(contact.familyName)")
-                print(contact.phoneNumbers)
-                print(contact.imageData)
                 self.contacts.append(contact)
             }
             self.setSelectedFriends()
@@ -80,6 +77,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     @IBAction func createEvents(_ sender: UIButton) {
+        Event.clearCache()
         let id = self.event?.saveToDB(ref: Constants.DB.event)
         
         if let data = self.image{
