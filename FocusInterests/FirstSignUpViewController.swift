@@ -20,6 +20,8 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
         self.phoneOrEmailTextField.setBottomBorder()
         self.phoneOrEmailTextField.keyboardType = .numberPad
         self.phoneOrEmailTextField.delegate = self
+        phoneOrEmailTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
+        
     }
     
     @IBAction func typeOfSignUpWasSelected(_ sender: Any) {
