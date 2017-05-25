@@ -12,8 +12,13 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
 
     @IBOutlet weak var tableView: UITableView!
     var inviteCellData = [inviteData]()
-    var inviteUIDList = [String]()
+
     var parentCell: SearchPlaceCell!
+    var type = ""
+    var id = ""
+    
+    var selected = [Bool]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -32,6 +37,10 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
                     self.inviteCellData.append(newData)
                 }
             }
+            
+            for _ in 0..<self.inviteCellData.count{
+                self.selected.append(false)
+            }
             self.tableView.reloadData()
         })
     }
@@ -44,7 +53,6 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
     
     
     @IBAction func backButton(_ sender: Any) {
-        self.inviteUIDList.removeAll()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -52,16 +60,22 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
         
         
          let time = NSDate().timeIntervalSince1970
-         for UID in inviteUIDList
-             {
-             Constants.DB.following_place.child(parentCell.placeID).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
-             
-             Constants.DB.user.child(UID).child("invitations").child("places").childByAutoId().updateChildValues(["placeID":parentCell.placeID, "time":time,"fromUID":AuthApi.getFirebaseUid()!])
+        
+        let inviteUIDList = zip(selected,self.inviteCellData ).filter { $0.0 }.map { $1.UID }
+        
+        
+         for UID in inviteUIDList{
+            if type == "place"{
+                Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
+            }
+            else{
+                Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
+            }
+            
+             Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!])
         }
         
         self.dismiss(animated: true, completion: nil)
-        
- 
     }
     
     
@@ -74,13 +88,35 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
         
         let cell:inviteCell = self.tableView.dequeueReusableCell(withIdentifier: "inviteCell") as! inviteCell!
         cell.data = inviteCellData[indexPath.row]
+        
+        if self.selected[indexPath.row]{
+            cell.selectedUserImage.image = UIImage(named: "Interest_Filled")
+            
+        }
+        else{
+            cell.selectedUserImage.image = UIImage(named: "Interest_blank")
+        }
+        
         cell.parent = self
         cell.load()
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell:inviteCell = self.tableView.dequeueReusableCell(withIdentifier: "inviteCell") as! inviteCell!
+        tableView.deselectRow(at: indexPath, animated: false)
         
+        self.selected[indexPath.row] = !self.selected[indexPath.row]
+        
+        if self.selected[indexPath.row]{
+            cell.selectedUserImage.image = UIImage(named: "Interest_Filled")
+            
+        }
+        else{
+            cell.selectedUserImage.image = UIImage(named: "Interest_blank")
+        }
+        
+        self.tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

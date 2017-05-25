@@ -170,7 +170,15 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     func inviteUser(sender:UIButton){
         let buttonRow = sender.tag
         
-        print("invite user to event \(self.events[buttonRow].title) ")
+        let event = self.events[buttonRow]
+        print("invite user to event \(event.title) ")
+        
+        let storyboard = UIStoryboard(name: "search_place", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "invitePlaceCV") as! invitePlaceCV
+        ivc.type = "event"
+        ivc.id = event.id!
+        self.present(ivc, animated: true, completion: { _ in })
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
