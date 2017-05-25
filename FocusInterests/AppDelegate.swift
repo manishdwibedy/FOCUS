@@ -15,6 +15,7 @@ import FBSDKCoreKit
 import GoogleSignIn
 import Fabric
 import TwitterKit
+import FirebaseDatabase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDelegate, GIDSignInDelegate {
@@ -26,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
         
         FirebaseDownstream.shared.getCurrentUserInterests { (interests) in
             for interest in interests! {
@@ -46,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         Fabric.with([Twitter.self])
         
         UIApplication.shared.statusBarStyle = .default
+        
         
         checkForLogin()
         
