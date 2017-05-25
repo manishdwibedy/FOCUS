@@ -30,6 +30,12 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         formatTextFields()
         setTextFieldDelegates()
         testSegueFromFirstSignUpVC()
+        
+        fullNameTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
+        passwordTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
+        userNameTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
+        finishButton.roundCorners(radius: 10)
+
     }
     
     @IBAction func finishBttnPressed(_ sender: Any) {
