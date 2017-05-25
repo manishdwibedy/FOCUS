@@ -74,7 +74,11 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
         
         let people = filtered[indexPath.row]
-        cell?.name.text = people.username
+        cell?.username.text = people.username
+        cell?.fullName.text = "Full Name"
+        
+        cell?.address.text = ""
+        cell?.distance.text = ""
         
 //        var addressComponents = event.fullAddress?.components(separatedBy: ",")
 //        let streetAddress = addressComponents?[0]
@@ -139,7 +143,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 130
         
     }
     

@@ -12,12 +12,13 @@ class SearchPeopleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var address: UITextView!
-    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var username: UILabel!
     @IBOutlet weak var interest: UILabel!
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var inviteButton: UIButton!
 
+    @IBOutlet weak var fullName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
