@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DottedProgressBar
 
 class NewUserPopupViewController: UIViewController {
     
@@ -30,11 +31,35 @@ class NewUserPopupViewController: UIViewController {
     @IBOutlet weak var descriptionText: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     
+    @IBOutlet weak var progress: UIView!
+    var progressBar: DottedProgressBar?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadValue()
+        
+        self.progressBar = DottedProgressBar()
+        
+        //appearance
+        self.progressBar?.progressAppearance = DottedProgressBar.DottedProgressAppearance(
+            dotRadius: 8.0,
+            dotsColor: UIColor.orange.withAlphaComponent(0.4),
+            dotsProgressColor: UIColor.red,
+            backColor: UIColor.clear
+        )
+        
+        self.progress.addSubview(progressBar!)
+        
+        self.progressBar?.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
+        
+        //set number of steps and current progress
+        self.progressBar?.setNumberOfDots(info.count, animated: false)
+        self.progressBar?.setProgress(1, animated: false)
+        
+        self.nextButton.roundCorners(radius: 10)
+        self.progressBar?.progressChangeAnimationDuration = 0.1
+        self.progressBar?.pauseBetweenConsecutiveAnimations = 0.1
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +69,8 @@ class NewUserPopupViewController: UIViewController {
     
 
     @IBAction func nextButtonClicked(_ sender: UIButton) {
+        
+        
         if index == info.count - 1{
             self.arrowImage?.alpha = 0
             self.dismiss(animated: true, completion: nil)
@@ -52,6 +79,7 @@ class NewUserPopupViewController: UIViewController {
             index += 1
             loadValue()
         }
+        self.progressBar?.setProgress(index+1, animated: true)
     }
     
     func loadValue(){
