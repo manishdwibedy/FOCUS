@@ -8,8 +8,9 @@
 
 import UIKit
 import Photos
+import Gallery
 
-class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
@@ -20,6 +21,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var pinOut: UIButton!
     
     var imageArray = [UIImage]()
+    let gallery = GalleryController()
     
     let sidePadding: CGFloat = 0.0
     let numberOfItemsPerRow: CGFloat = 4.0
@@ -31,8 +33,12 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageArray.append(UIImage(named:"Icon-Small-50x50@1x")!)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        gallery.delegate = self
         
         let width = ((collectionView.frame.width) - sidePadding)/numberOfItemsPerRow
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
@@ -81,9 +87,12 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     
     @IBAction func camera(_ sender: Any) {
+        present(gallery, animated: true, completion: nil)
     }
     
     @IBAction func cancel(_ sender: Any) {
+        pinTextView.text = "What are you up to?"
+        pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)
     }
     
     @IBAction func pin(_ sender: Any) {
@@ -102,6 +111,30 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         cell.imageView.image = imageArray[indexPath.row]
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0
+        {
+            present(gallery, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+        gallery.dismiss(animated: true, completion: nil)
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
+        gallery.dismiss(animated: true, completion: nil)
+    }
+    
+    func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
+        
     }
     
     
