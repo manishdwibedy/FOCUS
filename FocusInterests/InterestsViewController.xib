@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InterestsViewController" customModule="FocusInterests" customModuleProvider="target">
             <connections>
                 <outlet property="magneticView" destination="j0z-Cz-jYY" id="ZoW-X4-ohh"/>
+                <outlet property="saveButton" destination="kN3-J4-lVH" id="h4b-RW-PxY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,6 +41,9 @@
                             </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" title="Save" id="kN3-J4-lVH">
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="saveInterests:" destination="-1" id="cAk-C1-EeR"/>
+                                </connections>
                             </barButtonItem>
                         </navigationItem>
                     </items>

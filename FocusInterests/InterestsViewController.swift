@@ -15,6 +15,7 @@ import SpriteKit
 class InterestsViewController: UIViewController{
 
     
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     var interests = [Interest]()
     let backgroundColor = UIColor.init(red: 22/255, green: 42/255, blue: 64/255, alpha: 1)
     var filtered = [Interest]()
@@ -39,6 +40,10 @@ class InterestsViewController: UIViewController{
         self.magnetic.backgroundColor = UIColor.lightGray
         for index in 1..<12 {
             add(name: "Interest \(index)")
+        }
+        
+        if AuthApi.isNewUser(){
+            saveButton.title = "Done"
         }
         
     }
@@ -68,6 +73,18 @@ class InterestsViewController: UIViewController{
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func saveInterests(_ sender: UIBarButtonItem) {
+        if AuthApi.isNewUser(){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+            
+            present(vc, animated: true, completion: nil)
+        }
+        else{
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     /*
     // MARK: - Navigation
@@ -234,6 +251,8 @@ class CustomNode: Node{
             }
     
     }
+    
+    
     
     func hateInterest(){
         if let texture = self.texture {

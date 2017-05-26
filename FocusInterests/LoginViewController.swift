@@ -159,11 +159,21 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     }
     
     func showHomeVC() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-        let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
-
-        present(vc, animated: true, completion: nil)
+        
+        if AuthApi.isNewUser(){
+            let interestsVC = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
+            self.present(interestsVC, animated: true, completion: nil)
+            
+        }
+        else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+            
+            present(vc, animated: true, completion: nil)
+        }
+        
+        
     }
     
     func showLoginFailedAlert(loginType: String) {
