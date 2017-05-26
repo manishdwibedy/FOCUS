@@ -22,6 +22,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     var imageArray = [UIImage]()
     let gallery = GalleryController()
+    var galleryPicArray = [UIImage]()
     
     let sidePadding: CGFloat = 0.0
     let numberOfItemsPerRow: CGFloat = 4.0
@@ -96,6 +97,18 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func pin(_ sender: Any) {
+        let time = NSDate().timeIntervalSince1970
+        if pinTextView.text != nil && pinTextView.text != ""
+        {
+            if galleryPicArray.count != 0
+            {
+                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!])
+            }else
+            {
+                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!])
+            }
+        }
+    
     }
     
     
@@ -130,6 +143,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
+        galleryPicArray = images
         gallery.dismiss(animated: true, completion: nil)
     }
     
