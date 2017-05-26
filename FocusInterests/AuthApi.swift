@@ -132,4 +132,16 @@ struct AuthApi {
         return pword
     }
     
+    
+    static func isNewUser() -> Bool{
+        if let userFlag = defaults.object(forKey: "newUser") as? Bool {
+            return userFlag
+        }
+        return true
+    }
+    
+    static func setNewUser(){
+        defaults.set(false, forKey: "newUser")
+    }
+    
 }

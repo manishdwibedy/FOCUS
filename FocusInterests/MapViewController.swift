@@ -183,7 +183,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
-        self.showPopup()
+        if AuthApi.isNewUser(){
+            AuthApi.setNewUser()
+            self.showPopup()
+        }
+        
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
