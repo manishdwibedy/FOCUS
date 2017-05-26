@@ -15,11 +15,13 @@ import FirebaseDatabase
 import Alamofire
 import SwiftyJSON
 import Solar
+import PopupDialog
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     
+    @IBOutlet weak var popupArrowImage: UIImageView!
     var createdEvent: Event?
     
     private var clusterManager: GMUClusterManager!
@@ -93,6 +95,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         self.searchPlacesTab = self.tabBarController?.viewControllers?[3] as? SearchPlacesViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -178,6 +182,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
     }
     
+    func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
+        self.showPopup()
+    }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
@@ -267,6 +274,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func userProfileClicked() {
+        
+        
         let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
         self.present(VC, animated:true, completion:nil)
@@ -381,5 +390,48 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
         }
+    }
+    
+    func showPopup(){
+        
+        let overlayAppearance = PopupDialogOverlayView.appearance()
+        
+        overlayAppearance.color       = UIColor.black
+        overlayAppearance.blurRadius  = 20
+        overlayAppearance.blurEnabled = false
+        overlayAppearance.liveBlur    = false
+        overlayAppearance.opacity     = 0.4
+        
+        var dialogAppearance = PopupDialogDefaultView.appearance()
+        
+        dialogAppearance.backgroundColor      = UIColor.white
+        dialogAppearance.titleFont            = UIFont.boldSystemFont(ofSize: 14)
+        dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
+        dialogAppearance.titleTextAlignment   = .center
+        dialogAppearance.messageFont          = UIFont.systemFont(ofSize: 14)
+        dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
+        dialogAppearance.messageTextAlignment = .center
+        
+        // Customize the container view appearance
+        let pcv = PopupDialogContainerView.appearance()
+        pcv.backgroundColor = UIColor(red:0.23, green:0.23, blue:0.27, alpha:1.00)
+        pcv.cornerRadius    = 10
+        pcv.shadowEnabled   = true
+        pcv.shadowColor     = UIColor.black
+        
+        
+        // Create a custom view controller
+        let onboardingVC = NewUserPopupViewController(nibName: "NewUserPopupViewController", bundle: nil)
+        onboardingVC.arrowImage = self.popupArrowImage
+        
+//        onboardingVC.testImage = self.testImage
+        
+        // Create the dialog
+        let popup = PopupDialog(viewController: onboardingVC, buttonAlignment: .horizontal, transitionStyle: .bounceDown, gestureDismissal: true)
+        
+        
+        
+        // Present dialog
+        present(popup, animated: true, completion: nil)
     }
 }

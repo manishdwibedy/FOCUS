@@ -11,6 +11,7 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - Cosmos (9.0.0)
+  - DottedProgressBar (1.0.3)
   - Fabric (1.6.11)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
@@ -120,6 +121,7 @@ PODS:
   - JSQSystemSoundPlayer (2.0.1)
   - Magnetic (1.0.6)
   - OhhAuth (1.0.0)
+  - PopupDialog (0.5.4)
   - Protobuf (3.2.0)
   - SCLAlertView (0.7.0)
   - SDWebImage (3.8.2):
@@ -137,6 +139,7 @@ DEPENDENCIES:
   - Alamofire
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Cosmos (~> 9.0)
+  - DottedProgressBar
   - Fabric
   - FacebookCore
   - FacebookLogin
@@ -154,6 +157,7 @@ DEPENDENCIES:
   - JSQMessagesViewController
   - Magnetic
   - OhhAuth
+  - PopupDialog (~> 0.5)
   - SCLAlertView
   - SDWebImage (~> 3.8)
   - Solar
@@ -180,6 +184,7 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Cosmos: 33eee62b2a0418452aef470f711f83c3ea061b7b
+  DottedProgressBar: e81cd6f240a68c6b7d52bcb5f89ff74cabc619b8
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
@@ -208,6 +213,7 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Magnetic: 5d8e4ce3d3e6cf496af1035580971a1d17e966f3
   OhhAuth: 82863d7a9aa2a749eb2c65551281c01f3facf501
+  PopupDialog: 75cf955693590b0cb2fdde00223fb65d99c57247
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -216,6 +222,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 494c02d7639f94d21fbd0059942f905a10bae883
+PODFILE CHECKSUM: b1e06e9993a6857de8df4be65de6728aba766e60
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.2.1

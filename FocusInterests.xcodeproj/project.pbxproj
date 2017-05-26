@@ -35,6 +35,8 @@
 		5B634C841ED19A6300EBCC29 /* GMUPoint.h in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9631ED1906800A82104 /* GMUPoint.h */; };
 		5B634C851ED19A6900EBCC29 /* GMUPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9641ED1906800A82104 /* GMUPoint.m */; };
 		5B634C871ED2584F00EBCC29 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B634C861ED2584F00EBCC29 /* Share.swift */; };
+		5B69158C1ED7D80100093AD5 /* NewUserPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B69158A1ED7D80100093AD5 /* NewUserPopupViewController.swift */; };
+		5B69158D1ED7D80100093AD5 /* NewUserPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B69158B1ED7D80100093AD5 /* NewUserPopupViewController.xib */; };
 		5B6AFA631ED1906900A82104 /* GMUGridBasedClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9361ED1906800A82104 /* GMUGridBasedClusterAlgorithm.m */; };
 		5B6AFA641ED1906900A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF9381ED1906800A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m */; };
 		5B6AFA651ED1906900A82104 /* GMUSimpleClusterAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6AF93A1ED1906800A82104 /* GMUSimpleClusterAlgorithm.m */; };
@@ -238,6 +240,8 @@
 		5B634C801ED1960000EBCC29 /* MapCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCluster.swift; sourceTree = "<group>"; };
 		5B634C821ED196BE00EBCC29 /* CustomClusterRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomClusterRenderer.swift; sourceTree = "<group>"; };
 		5B634C861ED2584F00EBCC29 /* Share.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		5B69158A1ED7D80100093AD5 /* NewUserPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserPopupViewController.swift; sourceTree = "<group>"; };
+		5B69158B1ED7D80100093AD5 /* NewUserPopupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserPopupViewController.xib; sourceTree = "<group>"; };
 		5B6AF9341ED1906800A82104 /* GMUClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUClusterAlgorithm.h; sourceTree = "<group>"; };
 		5B6AF9351ED1906800A82104 /* GMUGridBasedClusterAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMUGridBasedClusterAlgorithm.h; sourceTree = "<group>"; };
 		5B6AF9361ED1906800A82104 /* GMUGridBasedClusterAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMUGridBasedClusterAlgorithm.m; sourceTree = "<group>"; };
@@ -935,6 +939,8 @@
 		D2ECAC511E7A2471006FFA1A /* NibVCs */ = {
 			isa = PBXGroup;
 			children = (
+				5B69158A1ED7D80100093AD5 /* NewUserPopupViewController.swift */,
+				5B69158B1ED7D80100093AD5 /* NewUserPopupViewController.xib */,
 				D2D876BA1E5FDAC500FC782E /* InterestsPickerViewController.xib */,
 				D2D876B91E5FDAC500FC782E /* InterestsPickerViewController.swift */,
 				D230D8C61E5B7E7800025EE9 /* SettingsViewController.swift */,
@@ -1139,6 +1145,7 @@
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
 				5BAB87A61EC972890064E5EC /* search_people.storyboard in Resources */,
+				5B69158D1ED7D80100093AD5 /* NewUserPopupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				5B959FF31ECD452C00094FE6 /* RatingViewCell.xib in Resources */,
 				5B71D70E1ED184880093A3F5 /* FollowProfileCell.xib in Resources */,
@@ -1216,7 +1223,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3EF8F78E107A5BD6342C5D9B /* [CP] Copy Pods Resources */ = {
@@ -1289,7 +1296,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A7D185B0FA00AE117B34AC52 /* [CP] Embed Pods Frameworks */ = {
@@ -1334,7 +1341,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1390,6 +1397,7 @@
 				5B6AFA671ED1906900A82104 /* GMUClusterManager.m in Sources */,
 				5B71D6FA1ED181D10093A3F5 /* SendInvitationsViewController.swift in Sources */,
 				5B71D70D1ED184880093A3F5 /* FollowProfileCell.swift in Sources */,
+				5B69158C1ED7D80100093AD5 /* NewUserPopupViewController.swift in Sources */,
 				5B6AFA741ED1906900A82104 /* GMUPolygon.m in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
 				5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */,

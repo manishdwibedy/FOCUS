@@ -33,7 +33,8 @@ target 'FocusInterests' do
     pod 'Magnetic'
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
     pod 'SCLAlertView'
-
+    pod 'PopupDialog', '~> 0.5'
+    pod 'DottedProgressBar'
 end
 
 target 'FocusInterestsTests' do
