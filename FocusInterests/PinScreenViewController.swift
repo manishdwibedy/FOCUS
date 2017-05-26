@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import Gallery
+import Firebase
 
 class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate{
 
@@ -21,6 +22,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var pinOut: UIButton!
     
     var imageArray = [UIImage]()
+    var cellArray = [PinImageCollectionViewCell]()
     let gallery = GalleryController()
     var galleryPicArray = [UIImage]()
     
@@ -97,16 +99,38 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func pin(_ sender: Any) {
+        for cell in cellArray
+        {
+            if cell.selectedIs == true
+            {
+                galleryPicArray.append(cell.imageView.image!)
+            }
+        }
         let time = NSDate().timeIntervalSince1970
         if pinTextView.text != nil && pinTextView.text != ""
         {
             if galleryPicArray.count != 0
             {
-                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!])
+                let imagePaths = NSMutableDictionary()
+                for image in galleryPicArray
+                {
+                    let random = Int(time) + Int(arc4random_uniform(10000000))
+                    let path = AuthApi.getFirebaseUid()!+"/"+String(random)
+                    imagePaths.addEntries(from: [String(random):["imagePath": path]])
+                    uploadImage(image: image, path: Constants.storage.pins.child(path))
+                }
+                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!, "images": imagePaths])
             }else
             {
                 Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!])
             }
+        }
+        pinTextView.text = "What are you up to?"
+        pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)
+        
+        for cell in cellArray
+        {
+            cell.imageView.layer.borderWidth = 0
         }
     
     }
@@ -116,13 +140,14 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        cellArray.removeAll()
         return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PinImageCollectionViewCell
         cell.imageView.image = imageArray[indexPath.row]
-        
+        cellArray.append(cell)
         return cell
     }
     
@@ -130,6 +155,20 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if indexPath.row == 0
         {
             present(gallery, animated: true, completion: nil)
+        }else
+        {
+            let cell = cellArray[indexPath.row]
+            if cell.selectedIs == false
+            {
+                cell.imageView.layer.borderColor = UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
+                cell.imageView.layer.borderWidth = 5
+                cell.selectedIs = true
+            }else
+            {
+                
+                cell.imageView.layer.borderWidth = 0
+                cell.selectedIs = false
+            }
         }
     }
     
@@ -212,6 +251,45 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     func keyboardDone()
     {
        pinTextView.resignFirstResponder()
+    }
+    
+    
+    
+    func uploadImage(image:UIImage, path: FIRStorageReference)
+    {
+        
+        let localFile = UIImageJPEGRepresentation(image, 0.5)
+        
+        let metadata = FIRStorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        let userID = AuthApi.getFirebaseUid()
+        let uploadTask = path.put(localFile!, metadata: metadata)
+    
+        
+        uploadTask.observe(.pause) { snapshot in
+            
+        }
+        
+        uploadTask.observe(.resume) { snapshot in
+            
+        }
+        
+        uploadTask.observe(.progress) { snapshot in
+            if let progress = snapshot.progress {
+                let percentComplete = 100.0 * Double(progress.completedUnitCount) / Double(progress.totalUnitCount)
+                print(percentComplete)
+            }
+        }
+        
+        uploadTask.observe(.success) { snapshot in
+           
+        }
+        
+        uploadTask.observe(.failure) { snapshot in
+            print(snapshot.error!)
+        }
+
     }
 
     

@@ -135,6 +135,7 @@ struct Constants {
     struct storage{
         public static let event = FIRStorage.storage().reference().child("events")
         public static let messages = FIRStorage.storage().reference().child("messages")
+        public static let pins = FIRStorage.storage().reference().child("pins")
     }
     
     struct Twitter{
