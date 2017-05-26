@@ -18,6 +18,12 @@ class FocusUser {
     var description: String?
     var interests = [Interest]()
     
+    var name: String?
+    var website: String?
+    var email: String?
+    var gender: String?
+    var phone: String?
+    
     init(fakeDict: (String, AnyObject)) {
         fromFakeDict(fakeDict: fakeDict)
     }
@@ -27,6 +33,19 @@ class FocusUser {
         self.firebaseId = firebaseId
         self.imageString = imageString
         self.currentLocation = currentLocation
+    }
+    
+    init(userName: String?, firebaseId: String?, imageString: String?, currentLocation: CLLocationCoordinate2D?, name: String?, website: String?, email: String?, gender: String?, phone: String?, description: String?) {
+        self.userName = userName
+        self.firebaseId = firebaseId
+        self.imageString = imageString
+        self.currentLocation = currentLocation
+        self.name = name
+        self.website = website
+        self.email = email
+        self.gender = gender
+        self.phone = phone
+        self.description = description
     }
     
     init(){}
