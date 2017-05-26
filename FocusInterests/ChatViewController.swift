@@ -35,11 +35,14 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             self.user["firebaseUserId"]! as! String: self.user["username"]! as! String
         ]
         
+        self.collectionView.backgroundColor = UIColor(hexString: "445464")
+        
         self.inputToolbar.contentView.textView.backgroundColor = UIColor.lightGray
         self.inputToolbar.contentView.textView.textColor = UIColor.white
-        self.inputToolbar.backgroundColor = UIColor.green
+        self.inputToolbar.backgroundColor = UIColor.white
         self.inputToolbar.contentView.textView.placeHolderTextColor = UIColor.white
         self.inputToolbar.contentView.textView.placeHolder = "Enter the message"
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         
         markUnread()
         getMessageID()

@@ -40,6 +40,15 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
 
         messageTable.tableFooterView = UIView()
+        
+        let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.messageTable.bounds.size.width, height: self.messageTable.bounds.size.height))
+        backgroundView.backgroundColor = UIColor(hexString: "445464")
+        messageTable.backgroundView = backgroundView
+        
+        self.messageTable.separatorColor = UIColor.white
+        self.messageTable.separatorInset = UIEdgeInsets.zero
+
+        
         // Do any additional setup after loading the view.
 //        loadInitialTable()
     }
@@ -124,6 +133,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
         let message = self.messages[indexPath.row]
         cell.textLabel?.text = message.name
+        cell.textLabel?.textColor = UIColor.white
+        cell.detailTextLabel?.textColor = UIColor.white
+
         let date = message.lastMessageDate
         cell.detailTextLabel?.text = formatter.timeSince(from: date, numericDates: false)
         

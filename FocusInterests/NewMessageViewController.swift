@@ -15,7 +15,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     let userRef = Constants.DB.user
     var users = [[String: Any]]()
     var usersInMemory: Set<String> = []
-    var filtered = [[String: String]]()
+    var filtered = [[String: Any]]()
     var searching = false
     
     override func viewDidLoad() {
@@ -27,6 +27,17 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         self.usersInMemory.insert(AuthApi.getFirebaseUid()!)
         loadInitialTable()
         loadRestUsers()
+        
+        
+        let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
+        backgroundView.backgroundColor = UIColor(hexString: "445464")
+        tableView.backgroundView = backgroundView
+        
+        self.tableView.separatorColor = UIColor.white
+        self.tableView.separatorInset = UIEdgeInsets.zero
+
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,12 +65,20 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
+        cell.textLabel?.textColor = UIColor.white
+
+        
         if !searching{
             cell.textLabel?.text = self.users[indexPath.row]["username"] as! String?
         }
         else{
-            cell.textLabel?.text = self.filtered[indexPath.row]["username"]
+            cell.textLabel?.text = self.filtered[indexPath.row]["username"] as! String?
         }
+        
+//        cell.preservesSuperviewLayoutMargins = false
+//        cell.separatorInset = UIEdgeInsets.zero
+//        cell.layoutMargins = UIEdgeInsets.zero
+
         
         return cell
     }
@@ -117,8 +136,14 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let searchPredicate = NSPredicate(format: "username CONTAINS[C] %@", searchText)
-        self.filtered = (self.users as NSArray).filtered(using: searchPredicate) as! [[String : String]]
+        
+        if searchText.characters.count > 0{
+            let searchPredicate = NSPredicate(format: "username CONTAINS[C] %@", searchText)
+            self.filtered = (self.users as NSArray).filtered(using: searchPredicate) as! [[String : Any]]
+        }
+        else{
+            self.filtered = self.users
+        }
         
         self.tableView.reloadData()
     }
