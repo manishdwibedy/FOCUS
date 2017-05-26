@@ -10,6 +10,7 @@ import UIKit
 import Photos
 import Gallery
 import Firebase
+import GooglePlaces
 
 class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate{
 
@@ -25,6 +26,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     var cellArray = [PinImageCollectionViewCell]()
     let gallery = GalleryController()
     var galleryPicArray = [UIImage]()
+    
+    var place: GMSPlace!
     
     let sidePadding: CGFloat = 0.0
     let numberOfItemsPerRow: CGFloat = 4.0
@@ -86,6 +89,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func changeLocation(_ sender: Any) {
+        let autoCompleteController = GMSAutocompleteViewController()
+        autoCompleteController.delegate = self
+        present(autoCompleteController, animated: true, completion: nil)
     }
     
     
@@ -119,10 +125,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     imagePaths.addEntries(from: [String(random):["imagePath": path]])
                     uploadImage(image: image, path: Constants.storage.pins.child(path))
                 }
-                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!, "images": imagePaths])
+                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":place.formattedAddress!, "images": imagePaths])
             }else
             {
-                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!])
+                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":place.formattedAddress!, "images":"nil"])
             }
         }
         pinTextView.text = "What are you up to?"
@@ -292,11 +298,39 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
 
     }
 
-    
-    
-    
+ 
+}
 
-
+extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
     
-
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        self.place = place
+        self.locationLabel.text = place.formattedAddress!
+        self.changeLocationOut.setTitle(place.formattedAddress, for: UIControlState.normal)
+        
+        print("Place name: \(place.name)")
+        
+        print("Place address: \(place.formattedAddress)")
+        
+        print("Place attributions: \(place.attributions)")
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // to do: handle error
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
 }
