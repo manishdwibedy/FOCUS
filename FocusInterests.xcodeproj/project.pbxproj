@@ -12,6 +12,7 @@
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
 		5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1659231EDA293D0002209A /* PrivacyViewController.swift */; };
 		5B1659261EDA30300002209A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1659251EDA30300002209A /* TermsViewController.swift */; };
+		5B1659281EDA33AF0002209A /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1659271EDA33AF0002209A /* LicenseViewController.swift */; };
 		5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E841ED276970075B57A /* InterestsViewController.swift */; };
 		5B251E891ED276970075B57A /* InterestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E851ED276970075B57A /* InterestsViewController.xib */; };
 		5B251E8A1ED276970075B57A /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E861ED276970075B57A /* InviteFriendsViewController.swift */; };
@@ -223,6 +224,7 @@
 		4DCECAEA41CAC4F1781A9ADD /* Pods-FocusInterests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.release.xcconfig"; sourceTree = "<group>"; };
 		5B1659231EDA293D0002209A /* PrivacyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		5B1659251EDA30300002209A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		5B1659271EDA33AF0002209A /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		5B251E841ED276970075B57A /* InterestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestsViewController.swift; sourceTree = "<group>"; };
 		5B251E851ED276970075B57A /* InterestsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestsViewController.xib; sourceTree = "<group>"; };
 		5B251E861ED276970075B57A /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 		5B3F05791ED909E90057F596 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				5B1659271EDA33AF0002209A /* LicenseViewController.swift */,
 				5B1659251EDA30300002209A /* TermsViewController.swift */,
 				5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */,
 				5B1659231EDA293D0002209A /* PrivacyViewController.swift */,
@@ -1436,6 +1439,7 @@
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
 				5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */,
 				5B7BB1DE1ED50CDD001E60FF /* SuggestPlacesViewController.swift in Sources */,
+				5B1659281EDA33AF0002209A /* LicenseViewController.swift in Sources */,
 				5B7BB1E81ED53FB1001E60FF /* UIView+Extensions.swift in Sources */,
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,

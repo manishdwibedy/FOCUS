@@ -104,6 +104,10 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 else{
                     swCell?.cellSwitch.setOn(false, animated: true)
                 }
+            case 7:
+                let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+                let VC = storyboard.instantiateViewController(withIdentifier: "License") as? LicenseViewController
+                self.present(VC!, animated: true, completion: nil)
             case 8:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Terms") as? TermsViewController
