@@ -151,12 +151,14 @@ struct Constants {
         public static let messages = FIRDatabase.database().reference().child("messages")
         public static let message_content = FIRDatabase.database().reference().child("message_content")
         public static let places = FIRDatabase.database().reference().child("places")
-         public static let following_place = FIRDatabase.database().reference().child("following_place")
+        public static let following_place = FIRDatabase.database().reference().child("following_place")
+        public static let pins = FIRDatabase.database().reference().child("pins")
     }
     
     struct storage{
         public static let event = FIRStorage.storage().reference().child("events")
         public static let messages = FIRStorage.storage().reference().child("messages")
+        public static let pins = FIRStorage.storage().reference().child("pins")
     }
     
     struct Twitter{

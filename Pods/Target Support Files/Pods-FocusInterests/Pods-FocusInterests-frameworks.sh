@@ -59,13 +59,8 @@ code_sign_if_enabled() {
   if [ -n "${EXPANDED_CODE_SIGN_IDENTITY}" -a "${CODE_SIGNING_REQUIRED}" != "NO" -a "${CODE_SIGNING_ALLOWED}" != "NO" ]; then
     # Use the current code_sign_identitiy
     echo "Code Signing $1 with Identity ${EXPANDED_CODE_SIGN_IDENTITY_NAME}"
-    local code_sign_cmd="/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements '$1'"
-
-    if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
-      code_sign_cmd="$code_sign_cmd &"
-    fi
-    echo "$code_sign_cmd"
-    eval "$code_sign_cmd"
+    echo "/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements \"$1\""
+    /usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements "$1"
   fi
 }
 
@@ -103,6 +98,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/FacebookShare-iOS10.0/FacebookShare.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2-iOS10.0/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher-iOS10.0/GTMSessionFetcher.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Gallery/Gallery.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-iOS10.0/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQMessagesViewController-iOS10.0/JSQMessagesViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer-iOS10.0/JSQSystemSoundPlayer.framework"
@@ -130,6 +126,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/FacebookShare-iOS10.0/FacebookShare.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2-iOS10.0/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher-iOS10.0/GTMSessionFetcher.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Gallery/Gallery.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac-iOS10.0/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQMessagesViewController-iOS10.0/JSQMessagesViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer-iOS10.0/JSQSystemSoundPlayer.framework"
@@ -141,7 +138,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Solar/Solar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON-iOS10.0/SwiftyJSON.framework"
-fi
-if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
-  wait
 fi

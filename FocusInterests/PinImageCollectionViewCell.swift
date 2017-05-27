@@ -15,4 +15,6 @@ class PinImageCollectionViewCell: UICollectionViewCell
     
     @IBOutlet weak var imageView: UIImageView!
     
+    var selectedIs = false
+    
 }

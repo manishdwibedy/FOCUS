@@ -35,6 +35,7 @@ target 'FocusInterests' do
     pod 'SCLAlertView'
     pod 'PopupDialog', '~> 0.5'
     pod 'DottedProgressBar'
+    pod 'Gallery'
 end
 
 target 'FocusInterestsTests' do

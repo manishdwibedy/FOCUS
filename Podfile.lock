@@ -77,6 +77,7 @@ PODS:
   - FirebaseStorage (1.0.6):
     - FirebaseAnalytics (~> 3.7)
     - GTMSessionFetcher/Core (~> 1.1)
+  - Gallery (1.2.0)
   - Google/Core (3.0.3):
     - FirebaseAnalytics (~> 3.2)
   - Google/SignIn (3.0.3):
@@ -150,6 +151,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Messaging
   - Firebase/Storage
+  - Gallery
   - Google/SignIn
   - GoogleMaps
   - GooglePlacePicker
@@ -201,6 +203,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FirebaseMessaging: df8267f378580a24174ce7861233aa11d5c90109
   FirebaseStorage: 63628572a5fde258f8e933b5fb42697468da0158
+  Gallery: 925b8133efa9d8fe933918f242b64110c6478b98
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
   GooglePlacePicker: 345b1aabd42c9d6d9bf2369c1bae1234d903e764
@@ -222,6 +225,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: b1e06e9993a6857de8df4be65de6728aba766e60
+PODFILE CHECKSUM: 757f1c96307d00d9c29abf198e678052564093ba
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.1.1
