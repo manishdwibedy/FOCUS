@@ -23,7 +23,7 @@ class Event: NSObject, NSCoding{
     var attendeeCount = 0
     var category: String?
     
-    init(title: String, description: String, fullAddress: String, shortAddress: String, latitude: String, longitude: String, date: String, creator: String, id: String? = nil, category: String?) {
+    init(title: String, description: String, fullAddress: String, shortAddress: String, latitude: String, longitude: String, date: String, creator: String?, id: String? = nil, category: String?) {
         self.title = title
         self.eventDescription = description
         self.fullAddress = fullAddress

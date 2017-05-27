@@ -29,6 +29,7 @@ struct Constants {
     
     struct keys {
         public static let googleMapsAPIKey = "AIzaSyCcfvYP6NRSYLJkvf3SAmIGBiQfdLWRqEM"
+        public static let eventBriteToken = "366MU6UCBA72BO3LJTHL"
     }
     
     struct dummyFeatures {
@@ -43,6 +44,28 @@ struct Constants {
     }
     
     struct interests {
+        
+//        Meet up
+//        Coffee
+//        Chill
+//        Celebration
+//        Food
+//        Drinks
+//        Work
+//        Learn
+//        Entertainment
+//        Arts
+//        Music
+//        Beauty
+//        Fashion
+//        Networking
+//        Exercise
+//        Wellness
+//        Sports
+//        Outdoors
+//        Views
+//        Causes
+        
         public static let football = Interest(name: "Football", category: InterestCategory.Sports, image: nil, imageString: nil)
         public static let basketball = Interest(name: "Basketball", category: InterestCategory.Sports, image: nil, imageString: nil)
         public static let soccer = Interest(name: "Soccer", category: InterestCategory.Sports, image: UIImage(named: "blackSoccer"), imageString: nil)

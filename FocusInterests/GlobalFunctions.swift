@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
 func featuresToString(features: [Feature]) -> String {
     var strArray = [String]()
@@ -95,4 +96,34 @@ func changeTimeZone(of date: Date, from sourceTimeZone: TimeZone, to destination
     toDF.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
     let estDate: Date = toDF.date(from: date_string)!
     return(estDate)
+}
+
+func getEvents(around location: CLLocation, completion: @escaping (_ result: String) -> Void){
+    let url = "https://www.eventbriteapi.com/v3/events/search/"
+    let parameters: [String: String] = [
+        "token" : "R6U22QXZZZ52YX2XRTWX",
+        "sort_by": "distance",
+        "location.latitude": String(location.coordinate.latitude),
+        "location.longitude" : String(location.coordinate.longitude),
+        "location.within": "10mi"
+    ]
+    
+    Alamofire.request(url, method: .get, parameters:parameters, headers: nil).responseJSON { response in
+        let json = JSON(data: response.data!)
+        let events = json["events"]
+        
+        for (_, eventJson) in events {
+            
+            print(eventJson)
+            
+//            let df: DateFormatter = DateFormatter()
+//            df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//            let date: Date = df.date(from: eventJson["start"]["local"].stringValue)!
+            let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: "", shortAddress: "", latitude: "", longitude: "", date: eventJson["start"]["local"].stringValue, creator: "", category: "")
+            
+        }
+        
+        completion("")
+        
+    }
 }

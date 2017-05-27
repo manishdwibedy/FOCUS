@@ -235,6 +235,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         self.currentLocation = location
         self.searchPlacesTab?.location = location
+        
+        
+//        getEvents(around: self.currentLocation!, completion: { events in
+//        })
+        
         print("got location")
         if let token = AuthApi.getYelpToken(){
             self.fetchPlaces(token: token)
