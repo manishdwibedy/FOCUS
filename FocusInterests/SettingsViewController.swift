@@ -92,6 +92,10 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             case 1:
                 let inviteFriendsVC = InviteFriendsViewController(nibName: "InviteFriendsViewController", bundle: nil)
                 self.present(inviteFriendsVC, animated: true, completion: nil)
+            case 3:
+                let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+                let VC = storyboard.instantiateViewController(withIdentifier: "Change_username_password") as? ChangeUsernamePasswordViewController
+                self.present(VC!, animated: true, completion: nil)
             case 4:
                 let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
                 if (swCell?.cellSwitch.isOn)!{

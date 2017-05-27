@@ -17,6 +17,8 @@
 		5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */; };
 		5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */; };
 		5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E901ED278A70075B57A /* UserProfileViewController.swift */; };
+		5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B3F05751ED907B10057F596 /* Settings.storyboard */; };
+		5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */; };
 		5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */; };
 		5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B4303A41ED55F6400B63D56 /* SearchEventTableViewCell.xib */; };
 		5B519E751ED667D000B36110 /* Pin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B519E741ED667D000B36110 /* Pin.storyboard */; };
@@ -224,6 +226,8 @@
 		5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestViewCell.swift; sourceTree = "<group>"; };
 		5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestViewCell.xib; sourceTree = "<group>"; };
 		5B251E901ED278A70075B57A /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		5B3F05751ED907B10057F596 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUsernamePasswordViewController.swift; sourceTree = "<group>"; };
 		5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventTableViewCell.swift; sourceTree = "<group>"; };
 		5B4303A41ED55F6400B63D56 /* SearchEventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchEventTableViewCell.xib; sourceTree = "<group>"; };
 		5B519E741ED667D000B36110 /* Pin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pin.storyboard; sourceTree = "<group>"; };
@@ -489,6 +493,14 @@
 			name = SignUpVCS;
 			sourceTree = "<group>";
 		};
+		5B3F05791ED909E90057F596 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		5B6AF7541ED1906700A82104 /* google-maps-ios-utils-master */ = {
 			isa = PBXGroup;
 			children = (
@@ -729,6 +741,7 @@
 				5BAB87AE1EC984400064E5EC /* search_event.storyboard */,
 				5BAB87B01EC9861F0064E5EC /* search_place.storyboard */,
 				5B519E741ED667D000B36110 /* Pin.storyboard */,
+				5B3F05751ED907B10057F596 /* Settings.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -839,6 +852,7 @@
 		D2B9B0721E5A0A1E0002F1B1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5B3F05791ED909E90057F596 /* Settings */,
 				D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */,
 				5BA37C761EBD63BE0091189E /* HomePageViewController.swift */,
 				5B251E901ED278A70075B57A /* UserProfileViewController.swift */,
@@ -1144,6 +1158,7 @@
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
+				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
 				5BAB87A61EC972890064E5EC /* search_people.storyboard in Resources */,
 				5B69158D1ED7D80100093AD5 /* NewUserPopupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
@@ -1380,6 +1395,7 @@
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				5B71D7051ED1837A0093A3F5 /* commentCell.swift in Sources */,
+				5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */,
 				5B6AFA6F1ED1906900A82104 /* GMUGeometryCollection.m in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
 				FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */,

@@ -84,6 +84,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                 if user != nil {
                     if let id = user?.uid {
                         AuthApi.set(firebaseUid: id)
+                        AuthApi.set(loggedIn: .Email)
                     }
                     self.emailTextField.text = ""
                     self.passwordTextField.text = ""
@@ -111,7 +112,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                             if let u = user {
                                 let fireId = u.uid
-                                self.addEmpty(userWith: fireId)
+//                                self.addEmpty(userWith: fireId)
                                 AuthApi.set(firebaseUid: fireId)
                                 AuthApi.set(loggedIn: .Facebook)
                                 AuthApi.set(facebookToken: FBSDKAccessToken.current().tokenString)
@@ -204,12 +205,12 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     
     // GIDSignInDelegate
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        guard let user = user else{
+        guard let googleUser = user else{
             return
         }
         
-        print("my email: \(user.profile.email)")
-        if let id = user.authentication.accessToken, let idToken = user.authentication.idToken {
+        print("my email: \(googleUser.profile.email)")
+        if let id = googleUser.authentication.accessToken, let idToken = googleUser.authentication.idToken {
             
             
             let credential = FIRGoogleAuthProvider.credential(withIDToken: idToken,
@@ -217,7 +218,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
                 if let u = user {
                     let fireId = u.uid
-                    self.addEmpty(userWith: fireId)
+                    
+//                    self.addEmpty(userWith: fireId)
                     AuthApi.set(firebaseUid: fireId)
                     AuthApi.set(loggedIn: .Google)
                     AuthApi.set(googleToken: id)
@@ -226,23 +228,51 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                     
                         let info = snapshot.value as? [String:Any]
                         
-                        guard let fullName = info?["fullname"] as? String, !fullName.isEmpty else{
-                            
-                            let appearance = SCLAlertView.SCLAppearance(
-                                showCloseButton: false
-                            )
-                            let alert = SCLAlertView(appearance: appearance)
-                            
-                            let fullName = alert.addTextField("Enter your name")
-                            alert.addButton("Done") {
-                                Constants.DB.user.child("\(fireId)/fullname").setValue(fullName.text!)
+                        if let fullname = info?["fullname"] as? String{
+                            if fullname.isEmpty{
+                                Constants.DB.user.child("\(fireId)/fullname").setValue(googleUser.profile.name)
                             }
-                            alert.showEdit("Enter your full name", subTitle: "Please enter your full name")
-                            
-
-                            return
                             
                         }
+                        else{
+                            Constants.DB.user.child("\(fireId)/fullname").setValue(googleUser.profile.name)
+                        }
+                        
+                        if let username = info?["username"] as? String{
+                            if username.isEmpty{
+                                Constants.DB.user.child("\(fireId)/username").setValue(googleUser.profile.email)
+                            }
+                            
+                        }
+                        
+                        if let image_string = info?["image_string"] as? String{
+                            if image_string.isEmpty{
+                                Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 100).absoluteString)
+                            }
+                            
+                        }
+                        else{
+                            Constants.DB.user.child("\(fireId)/fullname").setValue(googleUser.profile.imageURL(withDimension: 100).absoluteString)
+                        }
+                        
+                        
+//                        guard let fullName = info?["fullname"] as? String, !fullName.isEmpty else{
+//                            
+//                            let appearance = SCLAlertView.SCLAppearance(
+//                                showCloseButton: false
+//                            )
+//                            let alert = SCLAlertView(appearance: appearance)
+//                            
+//                            let fullName = alert.addTextField("Enter your name")
+//                            alert.addButton("Done") {
+//                                Constants.DB.user.child("\(fireId)/fullname").setValue(fullName.text!)
+//                            }
+//                            alert.showEdit("Enter your full name", subTitle: "Please enter your full name")
+//                            
+//
+//                            return
+//                            
+//                        }
                         self.showHomeVC()
                         
                     })
