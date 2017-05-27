@@ -104,10 +104,14 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 else{
                     swCell?.cellSwitch.setOn(false, animated: true)
                 }
+            case 8:
+                let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+                let VC = storyboard.instantiateViewController(withIdentifier: "Terms") as? TermsViewController
+                self.present(VC!, animated: true, completion: nil)
             case 9:
-            let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-            let VC = storyboard.instantiateViewController(withIdentifier: "Privacy") as? PrivacyViewController
-            self.present(VC!, animated: true, completion: nil)
+                let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+                let VC = storyboard.instantiateViewController(withIdentifier: "Privacy") as? PrivacyViewController
+                self.present(VC!, animated: true, completion: nil)
             case Constants.settings.cellTitles.count - 1:
                 fBManager!.logOut()
                 FBSDKAccessToken.setCurrent(nil)

@@ -11,6 +11,7 @@
 		04FD5D1C1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1B1EBBDBC200D7FFB7 /* FirstSignUpViewController.swift */; };
 		04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */; };
 		5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1659231EDA293D0002209A /* PrivacyViewController.swift */; };
+		5B1659261EDA30300002209A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1659251EDA30300002209A /* TermsViewController.swift */; };
 		5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E841ED276970075B57A /* InterestsViewController.swift */; };
 		5B251E891ED276970075B57A /* InterestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E851ED276970075B57A /* InterestsViewController.xib */; };
 		5B251E8A1ED276970075B57A /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E861ED276970075B57A /* InviteFriendsViewController.swift */; };
@@ -221,6 +222,7 @@
 		35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterestsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DCECAEA41CAC4F1781A9ADD /* Pods-FocusInterests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.release.xcconfig"; sourceTree = "<group>"; };
 		5B1659231EDA293D0002209A /* PrivacyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
+		5B1659251EDA30300002209A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		5B251E841ED276970075B57A /* InterestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestsViewController.swift; sourceTree = "<group>"; };
 		5B251E851ED276970075B57A /* InterestsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestsViewController.xib; sourceTree = "<group>"; };
 		5B251E861ED276970075B57A /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 		5B3F05791ED909E90057F596 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				5B1659251EDA30300002209A /* TermsViewController.swift */,
 				5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */,
 				5B1659231EDA293D0002209A /* PrivacyViewController.swift */,
 			);
@@ -1463,6 +1466,7 @@
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				5BAB87AD1EC97BED0064E5EC /* PeopleSearchViewController.swift in Sources */,
 				D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */,
+				5B1659261EDA30300002209A /* TermsViewController.swift in Sources */,
 				5B71D6F61ED180930093A3F5 /* CreateNewEventViewController.swift in Sources */,
 				5B7BB1EA1ED54677001E60FF /* UITableView+Extensions.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
