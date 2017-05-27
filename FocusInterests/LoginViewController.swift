@@ -108,6 +108,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         return
                     }
                     if let tokenString = FBSDKAccessToken.current().tokenString {
+                        
                         let credential = FIRFacebookAuthProvider.credential(withAccessToken: tokenString)
                         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                             if let u = user {
@@ -116,6 +117,62 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                 AuthApi.set(firebaseUid: fireId)
                                 AuthApi.set(loggedIn: .Facebook)
                                 AuthApi.set(facebookToken: FBSDKAccessToken.current().tokenString)
+                                
+                                
+                                let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"first_name, last_name ,email, picture.type(large)"])
+                                graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+                                    
+                                    if ((error) != nil)
+                                    {
+                                        print("Error: \(error)")
+                                    }
+                                    else
+                                    {
+                                        let data:[String:AnyObject] = result as! [String : AnyObject]
+                                        let first_name = data["first_name"] as? String
+                                        let last_name = data["last_name"] as? String
+                                        
+                                        let image_string = (data["picture"]?["data"] as! [String:Any])["url"] as? String
+                                        let username = data["email"] as? String
+                                        
+                                        let userRef = Constants.DB.user.child(fireId).observeSingleEvent(of: .value, with: {(snapshot) in
+                                            
+                                            let info = snapshot.value as? [String:Any]
+                                            
+                                            if let fullname = info?["fullname"] as? String{
+                                                if fullname.isEmpty{
+                                                    Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name) \(last_name)")
+                                                }
+                                                
+                                            }
+                                            else{
+                                                Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name) \(last_name)")
+                                            }
+                                            
+                                            if let username = info?["username"] as? String{
+                                                if username.isEmpty{
+                                                    Constants.DB.user.child("\(fireId)/username").setValue(username)
+                                                }
+                                                
+                                            }
+                                            
+                                            if let image_string = info?["image_string"] as? String{
+                                                if image_string.isEmpty{
+                                                    Constants.DB.user.child("\(fireId)/image_string").setValue(image_string)
+                                                }
+                                                
+                                            }
+                                            else{
+                                                Constants.DB.user.child("\(fireId)/fullname").setValue(image_string)
+                                            }
+                                            
+                                            
+                                        })
+                                        
+                                    }
+                                })
+
+                                
                                 self.showHomeVC()
                             }
                             
