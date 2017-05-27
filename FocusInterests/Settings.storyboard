@@ -9,6 +9,141 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Privacy View Controller-->
+        <scene sceneID="1ME-0h-qe6">
+            <objects>
+                <viewController storyboardIdentifier="Privacy" id="IGr-6D-CSz" customClass="PrivacyViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aTq-OS-yVf"/>
+                        <viewControllerLayoutGuide type="bottom" id="slW-XW-ENc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sof-ns-lC0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uA3-5J-BQh">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="w4H-gH-n0d"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.094117647058823528" green="0.17254901960784313" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Privacy" id="VLi-GB-Jtr">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="iOh-0y-3in">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backPressed:" destination="IGr-6D-CSz" id="rNH-gM-FhU"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eh6-aG-F12">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bix-pO-fHh">
+                                        <rect key="frame" x="10" y="10" width="355" height="583"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <mutableString key="content">&lt;body style="color: white"&gt;
+    &lt;h1&gt;&lt;b&gt;Privacy Policy&lt;b&gt;&lt;/h1&gt;
+    &lt;br /&gt;
+    Last updated: May 26, 2017&lt;br /&gt;
+    &lt;br /&gt;
+    Single Focus Inc. ("us", "we", or "our") operates the FOCUS: Map of Your World mobile application (the "Service").This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.&lt;br /&gt;
+    We will not use or share your information with anyone except as described in this Privacy Policy. We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Information Collection And Use&lt;/h3&gt;
+    &lt;br /&gt;
+    While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to, your email address, name, phone number, other information ("Personal Information”). We collect this information for the purpose of providing the Service, identifying and communicating with you, responding to your requests/inquiries, servicing your purchase orders, and improving our services.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Log Data  &lt;/h3&gt;
+    &lt;br /&gt;
+    When you access the Service by or through a mobile device, we may collect certain information automatically, including, but not limited to, the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use and other statistics ("Log Data”). In addition, we may use third party services such as Google Analytics that collect, monitor and analyze this type of information in order to increase our Service's functionality. These third party service providers have their own privacy policies addressing how they use such information. Please see the section regarding Location Information below regarding the use of your location information and your options.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Location Information  &lt;/h3&gt;
+    &lt;br /&gt;
+    We may use and store information about your location depending on the permissions you have set on your device. We use this information to provide features of our Service, to improve and customize our Service. You can enable or disable location services when you use our Service at anytime, through your mobile device settings.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Cookies  &lt;/h3&gt;
+    &lt;br /&gt;
+    Cookies are files with a small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a web site and transferred to your device. We use cookies to collect information in order to improve our services for you. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. The Help feature on most browsers provide information on how to accept cookies, disable cookies or to notify you when receiving a new cookie. If you do not accept cookies, you may not be able to use some features of our Service and we recommend that you leave them turned on.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Do Not Track Disclosure  &lt;/h3&gt;
+    &lt;br /&gt;
+    We support Do Not Track ("DNT"). Do Not Track is a preference you can set in your web browser to inform websites that you do not want to be tracked. You can enable or disable Do Not Track by visiting the Preferences or Settings page of your web browser.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Service Providers  &lt;/h3&gt;
+    &lt;br /&gt;
+    We may employ third party companies and individuals to facilitate our Service, to provide the Service on our behalf, to perform Servicerelated services and/or to assist us in analyzing how our Service is used. These third parties have access to your Personal Information only to perform specific tasks on our behalf and are obligated not to disclose or use your information for any other purpose.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Communications  &lt;/h3&gt;
+    &lt;br /&gt;
+    We may use your Personal Information to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or instructions provided in any email we send.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Security  &lt;/h3&gt;
+    &lt;br /&gt;
+    The security of your Personal Information is important to us, and we strive to implement and maintain reasonable, commercially acceptable security procedures and practices appropriate to the nature of the information we store, in order to protect it from unauthorized access, destruction, use, modification, or disclosure. However, please be aware that no method of transmission over the internet, or method of electronic storage is 100% secure and we are unable to guarantee the absolute security of the Personal Information we have collected from you.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Links To Other Sites  &lt;/h3&gt;
+    &lt;br /&gt;
+    Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed to that third party’s site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over, and assume no responsibility for the content, privacy policies or practices of any third party sites or services.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Children's Privacy  &lt;/h3&gt;
+    &lt;br /&gt;
+    Only persons age 18 or older have permission to access our Service. Our Service does not address anyone under the age of 13 ("Children”). We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you learn that your Children have provided us with Personal Information, please contact us. If we become aware that we have collected Personal Information from a children under age 13 without verification of parental consent, we take steps to remove that information from our servers.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Changes To This Privacy Policy  &lt;/h3&gt;
+    &lt;br /&gt;
+    This Privacy Policy is effective as of May 26, 2017 and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page. We reserve the right to update or change our Privacy Policy at any time and you should check this Privacy Policy periodically. Your continued use of the Service after we post any modifications to the Privacy Policy on this page will constitute your acknowledgment of the modifications and your consent to abide and be bound by the modified Privacy Policy. If we make any material changes to this Privacy Policy, we will notify you either through the email address you have provided us, or by placing a prominent notice on our website.&lt;br /&gt;
+    &lt;br /&gt;
+    &lt;h3&gt;Contact Us  &lt;/h3&gt;
+    &lt;br /&gt;
+    If you have any questions about this Privacy Policy, please contact us.
+&lt;/body&gt;</mutableString>
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" metaFont="system" size="14"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2196078431372549" green="0.28627450980392155" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="bix-pO-fHh" firstAttribute="leading" secondItem="eh6-aG-F12" secondAttribute="leading" constant="10" id="5Ta-xL-df5"/>
+                                    <constraint firstAttribute="trailing" secondItem="bix-pO-fHh" secondAttribute="trailing" constant="10" id="YWV-Rg-egp"/>
+                                    <constraint firstAttribute="bottom" secondItem="bix-pO-fHh" secondAttribute="bottom" constant="10" id="hgD-6j-NMj"/>
+                                    <constraint firstItem="bix-pO-fHh" firstAttribute="top" secondItem="eh6-aG-F12" secondAttribute="top" constant="10" id="yQf-K2-NQD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="slW-XW-ENc" firstAttribute="top" secondItem="eh6-aG-F12" secondAttribute="bottom" id="1IC-Ni-2sp"/>
+                            <constraint firstItem="eh6-aG-F12" firstAttribute="top" secondItem="uA3-5J-BQh" secondAttribute="bottom" id="GMx-Li-hju"/>
+                            <constraint firstAttribute="trailing" secondItem="eh6-aG-F12" secondAttribute="trailing" id="a3P-dk-sTB"/>
+                            <constraint firstItem="uA3-5J-BQh" firstAttribute="top" secondItem="aTq-OS-yVf" secondAttribute="bottom" id="aHh-lb-Poc"/>
+                            <constraint firstItem="eh6-aG-F12" firstAttribute="leading" secondItem="sof-ns-lC0" secondAttribute="leading" id="alv-aQ-uoK"/>
+                            <constraint firstAttribute="trailing" secondItem="uA3-5J-BQh" secondAttribute="trailing" id="mK6-w6-7RR"/>
+                            <constraint firstItem="uA3-5J-BQh" firstAttribute="leading" secondItem="sof-ns-lC0" secondAttribute="leading" id="yKY-L4-UtU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="bix-pO-fHh" id="Jwg-gw-JqU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7nR-Vg-UAG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="664.79999999999995" y="151.57421289355324"/>
+        </scene>
         <!--Change Username Password View Controller-->
         <scene sceneID="6oW-Fe-Qmf">
             <objects>
