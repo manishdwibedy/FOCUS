@@ -58,6 +58,22 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
+        
+        
+        if let last_pos = UserDefaults.standard.value(forKey: "last_location") as? String{
+            let coord = last_pos.components(separatedBy: ";;")
+            
+            let camera = GMSCameraPosition.camera(withLatitude: Double(coord[0])!,
+                                                  longitude: Double(coord[1])!,
+                                                  zoom: 15)
+            if mapView.isHidden {
+                mapView.isHidden = false
+                mapView.camera = camera
+            } else {
+                mapView.animate(to: camera)
+            }
+        }
+        
         // Set up the cluster manager with default icon generator and renderer.
         let iconGenerator = GMUDefaultClusterIconGenerator()
         
@@ -216,6 +232,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
                                               zoom: 15)
+        
+        UserDefaults.standard.set("last_location", forKey: "\(location.coordinate.latitude);;\(location.coordinate.longitude)")
         
         let current = changeTimeZone(of: Date(), from: TimeZone(abbreviation: "GMT")!, to: TimeZone.current)
         
