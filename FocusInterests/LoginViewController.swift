@@ -76,25 +76,70 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         
         AuthApi.setPassword(password: password)
         
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
-            if error != nil {
-                self.showLoginFailedAlert(loginType: "email")
-                print("there has been an error with email login: \(error?.localizedDescription)")
-            } else {
-                if user != nil {
-                    if let id = user?.uid {
-                        AuthApi.set(firebaseUid: id)
-                        AuthApi.set(loggedIn: .Email)
-                    }
-                    self.emailTextField.text = ""
-                    self.passwordTextField.text = ""
-                    self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
-                    self.showHomeVC()
+        if isValidEmail(text: email){
+            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+                if error != nil {
+                    self.showLoginFailedAlert(loginType: "email")
+                    print("there has been an error with email login: \(error?.localizedDescription)")
                 } else {
+                    if user != nil {
+                        if let id = user?.uid {
+                            AuthApi.set(firebaseUid: id)
+                            AuthApi.set(loggedIn: .Email)
+                        }
+                        
+                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
+                        
+                        self.emailTextField.text = ""
+                        self.passwordTextField.text = ""
+                        self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
+                        self.showHomeVC()
+                    } else {
+                        self.showLoginFailedAlert(loginType: "email")
+                    }
+                }
+            })
+        }
+        else{
+            let ref = Constants.DB.user_mapping
+            ref.child(email).observeSingleEvent(of: .value, with: { snapshot in
+                let user = snapshot.value as? String
+                
+                if let userEmail = user{
+                    FIRAuth.auth()?.signIn(withEmail: userEmail, password: password, completion: { (user, error) in
+                        if error != nil {
+                            self.showLoginFailedAlert(loginType: "email")
+                            print("there has been an error with email login: \(error?.localizedDescription)")
+                        } else {
+                            if user != nil {
+                                if let id = user?.uid {
+                                    AuthApi.set(firebaseUid: id)
+                                    AuthApi.set(loggedIn: .Email)
+                                }
+                                
+                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
+                                
+                                self.emailTextField.text = ""
+                                self.passwordTextField.text = ""
+                                self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
+                                self.showHomeVC()
+                            } else {
+                                self.showLoginFailedAlert(loginType: "email")
+                            }
+                        }
+                    })
+                }
+                else{
                     self.showLoginFailedAlert(loginType: "email")
                 }
-            }
-        })
+                
+            })
+ 
+        }
+        
+        
+        
+        
     }
 
     @IBAction func facebookLogin(_ sender: UIButton) {

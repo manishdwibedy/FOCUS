@@ -154,6 +154,7 @@ struct Constants {
         public static let following_place = FIRDatabase.database().reference().child("following_place")
         public static let pins = FIRDatabase.database().reference().child("pins")
         public static let feedback = FIRDatabase.database().reference().child("feedback")
+        public static let user_mapping = FIRDatabase.database().reference().child("username_mapping")
     }
     
     struct storage{
