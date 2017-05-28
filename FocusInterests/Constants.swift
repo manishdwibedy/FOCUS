@@ -126,7 +126,7 @@ struct Constants {
     }
     
     struct settings {
-        public static let cellTitles = ["Choose Interests", "Invite Facebook Friends", "Invite Contacts", "Change Username & Password", "Private Profile", "Tutorial", "Help and Support", "Open source libraries", "Terms", "Privacy Policy", "Clear Search History", "Logout"]
+        public static let cellTitles = ["Choose Interests", "Invite Facebook Friends", "Invite Contacts", "Change Username & Password", "Private Profile", "Tutorial", "Help and Support", "Send Feedback", "Open source libraries", "Terms", "Privacy Policy", "Clear Search History", "Logout"]
     }
     
     struct defaultsKeys {
@@ -153,6 +153,7 @@ struct Constants {
         public static let places = FIRDatabase.database().reference().child("places")
         public static let following_place = FIRDatabase.database().reference().child("following_place")
         public static let pins = FIRDatabase.database().reference().child("pins")
+        public static let feedback = FIRDatabase.database().reference().child("feedback")
     }
     
     struct storage{

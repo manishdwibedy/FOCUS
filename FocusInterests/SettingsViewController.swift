@@ -106,13 +106,17 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 }
             case 7:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-                let VC = storyboard.instantiateViewController(withIdentifier: "License") as? LicenseViewController
+                let VC = storyboard.instantiateViewController(withIdentifier: "Feedback") as? FeedbackViewController
                 self.present(VC!, animated: true, completion: nil)
             case 8:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-                let VC = storyboard.instantiateViewController(withIdentifier: "Terms") as? TermsViewController
+                let VC = storyboard.instantiateViewController(withIdentifier: "License") as? LicenseViewController
                 self.present(VC!, animated: true, completion: nil)
             case 9:
+                let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+                let VC = storyboard.instantiateViewController(withIdentifier: "Terms") as? TermsViewController
+                self.present(VC!, animated: true, completion: nil)
+            case 10:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Privacy") as? PrivacyViewController
                 self.present(VC!, animated: true, completion: nil)

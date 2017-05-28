@@ -621,6 +621,93 @@
             </objects>
             <point key="canvasLocation" x="2224.8000000000002" y="155.17241379310346"/>
         </scene>
+        <!--Feedback View Controller-->
+        <scene sceneID="xH3-d6-2bd">
+            <objects>
+                <viewController storyboardIdentifier="Feedback" id="zq0-nP-QTl" customClass="FeedbackViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gRw-rG-p08"/>
+                        <viewControllerLayoutGuide type="bottom" id="7fn-kG-uhS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BqH-CY-g1U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PmP-Ho-pa0">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="6zT-vK-r5j"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.094117647058823528" green="0.17254901960784313" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Feedback" id="A6W-Mv-kSw">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="bg4-9T-Sgi">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backPressed:" destination="zq0-nP-QTl" id="6sv-BY-n6O"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7qf-fK-dI2">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yof-41-T5I">
+                                        <rect key="frame" x="8" y="10" width="359" height="150"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="fbm-JS-pB2"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vS8-y1-xLs">
+                                        <rect key="frame" x="30" y="190" width="315" height="30"/>
+                                        <color key="backgroundColor" red="0.49803921569999998" green="0.76078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendFeedback:" destination="zq0-nP-QTl" eventType="touchUpInside" id="gGa-Xa-MvN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2196078431372549" green="0.28627450980392155" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="vS8-y1-xLs" secondAttribute="trailing" constant="30" id="QrP-Sc-pDi"/>
+                                    <constraint firstAttribute="trailing" secondItem="Yof-41-T5I" secondAttribute="trailing" constant="8" id="R9f-LA-FOS"/>
+                                    <constraint firstItem="Yof-41-T5I" firstAttribute="leading" secondItem="7qf-fK-dI2" secondAttribute="leading" constant="8" id="RHe-42-fg3"/>
+                                    <constraint firstItem="vS8-y1-xLs" firstAttribute="top" secondItem="Yof-41-T5I" secondAttribute="bottom" constant="30" id="WwY-Po-WPK"/>
+                                    <constraint firstItem="Yof-41-T5I" firstAttribute="top" secondItem="7qf-fK-dI2" secondAttribute="top" constant="10" id="nDQ-DL-hYc"/>
+                                    <constraint firstItem="vS8-y1-xLs" firstAttribute="leading" secondItem="7qf-fK-dI2" secondAttribute="leading" constant="30" id="qp9-Cr-dKv"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7qf-fK-dI2" firstAttribute="top" secondItem="PmP-Ho-pa0" secondAttribute="bottom" id="JM4-Zi-cx7"/>
+                            <constraint firstAttribute="trailing" secondItem="7qf-fK-dI2" secondAttribute="trailing" id="O9w-T1-1yS"/>
+                            <constraint firstAttribute="trailing" secondItem="PmP-Ho-pa0" secondAttribute="trailing" id="ft0-3k-PLz"/>
+                            <constraint firstItem="PmP-Ho-pa0" firstAttribute="top" secondItem="gRw-rG-p08" secondAttribute="bottom" id="heY-sS-GOf"/>
+                            <constraint firstItem="7qf-fK-dI2" firstAttribute="leading" secondItem="BqH-CY-g1U" secondAttribute="leading" id="hho-rA-MDn"/>
+                            <constraint firstItem="PmP-Ho-pa0" firstAttribute="leading" secondItem="BqH-CY-g1U" secondAttribute="leading" id="oyi-ZW-Ubh"/>
+                            <constraint firstItem="7fn-kG-uhS" firstAttribute="top" secondItem="7qf-fK-dI2" secondAttribute="bottom" id="tlD-7A-AtC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="sendButton" destination="vS8-y1-xLs" id="oS9-z8-LcQ"/>
+                        <outlet property="textView" destination="Yof-41-T5I" id="jG7-xO-rfb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kKC-fJ-bSM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3077.5999999999999" y="157.87106446776613"/>
+        </scene>
         <!--Change Username Password View Controller-->
         <scene sceneID="6oW-Fe-Qmf">
             <objects>

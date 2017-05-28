@@ -13,6 +13,8 @@
 		5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1659231EDA293D0002209A /* PrivacyViewController.swift */; };
 		5B1659261EDA30300002209A /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1659251EDA30300002209A /* TermsViewController.swift */; };
 		5B1659281EDA33AF0002209A /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1659271EDA33AF0002209A /* LicenseViewController.swift */; };
+		5B16592A1EDA50630002209A /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1659291EDA50630002209A /* FeedbackViewController.swift */; };
+		5B16592C1EDA53540002209A /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B16592B1EDA53540002209A /* UITextView+Extensions.swift */; };
 		5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E841ED276970075B57A /* InterestsViewController.swift */; };
 		5B251E891ED276970075B57A /* InterestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E851ED276970075B57A /* InterestsViewController.xib */; };
 		5B251E8A1ED276970075B57A /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E861ED276970075B57A /* InviteFriendsViewController.swift */; };
@@ -225,6 +227,8 @@
 		5B1659231EDA293D0002209A /* PrivacyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		5B1659251EDA30300002209A /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		5B1659271EDA33AF0002209A /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
+		5B1659291EDA50630002209A /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		5B16592B1EDA53540002209A /* UITextView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		5B251E841ED276970075B57A /* InterestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestsViewController.swift; sourceTree = "<group>"; };
 		5B251E851ED276970075B57A /* InterestsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestsViewController.xib; sourceTree = "<group>"; };
 		5B251E861ED276970075B57A /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
@@ -502,6 +506,7 @@
 		5B3F05791ED909E90057F596 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				5B1659291EDA50630002209A /* FeedbackViewController.swift */,
 				5B1659271EDA33AF0002209A /* LicenseViewController.swift */,
 				5B1659251EDA30300002209A /* TermsViewController.swift */,
 				5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */,
@@ -841,6 +846,7 @@
 				5B7BB1DF1ED50EA0001E60FF /* UIButton+Extensions.swift */,
 				5B7BB1E71ED53FB1001E60FF /* UIView+Extensions.swift */,
 				5B7BB1E91ED54677001E60FF /* UITableView+Extensions.swift */,
+				5B16592B1EDA53540002209A /* UITextView+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1454,6 +1460,7 @@
 				5B6AFA6A1ED1906900A82104 /* GMUDefaultClusterRenderer.m in Sources */,
 				FF7C87521ED74A8F004ABB1B /* PinImageCollectionViewCell.swift in Sources */,
 				D25D5D341E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift in Sources */,
+				5B16592A1EDA50630002209A /* FeedbackViewController.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
 				5B6AFA721ED1906900A82104 /* GMUPlacemark.m in Sources */,
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
@@ -1480,6 +1487,7 @@
 				D2ECAC541E7A255B006FFA1A /* UserProfile1ViewController.swift in Sources */,
 				04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */,
 				D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */,
+				5B16592C1EDA53540002209A /* UITextView+Extensions.swift in Sources */,
 				D227AD2F1E6CBD5A000FB9DD /* NewLoginVC.swift in Sources */,
 				D216482A1E9735AC00AE021B /* SelectedInterestCell.swift in Sources */,
 				5B634C811ED1960000EBCC29 /* MapCluster.swift in Sources */,
