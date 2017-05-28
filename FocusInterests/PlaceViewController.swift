@@ -129,13 +129,23 @@ class PlaceViewController: UIViewController {
     }
     
     func fetchSuggestedPlaces(token: String){
-        let url = "https://api.yelp.com/v3/businesses/search"
+        if let location = self.currentLocation{
+            getNearbyPlaces(location: location)
+        }
+        else{
+            let location = CLLocation(latitude: (self.place?.latitude)!, longitude: (self.place?.longitude)!)
+            getNearbyPlaces(location: location)
+        }
         
+    }
+    
+    func getNearbyPlaces(location: CLLocation){
+        let url = "https://api.yelp.com/v3/businesses/search"
         let categories = self.place?.categories.map { $0.alias }.joined(separator: ",")
-
+        
         let parameters: [String: Any] = [
-            "latitude" : Double(self.currentLocation!.coordinate.latitude),
-            "longitude" : Double(self.currentLocation!.coordinate.longitude),
+            "latitude" : Double(location.coordinate.latitude),
+            "longitude" : Double(location.coordinate.longitude),
             "categories": categories!,
             "limit": 3
         ]
@@ -144,7 +154,7 @@ class PlaceViewController: UIViewController {
             "authorization": "Bearer \(AuthApi.getYelpToken()!)",
             "cache-contro": "no-cache"
         ]
-    
+        
         Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
             var suggestedPlaces = [Place]()
             let json = JSON(data: response.data!)
@@ -185,7 +195,6 @@ class PlaceViewController: UIViewController {
             self.suggestPlacesDelegate?.gotSuggestedPlaces(places: suggestedPlaces)
         }
     }
-    
     /*
     // MARK: - Navigation
 

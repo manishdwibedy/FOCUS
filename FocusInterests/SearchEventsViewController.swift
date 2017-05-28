@@ -182,7 +182,11 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let event = self.events[indexPath.row]
+        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+        controller.event = event
+        self.present(controller, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
