@@ -98,8 +98,12 @@ func changeTimeZone(of date: Date, from sourceTimeZone: TimeZone, to destination
     return(estDate)
 }
 
-func getEvents(around location: CLLocation, completion: @escaping (_ result: String) -> Void){
+func getEvents(around location: CLLocation, completion: @escaping (_ result: [Event]) -> Void){
     let url = "https://www.eventbriteapi.com/v3/events/search/"
+
+    var count = 0
+    var eventList = [Event]()
+    
     let parameters: [String: String] = [
         "token" : "R6U22QXZZZ52YX2XRTWX",
         "sort_by": "distance",
@@ -112,20 +116,47 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: Str
         let json = JSON(data: response.data!)
         let events = json["events"]
         
+        count = (events.arrayObject?.count)!
         for (_, eventJson) in events {
             
-            print(eventJson)
+            let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: "")
             
-//            let df: DateFormatter = DateFormatter()
-//            df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-//            let date: Date = df.date(from: eventJson["start"]["local"].stringValue)!
-            let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: "", shortAddress: "", latitude: "", longitude: "", date: eventJson["start"]["local"].stringValue, creator: "", category: "")
+            getEventLocation(eventJson["venue_id"].stringValue, completion: { location in
+                event.fullAddress = location?.address
+                event.shortAddress = location?.address
+                event.latitude = location?.latitude
+                event.longitude = location?.longitude
+                
+                eventList.append(event)
+                
+                if eventList.count == count{
+                    completion(eventList)
+                }
+                
+            })
+            
             
         }
-        
-        completion("")
-        
     }
+}
+
+func getEventLocation(_ id: String, completion: @escaping (_ result: EventLocation?) -> Void){
+
+    let url = "https://www.eventbriteapi.com/v3/venues/\(id)"
+    print(url)
+    let parameters: [String: String] = [
+        "token" : "R6U22QXZZZ52YX2XRTWX",
+    ]
+    
+    Alamofire.request(url, method: .get, parameters:parameters, headers: nil).responseJSON { response in
+        let json = JSON(data: response.data!)
+        let address = json["address"].dictionaryValue
+        
+        let location = EventLocation(address: (address["localized_address_display"]?.stringValue)!, latitude: (address["latitude"]?.stringValue)!, longitude: (address["longitude"]?.stringValue)!)
+        
+        completion(location)
+    }
+    
 }
 
 func isValidEmail(text:String) -> Bool {

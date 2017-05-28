@@ -255,8 +255,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.searchPlacesTab?.location = location
         
         
-//        getEvents(around: self.currentLocation!, completion: { events in
-//        })
+        getEvents(around: self.currentLocation!, completion: { events in
+            for event in events{
+                let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                let marker = GMSMarker(position: position)
+                marker.icon = UIImage(named: "Event")
+                marker.title = event.title
+                marker.map = self.mapView
+                marker.accessibilityLabel = "event_\(self.events.count)"
+                
+            }
+        })
         
         print("got location")
         if let token = AuthApi.getYelpToken(){

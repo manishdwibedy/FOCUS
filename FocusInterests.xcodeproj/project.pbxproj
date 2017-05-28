@@ -121,6 +121,7 @@
 		5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB87B01EC9861F0064E5EC /* search_place.storyboard */; };
 		5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapInfoView.swift */; };
+		5BFA009F1EDA8BC200F1ACBF /* EventLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */; };
 		61C6096F1ED572AC004098BA /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6096E1ED572AC004098BA /* EditProfileViewController.swift */; };
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
 		96F2D75D974CE24C9A358244 /* Pods_FocusInterestsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */; };
@@ -372,6 +373,7 @@
 		5BAB87B01EC9861F0064E5EC /* search_place.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = search_place.storyboard; sourceTree = "<group>"; };
 		5BE31E871EA75E6A004768F0 /* MapInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
+		5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLocation.swift; sourceTree = "<group>"; };
 		61C6096E1ED572AC004098BA /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterestsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -731,6 +733,7 @@
 				5B959FCC1ECA9EBE00094FE6 /* Place.swift */,
 				5B959FF41ECD48CB00094FE6 /* PlaceRating.swift */,
 				5B634C801ED1960000EBCC29 /* MapCluster.swift */,
+				5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1446,6 +1449,7 @@
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				5B959FE81ECC14D200094FE6 /* PinTableViewCell.swift in Sources */,
 				5B6AFA661ED1906900A82104 /* GMUWrappingDictionaryKey.m in Sources */,
+				5BFA009F1EDA8BC200F1ACBF /* EventLocation.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
 				5B634C871ED2584F00EBCC29 /* Share.swift in Sources */,
 				FF69ABFA1ED649120044BE51 /* invitePlaceCV.swift in Sources */,
