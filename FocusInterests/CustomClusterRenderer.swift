@@ -28,7 +28,17 @@ class CustomClusterRenderer: GMUDefaultClusterRenderer {
         marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         
         if clusterIcon == nil{
-            marker.icon = getCustomUIImageItem(userData: userData)
+            
+            let customView = MapMarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            customView.markerBadge.text = "2"
+            
+            if let item = userData as? MapCluster {
+                customView.markerImage.image = item.icon
+            }
+            
+            marker.iconView = customView
+            
+//            marker.icon = getCustomUIImageItem(userData: userData)
         }
         marker.map = mapView
         if animated {
@@ -43,6 +53,7 @@ class CustomClusterRenderer: GMUDefaultClusterRenderer {
     
     func getCustomUIImageItem(userData: AnyObject) -> UIImage {
         if let item = userData as? MapCluster {
+            
             return item.icon
         }
         return UIImage()
