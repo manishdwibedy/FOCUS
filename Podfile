@@ -36,6 +36,8 @@ target 'FocusInterests' do
     pod 'PopupDialog', '~> 0.5'
     pod 'DottedProgressBar'
     pod 'Gallery'
+    pod 'BadgeSwift', '~> 5.0'
+
 end
 
 target 'FocusInterestsTests' do

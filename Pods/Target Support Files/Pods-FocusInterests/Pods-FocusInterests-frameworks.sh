@@ -91,6 +91,7 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Agrume-iOS10.0/Agrume.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS10.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BadgeSwift/BadgeSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts-iOS10.0/Bolts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ChameleonFramework/ChameleonFramework.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Cosmos-iOS10.0/Cosmos.framework"
@@ -119,6 +120,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Agrume-iOS10.0/Agrume.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS10.0/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BadgeSwift/BadgeSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts-iOS10.0/Bolts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ChameleonFramework/ChameleonFramework.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Cosmos-iOS10.0/Cosmos.framework"

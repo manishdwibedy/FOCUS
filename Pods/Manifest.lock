@@ -1,6 +1,7 @@
 PODS:
   - Agrume (3.2.1)
   - Alamofire (4.4.0)
+  - BadgeSwift (5.0.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -138,6 +139,7 @@ PODS:
 DEPENDENCIES:
   - Agrume (from `https://github.com/JanGorman/Agrume.git`)
   - Alamofire
+  - BadgeSwift (~> 5.0)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Cosmos (~> 9.0)
   - DottedProgressBar
@@ -183,6 +185,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Agrume: abf26210c3371bc6c74bbf2ced7a19d937bf8f0a
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  BadgeSwift: 3defa56f504bfb46f2300122c4a565ec9e405c1e
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Cosmos: 33eee62b2a0418452aef470f711f83c3ea061b7b
@@ -225,6 +228,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 757f1c96307d00d9c29abf198e678052564093ba
+PODFILE CHECKSUM: 48b9d70eed158ac54a7e6ae143122c0e2e653f62
 
 COCOAPODS: 1.2.1
