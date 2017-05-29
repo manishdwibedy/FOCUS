@@ -194,6 +194,7 @@
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
 		FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */; };
 		FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */; };
+		FF12737B1EDC882E0034AA42 /* PinLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF12737A1EDC882E0034AA42 /* PinLookViewController.swift */; };
 		FF69ABFA1ED649120044BE51 /* invitePlaceCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69ABF91ED649120044BE51 /* invitePlaceCV.swift */; };
 		FF69ABFD1ED6498F0044BE51 /* inviteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69ABFB1ED6498F0044BE51 /* inviteCell.swift */; };
 		FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF69ABFC1ED6498F0044BE51 /* inviteCell.xib */; };
@@ -455,6 +456,7 @@
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
 		FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
 		FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPlaceCell.xib; sourceTree = "<group>"; };
+		FF12737A1EDC882E0034AA42 /* PinLookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinLookViewController.swift; sourceTree = "<group>"; };
 		FF69ABF91ED649120044BE51 /* invitePlaceCV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = invitePlaceCV.swift; sourceTree = "<group>"; };
 		FF69ABFB1ED6498F0044BE51 /* inviteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inviteCell.swift; sourceTree = "<group>"; };
 		FF69ABFC1ED6498F0044BE51 /* inviteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = inviteCell.xib; sourceTree = "<group>"; };
@@ -998,6 +1000,7 @@
 			isa = PBXGroup;
 			children = (
 				FF7C87491ED73310004ABB1B /* PinScreenViewController.swift */,
+				FF12737A1EDC882E0034AA42 /* PinLookViewController.swift */,
 			);
 			name = Pin;
 			sourceTree = "<group>";
@@ -1520,6 +1523,7 @@
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
 				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */,
+				FF12737B1EDC882E0034AA42 /* PinLookViewController.swift in Sources */,
 				04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */,
 				5B71D7001ED1833E0093A3F5 /* EventDetailViewController.swift in Sources */,
 				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,

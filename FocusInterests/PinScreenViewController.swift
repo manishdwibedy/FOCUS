@@ -39,6 +39,12 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+        let data = pinData(UID: "kOOupXxDdPeTZpvEI0Cqx7fmxJm1", dateTS: 1495943929.0, pin: "come here", location: "Coon Rapids MN", lat: 51.5033640, lng: -0.1276250)
+        ivc.data = data
+        self.present(ivc, animated: true, completion: { _ in })
+        
         imageArray.append(UIImage(named:"Icon-Small-50x50@1x")!)
         
         collectionView.delegate = self
@@ -125,10 +131,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     imagePaths.addEntries(from: [String(random):["imagePath": path]])
                     uploadImage(image: image, path: Constants.storage.pins.child(path))
                 }
-                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":place.formattedAddress!, "images": imagePaths])
+                
+                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":place.formattedAddress!, "lat": Double(place.coordinate.latitude), "lng": Double(place.coordinate.longitude), "images": imagePaths])
             }else
             {
-                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":place.formattedAddress!, "images":"nil"])
+                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":place.formattedAddress!,"lat": Double(place.coordinate.latitude), "lng": Double(place.coordinate.longitude), "images":"nil"])
             }
         }
         pinTextView.text = "What are you up to?"
