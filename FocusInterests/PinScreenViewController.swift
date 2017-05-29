@@ -39,11 +39,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-        let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-        let data = pinData(UID: "kOOupXxDdPeTZpvEI0Cqx7fmxJm1", dateTS: 1495943929.0, pin: "come here", location: "Coon Rapids MN", lat: 51.5033640, lng: -0.1276250)
-        ivc.data = data
-        self.present(ivc, animated: true, completion: { _ in })
+//        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+//        let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+//        let data = pinData(UID: "kOOupXxDdPeTZpvEI0Cqx7fmxJm1", dateTS: 1495943929.0, pin: "come here", location: "Coon Rapids MN", lat: 51.5033640, lng: -0.1276250)
+//        ivc.data = data
+//        self.present(ivc, animated: true, completion: { _ in })
         
         imageArray.append(UIImage(named:"Icon-Small-50x50@1x")!)
         
