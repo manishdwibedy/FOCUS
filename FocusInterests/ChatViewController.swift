@@ -302,10 +302,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             let imageRef = Constants.storage.messages.child("\(messageID).jpg")
             
             // Create file metadata including the content type
-            let metadata = FIRStorageMetadata()
+            let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
             
-            let _ = imageRef.put(data, metadata: metadata) { (metadata, error) in
+            let _ = imageRef.putData(data, metadata: metadata) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     return

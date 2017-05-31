@@ -99,7 +99,7 @@ class pinData
     var pinMessage = String()
     var locationAddress = String()
     var coordinates = CLLocationCoordinate2D()
-    var dbPath = FIRDatabaseReference()
+    var dbPath = DatabaseReference()
     
     
     init(UID:String, dateTS:Double, pin: String, location: String, lat: Double, lng: Double) {

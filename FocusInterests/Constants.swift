@@ -146,21 +146,21 @@ struct Constants {
     }
     
     struct DB {
-        public static let event = FIRDatabase.database().reference().child("events")
-        public static let user = FIRDatabase.database().reference().child("users")
-        public static let messages = FIRDatabase.database().reference().child("messages")
-        public static let message_content = FIRDatabase.database().reference().child("message_content")
-        public static let places = FIRDatabase.database().reference().child("places")
-        public static let following_place = FIRDatabase.database().reference().child("following_place")
-        public static let pins = FIRDatabase.database().reference().child("pins")
-        public static let feedback = FIRDatabase.database().reference().child("feedback")
-        public static let user_mapping = FIRDatabase.database().reference().child("username_mapping")
+        public static let event = Database.database().reference().child("events")
+        public static let user = Database.database().reference().child("users")
+        public static let messages = Database.database().reference().child("messages")
+        public static let message_content = Database.database().reference().child("message_content")
+        public static let places = Database.database().reference().child("places")
+        public static let following_place = Database.database().reference().child("following_place")
+        public static let pins = Database.database().reference().child("pins")
+        public static let feedback = Database.database().reference().child("feedback")
+        public static let user_mapping = Database.database().reference().child("username_mapping")
     }
     
     struct storage{
-        public static let event = FIRStorage.storage().reference().child("events")
-        public static let messages = FIRStorage.storage().reference().child("messages")
-        public static let pins = FIRStorage.storage().reference().child("pins")
+        public static let event = Storage.storage().reference().child("events")
+        public static let messages = Storage.storage().reference().child("messages")
+        public static let pins = Storage.storage().reference().child("pins")
     }
     
     struct Twitter{

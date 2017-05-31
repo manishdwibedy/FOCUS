@@ -106,7 +106,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     
     func loadRestUsers(){
         
-        userRef.observe(FIRDataEventType.value, with: { (snapshot) in
+        userRef.observe(DataEventType.value, with: { (snapshot) in
             // Get user value
             let users = snapshot.value as? [String:[String:Any]]
             

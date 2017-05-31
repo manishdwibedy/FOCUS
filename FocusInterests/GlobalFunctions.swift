@@ -165,3 +165,30 @@ func isValidEmail(text:String) -> Bool {
     let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
     return emailTest.evaluate(with: text)
 }
+
+func sendNotification(to id: String, title: String, body: String){
+    let url = "https://881148b2.ngrok.io/sendMessage"
+    
+    Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+        let user = snapshot.value as? [String : Any] ?? [:]
+        
+        let token = user["token"] as? String
+        
+        let parameters = [
+            "to":token ?? "",
+            "title": title,
+            "body": body
+            
+            ] as [String : Any]
+        
+        
+        Alamofire.request(url, method: .get, parameters:parameters, headers: nil).response { response in
+            print(response)
+        }
+        
+    })
+    
+    
+
+    
+}

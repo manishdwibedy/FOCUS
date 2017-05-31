@@ -118,7 +118,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (FIRAuth.auth()?.currentUser?.isEmailVerified)! {
+        if (Auth.auth().currentUser?.isEmailVerified)! {
             print("Email verified")
         }
     }
@@ -239,7 +239,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
     func showNotVerified() {
         let alert = UIAlertController(title: "Not Verified", message: "To submit profile changes, you must click the link in the email you received when you registered. Would you like us to send another copy?", preferredStyle: .alert)
         let action1 = UIAlertAction(title: "Yes", style: .default) { (act) in
-            FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
+            Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
                 if error == nil {
                     let promptAlert = UIAlertController(title: "Email sent", message: "Please find the email and click the link.", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)

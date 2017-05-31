@@ -16,6 +16,7 @@ import Alamofire
 import SwiftyJSON
 import Solar
 import PopupDialog
+import FirebaseMessaging
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
@@ -82,7 +83,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
         clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
         
-        Constants.DB.event.observe(FIRDataEventType.value, with: { (snapshot) in
+        Constants.DB.event.observe(DataEventType.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             
             for (id, event) in events{
@@ -112,7 +113,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.searchPlacesTab = self.tabBarController?.viewControllers?[3] as? SearchPlacesViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
-        
+        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(token ?? "")")
     }
     
     override func viewWillAppear(_ animated: Bool) {

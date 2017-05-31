@@ -30,7 +30,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var guestButtonOut: UIButton!
     var event: Event?
     @IBOutlet weak var image: UIImageView!
-    let ref = FIRDatabase.database().reference()
+    let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
     var keyboardUp = false
     var attendingAmount = 0

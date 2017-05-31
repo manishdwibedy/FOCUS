@@ -41,8 +41,8 @@ class InviteFriendsViewController: UIViewController {
                             return
                         }
                         if let tokenString = FBSDKAccessToken.current().tokenString {
-                            let credential = FIRFacebookAuthProvider.credential(withAccessToken: tokenString)
-                            FIRAuth.auth()?.currentUser?.link(with: credential) { (user, error) in
+                            let credential = FacebookAuthProvider.credential(withAccessToken: tokenString)
+                            Auth.auth().currentUser?.link(with: credential) { (user, error) in
                                 if error != nil {
                                     
                                     self.showLoginFailedAlert(loginType: "Facebook")

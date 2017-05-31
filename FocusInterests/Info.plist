@@ -29,14 +29,12 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.633889221608-vbe57iqrilhp8n7bmpgudd908vpr5c5s</string>
+				<string>com.googleusercontent.apps.633889221608-7mbafaqf9mmjqp1vbr1urq28utnthg2r</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>3</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -60,6 +58,8 @@
 	<string>124579808092963</string>
 	<key>FacebookDisplayName</key>
 	<string>FOCUS</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -85,13 +85,13 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Focus would like access to your device&apos;s camera for certain features.</string>
+	<string>Focus would like access to your device's camera for certain features.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Focus would like access to your device&apos;s contacts for certain features.</string>
+	<string>Focus would like access to your device's contacts for certain features.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Focus would like access to your device&apos;s current position</string>
+	<string>Focus would like access to your device's current position</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Focus would like access to your device&apos;s photo library for this feature.</string>
+	<string>Focus would like access to your device's photo library for this feature.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

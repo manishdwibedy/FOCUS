@@ -33,7 +33,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     @IBOutlet weak var passwordTextField: UITextField!
     
     
-    let handle = FIRAuth.auth()
+    let handle = Auth.auth()
     let loginView = FBSDKLoginManager()
     let defaults = UserDefaults.standard
     var email: String?
@@ -41,7 +41,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     var signUp = false
     var delegate: LoginDelegate?
     let appD = UIApplication.shared.delegate as! AppDelegate
-    var user: FIRUser?
+    var user: User?
     
     
     override func viewDidLoad() {
@@ -89,7 +89,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         emailPwordButton.backgroundColor = UIColor.primaryGreen()
         emailPwordButton.layer.cornerRadius = 2
         segmentedC.tintColor = UIColor.white
-        if FIRAuth.auth()?.currentUser == nil {
+        if Auth.auth().currentUser == nil {
             signUp = true
             segmentedC.selectedSegmentIndex = 1
             emailTextField.placeholder = "Enter a valid email."
@@ -123,7 +123,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        handle?.addStateDidChangeListener({ (auth, user) in
+        handle.addStateDidChangeListener({ (auth, user) in
             if let u = user {
                 print("user uid: \(u.uid)")
             }
@@ -132,7 +132,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
     
     
     override func viewDidDisappear(_ animated: Bool) {
-        handle?.removeStateDidChangeListener(handle!)
+        handle.removeStateDidChangeListener(handle)
     }
     
     @IBAction func emailPwordTapped(_ sender: Any) {
@@ -163,15 +163,15 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         AuthApi.setPassword(password: pwrd)
         
         if signUp {
-            FIRAuth.auth()?.createUser(withEmail: eml, password: pwrd, completion: { (user, error) in
+            Auth.auth().createUser(withEmail: eml, password: pwrd, completion: { (user, error) in
                 if error != nil {
                     self.showLoginFailedAlert(loginType: "email & password")
                     print("and here is the error: \(error?.localizedDescription)")
                 } else {
                     if user != nil {
-                        self.user = user
+//                        self.user = user
                         self.addEmpty(userWith: user!.uid)
-                        FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { (error) in
+                        Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
                             if error != nil {
                                 self.showLoginFailedAlert(loginType: "email")
                                 print("there has been an error with email login: \(error?.localizedDescription)")
@@ -204,7 +204,7 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                 }
             })
         } else {
-            FIRAuth.auth()?.signIn(withEmail: eml, password: pwrd, completion: { (user, error) in
+            Auth.auth().signIn(withEmail: eml, password: pwrd, completion: { (user, error) in
                 if error != nil {
                     self.showLoginFailedAlert(loginType: "email")
                     print("there has been an error with email login: \(error?.localizedDescription)")
@@ -294,8 +294,8 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
                         return
                     }
                     if let tokenString = FBSDKAccessToken.current().tokenString {
-                        let credential = FIRFacebookAuthProvider.credential(withAccessToken: tokenString)
-                        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                        let credential = FacebookAuthProvider.credential(withAccessToken: tokenString)
+                        Auth.auth().signIn(with: credential) { (user, error) in
                             if let u = user {
                                 let fireId = u.uid
                                 self.addEmpty(userWith: fireId)
@@ -330,9 +330,9 @@ class NewLoginVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, FBSD
         if let id = user.authentication.accessToken, let idToken = user.authentication.idToken {
             AuthApi.set(googleToken: id)
             
-            let credential = FIRGoogleAuthProvider.credential(withIDToken: idToken,
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                               accessToken: id)
-            FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            Auth.auth().signIn(with: credential, completion: { (user, error) in
                 if let u = user {
                     let fireId = u.uid
                     self.addEmpty(userWith: fireId)

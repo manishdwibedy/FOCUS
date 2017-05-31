@@ -268,16 +268,16 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     
     
-    func uploadImage(image:UIImage, path: FIRStorageReference)
+    func uploadImage(image:UIImage, path: StorageReference)
     {
         
         let localFile = UIImageJPEGRepresentation(image, 0.5)
         
-        let metadata = FIRStorageMetadata()
+        let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         
         let userID = AuthApi.getFirebaseUid()
-        let uploadTask = path.put(localFile!, metadata: metadata)
+        let uploadTask = path.putData(localFile!, metadata: metadata)
     
         
         uploadTask.observe(.pause) { snapshot in

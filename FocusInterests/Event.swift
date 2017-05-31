@@ -36,7 +36,7 @@ class Event: NSObject, NSCoding{
         self.category = category
     }
     
-    func saveToDB(ref: FIRDatabaseReference) -> String{
+    func saveToDB(ref: DatabaseReference) -> String{
         let newEvent = ref.childByAutoId()
         
         let event = [

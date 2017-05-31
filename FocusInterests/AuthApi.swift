@@ -92,6 +92,19 @@ struct AuthApi {
         return nil
     }
     
+    static func set(FCMToken: String?) {
+        if let token = FCMToken {
+            defaults.set(token, forKey: "FCMToken")
+        }
+    }
+    
+    static func getFCMToken() -> String? {
+        if let token = defaults.object(forKey: "FCMToken") as? String {
+            return token
+        }
+        return nil
+    }
+    
     static func getYelpToken() -> String?{
         if let token = defaults.object(forKey: "yelpAccessToken") as? String {
             return token

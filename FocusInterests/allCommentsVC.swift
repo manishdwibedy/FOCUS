@@ -18,7 +18,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     var parentEvent: Event?
     var parentVC: EventDetailViewController?
-    let ref = FIRDatabase.database().reference()
+    let ref = Database.database().reference()
     let commentList = NSMutableArray()
     let commentsCList = NSMutableArray()
     var keyboardUp = false

@@ -76,7 +76,7 @@ class ChangeUsernamePasswordViewController: UIViewController {
         
         if !(password.text?.isEmpty)! && password.text == repeatPassword.text{
             
-            FIRAuth.auth()?.currentUser?.updatePassword(password.text!, completion: { error in
+            Auth.auth().currentUser?.updatePassword(to: password.text!, completion: { error in
                 if error != nil{
                     SCLAlertView().showError("Invalid password", subTitle: "Couldn't update your password.")
                 }

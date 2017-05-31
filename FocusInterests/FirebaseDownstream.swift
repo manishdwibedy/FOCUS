@@ -13,7 +13,7 @@ class FirebaseDownstream {
     
     public static let shared = FirebaseDownstream()
     
-    let ref = FIRDatabase.database().reference()
+    let ref = Database.database().reference()
     
     var giantInterestMap = [
         InterestCategory.Art.rawValue : [Constants.interests.modernArt, Constants.interests.murals, Constants.interests.museums],
@@ -67,8 +67,8 @@ class FirebaseDownstream {
     }
     
     func isUserEmailVerified(completion: @escaping (Bool) -> Void) {
-        guard let email = FIRAuth.auth()?.currentUser?.email, let password = AuthApi.getPassword() else { return }
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+        guard let email = Auth.auth().currentUser?.email, let password = AuthApi.getPassword() else { return }
+        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
             if error != nil {
                 print(error?.localizedDescription ?? String())
             } else {

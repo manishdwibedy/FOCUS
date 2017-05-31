@@ -44,14 +44,14 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         switch typeOfSignUp {
         case "phone":
             let formatedString = formatPhoneString(phoneNumber: usersEmailOrPhone)
-            FIRAuth.auth()!.createUser(withEmail: formatedString, password: validPassword, completion: { (user, error) in
+            Auth.auth().createUser(withEmail: formatedString, password: validPassword, completion: { (user, error) in
                 if error != nil {
                     print(error!.localizedDescription)
                 }
             })
         case "email":
             let email = self.usersEmailOrPhone
-            FIRAuth.auth()!.createUser(withEmail: email, password: validPassword, completion: { (user, error) in
+            Auth.auth().createUser(withEmail: email, password: validPassword, completion: { (user, error) in
                 if error != nil {
                     print("error occurred creating a user: \(error!.localizedDescription)")
                 }
