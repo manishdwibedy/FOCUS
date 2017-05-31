@@ -47,11 +47,24 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         marker.title = data.pinMessage
         marker.map = mapView
         
+        print(data.fromUID)
         Constants.DB.user.child(data.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
+                print(value)
                 self.usernameLabel.text = value?["username"] as? String
+                //self.pinMessageLabel.text = (value?["username"] as? String)! + " " + self.data.pinMessage
+//                print(value?["username"] as? String)
+//                let boldText  = (value?["username"] as? String)!
+//                let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 15)]
+//                let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+//
+//                let normalText = " " + self.data.pinMessage
+//                let normalString = NSMutableAttributedString(string:normalText)
+//                attributedString.append(normalString)
+//                self.pinMessageLabel.attributedText = attributedString
+                
             }
         })
         

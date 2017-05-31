@@ -48,22 +48,22 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
-//        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
-//            let value = snapshot.value as? NSDictionary
-//            if value != nil
-//            {
-//                for (key,_) in (value)!
-//                {
-//                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-//                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-//                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["place"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
-//                    ivc.data = data
-//                    self.present(ivc, animated: true, completion: { _ in })
-//                    
-//                    break
-//                }
-//            }
-//        })
+        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                for (key,_) in (value)!
+                {
+                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["place"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
+                    ivc.data = data
+                    self.present(ivc, animated: true, completion: { _ in })
+                    
+                    break
+                }
+            }
+        })
         
         
         
