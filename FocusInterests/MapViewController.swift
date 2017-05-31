@@ -40,9 +40,24 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var searchEventsTab: SearchEventsViewController? = nil
     
     @IBOutlet weak var navigationView: MapNavigationView!
+    
+    @IBOutlet weak var webView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+//        let authorisationURL = "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&Client_Secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q"
+////        let authorisationURL = "https://www.google.com"
+//        let url = URL(string: authorisationURL.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
+//        webView.loadRequest(URLRequest(url: url!))
+//        webView.delegate = self
+
+        let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
+        let requestObj = URLRequest(url: url!)
+        webView.loadRequest(requestObj)
+        webView.delegate = self
+
         
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -578,5 +593,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         // Present dialog
         present(popup, animated: true, completion: nil)
+    }
+}
+
+extension MapViewController: UIWebViewDelegate {
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        print("Loading")
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        if (webView.request?.url?.absoluteString.range(of: "access_token=") != nil) {
+            let params = webView.request?.url?.absoluteString.components(separatedBy: "=")
+            print(params?.last)
+            self.webView.isHidden = true
+        }
+
     }
 }
