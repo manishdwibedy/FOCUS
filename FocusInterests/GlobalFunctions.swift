@@ -166,6 +166,7 @@ func isValidEmail(text:String) -> Bool {
     return emailTest.evaluate(with: text)
 }
 
+
 func sendNotification(to id: String, title: String, body: String){
     let url = "https://881148b2.ngrok.io/sendMessage"
     
