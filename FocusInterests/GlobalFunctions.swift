@@ -116,34 +116,37 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
         let json = JSON(data: response.data!)
         let events = json["events"]
         
-        count = (events.arrayObject?.count)!
-        for (_, eventJson) in events {
-            
-            let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: "")
-            
-            getEventLocation(eventJson["venue_id"].stringValue, completion: { location in
-                event.fullAddress = location?.address
-                event.shortAddress = location?.address
-                event.latitude = location?.latitude
-                event.longitude = location?.longitude
+        if let array = events.arrayObject{
+            for (_, eventJson) in events {
                 
-                eventList.append(event)
+                let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: "")
                 
-                if eventList.count == count{
-                    completion(eventList)
-                }
+                event.setImageURL(url: eventJson["logo"]["url"].stringValue
+                )
+                getEventLocation(eventJson["venue_id"].stringValue, completion: { location in
+                    event.fullAddress = location?.address
+                    event.shortAddress = location?.address
+                    event.latitude = location?.latitude
+                    event.longitude = location?.longitude
+                    
+                    eventList.append(event)
+                    
+                    if eventList.count == array.count{
+                        completion(eventList)
+                    }
+                    
+                })
                 
-            })
-            
-            
+                
+            }
         }
+        
     }
 }
 
 func getEventLocation(_ id: String, completion: @escaping (_ result: EventLocation?) -> Void){
 
     let url = "https://www.eventbriteapi.com/v3/venues/\(id)"
-    print(url)
     let parameters: [String: String] = [
         "token" : "R6U22QXZZZ52YX2XRTWX",
     ]
@@ -191,4 +194,37 @@ func sendNotification(to id: String, title: String, body: String){
         }
         
     })
+}
+
+
+func getEventBriteToken(completion: @escaping (_ result: String) -> Void){
+    
+//    code=THE_USERS_AUTH_CODE&client_secret=YOUR_CLIENT_SECRET&client_id=YOUR_API_KEY&grant_type=authorization_code
+
+    let url = "https://www.eventbrite.com/oauth/token"
+    let parameters: [String: String] = [
+        "client_id" : "34IONXEGBQSXJGZXWO",
+        "client_secret" : "FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q",
+        "response_type": "token",
+        "grant_type": "authorization_code",
+        "code": "THE_USERS_AUTH_CODE"
+        
+        
+        
+    ]
+    
+    let headers: HTTPHeaders = [
+        "content-type": "application/x-www-form-urlencoded",
+        "cache-contro": "no-cache"
+    ]
+    
+    Alamofire.request(url, method: .post, parameters:parameters, headers: headers).responseJSON { response in
+        let json = JSON(data: response.data!)
+        let token = json["access_token"].stringValue
+        
+        AuthApi.set(yelpAccessToken: token)
+        
+        completion(token)
+        
+    }
 }
