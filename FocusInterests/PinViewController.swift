@@ -158,6 +158,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     }
     
     @IBAction func openWebSite(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: (place?.url)!)! as URL)
+
     }
     
     @IBAction func openUber(_ sender: Any) {
