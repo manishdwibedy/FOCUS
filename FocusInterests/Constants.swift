@@ -45,26 +45,8 @@ struct Constants {
     
     struct interests {
         
-//        Meet up
-//        Coffee
-//        Chill
-//        Celebration
-//        Food
-//        Drinks
-//        Work
-//        Learn
-//        Entertainment
-//        Arts
-//        Music
-//        Beauty
-//        Fashion
-//        Networking
-//        Exercise
-//        Wellness
-//        Sports
-//        Outdoors
-//        Views
-//        Causes
+        
+        public static let interests = ["Meet up","Coffee","Chill","Celebration","Food","Drinks","Work","Learn","Entertainment","Arts","Music","Beauty","Fashion","Networking","Exercise","Wellness","Sports","Outdoors","Views","Causes"]
         
         public static let football = Interest(name: "Football", category: InterestCategory.Sports, image: nil, imageString: nil)
         public static let basketball = Interest(name: "Basketball", category: InterestCategory.Sports, image: nil, imageString: nil)
@@ -85,7 +67,7 @@ struct Constants {
         public static let furniture = Interest(name: "Furniture", category: InterestCategory.Shopping, image: nil, imageString: nil)
         
         
-        public static let interest_list = [interests.football, interests.basketball, interests.soccer, interests.bike, interests.music, interests.modernArt]
+//        public static let interest_list = [interests.football, interests.basketball, interests.soccer, interests.bike, interests.music, interests.modernArt]
         
     }
     

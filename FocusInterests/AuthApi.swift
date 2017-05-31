@@ -161,4 +161,17 @@ struct AuthApi {
         defaults.set(false, forKey: "newUser")
     }
     
+    static func set(interests: String?) {
+        if let interests = interests {
+            defaults.set(interests, forKey: "interests")
+        }
+    }
+    
+    static func getInterests() -> String? {
+        if let interests = defaults.object(forKey: "interests") as? String {
+            return interests
+        }
+        return nil
+    }
+    
 }

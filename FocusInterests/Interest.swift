@@ -18,17 +18,30 @@ enum InterestCategory: String {
     case Shopping = "shopping"
 }
 
+enum InterestStatus{
+    case normal
+    case like
+    case love
+    case hate
+}
+
 class Interest {
     
     var name: String?
     var category: InterestCategory?
     var image: UIImage?
     var imageString: String?
+    var status: InterestStatus = .normal
     
     init(name: String?, category: InterestCategory?, image: UIImage?, imageString: String?) {
         self.name = name
         self.category = category
         self.image = image
         self.imageString = imageString
+    }
+    
+    func addStatus(status: InterestStatus){
+        self.status = status
+        
     }
 }

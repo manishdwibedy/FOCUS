@@ -152,9 +152,12 @@ func getEventLocation(_ id: String, completion: @escaping (_ result: EventLocati
         let json = JSON(data: response.data!)
         let address = json["address"].dictionaryValue
         
-        let location = EventLocation(address: (address["localized_address_display"]?.stringValue)!, latitude: (address["latitude"]?.stringValue)!, longitude: (address["longitude"]?.stringValue)!)
+        if let address_string = address["localized_address_display"]?.stringValue{
+            let location = EventLocation(address: address_string, latitude: (address["latitude"]?.stringValue)!, longitude: (address["longitude"]?.stringValue)!)
+            
+            completion(location)
+        }
         
-        completion(location)
     }
     
 }
