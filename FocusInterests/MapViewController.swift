@@ -46,18 +46,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        webView.isHidden = true
+        if AuthApi.getEventBriteToken() == nil{
+            let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
+            let requestObj = URLRequest(url: url!)
+            webView.loadRequest(requestObj)
+            webView.delegate = self
+        }
         
-//        let authorisationURL = "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&Client_Secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q"
-////        let authorisationURL = "https://www.google.com"
-//        let url = URL(string: authorisationURL.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
-//        webView.loadRequest(URLRequest(url: url!))
-//        webView.delegate = self
-
-        let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
-        let requestObj = URLRequest(url: url!)
-        webView.loadRequest(requestObj)
-        webView.delegate = self
-
         
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -74,9 +70,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
-        getEventBriteToken(completion: { token in
-            print(token)
-        })
         
         
         if let last_pos = UserDefaults.standard.value(forKey: "last_location") as? String{
@@ -301,19 +294,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 self.fetchPlaces(around: currentLocation, token: token)
             })
         }
-
-        getEvents(around: currentLocation, completion: { events in
-            for event in events{
-                let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                let marker = GMSMarker(position: position)
-                marker.icon = UIImage(named: "Event")
-                marker.title = event.title
-                marker.map = self.mapView
-                marker.accessibilityLabel = "event_\(self.events.count)"
-                self.events.append(event)
-            }
-        })
         
+        if AuthApi.getEventBriteToken() != nil{
+            getEvents(around: currentLocation, completion: { events in
+                for event in events{
+                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                    let marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: "Event")
+                    marker.title = event.title
+                    marker.map = self.mapView
+                    marker.accessibilityLabel = "event_\(self.events.count)"
+                    self.events.append(event)
+                }
+            })
+        }
     }
     
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
@@ -372,18 +366,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.currentLocation = location
         self.searchPlacesTab?.location = location
         
-        
-        getEvents(around: self.currentLocation!, completion: { events in
-            for event in events{
-                let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                let marker = GMSMarker(position: position)
-                marker.icon = UIImage(named: "Event")
-                marker.title = event.title
-                marker.map = self.mapView
-                marker.accessibilityLabel = "event_\(self.events.count)"
-                self.events.append(event)
-            }
-        })
+        if AuthApi.getEventBriteToken() != nil{
+            getEvents(around: self.currentLocation!, completion: { events in
+                for event in events{
+                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                    let marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: "Event")
+                    marker.title = event.title
+                    marker.map = self.mapView
+                    marker.accessibilityLabel = "event_\(self.events.count)"
+                    self.events.append(event)
+                }
+            })
+        }
         
         print("got location")
         if let token = AuthApi.getYelpToken(){
@@ -604,8 +599,12 @@ extension MapViewController: UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if (webView.request?.url?.absoluteString.range(of: "access_token=") != nil) {
             let params = webView.request?.url?.absoluteString.components(separatedBy: "=")
-            print(params?.last)
+            let access_token = (params?.last!)!
+            AuthApi.set(eventBriteAccessToken: access_token)
             self.webView.isHidden = true
+        }
+        else{
+            self.webView.isHidden = false
         }
 
     }

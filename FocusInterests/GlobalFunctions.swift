@@ -105,7 +105,7 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
     var eventList = [Event]()
     
     let parameters: [String: String] = [
-        "token" : "R6U22QXZZZ52YX2XRTWX",
+        "token" : AuthApi.getEventBriteToken()!,
         "sort_by": "distance",
         "location.latitude": String(location.coordinate.latitude),
         "location.longitude" : String(location.coordinate.longitude),
@@ -197,20 +197,14 @@ func sendNotification(to id: String, title: String, body: String){
 }
 
 
-func getEventBriteToken(completion: @escaping (_ result: String) -> Void){
+func getEventBriteToken(userCode: String, completion: @escaping (_ result: String) -> Void){
     
-//    code=THE_USERS_AUTH_CODE&client_secret=YOUR_CLIENT_SECRET&client_id=YOUR_API_KEY&grant_type=authorization_code
-
     let url = "https://www.eventbrite.com/oauth/token"
     let parameters: [String: String] = [
         "client_id" : "34IONXEGBQSXJGZXWO",
         "client_secret" : "FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q",
-        "response_type": "token",
         "grant_type": "authorization_code",
-        "code": "THE_USERS_AUTH_CODE"
-        
-        
-        
+        "code": userCode
     ]
     
     let headers: HTTPHeaders = [

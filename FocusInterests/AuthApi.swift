@@ -174,4 +174,14 @@ struct AuthApi {
         return nil
     }
     
+    static func getEventBriteToken() -> String?{
+        if let token = defaults.object(forKey: "eventBriteToken") as? String {
+            return token
+        }
+        return nil
+    }
+    
+    static func set(eventBriteAccessToken: String) {
+        defaults.set(eventBriteAccessToken, forKey: "eventBriteToken")
+    }
 }
