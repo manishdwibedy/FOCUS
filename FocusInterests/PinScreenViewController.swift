@@ -12,7 +12,7 @@ import Gallery
 import Firebase
 import GooglePlaces
 
-class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate{
+class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate, CLLocationManagerDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
@@ -27,7 +27,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     let gallery = GalleryController()
     var galleryPicArray = [UIImage]()
     
+    let locationManager = CLLocationManager()
     var place: GMSPlace!
+    var coordinates = CLLocationCoordinate2D()
+    var formmatedAddress = ""
     
     let sidePadding: CGFloat = 0.0
     let numberOfItemsPerRow: CGFloat = 4.0
@@ -39,11 +42,30 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-//        let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-//        let data = pinData(UID: "kOOupXxDdPeTZpvEI0Cqx7fmxJm1", dateTS: 1495943929.0, pin: "come here", location: "Coon Rapids MN", lat: 51.5033640, lng: -0.1276250)
-//        ivc.data = data
-//        self.present(ivc, animated: true, completion: { _ in })
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.distanceFilter = 500
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        
+//        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
+//            let value = snapshot.value as? NSDictionary
+//            if value != nil
+//            {
+//                for (key,_) in (value)!
+//                {
+//                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+//                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+//                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["place"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
+//                    ivc.data = data
+//                    self.present(ivc, animated: true, completion: { _ in })
+//                    
+//                    break
+//                }
+//            }
+//        })
+        
+        
         
         imageArray.append(UIImage(named:"Icon-Small-50x50@1x")!)
         
@@ -88,6 +110,16 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
 
         
     }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location: CLLocation = locations.last!
+        coordinates = location.coordinate
+        print("GOT LOCATION###################################################")
+        print(coordinates)
+        locationManager.stopUpdatingLocation()
+        
+        
+       
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -131,15 +163,16 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     imagePaths.addEntries(from: [String(random):["imagePath": path]])
                     uploadImage(image: image, path: Constants.storage.pins.child(path))
                 }
-                
-                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":place.formattedAddress!, "lat": Double(place.coordinate.latitude), "lng": Double(place.coordinate.longitude), "images": imagePaths])
+                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths])
             }else
             {
-                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":place.formattedAddress!,"lat": Double(place.coordinate.latitude), "lng": Double(place.coordinate.longitude), "images":"nil"])
+                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":formmatedAddress,"lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images":"nil"])
             }
         }
         pinTextView.text = "What are you up to?"
         pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)
+        imageArray.removeAll()
+        galleryPicArray.removeAll()
         
         for cell in cellArray
         {
@@ -147,7 +180,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         }
     
     }
-    
     
     
     
@@ -314,12 +346,9 @@ extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
         self.place = place
         self.locationLabel.text = place.formattedAddress!
         self.changeLocationOut.setTitle(place.formattedAddress, for: UIControlState.normal)
+        coordinates = self.place.coordinate
+        formmatedAddress = self.place.formattedAddress!
         
-        print("Place name: \(place.name)")
-        
-        print("Place address: \(place.formattedAddress)")
-        
-        print("Place attributions: \(place.attributions)")
         
         dismiss(animated: true, completion: nil)
     }

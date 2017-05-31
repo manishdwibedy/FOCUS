@@ -229,7 +229,11 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Pin" id="gG3-OF-paB">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="a0z-8p-Mqv"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="a0z-8p-Mqv">
+                                            <connections>
+                                                <action selector="back:" destination="Wnn-ii-34g" id="ykD-ot-DkT"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="8zW-dn-FAh"/>
                                     </navigationItem>
                                 </items>
