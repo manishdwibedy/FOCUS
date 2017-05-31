@@ -21,7 +21,6 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDelegate, GIDSignInDelegate {
-
     
     var window: UIWindow?
     let defaults = UserDefaults.standard
