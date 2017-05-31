@@ -27,6 +27,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     
     var data: pinData!
+    var likes = 0
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,17 +47,49 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         marker.title = data.pinMessage
         marker.map = mapView
         
+        print(data.fromUID)
         Constants.DB.user.child(data.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
+                print(value)
                 self.usernameLabel.text = value?["username"] as? String
+                //self.pinMessageLabel.text = (value?["username"] as? String)! + " " + self.data.pinMessage
+//                print(value?["username"] as? String)
+//                let boldText  = (value?["username"] as? String)!
+//                let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 15)]
+//                let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+//
+//                let normalText = " " + self.data.pinMessage
+//                let normalString = NSMutableAttributedString(string:normalText)
+//                attributedString.append(normalString)
+//                self.pinMessageLabel.attributedText = attributedString
+                
             }
         })
         
         addressTopOut.setTitle(data.locationAddress, for: UIControlState.normal)
         addressBottom.text = data.locationAddress
         pinMessageLabel.text = data.pinMessage
+        
+        
+        //check for likes
+        data.dbPath.child("like").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.likes = (value?["num"] as? Int)!
+                self.likesLabel.text = String(self.likes) + " likes"
+            }
+        })
+        
+        data.dbPath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.likeOut.isEnabled = false
+            }
+        })
         
         
         
@@ -75,6 +108,13 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     }
     
     @IBAction func like(_ sender: Any) {
+       
+        self.likes = self.likes + 1
+        data.dbPath.child("like").updateChildValues(["num": likes])
+        data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+        self.likeOut.isEnabled = false
+        self.likesLabel.text = String(self.likes) + " likes"
+       
     }
     
     @IBAction func comment(_ sender: Any) {
@@ -87,6 +127,9 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     }
     
 
+    @IBAction func back(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
 
 }
@@ -102,14 +145,14 @@ class pinData
     var dbPath = DatabaseReference()
     
     
-    init(UID:String, dateTS:Double, pin: String, location: String, lat: Double, lng: Double) {
+    init(UID:String, dateTS:Double, pin: String, location: String, lat: Double, lng: Double, path: DatabaseReference) {
         self.fromUID = UID
         self.dateTimeStamp = dateTS
         self.pinMessage = pin
         self.locationAddress = location
         self.coordinates.latitude = lat
         self.coordinates.longitude = lng
-        //self.dbPath = path
+        self.dbPath = path
     
         
     }
