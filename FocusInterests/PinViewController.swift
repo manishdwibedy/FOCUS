@@ -156,6 +156,36 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
+    
+    @IBAction func openWebSite(_ sender: Any) {
+    }
+    
+    @IBAction func openUber(_ sender: Any) {
+        let lat = place?.latitude as! Double
+        let long = place?.longitude as! Double
+        var address = place?.address[0] as! String
+        address = address.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let url1 = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=37.802374&dropoff[longitude]=-122.405818&dropoff[nickname]=Coit%20Tower&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
+//        //        let url  = URL(string: url_string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
+//        let url = URL(string: url1)
+//        if UIApplication.shared.canOpenURL(url!) == true
+//        {
+//            
+//            UIApplication.shared.openURL(url!)
+//        }
+        let url_string = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=\(lat)&dropoff[longitude]=\(long)&dropoff[nickname]=\(address)&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
+        
+        //let url  = URL(string: url_string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
+        let url = URL(string: url_string)
+        if UIApplication.shared.canOpenURL(url!) == true
+        {
+            UIApplication.shared.openURL(url!)
+        }
+        
+    }
+    
+    @IBAction func openGoogleMaps(_ sender: Any) {
+    }
     /*
     // MARK: - Navigation
 

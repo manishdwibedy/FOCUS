@@ -87,6 +87,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     // Google signin handler
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
+        if UIApplication.shared.canOpenURL(NSURL(fileURLWithPath: "uber://") as URL) {
+                        // Uber app is installed, construct and open deep link.
+        } else {
+            // No Uber app, open the mobile site.
+        }
+        
         let googleDidHandle = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(

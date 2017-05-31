@@ -188,8 +188,4 @@ func sendNotification(to id: String, title: String, body: String){
         }
         
     })
-    
-    
-
-    
 }

@@ -338,8 +338,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func notificationsClicked() {
-        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
-        self.present(vc, animated: true, completion: nil)
+//        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+//        self.present(vc, animated: true, completion: nil)
+        
+        let url1 = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=37.802374&dropoff[longitude]=-122.405818&dropoff[nickname]=Coit%20Tower&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
+        //        let url  = URL(string: url_string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
+        let url = URL(string: url1)
+        if UIApplication.shared.canOpenURL(url!) == true
+        {
+            
+            UIApplication.shared.openURL(url!)
+        }
     }
     
     func fetchPlaces(token: String){
