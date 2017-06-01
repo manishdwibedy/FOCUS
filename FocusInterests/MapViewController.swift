@@ -336,8 +336,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func notificationsClicked() {
-        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
-        self.present(vc, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
+        
+        let navigationController = UINavigationController(rootViewController: vc)
+        
+        self.present(navigationController, animated: true, completion: nil)
+        
     }
     
     func fetchPlaces(token: String){

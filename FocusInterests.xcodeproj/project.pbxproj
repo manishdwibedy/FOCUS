@@ -123,6 +123,9 @@
 		5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapInfoView.swift */; };
 		5BFA009F1EDA8BC200F1ACBF /* EventLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */; };
 		61C6096F1ED572AC004098BA /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6096E1ED572AC004098BA /* EditProfileViewController.swift */; };
+		61ED203C1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61ED203B1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard */; };
+		61ED203E1EDC236100247DC5 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */; };
+		61ED20401EDC2FBA00247DC5 /* NotificationFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */; };
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
 		96F2D75D974CE24C9A358244 /* Pods_FocusInterestsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */; };
 		D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317F61E5B47D300140323 /* HomViewControllerCell.swift */; };
@@ -375,6 +378,9 @@
 		5BE31E891EA76094004768F0 /* MapInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
 		5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLocation.swift; sourceTree = "<group>"; };
 		61C6096E1ED572AC004098BA /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		61ED203B1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notif_Invite_Feed.storyboard; sourceTree = "<group>"; };
+		61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFeedViewController.swift; sourceTree = "<group>"; };
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterestsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21317F61E5B47D300140323 /* HomViewControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomViewControllerCell.swift; sourceTree = "<group>"; };
@@ -753,6 +759,7 @@
 				D2B9B0431E5A047C0002F1B1 /* Main.storyboard */,
 				5B71D6F31ED17F2B0093A3F5 /* CreateEvent.storyboard */,
 				5B71D6FD1ED182D40093A3F5 /* EventDetails.storyboard */,
+				61ED203B1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard */,
 				D28EAFBF1E5E7C8E001EA7E5 /* Login.storyboard */,
 				D23E01361E6BA7C900E735F5 /* GoogleService-Info.plist */,
 				5BA37C781EBDB7EA0091189E /* Messages.storyboard */,
@@ -954,6 +961,8 @@
 				FF7C87511ED74A8F004ABB1B /* PinImageCollectionViewCell.swift */,
 				5B16592D1EDA6DE40002209A /* MapMarkerView.xib */,
 				5B16592F1EDA6DF40002209A /* MapMarkerView.swift */,
+				61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */,
+				61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1172,6 +1181,7 @@
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
 				5B959FD31ECAC6E000094FE6 /* PlaceDetails.storyboard in Resources */,
 				5B71D6FE1ED182D40093A3F5 /* EventDetails.storyboard in Resources */,
+				61ED203C1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard in Resources */,
 				5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
 				5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */,
@@ -1458,6 +1468,7 @@
 				5B7BB1DE1ED50CDD001E60FF /* SuggestPlacesViewController.swift in Sources */,
 				5B1659281EDA33AF0002209A /* LicenseViewController.swift in Sources */,
 				5B7BB1E81ED53FB1001E60FF /* UIView+Extensions.swift in Sources */,
+				61ED20401EDC2FBA00247DC5 /* NotificationFeedViewController.swift in Sources */,
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
@@ -1502,6 +1513,7 @@
 				5B16592C1EDA53540002209A /* UITextView+Extensions.swift in Sources */,
 				D227AD2F1E6CBD5A000FB9DD /* NewLoginVC.swift in Sources */,
 				D216482A1E9735AC00AE021B /* SelectedInterestCell.swift in Sources */,
+				61ED203E1EDC236100247DC5 /* CustomSegmentedControl.swift in Sources */,
 				5B634C811ED1960000EBCC29 /* MapCluster.swift in Sources */,
 				5B5906461EC3CB0400466AAC /* UserMessages.swift in Sources */,
 				D23E01391E6BAD0A00E735F5 /* FirebaseUpstream.swift in Sources */,

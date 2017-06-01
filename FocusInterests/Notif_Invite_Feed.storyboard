@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F71b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Notification Feed View Controller-->
+        <scene sceneID="ZZH-FY-cad">
+            <objects>
+                <viewController storyboardIdentifier="NotifViewController" id="Jyz-fX-gQp" customClass="NotificationFeedViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EGS-vH-0Lp"/>
+                        <viewControllerLayoutGuide type="bottom" id="xwf-gA-ZVT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GK2-xK-Gum">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cUS-Vg-g8o" customClass="CustomSegmentedControl" customModule="FocusInterests" customModuleProvider="target">
+                                <rect key="frame" x="16" y="72" width="343" height="29"/>
+                                <color key="backgroundColor" red="0.61176470588235299" green="0.64313725490196072" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
+                                <segments>
+                                    <segment title="Notifications"/>
+                                    <segment title="Invites"/>
+                                    <segment title="Feed"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="indexChanged:" destination="Jyz-fX-gQp" eventType="valueChanged" id="mgn-11-PVY"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8po-4l-Agk">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.22745098039215686" green="0.29411764705882354" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="cUS-Vg-g8o" firstAttribute="leading" secondItem="GK2-xK-Gum" secondAttribute="leadingMargin" id="3t7-6v-ZzZ"/>
+                            <constraint firstItem="8po-4l-Agk" firstAttribute="leading" secondItem="GK2-xK-Gum" secondAttribute="leading" id="4hC-8J-bWb"/>
+                            <constraint firstItem="cUS-Vg-g8o" firstAttribute="top" secondItem="EGS-vH-0Lp" secondAttribute="bottom" constant="8" symbolic="YES" id="GD5-hf-g6X"/>
+                            <constraint firstItem="8po-4l-Agk" firstAttribute="top" secondItem="cUS-Vg-g8o" secondAttribute="bottom" constant="8" symbolic="YES" id="NpV-5U-0Zs"/>
+                            <constraint firstItem="8po-4l-Agk" firstAttribute="bottom" secondItem="xwf-gA-ZVT" secondAttribute="top" id="U8g-L5-3D5"/>
+                            <constraint firstAttribute="trailing" secondItem="8po-4l-Agk" secondAttribute="trailing" id="Yb2-cm-YID"/>
+                            <constraint firstItem="cUS-Vg-g8o" firstAttribute="centerX" secondItem="8po-4l-Agk" secondAttribute="centerX" id="u7C-IM-62U"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="YAu-M7-0w8">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="md1-h5-Laa"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="PvB-vn-Wor">
+                            <connections>
+                                <action selector="leftButtonAction:" destination="Jyz-fX-gQp" id="gyw-FO-KDQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="backButtonItem" destination="PvB-vn-Wor" id="1zO-yV-htQ"/>
+                        <outlet property="segmentedControl" destination="cUS-Vg-g8o" id="1f5-b7-P6A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JTg-Z6-n3b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="940" y="145.27736131934034"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Soy-7b-zER">
+            <objects>
+                <navigationController storyboardIdentifier="NavNotifController" automaticallyAdjustsScrollViewInsets="NO" id="S6h-7I-cLB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="691-Ax-KJY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Jyz-fX-gQp" kind="relationship" relationship="rootViewController" id="4MG-Nq-jHp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VGh-f9-47g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.80000000000000004" y="145.27736131934034"/>
+        </scene>
+    </scenes>
+</document>
