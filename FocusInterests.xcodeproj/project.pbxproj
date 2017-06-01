@@ -25,6 +25,8 @@
 		5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */; };
 		5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E901ED278A70075B57A /* UserProfileViewController.swift */; };
 		5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */; };
+		5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C0541EDF8CE3007A8188 /* general_search.storyboard */; };
+		5B33C0571EDF8DF9007A8188 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */; };
 		5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B3F05751ED907B10057F596 /* Settings.storyboard */; };
 		5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */; };
 		5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */; };
@@ -243,6 +245,8 @@
 		5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestViewCell.xib; sourceTree = "<group>"; };
 		5B251E901ED278A70075B57A /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5B33C0541EDF8CE3007A8188 /* general_search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = general_search.storyboard; sourceTree = "<group>"; };
+		5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5B3F05751ED907B10057F596 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChangeUsernamePasswordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -651,6 +655,7 @@
 				FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */,
 				5B7BB1E51ED51E9E001E60FF /* SearchEventsViewController.swift */,
 				5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */,
+				5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -765,6 +770,7 @@
 				5B519E741ED667D000B36110 /* Pin.storyboard */,
 				5B3F05751ED907B10057F596 /* Settings.storyboard */,
 				5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */,
+				5B33C0541EDF8CE3007A8188 /* general_search.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1193,6 +1199,7 @@
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				5B959FF31ECD452C00094FE6 /* RatingViewCell.xib in Resources */,
 				5B71D70E1ED184880093A3F5 /* FollowProfileCell.xib in Resources */,
+				5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */,
 				5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */,
 				5B959FD81ECAD12500094FE6 /* map.gpx in Resources */,
 				5B959FE11ECBA62B00094FE6 /* InviteUserView.xib in Resources */,
@@ -1404,6 +1411,7 @@
 				D2ECAC581E7CD9F8006FFA1A /* UserPhotoCell.swift in Sources */,
 				61C6096F1ED572AC004098BA /* EditProfileViewController.swift in Sources */,
 				D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */,
+				5B33C0571EDF8DF9007A8188 /* SearchViewController.swift in Sources */,
 				5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */,
 				5B6AFA641ED1906900A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */,

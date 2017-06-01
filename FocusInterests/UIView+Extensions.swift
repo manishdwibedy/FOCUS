@@ -17,4 +17,14 @@ extension UIView{
         
         self.layer.mask = rectShape
     }
+    
+    func allCornersRounded(radius: Double){
+        let rectShape = CAShapeLayer()
+        rectShape.bounds = self.frame
+        rectShape.position = self.center
+        rectShape.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.topRight , .topLeft, .bottomLeft, .bottomRight], cornerRadii: CGSize(width: radius, height: radius)).cgPath
+        
+        self.layer.mask = rectShape
+    }
+
 }

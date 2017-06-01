@@ -70,7 +70,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
-        
+        if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
+            getYelpToken(completion: { token in
+                AuthApi.set(yelpAccessToken: token)
+                self.fetchPlaces(around: self.currentLocation!, token: token)
+            })
+        }
         
         if let last_pos = UserDefaults.standard.value(forKey: "last_location") as? String{
             let coord = last_pos.components(separatedBy: ";;")
@@ -450,6 +455,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func notificationsClicked() {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
         self.present(vc, animated: true, completion: nil)        
+    }
+    
+    func searchClicked() {
+        let storyboard = UIStoryboard(name: "general_search", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
+        VC?.location = self.currentLocation
+        self.present(VC!, animated: true, completion: nil)
     }
     
     func fetchPlaces(around location: CLLocation, token: String){
