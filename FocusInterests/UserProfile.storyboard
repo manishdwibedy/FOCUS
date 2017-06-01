@@ -37,19 +37,19 @@
                                         <rect key="frame" x="0.0" y="200" width="375" height="1317"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpm-dW-0we">
-                                                <rect key="frame" x="50" y="16" width="275" height="21"/>
+                                                <rect key="frame" x="10" y="16" width="355" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uex-oj-DPj">
-                                                <rect key="frame" x="33" y="55" width="99" height="21"/>
+                                                <rect key="frame" x="33" y="76" width="99" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjc-38-rqz">
-                                                <rect key="frame" x="317" y="52" width="30" height="27"/>
+                                                <rect key="frame" x="317" y="71" width="30" height="31"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <state key="normal" title="edit">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,9 +59,9 @@
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wo5-YS-IfZ">
-                                                <rect key="frame" x="33" y="82" width="314" height="135"/>
+                                                <rect key="frame" x="33" y="107" width="314" height="110"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="135" id="fez-qn-Fbz"/>
+                                                    <constraint firstAttribute="height" constant="110" id="fez-qn-Fbz"/>
                                                 </constraints>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </string>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -320,6 +320,7 @@
                                             <constraint firstItem="Qpm-dW-0we" firstAttribute="centerX" secondItem="wLf-1E-eSU" secondAttribute="centerX" id="Aka-tD-XfD"/>
                                             <constraint firstAttribute="height" constant="1317" id="Azw-Io-wGq"/>
                                             <constraint firstItem="wo5-YS-IfZ" firstAttribute="leading" secondItem="Uex-oj-DPj" secondAttribute="leading" id="CJR-6n-5jV"/>
+                                            <constraint firstItem="Uex-oj-DPj" firstAttribute="top" secondItem="eCO-Sw-Meb" secondAttribute="bottom" constant="20" id="Evu-10-SvR"/>
                                             <constraint firstItem="eCO-Sw-Meb" firstAttribute="centerX" secondItem="wLf-1E-eSU" secondAttribute="centerX" id="I7Q-Gr-Rmh"/>
                                             <constraint firstItem="Uex-oj-DPj" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="33" id="K73-X2-biN"/>
                                             <constraint firstItem="wo5-YS-IfZ" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="33" id="Ms4-xy-5O7"/>
@@ -329,11 +330,11 @@
                                             <constraint firstItem="zs8-eT-TCa" firstAttribute="top" secondItem="wo5-YS-IfZ" secondAttribute="bottom" constant="-9" id="VXx-mz-SVs"/>
                                             <constraint firstItem="F09-6U-2YX" firstAttribute="top" secondItem="wLf-1E-eSU" secondAttribute="top" constant="506" id="WO5-zC-KXs"/>
                                             <constraint firstItem="1gs-u9-MSd" firstAttribute="centerX" secondItem="wLf-1E-eSU" secondAttribute="centerX" id="dcn-QI-I06"/>
-                                            <constraint firstAttribute="trailing" secondItem="Qpm-dW-0we" secondAttribute="trailing" constant="50" id="egP-9n-jwV"/>
+                                            <constraint firstAttribute="trailing" secondItem="Qpm-dW-0we" secondAttribute="trailing" constant="10" id="egP-9n-jwV"/>
                                             <constraint firstItem="F09-6U-2YX" firstAttribute="top" secondItem="1gs-u9-MSd" secondAttribute="bottom" constant="8" symbolic="YES" id="k9P-Ns-Ioc"/>
-                                            <constraint firstItem="Qpm-dW-0we" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="50" id="nI2-ro-OEM"/>
+                                            <constraint firstItem="Qpm-dW-0we" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="10" id="nI2-ro-OEM"/>
                                             <constraint firstItem="WUe-TH-3g9" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="10" id="p0c-ST-rwf"/>
-                                            <constraint firstItem="wo5-YS-IfZ" firstAttribute="top" secondItem="tjc-38-rqz" secondAttribute="bottom" constant="3" id="rSx-gj-7zY"/>
+                                            <constraint firstItem="wo5-YS-IfZ" firstAttribute="top" secondItem="tjc-38-rqz" secondAttribute="bottom" constant="5" id="rSx-gj-7zY"/>
                                             <constraint firstAttribute="trailing" secondItem="WUe-TH-3g9" secondAttribute="trailing" constant="10" id="uYN-gf-MeG"/>
                                             <constraint firstAttribute="trailing" secondItem="wo5-YS-IfZ" secondAttribute="trailing" constant="28" id="ust-ee-p7L"/>
                                             <constraint firstItem="F09-6U-2YX" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="10" id="vIE-3k-Eat"/>
