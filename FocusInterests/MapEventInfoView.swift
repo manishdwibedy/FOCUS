@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MapInfoView: UIView {
+class MapEventInfoView: UIView {
 
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!

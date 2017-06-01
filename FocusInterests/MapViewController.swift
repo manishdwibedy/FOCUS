@@ -167,7 +167,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if parts?[0] == "event"{
             let index:Int! = Int(parts![1])
             let event = self.events[index]
-            let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+            let infoWindow = Bundle.main.loadNibNamed("MapEventInfoView", owner: self, options: nil)?[0] as! MapEventInfoView
             infoWindow.name.text = event.title
             
             if event.date?.range(of:",") != nil{
@@ -233,7 +233,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             let index:Int! = Int(parts![1])
             let place = self.places[index % self.places.count]
             
-            let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+            let infoWindow = Bundle.main.loadNibNamed("MapEventInfoView", owner: self, options: nil)?[0] as! MapEventInfoView
             infoWindow.name.text = place.name
 //            infoWindow.address.text  = place.address[0]
             infoWindow.time.text = "\(place.rating) (\(place.reviewCount))"
