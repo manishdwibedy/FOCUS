@@ -142,6 +142,8 @@ class UserProfileViewController: UIViewController {
         else{
             emptyPinLabel.isHidden = true
         }
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -160,6 +162,11 @@ class UserProfileViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
 
+    @IBAction func updatePin(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? PinScreenViewController
+        self.present(VC!, animated: true, completion: nil)
+    }
     
     /*
     // MARK: - Navigation

@@ -140,6 +140,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBAction func cancel(_ sender: Any) {
         pinTextView.text = "What are you up to?"
         pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func pin(_ sender: Any) {
