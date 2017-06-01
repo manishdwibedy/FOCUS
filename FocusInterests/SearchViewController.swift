@@ -55,6 +55,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         let nib = UINib(nibName: "SearchPlaceCell", bundle: nil)
         place_tableView.register(nib, forCellReuseIdentifier: "cell")
 
+        let nib1 = UINib(nibName: "SearchPeopleTableViewCell", bundle: nil)
+        people_tableView.register(nib1, forCellReuseIdentifier: "cell")
+        
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
@@ -177,10 +180,32 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         
         
         if tableView == self.people_tableView{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            let user = self.filtered_user[indexPath.row]
-            cell.textLabel?.text = user.username
-            return cell
+            let people = self.filtered_user[indexPath.row]
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SearchPeopleTableViewCell!
+            
+            cell?.username.text = people.username
+            cell?.fullName.text = "Full Name"
+            
+            cell?.address.text = ""
+            cell?.distance.text = ""
+            
+            cell?.ID = people.uuid!
+            cell?.checkFollow()
+            cell?.interest.text = "Category"
+        
+            let placeHolderImage = UIImage(named: "empty_event")
+            
+            cell?.followButton.roundCorners(radius: 10)
+            cell?.inviteButton.roundCorners(radius: 10)
+            
+            cell?.followButton.tag = indexPath.row
+            cell?.followButton.addTarget(self, action: #selector(self.followUser), for: UIControlEvents.touchUpInside)
+            
+            cell?.inviteButton.tag = indexPath.row
+            cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
+            
+            return cell!
         }
         else if tableView == self.place_tableView{
             
@@ -218,6 +243,18 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         
     }
     
+    func followUser(sender:UIButton){
+        let buttonRow = sender.tag
+        
+        print("following user \(self.people[buttonRow].username) ")
+    }
+    
+    func inviteUser(sender:UIButton){
+        let buttonRow = sender.tag
+        
+        print("invite user \(self.people[buttonRow].username) ")
+    }
+
     func getPlaces(text: String){
         if text.characters.count == 0{
             if self.places.count > 0{
