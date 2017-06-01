@@ -55,9 +55,10 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         
         let cell:SearchPlaceCell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell!
         cell.parentVC = self
+        
         let place = filtered[indexPath.row]
         cell.placeNameLabel.text = place.name
-        
+        cell.place = place
         if place.address.count > 0{
             if place.address.count == 1{
                 cell.addressTextView.text = "\(place.address[0])"

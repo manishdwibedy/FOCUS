@@ -21,7 +21,7 @@ class SearchPlaceCell: UITableViewCell {
     var placeID = String()
     var parentVC: SearchPlacesViewController! = nil
     var searchVC: SearchViewController? = nil
-    
+    var place: Place?
     
     override func awakeFromNib() {
         super.awakeFromNib()
