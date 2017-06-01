@@ -17,6 +17,7 @@ import SwiftyJSON
 import Solar
 import PopupDialog
 import FirebaseMessaging
+import SDWebImage
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
@@ -191,20 +192,31 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         return
                     }
 
-                    infoWindow.image.sd_setImage(with: url, placeholderImage: placeholderImage)
+                    let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+                        marker.tracksInfoWindowChanges = false
+                        infoWindow.image.setShowActivityIndicator(false)
+                        
+                    }
+                    
+                    
+                    infoWindow.image.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
                     infoWindow.image.setShowActivityIndicator(true)
                     infoWindow.image.setIndicatorStyle(.gray)
-                    marker.tracksInfoWindowChanges = false
+                    
 
                 })
                 
             }
             else{
-                infoWindow.image.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
+                let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+                    marker.tracksInfoWindowChanges = false
+                    infoWindow.image.setShowActivityIndicator(false)
+                    
+                }
+                
+                infoWindow.image.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
                 infoWindow.image.setShowActivityIndicator(true)
                 infoWindow.image.setIndicatorStyle(.gray)
-                marker.tracksInfoWindowChanges = false
-
             }
             
             infoWindow.category.text =  "\(event.category) ●" ?? "No category"
