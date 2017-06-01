@@ -82,7 +82,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="348" id="xo4-J8-S4Y"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mM1-om-33G">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wms-Ib-zaF">
                                                     <size key="itemSize" width="50" height="50"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -100,7 +100,7 @@
                                                         <size key="customSize" width="90" height="90"/>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="event_two" id="xvh-26-zrg">
-                                                        <rect key="frame" x="132.5" y="0.0" width="90" height="90"/>
+                                                        <rect key="frame" x="0.0" y="129" width="90" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -110,7 +110,7 @@
                                                         <size key="customSize" width="90" height="90"/>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="event_three" id="T5F-rd-5XJ">
-                                                        <rect key="frame" x="265" y="0.0" width="90" height="90"/>
+                                                        <rect key="frame" x="0.0" y="258" width="90" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -120,7 +120,7 @@
                                                         <size key="customSize" width="90" height="90"/>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="event_four" id="PJl-eE-JXF">
-                                                        <rect key="frame" x="0.0" y="100" width="90" height="90"/>
+                                                        <rect key="frame" x="100" y="0.0" width="90" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -130,7 +130,7 @@
                                                         <size key="customSize" width="90" height="90"/>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="event_five" id="nwq-EM-hwL">
-                                                        <rect key="frame" x="132.5" y="100" width="90" height="90"/>
+                                                        <rect key="frame" x="100" y="129" width="90" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -140,7 +140,7 @@
                                                         <size key="customSize" width="90" height="90"/>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="event_six" id="wlf-NB-DG3">
-                                                        <rect key="frame" x="265" y="100" width="90" height="90"/>
+                                                        <rect key="frame" x="100" y="258" width="90" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -150,7 +150,7 @@
                                                         <size key="customSize" width="90" height="90"/>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="event_seven" id="MB0-Wo-9p1">
-                                                        <rect key="frame" x="0.0" y="200" width="90" height="90"/>
+                                                        <rect key="frame" x="200" y="0.0" width="90" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -160,7 +160,7 @@
                                                         <size key="customSize" width="90" height="90"/>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="event_eight" id="vLt-Et-O6U">
-                                                        <rect key="frame" x="132.5" y="200" width="90" height="90"/>
+                                                        <rect key="frame" x="200" y="129" width="90" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -170,7 +170,7 @@
                                                         <size key="customSize" width="90" height="90"/>
                                                     </collectionViewCell>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="event_nine" id="UXD-jr-jqd">
-                                                        <rect key="frame" x="265" y="200" width="90" height="90"/>
+                                                        <rect key="frame" x="200" y="258" width="90" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -403,6 +403,7 @@
                     <size key="freeformSize" width="375" height="1600"/>
                     <connections>
                         <outlet property="descriptionText" destination="wo5-YS-IfZ" id="eSM-Ba-w8J"/>
+                        <outlet property="editButton" destination="tjc-38-rqz" id="m9N-Bc-j27"/>
                         <outlet property="fullNameLabel" destination="eCO-Sw-Meb" id="aJH-Kg-iKe"/>
                         <outlet property="interestStackView" destination="WUe-TH-3g9" id="Wp7-4S-xab"/>
                         <outlet property="pinAddress1Label" destination="KR1-UE-DOC" id="hQV-Np-o0p"/>

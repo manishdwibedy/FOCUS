@@ -21,6 +21,7 @@ class UserProfileViewController: UIViewController {
 	@IBOutlet var userLikesLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
     
     
     // user pin info
@@ -44,18 +45,32 @@ class UserProfileViewController: UIViewController {
 	// Collection view See more... button
 	// (and also any of the ones after)
 	
-	// Back button
+    // Back button
 	@IBAction func backButton(_ sender: Any) {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
 	
 	// Edit Description button
-	@IBAction func editDescription(_ sender: Any) {
-	}
-	
-	// See all... activity button
-	@IBAction func activityAllButton(_ sender: Any) {
+	@IBAction func editDescription(_ sender: UIButton) {
+        if editButton.title(for: .normal) == "edit"{
+            let scrollPoint = CGPoint(x: 0, y: sender.frame.origin.y + 200)
+            self.userScrollView.setContentOffset(scrollPoint, animated: true)
+            
+            descriptionText.isEditable = true
+            descriptionText.textColor = .black
+            descriptionText.backgroundColor = .white
+            descriptionText.becomeFirstResponder()
+            editButton.setTitle("save", for: .normal)
+        }
+        else{
+            descriptionText.isEditable = false
+            descriptionText.textColor = .white
+            descriptionText.backgroundColor = .clear
+            descriptionText.resignFirstResponder()
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("description").setValue(descriptionText.text)
+            editButton.setTitle("edit", for: .normal)
+        }
 	}
 	
     override func viewDidLoad() {
@@ -129,6 +144,7 @@ class UserProfileViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
 
+    
     /*
     // MARK: - Navigation
 
