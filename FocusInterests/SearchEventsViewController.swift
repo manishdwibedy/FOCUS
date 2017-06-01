@@ -177,6 +177,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let ivc = storyboard.instantiateViewController(withIdentifier: "invitePlaceCV") as! invitePlaceCV
         ivc.type = "event"
         ivc.id = event.id!
+        ivc.event = event
         self.present(ivc, animated: true, completion: { _ in })
         
     }

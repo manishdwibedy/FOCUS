@@ -174,9 +174,17 @@ func isValidEmail(text:String) -> Bool {
 
 
 func sendNotification(to id: String, title: String, body: String){
-    let url = "https://881148b2.ngrok.io/sendMessage"
+    let url = "http://focus-notifications.3hwampgg8c.us-west-2.elasticbeanstalk.com/sendMessage"
+    
+    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/notifications").childByAutoId().setValue([
+        "title": title,
+        "body": body,
+        "time": 1
+        ])
     
     Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+        
+        
         let user = snapshot.value as? [String : Any] ?? [:]
         
         let token = user["token"] as? String
@@ -190,7 +198,6 @@ func sendNotification(to id: String, title: String, body: String){
         
         
         Alamofire.request(url, method: .get, parameters:parameters, headers: nil).response { response in
-            print(response)
         }
         
     })

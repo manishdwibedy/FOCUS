@@ -85,6 +85,7 @@ class SearchPlaceCell: UITableViewCell {
         ivc.type = "place"
         ivc.parentCell = self
         ivc.id = self.placeID
+        ivc.place = place
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: { _ in })
         }
