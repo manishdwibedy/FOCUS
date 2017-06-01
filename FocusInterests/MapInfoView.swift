@@ -12,9 +12,9 @@ class MapInfoView: UIView {
 
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var address: UILabel!
     @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var attendees: UILabel!
+    @IBOutlet weak var category: UILabel!
+    @IBOutlet weak var distance: UILabel!
     
     /*
      @IBOutlet weak var name: UILabel!

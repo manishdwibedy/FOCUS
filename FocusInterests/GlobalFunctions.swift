@@ -172,6 +172,15 @@ func isValidEmail(text:String) -> Bool {
     return emailTest.evaluate(with: text)
 }
 
+func getDistance(fromLocation: CLLocation, toLocation: CLLocation) -> String{
+    let distanceInMeters = fromLocation.distance(from: toLocation)
+    let distance = distanceInMeters/1609.344
+    
+    if distance < 1{
+        return "<1 mile away"
+    }
+    return "\(round(distance)) miles away"
+}
 
 func sendNotification(to id: String, title: String, body: String){
     let url = "http://focus-notifications.3hwampgg8c.us-west-2.elasticbeanstalk.com/sendMessage"

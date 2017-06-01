@@ -160,14 +160,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         let accessibilityLabel = marker.accessibilityLabel
         
-        
+        marker.tracksInfoWindowChanges = true
+
         let parts = accessibilityLabel?.components(separatedBy: "_")
         if parts?[0] == "event"{
             let index:Int! = Int(parts![1])
             let event = self.events[index]
             let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
             infoWindow.name.text = event.title
-            infoWindow.address.text  = event.shortAddress
             
             if event.date?.range(of:",") != nil{
                 let time = event.date?.components(separatedBy: ",")[1]
@@ -178,7 +178,43 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 infoWindow.time.text = time
             }
             
-            infoWindow.attendees.text = "No one joining"
+            let placeholderImage = UIImage(named: "empty_event")
+        
+            if let id = event.id{
+                let reference = Constants.storage.event.child("\(id).jpg")
+                
+                
+                reference.downloadURL(completion: { (url, error) in
+                    
+                    if error != nil {
+                        print(error?.localizedDescription)
+                        return
+                    }
+
+                    infoWindow.image.sd_setImage(with: url, placeholderImage: placeholderImage)
+                    infoWindow.image.setShowActivityIndicator(true)
+                    infoWindow.image.setIndicatorStyle(.gray)
+                    marker.tracksInfoWindowChanges = false
+
+                })
+                
+            }
+            else{
+                infoWindow.image.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
+                infoWindow.image.setShowActivityIndicator(true)
+                infoWindow.image.setIndicatorStyle(.gray)
+                marker.tracksInfoWindowChanges = false
+
+            }
+            
+            infoWindow.category.text =  "\(event.category) ●" ?? "No category"
+            
+            infoWindow.distance.text = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
+            
+            
+            let primaryFocus = NSMutableAttributedString(string: infoWindow.category.text!)
+            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(infoWindow.category.text?.characters.count)! - 1,length:1))
+            infoWindow.category.attributedText = primaryFocus
             return infoWindow
         }
         else{
@@ -187,12 +223,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
             infoWindow.name.text = place.name
-            infoWindow.address.text  = place.address[0]
+//            infoWindow.address.text  = place.address[0]
             infoWindow.time.text = "\(place.rating) (\(place.reviewCount))"
 
             let categoryString = place.categories.map(){ $0.name }.joined(separator: ", ")
 
-            infoWindow.attendees.text = categoryString
+//            infoWindow.attendees.text = categoryString
             return infoWindow
             
         }
