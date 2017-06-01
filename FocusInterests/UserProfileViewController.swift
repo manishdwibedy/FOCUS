@@ -19,6 +19,7 @@ class UserProfileViewController: UIViewController {
 	@IBOutlet var userLikesLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
 	
+    @IBOutlet weak var fullNameLabel: UILabel!
 	// Haven't added:
 	// User FOCUS button
 	// Location Description (would this be location description?)
@@ -63,10 +64,11 @@ class UserProfileViewController: UIViewController {
                 let username_str = dictionnary!["username"] as! String
                 let description_str = dictionnary!["description"] as! String
                 let image_string = dictionnary!["image_string"] as! String
+                let fullname = dictionnary!["fullname"] as! String
                 
                 self.userName.text = username_str
                 self.descriptionText.text = description_str
-                
+                self.fullNameLabel.text = fullname
                 
                 self.userImage.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
                 
