@@ -466,7 +466,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func fetchPlaces(around location: CLLocation, token: String){
         let url = "https://api.yelp.com/v3/businesses/search"
-        let parameters: [String: Double] = [
+        let parameters: [String: Any] = [
+            "categories": getYelpCategories(),
             "latitude" : Double(location.coordinate.latitude),
             "longitude" : Double(location.coordinate.longitude)
         ]

@@ -24,7 +24,7 @@ class InterestsViewController: UIViewController{
     let backgroundColor = UIColor.init(red: 22/255, green: 42/255, blue: 64/255, alpha: 1)
     var filtered = [Interest]()
     var searching = false
-    let user_interests = AuthApi.getInterests()?.components(separatedBy: ", ")
+    let user_interests = AuthApi.getInterests()?.components(separatedBy: ",")
     
     @IBOutlet weak var magneticView: MagneticView!{
         didSet {
@@ -93,10 +93,20 @@ class InterestsViewController: UIViewController{
     
     @IBAction func saveInterests(_ sender: UIBarButtonItem) {
         let selected_interests = interest_status.filter( { return $0.status != .normal } )
-        let interest_string = selected_interests.map(){ $0.name! }.joined(separator: ", ")
+        let interest_string = selected_interests.map(){ $0.name! }.joined(separator: ",")
         
-        Constants.DB.user.child("\(String(describing: AuthApi.getFirebaseUid()!))/interests").setValue(interest_string)
-        AuthApi.set(interests: interest_string)
+        var interests = ""
+        if AuthApi.isNewUser(){
+            interests = interest_string
+            
+        }
+        else{
+            let earlier_interests = AuthApi.getInterests()!
+            interests = "\(earlier_interests),\(interest_string)"
+        }
+        
+        Constants.DB.user.child("\(String(describing: AuthApi.getFirebaseUid()!))/interests").setValue(interests)
+        AuthApi.set(interests: interests)
         
         if AuthApi.isNewUser(){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

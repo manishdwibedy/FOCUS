@@ -105,6 +105,7 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
     var eventList = [Event]()
     
     let parameters: [String: String] = [
+        "categories": getEventBriteCategories(),
         "token" : AuthApi.getEventBriteToken()!,
         "sort_by": "distance",
         "location.latitude": String(location.coordinate.latitude),
@@ -221,4 +222,28 @@ func getEventBriteToken(userCode: String, completion: @escaping (_ result: Strin
         completion(token)
         
     }
+}
+
+func getEventBriteCategories() -> String{
+    let interests = AuthApi.getInterests()?.components(separatedBy: ",")
+    var categories = Set<String>()
+    
+    for interest in interests!{
+        if let category = Constants.interests.eventBriteMapping[interest]{
+            categories.insert(category)
+        }
+    }
+    return categories.joined(separator: ",")
+}
+
+func getYelpCategories() -> String{
+    let interests = AuthApi.getInterests()?.components(separatedBy: ",")
+    var categories = Set<String>()
+    
+    for interest in interests!{
+        if let category = Constants.interests.yelpMapping[interest]{
+            categories.insert(category)
+        }
+    }
+    return categories.joined(separator: ",")
 }

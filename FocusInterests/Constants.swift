@@ -47,7 +47,38 @@ struct Constants {
         
         
         public static let interests = ["Meet up","Coffee","Chill","Celebration","Food","Drinks","Work","Learn","Entertainment","Arts","Music","Beauty","Fashion","Networking","Exercise","Wellness","Sports","Outdoors","Views","Causes"]
+      
+        public static let eventBriteMapping: [String:String] = [
+            "Music": "103",
+            "Networking": "101",
+            "Food": "110",
+            "Celebration": "113,116,199",
+            "Arts": "105",
+            "Entertainment": "104",
+            "Sports": "108",
+            "Fitness": "107",
+            "Learn": "102,115",
+            "Travel": "109",
+            "Causes": "111,114,112",
+            "Beauty": "106",
+            "Community": "117",
+            "Outdoors": "118,119",
+        ]
         
+        public static let yelpMapping = [
+            "Community": "homeservices,localservices,pets,publicservicesgovt,localflavor,auto",
+            "Learn": "education",
+            "Arts": "arts",
+            "Beauty": "beautysvc",
+            "Business": "financialservices,professional",
+            "Fitness": "bicycles,health,active",
+            "Celebration": "eventservices,nightlife",
+            "Entertainment": "massmedia",
+            "Shopping": "shopping",
+            "Food": "food,restaurants",
+            "Travel": "hotelstravel",
+            "Causes": "religiousorgs",
+        ]
         public static let football = Interest(name: "Football", category: InterestCategory.Sports, image: nil, imageString: nil)
         public static let basketball = Interest(name: "Basketball", category: InterestCategory.Sports, image: nil, imageString: nil)
         public static let soccer = Interest(name: "Soccer", category: InterestCategory.Sports, image: UIImage(named: "blackSoccer"), imageString: nil)
