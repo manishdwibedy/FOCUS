@@ -35,6 +35,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var pinDescription: UILabel!
     @IBOutlet weak var updatePinButton: UIButton!
     
+    @IBOutlet weak var emptyPinLabel: UILabel!
     // user interests
     @IBOutlet weak var interestStackView: UIStackView!
     
@@ -125,6 +126,21 @@ class UserProfileViewController: UIViewController {
             
             interestStackView.addArrangedSubview(textLabel)
             interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+        }
+        
+        let pinDataAvailable = false
+        if !pinDataAvailable{
+            
+            pinImage.isHidden = true
+            pinLabel.isHidden = true
+            pinCategoryLabel.isHidden = true
+            pinLikesLabel.isHidden = true
+            pinAddress1Label.isHidden = true
+            pinAddress2Label.isHidden = true
+            pinDescription.isHidden = true
+        }
+        else{
+            emptyPinLabel.isHidden = true
         }
     }
     

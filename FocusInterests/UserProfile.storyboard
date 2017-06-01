@@ -281,10 +281,17 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                     </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No pin to display!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42g-tI-aVT">
+                                                        <rect key="frame" x="102" y="63.5" width="152.5" height="23"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="KR1-UE-DOC" firstAttribute="top" secondItem="PFE-dm-34I" secondAttribute="bottom" constant="8" id="4dY-q8-aMQ"/>
+                                                    <constraint firstItem="42g-tI-aVT" firstAttribute="centerY" secondItem="zs8-eT-TCa" secondAttribute="centerY" id="4eb-xj-VMe"/>
                                                     <constraint firstItem="PFE-dm-34I" firstAttribute="leading" secondItem="hH3-Cy-m4h" secondAttribute="trailing" constant="15" id="8y2-ua-iFV"/>
                                                     <constraint firstItem="hH3-Cy-m4h" firstAttribute="top" secondItem="zs8-eT-TCa" secondAttribute="top" constant="10" id="8ye-SB-m9h"/>
                                                     <constraint firstItem="JUG-3S-aqt" firstAttribute="leading" secondItem="nuH-9L-XHv" secondAttribute="leading" id="IIr-En-rVK"/>
@@ -297,6 +304,7 @@
                                                     <constraint firstItem="JUG-3S-aqt" firstAttribute="top" secondItem="nuH-9L-XHv" secondAttribute="bottom" constant="8" id="dAG-wm-Bnw"/>
                                                     <constraint firstItem="NRe-j8-XoK" firstAttribute="top" secondItem="zs8-eT-TCa" secondAttribute="top" constant="10" id="djK-CU-cRU"/>
                                                     <constraint firstItem="nuH-9L-XHv" firstAttribute="leading" secondItem="KR1-UE-DOC" secondAttribute="leading" id="eZp-Fr-ZzX"/>
+                                                    <constraint firstItem="42g-tI-aVT" firstAttribute="centerX" secondItem="zs8-eT-TCa" secondAttribute="centerX" id="fh2-Dg-Seh"/>
                                                     <constraint firstAttribute="trailing" secondItem="H4s-5t-g9h" secondAttribute="trailing" constant="30" id="g5U-Xy-mo6"/>
                                                     <constraint firstItem="NRe-j8-XoK" firstAttribute="leading" secondItem="6pl-2M-p1Z" secondAttribute="trailing" id="iJk-Yj-kPE"/>
                                                     <constraint firstItem="H4s-5t-g9h" firstAttribute="leading" secondItem="zs8-eT-TCa" secondAttribute="leading" constant="30" id="nRH-wB-ZTP"/>
@@ -404,6 +412,7 @@
                     <connections>
                         <outlet property="descriptionText" destination="wo5-YS-IfZ" id="eSM-Ba-w8J"/>
                         <outlet property="editButton" destination="tjc-38-rqz" id="m9N-Bc-j27"/>
+                        <outlet property="emptyPinLabel" destination="42g-tI-aVT" id="6QP-2G-Qxo"/>
                         <outlet property="fullNameLabel" destination="eCO-Sw-Meb" id="aJH-Kg-iKe"/>
                         <outlet property="interestStackView" destination="WUe-TH-3g9" id="Wp7-4S-xab"/>
                         <outlet property="pinAddress1Label" destination="KR1-UE-DOC" id="hQV-Np-o0p"/>
