@@ -113,7 +113,7 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
         "location.within": "10mi"
     ]
     
-    /*Alamofire.request(url, method: .get, parameters:parameters, headers: nil).responseJSON { response in
+    Alamofire.request(url, method: .get, parameters:parameters, headers: nil).responseJSON { response in
         let json = JSON(data: response.data!)
         let events = json["events"]
         
@@ -141,14 +141,14 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
                 
             }
         }
-    }*/
+    }
 }
 
 func getEventLocation(_ id: String, completion: @escaping (_ result: EventLocation?) -> Void){
 
     let url = "https://www.eventbriteapi.com/v3/venues/\(id)"
     let parameters: [String: String] = [
-        "token" : "R6U22QXZZZ52YX2XRTWX",
+        "token" : AuthApi.getEventBriteToken()!,
     ]
     
     Alamofire.request(url, method: .get, parameters:parameters, headers: nil).responseJSON { response in
