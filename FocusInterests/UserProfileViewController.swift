@@ -68,7 +68,7 @@ class UserProfileViewController: UIViewController {
                 self.descriptionText.text = description_str
                 
                 
-                self.userImage.sd_setImage(with: URL(string: image_str), placeholderImage: UIImage(named: "empty_event"))
+                self.userImage.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
                 
             }
 

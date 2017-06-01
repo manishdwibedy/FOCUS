@@ -155,7 +155,7 @@ class FirebaseUpstream {
         
         if let uid = AuthApi.getFirebaseUid() {
             let storeChild = storage_UserProfile.child("\(uid).jpg")
-            let shrunkenImage = image.resized(withPercentage: 0.2)
+            let shrunkenImage = image.resized(withPercentage: 0.5)
 
             if let uploadData = UIImagePNGRepresentation(shrunkenImage!) {
                 storeChild.putData(uploadData, metadata: nil, completion: { (metaData, error) in
