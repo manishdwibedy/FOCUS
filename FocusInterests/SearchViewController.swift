@@ -58,6 +58,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         let nib1 = UINib(nibName: "SearchPeopleTableViewCell", bundle: nil)
         people_tableView.register(nib1, forCellReuseIdentifier: "cell")
         
+        let nib2 = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
+        event_tableView.register(nib2, forCellReuseIdentifier: "cell")
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
@@ -168,7 +170,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         if tableView == self.people_tableView{
             return filtered_user.count
         }
-        else if tableView == self.people_tableView{
+        else if tableView == self.place_tableView{
             return filtered_places.count
         }
         else{
@@ -210,7 +212,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         else if tableView == self.place_tableView{
             
             let place = self.filtered_places[indexPath.row]
-//            cell.textLabel?.text = place.name
             
             let cell:SearchPlaceCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SearchPlaceCell!
             
@@ -235,13 +236,116 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             return cell
         }
         else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             let event = self.filtered_events[indexPath.row]
-            cell.textLabel?.text = event.title
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SearchEventTableViewCell!
+            
+            cell?.name.text = event.title
+            
+            var addressComponents = event.fullAddress?.components(separatedBy: ",")
+            let streetAddress = addressComponents?[0]
+            
+            addressComponents?.remove(at: 0)
+            let city = addressComponents?.joined(separator: ", ")
+            
+            
+            cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
+            cell?.address.textContainer.maximumNumberOfLines = 6
+            
+            
+            cell?.guestCount.text = "\(event.attendeeCount) guests"
+            cell?.interest.text = "Category"
+            cell?.price.text = "Price"
+            //cell.checkForFollow(id: event.id!)
+            let placeHolderImage = UIImage(named: "empty_event")
+            
+            let reference = Constants.storage.event.child("\(event.id!).jpg")
+            
+            // Placeholder image
+            _ = UIImage(named: "empty_event")
+            
+            reference.downloadURL(completion: { (url, error) in
+                
+                if error != nil {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                
+                cell?.eventImage?.sd_setImage(with: url, placeholderImage: placeHolderImage)
+                
+                cell?.eventImage?.setShowActivityIndicator(true)
+                cell?.eventImage?.setIndicatorStyle(.gray)
+                
+            })
+            
+            //attending
+            Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    cell?.attendButton.setTitle("Attending", for: UIControlState.normal)
+                }
+                
+            })
+            
+            cell?.attendButton.roundCorners(radius: 10)
+            cell?.inviteButton.roundCorners(radius: 10)
+            
+            cell?.attendButton.tag = indexPath.row
+            cell?.attendButton.addTarget(self, action: #selector(self.attendEvent), for: UIControlEvents.touchUpInside)
+            
+            cell?.inviteButton.tag = indexPath.row
+            cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
+            
+            return cell!
         }
         
     }
+    
+    func attendEvent(sender:UIButton){
+        let buttonRow = sender.tag
+        let event = self.events[buttonRow]
+        
+        if sender.title(for: .normal) == "Attend"{
+            print("attending event \(event.title) ")
+            
+            Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+            
+            
+            Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    let attendingAmount = value?["amount"] as! Int
+                    Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount + 1])
+                }
+            })
+            
+            sender.setTitle("Attending", for: .normal)
+        }
+        else{
+            Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                
+                for (id,_) in value!{
+                    Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
+                }
+                
+            })
+            
+            Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    let attendingAmount = value?["amount"] as! Int
+                    Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
+                }
+            })
+            
+            sender.setTitle("Attend", for: .normal)
+        }
+        
+    }
+    
     
     func followUser(sender:UIButton){
         let buttonRow = sender.tag
@@ -341,6 +445,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 }
                 
                 self.filtered_events.append(event)
+                if text.characters.count == 0{
+                    self.events.append(event)
+                }
             }
             self.event_tableView.reloadData()
         })
