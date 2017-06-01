@@ -12,14 +12,29 @@ import SDWebImage
 class UserProfileViewController: UIViewController {
 
 	@IBOutlet var userScrollView: UIScrollView!
+    
+    // User data
 	@IBOutlet var userName: UILabel!
 	@IBOutlet var descriptionText: UITextView!
 	@IBOutlet var userLocationImage: UIImageView!
 	@IBOutlet var userLocationLabel: UILabel!
 	@IBOutlet var userLikesLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
-	
     @IBOutlet weak var fullNameLabel: UILabel!
+    
+    
+    // user pin info
+    
+    @IBOutlet weak var pinImage: UIImageView!
+    @IBOutlet weak var pinLabel: UILabel!
+    @IBOutlet weak var pinCategoryLabel: UILabel!
+    @IBOutlet weak var pinLikesLabel: UILabel!
+    @IBOutlet weak var pinAddress1Label: UILabel!
+    @IBOutlet weak var pinAddress2Label: UILabel!
+    @IBOutlet weak var pinDescription: UILabel!
+    @IBOutlet weak var updatePinButton: UIButton!
+    
+    
 	// Haven't added:
 	// User FOCUS button
 	// Location Description (would this be location description?)
@@ -32,13 +47,6 @@ class UserProfileViewController: UIViewController {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
-	// Message button
-	@IBAction func messageButton(_ sender: Any) {
-	}
-	
-	// Follow button
-	@IBAction func followButton(_ sender: Any) {
-	}
 	
 	// Edit Description button
 	@IBAction func editDescription(_ sender: Any) {
@@ -54,7 +62,7 @@ class UserProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.displayUserData()
-
+        updatePinButton.roundCorners(radius: 10)
     }
     
     func displayUserData() {
