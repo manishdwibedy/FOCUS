@@ -42,6 +42,20 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         eventHeaderView.topCornersRounded(radius: 20)
         event_tableView.tableFooterView = UIView()
         
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = UIColor.darkGray
+        
+        for view in searchBar.subviews.last!.subviews {
+            if view.isKind(of: NSClassFromString("UISearchBarBackground")!)
+            {
+                view.removeFromSuperview()
+            }
+        }
+        
+        let nib = UINib(nibName: "SearchPlaceCell", bundle: nil)
+        place_tableView.register(nib, forCellReuseIdentifier: "cell")
+
+        
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         
@@ -135,6 +149,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             })
             
             self.getPlaces(text: searchText)
+            self.getEvents(text: searchText)
         }
         else{
             self.filtered_user = self.people
@@ -159,21 +174,48 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
         
         if tableView == self.people_tableView{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             let user = self.filtered_user[indexPath.row]
             cell.textLabel?.text = user.username
+            return cell
         }
         else if tableView == self.place_tableView{
+            
             let place = self.filtered_places[indexPath.row]
-            cell.textLabel?.text = place.name
+//            cell.textLabel?.text = place.name
+            
+            let cell:SearchPlaceCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SearchPlaceCell!
+            
+            cell.searchVC = self
+            
+            cell.placeNameLabel.text = place.name
+            
+            if place.address.count > 0{
+                if place.address.count == 1{
+                    cell.addressTextView.text = "\(place.address[0])"
+                }
+                else{
+                    cell.addressTextView.text = "\(place.address[0])\n\(place.address[1])"
+                }
+            }
+            cell.placeID = place.id
+            cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
+            cell.categoryLabel.text = place.categories[0].name
+            cell.checkForFollow(id: place.id)
+            let placeHolderImage = UIImage(named: "empty_event")
+            cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
+            return cell
         }
         else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             let event = self.filtered_events[indexPath.row]
             cell.textLabel?.text = event.title
+            return cell
         }
-        return cell
+        
     }
     
     func getPlaces(text: String){
