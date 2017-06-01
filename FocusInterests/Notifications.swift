@@ -10,6 +10,9 @@ enum NotificationType: String {
     case Like = "liked"
     case Invite = "invited you to"
     case Tag = "tagged you in"
+    case Comment = "commented on"
+    case Pin = "pinned"
+    case Going = "is going to"
 }
 
 import Foundation

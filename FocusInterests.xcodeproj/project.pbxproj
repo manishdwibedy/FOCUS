@@ -125,6 +125,8 @@
 		5BE31E881EA75E6A004768F0 /* MapInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapInfoView.swift */; };
 		5BFA009F1EDA8BC200F1ACBF /* EventLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */; };
+		611734EF1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */; };
+		611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */; };
 		61C6096F1ED572AC004098BA /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6096E1ED572AC004098BA /* EditProfileViewController.swift */; };
 		61ED203C1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61ED203B1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard */; };
 		61ED203E1EDC236100247DC5 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */; };
@@ -383,6 +385,8 @@
 		5BE31E871EA75E6A004768F0 /* MapInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoView.swift; sourceTree = "<group>"; };
 		5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLocation.swift; sourceTree = "<group>"; };
+		611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFeedCellTableViewCell.swift; sourceTree = "<group>"; };
+		611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationFeedCellTableViewCell.xib; sourceTree = "<group>"; };
 		61C6096E1ED572AC004098BA /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		61ED203B1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notif_Invite_Feed.storyboard; sourceTree = "<group>"; };
 		61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
@@ -524,7 +528,6 @@
 		5B3F05791ED909E90057F596 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */,
 				5B1659291EDA50630002209A /* FeedbackViewController.swift */,
 				5B1659271EDA33AF0002209A /* LicenseViewController.swift */,
 				5B1659251EDA30300002209A /* TermsViewController.swift */,
@@ -892,6 +895,7 @@
 			children = (
 				5B3F05791ED909E90057F596 /* Settings */,
 				D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */,
+				61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */,
 				5BA37C761EBD63BE0091189E /* HomePageViewController.swift */,
 				5B251E901ED278A70075B57A /* UserProfileViewController.swift */,
 				61C6096E1ED572AC004098BA /* EditProfileViewController.swift */,
@@ -923,6 +927,8 @@
 			children = (
 				D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */,
 				D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */,
+				611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */,
+				611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */,
 				D21317F61E5B47D300140323 /* HomViewControllerCell.swift */,
 				D21317F71E5B47D300140323 /* HomViewControllerCell.xib */,
 				D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */,
@@ -1229,6 +1235,7 @@
 				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
 				5B5906481EC576CA00466AAC /* map_style.json in Resources */,
+				611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */,
 				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
 				5B71D6F41ED17F2B0093A3F5 /* CreateEvent.storyboard in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
@@ -1431,6 +1438,7 @@
 				5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */,
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
+				611734EF1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift in Sources */,
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
 				5B7BB1E01ED50EA0001E60FF /* UIButton+Extensions.swift in Sources */,
 				5BE31E8A1EA76094004768F0 /* MapInfoView.swift in Sources */,
