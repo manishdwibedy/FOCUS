@@ -12,6 +12,9 @@ class NotificationFeedViewController: UIViewController {
 
     @IBAction func indexChanged(_ sender: AnyObject) {
         
+        let segmentedControl = sender as! UISegmentedControl
+        
+        print(segmentedControl.selectedSegmentIndex)
         
     }
     
@@ -20,6 +23,8 @@ class NotificationFeedViewController: UIViewController {
     @IBOutlet weak var backButtonItem: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        segmentedControl.selectedSegmentIndex = 0
 
         backButtonItem.title = "Back"
         backButtonItem.tintColor = UIColor.veryLightGrey()

@@ -524,6 +524,7 @@
 		5B3F05791ED909E90057F596 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */,
 				5B1659291EDA50630002209A /* FeedbackViewController.swift */,
 				5B1659271EDA33AF0002209A /* LicenseViewController.swift */,
 				5B1659251EDA30300002209A /* TermsViewController.swift */,
@@ -970,7 +971,6 @@
 				5B16592D1EDA6DE40002209A /* MapMarkerView.xib */,
 				5B16592F1EDA6DF40002209A /* MapMarkerView.swift */,
 				61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */,
-				61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

@@ -46,12 +46,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView.isHidden = true
+        //webView.isHidden = true
         if AuthApi.getEventBriteToken() == nil{
             let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
             let requestObj = URLRequest(url: url!)
-            webView.loadRequest(requestObj)
-            webView.delegate = self
+            //webView.loadRequest(requestObj)
+            //webView.delegate = self
         }
         
         
@@ -73,7 +73,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
             getYelpToken(completion: { token in
                 AuthApi.set(yelpAccessToken: token)
-                self.fetchPlaces(around: self.currentLocation!, token: token)
+                //self.fetchPlaces(around: self.currentLocation!, token: token)
             })
         }
         
@@ -613,7 +613,7 @@ extension MapViewController: UIWebViewDelegate {
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        if (webView.request?.url?.absoluteString.range(of: "access_token=") != nil) {
+        /*if (webView.request?.url?.absoluteString.range(of: "access_token=") != nil) {
             let params = webView.request?.url?.absoluteString.components(separatedBy: "=")
             let access_token = (params?.last!)!
             AuthApi.set(eventBriteAccessToken: access_token)
@@ -621,7 +621,7 @@ extension MapViewController: UIWebViewDelegate {
         }
         else{
             self.webView.isHidden = false
-        }
-
+        }*/
     }
+    
 }
