@@ -15,7 +15,7 @@ class FollowProfileCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var followOut: UIButton!
     
-    let ref = FIRDatabase.database().reference()
+    let ref = Database.database().reference()
     var data: followProfileCellData!
     override func awakeFromNib() {
         super.awakeFromNib()

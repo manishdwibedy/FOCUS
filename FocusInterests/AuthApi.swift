@@ -92,6 +92,19 @@ struct AuthApi {
         return nil
     }
     
+    static func set(FCMToken: String?) {
+        if let token = FCMToken {
+            defaults.set(token, forKey: "FCMToken")
+        }
+    }
+    
+    static func getFCMToken() -> String? {
+        if let token = defaults.object(forKey: "FCMToken") as? String {
+            return token
+        }
+        return nil
+    }
+    
     static func getYelpToken() -> String?{
         if let token = defaults.object(forKey: "yelpAccessToken") as? String {
             return token
@@ -148,4 +161,27 @@ struct AuthApi {
         defaults.set(false, forKey: "newUser")
     }
     
+    static func set(interests: String?) {
+        if let interests = interests {
+            defaults.set(interests, forKey: "interests")
+        }
+    }
+    
+    static func getInterests() -> String? {
+        if let interests = defaults.object(forKey: "interests") as? String {
+            return interests
+        }
+        return nil
+    }
+    
+    static func getEventBriteToken() -> String?{
+        if let token = defaults.object(forKey: "eventBriteToken") as? String {
+            return token
+        }
+        return nil
+    }
+    
+    static func set(eventBriteAccessToken: String) {
+        defaults.set(eventBriteAccessToken, forKey: "eventBriteToken")
+    }
 }

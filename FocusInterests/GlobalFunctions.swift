@@ -105,7 +105,8 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
     var eventList = [Event]()
     
     let parameters: [String: String] = [
-        "token" : "R6U22QXZZZ52YX2XRTWX",
+        "categories": getEventBriteCategories(),
+        "token" : AuthApi.getEventBriteToken()!,
         "sort_by": "distance",
         "location.latitude": String(location.coordinate.latitude),
         "location.longitude" : String(location.coordinate.longitude),
@@ -116,26 +117,29 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
         let json = JSON(data: response.data!)
         let events = json["events"]
         
-        count = (events.arrayObject?.count)!
-        for (_, eventJson) in events {
-            
-            let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: "")
-            
-            getEventLocation(eventJson["venue_id"].stringValue, completion: { location in
-                event.fullAddress = location?.address
-                event.shortAddress = location?.address
-                event.latitude = location?.latitude
-                event.longitude = location?.longitude
+        if let array = events.arrayObject{
+            for (_, eventJson) in events {
                 
-                eventList.append(event)
+                let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: "")
                 
-                if eventList.count == count{
-                    completion(eventList)
-                }
+                event.setImageURL(url: eventJson["logo"]["url"].stringValue
+                )
+                getEventLocation(eventJson["venue_id"].stringValue, completion: { location in
+                    event.fullAddress = location?.address
+                    event.shortAddress = location?.address
+                    event.latitude = location?.latitude
+                    event.longitude = location?.longitude
+                    
+                    eventList.append(event)
+                    
+                    if eventList.count == array.count{
+                        completion(eventList)
+                    }
+                    
+                })
                 
-            })
-            
-            
+                
+            }
         }
     }*/
 }
@@ -143,7 +147,6 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
 func getEventLocation(_ id: String, completion: @escaping (_ result: EventLocation?) -> Void){
 
     let url = "https://www.eventbriteapi.com/v3/venues/\(id)"
-    print(url)
     let parameters: [String: String] = [
         "token" : "R6U22QXZZZ52YX2XRTWX",
     ]
@@ -152,9 +155,12 @@ func getEventLocation(_ id: String, completion: @escaping (_ result: EventLocati
         let json = JSON(data: response.data!)
         let address = json["address"].dictionaryValue
         
-        let location = EventLocation(address: (address["localized_address_display"]?.stringValue)!, latitude: (address["latitude"]?.stringValue)!, longitude: (address["longitude"]?.stringValue)!)
+        if let address_string = address["localized_address_display"]?.stringValue{
+            let location = EventLocation(address: address_string, latitude: (address["latitude"]?.stringValue)!, longitude: (address["longitude"]?.stringValue)!)
+            
+            completion(location)
+        }
         
-        completion(location)
     }
     
 }
@@ -164,4 +170,79 @@ func isValidEmail(text:String) -> Bool {
     
     let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
     return emailTest.evaluate(with: text)
+}
+
+
+func sendNotification(to id: String, title: String, body: String){
+    let url = "https://881148b2.ngrok.io/sendMessage"
+    
+    Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+        let user = snapshot.value as? [String : Any] ?? [:]
+        
+        let token = user["token"] as? String
+        
+        let parameters = [
+            "to":token ?? "",
+            "title": title,
+            "body": body
+            
+            ] as [String : Any]
+        
+        
+        Alamofire.request(url, method: .get, parameters:parameters, headers: nil).response { response in
+            print(response)
+        }
+        
+    })
+}
+
+
+func getEventBriteToken(userCode: String, completion: @escaping (_ result: String) -> Void){
+    
+    let url = "https://www.eventbrite.com/oauth/token"
+    let parameters: [String: String] = [
+        "client_id" : "34IONXEGBQSXJGZXWO",
+        "client_secret" : "FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q",
+        "grant_type": "authorization_code",
+        "code": userCode
+    ]
+    
+    let headers: HTTPHeaders = [
+        "content-type": "application/x-www-form-urlencoded",
+        "cache-contro": "no-cache"
+    ]
+    
+    Alamofire.request(url, method: .post, parameters:parameters, headers: headers).responseJSON { response in
+        let json = JSON(data: response.data!)
+        let token = json["access_token"].stringValue
+        
+        AuthApi.set(yelpAccessToken: token)
+        
+        completion(token)
+        
+    }
+}
+
+func getEventBriteCategories() -> String{
+    let interests = AuthApi.getInterests()?.components(separatedBy: ",")
+    var categories = Set<String>()
+    
+    for interest in interests!{
+        if let category = Constants.interests.eventBriteMapping[interest]{
+            categories.insert(category)
+        }
+    }
+    return categories.joined(separator: ",")
+}
+
+func getYelpCategories() -> String{
+    let interests = AuthApi.getInterests()?.components(separatedBy: ",")
+    var categories = Set<String>()
+    
+    for interest in interests!{
+        if let category = Constants.interests.yelpMapping[interest]{
+            categories.insert(category)
+        }
+    }
+    return categories.joined(separator: ",")
 }

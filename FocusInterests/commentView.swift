@@ -13,7 +13,7 @@ class commentView: UIView {
     @IBOutlet var view: UIView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var commentTextView: UITextView!
-    let ref = FIRDatabase.database().reference()
+    let ref = Database.database().reference()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

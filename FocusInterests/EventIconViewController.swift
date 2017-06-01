@@ -14,7 +14,7 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
     var event: Event?
     let picker = UIImagePickerController()
     var imageData: Data?
-    let storage = FIRStorage.storage()
+    let storage = Storage.storage()
     
     @IBOutlet weak var cameraTabBttn: UITabBarItem!
     @IBOutlet weak var photoLibraryTabItem: UITabBarItem!

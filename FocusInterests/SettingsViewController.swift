@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 import Firebase
+import GoogleSignIn
 
 protocol LogoutDelegate {
     func logout()
@@ -128,7 +129,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 defaults.set("notLoggedIn", forKey: "Login")
                 GIDSignIn.sharedInstance().signOut()
                 googleHandle!.signOut()
-                try! FIRAuth.auth()!.signOut()
+                try! Auth.auth().signOut()
                 self.logoutDelegate?.logout()
             default: break
         }        

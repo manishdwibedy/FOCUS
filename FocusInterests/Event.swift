@@ -22,6 +22,7 @@ class Event: NSObject, NSCoding{
     var id: String?
     var attendeeCount = 0
     var category: String?
+    var image_url: String? = nil
     
     init(title: String, description: String, fullAddress: String?, shortAddress: String?, latitude: String?, longitude: String?, date: String, creator: String?, id: String? = nil, category: String?) {
         self.title = title
@@ -36,7 +37,7 @@ class Event: NSObject, NSCoding{
         self.category = category
     }
     
-    func saveToDB(ref: FIRDatabaseReference) -> String{
+    func saveToDB(ref: DatabaseReference) -> String{
         let newEvent = ref.childByAutoId()
         
         let event = [
@@ -57,6 +58,10 @@ class Event: NSObject, NSCoding{
     
     func setAttendessCount(count: Int){
         attendeeCount = count
+    }
+    
+    func setImageURL(url: String){
+        self.image_url = url
     }
     
     required init(coder decoder: NSCoder) {

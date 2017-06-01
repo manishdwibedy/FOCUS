@@ -16,6 +16,7 @@ import Alamofire
 import SwiftyJSON
 import Solar
 import PopupDialog
+import FirebaseMessaging
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
@@ -39,8 +40,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var searchEventsTab: SearchEventsViewController? = nil
     
     @IBOutlet weak var navigationView: MapNavigationView!
+    
+    @IBOutlet weak var webView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        webView.isHidden = true
+        if AuthApi.getEventBriteToken() == nil{
+            let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
+            let requestObj = URLRequest(url: url!)
+            webView.loadRequest(requestObj)
+            webView.delegate = self
+        }
         
         
         locationManager = CLLocationManager()
@@ -58,7 +70,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
-        
+        if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
+            getYelpToken(completion: { token in
+                AuthApi.set(yelpAccessToken: token)
+                self.fetchPlaces(around: self.currentLocation!, token: token)
+            })
+        }
         
         if let last_pos = UserDefaults.standard.value(forKey: "last_location") as? String{
             let coord = last_pos.components(separatedBy: ";;")
@@ -75,14 +92,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
         // Set up the cluster manager with default icon generator and renderer.
-        let iconGenerator = GMUDefaultClusterIconGenerator()
+//        let iconGenerator = GMUDefaultClusterIconGenerator()
+//        
+//        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+//        
+//        let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
+//        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
         
-        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
-        
-        let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
-        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
-        
-        Constants.DB.event.observe(FIRDataEventType.value, with: { (snapshot) in
+        Constants.DB.event.observe(DataEventType.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             
             for (id, event) in events{
@@ -94,25 +111,31 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
                 
                 let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                let marker = GMSMarker(position: position)
+                marker.icon = UIImage(named: "Event")
+                marker.title = event.title
+                marker.map = self.mapView
+                marker.accessibilityLabel = "event_\(self.events.count)"
                 self.events.append(event)
                 
-                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "Event")!, id: String(describing: self.events.count), type: "event")
-                self.clusterManager.add(item)
-                self.searchEventsTab?.events.append(event)
+//                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "Event")!, id: String(describing: self.events.count), type: "event")
+//                self.clusterManager.add(item)
+//                self.searchEventsTab?.events.append(event)
             }
             
-            // Call cluster() after items have been added to perform the clustering and rendering on map.
-            self.clusterManager.cluster()
-            
-            // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
-            self.clusterManager.setDelegate(self, mapDelegate: self)
+//            // Call cluster() after items have been added to perform the clustering and rendering on map.
+//            self.clusterManager.cluster()
+//            
+//            // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
+//            self.clusterManager.setDelegate(self, mapDelegate: self)
             
         })
         
         self.searchPlacesTab = self.tabBarController?.viewControllers?[3] as? SearchPlacesViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
-        
+        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(token ?? "")")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,67 +157,161 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView?{
-        let data = marker.userData as? MapCluster
         
-        if let markerData = data{
-            if data?.type == "event"{
-                let index:Int! = Int(data!.id)
-                let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
-                let event = self.events[index]
-                infoWindow.name.text = event.title
-                infoWindow.address.text  = event.shortAddress
-                infoWindow.time.text = event.date?.components(separatedBy: ",")[1]
-                infoWindow.attendees.text = "No one joining"
-                return infoWindow
+        let accessibilityLabel = marker.accessibilityLabel
+        
+        
+        let parts = accessibilityLabel?.components(separatedBy: "_")
+        if parts?[0] == "event"{
+            let index:Int! = Int(parts![1])
+            let event = self.events[index]
+            let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+            infoWindow.name.text = event.title
+            infoWindow.address.text  = event.shortAddress
+            
+            if event.date?.range(of:",") != nil{
+                let time = event.date?.components(separatedBy: ",")[1]
+                infoWindow.time.text = time
             }
             else{
-                let index:Int! = Int(data!.id)
-                let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
-                let place = self.places[index]
-                infoWindow.name.text = place.name
-                infoWindow.address.text  = place.address[0]
-                infoWindow.time.text = "\(place.rating) (\(place.reviewCount))"
-                
-                let categoryString = place.categories.map(){ $0.name }.joined(separator: ", ")
-                
-                infoWindow.attendees.text = categoryString
-                return infoWindow
+                let time = event.date?.components(separatedBy: "T")[1]
+                infoWindow.time.text = time
             }
+            
+            infoWindow.attendees.text = "No one joining"
+            return infoWindow
         }
         else{
-            let newCamera = GMSCameraPosition.camera(withTarget: marker.position,
-                                                     zoom: mapView.camera.zoom + 1)
-            let update = GMSCameraUpdate.setCamera(newCamera)
-            mapView.moveCamera(update)
+            let index:Int! = Int(parts![1])
+            let place = self.places[index % self.places.count]
             
-            print("cluster click")
-            return nil
+            let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+            infoWindow.name.text = place.name
+            infoWindow.address.text  = place.address[0]
+            infoWindow.time.text = "\(place.rating) (\(place.reviewCount))"
+
+            let categoryString = place.categories.map(){ $0.name }.joined(separator: ", ")
+
+            infoWindow.attendees.text = categoryString
+            return infoWindow
+            
         }
+        
+//        let data = marker.userData as? MapCluster
+//        
+//        if let markerData = data{
+//            if data?.type == "event"{
+//                let index:Int! = Int(data!.id)
+//                let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+//                let event = self.events[index]
+//                infoWindow.name.text = event.title
+//                infoWindow.address.text  = event.shortAddress
+//                infoWindow.time.text = event.date?.components(separatedBy: ",")[1]
+//                infoWindow.attendees.text = "No one joining"
+//                return infoWindow
+//            }
+//            else{
+//                let index:Int! = Int(data!.id)
+//                let infoWindow = Bundle.main.loadNibNamed("MapInfoView", owner: self, options: nil)?[0] as! MapInfoView
+//                let place = self.places[index]
+//                infoWindow.name.text = place.name
+//                infoWindow.address.text  = place.address[0]
+//                infoWindow.time.text = "\(place.rating) (\(place.reviewCount))"
+//                
+//                let categoryString = place.categories.map(){ $0.name }.joined(separator: ", ")
+//                
+//                infoWindow.attendees.text = categoryString
+//                return infoWindow
+//            }
+//        }
+//        else{
+//            let newCamera = GMSCameraPosition.camera(withTarget: marker.position,
+//                                                     zoom: mapView.camera.zoom + 1)
+//            let update = GMSCameraUpdate.setCamera(newCamera)
+//            mapView.moveCamera(update)
+//            
+//            print("cluster click")
+//            return nil
+//        }
     }
     
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        let data = marker.userData as? MapCluster
+        let accessibilityLabel = marker.accessibilityLabel
         
-        if let markerData = data{
-            if data?.type == "event"{
-                let index:Int! = Int(data!.id)
-                let event = self.events[index]
-                let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
-                controller.event = event
-                self.present(controller, animated: true, completion: nil)
-                
-            }
-            else{
-                let index:Int! = Int(data!.id)
-                let place = self.places[index]
-                let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
-                controller.place = place
-                controller.currentLocation = self.currentLocation
-                self.present(controller, animated: true, completion: nil)
-            }
+        
+        let parts = accessibilityLabel?.components(separatedBy: "_")
+        if parts?[0] == "event"{
+            let index:Int! = Int(parts![1])
+            let event = self.events[index]
+            let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+            controller.event = event
+            self.present(controller, animated: true, completion: nil)
+        }
+        else{
+            let index:Int! = Int(parts![1])
+            let place = self.places[index % self.places.count]
+            let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+            controller.place = place
+            self.present(controller, animated: true, completion: nil)
+        }
+        
+//        let data = marker.userData as? MapCluster
+//        
+//        if let markerData = data{
+//            if data?.type == "event"{
+//                let index:Int! = Int(data!.id)
+//                let event = self.events[index]
+//                let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+//                let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+//                controller.event = event
+//                self.present(controller, animated: true, completion: nil)
+//                
+//            }
+//            else{
+//                let index:Int! = Int(data!.id)
+//                let place = self.places[index]
+//                let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+//                let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+//                controller.place = place
+//                controller.currentLocation = self.currentLocation
+//                self.present(controller, animated: true, completion: nil)
+//            }
+//        }
+    }
+    
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        
+        var lat: CLLocationDegrees = mapView.camera.target.latitude
+        var long: CLLocationDegrees = mapView.camera.target.longitude
+        
+        
+        var currentLocation =  CLLocation(latitude: lat, longitude: long)
+
+        
+        if let token = AuthApi.getYelpToken(){
+            self.fetchPlaces(around: currentLocation, token: token)
+        }
+        else{
+            getYelpToken(completion: {(token) in
+                self.fetchPlaces(around: currentLocation, token: token)
+            })
+        }
+        
+        if AuthApi.getEventBriteToken() != nil{
+            getEvents(around: currentLocation, completion: { events in
+                for event in events{
+                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                    let marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: "Event")
+                    marker.title = event.title
+                    marker.map = self.mapView
+                    marker.accessibilityLabel = "event_\(self.events.count)"
+                    self.events.append(event)
+                }
+            })
         }
     }
     
@@ -254,26 +371,26 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.currentLocation = location
         self.searchPlacesTab?.location = location
         
+        if AuthApi.getEventBriteToken() != nil{
+            getEvents(around: self.currentLocation!, completion: { events in
+                for event in events{
+                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                    let marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: "Event")
+                    marker.title = event.title
+                    marker.map = self.mapView
+                    marker.accessibilityLabel = "event_\(self.events.count)"
+                    self.events.append(event)
+                }
+            })
+        }
         
-        getEvents(around: self.currentLocation!, completion: { events in
-            for event in events{
-                let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                let marker = GMSMarker(position: position)
-                marker.icon = UIImage(named: "Event")
-                marker.title = event.title
-                marker.map = self.mapView
-                marker.accessibilityLabel = "event_\(self.events.count)"
-                
-            }
-        })
-        
-        print("got location")
         if let token = AuthApi.getYelpToken(){
-            self.fetchPlaces(token: token)
+            self.fetchPlaces(around: self.currentLocation!, token: token)
         }
         else{
             getYelpToken(completion: {(token) in
-                self.fetchPlaces(token: token)
+                self.fetchPlaces(around: self.currentLocation!, token: token)
             })
         }
         
@@ -342,14 +459,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let navigationController = UINavigationController(rootViewController: vc)
         
         self.present(navigationController, animated: true, completion: nil)
-        
     }
     
-    func fetchPlaces(token: String){
+    func searchClicked() {
+        let storyboard = UIStoryboard(name: "general_search", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
+        VC?.location = self.currentLocation
+        self.present(VC!, animated: true, completion: nil)
+    }
+    
+    func fetchPlaces(around location: CLLocation, token: String){
         let url = "https://api.yelp.com/v3/businesses/search"
-        let parameters: [String: Double] = [
-            "latitude" : Double(self.currentLocation!.coordinate.latitude),
-            "longitude" : Double(self.currentLocation!.coordinate.longitude)
+        let parameters: [String: Any] = [
+            "categories": getYelpCategories(),
+            "latitude" : Double(location.coordinate.latitude),
+            "longitude" : Double(location.coordinate.longitude)
         ]
         
         let headers: HTTPHeaders = [
@@ -375,6 +499,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 let phone = business.1["display_phone"].stringValue
                 let distance = business.1["distance"].doubleValue
                 let categories_json = business.1["categories"].arrayValue
+                let url = business.1["url"].stringValue
                 
                 var address = [String]()
                 for raw_address in address_json{
@@ -387,14 +512,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     categories.append(category)
                 }
                 
-                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories)
+                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url)
                 
                 if !self.places.contains(place){
                     
                     let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+                    let marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: "place_icon")
+                    marker.title = place.name
+                    marker.map = self.mapView
+                    marker.accessibilityLabel = "place_\(self.places.count)"
                     
-                    let item = MapCluster(position: position, name: place.name, icon: UIImage(named: "place_icon")!, id: String(self.places.count), type: "place")
-                    self.clusterManager.add(item)
+//                    let item = MapCluster(position: position, name: place.name, icon: UIImage(named: "place_icon")!, id: String(self.places.count), type: "place")
+//                    self.clusterManager.add(item)
                     self.places.append(place)
                     self.placeMapping[place.id] = place
                     self.getPlaceHours(id: place.id)
@@ -404,7 +534,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
                 }
             }
-            self.clusterManager.cluster()
+//            self.clusterManager.cluster()
         }
     }
     
@@ -474,5 +604,24 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         // Present dialog
         present(popup, animated: true, completion: nil)
+    }
+}
+
+extension MapViewController: UIWebViewDelegate {
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        print("Loading")
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        if (webView.request?.url?.absoluteString.range(of: "access_token=") != nil) {
+            let params = webView.request?.url?.absoluteString.components(separatedBy: "=")
+            let access_token = (params?.last!)!
+            AuthApi.set(eventBriteAccessToken: access_token)
+            self.webView.isHidden = true
+        }
+        else{
+            self.webView.isHidden = false
+        }
+
     }
 }

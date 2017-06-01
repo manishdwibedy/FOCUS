@@ -220,27 +220,6 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-## FBSDKShareKit
-
-Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
-
-You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-copy, modify, and distribute this software in source code or binary form for use
-in connection with the web services and APIs provided by Facebook.
-
-As with any software that integrates with the Facebook platform, your use of
-this software is subject to the Facebook Developer Principles and Policies
-[http://developers.facebook.com/policy/]. This copyright notice shall be
-included in all copies or substantial portions of the software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
 ## Fabric
 
 Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt
@@ -269,29 +248,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 ## FacebookLogin
-
-Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
-
-For Facebook Swift SDK software
-
-You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-copy, modify, and distribute this software in source code or binary form for use
-in connection with the web services and APIs provided by Facebook.
-
-As with any software that integrates with the Facebook platform, your use of
-this software is subject to the Facebook Developer Principles and Policies
-[http://developers.facebook.com/policy/]. This copyright notice shall be
-included in all copies or substantial portions of the software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-## FacebookShare
 
 Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
 
@@ -790,11 +746,19 @@ Licensed under the **MIT** license
 
 ## Google
 
-Copyright 2016 Google Inc.
+Copyright 2015 Google Inc.
+
+## GoogleInterchangeUtilities
+
+Copyright 2016 Google
 
 ## GoogleMaps
 
 Copyright 2017 Google
+
+## GoogleNetworkingUtilities
+
+Copyright 2016 Google
 
 ## GooglePlacePicker
 
@@ -807,6 +771,10 @@ Copyright 2017 Google
 ## GoogleSignIn
 
 Copyright 2017 Google
+
+## GoogleSymbolUtilities
+
+Copyright 2016 Google
 
 ## GoogleToolboxForMac
 
@@ -1013,6 +981,10 @@ Copyright 2017 Google
    See the License for the specific language governing permissions and
    limitations under the License.
 
+
+## GoogleUtilities
+
+Copyright 2016 Google
 
 ## JSQMessagesViewController
 
@@ -1461,9 +1433,9 @@ THE SOFTWARE.
 
 ## TwitterCore
 
-Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. Twitter Kit: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Twitter Kit Agreement located at https://fabric.io/terms/twitter and the Developer Agreement located at https://dev.twitter.com/overview/terms/agreement. Digits Kit: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Digits Kit Agreement located at https://fabric.io/terms/digits and the Developer Agreement located at https://dev.twitter.com/overview/terms/agreement. OSS: http://get.fabric.io/terms/opensource.txt.
+Copyright Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Twitter Kit Agreement located at https://dev.twitter.com/overview/terms/twitterkit and the Developer Agreement located at https://dev.twitter.com/overview/terms/agreement. OSS: https://dev.twitter.com/twitterkit/open-source-licenses
 
 ## TwitterKit
 
-Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms.  Twitter Kit: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Twitter Kit Agreement located at https://fabric.io/terms/twitter and the Developer Agreement located at https://dev.twitter.com/overview/terms/agreement. OSS: http://get.fabric.io/terms/opensource.txt
+Twitter Kit: Copyright Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Twitter Kit Agreement located at https://dev.twitter.com/overview/terms/twitterkit and the Developer Agreement located at https://dev.twitter.com/overview/terms/agreement. OSS: https://dev.twitter.com/twitterkit/open-source-licenses
 Generated by CocoaPods - https://cocoapods.org

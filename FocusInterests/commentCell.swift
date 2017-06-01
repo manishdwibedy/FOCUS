@@ -90,11 +90,11 @@ class commentCellData
 {
     var from = String()
     var comment = String()
-    var commentFirePath: FIRDatabaseReference!
+    var commentFirePath: DatabaseReference!
     var likeCount = Int()
     var date = Date()
     
-    init(from:String,comment:String,commentFirePath: FIRDatabaseReference, likeCount: Int, date:Date) {
+    init(from:String,comment:String,commentFirePath: DatabaseReference, likeCount: Int, date:Date) {
         self.from = from
         self.comment = comment
         self.commentFirePath = commentFirePath

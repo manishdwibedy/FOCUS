@@ -1,6 +1,0 @@
-framework module Cosmos {
-  umbrella header "Cosmos-iOS10.0-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>633889221608-vbe57iqrilhp8n7bmpgudd908vpr5c5s.apps.googleusercontent.com</string>
+	<string>633889221608-7mbafaqf9mmjqp1vbr1urq28utnthg2r.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.633889221608-vbe57iqrilhp8n7bmpgudd908vpr5c5s</string>
+	<string>com.googleusercontent.apps.633889221608-7mbafaqf9mmjqp1vbr1urq28utnthg2r</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBiQIuYIHVpAtzWlQ_fnwvScpe6h6cUUsI</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.singlefocus.FocusInterests</string>
+	<string>com.singlefocus.focus</string>
 	<key>PROJECT_ID</key>
 	<string>focus-dev-2b816</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:633889221608:ios:f90c398d1f5f9213</string>
+	<string>1:633889221608:ios:2cddcfc4ec840486</string>
 	<key>DATABASE_URL</key>
 	<string>https://focus-dev-2b816.firebaseio.com</string>
 </dict>

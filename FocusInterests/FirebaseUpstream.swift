@@ -16,9 +16,9 @@ class FirebaseUpstream {
     
     fileprivate init() {}
     
-    let ref = FIRDatabase.database().reference()
-    let storageRef = FIRStorage.storage().reference()
-    let storage_UserProfile = FIRStorage.storage().reference(withPath: "user_profile/")
+    let ref = Database.database().reference()
+    let storageRef = Storage.storage().reference()
+    let storage_UserProfile = Storage.storage().reference(withPath: "user_profile/")
     
     func addToUsers(focusUser: FocusUser) {
 
@@ -133,7 +133,7 @@ class FirebaseUpstream {
             let storeChild = storageRef.child("profileImage\(uid)")
             let shrunkenImage = image.resized(withPercentage: 0.2)
             if let uploadData = UIImagePNGRepresentation(shrunkenImage!) {
-                storeChild.put(uploadData, metadata: nil, completion: { (metaData, error) in
+                storeChild.putData(uploadData, metadata: nil, completion: { (metaData, error) in
                     if error != nil {
                         print(error?.localizedDescription)
                         return
@@ -155,10 +155,10 @@ class FirebaseUpstream {
         
         if let uid = AuthApi.getFirebaseUid() {
             let storeChild = storage_UserProfile.child("\(uid).jpg")
-            let shrunkenImage = image.resized(withPercentage: 0.2)
+            let shrunkenImage = image.resized(withPercentage: 0.5)
 
             if let uploadData = UIImagePNGRepresentation(shrunkenImage!) {
-                storeChild.put(uploadData, metadata: nil, completion: { (metaData, error) in
+                storeChild.putData(uploadData, metadata: nil, completion: { (metaData, error) in
                     if error != nil {
                         print(error?.localizedDescription ?? "Error")
                         return

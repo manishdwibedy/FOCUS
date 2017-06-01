@@ -30,7 +30,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var guestButtonOut: UIButton!
     var event: Event?
     @IBOutlet weak var image: UIImageView!
-    let ref = FIRDatabase.database().reference()
+    let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
     var keyboardUp = false
     var attendingAmount = 0
@@ -57,23 +57,34 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         self.navigationItem.title = self.event?.title
         
-        let reference = Constants.storage.event.child("\(event!.id!).jpg")
-        
         // Placeholder image
         let placeholderImage = UIImage(named: "empty_event")
         
-        reference.downloadURL(completion: { (url, error) in
+        if let id = event?.id{
+            let reference = Constants.storage.event.child("\(id).jpg")
             
-            if error != nil {
-                print(error?.localizedDescription)
-                return
-            }
             
-            self.image.sd_setImage(with: url, placeholderImage: placeholderImage)
+            reference.downloadURL(completion: { (url, error) in
+                
+                if error != nil {
+                    print(error?.localizedDescription)
+                    return
+                }
+                
+                self.image.sd_setImage(with: url, placeholderImage: placeholderImage)
+                self.image.setShowActivityIndicator(true)
+                self.image.setIndicatorStyle(.gray)
+                
+            })
+
+        }
+        else{
+            self.image.sd_setImage(with: URL(string:(event?.image_url)!), placeholderImage: placeholderImage)
             self.image.setShowActivityIndicator(true)
             self.image.setIndicatorStyle(.gray)
             
-        })
+        }
+        
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         commentTextField.layer.borderWidth = 1
@@ -104,82 +115,82 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         })
         
-        let fullRef = ref.child("events").child((event?.id)!).child("comments")
-        fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 3).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                for (key,_) in value!
+        if event?.id != nil{
+            let fullRef = ref.child("events").child((event?.id)!).child("comments")
+            fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 3).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
                 {
-                    let dict = value?[key] as! NSDictionary
-                    let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int, date: Date(timeIntervalSince1970: TimeInterval(dict["date"] as! Double)))
-                    self.commentsCList.add(data)
+                    for (key,_) in value!
+                    {
+                        let dict = value?[key] as! NSDictionary
+                        let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int, date: Date(timeIntervalSince1970: TimeInterval(dict["date"] as! Double)))
+                        self.commentsCList.add(data)
+                        
+                        
+                        
+                    }
+                }
+                
+                self.tableView.reloadData()
+                if self.commentsCList.count != 0
+                {
+                    let oldLastCellIndexPath = NSIndexPath(row: self.commentsCList.count-1, section: 0)
+                    self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
+                }
+                
+            })
+            
+            //check for likes
+            ref.child("events").child((event?.id)!).child("likeAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    self.likeCount.text = String(value?["num"] as! Int)
+                }
+            })
+            
+            ref.child("events").child((event?.id)!).child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
+                    self.likeOut.isEnabled = false
+                }
+                
+            })
+            
+            // attending amount
+            ref.child("events").child((event?.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    self.attendingAmount = value?["amount"] as! Int
+                    let text = String(self.attendingAmount) + " guests"
                     
                     
+                    let textRange = NSMakeRange(0, text.characters.count)
+                    let attributedText = NSMutableAttributedString(string: text)
+                    attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
+                    self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
                     
                 }
-            }
+            })
             
-            self.tableView.reloadData()
-            if self.commentsCList.count != 0
-            {
-                let oldLastCellIndexPath = NSIndexPath(row: self.commentsCList.count-1, section: 0)
-                self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
-            }
             
-        })
-        
-        //check for likes
-        ref.child("events").child((event?.id)!).child("likeAmount").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                self.likeCount.text = String(value?["num"] as! Int)
-            }
-        })
-        
-        ref.child("events").child((event?.id)!).child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
-                self.likeOut.isEnabled = false
-            }
             
-        })
-        
-        // attending amount
-        ref.child("events").child((event?.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                self.attendingAmount = value?["amount"] as! Int
-                let text = String(self.attendingAmount) + " guests"
+            //attending
+            ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    self.attendOut.isEnabled = false
+                    self.attendOut.setTitle("Attending", for: UIControlState.normal)
+                }
                 
-                
-                let textRange = NSMakeRange(0, text.characters.count)
-                let attributedText = NSMutableAttributedString(string: text)
-                attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
-                self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
-                
-            }
-        })
-        
-        
-        
-        //attending
-        ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                self.attendOut.isEnabled = false
-                self.attendOut.setTitle("Attending", for: UIControlState.normal)
-            }
-            
-        })
-        self.attendOut.titleLabel?.textAlignment = .left
-        
-        
+            })
+            self.attendOut.titleLabel?.textAlignment = .left
+        }
         
     }
     

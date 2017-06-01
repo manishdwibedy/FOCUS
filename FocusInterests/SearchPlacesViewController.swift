@@ -122,6 +122,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                     let phone = business.1["display_phone"].stringValue
                     let distance = business.1["distance"].doubleValue
                     let categories_json = business.1["categories"].arrayValue
+                    let url = business.1["url"].stringValue
                     
                     var address = [String]()
                     for raw_address in address_json{
@@ -134,7 +135,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                         categories.append(category)
                     }
                     
-                    let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories)
+                    let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url)
                     
                     if !self.filtered.contains(place){
                         self.filtered.append(place)

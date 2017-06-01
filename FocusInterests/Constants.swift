@@ -45,27 +45,40 @@ struct Constants {
     
     struct interests {
         
-//        Meet up
-//        Coffee
-//        Chill
-//        Celebration
-//        Food
-//        Drinks
-//        Work
-//        Learn
-//        Entertainment
-//        Arts
-//        Music
-//        Beauty
-//        Fashion
-//        Networking
-//        Exercise
-//        Wellness
-//        Sports
-//        Outdoors
-//        Views
-//        Causes
         
+        public static let interests = ["Meet up","Coffee","Chill","Celebration","Food","Drinks","Work","Learn","Entertainment","Arts","Music","Beauty","Fashion","Networking","Exercise","Wellness","Sports","Outdoors","Views","Causes"]
+      
+        public static let eventBriteMapping: [String:String] = [
+            "Music": "103",
+            "Networking": "101",
+            "Food": "110",
+            "Celebration": "113,116,199",
+            "Arts": "105",
+            "Entertainment": "104",
+            "Sports": "108",
+            "Fitness": "107",
+            "Learn": "102,115",
+            "Travel": "109",
+            "Causes": "111,114,112",
+            "Beauty": "106",
+            "Community": "117",
+            "Outdoors": "118,119",
+        ]
+        
+        public static let yelpMapping = [
+            "Community": "homeservices,localservices,pets,publicservicesgovt,localflavor,auto",
+            "Learn": "education",
+            "Arts": "arts",
+            "Beauty": "beautysvc",
+            "Business": "financialservices,professional",
+            "Fitness": "bicycles,health,active",
+            "Celebration": "eventservices,nightlife",
+            "Entertainment": "massmedia",
+            "Shopping": "shopping",
+            "Food": "food,restaurants",
+            "Travel": "hotelstravel",
+            "Causes": "religiousorgs",
+        ]
         public static let football = Interest(name: "Football", category: InterestCategory.Sports, image: nil, imageString: nil)
         public static let basketball = Interest(name: "Basketball", category: InterestCategory.Sports, image: nil, imageString: nil)
         public static let soccer = Interest(name: "Soccer", category: InterestCategory.Sports, image: UIImage(named: "blackSoccer"), imageString: nil)
@@ -85,7 +98,7 @@ struct Constants {
         public static let furniture = Interest(name: "Furniture", category: InterestCategory.Shopping, image: nil, imageString: nil)
         
         
-        public static let interest_list = [interests.football, interests.basketball, interests.soccer, interests.bike, interests.music, interests.modernArt]
+//        public static let interest_list = [interests.football, interests.basketball, interests.soccer, interests.bike, interests.music, interests.modernArt]
         
     }
     
@@ -146,21 +159,21 @@ struct Constants {
     }
     
     struct DB {
-        public static let event = FIRDatabase.database().reference().child("events")
-        public static let user = FIRDatabase.database().reference().child("users")
-        public static let messages = FIRDatabase.database().reference().child("messages")
-        public static let message_content = FIRDatabase.database().reference().child("message_content")
-        public static let places = FIRDatabase.database().reference().child("places")
-        public static let following_place = FIRDatabase.database().reference().child("following_place")
-        public static let pins = FIRDatabase.database().reference().child("pins")
-        public static let feedback = FIRDatabase.database().reference().child("feedback")
-        public static let user_mapping = FIRDatabase.database().reference().child("username_mapping")
+        public static let event = Database.database().reference().child("events")
+        public static let user = Database.database().reference().child("users")
+        public static let messages = Database.database().reference().child("messages")
+        public static let message_content = Database.database().reference().child("message_content")
+        public static let places = Database.database().reference().child("places")
+        public static let following_place = Database.database().reference().child("following_place")
+        public static let pins = Database.database().reference().child("pins")
+        public static let feedback = Database.database().reference().child("feedback")
+        public static let user_mapping = Database.database().reference().child("username_mapping")
     }
     
     struct storage{
-        public static let event = FIRStorage.storage().reference().child("events")
-        public static let messages = FIRStorage.storage().reference().child("messages")
-        public static let pins = FIRStorage.storage().reference().child("pins")
+        public static let event = Storage.storage().reference().child("events")
+        public static let messages = Storage.storage().reference().child("messages")
+        public static let pins = Storage.storage().reference().child("pins")
     }
     
     struct Twitter{

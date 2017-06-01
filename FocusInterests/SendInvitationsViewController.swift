@@ -84,10 +84,10 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let imageRef = Constants.storage.event.child("\(id!).jpg")
             
             // Create file metadata including the content type
-            let metadata = FIRStorageMetadata()
+            let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
             
-            let _ = imageRef.put(data, metadata: metadata) { (metadata, error) in
+            let _ = imageRef.putData(data, metadata: metadata) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     print("\(error!)")

@@ -11,6 +11,10 @@ import FacebookCore
 import FBSDKCoreKit
 import Magnetic
 import SpriteKit
+import SCLAlertView
+
+var interest_status = [Interest]()
+var interest_mapping = [String: Int]()
 
 class InterestsViewController: UIViewController{
 
@@ -20,6 +24,7 @@ class InterestsViewController: UIViewController{
     let backgroundColor = UIColor.init(red: 22/255, green: 42/255, blue: 64/255, alpha: 1)
     var filtered = [Interest]()
     var searching = false
+    let user_interests = AuthApi.getInterests()?.components(separatedBy: ",")
     
     @IBOutlet weak var magneticView: MagneticView!{
         didSet {
@@ -38,8 +43,10 @@ class InterestsViewController: UIViewController{
         // Do any additional setup after loading the view.
         
         self.magnetic.backgroundColor = UIColor.lightGray
-        for index in 1..<12 {
-            add(name: "Interest \(index)")
+        for (index,interest) in Constants.interests.interests.enumerated() {
+            add(name: interest)
+            interest_status.append(Interest(name: interest, category: nil, image: nil, imageString: nil))
+            interest_mapping[interest] = index
         }
         
         if AuthApi.isNewUser(){
@@ -51,17 +58,28 @@ class InterestsViewController: UIViewController{
     func add(name: String) {
         let name = name
         let color = UIColor.green
-        let node = CustomNode(text: name.capitalized, image: UIImage(named: "addUser"), color: color, radius: 40)
-        node.strokeColor = UIColor.black
-        magnetic.addChild(node)
         
+        if user_interests != nil{
+            if (self.user_interests?.contains(name))!{
+                let node = CustomNode(text: name.capitalized, image: nil, color: color, radius: 60)
+                magnetic.addChild(node)
+            }
+            else{
+                let node = CustomNode(text: name.capitalized, image: nil, color: color, radius: 40)
+                node.strokeColor = UIColor.black
+                magnetic.addChild(node)
+            }
+        }
+        else{
+            let node = CustomNode(text: name.capitalized, image: nil, color: color, radius: 40)
+            node.strokeColor = UIColor.black
+            magnetic.addChild(node)
+        }
         
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,6 +92,26 @@ class InterestsViewController: UIViewController{
     }
     
     @IBAction func saveInterests(_ sender: UIBarButtonItem) {
+        let selected_interests = interest_status.filter( { return $0.status != .normal } )
+        let interest_string = selected_interests.map(){ $0.name! }.joined(separator: ",")
+        
+        var interests = ""
+        if AuthApi.isNewUser(){
+            if selected_interests.count == 0{
+                SCLAlertView().showError("Invalid Interests", subTitle: "Please choose atleast one interest.")
+                return
+            }
+            interests = interest_string
+            
+        }
+        else{
+            let earlier_interests = AuthApi.getInterests()!
+            interests = "\(earlier_interests),\(interest_string)"
+        }
+        
+        Constants.DB.user.child("\(String(describing: AuthApi.getFirebaseUid()!))/interests").setValue(interests)
+        AuthApi.set(interests: interests)
+        
         if AuthApi.isNewUser(){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
@@ -103,6 +141,9 @@ extension InterestsViewController: MagneticDelegate {
     
     func magnetic(_ magnetic: Magnetic, didSelect node: Node) {
         print("didSelect -> \(node)")
+        if let interestNode = node as? CustomNode{
+            
+        }
     }
     
     func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
@@ -125,7 +166,6 @@ class ImageNode: Node {
 extension Magnetic{
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("begin touching")
         self.touchBegan = Date()
     }
     
@@ -134,8 +174,6 @@ extension Magnetic{
         if let lastTap = self.lastTapTime{
             let interval = Date().timeIntervalSince(lastTap)
             if Double(interval) < 0.2{
-                print("double tap")
-                print(interval)
                 self.isDoubleTap = true
             }
             else{
@@ -148,7 +186,6 @@ extension Magnetic{
         let tapduration = Date().timeIntervalSince(self.touchBegan!)
         
         if Double(tapduration) > 0.5{
-            print("long hold")
             self.isLongTap = true
         }
         else{
@@ -179,9 +216,10 @@ extension Magnetic{
             } else {
                 if !allowsMultipleSelection, let selectedNode = selectedChildren.first as? CustomNode {
                     selectedNode.state = .like
-                    magneticDelegate?.magnetic(self, didDeselect: selectedNode)
+                    magneticDelegate?.magnetic(self, didSelect: selectedNode)
                 }
                 
+                magneticDelegate?.magnetic(self, didSelect: node)
                 node.state = .like
             }
         }
@@ -199,6 +237,7 @@ enum State{
 class CustomNode: Node{
     var isDoubleTap = false
     var isLongTap = false
+    var status = InterestStatus.normal
     
     func setDoubleTap(){
         self.isDoubleTap = true
@@ -233,7 +272,6 @@ class CustomNode: Node{
                 case .hate: fallthrough
                 case .love:
                     let selectionTask = DispatchWorkItem {
-                        print(" show tap - \(Date().timeIntervalSince1970) \(self.isDoubleTap)")
                         if self.isLongTap{
                             self.hateInterest()
                         }
@@ -243,6 +281,7 @@ class CustomNode: Node{
                         else{
                             self.loveInterest()
                         }
+                        self.changeStatus(interest: self.text!, status: self.status)
                     }
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: selectionTask)
                 }
@@ -258,6 +297,8 @@ class CustomNode: Node{
         if let texture = self.texture {
             self.sprite.run(.setTexture(texture))
         }
+        self.status = .hate
+        
         self.run(.scale(to: 0.5, duration: 0.2))
     }
     
@@ -265,6 +306,7 @@ class CustomNode: Node{
         if let texture = self.texture {
             sprite.run(.setTexture(texture))
         }
+        self.status = .like
         run(.scale(to: 1.5, duration: 0.2))
     }
     
@@ -272,6 +314,13 @@ class CustomNode: Node{
         if let texture = self.texture {
             sprite.run(.setTexture(texture))
         }
+        self.status = .love
         run(.scale(to: 2, duration: 0.2))
+    }
+    
+    
+    func changeStatus(interest: String, status: InterestStatus){
+        let index = interest_mapping[interest]
+        interest_status[index!].status = status
     }
 }

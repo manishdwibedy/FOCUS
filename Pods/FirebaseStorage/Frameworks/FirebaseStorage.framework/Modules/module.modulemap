@@ -3,9 +3,6 @@ framework module FirebaseStorage {
   export *
   module * { export *}
   link "z"
-  link framework "CoreGraphics"
-  link framework "Foundation"
   link framework "MobileCoreServices"
   link framework "Security"
-  link framework "UIKit"
 }

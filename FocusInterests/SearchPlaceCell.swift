@@ -19,7 +19,9 @@ class SearchPlaceCell: UITableViewCell {
     @IBOutlet weak var categoryLabel: UILabel!
     
     var placeID = String()
-    var parentVC: SearchPlacesViewController!
+    var parentVC: SearchPlacesViewController! = nil
+    var searchVC: SearchViewController? = nil
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -83,7 +85,13 @@ class SearchPlaceCell: UITableViewCell {
         ivc.type = "place"
         ivc.parentCell = self
         ivc.id = self.placeID
-        parentVC.present(ivc, animated: true, completion: { _ in })
+        if let VC = self.parentVC{
+            VC.present(ivc, animated: true, completion: { _ in })
+        }
+        else{
+            self.searchVC?.present(ivc, animated: true, completion: { _ in })
+        }
+        
     }
     
     

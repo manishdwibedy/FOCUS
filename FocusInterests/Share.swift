@@ -7,24 +7,24 @@
 //
 
 import Foundation
-import FacebookShare
+//import FacebookShare
 import TwitterKit
 import FirebaseAuth
 import Alamofire
 import OhhAuth
 
 class Share{
-    static func facebook(with url: URL) throws{
-        let content = LinkShareContent(url: url)
-        
-        let shareDialog = MessageDialog(content: content)
-        shareDialog.completion = { result in
-            print(result)
-            
-        }
-        
-        try shareDialog.show()
-    }
+//    static func facebook(with url: URL) throws{
+//        let content = LinkShareContent(url: url)
+//        
+//        let shareDialog = MessageDialog(content: content)
+//        shareDialog.completion = { result in
+//            print(result)
+//            
+//        }
+//        
+//        try shareDialog.show()
+//    }
     
     static func loginAndShareTwitter(withStatus text: String){
         Twitter.sharedInstance().logIn { session, error in
@@ -34,9 +34,9 @@ class Share{
                 if (session != nil) {
                     let authToken = session?.authToken
                     let authTokenSecret = session?.authTokenSecret
-                    let credential = FIRTwitterAuthProvider.credential(withToken: authToken!, secret: authTokenSecret!)
+                    let credential = TwitterAuthProvider.credential(withToken: authToken!, secret: authTokenSecret!)
                     
-                    let user = FIRAuth.auth()?.currentUser
+                    let user = Auth.auth().currentUser
                     
                     user?.link(with: credential, completion: { (user, error) in
                         if error != nil {

@@ -12,6 +12,7 @@ protocol NavigationInteraction {
     func messagesClicked()
     func notificationsClicked()
     func userProfileClicked()
+    func searchClicked()
 }
 
 class MapNavigationView: UIView, UISearchBarDelegate {
@@ -66,19 +67,20 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     }
     
     @IBAction func searchButtonPressed(_ sender: UIButton) {
-        if showSearchBar{
-            if searchBar.alpha == 0{
-                searchBar.alpha = 1
-            }
-            else{
-                searchBar.alpha = 0
-                searchBar.text = ""
-                searchBar.resignFirstResponder()
-            }
-        }
-        else{
-            print("show search!!")
-        }
+        delegate?.searchClicked()
+//        if showSearchBar{
+//            if searchBar.alpha == 0{
+//                searchBar.alpha = 1
+//            }
+//            else{
+//                searchBar.alpha = 0
+//                searchBar.text = ""
+//                searchBar.resignFirstResponder()
+//            }
+//        }
+//        else{
+//            print("show search!!")
+//        }
     }
     
     @IBAction func notificationsButtonPressed(_ sender: UIButton) {
@@ -87,6 +89,8 @@ class MapNavigationView: UIView, UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("searching.. \(searchBar.text)")
+        
+        delegate?.searchClicked()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

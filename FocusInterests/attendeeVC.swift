@@ -19,7 +19,7 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var parentEvent: Event?
     var parentVC: EventDetailViewController?
     var attendeeList = NSMutableArray()
-    let ref = FIRDatabase.database().reference()
+    let ref = Database.database().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self

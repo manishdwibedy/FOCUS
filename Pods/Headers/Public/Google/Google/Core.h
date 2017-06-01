@@ -1,1 +1,1 @@
-../../../../Google/Headers/Core.h
+../../../../Google/Headers/GGLCore/Public/Core.h

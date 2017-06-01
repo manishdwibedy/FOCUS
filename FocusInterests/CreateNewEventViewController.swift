@@ -64,7 +64,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         
         
         
-        for _ in 0..<Constants.interests.interest_list.count{
+        for _ in 0..<Constants.interests.interests.count{
             checkInterests.append(false)
         }
         
@@ -83,8 +83,8 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             
             let interests = cached.category?.components(separatedBy: ",")
             
-            for (index, interest) in Constants.interests.interest_list.enumerated(){
-                if (interests?.contains(interest.name!))!{
+            for (index, interest) in Constants.interests.interests.enumerated(){
+                if (interests?.contains(interest))!{
                     checkInterests[index] = true
                 }
             }
@@ -132,7 +132,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                 let dateString = "\(validDate), \(validTime)"
                 guard let creator = AuthApi.getFirebaseUid() else { return }
                 
-                let interests = zip(checkInterests,Constants.interests.interest_list ).filter { $0.0 }.map { $1.name! }
+                let interests = zip(checkInterests,Constants.interests.interests ).filter { $0.0 }.map { $1 }
                 
                 guard !interests.isEmpty else{
                     presentNotification(title: "Choose a interest", message: "Please choose atleast one interest for this event.")
@@ -170,7 +170,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                 let dateString = "\(validDate), \(validTime)"
                 guard let creator = AuthApi.getFirebaseUid() else { return }
                 
-                let interests = zip(checkInterests,Constants.interests.interest_list ).filter { $0.0 }.map { $1.name! }
+                let interests = zip(checkInterests,Constants.interests.interests ).filter { $0.0 }.map { $1 }
                 
                 guard !interests.isEmpty else{
                     presentNotification(title: "Choose a interest", message: "Please choose atleast one interest for this event.")
@@ -292,7 +292,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
         
-        cell.selectedInterestLabel.text = Constants.interests.interest_list[indexPath.row].name
+        cell.selectedInterestLabel.text = Constants.interests.interests[indexPath.row]
         
         if checkInterests[indexPath.row]{
             cell.checkedInterest.image = UIImage(named: "Interest_Filled")

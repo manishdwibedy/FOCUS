@@ -12,6 +12,7 @@ import FBSDKCoreKit
 import FirebaseAuth
 import GoogleSignIn
 import SCLAlertView
+import FirebaseMessaging
 
 enum LoginTypes: String {
     case Email = "email"
@@ -23,12 +24,12 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
-    let handle = FIRAuth.auth()
+    let handle = Auth.auth()
     let loginView = FBSDKLoginManager()
     let defaults = UserDefaults.standard
     var delegate: LoginDelegate?
     let appD = UIApplication.shared.delegate as! AppDelegate
-    var user: FIRUser?
+    var user: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,17 +44,17 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        handle?.addStateDidChangeListener({ (auth, user) in
-            if let u = user {
-                print("user uid: \(u.uid)")
-                self.showHomeVC()
-            }
-        })
+//        handle.addStateDidChangeListener({ (auth, user) in
+//            if let u = user {
+//                print("user uid: \(u.uid)")
+//                self.showHomeVC()
+//            }
+//        })
     }
     
     
     override func viewDidDisappear(_ animated: Bool) {
-        handle?.removeStateDidChangeListener(handle!)
+        handle.removeStateDidChangeListener(handle)
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +78,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         AuthApi.setPassword(password: password)
         
         if isValidEmail(text: email){
-            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+            Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
                 if error != nil {
                     self.showLoginFailedAlert(loginType: "email")
                     print("there has been an error with email login: \(error?.localizedDescription)")
@@ -106,7 +107,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                 let user = snapshot.value as? String
                 
                 if let userEmail = user{
-                    FIRAuth.auth()?.signIn(withEmail: userEmail, password: password, completion: { (user, error) in
+                    Auth.auth().signIn(withEmail: userEmail, password: password, completion: { (user, error) in
                         if error != nil {
                             self.showLoginFailedAlert(loginType: "email")
                             print("there has been an error with email login: \(error?.localizedDescription)")
@@ -118,6 +119,10 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                 }
                                 
                                 Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
+                                
+                                let token = Messaging.messaging().fcmToken
+                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
+                                AuthApi.set(FCMToken: token)
                                 
                                 self.emailTextField.text = ""
                                 self.passwordTextField.text = ""
@@ -154,8 +159,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                     }
                     if let tokenString = FBSDKAccessToken.current().tokenString {
                         
-                        let credential = FIRFacebookAuthProvider.credential(withAccessToken: tokenString)
-                        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                        let credential = FacebookAuthProvider.credential(withAccessToken: tokenString)
+                        Auth.auth().signIn(with: credential) { (user, error) in
                             if let u = user {
                                 let fireId = u.uid
 //                                self.addEmpty(userWith: fireId)
@@ -211,6 +216,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                                 Constants.DB.user.child("\(fireId)/fullname").setValue(image_string)
                                             }
                                             
+                                            let token = Messaging.messaging().fcmToken
+                                            Constants.DB.user.child("\(fireId)/token").setValue(token)
+                                            AuthApi.set(FCMToken: token)
                                             
                                         })
                                         
@@ -315,9 +323,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         if let id = googleUser.authentication.accessToken, let idToken = googleUser.authentication.idToken {
             
             
-            let credential = FIRGoogleAuthProvider.credential(withIDToken: idToken,
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                               accessToken: id)
-            FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            Auth.auth().signIn(with: credential, completion: { (user, error) in
                 if let u = user {
                     let fireId = u.uid
                     
@@ -357,6 +365,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             Constants.DB.user.child("\(fireId)/fullname").setValue(googleUser.profile.imageURL(withDimension: 100).absoluteString)
                         }
                         
+                        let token = Messaging.messaging().fcmToken
+                        Constants.DB.user.child("\(fireId)/token").setValue(token)
+                        AuthApi.set(FCMToken: token)
                         
 //                        guard let fullName = info?["fullname"] as? String, !fullName.isEmpty else{
 //                            
