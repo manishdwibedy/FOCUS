@@ -16,16 +16,19 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
 
     @IBOutlet weak var peopleHeaderView: UIView!
     @IBOutlet weak var placeHeaderView: UIView!
+    @IBOutlet weak var eventHeaderView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var people_tableView: UITableView!
     @IBOutlet weak var place_tableView: UITableView!
+    @IBOutlet weak var event_tableView: UITableView!
     
     var location: CLLocation?
     var people = [User]()
     var filtered_user = [User]()
     var places = [Place]()
     var filtered_places = [Place]()
-    
+    var events = [Event]()
+    var filtered_events = [Event]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +39,23 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         placeHeaderView.topCornersRounded(radius: 20)
         place_tableView.tableFooterView = UIView()
         
-        // Do any additional setup after loading the view.
+        eventHeaderView.topCornersRounded(radius: 20)
+        event_tableView.tableFooterView = UIView()
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
     }
-
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -60,6 +77,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         })
         
         getPlaces(text: "")
+        getEvents(text: "")
         
     }
     override func didReceiveMemoryWarning() {
@@ -132,8 +150,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         if tableView == self.people_tableView{
             return filtered_user.count
         }
-        else{
+        else if tableView == self.people_tableView{
             return filtered_places.count
+        }
+        else{
+            return filtered_events.count
         }
         
     }
@@ -144,9 +165,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             let user = self.filtered_user[indexPath.row]
             cell.textLabel?.text = user.username
         }
-        else{
+        else if tableView == self.place_tableView{
             let place = self.filtered_places[indexPath.row]
             cell.textLabel?.text = place.name
+        }
+        else{
+            let event = self.filtered_events[indexPath.row]
+            cell.textLabel?.text = event.title
         }
         return cell
     }
@@ -215,4 +240,30 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         }
     }
 
+    func getEvents(text: String){
+        if text.characters.count == 0{
+            if self.events.count > 0{
+                return
+            }
+        }
+        
+        self.filtered_events.removeAll()
+        
+        let ref = Constants.DB.event
+        let query = ref.queryOrdered(byChild: "title").queryStarting(atValue: text.lowercased()).queryEnding(atValue: text.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
+            let events = snapshot.value as? [String : Any] ?? [:]
+            
+            for (id, event) in events{
+                let info = event as? [String:Any]
+                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+                
+                if let attending = info?["attendingList"] as? [String:Any]{
+                    event.setAttendessCount(count: attending.count)
+                }
+                
+                self.filtered_events.append(event)
+            }
+            self.event_tableView.reloadData()
+        })
+    }
 }
