@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F71b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -28,8 +28,15 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pca-sC-jif">
                                 <rect key="frame" x="0.0" y="64" width="375" height="1536"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="22m-P8-D1B">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="0do-en-hpG"/>
+                                        </constraints>
+                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLf-1E-eSU">
-                                        <rect key="frame" x="0.0" y="219" width="375" height="1317"/>
+                                        <rect key="frame" x="0.0" y="200" width="375" height="1317"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpm-dW-0we">
                                                 <rect key="frame" x="140" y="16" width="95" height="21"/>
@@ -703,28 +710,38 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="wLf-1E-eSU" firstAttribute="centerX" secondItem="pca-sC-jif" secondAttribute="centerX" id="1wI-9O-eR3"/>
+                                    <constraint firstAttribute="trailing" secondItem="22m-P8-D1B" secondAttribute="trailing" id="4kJ-L8-N2N"/>
                                     <constraint firstItem="wLf-1E-eSU" firstAttribute="leading" secondItem="pca-sC-jif" secondAttribute="leading" id="7fp-kV-99x"/>
-                                    <constraint firstItem="wLf-1E-eSU" firstAttribute="top" secondItem="pca-sC-jif" secondAttribute="top" constant="219" id="SDC-jo-6Re"/>
+                                    <constraint firstItem="wLf-1E-eSU" firstAttribute="top" secondItem="pca-sC-jif" secondAttribute="top" constant="200" id="SDC-jo-6Re"/>
                                     <constraint firstAttribute="trailing" secondItem="wLf-1E-eSU" secondAttribute="trailing" id="ZRg-Ye-QF6"/>
+                                    <constraint firstItem="22m-P8-D1B" firstAttribute="leading" secondItem="pca-sC-jif" secondAttribute="leading" id="f7W-gH-hsz"/>
+                                    <constraint firstItem="22m-P8-D1B" firstAttribute="top" secondItem="pca-sC-jif" secondAttribute="top" id="j4G-Kw-N1w"/>
                                     <constraint firstAttribute="bottom" secondItem="wLf-1E-eSU" secondAttribute="bottom" id="zr8-Xn-gZ0"/>
                                 </constraints>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" backIndicatorImage="BackArrow" backIndicatorTransitionMaskImage="BackArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Oi3-pC-q5R">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.094117647058823528" green="0.17254901960784313" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="User Profile" id="SNQ-5X-BJ8">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="pvz-IC-9Ep">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="backButton:" destination="cU2-hP-1h7" id="D1E-Q4-FMq"/>
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
                                             <barButtonItem title="Setting" id="yDE-Mq-Jva">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <action selector="settingsButtonTapped:" destination="cU2-hP-1h7" id="fz9-wf-J8y"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem systemItem="edit" id="zfE-8Q-VOK">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <segue destination="fzK-Fg-Tt6" kind="show" id="dP1-VZ-S5U"/>
                                                 </connections>
@@ -752,6 +769,7 @@
                     <size key="freeformSize" width="375" height="1600"/>
                     <connections>
                         <outlet property="descriptionText" destination="wo5-YS-IfZ" id="eSM-Ba-w8J"/>
+                        <outlet property="userImage" destination="22m-P8-D1B" id="XIy-3o-49T"/>
                         <outlet property="userLikesLabel" destination="bEr-V2-6V9" id="gxe-u4-SIK"/>
                         <outlet property="userLocationImage" destination="Q4F-PH-nC9" id="vUF-FW-LNM"/>
                         <outlet property="userLocationLabel" destination="ZQ3-Aa-bLL" id="6w8-A6-fsl"/>
@@ -761,7 +779,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nD5-vH-ssF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-84" y="-453"/>
+            <point key="canvasLocation" x="-85.3125" y="-453.16901408450707"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="8nX-yx-J3m">
@@ -1086,5 +1104,6 @@
     </scenes>
     <resources>
         <image name="BackArrow" width="24" height="41"/>
+        <image name="UserPhoto" width="102" height="102"/>
     </resources>
 </document>

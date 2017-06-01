@@ -17,6 +17,7 @@ class UserProfileViewController: UIViewController {
 	@IBOutlet var userLocationImage: UIImageView!
 	@IBOutlet var userLocationLabel: UILabel!
 	@IBOutlet var userLikesLabel: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
 	
 	// Haven't added:
 	// User FOCUS button
@@ -61,20 +62,14 @@ class UserProfileViewController: UIViewController {
                 print(dictionnary!)
                 let username_str = dictionnary!["username"] as! String
                 let description_str = dictionnary!["description"] as! String
+                let image_string = dictionnary!["image_string"] as! String
                 
                 self.userName.text = username_str
                 self.descriptionText.text = description_str
                 
                 
-                /* Profile pic
-                 
-                let image_string = dictionnary!["image_string"] as! String
+                self.userImage.sd_setImage(with: URL(string: image_str), placeholderImage: UIImage(named: "empty_event"))
                 
-
-                
-                imageView.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
-                 
-                 */
             }
 
         }
