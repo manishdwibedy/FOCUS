@@ -11,10 +11,10 @@ import FacebookCore
 import FBSDKCoreKit
 import Magnetic
 import SpriteKit
+import SCLAlertView
 
 var interest_status = [Interest]()
 var interest_mapping = [String: Int]()
-
 
 class InterestsViewController: UIViewController{
 
@@ -97,6 +97,10 @@ class InterestsViewController: UIViewController{
         
         var interests = ""
         if AuthApi.isNewUser(){
+            if selected_interests.count == 0{
+                SCLAlertView().showError("Invalid Interests", subTitle: "Please choose atleast one interest.")
+                return
+            }
             interests = interest_string
             
         }
