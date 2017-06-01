@@ -34,6 +34,8 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var pinDescription: UILabel!
     @IBOutlet weak var updatePinButton: UIButton!
     
+    // user interests
+    @IBOutlet weak var interestStackView: UIStackView!
     
 	// Haven't added:
 	// User FOCUS button
@@ -82,6 +84,32 @@ class UserProfileViewController: UIViewController {
                 
             }
 
+        }
+        
+        let interests = AuthApi.getInterests()?.components(separatedBy: ",")
+        
+        for view in interestStackView.arrangedSubviews{
+            interestStackView.removeArrangedSubview(view)
+        }
+        
+        for (index, interest) in (interests?.enumerated())!{
+            let textLabel = UILabel()
+            
+            textLabel.textColor = .white
+            textLabel.text  = interest
+            textLabel.textAlignment = .left
+            
+            
+            if index == 0{
+                textLabel.text = textLabel.text! + " ●"
+                
+                let primaryFocus = NSMutableAttributedString(string: textLabel.text!)
+                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(textLabel.text?.characters.count)! - 1,length:1))
+                textLabel.attributedText = primaryFocus
+            }
+            
+            interestStackView.addArrangedSubview(textLabel)
+            interestStackView.translatesAutoresizingMaskIntoConstraints = false;
         }
     }
     

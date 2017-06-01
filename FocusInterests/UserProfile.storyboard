@@ -198,7 +198,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WUe-TH-3g9">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="WUe-TH-3g9">
                                                 <rect key="frame" x="10" y="378" width="355" height="95"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="95" id="aAA-rd-QA3"/>
@@ -403,6 +403,7 @@
                     <connections>
                         <outlet property="descriptionText" destination="wo5-YS-IfZ" id="eSM-Ba-w8J"/>
                         <outlet property="fullNameLabel" destination="eCO-Sw-Meb" id="aJH-Kg-iKe"/>
+                        <outlet property="interestStackView" destination="WUe-TH-3g9" id="Wp7-4S-xab"/>
                         <outlet property="pinAddress1Label" destination="KR1-UE-DOC" id="hQV-Np-o0p"/>
                         <outlet property="pinAddress2Label" destination="nuH-9L-XHv" id="did-3n-rfd"/>
                         <outlet property="pinCategoryLabel" destination="NRe-j8-XoK" id="Atx-4S-cAu"/>
