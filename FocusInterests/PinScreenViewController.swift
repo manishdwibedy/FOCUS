@@ -48,22 +48,22 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
-        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                for (key,_) in (value)!
-                {
-                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["place"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
-                    ivc.data = data
-                    self.present(ivc, animated: true, completion: { _ in })
-                    
-                    break
-                }
-            }
-        })
+//        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
+//            let value = snapshot.value as? NSDictionary
+//            if value != nil
+//            {
+//                for (key,_) in (value)!
+//                {
+//                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+//                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+//                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
+//                    ivc.data = data
+//                    self.present(ivc, animated: true, completion: { _ in })
+//                    
+//                    break
+//                }
+//            }
+//        })
         
         
         
@@ -164,17 +164,19 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     let path = AuthApi.getFirebaseUid()!+"/"+String(random)
                     imagePaths.addEntries(from: [String(random):["imagePath": path]])
                     uploadImage(image: image, path: Constants.storage.pins.child(path))
+                    
                 }
-                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths])
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths])
             }else
             {
-                Constants.DB.pins.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"place":formmatedAddress,"lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images":"nil"])
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress,"lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images":"nil"])
             }
         }
         pinTextView.text = "What are you up to?"
         pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)
         imageArray.removeAll()
         galleryPicArray.removeAll()
+        pinTextView.resignFirstResponder()
         
         for cell in cellArray
         {
