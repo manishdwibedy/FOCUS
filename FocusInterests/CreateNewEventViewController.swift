@@ -81,7 +81,8 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             
             let dateTime = cached.date?.components(separatedBy: ",")
             eventDateTextField.text = dateTime?[0]
-            eventTimeTextField.text = dateTime?[0]
+            eventTimeTextField.text = dateTime?[1]
+            eventEndTimeTextField.text = cached.endTime
             
             let interests = cached.category?.components(separatedBy: ",")
             
