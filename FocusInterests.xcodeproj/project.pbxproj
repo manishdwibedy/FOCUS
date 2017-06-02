@@ -28,6 +28,8 @@
 		5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C0541EDF8CE3007A8188 /* general_search.storyboard */; };
 		5B33C0571EDF8DF9007A8188 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */; };
 		5B33C0591EE0B28A007A8188 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33C0581EE0B28A007A8188 /* Double+Extensions.swift */; };
+		5B33C05C1EE113CA007A8188 /* MapPinInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C05B1EE113CA007A8188 /* MapPinInfoView.xib */; };
+		5B33C05E1EE113D3007A8188 /* MapPinInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33C05D1EE113D3007A8188 /* MapPinInfoView.swift */; };
 		5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B3F05751ED907B10057F596 /* Settings.storyboard */; };
 		5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */; };
 		5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */; };
@@ -254,6 +256,8 @@
 		5B33C0541EDF8CE3007A8188 /* general_search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = general_search.storyboard; sourceTree = "<group>"; };
 		5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5B33C0581EE0B28A007A8188 /* Double+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		5B33C05B1EE113CA007A8188 /* MapPinInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapPinInfoView.xib; sourceTree = "<group>"; };
+		5B33C05D1EE113D3007A8188 /* MapPinInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPinInfoView.swift; sourceTree = "<group>"; };
 		5B3F05751ED907B10057F596 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChangeUsernamePasswordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -525,6 +529,17 @@
 				04FD5D1D1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift */,
 			);
 			name = SignUpVCS;
+			sourceTree = "<group>";
+		};
+		5B33C05A1EE1132D007A8188 /* Map Info Window */ = {
+			isa = PBXGroup;
+			children = (
+				5BE31E891EA76094004768F0 /* MapEventInfoView.swift */,
+				5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */,
+				5B33C05D1EE113D3007A8188 /* MapPinInfoView.swift */,
+				5B33C05B1EE113CA007A8188 /* MapPinInfoView.xib */,
+			);
+			name = "Map Info Window";
 			sourceTree = "<group>";
 		};
 		5B3F05791ED909E90057F596 /* Settings */ = {
@@ -950,8 +965,7 @@
 				5B71D7041ED1837A0093A3F5 /* commentView.xib */,
 				FF69ABFB1ED6498F0044BE51 /* inviteCell.swift */,
 				FF69ABFC1ED6498F0044BE51 /* inviteCell.xib */,
-				5BE31E891EA76094004768F0 /* MapEventInfoView.swift */,
-				5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */,
+				5B33C05A1EE1132D007A8188 /* Map Info Window */,
 				5BA37C741EBD4DFB0091189E /* MapNavigationView.swift */,
 				5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */,
 				5B71D70B1ED184880093A3F5 /* FollowProfileCell.swift */,
@@ -1214,6 +1228,7 @@
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
 				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
 				5BAB87A61EC972890064E5EC /* search_people.storyboard in Resources */,
+				5B33C05C1EE113CA007A8188 /* MapPinInfoView.xib in Resources */,
 				5B69158D1ED7D80100093AD5 /* NewUserPopupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				5B959FF31ECD452C00094FE6 /* RatingViewCell.xib in Resources */,
@@ -1474,6 +1489,7 @@
 				5B6AFA741ED1906900A82104 /* GMUPolygon.m in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
 				5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */,
+				5B33C05E1EE113D3007A8188 /* MapPinInfoView.swift in Sources */,
 				5B634C831ED196BE00EBCC29 /* CustomClusterRenderer.swift in Sources */,
 				5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,

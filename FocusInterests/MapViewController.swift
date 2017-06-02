@@ -233,14 +233,32 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             let index:Int! = Int(parts![1])
             let place = self.places[index % self.places.count]
             
-            let infoWindow = Bundle.main.loadNibNamed("MapEventInfoView", owner: self, options: nil)?[0] as! MapEventInfoView
+            let infoWindow = Bundle.main.loadNibNamed("MapPinInfoView", owner: self, options: nil)?[0] as! MapPinInfoView
             infoWindow.name.text = place.name
-//            infoWindow.address.text  = place.address[0]
-            infoWindow.time.text = "\(place.rating) (\(place.reviewCount))"
+            infoWindow.rating.text = String(place.rating)
+            infoWindow.reviews.text = "(\(place.reviewCount) reviews)"
+            let category = place.categories.map(){ $0.name }
 
-            let categoryString = place.categories.map(){ $0.name }.joined(separator: ", ")
-
-//            infoWindow.attendees.text = categoryString
+            infoWindow.category.text =  "\(category[0]) ●" 
+            let primaryFocus = NSMutableAttributedString(string: infoWindow.category.text!)
+            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(infoWindow.category.text?.characters.count)! - 1,length:1))
+            infoWindow.category.attributedText = primaryFocus
+            
+            let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+                marker.tracksInfoWindowChanges = false
+                infoWindow.image.setShowActivityIndicator(false)
+                
+            }
+            
+            let placeholderImage = UIImage(named: "empty_event")
+            
+            infoWindow.image.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+            infoWindow.image.setShowActivityIndicator(true)
+            infoWindow.image.setIndicatorStyle(.gray)
+            
+            infoWindow.distance.text = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
+            
+            
             return infoWindow
             
         }

@@ -176,10 +176,7 @@ func getDistance(fromLocation: CLLocation, toLocation: CLLocation) -> String{
     let distanceInMeters = fromLocation.distance(from: toLocation)
     let distance = distanceInMeters/1609.344
     
-    if distance < 1{
-        return "<1 mile away"
-    }
-    return "\(distance.roundTo(places: 1)) miles away"
+    return "(\(distance.roundTo(places: 1)) mi)"
 }
 
 func sendNotification(to id: String, title: String, body: String){
