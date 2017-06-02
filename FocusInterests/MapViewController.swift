@@ -170,13 +170,41 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             let infoWindow = Bundle.main.loadNibNamed("MapEventInfoView", owner: self, options: nil)?[0] as! MapEventInfoView
             infoWindow.name.text = event.title
             
+            var start = ""
+            var end = ""
             if event.date?.range(of:",") != nil{
                 let time = event.date?.components(separatedBy: ",")[1]
-                infoWindow.time.text = time
+            
+                
+                start = time!
+
             }
             else{
                 let time = event.date?.components(separatedBy: "T")[1]
-                infoWindow.time.text = time
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "HH:mm:ss"
+                let date = dateFormatter.date(from: time!)
+                
+                dateFormatter.dateFormat = "h:mm a"
+                
+                start = dateFormatter.string(from: date!)
+            }
+            
+            
+            if event.endTime.characters.count > 0{
+                let time = event.endTime.components(separatedBy: "T")[1]
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "HH:mm:ss"
+                let date = dateFormatter.date(from: time)
+                
+                dateFormatter.dateFormat = "h:mm a"
+                
+                end = dateFormatter.string(from: date!)
+                infoWindow.time.text = "\(start) - \(end)"
+            }
+            else{
+                infoWindow.time.text = "\(start) onwards"
             }
             
             let placeholderImage = UIImage(named: "empty_event")

@@ -124,6 +124,7 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
 
                 let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: getInterest(eventBriteId: category_id))
                 
+                event.setEndTime(endTime: eventJson["end"]["local"].stringValue)
                 event.setImageURL(url: eventJson["logo"]["url"].stringValue
                 )
                 getEventLocation(eventJson["venue_id"].stringValue, completion: { location in
