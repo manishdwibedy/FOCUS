@@ -25,6 +25,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var scrollView: UIScrollView!
     var placeVC: PlaceViewController? = nil
     
+    
+    @IBOutlet weak var webButton: UIButton!
+    @IBOutlet weak var uberButton: UIButton!
+    @IBOutlet weak var googleMapButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -100,6 +105,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             
             view.image.image = UIImage(named: "addUser")
         }
+        
+        webButton.setImage(UIImage(named: "web"), for: .normal)
+        webButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        uberButton.setImage(UIImage(named: "uber"), for: .normal)
+        uberButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
     }
 
     // function which is triggered when handleTap is called

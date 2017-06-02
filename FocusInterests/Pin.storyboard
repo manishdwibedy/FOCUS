@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--PIN-->
+        <!--Pin Screen View Controller-->
         <scene sceneID="1oy-rM-MCn">
             <objects>
                 <viewController storyboardIdentifier="Home" id="r5X-Z6-if9" customClass="PinScreenViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -187,9 +187,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="A0j-it-CBu" secondAttribute="trailing" constant="-16" id="z2z-Ip-Dlv"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PIN" id="Zae-ix-DKq">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="" image="pin" id="Zae-ix-DKq"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cancelOut" destination="uye-eQ-vsG" id="ZVL-0o-LoF"/>
@@ -416,5 +414,6 @@
     </scenes>
     <resources>
         <image name="UserPhoto" width="102" height="102"/>
+        <image name="pin" width="30" height="30"/>
     </resources>
 </document>
