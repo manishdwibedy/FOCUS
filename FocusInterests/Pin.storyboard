@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -352,13 +352,6 @@
                                     <action selector="more:" destination="Wnn-ii-34g" eventType="touchUpInside" id="LAF-WC-ct9"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIm-He-eMe">
-                                <rect key="frame" x="239" y="512" width="120" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.26412749290466309" green="0.32456326484680176" blue="0.39544886350631714" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -394,7 +387,6 @@
                         <outlet property="addressBottom" destination="xIt-Lv-GdI" id="MpF-FI-60P"/>
                         <outlet property="addressTopOut" destination="tVa-3J-grt" id="LhB-FQ-D5P"/>
                         <outlet property="commentOut" destination="oV5-eg-uPI" id="fAG-Ma-hno"/>
-                        <outlet property="dateLabel" destination="TIm-He-eMe" id="fC1-Xx-DkH"/>
                         <outlet property="interestsLabel" destination="rpQ-O8-xtN" id="uWr-p2-uxG"/>
                         <outlet property="likeOut" destination="eFv-QC-3S7" id="PNJ-Ab-N5t"/>
                         <outlet property="likesLabel" destination="j0G-WK-LPf" id="9Th-tQ-nQI"/>

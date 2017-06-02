@@ -37,6 +37,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var places = [Place]()
     var placeMapping = [String: Place]()
     
+    var pins = [pinData]()
+    
     var searchPlacesTab: SearchPlacesViewController? = nil
     var searchEventsTab: SearchEventsViewController? = nil
     
@@ -91,6 +93,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 mapView.animate(to: camera)
             }
         }
+        
+    fetchPins()
         
         // Set up the cluster manager with default icon generator and renderer.
 //        let iconGenerator = GMUDefaultClusterIconGenerator()
@@ -416,6 +420,25 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
     }
     
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
+        let accessibilityLabel = marker.accessibilityLabel
+        let parts = accessibilityLabel?.components(separatedBy: "_")
+        
+        if parts?[0] == "pin"
+        {
+            let data = pins[Int((parts?[1])!)!]
+            let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+            ivc.data = data
+            self.present(ivc, animated: true, completion: { _ in })
+
+        }
+        
+       return true
+    }
+    
+    
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
         if AuthApi.isNewUser(){
             AuthApi.setNewUser()
@@ -662,6 +685,35 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
         }
+    }
+    
+    func fetchPins()
+    {
+        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                for (key,_) in (value)!
+                {
+                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
+
+                    let position = CLLocationCoordinate2D(latitude: Double(data.coordinates.latitude), longitude: Double(data.coordinates.longitude))
+                    let marker = GMSMarker(position: position)
+                    marker.title = data.pinMessage
+                    marker.map = self.mapView
+                    marker.accessibilityLabel = "pin_\(self.pins.count)"
+                    self.pins.append(data)
+                    
+//                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+//                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+//                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
+//                    ivc.data = data
+//                    self.present(ivc, animated: true, completion: { _ in })
+                  
+                }
+            }
+        })
+
     }
     
     func showPopup(){
