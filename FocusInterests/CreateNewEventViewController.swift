@@ -35,7 +35,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var eventTimeTextField: UITextField!
+    @IBOutlet weak var eventEndTimeTextField: UITextField!
     @IBOutlet weak var eventDescriptionTextView: UITextView!
+    
     @IBOutlet weak var interestTableView: UITableView!
     @IBOutlet weak var publicOrPrivateSwitch: UISwitch!
     @IBOutlet weak var guestSettingsStackView: UIStackView!
@@ -94,7 +96,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func setTextFieldDelegates(){
-        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField].map{$0.delegate = self}
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventEndTimeTextField].map{$0.delegate = self}
     }
     
     @IBAction func PrivOrPubSwtchChanged(_ sender: UISwitch) {
@@ -177,9 +179,10 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                     return
                 }
                 
+                let endTime = eventEndTimeTextField.text
                 
                 self.event = Event(title: name, description: "", fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"))
-            
+                self.event?.setEndTime(endTime: endTime!)
             }
             
             Event.cacheEvent(event: self.event!)
@@ -187,7 +190,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             destination.event = self.event
             
             
-            let _ = [eventNameTextField, eventDateTextField, eventTimeTextField, locationTextField].map{$0.text = nil}
+            let _ = [eventNameTextField, eventDateTextField, eventTimeTextField, locationTextField, eventEndTimeTextField].map{$0.text = nil}
         }
     }
     
@@ -230,7 +233,11 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func addEventTime(_ sender: UITextField) {
-        showTimePicker()
+        showStartTimePicker()
+    }
+    
+    @IBAction func addEventEndTime(_ sender: UITextField) {
+        showEndTimePicker()
     }
     
     func showDatePicker(){
@@ -242,13 +249,23 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         eventDateTextField.inputView = datePicker
     }
     
-    func showTimePicker(){
+    func showStartTimePicker(){
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(timeSelected))
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(startTimeSelected))
         toolbar.setItems([done], animated: false)
-        eventTimeTextField.inputAccessoryView = toolbar
-        eventTimeTextField.inputView = timePicker
+        self.eventTimeTextField.inputAccessoryView = toolbar
+        self.eventTimeTextField.inputView = timePicker
+        
+    }
+    func showEndTimePicker(){
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(endTimeSelected))
+        toolbar.setItems([done], animated: false)
+        self.eventEndTimeTextField.inputAccessoryView = toolbar
+        self.eventEndTimeTextField.inputView = timePicker
+        
     }
     
     func dateSelected(){
@@ -256,24 +273,31 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.view.endEditing(true)
     }
     
-    func timeSelected(){
+    func startTimeSelected(){
         self.eventTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
         self.view.endEditing(true)
     }
     
+    func endTimeSelected(){
+        self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
+        self.view.endEditing(true)
+    }
+    
     func formatTextFields(){
-        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventDescriptionTextView].map{
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventEndTimeTextField, eventDescriptionTextView].map{
             self.addRoundBorder(view: $0)
         }
         
         eventDateTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Date")
         locationTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Location")
-        eventTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Time")
+        eventTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Start Time")
         eventNameTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Event Name")
+        eventEndTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "End Time")
         
         eventDateTextField.setRightIcon(iconString: "Calendar-50")
         locationTextField.setRightIcon(iconString: "location")
         eventTimeTextField.setRightIcon(iconString: "Clock-25")
+        eventEndTimeTextField.setRightIcon(iconString: "Clock-25")
     }
     
     func formatPlaceholder(placeholder text: String) -> NSAttributedString {

@@ -23,6 +23,7 @@ class Event: NSObject, NSCoding{
     var attendeeCount = 0
     var category: String?
     var image_url: String? = nil
+    var endTime: String = ""
     
     init(title: String, description: String, fullAddress: String?, shortAddress: String?, latitude: String?, longitude: String?, date: String, creator: String?, id: String? = nil, category: String?) {
         self.title = title
@@ -48,12 +49,17 @@ class Event: NSObject, NSCoding{
             "latitude": self.latitude!,
             "longitude": self.longitude!,
             "date": self.date!,
+            "endtime": self.endTime,
             "creator": self.creator!,
             "interest": self.category!
         ] as [String : String]
         newEvent.setValue(event)
         
         return newEvent.key
+    }
+    
+    func setEndTime(endTime: String){
+        self.endTime = endTime
     }
     
     func setAttendessCount(count: Int){
@@ -76,6 +82,8 @@ class Event: NSObject, NSCoding{
         self.id = decoder.decodeObject(forKey: "id") as? String ?? ""
         self.attendeeCount = decoder.decodeObject(forKey: "attendeeCount") as? Int ?? 0
         self.category = decoder.decodeObject(forKey: "category") as? String ?? ""
+        self.endTime = decoder.decodeObject(forKey: "endTime") as? String ?? ""
+        
     }
     
     func encode(with coder: NSCoder) {
@@ -90,6 +98,7 @@ class Event: NSObject, NSCoding{
         coder.encode(self.id, forKey: "id")
         coder.encode(self.attendeeCount, forKey: "attendeeCount")
         coder.encode(self.category, forKey: "category")
+        coder.encode(self.endTime, forKey: "endTime")
     }
     
     static func cacheEvent(event: Event){
