@@ -701,6 +701,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     let marker = GMSMarker(position: position)
                     marker.title = data.pinMessage
                     marker.map = self.mapView
+                    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+                    image.image = UIImage(named: "pinner")
+                    marker.iconView = image
                     marker.accessibilityLabel = "pin_\(self.pins.count)"
                     self.pins.append(data)
                     
