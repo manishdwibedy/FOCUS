@@ -219,14 +219,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 infoWindow.image.setIndicatorStyle(.gray)
             }
             
-            infoWindow.category.text =  "\(event.category) ●" ?? "No category"
-            
             infoWindow.distance.text = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
             
-            
-            let primaryFocus = NSMutableAttributedString(string: infoWindow.category.text!)
-            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(infoWindow.category.text?.characters.count)! - 1,length:1))
-            infoWindow.category.attributedText = primaryFocus
+            if let category = event.category{
+                infoWindow.category.text =  "\(category) ●"
+                
+                
+                
+                let primaryFocus = NSMutableAttributedString(string: infoWindow.category.text!)
+                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(infoWindow.category.text?.characters.count)! - 1,length:1))
+                infoWindow.category.attributedText = primaryFocus
+            }
+            else{
+                infoWindow.category.text = "None"
+            }
             return infoWindow
         }
         else{
