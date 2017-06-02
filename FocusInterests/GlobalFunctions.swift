@@ -120,7 +120,9 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
         if let array = events.arrayObject{
             for (_, eventJson) in events {
                 
-                let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: "")
+                let category_id = eventJson["category_id"].stringValue
+
+                let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: getInterest(eventBriteId: category_id))
                 
                 event.setImageURL(url: eventJson["logo"]["url"].stringValue
                 )
@@ -234,6 +236,32 @@ func getEventBriteToken(userCode: String, completion: @escaping (_ result: Strin
         completion(token)
         
     }
+}
+
+func getInterest(eventBriteId: String) -> String{
+    
+    for (interest, ids) in Constants.interests.eventBriteMapping{
+        let id_list = ids.components(separatedBy: ",")
+        for id in id_list{
+            if id == eventBriteId{
+                return interest
+            }
+        }
+    }
+    return ""
+}
+
+func getInterest(yelpCategory: String) -> String{
+    let yelpParent = Constants.interests.yelpParent[yelpCategory]
+    for (interest, ids) in Constants.interests.yelpMapping{
+        let id_list = ids.components(separatedBy: ",")
+        for id in id_list{
+            if id == yelpParent{
+                return interest
+            }
+        }
+    }
+    return ""
 }
 
 func getEventBriteCategories() -> String{

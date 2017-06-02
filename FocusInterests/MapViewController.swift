@@ -237,9 +237,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             infoWindow.name.text = place.name
             infoWindow.rating.text = String(place.rating)
             infoWindow.reviews.text = "(\(place.reviewCount) reviews)"
-            let category = place.categories.map(){ $0.name }
+            let category = place.categories.map(){ $0.alias }
 
-            infoWindow.category.text =  "\(category[0]) ●" 
+            
+            infoWindow.category.text =  "\(getInterest(yelpCategory: category[0])) ●" 
             let primaryFocus = NSMutableAttributedString(string: infoWindow.category.text!)
             primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(infoWindow.category.text?.characters.count)! - 1,length:1))
             infoWindow.category.attributedText = primaryFocus
