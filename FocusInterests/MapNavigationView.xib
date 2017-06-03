@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,45 +24,41 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-En-2Gc" userLabel="icons">
-                    <rect key="frame" x="10" y="25" width="355" height="50"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-En-2Gc" userLabel="icons">
+                    <rect key="frame" x="10" y="25" width="355" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleAspectFit" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzW-Ah-j3P">
-                            <rect key="frame" x="0.0" y="0.0" width="59" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="74" height="60"/>
                             <edgeInsets key="layoutMargins" top="8" left="22" bottom="8" right="8"/>
-                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                            <state key="normal" backgroundImage="User_Profile"/>
+                            <state key="normal" image="User_Profile_Dark"/>
                             <connections>
                                 <action selector="profileButtonPressed:" destination="-1" eventType="touchUpInside" id="Ff1-rb-4Ff"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd">
-                            <rect key="frame" x="99" y="0.0" width="58.5" height="50"/>
-                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                            <state key="normal" backgroundImage="Messages"/>
+                            <rect key="frame" x="94" y="0.0" width="73.5" height="60"/>
+                            <state key="normal" image="Messages_Dark"/>
                             <connections>
                                 <action selector="messagesButtonPressed:" destination="-1" eventType="touchUpInside" id="HhF-9i-eZZ"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIv-Ib-jcv">
-                            <rect key="frame" x="197.5" y="0.0" width="59" height="50"/>
-                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                            <state key="normal" backgroundImage="Search"/>
+                            <rect key="frame" x="187.5" y="0.0" width="74" height="60"/>
+                            <state key="normal" image="Search_Dark"/>
                             <connections>
                                 <action selector="searchButtonPressed:" destination="-1" eventType="touchUpInside" id="T3a-4h-zpO"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-MD-iuK">
-                            <rect key="frame" x="296.5" y="0.0" width="58.5" height="50"/>
-                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                            <state key="normal" backgroundImage="Notifications"/>
+                            <rect key="frame" x="281.5" y="0.0" width="73.5" height="60"/>
+                            <state key="normal" image="Notifications_Dark"/>
                             <connections>
                                 <action selector="notificationsButtonPressed:" destination="-1" eventType="touchUpInside" id="e6r-GR-iuC"/>
                             </connections>
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="02f-eu-E7X"/>
+                        <constraint firstAttribute="height" constant="60" id="02f-eu-E7X"/>
                     </constraints>
                 </stackView>
                 <searchBar alpha="0.0" contentMode="redraw" searchBarStyle="prominent" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clg-Ba-1dC">
@@ -88,9 +84,9 @@
         </view>
     </objects>
     <resources>
-        <image name="Messages" width="80" height="62"/>
-        <image name="Notifications" width="66" height="66"/>
-        <image name="Search" width="78" height="76"/>
-        <image name="User_Profile" width="67" height="77"/>
+        <image name="Messages_Dark" width="963" height="726"/>
+        <image name="Notifications_Dark" width="1536" height="1536"/>
+        <image name="Search_Dark" width="1536" height="1500"/>
+        <image name="User_Profile_Dark" width="1098" height="1035"/>
     </resources>
 </document>

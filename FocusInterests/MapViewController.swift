@@ -94,7 +94,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
         }
         
-    fetchPins()
+    //fetchPins()
         
         // Set up the cluster manager with default icon generator and renderer.
 //        let iconGenerator = GMUDefaultClusterIconGenerator()
@@ -481,6 +481,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let solar = Solar(for: current, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         
         if (solar?.isNighttime)!{
+            navigationView.userProfileButton.setImage(UIImage(named: "User_Profile"), for: .normal)
+            navigationView.messagesButton.setImage(UIImage(named: "Messages"), for: .normal)
+            navigationView.searchButton.setImage(UIImage(named: "Search"), for: .normal)
+            navigationView.notificationsButton.setImage(UIImage(named: "Notifications"), for: .normal)
+            
+            
             do {
                 // Set the map style by passing the URL of the local file.
                 if let styleURL = Bundle.main.url(forResource: "map_style", withExtension: "json") {
