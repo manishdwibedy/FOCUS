@@ -99,7 +99,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         navTitle.title = event?.title
         timeLabel.text = event?.date
         addressLabel.text = event?.fullAddress
-        descriptionLabel.text = event?.description
+        descriptionLabel.text = event?.eventDescription
         
         ref.child("users").child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
