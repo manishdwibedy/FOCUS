@@ -36,7 +36,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let camera = GMSCameraPosition.camera(withLatitude: data.coordinates.latitude, longitude: data.coordinates.longitude, zoom: 17)
+        let camera = GMSCameraPosition.camera(withLatitude: data.coordinates.latitude, longitude: data.coordinates.longitude, zoom: 13)
         let mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.viewForMap.frame.width, height: self.viewForMap.frame.height), camera: camera)
         mapView.delegate = self
         mapView.mapType = .normal
