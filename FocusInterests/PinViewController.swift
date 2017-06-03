@@ -111,6 +111,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         
         uberButton.setImage(UIImage(named: "uber"), for: .normal)
         uberButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        googleMapButton.setImage(UIImage(named: "maps"), for: .normal)
+        googleMapButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
     }
 
     // function which is triggered when handleTap is called
