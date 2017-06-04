@@ -50,6 +50,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getFeeds()
+        
         FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
             if dictionnary != nil {
                 let image_str = dictionnary!["image_string"] as! String

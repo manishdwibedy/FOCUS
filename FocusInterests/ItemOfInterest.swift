@@ -12,14 +12,10 @@ import UIKit
 class ItemOfInterest {
     
     var itemName: String?
-    var features: [Feature]?
-    var mainImage: UIImage?
-    var distance: String?
+    var imageURL: String?
     
-    init(itemName: String?, features: [Feature]?, mainImage: UIImage?, distance: String?) {
+    init(itemName: String?, imageURL: String?) {
         self.itemName = itemName
-        self.features = features
-        self.mainImage = mainImage
-        self.distance = distance
+        self.imageURL = imageURL
     }
 }

@@ -20,12 +20,28 @@ import Foundation
 class FocusNotification {
     
     var type: NotificationType?
-    var sender: User?
+    var sender: NotificationUser?
     var item: ItemOfInterest?
+    var time: Date?
     
-    init(type: NotificationType?, sender: User?, item: ItemOfInterest?) {
+    init(type: NotificationType?, sender: NotificationUser?, item: ItemOfInterest?, time: Date) {
         self.type = type
         self.sender = sender
         self.item = item
+        self.time = time
+    }
+}
+
+
+class NotificationUser {
+    
+    var username: String?
+    var uuid: String?
+    var imageURL: String?
+    
+    init(username: String?, uuid: String?, imageURL: String?) {
+        self.username =  username
+        self.uuid = uuid
+        self.imageURL = imageURL
     }
 }

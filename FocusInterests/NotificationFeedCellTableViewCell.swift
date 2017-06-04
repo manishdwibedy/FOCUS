@@ -26,10 +26,10 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     }
     
     func setupCell(notif: FocusNotification) {
-        self.userProfilePic.image = notif.sender?.userImage
+//        self.userProfilePic.image = notif.sender?.username
         let content = (notif.sender?.username)! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
         self.notifContent.text = content
-        self.notifImgView.image = notif.item?.mainImage
+//        self.notifImgView.image = notif.item?.imageURL
         self.timeLabel.text = "2h"
     }
     

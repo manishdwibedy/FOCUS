@@ -59,11 +59,11 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     
     func setupDummyArray() {
         
-        let notifNotif = FocusNotification(type: NotificationType.Comment, sender: User(username: "nicolas chr", uuid: "192103", userImage: nil, interests: nil) , item: ItemOfInterest(itemName: "EventDummy", features: nil, mainImage: nil, distance: nil))
+        let notifNotif = FocusNotification(type: NotificationType.Comment, sender: User(username: "nicolas chr", uuid: "192103", userImage: nil, interests: nil) , item: ItemOfInterest(itemName: "EventDummy", imageurl: ""), time: Date())
         
-        let notifInvite = FocusNotification(type: NotificationType.Invite, sender: User(username: "oliver", uuid: "192103", userImage: nil, interests: nil) , item: ItemOfInterest(itemName: "EventDummy", features: nil, mainImage: nil, distance: nil))
+        let notifInvite = FocusNotification(type: NotificationType.Invite, sender: User(username: "oliver", uuid: "192103", userImage: nil, interests: nil) , item: ItemOfInterest(itemName: "EventDummy", imageurl: ""), time: Date())
         
-        let notifFeed = FocusNotification(type: NotificationType.Going, sender: User(username: "leo jardim", uuid: "192103", userImage: nil, interests: nil) , item: ItemOfInterest(itemName: "EventDummy", features: nil, mainImage: nil, distance: nil))
+        let notifFeed = FocusNotification(type: NotificationType.Going, sender: User(username: "leo jardim", uuid: "192103", userImage: nil, interests: nil) , item: ItemOfInterest(itemName: "EventDummy", imageurl: ""), time: Date())
         
         
         self.multipleArray.insert([notifNotif, notifNotif], at: SelectedIndex.NOTIF.rawValue)

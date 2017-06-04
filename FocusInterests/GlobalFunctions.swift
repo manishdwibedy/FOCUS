@@ -214,6 +214,49 @@ func sendNotification(to id: String, title: String, body: String){
     })
 }
 
+func getFeeds(){
+    
+    let userID = "l0V17J9pQWaCbK4ZC2WVnSqwCtH3"
+    let feeds = [FocusNotification]()
+    Constants.DB.user.child(userID).observeSingleEvent(of: .value, with: { snapshot in
+        
+        
+        let user = snapshot.value as? [String : Any]
+        
+        let followers = user?["followers"] as? [String : Any]
+        let people = followers?["people"] as? [String : [String: Any]]
+        
+        for (_, follower) in people!{
+//            let followerID = follower["UID"] as! String
+//            let username = follower["username"] as! String
+            let followerID = "0wOmLiHD6jWg33qyz0DxJ0BAEDy1"
+            
+            
+            let followerUser = NotificationUser(username: "username", uuid: followerID, imageURL: "")
+            Constants.DB.pins.child(followerID).observeSingleEvent(of: .value, with: { snapshot in
+                let pin = snapshot.value as? [String : Any]
+                let time = Date(timeIntervalSince1970: pin["time"] as! Double)
+                let address = pin["formattedAddress"] as! String
+                let pinFeed = FocusNotification(type: NotificationType.Pin, sender: followerUser, item: pin, time: time)
+                self.feeds.append(pinFeed)
+            })
+            
+            
+            Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: followerID).observeSingleEvent(of: .value, with: { snapshot in
+                let event = snapshot.value as? [String : Any]
+                print(event)
+            })
+
+            Constants.DB.user.child(followerID).observeSingleEvent(of: .value, with: { snapshot in
+                let invitations = snapshot.value as? [String : Any]
+                print(invitations)
+            })
+        }
+        
+        
+    })
+}
+
 
 func getEventBriteToken(userCode: String, completion: @escaping (_ result: String) -> Void){
     
