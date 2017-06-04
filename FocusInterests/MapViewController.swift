@@ -36,6 +36,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var events = [Event]()
     var places = [Place]()
     var placeMapping = [String: Place]()
+    var hasCustomProfileImage = false
     
     var pins = [pinData]()
     
@@ -49,6 +50,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
+            if dictionnary != nil {
+                let image_str = dictionnary!["image_string"] as! String
+                if image_str.characters.count > 0{
+                    self.navigationView.userProfileButton.sd_setImage(with: URL(string: image_str), for: .normal)
+                    hasCustomProfileImage = true
+                }
+                
+                
+            }
+            
+        }
+            
         //webView.isHidden = true
         if AuthApi.getEventBriteToken() == nil{
             let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
@@ -481,7 +495,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let solar = Solar(for: current, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         
         if (solar?.isNighttime)!{
-            navigationView.userProfileButton.setImage(UIImage(named: "User_Profile"), for: .normal)
+            
+            if !hasCustomProfileImage{
+                navigationView.userProfileButton.setImage(UIImage(named: "User_Profile"), for: .normal)    
+            }
+            
             navigationView.messagesButton.setImage(UIImage(named: "Messages"), for: .normal)
             navigationView.searchButton.setImage(UIImage(named: "Search"), for: .normal)
             navigationView.notificationsButton.setImage(UIImage(named: "Notifications"), for: .normal)
