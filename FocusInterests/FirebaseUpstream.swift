@@ -88,9 +88,9 @@ class FirebaseUpstream {
         
         // ADDED FROM VIEW
         if let name = focusUser.name {
-            dict["name"] = name as AnyObject
+            dict["fullname"] = name as AnyObject
         } else {
-            dict["name"] = "" as AnyObject
+            dict["fullname"] = "" as AnyObject
         }
         if let website = focusUser.website {
             dict["website"] = website as AnyObject

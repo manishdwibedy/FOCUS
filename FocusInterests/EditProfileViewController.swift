@@ -53,7 +53,7 @@ class EditProfileViewController: UIViewController {
                 let username_str = dictionnary!["username"] as? String ?? ""
                 let description_str = dictionnary!["description"] as? String ?? ""
                 let gender_str = dictionnary!["gender"] as? String ?? ""
-                let name_str = dictionnary!["name"] as? String ?? ""
+                let name_str = dictionnary!["fullname"] as? String ?? ""
                 let website_str = dictionnary!["website"] as? String ?? ""
                 //let email_str = dictionnary!["email"] as? String ?? ""
                 //let phone_str = dictionnary!["phone_nbr"] as? String ?? ""
