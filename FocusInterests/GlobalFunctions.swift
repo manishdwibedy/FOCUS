@@ -185,13 +185,13 @@ func getDistance(fromLocation: CLLocation, toLocation: CLLocation) -> String{
 func sendNotification(to id: String, title: String, body: String){
     let url = "http://focus-notifications.3hwampgg8c.us-west-2.elasticbeanstalk.com/sendMessage"
     
-    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/notifications").childByAutoId().setValue([
+    Constants.DB.user.child("\(id)/notifications").childByAutoId().setValue([
         "title": title,
         "body": body,
         "time": 1
         ])
     
-    Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+    Constants.DB.user.child(id).observeSingleEvent(of: .value, with: { snapshot in
         
         
         let user = snapshot.value as? [String : Any] ?? [:]

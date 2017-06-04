@@ -13,4 +13,9 @@ extension UIButton{
         self.layer.cornerRadius = CGFloat(radius)
         self.clipsToBounds = true
     }
+    
+    func roundButton(){
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = self.frame.width/2
+    }
 }

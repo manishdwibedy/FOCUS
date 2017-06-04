@@ -55,7 +55,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 let image_str = dictionnary!["image_string"] as! String
                 if image_str.characters.count > 0{
                     self.navigationView.userProfileButton.sd_setImage(with: URL(string: image_str), for: .normal)
-                    hasCustomProfileImage = true
+                    self.hasCustomProfileImage = true
+                    self.navigationView.userProfileButton.roundButton()
                 }
                 
                 
@@ -108,7 +109,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
         }
         
-    //fetchPins()
+        fetchPins()
         
         // Set up the cluster manager with default icon generator and renderer.
 //        let iconGenerator = GMUDefaultClusterIconGenerator()
@@ -497,7 +498,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if (solar?.isNighttime)!{
             
             if !hasCustomProfileImage{
-                navigationView.userProfileButton.setImage(UIImage(named: "User_Profile"), for: .normal)    
+                navigationView.userProfileButton.setImage(UIImage(named: "User_Profile"), for: .normal)
             }
             
             navigationView.messagesButton.setImage(UIImage(named: "Messages"), for: .normal)
