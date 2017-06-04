@@ -40,6 +40,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.filtered = places
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {

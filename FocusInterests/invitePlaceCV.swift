@@ -35,8 +35,10 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
                 for (key,_) in value!
                 {
                     let newData = inviteData()
-                    newData.UID = (value?[key] as! NSDictionary)["firebaseUserId"] as! String
-                    self.inviteCellData.append(newData)
+                    if let UID = (value?[key] as! NSDictionary)["firebaseUserId"] as? String{
+                        newData.UID = UID
+                        self.inviteCellData.append(newData)
+                    }
                 }
             }
             
@@ -67,7 +69,9 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
         
         
          for UID in inviteUIDList{
+            var name = ""
             if type == "place"{
+                name = (place?.name)!
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in 
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
@@ -77,6 +81,7 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
             Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
             }
             else{
+                name = (event?.title)!
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
@@ -87,6 +92,19 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
             }
             
              Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!])
+            
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+                
+                let user = snapshot.value as? [String : Any] ?? [:]
+                
+                let username = user["username"] as? String
+                
+                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)")
+                
+            })
+
+            
+            
         }
         
         self.dismiss(animated: true, completion: nil)
