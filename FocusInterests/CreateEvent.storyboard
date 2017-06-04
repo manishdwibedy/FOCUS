@@ -54,7 +54,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
-                                        <rect key="frame" x="86" y="490" width="204" height="55"/>
+                                        <rect key="frame" x="86" y="551" width="204" height="55"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wNf-XX-soV">
                                                 <rect key="frame" x="0.0" y="0.0" width="132" height="25"/>
@@ -106,7 +106,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-56-fhv" userLabel="textField stackViews">
-                                        <rect key="frame" x="9" y="20" width="357" height="422"/>
+                                        <rect key="frame" x="9" y="20" width="357" height="483"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SUQ-U7-3Hm">
                                                 <rect key="frame" x="0.0" y="0.0" width="357" height="45"/>
@@ -182,8 +182,15 @@
                                                     <action selector="addEventEndTime:" destination="3TX-Ww-Aks" eventType="touchDown" id="BGv-H7-vqI"/>
                                                 </connections>
                                             </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6ez-1O-RJe">
+                                                <rect key="frame" x="0.0" y="352" width="357" height="45"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            </textField>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jhD-9V-7l9">
-                                                <rect key="frame" x="0.0" y="352" width="357" height="70"/>
+                                                <rect key="frame" x="0.0" y="413" width="357" height="70"/>
                                                 <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="uGk-kp-fEa"/>
@@ -202,12 +209,14 @@
                                             <constraint firstItem="SUQ-U7-3Hm" firstAttribute="width" secondItem="Z2l-7t-2Co" secondAttribute="width" id="Zwv-up-9GT"/>
                                             <constraint firstItem="VLy-M0-SHl" firstAttribute="height" secondItem="Vbf-5v-kMg" secondAttribute="height" id="ajz-O6-UIi"/>
                                             <constraint firstItem="Vbf-5v-kMg" firstAttribute="width" secondItem="Z2l-7t-2Co" secondAttribute="width" id="gas-Kj-iWY"/>
+                                            <constraint firstItem="6ez-1O-RJe" firstAttribute="width" secondItem="wEF-Wj-Vl6" secondAttribute="width" id="iZh-PR-0BP"/>
                                             <constraint firstItem="Vbf-5v-kMg" firstAttribute="height" secondItem="Z2l-7t-2Co" secondAttribute="height" id="qw1-ci-HdZ"/>
                                             <constraint firstItem="wEF-Wj-Vl6" firstAttribute="height" secondItem="VLy-M0-SHl" secondAttribute="height" id="sYD-4S-xke"/>
+                                            <constraint firstItem="6ez-1O-RJe" firstAttribute="height" secondItem="wEF-Wj-Vl6" secondAttribute="height" id="xv7-WN-TOI"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="im7-yd-Slf" userLabel="interestStackView">
-                                        <rect key="frame" x="10" y="561" width="356" height="241"/>
+                                        <rect key="frame" x="10" y="622" width="356" height="241"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwe-FK-Q1t">
                                                 <rect key="frame" x="133" y="0.0" width="90.5" height="33"/>
@@ -312,6 +321,7 @@
                         <outlet property="eventDescriptionTextView" destination="jhD-9V-7l9" id="XNB-hN-u0X"/>
                         <outlet property="eventEndTimeTextField" destination="wEF-Wj-Vl6" id="Qri-ix-iXw"/>
                         <outlet property="eventNameTextField" destination="SUQ-U7-3Hm" id="VKn-jV-rK2"/>
+                        <outlet property="eventPriceTextView" destination="6ez-1O-RJe" id="0WJ-OP-cYQ"/>
                         <outlet property="eventTimeTextField" destination="VLy-M0-SHl" id="WG2-3G-huo"/>
                         <outlet property="guestListBttn" destination="Gh9-Vi-Du2" id="2AE-Ud-0Y8"/>
                         <outlet property="guestSettingsStackView" destination="jvR-p8-idX" id="RR2-Dt-eEq"/>

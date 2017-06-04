@@ -1,4 +1,4 @@
-//
+   //
 //  CreateNewEventViewController.swift
 //  FocusInterests
 //
@@ -36,7 +36,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var eventTimeTextField: UITextField!
     @IBOutlet weak var eventEndTimeTextField: UITextField!
+    @IBOutlet weak var eventPriceTextView: UITextField!
     @IBOutlet weak var eventDescriptionTextView: UITextView!
+    
     
     @IBOutlet weak var interestTableView: UITableView!
     @IBOutlet weak var publicOrPrivateSwitch: UISwitch!
@@ -83,6 +85,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             eventDateTextField.text = dateTime?[0]
             eventTimeTextField.text = dateTime?[1]
             eventEndTimeTextField.text = cached.endTime
+            eventPriceTextView.text = String(describing: cached.price)
             
             let interests = cached.category?.components(separatedBy: ",")
             
@@ -97,7 +100,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func setTextFieldDelegates(){
-        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventEndTimeTextField].map{$0.delegate = self}
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventEndTimeTextField, eventPriceTextView].map{$0.delegate = self}
     }
     
     @IBAction func PrivOrPubSwtchChanged(_ sender: UISwitch) {
@@ -182,7 +185,10 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                 
                 let endTime = eventEndTimeTextField.text
                 
+                let price = eventPriceTextView.text
+                
                 self.event = Event(title: name, description: "", fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"))
+                self.event?.setPrice(price: Double(price!)!)
                 self.event?.setEndTime(endTime: endTime!)
             }
             
@@ -191,7 +197,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             destination.event = self.event
             
             
-            let _ = [eventNameTextField, eventDateTextField, eventTimeTextField, locationTextField, eventEndTimeTextField].map{$0.text = nil}
+            let _ = [eventNameTextField, eventDateTextField, eventTimeTextField, locationTextField, eventEndTimeTextField, eventPriceTextView].map{$0.text = nil}
         }
     }
     
@@ -285,7 +291,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func formatTextFields(){
-        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventEndTimeTextField, eventDescriptionTextView].map{
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventEndTimeTextField, eventDescriptionTextView, eventPriceTextView].map{
             self.addRoundBorder(view: $0)
         }
         
@@ -294,11 +300,13 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         eventTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Start Time")
         eventNameTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Event Name")
         eventEndTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "End Time")
+        eventPriceTextView.attributedPlaceholder = formatPlaceholder(placeholder: "Price")
         
         eventDateTextField.setRightIcon(iconString: "Calendar-50")
         locationTextField.setRightIcon(iconString: "location")
         eventTimeTextField.setRightIcon(iconString: "Clock-25")
         eventEndTimeTextField.setRightIcon(iconString: "Clock-25")
+        eventPriceTextView.setRightIcon(iconString: "price")
     }
     
     func formatPlaceholder(placeholder text: String) -> NSAttributedString {
