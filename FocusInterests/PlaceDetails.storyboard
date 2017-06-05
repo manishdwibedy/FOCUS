@@ -189,24 +189,21 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8l-6K-QW5">
-                                                <rect key="frame" x="112.5" y="51" width="150" height="20"/>
+                                                <rect key="frame" x="87.5" y="51" width="200" height="20"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4P-hB-7gQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="20"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="L2b-N1-oJs"/>
+                                                            <constraint firstAttribute="width" constant="80" id="L2b-N1-oJs"/>
                                                         </constraints>
                                                         <state key="normal" title="Follow">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1A-cq-uUh">
-                                                        <rect key="frame" x="90" y="0.0" width="60" height="20"/>
+                                                        <rect key="frame" x="120" y="0.0" width="80" height="20"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="M8U-Pq-AYu"/>
-                                                        </constraints>
                                                         <state key="normal" title="Review">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
@@ -220,7 +217,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="e4P-hB-7gQ" secondAttribute="bottom" id="SCG-or-FnC"/>
                                                     <constraint firstItem="e4P-hB-7gQ" firstAttribute="top" secondItem="k8l-6K-QW5" secondAttribute="top" id="byB-d6-P0a"/>
                                                     <constraint firstItem="e4P-hB-7gQ" firstAttribute="width" secondItem="A1A-cq-uUh" secondAttribute="width" id="iT2-GJ-0ap"/>
-                                                    <constraint firstAttribute="width" constant="150" id="nkP-TO-Ipd"/>
+                                                    <constraint firstAttribute="width" constant="200" id="nkP-TO-Ipd"/>
                                                     <constraint firstItem="A1A-cq-uUh" firstAttribute="top" secondItem="k8l-6K-QW5" secondAttribute="top" id="qgU-wz-16z"/>
                                                     <constraint firstItem="e4P-hB-7gQ" firstAttribute="leading" secondItem="k8l-6K-QW5" secondAttribute="leading" id="xWb-FI-pxu"/>
                                                 </constraints>
