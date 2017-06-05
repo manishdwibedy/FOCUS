@@ -186,10 +186,15 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                 
                 let endTime = eventEndTimeTextField.text
                 
-                let price = eventPriceTextView.text
+                
                 
                 self.event = Event(title: name, description: "", fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"))
-                self.event?.setPrice(price: Double(price!)!)
+                
+                let price = eventPriceTextView.text
+                if (price?.characters.count)! > 0{
+                    self.event?.setPrice(price: Double(price!)!)    
+                }
+                
                 self.event?.setEndTime(endTime: endTime!)
             }
             
