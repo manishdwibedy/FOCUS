@@ -379,13 +379,13 @@
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
-                                            <barButtonItem title="Setting" id="yDE-Mq-Jva">
+                                            <barButtonItem image="setting" id="yDE-Mq-Jva">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <action selector="settingsButtonTapped:" destination="cU2-hP-1h7" id="fz9-wf-J8y"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem systemItem="edit" id="zfE-8Q-VOK">
+                                            <barButtonItem image="edit-profile" style="plain" id="zfE-8Q-VOK">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <segue destination="fzK-Fg-Tt6" kind="show" id="dP1-VZ-S5U"/>
@@ -759,5 +759,7 @@
     <resources>
         <image name="BackArrow" width="1614" height="960"/>
         <image name="UserPhoto" width="102" height="102"/>
+        <image name="edit-profile" width="30" height="30"/>
+        <image name="setting" width="30" height="30"/>
     </resources>
 </document>
