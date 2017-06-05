@@ -85,12 +85,12 @@ class UserProfileViewController: UIViewController {
     
     func displayUserData() {
         FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
-            if dictionnary != nil {
-                print(dictionnary!)
-                let username_str = dictionnary!["username"] as? String ?? ""
-                let description_str = dictionnary!["description"] as? String ?? ""
-                let image_string = dictionnary!["image_string"] as? String ?? ""
-                let fullname = dictionnary!["fullname"] as? String ?? ""
+            if let dictionnary = dictionnary {
+                print(dictionnary)
+                let username_str = dictionnary["username"] as? String ?? ""
+                let description_str = dictionnary["description"] as? String ?? ""
+                let image_string = dictionnary["image_string"] as? String ?? ""
+                let fullname = dictionnary["fullname"] as? String ?? ""
                 
                 self.userName.text = username_str
                 self.descriptionText.text = description_str
