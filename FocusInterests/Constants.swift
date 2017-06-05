@@ -1560,9 +1560,9 @@ struct Constants {
     }
     
     struct dummyItemsOInterest {
-        public static let item1 = ItemOfInterest(itemName: "Lalapalooza", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature5], mainImage: UIImage(named: "pumpkins"), distance: "3.4 mi")
-        public static let item2 = ItemOfInterest(itemName: "Sado County Auto Show", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature5], mainImage: UIImage(named: "Humes"), distance: "5.0 mi")
-        public static let item3 = ItemOfInterest(itemName: "Apiary Convention", features: [Constants.dummyFeatures.feature1, Constants.dummyFeatures.feature6], mainImage: UIImage(named: "Shroom"), distance: "3.4 mi")
+//        public static let item1 = ItemOfInterest(itemName: "Lalapalooza", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature5], mainImage: UIImage(named: "pumpkins"), distance: "3.4 mi")
+//        public static let item2 = ItemOfInterest(itemName: "Sado County Auto Show", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature5], mainImage: UIImage(named: "Humes"), distance: "5.0 mi")
+//        public static let item3 = ItemOfInterest(itemName: "Apiary Convention", features: [Constants.dummyFeatures.feature1, Constants.dummyFeatures.feature6], mainImage: UIImage(named: "Shroom"), distance: "3.4 mi")
     }
     
     struct dummyUsers {
@@ -1590,9 +1590,9 @@ struct Constants {
     
     struct notifications {
        
-        public static let notification1 = FocusNotification(type: NotificationType.Invite, sender: Constants.dummyUsers.al, item: Constants.dummyItemsOInterest.item2)
-        public static let notification2 = FocusNotification(type: NotificationType.Like, sender: Constants.dummyUsers.mary, item: Constants.dummyItemsOInterest.item1)
-        public static let notification3 = FocusNotification(type: NotificationType.Tag, sender: Constants.dummyUsers.yoon, item: Constants.dummyItemsOInterest.item3)
+//        public static let notification1 = FocusNotification(type: NotificationType.Invite, sender: Constants.dummyUsers.al, item: Constants.dummyItemsOInterest.item2)
+//        public static let notification2 = FocusNotification(type: NotificationType.Like, sender: Constants.dummyUsers.mary, item: Constants.dummyItemsOInterest.item1)
+//        public static let notification3 = FocusNotification(type: NotificationType.Tag, sender: Constants.dummyUsers.yoon, item: Constants.dummyItemsOInterest.item3)
     }
     
     struct settings {

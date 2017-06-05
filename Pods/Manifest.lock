@@ -144,7 +144,7 @@ PODS:
   - Solar (2.0.0)
   - SwiftyJSON (3.1.4)
   - TwitterCore (3.0.0)
-  - TwitterKit (3.0.1):
+  - TwitterKit (3.0.3):
     - TwitterCore (>= 3.0.0)
 
 DEPENDENCIES:
@@ -219,7 +219,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   Gallery: 925b8133efa9d8fe933918f242b64110c6478b98
-  Google: d0932824c5b97c96be489aa6f4e8cd6c294d637d
+  Google: d536877ec602555b755cc28ce6fed104825c693c
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
   GoogleNetworkingUtilities: 3edd3a8161347494f2da60ea0deddc8a472d94cb
@@ -242,7 +242,7 @@ SPEC CHECKSUMS:
   Solar: ea092f7660c1b58d2b754227decb61a1c6710826
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
-  TwitterKit: a47394816df2a7c36e1544b629c25c927b414724
+  TwitterKit: 202404be71aadd81d19f677b34579fe77d9cb67e
 
 PODFILE CHECKSUM: dbb9ee0dac5bd4151954d3c70767dea6d1d33dc1
 

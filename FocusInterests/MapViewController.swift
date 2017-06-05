@@ -50,7 +50,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getFeeds()
+        
         
         FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
             if dictionnary != nil {
@@ -579,13 +579,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func userProfileClicked() {
         
-        
         let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
         self.present(VC, animated:true, completion:nil)
     }
     
     func messagesClicked() {
+        getFeeds()
+        
+        
         let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
         
 //        let newPerson = Event(title: "t", description: "d", fullAddress: "", shortAddress: "", latitude: "", longitude: "", date: "", creator: "", category: "")

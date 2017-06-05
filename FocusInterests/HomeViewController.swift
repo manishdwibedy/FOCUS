@@ -35,12 +35,12 @@ class ViewController: BaseViewController, UITableViewDataSource, UITableViewDele
         let cellNib = UINib(nibName: "HomViewControllerCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "HomeCell")
         
-        let item1 = ItemOfInterest(itemName: "Barre Burger Bar", features: [Constants.dummyFeatures.feature2, Constants.dummyFeatures.feature4, Constants.dummyFeatures.feature6], mainImage: UIImage(named: "Shroom"), distance: "8.5 mi")
-        let item2 = ItemOfInterest(itemName: "Jill's Pottery Studio", features: [Constants.dummyFeatures.feature5, Constants.dummyFeatures.feature1], mainImage: UIImage(named: "lady"), distance: "3.9 mi")
-        let item3 = ItemOfInterest(itemName: "The Fireworks Store", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature4, Constants.dummyFeatures.feature5], mainImage: UIImage(named: "tinyB"), distance: "0.5 mi")
-        let item4 = ItemOfInterest(itemName: "Downtown Ducati", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature1], mainImage: UIImage(named: "Humes"), distance: "8.4 mi")
+//        let item1 = ItemOfInterest(itemName: "Barre Burger Bar", features: [Constants.dummyFeatures.feature2, Constants.dummyFeatures.feature4, Constants.dummyFeatures.feature6], mainImage: UIImage(named: "Shroom"), distance: "8.5 mi")
+//        let item2 = ItemOfInterest(itemName: "Jill's Pottery Studio", features: [Constants.dummyFeatures.feature5, Constants.dummyFeatures.feature1], mainImage: UIImage(named: "lady"), distance: "3.9 mi")
+//        let item3 = ItemOfInterest(itemName: "The Fireworks Store", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature4, Constants.dummyFeatures.feature5], mainImage: UIImage(named: "tinyB"), distance: "0.5 mi")
+//        let item4 = ItemOfInterest(itemName: "Downtown Ducati", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature1], mainImage: UIImage(named: "Humes"), distance: "8.4 mi")
         
-        items = [item1, item2, item3, item4]
+//        items = [item1, item2, item3, item4]
         
         let nav = self.tabBarController as? CustomTabController
         nav?.setBarColor()

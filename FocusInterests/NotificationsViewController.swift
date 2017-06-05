@@ -18,7 +18,7 @@ class NotificationsViewController: BaseViewController, UITableViewDataSource, UI
         
         self.title = "NOTIFICATIONS"
         
-        notifications = [Constants.notifications.notification1, Constants.notifications.notification2, Constants.notifications.notification3]
+//        notifications = [Constants.notifications.notification1, Constants.notifications.notification2, Constants.notifications.notification3]
         
         navigationController?.navigationBar.barTintColor = UIColor.primaryGreen()
 

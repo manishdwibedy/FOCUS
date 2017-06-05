@@ -27,7 +27,7 @@ class NotificationsCellTableViewCell: UITableViewCell {
     }
     
     func configure(notification: FocusNotification) {
-        self.cellImage.image = notification.sender?.userImage
+//        self.cellImage.image = notification.sender?.userImage
         self.cellImage.roundedImage()
         self.cellTitleLabel.text = notification.sender?.username!
         self.cellActionLabel.text = notification.type?.rawValue

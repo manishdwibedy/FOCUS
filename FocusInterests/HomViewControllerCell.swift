@@ -28,11 +28,11 @@ class HomViewControllerCell: UITableViewCell {
     }
     
     func configure(itemOfInterest: ItemOfInterest) {
-        self.mainImage.image = itemOfInterest.mainImage
+        //self.mainImage.image = itemOfInterest.mainImage
         self.mainImage.roundedImage()
         self.itemName.text = itemOfInterest.itemName!
-        self.itemActivities.text = featuresToString(features: itemOfInterest.features!)
-        self.itemDistance.text = itemOfInterest.distance!
+//        self.itemActivities.text = featuresToString(features: itemOfInterest.features!)
+//        self.itemDistance.text = itemOfInterest.distance!
         self.imageButton.image = UIImage(named: "addUser")
         imageButton.roundedImage()
     }

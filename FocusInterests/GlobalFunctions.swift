@@ -217,7 +217,16 @@ func sendNotification(to id: String, title: String, body: String){
 func getFeeds(){
     
     let userID = "l0V17J9pQWaCbK4ZC2WVnSqwCtH3"
-    let feeds = [FocusNotification]()
+    var pins = [FocusNotification]()
+    var events = [FocusNotification]()
+    var invitations_event = [FocusNotification]()
+    
+    var pinCount = 0
+    var followerCount = 0
+    var invitationCount = 0
+    var eventCount = 0
+    var totalInvitation = 0
+    
     Constants.DB.user.child(userID).observeSingleEvent(of: .value, with: { snapshot in
         
         
@@ -226,34 +235,134 @@ func getFeeds(){
         let followers = user?["followers"] as? [String : Any]
         let people = followers?["people"] as? [String : [String: Any]]
         
+        followerCount = (people?.count)!
         for (_, follower) in people!{
 //            let followerID = follower["UID"] as! String
 //            let username = follower["username"] as! String
-            let followerID = "0wOmLiHD6jWg33qyz0DxJ0BAEDy1"
+            let imageURL = follower["imageURL"] as? String
+            let followerID = "b7VUFfTst8NqP6Wbv1zdnu8fvHl1"
             
             
-            let followerUser = NotificationUser(username: "username", uuid: followerID, imageURL: "")
+            let followerUser = NotificationUser(username: "username", uuid: followerID, imageURL: imageURL)
             Constants.DB.pins.child(followerID).observeSingleEvent(of: .value, with: { snapshot in
-                let pin = snapshot.value as? [String : Any]
-                let time = Date(timeIntervalSince1970: pin["time"] as! Double)
-                let address = pin["formattedAddress"] as! String
-                let pinFeed = FocusNotification(type: NotificationType.Pin, sender: followerUser, item: pin, time: time)
-                self.feeds.append(pinFeed)
+                let pin11 = snapshot.value as? [String : Any]
+                
+                if let pin = pin11{
+                    let time = Date(timeIntervalSince1970: pin["time"] as! Double)
+                    let address = pin["formattedAddress"] as! String
+                    let place = ItemOfInterest(itemName: address, imageURL: nil)
+                    let pinFeed = FocusNotification(type: NotificationType.Pin, sender: followerUser, item: place, time: time)
+                    pins.append(pinFeed)
+                }
+                
+                pinCount += 1
+                if pinCount == followerCount{
+                    print("pin done \(pinCount)")
+                }
             })
             
             
             Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: followerID).observeSingleEvent(of: .value, with: { snapshot in
-                let event = snapshot.value as? [String : Any]
-                print(event)
+                let eventInfo = snapshot.value as? [String : Any]
+                
+                if let eventInfo = eventInfo{
+                    for (id, event) in eventInfo{
+                        let info = event as? [String:Any]
+                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+//                        MMM dd, hh:mm
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MMM d, h:mm a"
+                        
+                        let time = dateFormatter.date(from: event.date!)
+                        let address = event.shortAddress
+                        let place = ItemOfInterest(itemName: address, imageURL: nil)
+                        if let time = time{
+                            let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: time)
+                            events.append(eventFeed)
+    
+                        }
+                        
+                    
+                    }
+                }
+                eventCount += 1
+                if eventCount == followerCount{
+                    print("event done \(eventCount)")
+                    print(events.count)
+                }
             })
 
             Constants.DB.user.child(followerID).observeSingleEvent(of: .value, with: { snapshot in
-                let invitations = snapshot.value as? [String : Any]
-                print(invitations)
+                let data = snapshot.value as? [String : Any]
+                
+                if let invitations = data?["invitations"] as? [String:Any]{
+                    invitationCount += invitations.count
+                    if let event = invitations["event"] as? [String:[String:Any]]{
+                        
+                        
+                        for (id,invite) in event{
+                            let id = invite["ID"]  as! String
+                            
+                            
+                            Constants.DB.event.child(id).observeSingleEvent(of: .value, with: { snapshot in
+                                let info = snapshot.value as? [String : Any]
+                                
+                                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+                                
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.dateFormat = "MMM d, h:mm a"
+                                
+                                let time = dateFormatter.date(from: event.date!)
+                                let address = event.shortAddress
+                                let place = ItemOfInterest(itemName: address, imageURL: nil)
+                                if let time = time{
+                                    let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: time)
+                                    invitations_event.append(eventFeed)
+                                    
+                                }
+                                invitationCount += 1
+                                if invitationCount == totalInvitation{
+                                    print("invitation done \(invitationCount)")
+                                }
+                            })
+                            
+                        }
+                    }
+                    
+//                    if let place = invitations["place"] as? [String:[String:Any]]{
+//                        
+//                        
+//                        for (id,invite) in place{
+//                            let id = invite["ID"]  as! String
+                    
+                            
+//                            Constants.DB.place.child(id).observeSingleEvent(of: .value, with: { snapshot in
+//                                let info = snapshot.value as? [String : Any]
+//                                
+//                                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+//                                
+//                                let dateFormatter = DateFormatter()
+//                                dateFormatter.dateFormat = "MMM d, h:mm a"
+//                                
+//                                let time = dateFormatter.date(from: event.date!)
+//                                let address = event.shortAddress
+//                                let place = ItemOfInterest(itemName: address, imageURL: nil)
+//                                if let time = time{
+//                                    let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: time)
+//                                    invitations.append(eventFeed)
+//                                    
+//                                }
+//                                invitationCount += 1
+//                                if invitationCount == totalInvitation{
+//                                    print("invitation done \(invitationCount)")
+//                                }
+//                            })
+//                            
+//                        }
+//                    }
+                }
             })
         }
-        
-        
     })
 }
 
