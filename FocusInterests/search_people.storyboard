@@ -40,10 +40,10 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J43-bq-Hr0">
-                                <rect key="frame" x="10" y="122" width="394" height="25"/>
+                                <rect key="frame" x="10" y="122" width="355" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgj-4F-tc5">
-                                        <rect key="frame" x="10" y="0.0" width="384" height="20"/>
+                                        <rect key="frame" x="10" y="0.0" width="345" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="w44-Od-Y43"/>
                                         </constraints>
@@ -80,7 +80,7 @@
                             <constraint firstItem="O91-5f-lIg" firstAttribute="leading" secondItem="Zxh-g3-Eqs" secondAttribute="leading" id="YFw-iR-MbZ"/>
                             <constraint firstAttribute="trailing" secondItem="O91-5f-lIg" secondAttribute="trailing" id="h42-Bk-NsB"/>
                             <constraint firstItem="PXI-1V-ZjI" firstAttribute="leading" secondItem="Zxh-g3-Eqs" secondAttribute="leading" constant="10" id="qMN-C1-co5"/>
-                            <constraint firstItem="J43-bq-Hr0" firstAttribute="trailing" secondItem="PXI-1V-ZjI" secondAttribute="trailing" constant="39" id="qpq-cQ-oTd"/>
+                            <constraint firstItem="J43-bq-Hr0" firstAttribute="trailing" secondItem="PXI-1V-ZjI" secondAttribute="trailing" id="qpq-cQ-oTd"/>
                             <constraint firstItem="J43-bq-Hr0" firstAttribute="leading" secondItem="Zxh-g3-Eqs" secondAttribute="leading" constant="10" id="vKL-0v-Csh"/>
                         </constraints>
                     </view>

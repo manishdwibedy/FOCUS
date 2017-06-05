@@ -87,7 +87,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 
                 let user = User(username: info?["username"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil)
                 
-                if user.uuid != AuthApi.getFirebaseUid(){
+                if user.uuid != AuthApi.getFirebaseUid() && user.uuid != nil{
                     self.people.append(user)
                 }
             }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xPx-tM-EtF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xPx-tM-EtF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,7 +60,7 @@
                                 <color key="sectionIndexBackgroundColor" red="0.90792702069999998" green="0.87262839240000001" blue="0.91347555049999996" alpha="0.55427486800000003" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yai-Q7-VQn">
-                                <rect key="frame" x="10" y="162" width="394" height="25"/>
+                                <rect key="frame" x="10" y="162" width="355" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnZ-Vj-jtc">
                                         <rect key="frame" x="10" y="2" width="43.5" height="17"/>
@@ -85,7 +85,7 @@
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="trailing" secondItem="z8z-95-lev" secondAttribute="trailing" id="CnO-vu-R07"/>
                             <constraint firstAttribute="trailing" secondItem="Uw4-jh-WA0" secondAttribute="trailing" id="Elz-B2-Rg1"/>
                             <constraint firstItem="yai-Q7-VQn" firstAttribute="leading" secondItem="rHJ-wx-hzQ" secondAttribute="leading" id="MaV-Mh-Kci"/>
-                            <constraint firstItem="yai-Q7-VQn" firstAttribute="trailing" secondItem="rHJ-wx-hzQ" secondAttribute="trailing" constant="39" id="QSw-fc-8Iz"/>
+                            <constraint firstItem="yai-Q7-VQn" firstAttribute="trailing" secondItem="rHJ-wx-hzQ" secondAttribute="trailing" id="QSw-fc-8Iz"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="leading" secondItem="z8z-95-lev" secondAttribute="leading" id="SOZ-2p-8s1"/>
                             <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="rHJ-wx-hzQ" secondAttribute="bottom" constant="8" id="UbY-9m-ddH"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="Wh7-vU-Ioc"/>
