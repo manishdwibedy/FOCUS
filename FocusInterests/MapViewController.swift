@@ -54,12 +54,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
             if dictionnary != nil {
-                let image_str = dictionnary!["image_string"] as! String
-                if image_str.characters.count > 0{
-                    self.navigationView.userProfileButton.sd_setImage(with: URL(string: image_str), for: .normal)
-                    self.hasCustomProfileImage = true
-                    self.navigationView.userProfileButton.roundButton()
+                if let image_str = dictionnary!["image_string"] as? String{
+                    if image_str.characters.count > 0{
+                        self.navigationView.userProfileButton.sd_setImage(with: URL(string: image_str), for: .normal)
+                        self.hasCustomProfileImage = true
+                        self.navigationView.userProfileButton.roundButton()
+                    }
                 }
+                
                 
                 
             }

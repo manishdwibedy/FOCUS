@@ -40,7 +40,7 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
     
     @IBAction func finishBttnPressed(_ sender: Any) {
         print("bttn was pressed")
-        guard let validPassword = self.passwordTextField.text else { return }
+        let validPassword = self.passwordTextField.text as! String
         switch typeOfSignUp {
         case "phone":
             let formatedString = formatPhoneString(phoneNumber: usersEmailOrPhone)
