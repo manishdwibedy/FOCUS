@@ -11,6 +11,14 @@ import UIKit
 class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, SuggestPlacesDelegate {
     var place: Place?
     
+    // basic info screen
+    @IBOutlet weak var placeNameLabel: UILabel!
+    @IBOutlet weak var costLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var reviewButton: UIButton!
+    
+    
     @IBOutlet weak var categoriesStackView: UIStackView!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityStateLabel: UILabel!
@@ -40,6 +48,18 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     
     func loadInfoScreen(place: Place){
         // Do any additional setup after loading the view.
+        
+        placeNameLabel.text = place.name
+        if place.price.characters.count == 0{
+            costLabel.text = "N.A."
+        }
+        else{
+            costLabel.text = place.price
+        }
+        
+        distanceLabel.text = "2 mi"
+        followButton.roundCorners(radius: 10)
+        reviewButton.roundCorners(radius: 10)
         
         for view in categoriesStackView.subviews{
             view.removeFromSuperview()
