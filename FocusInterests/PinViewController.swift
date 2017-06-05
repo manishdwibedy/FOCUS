@@ -18,8 +18,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var reviewButton: UIButton!
     
+    // categories
     
+    @IBOutlet weak var categoryBackground: UIView!
     @IBOutlet weak var categoriesStackView: UIStackView!
+    
+    
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityStateLabel: UILabel!
     @IBOutlet weak var streetAddress: UILabel!
@@ -60,6 +64,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         distanceLabel.text = "2 mi"
         followButton.roundCorners(radius: 10)
         reviewButton.roundCorners(radius: 10)
+        
+        
+        categoryBackground.addTopBorderWithColor(color: UIColor.white, width: 1)
+        categoryBackground.addBottomBorderWithColor(color: UIColor.white, width: 1)
         
         for view in categoriesStackView.subviews{
             view.removeFromSuperview()

@@ -147,7 +147,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYI-mS-d6G" userLabel="Categories">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOCUS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iT-yB-4Av">
                                                 <rect key="frame" x="156.5" y="5" width="62" height="21.5"/>
@@ -155,9 +155,6 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="35i-c3-WJX">
-                                                <rect key="frame" x="20" y="75" width="335" height="75"/>
-                                            </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1E4-6E-5eQ">
                                                 <rect key="frame" x="137.5" y="26" width="100" height="15"/>
                                                 <subviews>
@@ -222,24 +219,39 @@
                                                     <constraint firstItem="e4P-hB-7gQ" firstAttribute="leading" secondItem="k8l-6K-QW5" secondAttribute="leading" id="xWb-FI-pxu"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzw-eb-Hy5">
+                                                <rect key="frame" x="0.0" y="100" width="375" height="75"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="35i-c3-WJX">
+                                                        <rect key="frame" x="20" y="20" width="335" height="35"/>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="35i-c3-WJX" firstAttribute="top" secondItem="vzw-eb-Hy5" secondAttribute="top" constant="20" id="5p9-dX-EH2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="35i-c3-WJX" secondAttribute="trailing" constant="20" id="Cia-tS-6ek"/>
+                                                    <constraint firstItem="35i-c3-WJX" firstAttribute="leading" secondItem="vzw-eb-Hy5" secondAttribute="leading" constant="20" id="NNv-dB-R53"/>
+                                                    <constraint firstAttribute="bottom" secondItem="35i-c3-WJX" secondAttribute="bottom" constant="20" id="bJH-hY-WZO"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="2pk-eV-Gat"/>
+                                            <constraint firstAttribute="height" constant="175" id="2pk-eV-Gat"/>
                                             <constraint firstItem="k8l-6K-QW5" firstAttribute="top" secondItem="1E4-6E-5eQ" secondAttribute="bottom" constant="10" id="4ED-Vn-TCC"/>
                                             <constraint firstItem="1E4-6E-5eQ" firstAttribute="top" secondItem="0iT-yB-4Av" secondAttribute="bottom" constant="-0.5" id="9e7-CX-npH"/>
                                             <constraint firstItem="k8l-6K-QW5" firstAttribute="centerX" secondItem="EYI-mS-d6G" secondAttribute="centerX" id="9os-nB-yfJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="35i-c3-WJX" secondAttribute="bottom" id="B2p-YH-yWr"/>
+                                            <constraint firstItem="vzw-eb-Hy5" firstAttribute="leading" secondItem="EYI-mS-d6G" secondAttribute="leading" id="9wf-Ck-1aq"/>
                                             <constraint firstItem="1E4-6E-5eQ" firstAttribute="centerX" secondItem="EYI-mS-d6G" secondAttribute="centerX" id="BP9-se-hMK"/>
-                                            <constraint firstItem="35i-c3-WJX" firstAttribute="leading" secondItem="EYI-mS-d6G" secondAttribute="leading" constant="20" id="Z6i-Fc-LZr"/>
+                                            <constraint firstAttribute="bottom" secondItem="vzw-eb-Hy5" secondAttribute="bottom" id="NkW-ig-jrQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="vzw-eb-Hy5" secondAttribute="trailing" id="S7Q-Kz-NdT"/>
+                                            <constraint firstItem="vzw-eb-Hy5" firstAttribute="top" secondItem="k8l-6K-QW5" secondAttribute="bottom" constant="29" id="ehK-hE-6xs"/>
                                             <constraint firstItem="0iT-yB-4Av" firstAttribute="centerX" secondItem="EYI-mS-d6G" secondAttribute="centerX" id="j7h-fm-nbX"/>
-                                            <constraint firstItem="35i-c3-WJX" firstAttribute="top" secondItem="EYI-mS-d6G" secondAttribute="top" constant="75" id="lBl-3r-5a9"/>
-                                            <constraint firstAttribute="trailing" secondItem="35i-c3-WJX" secondAttribute="trailing" constant="20" id="rRO-g8-uhE"/>
                                             <constraint firstItem="0iT-yB-4Av" firstAttribute="top" secondItem="EYI-mS-d6G" secondAttribute="top" constant="5" id="tYn-6p-FTu"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLc-gV-LBV">
-                                        <rect key="frame" x="0.0" y="170" width="375" height="1000"/>
+                                        <rect key="frame" x="0.0" y="195" width="375" height="1000"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dH7-9c-Q24" userLabel="Information">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
@@ -484,6 +496,7 @@
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="categoriesStackView" destination="35i-c3-WJX" id="HyU-pz-c6h"/>
+                        <outlet property="categoryBackground" destination="vzw-eb-Hy5" id="liU-XP-4rC"/>
                         <outlet property="cityStateLabel" destination="1c3-f9-8xC" id="Tjw-d5-ech"/>
                         <outlet property="costLabel" destination="fMr-61-DKu" id="HC2-z6-7XZ"/>
                         <outlet property="distanceLabel" destination="PaM-so-Mow" id="Dvx-gn-vc5"/>
