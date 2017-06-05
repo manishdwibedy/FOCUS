@@ -757,7 +757,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BackArrow" width="24" height="41"/>
+        <image name="BackArrow" width="1614" height="960"/>
         <image name="UserPhoto" width="102" height="102"/>
     </resources>
 </document>

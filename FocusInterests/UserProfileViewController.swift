@@ -79,7 +79,6 @@ class UserProfileViewController: UIViewController {
 		userScrollView.contentSize = CGSize(width: 375, height: 1600)
         // Do any additional setup after loading the view.
         
-        self.displayUserData()
         updatePinButton.roundCorners(radius: 10)
     }
     
