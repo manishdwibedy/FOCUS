@@ -373,13 +373,22 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             controller.event = event
             self.present(controller, animated: true, completion: nil)
         }
-        else{
+        else if parts?[0] == "place"{
             let index:Int! = Int(parts![1])
             let place = self.places[index % self.places.count]
             let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
             controller.place = place
             self.present(controller, animated: true, completion: nil)
+        }
+        else
+        {
+            let data = pins[Int((parts?[1])!)!]
+            let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+            ivc.data = data
+            self.present(ivc, animated: true, completion: { _ in })
+            
         }
         
 //        let data = marker.userData as? MapCluster
@@ -437,24 +446,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
             })
         }
-    }
-    
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        
-        let accessibilityLabel = marker.accessibilityLabel
-        let parts = accessibilityLabel?.components(separatedBy: "_")
-        
-        if parts?[0] == "pin"
-        {
-            let data = pins[Int((parts?[1])!)!]
-            let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-            let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-            ivc.data = data
-            self.present(ivc, animated: true, completion: { _ in })
-
-        }
-        
-       return true
     }
     
     
