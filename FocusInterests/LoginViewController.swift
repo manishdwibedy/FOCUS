@@ -41,6 +41,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         loginView.loginBehavior = .web
         
         setUpTextFields()
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
