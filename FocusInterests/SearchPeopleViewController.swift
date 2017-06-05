@@ -75,6 +75,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
+        cell?.parentVC = self
         
         let people = filtered[indexPath.row]
         cell?.username.text = people.username

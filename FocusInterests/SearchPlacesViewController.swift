@@ -107,7 +107,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                 "latitude": location?.coordinate.latitude,
                 "longitude": location?.coordinate.longitude,
             ] as [String : Any]
-            
+            print(location?.coordinate)
             Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
                 let json = JSON(data: response.data!)
                 

@@ -211,6 +211,11 @@
 		FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF69ABFC1ED6498F0044BE51 /* inviteCell.xib */; };
 		FF7C874A1ED73310004ABB1B /* PinScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7C87491ED73310004ABB1B /* PinScreenViewController.swift */; };
 		FF7C87521ED74A8F004ABB1B /* PinImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7C87511ED74A8F004ABB1B /* PinImageCollectionViewCell.swift */; };
+		FFBF879F1EE5A855000168F5 /* InvitePeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBF879E1EE5A855000168F5 /* InvitePeopleViewController.swift */; };
+		FFBF87A21EE5B34E000168F5 /* InvitePeoplePlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBF87A01EE5B34E000168F5 /* InvitePeoplePlaceCell.swift */; };
+		FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */; };
+		FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBF87A41EE5BED0000168F5 /* InvitePeopleEventCell.swift */; };
+		FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBF87A51EE5BED0000168F5 /* InvitePeopleEventCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -484,6 +489,11 @@
 		FF69ABFC1ED6498F0044BE51 /* inviteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = inviteCell.xib; sourceTree = "<group>"; };
 		FF7C87491ED73310004ABB1B /* PinScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PinScreenViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FF7C87511ED74A8F004ABB1B /* PinImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		FFBF879E1EE5A855000168F5 /* InvitePeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePeopleViewController.swift; sourceTree = "<group>"; };
+		FFBF87A01EE5B34E000168F5 /* InvitePeoplePlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePeoplePlaceCell.swift; sourceTree = "<group>"; };
+		FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePeoplePlaceCell.xib; sourceTree = "<group>"; };
+		FFBF87A41EE5BED0000168F5 /* InvitePeopleEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePeopleEventCell.swift; sourceTree = "<group>"; };
+		FFBF87A51EE5BED0000168F5 /* InvitePeopleEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePeopleEventCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -684,6 +694,7 @@
 				FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */,
 				5B7BB1E51ED51E9E001E60FF /* SearchEventsViewController.swift */,
 				5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */,
+				FFBF879E1EE5A855000168F5 /* InvitePeopleViewController.swift */,
 				5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */,
 			);
 			name = Search;
@@ -987,6 +998,10 @@
 				5B959FE01ECBA62B00094FE6 /* InviteUserView.xib */,
 				FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */,
 				FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */,
+				FFBF87A01EE5B34E000168F5 /* InvitePeoplePlaceCell.swift */,
+				FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */,
+				FFBF87A41EE5BED0000168F5 /* InvitePeopleEventCell.swift */,
+				FFBF87A51EE5BED0000168F5 /* InvitePeopleEventCell.xib */,
 				5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */,
 				5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */,
 				5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */,
@@ -1224,6 +1239,7 @@
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
 				5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */,
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
+				FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */,
 				FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */,
 				5BAB87A41EC961AB0064E5EC /* UserProfile.storyboard in Resources */,
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
@@ -1254,6 +1270,7 @@
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
+				FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
 				5B5906481EC576CA00466AAC /* map_style.json in Resources */,
 				611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */,
@@ -1454,6 +1471,7 @@
 				5B6AFA641ED1906900A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */,
 				5B6AFA761ED1906900A82104 /* GQTPointQuadTree.m in Sources */,
+				FFBF87A21EE5B34E000168F5 /* InvitePeoplePlaceCell.swift in Sources */,
 				5B71D7071ED1837A0093A3F5 /* commentView.swift in Sources */,
 				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
 				5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */,
@@ -1470,11 +1488,13 @@
 				5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */,
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
+				FFBF879F1EE5A855000168F5 /* InvitePeopleViewController.swift in Sources */,
 				5B71D7051ED1837A0093A3F5 /* commentCell.swift in Sources */,
 				5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */,
 				5B6AFA6F1ED1906900A82104 /* GMUGeometryCollection.m in Sources */,
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
 				FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */,
+				FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */,
 				FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */,
 				D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */,
 				5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */,

@@ -114,13 +114,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
         coordinates = location.coordinate
-        print("GOT LOCATION###################################################")
-        print(coordinates)
         locationManager.stopUpdatingLocation()
-        
-        
-       
-    }
+     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
