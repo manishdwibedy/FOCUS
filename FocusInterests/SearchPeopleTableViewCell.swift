@@ -21,6 +21,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var fullName: UILabel!
 
     var ID = ""
+    var parentVC: SearchPeopleViewController!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -93,5 +94,22 @@ class SearchPeopleTableViewCell: UITableViewCell {
     }
     
     @IBAction func inviteUser(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "search_people", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople")
+        ivc.modalTransitionStyle = .crossDissolve
+        parentVC.present(ivc, animated: true, completion: { _ in })
+    
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
