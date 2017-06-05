@@ -36,6 +36,30 @@ class FirebaseDownstream {
         })
     }
     
+    func getUserNotifications(completion: @escaping ([FocusNotification]?) -> Void) {
+        let userId = AuthApi.getFirebaseUid()
+        
+        print("getUserNotification")
+
+        if let id = userId {
+            ref.child("users").child(id).child("invitations").observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? NSDictionary {
+                    var returnableNotif = [FocusNotification]()
+                    for (k, v) in value {
+                        print(k)
+                        print(v)
+                    }
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    completion(nil)
+                })
+                
+            })
+        }
+        
+    }
+    
     func getCurrentUserInterests(completion: @escaping ([Interest]?) -> Void) {
         let userId = AuthApi.getFirebaseUid()
         

@@ -50,6 +50,10 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.title = "Notifications"
         
+        FirebaseDownstream.shared.getUserNotifications { (array) in
+            print("done")
+        }
+        
         self.setupDummyArray()
         
         tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
