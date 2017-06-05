@@ -35,6 +35,8 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
 
         self.searchBar.delegate = self
         tableHeader.topCornersRounded(radius: 10)
+        
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {

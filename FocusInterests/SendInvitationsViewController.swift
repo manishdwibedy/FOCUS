@@ -37,6 +37,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
         
         friendsTableView.tableFooterView = UIView()
+        hideKeyboardWhenTappedAround()
     }
     
     func setSelectedFriends(){

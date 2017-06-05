@@ -48,7 +48,7 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         })
     
-
+        hideKeyboardWhenTappedAround()
         
     }
 

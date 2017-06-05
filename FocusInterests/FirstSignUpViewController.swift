@@ -22,6 +22,8 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
         self.phoneOrEmailTextField.delegate = self
         phoneOrEmailTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
         
+        hideKeyboardWhenTappedAround()
+        
     }
     
     @IBAction func typeOfSignUpWasSelected(_ sender: Any) {

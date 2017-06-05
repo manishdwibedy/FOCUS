@@ -37,7 +37,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.separatorInset = UIEdgeInsets.zero
 
         self.navigationController?.navigationBar.tintColor = UIColor.white
-
+        hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {

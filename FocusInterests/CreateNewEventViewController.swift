@@ -72,6 +72,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             checkInterests.append(false)
         }
         
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {

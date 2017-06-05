@@ -45,6 +45,8 @@ class RatingViewController: UIViewController, UITextViewDelegate, UITableViewDat
         }
         
         tableView.tableFooterView = UIView()
+        
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {

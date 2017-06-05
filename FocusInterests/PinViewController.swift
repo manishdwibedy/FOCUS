@@ -48,6 +48,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         placeVC?.suggestPlacesDelegate = self
         loadInfoScreen(place: self.place!)
         
+        hideKeyboardWhenTappedAround()
     }
     
     func loadInfoScreen(place: Place){

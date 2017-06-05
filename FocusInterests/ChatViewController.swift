@@ -49,6 +49,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         
         self.navigationItem.title = self.user["username"]! as? String
         super.collectionView.keyboardDismissMode = .interactive
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

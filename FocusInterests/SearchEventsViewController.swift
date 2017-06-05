@@ -42,6 +42,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         tableHeader.topCornersRounded(radius: 10)
         
         filtered = events
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {

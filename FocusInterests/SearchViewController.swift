@@ -68,6 +68,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         //tap.cancelsTouchesInView = false
         
         view.addGestureRecognizer(tap)
+        hideKeyboardWhenTappedAround()
     }
     
     //Calls this function when the tap is recognized.

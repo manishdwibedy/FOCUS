@@ -35,6 +35,8 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         passwordTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
         userNameTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
         finishButton.roundCorners(radius: 10)
+        
+        
 
     }
     

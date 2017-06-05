@@ -107,6 +107,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         
         getPhotos()
+        
 
         
     }

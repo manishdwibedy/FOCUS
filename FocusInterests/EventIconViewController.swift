@@ -25,6 +25,7 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        hideKeyboardWhenTappedAround()
     }
     
     private func chooseFromGallery(){
