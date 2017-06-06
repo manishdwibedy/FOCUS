@@ -1565,11 +1565,11 @@ struct Constants {
 //        public static let item3 = ItemOfInterest(itemName: "Apiary Convention", features: [Constants.dummyFeatures.feature1, Constants.dummyFeatures.feature6], mainImage: UIImage(named: "Shroom"), distance: "3.4 mi")
     }
     
-    struct dummyUsers {
-        public static let mary = User(username: "Amanda", uuid: "neafsh8387uh4iw4fh", userImage: UIImage(named: "FamHalloween"), interests: [Constants.interests.football, Constants.interests.bars, Constants.interests.events])
-        public static let al = User(username: "Al", uuid: "aksdjf93488743q7bp", userImage: UIImage(named: "pumpkins"), interests: [Constants.interests.furniture, Constants.interests.electronics, Constants.interests.bars])
-        public static let yoon = User(username: "Yoon", uuid: "ashf94uhw9e8hf39", userImage: UIImage(named: "Lopart"), interests: [Constants.interests.football, Constants.interests.soccer, Constants.interests.clothing])
-    }
+//    struct dummyUsers {
+//        public static let mary = User(username: "Amanda", uuid: "neafsh8387uh4iw4fh", userImage: UIImage(named: "FamHalloween"), interests: [Constants.interests.football, Constants.interests.bars, Constants.interests.events])
+//        public static let al = User(username: "Al", uuid: "aksdjf93488743q7bp", userImage: UIImage(named: "pumpkins"), interests: [Constants.interests.furniture, Constants.interests.electronics, Constants.interests.bars])
+//        public static let yoon = User(username: "Yoon", uuid: "ashf94uhw9e8hf39", userImage: UIImage(named: "Lopart"), interests: [Constants.interests.football, Constants.interests.soccer, Constants.interests.clothing])
+//    }
     
     struct dummyFocusUsers {
         public static let mary = FocusUser(userName: "Mary Jones", firebaseId: nil, imageString: nil, currentLocation: nil)

@@ -138,7 +138,7 @@ class UserProfileViewController: UIViewController {
                                 
                                 let followerUser = User(username: username, uuid: uid, userImage: nil, interests: nil, image_string: image_string)
                                 
-                                self.followers.append(followUser)
+                                self.followers.append(followerUser)
                             })
                         }
                         self.followerLabel.text = "Followers: \(count)"
@@ -146,7 +146,7 @@ class UserProfileViewController: UIViewController {
                 }
                 
                 if let followers = dictionnary["following"] as? [String:Any]{
-                    if let people = followers["people"] as? [String:Any]{
+                    if let people = followers["people"] as? [String:[String:Any]]{
                         let count = people.count
                         
                         for (_, user) in people{
@@ -162,7 +162,7 @@ class UserProfileViewController: UIViewController {
                                 
                                 let followerUser = User(username: username, uuid: uid, userImage: nil, interests: nil, image_string: image_string)
                                 
-                                self.following.append(followUser)
+                                self.following.append(followerUser)
                             })
                         }
 
