@@ -30,10 +30,17 @@
 		5B33C0591EE0B28A007A8188 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33C0581EE0B28A007A8188 /* Double+Extensions.swift */; };
 		5B33C05C1EE113CA007A8188 /* MapPinInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C05B1EE113CA007A8188 /* MapPinInfoView.xib */; };
 		5B33C05E1EE113D3007A8188 /* MapPinInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33C05D1EE113D3007A8188 /* MapPinInfoView.swift */; };
+		5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B34A6F21EE72B0800D16842 /* FollowingTableViewCell.xib */; };
+		5B34A6F61EE72B0800D16842 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B34A6F31EE72B0800D16842 /* FollowingTableViewCell.swift */; };
+		5B34A6F71EE72B0800D16842 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */; };
 		5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B3F05751ED907B10057F596 /* Settings.storyboard */; };
 		5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */; };
 		5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */; };
 		5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B4303A41ED55F6400B63D56 /* SearchEventTableViewCell.xib */; };
+		5B448E571EE72C1B00873F79 /* FollowersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B448E541EE72C1B00873F79 /* FollowersTableViewCell.xib */; };
+		5B448E581EE72C1B00873F79 /* FollowersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B448E551EE72C1B00873F79 /* FollowersTableViewCell.swift */; };
+		5B448E591EE72C1B00873F79 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B448E561EE72C1B00873F79 /* FollowersViewController.swift */; };
+		5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B448E5A1EE72C3400873F79 /* Following.storyboard */; };
 		5B519E751ED667D000B36110 /* Pin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B519E741ED667D000B36110 /* Pin.storyboard */; };
 		5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */; };
 		5B519E7A1ED677D800B36110 /* SearchPeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */; };
@@ -201,13 +208,6 @@
 		D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB6991E89F73800D62DC2 /* SocialGroupViewController.xib */; };
 		D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */; };
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
-		EB8563321EE71431005AC062 /* FollowersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB85632E1EE71431005AC062 /* FollowersTableViewCell.swift */; };
-		EB8563331EE71431005AC062 /* FollowersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB85632F1EE71431005AC062 /* FollowersTableViewCell.xib */; };
-		EB8563341EE71431005AC062 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563301EE71431005AC062 /* FollowingTableViewCell.swift */; };
-		EB8563351EE71431005AC062 /* FollowingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8563311EE71431005AC062 /* FollowingTableViewCell.xib */; };
-		EB85633B1EE7146B005AC062 /* Following.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB85633A1EE7146B005AC062 /* Following.storyboard */; };
-		EB8563441EE722D1005AC062 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563431EE722D1005AC062 /* FollowingViewController.swift */; };
-		EB8563461EE722D8005AC062 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563451EE722D8005AC062 /* FollowersViewController.swift */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
@@ -272,10 +272,17 @@
 		5B33C0581EE0B28A007A8188 /* Double+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		5B33C05B1EE113CA007A8188 /* MapPinInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapPinInfoView.xib; sourceTree = "<group>"; };
 		5B33C05D1EE113D3007A8188 /* MapPinInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPinInfoView.swift; sourceTree = "<group>"; };
+		5B34A6F21EE72B0800D16842 /* FollowingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingTableViewCell.xib; sourceTree = "<group>"; };
+		5B34A6F31EE72B0800D16842 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewCell.swift; sourceTree = "<group>"; };
+		5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		5B3F05751ED907B10057F596 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChangeUsernamePasswordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventTableViewCell.swift; sourceTree = "<group>"; };
 		5B4303A41ED55F6400B63D56 /* SearchEventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchEventTableViewCell.xib; sourceTree = "<group>"; };
+		5B448E541EE72C1B00873F79 /* FollowersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowersTableViewCell.xib; sourceTree = "<group>"; };
+		5B448E551EE72C1B00873F79 /* FollowersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTableViewCell.swift; sourceTree = "<group>"; };
+		5B448E561EE72C1B00873F79 /* FollowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
+		5B448E5A1EE72C3400873F79 /* Following.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Following.storyboard; sourceTree = "<group>"; };
 		5B519E741ED667D000B36110 /* Pin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pin.storyboard; sourceTree = "<group>"; };
 		5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleViewController.swift; sourceTree = "<group>"; };
 		5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleTableViewCell.swift; sourceTree = "<group>"; };
@@ -487,13 +494,6 @@
 		D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialCrowdCell.swift; sourceTree = "<group>"; };
 		D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialCrowdCell.xib; sourceTree = "<group>"; };
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
-		EB85632E1EE71431005AC062 /* FollowersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowersTableViewCell.swift; path = ../../../FollowersTableViewCell.swift; sourceTree = "<group>"; };
-		EB85632F1EE71431005AC062 /* FollowersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowersTableViewCell.xib; path = ../../../FollowersTableViewCell.xib; sourceTree = "<group>"; };
-		EB8563301EE71431005AC062 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingTableViewCell.swift; path = ../../../FollowingTableViewCell.swift; sourceTree = "<group>"; };
-		EB8563311EE71431005AC062 /* FollowingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowingTableViewCell.xib; path = ../../../FollowingTableViewCell.xib; sourceTree = "<group>"; };
-		EB85633A1EE7146B005AC062 /* Following.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Following.storyboard; path = ../../../Following.storyboard; sourceTree = "<group>"; };
-		EB8563431EE722D1005AC062 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingViewController.swift; path = ../../../FollowingViewController.swift; sourceTree = "<group>"; };
-		EB8563451EE722D8005AC062 /* FollowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowersViewController.swift; path = ../../../FollowersViewController.swift; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
@@ -829,7 +829,7 @@
 				5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */,
 				5B33C0541EDF8CE3007A8188 /* general_search.storyboard */,
 				EBB971691EE61E58009E88F3 /* Followers.storyboard */,
-				EB85633A1EE7146B005AC062 /* Following.storyboard */,
+				5B448E5A1EE72C3400873F79 /* Following.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -977,10 +977,6 @@
 		D2B9B0731E5A0A270002F1B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EB85632E1EE71431005AC062 /* FollowersTableViewCell.swift */,
-				EB85632F1EE71431005AC062 /* FollowersTableViewCell.xib */,
-				EB8563301EE71431005AC062 /* FollowingTableViewCell.swift */,
-				EB8563311EE71431005AC062 /* FollowingTableViewCell.xib */,
 				D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */,
 				D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */,
 				611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */,
@@ -1079,7 +1075,9 @@
 		EB8563411EE722BB005AC062 /* Followers */ = {
 			isa = PBXGroup;
 			children = (
-				EB8563451EE722D8005AC062 /* FollowersViewController.swift */,
+				5B448E541EE72C1B00873F79 /* FollowersTableViewCell.xib */,
+				5B448E551EE72C1B00873F79 /* FollowersTableViewCell.swift */,
+				5B448E561EE72C1B00873F79 /* FollowersViewController.swift */,
 			);
 			name = Followers;
 			sourceTree = "<group>";
@@ -1087,7 +1085,9 @@
 		EB8563421EE722C2005AC062 /* Following */ = {
 			isa = PBXGroup;
 			children = (
-				EB8563431EE722D1005AC062 /* FollowingViewController.swift */,
+				5B34A6F21EE72B0800D16842 /* FollowingTableViewCell.xib */,
+				5B34A6F31EE72B0800D16842 /* FollowingTableViewCell.swift */,
+				5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */,
 			);
 			name = Following;
 			sourceTree = "<group>";
@@ -1286,7 +1286,6 @@
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
-				EB8563351EE71431005AC062 /* FollowingTableViewCell.xib in Resources */,
 				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
 				5BAB87A61EC972890064E5EC /* search_people.storyboard in Resources */,
 				5B33C05C1EE113CA007A8188 /* MapPinInfoView.xib in Resources */,
@@ -1305,11 +1304,12 @@
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */,
-				EB85633B1EE7146B005AC062 /* Following.storyboard in Resources */,
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
+				5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
+				5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
-				EB8563331EE71431005AC062 /* FollowersTableViewCell.xib in Resources */,
+				5B448E571EE72C1B00873F79 /* FollowersTableViewCell.xib in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
@@ -1540,6 +1540,7 @@
 				FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */,
 				FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */,
 				FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */,
+				5B34A6F71EE72B0800D16842 /* FollowingViewController.swift in Sources */,
 				D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */,
 				5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */,
 				FF69ABFD1ED6498F0044BE51 /* inviteCell.swift in Sources */,
@@ -1567,18 +1568,17 @@
 				5B6AFA661ED1906900A82104 /* GMUWrappingDictionaryKey.m in Sources */,
 				5BFA009F1EDA8BC200F1ACBF /* EventLocation.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
-				EB8563341EE71431005AC062 /* FollowingTableViewCell.swift in Sources */,
 				5B634C871ED2584F00EBCC29 /* Share.swift in Sources */,
 				FF69ABFA1ED649120044BE51 /* invitePlaceCV.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
-				EB8563441EE722D1005AC062 /* FollowingViewController.swift in Sources */,
-				EB8563461EE722D8005AC062 /* FollowersViewController.swift in Sources */,
 				5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */,
+				5B448E591EE72C1B00873F79 /* FollowersViewController.swift in Sources */,
 				5B7BB1DE1ED50CDD001E60FF /* SuggestPlacesViewController.swift in Sources */,
 				5B1659281EDA33AF0002209A /* LicenseViewController.swift in Sources */,
 				5B7BB1E81ED53FB1001E60FF /* UIView+Extensions.swift in Sources */,
 				5B33C0591EE0B28A007A8188 /* Double+Extensions.swift in Sources */,
 				61ED20401EDC2FBA00247DC5 /* NotificationFeedViewController.swift in Sources */,
+				5B34A6F61EE72B0800D16842 /* FollowingTableViewCell.swift in Sources */,
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
@@ -1634,13 +1634,13 @@
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
 				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,
+				5B448E581EE72C1B00873F79 /* FollowersTableViewCell.swift in Sources */,
 				D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */,
 				5B959FED1ECD23D800094FE6 /* SuggestPlaceView.swift in Sources */,
 				5B6AFA691ED1906900A82104 /* GMUDefaultClusterIconGenerator.m in Sources */,
 				5B6AFA6C1ED1906900A82104 /* GMUGeometryRenderer.m in Sources */,
 				5B251E8A1ED276970075B57A /* InviteFriendsViewController.swift in Sources */,
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
-				EB8563321EE71431005AC062 /* FollowersTableViewCell.swift in Sources */,
 				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */,
 				FF12737B1EDC882E0034AA42 /* PinLookViewController.swift in Sources */,

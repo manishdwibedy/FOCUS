@@ -573,33 +573,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func userProfileClicked() {
         
-//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
-//        
-//        self.present(VC, animated:true, completion:nil)
+        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
-///////////////////////////////////////////////
-////ALEX JANG:  TESTING FOR VIEWCONTROLLERS////
-///////////////////////////////////////////////
-        let followerViewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.present(followerViewController, animated: true, completion: nil)
+        self.present(VC, animated:true, completion:nil)
+        
+        
     }
     
     func messagesClicked() {
         
         
         let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
-        
-//        let newPerson = Event(title: "t", description: "d", fullAddress: "", shortAddress: "", latitude: "", longitude: "", date: "", creator: "", category: "")
-//        let encodedData = NSKeyedArchiver.archivedData(withRootObject: newPerson)
-//        UserDefaults.standard.set(encodedData, forKey: "people")
-//        
-//        // retrieving a value for a key
-//        if let data = UserDefaults.standard.data(forKey: "people"),
-//            let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? Event {
-//            print(myPeopleList)
-//        } else {
-//            print("There is an issue")
-//        }
         
         self.present(VC, animated:true, completion:nil)
     }

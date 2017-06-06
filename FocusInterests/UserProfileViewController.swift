@@ -101,11 +101,13 @@ class UserProfileViewController: UIViewController {
     }
     
     func showFollowing(sender:UITapGestureRecognizer) {
-        print("show following")
+        let followerViewController = UIStoryboard(name: "Following", bundle: nil).instantiateViewController(withIdentifier: "FollowingViewController") as! FollowingViewController
+        self.present(followerViewController, animated: true, completion: nil)
     }
     
     func showFollower(sender:UITapGestureRecognizer) {
-        print("show followers")
+        let followerViewController = UIStoryboard(name: "Followers", bundle: nil).instantiateViewController(withIdentifier: "FollowersViewController") as! FollowersViewController
+        self.present(followerViewController, animated: true, completion: nil)
     }
     
     func displayUserData() {
