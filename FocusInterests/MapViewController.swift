@@ -573,9 +573,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func userProfileClicked() {
         
-        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+//        
+//        self.present(VC, animated:true, completion:nil)
         
-        self.present(VC, animated:true, completion:nil)
+//        FollowersViewController Tests
+        let followerViewController = UIStoryboard(name: "Followers", bundle: nil).instantiateViewController(withIdentifier: "Followers") as! UINavigationController
+        self.present(followerViewController, animated: true, completion: nil)
     }
     
     func messagesClicked() {
