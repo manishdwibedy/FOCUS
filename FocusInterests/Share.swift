@@ -7,24 +7,25 @@
 //
 
 import Foundation
-//import FacebookShare
+import FacebookShare
 import TwitterKit
 import FirebaseAuth
 import Alamofire
 import OhhAuth
 
 class Share{
-//    static func facebook(with url: URL) throws{
-//        let content = LinkShareContent(url: url)
-//        
-//        let shareDialog = MessageDialog(content: content)
-//        shareDialog.completion = { result in
-//            print(result)
-//            
-//        }
-//        
-//        try shareDialog.show()
-//    }
+    static func facebook(with url: URL, description: String) throws{
+        var content = LinkShareContent(url: url)
+        content.description = description
+        
+        let shareDialog = ShareDialog(content: content)
+        shareDialog.mode = .native
+        shareDialog.completion = { result in
+            print(result)
+            
+        }
+        try shareDialog.show()
+    }
     
     static func loginAndShareTwitter(withStatus text: String){
         Twitter.sharedInstance().logIn { session, error in
