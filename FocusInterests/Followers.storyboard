@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WBk-Go-dbG">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="uek-ck-4F2">
+            <objects>
+                <navigationController storyboardIdentifier="Followers" id="WBk-Go-dbG" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Xw-im-jPf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="cRR-ix-F0u">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="f8P-3x-jbR" kind="relationship" relationship="rootViewController" id="FEG-A8-FAA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lql-RR-BTF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1282" y="-684"/>
+        </scene>
+        <!--Followers-->
+        <scene sceneID="0VB-fy-vZV">
+            <objects>
+                <viewController id="f8P-3x-jbR" userLabel="Followers" customClass="FollowersViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NX3-q2-zXj"/>
+                        <viewControllerLayoutGuide type="bottom" id="hi7-QS-zik"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DMt-Ud-JiP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WoU-E9-IOy">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyu-KM-Pfl">
+                                        <rect key="frame" x="43" y="32" width="289" height="30"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Invite From Contacts">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRg-pT-S68">
+                                        <rect key="frame" x="43" y="80" width="289" height="30"/>
+                                        <color key="backgroundColor" red="0.14986308976833335" green="0.28455531300277781" blue="0.69023533237500001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Invite Facebook Friends">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ip9-uh-BkC">
+                                        <rect key="frame" x="0.0" y="134" width="375" height="420"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <sections/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="f8P-3x-jbR" id="7EO-5o-uyn"/>
+                                            <outlet property="delegate" destination="f8P-3x-jbR" id="YEc-iI-4ge"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Ip9-uh-BkC" firstAttribute="leading" secondItem="WoU-E9-IOy" secondAttribute="leading" id="8pD-LZ-2zh"/>
+                                    <constraint firstAttribute="trailing" secondItem="bRg-pT-S68" secondAttribute="trailing" constant="43" id="9fY-6t-qSg"/>
+                                    <constraint firstItem="Lyu-KM-Pfl" firstAttribute="leading" secondItem="WoU-E9-IOy" secondAttribute="leading" constant="43" id="AKb-Yi-wVA"/>
+                                    <constraint firstItem="bRg-pT-S68" firstAttribute="leading" secondItem="WoU-E9-IOy" secondAttribute="leading" constant="43" id="Anp-zr-c7b"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ip9-uh-BkC" secondAttribute="trailing" id="CMb-8I-w2V"/>
+                                    <constraint firstItem="Lyu-KM-Pfl" firstAttribute="top" secondItem="WoU-E9-IOy" secondAttribute="top" constant="32" id="Ype-qC-oZJ"/>
+                                    <constraint firstItem="Ip9-uh-BkC" firstAttribute="top" secondItem="bRg-pT-S68" secondAttribute="bottom" constant="24" id="gZc-8X-tgq"/>
+                                    <constraint firstItem="bRg-pT-S68" firstAttribute="top" secondItem="Lyu-KM-Pfl" secondAttribute="bottom" constant="18" id="htf-t3-eBS"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lyu-KM-Pfl" secondAttribute="trailing" constant="43" id="k6K-d6-Dne"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ip9-uh-BkC" secondAttribute="bottom" id="wE7-kA-YT9"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WoU-E9-IOy" firstAttribute="leading" secondItem="DMt-Ud-JiP" secondAttribute="leading" id="0Xt-BF-dee"/>
+                            <constraint firstItem="hi7-QS-zik" firstAttribute="top" secondItem="WoU-E9-IOy" secondAttribute="bottom" id="671-V7-hew"/>
+                            <constraint firstItem="WoU-E9-IOy" firstAttribute="top" secondItem="NX3-q2-zXj" secondAttribute="bottom" id="Zr7-u0-0Ce"/>
+                            <constraint firstAttribute="trailing" secondItem="WoU-E9-IOy" secondAttribute="trailing" id="qYI-du-91h"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="pin" id="bwk-eo-HEB"/>
+                    <navigationItem key="navigationItem" title="Followers" id="kKj-N3-IDD">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="GF6-w2-o4x"/>
+                    </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="inviteContactsButton" destination="Lyu-KM-Pfl" id="ggX-6J-9PC"/>
+                        <outlet property="inviteFbFriendsButton" destination="bRg-pT-S68" id="gPT-wg-BON"/>
+                        <outlet property="tableView" destination="Ip9-uh-BkC" id="4NW-Xr-lkI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="caI-Ic-Te2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-410.39999999999998" y="-684.10794602698661"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="pin" width="30" height="30"/>
+    </resources>
+</document>

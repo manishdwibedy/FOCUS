@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mnx-Qg-K9a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mnx-Qg-K9a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -146,7 +146,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ei1-33-FMq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1814" y="1444"/>
+            <point key="canvasLocation" x="1602" y="1520"/>
         </scene>
         <!--Pin-->
         <scene sceneID="Nnu-K9-sIW">
@@ -490,7 +490,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6q5-bj-tsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3135" y="1750"/>
+            <point key="canvasLocation" x="3449" y="1610"/>
         </scene>
         <!--Notifications View Controller-->
         <scene sceneID="K4W-gl-rgU">
@@ -560,7 +560,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpo-3D-Prx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ePA-XN-yOt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ePA-XN-yOt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -579,7 +579,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zwr-f5-bIi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home-1" id="xTg-4h-XeN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="acD-ii-E6E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="acD-ii-E6E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
