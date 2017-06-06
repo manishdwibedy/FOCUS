@@ -15,11 +15,13 @@ class User {
     var uuid: String?
     var userImage: UIImage?
     var interests: [Interest]?
+    var image_string: String?
     
-    init(username: String?, uuid: String?, userImage: UIImage?, interests: [Interest]?) {
+    init(username: String?, uuid: String?, userImage: UIImage?, interests: [Interest]?, image_string: String?) {
         self.username =  username
         self.uuid = uuid
         self.userImage = userImage
         self.interests = interests
+        self.image_string = image_string
     }
 }
