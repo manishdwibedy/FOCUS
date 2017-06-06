@@ -18,6 +18,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedOut: UISegmentedControl!
     
+    
+    var UID = ""
     var filtered = [Place]()
     var places = [Place]()
     var events = [Event]()
@@ -71,6 +73,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBAction func segmentedChanged(_ sender: Any) {
         searchBar.text = nil
+        places.removeAll()
+        events.removeAll()
         if segmentedOut.selectedSegmentIndex == 0
         {
             updatePlaces()
@@ -98,6 +102,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             let cell:InvitePeoplePlaceCell = self.tableView.dequeueReusableCell(withIdentifier: "InvitePeoplePlaceCell") as! InvitePeoplePlaceCell!
             
             let place = filtered[indexPath.row]
+            cell.place = place
             cell.placeNameLabel.text = place.name
            // cell.place = place
             if place.address.count > 0{
@@ -114,6 +119,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             //cell.checkForFollow(id: place.id)
             let placeHolderImage = UIImage(named: "empty_event")
             cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
+            cell.UID = UID
             return cell
         }else
         {
@@ -121,6 +127,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.name.text = events[indexPath.row].title
             cell.address.text = events[indexPath.row].fullAddress
             cell.interest.text = events[indexPath.row].category
+            cell.event = events[indexPath.row]
+            cell.UID = UID
             
             return cell
             

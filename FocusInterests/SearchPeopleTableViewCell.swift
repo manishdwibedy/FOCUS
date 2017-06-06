@@ -95,8 +95,8 @@ class SearchPeopleTableViewCell: UITableViewCell {
     
     @IBAction func inviteUser(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "search_people", bundle: nil)
-        let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople")
-        ivc.modalTransitionStyle = .crossDissolve
+        let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
+        ivc.UID = ID
         parentVC.present(ivc, animated: true, completion: { _ in })
     
     }
