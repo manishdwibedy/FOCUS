@@ -14,15 +14,19 @@ target 'FocusInterests' do
     pod 'Firebase/Crash'
     pod 'Firebase/Database'
 
-    pod ‘Google’
+    pod 'Google'
     pod 'GoogleSignIn'
     pod 'GooglePlaces'
     pod 'GooglePlacePicker'
     pod 'GoogleMaps'
 
 
-    pod 'FacebookCore'
-    pod 'FacebookLogin'
+    pod 'FacebookCore', '~> 0.2'
+    pod 'FacebookLogin', '~> 0.2'
+    pod 'FacebookShare', '~> 0.2'
+    pod 'FBSDKCoreKit', '~> 4.22.1'
+    pod 'FBSDKLoginKit', '~> 4.22.1'
+    pod 'FBSDKShareKit', '~> 4.22.1'
     
     pod 'SDWebImage', '~>3.8'
     pod 'JSQMessagesViewController'
@@ -45,27 +49,9 @@ target 'FocusInterests' do
 end
 
 target 'FocusInterestsTests' do
-
-    pod 'FacebookCore'
-    pod 'FacebookLogin'
-    pod 'FacebookShare'
-    pod 'JSQMessagesViewController'
-    pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
-    pod 'Alamofire'
-    pod 'SwiftyJSON'
-    pod 'Cosmos', '~> 9.0'
 end
 
 
 target 'FocusInterestsUITests' do
-
-    pod 'FacebookCore'
-    pod 'FacebookLogin'
-    pod 'FacebookShare'
-    pod 'JSQMessagesViewController'
-    pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
-    pod 'Alamofire'
-    pod 'SwiftyJSON'
-    pod 'Cosmos', '~> 9.0'
 end
 

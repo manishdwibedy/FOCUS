@@ -27,11 +27,11 @@ PODS:
     - FacebookCore (~> 0.2)
     - FBSDKCoreKit (~> 4.15)
     - FBSDKShareKit (~> 4.15)
-  - FBSDKCoreKit (4.23.0):
+  - FBSDKCoreKit (4.22.1):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.23.0):
+  - FBSDKLoginKit (4.22.1):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.23.0):
+  - FBSDKShareKit (4.22.1):
     - FBSDKCoreKit
   - Firebase/Auth (4.0.0):
     - Firebase/Core
@@ -91,18 +91,18 @@ PODS:
     - GoogleUtilities (~> 1.1)
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
-  - GoogleMaps (2.2.0):
-    - GoogleMaps/Maps (= 2.2.0)
-  - GoogleMaps/Base (2.2.0)
-  - GoogleMaps/Maps (2.2.0):
+  - GoogleMaps (2.3.0):
+    - GoogleMaps/Maps (= 2.3.0)
+  - GoogleMaps/Base (2.3.0)
+  - GoogleMaps/Maps (2.3.0):
     - GoogleMaps/Base
   - GoogleNetworkingUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
-  - GooglePlacePicker (2.2.0):
-    - GoogleMaps (= 2.2.0)
-    - GooglePlaces (= 2.2.0)
-  - GooglePlaces (2.2.0):
-    - GoogleMaps/Base (= 2.2.0)
+  - GooglePlacePicker (2.3.0):
+    - GoogleMaps (= 2.3.0)
+    - GooglePlaces (= 2.3.0)
+  - GooglePlaces (2.3.0):
+    - GoogleMaps/Base (= 2.3.0)
   - GoogleSignIn (4.0.2):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
@@ -155,9 +155,12 @@ DEPENDENCIES:
   - Cosmos (~> 9.0)
   - DottedProgressBar
   - Fabric
-  - FacebookCore
-  - FacebookLogin
-  - FacebookShare
+  - FacebookCore (~> 0.2)
+  - FacebookLogin (~> 0.2)
+  - FacebookShare (~> 0.2)
+  - FBSDKCoreKit (~> 4.22.1)
+  - FBSDKLoginKit (~> 4.22.1)
+  - FBSDKShareKit (~> 4.22.1)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Crash
@@ -206,9 +209,9 @@ SPEC CHECKSUMS:
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
-  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
-  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
-  FBSDKShareKit: 65751c3b9937ab9d594e6c37611ecc115ceeb448
+  FBSDKCoreKit: 9c2daf0162214d6d2e21cf8208a9c6c2a2e42b9c
+  FBSDKLoginKit: 00cf28916b9f0169763a3d61985d745b579fe304
+  FBSDKShareKit: 1cbd0fdc2bb3277dd3522512855dcf1f4088f734
   Firebase: 284eea779b73fdff309791817da7c68bff8dd572
   FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
@@ -221,10 +224,10 @@ SPEC CHECKSUMS:
   Gallery: 925b8133efa9d8fe933918f242b64110c6478b98
   Google: d536877ec602555b755cc28ce6fed104825c693c
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
-  GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
+  GoogleMaps: 340a6a0bebd17c2db8abcd3921976c7c53c86cb8
   GoogleNetworkingUtilities: 3edd3a8161347494f2da60ea0deddc8a472d94cb
-  GooglePlacePicker: 345b1aabd42c9d6d9bf2369c1bae1234d903e764
-  GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
+  GooglePlacePicker: 80a6719aa4d06c63524a231d0ecd8f87e87d98c2
+  GooglePlaces: 74d322c74184ea4576184089b496d291cf0dcd38
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
@@ -244,6 +247,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
   TwitterKit: 202404be71aadd81d19f677b34579fe77d9cb67e
 
-PODFILE CHECKSUM: dbb9ee0dac5bd4151954d3c70767dea6d1d33dc1
+PODFILE CHECKSUM: 266b79adcb5559fa1e25f33685f87e4772e9adbb
 
 COCOAPODS: 1.2.1
