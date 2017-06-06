@@ -205,9 +205,9 @@
 		EB8563331EE71431005AC062 /* FollowersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB85632F1EE71431005AC062 /* FollowersTableViewCell.xib */; };
 		EB8563341EE71431005AC062 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563301EE71431005AC062 /* FollowingTableViewCell.swift */; };
 		EB8563351EE71431005AC062 /* FollowingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8563311EE71431005AC062 /* FollowingTableViewCell.xib */; };
-		EB8563371EE7144E005AC062 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563361EE7144E005AC062 /* FollowingViewController.swift */; };
-		EB8563391EE71455005AC062 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563381EE71455005AC062 /* FollowersViewController.swift */; };
 		EB85633B1EE7146B005AC062 /* Following.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB85633A1EE7146B005AC062 /* Following.storyboard */; };
+		EB8563441EE722D1005AC062 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563431EE722D1005AC062 /* FollowingViewController.swift */; };
+		EB8563461EE722D8005AC062 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563451EE722D8005AC062 /* FollowersViewController.swift */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
@@ -491,9 +491,9 @@
 		EB85632F1EE71431005AC062 /* FollowersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowersTableViewCell.xib; path = ../../../FollowersTableViewCell.xib; sourceTree = "<group>"; };
 		EB8563301EE71431005AC062 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingTableViewCell.swift; path = ../../../FollowingTableViewCell.swift; sourceTree = "<group>"; };
 		EB8563311EE71431005AC062 /* FollowingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowingTableViewCell.xib; path = ../../../FollowingTableViewCell.xib; sourceTree = "<group>"; };
-		EB8563361EE7144E005AC062 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingViewController.swift; path = ../../../FollowingViewController.swift; sourceTree = "<group>"; };
-		EB8563381EE71455005AC062 /* FollowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowersViewController.swift; path = ../../../FollowersViewController.swift; sourceTree = "<group>"; };
 		EB85633A1EE7146B005AC062 /* Following.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Following.storyboard; path = ../../../Following.storyboard; sourceTree = "<group>"; };
+		EB8563431EE722D1005AC062 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingViewController.swift; path = ../../../FollowingViewController.swift; sourceTree = "<group>"; };
+		EB8563451EE722D8005AC062 /* FollowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowersViewController.swift; path = ../../../FollowersViewController.swift; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
@@ -943,8 +943,8 @@
 		D2B9B0721E5A0A1E0002F1B1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EBB971761EE67BEA009E88F3 /* Following */,
-				EBB9716B1EE61EE5009E88F3 /* Followers */,
+				EB8563421EE722C2005AC062 /* Following */,
+				EB8563411EE722BB005AC062 /* Followers */,
 				5B3F05791ED909E90057F596 /* Settings */,
 				D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */,
 				61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */,
@@ -1076,18 +1076,18 @@
 			name = NibVCs;
 			sourceTree = "<group>";
 		};
-		EBB9716B1EE61EE5009E88F3 /* Followers */ = {
+		EB8563411EE722BB005AC062 /* Followers */ = {
 			isa = PBXGroup;
 			children = (
-				EB8563381EE71455005AC062 /* FollowersViewController.swift */,
+				EB8563451EE722D8005AC062 /* FollowersViewController.swift */,
 			);
 			name = Followers;
 			sourceTree = "<group>";
 		};
-		EBB971761EE67BEA009E88F3 /* Following */ = {
+		EB8563421EE722C2005AC062 /* Following */ = {
 			isa = PBXGroup;
 			children = (
-				EB8563361EE7144E005AC062 /* FollowingViewController.swift */,
+				EB8563431EE722D1005AC062 /* FollowingViewController.swift */,
 			);
 			name = Following;
 			sourceTree = "<group>";
@@ -1571,8 +1571,8 @@
 				5B634C871ED2584F00EBCC29 /* Share.swift in Sources */,
 				FF69ABFA1ED649120044BE51 /* invitePlaceCV.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
-				EB8563371EE7144E005AC062 /* FollowingViewController.swift in Sources */,
-				EB8563391EE71455005AC062 /* FollowersViewController.swift in Sources */,
+				EB8563441EE722D1005AC062 /* FollowingViewController.swift in Sources */,
+				EB8563461EE722D8005AC062 /* FollowersViewController.swift in Sources */,
 				5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */,
 				5B7BB1DE1ED50CDD001E60FF /* SuggestPlacesViewController.swift in Sources */,
 				5B1659281EDA33AF0002209A /* LicenseViewController.swift in Sources */,
