@@ -24,6 +24,10 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     
     
+    // follower and following
+    @IBOutlet weak var followerLabel: UILabel!
+    @IBOutlet weak var followingLabel: UILabel!
+    
     // user pin info
     
     @IBOutlet weak var pinImage: UIImageView!
@@ -46,6 +50,9 @@ class UserProfileViewController: UIViewController {
 	// Collection view See more... button
 	// (and also any of the ones after)
 	
+    var followers = [User]()
+    var following = [User]()
+    
     // Back button
 	@IBAction func backButton(_ sender: Any) {
 		self.dismiss(animated: true, completion: nil)
@@ -81,6 +88,24 @@ class UserProfileViewController: UIViewController {
         
         updatePinButton.roundCorners(radius: 10)
         hideKeyboardWhenTappedAround()
+        
+        
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.showFollowing))
+        followingLabel.isUserInteractionEnabled = true
+        followingLabel.addGestureRecognizer(tap)
+        
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(self.showFollower))
+        followerLabel.isUserInteractionEnabled = true
+        followerLabel.addGestureRecognizer(tap1)
+    }
+    
+    func showFollowing(sender:UITapGestureRecognizer) {
+        print("show following")
+    }
+    
+    func showFollower(sender:UITapGestureRecognizer) {
+        print("show followers")
     }
     
     func displayUserData() {
@@ -95,6 +120,55 @@ class UserProfileViewController: UIViewController {
                 self.userName.text = username_str
                 self.descriptionText.text = description_str
                 self.fullNameLabel.text = fullname
+                
+                if let followers = dictionnary["followers"] as? [String:Any]{
+                    if let people = followers["people"] as? [String:[String:Any]]{
+                        let count = people.count
+                        
+                        for (_, user) in people{
+                            let uid = user["UID"] as? String
+                            let _ = Date(timeIntervalSince1970: (user["time"] as? Double)!)
+                            
+                            Constants.DB.user.child(uid!).observeSingleEvent(of: .value, with: { snapshot in
+                                let user = snapshot.value as? [String : Any] ?? [:]
+                                
+                                let name = user["fullname"] as? String
+                                let username = user["username"] as? String
+                                let image_stirng = user["image_string"] as? String
+                                
+                                let followerUser = User(username: username, uuid: uid, userImage: nil, interests: nil, image_string: image_string)
+                                
+                                self.followers.append(followUser)
+                            })
+                        }
+                        self.followerLabel.text = "Followers: \(count)"
+                    }
+                }
+                
+                if let followers = dictionnary["following"] as? [String:Any]{
+                    if let people = followers["people"] as? [String:Any]{
+                        let count = people.count
+                        
+                        for (_, user) in people{
+                            let uid = user["UID"] as? String
+                            let _ = Date(timeIntervalSince1970: (user["time"] as? Double)!)
+                            
+                            Constants.DB.user.child(uid!).observeSingleEvent(of: .value, with: { snapshot in
+                                let user = snapshot.value as? [String : Any] ?? [:]
+                                
+                                let name = user["fullname"] as? String
+                                let username = user["username"] as? String
+                                let image_stirng = user["image_string"] as? String
+                                
+                                let followerUser = User(username: username, uuid: uid, userImage: nil, interests: nil, image_string: image_string)
+                                
+                                self.following.append(followUser)
+                            })
+                        }
+
+                        self.followingLabel.text = "Followers: \(count)"
+                    }
+                }
                 
                 self.userImage.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
                 
