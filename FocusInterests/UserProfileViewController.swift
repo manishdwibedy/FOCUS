@@ -95,9 +95,9 @@ class UserProfileViewController: UIViewController {
         followingLabel.isUserInteractionEnabled = true
         followingLabel.addGestureRecognizer(tap)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.showFollower))
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(self.showFollower))
         followerLabel.isUserInteractionEnabled = true
-        followerLabel.addGestureRecognizer(tap)
+        followerLabel.addGestureRecognizer(tap1)
     }
     
     func showFollowing(sender:UITapGestureRecognizer) {
