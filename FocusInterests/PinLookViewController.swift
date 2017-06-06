@@ -31,7 +31,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        hideKeyboardWhenTappedAround()
         
     }
     

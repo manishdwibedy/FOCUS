@@ -48,7 +48,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         self.messageTable.separatorColor = UIColor.white
         self.messageTable.separatorInset = UIEdgeInsets.zero
 
-        
+        hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
 //        loadInitialTable()
     }

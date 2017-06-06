@@ -39,6 +39,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         tableHeader.topCornersRounded(radius: 10)
         
         filtered = people
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -47,6 +47,8 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
             }
             self.tableView.reloadData()
         })
+        
+        hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {

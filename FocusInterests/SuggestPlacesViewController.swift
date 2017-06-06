@@ -25,6 +25,8 @@ class SuggestPlacesViewController: UIViewController, UITableViewDataSource {
         
         backgroundView.backgroundColor = UIColor(hexString: "192D43")
         moreButton.roundCorners(radius: 10)
+        
+        hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {

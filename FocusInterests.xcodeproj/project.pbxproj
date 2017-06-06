@@ -127,6 +127,7 @@
 		5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB87B01EC9861F0064E5EC /* search_place.storyboard */; };
 		5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapEventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapEventInfoView.swift */; };
+		5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF0293F1EE5F7F300D54FAF /* UIViewController+Extensions.swift */; };
 		5BFA009F1EDA8BC200F1ACBF /* EventLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */; };
 		611734EF1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */; };
 		611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */; };
@@ -395,6 +396,7 @@
 		5BAB87B01EC9861F0064E5EC /* search_place.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = search_place.storyboard; sourceTree = "<group>"; };
 		5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapEventInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapEventInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapEventInfoView.swift; sourceTree = "<group>"; };
+		5BF0293F1EE5F7F300D54FAF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLocation.swift; sourceTree = "<group>"; };
 		611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFeedCellTableViewCell.swift; sourceTree = "<group>"; };
 		611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationFeedCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -902,6 +904,7 @@
 				5B7BB1E91ED54677001E60FF /* UITableView+Extensions.swift */,
 				5B16592B1EDA53540002209A /* UITextView+Extensions.swift */,
 				5B33C0581EE0B28A007A8188 /* Double+Extensions.swift */,
+				5BF0293F1EE5F7F300D54FAF /* UIViewController+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1482,6 +1485,7 @@
 				5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */,
 				5B7BB1E61ED51E9E001E60FF /* SearchEventsViewController.swift in Sources */,
 				5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */,
+				5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */,
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				FFBF879F1EE5A855000168F5 /* InvitePeopleViewController.swift in Sources */,

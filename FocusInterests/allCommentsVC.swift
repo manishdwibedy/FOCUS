@@ -63,6 +63,8 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
             }
 
         })
+        
+        hideKeyboardWhenTappedAround()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

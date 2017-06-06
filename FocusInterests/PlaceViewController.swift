@@ -39,6 +39,8 @@ class PlaceViewController: UIViewController {
         // Do any additional setup after loading the view.
         ratingBackground.layer.cornerRadius = 5
         self.loadPlace(place: self.place!)
+        
+        hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {

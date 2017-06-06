@@ -80,6 +80,7 @@ class UserProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         updatePinButton.roundCorners(radius: 10)
+        hideKeyboardWhenTappedAround()
     }
     
     func displayUserData() {

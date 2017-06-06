@@ -27,6 +27,7 @@ class EditProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.fillDataFromUser()
+        hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {
