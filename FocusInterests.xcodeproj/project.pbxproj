@@ -209,6 +209,9 @@
 		D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */; };
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
+		EBFAB3871EE74DE800A03E11 /* _Main Logo.PNG in Resources */ = {isa = PBXBuildFile; fileRef = EBFAB3861EE74DE800A03E11 /* _Main Logo.PNG */; };
+		EBFAB3891EE74E0800A03E11 /* _Main Logo Transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = EBFAB3881EE74E0800A03E11 /* _Main Logo Transparent.png */; };
+		EBFAB38B1EE750FD00A03E11 /* Group.png in Resources */ = {isa = PBXBuildFile; fileRef = EBFAB38A1EE750FD00A03E11 /* Group.png */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
 		FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */; };
@@ -495,6 +498,9 @@
 		D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialCrowdCell.xib; sourceTree = "<group>"; };
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
+		EBFAB3861EE74DE800A03E11 /* _Main Logo.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "_Main Logo.PNG"; path = "../../../../Downloads/_Main Logo.PNG"; sourceTree = "<group>"; };
+		EBFAB3881EE74E0800A03E11 /* _Main Logo Transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "_Main Logo Transparent.png"; path = "../../../../Downloads/_Main Logo Transparent.png"; sourceTree = "<group>"; };
+		EBFAB38A1EE750FD00A03E11 /* Group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Group.png; path = ../../../../Downloads/Group.png; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
 		FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
@@ -867,6 +873,7 @@
 		D2B9B03E1E5A047C0002F1B1 /* FocusInterests */ = {
 			isa = PBXGroup;
 			children = (
+				EBFAB3851EE74DDB00A03E11 /* Images */,
 				D296F5D41E7628B6007EC393 /* FocusInterests.entitlements */,
 				D296F5D11E75BB3B007EC393 /* Authentication */,
 				D28EAFBE1E5E7C4C001EA7E5 /* Resources */,
@@ -1092,6 +1099,16 @@
 			name = Following;
 			sourceTree = "<group>";
 		};
+		EBFAB3851EE74DDB00A03E11 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EBFAB3861EE74DE800A03E11 /* _Main Logo.PNG */,
+				EBFAB38A1EE750FD00A03E11 /* Group.png */,
+				EBFAB3881EE74E0800A03E11 /* _Main Logo Transparent.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		FF7C87481ED7324C004ABB1B /* Pin */ = {
 			isa = PBXGroup;
 			children = (
@@ -1283,6 +1300,8 @@
 				FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */,
 				FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */,
 				5BAB87A41EC961AB0064E5EC /* UserProfile.storyboard in Resources */,
+				EBFAB3891EE74E0800A03E11 /* _Main Logo Transparent.png in Resources */,
+				EBFAB3871EE74DE800A03E11 /* _Main Logo.PNG in Resources */,
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
@@ -1306,6 +1325,7 @@
 				5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */,
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */,
+				EBFAB38B1EE750FD00A03E11 /* Group.png in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,

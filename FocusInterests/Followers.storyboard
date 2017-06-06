@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WBk-Go-dbG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WBk-Go-dbG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <scene sceneID="uek-ck-4F2">
             <objects>
                 <navigationController storyboardIdentifier="Followers" hidesBarsWhenVerticallyCompact="YES" id="WBk-Go-dbG" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8Xw-im-jPf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Xw-im-jPf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -99,10 +99,17 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="pin" id="bwk-eo-HEB"/>
                     <navigationItem key="navigationItem" title="Followers" id="kKj-N3-IDD">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="GF6-w2-o4x"/>
+                        <barButtonItem key="backBarButtonItem" title="Back" id="NdQ-Wc-kca"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="R2p-Dc-Lh7">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="backAction:" destination="f8P-3x-jbR" id="w7P-Yw-8Zn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="R2p-Dc-Lh7" id="LWy-t7-ctq"/>
                         <outlet property="inviteContactsButton" destination="Lyu-KM-Pfl" id="ggX-6J-9PC"/>
                         <outlet property="inviteFbFriendsButton" destination="bRg-pT-S68" id="gPT-wg-BON"/>
                         <outlet property="tableView" destination="Ip9-uh-BkC" id="4NW-Xr-lkI"/>
