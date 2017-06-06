@@ -201,12 +201,14 @@
 		D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB6991E89F73800D62DC2 /* SocialGroupViewController.xib */; };
 		D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */; };
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
+		EB8563321EE71431005AC062 /* FollowersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB85632E1EE71431005AC062 /* FollowersTableViewCell.swift */; };
+		EB8563331EE71431005AC062 /* FollowersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB85632F1EE71431005AC062 /* FollowersTableViewCell.xib */; };
+		EB8563341EE71431005AC062 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563301EE71431005AC062 /* FollowingTableViewCell.swift */; };
+		EB8563351EE71431005AC062 /* FollowingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8563311EE71431005AC062 /* FollowingTableViewCell.xib */; };
+		EB8563371EE7144E005AC062 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563361EE7144E005AC062 /* FollowingViewController.swift */; };
+		EB8563391EE71455005AC062 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8563381EE71455005AC062 /* FollowersViewController.swift */; };
+		EB85633B1EE7146B005AC062 /* Following.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB85633A1EE7146B005AC062 /* Following.storyboard */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
-		EBB9718E1EE694EE009E88F3 /* Following.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB9718D1EE694EE009E88F3 /* Following.storyboard */; };
-		EBB971981EE69527009E88F3 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB971971EE69527009E88F3 /* FollowingViewController.swift */; };
-		EBB9719A1EE6952C009E88F3 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB971991EE6952C009E88F3 /* FollowersViewController.swift */; };
-		EBB9719D1EE69583009E88F3 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB9719B1EE69583009E88F3 /* FollowingTableViewCell.swift */; };
-		EBB9719E1EE69583009E88F3 /* FollowingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB9719C1EE69583009E88F3 /* FollowingTableViewCell.xib */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
 		FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */; };
@@ -485,12 +487,14 @@
 		D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialCrowdCell.swift; sourceTree = "<group>"; };
 		D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialCrowdCell.xib; sourceTree = "<group>"; };
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB85632E1EE71431005AC062 /* FollowersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowersTableViewCell.swift; path = ../../../FollowersTableViewCell.swift; sourceTree = "<group>"; };
+		EB85632F1EE71431005AC062 /* FollowersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowersTableViewCell.xib; path = ../../../FollowersTableViewCell.xib; sourceTree = "<group>"; };
+		EB8563301EE71431005AC062 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingTableViewCell.swift; path = ../../../FollowingTableViewCell.swift; sourceTree = "<group>"; };
+		EB8563311EE71431005AC062 /* FollowingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowingTableViewCell.xib; path = ../../../FollowingTableViewCell.xib; sourceTree = "<group>"; };
+		EB8563361EE7144E005AC062 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingViewController.swift; path = ../../../FollowingViewController.swift; sourceTree = "<group>"; };
+		EB8563381EE71455005AC062 /* FollowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowersViewController.swift; path = ../../../FollowersViewController.swift; sourceTree = "<group>"; };
+		EB85633A1EE7146B005AC062 /* Following.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Following.storyboard; path = ../../../Following.storyboard; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
-		EBB9718D1EE694EE009E88F3 /* Following.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Following.storyboard; path = ../../../Following.storyboard; sourceTree = "<group>"; };
-		EBB971971EE69527009E88F3 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingViewController.swift; path = ../../../FollowingViewController.swift; sourceTree = "<group>"; };
-		EBB971991EE6952C009E88F3 /* FollowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowersViewController.swift; path = ../../../FollowersViewController.swift; sourceTree = "<group>"; };
-		EBB9719B1EE69583009E88F3 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingTableViewCell.swift; path = ../../../FollowingTableViewCell.swift; sourceTree = "<group>"; };
-		EBB9719C1EE69583009E88F3 /* FollowingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowingTableViewCell.xib; path = ../../../FollowingTableViewCell.xib; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
 		FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
@@ -825,7 +829,7 @@
 				5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */,
 				5B33C0541EDF8CE3007A8188 /* general_search.storyboard */,
 				EBB971691EE61E58009E88F3 /* Followers.storyboard */,
-				EBB9718D1EE694EE009E88F3 /* Following.storyboard */,
+				EB85633A1EE7146B005AC062 /* Following.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -973,6 +977,10 @@
 		D2B9B0731E5A0A270002F1B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EB85632E1EE71431005AC062 /* FollowersTableViewCell.swift */,
+				EB85632F1EE71431005AC062 /* FollowersTableViewCell.xib */,
+				EB8563301EE71431005AC062 /* FollowingTableViewCell.swift */,
+				EB8563311EE71431005AC062 /* FollowingTableViewCell.xib */,
 				D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */,
 				D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */,
 				611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */,
@@ -1028,8 +1036,6 @@
 				5B16592D1EDA6DE40002209A /* MapMarkerView.xib */,
 				5B16592F1EDA6DF40002209A /* MapMarkerView.swift */,
 				61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */,
-				EBB9719B1EE69583009E88F3 /* FollowingTableViewCell.swift */,
-				EBB9719C1EE69583009E88F3 /* FollowingTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1073,7 +1079,7 @@
 		EBB9716B1EE61EE5009E88F3 /* Followers */ = {
 			isa = PBXGroup;
 			children = (
-				EBB971991EE6952C009E88F3 /* FollowersViewController.swift */,
+				EB8563381EE71455005AC062 /* FollowersViewController.swift */,
 			);
 			name = Followers;
 			sourceTree = "<group>";
@@ -1081,7 +1087,7 @@
 		EBB971761EE67BEA009E88F3 /* Following */ = {
 			isa = PBXGroup;
 			children = (
-				EBB971971EE69527009E88F3 /* FollowingViewController.swift */,
+				EB8563361EE7144E005AC062 /* FollowingViewController.swift */,
 			);
 			name = Following;
 			sourceTree = "<group>";
@@ -1280,7 +1286,7 @@
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
-				EBB9719E1EE69583009E88F3 /* FollowingTableViewCell.xib in Resources */,
+				EB8563351EE71431005AC062 /* FollowingTableViewCell.xib in Resources */,
 				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
 				5BAB87A61EC972890064E5EC /* search_people.storyboard in Resources */,
 				5B33C05C1EE113CA007A8188 /* MapPinInfoView.xib in Resources */,
@@ -1298,11 +1304,12 @@
 				5B519E7B1ED677D800B36110 /* SearchPeopleTableViewCell.xib in Resources */,
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
-				EBB9718E1EE694EE009E88F3 /* Following.storyboard in Resources */,
 				5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */,
+				EB85633B1EE7146B005AC062 /* Following.storyboard in Resources */,
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
+				EB8563331EE71431005AC062 /* FollowersTableViewCell.xib in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
@@ -1517,7 +1524,6 @@
 				611734EF1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift in Sources */,
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
 				5B7BB1E01ED50EA0001E60FF /* UIButton+Extensions.swift in Sources */,
-				EBB9719A1EE6952C009E88F3 /* FollowersViewController.swift in Sources */,
 				5BE31E8A1EA76094004768F0 /* MapEventInfoView.swift in Sources */,
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
 				5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */,
@@ -1534,7 +1540,6 @@
 				FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */,
 				FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */,
 				FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */,
-				EBB971981EE69527009E88F3 /* FollowingViewController.swift in Sources */,
 				D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */,
 				5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */,
 				FF69ABFD1ED6498F0044BE51 /* inviteCell.swift in Sources */,
@@ -1562,9 +1567,12 @@
 				5B6AFA661ED1906900A82104 /* GMUWrappingDictionaryKey.m in Sources */,
 				5BFA009F1EDA8BC200F1ACBF /* EventLocation.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
+				EB8563341EE71431005AC062 /* FollowingTableViewCell.swift in Sources */,
 				5B634C871ED2584F00EBCC29 /* Share.swift in Sources */,
 				FF69ABFA1ED649120044BE51 /* invitePlaceCV.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
+				EB8563371EE7144E005AC062 /* FollowingViewController.swift in Sources */,
+				EB8563391EE71455005AC062 /* FollowersViewController.swift in Sources */,
 				5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */,
 				5B7BB1DE1ED50CDD001E60FF /* SuggestPlacesViewController.swift in Sources */,
 				5B1659281EDA33AF0002209A /* LicenseViewController.swift in Sources */,
@@ -1613,7 +1621,6 @@
 				04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */,
 				D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */,
 				5B16592C1EDA53540002209A /* UITextView+Extensions.swift in Sources */,
-				EBB9719D1EE69583009E88F3 /* FollowingTableViewCell.swift in Sources */,
 				D227AD2F1E6CBD5A000FB9DD /* NewLoginVC.swift in Sources */,
 				D216482A1E9735AC00AE021B /* SelectedInterestCell.swift in Sources */,
 				61ED203E1EDC236100247DC5 /* CustomSegmentedControl.swift in Sources */,
@@ -1633,6 +1640,7 @@
 				5B6AFA6C1ED1906900A82104 /* GMUGeometryRenderer.m in Sources */,
 				5B251E8A1ED276970075B57A /* InviteFriendsViewController.swift in Sources */,
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
+				EB8563321EE71431005AC062 /* FollowersTableViewCell.swift in Sources */,
 				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */,
 				FF12737B1EDC882E0034AA42 /* PinLookViewController.swift in Sources */,
