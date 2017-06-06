@@ -23,6 +23,9 @@ enum LoginTypes: String {
 class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var facebookLoginButton: UIButton!
+    @IBOutlet weak var googleLoginButton: UIButton!
+    @IBOutlet weak var regularSignInButton: UIButton!
 
     let handle = Auth.auth()
     let loginView = FBSDKLoginManager()
@@ -39,6 +42,10 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         loginView.loginBehavior = .web
+        
+        self.regularSignInButton.roundCorners(radius: 9.0)
+        self.facebookLoginButton.roundCorners(radius: 17.0)
+        self.googleLoginButton.roundCorners(radius: 17.0)
         
         setUpTextFields()
         hideKeyboardWhenTappedAround()
@@ -255,8 +262,13 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     func setUpTextFields(){
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
+        
+        self.emailTextField.attributedPlaceholder = NSAttributedString(string: "Username, Email or Phone Number", attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+        self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+        
         self.emailTextField.setBottomBorder()
         self.passwordTextField.setBottomBorder()
+        
     }
     
     func addEmpty(userWith Id: String) {

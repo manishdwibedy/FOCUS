@@ -10,14 +10,17 @@ import UIKit
 
 class FollowingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var backButon: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         tableView.delegate = self
         tableView.dataSource = self
         
+        self.backButon.tintColor = UIColor.white
         let nib = UINib(nibName: "FollowingTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "FollowingTableViewCell")
         // Do any additional setup after loading the view.
@@ -41,6 +44,10 @@ class FollowingViewController: UIViewController, UITableViewDelegate, UITableVie
         return followingCell
     }
     
+    @IBAction func backAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     /*
      // MARK: - Navigation
      
