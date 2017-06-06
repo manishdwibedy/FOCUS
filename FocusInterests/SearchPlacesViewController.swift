@@ -41,8 +41,59 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.filtered = places
-        self.tableView.reloadData()
+        
+        let url = "https://api.yelp.com/v3/businesses/search"
+        
+        let headers: HTTPHeaders = [
+            "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+            "cache-contro": "no-cache"
+        ]
+        
+        let parameters = [
+            "term": "",
+            "latitude": location?.coordinate.latitude,
+            "longitude": location?.coordinate.longitude,
+            ] as [String : Any]
+        Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
+            let json = JSON(data: response.data!)
+            
+            _ = self.places.count
+            for (_, business) in json["businesses"].enumerated(){
+                let id = business.1["id"].stringValue
+                let name = business.1["name"].stringValue
+                let image_url = business.1["image_url"].stringValue
+                let isClosed = business.1["is_closed"].boolValue
+                let reviewCount = business.1["review_count"].intValue
+                let rating = business.1["rating"].floatValue
+                let latitude = business.1["coordinates"]["latitude"].doubleValue
+                let longitude = business.1["coordinates"]["longitude"].doubleValue
+                let price = business.1["price"].stringValue
+                let address_json = business.1["location"]["display_address"].arrayValue
+                let phone = business.1["display_phone"].stringValue
+                let distance = business.1["distance"].doubleValue
+                let categories_json = business.1["categories"].arrayValue
+                let url = business.1["url"].stringValue
+                
+                var address = [String]()
+                for raw_address in address_json{
+                    address.append(raw_address.stringValue)
+                }
+                
+                var categories = [Category]()
+                for raw_category in categories_json as [JSON]{
+                    let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                    categories.append(category)
+                }
+                
+                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url)
+                
+                if !self.places.contains(place){
+                    self.places.append(place)
+                }
+            }
+            self.filtered = self.places
+            self.tableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,6 +144,8 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        var results = [String: [Place]]()
         if(searchText.characters.count > 0){
             self.filtered.removeAll()
             let url = "https://api.yelp.com/v3/businesses/search"
@@ -110,6 +163,8 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
             print(location?.coordinate)
             Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
                 let json = JSON(data: response.data!)
+                
+                var result = [Place]()
                 
                 _ = self.places.count
                 for (_, business) in json["businesses"].enumerated(){
@@ -141,11 +196,32 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                     
                     let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url)
                     
-                    if !self.filtered.contains(place){
-                        self.filtered.append(place)
+                    if !result.contains(place){
+                        result.append(place)
                     }
                 }
-                self.tableView.reloadData()
+                results[searchText] = result
+                print("searching - \(searchText)")
+                
+                if self.searchBar.text == searchText{
+                    print(results[searchText])
+                    self.filtered = results[searchText]!
+                    
+                    self.filtered.sort{ //sort(_:) in Swift 3
+                            if $0.name != $1.name {
+                                return $0.name < $1.name
+                            }
+                            
+                        else { // All other fields are tied, break ties by last name
+                            return $0.distance < $1.distance
+                        }
+                    }
+                    
+                    print("searching finally - \(searchText)")
+                    print(self.filtered[0].name)
+                    self.tableView.reloadData()
+                }
+                
             }
         }
         else{
