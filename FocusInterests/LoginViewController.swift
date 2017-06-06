@@ -149,6 +149,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     }
 
     @IBAction func facebookLogin(_ sender: UIButton) {
+        loginView.loginBehavior = .native
         loginView.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
             if error != nil {
                 print(error?.localizedDescription)
@@ -170,7 +171,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                 AuthApi.set(facebookToken: FBSDKAccessToken.current().tokenString)
                                 
                                 
-                                let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"first_name, last_name ,email, picture.type(large)"])
+                                let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id, first_name, last_name ,email, picture.type(large)"])
                                 graphRequest.start(completionHandler: { (connection, result, error) -> Void in
                                     
                                     if ((error) != nil)
@@ -180,6 +181,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                     else
                                     {
                                         let data:[String:AnyObject] = result as! [String : AnyObject]
+                                        
+                                        let facebook_id = data["id"] as? String
                                         let first_name = data["first_name"] as? String
                                         let last_name = data["last_name"] as? String
                                         

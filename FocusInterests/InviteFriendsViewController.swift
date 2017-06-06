@@ -29,7 +29,7 @@ class InviteFriendsViewController: UIViewController {
     @IBAction func buttonClicked(_ sender: Any) {
         
         if AuthApi.getFacebookToken() != nil{
-            self.getFacebookFriends()
+            //self.getFacebookFriends()
         }
         else{
             loginView.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
@@ -50,7 +50,7 @@ class InviteFriendsViewController: UIViewController {
                                     return
                                 }
                                 AuthApi.set(facebookToken: tokenString)
-                                self.getFacebookFriends()
+                                //self.getFacebookFriends()
                             }
                             
                         }
@@ -70,7 +70,7 @@ class InviteFriendsViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func getFacebookFriends(){
+    static func getFacebookFriends(){
         let params = ["fields": "id, first_name, last_name, middle_name, name, email, picture", "limit": 1000] as [String : Any]
         let token = AccessToken(authenticationToken: AuthApi.getFacebookToken()!)
 

@@ -18,8 +18,9 @@ import Solar
 import PopupDialog
 import FirebaseMessaging
 import SDWebImage
+import MessageUI
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate {
+class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, MFMessageComposeViewControllerDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -598,12 +599,38 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func notificationsClicked() {
-        let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
+        var messageVC = MFMessageComposeViewController()
         
-        let navigationController = UINavigationController(rootViewController: vc)
+        messageVC.body = "Enter a message";
+        messageVC.recipients = ["Enter tel-nr"]
+        messageVC.messageComposeDelegate = self;
         
-        self.present(navigationController, animated: true, completion: nil)
+        self.present(messageVC, animated: false, completion: nil)
+        
+        
+        
+//        let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
+//        
+//        let navigationController = UINavigationController(rootViewController: vc)
+//        
+//        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController!, didFinishWith result: MessageComposeResult) {
+        switch (result) {
+        case .cancelled:
+            print("Message was cancelled")
+            self.dismiss(animated: true, completion: nil)
+        case .failed:
+            print("Message failed")
+            self.dismiss(animated: true, completion: nil)
+        case .sent:
+            print("Message was sent")
+            self.dismiss(animated: true, completion: nil)
+        default:
+            break;
+        }
     }
     
     func searchClicked() {

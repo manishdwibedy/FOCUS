@@ -12,14 +12,27 @@ import TwitterKit
 import FirebaseAuth
 import Alamofire
 import OhhAuth
+import FacebookCore
 
 class Share{
-    static func facebook(with url: URL, description: String) throws{
+    static func facebookShare(with url: URL, description: String) throws{
         var content = LinkShareContent(url: url)
         content.description = description
         
         let shareDialog = ShareDialog(content: content)
         shareDialog.mode = .native
+        shareDialog.completion = { result in
+            print(result)
+            
+        }
+        try shareDialog.show()
+    }
+    
+    static func facebookMessage(with url: URL, description: String) throws{
+        var content = LinkShareContent(url: url)
+        content.description = description
+        
+        let shareDialog = MessageDialog(content: content)
         shareDialog.completion = { result in
             print(result)
             
@@ -82,5 +95,26 @@ class Share{
         }
         
     }
-
+    
+    static func getFacebookFriends(){
+        let params = ["fields": "id, first_name, last_name, middle_name, name, email, picture"]
+        let token = AccessToken(authenticationToken: AuthApi.getFacebookToken()!)
+        
+        let connection = GraphRequestConnection()
+        connection.add(GraphRequest(graphPath: "me/taggable_friends", parameters: params, accessToken: token)) { httpResponse, result in
+            switch result {
+            case .success(let response):
+                //                print("Graph Request Succeeded: \(response)")
+                let friends = response.dictionaryValue?["data"] as! [[String : AnyObject]]
+                
+                for friend in friends{
+                    print("\(String(describing: friend["first_name"]!)) \(String(describing: friend["last_name"]!) )")
+                    print(String(describing: friend["id"]!))
+                }
+            case .failed(let error):
+                print("Graph Request Failed: \(error)")
+            }
+        }
+        connection.start()
+    }
 }
