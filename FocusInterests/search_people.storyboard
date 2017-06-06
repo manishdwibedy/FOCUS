@@ -112,21 +112,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="AYl-Yr-fFv">
-                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RME-pD-v8b">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="mVZ-Xl-OkV"/>
+                                </constraints>
                                 <color key="barTintColor" red="0.093117170035839081" green="0.17223116755485535" blue="0.26403194665908813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Suggestions" id="RTd-YN-uNF"/>
+                                    <navigationItem title="Suggestions" id="RTd-YN-uNF">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="FE1-iu-nrx">
+                                            <connections>
+                                                <action selector="back:" destination="9ey-Xo-CX9" id="j18-cH-3eb"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nZh-JF-eMk">
-                                <rect key="frame" x="93" y="99" width="189" height="29"/>
+                                <rect key="frame" x="93" y="119" width="189" height="29"/>
                                 <segments>
                                     <segment title="Places"/>
                                     <segment title="Events"/>
@@ -137,7 +146,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-wn-SdN">
-                                <rect key="frame" x="16" y="135" width="343" height="532"/>
+                                <rect key="frame" x="16" y="155" width="343" height="512"/>
                                 <color key="backgroundColor" red="0.68356941201971544" green="0.71607434800498049" blue="0.75323624023931279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.55294117649999996" green="0.58431372550000005" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>

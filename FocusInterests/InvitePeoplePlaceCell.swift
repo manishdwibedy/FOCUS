@@ -20,6 +20,7 @@ class InvitePeoplePlaceCell: UITableViewCell {
     
     var UID = ""
     var place: Place!
+    var parentVC: InvitePeopleViewController!
     override func awakeFromNib() {
         super.awakeFromNib()
         inviteButtonOut.layer.cornerRadius = 6
@@ -41,6 +42,7 @@ class InvitePeoplePlaceCell: UITableViewCell {
         })
         Constants.DB.places.child(place.id).child("invitations").childByAutoId().updateChildValues(["toUID":place.id, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
         Constants.DB.user.child(UID).child("invitations").child("place").childByAutoId().updateChildValues(["ID":place.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!])
+        parentVC.dismiss(animated: true, completion: nil)
     }
     
     
