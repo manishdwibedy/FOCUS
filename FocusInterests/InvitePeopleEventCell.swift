@@ -20,10 +20,24 @@ class InvitePeopleEventCell: UITableViewCell {
     
     var event: Event!
     var UID: String!
+    var parentVC: InvitePeopleViewController!
     override func awakeFromNib() {
         super.awakeFromNib()
         inviteOut.layer.cornerRadius = 6
         inviteOut.clipsToBounds = true
+        
+        
+    }
+    
+    func loadLikes()
+    {
+        Constants.DB.event.child(event.id!).child("likedAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.guestCount.text = String(value?["num"] as! Int) + " guests"
+            }
+        })
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -42,6 +56,7 @@ class InvitePeopleEventCell: UITableViewCell {
         })
         Constants.DB.event.child(event.id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
         Constants.DB.user.child(UID).child("invitations").child("event").childByAutoId().updateChildValues(["ID":event.id!, "time":time,"fromUID":AuthApi.getFirebaseUid()!])
+        parentVC.dismiss(animated: true, completion: nil)
     
     }
 }

@@ -120,6 +120,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             let placeHolderImage = UIImage(named: "empty_event")
             cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
             cell.UID = UID
+            cell.parentVC = self
             return cell
         }else
         {
@@ -129,7 +130,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.interest.text = events[indexPath.row].category
             cell.event = events[indexPath.row]
             cell.UID = UID
-            
+            cell.parentVC = self
+            cell.loadLikes()
             return cell
             
         }
@@ -299,6 +301,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     
     
+    @IBAction func back(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
 
