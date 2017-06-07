@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UEf-Fq-IAs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UEf-Fq-IAs">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -74,9 +74,18 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="pin" image="location" id="suZ-IT-5lL"/>
-                    <navigationItem key="navigationItem" title="Following" id="p62-6K-Qn4"/>
+                    <navigationItem key="navigationItem" title="Following" id="p62-6K-Qn4">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="dI2-UU-Nyc"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" style="plain" id="5jI-bI-k9d">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="backAction:" destination="Cro-Z4-GgD" id="oZt-hZ-7Rz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backButon" destination="5jI-bI-k9d" id="0gF-FW-KW4"/>
                         <outlet property="tableView" destination="XqD-F5-n8c" id="2tZ-bx-hdM"/>
                     </connections>
                 </viewController>
@@ -88,7 +97,7 @@
         <scene sceneID="pIJ-To-F1E">
             <objects>
                 <navigationController storyboardIdentifier="Following" id="UEf-Fq-IAs" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JSt-Gi-bTS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="JSt-Gi-bTS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>

@@ -12,6 +12,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var inviteContactsButton: UIButton!
     @IBOutlet weak var inviteFbFriendsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableView.delegate = self
         tableView.dataSource = self
+        
         
         self.inviteContactsButton.roundCorners(radius: 9.0)
         self.inviteFbFriendsButton.roundCorners(radius: 9.0)
@@ -49,6 +51,9 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         let followersCell = tableView.dequeueReusableCell(withIdentifier: "FollowProfileCell", for: indexPath) as! FollowProfileCell
         
         return followersCell
+    }
+    @IBAction func backAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     /*

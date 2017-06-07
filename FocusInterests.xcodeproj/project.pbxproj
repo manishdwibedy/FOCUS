@@ -208,6 +208,7 @@
 		D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB6991E89F73800D62DC2 /* SocialGroupViewController.xib */; };
 		D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */; };
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
+		EB3EA23A1EE7684500F61D38 /* _Main Logo Transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
@@ -494,6 +495,7 @@
 		D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialCrowdCell.swift; sourceTree = "<group>"; };
 		D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialCrowdCell.xib; sourceTree = "<group>"; };
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_Main Logo Transparent.png"; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
@@ -868,6 +870,7 @@
 			isa = PBXGroup;
 			children = (
 				D296F5D41E7628B6007EC393 /* FocusInterests.entitlements */,
+				EBFAB3851EE74DDB00A03E11 /* Images */,
 				D296F5D11E75BB3B007EC393 /* Authentication */,
 				D28EAFBE1E5E7C4C001EA7E5 /* Resources */,
 				D252206F1E5A894300EC2014 /* Models */,
@@ -1090,6 +1093,14 @@
 				5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */,
 			);
 			name = Following;
+			sourceTree = "<group>";
+		};
+		EBFAB3851EE74DDB00A03E11 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		FF7C87481ED7324C004ABB1B /* Pin */ = {
@@ -1324,6 +1335,7 @@
 				5B959FEB1ECD23C200094FE6 /* SuggestPlaceView.xib in Resources */,
 				5B71D7061ED1837A0093A3F5 /* commentCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
+				EB3EA23A1EE7684500F61D38 /* _Main Logo Transparent.png in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
