@@ -225,6 +225,7 @@
 		FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */; };
 		FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBF87A41EE5BED0000168F5 /* InvitePeopleEventCell.swift */; };
 		FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBF87A51EE5BED0000168F5 /* InvitePeopleEventCell.xib */; };
+		FFEFA1C11EE7864A000623CB /* PlaceAllPinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEFA1C01EE7864A000623CB /* PlaceAllPinsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -512,6 +513,7 @@
 		FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePeoplePlaceCell.xib; sourceTree = "<group>"; };
 		FFBF87A41EE5BED0000168F5 /* InvitePeopleEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePeopleEventCell.swift; sourceTree = "<group>"; };
 		FFBF87A51EE5BED0000168F5 /* InvitePeopleEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePeopleEventCell.xib; sourceTree = "<group>"; };
+		FFEFA1C01EE7864A000623CB /* PlaceAllPinsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceAllPinsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -723,6 +725,7 @@
 			children = (
 				5B959FD41ECAC9EF00094FE6 /* PlaceViewController.swift */,
 				5B959FD91ECADFA300094FE6 /* PinViewController.swift */,
+				FFEFA1C01EE7864A000623CB /* PlaceAllPinsViewController.swift */,
 				5B959FE61ECC14D200094FE6 /* PinTableViewCell.swift */,
 				5B959FE71ECC14D200094FE6 /* PinTableViewCell.xib */,
 				5B959FEE1ECD2DF300094FE6 /* RatingViewController.swift */,
@@ -1646,6 +1649,7 @@
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
 				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,
+				FFEFA1C11EE7864A000623CB /* PlaceAllPinsViewController.swift in Sources */,
 				5B448E581EE72C1B00873F79 /* FollowersTableViewCell.swift in Sources */,
 				D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */,
 				5B959FED1ECD23D800094FE6 /* SuggestPlaceView.swift in Sources */,
