@@ -9,23 +9,61 @@
 import UIKit
 
 class PinTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var likeAmountLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var comment: UITextView!
-    @IBOutlet weak var focus: UILabel!
+    //@IBOutlet weak var focus: UILabel!
     @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var likeOut: UIButton!
     
-    
+    var data: NSDictionary!
+    var likeCount = 0
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+       
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+       
     }
     
+    func loadLikes()
+    {
+        if data != nil
+        {
+            if data["like"] != nil
+            {
+                likeCount = (data["like"] as? NSDictionary)?["num"] as! Int
+                likeAmountLabel.text = String(likeCount)
+            }
+        }
+        Constants.DB.pins.child(data["fromUID"] as! String).child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.likeOut.isEnabled = false
+                self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
+                
+            }
+        })
+
+    }
+    
+    @IBAction func like(_ sender: Any) {
+        likeCount = likeCount + 1
+        Constants.DB.pins.child(data["fromUID"] as! String).child("like").updateChildValues(["num": likeCount])
+        Constants.DB.pins.child(data["fromUID"] as! String).child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+        likeOut.isEnabled = false
+        likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
+        likeAmountLabel.text = String(likeCount)
+        
+    }
+    @IBAction func comment(_ sender: Any) {
+    }
 }
