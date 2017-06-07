@@ -14,12 +14,19 @@ class UserMessages{
     var readMessages: Bool
     let messageID: String
     var lastMessageDate: Date
+    var lastContent: String?
+    var image_string: String
     
-    init(id: String, name: String, messageID: String, readMessages: Bool, lastMessageDate: Date){
+    init(id: String, name: String, messageID: String, readMessages: Bool, lastMessageDate: Date, image_string: String){
         self.id = id
         self.name = name
         self.messageID = messageID
         self.readMessages = readMessages
         self.lastMessageDate = lastMessageDate
+        self.image_string = image_string
+    }
+    
+    func addLastContent(lastContent: String){
+        self.lastContent = lastContent
     }
 }
