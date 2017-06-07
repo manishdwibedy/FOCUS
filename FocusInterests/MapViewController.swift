@@ -20,7 +20,7 @@ import FirebaseMessaging
 import SDWebImage
 import MessageUI
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, MFMessageComposeViewControllerDelegate {
+class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, MFMessageComposeViewControllerDelegate, switchPinTabDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -48,10 +48,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBOutlet weak var webView: UIWebView!
     
+    var popup: NewUserPopupViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
             if dictionnary != nil {
@@ -68,7 +68,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
         }
-            
+        
         //webView.isHidden = true
         if AuthApi.getEventBriteToken() == nil{
             let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
@@ -451,10 +451,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
-        if AuthApi.isNewUser(){
+        if !AuthApi.isNewUser(){
             AuthApi.setNewUser()
             self.showPopup()
         }
+//        changeTab()
         
     }
     
@@ -769,11 +770,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         var dialogAppearance = PopupDialogDefaultView.appearance()
         
-        dialogAppearance.backgroundColor      = UIColor.white
-        dialogAppearance.titleFont            = UIFont.boldSystemFont(ofSize: 14)
+        dialogAppearance.backgroundColor      = UIColor(red: 1, green: 1, blue: 1, alpha: 0.4)
+        dialogAppearance.titleFont            = UIFont(name: "Avenir-Book", size: 15)!
         dialogAppearance.titleColor           = UIColor(white: 0.4, alpha: 1)
         dialogAppearance.titleTextAlignment   = .center
-        dialogAppearance.messageFont          = UIFont.systemFont(ofSize: 14)
+        dialogAppearance.messageFont          = UIFont(name: "Avenir-Book", size: 15)!
         dialogAppearance.messageColor         = UIColor(white: 0.6, alpha: 1)
         dialogAppearance.messageTextAlignment = .center
         
@@ -788,16 +789,27 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         // Create a custom view controller
         let onboardingVC = NewUserPopupViewController(nibName: "NewUserPopupViewController", bundle: nil)
         onboardingVC.arrowImage = self.popupArrowImage
-        
+        onboardingVC.delegate = self
 //        onboardingVC.testImage = self.testImage
         
         // Create the dialog
-        let popup = PopupDialog(viewController: onboardingVC, buttonAlignment: .horizontal, transitionStyle: .bounceDown, gestureDismissal: true)
+        let popup = PopupDialog(viewController: onboardingVC, buttonAlignment: .horizontal, transitionStyle: .bounceDown, gestureDismissal: false)
         
         
+        popup.view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
         
+
+
         // Present dialog
         present(popup, animated: true, completion: nil)
+    }
+    
+    func changeTab(){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc: UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "home") as! UITabBarController
+        vc.selectedIndex = 2
+        self.present(vc, animated: true, completion: nil)
+
     }
 }
 

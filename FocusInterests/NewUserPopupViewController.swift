@@ -9,7 +9,13 @@
 import UIKit
 import DottedProgressBar
 
+protocol switchPinTabDelegate{
+    func changeTab()
+}
+
 class NewUserPopupViewController: UIViewController {
+    
+    var delegate: switchPinTabDelegate?
     
     let info = [
         ["", "What if you could have an all-in-one view of the people, places and events YOU are about?", "Well, now YOU can", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
@@ -30,9 +36,16 @@ class NewUserPopupViewController: UIViewController {
     @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var descriptionText: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var skipLabel: UILabel!
     
     @IBOutlet weak var progress: UIView!
     var progressBar: DottedProgressBar?
+    
+    
+    @IBOutlet weak var titleTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var descriptionTop: NSLayoutConstraint!
+    @IBOutlet weak var buttonTop: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +61,7 @@ class NewUserPopupViewController: UIViewController {
             dotsProgressColor: UIColor.red,
             backColor: UIColor.clear
         )
+        self.skipLabel.alpha = 0
         
         self.progress.addSubview(progressBar!)
         
@@ -60,8 +74,19 @@ class NewUserPopupViewController: UIViewController {
         self.nextButton.roundCorners(radius: 10)
         self.progressBar?.progressChangeAnimationDuration = 0.1
         self.progressBar?.pauseBetweenConsecutiveAnimations = 0.1
+        
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.skip))
+        tapGesture.numberOfTapsRequired = 1
+        skipLabel.isUserInteractionEnabled =  true
+        skipLabel.addGestureRecognizer(tapGesture)
+
     }
 
+    func skip(gr:UITapGestureRecognizer){
+        self.arrowImage?.alpha = 0
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,6 +99,8 @@ class NewUserPopupViewController: UIViewController {
         if index == info.count - 1{
             self.arrowImage?.alpha = 0
             self.dismiss(animated: true, completion: nil)
+            delegate?.changeTab()
+            
         }
         else{
             index += 1
@@ -83,9 +110,25 @@ class NewUserPopupViewController: UIViewController {
     }
     
     func loadValue(){
+        if index == 0{
+            titleTop.constant = -50
+            buttonTop.constant = 50
+            self.titleText.font = UIFont(name: "Avenir-Book", size: 15)
+        }
+        else{
+            titleTop.constant = 20
+            buttonTop.constant = 20
+            descriptionTop.constant = 0
+            
+            self.titleText.font = UIFont(name: "Avenir-Black", size: 15)
+            self.descriptionText.font = UIFont(name: "Avenir-Book", size: 15)
+            
+        }
+        
         if index == info.count - 1 {
             self.arrowImage?.alpha = 1
-            self.nextButton.setTitle("Done", for: .normal)
+            self.skipLabel.alpha = 1
+            self.nextButton.setTitle("Create Pin", for: .normal)
         }
         self.titleImage.image = UIImage(named: self.info[index][0] as! String)
         self.titleText.text = self.info[index][1] as! String
