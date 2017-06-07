@@ -59,6 +59,7 @@ class PlaceAllPinsViewController: UIViewController, UITableViewDelegate, UITable
             }
             
         })
+        cell.parentVC = self
         return cell
     }
     

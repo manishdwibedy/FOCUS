@@ -29,6 +29,17 @@ class CommentsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func loadInfo(UID:String)
+    {
+        Constants.DB.user.child(UID).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.userNameLabel.text = value?["username"] as? String
+            }
+        })
+    }
+    
     func setupCell(){
         
         self.userProfileImage.layer.borderWidth = 2

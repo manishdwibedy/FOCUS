@@ -20,6 +20,7 @@ class PinTableViewCell: UITableViewCell {
     
     var data: NSDictionary!
     var likeCount = 0
+    var parentVC: UIViewController!
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -65,5 +66,10 @@ class PinTableViewCell: UITableViewCell {
         
     }
     @IBAction func comment(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Comments", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
+        ivc.data = data
+        parentVC.present(ivc, animated: true, completion: { _ in })
     }
 }
