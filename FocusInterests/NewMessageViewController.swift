@@ -50,7 +50,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         search.searchBarStyle = .prominent
         search.placeholder = "Search..."
         let textFieldInsideSearchBar = search.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.backgroundColor = UIColor.lightGray
+        textFieldInsideSearchBar?.backgroundColor = UIColor.white
         search.delegate = self
         self.navigationItem.titleView = search
     }

@@ -142,6 +142,7 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - Solar (2.0.0)
+  - SVPullToRefresh (0.4.1)
   - SwiftyJSON (3.1.4)
   - TwitterCore (3.0.0)
   - TwitterKit (3.0.3):
@@ -180,6 +181,7 @@ DEPENDENCIES:
   - SCLAlertView
   - SDWebImage (~> 3.8)
   - Solar
+  - SVPullToRefresh (from `https://github.com/gabro/SVPullToRefresh`, branch `top-infinitescrolling`)
   - SwiftyJSON
   - TwitterKit
 
@@ -188,6 +190,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/JanGorman/Agrume.git
   ChameleonFramework:
     :git: https://github.com/ViccAlexander/Chameleon.git
+  SVPullToRefresh:
+    :branch: top-infinitescrolling
+    :git: https://github.com/gabro/SVPullToRefresh
 
 CHECKOUT OPTIONS:
   Agrume:
@@ -196,6 +201,9 @@ CHECKOUT OPTIONS:
   ChameleonFramework:
     :commit: acc480fbe023c6e5fe40f68593f4a70a8c4c7ad5
     :git: https://github.com/ViccAlexander/Chameleon.git
+  SVPullToRefresh:
+    :commit: 3f88bf7a51b37fc3f19f180a67c729dcec873df2
+    :git: https://github.com/gabro/SVPullToRefresh
 
 SPEC CHECKSUMS:
   Agrume: abf26210c3371bc6c74bbf2ced7a19d937bf8f0a
@@ -243,10 +251,11 @@ SPEC CHECKSUMS:
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   Solar: ea092f7660c1b58d2b754227decb61a1c6710826
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
   TwitterKit: 202404be71aadd81d19f677b34579fe77d9cb67e
 
-PODFILE CHECKSUM: 266b79adcb5559fa1e25f33685f87e4772e9adbb
+PODFILE CHECKSUM: c67fe2156870090254d1b334abe2e600e7fb0d97
 
 COCOAPODS: 1.2.1

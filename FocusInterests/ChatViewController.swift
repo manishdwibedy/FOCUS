@@ -12,6 +12,7 @@ import FirebaseDatabase
 import FirebaseStorage
 import SDWebImage
 import Agrume
+import SVPullToRefresh
 
 class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var user = [String:Any]()
@@ -51,6 +52,14 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         markUnread()
         getMessageID()
         
+        
+        collectionView.addPullToRefresh(actionHandler: { () -> Void in
+                        self.loadMore()
+                    })
+//        collectionView.addInfiniteScrolling(actionHandler: { () -> Void in
+//            self.loadMore()
+//        })
+
         self.navigationItem.title = self.user["username"]! as? String
     }
     
@@ -71,61 +80,66 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         // Dispose of any resources that can be recreated.
     }
     
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
-        
+    func loadMore() {
         let endDate = self.messages[0].date.timeIntervalSince1970
         let roundedEndDate = round(self.messages[0].date.timeIntervalSince1970)
         var earlierMessage = [JSQMessage]()
         var earlierId = [String]()
         
-        messageContentRef.child(self.messageID!).queryEnding(atValue: roundedEndDate).queryOrdered(byChild: "date").queryLimited(toLast: 2).observeSingleEvent(of: .value, with: {(snapshot) in
+        collectionView.collectionViewLayout.springinessEnabled = false
+        //collectionView.infiniteScrollingView.startAnimating()
+        
+        messageContentRef.child(self.messageID!).queryEnding(atValue: roundedEndDate).queryOrdered(byChild: "date").queryLimited(toLast: 25).observeSingleEvent(of: .value, with: {(snapshot) in
             
             let messages = snapshot.value as? [String:[String:Any]]
             
-            for (messageID,message_data) in messages!{
-                let id = message_data["sender_id"] as! String
-                let name = self.names[(message_data["sender_id"]! as! String)]
-                let date = Date(timeIntervalSince1970: TimeInterval(message_data["date"] as! Double))
-                
-                var message: JSQMessage?
-                if let text = message_data["text"] as? String{
-                    message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text)
+            if let messages = messages{
+                for (messageID,message_data) in messages{
+                    let id = message_data["sender_id"] as! String
+                    let name = self.names[(message_data["sender_id"]! as! String)]
+                    let date = Date(timeIntervalSince1970: TimeInterval(message_data["date"] as! Double))
                     
-                }
-                else{
-                    let image = JSQPhotoMediaItem(image: UIImage(named: "empty_event"))
-                    message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
-                    let imageRef = Constants.storage.messages.child("\(messageID).jpg")
-                    
-                    imageRef.downloadURL(completion: {(url, error) in
-                        if let error = error{
-                            print("Error occurred: \(error.localizedDescription)")
-                        }
+                    var message: JSQMessage?
+                    if let text = message_data["text"] as? String{
+                        message = JSQMessage(senderId: id, senderDisplayName: name, date: date, text: text)
                         
-                        SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                            (receivedSize :Int, ExpectedSize :Int) in
-                            
-                        }, completed: {
-                            (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                            
-                            if image != nil && finished{
-                                let JSQimage = JSQPhotoMediaItem(image: image)
-                                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
-                                
-                                let index = self.imageMapper[messageID]
-                                self.messages[index!] = message!
-                                self.collectionView.reloadData()
-                                
+                    }
+                    else{
+                        let image = JSQPhotoMediaItem(image: UIImage(named: "empty_event"))
+                        message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
+                        let imageRef = Constants.storage.messages.child("\(messageID).jpg")
+                        
+                        imageRef.downloadURL(completion: {(url, error) in
+                            if let error = error{
+                                print("Error occurred: \(error.localizedDescription)")
                             }
+                            
+                            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                                (receivedSize :Int, ExpectedSize :Int) in
+                                
+                            }, completed: {
+                                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                                
+                                if image != nil && finished{
+                                    let JSQimage = JSQPhotoMediaItem(image: image)
+                                    let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
+                                    
+                                    let index = self.imageMapper[messageID]
+                                    self.messages[index!] = message!
+                                    self.collectionView.reloadData()
+                                    
+                                }
+                            })
                         })
-                    })
-                }
-                
-                if date.timeIntervalSince1970 < endDate{
-                    earlierMessage.append(message!)
-                    earlierId.append(messageID)
+                    }
+                    
+                    if date.timeIntervalSince1970 < endDate{
+                        earlierMessage.append(message!)
+                        earlierId.append(messageID)
+                    }
                 }
             }
+            
             if earlierMessage.count == 0{
                 self.showLoadEarlierMessagesHeader = false
             }
@@ -140,9 +154,22 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             self.imageMapper.update(other: earlierMapper)
             self.messages = earlierMessage + self.messages
             
+            //scroll back to current position
+            self.finishReceivingMessage(animated: false)
+            self.collectionView.layoutIfNeeded()
+            //self.collectionView.contentOffset = CGPointMake(0, self.collectionView.contentSize.height - oldBottomOffset)
+            CATransaction.commit()
+            
+            //self.collectionView.infiniteScrollingView.stopAnimating()
+            
+            self.collectionView.collectionViewLayout.springinessEnabled = true
+            
             self.collectionView.reloadData()
-            }
-        )
+        })
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
+        
     }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
@@ -168,6 +195,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         if self.senderId == message.senderId {
             cell.messageBubbleTopLabel.textInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 45)
             cell.cellBottomLabel.textInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 45)
+            
+            JSQMessagesAvatarImageFactory.circularAvatarImage(UIImage(named:"tinyB"), withDiameter: 10)
         } else {
             cell.messageBubbleTopLabel.textInsets = UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
             cell.cellBottomLabel.textInsets = UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
@@ -193,6 +222,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
+        
         return JSQMessagesAvatarImage(avatarImage: UIImage(named:"tinyB"), highlightedImage: nil, placeholderImage: UIImage(named:"tinyB"))
     }
     
@@ -330,7 +360,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     func getMessages(){
-        messageContentRef.child(self.messageID!).queryOrdered(byChild: "date").queryLimited(toLast: 2).observe(.childAdded, with: {(snapshot) in
+        messageContentRef.child(self.messageID!).queryOrdered(byChild: "date").queryLimited(toLast: 10).observe(.childAdded, with: {(snapshot) in
             let message_data = snapshot.value as? [String:Any]
         
             let id = message_data?["sender_id"] as! String
@@ -383,11 +413,6 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 self.collectionView.reloadData()
                 self.scrollToBottom(animated: true)
             }
-            
-            
-            
-            self.showLoadEarlierMessagesHeader = true
-            
         })
     }
     

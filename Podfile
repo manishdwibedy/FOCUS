@@ -45,6 +45,7 @@ target 'FocusInterests' do
     pod 'DottedProgressBar'
     pod 'Gallery'
     pod 'BadgeSwift', '~> 5.0'
+    pod 'SVPullToRefresh', :git => 'https://github.com/gabro/SVPullToRefresh', :branch => 'top-infinitescrolling'
 
 end
 
