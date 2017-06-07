@@ -133,6 +133,64 @@
             </objects>
             <point key="canvasLocation" x="-191.19999999999999" y="178.56071964017991"/>
         </scene>
+        <!--Place All Pins View Controller-->
+        <scene sceneID="fuk-1o-9PB">
+            <objects>
+                <viewController storyboardIdentifier="pinList" id="Oj7-3n-GWr" customClass="PlaceAllPinsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kca-Uq-Vfb"/>
+                        <viewControllerLayoutGuide type="bottom" id="W9o-pl-hZB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4NQ-Xs-b5Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RuW-aW-fbd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFY-uh-CHY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="cyF-t1-Waq"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.3915078341960907" green="0.45119112730026245" blue="0.49692732095718384" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Pins" id="Xnj-HD-Uyh">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Kbh-6f-VOP">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="back:" destination="Oj7-3n-GWr" id="mrv-3x-LDm"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.30103757977485657" green="0.38847538828849792" blue="0.4713401198387146" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="DFY-uh-CHY" firstAttribute="trailing" secondItem="RuW-aW-fbd" secondAttribute="trailing" id="8WN-Ds-k87"/>
+                            <constraint firstItem="DFY-uh-CHY" firstAttribute="leading" secondItem="4NQ-Xs-b5Q" secondAttribute="leading" id="CcU-Vd-l7y"/>
+                            <constraint firstItem="DFY-uh-CHY" firstAttribute="top" secondItem="kca-Uq-Vfb" secondAttribute="bottom" constant="-20" id="Jzj-pp-3dS"/>
+                            <constraint firstItem="RuW-aW-fbd" firstAttribute="bottom" secondItem="W9o-pl-hZB" secondAttribute="top" id="SKa-CD-Hfm"/>
+                            <constraint firstItem="DFY-uh-CHY" firstAttribute="leading" secondItem="RuW-aW-fbd" secondAttribute="leading" id="U0s-VE-7aA"/>
+                            <constraint firstAttribute="trailing" secondItem="DFY-uh-CHY" secondAttribute="trailing" id="Vfh-DB-bmQ"/>
+                            <constraint firstItem="RuW-aW-fbd" firstAttribute="top" secondItem="DFY-uh-CHY" secondAttribute="bottom" id="qxt-34-9x9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="RuW-aW-fbd" id="WgM-44-9Uz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8k-SR-ZhT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1231.2" y="1116.7916041979011"/>
+        </scene>
         <!--Pin View Controller-->
         <scene sceneID="0IN-VZ-1nd">
             <objects>
@@ -409,7 +467,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="355" height="70"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X0F-pH-xsv" id="a3e-fz-772">
-                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="70"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="69.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
@@ -466,6 +524,16 @@
                                                     <constraint firstItem="MXe-hX-m6X" firstAttribute="leading" secondItem="STY-xG-qNq" secondAttribute="leading" constant="10" id="zEt-98-nlE"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ge3-bd-8kY">
+                                                <rect key="frame" x="329" y="700" width="36" height="27"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="More">
+                                                    <color key="titleColor" red="0.68356941199999999" green="0.71607434800000003" blue="0.75323624020000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="morePins:" destination="otb-Ee-qlq" eventType="touchUpInside" id="eMO-Xb-1P4"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>

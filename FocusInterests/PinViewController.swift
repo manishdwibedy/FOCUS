@@ -251,6 +251,18 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         
     }
     
+    @IBAction func morePins(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "pinList") as! PlaceAllPinsViewController
+        for str in (place?.address)!
+        {
+            ivc.placeID = ivc.placeID + " " + str
+            
+        }
+        self.present(ivc, animated: true, completion: { _ in })
+    }
+    
+    
     
     /*
     // MARK: - Navigation
