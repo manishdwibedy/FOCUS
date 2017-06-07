@@ -66,13 +66,22 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         cell.textLabel?.textColor = UIColor.white
+        
+       // cell.imageView?.roundedImage()
+        
+//        cell.imageView?.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
 
+        
+        cell.imageView?.layer.cornerRadius = 25
+        cell.imageView?.clipsToBounds = true
         
         if !searching{
             cell.textLabel?.text = self.users[indexPath.row]["username"] as! String?
+            cell.detailTextLabel?.text = self.users[indexPath.row]["fullname"] as? String
         }
         else{
             cell.textLabel?.text = self.filtered[indexPath.row]["username"] as! String?
+            cell.detailTextLabel?.text = self.filtered[indexPath.row]["fullname"] as? String
         }
         
 //        cell.preservesSuperviewLayoutMargins = false
