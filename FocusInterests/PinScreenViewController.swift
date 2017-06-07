@@ -21,7 +21,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var pinTextView: UITextView!
     @IBOutlet weak var cancelOut: UIButton!
     @IBOutlet weak var pinOut: UIButton!
+    @IBOutlet weak var cancelButtonOut: UIButton!
     
+    var pinType = "normal"
     var imageArray = [UIImage]()
     var cellArray = [PinImageCollectionViewCell]()
     let gallery = GalleryController()
@@ -30,6 +32,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     let locationManager = CLLocationManager()
     var place: GMSPlace!
     var coordinates = CLLocationCoordinate2D()
+    var locationName = ""
     var formmatedAddress = ""
     
     let sidePadding: CGFloat = 0.0
@@ -66,6 +69,15 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
 //        })
         
         
+        if pinType == "normal"
+        {
+            cancelButtonOut.isHidden = true
+        }else
+        {
+            cancelButtonOut.isHidden = false
+            changeLocationOut.isHidden = true
+            locationLabel.text = locationName
+        }
         
         imageArray.append(UIImage(named:"Icon-Small-50x50@1x")!)
         
@@ -141,6 +153,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func pin(_ sender: Any) {
+        Constants.DB.pins.child(AuthApi.getFirebaseUid()!).removeValue()
         for cell in cellArray
         {
             if cell.selectedIs == true
@@ -177,6 +190,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         for cell in cellArray
         {
             cell.imageView.layer.borderWidth = 0
+        }
+        
+        if pinType != "normal"
+        {
+            dismiss(animated: true, completion: nil)
         }
     
     }
@@ -336,6 +354,12 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         }
 
     }
+    
+    
+    @IBAction func cancelButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 
  
 }

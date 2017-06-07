@@ -234,6 +234,24 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             print("Can't use comgooglemaps://");
         }
     }
+    
+    @IBAction func pin(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "Home") as! PinScreenViewController
+        ivc.pinType = "place"
+        for str in (place?.address)!
+        {
+         ivc.formmatedAddress = ivc.formmatedAddress + " " + str
+        
+        }
+        ivc.coordinates.latitude = (place?.latitude)!
+        ivc.coordinates.longitude = (place?.longitude)!
+        ivc.locationName = (place?.name)!
+        self.present(ivc, animated: true, completion: { _ in })
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 

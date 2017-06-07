@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -47,9 +47,17 @@
                                             <constraint firstAttribute="width" constant="50" id="v51-yS-7fu"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DF-Ze-hpf">
+                                        <rect key="frame" x="320" y="8" width="48" height="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="oGh-eu-0Fe"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.087884031236171722" green="0.16743460297584534" blue="0.26403400301933289" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1DF-Ze-hpf" secondAttribute="trailing" constant="7" id="86T-cZ-vo9"/>
                                     <constraint firstItem="Odg-wd-kdR" firstAttribute="leading" secondItem="K7V-u7-6WN" secondAttribute="trailing" constant="8" id="N2P-oO-IKB"/>
                                     <constraint firstAttribute="trailing" secondItem="5eI-xS-jZm" secondAttribute="trailing" constant="8" id="NEw-h8-oyj"/>
                                     <constraint firstItem="K7V-u7-6WN" firstAttribute="leading" secondItem="hX9-m6-m5m" secondAttribute="leadingMargin" constant="11" id="PK7-B4-MlC"/>
@@ -58,6 +66,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Odg-wd-kdR" secondAttribute="bottom" constant="14" id="ltn-k4-GrJ"/>
                                     <constraint firstItem="5eI-xS-jZm" firstAttribute="top" secondItem="hX9-m6-m5m" secondAttribute="top" constant="18" id="nOH-PX-Xt9"/>
                                     <constraint firstAttribute="trailing" secondItem="Odg-wd-kdR" secondAttribute="trailing" constant="27" id="noj-BE-9Zu"/>
+                                    <constraint firstItem="1DF-Ze-hpf" firstAttribute="top" secondItem="hX9-m6-m5m" secondAttribute="topMargin" id="utH-Lb-YPe"/>
                                     <constraint firstItem="K7V-u7-6WN" firstAttribute="top" secondItem="hX9-m6-m5m" secondAttribute="top" constant="18" id="web-y6-ajn"/>
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
@@ -190,6 +199,7 @@
                     <tabBarItem key="tabBarItem" title="" image="pin" id="Zae-ix-DKq"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cancelButtonOut" destination="1DF-Ze-hpf" id="eGh-Tj-Ni8"/>
                         <outlet property="cancelOut" destination="uye-eQ-vsG" id="ZVL-0o-LoF"/>
                         <outlet property="changeLocationOut" destination="Odg-wd-kdR" id="HGk-xP-N0Y"/>
                         <outlet property="collectionView" destination="A0j-it-CBu" id="b4r-kk-qCU"/>
@@ -406,6 +416,6 @@
     </scenes>
     <resources>
         <image name="UserPhoto" width="102" height="102"/>
-        <image name="pin" width="30" height="30"/>
+        <image name="pin" width="122" height="122"/>
     </resources>
 </document>
