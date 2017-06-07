@@ -41,6 +41,8 @@
 		5B448E581EE72C1B00873F79 /* FollowersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B448E551EE72C1B00873F79 /* FollowersTableViewCell.swift */; };
 		5B448E591EE72C1B00873F79 /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B448E561EE72C1B00873F79 /* FollowersViewController.swift */; };
 		5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B448E5A1EE72C3400873F79 /* Following.storyboard */; };
+		5B448E621EE7B7FC00873F79 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B448E601EE7B7FC00873F79 /* MessageTableViewCell.swift */; };
+		5B448E631EE7B7FC00873F79 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B448E611EE7B7FC00873F79 /* MessageTableViewCell.xib */; };
 		5B519E751ED667D000B36110 /* Pin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B519E741ED667D000B36110 /* Pin.storyboard */; };
 		5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */; };
 		5B519E7A1ED677D800B36110 /* SearchPeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */; };
@@ -294,6 +296,8 @@
 		5B448E551EE72C1B00873F79 /* FollowersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTableViewCell.swift; sourceTree = "<group>"; };
 		5B448E561EE72C1B00873F79 /* FollowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		5B448E5A1EE72C3400873F79 /* Following.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Following.storyboard; sourceTree = "<group>"; };
+		5B448E601EE7B7FC00873F79 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		5B448E611EE7B7FC00873F79 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		5B519E741ED667D000B36110 /* Pin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pin.storyboard; sourceTree = "<group>"; };
 		5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleViewController.swift; sourceTree = "<group>"; };
 		5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleTableViewCell.swift; sourceTree = "<group>"; };
@@ -780,6 +784,8 @@
 				5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */,
 				5BA37C811EBE9DE30091189E /* NewMessageViewController.swift */,
 				5BA37C7F1EBDC4D90091189E /* ChatViewController.swift */,
+				5B448E601EE7B7FC00873F79 /* MessageTableViewCell.swift */,
+				5B448E611EE7B7FC00873F79 /* MessageTableViewCell.xib */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -1330,6 +1336,7 @@
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
 				5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */,
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
+				5B448E631EE7B7FC00873F79 /* MessageTableViewCell.xib in Resources */,
 				FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */,
 				FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */,
 				EB5891C81EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib in Resources */,
@@ -1618,6 +1625,7 @@
 				5B33C05E1EE113D3007A8188 /* MapPinInfoView.swift in Sources */,
 				5B634C831ED196BE00EBCC29 /* CustomClusterRenderer.swift in Sources */,
 				5B51C8D41EA722D2007E8D99 /* CreateEventViewController.swift in Sources */,
+				5B448E621EE7B7FC00873F79 /* MessageTableViewCell.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				5B959FF51ECD48CB00094FE6 /* PlaceRating.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,

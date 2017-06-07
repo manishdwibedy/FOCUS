@@ -28,7 +28,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         super.viewDidLoad()
 
         self.senderId = AuthApi.getFirebaseUid()
-        self.senderDisplayName = "USER 1"
+        self.senderDisplayName = ""
         
         self.names = [
             self.senderId: self.senderDisplayName,
@@ -37,19 +37,21 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         
         self.collectionView.backgroundColor = UIColor(hexString: "445464")
         
-        self.inputToolbar.contentView.textView.backgroundColor = UIColor.lightGray
+        self.inputToolbar.contentView.textView.backgroundColor = UIColor.clear
         self.inputToolbar.contentView.textView.textColor = UIColor.white
-        self.inputToolbar.backgroundColor = UIColor.white
+        self.inputToolbar.contentView.textView.roundCorners(radius: 5)
+        
+        self.inputToolbar.contentView.backgroundColor = UIColor(hexString: "445464")
+        
         self.inputToolbar.contentView.textView.placeHolderTextColor = UIColor.white
         self.inputToolbar.contentView.textView.placeHolder = "Enter the message"
+        
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
         markUnread()
         getMessageID()
         
         self.navigationItem.title = self.user["username"]! as? String
-        super.collectionView.keyboardDismissMode = .interactive
-        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -254,7 +256,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 agrume.showFrom(self)
             }
         }
-        
+        self.view.endEditing(true)
     }
     
     override func textViewDidChange(_ textView: UITextView) {
@@ -495,7 +497,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/read").setValue(true)
     }
     
-    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapCellAt indexPath: IndexPath!, touchLocation: CGPoint) {
+        self.view.endEditing(true)
+    }
     
     /*
     // MARK: - Navigation

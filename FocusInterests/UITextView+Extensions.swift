@@ -11,8 +11,10 @@ import Foundation
 extension UITextView{
     func roundCorners(radius: Double){
         self.layer.cornerRadius = CGFloat(radius)
-//        self.layer.borderWidth = 2.0
-//        self.layer.borderColor = UIColor.redColor().CGColor
-
+    }
+    
+    func addBorder(width: Double, color: UIColor){
+        self.layer.borderWidth = CGFloat(width)
+        self.layer.borderColor = color.cgColor
     }
 }

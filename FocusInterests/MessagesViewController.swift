@@ -17,6 +17,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     var messageMapper = [String: UserMessages]()
     private var _messages = [UserMessages]()
     
+    var contentMapping = [String: UserMessages]()
+    
     @IBOutlet weak var messageTable: UITableView!
     var messages: [UserMessages]{
         get{
@@ -44,6 +46,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.messageTable.bounds.size.width, height: self.messageTable.bounds.size.height))
         backgroundView.backgroundColor = UIColor(hexString: "445464")
         messageTable.backgroundView = backgroundView
+        
+        let nib = UINib(nibName: "MessageTableViewCell", bundle: nil)
+        messageTable.register(nib, forCellReuseIdentifier: "cell")
         
         self.messageTable.separatorColor = UIColor.white
         self.messageTable.separatorInset = UIEdgeInsets.zero
@@ -85,14 +90,33 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             if let unix = message?["date"] as? Double{
                 let date = Date(timeIntervalSince1970: unix)
                 
+                self.usersRef.child(snapshot.key).keepSynced(true)
                 self.usersRef.child(snapshot.key).observeSingleEvent(of: .value, with: {(snapshot) in
                     let user_info = snapshot.value as! [String:Any]
                     let username = user_info["username"] as! String
+                    let image_string = user_info["image_string"] as! String
                     
-                    let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date)
+                    let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date, image_string: image_string)
+                    
                     self.messageMapper[snapshot.key] = userMessage
                     self.userInfo[snapshot.key] = user_info
-                    self.messages.append(userMessage)
+                    self.contentMapping[userMessage.messageID] = userMessage
+                    
+                    Constants.DB.message_content.child(userMessage.messageID).queryOrdered(byChild: "date").queryLimited(toLast: 1).observe(.childAdded, with: {(snapshot) in
+                        let message_data = snapshot.value as? [String:Any]
+                        let id = userMessage.messageID
+                        
+                        if let text = message_data?["text"]{
+                            let message = self.contentMapping[id]
+                            message?.addLastContent(lastContent: text as! String)
+                        }
+                        else{
+                            
+                        }
+                        
+                        self.messages.append(userMessage)
+                        self.messageTable.reloadData()
+                    })
                     
                 })
             }
@@ -128,25 +152,29 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MessageTableViewCell
         let formatter = DateFormatter()
     
         let message = self.messages[indexPath.row]
-        cell.textLabel?.text = message.name
-        cell.textLabel?.textColor = UIColor.white
-        cell.detailTextLabel?.textColor = UIColor.white
-
+        cell.username.text = message.name
+        
+        cell.userImage.sd_setImage(with: URL(string: message.image_string)!, placeholderImage: UIImage(named: "UserPhoto"))
+        cell.content.text = message.lastContent
+        
         let date = message.lastMessageDate
-        cell.detailTextLabel?.text = formatter.timeSince(from: date, numericDates: false)
+        cell.time.text = formatter.timeSince(from: date, numericDates: false)
         
         if !message.readMessages{
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
-            cell.detailTextLabel?.font = UIFont.boldSystemFont(ofSize: 15.0)
+            
+            cell.textLabel?.font = UIFont(name: "Avenir-Book", size: 15)
+            cell.detailTextLabel?.font = UIFont(name: "Avenir-Book", size: 15)
         }
         else{
-            cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 15)
-            cell.detailTextLabel?.font = UIFont.italicSystemFont(ofSize: 15.0)
+            cell.textLabel?.font = UIFont(name: "Avenir-Book", size: 15)
+            cell.detailTextLabel?.font = UIFont(name: "Avenir-Book", size: 15)
         }
+        
+        cell.backgroundColor = .clear
         return cell
     }
     

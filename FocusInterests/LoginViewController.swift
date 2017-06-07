@@ -213,6 +213,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                             if let username = info?["username"] as? String{
                                                 if username.isEmpty{
                                                     Constants.DB.user.child("\(fireId)/username").setValue(username)
+                                                    AuthApi.set(username: username)
                                                 }
                                                 
                                             }
@@ -367,6 +368,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         if let username = info?["username"] as? String{
                             if username.isEmpty{
                                 Constants.DB.user.child("\(fireId)/username").setValue(googleUser.profile.email)
+                                AuthApi.set(username: username)
                             }
                             
                         }
