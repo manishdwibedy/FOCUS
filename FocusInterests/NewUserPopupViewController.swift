@@ -20,13 +20,13 @@ class NewUserPopupViewController: UIViewController {
     let info = [
         ["", "What if you could have an all-in-one view of the people, places and events YOU are about?", "Well, now YOU can", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
         
-        ["People", "People", "People are shown on your map when they Pin their location and FOCUS. You can choose to view activities and places you'll both like.", "people", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
+        ["intro_greenpin", "People", "People are shown on your map when they Pin their location and FOCUS. You can choose to view activities and places you'll both like.", "people", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
-        ["place_icon", "Places", "You now have a personalized Mpa of all the places that you FOCUS on. Rather than having to search for individual places you like, they'll always be up on your Map.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
+        ["intro_place", "Places", "You now have a personalized Map of all the places that you FOCUS on. Rather than having to search for individual places you like, they'll always be up on your Map.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
-        ["Event", "Places", "You now have a personalized Map of all the places that you FOCUS on. Rather than having to search for individual places you like, they'll always be up on your Map.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
+        ["intro_event", "Events", "A real-time look at the events that match your FOCUS. As new events are created, they'll be added to your Map. You can even move around the map to find cool events around town", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
-        ["place_icon", "Pin", "Create your first Pin now and connect with others who have a similar FOCUS!", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)]
+        ["intro_whitepin", "Pin", "Create your first Pin now and connect with others who have a similar FOCUS!", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)]
     ]
     
     var index = 0
