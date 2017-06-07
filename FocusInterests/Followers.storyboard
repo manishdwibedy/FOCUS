@@ -13,7 +13,7 @@
         <scene sceneID="uek-ck-4F2">
             <objects>
                 <navigationController storyboardIdentifier="Followers" hidesBarsWhenVerticallyCompact="YES" id="WBk-Go-dbG" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Xw-im-jPf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8Xw-im-jPf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>

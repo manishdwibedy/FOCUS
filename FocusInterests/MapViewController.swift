@@ -577,7 +577,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         self.present(VC, animated:true, completion:nil)
         
-        
     }
     
     func messagesClicked() {
