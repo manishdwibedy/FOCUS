@@ -52,7 +52,13 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         
         hideKeyboardWhenTappedAround()
         
-        Constants.DB.pins.queryOrdered(byChild: "formattedAddress").queryEqual(toValue: place?.id).observeSingleEvent(of: .value, with: { (snapshot) in
+        var address = ""
+        for str in (place?.address)!
+        {
+            address = address + " " + str
+            
+        }
+        Constants.DB.pins.queryOrdered(byChild: "formattedAddress").queryEqual(toValue: address).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
@@ -180,6 +186,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         let cell = Bundle.main.loadNibNamed("PinTableViewCell", owner: self, options: nil)?.first as! PinTableViewCell
         cell.data = data[indexPath.row]
         cell.comment.text = data[indexPath.row]["pin"] as! String
+        cell.loadLikes()
+        cell.parentVC = self
         Constants.DB.user.child(data[indexPath.row]["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil

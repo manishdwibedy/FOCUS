@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pYf-yc-Qtf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pYf-yc-Qtf">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,9 +22,6 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
-                    <connections>
-                        <segue destination="MO9-xI-UHS" kind="relationship" relationship="rootViewController" id="9qm-FU-g6V"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JBH-Iw-Lwt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -32,7 +30,7 @@
         <!--Comments-->
         <scene sceneID="upz-07-02E">
             <objects>
-                <viewController id="MO9-xI-UHS" customClass="CommentsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="comments" id="MO9-xI-UHS" customClass="CommentsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ocw-D2-Ere"/>
                         <viewControllerLayoutGuide type="bottom" id="996-ay-R9w"/>
@@ -42,8 +40,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nor-xQ-mzc">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="558"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="494"/>
                                 <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="494" id="fxg-7A-Cpq"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="MO9-xI-UHS" id="GWZ-r7-dmy"/>
                                     <outlet property="delegate" destination="MO9-xI-UHS" id="Iig-J6-2JG"/>
@@ -71,40 +72,65 @@
                                         <state key="normal" title="Post">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="post:" destination="MO9-xI-UHS" eventType="touchUpInside" id="er7-oG-2o3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUN-Hw-R4h">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" red="0.24209624528884888" green="0.33750134706497192" blue="0.42442375421524048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="MLs-bV-pQr"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.24209624530000001" green="0.33750134710000002" blue="0.4244237542" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Comments" id="Tqf-Gh-846">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="WZl-E0-Jgj">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backButtonAction:" destination="MO9-xI-UHS" id="Jkt-42-fEk"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="uWn-nL-sQi" secondAttribute="trailing" constant="16" id="9bC-Vl-IOe"/>
-                            <constraint firstItem="996-ay-R9w" firstAttribute="top" secondItem="uWn-nL-sQi" secondAttribute="bottom" constant="20" id="Bw1-1d-d9i"/>
-                            <constraint firstAttribute="trailing" secondItem="nor-xQ-mzc" secondAttribute="trailing" id="EWG-Bv-zsZ"/>
-                            <constraint firstItem="uWn-nL-sQi" firstAttribute="top" secondItem="nor-xQ-mzc" secondAttribute="bottom" constant="21" id="GzW-Hh-9Eb"/>
-                            <constraint firstItem="uWn-nL-sQi" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leading" constant="16" id="Kdy-ws-ulX"/>
-                            <constraint firstItem="nor-xQ-mzc" firstAttribute="top" secondItem="uLA-n2-bmV" secondAttribute="top" id="L8a-c9-Uaf"/>
-                            <constraint firstItem="nor-xQ-mzc" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leading" id="Q3U-jC-iQb"/>
-                            <constraint firstItem="996-ay-R9w" firstAttribute="top" secondItem="nor-xQ-mzc" secondAttribute="bottom" constant="109" id="k8s-ca-Nsb"/>
+                            <constraint firstItem="mUN-Hw-R4h" firstAttribute="top" secondItem="ocw-D2-Ere" secondAttribute="bottom" constant="-20" id="A7r-0Y-QDo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nor-xQ-mzc" secondAttribute="trailing" constant="-16" id="HB3-MO-5kO"/>
+                            <constraint firstItem="nor-xQ-mzc" firstAttribute="centerX" secondItem="uWn-nL-sQi" secondAttribute="centerX" id="Ijq-pJ-99D"/>
+                            <constraint firstItem="nor-xQ-mzc" firstAttribute="top" secondItem="mUN-Hw-R4h" secondAttribute="bottom" id="Ioz-58-D7m"/>
+                            <constraint firstItem="uWn-nL-sQi" firstAttribute="top" secondItem="nor-xQ-mzc" secondAttribute="bottom" constant="21" id="OB9-G4-2yU"/>
+                            <constraint firstItem="nor-xQ-mzc" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leadingMargin" constant="-16" id="Uli-E3-MvS"/>
+                            <constraint firstItem="mUN-Hw-R4h" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leadingMargin" constant="-16" id="VKb-yk-Vjq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mUN-Hw-R4h" secondAttribute="trailing" constant="-16" id="asZ-MU-bBz"/>
+                            <constraint firstAttribute="bottom" secondItem="uWn-nL-sQi" secondAttribute="bottom" constant="20" symbolic="YES" id="eme-6J-Bh0"/>
+                            <constraint firstItem="uWn-nL-sQi" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leadingMargin" id="h60-20-oZT"/>
+                            <constraint firstItem="nor-xQ-mzc" firstAttribute="leading" secondItem="mUN-Hw-R4h" secondAttribute="trailing" constant="-375" id="zXL-fH-klG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Comments" id="QB6-7T-G7n">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="Ult-gF-jDh">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="backButtonAction:" destination="MO9-xI-UHS" id="4AL-IO-f04"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addCommentView" destination="uWn-nL-sQi" id="zVk-DZ-oao"/>
+                        <outlet property="commentField" destination="5hr-AB-2uG" id="caY-Vh-Fha"/>
                         <outlet property="commentsTableView" destination="nor-xQ-mzc" id="84T-ig-Kha"/>
                         <outlet property="postButton" destination="l6a-of-LZd" id="hsG-pu-IhC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fp6-z6-BE4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="453.60000000000002" y="116.49175412293854"/>
+            <point key="canvasLocation" x="452" y="127.28635682158921"/>
         </scene>
     </scenes>
     <resources>
