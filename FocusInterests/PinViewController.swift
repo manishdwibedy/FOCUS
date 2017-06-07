@@ -42,6 +42,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var uberButton: UIButton!
     @IBOutlet weak var googleMapButton: UIButton!
     
+    var data = [NSDictionary]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,6 +51,19 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         loadInfoScreen(place: self.place!)
         
         hideKeyboardWhenTappedAround()
+        
+        Constants.DB.pins.queryOrdered(byChild: "formattedAddress").queryEqual(toValue: place?.id).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                for (key,_) in value!
+                {
+                    self.data.append(value?[key] as! NSDictionary)
+                }
+            }
+            self.table.reloadData()
+            
+        })
     }
     
     func loadInfoScreen(place: Place){
@@ -157,17 +172,23 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = Bundle.main.loadNibNamed("PinTableViewCell", owner: self, options: nil)?.first as! PinTableViewCell
-        cell.username.text = "hello"
-        cell.comment.text = "asasasasa"
-        cell.focus.text = "dummy"
-        cell.time.text = "Just now"
-        cell.userImage.image = UIImage(named: "addUser")
+        cell.data = data[indexPath.row]
+        cell.comment.text = data[indexPath.row]["pin"] as! String
+        Constants.DB.user.child(data[indexPath.row]["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                cell.username.text = value?["username"] as? String
+                
+            }
+            
+        })
         return cell
     }
     

@@ -45,9 +45,11 @@ class PlaceAllPinsViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = Bundle.main.loadNibNamed("PinTableViewCell", owner: self, options: nil)?.first as! PinTableViewCell
+        cell.data = data[indexPath.row]
         cell.comment.text = data[indexPath.row]["pin"] as! String
-        //cell.comment.text = "asasasasa"
-        cell.focus.text = ""
+        cell.loadLikes()
+        //cell.focus.text = ""
+        //cell.time.text = ""
         Constants.DB.user.child(data[indexPath.row]["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
@@ -57,7 +59,6 @@ class PlaceAllPinsViewController: UIViewController, UITableViewDelegate, UITable
             }
             
         })
-        cell.userImage.image = UIImage(named: "addUser")
         return cell
     }
     
