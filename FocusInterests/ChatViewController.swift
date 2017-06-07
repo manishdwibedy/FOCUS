@@ -28,7 +28,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         super.viewDidLoad()
 
         self.senderId = AuthApi.getFirebaseUid()
-        self.senderDisplayName = "USER 1"
+        self.senderDisplayName = ""
         
         self.names = [
             self.senderId: self.senderDisplayName,
@@ -48,8 +48,6 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         getMessageID()
         
         self.navigationItem.title = self.user["username"]! as? String
-        super.collectionView.keyboardDismissMode = .interactive
-        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -254,7 +252,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 agrume.showFrom(self)
             }
         }
-        
+        self.view.endEditing(true)
     }
     
     override func textViewDidChange(_ textView: UITextView) {
@@ -495,7 +493,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/read").setValue(true)
     }
     
-    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapCellAt indexPath: IndexPath!, touchLocation: CGPoint) {
+        self.view.endEditing(true)
+    }
     
     /*
     // MARK: - Navigation

@@ -46,6 +46,19 @@ struct AuthApi {
         return nil
     }
     
+    static func set(username: String?) {
+        if let username = username {
+            defaults.set(username, forKey: "username")
+        }
+    }
+    
+    static func getUserName() -> String? {
+        if let username = defaults.object(forKey: "username") as? String {
+            return username
+        }
+        return nil
+    }
+    
     static func set(facebookToken: String?) {
         defaults.set(facebookToken, forKey: "facebookAccessToken")
     }
