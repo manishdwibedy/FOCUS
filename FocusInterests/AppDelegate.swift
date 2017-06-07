@@ -235,6 +235,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
+        if Auth.auth().canHandleNotification(userInfo) {
+//            completionHandler(UIBackgroundFetchResultNoData)
+//            completionHandler(UIBackgroundFetchResult)
+            return
+        }
+        
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
@@ -257,6 +263,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("APNs token retrieved: \(deviceToken)")
         
+        Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.prod)
+
         // With swizzling disabled you must set the APNs token here.
         // Messaging.messaging().apnsToken = deviceToken
     }

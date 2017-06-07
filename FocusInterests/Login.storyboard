@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Nwf-t9-YbQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Nwf-t9-YbQ">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -742,7 +742,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Next"/>
                                         <connections>
-                                            <segue destination="23E-AK-q7g" kind="show" identifier="finishSignUp" id="RTW-rg-yJM"/>
+                                            <action selector="nextButtonClicked:" destination="8P8-kk-dh6" eventType="touchUpInside" id="7cX-eW-heU"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -785,6 +785,7 @@
                     <connections>
                         <outlet property="phoneEmailSwitcher" destination="hnt-i7-qSc" id="WTh-Xi-J9P"/>
                         <outlet property="phoneOrEmailTextField" destination="694-lq-czT" id="a6M-24-s7k"/>
+                        <segue destination="23E-AK-q7g" kind="show" identifier="next" id="SJs-J2-cg4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yum-uS-gpM" userLabel="First Responder" sceneMemberID="firstResponder"/>

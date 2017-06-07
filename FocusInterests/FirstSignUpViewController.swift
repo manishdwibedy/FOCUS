@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
     
@@ -24,6 +25,20 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
         
         hideKeyboardWhenTappedAround()
         
+    }
+    
+    @IBAction func nextButtonClicked(_ sender: Any) {
+        if phoneEmailSwitcher.selectedSegmentIndex == 0{
+            PhoneAuthProvider.provider().verifyPhoneNumber(self.phoneOrEmailTextField.text!) { (verificationID, error) in
+                if ((error) != nil) {
+                    print(error)
+                } else {
+                    print(verificationID)
+                    UserDefaults.standard.set(verificationID, forKey: "firebase_verification")
+                    UserDefaults.standard.synchronize()
+                }
+            }
+        }
     }
     
     @IBAction func typeOfSignUpWasSelected(_ sender: Any) {
