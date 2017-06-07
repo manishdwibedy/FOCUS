@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pYf-yc-Qtf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="hK1-Zg-svd">
+            <objects>
+                <navigationController storyboardIdentifier="Comments" id="pYf-yc-Qtf" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WaK-yN-wKY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="MO9-xI-UHS" kind="relationship" relationship="rootViewController" id="9qm-FU-g6V"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JBH-Iw-Lwt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-551" y="118"/>
+        </scene>
+        <!--Comments-->
+        <scene sceneID="upz-07-02E">
+            <objects>
+                <viewController id="MO9-xI-UHS" customClass="CommentsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ocw-D2-Ere"/>
+                        <viewControllerLayoutGuide type="bottom" id="996-ay-R9w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uLA-n2-bmV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nor-xQ-mzc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="558"/>
+                                <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="MO9-xI-UHS" id="GWZ-r7-dmy"/>
+                                    <outlet property="delegate" destination="MO9-xI-UHS" id="Iig-J6-2JG"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWn-nL-sQi">
+                                <rect key="frame" x="16" y="579" width="343" height="68"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5hr-AB-2uG">
+                                        <rect key="frame" x="61" y="17" width="198" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mail" translatesAutoresizingMaskIntoConstraints="NO" id="JCv-yt-LuN">
+                                        <rect key="frame" x="23" y="18" width="30" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6a-of-LZd">
+                                        <rect key="frame" x="279" y="22" width="50" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                        <state key="normal" title="Post">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="uWn-nL-sQi" secondAttribute="trailing" constant="16" id="9bC-Vl-IOe"/>
+                            <constraint firstItem="996-ay-R9w" firstAttribute="top" secondItem="uWn-nL-sQi" secondAttribute="bottom" constant="20" id="Bw1-1d-d9i"/>
+                            <constraint firstAttribute="trailing" secondItem="nor-xQ-mzc" secondAttribute="trailing" id="EWG-Bv-zsZ"/>
+                            <constraint firstItem="uWn-nL-sQi" firstAttribute="top" secondItem="nor-xQ-mzc" secondAttribute="bottom" constant="21" id="GzW-Hh-9Eb"/>
+                            <constraint firstItem="uWn-nL-sQi" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leading" constant="16" id="Kdy-ws-ulX"/>
+                            <constraint firstItem="nor-xQ-mzc" firstAttribute="top" secondItem="uLA-n2-bmV" secondAttribute="top" id="L8a-c9-Uaf"/>
+                            <constraint firstItem="nor-xQ-mzc" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leading" id="Q3U-jC-iQb"/>
+                            <constraint firstItem="996-ay-R9w" firstAttribute="top" secondItem="nor-xQ-mzc" secondAttribute="bottom" constant="109" id="k8s-ca-Nsb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Comments" id="QB6-7T-G7n">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="Ult-gF-jDh">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="backButtonAction:" destination="MO9-xI-UHS" id="4AL-IO-f04"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addCommentView" destination="uWn-nL-sQi" id="zVk-DZ-oao"/>
+                        <outlet property="commentsTableView" destination="nor-xQ-mzc" id="84T-ig-Kha"/>
+                        <outlet property="postButton" destination="l6a-of-LZd" id="hsG-pu-IhC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fp6-z6-BE4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="453.60000000000002" y="116.49175412293854"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="mail" width="32" height="32"/>
+    </resources>
+</document>

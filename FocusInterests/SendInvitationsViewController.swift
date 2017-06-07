@@ -10,11 +10,19 @@ import UIKit
 import Contacts
 import FirebaseStorage
 
-class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol SendInvitationsViewControllerDelegate {
+    func contactHasBeenSelected(contact: String)
+}
+
+class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SendInvitationsViewControllerDelegate{
     
-    @IBOutlet weak var inviteFromContactsBttn: UIButton!
-    @IBOutlet weak var createEventBttn: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var friendsTableView: UITableView!
+    @IBOutlet weak var contactList: UILabel!
+    @IBOutlet weak var contactListView: UIView!
+    
+    let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    
     var event: Event?
     var image: Data?
     var selectedFriend = [Bool]()
@@ -23,20 +31,35 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         formatNavBar()
-        formatSubViews()
+        
+        self.sendButton.roundCorners(radius: 10.0)
+        
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
         
+        self.friendsTableView.allowsSelection = false
+        
+        if contacts.count <= 0 {
+            contactListView.isHidden = true
+        }else{
+            contactListView.isHidden = false
+        }
+        
+        let inviteListCellNib = UINib(nibName: "InviteListTableViewCell", bundle: nil)
+        friendsTableView.register(inviteListCellNib, forCellReuseIdentifier: "personToInvite")
+        
+        let selectedTimeListCellNib = UINib(nibName: "SelectedTimeTableViewCell", bundle: nil)
+        friendsTableView.register(selectedTimeListCellNib, forCellReuseIdentifier: "selectedTimeCell")
+        
         if CNContactStore.authorizationStatus(for: .contacts) == .authorized{
-            inviteFromContactsBttn.isEnabled = false
             self.retrieveContactsWithStore(store: self.store)
         }
         else{
             
         }
         
-        friendsTableView.tableFooterView = UIView()
         hideKeyboardWhenTappedAround()
     }
     
@@ -76,29 +99,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             print(error)
         }
     }
-    
-    @IBAction func createEvents(_ sender: UIButton) {
-        Event.clearCache()
-        let id = self.event?.saveToDB(ref: Constants.DB.event)
-        
-        if let data = self.image{
-            let imageRef = Constants.storage.event.child("\(id!).jpg")
-            
-            // Create file metadata including the content type
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/jpeg"
-            
-            let _ = imageRef.putData(data, metadata: metadata) { (metadata, error) in
-                guard let metadata = metadata else {
-                    // Uh-oh, an error occurred!
-                    print("\(error!)")
-                    return
-                }
-                // Metadata contains file metadata such as size, content-type, and download URL.
-                let _ = metadata.downloadURL
-            }
-        }
-    }
 
     private func formatNavBar(){
         self.navigationItem.title = "Send Invites"
@@ -106,67 +106,55 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
     }
     
-    func formatSubViews(){
-        self.inviteFromContactsBttn.layer.cornerRadius = 10.0
-        self.createEventBttn.layer.cornerRadius = 10.0
-        self.friendsTableView.layer.cornerRadius = 10.0
-    }
-    
     // MARK: - Tableview Delegate Methods
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(section == 0){
+            return 1
+        }
         return contacts.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 56
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return self.alphabeticalSections
+    }
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        var temp = self.alphabeticalSections as NSArray
+        return temp.index(of: title)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = friendsTableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! InviteFriendTableViewCell
         
-        cell.friendIconImageView.roundedImage()
-        cell.friendIconImageView.addBorder(width: 2, color: UIColor.black)
-        
-        let friend = self.contacts[indexPath.row]
-        
-        cell.friendLabel.text = "\(friend.givenName) \(friend.familyName)"
-        if let data = friend.imageData{
-            cell.friendIconImageView.image = UIImage(data: data)
+        if(indexPath.section == 0){
+            let selectedTimeTableCell = tableView.dequeueReusableCell(withIdentifier: "selectedTimeCell", for: indexPath) as! SelectedTimeTableViewCell
+            return selectedTimeTableCell
         }
         
-        if selectedFriend[indexPath.row]{
-            cell.selectedFriend.image = UIImage(named: "Interest_Filled")
-        }
-        else{
-            cell.selectedFriend.image = UIImage(named: "Interest_blank")
-        }
+        let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
+        personToInviteCell.delegate = self
         
-        return cell
+        personToInviteCell.usernameLabel.text = self.contacts[indexPath.row].givenName //will need to change this to the username of user
+        personToInviteCell.fullNameLabel.text = self.contacts[indexPath.row].givenName
+        
+        return personToInviteCell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = friendsTableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! InviteFriendTableViewCell
-        
-        self.selectedFriend[indexPath.row] = !self.selectedFriend[indexPath.row]
-        
-        if selectedFriend[indexPath.row]{
-            cell.selectedFriend.image = UIImage(named: "Interest_Filled")
-        }
-        else{
-            cell.selectedFriend.image = UIImage(named: "Interest_blank")
-        }
-        tableView.reloadData()
-    }
-    
-    func postOnTwitter(text: String){
-        if AuthApi.getTwitterToken() == nil{
-            do{
-                try Share.loginAndShareTwitter(withStatus: text)
-            }
-            catch{
-                
-            }
-            
-        }
-        else{
-            Share.postToTwitter(withStatus: text)
+    func contactHasBeenSelected(contact: String){
+        print(contact)
+        contactListView.isHidden = false
+        if contactList.text!.isEmpty {
+            contactList.text = "\(contact)"
+        }else{
+            contactList.text = contactList.text! + ",\(contact)"
         }
     }
     

@@ -52,6 +52,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         
         return followersCell
     }
+    
     @IBAction func backAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

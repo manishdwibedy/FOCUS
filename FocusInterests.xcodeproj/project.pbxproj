@@ -209,6 +209,15 @@
 		D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */; };
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
 		EB3EA23A1EE7684500F61D38 /* _Main Logo Transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */; };
+		EB3EA2421EE7707500F61D38 /* InviteListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */; };
+		EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */; };
+		EB5891C71EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891C51EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift */; };
+		EB5891C81EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5891C61EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib */; };
+		EB5891CE1EE7E5B300C35EE9 /* Comments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */; };
+		EB5891D11EE7EB8800C35EE9 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */; };
+		EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */; };
+		EB5891D41EE7EBFE00C35EE9 /* Like.png in Resources */ = {isa = PBXBuildFile; fileRef = EB5891D31EE7EBFE00C35EE9 /* Like.png */; };
+		EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
@@ -497,6 +506,15 @@
 		D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialCrowdCell.xib; sourceTree = "<group>"; };
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_Main Logo Transparent.png"; sourceTree = "<group>"; };
+		EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteListTableViewCell.swift; sourceTree = "<group>"; };
+		EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteListTableViewCell.xib; sourceTree = "<group>"; };
+		EB5891C51EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedTimeTableViewCell.swift; sourceTree = "<group>"; };
+		EB5891C61EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectedTimeTableViewCell.xib; sourceTree = "<group>"; };
+		EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Comments.storyboard; sourceTree = "<group>"; };
+		EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
+		EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
+		EB5891D31EE7EBFE00C35EE9 /* Like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Like.png; sourceTree = "<group>"; };
+		EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
@@ -835,6 +853,7 @@
 				5B33C0541EDF8CE3007A8188 /* general_search.storyboard */,
 				EBB971691EE61E58009E88F3 /* Followers.storyboard */,
 				5B448E5A1EE72C3400873F79 /* Following.storyboard */,
+				EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -949,6 +968,7 @@
 		D2B9B0721E5A0A1E0002F1B1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB5891D51EE7EDFA00C35EE9 /* Comments */,
 				EB8563421EE722C2005AC062 /* Following */,
 				EB8563411EE722BB005AC062 /* Followers */,
 				5B3F05791ED909E90057F596 /* Settings */,
@@ -1038,6 +1058,12 @@
 				5B16592D1EDA6DE40002209A /* MapMarkerView.xib */,
 				5B16592F1EDA6DF40002209A /* MapMarkerView.swift */,
 				61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */,
+				EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */,
+				EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */,
+				EB5891C51EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift */,
+				EB5891C61EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib */,
+				EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */,
+				EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1078,6 +1104,14 @@
 			name = NibVCs;
 			sourceTree = "<group>";
 		};
+		EB5891D51EE7EDFA00C35EE9 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
 		EB8563411EE722BB005AC062 /* Followers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1101,6 +1135,7 @@
 		EBFAB3851EE74DDB00A03E11 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EB5891D31EE7EBFE00C35EE9 /* Like.png */,
 				EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */,
 			);
 			name = Images;
@@ -1289,6 +1324,7 @@
 				61ED203C1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard in Resources */,
 				5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
+				EB5891D41EE7EBFE00C35EE9 /* Like.png in Resources */,
 				5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
@@ -1296,6 +1332,7 @@
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
 				FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */,
 				FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */,
+				EB5891C81EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib in Resources */,
 				5BAB87A41EC961AB0064E5EC /* UserProfile.storyboard in Resources */,
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
@@ -1303,6 +1340,7 @@
 				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
 				5BAB87A61EC972890064E5EC /* search_people.storyboard in Resources */,
 				5B33C05C1EE113CA007A8188 /* MapPinInfoView.xib in Resources */,
+				EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */,
 				5B69158D1ED7D80100093AD5 /* NewUserPopupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				5B959FF31ECD452C00094FE6 /* RatingViewCell.xib in Resources */,
@@ -1323,6 +1361,7 @@
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
+				EB5891CE1EE7E5B300C35EE9 /* Comments.storyboard in Resources */,
 				5B448E571EE72C1B00873F79 /* FollowersTableViewCell.xib in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
@@ -1339,6 +1378,7 @@
 				5B71D7061ED1837A0093A3F5 /* commentCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
 				EB3EA23A1EE7684500F61D38 /* _Main Logo Transparent.png in Resources */,
+				EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1537,6 +1577,8 @@
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
 				611734EF1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift in Sources */,
+				EB3EA2421EE7707500F61D38 /* InviteListTableViewCell.swift in Sources */,
+				EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */,
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
 				5B7BB1E01ED50EA0001E60FF /* UIButton+Extensions.swift in Sources */,
 				5BE31E8A1EA76094004768F0 /* MapEventInfoView.swift in Sources */,
@@ -1603,6 +1645,7 @@
 				5B959FD51ECAC9EF00094FE6 /* PlaceViewController.swift in Sources */,
 				5BA37C821EBE9DE30091189E /* NewMessageViewController.swift in Sources */,
 				5BA37C7E1EBDC1C70091189E /* CustomTabController.swift in Sources */,
+				EB5891C71EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				5B6AFA6A1ED1906900A82104 /* GMUDefaultClusterRenderer.m in Sources */,
 				FF7C87521ED74A8F004ABB1B /* PinImageCollectionViewCell.swift in Sources */,
@@ -1622,6 +1665,7 @@
 				D296F5D31E75BB69007EC393 /* AuthApi.swift in Sources */,
 				5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */,
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
+				EB5891D11EE7EB8800C35EE9 /* CommentsTableViewCell.swift in Sources */,
 				5BAB87AD1EC97BED0064E5EC /* PeopleSearchViewController.swift in Sources */,
 				5B1659301EDA6DF40002209A /* MapMarkerView.swift in Sources */,
 				D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */,
