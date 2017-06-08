@@ -488,6 +488,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let marker = GMSMarker(position: position)
         marker.icon = UIImage(named: "self_location")
         marker.map = self.mapView
+        marker.zIndex = 1
         
         
         UserDefaults.standard.set("last_location", forKey: "\(location.coordinate.latitude);;\(location.coordinate.longitude)")
