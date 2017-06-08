@@ -103,6 +103,23 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
         
+        if let category = event.category?.components(separatedBy: ";")[0]{
+            cell?.interest.text = "\(category)"
+        }
+        else{
+            cell?.interest.text = "N.A."
+        }
+        
+        if let price = event.price{
+            if price == 0{
+                cell?.price.text = "Free"
+            }
+            else{
+                cell?.price.text = "\(price)"
+            }
+            
+        }
+        
         let reference = Constants.storage.event.child("\(event.id!).jpg")
         
         // Placeholder image
