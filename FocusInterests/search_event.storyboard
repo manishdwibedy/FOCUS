@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--EVENT-->
+        <!--EVENTS-->
         <scene sceneID="7vf-IH-Tml">
             <objects>
                 <viewController id="xPx-tM-EtF" customClass="SearchEventsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,7 +96,7 @@
                             <constraint firstItem="ZNT-Vt-zjc" firstAttribute="trailing" secondItem="eF4-Ev-ETy" secondAttribute="trailingMargin" id="yyE-oh-59d"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="EVENT" id="yhf-yt-eZ8">
+                    <tabBarItem key="tabBarItem" title="EVENTS" id="yhf-yt-eZ8">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

@@ -158,7 +158,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
         let token = Messaging.messaging().fcmToken
-        print("FCM token: \(token ?? "")")
+        
+        UITabBarItem.appearance().setTitleTextAttributes([
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
+            NSForegroundColorAttributeName : UIColor.green
+            ], for: .selected)
+
+        UITabBarItem.appearance().setTitleTextAttributes([
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
+            NSForegroundColorAttributeName : UIColor.white
+            ], for: .normal)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
