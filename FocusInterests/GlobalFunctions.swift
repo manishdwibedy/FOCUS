@@ -175,11 +175,17 @@ func isValidEmail(text:String) -> Bool {
     return emailTest.evaluate(with: text)
 }
 
-func getDistance(fromLocation: CLLocation, toLocation: CLLocation) -> String{
+func getDistance(fromLocation: CLLocation, toLocation: CLLocation, addBracket: Bool = false) -> String{
     let distanceInMeters = fromLocation.distance(from: toLocation)
     let distance = distanceInMeters/1609.344
     
-    return "(\(distance.roundTo(places: 1)) mi)"
+    if addBracket{
+        return "(\(distance.roundTo(places: 1)) mi)"
+    }
+    else{
+        return "\(distance.roundTo(places: 1)) mi"
+    }
+    
 }
 
 func sendNotification(to id: String, title: String, body: String){

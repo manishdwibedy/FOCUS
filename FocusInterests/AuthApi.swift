@@ -197,4 +197,17 @@ struct AuthApi {
     static func set(eventBriteAccessToken: String) {
         defaults.set(eventBriteAccessToken, forKey: "eventBriteToken")
     }
+    
+    static func getLocation() -> CLLocation?{
+        if let location = defaults.object(forKey: "last_location") as? String {
+            let coord = location.components(separatedBy: ";;")
+            return CLLocation(latitude: Double(coord[0])!, longitude: Double(coord[1])!)
+        }
+        return nil
+
+    }
+    
+    static func set(location: CLLocation){
+        defaults.set("\(location.coordinate.latitude);;\(location.coordinate.longitude)", forKey: "last_location")
+    }
 }

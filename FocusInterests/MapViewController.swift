@@ -98,11 +98,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             })
         }
         
-        if let last_pos = UserDefaults.standard.value(forKey: "last_location") as? String{
-            let coord = last_pos.components(separatedBy: ";;")
+        if let last_pos = AuthApi.getLocation(){
             
-            let camera = GMSCameraPosition.camera(withLatitude: Double(coord[0])!,
-                                                  longitude: Double(coord[1])!,
+            let camera = GMSCameraPosition.camera(withLatitude: last_pos.coordinate.latitude,
+                                                  longitude: last_pos.coordinate.longitude,
                                                   zoom: 15)
             if mapView.isHidden {
                 mapView.isHidden = false
@@ -501,7 +500,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         marker.zIndex = 1
         
         
-        UserDefaults.standard.set("last_location", forKey: "\(location.coordinate.latitude);;\(location.coordinate.longitude)")
+        AuthApi.set(location: location)
         
         let current = changeTimeZone(of: Date(), from: TimeZone(abbreviation: "GMT")!, to: TimeZone.current)
         

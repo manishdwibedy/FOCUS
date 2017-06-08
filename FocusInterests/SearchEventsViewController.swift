@@ -47,6 +47,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.location = AuthApi.getLocation()
         
         Constants.DB.event.observe(DataEventType.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
@@ -93,6 +94,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
         cell?.address.textContainer.maximumNumberOfLines = 6
 
+        let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+        cell?.distance.text = getDistance(fromLocation: self.location!, toLocation: eventLocation,addBracket: false)
 
         cell?.guestCount.text = "\(event.attendeeCount) guests"
         cell?.interest.text = "Category"
