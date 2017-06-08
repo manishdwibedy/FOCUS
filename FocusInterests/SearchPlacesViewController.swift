@@ -121,6 +121,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                 cell.addressTextView.text = "\(place.address[0])\n\(place.address[1])"
             }
         }
+        cell.distanceLabel.text = "\((place.distance * 0.000621371).roundTo(places: 1)) mi"
         cell.placeID = place.id
         cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
         cell.categoryLabel.text = place.categories[0].name

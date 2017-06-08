@@ -17,6 +17,7 @@ class SearchPlaceCell: UITableViewCell {
     @IBOutlet weak var inviteButtonOut: UIButton!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     var placeID = String()
     var parentVC: SearchPlacesViewController! = nil
