@@ -220,6 +220,14 @@
 		EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */; };
 		EB5891D41EE7EBFE00C35EE9 /* Like.png in Resources */ = {isa = PBXBuildFile; fileRef = EB5891D31EE7EBFE00C35EE9 /* Like.png */; };
 		EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */; };
+		EB722F901EE8A5F500420DC8 /* Reviews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB722F8F1EE8A5F500420DC8 /* Reviews.storyboard */; };
+		EB722F931EE8B19400420DC8 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */; };
+		EB722F961EE8B1BE00420DC8 /* ReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */; };
+		EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */; };
+		EB722F991EE8B66700420DC8 /* Unstar.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F981EE8B66700420DC8 /* Unstar.png */; };
+		EB722F9B1EE8BA3B00420DC8 /* Direct message sign.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9A1EE8BA3B00420DC8 /* Direct message sign.png */; };
+		EB722F9D1EE8BA4200420DC8 /* Dollar sign.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9C1EE8BA4200420DC8 /* Dollar sign.png */; };
+		EB722F9F1EE8BA7D00420DC8 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9E1EE8BA7D00420DC8 /* Green.png */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
@@ -519,6 +527,14 @@
 		EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
 		EB5891D31EE7EBFE00C35EE9 /* Like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Like.png; sourceTree = "<group>"; };
 		EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		EB722F8F1EE8A5F500420DC8 /* Reviews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Reviews.storyboard; sourceTree = "<group>"; };
+		EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
+		EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsTableViewCell.swift; sourceTree = "<group>"; };
+		EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewsTableViewCell.xib; sourceTree = "<group>"; };
+		EB722F981EE8B66700420DC8 /* Unstar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Unstar.png; sourceTree = "<group>"; };
+		EB722F9A1EE8BA3B00420DC8 /* Direct message sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Direct message sign.png"; sourceTree = "<group>"; };
+		EB722F9C1EE8BA4200420DC8 /* Dollar sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar sign.png"; sourceTree = "<group>"; };
+		EB722F9E1EE8BA7D00420DC8 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Green.png; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
@@ -860,6 +876,7 @@
 				EBB971691EE61E58009E88F3 /* Followers.storyboard */,
 				5B448E5A1EE72C3400873F79 /* Following.storyboard */,
 				EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */,
+				EB722F8F1EE8A5F500420DC8 /* Reviews.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -974,6 +991,7 @@
 		D2B9B0721E5A0A1E0002F1B1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB722F911EE8B18500420DC8 /* Reviews */,
 				EB5891D51EE7EDFA00C35EE9 /* Comments */,
 				EB8563421EE722C2005AC062 /* Following */,
 				EB8563411EE722BB005AC062 /* Followers */,
@@ -1118,6 +1136,16 @@
 			name = Comments;
 			sourceTree = "<group>";
 		};
+		EB722F911EE8B18500420DC8 /* Reviews */ = {
+			isa = PBXGroup;
+			children = (
+				EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */,
+				EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */,
+				EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */,
+			);
+			name = Reviews;
+			sourceTree = "<group>";
+		};
 		EB8563411EE722BB005AC062 /* Followers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1141,8 +1169,12 @@
 		EBFAB3851EE74DDB00A03E11 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EB722F981EE8B66700420DC8 /* Unstar.png */,
 				EB5891D31EE7EBFE00C35EE9 /* Like.png */,
+				EB722F9E1EE8BA7D00420DC8 /* Green.png */,
 				EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */,
+				EB722F9C1EE8BA4200420DC8 /* Dollar sign.png */,
+				EB722F9A1EE8BA3B00420DC8 /* Direct message sign.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1351,6 +1383,7 @@
 				5B69158D1ED7D80100093AD5 /* NewUserPopupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				5B959FF31ECD452C00094FE6 /* RatingViewCell.xib in Resources */,
+				EB722F9D1EE8BA4200420DC8 /* Dollar sign.png in Resources */,
 				5B71D70E1ED184880093A3F5 /* FollowProfileCell.xib in Resources */,
 				5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */,
 				5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */,
@@ -1359,6 +1392,7 @@
 				5B251E891ED276970075B57A /* InterestsViewController.xib in Resources */,
 				D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */,
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
+				EB722F901EE8A5F500420DC8 /* Reviews.storyboard in Resources */,
 				5B519E7B1ED677D800B36110 /* SearchPeopleTableViewCell.xib in Resources */,
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
@@ -1366,9 +1400,13 @@
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
+				EB722F9F1EE8BA7D00420DC8 /* Green.png in Resources */,
 				5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
 				EB5891CE1EE7E5B300C35EE9 /* Comments.storyboard in Resources */,
+				EB722F9B1EE8BA3B00420DC8 /* Direct message sign.png in Resources */,
+				EB722F991EE8B66700420DC8 /* Unstar.png in Resources */,
+				EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */,
 				5B448E571EE72C1B00873F79 /* FollowersTableViewCell.xib in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
@@ -1596,6 +1634,7 @@
 				5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */,
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
+				EB722F931EE8B19400420DC8 /* ReviewsViewController.swift in Sources */,
 				FFBF879F1EE5A855000168F5 /* InvitePeopleViewController.swift in Sources */,
 				5B71D7051ED1837A0093A3F5 /* commentCell.swift in Sources */,
 				5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */,
@@ -1668,6 +1707,7 @@
 				FF7C874A1ED73310004ABB1B /* PinScreenViewController.swift in Sources */,
 				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,
 				5B6AFA751ED1906900A82104 /* GMUStyle.m in Sources */,
+				EB722F961EE8B1BE00420DC8 /* ReviewsTableViewCell.swift in Sources */,
 				5B7BB1E31ED51069001E60FF /* SuggestPlaceTableViewCell.swift in Sources */,
 				5B519E7A1ED677D800B36110 /* SearchPeopleTableViewCell.swift in Sources */,
 				D296F5D31E75BB69007EC393 /* AuthApi.swift in Sources */,

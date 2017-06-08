@@ -41,7 +41,6 @@ class CommentsTableViewCell: UITableViewCell {
     }
     
     func setupCell(){
-        
         self.userProfileImage.layer.borderWidth = 2
         self.userProfileImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
         self.userProfileImage.roundedImage()

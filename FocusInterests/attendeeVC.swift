@@ -13,7 +13,6 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var navBackOut: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var guestListLabel: UILabel!
     @IBOutlet weak var attendingLabel: UILabel!
     
     var parentEvent: Event?
@@ -30,7 +29,6 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.register(nib, forCellReuseIdentifier: "FollowProfileCell")
         
         navTitle.title = parentEvent?.title
-        guestListLabel.text = (parentEvent?.title)! + " Guest List"
         let fullRef = ref.child("events").child((parentEvent?.id)!).child("attendingList")
         fullRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
