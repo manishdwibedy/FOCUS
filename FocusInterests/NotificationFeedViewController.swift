@@ -4,7 +4,9 @@
 //
 //  Created by Nicolas on 29/05/2017.
 //  Copyright © 2017 singlefocusinc. All rights reserved.
-//
+
+
+//TODO: FIX COLOR WHEN SPECIFIC SEGMENT IS SELECTED
 
 import UIKit
 
@@ -82,11 +84,16 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
     
     @IBAction func leftButtonAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromTop
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        self.dismiss(animated: true, completion: nil)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75.0
+        return 115.0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
