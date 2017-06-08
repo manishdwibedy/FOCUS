@@ -57,7 +57,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     if image_str.characters.count > 0{
                         self.navigationView.userProfileButton.sd_setImage(with: URL(string: image_str), for: .normal)
                         self.hasCustomProfileImage = true
-                        self.navigationView.userProfileButton.roundButton()
+                        self.navigationView.userProfileButton.imageView?.roundedImage()
                     }
                 }
                 

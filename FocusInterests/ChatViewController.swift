@@ -24,6 +24,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     var imagePicker = UIImagePickerController()
     var imageMapper = [String:Int]()
     var gotImages = false
+    var loadingMessages = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,14 +53,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         markUnread()
         getMessageID()
         
-        
-        collectionView.addPullToRefresh(actionHandler: { () -> Void in
-                        self.loadMore()
-                    })
-//        collectionView.addInfiniteScrolling(actionHandler: { () -> Void in
-//            self.loadMore()
-//        })
-
+        self.collectionView.bounces = false
+        loadingMessages = false
         self.navigationItem.title = self.user["username"]! as? String
     }
     
@@ -86,13 +81,14 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         var earlierMessage = [JSQMessage]()
         var earlierId = [String]()
         
-        collectionView.collectionViewLayout.springinessEnabled = false
+        //collectionView.collectionViewLayout.springinessEnabled = false
         //collectionView.infiniteScrollingView.startAnimating()
         
         messageContentRef.child(self.messageID!).queryEnding(atValue: roundedEndDate).queryOrdered(byChild: "date").queryLimited(toLast: 25).observeSingleEvent(of: .value, with: {(snapshot) in
             
             let messages = snapshot.value as? [String:[String:Any]]
             
+            print(messages)
             if let messages = messages{
                 for (messageID,message_data) in messages{
                     let id = message_data["sender_id"] as! String
@@ -155,15 +151,13 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             self.messages = earlierMessage + self.messages
             
             //scroll back to current position
-            self.finishReceivingMessage(animated: false)
+            //self.finishReceivingMessage(animated: false)
             self.collectionView.layoutIfNeeded()
-            //self.collectionView.contentOffset = CGPointMake(0, self.collectionView.contentSize.height - oldBottomOffset)
-            CATransaction.commit()
             
-            //self.collectionView.infiniteScrollingView.stopAnimating()
-            
-            self.collectionView.collectionViewLayout.springinessEnabled = true
-            
+            print("reloading")
+            self.loadingMessages = false
+            self.automaticallyScrollsToMostRecentMessage = false
+
             self.collectionView.reloadData()
         })
     }
@@ -188,18 +182,32 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         
         let message = messages[indexPath.row]
+        
+        print(indexPath.row)
+        print(message.text!)
+        
+        if indexPath.row == 0 && !loadingMessages{
+            loadingMessages = true
+        }
+        else if indexPath.row == 0 && loadingMessages{
+            loadMore()
+        }
+        
+        
         
         if self.senderId == message.senderId {
             cell.messageBubbleTopLabel.textInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 45)
             cell.cellBottomLabel.textInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 45)
             
-            JSQMessagesAvatarImageFactory.circularAvatarImage(UIImage(named:"tinyB"), withDiameter: 10)
+            cell.avatarImageView.roundedImage()
         } else {
             cell.messageBubbleTopLabel.textInsets = UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
             cell.cellBottomLabel.textInsets = UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 0)
+            cell.avatarImageView.roundedImage()
         }
         
         return cell
@@ -227,15 +235,15 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
-        let bubbleFactory = JSQMessagesBubbleImageFactory()
         
         let message = messages[indexPath.row]
         
         if self.senderId == message.senderId {
-            return bubbleFactory?.outgoingMessagesBubbleImage(with: .green)
+            return JSQMessagesBubbleImageFactory(bubble: UIImage.jsq_bubbleRegularStrokedTailless(), capInsets: .zero).outgoingMessagesBubbleImage(with: UIColor.white)
         } else {
-            return bubbleFactory?.incomingMessagesBubbleImage(with: .blue)
+            return JSQMessagesBubbleImageFactory(bubble: UIImage.jsq_bubbleRegularStrokedTailless(), capInsets: .zero).incomingMessagesBubbleImage(with: UIColor.white)
         }
+
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
