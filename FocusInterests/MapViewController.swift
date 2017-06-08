@@ -19,6 +19,7 @@ import PopupDialog
 import FirebaseMessaging
 import SDWebImage
 import MessageUI
+import ChameleonFramework
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, MFMessageComposeViewControllerDelegate, switchPinTabDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
@@ -51,21 +52,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
-            if dictionnary != nil {
-                if let image_str = dictionnary!["image_string"] as? String{
-                    if image_str.characters.count > 0{
-                        self.navigationView.userProfileButton.sd_setImage(with: URL(string: image_str), for: .normal)
-                        self.hasCustomProfileImage = true
-                        self.navigationView.userProfileButton.imageView?.roundedImage()
-                    }
-                }
-                
-                
-                
-            }
-            
-        }
+//        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
+//            if dictionnary != nil {
+//                if let image_str = dictionnary!["image_string"] as? String{
+//                    if image_str.characters.count > 0{
+//                        self.navigationView.userProfileButton.sd_setImage(with: URL(string: image_str), for: .normal)
+//                        self.hasCustomProfileImage = true
+//                        self.navigationView.userProfileButton.imageView?.roundedImage()
+//                    }
+//                }
+//                
+//                
+//                
+//            }
+//            
+//        }
         
         //webView.isHidden = true
         if AuthApi.getEventBriteToken() == nil{
@@ -160,7 +161,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         UITabBarItem.appearance().setTitleTextAttributes([
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
-            NSForegroundColorAttributeName : UIColor.green
+            NSForegroundColorAttributeName : UIColor(hexString: "7ac901")
             ], for: .selected)
 
         UITabBarItem.appearance().setTitleTextAttributes([
