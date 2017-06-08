@@ -10,10 +10,11 @@ import UIKit
 import GooglePlaces
 import FirebaseDatabase
 
-class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate {
+class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate{
     
     @IBOutlet weak var publicLabel: UILabel!
     @IBOutlet weak var privateLabel: UILabel!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var event: Event?
     var place: GMSPlace?
@@ -46,14 +47,34 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var interestTopConstraint: NSLayoutConstraint!
     
+    var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardNextButton))
+    var previousButton = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardPreviousButton))
+    
+    lazy var nextPrevToolbar: UIToolbar = {
+        var toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        var fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        
+        toolbar.setItems([fixedSpaceButton, self.previousButton, fixedSpaceButton, self.nextButton, flexibleSpaceButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        interestTableView.dataSource = self
-        interestTableView.delegate = self
+        self.interestTableView.dataSource = self
+        self.interestTableView.delegate = self
+        self.searchBar.delegate = self
         formatTextFields()
         setTextFieldDelegates()
         self.interestTableView.delaysContentTouches = false
         self.timePicker.datePickerMode = .time
+        self.timePicker.minuteInterval = 5
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d yyyy"
         self.timeFormatter.dateFormat = "h:mm a"
@@ -66,8 +87,6 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         backgroundView.backgroundColor = UIColor.lightGray
         interestTableView.backgroundView = backgroundView
         
-        
-        
         for _ in 0..<Constants.interests.interests.count{
             checkInterests.append(false)
         }
@@ -76,6 +95,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.eventNameTextField.becomeFirstResponder()
+        print(self.eventNameTextField.canBecomeFirstResponder)
+        print(self.eventDateTextField.canBecomeFirstResponder)
         if let cached = Event.fetchEvent() {
             self.event = cached
             eventNameTextField.text = cached.title
@@ -217,11 +239,11 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBAction func showGuestListBttn(_ sender: UIButton) {
         if self.guestListBttn.isSelected == false {
+            self.guestListBttn.setImage(UIImage(named: "Interest_Filled.png"), for: .selected)
             self.guestListBttn.isSelected = true
-            self.guestListBttn.setBackgroundImage(UIImage(named: "Interest_filled"), for: .selected)
         } else {
+            self.guestListBttn.setImage(UIImage(named: "Interest_blank.png"), for: .normal)
             self.guestListBttn.isSelected = false
-            self.guestListBttn.setBackgroundImage(UIImage(named: "Interest_blank"), for: .normal)
         }
     }
     
@@ -231,7 +253,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Interest_blank"), for: .normal)
         } else {
             self.showGuestFriendsBttn.isSelected = true
-            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Interest_filled"), for: .normal)
+            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Interest_Filled"), for: .normal)
         }
     }
     
@@ -269,8 +291,8 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         toolbar.setItems([done], animated: false)
         self.eventTimeTextField.inputAccessoryView = toolbar
         self.eventTimeTextField.inputView = timePicker
-        
     }
+    
     func showEndTimePicker(){
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -421,6 +443,73 @@ extension CreateNewEventViewController {
         return false
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        textField.inputAccessoryView = self.nextPrevToolbar
+        self.locationTextField.inputAccessoryView = self.nextPrevToolbar
+        self.eventDateTextField.inputAccessoryView = self.nextPrevToolbar
+        self.eventTimeTextField.inputAccessoryView = self.nextPrevToolbar
+        self.eventEndTimeTextField.inputAccessoryView = self.nextPrevToolbar
+        self.eventPriceTextView.inputAccessoryView = self.nextPrevToolbar
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
+    func keyboardNextButton(textField: UITextField){
+        switch textField{
+        case self.eventNameTextField:
+//            self.eventNameTextField.resignFirstResponder()
+            self.locationTextField.becomeFirstResponder()
+            break
+        case self.locationTextField:
+            self.locationTextField.resignFirstResponder()
+            self.eventDateTextField.becomeFirstResponder()
+            break
+        case self.eventDateTextField:
+            self.eventDateTextField.resignFirstResponder()
+            self.eventTimeTextField.becomeFirstResponder()
+            break
+        case self.eventTimeTextField:
+            self.eventTimeTextField.resignFirstResponder()
+            self.eventEndTimeTextField.becomeFirstResponder()
+            break
+        case self.eventEndTimeTextField:
+            self.eventEndTimeTextField.resignFirstResponder()
+            self.eventPriceTextView.becomeFirstResponder()
+            break
+        default:
+            textField.resignFirstResponder()
+        }
+    }
+    
+    func keyboardPreviousButton(textField: UITextField){
+        switch textField{
+        case self.eventNameTextField:
+            self.previousButton.isEnabled = false
+        case self.locationTextField:
+            self.locationTextField.resignFirstResponder()
+            self.eventNameTextField.becomeFirstResponder()
+            break
+        case self.eventDateTextField:
+            self.eventDateTextField.resignFirstResponder()
+            self.locationTextField.becomeFirstResponder()
+            break
+        case self.eventTimeTextField:
+            self.eventTimeTextField.resignFirstResponder()
+            self.eventDateTextField.becomeFirstResponder()
+            break
+        case self.eventEndTimeTextField:
+            self.eventEndTimeTextField.resignFirstResponder()
+            self.eventTimeTextField.becomeFirstResponder()
+            break
+        default:
+            textField.resignFirstResponder()
+        }
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView)
     {
         if (textView.text == "Description")
@@ -439,6 +528,16 @@ extension CreateNewEventViewController {
         textView.resignFirstResponder()
     }
     
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        //Will need to increase height of view controller in order to compensate for scroll view moving up
+//        self.scrollView.setContentOffset(CGPoint(x: 0, y: 500), animated: true)
+//    }
+    
+//    func searchForInterest(interest: String){
+//        filteredCandies = candies.filter { candy in
+//            return candy.name.lowercaseString.containsString(searchText.lowercaseString)
+//        }
+//    }
 }
 
 

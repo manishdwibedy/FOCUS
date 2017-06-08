@@ -115,7 +115,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fjs-tb-4TG">
                                                 <rect key="frame" x="75" y="61" width="207.5" height="31"/>
@@ -145,7 +145,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                 <connections>
                                                     <action selector="addEventLocation:" destination="3TX-Ww-Aks" eventType="touchDown" id="JmV-di-Fad"/>
                                                 </connections>
@@ -156,7 +156,7 @@
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                 <connections>
                                                     <action selector="addEventDate:" destination="3TX-Ww-Aks" eventType="touchDown" id="JCT-xL-2Yo"/>
                                                 </connections>
@@ -330,7 +330,8 @@
                         <outlet property="privateLabel" destination="NHt-Do-t7D" id="hJw-RW-5Fy"/>
                         <outlet property="publicLabel" destination="LCG-dE-mWN" id="3o9-5Z-Tey"/>
                         <outlet property="publicOrPrivateSwitch" destination="EH1-4f-id0" id="cmZ-l0-HyP"/>
-                        <outlet property="scrollView" destination="dIH-Pg-PIk" id="6JT-2U-iNa"/>
+                        <outlet property="scrollView" destination="dIH-Pg-PIk" id="e8w-TY-394"/>
+                        <outlet property="searchBar" destination="i7C-4y-5CM" id="87X-js-LTs"/>
                         <outlet property="showGuestFriendsBttn" destination="M06-h9-y9B" id="5Gw-Av-sIw"/>
                         <outlet property="showGuestListLabel" destination="Utt-as-Bjf" id="tTp-HJ-NAz"/>
                         <segue destination="eqH-re-POU" kind="show" identifier="chooseIcon" id="eLh-9t-fEY"/>
@@ -527,7 +528,7 @@
         <image name="location" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pdH-Ex-mw2"/>
         <segue reference="amW-Q6-Hfg"/>
+        <segue reference="eLh-9t-fEY"/>
     </inferredMetricsTieBreakers>
 </document>
