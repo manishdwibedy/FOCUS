@@ -597,15 +597,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func messagesClicked() {
         
-        
-//        let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
-//        
-//        self.present(VC, animated:true, completion:nil)
-        
-        let VC = UIStoryboard(name: "Reviews", bundle: nil).instantiateViewController(withIdentifier: "Reviews") as! UINavigationController
+        let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
         
         self.present(VC, animated:true, completion:nil)
-
     }
     
     func notificationsClicked() {
@@ -617,12 +611,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //        
 //        self.present(messageVC, animated: false, completion: nil)
         
-        
-        
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
         
         let navigationController = UINavigationController(rootViewController: vc)
+        
+//        let newController = NewViewController(nibName: "NewView", bundle: nil)
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromBottom
+        self.view.window!.layer.add(transition, forKey: kCATransition)
         
         self.present(navigationController, animated: true, completion: nil)
     }
