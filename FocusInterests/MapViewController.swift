@@ -48,8 +48,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBOutlet weak var webView: UIWebView!
     
-    var popup: NewUserPopupViewController!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,7 +88,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         placesClient = GMSPlacesClient.shared()
         
-        mapView.isMyLocationEnabled = true
+        //mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
         if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
@@ -485,6 +483,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
                                               zoom: 15)
+        
+        let position = CLLocationCoordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude))
+        let marker = GMSMarker(position: position)
+        marker.icon = UIImage(named: "self_location")
+        marker.map = self.mapView
+        
         
         UserDefaults.standard.set("last_location", forKey: "\(location.coordinate.latitude);;\(location.coordinate.longitude)")
         
