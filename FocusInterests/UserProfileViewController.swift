@@ -9,16 +9,14 @@
 import UIKit
 import SDWebImage
 
-class UserProfileViewController: UIViewController {
+class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
 
+    @IBOutlet weak var eventsCollectionView: UICollectionView!
 	@IBOutlet var userScrollView: UIScrollView!
     
     // User data
 	@IBOutlet var userName: UILabel!
 	@IBOutlet var descriptionText: UITextView!
-	@IBOutlet var userLocationImage: UIImageView!
-	@IBOutlet var userLocationLabel: UILabel!
-	@IBOutlet var userLikesLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
@@ -30,24 +28,32 @@ class UserProfileViewController: UIViewController {
     
     // user pin info
     
+    @IBOutlet weak var greenDotImage: UIImageView!
+    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var pinImage: UIImageView!
     @IBOutlet weak var pinLabel: UILabel!
     @IBOutlet weak var pinCategoryLabel: UILabel!
     @IBOutlet weak var pinLikesLabel: UILabel!
     @IBOutlet weak var pinAddress1Label: UILabel!
     @IBOutlet weak var pinAddress2Label: UILabel!
-    @IBOutlet weak var pinDescription: UILabel!
+    @IBOutlet weak var morePinButton: UIButton!
+    
+//    MARK: Do we still need this
+//    @IBOutlet weak var pinDescription: UILabel!
     @IBOutlet weak var updatePinButton: UIButton!
     
     @IBOutlet weak var emptyPinLabel: UILabel!
+    
     // user interests
     @IBOutlet weak var interestStackView: UIStackView!
     
 	// Haven't added:
 	// User FOCUS button
+    @IBOutlet weak var moreFocusButton: UIButton!
 	// Location Description (would this be location description?)
 	// Location FOCUS button (what would this be for?)
 	// Collection view See more... button
+    @IBOutlet weak var moreEventsButton: UIButton!
 	// (and also any of the ones after)
 	
     var followers = [User]()
@@ -58,6 +64,9 @@ class UserProfileViewController: UIViewController {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
+    @IBAction func moreButtonPressed(_ sender: UIButton) {
+        print(sender.tag)
+    }
 	
 	// Edit Description button
 	@IBAction func editDescription(_ sender: UIButton) {
@@ -89,7 +98,8 @@ class UserProfileViewController: UIViewController {
         updatePinButton.roundCorners(radius: 10)
         hideKeyboardWhenTappedAround()
         
-        
+        let eventsCollectionNib = UINib(nibName: "UserProfileCollectionViewCell", bundle: nil)
+        self.eventsCollectionView.register(eventsCollectionNib, forCellWithReuseIdentifier: "eventsCollectionCell")
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.showFollowing))
         followingLabel.isUserInteractionEnabled = true
@@ -98,6 +108,28 @@ class UserProfileViewController: UIViewController {
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(self.showFollower))
         followerLabel.isUserInteractionEnabled = true
         followerLabel.addGestureRecognizer(tap1)
+        
+//      Use tags in order to allow for only IBAction that will track
+//      each event based on the tag of the sender
+        self.morePinButton.tag = 1
+        self.moreFocusButton.tag = 2
+        self.moreEventsButton.tag = 3
+    }
+    
+//    MARK: COLLECTIONVIEW DELEGATE METHODS
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 9
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventsCollectionCell", for: indexPath) as!UserProfileCollectionViewCell
+        eventCell.userEventsLabel.text = "Event \(indexPath.row + 1)"
+        return eventCell
     }
     
     func showFollowing(sender:UITapGestureRecognizer) {
@@ -204,16 +236,22 @@ class UserProfileViewController: UIViewController {
             interestStackView.translatesAutoresizingMaskIntoConstraints = false;
         }
         
+        
         let pinDataAvailable = false
         if !pinDataAvailable{
             
+            greenDotImage.isHidden = true
+            categoryImage.isHidden = true
             pinImage.isHidden = true
             pinLabel.isHidden = true
             pinCategoryLabel.isHidden = true
             pinLikesLabel.isHidden = true
             pinAddress1Label.isHidden = true
             pinAddress2Label.isHidden = true
-            pinDescription.isHidden = true
+            updatePinButton.isHidden = true
+            morePinButton.isHidden = true
+//            MARK: Do we still need this
+//            pinDescription.isHidden = true
         }
         else{
             emptyPinLabel.isHidden = true
@@ -242,6 +280,30 @@ class UserProfileViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Pin", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? PinScreenViewController
         self.present(VC!, animated: true, completion: nil)
+    }
+    
+    func roundImagesAndButtons(){
+        self.updatePinButton.roundCorners(radius: 10.0)
+        
+        self.pinImage.layer.borderWidth = 1
+        self.pinImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
+        self.pinImage.roundedImage()
+        
+        self.editButton.layer.borderWidth = 1
+        self.editButton.layer.borderColor = UIColor.white.cgColor
+        self.editButton.roundCorners(radius: 5.0)
+        
+        self.morePinButton.layer.borderWidth = 1
+        self.morePinButton.layer.borderColor = UIColor.white.cgColor
+        self.morePinButton.roundCorners(radius: 5.0)
+        
+        self.moreFocusButton.layer.borderWidth = 1
+        self.moreFocusButton.layer.borderColor = UIColor.white.cgColor
+        self.moreFocusButton.roundCorners(radius: 5.0)
+        
+        self.moreEventsButton.layer.borderWidth = 1
+        self.moreEventsButton.layer.borderColor = UIColor.white.cgColor
+        self.moreEventsButton.roundCorners(radius: 5.0)
     }
     
     /*
