@@ -47,19 +47,73 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var interestTopConstraint: NSLayoutConstraint!
     
+//    TOOLBARS
+    
     var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardNextButton))
     var previousButton = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardPreviousButton))
+    var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    var fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+    var dateDoneButon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.dateSelected))
+    var startTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.startTimeSelected))
+    var endTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.endTimeSelected))
+    var priceDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.priceSelected))
     
+    lazy var dateToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton,self.dateDoneButon], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    lazy var startTimeToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.startTimeDoneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    lazy var endTimeToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.endTimeDoneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    lazy var priceToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.priceDoneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    //this toolbar is for the name, price, and description textfields
     lazy var nextPrevToolbar: UIToolbar = {
         var toolbar = UIToolbar()
         toolbar.barStyle = .default
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-        var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        var fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        
-        toolbar.setItems([fixedSpaceButton, self.previousButton, fixedSpaceButton, self.nextButton, flexibleSpaceButton], animated: false)
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
         return toolbar
@@ -95,9 +149,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.eventNameTextField.becomeFirstResponder()
-        print(self.eventNameTextField.canBecomeFirstResponder)
-        print(self.eventDateTextField.canBecomeFirstResponder)
+        
         if let cached = Event.fetchEvent() {
             self.event = cached
             eventNameTextField.text = cached.title
@@ -264,43 +316,25 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func addEventDate(_ sender: UITextField) {
-        showDatePicker()
+//        showDatePicker()
+        self.eventDateTextField.inputAccessoryView = self.dateToolbar
+        self.eventDateTextField.inputView = datePicker
     }
     
     @IBAction func addEventTime(_ sender: UITextField) {
-        showStartTimePicker()
+//        showStartTimePicker()
+        self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
+        self.eventTimeTextField.inputView = self.timePicker
     }
     
     @IBAction func addEventEndTime(_ sender: UITextField) {
-        showEndTimePicker()
+//        showEndTimePicker()
+        self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
+        self.eventEndTimeTextField.inputView = self.timePicker
     }
     
-    func showDatePicker(){
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(dateSelected))
-        toolbar.setItems([done], animated: false)
-        eventDateTextField.inputAccessoryView = toolbar
-        eventDateTextField.inputView = datePicker
-    }
-    
-    func showStartTimePicker(){
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(startTimeSelected))
-        toolbar.setItems([done], animated: false)
-        self.eventTimeTextField.inputAccessoryView = toolbar
-        self.eventTimeTextField.inputView = timePicker
-    }
-    
-    func showEndTimePicker(){
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(endTimeSelected))
-        toolbar.setItems([done], animated: false)
-        self.eventEndTimeTextField.inputAccessoryView = toolbar
-        self.eventEndTimeTextField.inputView = timePicker
-        
+    @IBAction func addPrice(_ sender: UITextField) {
+        self.eventPriceTextView.inputAccessoryView = self.priceToolbar
     }
     
     func dateSelected(){
@@ -315,6 +349,11 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     func endTimeSelected(){
         self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
+        self.view.endEditing(true)
+    }
+    
+    func priceSelected(){
+        print(self.eventPriceTextView.text)
         self.view.endEditing(true)
     }
     
@@ -335,6 +374,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         eventTimeTextField.setRightIcon(iconString: "Clock-25")
         eventEndTimeTextField.setRightIcon(iconString: "Clock-25")
         eventPriceTextView.setRightIcon(iconString: "price")
+        
     }
     
     func formatPlaceholder(placeholder text: String) -> NSAttributedString {
@@ -415,6 +455,7 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
         
         print("Place attributions: \(place.attributions)")
         
+        self.eventDateTextField.becomeFirstResponder()
         dismiss(animated: true, completion: nil)
     }
     
@@ -424,6 +465,14 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
     }
     
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        if self.eventNameTextField.isFirstResponder {
+            self.eventNameTextField.becomeFirstResponder()
+        }
+        
+        if self.eventDateTextField.isFirstResponder {
+            self.eventDateTextField.becomeFirstResponder()
+        }
+
         dismiss(animated: true, completion: nil)
     }
     
@@ -438,18 +487,32 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
 
 extension CreateNewEventViewController {
     
+//    MARK: TEXT FIELD DELEGATE FUNCTIONS
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        textField.inputAccessoryView = self.nextPrevToolbar
-        self.locationTextField.inputAccessoryView = self.nextPrevToolbar
-        self.eventDateTextField.inputAccessoryView = self.nextPrevToolbar
-        self.eventTimeTextField.inputAccessoryView = self.nextPrevToolbar
-        self.eventEndTimeTextField.inputAccessoryView = self.nextPrevToolbar
-        self.eventPriceTextView.inputAccessoryView = self.nextPrevToolbar
+        if textField == self.eventDateTextField {
+            eventDateTextField.inputAccessoryView = self.dateToolbar
+            eventDateTextField.inputView = self.datePicker
+        } else if textField == self.eventTimeTextField {
+            self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
+            self.eventTimeTextField.inputView = self.timePicker
+        } else if textField == self.eventEndTimeTextField {
+            self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
+            self.eventEndTimeTextField.inputView = self.timePicker
+        } else if textField == self.locationTextField {
+            let autoCompleteController = GMSAutocompleteViewController()
+            autoCompleteController.delegate = self
+            present(autoCompleteController, animated: true, completion: nil)
+        } else if textField == self.eventPriceTextView {
+            self.eventPriceTextView.inputAccessoryView = self.priceToolbar
+        } else {
+            self.eventNameTextField.inputAccessoryView = self.nextPrevToolbar
+        }
         
         return true
     }
@@ -458,57 +521,7 @@ extension CreateNewEventViewController {
         
     }
     
-    func keyboardNextButton(textField: UITextField){
-        switch textField{
-        case self.eventNameTextField:
-//            self.eventNameTextField.resignFirstResponder()
-            self.locationTextField.becomeFirstResponder()
-            break
-        case self.locationTextField:
-            self.locationTextField.resignFirstResponder()
-            self.eventDateTextField.becomeFirstResponder()
-            break
-        case self.eventDateTextField:
-            self.eventDateTextField.resignFirstResponder()
-            self.eventTimeTextField.becomeFirstResponder()
-            break
-        case self.eventTimeTextField:
-            self.eventTimeTextField.resignFirstResponder()
-            self.eventEndTimeTextField.becomeFirstResponder()
-            break
-        case self.eventEndTimeTextField:
-            self.eventEndTimeTextField.resignFirstResponder()
-            self.eventPriceTextView.becomeFirstResponder()
-            break
-        default:
-            textField.resignFirstResponder()
-        }
-    }
-    
-    func keyboardPreviousButton(textField: UITextField){
-        switch textField{
-        case self.eventNameTextField:
-            self.previousButton.isEnabled = false
-        case self.locationTextField:
-            self.locationTextField.resignFirstResponder()
-            self.eventNameTextField.becomeFirstResponder()
-            break
-        case self.eventDateTextField:
-            self.eventDateTextField.resignFirstResponder()
-            self.locationTextField.becomeFirstResponder()
-            break
-        case self.eventTimeTextField:
-            self.eventTimeTextField.resignFirstResponder()
-            self.eventDateTextField.becomeFirstResponder()
-            break
-        case self.eventEndTimeTextField:
-            self.eventEndTimeTextField.resignFirstResponder()
-            self.eventTimeTextField.becomeFirstResponder()
-            break
-        default:
-            textField.resignFirstResponder()
-        }
-    }
+    //    MARK: TEXT VIEW DELEGATE FUNCTIONS
     
     func textViewDidBeginEditing(_ textView: UITextView)
     {
@@ -528,16 +541,75 @@ extension CreateNewEventViewController {
         textView.resignFirstResponder()
     }
     
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        //Will need to increase height of view controller in order to compensate for scroll view moving up
-//        self.scrollView.setContentOffset(CGPoint(x: 0, y: 500), animated: true)
-//    }
     
-//    func searchForInterest(interest: String){
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+//        TODO: sometimes the tool bar works and sometimes it doesn't. need to figure out why
+        self.eventDescriptionTextView.inputAccessoryView = self.nextPrevToolbar
+        return true
+    }
+    
+//    MARK: SEARCH BAR DELEGATE FUNCTIONS
+    
+//    TODO: need to increase height of view controller in order to compensate for scroll view moving up
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        self.searchBar.inputAccessoryView = self.nextPrevToolbar
+        return true
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.scrollView.setContentOffset(CGPoint(x: 0, y: 500), animated: true)
+    }
+    
+    func searchForInterest(interest: String){
 //        filteredCandies = candies.filter { candy in
 //            return candy.name.lowercaseString.containsString(searchText.lowercaseString)
 //        }
-//    }
+    }
+    
+    func keyboardNextButton(){
+        if self.eventNameTextField.isFirstResponder{
+            self.locationTextField.becomeFirstResponder()
+            self.eventDateTextField.becomeFirstResponder()
+        } else if self.eventDateTextField.isFirstResponder {
+            self.eventTimeTextField.becomeFirstResponder()
+        } else if self.eventTimeTextField.isFirstResponder {
+            self.eventEndTimeTextField.becomeFirstResponder()
+        } else if self.eventEndTimeTextField.isFirstResponder {
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
+            self.eventPriceTextView.becomeFirstResponder()
+        } else if self.eventPriceTextView.isFirstResponder{
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
+            self.eventDescriptionTextView.becomeFirstResponder()
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: 200), animated: true)
+        } else if self.eventDescriptionTextView.isFirstResponder {
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentInset.bottom), animated: true)
+            self.searchBar.becomeFirstResponder()
+        }
+    }
+    
+    func keyboardPreviousButton(){
+        if self.searchBar.isFirstResponder {
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-20), animated: true)
+            self.eventDescriptionTextView.becomeFirstResponder()
+        } else if self.eventDescriptionTextView.isFirstResponder {
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-10), animated: true)
+            self.eventPriceTextView.becomeFirstResponder()
+        } else if self.eventPriceTextView.isFirstResponder {
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-10), animated: true)
+            self.eventEndTimeTextField.becomeFirstResponder()
+        } else if self.eventEndTimeTextField.isFirstResponder {
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-10), animated: true)
+            self.eventTimeTextField.becomeFirstResponder()
+        } else if self.eventTimeTextField.isFirstResponder {
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-10), animated: true)
+            self.eventDateTextField.becomeFirstResponder()
+        } else if self.eventDateTextField.isFirstResponder {
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentInset.top), animated: true)
+            self.locationTextField.becomeFirstResponder()
+            self.eventNameTextField.becomeFirstResponder()
+        }
+        
+    }
 }
 
 

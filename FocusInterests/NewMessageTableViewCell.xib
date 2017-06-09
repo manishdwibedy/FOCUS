@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newMessageCell" rowHeight="56" id="KGk-i7-Jjw" customClass="NewMessageTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="339" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="339" height="55.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="4Cb-Z3-4Zl">
+                        <rect key="frame" x="14" y="7.5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="kwV-dA-Kqt"/>
+                            <constraint firstAttribute="width" constant="40" id="oIB-R6-lcY"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFo-2h-0ja">
+                        <rect key="frame" x="70" y="7.5" width="211" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="7vH-AL-g26"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyX-5d-y4d">
+                        <rect key="frame" x="70" y="25.5" width="211" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="BmM-34-0fe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="wFo-2h-0ja" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="62" id="07x-mg-K7F"/>
+                    <constraint firstItem="4Cb-Z3-4Zl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-0.25" id="4fm-H3-6Nd"/>
+                    <constraint firstItem="LyX-5d-y4d" firstAttribute="leading" secondItem="4Cb-Z3-4Zl" secondAttribute="trailing" constant="16" id="9nU-no-6WG"/>
+                    <constraint firstItem="wFo-2h-0ja" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="6" id="CII-UC-1Bx"/>
+                    <constraint firstItem="LyX-5d-y4d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="62" id="HKw-IT-eXp"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="wFo-2h-0ja" secondAttribute="trailing" constant="50" id="Igd-by-CuM"/>
+                    <constraint firstItem="LyX-5d-y4d" firstAttribute="top" secondItem="wFo-2h-0ja" secondAttribute="bottom" constant="2" id="JDW-Zn-9jq"/>
+                    <constraint firstItem="wFo-2h-0ja" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-12.25" id="Kl4-iV-qqh"/>
+                    <constraint firstItem="LyX-5d-y4d" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="6" id="mdN-ea-dgU"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="4Cb-Z3-4Zl" secondAttribute="leading" constant="-6" id="vF8-es-Jyv"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LyX-5d-y4d" secondAttribute="trailing" constant="50" id="xV6-zo-men"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="fullNameLabel" destination="LyX-5d-y4d" id="b7j-Pr-mHs"/>
+                <outlet property="userProfileImage" destination="4Cb-Z3-4Zl" id="mjO-F8-gdw"/>
+                <outlet property="usernameLabel" destination="wFo-2h-0ja" id="ewD-Tm-1L7"/>
+            </connections>
+            <point key="canvasLocation" x="-0.5" y="130"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="UserPhoto" width="102" height="102"/>
+    </resources>
+</document>

@@ -12,6 +12,8 @@ import FirebaseDatabase
 class NewMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
 
+    let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    
     let userRef = Constants.DB.user
     var users = [[String: Any]]()
     var usersInMemory: Set<String> = []
@@ -28,14 +30,16 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         loadInitialTable()
         loadRestUsers()
         
-        
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
         backgroundView.backgroundColor = UIColor(hexString: "445464")
         tableView.backgroundView = backgroundView
         
         self.tableView.separatorColor = UIColor.white
         self.tableView.separatorInset = UIEdgeInsets.zero
-
+        
+        let nib = UINib(nibName: "NewMessageTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "newMessageCell")
+        
         self.navigationController?.navigationBar.tintColor = UIColor.white
         hideKeyboardWhenTappedAround()
     }
@@ -63,25 +67,18 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newMessageCell", for: indexPath) as! NewMessageTableViewCell
         
         cell.textLabel?.textColor = UIColor.white
         
-       // cell.imageView?.roundedImage()
-        
-//        cell.imageView?.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-
-        
-        cell.imageView?.layer.cornerRadius = 25
-        cell.imageView?.clipsToBounds = true
         
         if !searching{
-            cell.textLabel?.text = self.users[indexPath.row]["username"] as! String?
-            cell.detailTextLabel?.text = self.users[indexPath.row]["fullname"] as? String
+            cell.usernameLabel.text = self.users[indexPath.row]["username"] as! String?
+            cell.fullNameLabel.text = self.users[indexPath.row]["fullname"] as? String
         }
         else{
-            cell.textLabel?.text = self.filtered[indexPath.row]["username"] as! String?
-            cell.detailTextLabel?.text = self.filtered[indexPath.row]["fullname"] as? String
+            cell.usernameLabel.text = self.filtered[indexPath.row]["username"] as! String?
+            cell.fullNameLabel.text = self.filtered[indexPath.row]["fullname"] as? String
         }
         
 //        cell.preservesSuperviewLayoutMargins = false
@@ -94,6 +91,15 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "show_chat", sender: indexPath.row)
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return self.alphabeticalSections
+    }
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        var temp = self.alphabeticalSections as NSArray
+        return temp.index(of: title)
     }
     
     func loadInitialTable(){
@@ -111,10 +117,10 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         }) { (error) in
             print(error.localizedDescription)
         }
+        
     }
     
     func loadRestUsers(){
-        
         userRef.observe(DataEventType.value, with: { (snapshot) in
             // Get user value
             let users = snapshot.value as? [String:[String:Any]]
@@ -125,7 +131,17 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                     self.usersInMemory.insert(id)
                 }
             }
+            
+            self.users.sort { (nameOne, nameTwo) -> Bool in
+                var stringOfNameOne = String(describing: nameOne["username"])
+                var stringOfNameTwo = String(describing: nameTwo["username"])
+                
+                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
+            }
+            
+            self.tableView.reloadData()
         })
+        
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

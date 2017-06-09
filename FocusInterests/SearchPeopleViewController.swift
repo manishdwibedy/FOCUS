@@ -15,8 +15,8 @@ import SwiftyJSON
 class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableHeader: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var moreButton: UIButton!
     
     var people = [User]()
     var filtered = [User]()
@@ -24,6 +24,11 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let greenPinImage = UIImage(named: "pin")
+//        greenPinImage!.imageScaled(to: CGSize(width: 10, height: 10))
+//        let greenPinImageView = UIImageView(image: greenPinImage)
+//        self.navigationItem.title =  greenPinImageView + " People"
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -35,8 +40,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
         
         self.searchBar.delegate = self
-        
-        tableHeader.topCornersRounded(radius: 10)
+        self.moreButton.layer.borderColor = UIColor.white.cgColor
+        self.moreButton.roundCorners(radius: 5.0)
         
         filtered = people
         hideKeyboardWhenTappedAround()
@@ -81,8 +86,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.username.text = people.username
         cell?.fullName.text = "Full Name"
         
-        cell?.address.text = ""
-        cell?.distance.text = ""
+        cell?.address.text = "1234 Grand Ave.\nPasadena, CA 91101"
+        cell?.distance.text = "2.1m"
         
 //        var addressComponents = event.fullAddress?.components(separatedBy: ",")
 //        let streetAddress = addressComponents?[0]
@@ -130,6 +135,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         return cell!
     }
     
+    
     func followUser(sender:UIButton){
         let buttonRow = sender.tag
         
@@ -147,8 +153,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
-        
+        return 150
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

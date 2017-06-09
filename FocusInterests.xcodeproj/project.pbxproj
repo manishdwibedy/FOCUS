@@ -212,6 +212,8 @@
 		D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB6991E89F73800D62DC2 /* SocialGroupViewController.xib */; };
 		D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */; };
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
+		EB252F0B1EE9E9F7001C163D /* NewMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */; };
+		EB252F0C1EE9E9F7001C163D /* NewMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB252F0A1EE9E9F7001C163D /* NewMessageTableViewCell.xib */; };
 		EB3EA23A1EE7684500F61D38 /* _Main Logo Transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */; };
 		EB3EA2421EE7707500F61D38 /* InviteListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */; };
 		EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */; };
@@ -523,6 +525,8 @@
 		D2FDB69C1E89FF2B00D62DC2 /* SocialCrowdCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialCrowdCell.swift; sourceTree = "<group>"; };
 		D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialCrowdCell.xib; sourceTree = "<group>"; };
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageTableViewCell.swift; sourceTree = "<group>"; };
+		EB252F0A1EE9E9F7001C163D /* NewMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewMessageTableViewCell.xib; sourceTree = "<group>"; };
 		EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_Main Logo Transparent.png"; sourceTree = "<group>"; };
 		EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteListTableViewCell.swift; sourceTree = "<group>"; };
 		EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteListTableViewCell.xib; sourceTree = "<group>"; };
@@ -818,6 +822,8 @@
 				5BA37C7F1EBDC4D90091189E /* ChatViewController.swift */,
 				5B448E601EE7B7FC00873F79 /* MessageTableViewCell.swift */,
 				5B448E611EE7B7FC00873F79 /* MessageTableViewCell.xib */,
+				EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */,
+				EB252F0A1EE9E9F7001C163D /* NewMessageTableViewCell.xib */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -1388,6 +1394,7 @@
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
 				5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */,
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
+				EB252F0C1EE9E9F7001C163D /* NewMessageTableViewCell.xib in Resources */,
 				5B448E631EE7B7FC00873F79 /* MessageTableViewCell.xib in Resources */,
 				FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */,
 				FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */,
@@ -1679,6 +1686,7 @@
 				5B6AFA671ED1906900A82104 /* GMUClusterManager.m in Sources */,
 				5B71D6FA1ED181D10093A3F5 /* SendInvitationsViewController.swift in Sources */,
 				5B71D70D1ED184880093A3F5 /* FollowProfileCell.swift in Sources */,
+				EB252F0B1EE9E9F7001C163D /* NewMessageTableViewCell.swift in Sources */,
 				5B69158C1ED7D80100093AD5 /* NewUserPopupViewController.swift in Sources */,
 				5B6AFA741ED1906900A82104 /* GMUPolygon.m in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
