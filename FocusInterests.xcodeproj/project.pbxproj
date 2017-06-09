@@ -246,6 +246,8 @@
 		FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */; };
 		FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBF87A41EE5BED0000168F5 /* InvitePeopleEventCell.swift */; };
 		FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBF87A51EE5BED0000168F5 /* InvitePeopleEventCell.xib */; };
+		FFD32DD31EE9FF9900FE725E /* InterstCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD32DD11EE9FF9900FE725E /* InterstCollectionViewCell.swift */; };
+		FFD32DD41EE9FF9900FE725E /* InterstCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFD32DD21EE9FF9900FE725E /* InterstCollectionViewCell.xib */; };
 		FFEFA1C11EE7864A000623CB /* PlaceAllPinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEFA1C01EE7864A000623CB /* PlaceAllPinsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -555,6 +557,8 @@
 		FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePeoplePlaceCell.xib; sourceTree = "<group>"; };
 		FFBF87A41EE5BED0000168F5 /* InvitePeopleEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePeopleEventCell.swift; sourceTree = "<group>"; };
 		FFBF87A51EE5BED0000168F5 /* InvitePeopleEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePeopleEventCell.xib; sourceTree = "<group>"; };
+		FFD32DD11EE9FF9900FE725E /* InterstCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstCollectionViewCell.swift; sourceTree = "<group>"; };
+		FFD32DD21EE9FF9900FE725E /* InterstCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterstCollectionViewCell.xib; sourceTree = "<group>"; };
 		FFEFA1C01EE7864A000623CB /* PlaceAllPinsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceAllPinsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1022,6 +1026,8 @@
 				D2A173541E5E911500C7724B /* SignUpViewController.swift */,
 				5B251E841ED276970075B57A /* InterestsViewController.swift */,
 				5B251E851ED276970075B57A /* InterestsViewController.xib */,
+				FFD32DD11EE9FF9900FE725E /* InterstCollectionViewCell.swift */,
+				FFD32DD21EE9FF9900FE725E /* InterstCollectionViewCell.xib */,
 				5B251E861ED276970075B57A /* InviteFriendsViewController.swift */,
 				5B251E871ED276970075B57A /* InviteFriendsViewController.xib */,
 				04FD5D1F1EBBDF9B00D7FFB7 /* SignUpVCS */,
@@ -1426,6 +1432,7 @@
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
+				FFD32DD41EE9FF9900FE725E /* InterstCollectionViewCell.xib in Resources */,
 				FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */,
 				5B448E651EE94BF900873F79 /* Invites.storyboard in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
@@ -1753,6 +1760,7 @@
 				D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */,
 				5B959FDA1ECADFA300094FE6 /* PinViewController.swift in Sources */,
 				5B71D70A1ED183EE0093A3F5 /* attendeeVC.swift in Sources */,
+				FFD32DD31EE9FF9900FE725E /* InterstCollectionViewCell.swift in Sources */,
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
 				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,

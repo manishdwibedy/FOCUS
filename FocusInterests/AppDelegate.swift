@@ -138,6 +138,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         let tabContr = storyboard.instantiateInitialViewController() as! UITabBarController
         self.window?.rootViewController = tabContr
         self.window?.makeKeyAndVisible()
+        
+//        let newView = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
+//        self.window?.rootViewController = newView
+//        self.window?.makeKeyAndVisible()
+        
+      
+        
     }
     
     func logout() {
