@@ -39,6 +39,9 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
                 }
             }
         }
+        else{
+            self.performSegue(withIdentifier: "next", sender: nil)
+        }
     }
     
     @IBAction func typeOfSignUpWasSelected(_ sender: Any) {
@@ -53,7 +56,7 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "finishSignUp" {
+        if segue.identifier == "next" {
             if let destinationVC = segue.destination as? SecondSignUpViewController {
                 guard let validEntry = phoneOrEmailTextField.text else { return }
                 switch self.phoneEmailSwitcher.selectedSegmentIndex {
