@@ -81,8 +81,8 @@ class SearchPlaceCell: UITableViewCell {
     }
    
     @IBAction func inviteButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "search_place", bundle: nil)
-        let ivc = storyboard.instantiateViewController(withIdentifier: "invitePlaceCV") as! invitePlaceCV
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "place"
         ivc.parentCell = self
         ivc.id = self.placeID

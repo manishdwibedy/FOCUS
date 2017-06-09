@@ -212,8 +212,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let event = self.events[buttonRow]
         print("invite user to event \(event.title) ")
         
-        let storyboard = UIStoryboard(name: "search_place", bundle: nil)
-        let ivc = storyboard.instantiateViewController(withIdentifier: "invitePlaceCV") as! invitePlaceCV
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "event"
         ivc.id = event.id!
         ivc.event = event

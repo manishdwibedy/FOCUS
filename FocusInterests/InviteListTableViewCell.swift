@@ -45,6 +45,6 @@ class InviteListTableViewCell: UITableViewCell {
     }
     
     @IBAction func contactSelectedAction(_ sender: Any) {
-        delegate?.contactHasBeenSelected(contact: self.fullNameLabel.text!)
+        delegate?.contactHasBeenSelected(contact: self.fullNameLabel.text!, index: self.inviteConfirmationButton.tag)
     }
 }
