@@ -509,15 +509,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         if (solar?.isNighttime)!{
             
-            if !hasCustomProfileImage{
-                navigationView.userProfileButton.setImage(UIImage(named: "User_Profile"), for: .normal)
-            }
-            
-            navigationView.messagesButton.setImage(UIImage(named: "Messages"), for: .normal)
-            navigationView.searchButton.setImage(UIImage(named: "Search"), for: .normal)
-            navigationView.notificationsButton.setImage(UIImage(named: "Notifications"), for: .normal)
-            
-            
+//            if !hasCustomProfileImage{
+//                navigationView.userProfileButton.setImage(UIImage(named: "User_Profile"), for: .normal)
+//            }
+//            
+//            navigationView.messagesButton.setImage(UIImage(named: "Messages"), for: .normal)
+//            navigationView.searchButton.setImage(UIImage(named: "Search"), for: .normal)
+//            navigationView.notificationsButton.setImage(UIImage(named: "Notifications"), for: .normal)
+
+            navigationView.backgroundColor = UIColor(hexString: "435366")
+//            self.tabBarController!.tabBar.backgroundColor = UIColor(hexString: "435366")
+
+
             do {
                 // Set the map style by passing the URL of the local file.
                 if let styleURL = Bundle.main.url(forResource: "map_style", withExtension: "json") {

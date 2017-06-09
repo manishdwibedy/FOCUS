@@ -11,10 +11,12 @@ import Contacts
 import FirebaseStorage
 
 protocol SendInvitationsViewControllerDelegate {
-    func contactHasBeenSelected(contact: String)
+    func contactHasBeenSelected(contact: String, index: Int)
 }
 
 class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SendInvitationsViewControllerDelegate{
+    
+
     
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var friendsTableView: UITableView!
@@ -148,9 +150,11 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         return personToInviteCell
     }
     
-    func contactHasBeenSelected(contact: String){
+    func contactHasBeenSelected(contact: String, index: Int){
         print(contact)
         contactListView.isHidden = false
+        
+        
         if contactList.text!.isEmpty {
             contactList.text = "\(contact)"
         }else{
