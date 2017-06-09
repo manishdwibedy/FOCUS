@@ -214,6 +214,10 @@
 		D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2FDB69D1E89FF2B00D62DC2 /* SocialCrowdCell.xib */; };
 		EB252F0B1EE9E9F7001C163D /* NewMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */; };
 		EB252F0C1EE9E9F7001C163D /* NewMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB252F0A1EE9E9F7001C163D /* NewMessageTableViewCell.xib */; };
+		EB252F0E1EEA712D001C163D /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = EB252F0D1EEA712D001C163D /* Gear.png */; };
+		EB252F101EEA7F40001C163D /* Friend Pin.png in Resources */ = {isa = PBXBuildFile; fileRef = EB252F0F1EEA7F40001C163D /* Friend Pin.png */; };
+		EB252F131EEAA062001C163D /* UserProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB252F111EEAA062001C163D /* UserProfileCollectionViewCell.swift */; };
+		EB252F141EEAA062001C163D /* UserProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */; };
 		EB3EA23A1EE7684500F61D38 /* _Main Logo Transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */; };
 		EB3EA2421EE7707500F61D38 /* InviteListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */; };
 		EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */; };
@@ -525,6 +529,10 @@
 		EA5A7F8277AEF233107F6998 /* Pods-FocusInterests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterests/Pods-FocusInterests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageTableViewCell.swift; sourceTree = "<group>"; };
 		EB252F0A1EE9E9F7001C163D /* NewMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewMessageTableViewCell.xib; sourceTree = "<group>"; };
+		EB252F0D1EEA712D001C163D /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
+		EB252F0F1EEA7F40001C163D /* Friend Pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Friend Pin.png"; sourceTree = "<group>"; };
+		EB252F111EEAA062001C163D /* UserProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		EB3EA2391EE7684500F61D38 /* _Main Logo Transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_Main Logo Transparent.png"; sourceTree = "<group>"; };
 		EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteListTableViewCell.swift; sourceTree = "<group>"; };
 		EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteListTableViewCell.xib; sourceTree = "<group>"; };
@@ -1108,6 +1116,8 @@
 				EB5891C61EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib */,
 				EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */,
 				EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */,
+				EB252F111EEAA062001C163D /* UserProfileCollectionViewCell.swift */,
+				EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1189,6 +1199,8 @@
 		EBFAB3851EE74DDB00A03E11 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EB252F0F1EEA7F40001C163D /* Friend Pin.png */,
+				EB252F0D1EEA712D001C163D /* Gear.png */,
 				EB722F981EE8B66700420DC8 /* Unstar.png */,
 				EB5891D31EE7EBFE00C35EE9 /* Like.png */,
 				EB722F9E1EE8BA7D00420DC8 /* Green.png */,
@@ -1382,6 +1394,7 @@
 				61ED203C1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard in Resources */,
 				5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
+				EB252F0E1EEA712D001C163D /* Gear.png in Resources */,
 				EB5891D41EE7EBFE00C35EE9 /* Like.png in Resources */,
 				5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
@@ -1418,6 +1431,7 @@
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */,
+				EB252F101EEA7F40001C163D /* Friend Pin.png in Resources */,
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
@@ -1443,6 +1457,7 @@
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				5B959FEB1ECD23C200094FE6 /* SuggestPlaceView.xib in Resources */,
 				5B71D7061ED1837A0093A3F5 /* commentCell.xib in Resources */,
+				EB252F141EEAA062001C163D /* UserProfileCollectionViewCell.xib in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
 				EB3EA23A1EE7684500F61D38 /* _Main Logo Transparent.png in Resources */,
 				EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */,
@@ -1773,6 +1788,7 @@
 				5B251E8A1ED276970075B57A /* InviteFriendsViewController.swift in Sources */,
 				5B448E671EE94C7700873F79 /* InviteViewController.swift in Sources */,
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
+				EB252F131EEAA062001C163D /* UserProfileCollectionViewCell.swift in Sources */,
 				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */,
 				FF12737B1EDC882E0034AA42 /* PinLookViewController.swift in Sources */,
