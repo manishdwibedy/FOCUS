@@ -17,7 +17,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var inviteButton: UIButton!
-
+    @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var fullName: UILabel!
 
     var ID = ""
@@ -26,6 +26,11 @@ class SearchPeopleTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.userImage.layer.borderWidth = 2
+        self.userImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
+        self.userImage.roundedImage()
+        self.cellContentView.allCornersRounded(radius: 10.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -37,15 +42,12 @@ class SearchPeopleTableViewCell: UITableViewCell {
     func checkFollow(){
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                
+            if value != nil {
                 self.followButton.layer.borderColor = UIColor.white.cgColor
                 self.followButton.layer.borderWidth = 1
                 self.followButton.backgroundColor = UIColor.clear
                 self.followButton.setTitle("Following", for: UIControlState.normal)
-            }else
-            {
+            } else {
                 self.followButton.layer.borderColor = UIColor.clear.cgColor
                 self.followButton.layer.borderWidth = 0
                 self.followButton.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
@@ -54,6 +56,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
         })
     }
     
+//    TODO: Bug when trying to unfollow a user
     @IBAction func followUser(_ sender: UIButton) {
         let time = NSDate().timeIntervalSince1970
 
@@ -66,14 +69,12 @@ class SearchPeopleTableViewCell: UITableViewCell {
             self.followButton.layer.borderWidth = 1
             self.followButton.backgroundColor = UIColor.clear
             self.followButton.setTitle("Following", for: UIControlState.normal)
-        }
-        else{
+        } else {
            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? [String:Any]
                 
                 for (id, _) in value!{
-                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people/\(id)").removeValue()
-                    
+                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people/\(id)").removeValue()
                 }
              
                 })
