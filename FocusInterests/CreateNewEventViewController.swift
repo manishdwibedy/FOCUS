@@ -9,7 +9,8 @@
 import UIKit
 import GooglePlaces
 import FirebaseDatabase
-
+import GeoFire
+   
 class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate{
     
     @IBOutlet weak var publicLabel: UILabel!

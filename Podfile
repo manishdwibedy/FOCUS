@@ -13,6 +13,7 @@ target 'FocusInterests' do
     pod 'Firebase/Storage'
     pod 'Firebase/Crash'
     pod 'Firebase/Database'
+    pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 
     pod 'Google'
     pod 'GoogleSignIn'

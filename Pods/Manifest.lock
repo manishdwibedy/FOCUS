@@ -82,6 +82,8 @@ PODS:
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - Gallery (1.2.0)
+  - GeoFire (2.0.0):
+    - Firebase/Database (~> 4.0)
   - Google (2.0.4):
     - Google/Core (= 2.0.4)
   - Google/Core (2.0.4):
@@ -169,6 +171,7 @@ DEPENDENCIES:
   - Firebase/Messaging (~> 4.0)
   - Firebase/Storage
   - Gallery
+  - GeoFire (from `https://github.com/firebase/geofire-objc.git`)
   - Google
   - GoogleMaps
   - GooglePlacePicker
@@ -190,6 +193,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/JanGorman/Agrume.git
   ChameleonFramework:
     :git: https://github.com/ViccAlexander/Chameleon.git
+  GeoFire:
+    :git: https://github.com/firebase/geofire-objc.git
   SVPullToRefresh:
     :branch: top-infinitescrolling
     :git: https://github.com/gabro/SVPullToRefresh
@@ -201,6 +206,9 @@ CHECKOUT OPTIONS:
   ChameleonFramework:
     :commit: acc480fbe023c6e5fe40f68593f4a70a8c4c7ad5
     :git: https://github.com/ViccAlexander/Chameleon.git
+  GeoFire:
+    :commit: 96d6463f59016785f9c5ae9b669019c44786a23f
+    :git: https://github.com/firebase/geofire-objc.git
   SVPullToRefresh:
     :commit: 3f88bf7a51b37fc3f19f180a67c729dcec873df2
     :git: https://github.com/gabro/SVPullToRefresh
@@ -230,6 +238,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   Gallery: 925b8133efa9d8fe933918f242b64110c6478b98
+  GeoFire: 02f02683e09367c2eee073c6b09c794da19833ee
   Google: d536877ec602555b755cc28ce6fed104825c693c
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleMaps: 340a6a0bebd17c2db8abcd3921976c7c53c86cb8
@@ -256,6 +265,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
   TwitterKit: 202404be71aadd81d19f677b34579fe77d9cb67e
 
-PODFILE CHECKSUM: c67fe2156870090254d1b334abe2e600e7fb0d97
+PODFILE CHECKSUM: 2eac6400dce67c85bb2b4a1f07b49e8f9429443f
 
 COCOAPODS: 1.2.1

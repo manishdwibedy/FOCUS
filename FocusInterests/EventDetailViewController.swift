@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import Firebase
+import GeoFire
 
 class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var likeCount: UILabel!
@@ -51,6 +52,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var attendingAmount = 0
     var isAttending = false
     var suggestions = [Event]()
+    let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -237,6 +240,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 }
                 
             })
+            
             
             getEventSuggestions()
             
@@ -498,48 +502,39 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     func getEventSuggestions(){
         
-        Constants.DB.event.queryLimited(toLast: 3).observe(DataEventType.value, with: { (snapshot) in
-            let events = snapshot.value as? [String : Any] ?? [:]
-            
-            for (id, event) in events{
-                let info = event as? [String:Any]
-                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: snapshot.key, category: info?["interests"] as? String)
+        let center = CLLocation(latitude: Double((event?.latitude)!)!, longitude: Double((event?.latitude)!)!)
+                if let circleQuery = self.geoFire?.query(at: center, withRadius: 5.0) {
+                        _ = circleQuery.observe(.keyEntered) { (key, location) in
+                                print("Key '\(key)' entered the search area and is at location '\(location)'")
+                            
+                            Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
+                                let info = snapshot.value as? [String : Any] ?? [:]
+                                
+//                                for (id, event) in events{
+//                                    let info = event as? [String:Any]
+                                    let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
+                                    
+                                    if let attending = info["attendingList"] as? [String:Any]{
+                                        event.setAttendessCount(count: attending.count)
+                                    }
+                                    
+                                    if event.id != self.event?.id{
+                                        self.suggestions.append(event)
+                                        
+                                    }
+                                    
+//                                    if self.suggestions.count == 2{
+                                        self.eventsTableView.reloadData()
+//                                    }
+//                                }
+                            })
+                            }
                 
-                if let attending = info?["attendingList"] as? [String:Any]{
-                    event.setAttendessCount(count: attending.count)
-                }
-                
-                let reference = Constants.storage.event.child("\(id).jpg")
-                
-                
-//                reference.downloadURL(completion: { (url, error) in
-//                    
-//                    if error != nil {
-//                        print(error?.localizedDescription)
-//                        return
-//                    }
-//                    
-//                    let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
-//                        marker.tracksInfoWindowChanges = false
-//                        infoWindow.image.setShowActivityIndicator(false)
-//                        
-//                    }
-//                    
-//                    
-//                    
-//                    
-//                })
-                
-                if event.id != self.event?.id{
-                    self.suggestions.append(event)
-                    
-                }
-                
-                if self.suggestions.count == 2{
-                    self.eventsTableView.reloadData()
-                }
-            }
-        })
+                            circleQuery.observeReady{
+                                print("All initial data has been loaded and events have been fired for circle query!")
+                            }
+                    }
+        
     }
     
     func setupViewsAndButton(){
