@@ -10,6 +10,9 @@ import UIKit
 
 class HomePageViewController: UITabBarController {
 
+    var showEvent = false
+    var location: CLLocation? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +25,13 @@ class HomePageViewController: UITabBarController {
         UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .selected)
         
         setupTabBarSeparators()
+        
+        var vc = self.viewControllers![0] as! MapViewController
+        vc.showEvent = showEvent
+        if let location = self.location{
+            vc.currentLocation = location
+        }
+        
         // Do any additional setup after loading the view.
     }
 

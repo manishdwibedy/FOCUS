@@ -243,6 +243,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func mapEvent(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
+        VC?.showEvent = true
+        VC?.location = CLLocation(latitude: Double((event?.latitude)!)!, longitude: Double((event?.longitude)!)!)
+        self.present(VC!, animated: true, completion: nil)
     }
     
     @IBAction func postComment(_ sender: Any) {

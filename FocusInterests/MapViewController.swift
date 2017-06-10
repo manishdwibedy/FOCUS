@@ -39,7 +39,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var places = [Place]()
     var placeMapping = [String: Place]()
     var hasCustomProfileImage = false
-    
+    var showEvent = false
     var pins = [pinData]()
     
     var searchPlacesTab: SearchPlacesViewController? = nil
@@ -90,7 +90,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         placesClient = GMSPlacesClient.shared()
         
-        //mapView.isMyLocationEnabled = true
+//        mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
         if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
@@ -184,6 +184,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             print(invitations)
         })
 
+        if showEvent{
+            
+            let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
+                                                  longitude: (currentLocation?.coordinate.longitude)!,
+                                                  zoom: 15)
+            if mapView.isHidden {
+                mapView.isHidden = false
+                mapView.camera = camera
+            } else {
+                mapView.animate(to: camera)
+            }
+        }
         
         if let token = AuthApi.getYelpToken(){
 //            fetchPlaces(token: token)
@@ -569,13 +581,32 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             })
         }
         
+        if !showEvent{
+            mapView.settings.myLocationButton = true
+
+            if mapView.isHidden {
+                mapView.isHidden = false
+                mapView.camera = camera
+            } else {
+                mapView.animate(to: camera)
+            }
+        }
+        
+
+    }
+    
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
+                                              longitude: (currentLocation?.coordinate.longitude)!,
+                                              zoom: 15)
+        
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
         } else {
             mapView.animate(to: camera)
         }
-
+        return true
     }
     
     // Handle authorization for the location manager.
