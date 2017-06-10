@@ -13,6 +13,12 @@ import Firebase
 class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var hostNameLabel: UILabel!
+    
+    @IBOutlet weak var eventNameLabel: UILabel!
+    @IBOutlet weak var fullnameLabel: UILabel!
+    
+    @IBOutlet weak var eventInterests: UILabel!
+    @IBOutlet weak var eventAmount: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
@@ -35,10 +41,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var postCommentsButton: UIButton!
     @IBOutlet weak var moreOtherLikesButton: UIButton!
     
-    @IBOutlet weak var guestButtonOut: UIButton!
-    var event: Event?
-    @IBOutlet weak var image: UIImageView!
     
+    @IBOutlet weak var guestButtonOut: UIButton!
+    @IBOutlet weak var image: UIImageView!
+    var event: Event?
     let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
     var keyboardUp = false
@@ -115,6 +121,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
         
         navTitle.title = event?.title
+        eventNameLabel.text = event?.title
         timeLabel.text = event?.date
         addressLabel.text = event?.fullAddress
         descriptionLabel.text = event?.eventDescription
@@ -126,6 +133,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             if value != nil
             {
                 let placeString = ("Add comment as " + (value?["username"] as! String))
+                self.hostNameLabel.text = value?["username"] as! String
+                self.fullnameLabel.text = value?["fullname"] as! String
                 var placeHolder = NSMutableAttributedString()
                 placeHolder = NSMutableAttributedString(string:placeString, attributes: [NSFontAttributeName:UIFont(name: "Helvetica", size: 15.0)!])
                 placeHolder.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 255, green: 255, blue: 255, alpha: 0.8), range:NSRange(location:0,length:placeString.characters.count))
@@ -206,6 +215,21 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 {
                     self.attendOut.isEnabled = false
                     self.attendOut.setTitle("Attending", for: UIControlState.normal)
+                }
+                
+            })
+            
+            
+            // interests
+            ref.child("events").child((event?.id)!).child("interests").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if let value = value as? String
+                {
+                    self.eventInterests.text = value
+                    
+                }
+                else{
+                    self.eventInterests.text = "N.A."
                 }
                 
             })

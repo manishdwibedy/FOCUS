@@ -150,7 +150,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euL-SU-SLg" userLabel="Interests View">
                                         <rect key="frame" x="0.0" y="300" width="375" height="74"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests go here " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBQ-ea-dbh">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests go here " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBQ-ea-dbh" userLabel="The">
                                                 <rect key="frame" x="8" y="30" width="359" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="359" id="gcK-rQ-RVG"/>
@@ -537,7 +537,11 @@
                         <outlet property="commentsTableView" destination="Fkz-WO-lvo" id="fi0-8x-dBo"/>
                         <outlet property="descriptionEditButton" destination="fAn-v8-vxf" id="lpB-mD-Qw3"/>
                         <outlet property="descriptionLabel" destination="2iq-YC-hgq" id="KMz-fd-qgx"/>
+                        <outlet property="eventAmount" destination="sVl-qp-toO" id="ED1-VS-3Mj"/>
+                        <outlet property="eventInterests" destination="DBQ-ea-dbh" id="dHO-WD-DIC"/>
+                        <outlet property="eventNameLabel" destination="RqY-ns-LeC" id="6nl-8g-rKr"/>
                         <outlet property="eventsTableView" destination="371-1b-x7j" id="9Xm-Lt-5z3"/>
+                        <outlet property="fullnameLabel" destination="ime-Gy-nfU" id="Kzw-xA-fov"/>
                         <outlet property="guestButtonOut" destination="aTS-NT-86s" id="zv1-Mj-BzK"/>
                         <outlet property="hostNameLabel" destination="8v2-dQ-eLf" id="Hc4-Wq-dNd"/>
                         <outlet property="image" destination="i9J-UJ-8IQ" id="jXS-cL-Pe1"/>
