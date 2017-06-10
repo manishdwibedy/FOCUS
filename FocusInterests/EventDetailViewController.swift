@@ -50,6 +50,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var keyboardUp = false
     var attendingAmount = 0
     var isAttending = false
+    var suggestions = [Event]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         commentsTableView.delegate = self
@@ -235,6 +237,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 }
                 
             })
+            
+            getEventSuggestions()
+            
             self.attendOut.titleLabel?.textAlignment = .left
         }
         
@@ -385,7 +390,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         if(tableView.tag == 0){
             rowCount = commentsCList.count
         }else if(tableView.tag == 1){
-            rowCount = 2
+            rowCount = self.suggestions.count
         }
         
         return rowCount
@@ -406,11 +411,23 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         }else if(tableView.tag == 1){
             let eventCell = self.eventsTableView.dequeueReusableCell(withIdentifier: "otherLikesEventCell", for: indexPath) as? OtherLikesTableViewCell
-            eventCell?.distanceLabel.text = "2.1 mi"
-            eventCell?.categoryLabel.text = "Summer"
-            eventCell?.addressLabel.text = "Pasadena"
-            eventCell?.dateAndTimeLabel.text = "August"
-            eventCell?.locationLabel.text = "Los Angeles"
+            
+            let suggestion = self.suggestions[indexPath.row]
+            
+            let suggestionLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double(suggestion.longitude!)!)
+            
+            eventCell?.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: suggestionLocation,addBracket: false)
+            
+            if let category = suggestion.category{
+                eventCell?.categoryLabel.text = category.components(separatedBy: ",")[0]
+            }
+            else{
+                eventCell?.categoryLabel.text = "N.A."
+            }
+            
+            eventCell?.addressLabel.text = suggestion.shortAddress
+            eventCell?.dateAndTimeLabel.text = suggestion.date
+            eventCell?.locationLabel.text = suggestion.shortAddress
             
             tableCell = eventCell!
             
@@ -458,6 +475,52 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             commentTextField.resignFirstResponder()
             commentTextField.text = ""
         }
+    }
+    
+    func getEventSuggestions(){
+        
+        Constants.DB.event.queryLimited(toLast: 3).observe(DataEventType.value, with: { (snapshot) in
+            let events = snapshot.value as? [String : Any] ?? [:]
+            
+            for (id, event) in events{
+                let info = event as? [String:Any]
+                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: snapshot.key, category: info?["interests"] as? String)
+                
+                if let attending = info?["attendingList"] as? [String:Any]{
+                    event.setAttendessCount(count: attending.count)
+                }
+                
+                let reference = Constants.storage.event.child("\(id).jpg")
+                
+                
+//                reference.downloadURL(completion: { (url, error) in
+//                    
+//                    if error != nil {
+//                        print(error?.localizedDescription)
+//                        return
+//                    }
+//                    
+//                    let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+//                        marker.tracksInfoWindowChanges = false
+//                        infoWindow.image.setShowActivityIndicator(false)
+//                        
+//                    }
+//                    
+//                    
+//                    
+//                    
+//                })
+                
+                if event.id != self.event?.id{
+                    self.suggestions.append(event)
+                    
+                }
+                
+                if self.suggestions.count == 2{
+                    self.eventsTableView.reloadData()
+                }
+            }
+        })
     }
     
     func setupViewsAndButton(){

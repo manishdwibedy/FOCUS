@@ -89,6 +89,10 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QR2-lK-lxS">
+                                <rect key="frame" x="16" y="85" width="343" height="453"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro_pin" translatesAutoresizingMaskIntoConstraints="NO" id="to3-UK-Oze">
                                 <rect key="frame" x="162" y="538" width="50" height="100"/>
                                 <constraints>
@@ -106,11 +110,15 @@
                         <constraints>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="2x6-qQ-iyw"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="3r4-0c-HZ5"/>
+                            <constraint firstItem="to3-UK-Oze" firstAttribute="top" secondItem="QR2-lK-lxS" secondAttribute="bottom" id="Bw2-ca-3O3"/>
                             <constraint firstAttribute="trailing" secondItem="05W-Qw-2Y5" secondAttribute="trailing" id="DHn-cC-Nm9"/>
                             <constraint firstItem="to3-UK-Oze" firstAttribute="centerX" secondItem="wPw-hG-pw7" secondAttribute="centerX" id="EN5-nb-BSt"/>
                             <constraint firstAttribute="trailing" secondItem="bIq-Pr-ji4" secondAttribute="trailing" id="H69-6o-iu0"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="to3-UK-Oze" secondAttribute="bottom" constant="-20" id="MIK-K5-avi"/>
+                            <constraint firstItem="QR2-lK-lxS" firstAttribute="top" secondItem="bIq-Pr-ji4" secondAttribute="bottom" id="aHO-wc-zbz"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="05W-Qw-2Y5" secondAttribute="bottom" id="dIH-f6-lgF"/>
+                            <constraint firstItem="QR2-lK-lxS" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leadingMargin" id="hbY-gF-ajY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QR2-lK-lxS" secondAttribute="trailing" id="sO3-jM-dUB"/>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="wlW-Ae-CCd"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="x8H-nN-16x"/>
                         </constraints>
@@ -131,6 +139,7 @@
                         <outlet property="mapView" destination="05W-Qw-2Y5" id="x3W-XA-QMw"/>
                         <outlet property="navigationView" destination="bIq-Pr-ji4" id="tVe-bJ-rDh"/>
                         <outlet property="popupArrowImage" destination="to3-UK-Oze" id="5nh-bb-S3E"/>
+                        <outlet property="webView" destination="QR2-lK-lxS" id="RQl-tY-oLp"/>
                         <segue destination="frg-C7-nnG" kind="show" identifier="show_event_details" id="aXM-w5-5lD"/>
                     </connections>
                 </viewController>
