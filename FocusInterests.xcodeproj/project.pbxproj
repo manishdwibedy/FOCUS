@@ -242,6 +242,11 @@
 		EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */; };
 		EBD980871EEB64C400FC54C1 /* OtherLikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */; };
 		EBD980881EEB64C400FC54C1 /* OtherLikesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */; };
+		EBD9808D1EEBCCD500FC54C1 /* Message Icon white 30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD980891EEBCCD500FC54C1 /* Message Icon white 30x30.png */; };
+		EBD9808E1EEBCCD500FC54C1 /* Notifications Icon white 30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD9808A1EEBCCD500FC54C1 /* Notifications Icon white 30x30.png */; };
+		EBD9808F1EEBCCD500FC54C1 /* Search Icon white 30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD9808B1EEBCCD500FC54C1 /* Search Icon white 30x30.png */; };
+		EBD980901EEBCCD500FC54C1 /* User Icon white 30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD9808C1EEBCCD500FC54C1 /* User Icon white 30x30.png */; };
+		EBD980921EEBD99D00FC54C1 /* FB.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD980911EEBD99D00FC54C1 /* FB.png */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
 		FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */; };
@@ -564,6 +569,11 @@
 		EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsEventDetailTableViewCell.xib; sourceTree = "<group>"; };
 		EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherLikesTableViewCell.swift; sourceTree = "<group>"; };
 		EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherLikesTableViewCell.xib; sourceTree = "<group>"; };
+		EBD980891EEBCCD500FC54C1 /* Message Icon white 30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Message Icon white 30x30.png"; sourceTree = "<group>"; };
+		EBD9808A1EEBCCD500FC54C1 /* Notifications Icon white 30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notifications Icon white 30x30.png"; sourceTree = "<group>"; };
+		EBD9808B1EEBCCD500FC54C1 /* Search Icon white 30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search Icon white 30x30.png"; sourceTree = "<group>"; };
+		EBD9808C1EEBCCD500FC54C1 /* User Icon white 30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "User Icon white 30x30.png"; sourceTree = "<group>"; };
+		EBD980911EEBD99D00FC54C1 /* FB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FB.png; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
 		FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
@@ -1219,6 +1229,11 @@
 		EBFAB3851EE74DDB00A03E11 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EBD980911EEBD99D00FC54C1 /* FB.png */,
+				EBD980891EEBCCD500FC54C1 /* Message Icon white 30x30.png */,
+				EBD9808A1EEBCCD500FC54C1 /* Notifications Icon white 30x30.png */,
+				EBD9808B1EEBCCD500FC54C1 /* Search Icon white 30x30.png */,
+				EBD9808C1EEBCCD500FC54C1 /* User Icon white 30x30.png */,
 				EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */,
 				EB252F0F1EEA7F40001C163D /* Friend Pin.png */,
 				EB252F0D1EEA712D001C163D /* Gear.png */,
@@ -1406,6 +1421,7 @@
 				D28EAFC01E5E7C8E001EA7E5 /* Login.storyboard in Resources */,
 				D2ECAC591E7CD9F8006FFA1A /* UserPhotoCell.xib in Resources */,
 				D25370D31E885EE40071B115 /* FollowCell.xib in Resources */,
+				EBD980901EEBCCD500FC54C1 /* User Icon white 30x30.png in Resources */,
 				EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */,
 				D2ECAC551E7A255B006FFA1A /* UserProfile1ViewController.xib in Resources */,
 				5B251E8B1ED276970075B57A /* InviteFriendsViewController.xib in Resources */,
@@ -1418,6 +1434,7 @@
 				EB252F0E1EEA712D001C163D /* Gear.png in Resources */,
 				EB5891D41EE7EBFE00C35EE9 /* Like.png in Resources */,
 				5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */,
+				EBD9808E1EEBCCD500FC54C1 /* Notifications Icon white 30x30.png in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
@@ -1438,11 +1455,13 @@
 				EBD980881EEB64C400FC54C1 /* OtherLikesTableViewCell.xib in Resources */,
 				EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */,
 				5B69158D1ED7D80100093AD5 /* NewUserPopupViewController.xib in Resources */,
+				EBD980921EEBD99D00FC54C1 /* FB.png in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				5B959FF31ECD452C00094FE6 /* RatingViewCell.xib in Resources */,
 				EB722F9D1EE8BA4200420DC8 /* Dollar sign.png in Resources */,
 				EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */,
 				5B71D70E1ED184880093A3F5 /* FollowProfileCell.xib in Resources */,
+				EBD9808D1EEBCCD500FC54C1 /* Message Icon white 30x30.png in Resources */,
 				5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */,
 				5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */,
 				5B959FD81ECAD12500094FE6 /* map.gpx in Resources */,
@@ -1450,6 +1469,7 @@
 				5B251E891ED276970075B57A /* InterestsViewController.xib in Resources */,
 				D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */,
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
+				EBD9808F1EEBCCD500FC54C1 /* Search Icon white 30x30.png in Resources */,
 				EB722F901EE8A5F500420DC8 /* Reviews.storyboard in Resources */,
 				5B519E7B1ED677D800B36110 /* SearchPeopleTableViewCell.xib in Resources */,
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,

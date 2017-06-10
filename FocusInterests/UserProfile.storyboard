@@ -292,14 +292,6 @@
                                                     <constraint firstItem="F09-6U-2YX" firstAttribute="leading" secondItem="Yfu-XU-At8" secondAttribute="leading" constant="39" id="urk-fX-539"/>
                                                 </constraints>
                                             </view>
-                                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkJ-z7-1G6">
-                                                <rect key="frame" x="1" y="1187" width="375" height="49"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <items>
-                                                    <tabBarItem systemItem="favorites" id="Onv-nK-Znf"/>
-                                                    <tabBarItem systemItem="more" id="Nhw-nB-fvM"/>
-                                                </items>
-                                            </tabBar>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uGB-84-lPX">
                                                 <rect key="frame" x="8" y="8" width="359" height="269"/>
                                                 <subviews>
@@ -309,8 +301,8 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gear.png" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-Sh-HtS">
-                                                        <rect key="frame" x="321" y="8" width="25" height="25"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Gear.png" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-Sh-HtS">
+                                                        <rect key="frame" x="319" y="74" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="fG3-Cw-9ld"/>
                                                             <constraint firstAttribute="width" constant="25" id="vdt-Sn-oHJ"/>
@@ -367,6 +359,14 @@
                                                             <action selector="editDescription:" destination="cU2-hP-1h7" eventType="touchUpInside" id="lBV-0n-zbP"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Niz-Af-QYR">
+                                                        <rect key="frame" x="321" y="8" width="25" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="fKh-C5-IPk"/>
+                                                            <constraint firstAttribute="width" constant="25" id="yhf-EW-Dvc"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Gear.png"/>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -396,20 +396,16 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.19215686274509802" green="0.24705882352941178" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="hkJ-z7-1G6" secondAttribute="bottom" id="2we-ec-0fd"/>
                                             <constraint firstItem="uGB-84-lPX" firstAttribute="leading" secondItem="G0j-Fw-8KL" secondAttribute="leading" id="75e-un-1G7"/>
                                             <constraint firstItem="G0j-Fw-8KL" firstAttribute="trailing" secondItem="SF4-Kb-s3b" secondAttribute="trailing" id="7gN-ts-uA6"/>
                                             <constraint firstAttribute="height" constant="1236" id="Azw-Io-wGq"/>
                                             <constraint firstItem="uGB-84-lPX" firstAttribute="top" secondItem="wLf-1E-eSU" secondAttribute="topMargin" id="BGy-fN-RRG"/>
                                             <constraint firstItem="G0j-Fw-8KL" firstAttribute="top" secondItem="uGB-84-lPX" secondAttribute="bottom" constant="12" id="HUO-EW-RdT"/>
                                             <constraint firstItem="Yfu-XU-At8" firstAttribute="top" secondItem="SF4-Kb-s3b" secondAttribute="bottom" constant="8" symbolic="YES" id="NpX-YQ-7jU"/>
-                                            <constraint firstItem="Yfu-XU-At8" firstAttribute="centerX" secondItem="hkJ-z7-1G6" secondAttribute="centerX" id="QN5-o2-xKU"/>
                                             <constraint firstItem="SF4-Kb-s3b" firstAttribute="centerX" secondItem="Yfu-XU-At8" secondAttribute="centerX" id="R1k-M1-dfc"/>
-                                            <constraint firstItem="hkJ-z7-1G6" firstAttribute="top" secondItem="Yfu-XU-At8" secondAttribute="bottom" constant="16" id="UK6-I9-TgK"/>
                                             <constraint firstItem="uGB-84-lPX" firstAttribute="trailing" secondItem="G0j-Fw-8KL" secondAttribute="trailing" id="ZEw-C9-zRx"/>
                                             <constraint firstItem="uGB-84-lPX" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leadingMargin" id="bLf-AW-Jp0"/>
                                             <constraint firstItem="uGB-84-lPX" firstAttribute="trailing" secondItem="wLf-1E-eSU" secondAttribute="trailingMargin" id="g16-qr-mT0"/>
-                                            <constraint firstItem="hkJ-z7-1G6" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="1" id="hay-nm-vMQ"/>
                                             <constraint firstItem="SF4-Kb-s3b" firstAttribute="top" secondItem="G0j-Fw-8KL" secondAttribute="bottom" constant="12" id="lYF-Kc-WG7"/>
                                             <constraint firstItem="G0j-Fw-8KL" firstAttribute="leading" secondItem="SF4-Kb-s3b" secondAttribute="leading" id="tde-gv-zc6"/>
                                             <constraint firstItem="SF4-Kb-s3b" firstAttribute="leading" secondItem="Yfu-XU-At8" secondAttribute="leading" id="vyf-cs-DF4"/>
@@ -436,24 +432,24 @@
                                 <items>
                                     <navigationItem id="SNQ-5X-BJ8">
                                         <leftBarButtonItems>
-                                            <barButtonItem image="User_Profile" id="pvz-IC-9Ep">
+                                            <barButtonItem image="User Icon white 30x30.png" id="pvz-IC-9Ep">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <action selector="backButton:" destination="cU2-hP-1h7" id="D1E-Q4-FMq"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem image="Messages_Dark" id="CwD-Cg-3nj">
+                                            <barButtonItem image="Message Icon white 30x30.png" id="CwD-Cg-3nj">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </barButtonItem>
                                         </leftBarButtonItems>
                                         <rightBarButtonItems>
-                                            <barButtonItem image="Notifications_Dark" id="yDE-Mq-Jva">
+                                            <barButtonItem image="Notifications Icon white 30x30.png" id="yDE-Mq-Jva">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <action selector="settingsButtonTapped:" destination="cU2-hP-1h7" id="fz9-wf-J8y"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem image="Search_Dark" style="plain" id="zfE-8Q-VOK">
+                                            <barButtonItem image="Search Icon white 30x30.png" style="plain" id="zfE-8Q-VOK">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <segue destination="fzK-Fg-Tt6" kind="show" id="dP1-VZ-S5U"/>
@@ -836,10 +832,10 @@
         <image name="Friend Pin.png" width="75" height="72"/>
         <image name="Gear.png" width="66" height="68"/>
         <image name="Green.png" width="82" height="82"/>
-        <image name="Messages_Dark" width="40" height="40"/>
-        <image name="Notifications_Dark" width="40" height="40"/>
-        <image name="Search_Dark" width="40" height="40"/>
+        <image name="Message Icon white 30x30.png" width="30" height="30"/>
+        <image name="Notifications Icon white 30x30.png" width="30" height="30"/>
+        <image name="Search Icon white 30x30.png" width="30" height="30"/>
+        <image name="User Icon white 30x30.png" width="30" height="30"/>
         <image name="UserPhoto" width="102" height="102"/>
-        <image name="User_Profile" width="40" height="40"/>
     </resources>
 </document>

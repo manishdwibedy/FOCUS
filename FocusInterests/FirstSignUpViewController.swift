@@ -22,7 +22,11 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
         self.phoneOrEmailTextField.keyboardType = .numberPad
         self.phoneOrEmailTextField.delegate = self
         phoneOrEmailTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
-        
+        self.phoneEmailSwitcher.tintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
+        var attr = NSDictionary(object: UIFont(name: "Avenir", size: 20.0)!, forKey: NSFontAttributeName as NSCopying)
+        self.phoneEmailSwitcher.setTitleTextAttributes(attr as? [AnyHashable : Any], for: .normal)
+//        let font = UIFont.systemFont(ofSize: 20)
+//        segmentedControl.setTitleTextAttributes([NSFontAttributeName: font],for: .normal)
         hideKeyboardWhenTappedAround()
         
     }
@@ -43,6 +47,8 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
             self.performSegue(withIdentifier: "next", sender: nil)
         }
     }
+    
+    
     
     @IBAction func typeOfSignUpWasSelected(_ sender: Any) {
         phoneOrEmailTextField.resignFirstResponder()
