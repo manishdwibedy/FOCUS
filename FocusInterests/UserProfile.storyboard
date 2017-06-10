@@ -496,6 +496,7 @@
                         <outlet property="pinImage" destination="hH3-Cy-m4h" id="0l3-67-1kU"/>
                         <outlet property="pinLabel" destination="PFE-dm-34I" id="oO6-GR-O3q"/>
                         <outlet property="pinLikesLabel" destination="VK7-Ea-kjC" id="GZa-IM-E8i"/>
+                        <outlet property="suggestionsHeight" destination="xo4-J8-S4Y" id="ycj-Cq-FVV"/>
                         <outlet property="updatePinButton" destination="H4s-5t-g9h" id="fWD-De-0vz"/>
                         <outlet property="userImage" destination="22m-P8-D1B" id="0FN-cs-vKc"/>
                         <outlet property="userName" destination="Qpm-dW-0we" id="12T-Gf-UfK"/>

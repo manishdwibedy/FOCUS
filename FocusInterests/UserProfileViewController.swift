@@ -23,6 +23,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     
+    @IBOutlet weak var suggestionsHeight: NSLayoutConstraint!
     
     // follower and following
     @IBOutlet weak var followerLabel: UILabel!
@@ -139,6 +140,26 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
         let suggestion = self.suggestion[indexPath.row]
         eventCell.userEventsLabel.text = suggestion.title
+        
+        // Placeholder image
+        let placeholderImage = UIImage(named: "empty_event")
+        
+        
+        let reference = Constants.storage.event.child("\(suggestion.id).jpg")
+        
+        reference.downloadURL(completion: { (url, error) in
+            
+            if error != nil {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            eventCell.userEventsImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+            eventCell.userEventsImage.setShowActivityIndicator(true)
+            eventCell.userEventsImage.setIndicatorStyle(.gray)
+            
+        })
+            
         return eventCell
     }
     
@@ -310,7 +331,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     
                   self.suggestion.append(event)
 
-                    self.eventsCollectionView.reloadData()
+                    var rows = self.suggestion.count / 3
+                    if self.suggestion.count % 3 != 0{
+                        rows += 1
+                    }
+                    self.suggestionsHeight.constant = CGFloat(125 * rows)
+                self.eventsCollectionView.reloadData()
                 })
             }
             
