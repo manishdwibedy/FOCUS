@@ -40,7 +40,7 @@ class FirebaseDownstream {
         let userId = AuthApi.getFirebaseUid()
         
         print("getUserNotification")
-
+        
         if let id = userId {
             ref.child("users").child(id).child("invitations").observeSingleEvent(of: .value, with: { (snapshot) in
                 if let value = snapshot.value as? NSDictionary {
@@ -57,17 +57,41 @@ class FirebaseDownstream {
                         {
                             self.ref.child("users").child((inValue[inKey] as! NSDictionary)["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                 if let valueUID = snapshot.value as? NSDictionary {
+                                    var dbKey = ""
+                                    if key as! String == "event"{
+                                        dbKey = "events"
+                                        self.ref.child(dbKey).child((inValue[inKey] as! NSDictionary)["ID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                                            if let valueInviteID = snapshot.value as? NSDictionary {
+                                                var itemName = valueInviteID["title"] as! String
+                                                let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: ItemOfInterest(itemName: itemName, imageURL: ""), time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
+                                                returnableNotif.append(notification)
+                                            }
+                                            valueCount = valueCount + 1
+                                            if valueCount == totalCount
+                                            {
+                                                DispatchQueue.main.async(execute: {
+                                                    completion(returnableNotif)
+                                                })
+                                            }
+                                        })
+                                    }else if key as! String == "place"{
+                                        dbKey = "places"
+                                        let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: ItemOfInterest(itemName: ((inValue[inKey] as! NSDictionary)["ID"] as? String), imageURL: ""), time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
+                                        returnableNotif.append(notification)
                                     
-                            let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: ItemOfInterest(itemName: String(describing: v), imageURL: ""), time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
-                            returnableNotif.append(notification)
+                                    valueCount = valueCount + 1
+                                    if valueCount == totalCount
+                                    {
+                                        DispatchQueue.main.async(execute: {
+                                            completion(returnableNotif)
+                                        })
+                                    }
+                                    }
+                                
+                                    
+                                    
                                 }
-                                valueCount = valueCount + 1
-                                if valueCount == totalCount
-                                {
-                                    DispatchQueue.main.async(execute: {
-                                        completion(returnableNotif)
-                                    })
-                                }
+                                
                                 
                             })
                         }
