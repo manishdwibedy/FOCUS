@@ -68,14 +68,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            
 //        }
         
-        getFeeds(gotPins: {
-            pins in
-            print(pins)
-        }, gotEvents: { events in
-            print(events)
-        }, gotInvitations: {invitations in
-            print(invitations)
-        })
         
         //webView.isHidden = true
         if AuthApi.getEventBriteToken() == nil{
@@ -182,6 +174,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        getFeeds(gotPins: {
+            pins in
+            print(pins)
+        }, gotEvents: { events in
+            print(events)
+        }, gotInvitations: {invitations in
+            print(invitations)
+        })
+
         
         if let token = AuthApi.getYelpToken(){
 //            fetchPlaces(token: token)
