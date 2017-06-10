@@ -38,6 +38,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
 //        self.userProfilePic.image = notif.sender?.username
         let content = (notif.sender?.username)! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
         self.userNameLabel.text = (notif.sender?.username)!
+        self.locationNameLabel.text = notif.item?.itemName
 //        self.notifImgView.image = notif.item?.imageURL
         self.timeLabel.text = "2h"
     }

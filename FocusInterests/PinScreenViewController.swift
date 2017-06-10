@@ -39,6 +39,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     let numberOfItemsPerRow: CGFloat = 4.0
     let hieghtAdjustment: CGFloat = 0.0
     
+    var isPublic = false
+    var isTwitter = false
+    var isFacebook = false
+    
+    
    
     
     
@@ -175,10 +180,19 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     uploadImage(image: image, path: Constants.storage.pins.child(path))
                     
                 }
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths])
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic])
             }else
             {
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress,"lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images":"nil"])
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress,"lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images":"nil", "public": isPublic])
+            }
+            
+            if isTwitter == true
+            {
+                Share.postToTwitter(withStatus: pinTextView.text!)
+            }
+            if isFacebook == true
+            {
+                try! Share.facebookShare(with: URL(string: "www.google.com")!, description: pinTextView.text!)
             }
         }
         pinTextView.text = "What are you up to?"
@@ -186,6 +200,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         imageArray.removeAll()
         galleryPicArray.removeAll()
         pinTextView.resignFirstResponder()
+        
+        isPublic = false
+        isTwitter = false
+        isFacebook = false
         
         for cell in cellArray
         {
@@ -359,6 +377,40 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBAction func publicButton(_ sender: Any) {
+        if isPublic == false
+        {
+            isPublic = true
+        }else
+        {
+            isPublic = false
+        }
+    }
+    
+    @IBAction func facebookButton(_ sender: Any) {
+        if isFacebook == false
+        {
+            isFacebook = true
+        }else
+        {
+            isFacebook = false
+        }
+    }
+    
+    @IBAction func twitterButton(_ sender: Any) {
+        if isTwitter == false
+        {
+            isTwitter = true
+        }else
+        {
+            isTwitter = false
+        }
+    }
+    
+    
+    
     
 
  
