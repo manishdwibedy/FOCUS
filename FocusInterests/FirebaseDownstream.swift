@@ -36,7 +36,7 @@ class FirebaseDownstream {
         })
     }
     
-    func getUserNotifications(completion: @escaping ([FocusNotification]?) -> Void) {
+    func getUserNotifications(completion: @escaping ([FocusNotification]?) -> Void, gotNotif: @escaping (_ events: [FocusNotification]) -> Void) {
         let userId = AuthApi.getFirebaseUid()
         
         print("getUserNotification")
@@ -101,6 +101,15 @@ class FirebaseDownstream {
                 
                 
             })
+            
+            
+            ref.child("users").child(id).child("notifications").observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? NSDictionary {
+                    //let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: <#T##String?#>, uuid: <#T##String?#>, imageURL: <#T##String?#>), item: <#T##ItemOfInterest?#>, time: <#T##Date#>)
+                }
+            })
+            
+            
         }
         
     }

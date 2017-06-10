@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -71,41 +71,41 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What are you up to?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IIB-I7-1sg">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="What are you up to?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IIB-I7-1sg">
                                 <rect key="frame" x="16" y="151.5" width="343" height="206.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfT-IG-bgE">
-                                <rect key="frame" x="16" y="119.5" width="54" height="30"/>
-                                <state key="normal" title="Camera">
-                                    <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="camera:" destination="r5X-Z6-if9" eventType="touchUpInside" id="3Fu-ba-wol"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y9L-9E-i9r">
-                                <rect key="frame" x="177" y="366" width="182" height="30"/>
+                                <rect key="frame" x="181" y="366" width="178" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUx-Gb-fVd">
-                                        <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                                        <state key="normal" title="Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
+                                        <state key="normal" title="Public">
                                             <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="publicButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="UKy-7O-F4s"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRf-Hh-68S">
-                                        <rect key="frame" x="56" y="0.0" width="68" height="30"/>
+                                        <rect key="frame" x="52" y="0.0" width="68" height="30"/>
                                         <state key="normal" title="FaceBook">
                                             <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="facebookButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="Bas-9D-GnD"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wN-XP-zBN">
-                                        <rect key="frame" x="134" y="0.0" width="48" height="30"/>
+                                        <rect key="frame" x="130" y="0.0" width="48" height="30"/>
                                         <state key="normal" title="Twitter">
                                             <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="twitterButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="RP3-sm-664"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -170,18 +170,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hX9-m6-m5m" firstAttribute="leading" secondItem="A0j-it-CBu" secondAttribute="leading" id="1xE-1k-7FB"/>
-                            <constraint firstItem="jfT-IG-bgE" firstAttribute="top" secondItem="hX9-m6-m5m" secondAttribute="bottom" constant="8" id="3Tj-Io-EIi"/>
                             <constraint firstItem="jNi-Ij-b57" firstAttribute="leading" secondItem="Y9L-9E-i9r" secondAttribute="trailing" constant="-155" id="4rx-Bh-hEA"/>
                             <constraint firstAttribute="trailing" secondItem="hX9-m6-m5m" secondAttribute="trailing" id="7HG-wG-Vzr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jNi-Ij-b57" secondAttribute="trailing" id="A7r-WM-0nO"/>
                             <constraint firstItem="A0j-it-CBu" firstAttribute="top" secondItem="jNi-Ij-b57" secondAttribute="bottom" constant="3" id="ByU-g6-B5r"/>
                             <constraint firstItem="uye-eQ-vsG" firstAttribute="baseline" secondItem="jNi-Ij-b57" secondAttribute="baseline" id="HyU-VR-9Q2"/>
-                            <constraint firstItem="jfT-IG-bgE" firstAttribute="leading" secondItem="RAS-2w-xgh" secondAttribute="leadingMargin" id="NVZ-ih-h5y"/>
                             <constraint firstItem="Y9L-9E-i9r" firstAttribute="trailing" secondItem="jNi-Ij-b57" secondAttribute="trailing" id="QzY-8m-5q2"/>
                             <constraint firstItem="hX9-m6-m5m" firstAttribute="centerX" secondItem="IIB-I7-1sg" secondAttribute="centerX" id="UK7-SD-40S"/>
-                            <constraint firstItem="IIB-I7-1sg" firstAttribute="top" secondItem="jfT-IG-bgE" secondAttribute="bottom" constant="2" id="UWp-WS-OSa"/>
                             <constraint firstItem="hX9-m6-m5m" firstAttribute="leading" secondItem="RAS-2w-xgh" secondAttribute="leading" id="a0B-7M-Zxq"/>
-                            <constraint firstItem="jfT-IG-bgE" firstAttribute="leading" secondItem="IIB-I7-1sg" secondAttribute="leading" id="bn7-oD-Xyp"/>
                             <constraint firstItem="uye-eQ-vsG" firstAttribute="width" secondItem="jNi-Ij-b57" secondAttribute="width" id="e5g-4r-azN"/>
                             <constraint firstItem="A0j-it-CBu" firstAttribute="bottom" secondItem="JXT-PG-lAU" secondAttribute="top" id="goF-O0-c9D"/>
                             <constraint firstItem="jNi-Ij-b57" firstAttribute="top" secondItem="Y9L-9E-i9r" secondAttribute="bottom" constant="5" id="h8Z-84-Kye"/>

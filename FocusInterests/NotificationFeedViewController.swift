@@ -45,11 +45,13 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
        
         
-        FirebaseDownstream.shared.getUserNotifications(){(array) -> () in
+        FirebaseDownstream.shared.getUserNotifications(completion: {array in
             //self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)
             self.invArray = array!
             print("done")
-        }
+        }, gotNotif: {not in
+            self.nofArray = not
+        })
         
         getFeeds(gotPins: {pins in
             print("get pins")
