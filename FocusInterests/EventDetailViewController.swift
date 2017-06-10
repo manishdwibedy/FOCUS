@@ -12,32 +12,46 @@ import Firebase
 
 class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var likeCount: UILabel!
-    @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var hostNameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UITextView!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var attendOut: UIButton!
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var navBackOut: UIBarButtonItem!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var commentsTableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var inviteOut: UIButton!
     @IBOutlet weak var mapOut: UIButton!
+    @IBOutlet weak var eventsTableView: UITableView!
+    @IBOutlet weak var addCommentView: UIView!
+    @IBOutlet weak var userProfileImage: UIImageView!
+    
+    @IBOutlet weak var userInfoEditButton: UIButton!
+    @IBOutlet weak var descriptionEditButton: UIButton!
+    @IBOutlet weak var moreCommentsButton: UIButton!
+    @IBOutlet weak var postCommentsButton: UIButton!
+    @IBOutlet weak var moreOtherLikesButton: UIButton!
     
     @IBOutlet weak var guestButtonOut: UIButton!
     var event: Event?
     @IBOutlet weak var image: UIImageView!
+    
     let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
     var keyboardUp = false
     var attendingAmount = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        commentsTableView.delegate = self
+        commentsTableView.dataSource = self
+        commentsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        eventsTableView.delegate = self
+        eventsTableView.dataSource = self
+        eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
         
         attendOut.layer.cornerRadius = 6
         attendOut.clipsToBounds = true
@@ -49,10 +63,14 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         mapOut.clipsToBounds = true
         
         
+        let commentsNib = UINib(nibName: "commentCell", bundle: nil)
+        commentsTableView.register(commentsNib, forCellReuseIdentifier: "cell")
         
+        let eventsNib = UINib(nibName: "OtherLikesTableViewCell", bundle: nil)
+        eventsTableView.register(eventsNib, forCellReuseIdentifier: "otherLikesEventCell")
         
-        let nib = UINib(nibName: "commentCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "cell")
+        self.setupViewsAndButton()
+        
         // Reference to an image file in Firebase Storage
         
         self.navigationItem.title = self.event?.title
@@ -101,6 +119,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         addressLabel.text = event?.fullAddress
         descriptionLabel.text = event?.eventDescription
         
+//        TODO:THERE IS A BUG THAT RETURNS NIL BEFORE VIEW LOADS
+        
         ref.child("users").child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
@@ -132,11 +152,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     }
                 }
                 
-                self.tableView.reloadData()
+                self.commentsTableView.reloadData()
                 if self.commentsCList.count != 0
                 {
                     let oldLastCellIndexPath = NSIndexPath(row: self.commentsCList.count-1, section: 0)
-                    self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
+                    self.commentsTableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
                 }
                 
             })
@@ -236,7 +256,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             self.commentsCList.removeObject(at: 0)
         }
         self.commentsCList.add(data)
-        tableView.reloadData()
+        commentsTableView.reloadData()
         //tableView.beginUpdates()
         //tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
         //tableView.endUpdates()
@@ -245,7 +265,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.scrollView.frame.origin.y = 0
         self.view.frame.origin.y = 0
         let oldLastCellIndexPath = NSIndexPath(row: commentsCList.count-1, section: 0)
-        self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
+        self.commentsTableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
     }
     
     
@@ -263,11 +283,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
-        
-        
-
-    
-    
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -308,17 +323,42 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commentsCList.count
+        var rowCount: Int = 0
+        if(tableView.tag == 0){
+            rowCount = commentsCList.count
+        }else if(tableView.tag == 1){
+            rowCount = 2
+        }
+        
+        return rowCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:commentCell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! commentCell!
-        cell.data = (commentsCList[indexPath.row] as! commentCellData)
-        cell.commentLabel.text = (commentsCList[indexPath.row] as! commentCellData).comment
-        cell.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
-        cell.checkForLike()
-        return cell
+        var tableCell = UITableViewCell()
+        
+        if(tableView.tag == 0){
+            let commentCell = self.commentsTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? commentCell
+            commentCell?.data = (commentsCList[indexPath.row] as! commentCellData)
+            commentCell?.commentLabel.text = (commentsCList[indexPath.row] as! commentCellData).comment
+            commentCell?.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
+            commentCell?.checkForLike()
+            
+            tableCell = commentCell!
+            
+        }else if(tableView.tag == 1){
+            let eventCell = self.eventsTableView.dequeueReusableCell(withIdentifier: "otherLikesEventCell", for: indexPath) as? OtherLikesTableViewCell
+            eventCell?.distanceLabel.text = "2.1 mi"
+            eventCell?.categoryLabel.text = "Summer"
+            eventCell?.addressLabel.text = "Pasadena"
+            eventCell?.dateAndTimeLabel.text = "August"
+            eventCell?.locationLabel.text = "Los Angeles"
+            
+            tableCell = eventCell!
+            
+        }
+
+        return tableCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -326,7 +366,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65
+        
+        var rowHeight = CGFloat()
+        
+        if(tableView.tag == 0){
+            rowHeight = 85
+        }else if(tableView.tag == 1){
+            rowHeight = 95
+        }
+        return rowHeight
         
     }
     
@@ -352,12 +400,36 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             commentTextField.resignFirstResponder()
             commentTextField.text = ""
         }
-        
     }
     
-    
-    
-    
+    func setupViewsAndButton(){
+        userProfileImage.roundedImage()
+        
+        attendOut.roundCorners(radius: 7.0)
+        inviteOut.roundCorners(radius: 7.0)
+        mapOut.roundCorners(radius: 7.0)
+        
+        addCommentView.layer.borderWidth = 1
+        userInfoEditButton.layer.borderWidth = 1
+        descriptionEditButton.layer.borderWidth = 1
+        moreCommentsButton.layer.borderWidth = 1
+        postCommentsButton.layer.borderWidth = 1
+        moreOtherLikesButton.layer.borderWidth = 1
+        
+        addCommentView.layer.borderColor = UIColor.white.cgColor
+        userInfoEditButton.layer.borderColor = UIColor.white.cgColor
+        descriptionEditButton.layer.borderColor = UIColor.white.cgColor
+        moreCommentsButton.layer.borderColor = UIColor.white.cgColor
+        postCommentsButton.layer.borderColor = UIColor.white.cgColor
+        moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
+        
+        addCommentView.allCornersRounded(radius: 7.0)
+        userInfoEditButton.roundCorners(radius: 7.0)
+        descriptionEditButton.roundCorners(radius: 7.0)
+        moreCommentsButton.roundCorners(radius: 7.0)
+        postCommentsButton.roundCorners(radius: 7.0)
+        moreOtherLikesButton.roundCorners(radius: 7.0)
+    }
     
 }
 
