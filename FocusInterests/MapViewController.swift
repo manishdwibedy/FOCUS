@@ -68,6 +68,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            
 //        }
         
+        getFeeds(gotPins: {
+            pins in
+            print(pins)
+        }, gotEvents: { events in
+            print(events)
+        }, gotInvitations: {invitations in
+            print(invitations)
+        })
+        
         //webView.isHidden = true
         if AuthApi.getEventBriteToken() == nil{
             let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
