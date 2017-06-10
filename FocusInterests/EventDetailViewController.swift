@@ -425,6 +425,25 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 eventCell?.categoryLabel.text = "N.A."
             }
             
+            let reference = Constants.storage.event.child("\(suggestion.id).jpg")
+            
+            let placeholderImage = UIImage(named: "empty_event")
+            reference.downloadURL(completion: { (url, error) in
+                
+                if error != nil {
+                    print(error?.localizedDescription)
+                    return
+                }
+                
+                
+                
+                
+                eventCell?.userProfileImage.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: nil)
+                
+                
+            })
+            
+            
             eventCell?.addressLabel.text = suggestion.shortAddress
             eventCell?.dateAndTimeLabel.text = suggestion.date
             eventCell?.locationLabel.text = suggestion.shortAddress
