@@ -8,6 +8,8 @@
 
 import UIKit
 import SDWebImage
+import GeoFire
+import FirebaseDatabase
 
 class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
 
@@ -58,6 +60,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 	
     var followers = [User]()
     var following = [User]()
+    
+    var suggestion = [Event]()
+    let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
+    
     
     // Back button
 	@IBAction func backButton(_ sender: Any) {
@@ -114,6 +120,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.morePinButton.tag = 1
         self.moreFocusButton.tag = 2
         self.moreEventsButton.tag = 3
+        
+        getEventSuggestions()
     }
     
 //    MARK: COLLECTIONVIEW DELEGATE METHODS
@@ -123,12 +131,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return self.suggestion.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventsCollectionCell", for: indexPath) as!UserProfileCollectionViewCell
-        eventCell.userEventsLabel.text = "Event \(indexPath.row + 1)"
+        
+        let suggestion = self.suggestion[indexPath.row]
+        eventCell.userEventsLabel.text = suggestion.title
         return eventCell
     }
     
@@ -280,6 +290,35 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let storyboard = UIStoryboard(name: "Pin", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? PinScreenViewController
         self.present(VC!, animated: true, completion: nil)
+    }
+    
+    func getEventSuggestions(){
+        
+        let center = AuthApi.getLocation()
+        if let circleQuery = self.geoFire?.query(at: center, withRadius: 20.0) {
+            _ = circleQuery.observe(.keyEntered) { (key, location) in
+                print("Key '\(key)' entered the search area and is at location '\(location)'")
+                
+                Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
+                    let info = snapshot.value as? [String : Any] ?? [:]
+                    
+                    let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
+                    
+                    if let attending = info["attendingList"] as? [String:Any]{
+                        event.setAttendessCount(count: attending.count)
+                    }
+                    
+                  self.suggestion.append(event)
+
+                    self.eventsCollectionView.reloadData()
+                })
+            }
+            
+            circleQuery.observeReady{
+                print("All initial data has been loaded and events have been fired for circle query!")
+            }
+        }
+        
     }
     
     func roundImagesAndButtons(){
