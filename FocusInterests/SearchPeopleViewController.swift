@@ -137,9 +137,20 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     
     
     func followUser(sender:UIButton){
+        let time = NSDate().timeIntervalSince1970
+        
         let buttonRow = sender.tag
         
         print("following user \(self.people[buttonRow].username) ")
+        
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").childByAutoId().updateChildValues(["UID":self.people[buttonRow].uuid, "time":time])
+        
+        
+        
+        
+    Constants.DB.user.child(self.people[buttonRow].uuid!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
+        
+        
     }
     
     func inviteUser(sender:UIButton){

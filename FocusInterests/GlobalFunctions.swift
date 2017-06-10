@@ -246,7 +246,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
 //            let followerID = follower["UID"] as! String
 //            let username = follower["username"] as! String
             let imageURL = follower["imageURL"] as? String
-            let followerID = "b7VUFfTst8NqP6Wbv1zdnu8fvHl1"
+            let followerID = "0wOmLiHD6jWg33qyz0DxJ0BAEDy1"
             
             
             let followerUser = NotificationUser(username: "username", uuid: followerID, imageURL: imageURL)
