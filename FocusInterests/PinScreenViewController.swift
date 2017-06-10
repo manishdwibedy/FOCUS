@@ -22,6 +22,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var cancelOut: UIButton!
     @IBOutlet weak var pinOut: UIButton!
     @IBOutlet weak var cancelButtonOut: UIButton!
+    @IBOutlet weak var publicOut: UIButton!
+    @IBOutlet weak var facebookOut: UIButton!
+    @IBOutlet weak var twitterOut: UIButton!
     
     var pinType = "normal"
     var imageArray = [UIImage]()
@@ -383,6 +386,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if isPublic == false
         {
             isPublic = true
+            
         }else
         {
             isPublic = false

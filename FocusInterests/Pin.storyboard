@@ -202,10 +202,13 @@
                         <outlet property="cancelOut" destination="uye-eQ-vsG" id="ZVL-0o-LoF"/>
                         <outlet property="changeLocationOut" destination="Odg-wd-kdR" id="HGk-xP-N0Y"/>
                         <outlet property="collectionView" destination="A0j-it-CBu" id="b4r-kk-qCU"/>
+                        <outlet property="facebookOut" destination="rRf-Hh-68S" id="jdF-1W-Kpr"/>
                         <outlet property="locationLabel" destination="5eI-xS-jZm" id="VKF-8R-VIb"/>
                         <outlet property="pinOut" destination="jNi-Ij-b57" id="HdE-g9-dAH"/>
                         <outlet property="pinTextView" destination="IIB-I7-1sg" id="reF-1K-rBg"/>
                         <outlet property="profileImage" destination="K7V-u7-6WN" id="gGp-6Q-6mQ"/>
+                        <outlet property="publicOut" destination="RUx-Gb-fVd" id="VLt-Ia-yaE"/>
+                        <outlet property="twitterOut" destination="1wN-XP-zBN" id="cH6-xn-9Nr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5mA-Yn-VQc" userLabel="First Responder" sceneMemberID="firstResponder"/>
