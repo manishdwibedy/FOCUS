@@ -188,7 +188,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
                                                   longitude: (currentLocation?.coordinate.longitude)!,
-                                                  zoom: 15)
+                                                  zoom: 17)
             if mapView.isHidden {
                 mapView.isHidden = false
                 mapView.camera = camera
