@@ -237,6 +237,11 @@
 		EB722F9D1EE8BA4200420DC8 /* Dollar sign.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9C1EE8BA4200420DC8 /* Dollar sign.png */; };
 		EB722F9F1EE8BA7D00420DC8 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9E1EE8BA7D00420DC8 /* Green.png */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
+		EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */; };
+		EBD980831EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */; };
+		EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */; };
+		EBD980871EEB64C400FC54C1 /* OtherLikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */; };
+		EBD980881EEB64C400FC54C1 /* OtherLikesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
 		FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */; };
@@ -554,6 +559,11 @@
 		EB722F9C1EE8BA4200420DC8 /* Dollar sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar sign.png"; sourceTree = "<group>"; };
 		EB722F9E1EE8BA7D00420DC8 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Green.png; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
+		EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Large_Apple_Maps.png; sourceTree = "<group>"; };
+		EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsEventDetailTableViewCell.swift; sourceTree = "<group>"; };
+		EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsEventDetailTableViewCell.xib; sourceTree = "<group>"; };
+		EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherLikesTableViewCell.swift; sourceTree = "<group>"; };
+		EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherLikesTableViewCell.xib; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
 		FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
@@ -1124,6 +1134,10 @@
 				EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */,
 				EB252F111EEAA062001C163D /* UserProfileCollectionViewCell.swift */,
 				EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */,
+				EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */,
+				EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */,
+				EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */,
+				EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1205,6 +1219,7 @@
 		EBFAB3851EE74DDB00A03E11 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */,
 				EB252F0F1EEA7F40001C163D /* Friend Pin.png */,
 				EB252F0D1EEA712D001C163D /* Gear.png */,
 				EB722F981EE8B66700420DC8 /* Unstar.png */,
@@ -1404,6 +1419,7 @@
 				EB5891D41EE7EBFE00C35EE9 /* Like.png in Resources */,
 				5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
+				EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
 				5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */,
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
@@ -1419,11 +1435,13 @@
 				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
 				5BAB87A61EC972890064E5EC /* search_people.storyboard in Resources */,
 				5B33C05C1EE113CA007A8188 /* MapPinInfoView.xib in Resources */,
+				EBD980881EEB64C400FC54C1 /* OtherLikesTableViewCell.xib in Resources */,
 				EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */,
 				5B69158D1ED7D80100093AD5 /* NewUserPopupViewController.xib in Resources */,
 				D2B9B04D1E5A047C0002F1B1 /* LaunchScreen.storyboard in Resources */,
 				5B959FF31ECD452C00094FE6 /* RatingViewCell.xib in Resources */,
 				EB722F9D1EE8BA4200420DC8 /* Dollar sign.png in Resources */,
+				EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */,
 				5B71D70E1ED184880093A3F5 /* FollowProfileCell.xib in Resources */,
 				5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */,
 				5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */,
@@ -1654,6 +1672,7 @@
 				D2ECAC581E7CD9F8006FFA1A /* UserPhotoCell.swift in Sources */,
 				61C6096F1ED572AC004098BA /* EditProfileViewController.swift in Sources */,
 				D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */,
+				EBD980871EEB64C400FC54C1 /* OtherLikesTableViewCell.swift in Sources */,
 				5B33C0571EDF8DF9007A8188 /* SearchViewController.swift in Sources */,
 				5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */,
 				5B6AFA641ED1906900A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
@@ -1741,6 +1760,7 @@
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				5B6AFA6A1ED1906900A82104 /* GMUDefaultClusterRenderer.m in Sources */,
 				FF7C87521ED74A8F004ABB1B /* PinImageCollectionViewCell.swift in Sources */,
+				EBD980831EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift in Sources */,
 				D25D5D341E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift in Sources */,
 				5B16592A1EDA50630002209A /* FeedbackViewController.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
