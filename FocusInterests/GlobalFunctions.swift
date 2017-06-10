@@ -220,7 +220,7 @@ func sendNotification(to id: String, title: String, body: String){
     })
 }
 
-func getFeeds(){
+func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvents: @escaping (_ events: [FocusNotification]) -> Void, gotInvitations: @escaping (_ invitations: [FocusNotification]) -> Void){
     
     let userID = "l0V17J9pQWaCbK4ZC2WVnSqwCtH3"
     var pins = [FocusNotification]()
@@ -263,6 +263,7 @@ func getFeeds(){
                 
                 pinCount += 1
                 if pinCount == followerCount{
+                    gotPins(pin)
                     print("pin done \(pinCount)")
                 }
             })
@@ -293,6 +294,7 @@ func getFeeds(){
                 }
                 eventCount += 1
                 if eventCount == followerCount{
+                    gotEvents(events)
                     print("event done \(eventCount)")
                     print(events.count)
                 }
@@ -328,6 +330,7 @@ func getFeeds(){
                                 }
                                 invitationCount += 1
                                 if invitationCount == totalInvitation{
+                                    invitations(invitations_event)
                                     print("invitation done \(invitationCount)")
                                 }
                             })
