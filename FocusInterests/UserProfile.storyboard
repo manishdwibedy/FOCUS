@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -434,24 +434,26 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="User Profile" id="SNQ-5X-BJ8">
+                                    <navigationItem id="SNQ-5X-BJ8">
                                         <leftBarButtonItems>
-                                            <barButtonItem title="Item" id="pvz-IC-9Ep">
+                                            <barButtonItem image="User_Profile" id="pvz-IC-9Ep">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <action selector="backButton:" destination="cU2-hP-1h7" id="D1E-Q4-FMq"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem title="Item" id="CwD-Cg-3nj"/>
+                                            <barButtonItem image="Messages_Dark" id="CwD-Cg-3nj">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </barButtonItem>
                                         </leftBarButtonItems>
                                         <rightBarButtonItems>
-                                            <barButtonItem image="setting" id="yDE-Mq-Jva">
+                                            <barButtonItem image="Notifications_Dark" id="yDE-Mq-Jva">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <action selector="settingsButtonTapped:" destination="cU2-hP-1h7" id="fz9-wf-J8y"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem image="edit-profile" style="plain" id="zfE-8Q-VOK">
+                                            <barButtonItem image="Search_Dark" style="plain" id="zfE-8Q-VOK">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <segue destination="fzK-Fg-Tt6" kind="show" id="dP1-VZ-S5U"/>
@@ -834,8 +836,10 @@
         <image name="Friend Pin.png" width="75" height="72"/>
         <image name="Gear.png" width="66" height="68"/>
         <image name="Green.png" width="82" height="82"/>
+        <image name="Messages_Dark" width="40" height="40"/>
+        <image name="Notifications_Dark" width="40" height="40"/>
+        <image name="Search_Dark" width="40" height="40"/>
         <image name="UserPhoto" width="102" height="102"/>
-        <image name="edit-profile" width="30" height="30"/>
-        <image name="setting" width="30" height="30"/>
+        <image name="User_Profile" width="40" height="40"/>
     </resources>
 </document>

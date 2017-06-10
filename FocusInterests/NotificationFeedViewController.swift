@@ -52,7 +52,11 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.title = "Notifications"
         
-        FirebaseDownstream.shared.getUserNotifications { (array) in
+        FirebaseDownstream.shared.getUserNotifications(){(array) -> () in
+           
+            print(array)
+            self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)
+            
             print("done")
         }
         
@@ -61,6 +65,14 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
         
         // Do any additional setup after loading the view.
+        
+        getFeeds(gotPins: {pins in
+            print(pins)
+        }, gotEvents: { events in
+            print(events)
+        }, gotInvitations: {invitations in
+            print(invitations)
+        })
     }
     
     func setupDummyArray() {

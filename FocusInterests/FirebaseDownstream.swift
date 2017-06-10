@@ -45,15 +45,36 @@ class FirebaseDownstream {
             ref.child("users").child(id).child("invitations").observeSingleEvent(of: .value, with: { (snapshot) in
                 if let value = snapshot.value as? NSDictionary {
                     var returnableNotif = [FocusNotification]()
-                    for (k, v) in value {
-                        print(k)
-                        print(v)
+                    var valueCount = 0
+                    var totalCount = 0
+                    for (key, v) in value {
+                        let inValue = value[key] as! NSDictionary
+                        totalCount = totalCount + inValue.count
+                    }
+                    for (key, v) in value {
+                        let inValue = value[key] as! NSDictionary
+                        for (inKey, _) in inValue
+                        {
+                            self.ref.child("users").child((inValue[inKey] as! NSDictionary)["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                                if let valueUID = snapshot.value as? NSDictionary {
+                                    
+                            let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: ItemOfInterest(itemName: String(describing: v), imageURL: ""), time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
+                            returnableNotif.append(notification)
+                                }
+                                valueCount = valueCount + 1
+                                if valueCount == totalCount
+                                {
+                                    DispatchQueue.main.async(execute: {
+                                        completion(returnableNotif)
+                                    })
+                                }
+                                
+                            })
+                        }
                     }
                 }
                 
-                DispatchQueue.main.async(execute: {
-                    completion(nil)
-                })
+                
                 
             })
         }
