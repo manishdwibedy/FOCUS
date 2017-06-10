@@ -263,7 +263,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                 
                 pinCount += 1
                 if pinCount == followerCount{
-                    gotPins(pin)
+                    gotPins(pins)
                     print("pin done \(pinCount)")
                 }
             })
@@ -330,7 +330,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                 }
                                 invitationCount += 1
                                 if invitationCount == totalInvitation{
-                                    invitations(invitations_event)
+                                    gotInvitations(invitations_event)
                                     print("invitation done \(invitationCount)")
                                 }
                             })
