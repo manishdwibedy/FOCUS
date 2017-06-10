@@ -224,8 +224,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
             // interests
             ref.child("events").child((event?.id)!).child("interests").observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if let value = value as? String
+                let value = snapshot.value as? String
+                if value != nil
                 {
                     self.eventInterests.text = value
                     

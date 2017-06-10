@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -352,14 +352,6 @@
                                             <constraint firstItem="szT-yE-HER" firstAttribute="centerX" secondItem="371-1b-x7j" secondAttribute="centerX" id="xg9-hY-1kH"/>
                                         </constraints>
                                     </view>
-                                    <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s2E-LQ-Hxh">
-                                        <rect key="frame" x="0.0" y="1151" width="375" height="49"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <items>
-                                            <tabBarItem systemItem="favorites" id="0hQ-gy-qWd"/>
-                                            <tabBarItem systemItem="more" id="7uN-0v-kCb"/>
-                                        </items>
-                                    </tabBar>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvE-CA-yO9" userLabel="Details View">
                                         <rect key="frame" x="0.0" y="375" width="375" height="237"/>
                                         <subviews>
@@ -495,9 +487,7 @@
                                     <constraint firstItem="LvE-CA-yO9" firstAttribute="top" secondItem="CUv-wF-Cff" secondAttribute="bottom" constant="77" id="Hbz-6s-Qbf"/>
                                     <constraint firstItem="CUv-wF-Cff" firstAttribute="top" secondItem="i9J-UJ-8IQ" secondAttribute="bottom" constant="-1" id="J64-iC-lrt"/>
                                     <constraint firstItem="sG6-5F-fdt" firstAttribute="top" secondItem="Jsv-zr-udl" secondAttribute="top" constant="968" id="M3G-EV-anG"/>
-                                    <constraint firstItem="sG6-5F-fdt" firstAttribute="trailing" secondItem="s2E-LQ-Hxh" secondAttribute="trailing" id="M4v-eM-Xav"/>
                                     <constraint firstAttribute="trailing" secondItem="Uv3-2k-fkR" secondAttribute="trailing" id="NYv-vr-I7m"/>
-                                    <constraint firstItem="sG6-5F-fdt" firstAttribute="leading" secondItem="s2E-LQ-Hxh" secondAttribute="leading" id="Q3F-Ta-c7h"/>
                                     <constraint firstAttribute="trailing" secondItem="i9J-UJ-8IQ" secondAttribute="trailing" id="SgE-mn-CmO"/>
                                     <constraint firstItem="hrw-H0-s1k" firstAttribute="trailing" secondItem="sG6-5F-fdt" secondAttribute="trailing" id="T6B-P3-Pyt"/>
                                     <constraint firstItem="Uv3-2k-fkR" firstAttribute="top" secondItem="Jsv-zr-udl" secondAttribute="top" constant="2" id="VNa-nB-g8K"/>
@@ -508,10 +498,9 @@
                                     <constraint firstItem="hrw-H0-s1k" firstAttribute="top" secondItem="5Zx-Eu-99x" secondAttribute="bottom" id="gJy-5s-FFI"/>
                                     <constraint firstItem="CUv-wF-Cff" firstAttribute="leading" secondItem="LvE-CA-yO9" secondAttribute="leading" id="gdx-uQ-rme"/>
                                     <constraint firstItem="LvE-CA-yO9" firstAttribute="top" secondItem="i9J-UJ-8IQ" secondAttribute="bottom" constant="146" id="iwY-Qg-FgY"/>
-                                    <constraint firstAttribute="bottom" secondItem="sG6-5F-fdt" secondAttribute="bottom" constant="49" id="mYC-dX-FXt"/>
+                                    <constraint firstAttribute="bottom" secondItem="sG6-5F-fdt" secondAttribute="bottom" constant="10" id="mYC-dX-FXt"/>
                                     <constraint firstItem="euL-SU-SLg" firstAttribute="top" secondItem="LvE-CA-yO9" secondAttribute="bottom" constant="-312" id="nPJ-tk-3iz"/>
                                     <constraint firstItem="hrw-H0-s1k" firstAttribute="leading" secondItem="sG6-5F-fdt" secondAttribute="leading" id="piY-R1-FPs"/>
-                                    <constraint firstAttribute="bottom" secondItem="s2E-LQ-Hxh" secondAttribute="bottom" id="uCG-iX-FyG"/>
                                     <constraint firstItem="euL-SU-SLg" firstAttribute="trailing" secondItem="5Zx-Eu-99x" secondAttribute="trailing" id="wVh-0W-t1U"/>
                                     <constraint firstItem="i9J-UJ-8IQ" firstAttribute="trailing" secondItem="CUv-wF-Cff" secondAttribute="trailing" id="wyB-u2-Sp4"/>
                                     <constraint firstItem="5Zx-Eu-99x" firstAttribute="trailing" secondItem="hrw-H0-s1k" secondAttribute="trailing" id="xr4-qi-2hQ"/>

@@ -123,12 +123,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //        let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
 //        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
         
-        Constants.DB.event.observe(DataEventType.value, with: { (snapshot) in
+        Constants.DB.event.observe(DataEventType.childAdded, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
+            let info = events as? [String:Any]
+//            for (id, event) in events{
             
-            for (id, event) in events{
-                let info = event as? [String:Any]
-                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: snapshot.key, category: info?["interests"] as? String)
         
                 if let attending = info?["attendingList"] as? [String:Any]{
                     event.setAttendessCount(count: attending.count)
@@ -145,7 +145,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "Event")!, id: String(describing: self.events.count), type: "event")
 //                self.clusterManager.add(item)
 //                self.searchEventsTab?.events.append(event)
-            }
+//            }
             
 //            // Call cluster() after items have been added to perform the clustering and rendering on map.
 //            self.clusterManager.cluster()
@@ -305,7 +305,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             infoWindow.distance.text = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
             
             if let category = event.category{
-                infoWindow.category.text =  "\(category) ●"
+                let focus = category.components(separatedBy: ",")[0]
+                infoWindow.category.text =  "\(focus) ●"
                 
                 
                 

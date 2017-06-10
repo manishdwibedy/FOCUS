@@ -101,6 +101,29 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
 
+    @IBAction func createEvent(_ sender: Any) {
+        Event.clearCache()
+        let id = self.event?.saveToDB(ref: Constants.DB.event)
+        
+        if let data = self.image{
+            let imageRef = Constants.storage.event.child("\(id!).jpg")
+            
+            // Create file metadata including the content type
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            let _ = imageRef.putData(data, metadata: metadata) { (metadata, error) in
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    print("\(error!)")
+                    return
+                }
+                // Metadata contains file metadata such as size, content-type, and download URL.
+                let _ = metadata.downloadURL
+            }
+        }
+        
+    }
     private func formatNavBar(){
         self.navigationItem.title = "Send Invites"
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
