@@ -14,11 +14,10 @@ protocol SendInvitationsViewControllerDelegate {
     func contactHasBeenSelected(contact: String, index: Int)
 }
 
-class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SendInvitationsViewControllerDelegate{
+class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SendInvitationsViewControllerDelegate{
     
-
-    
-    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var createEventButton: UIButton!
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var contactList: UILabel!
     @IBOutlet weak var contactListView: UIView!
@@ -36,7 +35,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         formatNavBar()
         
-        self.sendButton.roundCorners(radius: 10.0)
+        self.createEventButton.roundCorners(radius: 10.0)
         
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
@@ -129,6 +128,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         return self.alphabeticalSections
     }
     
+    
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         var temp = self.alphabeticalSections as NSArray
         return temp.index(of: title)
@@ -162,6 +162,12 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
+//    MARK: SEARCH BAR DELEGATE METHODS
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        let searchTextField: UITextField = self.searchBar.value(forKey: "_searchField") as! UITextField
+        searchTextField.clearButtonMode = .whileEditing
+    }
 
     @IBAction func backPressed(_ sender: UIBarButtonItem) {
 //        self.dismiss(animated: true, completion: nil)

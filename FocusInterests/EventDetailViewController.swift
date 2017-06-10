@@ -49,6 +49,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     let commentsCList = NSMutableArray()
     var keyboardUp = false
     var attendingAmount = 0
+    var isAttending = false
     override func viewDidLoad() {
         super.viewDidLoad()
         commentsTableView.delegate = self
@@ -213,7 +214,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 let value = snapshot.value as? NSDictionary
                 if value != nil
                 {
-                    self.attendOut.isEnabled = false
+                    self.isAttending = true
+                    //self.attendOut.isEnabled = false
                     self.attendOut.setTitle("Attending", for: UIControlState.normal)
                 }
                 
@@ -256,14 +258,41 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func attendEvent(_ sender: UIButton) {
-        let newAmount = attendingAmount + 1
-        attendingAmount = newAmount
-        self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
-        let fullRef = ref.child("events").child((event?.id)!)
-        fullRef.child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
-        fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
-        self.attendOut.isEnabled = false
-        self.attendOut.setTitle("Attending", for: UIControlState.normal)
+        if isAttending == false
+        {
+            let newAmount = attendingAmount + 1
+            attendingAmount = newAmount
+            self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
+            let fullRef = ref.child("events").child((event?.id)!)
+            fullRef.child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+            fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
+           // self.attendOut.isEnabled = false
+            self.isAttending = true
+            self.attendOut.setTitle("Attending", for: UIControlState.normal)
+        }else
+        {
+            ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    for (key,_) in value!
+                    {
+                        self.ref.child("events").child((self.event?.id)!).child("attendingList").child(key as! String).removeValue()
+                    }
+                    
+                    let newAmount = self.attendingAmount - 1
+                    self.attendingAmount = newAmount
+                    self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
+                    let fullRef = self.ref.child("events").child((self.event?.id)!)
+                    fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
+                    self.isAttending = false
+                    self.attendOut.setTitle("Attend", for: UIControlState.normal)
+                }
+                
+            })
+
+            
+        }
     }
     
     @IBAction func mapEvent(_ sender: Any) {
