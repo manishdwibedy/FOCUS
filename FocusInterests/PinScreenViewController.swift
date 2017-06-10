@@ -190,6 +190,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             {
                 Share.postToTwitter(withStatus: pinTextView.text!)
             }
+            if isFacebook == true
+            {
+                try! Share.facebookShare(with: URL(string: "www.google.com")!, description: pinTextView.text!)
+            }
         }
         pinTextView.text = "What are you up to?"
         pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)

@@ -22,6 +22,7 @@ class ReviewsTableViewCell: UITableViewCell {
     @IBOutlet weak var starReviewFour: UIImageView!
     @IBOutlet weak var starReviewFive: UIImageView!
     
+    var stars = [UIImageView]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +37,9 @@ class ReviewsTableViewCell: UITableViewCell {
     }
     
     func setupCell(){
+        
+        stars = [starReviewOne,starReviewTwo,starReviewThree,starReviewFour,starReviewFive]
+        
         self.userProfileImage.layer.borderWidth = 2
         self.userProfileImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
         self.userProfileImage.roundedImage()
@@ -62,5 +66,25 @@ class ReviewsTableViewCell: UITableViewCell {
         bottomBorder.frame = CGRect(x: 0, y: self.readMoreButton.frame.height, width: self.readMoreButton.frame.width, height: 1)
         self.readMoreButton.layer.addSublayer(bottomBorder)
     }
+    
+    
+    func getUsernae(UID: String)
+    {
+        Constants.DB.user.child(UID).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let value = snapshot.value as? NSDictionary {
+                self.userNameLabel.text = value["username"] as! String
+            }
+        })
+    }
+    
+    func showStarts(num: Int)
+    {
+        for i in 0..<num
+        {
+            stars[i].image = UIImage(named: "Star")
+        }
+        
+    }
+    
     
 }

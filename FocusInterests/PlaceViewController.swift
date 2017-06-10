@@ -198,14 +198,20 @@ class PlaceViewController: UIViewController {
             self.suggestPlacesDelegate?.gotSuggestedPlaces(places: suggestedPlaces)
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    
+    @IBAction func reviewButon(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Reviews", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "Reviews") as! UINavigationController
+        let reviewVC = ivc.viewControllers[0] as! ReviewsViewController
+        reviewVC.place = self.place
+        self.present(ivc, animated: true, completion: { _ in })
     }
-    */
+    
+    
+    
+    
 
 }
