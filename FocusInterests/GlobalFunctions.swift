@@ -243,13 +243,13 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
         
         followerCount = (people?.count)!
         for (_, follower) in people!{
-//            let followerID = follower["UID"] as! String
+            let followerID = follower["UID"] as! String
 //            let username = follower["username"] as! String
-            let imageURL = follower["imageURL"] as? String
-            let followerID = "0wOmLiHD6jWg33qyz0DxJ0BAEDy1"
+//            let imageURL = follower["imageURL"] as? String
+//            let followerID = "0wOmLiHD6jWg33qyz0DxJ0BAEDy1"
             
             
-            let followerUser = NotificationUser(username: "username", uuid: followerID, imageURL: imageURL)
+            let followerUser = NotificationUser(username: "username", uuid: followerID, imageURL: nil)
             Constants.DB.pins.child(followerID).observeSingleEvent(of: .value, with: { snapshot in
                 let pin11 = snapshot.value as? [String : Any]
                 
@@ -304,9 +304,9 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                 let data = snapshot.value as? [String : Any]
                 
                 if let invitations = data?["invitations"] as? [String:Any]{
-                    invitationCount += invitations.count
+                    
                     if let event = invitations["event"] as? [String:[String:Any]]{
-                        
+                        totalInvitation += event.count
                         
                         for (id,invite) in event{
                             let id = invite["ID"]  as! String
