@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InterestsViewController" customModule="FocusInterests" customModuleProvider="target">
             <connections>
-                <outlet property="magneticView" destination="j0z-Cz-jYY" id="ZoW-X4-ohh"/>
+                <outlet property="collectionView" destination="ZHW-X7-Nev" id="0kO-OV-8Q8"/>
                 <outlet property="saveButton" destination="kN3-J4-lVH" id="h4b-RW-PxY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -60,20 +61,27 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0z-Cz-jYY" customClass="MagneticView" customModule="Magnetic">
-                            <rect key="frame" x="0.0" y="50" width="375" height="553"/>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZHW-X7-Nev">
+                            <rect key="frame" x="8" y="58" width="357" height="537"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ayy-IA-EnK">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.15987274050712585" green="0.24723538756370544" blue="0.34217935800552368" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="qrp-e4-OmM" firstAttribute="top" secondItem="P7q-fo-LSB" secondAttribute="top" constant="10" id="78i-cA-Qa2"/>
+                        <constraint firstItem="ZHW-X7-Nev" firstAttribute="bottom" secondItem="P7q-fo-LSB" secondAttribute="bottomMargin" id="EIQ-wf-168"/>
                         <constraint firstAttribute="trailing" secondItem="qrp-e4-OmM" secondAttribute="trailing" constant="10" id="FjP-yO-dDn"/>
-                        <constraint firstAttribute="trailing" secondItem="j0z-Cz-jYY" secondAttribute="trailing" id="KLG-4T-aEB"/>
-                        <constraint firstItem="j0z-Cz-jYY" firstAttribute="top" secondItem="qrp-e4-OmM" secondAttribute="bottom" id="OHq-26-bmZ"/>
-                        <constraint firstItem="j0z-Cz-jYY" firstAttribute="leading" secondItem="P7q-fo-LSB" secondAttribute="leading" id="aAw-15-jEn"/>
+                        <constraint firstItem="ZHW-X7-Nev" firstAttribute="trailing" secondItem="qrp-e4-OmM" secondAttribute="trailing" id="Mnv-G5-ByF"/>
+                        <constraint firstItem="ZHW-X7-Nev" firstAttribute="leading" secondItem="P7q-fo-LSB" secondAttribute="leadingMargin" id="YO8-VB-h3i"/>
+                        <constraint firstItem="ZHW-X7-Nev" firstAttribute="top" secondItem="qrp-e4-OmM" secondAttribute="bottom" constant="8" symbolic="YES" id="eJ3-iH-pRw"/>
                         <constraint firstItem="qrp-e4-OmM" firstAttribute="leading" secondItem="P7q-fo-LSB" secondAttribute="leading" constant="10" id="sAg-Z8-STc"/>
-                        <constraint firstAttribute="bottom" secondItem="j0z-Cz-jYY" secondAttribute="bottom" id="uTP-7l-M5E"/>
                     </constraints>
                 </view>
             </subviews>
@@ -86,7 +94,7 @@
                 <constraint firstItem="1vZ-p8-MEN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="iBy-RX-aSc"/>
                 <constraint firstItem="P7q-fo-LSB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pHK-fR-Aee"/>
             </constraints>
-            <point key="canvasLocation" x="72" y="59"/>
+            <point key="canvasLocation" x="71.5" y="58.5"/>
         </view>
     </objects>
 </document>

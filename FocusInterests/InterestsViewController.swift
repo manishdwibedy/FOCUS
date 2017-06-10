@@ -9,14 +9,19 @@
 import UIKit
 import FacebookCore
 import FBSDKCoreKit
-import Magnetic
 import SpriteKit
 import SCLAlertView
 
 var interest_status = [Interest]()
 var interest_mapping = [String: Int]()
 
-class InterestsViewController: UIViewController{
+
+
+let sidePadding: CGFloat = 2.0
+let numberOfItemsPerRow: CGFloat = 3.0
+let hieghtAdjustment: CGFloat = 2.0
+
+class InterestsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
 
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -26,57 +31,81 @@ class InterestsViewController: UIViewController{
     var searching = false
     let user_interests = AuthApi.getInterests()?.components(separatedBy: ",")
     
-    @IBOutlet weak var magneticView: MagneticView!{
-        didSet {
-            magnetic.magneticDelegate = self
-
-        }
-    }
+    var interestCells = [InterstCollectionViewCell]()
     
-    var magnetic: Magnetic {
-        return magneticView.magnetic
-    }
+    var imageArrayBlue = ["Arts Blue","Beauty Blue","Business Blue","Causes Blue","Celebration Blue","Chill Blue","Coffee Blue","Community Blue","Drinks Blue","Entertainment Blue","Fitness Blue","Food Blue","Learn Blue","Meet up Blue","Music Blue","Networking Blue","Outdoors Blue","Shopping Blue","Sports Blue","Travel Blue","Views Blue"]
+    
+    var imageArrayGreen = ["Arts Green","Beauty Green","Business Green","Causes Green","Celebration Green","Chill Green","Coffee Green","Community Green","Drinks Green","Entertainment Green","Fitness Green","Food Green","Learn Green","Meet up Green","Music Green","Networking Green","Outdoors Green","Shopping Green","Sports Green","Travel Green","Views Green"]
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        let commentsNib = UINib(nibName: "InterstCollectionViewCell", bundle: nil)
+        self.collectionView.register(commentsNib, forCellWithReuseIdentifier: "interestCell")
         
-        self.magnetic.backgroundColor = UIColor.lightGray
-        for (index,interest) in Constants.interests.interests.enumerated() {
-            add(name: interest)
-            interest_status.append(Interest(name: interest, category: nil, image: nil, imageString: nil))
-            interest_mapping[interest] = index
-        }
+        
         
         if AuthApi.isNewUser(){
             saveButton.title = "Done"
         }
         
+        let width = ((collectionView.frame.width) - sidePadding)/numberOfItemsPerRow
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: width + hieghtAdjustment)
+        
+        
     }
     
-    func add(name: String) {
-        let name = name
-        let color = UIColor.green
-        
-        if user_interests != nil{
-            if (self.user_interests?.contains(name))!{
-                let node = CustomNode(text: name.capitalized, image: nil, color: color, radius: 60)
-                magnetic.addChild(node)
-            }
-            else{
-                let node = CustomNode(text: name.capitalized, image: nil, color: color, radius: 40)
-                node.strokeColor = UIColor.black
-                magnetic.addChild(node)
-            }
-        }
-        else{
-            let node = CustomNode(text: name.capitalized, image: nil, color: color, radius: 40)
-            node.strokeColor = UIColor.black
-            magnetic.addChild(node)
-        }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageArrayBlue.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "interestCell", for: indexPath) as! InterstCollectionViewCell
+        cell.image.image = UIImage(named: imageArrayBlue[indexPath.row])
+        let interest = imageArrayBlue[indexPath.row].components(separatedBy: " ")
+        cell.label.text = interest[0]
+        cell.parentVC = self
+        cell.index = indexPath.row
+        cell.indexPath = indexPath
+        interestCells.append(cell)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+       return CGSize(width: 400, height: 400)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout
+        collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 50
+    }
+    
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -92,235 +121,72 @@ class InterestsViewController: UIViewController{
     }
     
     @IBAction func saveInterests(_ sender: UIBarButtonItem) {
-        let selected_interests = interest_status.filter( { return $0.status != .normal } )
-        let interest_string = selected_interests.map(){ $0.name! }.joined(separator: ",")
+//        let selected_interests = interest_status.filter( { return $0.status != .normal } )
+//        let interest_string = selected_interests.map(){ $0.name! }.joined(separator: ",")
+//        
+//        var interests = ""
+//        if AuthApi.isNewUser(){
+//            if selected_interests.count == 0{
+//                SCLAlertView().showError("Invalid Interests", subTitle: "Please choose atleast one interest.")
+//                return
+//            }
+//            interests = interest_string
+//            
+//        }
+//        else{
+//            let earlier_interests = AuthApi.getInterests()!
+//            interests = "\(earlier_interests),\(interest_string)"
+//        }
+//        
+//        Constants.DB.user.child("\(String(describing: AuthApi.getFirebaseUid()!))/interests").setValue(interests)
+//        AuthApi.set(interests: interests)
+//        
+//        if AuthApi.isNewUser(){
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            
+//            let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+//            
+//            present(vc, animated: true, completion: nil)
+//        }
+//        else{
+//            self.dismiss(animated: true, completion: nil)
+//        }
+//    }
         
-        var interests = ""
-        if AuthApi.isNewUser(){
-            if selected_interests.count == 0{
-                SCLAlertView().showError("Invalid Interests", subTitle: "Please choose atleast one interest.")
-                return
-            }
-            interests = interest_string
-            
+    var interestAll = ""
+    for cell in interestCells
+    {
+        if cell.liked == true || cell.loved == true
+        {
+            interestAll = interestAll + cell.label.text!+","
         }
-        else{
-            let earlier_interests = AuthApi.getInterests()!
-            interests = "\(earlier_interests),\(interest_string)"
-        }
+
+    }
         
-        Constants.DB.user.child("\(String(describing: AuthApi.getFirebaseUid()!))/interests").setValue(interests)
-        AuthApi.set(interests: interests)
+    Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["interests":interestAll])
+    AuthApi.set(interests: interestAll)
         
-        if AuthApi.isNewUser(){
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
-            
-            present(vc, animated: true, completion: nil)
-        }
-        else{
-            self.dismiss(animated: true, completion: nil)
-        }
+    if AuthApi.isNewUser(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+
+        present(vc, animated: true, completion: nil)
+    }
+    else{
+        self.dismiss(animated: true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
+  }
+    
+   
 }
 
-// MARK: - MagneticDelegate
-extension InterestsViewController: MagneticDelegate {
-    
-    func magnetic(_ magnetic: Magnetic, didSelect node: Node) {
-        print("didSelect -> \(node)")
-        if let interestNode = node as? CustomNode{
-            
-        }
-    }
-    
-    func magnetic(_ magnetic: Magnetic, didDeselect node: Node) {
-        print("didDeselect -> \(node)")
-    }
-    
-}
 
-// MARK: - ImageNode
-class ImageNode: Node {
-    override var image: UIImage? {
-        didSet {
-            sprite.texture = image.map { SKTexture(image: $0) }
-        }
-    }
-    override func selectedAnimation() {}
-    override func deselectedAnimation() {}
-}
 
-extension Magnetic{
-    
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.touchBegan = Date()
-    }
-    
-    override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // if can get last tap time
-        if let lastTap = self.lastTapTime{
-            let interval = Date().timeIntervalSince(lastTap)
-            if Double(interval) < 0.2{
-                self.isDoubleTap = true
-            }
-            else{
-                self.isDoubleTap = false
-            }
-        }
-        
-        // check for long hold
-        
-        let tapduration = Date().timeIntervalSince(self.touchBegan!)
-        
-        if Double(tapduration) > 0.5{
-            self.isLongTap = true
-        }
-        else{
-            self.isLongTap = false
-            self.touchBegan = Date()
-        }
-        self.lastTapTime = Date()
-        self.touchBegan = nil
-        if let point = touches.first?.location(in: self), let node = atPoint(point) as? CustomNode {
-            
-            if isDoubleTap{
-                node.setDoubleTap()
-            }
-            else{
-                node.resetDoubleTap()
-            }
-            
-            if isLongTap{
-                node.setLongTap()
-            }
-            else{
-                node.resetLongTap()
-            }
-            
-            if node.isSelected {
-                node.state = .normal
-                magneticDelegate?.magnetic(self, didDeselect: node)
-            } else {
-                if !allowsMultipleSelection, let selectedNode = selectedChildren.first as? CustomNode {
-                    selectedNode.state = .like
-                    magneticDelegate?.magnetic(self, didSelect: selectedNode)
-                }
-                
-                magneticDelegate?.magnetic(self, didSelect: node)
-                node.state = .like
-            }
-        }
-    }
-
-}
-
-enum State{
-    case normal
-    case like
-    case love
-    case hate
-}
-
-class CustomNode: Node{
-    var isDoubleTap = false
-    var isLongTap = false
-    var status = InterestStatus.normal
-    
-    func setDoubleTap(){
-        self.isDoubleTap = true
-    }
-    
-    func resetDoubleTap(){
-        self.isDoubleTap = false
-    }
-    
-    func setLongTap(){
-        self.isLongTap = true
-    }
-    
-    func resetLongTap(){
-        self.isLongTap = false
-    }
-    
-    override var image: UIImage? {
-        didSet {
-            texture = image.map { SKTexture(image: $0) }
-        }
-    }
-    
-    var texture: SKTexture?
-    
-    var state: State = .normal {
-        didSet {
-            //guard state != oldValue else { return }
-            switch(state){
-                case .normal: fallthrough
-                case .like: fallthrough
-                case .hate: fallthrough
-                case .love:
-                    let selectionTask = DispatchWorkItem {
-                        if self.isLongTap{
-                            self.hateInterest()
-                        }
-                        else if !self.isDoubleTap{
-                            self.likeInterest()
-                        }
-                        else{
-                            self.loveInterest()
-                        }
-                        self.changeStatus(interest: self.text!, status: self.status)
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: selectionTask)
-                }
-            
-            
-            }
-    
-    }
     
     
     
-    func hateInterest(){
-        if let texture = self.texture {
-            self.sprite.run(.setTexture(texture))
-        }
-        self.status = .hate
-        
-        self.run(.scale(to: 0.5, duration: 0.2))
-    }
-    
-    func likeInterest(){
-        if let texture = self.texture {
-            sprite.run(.setTexture(texture))
-        }
-        self.status = .like
-        run(.scale(to: 1.5, duration: 0.2))
-    }
-    
-    func loveInterest(){
-        if let texture = self.texture {
-            sprite.run(.setTexture(texture))
-        }
-        self.status = .love
-        run(.scale(to: 2, duration: 0.2))
-    }
-    
-    
-    func changeStatus(interest: String, status: InterestStatus){
-        let index = interest_mapping[interest]
-        interest_status[index!].status = status
-    }
-}
+   
