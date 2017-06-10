@@ -158,7 +158,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         let message = self.messages[indexPath.row]
         cell.username.text = message.name
         
-        cell.userImage.sd_setImage(with: URL(string: message.image_string)!, placeholderImage: UIImage(named: "UserPhoto"))
+        if let url = URL(string: message.image_string){
+            cell.userImage.sd_setImage(with: url, placeholderImage: UIImage(named: "UserPhoto"))
+        }
+        
         cell.content.text = message.lastContent
         
         let date = message.lastMessageDate
