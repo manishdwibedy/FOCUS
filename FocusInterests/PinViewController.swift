@@ -70,6 +70,15 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             self.table.reloadData()
             
         })
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.callPlace))
+        phoneLabel.isUserInteractionEnabled = true
+        phoneLabel.addGestureRecognizer(tap)
+    }
+    
+    func callPlace(sender:UITapGestureRecognizer) {
+        guard let number = URL(string: "tel://" + (place?.plainPhone)!) else { return }
+        UIApplication.shared.open(number)
     }
     
     func loadInfoScreen(place: Place){

@@ -18,14 +18,16 @@ class Place: Equatable{
     let latitude: Double
     let longitude: Double
     let price: String
+    
     let address: [String]
     let phone: String
+    let plainPhone: String
     let distance: Double
     let categories: [Category]
     var hours: [Hours]?
     var url: String
     
-    init(id:String, name:String, image_url: String, isClosed: Bool, reviewCount: Int, rating: Float, latitude: Double, longitude: Double, price: String, address: [String], phone: String, distance: Double, categories: [Category], url: String){
+    init(id:String, name:String, image_url: String, isClosed: Bool, reviewCount: Int, rating: Float, latitude: Double, longitude: Double, price: String, address: [String], phone: String, distance: Double, categories: [Category], url: String, plainPhone: String){
         self.id = id
         self.name = name
         self.image_url = image_url
@@ -40,6 +42,7 @@ class Place: Equatable{
         self.distance = distance
         self.categories = categories
         self.url = url
+        self.plainPhone = plainPhone
     }
     
     func setHours(hours: [Hours]){
