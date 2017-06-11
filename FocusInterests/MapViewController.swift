@@ -68,14 +68,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            
 //        }
         
-        UserDefaults.standard.set(nil, forKey: "eventBriteToken")
-        webView.isHidden = true
-        if AuthApi.getEventBriteToken() == nil{
-            let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
-            let requestObj = URLRequest(url: url!)
-            webView.loadRequest(requestObj)
-            webView.delegate = self
-        }
+//        UserDefaults.standard.set(nil, forKey: "eventBriteToken")
+//        webView.isHidden = true
+//        if AuthApi.getEventBriteToken() == nil{
+//            let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
+//            let requestObj = URLRequest(url: url!)
+//            webView.loadRequest(requestObj)
+//            webView.delegate = self
+//        }
         
         
         locationManager = CLLocationManager()
@@ -219,20 +219,25 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         marker.tracksInfoWindowChanges = true
 
         let parts = accessibilityLabel?.components(separatedBy: "_")
+        
         if parts?[0] == "event"{
-            let index:Int! = Int(parts![1])
+            let index: Int! = Int(parts![1])
             let event = self.events[index]
-            let infoWindow = Bundle.main.loadNibNamed("MapEventInfoView", owner: self, options: nil)?[0] as! MapEventInfoView
-            infoWindow.name.text = event.title
             
+            
+            let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
+            
+            var timeString = ""
+            let imageView = UIImageView()
+            var distance = ""
+            let interest = UILabel()
+
             var start = ""
             var end = ""
             if event.date?.range(of:",") != nil{
                 let time = event.date?.components(separatedBy: ",")[1]
-            
-                
                 start = time!
-
+                
             }
             else{
                 let time = event.date?.components(separatedBy: "T")[1]
@@ -256,14 +261,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 dateFormatter.dateFormat = "h:mm a"
                 
                 end = dateFormatter.string(from: date!)
-                infoWindow.time.text = "\(start) - \(end)"
+                timeString = "\(start) - \(end)"
             }
             else{
-                infoWindow.time.text = "\(start) onwards"
+                timeString = "\(start) onwards"
             }
             
             let placeholderImage = UIImage(named: "empty_event")
-        
+            
             if let id = event.id{
                 let reference = Constants.storage.event.child("\(id).jpg")
                 
@@ -274,85 +279,252 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         print(error?.localizedDescription)
                         return
                     }
-
-                    let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
-                        marker.tracksInfoWindowChanges = false
-                        infoWindow.image.setShowActivityIndicator(false)
-                        
-                    }
                     
+                    infoWindow.backImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                    infoWindow.backImage.setShowActivityIndicator(true)
+                    infoWindow.backImage.setIndicatorStyle(.gray)
+                
                     
-                    infoWindow.image.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
-                    infoWindow.image.setShowActivityIndicator(true)
-                    infoWindow.image.setIndicatorStyle(.gray)
-                    
-
                 })
                 
             }
             else{
-                let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
-                    marker.tracksInfoWindowChanges = false
-                    infoWindow.image.setShowActivityIndicator(false)
-                    
-                }
+                infoWindow.backImage.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
+                infoWindow.backImage.setShowActivityIndicator(true)
+                infoWindow.backImage.setIndicatorStyle(.gray)
                 
-                infoWindow.image.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
-                infoWindow.image.setShowActivityIndicator(true)
-                infoWindow.image.setIndicatorStyle(.gray)
             }
             
-            infoWindow.distance.text = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
+            
+            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
+            
             
             if let category = event.category{
                 let focus = category.components(separatedBy: ",")[0]
-                infoWindow.category.text =  "\(focus) ●"
+                interest.text =  "\(focus)"
                 
                 
                 
-                let primaryFocus = NSMutableAttributedString(string: infoWindow.category.text!)
-                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(infoWindow.category.text?.characters.count)! - 1,length:1))
-                infoWindow.category.attributedText = primaryFocus
+                let primaryFocus = NSMutableAttributedString(string: interest.text!)
+                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
+                interest.attributedText = primaryFocus
             }
             else{
-                infoWindow.category.text = "None"
+                interest.text = "None"
             }
+            infoWindow.loadEvent(name: event.title!, date: timeString, miles: distance, interest: interest)
+            
             return infoWindow
-        }
-        else{
+            
+
+            
+        }else if parts?[0] == "place"{
+        
             let index:Int! = Int(parts![1])
             let place = self.places[index % self.places.count]
             
-            let infoWindow = Bundle.main.loadNibNamed("MapPinInfoView", owner: self, options: nil)?[0] as! MapPinInfoView
-            infoWindow.name.text = place.name
-            infoWindow.rating.text = String(place.rating)
-            infoWindow.reviews.text = "(\(place.reviewCount) reviews)"
+            var name = ""
+            var rating = ""
+            var reviews = ""
+            var interest = UILabel()
+            var imageView = UIImageView()
+            var distance = ""
+
+            let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
+            name = place.name
+            rating = String(place.rating)
+            reviews = "(\(place.reviewCount) reviews)"
             let category = place.categories.map(){ $0.alias }
 
-            
-            infoWindow.category.text =  "\(getInterest(yelpCategory: category[0])) ●" 
-            let primaryFocus = NSMutableAttributedString(string: infoWindow.category.text!)
-            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(infoWindow.category.text?.characters.count)! - 1,length:1))
-            infoWindow.category.attributedText = primaryFocus
-            
+
+            interest.text =  "\(getInterest(yelpCategory: category[0])) ●"
+            let primaryFocus = NSMutableAttributedString(string: interest.text!)
+            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
+            interest.attributedText = primaryFocus
+
             let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
                 marker.tracksInfoWindowChanges = false
-                infoWindow.image.setShowActivityIndicator(false)
-                
+                infoWindow.backImage.setShowActivityIndicator(false)
+
             }
-            
+
             let placeholderImage = UIImage(named: "empty_event")
+
+            infoWindow.backImage.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+            infoWindow.backImage.setShowActivityIndicator(true)
+            infoWindow.backImage.setIndicatorStyle(.gray)
             
-            infoWindow.image.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
-            infoWindow.image.setShowActivityIndicator(true)
-            infoWindow.image.setIndicatorStyle(.gray)
+            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
             
-            infoWindow.distance.text = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
+            infoWindow.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest)
+                return infoWindow
             
+            
+            
+            
+
+        }else
+        {
+            let index:Int! = Int(parts![1])
+            let pin = self.pins[index]
+            
+            let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
+            var distance = ""
+            var pinMessage = pin.pinMessage
+            //var inte
+            //let location = pin.locationAddress
+            var name = ""
+            //var timeAgo = ""
+        
+            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
+            
+            Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    name = value?["username"] as! String
+                    infoWindow.loadPin(name: name, pin: pinMessage, distance: distance)
+                }
+            })
+
             
             return infoWindow
-            
         }
+        
+//        if parts?[0] == "event"{
+//            let index:Int! = Int(parts![1])
+//            let event = self.events[index]
+//            let infoWindow = Bundle.main.loadNibNamed("MapEventInfoView", owner: self, options: nil)?[0] as! MapEventInfoView
+//            infoWindow.name.text = event.title
+//            
+//            var start = ""
+//            var end = ""
+//            if event.date?.range(of:",") != nil{
+//                let time = event.date?.components(separatedBy: ",")[1]
+//            
+//                
+//                start = time!
+//
+//            }
+//            else{
+//                let time = event.date?.components(separatedBy: "T")[1]
+//                
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "HH:mm:ss"
+//                let date = dateFormatter.date(from: time!)
+//                
+//                dateFormatter.dateFormat = "h:mm a"
+//                
+//                start = dateFormatter.string(from: date!)
+//            }
+//            
+//            
+//            if event.endTime.characters.count > 0{
+//                let time = event.endTime.components(separatedBy: "T")[1]
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "HH:mm:ss"
+//                let date = dateFormatter.date(from: time)
+//                
+//                dateFormatter.dateFormat = "h:mm a"
+//                
+//                end = dateFormatter.string(from: date!)
+//                infoWindow.time.text = "\(start) - \(end)"
+//            }
+//            else{
+//                infoWindow.time.text = "\(start) onwards"
+//            }
+//            
+//            let placeholderImage = UIImage(named: "empty_event")
+//        
+//            if let id = event.id{
+//                let reference = Constants.storage.event.child("\(id).jpg")
+//                
+//                
+//                reference.downloadURL(completion: { (url, error) in
+//                    
+//                    if error != nil {
+//                        print(error?.localizedDescription)
+//                        return
+//                    }
+//
+//                    let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+//                        marker.tracksInfoWindowChanges = false
+//                        infoWindow.image.setShowActivityIndicator(false)
+//                        
+//                    }
+//                    
+//                    
+//                    infoWindow.image.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+//                    infoWindow.image.setShowActivityIndicator(true)
+//                    infoWindow.image.setIndicatorStyle(.gray)
+//                    
+//
+//                })
+//                
+//            }
+//            else{
+//                let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+//                    marker.tracksInfoWindowChanges = false
+//                    infoWindow.image.setShowActivityIndicator(false)
+//                    
+//                }
+//                
+//                infoWindow.image.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+//                infoWindow.image.setShowActivityIndicator(true)
+//                infoWindow.image.setIndicatorStyle(.gray)
+//            }
+//            
+//            infoWindow.distance.text = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
+//            
+//            if let category = event.category{
+//                let focus = category.components(separatedBy: ",")[0]
+//                infoWindow.category.text =  "\(focus) ●"
+//                
+//                
+//                
+//                let primaryFocus = NSMutableAttributedString(string: infoWindow.category.text!)
+//                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(infoWindow.category.text?.characters.count)! - 1,length:1))
+//                infoWindow.category.attributedText = primaryFocus
+//            }
+//            else{
+//                infoWindow.category.text = "None"
+//            }
+//            return infoWindow
+//        }
+//        else{
+//            let index:Int! = Int(parts![1])
+//            let place = self.places[index % self.places.count]
+//            
+//            let infoWindow = Bundle.main.loadNibNamed("MapPinInfoView", owner: self, options: nil)?[0] as! MapPinInfoView
+//            infoWindow.name.text = place.name
+//            infoWindow.rating.text = String(place.rating)
+//            infoWindow.reviews.text = "(\(place.reviewCount) reviews)"
+//            let category = place.categories.map(){ $0.alias }
+//
+//            
+//            infoWindow.category.text =  "\(getInterest(yelpCategory: category[0])) ●" 
+//            let primaryFocus = NSMutableAttributedString(string: infoWindow.category.text!)
+//            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(infoWindow.category.text?.characters.count)! - 1,length:1))
+//            infoWindow.category.attributedText = primaryFocus
+//            
+//            let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+//                marker.tracksInfoWindowChanges = false
+//                infoWindow.image.setShowActivityIndicator(false)
+//                
+//            }
+//            
+//            let placeholderImage = UIImage(named: "empty_event")
+//            
+//            infoWindow.image.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+//            infoWindow.image.setShowActivityIndicator(true)
+//            infoWindow.image.setIndicatorStyle(.gray)
+//            
+//            infoWindow.distance.text = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
+//            
+//            
+//            return infoWindow
+//            
+//        }
         
 //        let data = marker.userData as? MapCluster
 //        

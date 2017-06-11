@@ -257,6 +257,8 @@
 		FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF69ABFC1ED6498F0044BE51 /* inviteCell.xib */; };
 		FF7C874A1ED73310004ABB1B /* PinScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7C87491ED73310004ABB1B /* PinScreenViewController.swift */; };
 		FF7C87521ED74A8F004ABB1B /* PinImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7C87511ED74A8F004ABB1B /* PinImageCollectionViewCell.swift */; };
+		FF8F7C251EECD0BE00AEC685 /* MapPopUpScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8F7C241EECD0BE00AEC685 /* MapPopUpScreenView.swift */; };
+		FF8F7C291EECD0EE00AEC685 /* MapPopUpScreenView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8F7C281EECD0EE00AEC685 /* MapPopUpScreenView.xib */; };
 		FFBF879F1EE5A855000168F5 /* InvitePeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBF879E1EE5A855000168F5 /* InvitePeopleViewController.swift */; };
 		FFBF87A21EE5B34E000168F5 /* InvitePeoplePlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBF87A01EE5B34E000168F5 /* InvitePeoplePlaceCell.swift */; };
 		FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */; };
@@ -584,6 +586,8 @@
 		FF69ABFC1ED6498F0044BE51 /* inviteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = inviteCell.xib; sourceTree = "<group>"; };
 		FF7C87491ED73310004ABB1B /* PinScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PinScreenViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FF7C87511ED74A8F004ABB1B /* PinImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		FF8F7C241EECD0BE00AEC685 /* MapPopUpScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPopUpScreenView.swift; sourceTree = "<group>"; };
+		FF8F7C281EECD0EE00AEC685 /* MapPopUpScreenView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapPopUpScreenView.xib; sourceTree = "<group>"; };
 		FFBF879E1EE5A855000168F5 /* InvitePeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePeopleViewController.swift; sourceTree = "<group>"; };
 		FFBF87A01EE5B34E000168F5 /* InvitePeoplePlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePeoplePlaceCell.swift; sourceTree = "<group>"; };
 		FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePeoplePlaceCell.xib; sourceTree = "<group>"; };
@@ -648,6 +652,8 @@
 				5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */,
 				5B33C05D1EE113D3007A8188 /* MapPinInfoView.swift */,
 				5B33C05B1EE113CA007A8188 /* MapPinInfoView.xib */,
+				FF8F7C241EECD0BE00AEC685 /* MapPopUpScreenView.swift */,
+				FF8F7C281EECD0EE00AEC685 /* MapPopUpScreenView.xib */,
 			);
 			name = "Map Info Window";
 			sourceTree = "<group>";
@@ -1468,6 +1474,7 @@
 				5B959FE11ECBA62B00094FE6 /* InviteUserView.xib in Resources */,
 				5B251E891ED276970075B57A /* InterestsViewController.xib in Resources */,
 				D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */,
+				FF8F7C291EECD0EE00AEC685 /* MapPopUpScreenView.xib in Resources */,
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
 				EBD9808F1EEBCCD500FC54C1 /* Search Icon white 30x30.png in Resources */,
 				EB722F901EE8A5F500420DC8 /* Reviews.storyboard in Resources */,
@@ -1718,6 +1725,7 @@
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				EB722F931EE8B19400420DC8 /* ReviewsViewController.swift in Sources */,
+				FF8F7C251EECD0BE00AEC685 /* MapPopUpScreenView.swift in Sources */,
 				FFBF879F1EE5A855000168F5 /* InvitePeopleViewController.swift in Sources */,
 				5B71D7051ED1837A0093A3F5 /* commentCell.swift in Sources */,
 				5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */,
