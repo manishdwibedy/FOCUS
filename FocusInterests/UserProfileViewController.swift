@@ -123,6 +123,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.moreEventsButton.tag = 3
         
         getEventSuggestions()
+        getPin()
     }
     
 //    MARK: COLLECTIONVIEW DELEGATE METHODS
@@ -305,6 +306,32 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBAction func settingsButtonTapped(_ sender: UIBarButtonItem) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+    func getPin() {
+        
+        Constants.DB.pins.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                self.pinAddress1Label.text = value?["formattedAddress"] as? String
+                self.pinAddress2Label.text = value?["pin"] as? String
+                if (value?["like"] as? NSDictionary) != nil{
+                self.pinLikesLabel.text = String((value?["like"] as? NSDictionary)?["num"] as! Int)
+                }
+                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    if value != nil
+                    {
+                        self.pinLabel.text = value?["username"] as? String
+                    }
+                })
+                
+                
+            }
+        })
+        
     }
 
     @IBAction func updatePin(_ sender: Any) {
