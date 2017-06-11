@@ -37,6 +37,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var scrollView: UIScrollView!
     var placeVC: PlaceViewController? = nil
     
+    @IBOutlet weak var tipsTableView: UITableView!
     
     @IBOutlet weak var webButton: UIButton!
     @IBOutlet weak var uberButton: UIButton!
@@ -47,6 +48,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let tipsPlaceReviewNib = UINib(nibName: "TipPlaceReviewTableViewCell", bundle: nil)
+        self.tipsTableView.register(tipsPlaceReviewNib, forCellReuseIdentifier: "tipPlaceReviewCell")
+        let pinPlaceReviewNib = UINib(nibName: "PinPlaceReviewTableViewCell", bundle: nil)
+        self.table.register(pinPlaceReviewNib, forCellReuseIdentifier: "pinPlaceReviewCell")
         placeVC?.suggestPlacesDelegate = self
         loadInfoScreen(place: self.place!)
         
@@ -162,7 +167,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             view.userName.textColor = .white
             view.delegate = self
             
-            view.image.image = UIImage(named: "addUser")
+            view.image.image = UIImage(named: "UserPhoto")
         }
         
         webButton.setImage(UIImage(named: "web"), for: .normal)
@@ -187,26 +192,52 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        if (tableView == table){
+            return 8
+        } else {
+            return 5
+        }
+    
+//        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = Bundle.main.loadNibNamed("PinTableViewCell", owner: self, options: nil)?.first as! PinTableViewCell
-        cell.data = data[indexPath.row]
-        cell.comment.text = data[indexPath.row]["pin"] as! String
-        cell.loadLikes()
-        cell.parentVC = self
-        Constants.DB.user.child(data[indexPath.row]["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                cell.username.text = value?["username"] as? String
-                
-            }
+    
+        if (tableView == table){
+            let pinCell = self.table.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
+            //        let pinCell = Bundle.main.loadNibNamed("PinPlaceReviewTableViewCell", owner: self, options: nil)?.first as! PinPlaceReviewTableViewCell
             
-        })
-        return cell
+            //        cell.data = data[indexPath.row]
+            pinCell.usernameLabel.text = "username"
+            pinCell.categoryLabel.text = "category" //add image after category here
+            pinCell.timeOfPinLabel.text = "31min"
+            pinCell.commentsTextView.text = "Comments"
+            //        pinCell.commentsTextView.text = data[indexPath.row]["pin"] as! String
+            
+            //        cell.loadLikes()
+            //        cell.parentVC = self
+            
+            /*
+             Constants.DB.user.child(data[indexPath.row]["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+             let value = snapshot.value as? NSDictionary
+             if value != nil
+             {
+             pinCell.usernameLabel.text = value?["username"] as? String
+             
+             }
+             
+             })
+             */
+            return pinCell
+        } else {
+            let tipsCell = self.tipsTableView.dequeueReusableCell(withIdentifier: "tipPlaceReviewCell", for: indexPath) as! TipPlaceReviewTableViewCell
+            
+            tipsCell.usernameLabel.text = "user name"
+            tipsCell.tipCommentTextView.text = "blah"
+            tipsCell.likeAmountLabel.text = "31"
+            
+            return tipsCell
+        }
     }
     
     func inviteUser(name: String) {
