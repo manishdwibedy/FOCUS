@@ -13,6 +13,9 @@ import GeoFire
    
 class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate{
     
+    @IBOutlet var parentView: UIView!
+    
+    
     @IBOutlet weak var publicLabel: UILabel!
     @IBOutlet weak var privateLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -23,7 +26,13 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     let timePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
+    
+    // Interests
     var checkInterests = [Bool]()
+    var filteredCheck = [Bool]()
+    var interests = [String]()
+    var filteredInterest = [String]()
+    
     let validatedFields = true
     
     @IBOutlet weak var canInviteFriendsLabel: UILabel!
@@ -32,6 +41,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var guestListBttn: UIButton!
     @IBOutlet weak var showGuestFriendsBttn: UIButton!
     
+    @IBOutlet weak var interestTableBottom: NSLayoutConstraint!
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -122,6 +132,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.interestTableView.dataSource = self
         self.interestTableView.delegate = self
         self.searchBar.delegate = self
@@ -144,7 +155,11 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         
         for _ in 0..<Constants.interests.interests.count{
             checkInterests.append(false)
+            filteredCheck.append(false)
         }
+        
+        self.filteredInterest = Constants.interests.interests
+        self.interests = self.filteredInterest
         
         hideKeyboardWhenTappedAround()
     }
@@ -173,10 +188,46 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             interestTableView.reloadData()
             Event.clearCache()
         }
+        registerKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unregisterKeyboardNotifications()
+
+    }
+    
+    func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardDidShow(notification:)),
+                                               name: NSNotification.Name.UIKeyboardDidShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillHide(notification:)),
+                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+    }
+    
+    func unregisterKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func setTextFieldDelegates(){
         let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventEndTimeTextField, eventPriceTextView].map{$0.delegate = self}
+    }
+    
+    func keyboardDidShow(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardInfo = userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue
+        let keyboardSize = keyboardInfo.cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 200, right: 0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        scrollView.contentInset = UIEdgeInsets.zero
+        scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
     
     @IBAction func PrivOrPubSwtchChanged(_ sender: UISwitch) {
@@ -388,13 +439,13 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return checkInterests.count
+        return filteredInterest.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
         
-        cell.selectedInterestLabel.text = Constants.interests.interests[indexPath.row]
+        cell.selectedInterestLabel.text = filteredInterest[indexPath.row]
         
         if checkInterests[indexPath.row]{
             cell.checkedInterest.image = UIImage(named: "Interest_Filled")
@@ -552,13 +603,18 @@ extension CreateNewEventViewController {
 //    MARK: SEARCH BAR DELEGATE FUNCTIONS
     
 //    TODO: need to increase height of view controller in order to compensate for scroll view moving up
-    
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        self.searchBar.inputAccessoryView = self.nextPrevToolbar
-        return true
-    }
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        self.scrollView.setContentOffset(CGPoint(x: 0, y: 500), animated: true)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.characters.count > 0{
+            self.filteredInterest = self.interests.filter { $0.contains(searchText) }
+            self.interestTableView.reloadData()
+            
+
+        }
+        else{
+            self.filteredInterest = self.interests
+            self.interestTableView.reloadData()
+        }
     }
     
     func searchForInterest(interest: String){

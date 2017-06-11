@@ -185,7 +185,7 @@
                                                 <rect key="frame" x="0.0" y="352" width="357" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
                                             </textField>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jhD-9V-7l9">
@@ -324,9 +324,11 @@
                         <outlet property="eventTimeTextField" destination="VLy-M0-SHl" id="WG2-3G-huo"/>
                         <outlet property="guestListBttn" destination="Gh9-Vi-Du2" id="2AE-Ud-0Y8"/>
                         <outlet property="guestSettingsStackView" destination="jvR-p8-idX" id="RR2-Dt-eEq"/>
+                        <outlet property="interestTableBottom" destination="Thw-3S-pg2" id="GWr-TB-4Ri"/>
                         <outlet property="interestTableView" destination="4mD-gv-r8q" id="C0Y-M9-0VQ"/>
                         <outlet property="interestTopConstraint" destination="sEg-zu-sgE" id="LVs-lX-Jmx"/>
                         <outlet property="locationTextField" destination="Z2l-7t-2Co" id="swX-ke-M5l"/>
+                        <outlet property="parentView" destination="BxB-qZ-pRY" id="B23-BK-fVm"/>
                         <outlet property="privateLabel" destination="NHt-Do-t7D" id="hJw-RW-5Fy"/>
                         <outlet property="publicLabel" destination="LCG-dE-mWN" id="3o9-5Z-Tey"/>
                         <outlet property="publicOrPrivateSwitch" destination="EH1-4f-id0" id="cmZ-l0-HyP"/>
@@ -371,7 +373,7 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mAM-LI-rHW">
-                                <rect key="frame" x="0.0" y="108" width="375" height="692"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="643"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xYK-Z5-9fw">
                                         <rect key="frame" x="0.0" y="-6" width="375" height="508"/>
@@ -542,7 +544,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eYW-PJ-Iy8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y9s-5u-ROX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7SC-b0-CUZ">
@@ -572,10 +574,10 @@
                                 </items>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-WG-8rv">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="843"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXV-Yc-qSe">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="907" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="Camera" id="5Ww-Fo-APP">
                                         <connections>
@@ -4081,7 +4083,7 @@ AAAAAAADJ0A
         </image>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pdH-Ex-mw2"/>
+        <segue reference="eLh-9t-fEY"/>
         <segue reference="amW-Q6-Hfg"/>
     </inferredMetricsTieBreakers>
 </document>

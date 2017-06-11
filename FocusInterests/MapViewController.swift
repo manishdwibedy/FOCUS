@@ -184,6 +184,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             print(invitations)
         })
 
+        
         if showEvent{
             
             let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
