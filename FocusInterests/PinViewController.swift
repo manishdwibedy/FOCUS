@@ -8,8 +8,17 @@
 
 import UIKit
 
-class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, SuggestPlacesDelegate {
+class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, SuggestPlacesDelegate, UITextViewDelegate{
     var place: Place?
+    
+    @IBOutlet weak var postReviewSeciontButton: UIButton!
+    @IBOutlet weak var moreCategoriesSectionButton: UIButton!
+    @IBOutlet weak var morePinSectionButton: UIButton!
+    @IBOutlet weak var addTipButton: UIButton!
+    @IBOutlet weak var moreTipSectionButton: UIButton!
+    
+    @IBOutlet weak var reviewsView: UIView!
+    @IBOutlet weak var reviewsTextView: UITextView!
     
     // basic info screen
     @IBOutlet weak var placeNameLabel: UILabel!
@@ -47,11 +56,13 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let tipsPlaceReviewNib = UINib(nibName: "TipPlaceReviewTableViewCell", bundle: nil)
-        self.tipsTableView.register(tipsPlaceReviewNib, forCellReuseIdentifier: "tipPlaceReviewCell")
+        
         let pinPlaceReviewNib = UINib(nibName: "PinPlaceReviewTableViewCell", bundle: nil)
         self.table.register(pinPlaceReviewNib, forCellReuseIdentifier: "pinPlaceReviewCell")
+        
+        let tipsPlaceReviewNib = UINib(nibName: "TipPlaceReviewTableViewCell", bundle: nil)
+        self.tipsTableView.register(tipsPlaceReviewNib, forCellReuseIdentifier: "tipPlaceReviewCell")
+        
         placeVC?.suggestPlacesDelegate = self
         loadInfoScreen(place: self.place!)
         
@@ -101,6 +112,25 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         followButton.roundCorners(radius: 10)
         reviewButton.roundCorners(radius: 10)
         
+        postReviewSeciontButton.layer.borderWidth = 1
+        moreCategoriesSectionButton.layer.borderWidth = 1
+        morePinSectionButton.layer.borderWidth = 1
+        addTipButton.layer.borderWidth = 1
+        moreTipSectionButton.layer.borderWidth = 1
+        
+        postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
+        moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
+        morePinSectionButton.layer.borderColor = UIColor.white.cgColor
+        addTipButton.layer.borderColor = UIColor.white.cgColor
+        moreTipSectionButton.layer.borderColor = UIColor.white.cgColor
+        
+        postReviewSeciontButton.roundCorners(radius: 5)
+        moreCategoriesSectionButton.roundCorners(radius: 5)
+        morePinSectionButton.roundCorners(radius: 5)
+        addTipButton.roundCorners(radius: 10)
+        moreTipSectionButton.roundCorners(radius: 5)
+        
+        reviewsView.allCornersRounded(radius: 10)
         
         categoryBackground.addTopBorderWithColor(color: UIColor.white, width: 1)
         categoryBackground.addBottomBorderWithColor(color: UIColor.white, width: 1)
@@ -170,13 +200,13 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             view.image.image = UIImage(named: "UserPhoto")
         }
         
-        webButton.setImage(UIImage(named: "web"), for: .normal)
+        webButton.setImage(UIImage(named: "Community Green"), for: .normal)
         webButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         uberButton.setImage(UIImage(named: "uber"), for: .normal)
         uberButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
-        googleMapButton.setImage(UIImage(named: "maps"), for: .normal)
+        googleMapButton.setImage(UIImage(named: "Large_Apple_Maps.png"), for: .normal)
         googleMapButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
     }
 
@@ -193,16 +223,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tableView == table){
-            return 8
+            return 2
         } else {
-            return 5
+            return 2
         }
     
 //        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+//        var cell = UITableViewCell()
         if (tableView == table){
             let pinCell = self.table.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
             //        let pinCell = Bundle.main.loadNibNamed("PinPlaceReviewTableViewCell", owner: self, options: nil)?.first as! PinPlaceReviewTableViewCell
@@ -237,6 +267,14 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             tipsCell.likeAmountLabel.text = "31"
             
             return tipsCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(tableView == table){
+            return 70
+        }else{
+            return 90
         }
     }
     
@@ -331,7 +369,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         self.present(ivc, animated: true, completion: { _ in })
     }
     
-    
+    // MARK: TEXT VIEW DELEGATE METHODS
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.reviewsTextView.text = ""
+    }
     
     /*
     // MARK: - Navigation

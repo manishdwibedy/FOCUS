@@ -12,22 +12,54 @@ import FirebaseAuth
 
 class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var phoneNumberEmailView: UIView!
     @IBOutlet weak var phoneOrEmailTextField: UITextField!
     @IBOutlet weak var phoneEmailSwitcher: UISegmentedControl!
+    
     var typeOfSignUpSelected = "phone"
+    let darkBlueBackgroundColor = UIColor(red: 21/255.0, green: 41/255.0, blue: 65/255.0, alpha: 1.0)
+    let limeGreenColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.phoneOrEmailTextField.setBottomBorder()
+        self.phoneNumberEmailView.addBottomBorderWithColor(color: UIColor.white, width: 1)
+        
+        self.nextButton.roundCorners(radius: 9.0)
         self.phoneOrEmailTextField.keyboardType = .numberPad
         self.phoneOrEmailTextField.delegate = self
-        phoneOrEmailTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
-        self.phoneEmailSwitcher.tintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
-        var attr = NSDictionary(object: UIFont(name: "Avenir", size: 20.0)!, forKey: NSFontAttributeName as NSCopying)
-        self.phoneEmailSwitcher.setTitleTextAttributes(attr as? [AnyHashable : Any], for: .normal)
-//        let font = UIFont.systemFont(ofSize: 20)
-//        segmentedControl.setTitleTextAttributes([NSFontAttributeName: font],for: .normal)
+        
+        self.customizeSwitcherAppearance()
         hideKeyboardWhenTappedAround()
+    }
+    
+    func customizeSwitcherAppearance() {
+        self.phoneOrEmailTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
+        //        var attr = NSDictionary(object: UIFont(name: "Avenir", size: 20.0)!, forKey: NSFontAttributeName as NSCopying)
+        
+        self.phoneEmailSwitcher.setTitleTextAttributes([NSFontAttributeName:UIFont(name: "Avenir", size: 20.0)!,NSForegroundColorAttributeName:UIColor.white], for: .normal)
+        
+        self.phoneEmailSwitcher.setTitleTextAttributes([NSFontAttributeName:UIFont(name: "Avenir", size: 20.0)!,NSForegroundColorAttributeName: self.limeGreenColor], for:.selected)
+        
+        self.phoneEmailSwitcher.setBackgroundImage(self.imageWithColor(color: UIColor.clear), for:.normal, barMetrics:.default)
+        
+        self.phoneEmailSwitcher.setBackgroundImage(self.imageWithColor(color: UIColor.clear), for:.selected, barMetrics:.default)
+        
+        self.phoneEmailSwitcher.setDividerImage(self.imageWithColor(color: UIColor.white), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        
+        self.phoneEmailSwitcher.setDividerImage(self.imageWithColor(color: UIColor.white), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        
+    }
+    
+    func imageWithColor(color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: self.phoneEmailSwitcher.frame.size.height)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setFillColor(color.cgColor);
+        context!.fill(rect);
+        let image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return image!
         
     }
     
