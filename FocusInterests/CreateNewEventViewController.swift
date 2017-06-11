@@ -64,7 +64,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     var previousButton = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardPreviousButton))
     var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     var fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-    var dateDoneButon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.dateSelected))
+//    var dateDoneButon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.dateSelected))
     var startTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.startTimeSelected))
     var endTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.endTimeSelected))
     var priceDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.priceSelected))
@@ -75,7 +75,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton,self.dateDoneButon], animated: false)
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
         return toolbar
@@ -87,7 +87,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.startTimeDoneButton], animated: false)
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
         return toolbar
@@ -99,7 +99,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.endTimeDoneButton], animated: false)
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
         return toolbar
@@ -111,7 +111,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.priceDoneButton], animated: false)
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
         return toolbar
@@ -144,6 +144,8 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d yyyy"
         self.timeFormatter.dateFormat = "h:mm a"
+        
+        eventNameTextField.delegate = self
         
         eventDescriptionTextView.delegate = self
         eventDescriptionTextView.text = "Description"
@@ -392,21 +394,25 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     func dateSelected(){
         self.eventDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
         self.view.endEditing(true)
+        self.eventTimeTextField.becomeFirstResponder()
     }
     
     func startTimeSelected(){
         self.eventTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
         self.view.endEditing(true)
+        self.eventEndTimeTextField.becomeFirstResponder()
     }
     
     func endTimeSelected(){
         self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
         self.view.endEditing(true)
+        self.eventPriceTextView.becomeFirstResponder()
     }
     
     func priceSelected(){
         print(self.eventPriceTextView.text)
         self.view.endEditing(true)
+        self.eventDescriptionTextView.becomeFirstResponder()
     }
     
     func formatTextFields(){
@@ -550,13 +556,17 @@ extension CreateNewEventViewController {
         if textField == self.eventDateTextField {
             eventDateTextField.inputAccessoryView = self.dateToolbar
             eventDateTextField.inputView = self.datePicker
-        } else if textField == self.eventTimeTextField {
+        }
+        else if textField == self.eventTimeTextField {
             self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
             self.eventTimeTextField.inputView = self.timePicker
-        } else if textField == self.eventEndTimeTextField {
+        }
+        else if textField == self.eventEndTimeTextField {
             self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
             self.eventEndTimeTextField.inputView = self.timePicker
         } else if textField == self.locationTextField {
+//            eventDateTextField.inputAccessoryView = self.datePicker
+            
             let autoCompleteController = GMSAutocompleteViewController()
             autoCompleteController.delegate = self
             present(autoCompleteController, animated: true, completion: nil)
@@ -626,14 +636,16 @@ extension CreateNewEventViewController {
     func keyboardNextButton(){
         if self.eventNameTextField.isFirstResponder{
             self.locationTextField.becomeFirstResponder()
-            self.eventDateTextField.becomeFirstResponder()
         } else if self.eventDateTextField.isFirstResponder {
             self.eventTimeTextField.becomeFirstResponder()
+            self.eventDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
         } else if self.eventTimeTextField.isFirstResponder {
             self.eventEndTimeTextField.becomeFirstResponder()
+            self.eventTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
         } else if self.eventEndTimeTextField.isFirstResponder {
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
             self.eventPriceTextView.becomeFirstResponder()
+            self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
         } else if self.eventPriceTextView.isFirstResponder{
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
             self.eventDescriptionTextView.becomeFirstResponder()
