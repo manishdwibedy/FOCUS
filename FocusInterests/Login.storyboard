@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Nwf-t9-YbQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Nwf-t9-YbQ">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -726,27 +726,20 @@
                                     <segue destination="H1e-hr-4VX" kind="unwind" unwindAction="unwindFromSignUPWithSender:" id="zNZ-gI-aUs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0f-h5-cCA">
-                                <rect key="frame" x="77" y="413" width="269" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0f-h5-cCA">
+                                <rect key="frame" x="63" y="472" width="289" height="38"/>
                                 <color key="backgroundColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="xGR-x2-dtC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="nextButtonClicked:" destination="8P8-kk-dh6" eventType="touchUpInside" id="7cX-eW-heU"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="694-lq-czT">
-                                <rect key="frame" x="77" y="348" width="269" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hnt-i7-qSc">
-                                <rect key="frame" x="77" y="171" width="269" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hnt-i7-qSc">
+                                <rect key="frame" x="47" y="157" width="321" height="29"/>
                                 <segments>
                                     <segment title="Phone"/>
                                     <segment title="Email"/>
@@ -756,19 +749,68 @@
                                     <action selector="typeOfSignUpWasSelected:" destination="8P8-kk-dh6" eventType="valueChanged" id="6dg-4b-zQQ"/>
                                 </connections>
                             </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZ1-Is-ldq">
+                                <rect key="frame" x="63" y="347" width="289" height="43"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US (+1)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ymi-FW-sZi">
+                                        <rect key="frame" x="11" y="7" width="80" height="31"/>
+                                        <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="6bp-bw-wH7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="694-lq-czT">
+                                        <rect key="frame" x="87" y="5" width="194" height="33"/>
+                                        <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="194" id="WgK-SV-Mjg"/>
+                                        </constraints>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Ymi-FW-sZi" firstAttribute="top" secondItem="IZ1-Is-ldq" secondAttribute="top" constant="7" id="0hE-Iq-lp9"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ymi-FW-sZi" secondAttribute="bottom" constant="5" id="7vg-tH-IJK"/>
+                                    <constraint firstItem="694-lq-czT" firstAttribute="trailing" secondItem="IZ1-Is-ldq" secondAttribute="trailingMargin" id="8a0-GA-mIo"/>
+                                    <constraint firstItem="694-lq-czT" firstAttribute="leading" secondItem="IZ1-Is-ldq" secondAttribute="leading" constant="87" id="QyI-ef-OXA"/>
+                                    <constraint firstAttribute="height" constant="43" id="a1v-7C-qtM"/>
+                                    <constraint firstAttribute="trailing" secondItem="694-lq-czT" secondAttribute="trailing" constant="8" id="azG-gd-Y9K"/>
+                                    <constraint firstItem="Ymi-FW-sZi" firstAttribute="leading" secondItem="IZ1-Is-ldq" secondAttribute="leading" constant="11" id="iJV-ja-0pP"/>
+                                    <constraint firstItem="694-lq-czT" firstAttribute="top" secondItem="IZ1-Is-ldq" secondAttribute="top" constant="5" id="mxg-aU-yTK"/>
+                                    <constraint firstItem="Ymi-FW-sZi" firstAttribute="bottom" secondItem="694-lq-czT" secondAttribute="bottom" id="sEm-cW-I32"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KHc-Js-wTB" firstAttribute="top" secondItem="vZ6-ia-lvT" secondAttribute="bottom" constant="-20" id="7Od-6D-Pbl"/>
-                            <constraint firstItem="KHc-Js-wTB" firstAttribute="leading" secondItem="WKd-gR-SQg" secondAttribute="leading" id="DVF-Gb-tlo"/>
-                            <constraint firstItem="Hjg-x5-NzF" firstAttribute="top" secondItem="vZ6-ia-lvT" secondAttribute="bottom" id="FXO-YX-MXc"/>
-                            <constraint firstItem="Ekv-Gj-4bL" firstAttribute="top" secondItem="KHc-Js-wTB" secondAttribute="bottom" id="NiH-X1-WxK"/>
-                            <constraint firstAttribute="trailing" secondItem="KHc-Js-wTB" secondAttribute="trailing" id="RcL-dv-ZQM"/>
-                            <constraint firstItem="Hjg-x5-NzF" firstAttribute="leading" secondItem="WKd-gR-SQg" secondAttribute="leadingMargin" id="oRO-yG-aEN"/>
+                            <constraint firstItem="KHc-Js-wTB" firstAttribute="top" secondItem="WKd-gR-SQg" secondAttribute="top" id="1FJ-GK-Pfh"/>
+                            <constraint firstItem="Hjg-x5-NzF" firstAttribute="leading" secondItem="WKd-gR-SQg" secondAttribute="leadingMargin" id="5mQ-NZ-Qiz"/>
+                            <constraint firstItem="IZ1-Is-ldq" firstAttribute="trailing" secondItem="r0f-h5-cCA" secondAttribute="trailing" id="66w-sj-saV"/>
+                            <constraint firstItem="r0f-h5-cCA" firstAttribute="top" secondItem="KHc-Js-wTB" secondAttribute="bottom" constant="-264" id="84d-bo-I6f"/>
+                            <constraint firstItem="KHc-Js-wTB" firstAttribute="leading" secondItem="WKd-gR-SQg" secondAttribute="leading" id="9MI-gH-dbz"/>
+                            <constraint firstItem="Ekv-Gj-4bL" firstAttribute="top" secondItem="r0f-h5-cCA" secondAttribute="bottom" constant="226" id="E3d-zx-H26"/>
+                            <constraint firstItem="KHc-Js-wTB" firstAttribute="centerX" secondItem="IZ1-Is-ldq" secondAttribute="centerX" id="Igm-ch-RdB"/>
+                            <constraint firstItem="hnt-i7-qSc" firstAttribute="top" secondItem="vZ6-ia-lvT" secondAttribute="bottom" constant="137" id="Ihi-Fa-5r9"/>
+                            <constraint firstItem="Hjg-x5-NzF" firstAttribute="top" secondItem="vZ6-ia-lvT" secondAttribute="bottom" id="RuN-eJ-wgN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hnt-i7-qSc" secondAttribute="trailing" constant="26" id="UBb-6B-NXm"/>
+                            <constraint firstItem="r0f-h5-cCA" firstAttribute="top" secondItem="IZ1-Is-ldq" secondAttribute="bottom" constant="82" id="Y5E-bt-ley"/>
+                            <constraint firstItem="hnt-i7-qSc" firstAttribute="leading" secondItem="WKd-gR-SQg" secondAttribute="leadingMargin" constant="27" id="Y7M-zo-yUA"/>
+                            <constraint firstItem="KHc-Js-wTB" firstAttribute="centerY" secondItem="IZ1-Is-ldq" secondAttribute="centerY" id="cFW-a9-J3P"/>
+                            <constraint firstAttribute="trailing" secondItem="KHc-Js-wTB" secondAttribute="trailing" id="fe5-VL-y8F"/>
+                            <constraint firstItem="KHc-Js-wTB" firstAttribute="bottom" secondItem="Ekv-Gj-4bL" secondAttribute="top" id="ov9-Ye-j2g"/>
+                            <constraint firstItem="IZ1-Is-ldq" firstAttribute="leading" secondItem="r0f-h5-cCA" secondAttribute="leading" id="zPw-OK-K3E"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nextButton" destination="r0f-h5-cCA" id="y3X-6C-fzj"/>
                         <outlet property="phoneEmailSwitcher" destination="hnt-i7-qSc" id="WTh-Xi-J9P"/>
+                        <outlet property="phoneNumberEmailView" destination="IZ1-Is-ldq" id="f81-Bp-3De"/>
                         <outlet property="phoneOrEmailTextField" destination="694-lq-czT" id="a6M-24-s7k"/>
                         <segue destination="23E-AK-q7g" kind="show" identifier="next" id="SJs-J2-cg4"/>
                     </connections>
