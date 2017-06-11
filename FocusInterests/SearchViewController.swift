@@ -399,6 +399,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 let distance = business.1["distance"].doubleValue
                 let categories_json = business.1["categories"].arrayValue
                 let url = business.1["url"].stringValue
+                let plain_phone = business.1["phone"].stringValue
                 
                 var address = [String]()
                 for raw_address in address_json{
@@ -411,7 +412,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                     categories.append(category)
                 }
                 
-                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url)
+                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                 
                 if !self.filtered_places.contains(place){
                     self.filtered_places.append(place)

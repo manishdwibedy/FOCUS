@@ -133,7 +133,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         descriptionLabel.text = event?.eventDescription
         
 //        TODO:THERE IS A BUG THAT RETURNS NIL BEFORE VIEW LOADS
-        
+        /*
         ref.child("users").child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
@@ -245,7 +245,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             getEventSuggestions()
             
             self.attendOut.titleLabel?.textAlignment = .left
-        }
+        }*/
         
     }
     
