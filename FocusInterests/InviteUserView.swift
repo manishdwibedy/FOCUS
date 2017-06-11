@@ -31,7 +31,7 @@ class InviteUserView: UIView {
     
     func load() {
         Bundle.main.loadNibNamed("InviteUserView", owner: self, options: nil)
-       
+        self.image.roundedImage()
         self.inviteButton.roundCorners(radius: 5.0)
         self.view.addSubview(userName)
         self.view.addSubview(image)
