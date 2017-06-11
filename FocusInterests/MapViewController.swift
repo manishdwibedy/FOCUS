@@ -24,6 +24,7 @@ import ChameleonFramework
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, MFMessageComposeViewControllerDelegate, switchPinTabDelegate {
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var popUpView: UIView!
     
     @IBOutlet weak var popupArrowImage: UIImageView!
     var createdEvent: Event?
@@ -48,6 +49,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet weak var navigationView: MapNavigationView!
     
     @IBOutlet weak var webView: UIWebView!
+    
+    var popUpScreen: MapPopUpScreenView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,6 +172,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
             NSForegroundColorAttributeName : UIColor.white
             ], for: .normal)
+        
+        
 
     }
     
@@ -210,28 +215,43 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewDidAppear(_ animated: Bool) {
         UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
+        
+        print(popUpView.frame.size)
+        popUpScreen = MapPopUpScreenView(frame: CGRect(x: 0, y: 0, width: popUpView.frame.width, height: popUpView.frame.width))
+        popUpScreen.parentVC = self
+        self.popUpView.addSubview(popUpScreen)
     }
     
-    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView?{
+
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        popUpView.isHidden = true
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
+        popUpView.isHidden = false
         
         let accessibilityLabel = marker.accessibilityLabel
         
         marker.tracksInfoWindowChanges = true
-
+        
         let parts = accessibilityLabel?.components(separatedBy: "_")
         
         if parts?[0] == "event"{
             let index: Int! = Int(parts![1])
             let event = self.events[index]
             
+            popUpScreen.object = event
+            popUpScreen.type = "event"
             
-            let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
+            
+            //let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
             
             var timeString = ""
             let imageView = UIImageView()
             var distance = ""
             let interest = UILabel()
-
+            
             var start = ""
             var end = ""
             if event.date?.range(of:",") != nil{
@@ -280,18 +300,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         return
                     }
                     
-                    infoWindow.backImage.sd_setImage(with: url, placeholderImage: placeholderImage)
-                    infoWindow.backImage.setShowActivityIndicator(true)
-                    infoWindow.backImage.setIndicatorStyle(.gray)
-                
+                    self.popUpScreen.backImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                    self.popUpScreen.backImage.setShowActivityIndicator(true)
+                    self.popUpScreen.backImage.setIndicatorStyle(.gray)
+                    
                     
                 })
                 
             }
             else{
-                infoWindow.backImage.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
-                infoWindow.backImage.setShowActivityIndicator(true)
-                infoWindow.backImage.setIndicatorStyle(.gray)
+                popUpScreen.backImage.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
+                popUpScreen.backImage.setShowActivityIndicator(true)
+                popUpScreen.backImage.setIndicatorStyle(.gray)
                 
             }
             
@@ -312,16 +332,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             else{
                 interest.text = "None"
             }
-            infoWindow.loadEvent(name: event.title!, date: timeString, miles: distance, interest: interest)
+            popUpScreen.loadEvent(name: event.title!, date: timeString, miles: distance, interest: interest)
             
-            return infoWindow
+            return true
             
-
+            
             
         }else if parts?[0] == "place"{
-        
+            
             let index:Int! = Int(parts![1])
             let place = self.places[index % self.places.count]
+            
+            popUpScreen.object = place
+            popUpScreen.type = "place"
             
             var name = ""
             var rating = ""
@@ -329,53 +352,56 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             var interest = UILabel()
             var imageView = UIImageView()
             var distance = ""
-
-            let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
+            
+            //let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
             name = place.name
             rating = String(place.rating)
             reviews = "(\(place.reviewCount) reviews)"
             let category = place.categories.map(){ $0.alias }
-
-
+            
+            
             interest.text =  "\(getInterest(yelpCategory: category[0])) ●"
             let primaryFocus = NSMutableAttributedString(string: interest.text!)
             primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
             interest.attributedText = primaryFocus
-
+            
             let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
                 marker.tracksInfoWindowChanges = false
-                infoWindow.backImage.setShowActivityIndicator(false)
-
+                self.popUpScreen.backImage.setShowActivityIndicator(false)
+                
             }
-
+            
             let placeholderImage = UIImage(named: "empty_event")
-
-            infoWindow.backImage.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
-            infoWindow.backImage.setShowActivityIndicator(true)
-            infoWindow.backImage.setIndicatorStyle(.gray)
+            
+            popUpScreen.backImage.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+            popUpScreen.backImage.setShowActivityIndicator(true)
+            popUpScreen.backImage.setIndicatorStyle(.gray)
             
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
             
-            infoWindow.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest)
-                return infoWindow
+            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest)
+            return true
             
             
             
             
-
+            
         }else
         {
             let index:Int! = Int(parts![1])
             let pin = self.pins[index]
             
-            let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
+            popUpScreen.object = pin
+            popUpScreen.type = "pin"
+            
+            //let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
             var distance = ""
             var pinMessage = pin.pinMessage
             //var inte
             //let location = pin.locationAddress
             var name = ""
             //var timeAgo = ""
-        
+            
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
             
             Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -383,14 +409,196 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if value != nil
                 {
                     name = value?["username"] as! String
-                    infoWindow.loadPin(name: name, pin: pinMessage, distance: distance)
+                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance)
                 }
             })
-
             
-            return infoWindow
+            
+            return true
         }
+
         
+    }
+    
+//    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView?{
+//        
+//        let accessibilityLabel = marker.accessibilityLabel
+//        
+//        marker.tracksInfoWindowChanges = true
+//
+//        let parts = accessibilityLabel?.components(separatedBy: "_")
+//        
+//        if parts?[0] == "event"{
+//            let index: Int! = Int(parts![1])
+//            let event = self.events[index]
+//            
+//            
+//            let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
+//            
+//            var timeString = ""
+//            let imageView = UIImageView()
+//            var distance = ""
+//            let interest = UILabel()
+//
+//            var start = ""
+//            var end = ""
+//            if event.date?.range(of:",") != nil{
+//                let time = event.date?.components(separatedBy: ",")[1]
+//                start = time!
+//                
+//            }
+//            else{
+//                let time = event.date?.components(separatedBy: "T")[1]
+//                
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "HH:mm:ss"
+//                let date = dateFormatter.date(from: time!)
+//                
+//                dateFormatter.dateFormat = "h:mm a"
+//                
+//                start = dateFormatter.string(from: date!)
+//            }
+//            
+//            
+//            if event.endTime.characters.count > 0{
+//                let time = event.endTime.components(separatedBy: "T")[1]
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "HH:mm:ss"
+//                let date = dateFormatter.date(from: time)
+//                
+//                dateFormatter.dateFormat = "h:mm a"
+//                
+//                end = dateFormatter.string(from: date!)
+//                timeString = "\(start) - \(end)"
+//            }
+//            else{
+//                timeString = "\(start) onwards"
+//            }
+//            
+//            let placeholderImage = UIImage(named: "empty_event")
+//            
+//            if let id = event.id{
+//                let reference = Constants.storage.event.child("\(id).jpg")
+//                
+//                
+//                reference.downloadURL(completion: { (url, error) in
+//                    
+//                    if error != nil {
+//                        print(error?.localizedDescription)
+//                        return
+//                    }
+//                    
+//                    infoWindow.backImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+//                    infoWindow.backImage.setShowActivityIndicator(true)
+//                    infoWindow.backImage.setIndicatorStyle(.gray)
+//                
+//                    
+//                })
+//                
+//            }
+//            else{
+//                infoWindow.backImage.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
+//                infoWindow.backImage.setShowActivityIndicator(true)
+//                infoWindow.backImage.setIndicatorStyle(.gray)
+//                
+//            }
+//            
+//            
+//            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
+//            
+//            
+//            if let category = event.category{
+//                let focus = category.components(separatedBy: ",")[0]
+//                interest.text =  "\(focus)"
+//                
+//                
+//                
+//                let primaryFocus = NSMutableAttributedString(string: interest.text!)
+//                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
+//                interest.attributedText = primaryFocus
+//            }
+//            else{
+//                interest.text = "None"
+//            }
+//            infoWindow.loadEvent(name: event.title!, date: timeString, miles: distance, interest: interest)
+//            
+//            return infoWindow
+//            
+//
+//            
+//        }else if parts?[0] == "place"{
+//        
+//            let index:Int! = Int(parts![1])
+//            let place = self.places[index % self.places.count]
+//            
+//            var name = ""
+//            var rating = ""
+//            var reviews = ""
+//            var interest = UILabel()
+//            var imageView = UIImageView()
+//            var distance = ""
+//
+//            let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
+//            name = place.name
+//            rating = String(place.rating)
+//            reviews = "(\(place.reviewCount) reviews)"
+//            let category = place.categories.map(){ $0.alias }
+//
+//
+//            interest.text =  "\(getInterest(yelpCategory: category[0])) ●"
+//            let primaryFocus = NSMutableAttributedString(string: interest.text!)
+//            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
+//            interest.attributedText = primaryFocus
+//
+//            let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+//                marker.tracksInfoWindowChanges = false
+//                infoWindow.backImage.setShowActivityIndicator(false)
+//
+//            }
+//
+//            let placeholderImage = UIImage(named: "empty_event")
+//
+//            infoWindow.backImage.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+//            infoWindow.backImage.setShowActivityIndicator(true)
+//            infoWindow.backImage.setIndicatorStyle(.gray)
+//            
+//            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
+//            
+//            infoWindow.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest)
+//                return infoWindow
+//            
+//            
+//            
+//            
+//
+//        }else
+//        {
+//            let index:Int! = Int(parts![1])
+//            let pin = self.pins[index]
+//            
+//            let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
+//            var distance = ""
+//            var pinMessage = pin.pinMessage
+//            //var inte
+//            //let location = pin.locationAddress
+//            var name = ""
+//            //var timeAgo = ""
+//        
+//            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
+//            
+//            Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
+//                let value = snapshot.value as? NSDictionary
+//                if value != nil
+//                {
+//                    name = value?["username"] as! String
+//                    infoWindow.loadPin(name: name, pin: pinMessage, distance: distance)
+//                }
+//            })
+//
+//            
+//            return infoWindow
+//        }
+    
 //        if parts?[0] == "event"{
 //            let index:Int! = Int(parts![1])
 //            let event = self.events[index]
@@ -562,7 +770,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            print("cluster click")
 //            return nil
 //        }
-    }
+    //}
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         let accessibilityLabel = marker.accessibilityLabel

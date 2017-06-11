@@ -106,6 +106,13 @@
                                     <constraint firstAttribute="height" constant="65" id="ENT-vO-Ph2"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9GY-g7-gUF">
+                                <rect key="frame" x="0.0" y="423" width="375" height="195"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="195" id="rkl-jt-jnk"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="2x6-qQ-iyw"/>
@@ -114,10 +121,13 @@
                             <constraint firstAttribute="trailing" secondItem="05W-Qw-2Y5" secondAttribute="trailing" id="DHn-cC-Nm9"/>
                             <constraint firstItem="to3-UK-Oze" firstAttribute="centerX" secondItem="wPw-hG-pw7" secondAttribute="centerX" id="EN5-nb-BSt"/>
                             <constraint firstAttribute="trailing" secondItem="bIq-Pr-ji4" secondAttribute="trailing" id="H69-6o-iu0"/>
+                            <constraint firstItem="9GY-g7-gUF" firstAttribute="leading" secondItem="bIq-Pr-ji4" secondAttribute="leading" id="LUG-Nz-YoJ"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="to3-UK-Oze" secondAttribute="bottom" constant="-20" id="MIK-K5-avi"/>
                             <constraint firstItem="QR2-lK-lxS" firstAttribute="top" secondItem="bIq-Pr-ji4" secondAttribute="bottom" id="aHO-wc-zbz"/>
+                            <constraint firstItem="9GY-g7-gUF" firstAttribute="trailing" secondItem="05W-Qw-2Y5" secondAttribute="trailing" id="bHd-le-weV"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="05W-Qw-2Y5" secondAttribute="bottom" id="dIH-f6-lgF"/>
                             <constraint firstItem="QR2-lK-lxS" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leadingMargin" id="hbY-gF-ajY"/>
+                            <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="9GY-g7-gUF" secondAttribute="bottom" id="ndc-Hh-qgn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QR2-lK-lxS" secondAttribute="trailing" id="sO3-jM-dUB"/>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="wlW-Ae-CCd"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="x8H-nN-16x"/>
@@ -138,6 +148,7 @@
                     <connections>
                         <outlet property="mapView" destination="05W-Qw-2Y5" id="x3W-XA-QMw"/>
                         <outlet property="navigationView" destination="bIq-Pr-ji4" id="tVe-bJ-rDh"/>
+                        <outlet property="popUpView" destination="9GY-g7-gUF" id="0KR-mZ-pkT"/>
                         <outlet property="popupArrowImage" destination="to3-UK-Oze" id="5nh-bb-S3E"/>
                         <outlet property="webView" destination="QR2-lK-lxS" id="RQl-tY-oLp"/>
                         <segue destination="frg-C7-nnG" kind="show" identifier="show_event_details" id="aXM-w5-5lD"/>
@@ -569,7 +580,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qpo-3D-Prx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Notifications" image="loudspeaker" selectedImage="loudspeaker" id="5Sz-s2-Hwz"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ePA-XN-yOt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ePA-XN-yOt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -588,7 +599,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zwr-f5-bIi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="Home-1" id="xTg-4h-XeN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="acD-ii-E6E">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="acD-ii-E6E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
