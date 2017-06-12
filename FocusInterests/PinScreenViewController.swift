@@ -208,6 +208,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         isTwitter = false
         isFacebook = false
         
+        
+        publicOut.setImage(UIImage(named: "LockGray"), for: UIControlState.normal)
+        facebookOut.setImage(UIImage(named: "facebookGray"), for: UIControlState.normal)
+        twitterOut.setImage(UIImage(named: "TwitterGray"), for: UIControlState.normal)
+        
         for cell in cellArray
         {
             cell.imageView.layer.borderWidth = 0
@@ -386,10 +391,12 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if isPublic == false
         {
             isPublic = true
+            publicOut.setImage(UIImage(named: "LockGreen"), for: UIControlState.normal)
             
         }else
         {
             isPublic = false
+            publicOut.setImage(UIImage(named: "LockGray"), for: UIControlState.normal)
         }
     }
     
@@ -397,9 +404,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if isFacebook == false
         {
             isFacebook = true
+            facebookOut.setImage(UIImage(named: "facebookGreen"), for: UIControlState.normal)
         }else
         {
             isFacebook = false
+            facebookOut.setImage(UIImage(named: "facebookGray"), for: UIControlState.normal)
         }
     }
     
@@ -407,9 +416,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if isTwitter == false
         {
             isTwitter = true
+            twitterOut.setImage(UIImage(named: "TwitterGreen"), for: UIControlState.normal)
         }else
         {
             isTwitter = false
+            twitterOut.setImage(UIImage(named: "TwitterGray"), for: UIControlState.normal)
         }
     }
     
