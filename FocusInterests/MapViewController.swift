@@ -181,15 +181,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        getFeeds(gotPins: {
-            pins in
-            print(pins)
-        }, gotEvents: { events in
-            print(events)
-        }, gotInvitations: {invitations in
-            print(invitations)
-        })
-
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
         }
