@@ -365,6 +365,13 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBAction func addEventLocation(_ sender: UITextField) {
         let autoCompleteController = GMSAutocompleteViewController()
+        
+        let filter = GMSAutocompleteFilter()
+        filter.country = "US"
+        
+        autoCompleteController.autocompleteFilter = filter
+
+        
         autoCompleteController.delegate = self
         present(autoCompleteController, animated: true, completion: nil)
     }
@@ -535,10 +542,12 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
     }
     
     func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        viewController.autocompleteFilter?.country = "US"
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        viewController.autocompleteFilter?.country = "US"
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }

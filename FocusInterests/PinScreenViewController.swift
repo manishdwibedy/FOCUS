@@ -144,6 +144,12 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     @IBAction func changeLocation(_ sender: Any) {
         let autoCompleteController = GMSAutocompleteViewController()
+        
+        let filter = GMSAutocompleteFilter()
+        filter.country = "US"
+        
+        autoCompleteController.autocompleteFilter = filter
+
         autoCompleteController.delegate = self
         present(autoCompleteController, animated: true, completion: nil)
     }
@@ -454,10 +460,12 @@ extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
     }
     
     func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        viewController.autocompleteFilter?.country = "US"
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        viewController.autocompleteFilter?.country = "US"
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
