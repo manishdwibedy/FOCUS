@@ -71,36 +71,48 @@
                                 </constraints>
                                 <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" text="What are you up to?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IIB-I7-1sg">
-                                <rect key="frame" x="16" y="151.5" width="343" height="206.5"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What are you up to?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IIB-I7-1sg">
+                                <rect key="frame" x="16" y="151.5" width="343" height="186.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y9L-9E-i9r">
-                                <rect key="frame" x="181" y="366" width="178" height="30"/>
+                                <rect key="frame" x="189" y="346" width="170" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUx-Gb-fVd">
-                                        <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
-                                        <state key="normal" title="Public">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUx-Gb-fVd">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="RtW-Yd-SFV"/>
+                                            <constraint firstAttribute="height" constant="50" id="mvu-o2-lQ8"/>
+                                        </constraints>
+                                        <state key="normal" image="LockGray">
                                             <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="publicButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="UKy-7O-F4s"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRf-Hh-68S">
-                                        <rect key="frame" x="52" y="0.0" width="68" height="30"/>
-                                        <state key="normal" title="FaceBook">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRf-Hh-68S">
+                                        <rect key="frame" x="60" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Q5t-uL-USj"/>
+                                            <constraint firstAttribute="width" constant="50" id="s1P-9R-j3d"/>
+                                        </constraints>
+                                        <state key="normal" image="facebookGray">
                                             <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="facebookButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="Bas-9D-GnD"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wN-XP-zBN">
-                                        <rect key="frame" x="130" y="0.0" width="48" height="30"/>
-                                        <state key="normal" title="Twitter">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wN-XP-zBN">
+                                        <rect key="frame" x="120" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="4e6-3R-JlH"/>
+                                            <constraint firstAttribute="width" constant="50" id="HX9-vU-4gP"/>
+                                        </constraints>
+                                        <state key="normal" image="TwitterGray">
                                             <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -176,6 +188,7 @@
                             <constraint firstItem="A0j-it-CBu" firstAttribute="top" secondItem="jNi-Ij-b57" secondAttribute="bottom" constant="3" id="ByU-g6-B5r"/>
                             <constraint firstItem="uye-eQ-vsG" firstAttribute="baseline" secondItem="jNi-Ij-b57" secondAttribute="baseline" id="HyU-VR-9Q2"/>
                             <constraint firstItem="Y9L-9E-i9r" firstAttribute="trailing" secondItem="jNi-Ij-b57" secondAttribute="trailing" id="QzY-8m-5q2"/>
+                            <constraint firstItem="IIB-I7-1sg" firstAttribute="top" secondItem="hX9-m6-m5m" secondAttribute="bottom" constant="40" id="RyO-Kh-EhT"/>
                             <constraint firstItem="hX9-m6-m5m" firstAttribute="centerX" secondItem="IIB-I7-1sg" secondAttribute="centerX" id="UK7-SD-40S"/>
                             <constraint firstItem="hX9-m6-m5m" firstAttribute="leading" secondItem="RAS-2w-xgh" secondAttribute="leading" id="a0B-7M-Zxq"/>
                             <constraint firstItem="uye-eQ-vsG" firstAttribute="width" secondItem="jNi-Ij-b57" secondAttribute="width" id="e5g-4r-azN"/>
@@ -417,7 +430,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LockGray" width="480" height="480"/>
+        <image name="TwitterGray" width="480" height="480"/>
         <image name="UserPhoto" width="102" height="102"/>
+        <image name="facebookGray" width="480" height="480"/>
         <image name="map_pin" width="40" height="40"/>
     </resources>
 </document>

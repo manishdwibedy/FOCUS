@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,33 +19,59 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="51.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="usM-Gl-QFY">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="usM-Gl-QFY">
                         <rect key="frame" x="8" y="5" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="9BK-wP-nBR"/>
+                            <constraint firstAttribute="height" constant="40" id="LH0-5f-CT6"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="user name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94m-G6-dNY">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94m-G6-dNY">
                         <rect key="frame" x="64" y="8" width="120" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="OBS-R2-pHa"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lna-Gd-MZ9">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="full name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lna-Gd-MZ9">
                         <rect key="frame" x="64" y="26" width="120" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="e3V-32-MYh"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbA-id-Ycz">
-                        <rect key="frame" x="295" y="13" width="25" height="25"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbA-id-Ycz">
+                        <rect key="frame" x="285" y="13" width="27" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="3Ed-6t-KSc"/>
+                            <constraint firstAttribute="width" constant="27" id="UDw-Rq-PcF"/>
+                        </constraints>
+                        <state key="normal" image="GreyCircle"/>
                         <connections>
                             <action selector="contactSelectedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aBm-o0-prS"/>
                         </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="EbA-id-Ycz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="7qX-G0-MwK"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="EbA-id-Ycz" secondAttribute="bottom" constant="5.5" id="Ala-1h-V8O"/>
+                    <constraint firstItem="usM-Gl-QFY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="D3t-Mi-rrs"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Lna-Gd-MZ9" secondAttribute="bottom" constant="1.5" id="EEa-Fm-kdY"/>
+                    <constraint firstItem="Lna-Gd-MZ9" firstAttribute="top" secondItem="94m-G6-dNY" secondAttribute="bottom" constant="2" id="KUn-8a-5qZ"/>
+                    <constraint firstAttribute="bottom" secondItem="usM-Gl-QFY" secondAttribute="bottom" constant="6.5" id="LDS-Mi-Mj5"/>
+                    <constraint firstItem="EbA-id-Ycz" firstAttribute="leading" secondItem="Lna-Gd-MZ9" secondAttribute="trailing" constant="101" id="PaU-y4-iC0"/>
+                    <constraint firstItem="usM-Gl-QFY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Qc2-st-Xbh"/>
+                    <constraint firstItem="EbA-id-Ycz" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Su9-Uz-xri"/>
+                    <constraint firstItem="94m-G6-dNY" firstAttribute="leading" secondItem="usM-Gl-QFY" secondAttribute="trailing" constant="16" id="crH-kP-fAZ"/>
+                    <constraint firstItem="94m-G6-dNY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="gWi-0j-z0r"/>
+                    <constraint firstItem="EbA-id-Ycz" firstAttribute="leading" secondItem="94m-G6-dNY" secondAttribute="trailing" constant="101" id="qHd-zs-FZv"/>
+                    <constraint firstItem="Lna-Gd-MZ9" firstAttribute="leading" secondItem="usM-Gl-QFY" secondAttribute="trailing" constant="16" id="rhZ-7z-dnn"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="fullNameLabel" destination="Lna-Gd-MZ9" id="aqZ-u7-1GR"/>
@@ -56,6 +83,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="GreyCircle" width="38" height="38"/>
         <image name="UserPhoto" width="102" height="102"/>
     </resources>
 </document>

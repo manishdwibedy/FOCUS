@@ -10,7 +10,7 @@ import UIKit
 import Contacts
 
 class InviteListTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -45,6 +45,14 @@ class InviteListTableViewCell: UITableViewCell {
     }
     
     @IBAction func contactSelectedAction(_ sender: Any) {
-        delegate?.contactHasBeenSelected(contact: self.fullNameLabel.text!, index: self.inviteConfirmationButton.tag)
+        if(self.inviteConfirmationButton.image(for: .normal) == #imageLiteral(resourceName: "GreyCircle")){
+            self.inviteConfirmationButton.isSelected = true
+            self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "GreenCheck"), for: .selected)
+        }else{
+            self.inviteConfirmationButton.isSelected = false
+            self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "GreyCircle"), for: .normal)
+        }
+        
+        delegate?.contactHasBeenSelected(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
     }
 }

@@ -10,11 +10,16 @@ import UIKit
 import Contacts
 import FirebaseStorage
 
+protocol SelectAllContactsDelegate {
+    func selectedAllFollowers()
+    func deselectAllFollowers()
+}
+
 protocol SendInvitationsViewControllerDelegate {
     func contactHasBeenSelected(contact: String, index: Int)
 }
 
-class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SendInvitationsViewControllerDelegate{
+class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SendInvitationsViewControllerDelegate, SelectAllContactsDelegate{
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var createEventButton: UIButton!
@@ -29,6 +34,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     var selectedFriend = [Bool]()
     let store = CNContactStore()
     var contacts = [CNContact]()
+    var filteredContacts = [CNContact]()
+    var searchingForContact = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +43,14 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         formatNavBar()
         
         self.createEventButton.roundCorners(radius: 10.0)
+        
+        self.searchBar.isTranslucent = false
+        
+        self.searchBar.barTintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
+        
+        self.searchBar.layer.cornerRadius  = 6;
+        self.searchBar.clipsToBounds = true
+        self.searchBar.layer.borderWidth = 1
         
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
@@ -51,8 +66,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         let inviteListCellNib = UINib(nibName: "InviteListTableViewCell", bundle: nil)
         friendsTableView.register(inviteListCellNib, forCellReuseIdentifier: "personToInvite")
         
-        let selectedTimeListCellNib = UINib(nibName: "SelectedTimeTableViewCell", bundle: nil)
-        friendsTableView.register(selectedTimeListCellNib, forCellReuseIdentifier: "selectedTimeCell")
+        let selectedAllContactsCellNib = UINib(nibName: "SelectAllContactsTableViewCell", bundle: nil)
+        friendsTableView.register(selectedAllContactsCellNib, forCellReuseIdentifier: "selectAllContactsCell")
         
         if CNContactStore.authorizationStatus(for: .contacts) == .authorized{
             self.retrieveContactsWithStore(store: self.store)
@@ -60,6 +75,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         else{
             
         }
+        
+        self.sortContacts()
         
         hideKeyboardWhenTappedAround()
     }
@@ -139,8 +156,14 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0){
             return 1
+        } else {
+            
+            if(searchingForContact) {
+                return filteredContacts.count
+            }
+            
+            return contacts.count
         }
-        return contacts.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -160,24 +183,28 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if(indexPath.section == 0){
-            let selectedTimeTableCell = tableView.dequeueReusableCell(withIdentifier: "selectedTimeCell", for: indexPath) as! SelectedTimeTableViewCell
-            return selectedTimeTableCell
+            let selectedAllFollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "selectAllContactsCell", for: indexPath) as! SelectAllContactsTableViewCell
+            selectedAllFollowersTableCell.delegate = self
+            return selectedAllFollowersTableCell
+        } else {
+            let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
+            personToInviteCell.delegate = self
+            
+            if(searchingForContact){
+                personToInviteCell.usernameLabel.text = self.filteredContacts[indexPath.row].givenName
+                personToInviteCell.fullNameLabel.text = self.filteredContacts[indexPath.row].familyName
+            }else {
+                personToInviteCell.usernameLabel.text = self.contacts[indexPath.row].givenName //will need to change this to the username of user
+                personToInviteCell.fullNameLabel.text = self.contacts[indexPath.row].familyName
+            }
+            
+            return personToInviteCell
         }
-        
-        let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
-        personToInviteCell.delegate = self
-        
-        personToInviteCell.usernameLabel.text = self.contacts[indexPath.row].givenName //will need to change this to the username of user
-        personToInviteCell.fullNameLabel.text = self.contacts[indexPath.row].givenName
-        
-        return personToInviteCell
     }
     
     func contactHasBeenSelected(contact: String, index: Int){
         print(contact)
         contactListView.isHidden = false
-        
-        
         if contactList.text!.isEmpty {
             contactList.text = "\(contact)"
         }else{
@@ -185,13 +212,59 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
+    func deselectAllFollowers() {
+        contactListView.isHidden = true
+        contactList.text = ""
+    }
+    
+    func selectedAllFollowers() {
+        contactListView.isHidden = false
+        for contactIndex in 0...contacts.count-1{
+            contactList.text = contactList.text! + ",\(contacts[contactIndex].givenName)"
+        }
+    }
+    
 //    MARK: SEARCH BAR DELEGATE METHODS
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        let searchTextField: UITextField = self.searchBar.value(forKey: "_searchField") as! UITextField
-        searchTextField.clearButtonMode = .whileEditing
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(self.searchBar == nil || self.searchBar.text == ""){
+            self.searchingForContact = false
+            self.searchBar.endEditing(true)
+            self.friendsTableView.reloadData()
+        }else{
+            self.searchingForContact = true
+            self.filteredContacts = self.contacts.filter({ singleContact in
+                return singleContact.givenName.lowercased() == self.searchBar.text!.lowercased()
+            })
+            self.sortContacts()
+            self.friendsTableView.reloadData()
+        }
+    }
+    
+    func sortContacts(){
+        if(searchingForContact){
+            self.filteredContacts.sort { (nameOne, nameTwo) -> Bool in
+                let stringOfNameOne = String(describing: nameOne.givenName)
+                let stringOfNameTwo = String(describing: nameTwo.givenName)
+                
+                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
+            }
+        }else{
+            self.contacts.sort { (nameOne, nameTwo) -> Bool in
+                let stringOfNameOne = String(describing: nameOne.givenName)
+                let stringOfNameTwo = String(describing: nameTwo.givenName)
+                
+                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
+            }
+        }
     }
 
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchingForContact = true
+        self.searchBar.endEditing(true)
+        self.friendsTableView.reloadData()
+    }
+    
     @IBAction func backPressed(_ sender: UIBarButtonItem) {
 //        self.dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
