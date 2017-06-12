@@ -35,12 +35,10 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var selectedFriend = [Bool]()
     let store = CNContactStore()
     var contacts = [CNContact]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         formatNavBar()
-        
         self.sendButton.roundCorners(radius: 10.0)
         
         self.friendsTableView.delegate = self
@@ -133,7 +131,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
         personToInviteCell.delegate = self
-        
+
         personToInviteCell.usernameLabel.text = self.inviteCellData[indexPath.row].username //will need to change this to the username of user
         personToInviteCell.fullNameLabel.text = self.inviteCellData[indexPath.row].fullname
         
@@ -142,15 +140,20 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func contactHasBeenSelected(contact: String, index: Int){
-        print(contact)
         contactListView.isHidden = false
-        self.selected[index] = !self.selected[index]
-        if contactList.text!.isEmpty {
-            contactList.text = "\(contact)"
-        }else{
-            contactList.text = contactList.text! + ",\(contact)"
+        if self.selected[index] == false
+        {
+            self.selected[index] = true
+            if contactList.text!.isEmpty {
+                contactList.text = "\(contact)"
+            }else{
+                contactList.text = contactList.text! + ",\(contact)"
+            }
         }
+
+        
     }
+    
     
     
     @IBAction func backPressed(_ sender: Any) {
@@ -199,6 +202,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             })
         }
+        
+        dismiss(animated: true, completion: nil)
     }
 }
 
