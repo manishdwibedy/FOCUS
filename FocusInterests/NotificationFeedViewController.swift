@@ -43,7 +43,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.title = "Notifications"
         
-       
+        AuthApi.clearNotifications()
         
         FirebaseDownstream.shared.getUserNotifications(completion: {array in
             //self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)

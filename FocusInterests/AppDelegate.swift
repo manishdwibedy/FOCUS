@@ -224,6 +224,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
+        AuthApi.gotNotification()
+        if UIApplication.shared.applicationState == .active{
+            print("Notification received by running app")
+        }
+        else{
+            print("App opened from Notification")
+        }
+        
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")

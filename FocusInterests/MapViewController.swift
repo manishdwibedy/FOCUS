@@ -190,7 +190,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             print(invitations)
         })
 
-        
+        if AuthApi.gotNotification(){
+//            navigationView.notificationsButton.set
+        }
         if showEvent{
             
             let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,

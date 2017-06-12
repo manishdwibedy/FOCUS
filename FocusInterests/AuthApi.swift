@@ -210,4 +210,19 @@ struct AuthApi {
     static func set(location: CLLocation){
         defaults.set("\(location.coordinate.latitude);;\(location.coordinate.longitude)", forKey: "last_location")
     }
+    
+    static func isNotificationAvailable() -> Bool{
+        if let notification = defaults.object(forKey: "notification") as? Bool {
+            return notification
+        }
+        return false
+    }
+    
+    static func gotNotification(){
+        defaults.set(true, forKey: "notification")
+    }
+    
+    static func clearNotifications(){
+        defaults.set(false, forKey: "notification")
+    }
 }
