@@ -10,8 +10,8 @@ import UIKit
 
 class SelectedTimeTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var selectedTimeButton: UIButton!
     var contactListArray = [String]() //will need to change this to CNContacts later
+    @IBOutlet weak var selectedTime: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,12 +25,10 @@ class SelectedTimeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
     func setupBottomBorderForSelectedTimeButton(){
         let bottomBorder: CALayer = CALayer()
-        bottomBorder.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
         bottomBorder.borderWidth = 1;
-        bottomBorder.frame = CGRect(x: 0, y: self.selectedTimeButton.frame.height, width: self.selectedTimeButton.frame.width, height: 1)
-        self.selectedTimeButton.layer.addSublayer(bottomBorder)
+        bottomBorder.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
+        
     }
 }

@@ -241,6 +241,8 @@
 		EB722F9D1EE8BA4200420DC8 /* Dollar sign.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9C1EE8BA4200420DC8 /* Dollar sign.png */; };
 		EB722F9F1EE8BA7D00420DC8 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9E1EE8BA7D00420DC8 /* Green.png */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
+		EBC52C721EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */; };
+		EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */; };
 		EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */; };
 		EBD980831EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */; };
 		EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */; };
@@ -574,6 +576,8 @@
 		EB722F9C1EE8BA4200420DC8 /* Dollar sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar sign.png"; sourceTree = "<group>"; };
 		EB722F9E1EE8BA7D00420DC8 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Green.png; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
+		EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllContactsTableViewCell.swift; sourceTree = "<group>"; };
+		EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAllContactsTableViewCell.xib; sourceTree = "<group>"; };
 		EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Large_Apple_Maps.png; sourceTree = "<group>"; };
 		EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsEventDetailTableViewCell.swift; sourceTree = "<group>"; };
 		EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsEventDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -1166,6 +1170,8 @@
 				EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */,
 				EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */,
 				EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */,
+				EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */,
+				EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1497,6 +1503,7 @@
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */,
 				EB252F101EEA7F40001C163D /* Friend Pin.png in Resources */,
+				EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */,
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
@@ -1801,6 +1808,7 @@
 				5BA37C821EBE9DE30091189E /* NewMessageViewController.swift in Sources */,
 				5BA37C7E1EBDC1C70091189E /* CustomTabController.swift in Sources */,
 				EB5891C71EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift in Sources */,
+				EBC52C721EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				5B6AFA6A1ED1906900A82104 /* GMUDefaultClusterRenderer.m in Sources */,
 				FF7C87521ED74A8F004ABB1B /* PinImageCollectionViewCell.swift in Sources */,
