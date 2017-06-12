@@ -138,9 +138,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                let placeString = ("Add comment as " + (value?["username"] as! String))
-                self.hostNameLabel.text = value?["username"] as! String
-                self.fullnameLabel.text = value?["fullname"] as! String
+                let placeString = "Add comment"
+                self.hostNameLabel.text = value?["username"] as? String
+                self.fullnameLabel.text = value?["fullname"] as? String
                 var placeHolder = NSMutableAttributedString()
                 placeHolder = NSMutableAttributedString(string:placeString, attributes: [NSFontAttributeName:UIFont(name: "Helvetica", size: 15.0)!])
                 placeHolder.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 255, green: 255, blue: 255, alpha: 0.8), range:NSRange(location:0,length:placeString.characters.count))
