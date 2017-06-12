@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import FirebaseDatabase
 import FirebaseStorage
+import ChameleonFramework
 
 struct Constants {
     
@@ -32,17 +33,14 @@ struct Constants {
         public static let eventBriteToken = "366MU6UCBA72BO3LJTHL"
     }
     
-    struct dummyFeatures {
-        
-        public static let feature1 = Feature(featureName: "Babies")
-        public static let feature2 = Feature(featureName: "Food Obsession")
-        public static let feature3 = Feature(featureName: "Meadows")
-        public static let feature4 = Feature(featureName: "Knife skills")
-        public static let feature5 = Feature(featureName: "Storm chasing")
-        public static let feature6 = Feature(featureName: "Painting")
-        
+    struct color{
+        public static let navy = UIColor(hexString: "142840")
+        public static let darkBlue = UIColor(hexString: "154a5f")
+        public static let gray = UIColor(hexString: "435366")
+        public static let lightBlue = UIColor(hexString: "1ad1dc")
+        public static let green = UIColor(hexString: "7ac901")
+        public static let pink = UIColor(hexString: "ff3366")
     }
-    
     struct interests {
         
         
@@ -1559,29 +1557,7 @@ struct Constants {
         
     }
     
-    struct dummyItemsOInterest {
-//        public static let item1 = ItemOfInterest(itemName: "Lalapalooza", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature5], mainImage: UIImage(named: "pumpkins"), distance: "3.4 mi")
-//        public static let item2 = ItemOfInterest(itemName: "Sado County Auto Show", features: [Constants.dummyFeatures.feature3, Constants.dummyFeatures.feature5], mainImage: UIImage(named: "Humes"), distance: "5.0 mi")
-//        public static let item3 = ItemOfInterest(itemName: "Apiary Convention", features: [Constants.dummyFeatures.feature1, Constants.dummyFeatures.feature6], mainImage: UIImage(named: "Shroom"), distance: "3.4 mi")
-    }
-    
-//    struct dummyUsers {
-//        public static let mary = User(username: "Amanda", uuid: "neafsh8387uh4iw4fh", userImage: UIImage(named: "FamHalloween"), interests: [Constants.interests.football, Constants.interests.bars, Constants.interests.events])
-//        public static let al = User(username: "Al", uuid: "aksdjf93488743q7bp", userImage: UIImage(named: "pumpkins"), interests: [Constants.interests.furniture, Constants.interests.electronics, Constants.interests.bars])
-//        public static let yoon = User(username: "Yoon", uuid: "ashf94uhw9e8hf39", userImage: UIImage(named: "Lopart"), interests: [Constants.interests.football, Constants.interests.soccer, Constants.interests.clothing])
-//    }
-    
-    struct dummyFocusUsers {
-        public static let mary = FocusUser(userName: "Mary Jones", firebaseId: nil, imageString: nil, currentLocation: nil)
-        public static let bill = FocusUser(userName: "Bill Brasky", firebaseId: nil, imageString: nil, currentLocation: nil)
-        public static let ellie = FocusUser(userName: "Ellie Jacoby", firebaseId: nil, imageString: nil, currentLocation: nil)
-        public static let albert = FocusUser(userName: "Albert Schloss", firebaseId: nil, imageString: nil, currentLocation: nil)
-        public static let amanda = FocusUser(userName: "Amanda Thornburg", firebaseId: nil, imageString: nil, currentLocation: nil)
-        public static let Joe = FocusUser(userName: "Joe Hynes", firebaseId: nil, imageString: nil, currentLocation: nil)
-        public static let chris = FocusUser(userName: "Chris Hynes", firebaseId: nil, imageString: nil, currentLocation: nil)
-        public static let patty = FocusUser(userName: "Patricia Blackmore", firebaseId: nil, imageString: nil, currentLocation: nil)
-        
-    }
+   
     
     struct FollowArrays {
         public static let followers = [dummyFocusUsers.albert, dummyFocusUsers.mary, dummyFocusUsers.chris, dummyFocusUsers.Joe, dummyFocusUsers.amanda]
