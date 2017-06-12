@@ -42,6 +42,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var hasCustomProfileImage = false
     var showEvent = false
     var pins = [pinData]()
+    var userLocation: GMSMarker? = nil
     
     var searchPlacesTab: SearchPlacesViewController? = nil
     var searchEventsTab: SearchEventsViewController? = nil
@@ -898,10 +899,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                               zoom: 15)
         
         let position = CLLocationCoordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude))
-        let marker = GMSMarker(position: position)
-        marker.icon = UIImage(named: "self_location")
-        marker.map = self.mapView
-        marker.zIndex = 1
+        self.userLocation = GMSMarker(position: position)
+        self.userLocation?.icon = UIImage(named: "self_location")
+        self.userLocation?.map = self.mapView
+        self.userLocation?.zIndex = 1
         
         
         AuthApi.set(location: location)
