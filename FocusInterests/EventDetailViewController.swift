@@ -10,8 +10,9 @@ import UIKit
 import SDWebImage
 import Firebase
 import GeoFire
+import ChameleonFramework
 
-class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
+class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate {
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var hostNameLabel: UILabel!
     
@@ -251,6 +252,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             descriptionEditButton.isHidden = true
             userInfoEditButton.isHidden = true
         }
+        
+        self.commentTextField.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -570,6 +573,49 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         moreOtherLikesButton.roundCorners(radius: 7.0)
     }
     
+    
+    @IBAction func valueChanged(_ sender: UITextField) {
+        
+        if (sender.text?.characters.count)! > 0{
+            postCommentsButton.setTitleColor(UIColor(hexString: "7ac901"), for: .normal)
+            postCommentsButton.isEnabled = true
+        }
+        else{
+            postCommentsButton.setTitleColor(UIColor.lightGray, for: .normal)
+            postCommentsButton.isEnabled = false
+        }
+    }
+    
+    @IBAction func showGoogleMaps(_ sender: Any) {
+        let lat = Double((event?.latitude)!)!
+        let long = Double((event?.longitude)!)!
+        
+        
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            UIApplication.shared.openURL(URL(string:
+                "comgooglemaps://?daddr=\(lat),\(long)&directionsmode=driving")!)
+        } else {
+            print("Can't use comgooglemaps://");
+        }
+    }
+    
+    
+    @IBAction func showUber(_ sender: Any) {
+        let lat = Double((event?.latitude)!)!
+        let long = Double((event?.longitude)!)!
+        var address = event?.shortAddress
+        
+        address = address?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        let url_string = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=\(lat)&dropoff[longitude]=\(long)&dropoff[nickname]=\(address!)&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
+        
+        //let url  = URL(string: url_string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
+        let url = URL(string: url_string)
+        if UIApplication.shared.canOpenURL(url!) == true
+        {
+            UIApplication.shared.openURL(url!)
+        }
+    }
 }
 
 
