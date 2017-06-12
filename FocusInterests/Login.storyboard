@@ -671,10 +671,10 @@
                                 </subviews>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="_Main Logo Transparent.png" translatesAutoresizingMaskIntoConstraints="NO" id="rY1-XT-C2R">
-                                <rect key="frame" x="81" y="28" width="252" height="215"/>
+                                <rect key="frame" x="95" y="28" width="224" height="215"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="215" id="Bp3-tP-cQn"/>
-                                    <constraint firstAttribute="width" constant="252" id="gRO-s8-hMs"/>
+                                    <constraint firstAttribute="width" constant="224" id="gRO-s8-hMs"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -682,11 +682,11 @@
                         <constraints>
                             <constraint firstItem="K5z-Xh-TOp" firstAttribute="centerY" secondItem="HGh-z7-isQ" secondAttribute="centerY" constant="35.166666666666686" id="SQ4-9c-Pvx"/>
                             <constraint firstItem="K5z-Xh-TOp" firstAttribute="width" secondItem="HGh-z7-isQ" secondAttribute="height" multiplier="63:184" id="T7A-JK-HOv"/>
-                            <constraint firstItem="rY1-XT-C2R" firstAttribute="leading" secondItem="K5z-Xh-TOp" secondAttribute="trailing" constant="-252" id="XLf-qR-J0e"/>
+                            <constraint firstItem="rY1-XT-C2R" firstAttribute="leading" secondItem="K5z-Xh-TOp" secondAttribute="trailing" constant="-238" id="XLf-qR-J0e"/>
                             <constraint firstItem="K5z-Xh-TOp" firstAttribute="centerX" secondItem="HGh-z7-isQ" secondAttribute="centerX" id="Y7I-Hc-RMP"/>
                             <constraint firstItem="rY1-XT-C2R" firstAttribute="top" secondItem="lEF-pk-Jwk" secondAttribute="bottom" constant="8" id="aGD-7C-VFc"/>
-                            <constraint firstItem="rY1-XT-C2R" firstAttribute="leading" secondItem="HGh-z7-isQ" secondAttribute="leadingMargin" constant="61" id="lcY-JZ-nYl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="rY1-XT-C2R" secondAttribute="trailing" constant="61" id="lfU-Oo-q8Z"/>
+                            <constraint firstItem="rY1-XT-C2R" firstAttribute="leading" secondItem="HGh-z7-isQ" secondAttribute="leadingMargin" constant="75" id="lcY-JZ-nYl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rY1-XT-C2R" secondAttribute="trailing" constant="75" id="lfU-Oo-q8Z"/>
                         </constraints>
                     </view>
                     <connections>

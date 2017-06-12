@@ -43,6 +43,14 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var suggestPlacesStackView: UIStackView!
     
+    @IBOutlet weak var writeReviewView: UITextView!
+    @IBOutlet weak var starRatingView: UIView!
+    @IBOutlet weak var tipView: UIView!
+    @IBOutlet weak var pinView: UIView!
+    @IBOutlet weak var inviteView: UIView!
+    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var categoryView: UIView!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     var placeVC: PlaceViewController? = nil
     
@@ -130,10 +138,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         addTipButton.roundCorners(radius: 10)
         moreTipSectionButton.roundCorners(radius: 5)
         
-        reviewsView.allCornersRounded(radius: 10)
-        
-        categoryBackground.addTopBorderWithColor(color: UIColor.white, width: 1)
-        categoryBackground.addBottomBorderWithColor(color: UIColor.white, width: 1)
+        starRatingView.topCornersRounded(radius: 10)
+        writeReviewView.bottomCornersRounded(radius: 10)
         
         for view in categoriesStackView.subviews{
             view.removeFromSuperview()
@@ -222,12 +228,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (tableView == table){
-            return 2
-        } else {
-            return 2
-        }
-    
+//        if (tableView == table || tableView == tipsTableView){
+//            return 2
+//        }
+        return 2
 //        return data.count
     }
     
@@ -273,14 +277,15 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView == table){
             return 70
-        }else{
-            return 90
         }
+        
+        return 100
     }
     
     func inviteUser(name: String) {
         print("clicked \(name)")
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
