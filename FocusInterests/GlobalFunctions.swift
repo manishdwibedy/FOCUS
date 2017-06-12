@@ -222,7 +222,7 @@ func sendNotification(to id: String, title: String, body: String){
 
 func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvents: @escaping (_ events: [FocusNotification]) -> Void, gotInvitations: @escaping (_ invitations: [FocusNotification]) -> Void){
     
-    let userID = "l0V17J9pQWaCbK4ZC2WVnSqwCtH3"
+    let userID = AuthApi.getFirebaseUid()
     var pins = [FocusNotification]()
     var events = [FocusNotification]()
     var invitations_event = [FocusNotification]()
@@ -233,7 +233,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
     var eventCount = 0
     var totalInvitation = 0
     
-    Constants.DB.user.child(userID).observeSingleEvent(of: .value, with: { snapshot in
+    Constants.DB.user.child(userID!).observeSingleEvent(of: .value, with: { snapshot in
         
         
         let user = snapshot.value as? [String : Any]
