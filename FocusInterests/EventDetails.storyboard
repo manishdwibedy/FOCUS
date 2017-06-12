@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -38,7 +38,8 @@
                                         </textAttributes>
                                         <items>
                                             <navigationItem title="Title" id="GLi-K5-S8X">
-                                                <barButtonItem key="leftBarButtonItem" title="Back" id="ATt-F1-0UQ">
+                                                <barButtonItem key="leftBarButtonItem" image="BackArrow" id="ATt-F1-0UQ">
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <connections>
                                                         <action selector="navBack:" destination="AZe-9E-xBf" id="6dV-ef-Z10"/>
                                                     </connections>
@@ -730,6 +731,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackArrow" width="50" height="30"/>
         <image name="Direct message sign.png" width="38" height="32"/>
         <image name="Large_Apple_Maps.png" width="123" height="123"/>
         <image name="Like" width="30" height="30"/>
