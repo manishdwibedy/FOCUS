@@ -190,7 +190,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             print(invitations)
         })
 
-        if AuthApi.gotNotification(){
+        if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
         }
         if showEvent{
