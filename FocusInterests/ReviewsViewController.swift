@@ -36,7 +36,7 @@ class ReviewsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         interestLabel.text = place.categories[0].name
         placeNameLabel.text = place.name
-        
+        self.reviewsTableView.tableFooterView = UIView()
         
         
     }
@@ -68,5 +68,8 @@ class ReviewsViewController: UIViewController, UITableViewDelegate, UITableViewD
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func backPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 
 }

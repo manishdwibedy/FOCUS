@@ -41,7 +41,22 @@ class PlaceViewController: UIViewController {
         self.loadPlace(place: self.place!)
         
         hideKeyboardWhenTappedAround()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showRating(sender:)))
+        
+        ratingBackground.addGestureRecognizer(tapGesture)
     }
+    
+    func showRating(sender: UITapGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "Reviews", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "reviews") as? ReviewsViewController
+        VC?.place = place
+        self.present(VC!, animated: true, completion: nil)
+        
+        
+
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

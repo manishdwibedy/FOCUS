@@ -14,8 +14,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var postReviewSeciontButton: UIButton!
     @IBOutlet weak var moreCategoriesSectionButton: UIButton!
     @IBOutlet weak var morePinSectionButton: UIButton!
-    @IBOutlet weak var addTipButton: UIButton!
-    @IBOutlet weak var moreTipSectionButton: UIButton!
+    
     
     @IBOutlet weak var reviewsView: UIView!
     @IBOutlet weak var reviewsTextView: UITextView!
@@ -45,7 +44,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     
     @IBOutlet weak var writeReviewView: UITextView!
     @IBOutlet weak var starRatingView: UIView!
-    @IBOutlet weak var tipView: UIView!
     @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var inviteView: UIView!
     @IBOutlet weak var infoView: UIView!
@@ -54,7 +52,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var scrollView: UIScrollView!
     var placeVC: PlaceViewController? = nil
     
-    @IBOutlet weak var tipsTableView: UITableView!
+    
     
     @IBOutlet weak var webButton: UIButton!
     @IBOutlet weak var uberButton: UIButton!
@@ -67,9 +65,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         
         let pinPlaceReviewNib = UINib(nibName: "PinPlaceReviewTableViewCell", bundle: nil)
         self.table.register(pinPlaceReviewNib, forCellReuseIdentifier: "pinPlaceReviewCell")
-        
-        let tipsPlaceReviewNib = UINib(nibName: "TipPlaceReviewTableViewCell", bundle: nil)
-        self.tipsTableView.register(tipsPlaceReviewNib, forCellReuseIdentifier: "tipPlaceReviewCell")
         
         placeVC?.suggestPlacesDelegate = self
         loadInfoScreen(place: self.place!)
@@ -123,20 +118,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         postReviewSeciontButton.layer.borderWidth = 1
         moreCategoriesSectionButton.layer.borderWidth = 1
         morePinSectionButton.layer.borderWidth = 1
-        addTipButton.layer.borderWidth = 1
-        moreTipSectionButton.layer.borderWidth = 1
+        
         
         postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
         moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
         morePinSectionButton.layer.borderColor = UIColor.white.cgColor
-        addTipButton.layer.borderColor = UIColor.white.cgColor
-        moreTipSectionButton.layer.borderColor = UIColor.white.cgColor
+        
         
         postReviewSeciontButton.roundCorners(radius: 5)
         moreCategoriesSectionButton.roundCorners(radius: 5)
         morePinSectionButton.roundCorners(radius: 5)
-        addTipButton.roundCorners(radius: 10)
-        moreTipSectionButton.roundCorners(radius: 5)
         
         starRatingView.topCornersRounded(radius: 10)
         writeReviewView.bottomCornersRounded(radius: 10)
@@ -237,7 +228,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        var cell = UITableViewCell()
-        if (tableView == table){
+//        if (tableView == table){
             let pinCell = self.table.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
             //        let pinCell = Bundle.main.loadNibNamed("PinPlaceReviewTableViewCell", owner: self, options: nil)?.first as! PinPlaceReviewTableViewCell
             
@@ -263,15 +254,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
              })
              */
             return pinCell
-        } else {
-            let tipsCell = self.tipsTableView.dequeueReusableCell(withIdentifier: "tipPlaceReviewCell", for: indexPath) as! TipPlaceReviewTableViewCell
-            
-            tipsCell.usernameLabel.text = "user name"
-            tipsCell.tipCommentTextView.text = "blah"
-            tipsCell.likeAmountLabel.text = "31"
-            
-            return tipsCell
-        }
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

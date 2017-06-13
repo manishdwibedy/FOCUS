@@ -1553,22 +1553,8 @@ struct Constants {
             "skillednursing": "health",
             "laundromat": "laundryservices",
             "gardens": "arts",]
-//        public static let interest_list = [interests.football, interests.basketball, interests.soccer, interests.bike, interests.music, interests.modernArt]
+
         
-    }
-    
-   
-    
-    struct FollowArrays {
-        public static let followers = [dummyFocusUsers.albert, dummyFocusUsers.mary, dummyFocusUsers.chris, dummyFocusUsers.Joe, dummyFocusUsers.amanda]
-        public static let followings = [dummyFocusUsers.ellie, dummyFocusUsers.albert, dummyFocusUsers.bill, dummyFocusUsers.mary, dummyFocusUsers.chris, dummyFocusUsers.patty]
-    }
-    
-    struct notifications {
-       
-//        public static let notification1 = FocusNotification(type: NotificationType.Invite, sender: Constants.dummyUsers.al, item: Constants.dummyItemsOInterest.item2)
-//        public static let notification2 = FocusNotification(type: NotificationType.Like, sender: Constants.dummyUsers.mary, item: Constants.dummyItemsOInterest.item1)
-//        public static let notification3 = FocusNotification(type: NotificationType.Tag, sender: Constants.dummyUsers.yoon, item: Constants.dummyItemsOInterest.item3)
     }
     
     struct settings {

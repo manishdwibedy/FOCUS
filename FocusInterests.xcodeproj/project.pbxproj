@@ -136,6 +136,7 @@
 		5BAB87AD1EC97BED0064E5EC /* PeopleSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB87AC1EC97BED0064E5EC /* PeopleSearchViewController.swift */; };
 		5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB87AE1EC984400064E5EC /* search_event.storyboard */; };
 		5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB87B01EC9861F0064E5EC /* search_place.storyboard */; };
+		5BBF7AC21EEF5C61000209D6 /* Reviews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */; };
 		5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapEventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapEventInfoView.swift */; };
 		5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF0293F1EE5F7F300D54FAF /* UIViewController+Extensions.swift */; };
@@ -232,7 +233,6 @@
 		EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */; };
 		EB5891D41EE7EBFE00C35EE9 /* Like.png in Resources */ = {isa = PBXBuildFile; fileRef = EB5891D31EE7EBFE00C35EE9 /* Like.png */; };
 		EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */; };
-		EB722F901EE8A5F500420DC8 /* Reviews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB722F8F1EE8A5F500420DC8 /* Reviews.storyboard */; };
 		EB722F931EE8B19400420DC8 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */; };
 		EB722F961EE8B1BE00420DC8 /* ReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */; };
 		EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */; };
@@ -462,6 +462,7 @@
 		5BAB87AC1EC97BED0064E5EC /* PeopleSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleSearchViewController.swift; sourceTree = "<group>"; };
 		5BAB87AE1EC984400064E5EC /* search_event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = search_event.storyboard; sourceTree = "<group>"; };
 		5BAB87B01EC9861F0064E5EC /* search_place.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = search_place.storyboard; sourceTree = "<group>"; };
+		5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Reviews.storyboard; sourceTree = "<group>"; };
 		5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapEventInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapEventInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapEventInfoView.swift; sourceTree = "<group>"; };
 		5BF0293F1EE5F7F300D54FAF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -567,7 +568,6 @@
 		EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
 		EB5891D31EE7EBFE00C35EE9 /* Like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Like.png; sourceTree = "<group>"; };
 		EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
-		EB722F8F1EE8A5F500420DC8 /* Reviews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Reviews.storyboard; sourceTree = "<group>"; };
 		EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
 		EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsTableViewCell.swift; sourceTree = "<group>"; };
 		EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewsTableViewCell.xib; sourceTree = "<group>"; };
@@ -948,8 +948,8 @@
 				EBB971691EE61E58009E88F3 /* Followers.storyboard */,
 				5B448E5A1EE72C3400873F79 /* Following.storyboard */,
 				EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */,
-				EB722F8F1EE8A5F500420DC8 /* Reviews.storyboard */,
 				5B448E641EE94BF900873F79 /* Invites.storyboard */,
+				5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1497,7 +1497,6 @@
 				FF8F7C291EECD0EE00AEC685 /* MapPopUpScreenView.xib in Resources */,
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
 				EBD9808F1EEBCCD500FC54C1 /* Search Icon white 30x30.png in Resources */,
-				EB722F901EE8A5F500420DC8 /* Reviews.storyboard in Resources */,
 				5B519E7B1ED677D800B36110 /* SearchPeopleTableViewCell.xib in Resources */,
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
@@ -1531,6 +1530,7 @@
 				5B959FEB1ECD23C200094FE6 /* SuggestPlaceView.xib in Resources */,
 				5B71D7061ED1837A0093A3F5 /* commentCell.xib in Resources */,
 				EB252F141EEAA062001C163D /* UserProfileCollectionViewCell.xib in Resources */,
+				5BBF7AC21EEF5C61000209D6 /* Reviews.storyboard in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
 				EB3EA23A1EE7684500F61D38 /* _Main Logo Transparent.png in Resources */,
 				EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */,

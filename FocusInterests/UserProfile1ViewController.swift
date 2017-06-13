@@ -322,7 +322,7 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             return cell!
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.SocialGroupCell.rawValue) as? SocialCrowdCell
-            cell?.configureFor(followers: Constants.FollowArrays.followers, followed: Constants.FollowArrays.followings)
+//            cell?.configureFor(followers: Constants.FollowArrays.followers, followed: Constants.FollowArrays.followings)
             return cell!
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifiers.DisplayInterestCell.rawValue) as? DisplayInterestsCell
@@ -364,8 +364,8 @@ class UserProfile1ViewController: BaseViewController, UITableViewDataSource, UIT
             textView.becomeFirstResponder()
         case 2:
             let vc = SocialGroupViewController(nibName: "SocialGroupViewController", bundle: nil)
-            vc.followers = Constants.FollowArrays.followers
-            vc.following = Constants.FollowArrays.followings
+//            vc.followers = Constants.FollowArrays.followers
+//            vc.following = Constants.FollowArrays.followings
             vc.username = (self.user?.userName)!
             present(vc, animated: true, completion: nil)
         default:
