@@ -26,6 +26,8 @@ class MapPopUpScreenView: UIView {
     
     @IBOutlet weak var bottomText: UILabel!
     
+    @IBOutlet weak var addressLabel: UILabel!
+    
     var object: Any!
     var type = ""
     var parentVC: MapViewController!
@@ -75,13 +77,14 @@ class MapPopUpScreenView: UIView {
     }
     
     
-    func loadPlace(name: String, rating: String, reviews: String, miles: String, interest: UILabel)
+    func loadPlace(name: String, rating: String, reviews: String, miles: String, interest: UILabel, address:String)
     {
         self.startImage.isHidden = false
         boldLabel.text = name
         bottomText.text = rating + "   " + reviews
         mileLabel.text = miles
-        interest.text = interest.attributedText?.string
+        interestLabel.text = interest.attributedText?.string
+        addressLabel.text = address
         
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1).cgColor

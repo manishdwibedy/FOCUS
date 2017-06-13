@@ -355,7 +355,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             let category = place.categories.map(){ $0.alias }
             
             
-            interest.text =  "\(getInterest(yelpCategory: category[0])) ●"
+            interest.text =  "\(getInterest(yelpCategory: category[0]))"
             let primaryFocus = NSMutableAttributedString(string: interest.text!)
             primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
             interest.attributedText = primaryFocus
@@ -374,7 +374,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
             
-            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest)
+            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest, address: place.address[0] + place.address[1])
             return true
             
             
