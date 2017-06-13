@@ -327,7 +327,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             else{
                 interest.text = "None"
             }
-            popUpScreen.loadEvent(name: event.title!, date: timeString, miles: distance, interest: interest)
+            popUpScreen.loadEvent(name: event.title!, date: timeString, miles: distance, interest: interest, address: event.shortAddress!)
             
             return true
             

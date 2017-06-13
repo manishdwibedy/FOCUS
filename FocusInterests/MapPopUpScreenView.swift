@@ -54,19 +54,20 @@ class MapPopUpScreenView: UIView {
         self.view.addGestureRecognizer(tap)
         
     }
-    func loadEvent(name:String, date: String, miles: String, interest: UILabel)
+    func loadEvent(name:String, date: String, miles: String, interest: UILabel, address: String)
     {
         self.startImage.isHidden = true
         boldLabel.text = name
         bottomText.text = date
         mileLabel.text = miles
         interestLabel.text = interest.attributedText?.string
+        addressLabel.text = address
         
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 254/255, green: 55/255, blue: 103/255, alpha: 1).cgColor
         self.profileImage.layer.borderWidth = 1
         self.profileImage.clipsToBounds = true
-        self.profileImage.isHidden = false
+        self.profileImage.isHidden = true
 
         self.layer.borderColor = UIColor(red: 254/255, green: 55/255, blue: 103/255, alpha: 1).cgColor
         self.layer.borderWidth = 2
