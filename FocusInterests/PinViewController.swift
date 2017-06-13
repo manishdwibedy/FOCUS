@@ -50,13 +50,26 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var categoryView: UIView!
     
     @IBOutlet weak var scrollView: UIScrollView!
-    var placeVC: PlaceViewController? = nil
     
+    var placeVC: PlaceViewController? = nil
+    var ratingID: String?
+    var rating: Int? = nil
     
     
     @IBOutlet weak var webButton: UIButton!
     @IBOutlet weak var uberButton: UIButton!
     @IBOutlet weak var googleMapButton: UIButton!
+    
+    @IBOutlet weak var categoryTop: NSLayoutConstraint!
+    
+    //rating
+    @IBOutlet weak var ratingView: UIView!
+    
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    @IBOutlet weak var button5: UIButton!
     
     var data = [NSDictionary]()
     
@@ -93,6 +106,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.callPlace))
         phoneLabel.isUserInteractionEnabled = true
         phoneLabel.addGestureRecognizer(tap)
+        
+        reviewsView.alpha = 0
+        categoryTop.constant = 100
+        
+        button1.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+        button2.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+        button3.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+        button4.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+        button5.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+
     }
     
     func callPlace(sender:UITapGestureRecognizer) {
@@ -362,6 +385,58 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         self.reviewsTextView.text = ""
     }
     
+    @IBAction func showReview(_ sender: Any) {
+        if reviewsView.alpha == 1{
+            reviewsView.alpha = 0
+            categoryTop.constant = 100
+        }
+        else{
+            reviewsView.alpha = 1
+            categoryTop.constant = 215
+        }
+        
+    }
+    
+    @IBAction func selectedRating(sender: UIButton){
+        self.rating = sender.tag
+        for select in 1...sender.tag{
+            let button = ratingView.viewWithTag(select) as! UIButton
+            button.setImage(#imageLiteral(resourceName: "Star"), for: .normal)
+        }
+        
+        if sender.tag < 5{
+            for unselected in sender.tag + 1...5{
+                let button = ratingView.viewWithTag(unselected) as! UIButton
+                button.setImage(#imageLiteral(resourceName: "Unstar.png"), for: .normal)
+            }    
+        }
+        
+    }
+    
+    @IBAction func postComment(_ sender: Any) {
+        let place = Constants.DB.places
+        let comments = place.child((self.place?.id)!).child("comments")
+        
+        let comment = comments.childByAutoId()
+        
+        if let rating = self.ratingID{
+            comments.child(rating).setValue([
+                "rating": self.rating,
+                "comment": reviewsTextView.text,
+                "date": Date().timeIntervalSince1970,
+                "user": AuthApi.getFirebaseUid()!
+                ])
+        }
+        else{
+            comment.setValue([
+                "rating": self.rating,
+                "comment": reviewsTextView.text,
+                "date": Date().timeIntervalSince1970,
+                "user": AuthApi.getFirebaseUid()!
+                ])
+            self.ratingID = comment.key
+        }
+    }
     /*
     // MARK: - Navigation
 

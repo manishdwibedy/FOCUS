@@ -251,6 +251,9 @@
                                                         <state key="normal" title="Review">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="showReview:" destination="otb-Ee-qlq" eventType="touchUpInside" id="DD4-EU-8o4"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOCUS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iT-yB-4Av">
                                                         <rect key="frame" x="160" y="0.0" width="54.5" height="22"/>
@@ -326,11 +329,14 @@
                                                         <state key="normal" title="Post">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="postComment:" destination="otb-Ee-qlq" eventType="touchUpInside" id="23a-G2-RM4"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T1I-5c-7EA" userLabel="Stars View">
                                                         <rect key="frame" x="8" y="0.0" width="359" height="28"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZu-dx-Yxt" userLabel="Star 1">
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZu-dx-Yxt" userLabel="Star 1">
                                                                 <rect key="frame" x="113" y="4" width="20" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="20" id="Bf1-va-Oxh"/>
@@ -338,7 +344,7 @@
                                                                 </constraints>
                                                                 <state key="normal" image="Star"/>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AB-GS-f6g" userLabel="Star 2">
+                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AB-GS-f6g" userLabel="Star 2">
                                                                 <rect key="frame" x="141" y="4" width="20" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="20" id="WCk-lP-tHf"/>
@@ -346,7 +352,7 @@
                                                                 </constraints>
                                                                 <state key="normal" image="Star"/>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LYU-u7-8Hr" userLabel="Star 3">
+                                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LYU-u7-8Hr" userLabel="Star 3">
                                                                 <rect key="frame" x="169" y="4" width="20" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="20" id="Av1-Fg-akD"/>
@@ -354,7 +360,7 @@
                                                                 </constraints>
                                                                 <state key="normal" image="Star"/>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36G-7M-Y2a" userLabel="Star 4">
+                                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36G-7M-Y2a" userLabel="Star 4">
                                                                 <rect key="frame" x="197" y="4" width="20" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="20" id="04T-wq-k0E"/>
@@ -362,7 +368,7 @@
                                                                 </constraints>
                                                                 <state key="normal" image="Unstar.png"/>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvp-PN-NCz" userLabel="Star 5">
+                                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvp-PN-NCz" userLabel="Star 5">
                                                                 <rect key="frame" x="225" y="4" width="20" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="20" id="0gf-hf-eDx"/>
@@ -750,8 +756,14 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1200"/>
                     <connections>
+                        <outlet property="button1" destination="dZu-dx-Yxt" id="dLH-UQ-piw"/>
+                        <outlet property="button2" destination="0AB-GS-f6g" id="t9r-mM-FS6"/>
+                        <outlet property="button3" destination="LYU-u7-8Hr" id="grt-NH-dyl"/>
+                        <outlet property="button4" destination="36G-7M-Y2a" id="m9F-Q7-q8h"/>
+                        <outlet property="button5" destination="kvp-PN-NCz" id="lE9-Fq-GIT"/>
                         <outlet property="categoriesStackView" destination="StY-0d-aLr" id="uF0-w1-Kr6"/>
                         <outlet property="categoryBackground" destination="vzw-eb-Hy5" id="liU-XP-4rC"/>
+                        <outlet property="categoryTop" destination="HIr-ic-Kmb" id="g68-aB-bqO"/>
                         <outlet property="categoryView" destination="vzw-eb-Hy5" id="G0p-5k-Pk2"/>
                         <outlet property="cityStateLabel" destination="1c3-f9-8xC" id="Tjw-d5-ech"/>
                         <outlet property="costLabel" destination="fMr-61-DKu" id="HC2-z6-7XZ"/>
@@ -769,6 +781,7 @@
                         <outlet property="pinView" destination="usz-Ts-PyD" id="TII-Y6-GvY"/>
                         <outlet property="placeNameLabel" destination="0iT-yB-4Av" id="pyd-Il-tkk"/>
                         <outlet property="postReviewSeciontButton" destination="sdD-F8-zH3" id="ao7-eA-cmC"/>
+                        <outlet property="ratingView" destination="T1I-5c-7EA" id="My0-6I-d3J"/>
                         <outlet property="reviewButton" destination="A1A-cq-uUh" id="Kb2-lV-tvi"/>
                         <outlet property="reviewsTextView" destination="Oey-r3-XUH" id="WUT-KF-DHh"/>
                         <outlet property="reviewsView" destination="k8l-6K-QW5" id="FCO-IS-Vjd"/>
