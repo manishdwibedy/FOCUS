@@ -25,13 +25,11 @@ class SelectAllContactsTableViewCell: UITableViewCell {
     }
     
     @IBAction func selectedAllFollowers(_ sender: Any) {
-        if(self.selectAllFollowersButton.image(for: .normal) == #imageLiteral(resourceName: "GreyCircle")){
-            self.selectAllFollowersButton.isSelected = true
-            self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "GreenCheck"), for: .selected)
+        if(self.selectAllFollowersButton.image(for: .normal) == #imageLiteral(resourceName: "Interest_blank")){
+            self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Interest_Filled"), for: .normal)
             delegate?.selectedAllFollowers()
         }else{
-            self.selectAllFollowersButton.isSelected = false
-            self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "GreyCircle"), for: .normal)
+            self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
             delegate?.deselectAllFollowers()
         }
     }

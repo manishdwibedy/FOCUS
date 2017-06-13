@@ -67,8 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-//        Fabric.with([Twitter.self])
-//
+        
         
         Twitter.sharedInstance().start(withConsumerKey:Constants.Twitter.consumerKey, consumerSecret:Constants.Twitter.consumerSecret)
 
@@ -94,13 +93,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
             // No Uber app, open the mobile site.
         }
         
+        
+        
         let googleDidHandle = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(
             app,
             open: url,
             sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
-        return googleDidHandle || facebookDidHandle
+        return googleDidHandle || facebookDidHandle || Twitter.sharedInstance().application(app, open: url, options: options)
     }
 
     func checkForLogin() {

@@ -154,6 +154,18 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    func contactHasBeenRemoved(contact: String, index: Int) {
+        contactListView.isHidden = false
+        if self.selected[index] == true
+        {
+            self.selected[index] = false
+            if contactList.text!.isEmpty {
+                contactList.text = "\(contact)"
+            }else{
+                contactList.text = contactList.text! + ",\(contact)"
+            }
+        }
+    }
     
     
     @IBAction func backPressed(_ sender: Any) {

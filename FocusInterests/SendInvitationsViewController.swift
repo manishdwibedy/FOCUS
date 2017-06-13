@@ -9,6 +9,7 @@
 import UIKit
 import Contacts
 import FirebaseStorage
+import SCLAlertView
 
 protocol SelectAllContactsDelegate {
     func selectedAllFollowers()
@@ -17,6 +18,7 @@ protocol SelectAllContactsDelegate {
 
 protocol SendInvitationsViewControllerDelegate {
     func contactHasBeenSelected(contact: String, index: Int)
+    func contactHasBeenRemoved(contact: String, index: Int)
 }
 
 class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SendInvitationsViewControllerDelegate, SelectAllContactsDelegate{
@@ -27,6 +29,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var contactList: UILabel!
     @IBOutlet weak var contactListView: UIView!
     
+    @IBOutlet weak var facebookSwitch: UISwitch!
+    @IBOutlet weak var twitterSwitch: UISwitch!
     let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
     var event: Event?
@@ -98,7 +102,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
             
             try? contactStore.enumerateContacts(with: request1) { (contact, error) in
-                if contact.givenName.characters.count > 0 || contact.familyName.characters.count > 0{
+                if contact.phoneNumbers.count > 0 && (contact.givenName.characters.count > 0 || contact.familyName.characters.count > 0){
                     self.contacts.append(contact)
                 }
                 
@@ -131,6 +135,20 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 let _ = metadata.downloadURL
             }
+        }
+        
+        if twitterSwitch.isOn{
+            Share.loginAndShareTwitter(withStatus: "Please come to \(String(describing: self.event?.title))")
+        }
+        
+        if facebookSwitch.isOn{
+            do{
+                try Share.facebookShare(with: URL(string:"http://mapofyourworld.com")!, description: "Please come to \(self.event?.title)")
+            }
+            catch{
+                SCLAlertView().showError("Facebook Error", subTitle: "Could not post to facebook")
+            }
+            
         }
         
     }
@@ -182,6 +200,15 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         } else {
             let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
             personToInviteCell.delegate = self
+            personToInviteCell.inviteConfirmationButton.tag = indexPath.row
+//            
+//            
+//            if selectedFriend[indexPath.row]{
+//                personToInviteCell.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_Filled"), for: .normal)
+//            }
+//            else{
+//                personToInviteCell.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
+//            }
             
             if(searchingForContact){
                 personToInviteCell.usernameLabel.text = self.filteredContacts[indexPath.row].givenName
@@ -196,13 +223,27 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func contactHasBeenSelected(contact: String, index: Int){
-        print(contact)
-        contactListView.isHidden = false
-        if contactList.text!.isEmpty {
-            contactList.text = "\(contact)"
-        }else{
-            contactList.text = contactList.text! + ",\(contact)"
+        selectedFriend[index] = true
+        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
+        if friendList.count > 0{
+            contactListView.isHidden = false
         }
+        else{
+            contactListView.isHidden = true
+        }
+        contactList.text = friendList.joined(separator: ",")
+    }
+    
+    func contactHasBeenRemoved(contact: String, index: Int){
+        selectedFriend[index] = false
+        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
+        if friendList.count > 0{
+            contactListView.isHidden = false
+        }
+        else{
+            contactListView.isHidden = true
+        }
+        contactList.text = friendList.joined(separator: ",")
     }
     
     func deselectAllFollowers() {
@@ -228,9 +269,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             self.searchingForContact = true
             self.filteredContacts = self.contacts.filter { $0.givenName.contains(searchText) || $0.familyName.contains(searchText) }
 
-//            self.filteredContacts = self.contacts.filter({ singleContact in
-//                return singleContact.givenName.lowercased() == self.searchBar.text!.lowercased()
-//            })
             self.sortContacts()
             self.friendsTableView.reloadData()
         }

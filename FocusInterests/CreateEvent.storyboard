@@ -543,8 +543,10 @@
                         <outlet property="contactList" destination="eSf-8u-5Aj" id="8pu-HE-V5R"/>
                         <outlet property="contactListView" destination="upw-Ob-YFg" id="8tY-Nd-KKT"/>
                         <outlet property="createEventButton" destination="d9H-td-GzC" id="WEd-Dl-Q3P"/>
+                        <outlet property="facebookSwitch" destination="Vo7-Xg-Ult" id="ouY-bY-455"/>
                         <outlet property="friendsTableView" destination="xYK-Z5-9fw" id="8UA-V4-9uP"/>
                         <outlet property="searchBar" destination="j7M-Yi-1Uf" id="xNr-QC-Nby"/>
+                        <outlet property="twitterSwitch" destination="3FE-nU-AvO" id="qgg-q2-IsJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajl-2Z-7Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -642,11 +644,11 @@
     </scenes>
     <resources>
         <image name="FB.png" width="43" height="43"/>
-        <image name="Interest_blank" width="37" height="36"/>
+        <image name="Interest_blank" width="39" height="39"/>
         <image name="Twitter_Logo_White_On_Image" width="250" height="204"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eLh-9t-fEY"/>
+        <segue reference="pdH-Ex-mw2"/>
         <segue reference="amW-Q6-Hfg"/>
     </inferredMetricsTieBreakers>
 </document>

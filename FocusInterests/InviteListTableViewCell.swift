@@ -47,14 +47,15 @@ class InviteListTableViewCell: UITableViewCell {
     @IBAction func contactSelectedAction(_ sender: Any) {
         if self.inviteConfirmationButton.isSelected == false{
             self.inviteConfirmationButton.isSelected = true
-            self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "GreenCheck"), for: .selected)
+            self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_Filled"), for: .selected)
              delegate?.contactHasBeenSelected(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
+            
         }else{
-            //self.inviteConfirmationButton.isSelected = false
-            //self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "GreyCircle"), for: .normal)
-           
+            self.inviteConfirmationButton.isSelected = false
+            self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
+            delegate?.contactHasBeenRemoved(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
+            
         }
-        delegate?.contactHasBeenSelected(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
         
        
     }

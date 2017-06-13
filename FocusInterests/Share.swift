@@ -41,6 +41,12 @@ class Share{
     }
     
     static func loginAndShareTwitter(withStatus text: String){
+        
+        if AuthApi.getTwitterToken() != nil{
+            postToTwitter(withStatus: text)
+            return
+        }
+        
         Twitter.sharedInstance().logIn { session, error in
             if (session != nil)
             {
@@ -53,12 +59,13 @@ class Share{
                     let user = Auth.auth().currentUser
                     
                     user?.link(with: credential, completion: { (user, error) in
+                        AuthApi.set(twitterToken: authToken!)
+                        AuthApi.set(twitterTokenSecret: authTokenSecret!)
+                        
                         if error != nil {
                             // ...
                             return
                         }
-                        AuthApi.set(twitterToken: authToken!)
-                        AuthApi.set(twitterTokenSecret: authTokenSecret!)
                         postToTwitter(withStatus: text)
                     })
                     
