@@ -226,9 +226,11 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             self.friendsTableView.reloadData()
         }else{
             self.searchingForContact = true
-            self.filteredContacts = self.contacts.filter({ singleContact in
-                return singleContact.givenName.lowercased() == self.searchBar.text!.lowercased()
-            })
+            self.filteredContacts = self.contacts.filter { $0.givenName.contains(searchText) || $0.familyName.contains(searchText) }
+
+//            self.filteredContacts = self.contacts.filter({ singleContact in
+//                return singleContact.givenName.lowercased() == self.searchBar.text!.lowercased()
+//            })
             self.sortContacts()
             self.friendsTableView.reloadData()
         }
