@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ii7-3r-SGo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ii7-3r-SGo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -28,9 +28,8 @@
                                 <color key="sectionIndexBackgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="58f-vL-hfC">
-                                <rect key="frame" x="0.0" y="559" width="375" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58f-vL-hfC">
+                                <rect key="frame" x="0.0" y="610" width="375" height="57"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yU-hF-EgJ">
                                         <rect key="frame" x="306" y="13" width="61" height="30"/>
@@ -50,6 +49,9 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="fab-Ps-Opo"/>
+                                </constraints>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="noj-oM-whr">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -71,21 +73,16 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Afj-s8-mzB">
-                                <rect key="frame" x="0.0" y="619" width="375" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <tabBarItem title="pin" image="location" id="ScM-xc-JFL"/>
-                                </items>
-                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ith-zO-7mj" firstAttribute="top" secondItem="noj-oM-whr" secondAttribute="bottom" id="9FE-3g-EOe"/>
                             <constraint firstItem="noj-oM-whr" firstAttribute="top" secondItem="UaN-7t-6P3" secondAttribute="bottom" id="AxJ-bS-jO0"/>
+                            <constraint firstItem="58f-vL-hfC" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="Boj-ND-RSA"/>
                             <constraint firstItem="noj-oM-whr" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="JR6-1L-qtt"/>
+                            <constraint firstAttribute="trailing" secondItem="58f-vL-hfC" secondAttribute="trailing" id="Uip-LI-uwm"/>
                             <constraint firstItem="0gF-6J-suq" firstAttribute="top" secondItem="ith-zO-7mj" secondAttribute="bottom" id="Vg9-Jl-4Du"/>
+                            <constraint firstItem="0gF-6J-suq" firstAttribute="top" secondItem="58f-vL-hfC" secondAttribute="bottom" id="grY-ux-g6y"/>
                             <constraint firstItem="ith-zO-7mj" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="jf2-T3-IHB"/>
                             <constraint firstAttribute="trailing" secondItem="ith-zO-7mj" secondAttribute="trailing" id="xIQ-25-Bue"/>
                             <constraint firstAttribute="trailing" secondItem="noj-oM-whr" secondAttribute="trailing" id="yuP-9N-Hji"/>
@@ -104,7 +101,4 @@
             <point key="canvasLocation" x="2357.5999999999999" y="116.94152923538232"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="location" width="25" height="25"/>
-    </resources>
 </document>
