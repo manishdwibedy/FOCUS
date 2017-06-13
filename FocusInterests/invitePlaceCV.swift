@@ -78,7 +78,7 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
                     let fullname = user["fullname"] as? String
-                    sendNotification(to: self.id, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "")
+                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "")
                 })
             Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
             }
@@ -88,7 +88,7 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
                     let fullname = user["fullname"] as? String
-                    sendNotification(to: self.id, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "")
+                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "")
                 })
             Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
             }
