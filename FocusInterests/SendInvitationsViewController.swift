@@ -1,3 +1,4 @@
+
 //
 //  SendInvitationsViewController.swift
 //  FocusInterests
@@ -10,6 +11,7 @@ import UIKit
 import Contacts
 import FirebaseStorage
 import SCLAlertView
+import MessageUI
 
 protocol SelectAllContactsDelegate {
     func selectedAllFollowers()
@@ -21,7 +23,7 @@ protocol SendInvitationsViewControllerDelegate {
     func contactHasBeenRemoved(contact: String, index: Int)
 }
 
-class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SendInvitationsViewControllerDelegate, SelectAllContactsDelegate{
+class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SendInvitationsViewControllerDelegate, SelectAllContactsDelegate, MFMessageComposeViewControllerDelegate{
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var createEventButton: UIButton!
@@ -151,7 +153,41 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             
         }
         
+        let messageVC = MFMessageComposeViewController()
+        
+        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.phoneNumbers }
+        
+        var phoneNumbers = [String]()
+        for friendPhoneList in friendList{
+            for number in friendPhoneList{
+                phoneNumbers.append((number.value.value(forKey: "digits") as? String)!)
+            }
+        }
+        
+        messageVC.body = "Please come to \(self.event?.title)"
+        messageVC.recipients = phoneNumbers
+        messageVC.messageComposeDelegate = self;
+        
+        self.present(messageVC, animated: false, completion: nil)
+        
     }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController!, didFinishWith result: MessageComposeResult) {
+        switch (result) {
+        case .cancelled:
+            print("Message was cancelled")
+            self.dismiss(animated: true, completion: nil)
+        case .failed:
+            print("Message failed")
+            self.dismiss(animated: true, completion: nil)
+        case .sent:
+            print("Message was sent")
+            self.dismiss(animated: true, completion: nil)
+        default:
+            break;
+        }
+    }
+    
     private func formatNavBar(){
         self.navigationItem.title = "Send Invites"
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white

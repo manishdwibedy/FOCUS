@@ -21,7 +21,8 @@ import SDWebImage
 import MessageUI
 import ChameleonFramework
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, MFMessageComposeViewControllerDelegate, switchPinTabDelegate {
+class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate {
+    
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var popUpView: UIView!
@@ -1041,22 +1042,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.view.window!.layer.add(transition, forKey: kCATransition)
         
         self.present(navigationController, animated: true, completion: nil)
-    }
-    
-    func messageComposeViewController(_ controller: MFMessageComposeViewController!, didFinishWith result: MessageComposeResult) {
-        switch (result) {
-        case .cancelled:
-            print("Message was cancelled")
-            self.dismiss(animated: true, completion: nil)
-        case .failed:
-            print("Message failed")
-            self.dismiss(animated: true, completion: nil)
-        case .sent:
-            print("Message was sent")
-            self.dismiss(animated: true, completion: nil)
-        default:
-            break;
-        }
     }
     
     func searchClicked() {
