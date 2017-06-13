@@ -99,7 +99,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
 //        cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
 //        cell?.address.textContainer.maximumNumberOfLines = 6
         cell?.ID = people.uuid!
-        cell?.checkFollow()
         cell?.interest.text = "Category"
         //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
@@ -132,6 +131,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.inviteButton.tag = indexPath.row
         cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
         
+        cell?.checkFollow()
+        
         return cell!
     }
     
@@ -143,12 +144,12 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         print("following user \(self.people[buttonRow].username) ")
         
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").childByAutoId().updateChildValues(["UID":self.people[buttonRow].uuid, "time":time])
+        //Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").childByAutoId().updateChildValues(["UID":self.people[buttonRow].uuid, "time":time])
         
         
         
         
-    Constants.DB.user.child(self.people[buttonRow].uuid!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
+    //Constants.DB.user.child(self.people[buttonRow].uuid!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
         
         
     }

@@ -56,6 +56,8 @@ class SearchPeopleTableViewCell: UITableViewCell {
     func checkFollow(){
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
+            print("got follow data")
+            print(value)
             if value != nil {
                 self.followButton.layer.borderColor = UIColor.white.cgColor
                 self.followButton.layer.borderWidth = 1
@@ -84,6 +86,9 @@ class SearchPeopleTableViewCell: UITableViewCell {
             self.followButton.backgroundColor = UIColor.clear
             self.followButton.setTitle("Following", for: UIControlState.normal)
         } else {
+            
+            print("UNFOLLOW ID")
+            print(ID)
            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? [String:Any]
                 

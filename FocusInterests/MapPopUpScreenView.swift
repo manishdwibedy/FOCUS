@@ -64,6 +64,7 @@ class MapPopUpScreenView: UIView {
         self.profileImage.layer.borderColor = UIColor(red: 254/255, green: 55/255, blue: 103/255, alpha: 1).cgColor
         self.profileImage.layer.borderWidth = 1
         self.profileImage.clipsToBounds = true
+        self.profileImage.isHidden = false
 
         self.layer.borderColor = UIColor(red: 254/255, green: 55/255, blue: 103/255, alpha: 1).cgColor
         self.layer.borderWidth = 2
@@ -86,6 +87,8 @@ class MapPopUpScreenView: UIView {
         self.profileImage.layer.borderColor = UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1).cgColor
         self.profileImage.layer.borderWidth = 1
         self.profileImage.clipsToBounds = true
+        self.profileImage.isHidden = true
+        
         
         self.layer.borderColor = UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1).cgColor
         self.layer.borderWidth = 2
@@ -107,6 +110,7 @@ class MapPopUpScreenView: UIView {
         self.profileImage.layer.borderColor = UIColor(red: 125/255, green: 201/255, blue: 49/255, alpha: 1).cgColor
         self.profileImage.layer.borderWidth = 1
         self.profileImage.clipsToBounds = true
+        self.profileImage.isHidden = false
         
         self.layer.borderColor = UIColor(red: 125/255, green: 201/255, blue: 49/255, alpha: 1).cgColor
         self.layer.borderWidth = 2
