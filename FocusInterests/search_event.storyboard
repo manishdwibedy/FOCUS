@@ -36,7 +36,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yai-Q7-VQn">
-                                <rect key="frame" x="10" y="157" width="355" height="25"/>
+                                <rect key="frame" x="5" y="157" width="365" height="25"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnZ-Vj-jtc">
                                         <rect key="frame" x="10" y="2" width="337" height="23"/>
@@ -48,7 +48,7 @@
                                 <color key="backgroundColor" red="0.63137254901960782" green="0.66274509803921566" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="jnZ-Vj-jtc" secondAttribute="bottom" id="5pj-At-IM6"/>
-                                    <constraint firstItem="jnZ-Vj-jtc" firstAttribute="trailing" secondItem="yai-Q7-VQn" secondAttribute="trailingMargin" id="RLg-dX-lN1"/>
+                                    <constraint firstItem="jnZ-Vj-jtc" firstAttribute="trailing" secondItem="yai-Q7-VQn" secondAttribute="trailingMargin" constant="-10" id="RLg-dX-lN1"/>
                                     <constraint firstItem="jnZ-Vj-jtc" firstAttribute="top" secondItem="yai-Q7-VQn" secondAttribute="top" constant="2" id="jzR-Fm-GDy"/>
                                     <constraint firstItem="jnZ-Vj-jtc" firstAttribute="leading" secondItem="yai-Q7-VQn" secondAttribute="leading" constant="10" id="mTT-v1-Zur"/>
                                 </constraints>
@@ -68,14 +68,6 @@
                                     <action selector="showCreateEvent:" destination="xPx-tM-EtF" eventType="touchUpInside" id="f0n-Xj-yY6"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-AA-SPe">
-                                <rect key="frame" x="10" y="181" width="355" height="429"/>
-                                <color key="backgroundColor" red="0.1215903535" green="0.19626170400000001" blue="0.28496062760000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="xPx-tM-EtF" id="ZOg-gp-Nqw"/>
-                                    <outlet property="delegate" destination="xPx-tM-EtF" id="Ptu-K7-eu6"/>
-                                </connections>
-                            </tableView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z8z-95-lev">
                                 <rect key="frame" x="10" y="64" width="355" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -84,12 +76,20 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-AA-SPe">
+                                <rect key="frame" x="5" y="181" width="365" height="429"/>
+                                <color key="backgroundColor" red="0.1215903535" green="0.19626170400000001" blue="0.28496062760000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="xPx-tM-EtF" id="ZOg-gp-Nqw"/>
+                                    <outlet property="delegate" destination="xPx-tM-EtF" id="Ptu-K7-eu6"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.1215903535" green="0.19626170400000001" blue="0.28496062760000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="trailing" secondItem="z8z-95-lev" secondAttribute="trailing" constant="10" id="3ee-Kk-zMH"/>
                             <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="yai-Q7-VQn" secondAttribute="bottom" constant="436" id="6dZ-mM-EyJ"/>
-                            <constraint firstItem="yai-Q7-VQn" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leadingMargin" constant="-6" id="C15-uc-6uv"/>
+                            <constraint firstItem="yai-Q7-VQn" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leadingMargin" constant="-11" id="C15-uc-6uv"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="CtI-2Y-EH7"/>
                             <constraint firstItem="yai-Q7-VQn" firstAttribute="trailing" secondItem="rHT-AA-SPe" secondAttribute="trailing" id="KSv-f0-IIi"/>
                             <constraint firstItem="rHT-AA-SPe" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="34" id="LvL-YX-YRN"/>
@@ -98,7 +98,7 @@
                             <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="rHT-AA-SPe" secondAttribute="bottom" constant="8" symbolic="YES" id="Wlw-Ko-79Y"/>
                             <constraint firstItem="yai-Q7-VQn" firstAttribute="leading" secondItem="rHT-AA-SPe" secondAttribute="leading" id="Zsp-BP-oHf"/>
                             <constraint firstItem="yai-Q7-VQn" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="10" id="ci2-Dm-k5m"/>
-                            <constraint firstItem="ZNT-Vt-zjc" firstAttribute="trailing" secondItem="yai-Q7-VQn" secondAttribute="trailing" id="obv-pc-f85"/>
+                            <constraint firstItem="ZNT-Vt-zjc" firstAttribute="trailing" secondItem="yai-Q7-VQn" secondAttribute="trailing" constant="-5" id="obv-pc-f85"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="top" secondItem="eF4-Ev-ETy" secondAttribute="top" id="pcL-4l-xEV"/>
                             <constraint firstItem="z8z-95-lev" firstAttribute="top" secondItem="Uw4-jh-WA0" secondAttribute="bottom" id="rF4-Y5-7TI"/>
                             <constraint firstAttribute="trailing" secondItem="Uw4-jh-WA0" secondAttribute="trailing" id="vf5-1u-21Q"/>

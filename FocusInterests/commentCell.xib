@@ -95,6 +95,7 @@
                 <outlet property="dateLabel" destination="7RB-L1-Zih" id="XUY-5B-nIY"/>
                 <outlet property="likeCount" destination="BIu-P8-hD2" id="6Q6-RZ-hDD"/>
                 <outlet property="likeOut" destination="o9d-SK-l7h" id="nF5-rc-04m"/>
+                <outlet property="userProfilePhoto" destination="xn0-vb-Ke6" id="C4Z-dP-IEa"/>
             </connections>
             <point key="canvasLocation" x="28.5" y="83.5"/>
         </tableViewCell>

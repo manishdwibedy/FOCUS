@@ -14,8 +14,10 @@ import SCLAlertView
    
 class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate{
     
+    @IBOutlet weak var interestListView: UIView!
     @IBOutlet var parentView: UIView!
-    
+    @IBOutlet weak var interestListLabel: UILabel!
+    @IBOutlet weak var interestNextButton: UIButton!
     
     @IBOutlet weak var publicLabel: UILabel!
     @IBOutlet weak var privateLabel: UILabel!
@@ -169,6 +171,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.filteredInterest = Constants.interests.interests
         self.interests = self.filteredInterest
         
+        self.interestListView.isHidden = true
         hideKeyboardWhenTappedAround()
     }
     
@@ -477,10 +480,20 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        interestListView.isHidden = false
+        
         let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
         tableView.deselectRow(at: indexPath, animated: false)
         
         checkInterests[indexPath.row] = !checkInterests[indexPath.row]
+        
+        if interestListLabel.text == "" || interestListLabel.text == nil{
+            self.interestListLabel.text =  filteredInterest[indexPath.row]
+        } else {
+            self.interestListLabel.text =  self.interestListLabel.text! + ", \(filteredInterest[indexPath.row])"
+        }
+        
         if checkInterests[indexPath.row]{
             cell.checkedInterest.image = UIImage(named: "Interest_Filled")
         }

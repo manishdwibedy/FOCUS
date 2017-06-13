@@ -33,11 +33,7 @@
                                     <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="People" id="GWa-5t-KOw">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="4Rb-F5-VON">
-                                            <color key="tintColor" red="0.61176470589999998" green="0.64313725489999995" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem title="People" id="GWa-5t-KOw"/>
                                 </items>
                             </navigationBar>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Azg-xG-CeT">

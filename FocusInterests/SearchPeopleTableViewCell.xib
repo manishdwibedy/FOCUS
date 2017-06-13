@@ -39,7 +39,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="address" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pr-kM-S8b">
-                                <rect key="frame" x="44" y="41" width="136" height="46"/>
+                                <rect key="frame" x="44" y="41" width="45" height="46"/>
                                 <color key="backgroundColor" red="0.58431372550000005" green="0.65098039220000004" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="TQu-bF-a1H"/>
@@ -122,7 +122,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpm-zK-R8B">
-                                <rect key="frame" x="203" y="72" width="40" height="15"/>
+                                <rect key="frame" x="3" y="57" width="40" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="02i-Wa-LZw"/>
                                     <constraint firstAttribute="height" constant="15" id="7ti-6m-gG7"/>
@@ -146,15 +146,14 @@
                             <constraint firstItem="4Pr-kM-S8b" firstAttribute="top" secondItem="2vx-AD-EVj" secondAttribute="bottom" constant="3" id="MqJ-Vu-xKb"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Jrp-IZ-pa4" secondAttribute="bottom" constant="86" id="Pz6-Pf-5yl"/>
                             <constraint firstAttribute="trailing" secondItem="6Vx-MI-HiM" secondAttribute="trailing" constant="14" id="RWV-dR-NFS"/>
-                            <constraint firstAttribute="trailing" secondItem="cpm-zK-R8B" secondAttribute="trailing" constant="134" id="SAZ-JM-XS4"/>
                             <constraint firstAttribute="bottom" secondItem="6Vx-MI-HiM" secondAttribute="bottom" constant="104" id="VTI-XB-myr"/>
                             <constraint firstItem="8on-d7-y1V" firstAttribute="top" secondItem="4Pr-kM-S8b" secondAttribute="bottom" constant="3" id="bWL-IF-K2g"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="leading" secondItem="2vx-AD-EVj" secondAttribute="leading" id="bYq-Ga-mpc"/>
                             <constraint firstItem="Jrp-IZ-pa4" firstAttribute="leading" secondItem="KLR-T5-BTj" secondAttribute="leadingMargin" id="c0G-lr-yEL"/>
                             <constraint firstItem="Jrp-IZ-pa4" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="topMargin" id="dDa-3u-t2j"/>
-                            <constraint firstItem="cpm-zK-R8B" firstAttribute="leading" secondItem="4Pr-kM-S8b" secondAttribute="trailing" constant="23" id="gtz-AC-J3S"/>
                             <constraint firstItem="4Pr-kM-S8b" firstAttribute="leading" secondItem="Jrp-IZ-pa4" secondAttribute="trailing" constant="6" id="iJD-df-oWy"/>
-                            <constraint firstItem="cpm-zK-R8B" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" constant="72" id="j2e-pA-7ZK"/>
+                            <constraint firstItem="cpm-zK-R8B" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" constant="57" id="j2e-pA-7ZK"/>
+                            <constraint firstItem="cpm-zK-R8B" firstAttribute="centerX" secondItem="Jrp-IZ-pa4" secondAttribute="centerX" id="oq6-BX-GWQ"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="leading" secondItem="dBt-EP-FC5" secondAttribute="trailing" constant="8" id="qJ9-Sj-LAe"/>
                             <constraint firstItem="4Pr-kM-S8b" firstAttribute="leading" secondItem="8on-d7-y1V" secondAttribute="leading" constant="-2" id="xgN-LF-opi"/>
                         </constraints>

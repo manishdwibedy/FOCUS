@@ -28,8 +28,8 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.layer.cornerRadius = 6
         tableView.clipsToBounds = true
+        
         let nib = UINib(nibName: "SearchPlaceCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
 
@@ -136,9 +136,10 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
             cell.categoryLabel.text = place.categories[0].name    
         }
         
-        cell.checkForFollow(id: place.id)
+//        cell.checkForFollow(id: place.id)
         let placeHolderImage = UIImage(named: "empty_event")
         cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
+        
         return cell
     }
     

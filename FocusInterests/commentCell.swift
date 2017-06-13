@@ -9,7 +9,8 @@
 import UIKit
 import Firebase
 class commentCell: UITableViewCell {
-
+    
+    @IBOutlet weak var userProfilePhoto: UIImageView!
     @IBOutlet weak var commentLabel: UITextView!
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var likeOut: UIButton!
@@ -18,6 +19,7 @@ class commentCell: UITableViewCell {
     var data: commentCellData!
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.userProfilePhoto.roundedImage()
         self.selectionStyle = .none
     }
 
