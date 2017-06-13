@@ -73,7 +73,9 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             self.retrieveContactsWithStore(store: self.store)
         }
         else{
-            
+            self.store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
+                self.retrieveContactsWithStore(store: self.store)
+            }
         }
         
         self.sortContacts()
@@ -87,19 +89,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
-    @IBAction func inviteFromContacts(_ sender: UIButton) {
-        if CNContactStore.authorizationStatus(for: .contacts) == .notDetermined {
-            
-            
-            self.store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
-                self.retrieveContactsWithStore(store: self.store)
-            }
-            
-        } else if CNContactStore.authorizationStatus(for: .contacts) == .authorized {
-            self.retrieveContactsWithStore(store: store)
-        }
-    }
-    
     func retrieveContactsWithStore(store: CNContactStore) {
         self.contacts.removeAll()
         do {
@@ -109,9 +98,13 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
             
             try? contactStore.enumerateContacts(with: request1) { (contact, error) in
-                self.contacts.append(contact)
+                if contact.givenName.characters.count > 0 || contact.familyName.characters.count > 0{
+                    self.contacts.append(contact)
+                }
+                
             }
             self.setSelectedFriends()
+            self.sortContacts()
             friendsTableView.reloadData()
         } catch {
             print(error)
