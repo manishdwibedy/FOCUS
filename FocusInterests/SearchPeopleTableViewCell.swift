@@ -87,30 +87,46 @@ class SearchPeopleTableViewCell: UITableViewCell {
             self.followButton.setTitle("Following", for: UIControlState.normal)
         } else {
             
-            print("UNFOLLOW ID")
-            print(ID)
-           Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? [String:Any]
-                
-                for (id, _) in value!{
-                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people/\(id)").removeValue()
-                }
-             
-                })
-            Constants.DB.user.child(self.ID).child("followers").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? [String:Any]
-                
-                for (id, _) in value!{
-                    Constants.DB.user.child(self.ID).child("followers/people/\(id)").removeValue()
-                    
-                }
-                
-            })
-            self.followButton.layer.borderColor = UIColor.clear.cgColor
-            self.followButton.layer.borderWidth = 0
-            self.followButton.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
-            self.followButton.setTitle("Follow", for: UIControlState.normal)
+            let alertController = UIAlertController(title: "Unfollow?", message: "Are you sure you want to unfollow?", preferredStyle: UIAlertControllerStyle.alert)
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: UIAlertActionStyle.destructive) {
+                (result : UIAlertAction) -> Void in
+                self.unflollow()
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
+            alertController.addAction(unfollowAction)
+            alertController.addAction(cancel)
+            parentVC.present(alertController, animated: true, completion: nil)
+            
+            
         }
+    }
+    
+    
+    func unflollow()
+    {
+        print("UNFOLLOW ID")
+        print(ID)
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String:Any]
+            
+            for (id, _) in value!{
+                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people/\(id)").removeValue()
+            }
+            
+        })
+        Constants.DB.user.child(self.ID).child("followers").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String:Any]
+            
+            for (id, _) in value!{
+                Constants.DB.user.child(self.ID).child("followers/people/\(id)").removeValue()
+                
+            }
+            
+        })
+        self.followButton.layer.borderColor = UIColor.clear.cgColor
+        self.followButton.layer.borderWidth = 0
+        self.followButton.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
+        self.followButton.setTitle("Follow", for: UIControlState.normal)
     }
     
     @IBAction func inviteUser(_ sender: UIButton) {
