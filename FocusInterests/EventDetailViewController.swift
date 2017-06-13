@@ -133,6 +133,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         addressLabel.text = event?.fullAddress
         descriptionLabel.text = event?.eventDescription
         
+        
 //        TODO:THERE IS A BUG THAT RETURNS NIL BEFORE VIEW LOADS
         
         ref.child("users").child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in

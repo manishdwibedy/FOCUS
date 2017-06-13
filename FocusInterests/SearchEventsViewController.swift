@@ -27,21 +27,32 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.layer.cornerRadius = 6
+    
+        tableView.bottomCornersRounded(radius: 6)
         tableView.clipsToBounds = true
         
         let nib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
+        tableView.register(nib, forCellReuseIdentifier: "searchEventTableCell")
+        
+        
         
         self.searchBar.delegate = self
         
+        self.searchBar.isTranslucent = true
+        self.searchBar.backgroundImage = UIImage()
+        self.searchBar.tintColor = UIColor.white
+        self.searchBar.barTintColor = UIColor.white
+        self.searchBar.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+        self.searchBar.layer.cornerRadius = 6
+        self.searchBar.clipsToBounds = true
+        self.searchBar.layer.borderWidth = 2
+        self.searchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
+        
+        
         createEventButton.roundCorners(radius: 10)
-        tableHeader.topCornersRounded(radius: 10)
         
         filtered = events
+        
         hideKeyboardWhenTappedAround()
     }
     
@@ -79,7 +90,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchEventTableViewCell!
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "searchEventTableCell") as! SearchEventTableViewCell!
         
         let event = filtered[indexPath.row]
         cell?.name.text = event.title
@@ -139,27 +150,32 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
         })
         
-        //attending
-        Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                cell?.attendButton.setTitle("Attending", for: UIControlState.normal)
-            }
-            
-        })
+//        MARK: THESE WERE COMMENTED OUT SINCE ATTENDING BUTTON WAS REMOVED
+//        attending
+//        Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+//            let value = snapshot.value as? NSDictionary
+//            if value != nil
+//            {
+//                cell?.attendButton.backgroundColor = UIColor.clear
+//                cell?.attendButton.setTitle("Unattend", for: UIControlState.normal)
+//            }
+//            
+//        })
         
-        cell?.attendButton.roundCorners(radius: 10)
         cell?.inviteButton.roundCorners(radius: 10)
+        cell?.inviteButton.layer.shadowOpacity = 1.0
+        cell?.inviteButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        cell?.inviteButton.layer.masksToBounds = false
+        cell?.inviteButton.layer.shadowColor = UIColor.black.cgColor
+        cell?.inviteButton.layer.shadowRadius = 10.0
         
-        cell?.attendButton.tag = indexPath.row
-        cell?.attendButton.addTarget(self, action: #selector(self.attendEvent), for: UIControlEvents.touchUpInside)
-
         cell?.inviteButton.tag = indexPath.row
         cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
         
         return cell!
     }
+    
+    
     
     func attendEvent(sender:UIButton){
         let buttonRow = sender.tag
@@ -180,7 +196,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 }
             })
             
-            sender.setTitle("Attending", for: .normal)
+            sender.backgroundColor = UIColor.clear
+            sender.setTitle("Unattend", for: .normal)
         }
         else{
             Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -200,7 +217,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
                 }
             })
-            
+            sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
             sender.setTitle("Attend", for: .normal)
         }
         
@@ -231,7 +248,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
