@@ -27,6 +27,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     
     var data: pinData!
+    var dictData = NSDictionary()
     var likes = 0
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +71,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         //check for images
         data.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
+            self.dictData = value!
             if value != nil
             {
                 
@@ -164,6 +166,12 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     }
     
     @IBAction func comment(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Comments", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
+        ivc.data = dictData
+        self.present(ivc, animated: true, completion: { _ in })
+        
     }
     
     @IBAction func send(_ sender: Any) {

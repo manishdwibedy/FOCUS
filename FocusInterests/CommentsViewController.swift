@@ -98,7 +98,10 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func keyboardDidShow(notification: NSNotification) {
         let oldLastCellIndexPath = NSIndexPath(row: commentData.count-1, section: 0)
-        self.commentsTableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
+        if commentData.count != 0
+        {
+            self.commentsTableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
+        }
         
     }
     
