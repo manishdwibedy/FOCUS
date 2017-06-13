@@ -39,9 +39,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         
         
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(didDoubletap(sender:)))
+        doubleTap.numberOfTapsRequired = 2
+        self.viewForMap.addGestureRecognizer(doubleTap)
         
-        
-        print(data.fromUID)
         Constants.DB.user.child(data.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
@@ -165,6 +166,20 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
        
     }
     
+    func didDoubletap(sender:UITapGestureRecognizer)
+    {
+        if self.likeOut.isEnabled == true
+        {
+            self.likes = self.likes + 1
+            data.dbPath.child("like").updateChildValues(["num": likes])
+            data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+            self.likeOut.isEnabled = false
+            self.likesLabel.text = String(self.likes) + " likes"
+            self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
+        }
+        
+    }
+    
     @IBAction func comment(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Comments", bundle: nil)
@@ -184,6 +199,9 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBAction func back(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+
     
 
 }
