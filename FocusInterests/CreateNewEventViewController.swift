@@ -69,6 +69,11 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     var endTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.endTimeSelected))
     var priceDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.priceSelected))
     
+    
+    // start and end time
+    var startTime: Date? = nil
+    var endTime: Date? = nil
+    
     lazy var dateToolbar: UIToolbar = {
         let toolbar = UIToolbar()
         toolbar.barStyle = .default
@@ -431,8 +436,8 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         locationTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Location")
         eventTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Start Time")
         eventNameTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Event Name")
-        eventEndTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "End Time")
-        eventPriceTextView.attributedPlaceholder = formatPlaceholder(placeholder: "Price")
+        eventEndTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "End Time (if applicable)")
+        eventPriceTextView.attributedPlaceholder = formatPlaceholder(placeholder: "Price (if applicable)")
         
         eventDateTextField.setRightIcon(iconString: "Calendar-50")
         locationTextField.setRightIcon(iconString: "location")
@@ -651,10 +656,18 @@ extension CreateNewEventViewController {
         } else if self.eventTimeTextField.isFirstResponder {
             self.eventEndTimeTextField.becomeFirstResponder()
             self.eventTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
+            self.startTime = self.timePicker.date
         } else if self.eventEndTimeTextField.isFirstResponder {
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
-            self.eventPriceTextView.becomeFirstResponder()
-            self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
+            
+            if timePicker.date > self.startTime!{
+                self.eventPriceTextView.becomeFirstResponder()
+                self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
+                self.endTime = timePicker.date
+            }
+            else{
+                SCLAlertView().showError("Invalid end time", subTitle: "Please enter end time after start time.")
+            }
         } else if self.eventPriceTextView.isFirstResponder{
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
             self.eventDescriptionTextView.becomeFirstResponder()
