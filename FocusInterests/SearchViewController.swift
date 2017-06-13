@@ -277,22 +277,23 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 cell?.eventImage?.setIndicatorStyle(.gray)
                 
             })
+
             
-            //attending
-            Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil
-                {
-                    cell?.attendButton.setTitle("Attending", for: UIControlState.normal)
-                }
-                
-            })
+//            attending
+//            Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+//                let value = snapshot.value as? NSDictionary
+//                if value != nil
+//                {
+//                    cell?.attendButton.setTitle("Attending", for: UIControlState.normal)
+//                }
+//                
+//            })
             
-            cell?.attendButton.roundCorners(radius: 10)
+//            cell?.attendButton.roundCorners(radius: 10)
             cell?.inviteButton.roundCorners(radius: 10)
             
-            cell?.attendButton.tag = indexPath.row
-            cell?.attendButton.addTarget(self, action: #selector(self.attendEvent), for: UIControlEvents.touchUpInside)
+//            cell?.attendButton.tag = indexPath.row
+//            cell?.attendButton.addTarget(self, action: #selector(self.attendEvent), for: UIControlEvents.touchUpInside)
             
             cell?.inviteButton.tag = indexPath.row
             cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
