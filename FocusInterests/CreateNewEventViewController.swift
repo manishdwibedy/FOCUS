@@ -10,6 +10,7 @@ import UIKit
 import GooglePlaces
 import FirebaseDatabase
 import GeoFire
+import SCLAlertView
    
 class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate{
     
@@ -33,7 +34,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     var interests = [String]()
     var filteredInterest = [String]()
     
-    let validatedFields = true
+    let validatedFields = false
     
     @IBOutlet weak var canInviteFriendsLabel: UILabel!
     @IBOutlet weak var showGuestListLabel: UILabel!
