@@ -14,11 +14,20 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
 
     let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
-    let userRef = Constants.DB.user
-    var users = [[String: Any]]()
+    
+    var sections = [String]()
+    var filteredSection = [String]()
+    
+    var sectionMapping = [String:Int]()
+    var filteredSectionMapping = [String:Int]()
+    
+    
+    var users = [String:[[String: Any]]]()
+    var filtered = [String:[[String: Any]]]()
+    
     var usersInMemory: Set<String> = []
-    var filtered = [[String: Any]]()
     var searching = false
+    let userRef = Constants.DB.user
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +37,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         self.usersInMemory.insert(AuthApi.getFirebaseUid()!)
         loadInitialTable()
-        loadRestUsers()
+        //loadRestUsers()
         
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
         backgroundView.backgroundColor = UIColor(hexString: "445464")
@@ -59,11 +68,12 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         self.navigationItem.titleView = search
     }
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.filteredSection.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searching{
-            return self.filtered.count
-        }
-        return self.users.count
+        return self.filteredSectionMapping[self.filteredSection[section]]!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,15 +81,11 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         cell.textLabel?.textColor = UIColor.white
         
+        let section = filteredSection[indexPath.section]
         
-        if !searching{
-            cell.usernameLabel.text = self.users[indexPath.row]["username"] as! String?
-            cell.fullNameLabel.text = self.users[indexPath.row]["fullname"] as? String
-        }
-        else{
-            cell.usernameLabel.text = self.filtered[indexPath.row]["username"] as! String?
-            cell.fullNameLabel.text = self.filtered[indexPath.row]["fullname"] as? String
-        }
+        let user = self.filtered[section]?[indexPath.row]
+        cell.usernameLabel.text = user?["username"] as! String?
+        cell.fullNameLabel.text = user?["fullname"] as? String
         
 //        cell.preservesSuperviewLayoutMargins = false
 //        cell.separatorInset = UIEdgeInsets.zero
@@ -90,15 +96,21 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "show_chat", sender: indexPath.row)
+        let section = self.filteredSection[indexPath.section]
+        let user = self.filtered[section]?[indexPath.row]
+        self.performSegue(withIdentifier: "show_chat", sender: user)
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return self.alphabeticalSections
+        return self.filteredSection
     }
     
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        var temp = self.alphabeticalSections as NSArray
+        
+        tableView.scrollToRow(at: IndexPath(row: 0, section: index), at: UITableViewScrollPosition.top , animated: false)
+//        return sortedContactKeys.index(of: title)!
+
+        var temp = self.filteredSection as NSArray
         return temp.index(of: title)
     }
     
@@ -109,10 +121,26 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             
             for (id, user) in users!{
                 if !self.usersInMemory.contains(id){
-                    self.users.append(user)
-                    self.usersInMemory.insert(id)
+                    if let username = user["username"] as? String{
+                        let first = String(describing: username.characters.first!).uppercased()
+                        
+                        self.usersInMemory.insert(id)
+                        
+                        if !self.sections.contains(first){
+                            self.sections.append(first)
+                            self.sectionMapping[first] = 1
+                            self.users[first] = [user]
+                        }
+                        else{
+                            self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                            self.users[first]?.append(user)
+                        }
+                    }
                 }
             }
+            self.filteredSectionMapping = self.sectionMapping
+            self.filteredSection = self.sections
+            self.filtered = self.users
             self.tableView.reloadData()
         }) { (error) in
             print(error.localizedDescription)
@@ -120,29 +148,29 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-    func loadRestUsers(){
-        userRef.observe(DataEventType.value, with: { (snapshot) in
-            // Get user value
-            let users = snapshot.value as? [String:[String:Any]]
-            
-            for (id, user) in users!{
-                if !self.usersInMemory.contains(id){
-                    self.users.append(user)
-                    self.usersInMemory.insert(id)
-                }
-            }
-            
-            self.users.sort { (nameOne, nameTwo) -> Bool in
-                var stringOfNameOne = String(describing: nameOne["username"])
-                var stringOfNameTwo = String(describing: nameTwo["username"])
-                
-                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
-            }
-            
-            self.tableView.reloadData()
-        })
-        
-    }
+//    func loadRestUsers(){
+//        userRef.observe(DataEventType.value, with: { (snapshot) in
+//            // Get user value
+//            let users = snapshot.value as? [String:[String:Any]]
+//            
+//            for (id, user) in users!{
+//                if !self.usersInMemory.contains(id){
+//                    self.users.append(user)
+//                    self.usersInMemory.insert(id)
+//                }
+//            }
+//            
+//            self.users.sort { (nameOne, nameTwo) -> Bool in
+//                var stringOfNameOne = String(describing: nameOne["username"])
+//                var stringOfNameTwo = String(describing: nameTwo["username"])
+//                
+//                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
+//            }
+//            
+//            self.tableView.reloadData()
+//        })
+//        
+//    }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searching = true
@@ -164,9 +192,39 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         if searchText.characters.count > 0{
             let searchPredicate = NSPredicate(format: "username CONTAINS[C] %@", searchText)
-            self.filtered = (self.users as NSArray).filtered(using: searchPredicate) as! [[String : Any]]
+            var filteredUser = [[String:Any]]()
+            for section in sections {
+                let users = self.users[section]
+                let array = (users as! NSArray).filtered(using: searchPredicate)
+                for val in array{
+                    filteredUser.append(val as! [String : Any])
+                }
+            }
+            
+            filteredSection.removeAll()
+            filtered.removeAll()
+            filteredSectionMapping.removeAll()
+            for user in filteredUser{
+                if let username = user["username"] as? String{
+                    let first = String(describing: username.characters.first!).uppercased()
+                    
+                    
+                    if !self.filteredSection.contains(first){
+                        self.filteredSection.append(first)
+                        self.filteredSectionMapping[first] = 1
+                        self.filtered[first] = [user]
+                    }
+                    else{
+                        self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
+                        self.filtered[first]?.append(user)
+                    }
+                }
+                
+            }
         }
         else{
+            self.filteredSection = self.sections
+            self.filteredSectionMapping = self.sectionMapping
             self.filtered = self.users
         }
         
@@ -177,15 +235,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show_chat"{
             let VC = segue.destination as! ChatViewController
-            searching = false
-            let user: [String:Any]
-            if searching{
-                user = self.filtered[sender as! Int]
-            }
-            else{
-                user = self.users[sender as! Int]
-            }
-            VC.user = user
+            let user = sender as? [String:Any]
+            VC.user = user!
         }
     }
 }
