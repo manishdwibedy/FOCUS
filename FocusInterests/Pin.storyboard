@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -317,40 +317,14 @@
                                 <rect key="frame" x="0.0" y="127" width="375" height="379"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bZe-CO-fzE">
-                                <rect key="frame" x="16" y="507" width="153" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFv-QC-3S7">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                        <state key="normal" title="Like"/>
-                                        <connections>
-                                            <action selector="like:" destination="Wnn-ii-34g" eventType="touchUpInside" id="Elk-9r-cqD"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oV5-eg-uPI">
-                                        <rect key="frame" x="40" y="0.0" width="67" height="30"/>
-                                        <state key="normal" title="Comment"/>
-                                        <connections>
-                                            <action selector="comment:" destination="Wnn-ii-34g" eventType="touchUpInside" id="Hzi-71-ChM"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CsI-L6-VgU">
-                                        <rect key="frame" x="117" y="0.0" width="36" height="30"/>
-                                        <state key="normal" title="Send"/>
-                                        <connections>
-                                            <action selector="send:" destination="Wnn-ii-34g" eventType="touchUpInside" id="tXT-Jt-9Mq"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIt-Lv-GdI">
-                                <rect key="frame" x="16" y="552" width="153" height="20.5"/>
+                                <rect key="frame" x="16" y="562" width="140" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpQ-O8-xtN">
-                                <rect key="frame" x="177" y="552" width="81" height="20.5"/>
+                                <rect key="frame" x="164" y="562" width="81" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="81" id="HNX-Bi-DJh"/>
                                 </constraints>
@@ -359,7 +333,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Likes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0G-WK-LPf">
-                                <rect key="frame" x="272" y="552.5" width="87" height="20.5"/>
+                                <rect key="frame" x="259" y="562.5" width="100" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -377,6 +351,44 @@
                                     <action selector="more:" destination="Wnn-ii-34g" eventType="touchUpInside" id="LAF-WC-ct9"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bZe-CO-fzE">
+                                <rect key="frame" x="16" y="514" width="140" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFv-QC-3S7">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="1FP-Q6-TES"/>
+                                            <constraint firstAttribute="height" constant="40" id="4Zt-71-dfe"/>
+                                        </constraints>
+                                        <state key="normal" image="Like"/>
+                                        <connections>
+                                            <action selector="like:" destination="Wnn-ii-34g" eventType="touchUpInside" id="Elk-9r-cqD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oV5-eg-uPI">
+                                        <rect key="frame" x="50" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="0gY-wl-XAa"/>
+                                            <constraint firstAttribute="width" constant="40" id="76s-I1-OGK"/>
+                                        </constraints>
+                                        <state key="normal" image="Comment"/>
+                                        <connections>
+                                            <action selector="comment:" destination="Wnn-ii-34g" eventType="touchUpInside" id="Hzi-71-ChM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CsI-L6-VgU">
+                                        <rect key="frame" x="100" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Wb4-nn-wJp"/>
+                                            <constraint firstAttribute="width" constant="40" id="aBk-SG-dsI"/>
+                                        </constraints>
+                                        <state key="normal" image="SendIcon"/>
+                                        <connections>
+                                            <action selector="send:" destination="Wnn-ii-34g" eventType="touchUpInside" id="tXT-Jt-9Mq"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.26412749290466309" green="0.32456326484680176" blue="0.39544886350631714" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -430,7 +442,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Comment" width="74" height="74"/>
+        <image name="Like" width="30" height="30"/>
         <image name="LockGray" width="480" height="480"/>
+        <image name="SendIcon" width="38" height="32"/>
         <image name="TwitterGray" width="480" height="480"/>
         <image name="UserPhoto" width="102" height="102"/>
         <image name="facebookGray" width="480" height="480"/>

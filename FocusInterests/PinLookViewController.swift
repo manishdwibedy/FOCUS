@@ -36,16 +36,9 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let camera = GMSCameraPosition.camera(withLatitude: data.coordinates.latitude, longitude: data.coordinates.longitude, zoom: 13)
-        let mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.viewForMap.frame.width, height: self.viewForMap.frame.height), camera: camera)
-        mapView.delegate = self
-        mapView.mapType = .normal
-        viewForMap.addSubview(mapView)
         
-        let position = CLLocationCoordinate2D(latitude: data.coordinates.latitude, longitude: data.coordinates.longitude)
-        let marker = GMSMarker(position: position)
-        marker.title = data.pinMessage
-        marker.map = mapView
+        
+        
         
         print(data.fromUID)
         Constants.DB.user.child(data.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -73,6 +66,55 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         pinMessageLabel.text = data.pinMessage
         
         
+        
+        //check for images
+        data.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                
+                if value?["images"] != nil
+                {
+                    var firstVal = ""
+                    print("images")
+                    print((value?["images"])!)
+                    for (key,_) in (value?["images"] as! NSDictionary)
+                    {
+                        firstVal = key as! String
+                        break
+                    }
+                    let bigImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.viewForMap.frame.width, height: self.viewForMap.frame.height))
+                    self.viewForMap.addSubview(bigImage)
+                    
+                    let placeholderImage = UIImage(named: "empty_event")
+                    
+                    let reference = Constants.storage.pins.child(((value?["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
+                    reference.downloadURL(completion: { (url, error) in
+                        
+                        if error != nil {
+                            print(error?.localizedDescription)
+                            return
+                        }
+                        
+                        bigImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                        bigImage.setShowActivityIndicator(true)
+                        bigImage.setIndicatorStyle(.gray)
+                        
+                    })
+                    
+                }else
+                {
+                    let camera = GMSCameraPosition.camera(withLatitude: self.data.coordinates.latitude, longitude: self.data.coordinates.longitude, zoom: 13)
+                    let mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.viewForMap.frame.width, height: self.viewForMap.frame.height), camera: camera)
+                    mapView.delegate = self
+                    mapView.mapType = .normal
+                    self.viewForMap.addSubview(mapView)
+                }
+                
+            }
+        })
+        
+        
         //check for likes
         data.dbPath.child("like").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -88,6 +130,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             if value != nil
             {
                 self.likeOut.isEnabled = false
+                self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
             }
         })
         
@@ -108,12 +151,15 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     }
     
     @IBAction func like(_ sender: Any) {
-       
-        self.likes = self.likes + 1
-        data.dbPath.child("like").updateChildValues(["num": likes])
-        data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
-        self.likeOut.isEnabled = false
-        self.likesLabel.text = String(self.likes) + " likes"
+       if self.likeOut.isEnabled == true
+       {
+            self.likes = self.likes + 1
+            data.dbPath.child("like").updateChildValues(["num": likes])
+            data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+            self.likeOut.isEnabled = false
+            self.likesLabel.text = String(self.likes) + " likes"
+            self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
+        }
        
     }
     

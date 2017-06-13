@@ -178,8 +178,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         let time = NSDate().timeIntervalSince1970
         if pinTextView.text != nil && pinTextView.text != ""
         {
-            if galleryPicArray.count != 0
-            {
                 let imagePaths = NSMutableDictionary()
                 for image in galleryPicArray
                 {
@@ -190,10 +188,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     
                 }
                 Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic])
-            }else
-            {
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress,"lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images":"nil", "public": isPublic])
-            }
+
             
             if isTwitter == true
             {

@@ -381,7 +381,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             
             
-        }else
+        }else if parts?[0] == "pin"
         {
             let index:Int! = Int(parts![1])
             let pin = self.pins[index]
@@ -407,10 +407,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance)
                 }
             })
-            
+        
+        
             
             return true
         }
+        
+        return true
 
         
     }
