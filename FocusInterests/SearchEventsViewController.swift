@@ -28,7 +28,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        tableView.bottomCornersRounded(radius: 6)
         tableView.clipsToBounds = true
         
         let nib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)

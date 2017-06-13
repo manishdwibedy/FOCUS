@@ -402,6 +402,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         if(tableView.tag == 0){
             rowCount = commentsCList.count
         }else if(tableView.tag == 1){
+            print("SUGGESTIONS")
+            print(self.suggestions.count)
+            print(self.suggestions.count)
             rowCount = self.suggestions.count
         }
         
@@ -532,7 +535,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                                     }
                                     
 //                                    if self.suggestions.count == 2{
-                                        self.eventsTableView.reloadData()
+                                self.eventsTableView.reloadData()
 //                                    }
 //                                }
                             })

@@ -74,7 +74,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxW-oS-L2a">
-                                <rect key="frame" x="73" y="7" width="62" height="20"/>
+                                <rect key="frame" x="73" y="7" width="102" height="20"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -105,12 +105,12 @@
                             <constraint firstItem="H0b-mV-xrM" firstAttribute="top" secondItem="pyj-iE-Wv2" secondAttribute="topMargin" id="ZxM-K9-aSX"/>
                             <constraint firstItem="p3N-sR-ozX" firstAttribute="leading" secondItem="5xg-xc-JPg" secondAttribute="trailing" constant="8" symbolic="YES" id="dmh-e1-oav"/>
                             <constraint firstItem="N3n-Fh-fvf" firstAttribute="top" secondItem="pyj-iE-Wv2" secondAttribute="top" constant="25" id="ejP-Xi-2SU"/>
-                            <constraint firstItem="djv-ET-Cuh" firstAttribute="leading" secondItem="UxW-oS-L2a" secondAttribute="trailing" constant="66" id="hZ8-Gy-mGD"/>
+                            <constraint firstItem="djv-ET-Cuh" firstAttribute="leading" secondItem="UxW-oS-L2a" secondAttribute="trailing" constant="26" id="hZ8-Gy-mGD"/>
                             <constraint firstItem="5xg-xc-JPg" firstAttribute="top" secondItem="H0b-mV-xrM" secondAttribute="bottom" constant="8" symbolic="YES" id="i1d-wD-pOT"/>
                             <constraint firstItem="H0b-mV-xrM" firstAttribute="leading" secondItem="pyj-iE-Wv2" secondAttribute="leadingMargin" id="iNR-Tu-buu"/>
                             <constraint firstItem="p3N-sR-ozX" firstAttribute="top" secondItem="N3n-Fh-fvf" secondAttribute="bottom" constant="8" symbolic="YES" id="iRC-YK-rIg"/>
                             <constraint firstItem="FAk-rc-9Hs" firstAttribute="trailing" secondItem="pyj-iE-Wv2" secondAttribute="trailingMargin" id="l8J-EL-gju"/>
-                            <constraint firstItem="UxW-oS-L2a" firstAttribute="trailing" secondItem="p3N-sR-ozX" secondAttribute="trailing" id="lYC-YQ-W6m"/>
+                            <constraint firstItem="UxW-oS-L2a" firstAttribute="trailing" secondItem="p3N-sR-ozX" secondAttribute="trailing" constant="40" id="lYC-YQ-W6m"/>
                             <constraint firstItem="UxW-oS-L2a" firstAttribute="leading" secondItem="N3n-Fh-fvf" secondAttribute="leading" id="llo-ji-Bw6"/>
                             <constraint firstItem="5xg-xc-JPg" firstAttribute="firstBaseline" secondItem="p3N-sR-ozX" secondAttribute="firstBaseline" id="luz-q4-GFD"/>
                             <constraint firstItem="UxW-oS-L2a" firstAttribute="firstBaseline" secondItem="djv-ET-Cuh" secondAttribute="firstBaseline" id="rGk-Vm-jB1"/>
@@ -141,7 +141,7 @@
                 <outlet property="name" destination="UxW-oS-L2a" id="DnE-AO-GIU"/>
                 <outlet property="price" destination="djv-ET-Cuh" id="LEv-DI-AK8"/>
             </connections>
-            <point key="canvasLocation" x="48" y="56"/>
+            <point key="canvasLocation" x="58" y="56"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -30,7 +30,21 @@ class SearchPeopleTableViewCell: UITableViewCell {
         self.userImage.layer.borderWidth = 2
         self.userImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
         self.userImage.roundedImage()
-        self.cellContentView.allCornersRounded(radius: 10.0)
+        self.cellContentView.allCornersRounded(radius: 6.0)
+        
+        self.followButton.roundCorners(radius: 10)
+        self.followButton.layer.shadowOpacity = 1.0
+        self.followButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        self.followButton.layer.masksToBounds = false
+        self.followButton.layer.shadowColor = UIColor.black.cgColor
+        self.followButton.layer.shadowRadius = 10.0
+        
+        self.inviteButton.roundCorners(radius: 10)
+        self.inviteButton.layer.shadowOpacity = 1.0
+        self.inviteButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        self.inviteButton.layer.masksToBounds = false
+        self.inviteButton.layer.shadowColor = UIColor.black.cgColor
+        self.inviteButton.layer.shadowRadius = 10.0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -99,18 +113,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
         let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
         ivc.UID = ID
         parentVC.present(ivc, animated: true, completion: { _ in })
-    
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
