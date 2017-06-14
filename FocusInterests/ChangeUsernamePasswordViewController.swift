@@ -51,7 +51,6 @@ class ChangeUsernamePasswordViewController: UIViewController {
         if !(username.text?.isEmpty)!{
             Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
             
-            
             if AuthApi.getLoginType() == .Email{
                 password.isEnabled = true
                 repeatPassword.isEnabled = true
@@ -78,7 +77,10 @@ class ChangeUsernamePasswordViewController: UIViewController {
             
             Auth.auth().currentUser?.updatePassword(to: password.text!, completion: { error in
                 if error != nil{
-                    SCLAlertView().showError("Invalid password", subTitle: "Couldn't update your password.")
+                    print(error)
+                    SCLAlertView().showError("Invalid password", subTitle: "Couldn't update your password... there was an error.")
+                }else{
+                    self.dismiss(animated: true, completion: nil)
                 }
             })
         }

@@ -73,6 +73,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
     @IBOutlet weak var button5: UIButton!
     
     var data = [NSDictionary]()
+    var isFollowing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +120,34 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
         button3.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
         button4.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
         button5.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+        
+        checkFollowing()
 
+    }
+    
+    func checkFollowing()
+    {
+        Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil {
+                self.followButton.isSelected = true
+                self.followButton.layer.borderColor = UIColor.white.cgColor
+                self.followButton.layer.borderWidth = 1
+                self.followButton.backgroundColor = UIColor.clear
+                self.followButton.setTitle("Following", for: UIControlState.normal)
+                self.isFollowing = true
+                
+            }else{
+                self.followButton.isSelected = false
+                self.followButton.layer.borderColor = UIColor.clear.cgColor
+                self.followButton.layer.borderWidth = 0
+                self.followButton.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
+                self.followButton.setTitle("Follow", for: UIControlState.normal)
+                self.isFollowing = false
+                
+            }
+        })
+        
     }
     
     func callPlace(sender:UITapGestureRecognizer) {
@@ -454,6 +482,47 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
             self.ratingID = comment.key
         }
     }
+    
+    @IBAction func follow(_ sender: Any) {
+        
+        if isFollowing == false
+        {
+        let time = NSDate().timeIntervalSince1970
+        Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id, "time":time])
+        
+        self.followButton.isSelected = true
+        self.followButton.layer.borderWidth = 1
+        self.followButton.layer.borderColor = UIColor.white.cgColor
+        self.followButton.layer.shadowOpacity = 1.0
+        self.followButton.layer.masksToBounds = false
+        self.followButton.layer.shadowColor = UIColor.black.cgColor
+        self.followButton.layer.shadowRadius = 7.0
+        self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+        self.followButton.tintColor = UIColor.clear
+        self.followButton.setTitle("Following", for: UIControlState.normal)
+            isFollowing = true
+        }else
+        {
+            self.followButton.setTitle("Follow", for: UIControlState.normal)
+            Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil {
+                    for (key,_) in value!
+                    {
+                        Constants.DB.following_place.child((self.place?.id)!).child("followers").child(key as! String).removeValue()
+                    }
+                    
+                    
+                    
+                }
+            })
+        }
+        //           Constants.DB.places.child(placeID).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
+        
+        
+    }
+    
     /*
     // MARK: - Navigation
 
