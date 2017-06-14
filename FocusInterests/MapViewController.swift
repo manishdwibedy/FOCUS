@@ -1017,13 +1017,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func userProfileClicked() {
         
         // testing create event
-        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
-        self.present(controller, animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
+//        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
+//        self.present(controller, animated: true, completion: nil)
         
-//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
-//        
-//        self.present(VC, animated:true, completion:nil)        
+        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+        
+        self.present(VC, animated:true, completion:nil)        
     }
     
     func messagesClicked() {
