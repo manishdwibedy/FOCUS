@@ -26,7 +26,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("")
         googleHandle = GIDSignIn()
         googleHandle?.delegate = self
         fBManager = FBSDKLoginManager()
@@ -105,7 +105,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 else{
                     swCell?.cellSwitch.setOn(false, animated: true)
                 }
-            case 7:
+            case 6:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Feedback") as? FeedbackViewController
                 self.present(VC!, animated: true, completion: nil)
