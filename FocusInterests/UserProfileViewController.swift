@@ -44,8 +44,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 //    MARK: Do we still need this
 //    @IBOutlet weak var pinDescription: UILabel!
     @IBOutlet weak var updatePinButton: UIButton!
-    
-    @IBOutlet weak var emptyPinLabel: UILabel!
+    @IBOutlet weak var emptyPinButton: UIButton!
     
     // user interests
     @IBOutlet weak var interestStackView: UIStackView!
@@ -125,6 +124,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.morePinButton.tag = 1
         self.moreFocusButton.tag = 2
         self.moreEventsButton.tag = 3
+        self.emptyPinButton.roundCorners(radius: 10)
         
         getEventSuggestions()
         getPin()
@@ -290,7 +290,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 //            pinDescription.isHidden = true
         }
         else{
-            emptyPinLabel.isHidden = true
+            emptyPinButton.isHidden = true
         }
         
         
@@ -402,6 +402,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.moreEventsButton.roundCorners(radius: 5.0)
     }
     
+    @IBAction func createPin(_ sender: Any) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc: UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "home") as! UITabBarController
+        vc.selectedIndex = 2
+        self.present(vc, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
