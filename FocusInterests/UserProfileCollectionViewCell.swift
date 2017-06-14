@@ -15,6 +15,8 @@ class UserProfileCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.userEventsImage.layer.borderWidth = 1
+        self.userEventsImage.layer.borderColor = UIColor.darkGreen().cgColor
         self.userEventsImage.roundedImage()
     }
 

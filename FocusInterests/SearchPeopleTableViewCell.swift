@@ -38,22 +38,22 @@ class SearchPeopleTableViewCell: UITableViewCell {
         //follow button
         self.followButton.clipsToBounds = true
         self.followButton.isSelected = false
-        self.followButton.roundCorners(radius: 6)
+        self.followButton.roundCorners(radius: 5.0)
         self.followButton.layer.shadowOpacity = 1.0
         self.followButton.layer.masksToBounds = false
         self.followButton.layer.shadowColor = UIColor.black.cgColor
-        self.followButton.layer.shadowRadius = 7.0
+        self.followButton.layer.shadowRadius = 6.0
         
         self.followButton.setTitle("Follow", for: UIControlState.normal)
         self.followButton.setTitle("Unfollow", for: UIControlState.selected)
         
         //invite button
         self.inviteButton.clipsToBounds = true
-        self.inviteButton.roundCorners(radius: 6)
+        self.inviteButton.roundCorners(radius: 5.0)
         self.inviteButton.layer.shadowOpacity = 1.0
         self.inviteButton.layer.masksToBounds = false
         self.inviteButton.layer.shadowColor = UIColor.black.cgColor
-        self.inviteButton.layer.shadowRadius = 7.0
+        self.inviteButton.layer.shadowRadius = 6.0
         
     }
 

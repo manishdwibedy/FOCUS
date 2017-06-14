@@ -11,10 +11,11 @@ import SDWebImage
 import GeoFire
 import FirebaseDatabase
 
-class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate{
 
     @IBOutlet weak var eventsCollectionView: UICollectionView!
 	@IBOutlet var userScrollView: UIScrollView!
+    @IBOutlet weak var navBarItem: UINavigationItem!
     
     // User data
 	@IBOutlet var userName: UILabel!
@@ -32,7 +33,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     // user pin info
     
     @IBOutlet weak var greenDotImage: UIImageView!
-    @IBOutlet weak var categoryImage: UIImageView!
+//    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var pinImage: UIImageView!
     @IBOutlet weak var pinLabel: UILabel!
     @IBOutlet weak var pinCategoryLabel: UILabel!
@@ -102,10 +103,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+    
 		userScrollView.contentSize = CGSize(width: 375, height: 1600)
         // Do any additional setup after loading the view.
         
-        updatePinButton.roundCorners(radius: 10)
         hideKeyboardWhenTappedAround()
         
         let eventsCollectionNib = UINib(nibName: "UserProfileCollectionViewCell", bundle: nil)
@@ -126,6 +127,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.moreEventsButton.tag = 3
         self.emptyPinButton.roundCorners(radius: 10)
         
+        self.roundImagesAndButtons()
+        
         getEventSuggestions()
         getPin()
     }
@@ -137,6 +140,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+//        
         return self.suggestion.count
     }
     
@@ -144,7 +149,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventsCollectionCell", for: indexPath) as!UserProfileCollectionViewCell
         
         let suggestion = self.suggestion[indexPath.row]
-        eventCell.userEventsLabel.text = suggestion.title
+//        eventCell.userEventsLabel.text = suggestion.title
         
         // Placeholder image
         let placeholderImage = UIImage(named: "empty_event")
@@ -190,6 +195,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 self.userName.text = username_str
                 self.descriptionText.text = description_str
                 self.fullNameLabel.text = fullname
+                
+//        setting username to title
+                self.navBarItem.title = self.userName.text
                 
                 if let followers = dictionnary["followers"] as? [String:Any]{
                     if let people = followers["people"] as? [String:[String:Any]]{
@@ -277,7 +285,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         if !pinDataAvailable{
             
             greenDotImage.isHidden = true
-            categoryImage.isHidden = true
+//            categoryImage.isHidden = true
             pinImage.isHidden = true
             pinLabel.isHidden = true
             pinCategoryLabel.isHidden = true
@@ -307,10 +315,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func settingsButtonTapped(_ sender: UIBarButtonItem) {
-        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
-        self.present(vc, animated: true, completion: nil)
-    }
+//    @IBAction func settingsButtonTapped(_ sender: UIBarButtonItem) {
+//        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+//        self.present(vc, animated: true, completion: nil)
+//    }
     
     
     func getPin() {
@@ -366,7 +374,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     if self.suggestion.count % 3 != 0{
                         rows += 1
                     }
-                    self.suggestionsHeight.constant = CGFloat(125 * rows)
+//                    self.suggestionsHeight.constant = CGFloat(125 * rows)
                 self.eventsCollectionView.reloadData()
                 })
             }
