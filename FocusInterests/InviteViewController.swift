@@ -16,6 +16,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var contactList: UILabel!
     @IBOutlet weak var contactListView: UIView!
+    @IBOutlet weak var timeOut: UIButton!
     
     let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
@@ -29,6 +30,12 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var event: Event?
     
     var selected = [Bool]()
+    
+    let datePicker = UIDatePicker()
+    let timePicker = UIDatePicker()
+    let dateFormatter = DateFormatter()
+    let timeFormatter = DateFormatter()
+    var inviteTime = ""
 
     
     var image: Data?
@@ -55,8 +62,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let inviteListCellNib = UINib(nibName: "InviteListTableViewCell", bundle: nil)
         friendsTableView.register(inviteListCellNib, forCellReuseIdentifier: "personToInvite")
         
-        let selectedTimeListCellNib = UINib(nibName: "SelectedTimeTableViewCell", bundle: nil)
-        friendsTableView.register(selectedTimeListCellNib, forCellReuseIdentifier: "selectedTimeCell")
+//        let selectedTimeListCellNib = UINib(nibName: "SelectedTimeTableViewCell", bundle: nil)
+//        friendsTableView.register(selectedTimeListCellNib, forCellReuseIdentifier: "selectedTimeCell")
         
         
         Constants.DB.user.queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -81,6 +88,14 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         })
         
         
+        self.timePicker.datePickerMode = .time
+        self.timePicker.minuteInterval = 5
+        self.datePicker.datePickerMode = .date
+        self.dateFormatter.dateFormat = "MMM d yyyy"
+        self.timeFormatter.dateFormat = "h:mm a"
+        
+        self.timePicker.addTarget(self, action: #selector(pickerChange(sender:)), for: UIControlEvents.valueChanged)
+        
         hideKeyboardWhenTappedAround()
     }
     
@@ -103,9 +118,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 0){
-            return 1
-        }
+        
         return inviteCellData.count
     }
     
@@ -125,8 +138,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if(indexPath.section == 0){
-            let selectedTimeTableCell = tableView.dequeueReusableCell(withIdentifier: "selectedTimeCell", for: indexPath) as! SelectedTimeTableViewCell
-            return selectedTimeTableCell
+//            let selectedTimeTableCell = tableView.dequeueReusableCell(withIdentifier: "selectedTimeCell", for: indexPath) as! SelectedTimeTableViewCell
+//            return selectedTimeTableCell
         }
         
         let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
@@ -189,7 +202,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let fullname = user["fullname"] as? String
                     sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "")
                 })
-                Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
+                Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime])
             }
             else{
                 name = (event?.title)!
@@ -202,7 +215,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
             }
             
-            Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!])
+            Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"inviteTime":inviteTime])
             
             Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
                 
@@ -217,6 +230,35 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func timePushed(_ sender: Any) {
+        
+        timePicker.frame = CGRect(x: 0, y: (self.view.frame.height)-(timePicker.frame.height), width: self.view.frame.width, height: timePicker.frame.height)
+        timePicker.backgroundColor = UIColor.white
+        timePicker.inputAccessoryView
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(screenTapWithPicker(sender:)))
+        self.view.addGestureRecognizer(tap)
+    
+        self.view.addSubview(timePicker)
+    }
+    
+    
+    func screenTapWithPicker(sender: UITapGestureRecognizer)
+    {
+        timePicker.removeFromSuperview()
+    }
+    
+    func pickerChange(sender: UIDatePicker)
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        let dateString = dateFormatter.string(from: sender.date)
+        timeOut.setTitle(dateString, for: UIControlState.normal)
+        inviteTime = dateString
+    }
+    
+    
 }
 
 struct InviteUser{
