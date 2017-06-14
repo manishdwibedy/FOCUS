@@ -301,13 +301,6 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Gear.png" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-Sh-HtS">
-                                                        <rect key="frame" x="319" y="74" width="25" height="25"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="25" id="fG3-Cw-9ld"/>
-                                                            <constraint firstAttribute="width" constant="25" id="vdt-Sn-oHJ"/>
-                                                        </constraints>
-                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCO-Sw-Meb">
                                                         <rect key="frame" x="152" y="37" width="55" height="17"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -359,28 +352,30 @@
                                                             <action selector="editDescription:" destination="cU2-hP-1h7" eventType="touchUpInside" id="lBV-0n-zbP"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Niz-Af-QYR">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Niz-Af-QYR">
                                                         <rect key="frame" x="321" y="8" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="fKh-C5-IPk"/>
                                                             <constraint firstAttribute="width" constant="25" id="yhf-EW-Dvc"/>
                                                         </constraints>
                                                         <state key="normal" image="Gear.png"/>
+                                                        <connections>
+                                                            <action selector="settingButtonPressed:" destination="cU2-hP-1h7" eventType="touchUpInside" id="3NQ-fK-LIq"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="2fK-T8-Z5L" firstAttribute="leading" secondItem="FTF-AM-b0X" secondAttribute="leading" constant="151" id="0mZ-el-wZn"/>
-                                                    <constraint firstItem="iWj-Sh-HtS" firstAttribute="centerX" secondItem="tjc-38-rqz" secondAttribute="centerX" constant="2.5" id="Bty-3P-2Dr"/>
                                                     <constraint firstItem="Qpm-dW-0we" firstAttribute="firstBaseline" secondItem="tjc-38-rqz" secondAttribute="firstBaseline" constant="-220" id="Ddy-I2-mIh"/>
                                                     <constraint firstItem="2fK-T8-Z5L" firstAttribute="centerY" secondItem="tjc-38-rqz" secondAttribute="centerY" constant="-164.5" id="Eh6-f9-zrI"/>
-                                                    <constraint firstItem="tjc-38-rqz" firstAttribute="centerY" secondItem="iWj-Sh-HtS" secondAttribute="centerY" constant="218" id="Hpl-Mz-RMn"/>
                                                     <constraint firstItem="wo5-YS-IfZ" firstAttribute="top" secondItem="uGB-84-lPX" secondAttribute="top" constant="119" id="IOk-df-RLT"/>
                                                     <constraint firstItem="Qpm-dW-0we" firstAttribute="baseline" secondItem="FTF-AM-b0X" secondAttribute="baseline" constant="-55" id="Keq-8h-E2f"/>
                                                     <constraint firstItem="wo5-YS-IfZ" firstAttribute="centerY" secondItem="eCO-Sw-Meb" secondAttribute="centerY" constant="124.5" id="LgQ-IY-Lj2"/>
                                                     <constraint firstItem="wo5-YS-IfZ" firstAttribute="centerX" secondItem="uGB-84-lPX" secondAttribute="centerX" id="MAW-EO-5VL"/>
                                                     <constraint firstItem="eCO-Sw-Meb" firstAttribute="centerX" secondItem="2fK-T8-Z5L" secondAttribute="centerX" constant="-75" id="Obb-K4-385"/>
                                                     <constraint firstItem="Qpm-dW-0we" firstAttribute="centerY" secondItem="2fK-T8-Z5L" secondAttribute="centerY" constant="-55.5" id="PlG-mA-P7l"/>
+                                                    <constraint firstItem="Niz-Af-QYR" firstAttribute="top" secondItem="Qpm-dW-0we" secondAttribute="top" id="Qct-6u-bk0"/>
                                                     <constraint firstItem="FTF-AM-b0X" firstAttribute="baseline" secondItem="2fK-T8-Z5L" secondAttribute="firstBaseline" id="Uit-84-xbs"/>
                                                     <constraint firstItem="Uex-oj-DPj" firstAttribute="centerX" secondItem="tjc-38-rqz" secondAttribute="centerX" constant="-151.5" id="Ws2-UV-Rn9"/>
                                                     <constraint firstItem="tjc-38-rqz" firstAttribute="centerX" secondItem="eCO-Sw-Meb" secondAttribute="centerX" constant="151.5" id="X72-bG-Dra"/>
@@ -390,6 +385,7 @@
                                                     <constraint firstItem="wo5-YS-IfZ" firstAttribute="centerX" secondItem="tjc-38-rqz" secondAttribute="centerX" constant="-151.5" id="gh9-U6-1ZX"/>
                                                     <constraint firstItem="wo5-YS-IfZ" firstAttribute="centerY" secondItem="uGB-84-lPX" secondAttribute="centerY" constant="35.5" id="pUb-ZI-ZpK"/>
                                                     <constraint firstItem="FTF-AM-b0X" firstAttribute="bottom" secondItem="eCO-Sw-Meb" secondAttribute="bottom" constant="28" id="uZf-IW-4bq"/>
+                                                    <constraint firstItem="Niz-Af-QYR" firstAttribute="trailing" secondItem="tjc-38-rqz" secondAttribute="trailing" id="vCi-vd-4wd"/>
                                                     <constraint firstItem="wo5-YS-IfZ" firstAttribute="leading" secondItem="uGB-84-lPX" secondAttribute="leading" constant="8" id="x67-mY-gg2"/>
                                                 </constraints>
                                             </view>
@@ -829,7 +825,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BackArrow" width="1614" height="960"/>
+        <image name="BackArrow" width="50" height="30"/>
         <image name="Friend Pin.png" width="75" height="72"/>
         <image name="Gear.png" width="66" height="68"/>
         <image name="Green.png" width="82" height="82"/>

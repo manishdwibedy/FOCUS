@@ -40,6 +40,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         tableView.clipsToBounds = true
         let nib = UINib(nibName: "InvitePeoplePlaceCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "InvitePeoplePlaceCell")
+        
         let nib2 = UINib(nibName: "InvitePeopleEventCell", bundle: nil)
         tableView.register(nib2, forCellReuseIdentifier: "InvitePeopleEventCell")
 
@@ -146,7 +147,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 115
         
     }
     

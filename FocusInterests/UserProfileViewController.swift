@@ -65,6 +65,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     var suggestion = [Event]()
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
     
+    @IBAction func settingButtonPressed(_ sender: Any) {
+        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
+        present(vc, animated: true, completion: nil)
+    }
     
     // Back button
 	@IBAction func backButton(_ sender: Any) {

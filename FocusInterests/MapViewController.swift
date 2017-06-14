@@ -87,7 +87,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 500
-        //locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
         mapView.delegate = self
@@ -401,7 +401,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             var name = ""
             //var timeAgo = ""
             
-            //distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
+            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
             
             Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
