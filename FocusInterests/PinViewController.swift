@@ -8,13 +8,13 @@
 
 import UIKit
 
-class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, SuggestPlacesDelegate, UITextViewDelegate{
+class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, UITextViewDelegate{
     var place: Place?
     
     @IBOutlet weak var postReviewSeciontButton: UIButton!
     @IBOutlet weak var moreCategoriesSectionButton: UIButton!
     @IBOutlet weak var morePinSectionButton: UIButton!
-    
+    @IBOutlet weak var moreOtherLikesButton: UIButton!
     
     @IBOutlet weak var reviewsView: UIView!
     @IBOutlet weak var reviewsTextView: UITextView!
@@ -40,7 +40,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
-    @IBOutlet weak var suggestPlacesStackView: UIStackView!
+//    @IBOutlet weak var suggestPlacesStackView: UIStackView!
+    @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
     
     @IBOutlet weak var writeReviewView: UITextView!
     @IBOutlet weak var starRatingView: UIView!
@@ -79,7 +80,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         let pinPlaceReviewNib = UINib(nibName: "PinPlaceReviewTableViewCell", bundle: nil)
         self.table.register(pinPlaceReviewNib, forCellReuseIdentifier: "pinPlaceReviewCell")
         
-        placeVC?.suggestPlacesDelegate = self
+        let nib = UINib(nibName: "SearchPlaceCell", bundle: nil)
+        self.peopleAlsoLikedTableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
+        
+//        placeVC?.suggestPlacesDelegate = self
         loadInfoScreen(place: self.place!)
         
         hideKeyboardWhenTappedAround()
@@ -141,16 +145,18 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         postReviewSeciontButton.layer.borderWidth = 1
         moreCategoriesSectionButton.layer.borderWidth = 1
         morePinSectionButton.layer.borderWidth = 1
-        
+        moreOtherLikesButton.layer.borderWidth = 1
         
         postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
         moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
         morePinSectionButton.layer.borderColor = UIColor.white.cgColor
-        
+        moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
         
         postReviewSeciontButton.roundCorners(radius: 5)
         moreCategoriesSectionButton.roundCorners(radius: 5)
         morePinSectionButton.roundCorners(radius: 5)
+        moreOtherLikesButton.roundCorners(radius: 5)
+        
         
         starRatingView.topCornersRounded(radius: 10)
         writeReviewView.bottomCornersRounded(radius: 10)
@@ -242,16 +248,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if (tableView == table || tableView == tipsTableView){
-//            return 2
-//        }
-        return 2
-//        return data.count
+        if (tableView.tag == 0){
+            return 2
+        }else{
+            return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        var cell = UITableViewCell()
-//        if (tableView == table){
+        if (tableView.tag == 0){
             let pinCell = self.table.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
             //        let pinCell = Bundle.main.loadNibNamed("PinPlaceReviewTableViewCell", owner: self, options: nil)?.first as! PinPlaceReviewTableViewCell
             
@@ -277,15 +283,26 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
              })
              */
             return pinCell
-//        }
+        }else{
+            
+            let otherPlacesCell = self.peopleAlsoLikedTableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
+            otherPlacesCell.placeCellView.backgroundColor = UIColor.clear
+            otherPlacesCell.layer.backgroundColor = UIColor.clear.cgColor
+            otherPlacesCell.placeNameLabel.text = "place name"
+            otherPlacesCell.ratingLabel.text = "4.3"
+            otherPlacesCell.categoryLabel.text = "Mexican"
+            otherPlacesCell.distanceLabel.text = "4.3 mi"
+            
+            return otherPlacesCell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(tableView == table){
+        if(tableView.tag == 0){
             return 70
+        }else{
+            return 105
         }
-        
-        return 100
     }
     
     func inviteUser(name: String) {
@@ -298,22 +315,22 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
         // Dispose of any resources that can be recreated.
     }
     
-    func gotSuggestedPlaces(places: [Place]) {
-        for (index, place) in places.enumerated(){
-            let view = suggestPlacesStackView.arrangedSubviews[index] as! SuggestPlaceView
-            view.place = place
-            view.name.text = place.name
-            view.name.textColor = .white
-            view.imageView.sd_setImage(with: URL(string: place.image_url), placeholderImage: UIImage(named: "addUser"))
-            view.imageView.roundedImage()
-            
-            view.isUserInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-            view.addGestureRecognizer(tap)
-            
-        }
-    }
-    
+//    func gotSuggestedPlaces(places: [Place]) {
+//        for (index, place) in places.enumerated(){
+//            let view = suggestPlacesStackView.arrangedSubviews[index] as! SuggestPlaceView
+//            view.place = place
+//            view.name.text = place.name
+//            view.name.textColor = .white
+//            view.imageView.sd_setImage(with: URL(string: place.image_url), placeholderImage: UIImage(named: "addUser"))
+//            view.imageView.roundedImage()
+//            
+//            view.isUserInteractionEnabled = true
+//            let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+//            view.addGestureRecognizer(tap)
+//            
+//        }
+//    }
+//    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }

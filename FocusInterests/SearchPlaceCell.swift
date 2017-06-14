@@ -37,7 +37,7 @@ class SearchPlaceCell: UITableViewCell {
         self.followButtonOut.layer.shadowOpacity = 1.0
         self.followButtonOut.layer.masksToBounds = false
         self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-        self.followButtonOut.layer.shadowRadius = 7.0
+        self.followButtonOut.layer.shadowRadius = 6.0
         self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
         self.followButtonOut.setTitle("Unfollow", for: UIControlState.selected)
         
@@ -47,7 +47,7 @@ class SearchPlaceCell: UITableViewCell {
         self.inviteButtonOut.layer.shadowOpacity = 1.0
         self.inviteButtonOut.layer.masksToBounds = false
         self.inviteButtonOut.layer.shadowColor = UIColor.black.cgColor
-        self.inviteButtonOut.layer.shadowRadius = 7.0
+        self.inviteButtonOut.layer.shadowRadius = 6.0
 
 //        image
         placeImage.layer.borderWidth = 1
