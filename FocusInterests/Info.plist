@@ -18,15 +18,13 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-    
-    
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb124579808092963</string>
-        	</array>
+			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
@@ -36,14 +34,14 @@
 				<string>com.googleusercontent.apps.633889221608-7mbafaqf9mmjqp1vbr1urq28utnthg2r</string>
 			</array>
 		</dict>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Viewer</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>twitterkit-kDcg3AljHuqwQkS7ZYvo6aqzz</string>
-            </array>
-        </dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twitterkit-kDcg3AljHuqwQkS7ZYvo6aqzz</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>9</string>
@@ -62,7 +60,7 @@
 					<string>Consumer Secret</string>
 				</dict>
 				<key>KitName</key>
-				<string>Twitter</string>
+				<string>Crashlytics</string>
 			</dict>
 		</array>
 	</dict>
@@ -80,8 +78,8 @@
 		<string>fbshareextension</string>
 		<string>uber</string>
 		<string>comgooglemaps</string>
-        <string>twitter</string>
-        <string>twitterauth</string>
+		<string>twitter</string>
+		<string>twitterauth</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

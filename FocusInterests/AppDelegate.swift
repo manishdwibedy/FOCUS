@@ -18,6 +18,7 @@ import TwitterKit
 import FirebaseDatabase
 import Google
 import UserNotifications
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDelegate, GIDSignInDelegate {
@@ -67,7 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        
+//        Fabric.with([Twitter.self])
+//
         
         Twitter.sharedInstance().start(withConsumerKey:Constants.Twitter.consumerKey, consumerSecret:Constants.Twitter.consumerSecret)
 
@@ -80,6 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         Messaging.messaging().delegate = self
         // [END set_messaging_delegate]
 
+        Fabric.with([Crashlytics.self])
         
         return true
     }

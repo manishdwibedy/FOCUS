@@ -57,6 +57,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
 //        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
 //            if dictionnary != nil {
 //                if let image_str = dictionnary!["image_string"] as? String{
@@ -900,10 +902,22 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                               zoom: 15)
         
         let position = CLLocationCoordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude))
-        self.userLocation = GMSMarker(position: position)
-        self.userLocation?.icon = UIImage(named: "self_location")
-        self.userLocation?.map = self.mapView
-        self.userLocation?.zIndex = 1
+        if self.userLocation == nil{
+            self.userLocation = GMSMarker(position: position)
+            self.userLocation?.icon = UIImage(named: "self_location")
+            self.userLocation?.map = self.mapView
+            self.userLocation?.zIndex = 1
+        }
+        else{
+            self.userLocation?.map = nil
+            
+            self.userLocation = GMSMarker(position: position)
+            self.userLocation?.icon = UIImage(named: "self_location")
+            self.userLocation?.map = self.mapView
+            self.userLocation?.zIndex = 1
+            
+        }
+        
         
         
         AuthApi.set(location: location)
@@ -1015,7 +1029,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func userProfileClicked() {
-        
         // testing create event
 //        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
 //        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")

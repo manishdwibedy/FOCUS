@@ -12,6 +12,8 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - Cosmos (9.0.0)
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
   - DottedProgressBar (1.0.3)
   - Fabric (1.6.11)
   - FacebookCore (0.2.0):
@@ -156,6 +158,7 @@ DEPENDENCIES:
   - BadgeSwift (~> 5.0)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Cosmos (~> 9.0)
+  - Crashlytics
   - DottedProgressBar
   - Fabric
   - FacebookCore (~> 0.2)
@@ -220,6 +223,7 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Cosmos: 33eee62b2a0418452aef470f711f83c3ea061b7b
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   DottedProgressBar: e81cd6f240a68c6b7d52bcb5f89ff74cabc619b8
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
@@ -265,6 +269,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
   TwitterKit: 202404be71aadd81d19f677b34579fe77d9cb67e
 
-PODFILE CHECKSUM: 2eac6400dce67c85bb2b4a1f07b49e8f9429443f
+PODFILE CHECKSUM: 5cb4fde3853b98f6dd0c79c92a8462d2855a0894
 
 COCOAPODS: 1.2.1
