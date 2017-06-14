@@ -525,6 +525,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func chooseIcon(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "chooseIcon", sender: nil)
     }
+    
 }
 
 extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
