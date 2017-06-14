@@ -87,6 +87,9 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         // Do any additional setup after loading the view.
         
+        segmentedControl.layer.cornerRadius = 6
+        segmentedControl.clipsToBounds = true
+        
         
     }
     

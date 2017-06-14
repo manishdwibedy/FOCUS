@@ -22,15 +22,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cUS-Vg-g8o" customClass="CustomSegmentedControl" customModule="FocusInterests" customModuleProvider="target">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cUS-Vg-g8o" customClass="CustomSegmentedControl" customModule="FocusInterests" customModuleProvider="target">
                                 <rect key="frame" x="16" y="72" width="343" height="29"/>
-                                <color key="backgroundColor" red="0.61176470588235299" green="0.64313725490196072" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.8231821261011355" green="0.85621591168456823" blue="0.90420579663212441" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
                                     <segment title="Notifications"/>
                                     <segment title="Invites"/>
                                     <segment title="Feed"/>
                                 </segments>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="indexChanged:" destination="Jyz-fX-gQp" eventType="valueChanged" id="mgn-11-PVY"/>
                                 </connections>
