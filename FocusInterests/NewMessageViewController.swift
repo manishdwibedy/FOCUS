@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import JSQMessagesViewController
 
 class NewMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -28,6 +29,9 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     var usersInMemory: Set<String> = []
     var searching = false
     let userRef = Constants.DB.user
+    var addPin = false
+    var pinMessage: String? = nil
+    var pinImage: UIImage? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -242,6 +246,9 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             let VC = segue.destination as! ChatViewController
             let user = sender as? [String:Any]
             VC.user = user!
+            VC.addPin = self.addPin
+            VC.pinMessage = self.pinMessage
+            VC.pinImage = self.pinImage
         }
     }
 }
