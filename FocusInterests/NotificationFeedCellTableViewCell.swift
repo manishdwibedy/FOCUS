@@ -22,6 +22,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var userProfilePic: UIImageView!
+    var selectedButton = false
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -56,5 +57,26 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         self.userProfilePic.roundedImage()
         self.locationImage.roundedImage()
     }
+    
+    
+    @IBAction func seeYouTherePushed(_ sender: Any) {
+        
+        if selectedButton == false{
+            selectedButton = true
+            seeYouThereButton.isHidden = true
+            nextTimeButton.isEnabled = false
+            nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
+        }
+        
+    }
+    
+    @IBAction func nextTimePushed(_ sender: Any) {
+        selectedButton = true
+        seeYouThereButton.isHidden = true
+        nextTimeButton.isEnabled = false
+        nextTimeButton.setTitle("Declined", for: UIControlState.normal)
+        
+    }
+    
     
 }

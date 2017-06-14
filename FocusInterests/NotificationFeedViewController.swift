@@ -151,6 +151,8 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             cell.setupCell(notif: invArray[indexPath.row])
         }else if self.selectedSegmentIndex == 2{
             cell.setupCell(notif: feedAray[indexPath.row])
+            cell.seeYouThereButton.isHidden = true
+            cell.nextTimeButton.isHidden = true
         }else
         {
             cell.setupCell(notif: nofArray[indexPath.row])
