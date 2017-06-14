@@ -83,7 +83,12 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.parentVC = self
         
         let people = filtered[indexPath.row]
-        cell?.username.text = people.username
+        if(people.username == "" || people.username == nil){
+            cell?.username.text = "No username"
+        }else{
+            cell?.username.text = people.username
+        }
+        
         cell?.fullName.text = "Full Name"
         
         cell?.address.text = "1234 Grand Ave.\nPasadena, CA 91101"
@@ -142,16 +147,75 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         let buttonRow = sender.tag
         
-        print("following user \(self.people[buttonRow].username) ")
         
-        //Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").childByAutoId().updateChildValues(["UID":self.people[buttonRow].uuid, "time":time])
-        
-        
-        
-        
-    //Constants.DB.user.child(self.people[buttonRow].uuid!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-        
-        
+        if sender.isSelected == false {
+            sender.isSelected = true
+            sender.layer.borderColor = UIColor.white.cgColor
+            sender.layer.borderWidth = 1
+            sender.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+            sender.tintColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+            
+        } else if sender.isSelected == true{
+            print("now unfollowing user")
+            print("UNFOLLOW ID")
+            //           Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
+            //                let value = snapshot.value as? [String:Any]
+            //
+            //                for (id, _) in value!{
+            //                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people/\(id)").removeValue()
+            //                }
+            //
+            //                })
+            //            Constants.DB.user.child(self.ID).child("followers").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            //                let value = snapshot.value as? [String:Any]
+            //
+            //                for (id, _) in value!{
+            //                    Constants.DB.user.child(self.ID).child("followers/people/\(id)").removeValue()
+            //
+            //                }
+            //
+            //            })
+            
+            //            follow button appearance
+            
+            //            alert controller view
+            
+            let unfollowAlertController = UIAlertController(title: "\n\n\n\n\n\n", message: "Are you sure you want to unfollow \(self.people[buttonRow].username!)", preferredStyle: .actionSheet)
+            
+            let margin:CGFloat = 10.0
+            let rect = CGRect(x: margin, y: margin, width: unfollowAlertController.view.bounds.size.width - margin * 4.0, height: CGFloat(120))
+            let customView = UIView(frame: rect)
+            
+            customView.backgroundColor = .green
+            let imgViewTitle = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            imgViewTitle.image = self.people[buttonRow].userImage
+            customView.addSubview(imgViewTitle)
+            unfollowAlertController.view.addSubview(customView)
+//            let imgViewTitle = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
+//            imgViewTitle.image = self.people[buttonRow].userImage
+            
+//            unfollowAlertController.view.addSubview(imgViewTitle)
+            
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
+                print("unfollow has been tapped")
+                print("now following user is followUserAction")
+                
+//                unfollow button view
+                
+                sender.isSelected = false
+                sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                sender.tintColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print("cancel has been tapped")
+            }
+            
+            unfollowAlertController.addAction(unfollowAction)
+            unfollowAlertController.addAction(cancelAction)
+            self.present(unfollowAlertController, animated: true, completion: nil)
+        }
+
     }
     
     func inviteUser(sender:UIButton){

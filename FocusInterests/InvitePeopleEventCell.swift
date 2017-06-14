@@ -17,15 +17,21 @@ class InvitePeopleEventCell: UITableViewCell {
     @IBOutlet weak var guestCount: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var inviteOut: UIButton!
+    @IBOutlet weak var inviteEventCellContentView: UIView!
     
     var event: Event!
     var UID: String!
     var parentVC: InvitePeopleViewController!
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         inviteOut.layer.cornerRadius = 6
         inviteOut.clipsToBounds = true
         
+        self.eventImage.layer.borderWidth = 2
+        self.eventImage.layer.borderColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0).cgColor
+        self.eventImage.roundedImage()
+        self.inviteEventCellContentView.allCornersRounded(radius: 6.0)
         
     }
     

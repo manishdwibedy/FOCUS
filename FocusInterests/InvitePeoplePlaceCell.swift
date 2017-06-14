@@ -17,14 +17,22 @@ class InvitePeoplePlaceCell: UITableViewCell {
     @IBOutlet weak var inviteButtonOut: UIButton!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var inviteCellContentView: UIView!
     
     var UID = ""
     var place: Place!
     var parentVC: InvitePeopleViewController!
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        
         inviteButtonOut.layer.cornerRadius = 6
         inviteButtonOut.clipsToBounds = true
+        
+        self.placeImage.roundedImage()
+        self.placeImage.layer.borderWidth = 2
+        self.placeImage.layer.borderColor = UIColor(red: 72/255.0, green: 255/255.0, blue: 255.0/255.0, alpha: 1.0).cgColor
+        self.inviteCellContentView.allCornersRounded(radius: 6.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
