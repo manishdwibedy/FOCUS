@@ -49,7 +49,9 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         FirebaseDownstream.shared.getUserNotifications(completion: {array in
             //self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)
             self.invArray = array!
-            print("done")
+            print("got NOTI")
+            print(array)
+            
         }, gotNotif: {not in
             self.nofArray = not
         })
@@ -158,6 +160,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         {
             cell.setupCell(notif: nofArray[indexPath.row])
         }
+        cell.parentVC = self
         return cell
     }
     

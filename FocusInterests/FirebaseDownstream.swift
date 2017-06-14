@@ -58,34 +58,46 @@ class FirebaseDownstream {
                             self.ref.child("users").child((inValue[inKey] as! NSDictionary)["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                 if let valueUID = snapshot.value as? NSDictionary {
                                     var dbKey = ""
+                                    
                                     if key as! String == "event"{
+                                        
                                         dbKey = "events"
                                         self.ref.child(dbKey).child((inValue[inKey] as! NSDictionary)["ID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                             if let valueInviteID = snapshot.value as? NSDictionary {
-                                                var itemName = valueInviteID["title"] as! String
-                                                let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: ItemOfInterest(itemName: itemName, imageURL: ""), time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
+                                                let itemName = valueInviteID["title"] as! String
+                                                let item = ItemOfInterest(itemName: itemName, imageURL: "")
+                                                item.type = "event"
+                                                item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
+                                                let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
                                                 returnableNotif.append(notification)
+                                                
                                             }
                                             valueCount = valueCount + 1
-                                            if valueCount == totalCount
-                                            {
-                                                DispatchQueue.main.async(execute: {
+//                                            if valueCount == totalCount - 1
+//                                            {
+                                               DispatchQueue.main.async(execute: {
                                                     completion(returnableNotif)
                                                 })
-                                            }
+                                           // }
                                         })
                                     }else if key as! String == "place"{
+                                        
                                         dbKey = "places"
-                                        let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: ItemOfInterest(itemName: ((inValue[inKey] as! NSDictionary)["ID"] as? String), imageURL: ""), time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
+                                        let item = ItemOfInterest(itemName: ((inValue[inKey] as! NSDictionary)["ID"] as? String), imageURL: "")
+                                        item.type = "place"
+                                        item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
+                                        let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
                                         returnableNotif.append(notification)
+                                        
                                     
                                     valueCount = valueCount + 1
-                                    if valueCount == totalCount
-                                    {
+//                                    if valueCount == totalCount - 1
+//                                    {
+                                        
                                         DispatchQueue.main.async(execute: {
                                             completion(returnableNotif)
                                         })
-                                    }
+                                    //}
                                     }
                                 
                                     
