@@ -38,6 +38,7 @@ target 'FocusInterests' do
     pod 'Solar'
     pod 'Fabric'
     pod 'TwitterKit'
+    pod 'Crashlytics'
     pod 'OhhAuth'
     pod 'Magnetic'
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'

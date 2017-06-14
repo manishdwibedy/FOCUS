@@ -1641,7 +1641,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 0d682f4533db1e6cc0c9ca6cfe0f27d73f01b260 a714c3703a5ba0776b777106107951ac9f95d212b82f19fd3be724b8f57f8fe4";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 0d682f4533db1e6cc0c9ca6cfe0f27d73f01b260 a714c3703a5ba0776b777106107951ac9f95d212b82f19fd3be724b8f57f8fe4\n\nGOOGLE_APP_ID=1:633889221608:ios:2cddcfc4ec840486\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym ${SRCROOT}/service.json";
 		};
 		9BF2880351749F6941762599 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2038,7 +2038,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 66JH2JK5HD;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/google-maps-ios-utils-master/samples/SwiftDemoApp/Pods/GoogleMaps/Base/Frameworks",
@@ -2069,6 +2071,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 66JH2JK5HD;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/google-maps-ios-utils-master/samples/SwiftDemoApp/Pods/GoogleMaps/Base/Frameworks",

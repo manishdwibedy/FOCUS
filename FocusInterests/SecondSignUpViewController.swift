@@ -59,10 +59,15 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
                 }
                 
                 if let validUser = user {
-                    AuthApi.set(userEmail: email)
-                    AuthApi.set(firebaseUid: validUser.uid)
-                    AuthApi.setPassword(password: validPassword)
-                    AuthApi.set(loggedIn: .Email)
+                    Auth.auth().signIn(withEmail: email, password: validPassword) { (user, error) in
+                        AuthApi.set(userEmail: email)
+                        AuthApi.set(firebaseUid: validUser.uid)
+                        AuthApi.setPassword(password: validPassword)
+                        AuthApi.set(loggedIn: .Email)
+                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
+                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(self.userName)
+                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/fullname").setValue(self.fullName)
+                    }
                 }
             })
         default:
