@@ -163,7 +163,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, S
             let textLabel = UILabel()
             
             textLabel.textColor = .white
-            textLabel.text  = getInterest(yelpCategory: category.name)
+            textLabel.text  = getInterest(yelpCategory: category.alias)
             textLabel.textAlignment = .left
             
             
