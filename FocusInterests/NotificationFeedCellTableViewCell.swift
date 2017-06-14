@@ -21,8 +21,10 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationImage: UIImageView!
-    @IBOutlet weak var userProfilePic: UIImageView!
+    @IBOutlet weak var userProfilePic: UIButton!
+    
     var selectedButton = false
+    var notif: FocusNotification!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,12 +38,15 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     
     func setupCell(notif: FocusNotification) {
         self.roundButtonsAndPictures()
+        
 //        self.userProfilePic.image = notif.sender?.username
         let content = (notif.sender?.username)! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
         self.userNameLabel.text = (notif.sender?.username)!
         self.locationNameLabel.text = notif.item?.itemName
 //        self.notifImgView.image = notif.item?.imageURL
         self.timeLabel.text = "2h"
+        
+        self.notif = notif
     }
     
     func roundButtonsAndPictures(){
@@ -54,7 +59,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         self.userProfilePic.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
         self.locationImage.layer.borderColor = UIColor.cyan.cgColor
         
-        self.userProfilePic.roundedImage()
+        self.userProfilePic.imageView?.roundedImage()
         self.locationImage.roundedImage()
     }
     
@@ -78,5 +83,33 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
     }
     
+    @IBAction func profilePicPushed(_ sender: Any) {
+        
+        if notif.type == NotificationType.Invite{
+            print(notif.item?.itemName)
+        }
+        print(notif.item?.itemName)
+        print(notif.type)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
 }
+
+
+
+
+
+
+
+
+
+
+
+

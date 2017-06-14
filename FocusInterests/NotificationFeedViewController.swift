@@ -37,11 +37,12 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         segmentedControl.selectedSegmentIndex = self.selectedSegmentIndex
 
-        backButtonItem.title = "Back"
+        backButtonItem.image = UIImage(named: "BackArrow")
         backButtonItem.tintColor = UIColor.veryLightGrey()
         self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "#182C43")
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.title = "Notifications"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         AuthApi.clearNotifications()
         
