@@ -105,6 +105,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             })
         }
         
+        if self.currentLocation == nil{
+            self.currentLocation = AuthApi.getLocation()
+        }
+        
         if let last_pos = AuthApi.getLocation(){
             
             let camera = GMSCameraPosition.camera(withLatitude: last_pos.coordinate.latitude,
@@ -374,7 +378,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
             
-            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest, address: place.address[0] + place.address[1])
+            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest, address: place.address.joined(separator: " "))
             return true
             
             
@@ -1011,9 +1015,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func userProfileClicked() {
-        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
-        self.present(VC, animated:true, completion:nil)        
+        // testing create event
+        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
+        self.present(controller, animated: true, completion: nil)
+        
+//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+//        
+//        self.present(VC, animated:true, completion:nil)        
     }
     
     func messagesClicked() {
