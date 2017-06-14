@@ -360,11 +360,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             reviews = "(\(place.reviewCount) reviews)"
             let category = place.categories.map(){ $0.alias }
             
+            let interestText = getInterest(yelpCategory: category[0])
             
-            interest.text =  "\(getInterest(yelpCategory: category[0]))"
-            let primaryFocus = NSMutableAttributedString(string: interest.text!)
-            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
-            interest.attributedText = primaryFocus
+            if interestText.characters.count > 0 {
+                interest.text =  "\(interestText)"
+                let primaryFocus = NSMutableAttributedString(string: interest.text!)
+                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
+                interest.attributedText = primaryFocus
+            }
+            else{
+                interest.text = "N.A."
+            }
             
             let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
                 marker.tracksInfoWindowChanges = false
