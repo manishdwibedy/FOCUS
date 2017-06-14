@@ -148,6 +148,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
             }
         })
         
+        if (place?.categories.count)! > 1{
+            moreCategoriesSectionButton.isHidden = false
+        }else{
+            moreCategoriesSectionButton.isHidden = true
+        }
+        
     }
     
     func callPlace(sender:UITapGestureRecognizer) {
