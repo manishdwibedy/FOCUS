@@ -35,6 +35,17 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var twitterSwitch: UISwitch!
     let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
+    var sections = [String]()
+    var filteredSection = [String]()
+    
+    var sectionMapping = [String:Int]()
+    var filteredSectionMapping = [String:Int]()
+    
+    
+    var users = [String:[CNContact]]()
+    var filtered = [String:[CNContact]]()
+    
+    
     var event: Event?
     var image: Data?
     var selectedFriend = [Bool]()
@@ -109,8 +120,29 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
                 }
                 
             }
+            
+            for contact in contacts{
+                if let name = contact.givenName as? String{
+                    let first = String(describing: name.characters.first!).uppercased()
+                    
+                    
+                    if !self.sections.contains(first){
+                        self.sections.append(first)
+                        self.sectionMapping[first] = 1
+                        self.users[first] = [contact]
+                    }
+                    else{
+                        self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                        self.users[first]?.append(contact)
+                    }
+                }
+            }
+            self.filteredSectionMapping = self.sectionMapping
+            self.filteredSection = self.sections
+            self.filtered = self.users
+            
             self.setSelectedFriends()
-            self.sortContacts()
+            self.filteredSection.sort()
             friendsTableView.reloadData()
         } catch {
             print(error)
@@ -197,19 +229,14 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     // MARK: - Tableview Delegate Methods
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return self.filteredSection.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0){
             return 1
         } else {
-            
-            if(searchingForContact) {
-                return filteredContacts.count
-            }
-            
-            return contacts.count
+            return self.filteredSectionMapping[self.filteredSection[section]]!
         }
     }
     
@@ -218,12 +245,14 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return self.alphabeticalSections
+        return self.filteredSection
     }
     
     
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        var temp = self.alphabeticalSections as NSArray
+        tableView.scrollToRow(at: IndexPath(row: 0, section: index), at: UITableViewScrollPosition.top , animated: false)
+        
+        var temp = self.filteredSection as NSArray
         return temp.index(of: title)
     }
     
@@ -237,22 +266,12 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
             personToInviteCell.delegate = self
             personToInviteCell.inviteConfirmationButton.tag = indexPath.row
-//            
-//            
-//            if selectedFriend[indexPath.row]{
-//                personToInviteCell.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_Filled"), for: .normal)
-//            }
-//            else{
-//                personToInviteCell.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
-//            }
             
-            if(searchingForContact){
-                personToInviteCell.usernameLabel.text = self.filteredContacts[indexPath.row].givenName
-                personToInviteCell.fullNameLabel.text = self.filteredContacts[indexPath.row].familyName
-            }else {
-                personToInviteCell.usernameLabel.text = self.contacts[indexPath.row].givenName //will need to change this to the username of user
-                personToInviteCell.fullNameLabel.text = self.contacts[indexPath.row].familyName
-            }
+            let section = filteredSection[indexPath.section]
+            
+            let user = self.filtered[section]?[indexPath.row]
+            personToInviteCell.usernameLabel.text = user?.givenName as! String?
+            personToInviteCell.fullNameLabel.text = user?.familyName as? String
             
             return personToInviteCell
         }
@@ -311,21 +330,21 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func sortContacts(){
-        if(searchingForContact){
-            self.filteredContacts.sort { (nameOne, nameTwo) -> Bool in
-                let stringOfNameOne = String(describing: nameOne.givenName)
-                let stringOfNameTwo = String(describing: nameTwo.givenName)
-                
-                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
-            }
-        }else{
-            self.contacts.sort { (nameOne, nameTwo) -> Bool in
-                let stringOfNameOne = String(describing: nameOne.givenName)
-                let stringOfNameTwo = String(describing: nameTwo.givenName)
-                
-                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
-            }
-        }
+//        if(searchingForContact){
+//            self.filteredContacts.sort { (nameOne, nameTwo) -> Bool in
+//                let stringOfNameOne = String(describing: nameOne.givenName)
+//                let stringOfNameTwo = String(describing: nameTwo.givenName)
+//                
+//                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
+//            }
+//        }else{
+//            self.users.sort { (nameOne, nameTwo) -> Bool in
+//                let stringOfNameOne = String(describing: nameOne.givenName)
+//                let stringOfNameTwo = String(describing: nameTwo.givenName)
+//                
+//                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
+//            }
+//        }
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
