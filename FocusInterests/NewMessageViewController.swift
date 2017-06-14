@@ -35,10 +35,6 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         tableView.tableFooterView = UIView()
         self.setupSearchBar()
         
-        self.usersInMemory.insert(AuthApi.getFirebaseUid()!)
-        loadInitialTable()
-        //loadRestUsers()
-        
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
         backgroundView.backgroundColor = UIColor(hexString: "445464")
         tableView.backgroundView = backgroundView
@@ -51,6 +47,14 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.usersInMemory.insert(AuthApi.getFirebaseUid()!)
+        loadInitialTable()
+        //loadRestUsers()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,6 +119,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func loadInitialTable(){
+        print("loading user list")
         self.userRef.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let users = snapshot.value as? [String:[String:Any]]

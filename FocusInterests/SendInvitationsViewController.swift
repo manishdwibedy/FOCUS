@@ -229,14 +229,14 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     // MARK: - Tableview Delegate Methods
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.filteredSection.count
+        return self.filteredSection.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0){
             return 1
         } else {
-            return self.filteredSectionMapping[self.filteredSection[section]]!
+            return self.filteredSectionMapping[self.filteredSection[section-1]]!
         }
     }
     
@@ -245,7 +245,9 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return self.filteredSection
+        var sections = [""]
+        sections += self.filteredSection
+        return sections
     }
     
     
@@ -267,7 +269,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             personToInviteCell.delegate = self
             personToInviteCell.inviteConfirmationButton.tag = indexPath.row
             
-            let section = filteredSection[indexPath.section]
+            let section = filteredSection[indexPath.section-1]
             
             let user = self.filtered[section]?[indexPath.row]
             personToInviteCell.usernameLabel.text = user?.givenName as! String?
@@ -317,14 +319,44 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(self.searchBar == nil || self.searchBar.text == ""){
-            self.searchingForContact = false
+            self.filteredSection = self.sections
+            self.filteredSectionMapping = self.sectionMapping
+            self.filtered = self.users
+            
             self.searchBar.endEditing(true)
             self.friendsTableView.reloadData()
         }else{
-            self.searchingForContact = true
-            self.filteredContacts = self.contacts.filter { $0.givenName.contains(searchText) || $0.familyName.contains(searchText) }
-
-            self.sortContacts()
+            let searchPredicate = NSPredicate(format: "givenName CONTAINS[C] %@", searchText)
+            var filteredUser = [CNContact]()
+            for section in sections {
+                let users = self.users[section]
+                let array = (users as! NSArray).filtered(using: searchPredicate)
+                for val in array{
+                    filteredUser.append(val as! CNContact)
+                }
+            }
+            
+            filteredSection.removeAll()
+            filtered.removeAll()
+            filteredSectionMapping.removeAll()
+            for user in filteredUser{
+                if let name = user.givenName as? String{
+                    let first = String(describing: name.characters.first!).uppercased()
+                    
+                    
+                    if !self.filteredSection.contains(first){
+                        self.filteredSection.append(first)
+                        self.filteredSectionMapping[first] = 1
+                        self.filtered[first] = [user]
+                    }
+                    else{
+                        self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
+                        self.filtered[first]?.append(user)
+                    }
+                }
+                
+            }
+            self.filteredSection.sort()
             self.friendsTableView.reloadData()
         }
     }
