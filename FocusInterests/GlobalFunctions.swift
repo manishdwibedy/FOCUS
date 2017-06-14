@@ -239,10 +239,10 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
         let user = snapshot.value as? [String : Any]
         
         let followers = user?["followers"] as? [String : Any]
-        let people = followers?["people"] as? [String : [String: Any]]
+        let people = followers?["people"] as? [String : [String: Any]] ?? [:]
         
-        followerCount = (people?.count)!
-        for (_, follower) in people!{
+        followerCount = (people.count)!
+        for (_, follower) in people{
             let followerID = follower["UID"] as! String
 //            let username = follower["username"] as! String
 //            let imageURL = follower["imageURL"] as? String
