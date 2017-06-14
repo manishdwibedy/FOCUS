@@ -31,7 +31,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.clipsToBounds = true
         
         let nib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "searchEventTableCell")
+        tableView.register(nib, forCellReuseIdentifier: "cell")
         
         
         
@@ -89,7 +89,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "searchEventTableCell") as! SearchEventTableViewCell!
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! SearchEventTableViewCell!
         
         let event = filtered[indexPath.row]
         cell?.name.text = event.title
