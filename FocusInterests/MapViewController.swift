@@ -97,7 +97,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         placesClient = GMSPlacesClient.shared()
         
-//        mapView.isMyLocationEnabled = true
+        mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
         if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
@@ -908,21 +908,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                               zoom: 15)
         
         let position = CLLocationCoordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude))
-        if self.userLocation == nil{
-            self.userLocation = GMSMarker(position: position)
-            self.userLocation?.icon = UIImage(named: "self_location")
-            self.userLocation?.map = self.mapView
-            self.userLocation?.zIndex = 1
-        }
-        else{
-            self.userLocation?.map = nil
-            
-            self.userLocation = GMSMarker(position: position)
-            self.userLocation?.icon = UIImage(named: "self_location")
-            self.userLocation?.map = self.mapView
-            self.userLocation?.zIndex = 1
-            
-        }
+//        if self.userLocation == nil{
+//            self.userLocation = GMSMarker(position: position)
+//            self.userLocation?.icon = UIImage(named: "self_location")
+//            self.userLocation?.map = self.mapView
+//            self.userLocation?.zIndex = 1
+//        }
+//        else{
+//            self.userLocation?.map = nil
+//            
+//            self.userLocation = GMSMarker(position: position)
+//            self.userLocation?.icon = UIImage(named: "self_location")
+//            self.userLocation?.map = self.mapView
+//            self.userLocation?.zIndex = 1
+//            
+//        }
         
         
         
@@ -942,7 +942,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            navigationView.searchButton.setImage(UIImage(named: "Search"), for: .normal)
 //            navigationView.notificationsButton.setImage(UIImage(named: "Notifications"), for: .normal)
 
-            navigationView.backgroundColor = UIColor(hexString: "435366")
+            navigationView.view.backgroundColor = Constants.color.navy
+            
 //            self.tabBarController!.tabBar.backgroundColor = UIColor(hexString: "435366")
 
 
