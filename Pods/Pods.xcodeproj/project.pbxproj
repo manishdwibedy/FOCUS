@@ -350,9 +350,9 @@
 		5AC5C169E019CCE7B6EDAAB7BE2BFA1F /* TZStackViewDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DA95D2A85A2962B7C2356D62B915BE /* TZStackViewDistribution.swift */; };
 		5ACF6820BE12F0405871EA20A6C3CA7C /* FBSDKImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F23D5B671CF249CF6E147275BED52A0 /* FBSDKImageDownloader.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5AEDA164C0AA5062F24F1DA3B8D7C7C9 /* OhhAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CABAB6118172268F5D463F913B548D /* OhhAuth.swift */; };
+		5B165C181EF238AD00860EA3 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5716D46F400FFDDA7D2D505A16D85A3 /* FirebaseDatabase.framework */; };
 		5B1AF8B6D07FA01316058C49151CF53A /* GTMOAuth2Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = DC105910F4127EC0E2A0E31EC960A5C6 /* GTMOAuth2Authentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B851EE40C78D5874F9BE0942D129D22 /* FBSDKAccessToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FF5191A2F5B617E92F0E9E31CD1BE4 /* FBSDKAccessToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5BD5889B1EF1166600F1320A /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5716D46F400FFDDA7D2D505A16D85A3 /* FirebaseDatabase.framework */; };
 		5BE99F6AD309E4C4C497D161EB1BCC8D /* GameRequest.Recipient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC725A1FA8A874E7B48B9DA53A96430 /* GameRequest.Recipient.swift */; };
 		5C3138B32124CFD95BEF0FF5087536D2 /* Any.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA4367A5800B0921380909CCF35D25 /* Any.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5C4E9462CCC8EB93575B9766100B18DD /* FBSDKAccessTokenCacheV3_21.h in Headers */ = {isa = PBXBuildFile; fileRef = F15777399DA07FCDF364155686053DCC /* FBSDKAccessTokenCacheV3_21.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -2515,7 +2515,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BD5889B1EF1166600F1320A /* FirebaseDatabase.framework in Frameworks */,
+				5B165C181EF238AD00860EA3 /* FirebaseDatabase.framework in Frameworks */,
 				C905C7C05DA47C2413D9E2492D7C4016 /* CoreLocation.framework in Frameworks */,
 				29201A2541063D958C1F622BDE21A5FC /* Foundation.framework in Frameworks */,
 				735B1005CF6967A0B2224C691D8DAB4F /* GoogleToolboxForMac.framework in Frameworks */,
