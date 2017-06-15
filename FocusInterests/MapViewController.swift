@@ -188,6 +188,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        saveUserInfo()
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
         }
@@ -1294,6 +1295,5 @@ extension MapViewController: UIWebViewDelegate {
         else{
             self.webView.isHidden = false
         }
-    }
-    
+    }    
 }

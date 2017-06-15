@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import CoreLocation
+import Crashlytics
 
 func featuresToString(features: [Feature]) -> String {
     var strArray = [String]()
@@ -451,6 +452,13 @@ func getYelpCategories() -> String{
     }
     return categories.joined(separator: ",")
     
+}
+
+
+func saveUserInfo(){
+    Crashlytics.sharedInstance().setUserIdentifier(AuthApi.getFirebaseUid())
+    Crashlytics.sharedInstance().setUserEmail(AuthApi.getUserEmail())
+    Crashlytics.sharedInstance().setUserName(AuthApi.getUserName())
 }
 
     func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
