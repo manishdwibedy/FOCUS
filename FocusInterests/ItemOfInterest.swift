@@ -13,6 +13,8 @@ class ItemOfInterest {
     
     var itemName: String?
     var imageURL: String?
+    var type = ""
+    var id = ""
     
     init(itemName: String?, imageURL: String?) {
         self.itemName = itemName

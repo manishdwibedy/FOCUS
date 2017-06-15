@@ -37,18 +37,21 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         segmentedControl.selectedSegmentIndex = self.selectedSegmentIndex
 
-        backButtonItem.title = "Back"
+        backButtonItem.image = UIImage(named: "BackArrow")
         backButtonItem.tintColor = UIColor.veryLightGrey()
         self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "#182C43")
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.title = "Notifications"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         AuthApi.clearNotifications()
         
         FirebaseDownstream.shared.getUserNotifications(completion: {array in
             //self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)
             self.invArray = array!
-            print("done")
+            print("got NOTI")
+            print(array)
+            
         }, gotNotif: {not in
             self.nofArray = not
         })
@@ -151,10 +154,13 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             cell.setupCell(notif: invArray[indexPath.row])
         }else if self.selectedSegmentIndex == 2{
             cell.setupCell(notif: feedAray[indexPath.row])
+            cell.seeYouThereButton.isHidden = true
+            cell.nextTimeButton.isHidden = true
         }else
         {
             cell.setupCell(notif: nofArray[indexPath.row])
         }
+        cell.parentVC = self
         return cell
     }
     
