@@ -873,7 +873,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
-        if !AuthApi.isNewUser(){
+        if AuthApi.isNewUser(){
             AuthApi.setNewUser()
             self.showPopup()
         }
