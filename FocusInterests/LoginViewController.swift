@@ -26,7 +26,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var regularSignInButton: UIButton!
-
+    @IBOutlet weak var orView: UIView!
+    
     let handle = Auth.auth()
     let loginView = FBSDKLoginManager()
     let defaults = UserDefaults.standard
@@ -44,8 +45,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         loginView.loginBehavior = .web
         
         self.regularSignInButton.roundCorners(radius: 9.0)
-        self.facebookLoginButton.roundCorners(radius: 17.0)
-        self.googleLoginButton.roundCorners(radius: 17.0)
+        self.facebookLoginButton.roundCorners(radius: 27.5)
+        self.googleLoginButton.roundCorners(radius: 27.5)
         
         setUpTextFields()
         hideKeyboardWhenTappedAround()
@@ -64,6 +65,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     override func viewDidDisappear(_ animated: Bool) {
         handle.removeStateDidChangeListener(handle)
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -318,7 +321,6 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             print("User logged in with id: \(uid)")
         }
     }
-    
 
     
     // FaceBook Delegates
