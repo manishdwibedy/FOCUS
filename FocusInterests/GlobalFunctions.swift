@@ -470,6 +470,7 @@ func getYelpCategories() -> String{
         Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
             let json = JSON(data: response.data!)["businesses"]
              print("got data")
+            print(json)
             
             var result = [Place]()
             
