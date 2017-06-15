@@ -305,7 +305,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                 image, error in
                     if let image = image{
                         print("got image")
-                        self.imageArray.append(image!)
+                        self.imageArray.append(image)
                     }
                 })
             }
