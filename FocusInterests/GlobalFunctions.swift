@@ -455,17 +455,13 @@ func getYelpCategories() -> String{
 
     func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
         
-        let url = "https://api.yelp.com/v3/businesses/search"
+        let url = "https://api.yelp.com/v3/businesses/\(ID)"
         
         let headers: HTTPHeaders = [
             "authorization": "Bearer \(AuthApi.getYelpToken()!)",
             "cache-contro": "no-cache"
         ]
         
-        
-        let parameters = [
-            "id": ID
-             ] as [String : Any]
         print("getting data")
         Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
             let json = JSON(data: response.data!)["businesses"]
