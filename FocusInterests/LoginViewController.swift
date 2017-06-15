@@ -131,7 +131,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                 let token = Messaging.messaging().fcmToken
                                 Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
                                 AuthApi.set(FCMToken: token)
-                                
+                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
                                 self.emailTextField.text = ""
                                 self.passwordTextField.text = ""
                                 self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
@@ -229,6 +229,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                             }
                                             
                                             let token = Messaging.messaging().fcmToken
+                                            Constants.DB.user.child("\(fireId)/firebaseUserId").setValue(fireId)
                                             Constants.DB.user.child("\(fireId)/token").setValue(token)
                                             AuthApi.set(FCMToken: token)
                                             
@@ -372,6 +373,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             }
                             
                         }
+                        else{
+                            Constants.DB.user.child("\(fireId)/username").setValue(googleUser.profile.email)
+                        }
                         
                         if let image_string = info?["image_string"] as? String{
                             if image_string.isEmpty{
@@ -380,13 +384,14 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             
                         }
                         else{
-                            Constants.DB.user.child("\(fireId)/fullname").setValue(googleUser.profile.imageURL(withDimension: 100).absoluteString)
+                            Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 100).absoluteString)
                         }
                         
                         let token = Messaging.messaging().fcmToken
                         Constants.DB.user.child("\(fireId)/token").setValue(token)
                         AuthApi.set(FCMToken: token)
                         
+                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
 //                        guard let fullName = info?["fullname"] as? String, !fullName.isEmpty else{
 //                            
 //                            let appearance = SCLAlertView.SCLAppearance(
