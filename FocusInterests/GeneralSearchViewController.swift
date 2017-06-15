@@ -21,7 +21,7 @@ class GeneralSearchViewController: UIViewController, UITableViewDelegate, UITabl
         let generalSearchNib = UINib(nibName: "GeneralSearchCellTableViewCell", bundle: nil)
         self.generalSearchTableView.register(generalSearchNib, forCellReuseIdentifier: "generalSearchCell")
 //        UISearchBar.appearance().setImage(UIImage(named: "new_search_icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
-    self.currentLocationSearchBar.image(for: ., state: <#T##UIControlState#>)
+//    self.currentLocationSearchBar.image(for: ., state: <#T##UIControlState#>)
 
     }
 
