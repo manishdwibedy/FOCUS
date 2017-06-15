@@ -75,87 +75,85 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     
     @IBAction func emailLogin(_ sender: UIButton) {
         
-        guard let email = self.emailTextField.text else{
-            print("empty email")
+        if (self.emailTextField.text?.isEmpty)!{
+            showLoginFailedAlert(loginType: "missing_email")
             return
         }
         
     
-        guard let password = self.passwordTextField.text else{
-            print("empty password")
+        if (self.passwordTextField.text?.isEmpty)!{
+            showLoginFailedAlert(loginType: "missing_password")
             return
         }
         
-        AuthApi.setPassword(password: password)
-        
-        if isValidEmail(text: email){
-            Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-                if error != nil {
-                    self.showLoginFailedAlert(loginType: "email")
-                    print("there has been an error with email login: \(error?.localizedDescription)")
-                } else {
-                    if user != nil {
-                        if let id = user?.uid {
-                            AuthApi.set(firebaseUid: id)
-                            AuthApi.set(loggedIn: .Email)
-                        }
-                        
-                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
-                        
-                        self.emailTextField.text = ""
-                        self.passwordTextField.text = ""
-                        self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
-                        self.showHomeVC()
+        if let email = self.emailTextField.text, let password = self.passwordTextField.text{
+            AuthApi.setPassword(password: password)
+            
+            if isValidEmail(text: email){
+                Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+                    if error != nil {
+                        self.showLoginFailedAlert(loginType: "email")
+                        print("there has been an error with email login: \(error?.localizedDescription)")
                     } else {
+                        if user != nil {
+                            if let id = user?.uid {
+                                AuthApi.set(firebaseUid: id)
+                                AuthApi.set(loggedIn: .Email)
+                            }
+                            
+                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
+                            
+                            self.emailTextField.text = ""
+                            self.passwordTextField.text = ""
+                            self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
+                            self.showHomeVC()
+                        } else {
+                            self.showLoginFailedAlert(loginType: "email")
+                        }
+                    }
+                })
+            }
+            else{
+                let ref = Constants.DB.user_mapping
+                ref.child(email).observeSingleEvent(of: .value, with: { snapshot in
+                    let user = snapshot.value as? String
+                    
+                    if let userEmail = user{
+                        Auth.auth().signIn(withEmail: userEmail, password: password, completion: { (user, error) in
+                            if error != nil {
+                                self.showLoginFailedAlert(loginType: "email")
+                                print("there has been an error with email login: \(error?.localizedDescription)")
+                            } else {
+                                if user != nil {
+                                    if let id = user?.uid {
+                                        AuthApi.set(firebaseUid: id)
+                                        AuthApi.set(loggedIn: .Email)
+                                    }
+                                    
+                                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
+                                    
+                                    let token = Messaging.messaging().fcmToken
+                                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
+                                    AuthApi.set(FCMToken: token)
+                                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
+                                    self.emailTextField.text = ""
+                                    self.passwordTextField.text = ""
+                                    self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
+                                    self.showHomeVC()
+                                } else {
+                                    self.showLoginFailedAlert(loginType: "email")
+                                }
+                            }
+                        })
+                    }
+                    else{
                         self.showLoginFailedAlert(loginType: "email")
                     }
-                }
-            })
-        }
-        else{
-            let ref = Constants.DB.user_mapping
-            ref.child(email).observeSingleEvent(of: .value, with: { snapshot in
-                let user = snapshot.value as? String
+                    
+                })
                 
-                if let userEmail = user{
-                    Auth.auth().signIn(withEmail: userEmail, password: password, completion: { (user, error) in
-                        if error != nil {
-                            self.showLoginFailedAlert(loginType: "email")
-                            print("there has been an error with email login: \(error?.localizedDescription)")
-                        } else {
-                            if user != nil {
-                                if let id = user?.uid {
-                                    AuthApi.set(firebaseUid: id)
-                                    AuthApi.set(loggedIn: .Email)
-                                }
-                                
-                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
-                                
-                                let token = Messaging.messaging().fcmToken
-                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
-                                AuthApi.set(FCMToken: token)
-                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
-                                self.emailTextField.text = ""
-                                self.passwordTextField.text = ""
-                                self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
-                                self.showHomeVC()
-                            } else {
-                                self.showLoginFailedAlert(loginType: "email")
-                            }
-                        }
-                    })
-                }
-                else{
-                    self.showLoginFailedAlert(loginType: "email")
-                }
-                
-            })
- 
+            }
         }
-        
-        
-        
-        
     }
 
     @IBAction func facebookLogin(_ sender: UIButton) {
@@ -309,11 +307,21 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     }
     
     func showLoginFailedAlert(loginType: String) {
-        let alert = UIAlertController(title: "Login error", message: "There has been an error logging in with \(loginType). Please try again.", preferredStyle: .alert)
+        var alert: UIAlertController? = nil
+        
+        if loginType == "missing_email"{
+            alert = UIAlertController(title: "Login error", message: "Please enter a valid email/username", preferredStyle: .alert)
+        }
+        else if loginType == "missing_password"{
+            alert = UIAlertController(title: "Login error", message: "Please enter a valid password", preferredStyle: .alert)
+        }
+        else{
+             alert = UIAlertController(title: "Login error", message: "There has been an error logging in with \(loginType). Please try again.", preferredStyle: .alert)
+        }
         let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
-        alert.view.tintColor = UIColor.primaryGreen()
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        alert?.view.tintColor = UIColor.primaryGreen()
+        alert?.addAction(action)
+        self.present(alert!, animated: true, completion: nil)
     }
     
     func checkForSignedUp() {
