@@ -877,9 +877,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
         if AuthApi.isNewUser(){
             AuthApi.setNewUser()
-            self.showPopup()
-        }
-        else{
             let appearance = SCLAlertView.SCLAppearance(
                 kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
                 kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
@@ -889,17 +886,24 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             let alert = SCLAlertView(appearance: appearance)
             let username = alert.addTextField("Enter your username")
+            username.autocapitalizationType = .none
             alert.addButton("Add user name") {
                 if (username.text?.characters.count)! > 0{
-                     Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
-                    print("Text value: \(username)")
+                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+                    print("Text value: \(username.text!)")
                     alert.hideView()
-                    
+                    self.showPopup()
                 }
                 
             }
             
             alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
+            
+            
+            
+        }
+        else{
+            
         }
 //        changeTab()
         
