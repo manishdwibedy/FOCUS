@@ -111,7 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         if let loggedIn = defaults.object(forKey: "Login") as? String {
             if loggedIn == "notLoggedIn" {
                 logout()
-            } else {
+            }
+            else {
                 login()
             }
         } else if defaults.object(forKey: "Login") == nil {

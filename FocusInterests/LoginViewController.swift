@@ -26,7 +26,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var regularSignInButton: UIButton!
-
+    @IBOutlet weak var orView: UIView!
+    
     let handle = Auth.auth()
     let loginView = FBSDKLoginManager()
     let defaults = UserDefaults.standard
@@ -44,8 +45,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         loginView.loginBehavior = .web
         
         self.regularSignInButton.roundCorners(radius: 9.0)
-        self.facebookLoginButton.roundCorners(radius: 17.0)
-        self.googleLoginButton.roundCorners(radius: 17.0)
+        self.facebookLoginButton.roundCorners(radius: 27.5)
+        self.googleLoginButton.roundCorners(radius: 27.5)
         
         setUpTextFields()
         hideKeyboardWhenTappedAround()
@@ -64,6 +65,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     override func viewDidDisappear(_ animated: Bool) {
         handle.removeStateDidChangeListener(handle)
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -72,87 +75,85 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     
     @IBAction func emailLogin(_ sender: UIButton) {
         
-        guard let email = self.emailTextField.text else{
-            print("empty email")
+        if (self.emailTextField.text?.isEmpty)!{
+            showLoginFailedAlert(loginType: "missing_email")
             return
         }
         
     
-        guard let password = self.passwordTextField.text else{
-            print("empty password")
+        if (self.passwordTextField.text?.isEmpty)!{
+            showLoginFailedAlert(loginType: "missing_password")
             return
         }
         
-        AuthApi.setPassword(password: password)
-        
-        if isValidEmail(text: email){
-            Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-                if error != nil {
-                    self.showLoginFailedAlert(loginType: "email")
-                    print("there has been an error with email login: \(error?.localizedDescription)")
-                } else {
-                    if user != nil {
-                        if let id = user?.uid {
-                            AuthApi.set(firebaseUid: id)
-                            AuthApi.set(loggedIn: .Email)
-                        }
-                        
-                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
-                        
-                        self.emailTextField.text = ""
-                        self.passwordTextField.text = ""
-                        self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
-                        self.showHomeVC()
+        if let email = self.emailTextField.text, let password = self.passwordTextField.text{
+            AuthApi.setPassword(password: password)
+            
+            if isValidEmail(text: email){
+                Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
+                    if error != nil {
+                        self.showLoginFailedAlert(loginType: "email")
+                        print("there has been an error with email login: \(error?.localizedDescription)")
                     } else {
+                        if user != nil {
+                            if let id = user?.uid {
+                                AuthApi.set(firebaseUid: id)
+                                AuthApi.set(loggedIn: .Email)
+                            }
+                            
+                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
+                            
+                            self.emailTextField.text = ""
+                            self.passwordTextField.text = ""
+                            self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
+                            self.showHomeVC()
+                        } else {
+                            self.showLoginFailedAlert(loginType: "email")
+                        }
+                    }
+                })
+            }
+            else{
+                let ref = Constants.DB.user_mapping
+                ref.child(email).observeSingleEvent(of: .value, with: { snapshot in
+                    let user = snapshot.value as? String
+                    
+                    if let userEmail = user{
+                        Auth.auth().signIn(withEmail: userEmail, password: password, completion: { (user, error) in
+                            if error != nil {
+                                self.showLoginFailedAlert(loginType: "email")
+                                print("there has been an error with email login: \(error?.localizedDescription)")
+                            } else {
+                                if user != nil {
+                                    if let id = user?.uid {
+                                        AuthApi.set(firebaseUid: id)
+                                        AuthApi.set(loggedIn: .Email)
+                                    }
+                                    
+                                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
+                                    
+                                    let token = Messaging.messaging().fcmToken
+                                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
+                                    AuthApi.set(FCMToken: token)
+                                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
+                                    self.emailTextField.text = ""
+                                    self.passwordTextField.text = ""
+                                    self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
+                                    self.showHomeVC()
+                                } else {
+                                    self.showLoginFailedAlert(loginType: "email")
+                                }
+                            }
+                        })
+                    }
+                    else{
                         self.showLoginFailedAlert(loginType: "email")
                     }
-                }
-            })
-        }
-        else{
-            let ref = Constants.DB.user_mapping
-            ref.child(email).observeSingleEvent(of: .value, with: { snapshot in
-                let user = snapshot.value as? String
+                    
+                })
                 
-                if let userEmail = user{
-                    Auth.auth().signIn(withEmail: userEmail, password: password, completion: { (user, error) in
-                        if error != nil {
-                            self.showLoginFailedAlert(loginType: "email")
-                            print("there has been an error with email login: \(error?.localizedDescription)")
-                        } else {
-                            if user != nil {
-                                if let id = user?.uid {
-                                    AuthApi.set(firebaseUid: id)
-                                    AuthApi.set(loggedIn: .Email)
-                                }
-                                
-                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
-                                
-                                let token = Messaging.messaging().fcmToken
-                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
-                                AuthApi.set(FCMToken: token)
-                                
-                                self.emailTextField.text = ""
-                                self.passwordTextField.text = ""
-                                self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
-                                self.showHomeVC()
-                            } else {
-                                self.showLoginFailedAlert(loginType: "email")
-                            }
-                        }
-                    })
-                }
-                else{
-                    self.showLoginFailedAlert(loginType: "email")
-                }
-                
-            })
- 
+            }
         }
-        
-        
-        
-        
     }
 
     @IBAction func facebookLogin(_ sender: UIButton) {
@@ -185,60 +186,14 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                     {
                                         print("Error: \(error)")
                                     }
-                                    else
-                                    {
-                                        let data:[String:AnyObject] = result as! [String : AnyObject]
-                                        
-                                        let facebook_id = data["id"] as? String
-                                        let first_name = data["first_name"] as? String
-                                        let last_name = data["last_name"] as? String
-                                        
-                                        let image_string = (data["picture"]?["data"] as! [String:Any])["url"] as? String
-                                        let username = data["email"] as? String
-                                        
-                                        let userRef = Constants.DB.user.child(fireId).observeSingleEvent(of: .value, with: {(snapshot) in
-                                            
-                                            let info = snapshot.value as? [String:Any]
-                                            
-                                            if let fullname = info?["fullname"] as? String{
-                                                if fullname.isEmpty{
-                                                    Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name) \(last_name)")
-                                                }
-                                                
-                                            }
-                                            else{
-                                                Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name) \(last_name)")
-                                            }
-                                            
-                                            if let username = info?["username"] as? String{
-                                                if username.isEmpty{
-                                                    Constants.DB.user.child("\(fireId)/username").setValue(username)
-                                                    AuthApi.set(username: username)
-                                                }
-                                                
-                                            }
-                                            
-                                            if let image_string = info?["image_string"] as? String{
-                                                if image_string.isEmpty{
-                                                    Constants.DB.user.child("\(fireId)/image_string").setValue(image_string)
-                                                }
-                                                
-                                            }
-                                            else{
-                                                Constants.DB.user.child("\(fireId)/fullname").setValue(image_string)
-                                            }
-                                            
-                                            let token = Messaging.messaging().fcmToken
-                                            Constants.DB.user.child("\(fireId)/token").setValue(token)
-                                            AuthApi.set(FCMToken: token)
-                                            
-                                        })
-                                        
+                                    else{
+                                        self.getFacebookData(uuid: fireId, result: result)
                                     }
+                                    self.showHomeVC()
                                 })
 
                                 
-                                self.showHomeVC()
+                                
                             }
                             
                             self.checkForSignedUp()
@@ -305,11 +260,21 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     }
     
     func showLoginFailedAlert(loginType: String) {
-        let alert = UIAlertController(title: "Login error", message: "There has been an error logging in with \(loginType). Please try again.", preferredStyle: .alert)
+        var alert: UIAlertController? = nil
+        
+        if loginType == "missing_email"{
+            alert = UIAlertController(title: "Login error", message: "Please enter a valid email/username", preferredStyle: .alert)
+        }
+        else if loginType == "missing_password"{
+            alert = UIAlertController(title: "Login error", message: "Please enter a valid password", preferredStyle: .alert)
+        }
+        else{
+             alert = UIAlertController(title: "Login error", message: "There has been an error logging in with \(loginType). Please try again.", preferredStyle: .alert)
+        }
         let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
-        alert.view.tintColor = UIColor.primaryGreen()
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        alert?.view.tintColor = UIColor.primaryGreen()
+        alert?.addAction(action)
+        self.present(alert!, animated: true, completion: nil)
     }
     
     func checkForSignedUp() {
@@ -317,7 +282,6 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             print("User logged in with id: \(uid)")
         }
     }
-    
 
     
     // FaceBook Delegates
@@ -365,45 +329,21 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             Constants.DB.user.child("\(fireId)/fullname").setValue(googleUser.profile.name)
                         }
                         
-                        if let username = info?["username"] as? String{
-                            if username.isEmpty{
-                                Constants.DB.user.child("\(fireId)/username").setValue(googleUser.profile.email)
-                                AuthApi.set(username: username)
-                            }
-                            
-                        }
-                        
                         if let image_string = info?["image_string"] as? String{
                             if image_string.isEmpty{
-                                Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 100).absoluteString)
+                                Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 375).absoluteString)
                             }
                             
                         }
                         else{
-                            Constants.DB.user.child("\(fireId)/fullname").setValue(googleUser.profile.imageURL(withDimension: 100).absoluteString)
+                            Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 375).absoluteString)
                         }
                         
                         let token = Messaging.messaging().fcmToken
                         Constants.DB.user.child("\(fireId)/token").setValue(token)
                         AuthApi.set(FCMToken: token)
                         
-//                        guard let fullName = info?["fullname"] as? String, !fullName.isEmpty else{
-//                            
-//                            let appearance = SCLAlertView.SCLAppearance(
-//                                showCloseButton: false
-//                            )
-//                            let alert = SCLAlertView(appearance: appearance)
-//                            
-//                            let fullName = alert.addTextField("Enter your name")
-//                            alert.addButton("Done") {
-//                                Constants.DB.user.child("\(fireId)/fullname").setValue(fullName.text!)
-//                            }
-//                            alert.showEdit("Enter your full name", subTitle: "Please enter your full name")
-//                            
-//
-//                            return
-//                            
-//                        }
+                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
                         self.showHomeVC()
                         
                     })
@@ -429,8 +369,47 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         return true
     }
     
-    func askFullName(){
+    func getFacebookData(uuid fireId: String,result: Any)
+    {
+        let data:[String:AnyObject] = result as! [String : AnyObject]
         
+        let facebook_id = data["id"] as? String
+        let first_name = data["first_name"] as? String
+        let last_name = data["last_name"] as? String
+        
+        let facebook_image_string = (data["picture"]?["data"] as! [String:Any])["url"] as? String
+        let username = data["email"] as? String
+        
+        let userRef = Constants.DB.user.child(fireId).observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            let info = snapshot.value as? [String:Any]
+            
+            if let fullname = info?["fullname"] as? String{
+                if fullname.isEmpty{
+                    Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name!) \(last_name!)")
+                }
+                
+            }
+            else{
+                Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name!) \(last_name!)")
+            }
+            
+            if let image_string = info?["image_string"] as? String{
+                if image_string.isEmpty{
+                    Constants.DB.user.child("\(fireId)/image_string").setValue(facebook_image_string)
+                }
+                
+            }
+            else{
+                Constants.DB.user.child("\(fireId)/image_string").setValue(facebook_image_string)
+            }
+            
+            let token = Messaging.messaging().fcmToken
+            Constants.DB.user.child("\(fireId)/firebaseUserId").setValue(fireId)
+            Constants.DB.user.child("\(fireId)/token").setValue(token)
+            AuthApi.set(FCMToken: token)
+            
+        })
     }
 
 }

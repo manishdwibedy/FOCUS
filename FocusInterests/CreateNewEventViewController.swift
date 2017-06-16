@@ -247,14 +247,14 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             self.publicLabel.textColor = UIColor.white
             
             guestSettingsStackView.isHidden = false
-            interestTopConstraint.constant = 16
+            interestTopConstraint.constant = 125
             
         } else /* the switch is set to public */ {
             self.privateLabel.textColor = UIColor.white
             self.publicLabel.textColor = UIColor.primaryGreen()
             
             guestSettingsStackView.isHidden = true
-            interestTopConstraint.constant = -70
+            interestTopConstraint.constant = 50
         }
     }
     

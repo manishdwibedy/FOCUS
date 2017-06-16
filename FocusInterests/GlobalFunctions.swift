@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import CoreLocation
+import Crashlytics
 
 func featuresToString(features: [Feature]) -> String {
     var strArray = [String]()
@@ -239,10 +240,10 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
         let user = snapshot.value as? [String : Any]
         
         let followers = user?["followers"] as? [String : Any]
-        let people = followers?["people"] as? [String : [String: Any]]
+        let people = followers?["people"] as? [String : [String: Any]] ?? [:]
         
-        followerCount = (people?.count)!
-        for (_, follower) in people!{
+        followerCount = people.count
+        for (_, follower) in people{
             let followerID = follower["UID"] as! String
 //            let username = follower["username"] as! String
 //            let imageURL = follower["imageURL"] as? String
@@ -453,44 +454,47 @@ func getYelpCategories() -> String{
     
 }
 
+
+func saveUserInfo(){
+    Crashlytics.sharedInstance().setUserIdentifier(AuthApi.getFirebaseUid())
+    Crashlytics.sharedInstance().setUserEmail(AuthApi.getUserEmail())
+    Crashlytics.sharedInstance().setUserName(AuthApi.getUserName())
+}
+
     func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
         
-        let url = "https://api.yelp.com/v3/businesses/search"
+        let url = "https://api.yelp.com/v3/businesses/\(ID)"
         
         let headers: HTTPHeaders = [
             "authorization": "Bearer \(AuthApi.getYelpToken()!)",
             "cache-contro": "no-cache"
         ]
         
-        
-        let parameters = [
-            "id": ID
-             ] as [String : Any]
         print("getting data")
-        Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
-            let json = JSON(data: response.data!)["businesses"]
+        Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
+            let json = JSON(data: response.data!)
              print("got data")
             print(json)
             
-            var result = [Place]()
+        
             
             
-            for (_, business) in json.enumerated(){
-                let id = business.1["id"].stringValue
-                let name = business.1["name"].stringValue
-                let image_url = business.1["image_url"].stringValue
-                let isClosed = business.1["is_closed"].boolValue
-                let reviewCount = business.1["review_count"].intValue
-                let rating = business.1["rating"].floatValue
-                let latitude = business.1["coordinates"]["latitude"].doubleValue
-                let longitude = business.1["coordinates"]["longitude"].doubleValue
-                let price = business.1["price"].stringValue
-                let address_json = business.1["location"]["display_address"].arrayValue
-                let phone = business.1["display_phone"].stringValue
-                let distance = business.1["distance"].doubleValue
-                let categories_json = business.1["categories"].arrayValue
-                let url = business.1["url"].stringValue
-                let plain_phone = business.1["phone"].stringValue
+//            for (_, business) in json.enumerated(){
+                let id = json["id"].stringValue
+                let name = json["name"].stringValue
+                let image_url = json["image_url"].stringValue
+                let isClosed = json["is_closed"].boolValue
+                let reviewCount = json["review_count"].intValue
+                let rating = json["rating"].floatValue
+                let latitude = json["coordinates"]["latitude"].doubleValue
+                let longitude = json["coordinates"]["longitude"].doubleValue
+                let price = json["price"].stringValue
+                let address_json = json["location"]["display_address"].arrayValue
+                let phone = json["display_phone"].stringValue
+                let distance = json["distance"].doubleValue
+                let categories_json = json["categories"].arrayValue
+                let url = json["url"].stringValue
+                let plain_phone = json["phone"].stringValue
                 
                 var address = [String]()
                 for raw_address in address_json{
@@ -505,14 +509,11 @@ func getYelpCategories() -> String{
                 
                 let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                 
-                if !result.contains(place){
-                    result.append(place)
-                }
                 
                 completion(place)
                 
                 
-            }
+//            }
             
                 //                    print(self.filtered[0].name)
                 

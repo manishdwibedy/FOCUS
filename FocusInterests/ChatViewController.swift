@@ -25,6 +25,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     var imageMapper = [String:Int]()
     var gotImages = false
     var loadingMessages = false
+    var addPin = false
+    var pinMessage: String? = nil
+    var pinImage: UIImage? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,9 +191,6 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         
         let message = messages[indexPath.row]
-        
-        print(indexPath.row)
-        print(message.text!)
         
         if indexPath.row == 0 && !loadingMessages{
             loadingMessages = true
@@ -496,13 +496,25 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             let threadID = messageContentRef.childByAutoId()
             let newMessage = threadID.childByAutoId()
             
-            let messageDictionary = [
-                                "sender_id" : AuthApi.getFirebaseUid(),
-                                "text" : message.text,
-                                "date": Date().timeIntervalSince1970
-                            ] as [String : Any]
-            self.messageID = threadID.key
-            newMessage.setValue(messageDictionary)
+            if !message.isMediaMessage {
+                let messageDictionary = [
+                    "sender_id" : AuthApi.getFirebaseUid(),
+                    "text" : message.text,
+                    "date": Date().timeIntervalSince1970
+                    ] as [String : Any]
+                self.messageID = threadID.key
+                newMessage.setValue(messageDictionary)
+            }
+            else{
+                let messageDictionary = [
+                    "sender_id" : AuthApi.getFirebaseUid(),
+                    "image" : true,
+                    "date": Date().timeIntervalSince1970
+                    ] as [String : Any]
+                self.messageID = threadID.key
+                newMessage.setValue(messageDictionary)
+            }
+            
             self.addMessageID()
             self.getMessages()
         }

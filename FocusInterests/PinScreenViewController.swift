@@ -303,10 +303,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             {
                 imgageManager.requestImage(for: fetchResult.object(at: i) , targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: requestOptions, resultHandler: {
                 image, error in
-                    
-                    print("got image")
-                    self.imageArray.append(image!)
-                    
+                    if let image = image{
+                        print("got image")
+                        self.imageArray.append(image)
+                    }
                 })
             }
             

@@ -20,6 +20,7 @@ import FirebaseMessaging
 import SDWebImage
 import MessageUI
 import ChameleonFramework
+import SCLAlertView
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate {
     
@@ -97,7 +98,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         placesClient = GMSPlacesClient.shared()
         
-//        mapView.isMyLocationEnabled = true
+        mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         
         if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
@@ -188,6 +189,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).keepSynced(true)
+        saveUserInfo()
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
         }
@@ -872,9 +875,35 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
-        if !AuthApi.isNewUser(){
+        if AuthApi.isNewUser(){
             AuthApi.setNewUser()
-            self.showPopup()
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: false
+            )
+            
+            let alert = SCLAlertView(appearance: appearance)
+            let username = alert.addTextField("Enter your username")
+            username.autocapitalizationType = .none
+            alert.addButton("Add user name") {
+                if (username.text?.characters.count)! > 0{
+                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+                    print("Text value: \(username.text!)")
+                    alert.hideView()
+                    self.showPopup()
+                }
+                
+            }
+            
+            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
+            
+            
+            
+        }
+        else{
+            
         }
 //        changeTab()
         
@@ -908,21 +937,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                               zoom: 15)
         
         let position = CLLocationCoordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude))
-        if self.userLocation == nil{
-            self.userLocation = GMSMarker(position: position)
-            self.userLocation?.icon = UIImage(named: "self_location")
-            self.userLocation?.map = self.mapView
-            self.userLocation?.zIndex = 1
-        }
-        else{
-            self.userLocation?.map = nil
-            
-            self.userLocation = GMSMarker(position: position)
-            self.userLocation?.icon = UIImage(named: "self_location")
-            self.userLocation?.map = self.mapView
-            self.userLocation?.zIndex = 1
-            
-        }
+//        if self.userLocation == nil{
+//            self.userLocation = GMSMarker(position: position)
+//            self.userLocation?.icon = UIImage(named: "self_location")
+//            self.userLocation?.map = self.mapView
+//            self.userLocation?.zIndex = 1
+//        }
+//        else{
+//            self.userLocation?.map = nil
+//            
+//            self.userLocation = GMSMarker(position: position)
+//            self.userLocation?.icon = UIImage(named: "self_location")
+//            self.userLocation?.map = self.mapView
+//            self.userLocation?.zIndex = 1
+//            
+//        }
         
         
         
@@ -942,7 +971,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            navigationView.searchButton.setImage(UIImage(named: "Search"), for: .normal)
 //            navigationView.notificationsButton.setImage(UIImage(named: "Notifications"), for: .normal)
 
-            navigationView.backgroundColor = UIColor(hexString: "435366")
+            navigationView.view.backgroundColor = Constants.color.navy
+            
 //            self.tabBarController!.tabBar.backgroundColor = UIColor(hexString: "435366")
 
 
@@ -1077,10 +1107,23 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func searchClicked() {
-        let storyboard = UIStoryboard(name: "general_search", bundle: nil)
-        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
-        VC?.location = self.currentLocation
-        self.present(VC!, animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "general_search", bundle: nil)
+//        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
+//        VC?.location = self.currentLocation
+//        self.present(VC!, animated: true, completion: nil)
+        
+        let storyBoard = UIStoryboard(name: "general_search", bundle: nil)
+        let generalSearchVC = storyBoard.instantiateViewController(withIdentifier: "GeneralSearchViewController") as? GeneralSearchViewController
+        
+//        let newController = NewViewController(nibName: "NewView", bundle: nil)
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromBottom
+        view.window!.layer.add(transition, forKey: kCATransition)
+        self.present(generalSearchVC!, animated: true, completion: nil)
+        
+        
     }
     
     func fetchPlaces(around location: CLLocation, token: String){
@@ -1293,6 +1336,5 @@ extension MapViewController: UIWebViewDelegate {
         else{
             self.webView.isHidden = false
         }
-    }
-    
+    }    
 }

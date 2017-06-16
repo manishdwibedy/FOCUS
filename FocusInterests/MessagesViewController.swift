@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import SDWebImage
 
 class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -159,8 +160,18 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         let message = self.messages[indexPath.row]
         cell.username.text = message.name
         
+        
+        
+        let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+            cell.userImage.roundedImage()
+        }
+        
+        let placeholderImage = UIImage(named: "UserPhoto")
+        
         if let url = URL(string: message.image_string){
-            cell.userImage.sd_setImage(with: url, placeholderImage: UIImage(named: "UserPhoto"))
+            cell.userImage.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+            cell.userImage.setShowActivityIndicator(true)
+            cell.userImage.setIndicatorStyle(.gray)
         }
         
         cell.content.text = message.lastContent

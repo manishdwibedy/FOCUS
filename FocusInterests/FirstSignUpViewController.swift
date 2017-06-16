@@ -12,9 +12,11 @@ import FirebaseAuth
 
 class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var usPhoneLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var phoneNumberEmailView: UIView!
-    @IBOutlet weak var phoneOrEmailTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var phoneEmailSwitcher: UISegmentedControl!
     
     var typeOfSignUpSelected = "phone"
@@ -26,20 +28,26 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
         self.phoneNumberEmailView.addBottomBorderWithColor(color: UIColor.white, width: 1)
         
         self.nextButton.roundCorners(radius: 9.0)
-        self.phoneOrEmailTextField.keyboardType = .numberPad
-        self.phoneOrEmailTextField.delegate = self
+        self.phoneTextField.keyboardType = .numberPad
+        self.emailTextField.isHidden = true
         
+        self.phoneTextField.delegate = self
+        self.emailTextField.delegate = self
         self.customizeSwitcherAppearance()
         hideKeyboardWhenTappedAround()
     }
     
     func customizeSwitcherAppearance() {
-        self.phoneOrEmailTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
+        self.phoneTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
         //        var attr = NSDictionary(object: UIFont(name: "Avenir", size: 20.0)!, forKey: NSFontAttributeName as NSCopying)
         
         self.phoneEmailSwitcher.setTitleTextAttributes([NSFontAttributeName:UIFont(name: "Avenir", size: 20.0)!,NSForegroundColorAttributeName:UIColor.white], for: .normal)
         
         self.phoneEmailSwitcher.setTitleTextAttributes([NSFontAttributeName:UIFont(name: "Avenir", size: 20.0)!,NSForegroundColorAttributeName: self.limeGreenColor], for:.selected)
+        
+        self.emailTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSForegroundColorAttributeName : UIColor.lightGray])
+        
+        self.phoneTextField.attributedPlaceholder = NSAttributedString(string: "Phone Number", attributes: [NSForegroundColorAttributeName : UIColor.lightGray])
         
         self.phoneEmailSwitcher.setBackgroundImage(self.imageWithColor(color: UIColor.clear), for:.normal, barMetrics:.default)
         
@@ -65,7 +73,7 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
     
     @IBAction func nextButtonClicked(_ sender: Any) {
         if phoneEmailSwitcher.selectedSegmentIndex == 0{
-            PhoneAuthProvider.provider().verifyPhoneNumber(self.phoneOrEmailTextField.text!) { (verificationID, error) in
+            PhoneAuthProvider.provider().verifyPhoneNumber(self.phoneTextField.text!) { (verificationID, error) in
                 if ((error) != nil) {
                     print(error)
                 } else {
@@ -83,20 +91,27 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
     
     
     @IBAction func typeOfSignUpWasSelected(_ sender: Any) {
-        phoneOrEmailTextField.resignFirstResponder()
+        phoneTextField.resignFirstResponder()
         if phoneEmailSwitcher.selectedSegmentIndex == 0 {
-            self.phoneOrEmailTextField.placeholder = "Phone Number"
-            self.phoneOrEmailTextField.keyboardType = .numberPad
+            
+            self.emailTextField.isHidden = true
+            self.usPhoneLabel.isHidden = false
+            self.phoneTextField.isHidden = false
         } else {
-            self.phoneOrEmailTextField.placeholder = "Email"
-            self.phoneOrEmailTextField.keyboardType = .emailAddress
+            self.usPhoneLabel.isHidden = true
+            self.phoneTextField.isHidden = true
+            self.emailTextField.isHidden = false
+            
+            self.emailTextField.keyboardType = .emailAddress
+            self.emailTextField.returnKeyType = .done
+            
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "next" {
             if let destinationVC = segue.destination as? SecondSignUpViewController {
-                guard let validEntry = phoneOrEmailTextField.text else { return }
+                guard let validEntry = phoneTextField.text else { return }
                 switch self.phoneEmailSwitcher.selectedSegmentIndex {
                 case 0:
                     self.typeOfSignUpSelected = "phone"
