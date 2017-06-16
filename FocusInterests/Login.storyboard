@@ -914,7 +914,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="igb-sL-x3Y" secondAttribute="height" multiplier="263:30" constant="10" id="Nls-ug-OWm"/>
                                         </constraints>
-                                        <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                     </textField>
