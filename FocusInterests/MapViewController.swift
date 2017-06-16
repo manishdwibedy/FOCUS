@@ -20,6 +20,7 @@ import FirebaseMessaging
 import SDWebImage
 import MessageUI
 import ChameleonFramework
+import SCLAlertView
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate {
     
@@ -877,6 +878,28 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if AuthApi.isNewUser(){
             AuthApi.setNewUser()
             self.showPopup()
+        }
+        else{
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: false
+            )
+            
+            let alert = SCLAlertView(appearance: appearance)
+            let username = alert.addTextField("Enter your username")
+            alert.addButton("Add user name") {
+                if (username.text?.characters.count)! > 0{
+                     Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+                    print("Text value: \(username)")
+                    alert.hideView()
+                    
+                }
+                
+            }
+            
+            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
         }
 //        changeTab()
         
