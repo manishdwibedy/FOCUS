@@ -218,6 +218,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                                 }
                                                 
                                             }
+                                            else{
+                                                Constants.DB.user.child("\(fireId)/username").setValue(username)
+                                            }
                                             
                                             if let image_string = info?["image_string"] as? String{
                                                 if image_string.isEmpty{
@@ -226,7 +229,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                                 
                                             }
                                             else{
-                                                Constants.DB.user.child("\(fireId)/fullname").setValue(image_string)
+                                                Constants.DB.user.child("\(fireId)/image_string").setValue(image_string)
                                             }
                                             
                                             let token = Messaging.messaging().fcmToken
