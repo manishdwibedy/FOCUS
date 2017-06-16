@@ -188,6 +188,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).keepSynced(true)
         saveUserInfo()
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
