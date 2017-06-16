@@ -186,64 +186,14 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                     {
                                         print("Error: \(error)")
                                     }
-                                    else
-                                    {
-                                        let data:[String:AnyObject] = result as! [String : AnyObject]
-                                        
-                                        let facebook_id = data["id"] as? String
-                                        let first_name = data["first_name"] as? String
-                                        let last_name = data["last_name"] as? String
-                                        
-                                        let image_string = (data["picture"]?["data"] as! [String:Any])["url"] as? String
-                                        let username = data["email"] as? String
-                                        
-                                        let userRef = Constants.DB.user.child(fireId).observeSingleEvent(of: .value, with: {(snapshot) in
-                                            
-                                            let info = snapshot.value as? [String:Any]
-                                            
-                                            if let fullname = info?["fullname"] as? String{
-                                                if fullname.isEmpty{
-                                                    Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name) \(last_name)")
-                                                }
-                                                
-                                            }
-                                            else{
-                                                Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name) \(last_name)")
-                                            }
-                                            
-                                            if let username = info?["username"] as? String{
-                                                if username.isEmpty{
-                                                    Constants.DB.user.child("\(fireId)/username").setValue(username)
-                                                    AuthApi.set(username: username)
-                                                }
-                                                
-                                            }
-                                            else{
-                                                Constants.DB.user.child("\(fireId)/username").setValue(username)
-                                            }
-                                            
-                                            if let image_string = info?["image_string"] as? String{
-                                                if image_string.isEmpty{
-                                                    Constants.DB.user.child("\(fireId)/image_string").setValue(image_string)
-                                                }
-                                                
-                                            }
-                                            else{
-                                                Constants.DB.user.child("\(fireId)/image_string").setValue(image_string)
-                                            }
-                                            
-                                            let token = Messaging.messaging().fcmToken
-                                            Constants.DB.user.child("\(fireId)/firebaseUserId").setValue(fireId)
-                                            Constants.DB.user.child("\(fireId)/token").setValue(token)
-                                            AuthApi.set(FCMToken: token)
-                                            
-                                        })
-                                        
+                                    else{
+                                        self.getFacebookData(uuid: fireId, result: result)
                                     }
+                                    self.showHomeVC()
                                 })
 
                                 
-                                self.showHomeVC()
+                                
                             }
                             
                             self.checkForSignedUp()
@@ -405,23 +355,6 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         AuthApi.set(FCMToken: token)
                         
                         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
-//                        guard let fullName = info?["fullname"] as? String, !fullName.isEmpty else{
-//                            
-//                            let appearance = SCLAlertView.SCLAppearance(
-//                                showCloseButton: false
-//                            )
-//                            let alert = SCLAlertView(appearance: appearance)
-//                            
-//                            let fullName = alert.addTextField("Enter your name")
-//                            alert.addButton("Done") {
-//                                Constants.DB.user.child("\(fireId)/fullname").setValue(fullName.text!)
-//                            }
-//                            alert.showEdit("Enter your full name", subTitle: "Please enter your full name")
-//                            
-//
-//                            return
-//                            
-//                        }
                         self.showHomeVC()
                         
                     })
@@ -447,8 +380,47 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         return true
     }
     
-    func askFullName(){
+    func getFacebookData(uuid fireId: String,result: Any)
+    {
+        let data:[String:AnyObject] = result as! [String : AnyObject]
         
+        let facebook_id = data["id"] as? String
+        let first_name = data["first_name"] as? String
+        let last_name = data["last_name"] as? String
+        
+        let facebook_image_string = (data["picture"]?["data"] as! [String:Any])["url"] as? String
+        let username = data["email"] as? String
+        
+        let userRef = Constants.DB.user.child(fireId).observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            let info = snapshot.value as? [String:Any]
+            
+            if let fullname = info?["fullname"] as? String{
+                if fullname.isEmpty{
+                    Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name!) \(last_name!)")
+                }
+                
+            }
+            else{
+                Constants.DB.user.child("\(fireId)/fullname").setValue("\(first_name!) \(last_name!)")
+            }
+            
+            if let image_string = info?["image_string"] as? String{
+                if image_string.isEmpty{
+                    Constants.DB.user.child("\(fireId)/image_string").setValue(facebook_image_string)
+                }
+                
+            }
+            else{
+                Constants.DB.user.child("\(fireId)/image_string").setValue(facebook_image_string)
+            }
+            
+            let token = Messaging.messaging().fcmToken
+            Constants.DB.user.child("\(fireId)/firebaseUserId").setValue(fireId)
+            Constants.DB.user.child("\(fireId)/token").setValue(token)
+            AuthApi.set(FCMToken: token)
+            
+        })
     }
 
 }
