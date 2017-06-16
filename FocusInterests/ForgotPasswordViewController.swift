@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ForgotPasswordViewController: UIViewController {
 
@@ -30,6 +31,12 @@ class ForgotPasswordViewController: UIViewController {
     
     @IBAction func submitPressed(_ sender: Any) {
         print("sending email to user")
+        Auth.auth().sendPasswordReset(withEmail: emailTextField.text) { (error) in
+            if error == nil{
+                
+            }
+        }
+        
         self.dismiss(animated: true, completion: nil)
     }
 
