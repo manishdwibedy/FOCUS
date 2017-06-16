@@ -90,7 +90,12 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-       return CGSize(width: 400, height: 400)
+        
+        let screenRect = UIScreen.main.bounds
+        let width = screenRect.size.width
+        let cellWidth = width/3.0
+        
+        return CGSize(width: cellWidth, height: cellWidth)
     }
     
     func collectionView(_ collectionView: UICollectionView,

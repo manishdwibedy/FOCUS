@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -33,8 +33,8 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </textAttributes>
                     <items>
-                        <navigationItem title="Choose Interests" id="Qjm-ZA-NXy">
-                            <barButtonItem key="leftBarButtonItem" title="Back" id="TdH-N7-i01">
+                        <navigationItem title="Choose FOCUS" id="Qjm-ZA-NXy">
+                            <barButtonItem key="leftBarButtonItem" image="BackArrow" id="TdH-N7-i01">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="-1" id="4Zr-Wl-uv2"/>
@@ -97,4 +97,7 @@
             <point key="canvasLocation" x="71.5" y="58.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="BackArrow" width="30" height="30"/>
+    </resources>
 </document>
