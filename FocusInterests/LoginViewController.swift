@@ -389,12 +389,12 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         
                         if let image_string = info?["image_string"] as? String{
                             if image_string.isEmpty{
-                                Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 100).absoluteString)
+                                Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 375).absoluteString)
                             }
                             
                         }
                         else{
-                            Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 100).absoluteString)
+                            Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 375).absoluteString)
                         }
                         
                         let token = Messaging.messaging().fcmToken
