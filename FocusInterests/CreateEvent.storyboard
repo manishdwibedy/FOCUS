@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3TX-Ww-Aks">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3TX-Ww-Aks">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -52,58 +52,6 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
-                                        <rect key="frame" x="86" y="551" width="204" height="55"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wNf-XX-soV">
-                                                <rect key="frame" x="0.0" y="0.0" width="132" height="25"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gh9-Vi-Du2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="25" id="9mr-tC-hJg"/>
-                                                            <constraint firstAttribute="width" constant="25" id="sBv-7l-irc"/>
-                                                        </constraints>
-                                                        <state key="normal" image="Interest_blank"/>
-                                                        <connections>
-                                                            <action selector="showGuestListBttn:" destination="3TX-Ww-Aks" eventType="touchUpInside" id="deu-Ff-fsR"/>
-                                                        </connections>
-                                                    </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Guestlist" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Utt-as-Bjf">
-                                                        <rect key="frame" x="33" y="2.5" width="99" height="20.5"/>
-                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ya7-tO-SuS">
-                                                <rect key="frame" x="0.0" y="30" width="204" height="25"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M06-h9-y9B">
-                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="25" id="3wt-Nd-4Hi"/>
-                                                            <constraint firstAttribute="width" constant="25" id="sST-HB-j1j"/>
-                                                        </constraints>
-                                                        <state key="normal" image="Interest_blank"/>
-                                                        <connections>
-                                                            <action selector="allowForInvitingFriendsBttn:" destination="3TX-Ww-Aks" eventType="touchUpInside" id="JBW-9q-XCH"/>
-                                                        </connections>
-                                                    </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guests Can Invite Friends" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xe7-7I-sEu">
-                                                        <rect key="frame" x="33" y="2" width="171" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="vCf-eX-lE6"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-56-fhv" userLabel="textField stackViews">
                                         <rect key="frame" x="9" y="20" width="357" height="483"/>
                                         <subviews>
@@ -214,8 +162,60 @@
                                             <constraint firstItem="6ez-1O-RJe" firstAttribute="height" secondItem="wEF-Wj-Vl6" secondAttribute="height" id="xv7-WN-TOI"/>
                                         </constraints>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
+                                        <rect key="frame" x="86" y="565" width="204" height="55"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wNf-XX-soV">
+                                                <rect key="frame" x="0.0" y="0.0" width="132" height="25"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gh9-Vi-Du2">
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="9mr-tC-hJg"/>
+                                                            <constraint firstAttribute="width" constant="25" id="sBv-7l-irc"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Interest_blank"/>
+                                                        <connections>
+                                                            <action selector="showGuestListBttn:" destination="3TX-Ww-Aks" eventType="touchUpInside" id="deu-Ff-fsR"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Guestlist" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Utt-as-Bjf">
+                                                        <rect key="frame" x="33" y="2.5" width="99" height="20.5"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ya7-tO-SuS">
+                                                <rect key="frame" x="0.0" y="30" width="204" height="25"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M06-h9-y9B">
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="3wt-Nd-4Hi"/>
+                                                            <constraint firstAttribute="width" constant="25" id="sST-HB-j1j"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Interest_blank"/>
+                                                        <connections>
+                                                            <action selector="allowForInvitingFriendsBttn:" destination="3TX-Ww-Aks" eventType="touchUpInside" id="JBW-9q-XCH"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guests Can Invite Friends" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xe7-7I-sEu">
+                                                        <rect key="frame" x="33" y="2" width="171" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="21" id="vCf-eX-lE6"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6s-qc-KUO">
-                                        <rect key="frame" x="0.0" y="614" width="375" height="273"/>
+                                        <rect key="frame" x="0.0" y="628" width="375" height="273"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DK1-Jl-3Sz">
                                                 <rect key="frame" x="1" y="52" width="373" height="220"/>
@@ -338,8 +338,8 @@
                                 <color key="backgroundColor" red="0.38039215686274508" green="0.45098039215686275" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="X6s-qc-KUO" firstAttribute="centerX" secondItem="dIH-Pg-PIk" secondAttribute="centerX" id="5kZ-or-f0f"/>
-                                    <constraint firstItem="jvR-p8-idX" firstAttribute="top" secondItem="Pss-56-fhv" secondAttribute="bottom" constant="48" id="CxL-ig-Du1"/>
                                     <constraint firstItem="Pss-56-fhv" firstAttribute="leading" secondItem="dIH-Pg-PIk" secondAttribute="leading" constant="9" id="E6z-Fg-Yl0"/>
+                                    <constraint firstItem="X6s-qc-KUO" firstAttribute="top" secondItem="Pss-56-fhv" secondAttribute="bottom" constant="125" id="FlD-Jv-A4r"/>
                                     <constraint firstItem="jvR-p8-idX" firstAttribute="centerX" secondItem="dIH-Pg-PIk" secondAttribute="centerX" id="LiT-Lp-gmg"/>
                                     <constraint firstAttribute="bottom" secondItem="X6s-qc-KUO" secondAttribute="bottom" id="PS3-hP-rRp"/>
                                     <constraint firstItem="Pss-56-fhv" firstAttribute="top" secondItem="dIH-Pg-PIk" secondAttribute="top" constant="20" id="VrE-78-7cn"/>
@@ -381,6 +381,7 @@
                         <outlet property="interestNextButton" destination="OH2-HW-w53" id="zgL-uR-a5h"/>
                         <outlet property="interestTableBottom" destination="Thw-3S-pg2" id="GWr-TB-4Ri"/>
                         <outlet property="interestTableView" destination="4mD-gv-r8q" id="C0Y-M9-0VQ"/>
+                        <outlet property="interestTopConstraint" destination="FlD-Jv-A4r" id="ztc-5n-w0w"/>
                         <outlet property="locationTextField" destination="Z2l-7t-2Co" id="swX-ke-M5l"/>
                         <outlet property="parentView" destination="BxB-qZ-pRY" id="B23-BK-fVm"/>
                         <outlet property="privateLabel" destination="NHt-Do-t7D" id="hJw-RW-5Fy"/>
