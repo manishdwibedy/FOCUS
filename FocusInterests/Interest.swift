@@ -23,6 +23,19 @@ enum InterestStatus{
     case like
     case love
     case hate
+    
+    mutating func toggle() {
+        switch self {
+        case .normal:
+            self = .like
+        case .like:
+            self = .love
+        case .love:
+            self = .normal
+        case .hate:
+            break
+        }
+    }
 }
 
 class Interest {

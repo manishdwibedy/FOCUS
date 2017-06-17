@@ -17,9 +17,9 @@ var interest_mapping = [String: Int]()
 
 
 
-let sidePadding: CGFloat = 2.0
+let sidePadding: CGFloat = 20.0
 let numberOfItemsPerRow: CGFloat = 3.0
-let hieghtAdjustment: CGFloat = 2.0
+let hieghtAdjustment: CGFloat = 20.0
 
 class InterestsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
 
@@ -33,13 +33,14 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     
     var interestCells = [InterstCollectionViewCell]()
     
-    var imageArrayBlue = ["Arts Blue","Beauty Blue","Business Blue","Causes Blue","Celebration Blue","Chill Blue","Coffee Blue","Community Blue","Drinks Blue","Entertainment Blue","Fitness Blue","Food Blue","Learn Blue","Meet up Blue","Music Blue","Networking Blue","Outdoors Blue","Shopping Blue","Sports Blue","Travel Blue","Views Blue"]
-    
-    var imageArrayGreen = ["Arts Green","Beauty Green","Business Green","Causes Green","Celebration Green","Chill Green","Coffee Green","Community Green","Drinks Green","Entertainment Green","Fitness Green","Food Green","Learn Green","Meet up Green","Music Green","Networking Green","Outdoors Green","Shopping Green","Sports Green","Travel Green","Views Green"]
+//    var imageArrayBlue = ["Arts Blue","Beauty Blue","Business Blue","Causes Blue","Celebration Blue","Chill Blue","Coffee Blue","Community Blue","Drinks Blue","Entertainment Blue","Fitness Blue","Food Blue","Learn Blue","Meet up Blue","Music Blue","Networking Blue","Outdoors Blue","Shopping Blue","Sports Blue","Travel Blue","Views Blue"]
+//    
+//    var imageArrayGreen = ["Arts Green","Beauty Green","Business Green","Causes Green","Celebration Green","Chill Green","Coffee Green","Community Green","Drinks Green","Entertainment Green","Fitness Green","Food Green","Learn Green","Meet up Green","Music Green","Networking Green","Outdoors Green","Shopping Green","Sports Green","Travel Green","Views Green"]
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
+    var focus_string = ["Meet up", "Coffee", "Chill", "Celebration", "Food", "Drinks", "Business", "Learn", "Entertainment", "Arts", "Music", "Beauty", "Shopping", "Fitness", "Sports", "Outdoors", "Views", "Causes", "Community", "Travel", "Networking"]
+    var focus = [Interest]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,10 +57,18 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
             saveButton.title = "Done"
         }
         
+        let screenRect = UIScreen.main.bounds
+        let screenWidth = screenRect.size.width
+        let cellWidth = screenWidth/3.0
+        
+        
         let width = ((collectionView.frame.width) - sidePadding)/numberOfItemsPerRow
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width + hieghtAdjustment)
+        layout.itemSize = CGSize(width: width, height: width)
         
+        for interest in focus_string{
+            focus.append(Interest(name: interest, category: nil, image: nil, imageString: nil))
+        }
         
     }
     
@@ -67,14 +76,14 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArrayBlue.count
+        return focus.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "interestCell", for: indexPath) as! InterstCollectionViewCell
-        cell.image.image = UIImage(named: imageArrayBlue[indexPath.row])
-        let interest = imageArrayBlue[indexPath.row].components(separatedBy: " ")
-        cell.label.text = interest[0]
+        let imageName = "\(focus[indexPath.row].name!) Blue"
+        cell.image.image = UIImage(named: imageName)
+        cell.label.text = focus[indexPath.row].name
         cell.parentVC = self
         cell.index = indexPath.row
         cell.indexPath = indexPath
@@ -101,13 +110,13 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 50
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 50
+        return 20
     }
     
     
@@ -136,27 +145,12 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
 //                return
 //            }
 //            interests = interest_string
-//            
 //        }
 //        else{
 //            let earlier_interests = AuthApi.getInterests()!
 //            interests = "\(earlier_interests),\(interest_string)"
 //        }
-//        
-//        Constants.DB.user.child("\(String(describing: AuthApi.getFirebaseUid()!))/interests").setValue(interests)
-//        AuthApi.set(interests: interests)
-//        
-//        if AuthApi.isNewUser(){
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            
-//            let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
-//            
-//            present(vc, animated: true, completion: nil)
-//        }
-//        else{
-//            self.dismiss(animated: true, completion: nil)
-//        }
-//    }
+//
         
     var interestAll = ""
     for cell in interestCells
