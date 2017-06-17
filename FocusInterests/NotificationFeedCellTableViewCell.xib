@@ -140,6 +140,7 @@
                 <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="EnX-Nm-dDd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="7BI-jx-a3Z"/>
+                    <constraint firstItem="th2-x8-nnK" firstAttribute="leading" secondItem="EnX-Nm-dDd" secondAttribute="trailing" constant="12" id="7z5-wu-7a9"/>
                     <constraint firstItem="wK2-Jo-qA1" firstAttribute="baseline" secondItem="5Pz-GY-U38" secondAttribute="firstBaseline" id="B0E-vS-zDJ"/>
                     <constraint firstItem="EnX-Nm-dDd" firstAttribute="top" secondItem="KgY-3n-kfu" secondAttribute="top" id="Bkj-tZ-PIu"/>
                     <constraint firstItem="5Pz-GY-U38" firstAttribute="leading" secondItem="wK2-Jo-qA1" secondAttribute="trailing" constant="8" id="Bod-fd-6fG"/>

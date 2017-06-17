@@ -114,10 +114,17 @@ class FirebaseDownstream {
                 
             })
             
-            
+            var returnNotif = [FocusNotification]()
             ref.child("users").child(id).child("notifications").observeSingleEvent(of: .value, with: { (snapshot) in
                 if let value = snapshot.value as? NSDictionary {
-                    //let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: <#T##String?#>, uuid: <#T##String?#>, imageURL: <#T##String?#>), item: <#T##ItemOfInterest?#>, time: <#T##Date#>)
+                    for (key,_) in value{
+                        let item = ItemOfInterest(itemName: "", imageURL: "")
+                        item.data = value[key] as! NSDictionary
+                    let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: "", uuid: "", imageURL: ""), item: item, time: Date(timeIntervalSince1970: TimeInterval((value[key] as! NSDictionary)["time"] as! Double)))
+                    
+                    returnNotif.append(notification)
+                   }
+                    gotNotif(returnNotif)
                 }
             })
             

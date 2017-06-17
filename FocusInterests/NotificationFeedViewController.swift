@@ -54,6 +54,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             
         }, gotNotif: {not in
             self.nofArray = not
+            self.tableView.reloadData()
         })
         
         getFeeds(gotPins: {pins in
@@ -87,6 +88,8 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
          //self.setupDummyArray()
         
         tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
+        
+        tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
         
         // Do any additional setup after loading the view.
         
@@ -126,7 +129,11 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 115.0
+        if self.selectedSegmentIndex == 0{
+            return 90
+        }else{
+            return 115.0
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -147,21 +154,26 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
+        
         if self.selectedSegmentIndex == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotifTabCell", for: indexPath) as! notificationTabCell
             cell.setupCell(notif: nofArray[indexPath.row])
+            return cell
         }else if self.selectedSegmentIndex == 1{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
+            cell.parentVC = self
             cell.setupCell(notif: invArray[indexPath.row])
-        }else if self.selectedSegmentIndex == 2{
+             return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
+            cell.parentVC = self
             cell.setupCell(notif: feedAray[indexPath.row])
             cell.seeYouThereButton.isHidden = true
             cell.nextTimeButton.isHidden = true
-        }else
-        {
-            cell.setupCell(notif: nofArray[indexPath.row])
+             return cell
         }
-        cell.parentVC = self
-        return cell
+        
+        
     }
     
     

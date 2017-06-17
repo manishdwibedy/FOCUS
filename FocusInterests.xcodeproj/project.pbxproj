@@ -277,6 +277,8 @@
 		FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */; };
 		FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBF87A41EE5BED0000168F5 /* InvitePeopleEventCell.swift */; };
 		FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBF87A51EE5BED0000168F5 /* InvitePeopleEventCell.xib */; };
+		FFC36FF21EF49E9000D58F92 /* notificationTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC36FF01EF49E9000D58F92 /* notificationTabCell.swift */; };
+		FFC36FF31EF49E9000D58F92 /* notificationTabCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFC36FF11EF49E9000D58F92 /* notificationTabCell.xib */; };
 		FFD32DD31EE9FF9900FE725E /* InterstCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD32DD11EE9FF9900FE725E /* InterstCollectionViewCell.swift */; };
 		FFD32DD41EE9FF9900FE725E /* InterstCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFD32DD21EE9FF9900FE725E /* InterstCollectionViewCell.xib */; };
 		FFEFA1C11EE7864A000623CB /* PlaceAllPinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEFA1C01EE7864A000623CB /* PlaceAllPinsViewController.swift */; };
@@ -619,6 +621,8 @@
 		FFBF87A11EE5B34E000168F5 /* InvitePeoplePlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePeoplePlaceCell.xib; sourceTree = "<group>"; };
 		FFBF87A41EE5BED0000168F5 /* InvitePeopleEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePeopleEventCell.swift; sourceTree = "<group>"; };
 		FFBF87A51EE5BED0000168F5 /* InvitePeopleEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePeopleEventCell.xib; sourceTree = "<group>"; };
+		FFC36FF01EF49E9000D58F92 /* notificationTabCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = notificationTabCell.swift; sourceTree = "<group>"; };
+		FFC36FF11EF49E9000D58F92 /* notificationTabCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = notificationTabCell.xib; sourceTree = "<group>"; };
 		FFD32DD11EE9FF9900FE725E /* InterstCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstCollectionViewCell.swift; sourceTree = "<group>"; };
 		FFD32DD21EE9FF9900FE725E /* InterstCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterstCollectionViewCell.xib; sourceTree = "<group>"; };
 		FFEFA1C01EE7864A000623CB /* PlaceAllPinsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceAllPinsViewController.swift; sourceTree = "<group>"; };
@@ -1123,6 +1127,8 @@
 				D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */,
 				611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */,
 				611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */,
+				FFC36FF01EF49E9000D58F92 /* notificationTabCell.swift */,
+				FFC36FF11EF49E9000D58F92 /* notificationTabCell.xib */,
 				D21317F61E5B47D300140323 /* HomViewControllerCell.swift */,
 				D21317F71E5B47D300140323 /* HomViewControllerCell.xib */,
 				D28EAFBA1E5D30C3001EA7E5 /* SwitchCell.swift */,
@@ -1487,6 +1493,7 @@
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
 				5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */,
 				EBD76FF51EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib in Resources */,
+				FFC36FF31EF49E9000D58F92 /* notificationTabCell.xib in Resources */,
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
 				EB252F0C1EE9E9F7001C163D /* NewMessageTableViewCell.xib in Resources */,
 				5B448E631EE7B7FC00873F79 /* MessageTableViewCell.xib in Resources */,
@@ -1881,6 +1888,7 @@
 				5B59064E1EC7E60D00466AAC /* MessagesViewController.swift in Sources */,
 				D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */,
 				5B959FDA1ECADFA300094FE6 /* PinViewController.swift in Sources */,
+				FFC36FF21EF49E9000D58F92 /* notificationTabCell.swift in Sources */,
 				5B71D70A1ED183EE0093A3F5 /* attendeeVC.swift in Sources */,
 				FFD32DD31EE9FF9900FE725E /* InterstCollectionViewCell.swift in Sources */,
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,

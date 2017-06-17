@@ -15,6 +15,7 @@ class ItemOfInterest {
     var imageURL: String?
     var type = ""
     var id = ""
+    var data: NSDictionary!
     
     init(itemName: String?, imageURL: String?) {
         self.itemName = itemName
