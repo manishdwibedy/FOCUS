@@ -248,6 +248,7 @@
 		EBD76FF11EF2763300E4776A /* GeneralSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF01EF2763300E4776A /* GeneralSearchViewController.swift */; };
 		EBD76FF41EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF21EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift */; };
 		EBD76FF51EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD76FF31EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib */; };
+		EBD76FF71EF3527200E4776A /* UserProfileTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */; };
 		EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */; };
 		EBD980831EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */; };
 		EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */; };
@@ -590,6 +591,7 @@
 		EBD76FF01EF2763300E4776A /* GeneralSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSearchViewController.swift; sourceTree = "<group>"; };
 		EBD76FF21EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSearchCellTableViewCell.swift; sourceTree = "<group>"; };
 		EBD76FF31EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralSearchCellTableViewCell.xib; sourceTree = "<group>"; };
+		EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTwoViewController.swift; sourceTree = "<group>"; };
 		EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Large_Apple_Maps.png; sourceTree = "<group>"; };
 		EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsEventDetailTableViewCell.swift; sourceTree = "<group>"; };
 		EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsEventDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -1112,6 +1114,7 @@
 				5B959FD61ECAC9F400094FE6 /* Place */,
 				5BAB87A91EC97BB20064E5EC /* People */,
 				5B71D6F21ED154F10093A3F5 /* Search */,
+				EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1825,6 +1828,7 @@
 				5B34A6F61EE72B0800D16842 /* FollowingTableViewCell.swift in Sources */,
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
+				EBD76FF71EF3527200E4776A /* UserProfileTwoViewController.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
 				5B71D7101ED184D30093A3F5 /* allCommentsVC.swift in Sources */,
 				5B959FF21ECD452C00094FE6 /* RatingViewCell.swift in Sources */,

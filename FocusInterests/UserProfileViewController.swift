@@ -17,14 +17,17 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 	@IBOutlet var userScrollView: UIScrollView!
     @IBOutlet weak var navBarItem: UINavigationItem!
     
+    @IBOutlet weak var userInfoView: UIView!
+    @IBOutlet weak var pinView: UIView!
+    
     // User data
-	@IBOutlet var userName: UILabel!
+//	@IBOutlet var userName: UILabel!
 	@IBOutlet var descriptionText: UITextView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     
-    @IBOutlet weak var suggestionsHeight: NSLayoutConstraint!
+//    @IBOutlet weak var suggestionsHeight: NSLayoutConstraint!
     
     // follower and following
     @IBOutlet weak var followerLabel: UILabel!
@@ -104,7 +107,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
     
-		userScrollView.contentSize = CGSize(width: 375, height: 1600)
+//		userScrollView.contentSize = CGSize(width: 375, height: 1600)
         // Do any additional setup after loading the view.
         
         hideKeyboardWhenTappedAround()
@@ -128,6 +131,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.emptyPinButton.roundCorners(radius: 10)
         
         self.roundImagesAndButtons()
+
+        self.navigationController?.navigationBar.titleTextAttributes = [
+             NSFontAttributeName: UIFont(name: "Avenir Book", size: 21)!]
         
         getEventSuggestions()
         getPin()
@@ -192,12 +198,15 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 let image_string = dictionnary["image_string"] as? String ?? ""
                 let fullname = dictionnary["fullname"] as? String ?? ""
                 
-                self.userName.text = username_str
-                self.descriptionText.text = description_str
+//                self.userName.text = username_str
+//                self.descriptionText.text = description_str
+                
+//                SAMPLE description text
+                self.descriptionText.text = "laboris nisi ut aliquip ex ea commodo consequat. a;lsdkfas;dfkasd;f asdf;lkajsdf;kajsdf a;sld fka;skdlf ja;sdlkfj a;sdf jka;dslkjfa;lsd fk;as dfkj;asdfjkl a;sdfjka;sdlfjkas df"
                 self.fullNameLabel.text = fullname
                 
 //        setting username to title
-                self.navBarItem.title = self.userName.text
+//                self.navBarItem.title = self.userName.text
                 
                 if let followers = dictionnary["followers"] as? [String:Any]{
                     if let people = followers["people"] as? [String:[String:Any]]{
@@ -299,6 +308,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         }
         else{
             emptyPinButton.isHidden = true
+            self.pinView.setNeedsLayout()
         }
         
         
@@ -307,6 +317,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.displayUserData()
+        
+        let fixedWidth = self.descriptionText.frame.size.width
+        self.descriptionText.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        let newSize = self.descriptionText.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        var newFrame = self.descriptionText.frame
+        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+        self.descriptionText.frame = newFrame;
+
 
     }
 
@@ -388,6 +406,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     func roundImagesAndButtons(){
         self.updatePinButton.roundCorners(radius: 10.0)
+        
+        self.userImage.layer.borderWidth = 2
+        self.userImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
+        self.userImage.roundedImage()
         
         self.pinImage.layer.borderWidth = 1
         self.pinImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor

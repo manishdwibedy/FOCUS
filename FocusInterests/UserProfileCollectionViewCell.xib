@@ -31,11 +31,12 @@
                             <constraint firstAttribute="height" constant="18" id="N4S-oM-a1q"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="ps8-ME-iq7" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="-4.5" id="Dmc-Ck-DzZ"/>
                 <constraint firstItem="ps8-ME-iq7" firstAttribute="centerX" secondItem="TGv-aC-IbM" secondAttribute="centerX" constant="-4.5" id="XfF-oR-ixI"/>
