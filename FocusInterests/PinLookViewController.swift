@@ -19,7 +19,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var commentOut: UIButton!
     @IBOutlet weak var sendOut: UIButton!
-    @IBOutlet weak var addressBottom: UILabel!
     @IBOutlet weak var interestsLabel: UILabel!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var pinMessageLabel: UILabel!
@@ -65,7 +64,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         })
         
         addressTopOut.setTitle(data.locationAddress.replacingOccurrences(of: ";;", with: "\n", options: .literal, range: nil), for: UIControlState.normal)
-        addressBottom.text = data.locationAddress
         pinMessageLabel.text = data.pinMessage
         
         
