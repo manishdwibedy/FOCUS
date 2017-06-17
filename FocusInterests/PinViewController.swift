@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, UITextViewDelegate{
     var place: Place?
@@ -392,16 +393,25 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
     }
     
     @IBAction func openGoogleMaps(_ sender: Any) {
-        let lat = place?.latitude as! Double
-        let long = place?.longitude as! Double
+        let latitude = place?.latitude as! Double
+        let longitude = place?.longitude as! Double
         
+        let user_location = AuthApi.getLocation()
+        let place_location = CLLocation(latitude: latitude, longitude: longitude)
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
-        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-            UIApplication.shared.openURL(URL(string:
-                "comgooglemaps://?daddr=\(lat),\(long)&directionsmode=driving")!)
-        } else {
-            print("Can't use comgooglemaps://");
-        }
+        let distanceInMeters = user_location!.distance(from: place_location)
+
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, distanceInMeters*2, distanceInMeters*2)
+        
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = place?.name
+        mapItem.openInMaps(launchOptions: options)
     }
     
     @IBAction func pin(_ sender: Any) {

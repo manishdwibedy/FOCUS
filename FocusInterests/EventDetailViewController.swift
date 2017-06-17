@@ -631,16 +631,27 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func showGoogleMaps(_ sender: Any) {
-        let lat = Double((event?.latitude)!)!
-        let long = Double((event?.longitude)!)!
+        let latitude = Double((event?.latitude)!)!
+        let longitude = Double((event?.longitude)!)!
+
+        
+        let user_location = AuthApi.getLocation()
+        let place_location = CLLocation(latitude: latitude, longitude: longitude)
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        
+        let distanceInMeters = user_location!.distance(from: place_location)
+        
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, distanceInMeters*2, distanceInMeters*2)
         
         
-        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-            UIApplication.shared.openURL(URL(string:
-                "comgooglemaps://?daddr=\(lat),\(long)&directionsmode=driving")!)
-        } else {
-            print("Can't use comgooglemaps://");
-        }
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = event?.title
+        mapItem.openInMaps(launchOptions: options)
     }
     
     

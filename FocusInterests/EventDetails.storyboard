@@ -245,7 +245,7 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oo-yz-7N6">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oo-yz-7N6">
                                                         <rect key="frame" x="21" y="164.5" width="60" height="58.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="qhS-6o-oY5"/>
@@ -255,7 +255,7 @@
                                                             <action selector="showGoogleMaps:" destination="AZe-9E-xBf" eventType="touchUpInside" id="Vah-bF-PWJ"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRh-AH-1F4">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRh-AH-1F4">
                                                         <rect key="frame" x="89" y="169.5" width="50" height="48.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="8pL-5d-joo"/>
