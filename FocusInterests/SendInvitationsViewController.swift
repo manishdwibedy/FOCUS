@@ -94,14 +94,14 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         let selectedAllContactsCellNib = UINib(nibName: "SelectAllContactsTableViewCell", bundle: nil)
         friendsTableView.register(selectedAllContactsCellNib, forCellReuseIdentifier: "selectAllContactsCell")
         
-//        if CNContactStore.authorizationStatus(for: .contacts) == .authorized{
-//            self.retrieveContactsWithStore(store: self.store)
-//        }
-//        else{
-//            self.store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
-//                self.retrieveContactsWithStore(store: self.store)
-//            }
-//        }
+        if CNContactStore.authorizationStatus(for: .contacts) == .authorized{
+            self.retrieveContactsWithStore(store: self.store)
+        }
+        else{
+            self.store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
+                self.retrieveContactsWithStore(store: self.store)
+            }
+        }
         
         self.sortContacts()
         
@@ -275,15 +275,15 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         } else {
             let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
             personToInviteCell.delegate = self
-//            personToInviteCell.inviteConfirmationButton.tag = indexPath.row
+            personToInviteCell.inviteConfirmationButton.tag = indexPath.row
             
-//            let section = filteredSection[indexPath.section-1]
+            let section = filteredSection[indexPath.section-1]
             
-//            let user = self.filtered[section]?[indexPath.row]
-//            personToInviteCell.usernameLabel.text = user?.givenName
-//            personToInviteCell.fullNameLabel.text = user?.familyName
-            personToInviteCell.usernameLabel.text = "Alex"
-            personToInviteCell.fullNameLabel.text = "Alex Jang"
+            let user = self.filtered[section]?[indexPath.row]
+            personToInviteCell.usernameLabel.text = user?.givenName
+            personToInviteCell.fullNameLabel.text = user?.familyName
+//            personToInviteCell.usernameLabel.text = "Alex"
+//            personToInviteCell.fullNameLabel.text = "Alex Jang"
 
             return personToInviteCell
         }
