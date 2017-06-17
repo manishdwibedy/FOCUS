@@ -45,6 +45,17 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbA-id-Ycz">
+                        <rect key="frame" x="287" y="13" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="3Ed-6t-KSc"/>
+                            <constraint firstAttribute="width" constant="25" id="UDw-Rq-PcF"/>
+                        </constraints>
+                        <state key="normal" image="Interest_blank"/>
+                        <connections>
+                            <action selector="contactSelectedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aBm-o0-prS"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>

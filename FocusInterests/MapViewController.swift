@@ -1107,19 +1107,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func searchClicked() {
-//        let storyboard = UIStoryboard(name: "general_search", bundle: nil)
-//        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
-//        VC?.location = self.currentLocation
-//        self.present(VC!, animated: true, completion: nil)
-        
-        let generalSearchVC = UIStoryboard(name: "general_search", bundle: nil).instantiateViewController(withIdentifier: "GeneralSearchViewController") as? GeneralSearchViewController
-        
+        let storyboard = UIStoryboard(name: "general_search", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
+        VC?.location = self.currentLocation
         let transition = CATransition()
         transition.duration = 0.4
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromBottom
         view.window!.layer.add(transition, forKey: kCATransition)
-        self.present(generalSearchVC!, animated: true, completion: nil)
+        self.present(VC!, animated: true, completion: nil)
         
         
     }
