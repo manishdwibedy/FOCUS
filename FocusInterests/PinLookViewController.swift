@@ -19,7 +19,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var commentOut: UIButton!
     @IBOutlet weak var sendOut: UIButton!
-    @IBOutlet weak var addressBottom: UILabel!
     @IBOutlet weak var interestsLabel: UILabel!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var pinMessageLabel: UILabel!
@@ -33,6 +32,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         super.viewDidLoad()
 
         hideKeyboardWhenTappedAround()
+        profileImage.roundedImage()
         
     }
     
@@ -63,8 +63,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             }
         })
         
-        addressTopOut.setTitle(data.locationAddress, for: UIControlState.normal)
-        addressBottom.text = data.locationAddress
+        addressTopOut.setTitle(data.locationAddress.replacingOccurrences(of: ";;", with: "\n", options: .literal, range: nil), for: UIControlState.normal)
         pinMessageLabel.text = data.pinMessage
         
         
@@ -87,6 +86,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                         break
                     }
                     let bigImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.viewForMap.frame.width, height: self.viewForMap.frame.height))
+                    
+                    bigImage.contentMode = UIViewContentMode.scaleAspectFill
+                    bigImage.clipsToBounds = true
+                    
                     self.viewForMap.addSubview(bigImage)
                     
                     let placeholderImage = UIImage(named: "empty_event")

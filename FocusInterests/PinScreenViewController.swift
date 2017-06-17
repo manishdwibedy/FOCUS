@@ -436,10 +436,63 @@ extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         self.place = place
-        self.locationLabel.text = place.formattedAddress!
         self.changeLocationOut.setTitle(place.formattedAddress, for: UIControlState.normal)
         coordinates = self.place.coordinate
-        formmatedAddress = self.place.formattedAddress!
+        
+        var first = [String]()
+        var second = [String]()
+        
+        var isPlace = true
+        //locality;admin area level 1; postal code
+        for a in place.addressComponents!{
+            if a.type == "street_number"{
+                first.append(a.name)
+                isPlace = false
+            }
+            if a.type == "route"{
+                first.append(a.name)
+                isPlace = false
+            }
+            
+            if a.type == "locality"{
+                if isPlace{
+                    first.append(a.name)
+                }
+                else{
+                    second.append(a.name)
+                }
+            }
+            if a.type == "administrative_area_level_1"{
+                if isPlace{
+                    first.append(a.name)
+                }
+                else{
+                    second.append(a.name)
+                }
+            }
+            if a.type == "postal_code"{
+                if isPlace{
+                    first.append(a.name)
+                }
+                else{
+                    second.append(a.name)
+                }
+            }
+            
+        }
+        
+        if isPlace{
+            second = first
+            self.locationLabel.text = place.name
+            
+            formmatedAddress = "\(place.name);;\(second.joined(separator: ", "))"
+        }
+        else{
+            self.locationLabel.text = first.joined(separator: ", ")
+            formmatedAddress = "\(first.joined(separator: ", "));;\(second.joined(separator: ", "))"
+        }
+        
+        
         
         
         dismiss(animated: true, completion: nil)

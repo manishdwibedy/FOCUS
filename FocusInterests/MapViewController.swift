@@ -1083,14 +1083,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func notificationsClicked() {
-//        var messageVC = MFMessageComposeViewController()
-//        
-//        messageVC.body = "Enter a message";
-//        messageVC.recipients = ["Enter tel-nr"]
-//        messageVC.messageComposeDelegate = self;
-//        
-//        self.present(messageVC, animated: false, completion: nil)
         
+//        let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
+//        self.present(selectInterests, animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
         
