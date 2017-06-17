@@ -144,7 +144,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let place = self.places[indexPath.row]
+        let place = self.filtered[indexPath.row]
         let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
         controller.place = place
