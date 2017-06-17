@@ -230,7 +230,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 if value != nil
                 {
                     self.isAttending = true
-                    //self.attendOut.isEnabled = false
                     self.attendOut.setTitle("Attending", for: UIControlState.normal)
                 }
                 
@@ -295,12 +294,17 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         {
             let newAmount = attendingAmount + 1
             attendingAmount = newAmount
-            self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
             let fullRef = ref.child("events").child((event?.id)!)
             fullRef.child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
             fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
-           // self.attendOut.isEnabled = false
             self.isAttending = true
+            
+            let guestText = "\(newAmount) guests"
+            let textRange = NSMakeRange(0, guestText.characters.count)
+            let attributedText = NSMutableAttributedString(string: guestText)
+            attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
+            self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
+            
             self.attendOut.setTitle("Attending", for: UIControlState.normal)
         }else
         {
@@ -315,10 +319,18 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     
                     let newAmount = self.attendingAmount - 1
                     self.attendingAmount = newAmount
-                    self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
                     let fullRef = self.ref.child("events").child((self.event?.id)!)
                     fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
+                    
                     self.isAttending = false
+                    
+                    let guestText = "\(newAmount) guests"
+                    let textRange = NSMakeRange(0, guestText.characters.count)
+                    let attributedText = NSMutableAttributedString(string: guestText)
+                    attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
+                    self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
+            
+                    
                     self.attendOut.setTitle("Attend", for: UIControlState.normal)
                 }
                 
