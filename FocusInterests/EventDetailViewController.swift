@@ -371,7 +371,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     func keyboardDidShow(notification: NSNotification) {
         keyboardUp = true
-        navBackOut.title = "Cancel"
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
             //self.scrollView.contentOffset.y = (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60
@@ -382,7 +381,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     func keyboardDidHide(notification: NSNotification) {
         keyboardUp = false
-        navBackOut.title = "Back"
     }
     
     
