@@ -225,7 +225,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
             
             //attending
-            ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            ref.child("events").child((event?.id)!).child("attendingList").observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 if value != nil
                 {
