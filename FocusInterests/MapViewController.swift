@@ -1083,27 +1083,22 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func notificationsClicked() {
-//        var messageVC = MFMessageComposeViewController()
+        
+        let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
+        self.present(selectInterests, animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
 //        
-//        messageVC.body = "Enter a message";
-//        messageVC.recipients = ["Enter tel-nr"]
-//        messageVC.messageComposeDelegate = self;
+//        let navigationController = UINavigationController(rootViewController: vc)
 //        
-//        self.present(messageVC, animated: false, completion: nil)
-        
-        let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
-        
-        let navigationController = UINavigationController(rootViewController: vc)
-        
-//        let newController = NewViewController(nibName: "NewView", bundle: nil)
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromBottom
-        self.view.window!.layer.add(transition, forKey: kCATransition)
-        
-        self.present(navigationController, animated: true, completion: nil)
+////        let newController = NewViewController(nibName: "NewView", bundle: nil)
+//        let transition = CATransition()
+//        transition.duration = 0.5
+//        transition.type = kCATransitionPush
+//        transition.subtype = kCATransitionFromBottom
+//        self.view.window!.layer.add(transition, forKey: kCATransition)
+//        
+//        self.present(navigationController, animated: true, completion: nil)
     }
     
     func searchClicked() {

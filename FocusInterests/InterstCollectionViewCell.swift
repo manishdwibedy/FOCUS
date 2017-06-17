@@ -29,6 +29,9 @@ class InterstCollectionViewCell: UICollectionViewCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(sender:)))
         self.addGestureRecognizer(tap)
 
+        let longP = UILongPressGestureRecognizer(target: self, action: #selector(longP(sender:)))
+        longP.minimumPressDuration = 0.3
+        self.addGestureRecognizer(longP)
     }
     
     func tap(sender: UITapGestureRecognizer)
@@ -95,7 +98,11 @@ class InterstCollectionViewCell: UICollectionViewCell {
     
     func longP(sender: UILongPressGestureRecognizer)
     {
-        //parentVC.collectionView.deleteItems(at: [indexPath])
+        if sender.state != .ended {
+            return
+        }
+        parentVC.focus.remove(at: indexPath.row)
+        parentVC.collectionView.deleteItems(at: [indexPath])
     }
 
 }
