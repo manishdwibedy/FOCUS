@@ -264,6 +264,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         // Dispose of any resources that can be recreated.
     }
     @IBAction func inviteEvent(_ sender: UIButton) {
+        let ivc = storyboard?.instantiateViewController(withIdentifier: "home") as! InviteViewController
+        ivc.type = "event"
+        ivc.id = (event?.id!)!
+        ivc.event = event
+        self.present(ivc, animated: true, completion: { _ in })
     }
     
     @IBAction func likeEvent(_ sender: UIButton) {
