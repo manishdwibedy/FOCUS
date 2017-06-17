@@ -25,6 +25,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var moreOut: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var commentsStackView: UIStackView!
     var data: pinData!
     var dictData = NSDictionary()
     var likes = 0
@@ -47,8 +48,17 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                print(value)
-                self.usernameLabel.text = value?["username"] as? String
+                let username = value?["username"] as! String
+                self.usernameLabel.text = username
+                
+                
+                let messageText = "\(String(describing: username)) \(self.data.pinMessage)"
+                
+                let length = messageText.characters.count - username.characters.count
+                let range = NSMakeRange(username.characters.count, length)
+
+                self.pinMessageLabel.attributedText = attributedString(from: messageText, nonBoldRange: range)
+
                 //self.pinMessageLabel.text = (value?["username"] as? String)! + " " + self.data.pinMessage
 //                print(value?["username"] as? String)
 //                let boldText  = (value?["username"] as? String)!
@@ -64,7 +74,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         })
         
         addressTopOut.setTitle(data.locationAddress.replacingOccurrences(of: ";;", with: "\n", options: .literal, range: nil), for: UIControlState.normal)
-        pinMessageLabel.text = data.pinMessage
+        
         
         
         
@@ -141,6 +151,74 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         })
         
         
+        for view in commentsStackView.subviews{
+            view.removeFromSuperview()
+        }
+        
+        data.dbPath.child("comments").queryOrdered(byChild: "date").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if let value = value
+            {
+                if value.count > 2{
+                    let textLabel = UILabel()
+
+                    textLabel.textColor = .white
+                    textLabel.text  = "View \(value.count) comments"
+                    textLabel.textAlignment = .left
+                    
+                    let tap = UITapGestureRecognizer(target: self, action: Selector("showComments:"))
+                    textLabel.addGestureRecognizer(tap)
+
+                    self.commentsStackView.addArrangedSubview(textLabel)
+                    self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false;
+                }
+                
+                let keys = value.allKeys as? [String]
+                for id in (keys?[0..<2])!{
+                    
+                    let data = value[id] as? [String:Any]
+                    Constants.DB.user.child(data?["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let value = snapshot.value as? NSDictionary
+                        if value != nil
+                        {
+                            let username = value?["username"] as! String
+                            self.usernameLabel.text = username
+                            
+                            let textLabel = UILabel()
+                            
+                            textLabel.textColor = .white
+                            
+                            let messageText = "\(username) \(data?["comment"] as! String)"
+                            
+                            let length = messageText.characters.count - username.characters.count
+                            let range = NSMakeRange(username.characters.count, length)
+                            
+                            textLabel.attributedText = attributedString(from: messageText, nonBoldRange: range)
+                            textLabel.textAlignment = .left
+                            
+                            
+                            
+                            self.commentsStackView.addArrangedSubview(textLabel)
+                            self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false;
+
+                        }
+                    })
+                    
+                }
+//                for (index, category) in (place.categories.enumerated()){
+//                    let textLabel = UILabel()
+//                    
+//                    textLabel.textColor = .white
+//                    textLabel.text  = getInterest(yelpCategory: category.alias)
+//                    textLabel.textAlignment = .left
+//                    
+//                    
+//                    commentsStackView.addArrangedSubview(textLabel)
+//                    commentsStackView.translatesAutoresizingMaskIntoConstraints = false;
+//                }
+            }
+        })
+        
         
     }
 
@@ -203,6 +281,13 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    func showComments(sender:UITapGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "Comments", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
+        ivc.data = dictData
+        self.present(ivc, animated: true, completion: { _ in })
+        
+    }
     
 
     
