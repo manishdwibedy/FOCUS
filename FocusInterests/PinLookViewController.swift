@@ -33,6 +33,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         super.viewDidLoad()
 
         hideKeyboardWhenTappedAround()
+        profileImage.roundedImage()
         
     }
     
@@ -87,6 +88,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                         break
                     }
                     let bigImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.viewForMap.frame.width, height: self.viewForMap.frame.height))
+                    
+                    bigImage.contentMode = UIViewContentMode.scaleAspectFill
+                    bigImage.clipsToBounds = true
+                    
                     self.viewForMap.addSubview(bigImage)
                     
                     let placeholderImage = UIImage(named: "empty_event")
