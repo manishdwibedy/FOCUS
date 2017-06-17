@@ -265,10 +265,10 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W6f-uJ-Bg0">
-                                <rect key="frame" x="0.0" y="64" width="375" height="55"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="63"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="cQ3-SI-V2f">
-                                        <rect key="frame" x="8" y="5" width="45" height="45"/>
+                                        <rect key="frame" x="8" y="5" width="45" height="53"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="BKh-3S-rns"/>
                                         </constraints>
@@ -282,13 +282,12 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVa-3J-grt">
-                                        <rect key="frame" x="61" y="25" width="173" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="173" id="0Bc-KC-EvR"/>
-                                        </constraints>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="tVa-3J-grt">
+                                        <rect key="frame" x="61" y="25" width="239" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="address">
+                                        <state key="normal">
+                                            <string key="title">line 1
+line 2</string>
                                             <color key="titleColor" red="0.68938513156725933" green="0.72458949311315624" blue="0.78836557738066926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -298,6 +297,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.26412749290466309" green="0.32456326484680176" blue="0.39544886350631714" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tVa-3J-grt" secondAttribute="trailing" constant="75" id="A1I-EV-YTJ"/>
                                     <constraint firstItem="cQ3-SI-V2f" firstAttribute="leading" secondItem="W6f-uJ-Bg0" secondAttribute="leadingMargin" id="BUT-Bq-WR9"/>
                                     <constraint firstItem="cQ3-SI-V2f" firstAttribute="centerY" secondItem="W6f-uJ-Bg0" secondAttribute="centerY" id="E3M-gI-BHc"/>
                                     <constraint firstItem="GLV-ze-oa7" firstAttribute="leading" secondItem="tVa-3J-grt" secondAttribute="leading" id="fao-53-RTY"/>
@@ -308,7 +308,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EL7-by-RR7">
-                                <rect key="frame" x="0.0" y="127" width="375" height="379"/>
+                                <rect key="frame" x="0.0" y="135" width="375" height="371"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIt-Lv-GdI">
@@ -397,7 +397,7 @@
                             <constraint firstItem="kSX-QC-Op4" firstAttribute="centerX" secondItem="EL7-by-RR7" secondAttribute="centerX" id="RT2-c8-e8l"/>
                             <constraint firstItem="xIt-Lv-GdI" firstAttribute="top" secondItem="bZe-CO-fzE" secondAttribute="bottom" constant="15" id="Tbl-BB-uVk"/>
                             <constraint firstAttribute="trailing" secondItem="hJE-2j-BeM" secondAttribute="trailing" id="U8p-2P-9Um"/>
-                            <constraint firstItem="EL7-by-RR7" firstAttribute="top" secondItem="89H-gt-97y" secondAttribute="top" constant="127" id="UQu-LN-dNk"/>
+                            <constraint firstItem="EL7-by-RR7" firstAttribute="top" secondItem="89H-gt-97y" secondAttribute="top" constant="135" id="UQu-LN-dNk"/>
                             <constraint firstItem="bZe-CO-fzE" firstAttribute="leading" secondItem="89H-gt-97y" secondAttribute="leadingMargin" id="XYg-z9-ATG"/>
                             <constraint firstItem="j0G-WK-LPf" firstAttribute="trailing" secondItem="kSX-QC-Op4" secondAttribute="trailing" id="Z2u-xc-9AQ"/>
                             <constraint firstItem="xIt-Lv-GdI" firstAttribute="baseline" secondItem="rpQ-O8-xtN" secondAttribute="baseline" id="ZHi-1d-3N8"/>

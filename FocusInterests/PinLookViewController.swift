@@ -64,7 +64,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             }
         })
         
-        addressTopOut.setTitle(data.locationAddress, for: UIControlState.normal)
+        addressTopOut.setTitle(data.locationAddress.replacingOccurrences(of: ";;", with: "\n", options: .literal, range: nil), for: UIControlState.normal)
         addressBottom.text = data.locationAddress
         pinMessageLabel.text = data.pinMessage
         
