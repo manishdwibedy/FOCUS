@@ -450,12 +450,12 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         eventNameTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Event Name")
         eventEndTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "End Time (if applicable)")
         eventPriceTextView.attributedPlaceholder = formatPlaceholder(placeholder: "Price (if applicable)")
-        
-        eventDateTextField.setRightIcon(iconString: "Calendar-50")
-        locationTextField.setRightIcon(iconString: "location")
-        eventTimeTextField.setRightIcon(iconString: "Clock-25")
-        eventEndTimeTextField.setRightIcon(iconString: "Clock-25")
-        eventPriceTextView.setRightIcon(iconString: "price")
+
+//        eventDateTextField.setRightIcon(iconString: "Calendar-50")
+//        locationTextField.setRightIcon(iconString: "location")
+//        eventTimeTextField.setRightIcon(iconString: "Clock-25")
+//        eventEndTimeTextField.setRightIcon(iconString: "Clock-25")
+//        eventPriceTextView.setRightIcon(iconString: "price")
         
     }
     

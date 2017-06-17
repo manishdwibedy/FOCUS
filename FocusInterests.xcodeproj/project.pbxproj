@@ -245,9 +245,6 @@
 		EBC52C721EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */; };
 		EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */; };
 		EBD76FEF1EF2616400E4776A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FEE1EF2616400E4776A /* ForgotPasswordViewController.swift */; };
-		EBD76FF11EF2763300E4776A /* GeneralSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF01EF2763300E4776A /* GeneralSearchViewController.swift */; };
-		EBD76FF41EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF21EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift */; };
-		EBD76FF51EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD76FF31EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib */; };
 		EBD76FF71EF3527200E4776A /* UserProfileTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */; };
 		EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */; };
 		EBD980831EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */; };
@@ -588,9 +585,6 @@
 		EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllContactsTableViewCell.swift; sourceTree = "<group>"; };
 		EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAllContactsTableViewCell.xib; sourceTree = "<group>"; };
 		EBD76FEE1EF2616400E4776A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		EBD76FF01EF2763300E4776A /* GeneralSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSearchViewController.swift; sourceTree = "<group>"; };
-		EBD76FF21EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSearchCellTableViewCell.swift; sourceTree = "<group>"; };
-		EBD76FF31EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralSearchCellTableViewCell.xib; sourceTree = "<group>"; };
 		EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTwoViewController.swift; sourceTree = "<group>"; };
 		EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Large_Apple_Maps.png; sourceTree = "<group>"; };
 		EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsEventDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -837,7 +831,6 @@
 				5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */,
 				FFBF879E1EE5A855000168F5 /* InvitePeopleViewController.swift */,
 				5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */,
-				EBD76FF01EF2763300E4776A /* GeneralSearchViewController.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -1191,8 +1184,6 @@
 				EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */,
 				EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */,
 				EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */,
-				EBD76FF21EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift */,
-				EBD76FF31EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1489,7 +1480,6 @@
 				EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
 				5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */,
-				EBD76FF51EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib in Resources */,
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
 				EB252F0C1EE9E9F7001C163D /* NewMessageTableViewCell.xib in Resources */,
 				5B448E631EE7B7FC00873F79 /* MessageTableViewCell.xib in Resources */,
@@ -1860,7 +1850,6 @@
 				5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */,
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				EB5891D11EE7EB8800C35EE9 /* CommentsTableViewCell.swift in Sources */,
-				EBD76FF11EF2763300E4776A /* GeneralSearchViewController.swift in Sources */,
 				5BAB87AD1EC97BED0064E5EC /* PeopleSearchViewController.swift in Sources */,
 				5B1659301EDA6DF40002209A /* MapMarkerView.swift in Sources */,
 				D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */,
@@ -1869,7 +1858,6 @@
 				5B7BB1EA1ED54677001E60FF /* UITableView+Extensions.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 				5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */,
-				EBD76FF41EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift in Sources */,
 				5B6AFA651ED1906900A82104 /* GMUSimpleClusterAlgorithm.m in Sources */,
 				5B6AFA771ED1906900A82104 /* GQTPointQuadTreeChild.m in Sources */,
 				D2ECAC541E7A255B006FFA1A /* UserProfile1ViewController.swift in Sources */,
