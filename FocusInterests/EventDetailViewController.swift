@@ -21,6 +21,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     @IBOutlet weak var eventInterests: UILabel!
     @IBOutlet weak var eventAmount: UILabel!
+    @IBOutlet weak var eventAmountHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
@@ -65,6 +67,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         eventsTableView.dataSource = self
         eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
+        if event?.price != nil && (event?.price)! > 0.0{
+            eventAmount.text = "$ \(String(describing: event?.price))"
+        }
+        else{
+            eventAmountHeight.constant = 0
+        }
         
         attendOut.layer.cornerRadius = 6
         attendOut.clipsToBounds = true
@@ -263,6 +271,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func inviteEvent(_ sender: UIButton) {
         let ivc = storyboard?.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "event"
