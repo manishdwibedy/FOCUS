@@ -255,6 +255,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
         
         self.commentTextField.delegate = self
+        
+        hideKeyboardWhenTappedAround()
     }
     
     override func didReceiveMemoryWarning() {
@@ -553,21 +555,18 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         inviteOut.roundCorners(radius: 7.0)
         mapOut.roundCorners(radius: 7.0)
         
-        addCommentView.layer.borderWidth = 1
         userInfoEditButton.layer.borderWidth = 1
         descriptionEditButton.layer.borderWidth = 1
         moreCommentsButton.layer.borderWidth = 1
         postCommentsButton.layer.borderWidth = 1
         moreOtherLikesButton.layer.borderWidth = 1
         
-        addCommentView.layer.borderColor = UIColor.white.cgColor
         userInfoEditButton.layer.borderColor = UIColor.white.cgColor
         descriptionEditButton.layer.borderColor = UIColor.white.cgColor
         moreCommentsButton.layer.borderColor = UIColor.white.cgColor
         postCommentsButton.layer.borderColor = UIColor.white.cgColor
         moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
         
-        addCommentView.allCornersRounded(radius: 7.0)
         userInfoEditButton.roundCorners(radius: 7.0)
         descriptionEditButton.roundCorners(radius: 7.0)
         moreCommentsButton.roundCorners(radius: 7.0)
