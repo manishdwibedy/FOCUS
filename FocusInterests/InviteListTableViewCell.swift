@@ -37,6 +37,9 @@ class InviteListTableViewCell: UITableViewCell {
         self.userProfileImage.layer.borderWidth = 2
         self.userProfileImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
         self.userProfileImage.roundedImage()
+        
+        self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Green.png"), for: .selected)
+        self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
     }
     
     func setUserNameAndFullNameValues(userName: String, fullName: String){
@@ -47,12 +50,10 @@ class InviteListTableViewCell: UITableViewCell {
     @IBAction func contactSelectedAction(_ sender: Any) {
         if self.inviteConfirmationButton.isSelected == false{
             self.inviteConfirmationButton.isSelected = true
-            self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_Filled"), for: .selected)
              delegate?.contactHasBeenSelected(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
             
         }else{
             self.inviteConfirmationButton.isSelected = false
-            self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
             delegate?.contactHasBeenRemoved(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
             
         }
