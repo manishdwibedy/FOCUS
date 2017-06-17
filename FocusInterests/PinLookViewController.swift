@@ -15,7 +15,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var addressTopOut: UIButton!
-    @IBOutlet weak var optionsOut: UIButton!
     @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var commentOut: UIButton!
     @IBOutlet weak var sendOut: UIButton!
@@ -75,8 +74,9 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         
         addressTopOut.setTitle(data.locationAddress.replacingOccurrences(of: ";;", with: "\n", options: .literal, range: nil), for: UIControlState.normal)
         
-        
-        
+        let formatter = DateFormatter()
+        let date = Date(timeIntervalSince1970: data.dateTimeStamp)
+        dateLabel.text = formatter.timeSince(from: date, numericDates: false)
         
         //check for images
         data.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -145,7 +145,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                self.likeOut.isEnabled = false
+                
                 self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
             }
         })
@@ -163,6 +163,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     let textLabel = UILabel()
 
                     textLabel.textColor = .white
+                    textLabel.font = UIFont(name: "Avenir-Book", size: 15)
                     textLabel.text  = "View \(value.count) comments"
                     textLabel.textAlignment = .left
                     
@@ -235,7 +236,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     }
     
     @IBAction func like(_ sender: Any) {
-       if self.likeOut.isEnabled == true
+       if (self.likeOut.imageView?.image?.isEqual(UIImage(named: "Like")))!
        {
             self.likes = self.likes + 1
             data.dbPath.child("like").updateChildValues(["num": likes])
@@ -243,6 +244,24 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             self.likeOut.isEnabled = false
             self.likesLabel.text = String(self.likes) + " likes"
             self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
+        }
+       else{
+        self.likes = self.likes - 1
+        data.dbPath.child("like").updateChildValues(["num": likes])
+        
+        data.dbPath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+//                data.dbPath.child("like").child("likedBy").
+                print(value)
+            }
+        })
+        
+//        data.dbPath.child("like").child("likedBy").rem
+        self.likeOut.isEnabled = false
+        self.likesLabel.text = String(self.likes) + " likes"
+        self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
         }
        
     }
