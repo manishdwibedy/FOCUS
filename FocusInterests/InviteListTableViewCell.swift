@@ -17,6 +17,8 @@ class InviteListTableViewCell: UITableViewCell {
     @IBOutlet weak var inviteConfirmationButton: UIButton!
     var delegate: SendInvitationsViewControllerDelegate?
     
+    var user: InviteUser? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

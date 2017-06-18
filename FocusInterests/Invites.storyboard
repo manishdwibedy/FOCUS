@@ -58,13 +58,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Uub-jM-uqs"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Send Invites" id="s7p-U2-DPl">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Vyu-gj-wVo">
+                                        <barButtonItem key="leftBarButtonItem" image="BackArrow" id="Vyu-gj-wVo">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="backPressed:" destination="ii7-3r-SGo" id="aLt-1y-ZTq"/>
@@ -73,39 +73,50 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7de-LD-Fht">
-                                <rect key="frame" x="136" y="72" width="103" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rg7-5I-k1W">
+                                <rect key="frame" x="0.0" y="64" width="375" height="46"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nru-7F-n9l">
+                                        <rect key="frame" x="20" y="11" width="50" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7de-LD-Fht">
+                                        <rect key="frame" x="120" y="5" width="103" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="103" id="90T-sZ-Bhe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="4:15">
+                                            <color key="titleColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="timePushed:" destination="ii7-3r-SGo" eventType="touchUpInside" id="qSp-Oo-Ta6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="103" id="90T-sZ-Bhe"/>
+                                    <constraint firstItem="7de-LD-Fht" firstAttribute="centerY" secondItem="rg7-5I-k1W" secondAttribute="centerY" id="51v-uJ-MNA"/>
+                                    <constraint firstItem="nru-7F-n9l" firstAttribute="leading" secondItem="rg7-5I-k1W" secondAttribute="leading" constant="20" id="D97-OA-YaR"/>
+                                    <constraint firstItem="nru-7F-n9l" firstAttribute="centerY" secondItem="rg7-5I-k1W" secondAttribute="centerY" id="UqW-QB-Ew7"/>
+                                    <constraint firstItem="7de-LD-Fht" firstAttribute="leading" secondItem="nru-7F-n9l" secondAttribute="trailing" constant="50" id="ZFt-aW-zd8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="4:15">
-                                    <color key="titleColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="timePushed:" destination="ii7-3r-SGo" eventType="touchUpInside" id="qSp-Oo-Ta6"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nru-7F-n9l">
-                                <rect key="frame" x="16" y="77" width="61" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ith-zO-7mj" firstAttribute="top" secondItem="noj-oM-whr" secondAttribute="bottom" constant="46" id="9FE-3g-EOe"/>
                             <constraint firstItem="noj-oM-whr" firstAttribute="top" secondItem="UaN-7t-6P3" secondAttribute="bottom" id="AxJ-bS-jO0"/>
                             <constraint firstItem="58f-vL-hfC" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="Boj-ND-RSA"/>
-                            <constraint firstItem="7de-LD-Fht" firstAttribute="centerY" secondItem="nru-7F-n9l" secondAttribute="centerY" id="E83-bc-rLb"/>
+                            <constraint firstItem="ith-zO-7mj" firstAttribute="top" secondItem="rg7-5I-k1W" secondAttribute="bottom" id="F9K-1G-ZOF"/>
                             <constraint firstItem="noj-oM-whr" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="JR6-1L-qtt"/>
-                            <constraint firstItem="7de-LD-Fht" firstAttribute="leading" secondItem="nru-7F-n9l" secondAttribute="trailing" constant="59" id="KWL-kM-3Hg"/>
                             <constraint firstAttribute="trailing" secondItem="58f-vL-hfC" secondAttribute="trailing" id="Uip-LI-uwm"/>
                             <constraint firstItem="0gF-6J-suq" firstAttribute="top" secondItem="ith-zO-7mj" secondAttribute="bottom" id="Vg9-Jl-4Du"/>
-                            <constraint firstItem="ith-zO-7mj" firstAttribute="top" secondItem="7de-LD-Fht" secondAttribute="bottom" constant="8" symbolic="YES" id="aRF-Uf-fHK"/>
-                            <constraint firstItem="7de-LD-Fht" firstAttribute="centerX" secondItem="noj-oM-whr" secondAttribute="centerX" id="cFW-xV-yNg"/>
-                            <constraint firstItem="7de-LD-Fht" firstAttribute="top" secondItem="noj-oM-whr" secondAttribute="bottom" constant="8" id="fYt-D5-UXh"/>
+                            <constraint firstItem="rg7-5I-k1W" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="WbM-sz-dxw"/>
+                            <constraint firstItem="rg7-5I-k1W" firstAttribute="top" secondItem="noj-oM-whr" secondAttribute="bottom" id="bwE-Jj-HvO"/>
+                            <constraint firstAttribute="trailing" secondItem="rg7-5I-k1W" secondAttribute="trailing" id="gba-mD-uA1"/>
                             <constraint firstItem="0gF-6J-suq" firstAttribute="top" secondItem="58f-vL-hfC" secondAttribute="bottom" id="grY-ux-g6y"/>
                             <constraint firstItem="ith-zO-7mj" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="jf2-T3-IHB"/>
                             <constraint firstAttribute="trailing" secondItem="ith-zO-7mj" secondAttribute="trailing" id="xIQ-25-Bue"/>
@@ -127,4 +138,7 @@
             <point key="canvasLocation" x="2357.5999999999999" y="116.49175412293854"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BackArrow" width="30" height="30"/>
+    </resources>
 </document>
