@@ -43,10 +43,26 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         self.roundButtonsAndPictures()
         
 //        self.userProfilePic.image = notif.sender?.username
-        let content = (notif.sender?.username)! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
-        self.userNameLabel.text = (notif.sender?.username)!
-        self.locationNameLabel.text = notif.item?.itemName
-//        self.notifImgView.image = notif.item?.imageURL
+        let content = (notif.sender?.username)! + " "//! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
+        
+        
+        
+        var attrString: NSMutableAttributedString = NSMutableAttributedString(string: (notif.sender?.username)! + " ")
+        attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1), range: NSMakeRange(0,  (notif.sender?.username?.characters.count)!))
+        
+        var descString: NSMutableAttributedString = NSMutableAttributedString(string: (notif.type?.rawValue)! + " ")
+        descString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, (notif.type?.rawValue.characters.count)!))
+        
+        var descString2: NSMutableAttributedString = NSMutableAttributedString(string: (notif.item?.itemName!)!)
+        descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (notif.item?.itemName?.characters.count)!))
+        
+        attrString.append(descString);
+        attrString.append(descString2);
+        
+        
+        
+        self.userNameLabel.attributedText = attrString
+
         self.timeLabel.text = "2h"
         
         self.notif = notif

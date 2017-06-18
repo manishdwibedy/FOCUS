@@ -59,6 +59,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
         
+        profileImage.layer.cornerRadius = profileImage.frame.width/2
+        profileImage.clipsToBounds = true
+        
 //        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
 //            let value = snapshot.value as? NSDictionary
 //            if value != nil
