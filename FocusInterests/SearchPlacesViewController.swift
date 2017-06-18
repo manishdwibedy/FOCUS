@@ -42,6 +42,30 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            
+            
+            if let placeData = value{
+                let count = placeData.count
+                self.places.removeAll()
+                for (_,place) in placeData
+                {
+                    let place_id = (place as? [String:Any])?["placeID"]
+                    getYelpByID(ID: place_id as! String, completion: {place in
+                        self.places.append(place)
+                        
+                        if self.places.count == count{
+                            self.filtered = self.places
+                            self.tableView.reloadData()
+                        }
+                    })
+                    print(place_id)
+                }
+                
+            }
+        })
+        
 //        let url = "https://api.yelp.com/v3/businesses/search"
 //        
 //        let headers: HTTPHeaders = [
