@@ -189,7 +189,7 @@ func getDistance(fromLocation: CLLocation, toLocation: CLLocation, addBracket: B
     
 }
 
-func sendNotification(to id: String, title: String, body: String){
+func sendNotification(to id: String, title: String, body: String, actionType: String, type: String, item_id: String){
     let url = "http://focus-notifications.3hwampgg8c.us-west-2.elasticbeanstalk.com/sendMessage"
     
     let time = NSDate().timeIntervalSince1970
@@ -197,7 +197,10 @@ func sendNotification(to id: String, title: String, body: String){
     Constants.DB.user.child("\(id)/notifications").childByAutoId().setValue([
         "title": title,
         "body": body,
-        "time": Double(time)
+        "time": Double(time),
+        "actionType": actionType,
+        "type": type,
+        "id": item_id
         ])
     
     Constants.DB.user.child(id).observeSingleEvent(of: .value, with: { snapshot in

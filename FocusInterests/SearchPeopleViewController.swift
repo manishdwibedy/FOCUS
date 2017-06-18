@@ -21,6 +21,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     var people = [User]()
     var filtered = [User]()
     var location: CLLocation?
+    var pinAvailable = [pinData?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,22 +51,50 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
         let ref = Constants.DB.user
         _ = ref.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { snapshot in
             let users = snapshot.value as? [String : Any] ?? [:]
             
+            let count = users.count
+            self.people.removeAll()
             for (_, user) in users{
                 let info = user as? [String:Any]
                 
-                let user = User(username: info?["username"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                
+                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"]  as! String?, uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
                 
                 if user.uuid != AuthApi.getFirebaseUid() && user.uuid != nil{
-                    self.people.append(user)
+                    
+                    
+                    Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let value = snapshot.value as? NSDictionary
+                        if value != nil
+                        {
+                            var address = value?["formattedAddress"] as! String
+                            address = address.replacingOccurrences(of: ";;", with: "\n")
+                            let data = pinData(UID: value?["fromUID"] as! String, dateTS: (value?["time"] as! Double), pin: (value?["pin"] as! String), location: (value?["formattedAddress"] as! String), lat: (value?["lat"] as! Double), lng: (value?["lng"] as! Double), path: Constants.DB.pins.child(user.uuid! as! String))
+                            self.pinAvailable.append(data)
+                        }
+                        else{
+                            self.pinAvailable.append(nil)
+                        }
+                        self.people.append(user)
+                        
+                        self.filtered = self.people
+                        self.tableView.reloadData()
+                    })
                 }
+                
+                
             }
-            self.filtered = self.people
-            self.tableView.reloadData()
+            
         })
+        
+        let cancelButtonAttributes: [String: AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
+        
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(cancelButtonAttributes, for: .normal)
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,52 +118,28 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             cell?.username.text = people.username
         }
         
-        cell?.fullName.text = "Full Name"
         
-        cell?.address.text = "1234 Grand Ave.\nPasadena, CA 91101"
-        cell?.distance.text = "2.1m"
+        cell?.fullName.text = people.fullname
         
-//        var addressComponents = event.fullAddress?.components(separatedBy: ",")
-//        let streetAddress = addressComponents?[0]
-//        
-//        addressComponents?.remove(at: 0)
-//        let city = addressComponents?.joined(separator: ", ")
-//        
-//        
-//        cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
-//        cell?.address.textContainer.maximumNumberOfLines = 6
+        if let pin = self.pinAvailable[indexPath.row]{
+            var address = pin.locationAddress
+            address = address.replacingOccurrences(of: ";;", with: "\n")
+            cell?.address.text = address
+            cell?.distance.text = "2.1 mi"
+        }
+        else{
+            cell?.address.text = ""
+            cell?.distance.text = ""
+            cell?.interestView?.isHidden = true
+        }
+    
         cell?.ID = people.uuid!
         cell?.interest.text = "Category"
         //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
         
-//        let reference = Constants.storage.event.child("\(event.id!).jpg")
-//        
-//        // Placeholder image
-//        _ = UIImage(named: "empty_event")
-//        
-//        reference.downloadURL(completion: { (url, error) in
-//            
-//            if error != nil {
-//                print(error?.localizedDescription ?? "")
-//                return
-//            }
-//            
-//            cell?.userImage?.sd_setImage(with: url, placeholderImage: placeHolderImage)
-//            
-//            cell?.userImage?.setShowActivityIndicator(true)
-//            cell?.userImage?.setIndicatorStyle(.gray)
-//            
-//        })
-        
         cell?.followButton.roundCorners(radius: 10)
         cell?.inviteButton.roundCorners(radius: 10)
-        
-        cell?.followButton.tag = indexPath.row
-        cell?.followButton.addTarget(self, action: #selector(self.followUser), for: UIControlEvents.touchUpInside)
-        
-        cell?.inviteButton.tag = indexPath.row
-        cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
         
         cell?.checkFollow()
         
@@ -156,72 +161,11 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             sender.tintColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
             
         } else if sender.isSelected == true{
-            print("now unfollowing user")
-            print("UNFOLLOW ID")
-            //           Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
-            //                let value = snapshot.value as? [String:Any]
-            //
-            //                for (id, _) in value!{
-            //                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people/\(id)").removeValue()
-            //                }
-            //
-            //                })
-            //            Constants.DB.user.child(self.ID).child("followers").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-            //                let value = snapshot.value as? [String:Any]
-            //
-            //                for (id, _) in value!{
-            //                    Constants.DB.user.child(self.ID).child("followers/people/\(id)").removeValue()
-            //
-            //                }
-            //
-            //            })
             
-            //            follow button appearance
             
-            //            alert controller view
             
-            let unfollowAlertController = UIAlertController(title: "\n\n\n\n\n\n", message: "Are you sure you want to unfollow \(self.people[buttonRow].username!)", preferredStyle: .actionSheet)
-            
-            let margin:CGFloat = 10.0
-            let rect = CGRect(x: margin, y: margin, width: unfollowAlertController.view.bounds.size.width - margin * 4.0, height: CGFloat(120))
-            let customView = UIView(frame: rect)
-            
-            customView.backgroundColor = .green
-            let imgViewTitle = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-            imgViewTitle.image = self.people[buttonRow].userImage
-            customView.addSubview(imgViewTitle)
-            unfollowAlertController.view.addSubview(customView)
-//            let imgViewTitle = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
-//            imgViewTitle.image = self.people[buttonRow].userImage
-            
-//            unfollowAlertController.view.addSubview(imgViewTitle)
-            
-            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
-                print("unfollow has been tapped")
-                print("now following user is followUserAction")
-                
-//                unfollow button view
-                
-                sender.isSelected = false
-                sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-                sender.tintColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-            }
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
-                print("cancel has been tapped")
-            }
-            
-            unfollowAlertController.addAction(unfollowAction)
-            unfollowAlertController.addAction(cancelAction)
-            self.present(unfollowAlertController, animated: true, completion: nil)
         }
 
-    }
-    
-    func inviteUser(sender:UIButton){
-        let buttonRow = sender.tag
-        
-        print("invite user \(self.people[buttonRow].username) ")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -229,7 +173,15 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
+        
+        if (self.pinAvailable[indexPath.row] != nil){
+            return 150
+        }
+        else{
+            return 80
+        }
+        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -243,7 +195,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                 for (_, user) in users{
                     let info = user as? [String:Any]
                     
-                    let user = User(username: info?["username"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                    let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
                     
                     if user.uuid != AuthApi.getFirebaseUid(){
                         self.filtered.append(user)
@@ -258,6 +210,14 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         }
         
         
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
     }
     
     @IBAction func showCreateEvent(_ sender: UIButton) {

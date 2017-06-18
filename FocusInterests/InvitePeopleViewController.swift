@@ -25,6 +25,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var events = [Event]()
     var location: CLLocation?
     let locationManager = CLLocationManager()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -59,22 +59,37 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         super.viewWillAppear(animated)
         self.location = AuthApi.getLocation()
         
-        Constants.DB.event.observe(DataEventType.value, with: { (snapshot) in
-            let events = snapshot.value as? [String : Any] ?? [:]
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
             
-            for (id, event) in events{
-                let info = event as? [String:Any]
-                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
-                
-                if let attending = info?["attendingList"] as? [String:Any]{
-                    event.setAttendessCount(count: attending.count)
+            
+            if let placeData = value{
+                let count = placeData.count
+                self.events.removeAll()
+                for (_,place) in placeData
+                {
+                    let id = (place as? [String:Any])?["ID"]
+                    
+                    Constants.DB.event.child(id as! String).observe(DataEventType.value, with: { (snapshot) in
+                        let info = snapshot.value as? [String : Any] ?? [:]
+            
+//                        for (id, event) in events{
+//                            let info = event as? [String:Any]
+                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id as! String, category: info["interest"] as? String)
+            
+                            if let attending = info["attendingList"] as? [String:Any]{
+                                event.setAttendessCount(count: attending.count)
+                            }
+            
+                            self.events.append(event)
+                            if self.events.count == count{
+                                self.filtered = self.events
+                                self.tableView.reloadData()
+                            }
+//                        }
+                    })
                 }
-                
-                self.events.append(event)
-                
             }
-            self.filtered = self.events
-            self.tableView.reloadData()
         })
     }
     
@@ -278,6 +293,13 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
     @IBAction func showCreateEvent(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)

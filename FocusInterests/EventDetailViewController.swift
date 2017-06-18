@@ -235,6 +235,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                         print(guest)
                         if guest["UID"] == AuthApi.getFirebaseUid()!{
                             self.isAttending = true
+                            
+                            self.attendOut.layer.cornerRadius = 6
+                            self.attendOut.layer.borderWidth = 1
+                            self.attendOut.backgroundColor = .clear
+                            self.attendOut.layer.borderColor = UIColor.black.cgColor
+
                             self.attendOut.setTitle("Attending", for: UIControlState.normal)
                         }
                     }
@@ -319,6 +325,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
             self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
             
+            attendOut.layer.cornerRadius = 6
+            attendOut.layer.borderWidth = 1
+            attendOut.backgroundColor = .clear
+            attendOut.layer.borderColor = UIColor.black.cgColor
+
             self.attendOut.setTitle("Attending", for: UIControlState.normal)
         }else
         {
@@ -346,7 +357,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
                     self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
             
-                    
+                    self.attendOut.backgroundColor = Constants.color.green
                     self.attendOut.setTitle("Attend", for: UIControlState.normal)
                 }
                 
@@ -555,39 +566,32 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func getEventSuggestions(){
-        
         let center = CLLocation(latitude: Double((event?.latitude)!)!, longitude: Double((event?.latitude)!)!)
-                if let circleQuery = self.geoFire?.query(at: center, withRadius: 5.0) {
-                        _ = circleQuery.observe(.keyEntered) { (key, location) in
-                                print("Key '\(key)' entered the search area and is at location '\(location)'")
-                            
-                            Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
-                                let info = snapshot.value as? [String : Any] ?? [:]
-                                
-//                                for (id, event) in events{
-//                                    let info = event as? [String:Any]
-                                    let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
-                                    
-                                    if let attending = info["attendingList"] as? [String:Any]{
-                                        event.setAttendessCount(count: attending.count)
-                                    }
-                                    
-                                    if event.id != self.event?.id{
-                                        self.suggestions.append(event)
-                                        
-                                    }
-                                    
-//                                    if self.suggestions.count == 2{
-                                self.eventsTableView.reloadData()
-//                                    }
-//                                }
-                            })
-                            }
+        if let circleQuery = self.geoFire?.query(at: center, withRadius: 20.0) {
+            _ = circleQuery.observe(.keyEntered) { (key, location) in
+                    print("Key '\(key)' entered the search area and is at location '\(location)'")
                 
-                            circleQuery.observeReady{
-                                print("All initial data has been loaded and events have been fired for circle query!")
-                            }
-                    }
+                Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
+                    let info = snapshot.value as? [String : Any] ?? [:]
+                    
+                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
+                        
+                        if let attending = info["attendingList"] as? [String:Any]{
+                            event.setAttendessCount(count: attending.count)
+                        }
+                        
+                        if event.id != self.event?.id{
+                            self.suggestions.append(event)
+                        }
+                        
+                    self.eventsTableView.reloadData()
+                })
+            }
+    
+            circleQuery.observeReady{
+                print("All initial data has been loaded and events have been fired for circle query!")
+            }
+        }
         
     }
     

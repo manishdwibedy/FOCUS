@@ -19,9 +19,11 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var tableHeader: UIView!
     
+    @IBOutlet weak var invitePopup: UIView!
     var places = [Place]()
     var filtered = [Place]()
     var location: CLLocation?
+    var showPopup = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,72 +44,47 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        let url = "https://api.yelp.com/v3/businesses/search"
-//        
-//        let headers: HTTPHeaders = [
-//            "authorization": "Bearer \(AuthApi.getYelpToken()!)",
-//            "cache-contro": "no-cache"
-//        ]
-//        
-//        let parameters = [
-//            "term": "Porta via",
-//            "latitude": location?.coordinate.latitude,
-//            "longitude": location?.coordinate.longitude,
-//            ] as [String : Any]
-//        Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseString(completionHandler: {response in
-//                print(response)
-//        })
-//        Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
-//            
-//            print(response.request)  // original URL request
-//            print(response.response) // URL response
-//            print(response.data)     // server data
-//            print(response.result)   // result of response serialization
-//            let json = JSON(data: response.data!)["businesses"]
-//            
-//            _ = self.places.count
-//            for (_, business) in json.enumerated(){
-//                let id = business.1["id"].stringValue
-//                let name = business.1["name"].stringValue
-//                let image_url = business.1["image_url"].stringValue
-//                let isClosed = business.1["is_closed"].boolValue
-//                let reviewCount = business.1["review_count"].intValue
-//                let rating = business.1["rating"].floatValue
-//                let latitude = business.1["coordinates"]["latitude"].doubleValue
-//                let longitude = business.1["coordinates"]["longitude"].doubleValue
-//                let price = business.1["price"].stringValue
-//                let address_json = business.1["location"]["display_address"].arrayValue
-//                let phone = business.1["display_phone"].stringValue
-//                let distance = business.1["distance"].doubleValue
-//                let categories_json = business.1["categories"].arrayValue
-//                let url = business.1["url"].stringValue
-//                
-//                var address = [String]()
-//                for raw_address in address_json{
-//                    address.append(raw_address.stringValue)
-//                }
-//                
-//                var categories = [Category]()
-//                for raw_category in categories_json as [JSON]{
-//                    let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
-//                    categories.append(category)
-//                }
-//                
-//                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url)
-//                
-//                if !self.places.contains(place){
-//                    self.places.append(place)
-//                }
-//            }
-            self.filtered = self.places
-            self.tableView.reloadData()
-//        }
+        if showPopup{
+            invitePopup.alpha = 1
+            invitePopup.allCornersRounded(radius: 10)
+            
+            _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector:  Selector("hidePopup"), userInfo: nil, repeats: false)
+
+        }
+        
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            
+            
+            if let placeData = value{
+                let count = placeData.count
+                self.places.removeAll()
+                for (_,place) in placeData
+                {
+                    let place_id = (place as? [String:Any])?["placeID"]
+                    getYelpByID(ID: place_id as! String, completion: {place in
+                        self.places.append(place)
+                        
+                        if self.places.count == count{
+                            self.filtered = self.places
+                            self.tableView.reloadData()
+                        }
+                    })
+                
+                }
+                
+            }
+        })
     }
     
+    func hidePopup(){
+        invitePopup.alpha = 0
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filtered.count
@@ -136,7 +113,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
             cell.categoryLabel.text = place.categories[0].name    
         }
         
-//        cell.checkForFollow(id: place.id)
+        cell.checkForFollow(id: place.id)
         let placeHolderImage = UIImage(named: "empty_event")
         cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
         cell.checkForFollow(id: place.id)
@@ -154,6 +131,14 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
         
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

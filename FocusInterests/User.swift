@@ -12,13 +12,15 @@ import UIKit
 class User {
     
     var username: String?
+    var fullname: String?
     var uuid: String?
     var userImage: UIImage?
     var interests: [Interest]?
     var image_string: String?
     
-    init(username: String?, uuid: String?, userImage: UIImage?, interests: [Interest]?, image_string: String?) {
+    init(username: String?, fullname: String?, uuid: String?, userImage: UIImage?, interests: [Interest]?, image_string: String?) {
         self.username =  username
+        self.fullname = fullname
         self.uuid = uuid
         self.userImage = userImage
         self.interests = interests

@@ -20,8 +20,10 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var fullName: UILabel!
 
+    @IBOutlet weak var interestView: UIView!
     var ID = ""
     var parentVC: SearchPeopleViewController!
+    var pinAvailable = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +47,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
         self.followButton.layer.shadowRadius = 6.0
         
         self.followButton.setTitle("Follow", for: UIControlState.normal)
-        self.followButton.setTitle("Unfollow", for: UIControlState.selected)
+        self.followButton.setTitle("Following", for: UIControlState.selected)
         
         //invite button
         self.inviteButton.clipsToBounds = true
@@ -90,72 +92,35 @@ class SearchPeopleTableViewCell: UITableViewCell {
         let time = NSDate().timeIntervalSince1970
 
         if self.followButton.isSelected == false{
-//            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").childByAutoId().updateChildValues(["UID":ID, "time":Double(time)])
-//
-//            Constants.DB.user.child(ID).child("followers").child("people").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":time])
-//
-//            unfollow button appearance
-                self.followButton.isSelected = true
-                self.followButton.layer.borderColor = UIColor.white.cgColor
-                self.followButton.layer.borderWidth = 1
-                self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
-                self.followButton.tintColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+            Follow.followUser(uid: self.ID)
+            self.followButton.isSelected = true
+            self.followButton.layer.borderColor = UIColor.white.cgColor
+            self.followButton.layer.borderWidth = 1
+            self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+            self.followButton.tintColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
  
         } else if self.followButton.isSelected == true{
-            print("now unfollowing user is followUserAction")
-            print("UNFOLLOW ID")
-            print(ID)
-//           Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
-//                let value = snapshot.value as? [String:Any]
-//                
-//                for (id, _) in value!{
-//                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people/\(id)").removeValue()
-//                }
-//             
-//                })
-//            Constants.DB.user.child(self.ID).child("followers").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-//                let value = snapshot.value as? [String:Any]
-//                
-//                for (id, _) in value!{
-//                    Constants.DB.user.child(self.ID).child("followers/people/\(id)").removeValue()
-//                    
-//                }
-//                
-//            })
             
-//            follow button appearance
-            self.followButton.isSelected = false
-            self.followButton.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-            self.followButton.tintColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-        }
-    }
-    
-    
-    func unflollow()
-    {
-        print("UNFOLLOW ID")
-        print(ID)
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? [String:Any]
+            let unfollowAlertController = UIAlertController(title: "Unfollow user", message: "Are you sure you want to unfollow \(self.username.text!)", preferredStyle: .actionSheet)
             
-            for (id, _) in value!{
-                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people/\(id)").removeValue()
-            }
             
-        })
-        Constants.DB.user.child(self.ID).child("followers").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? [String:Any]
-            
-            for (id, _) in value!{
-                Constants.DB.user.child(self.ID).child("followers/people/\(id)").removeValue()
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
                 
+                Follow.unFollowUser(uid: self.ID)
+                
+                sender.isSelected = false
+                sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                sender.tintColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
             }
             
-        })
-        self.followButton.layer.borderColor = UIColor.clear.cgColor
-        self.followButton.layer.borderWidth = 0
-        self.followButton.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
-        self.followButton.setTitle("Follow", for: UIControlState.normal)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print("cancel has been tapped")
+            }
+            
+            unfollowAlertController.addAction(unfollowAction)
+            unfollowAlertController.addAction(cancelAction)
+            parentVC.present(unfollowAlertController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func inviteUser(_ sender: UIButton) {

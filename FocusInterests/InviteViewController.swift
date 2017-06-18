@@ -18,10 +18,11 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var contactListView: UIView!
     @IBOutlet weak var timeOut: UIButton!
     
-    let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-    
-    
-    var inviteCellData = [InviteUser]()
+    @IBOutlet weak var friendListBottom: NSLayoutConstraint!
+   
+    var sections = [String]()
+    var sectionMapping = [String:Int]()
+    var users = [String:[InviteUser]]()
     
     var parentCell: SearchPlaceCell!
     var type = ""
@@ -29,7 +30,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var place: Place?
     var event: Event?
     
-    var selected = [Bool]()
+    var selected = [InviteUser:Bool]()
     
     let datePicker = UIDatePicker()
     let timePicker = UIDatePicker()
@@ -37,7 +38,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let timeFormatter = DateFormatter()
     var inviteTime = ""
 
-    
+    var searchPlace: SearchPlacesViewController? = nil
     var image: Data?
     var selectedFriend = [Bool]()
     let store = CNContactStore()
@@ -51,7 +52,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
         
-        self.friendsTableView.allowsSelection = false
+        self.friendsTableView.allowsSelection = true
         
         if contacts.count <= 0 {
             contactListView.isHidden = true
@@ -66,24 +67,39 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        friendsTableView.register(selectedTimeListCellNib, forCellReuseIdentifier: "selectedTimeCell")
         
         
-        Constants.DB.user.queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { (snapshot) in
+        Constants.DB.user.observeSingleEvent(of: .value, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
             if let data = data
             {
+//                self.inviteCellData.removeAll()
                 for (_,value) in data
                 {
                     if let info = value as? [String: Any]{
                         if let uid = info["firebaseUserId"] as? String, let username = info["username"] as? String, let fullname = info["fullname"] as? String{
                             let newData = InviteUser(UID: uid, username: username, fullname: fullname)
-                            self.inviteCellData.append(newData)
+                            self.selected[newData] = false
+                            if newData.UID != AuthApi.getFirebaseUid(){
+//                                self.inviteCellData.append(newData)
+                                
+                                let first = String(describing: newData.username.characters.first!).uppercased()
+                                
+                                if !self.sections.contains(first){
+                                    self.sections.append(first)
+                                    self.sectionMapping[first] = 1
+                                    self.users[first] = [newData]
+                                }
+                                else{
+                                    self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                                    self.users[first]?.append(newData)
+                                }
+                                
+                            }
                         }
                     }
                 }
             }
             
-            for _ in 0..<self.inviteCellData.count{
-                self.selected.append(false)
-            }
+            self.sections.sort()
             self.friendsTableView.reloadData()
         })
         
@@ -96,6 +112,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.timePicker.addTarget(self, action: #selector(pickerChange(sender:)), for: UIControlEvents.valueChanged)
         
+        self.friendsTableView.tableFooterView = UIView()
         hideKeyboardWhenTappedAround()
     }
     
@@ -114,12 +131,12 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Tableview Delegate Methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return inviteCellData.count
+        return self.sectionMapping[self.sections[section]]!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -127,56 +144,109 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return self.alphabeticalSections
+        return self.sections
     }
     
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        var temp = self.alphabeticalSections as NSArray
+        tableView.scrollToRow(at: IndexPath(row: 0, section: index), at: UITableViewScrollPosition.top , animated: false)
+        
+        var temp = self.sections as NSArray
         return temp.index(of: title)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if(indexPath.section == 0){
-//            let selectedTimeTableCell = tableView.dequeueReusableCell(withIdentifier: "selectedTimeCell", for: indexPath) as! SelectedTimeTableViewCell
-//            return selectedTimeTableCell
-        }
+        let section = sections[indexPath.section]
+        let user = self.users[section]?[indexPath.row]
+
         
         let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
         personToInviteCell.delegate = self
-
-        personToInviteCell.usernameLabel.text = self.inviteCellData[indexPath.row].username //will need to change this to the username of user
-        personToInviteCell.fullNameLabel.text = self.inviteCellData[indexPath.row].fullname
+        personToInviteCell.user = user
+        
+        if self.selected[user!]!{
+            personToInviteCell.inviteConfirmationButton.isSelected = true
+        }
+        else{
+            personToInviteCell.inviteConfirmationButton.isSelected = false
+        }
+        
+        
+        
+        personToInviteCell.usernameLabel.text = user?.username
+        personToInviteCell.fullNameLabel.text = user?.fullname
         
         personToInviteCell.inviteConfirmationButton.tag = indexPath.row
         return personToInviteCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.row
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let section = sections[indexPath.section]
+        let user = self.users[section]?[indexPath.row]
+
+        
+        let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
+        
+        
+        if !self.selected[user!]!{
+            personToInviteCell.inviteConfirmationButton.isSelected = true
+            contactHasBeenSelected(contact: (user?.username)!, index: index)
+        }
+        else{
+            personToInviteCell.inviteConfirmationButton.isSelected = false
+            contactHasBeenRemoved(contact: (user?.username)!, index: index)
+        }
+    }
     func contactHasBeenSelected(contact: String, index: Int){
         contactListView.isHidden = false
-        if self.selected[index] == false
+        
+        let section = String(describing: contact.characters.first!)
+        let user = self.users[section.uppercased()]?[index]
+
+        
+        if self.selected[user!]! == false
         {
-            self.selected[index] = true
-            if contactList.text!.isEmpty {
-                contactList.text = "\(contact)"
-            }else{
-                contactList.text = contactList.text! + ",\(contact)"
+            self.selected[user!]! = true
+            
+            var selectedFriends = [String]()
+            for (user, flag) in self.selected{
+                if flag{
+                    selectedFriends.append(user.username)
+                }
             }
+            
+            if selectedFriends.count > 0{
+                friendListBottom.constant = 57
+            }
+            contactList.text = selectedFriends.joined(separator: ", ")
+            friendsTableView.reloadData()
         }
 
         
     }
     
     func contactHasBeenRemoved(contact: String, index: Int) {
-        contactListView.isHidden = false
-        if self.selected[index] == true
+        let section = String(describing: contact.characters.first!)
+        let user = self.users[section.uppercased()]?[index]
+
+        if self.selected[user!]! == true
         {
-            self.selected[index] = false
-            if contactList.text!.isEmpty {
-                contactList.text = "\(contact)"
-            }else{
-                contactList.text = contactList.text! + ",\(contact)"
+            self.selected[user!]! = false
+            var selectedFriends = [String]()
+            for (user, flag) in self.selected{
+                if flag{
+                    selectedFriends.append(user.username)
+                }
             }
+            if selectedFriends.count == 0{
+                contactListView.isHidden = true
+                friendListBottom.constant = 0
+            }
+            contactList.text = selectedFriends.joined(separator: ", ")
+            friendsTableView.reloadData()
         }
     }
     
@@ -189,8 +259,13 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let time = NSDate().timeIntervalSince1970
         
-        let inviteUIDList = zip(selected,self.inviteCellData ).filter { $0.0 }.map { $1.UID }
+        var inviteUIDList = [String]()
         
+        for (user, flag) in self.selected{
+            if flag{
+                inviteUIDList.append(user.UID)
+            }
+        }
         
         for UID in inviteUIDList{
             var name = ""
@@ -200,7 +275,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
                     let fullname = user["fullname"] as? String
-                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "")
+                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "", item_id: "")
                 })
                 Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime])
             }
@@ -210,7 +285,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
                     let fullname = user["fullname"] as? String
-                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "")
+                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "", item_id: "")
                 })
                 Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
             }
@@ -223,11 +298,11 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 let username = user["username"] as? String
                 
-                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)")
+                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)", actionType: "", type: "", item_id: "")
                 
             })
         }
-        
+        searchPlace?.showPopup = true
         dismiss(animated: true, completion: nil)
     }
     
@@ -261,9 +336,25 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
 }
 
-struct InviteUser{
+class InviteUser: Hashable, Equatable{
     let UID: String
     let username: String
     let fullname: String
+    
+    init(UID: String, username: String, fullname: String) {
+        self.UID = UID
+        self.username = username
+        self.fullname = fullname
+    }
+    
+    var hashValue : Int {
+        get {
+            return "\(self.UID)".hashValue
+        }
+    }
+    
+    static func ==(lhs: InviteUser, rhs: InviteUser) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
 }
 

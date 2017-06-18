@@ -82,37 +82,43 @@ class SearchPlaceCell: UITableViewCell {
             self.followButtonOut.setTitle("Following", for: UIControlState.normal)
             
             let time = NSDate().timeIntervalSince1970
-            Constants.DB.following_place.child(placeID).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":placeID, "time":time])
-//            Constants.DB.places.child(placeID).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-            
+            Follow.followPlace(id: (place?.id)!)
             
 
         } else if self.followButtonOut.isSelected == true {
             
-//            follow button appearance
-            self.followButtonOut.isSelected = false
-            self.followButtonOut.layer.borderWidth = 1
-            self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
-            self.followButtonOut.layer.shadowOpacity = 1.0
-            self.followButtonOut.layer.masksToBounds = false
-            self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-            self.followButtonOut.layer.shadowRadius = 6.0
-            self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-            self.followButtonOut.tintColor = UIColor.clear
-            self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
-            Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil {
-                    for (key,_) in value!
-                    {
-                     Constants.DB.following_place.child((self.place?.id)!).child("followers").child(key as! String).removeValue()
-                    }
-                    
-                    
-                    
-                }
-            })
+            
+            let unfollowAlertController = UIAlertController(title: "Unfollow user", message: "Are you sure you want to unfollow \(self.place!.name)", preferredStyle: .actionSheet)
+            
+            
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
+                
+                //            follow button appearance
+                self.followButtonOut.isSelected = false
+                self.followButtonOut.layer.borderWidth = 1
+                self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
+                self.followButtonOut.layer.shadowOpacity = 1.0
+                self.followButtonOut.layer.masksToBounds = false
+                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
+                self.followButtonOut.layer.shadowRadius = 6.0
+                self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButtonOut.tintColor = UIColor.clear
+
+                Follow.unFollowPlace(id: (self.place?.id)!)
+                
+                self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print("cancel has been tapped")
+            }
+            
+            unfollowAlertController.addAction(unfollowAction)
+            unfollowAlertController.addAction(cancelAction)
+            parentVC.present(unfollowAlertController, animated: true, completion: nil)
+            
+            
             
         }
         
@@ -125,7 +131,7 @@ class SearchPlaceCell: UITableViewCell {
         ivc.parentCell = self
         ivc.id = self.placeID
         ivc.place = place
-        
+        ivc.searchPlace = parentVC
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: nil)
         }
@@ -139,24 +145,22 @@ class SearchPlaceCell: UITableViewCell {
     
     func checkForFollow(id:String){
         print(id)
-        Constants.DB.following_place.child(id).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil {
-                self.followButtonOut.isSelected = true
-                self.followButtonOut.layer.borderColor = UIColor.white.cgColor
-                self.followButtonOut.layer.borderWidth = 1
-                self.followButtonOut.backgroundColor = UIColor.clear
-                self.followButtonOut.setTitle("Following", for: UIControlState.normal)
-                
-                
-            }else{
-                self.followButtonOut.isSelected = false
-                self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
-                self.followButtonOut.layer.borderWidth = 0
-                self.followButtonOut.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
-                self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
-                
-            }
-        })
+        
+        if parentVC.places.contains(self.place!){
+            self.followButtonOut.isSelected = true
+            self.followButtonOut.layer.borderColor = UIColor.white.cgColor
+            self.followButtonOut.layer.borderWidth = 1
+            self.followButtonOut.backgroundColor = UIColor.clear
+            self.followButtonOut.setTitle("Following", for: UIControlState.normal)
+            
+        }
+        else{
+            self.followButtonOut.isSelected = false
+            self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
+            self.followButtonOut.layer.borderWidth = 0
+            self.followButtonOut.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
+            self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
+            
+        }
     }
 }

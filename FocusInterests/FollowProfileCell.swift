@@ -74,7 +74,7 @@ class FollowProfileCell: UITableViewCell {
     
     @IBAction func follow(_ sender: Any) {
         if followOut.titleLabel?.text == "Follow"{
-            followUser(uid: data.uid)
+            Follow.followUser(uid: data.uid)
             
             followOut.layer.borderColor = UIColor.white.cgColor
             followOut.layer.borderWidth = 1
@@ -90,7 +90,7 @@ class FollowProfileCell: UITableViewCell {
             let unfollowAlertController = UIAlertController(title: "Unfollow", message: "Are you sure you want to unfollow \(data.username)", preferredStyle: .actionSheet)
             
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
-                unFollowUser(uid: self.data.uid)
+                Follow.unFollowUser(uid: self.data.uid)
             }
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in

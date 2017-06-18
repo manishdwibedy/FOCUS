@@ -29,7 +29,7 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     private func chooseFromGallery(){
-        picker.allowsEditing = false
+        picker.allowsEditing = true
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         present(picker, animated: true, completion: nil)
@@ -41,6 +41,7 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
             picker.sourceType = UIImagePickerControllerSourceType.camera
             picker.cameraCaptureMode = .photo
             picker.modalPresentationStyle = .fullScreen
+            picker.allowsEditing = true
             present(picker,animated: true,completion: nil)
         }
     }
@@ -64,7 +65,7 @@ class EventIconViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+        let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage //2
         eventIcon.contentMode = .scaleAspectFit //3
         eventIcon.image = chosenImage //4
         self.imageData = UIImagePNGRepresentation(chosenImage)

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,13 +34,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="Ud3-Ku-hZt"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="11"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="address" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pr-kM-S8b">
                                 <rect key="frame" x="44" y="41" width="203" height="46"/>
-                                <color key="backgroundColor" red="0.58431372550000005" green="0.65098039220000004" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="TQu-bF-a1H"/>
                                 </constraints>
@@ -59,6 +59,9 @@
                                 <state key="normal" title="Follow">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="followUser:" destination="mns-GT-1Sv" eventType="touchUpInside" id="SQi-ae-cJB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Vx-MI-HiM">
                                 <rect key="frame" x="255" y="8" width="65" height="20"/>
@@ -135,13 +138,11 @@
                             <constraint firstItem="dBt-EP-FC5" firstAttribute="leading" secondItem="sOb-GM-41h" secondAttribute="trailing" constant="40" id="3jJ-zS-99f"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="leading" secondItem="Jrp-IZ-pa4" secondAttribute="trailing" constant="8" id="5QG-4u-y2k"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" constant="8" id="8qf-mY-Ucw"/>
-                            <constraint firstAttribute="bottom" secondItem="8on-d7-y1V" secondAttribute="bottom" constant="18" id="Dh1-Q7-rfr"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" constant="8" id="FSU-uW-rGV"/>
                             <constraint firstItem="2vx-AD-EVj" firstAttribute="top" secondItem="sOb-GM-41h" secondAttribute="bottom" constant="1" id="Gef-gn-b7J"/>
                             <constraint firstItem="4Pr-kM-S8b" firstAttribute="leading" secondItem="KLR-T5-BTj" secondAttribute="leading" constant="44" id="HiT-40-9MN"/>
                             <constraint firstItem="dBt-EP-FC5" firstAttribute="baseline" secondItem="6Vx-MI-HiM" secondAttribute="baseline" id="Jv9-Iq-Gaf"/>
                             <constraint firstItem="4Pr-kM-S8b" firstAttribute="top" secondItem="2vx-AD-EVj" secondAttribute="bottom" constant="3" id="MqJ-Vu-xKb"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Jrp-IZ-pa4" secondAttribute="bottom" constant="86" id="Pz6-Pf-5yl"/>
                             <constraint firstAttribute="trailing" secondItem="6Vx-MI-HiM" secondAttribute="trailing" constant="14" id="RWV-dR-NFS"/>
                             <constraint firstAttribute="bottom" secondItem="6Vx-MI-HiM" secondAttribute="bottom" constant="104" id="VTI-XB-myr"/>
                             <constraint firstItem="8on-d7-y1V" firstAttribute="top" secondItem="4Pr-kM-S8b" secondAttribute="bottom" constant="3" id="bWL-IF-K2g"/>
@@ -157,7 +158,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="KLR-T5-BTj" firstAttribute="top" secondItem="n0I-2n-AQA" secondAttribute="topMargin" id="45g-eq-3Ty"/>
                     <constraint firstItem="KLR-T5-BTj" firstAttribute="trailing" secondItem="n0I-2n-AQA" secondAttribute="trailingMargin" id="4vO-ct-eBX"/>
@@ -176,6 +177,7 @@
                 <outlet property="followButton" destination="dBt-EP-FC5" id="ZiG-bc-2bk"/>
                 <outlet property="fullName" destination="2vx-AD-EVj" id="3Be-PK-fUz"/>
                 <outlet property="interest" destination="OHh-7b-rCo" id="0sN-hx-cAh"/>
+                <outlet property="interestView" destination="8on-d7-y1V" id="uyg-IA-Aho"/>
                 <outlet property="inviteButton" destination="6Vx-MI-HiM" id="ed2-LR-Tc5"/>
                 <outlet property="userImage" destination="Jrp-IZ-pa4" id="DKB-rM-74T"/>
                 <outlet property="username" destination="sOb-GM-41h" id="JlM-fH-z8F"/>

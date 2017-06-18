@@ -125,7 +125,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
         }
         
-        fetchPins()
+        
         
         // Set up the cluster manager with default icon generator and renderer.
 //        let iconGenerator = GMUDefaultClusterIconGenerator()
@@ -190,6 +190,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         super.viewWillAppear(animated)
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).keepSynced(true)
+        Constants.DB.pins.keepSynced(true)
+        
         saveUserInfo()
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
@@ -206,6 +208,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 mapView.animate(to: camera)
             }
         }
+        
+        fetchPins()
         
         if let token = AuthApi.getYelpToken(){
 //            fetchPlaces(token: token)
@@ -1182,7 +1186,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     self.placeMapping[place.id] = place
                     self.getPlaceHours(id: place.id)
                     
-                    self.searchPlacesTab?.places.append(place)
+                    //self.searchPlacesTab?.places.append(place)
                     
 
                 }
