@@ -65,10 +65,10 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell:FollowProfileCell = self.tableView.dequeueReusableCell(withIdentifier: "FollowProfileCell") as! FollowProfileCell!
         cell.data = attendeeList[indexPath.row] as! followProfileCellData
         cell.loadData()
+        cell.parentVC = self
         cell.profileImage.roundedImage()
         if cell.data.uid == AuthApi.getFirebaseUid()
         {
-            
             cell.followOut.isHidden = true
         }
         return cell

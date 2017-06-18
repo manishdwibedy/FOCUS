@@ -17,6 +17,7 @@ class FollowProfileCell: UITableViewCell {
     
     let ref = Database.database().reference()
     var data: followProfileCellData!
+    var parentVC: attendeeVC? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -44,7 +45,6 @@ class FollowProfileCell: UITableViewCell {
                 
                     if boolV == true
                     {
-                        self.followOut.isEnabled = false
                         self.followOut.layer.borderColor = UIColor.white.cgColor
                         self.followOut.layer.borderWidth = 1
                         self.followOut.backgroundColor = UIColor.clear
@@ -73,13 +73,37 @@ class FollowProfileCell: UITableViewCell {
     
     
     @IBAction func follow(_ sender: Any) {
-        
-        ref.child("users").child(AuthApi.getFirebaseUid()!).child("following").childByAutoId().updateChildValues(["UID": data.uid])
-        followOut.isEnabled = false
-        followOut.layer.borderColor = UIColor.white.cgColor
-        followOut.layer.borderWidth = 1
-        followOut.backgroundColor = UIColor.clear
-        followOut.setTitle("Following", for: UIControlState.normal)
+        if followOut.titleLabel?.text == "Follow"{
+            followUser(uid: data.uid)
+            
+            followOut.layer.borderColor = UIColor.white.cgColor
+            followOut.layer.borderWidth = 1
+            followOut.backgroundColor = UIColor.clear
+            followOut.setTitle("Following", for: UIControlState.normal)
+            
+        }
+        else{
+            ref.child("users").child(AuthApi.getFirebaseUid()!).child("following").childByAutoId().updateChildValues(["UID": data.uid])
+            followOut.backgroundColor = Constants.color.green
+            followOut.setTitle("Follow", for: UIControlState.normal)
+            
+            let unfollowAlertController = UIAlertController(title: "Unfollow", message: "Are you sure you want to unfollow \(data.username)", preferredStyle: .actionSheet)
+            
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
+                unFollowUser(uid: self.data.uid)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print("cancel has been tapped")
+            }
+            
+            unfollowAlertController.addAction(unfollowAction)
+            unfollowAlertController.addAction(cancelAction)
+            parentVC?.present(unfollowAlertController, animated: true, completion: nil)
+            
+            
+            
+        }
         
     }
     

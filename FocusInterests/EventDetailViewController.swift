@@ -630,6 +630,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
     }
     
+    @IBAction func showComments(_ sender: Any) {
+        
+        
+        let storyboard = UIStoryboard(name: "Comments", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
+//        ivc.data = self.commentsCList
+        self.present(ivc, animated: true, completion: { _ in })
+        
+    }
     @IBAction func showGoogleMaps(_ sender: Any) {
         let latitude = Double((event?.latitude)!)!
         let longitude = Double((event?.longitude)!)!

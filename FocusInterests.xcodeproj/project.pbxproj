@@ -33,6 +33,7 @@
 		5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B34A6F21EE72B0800D16842 /* FollowingTableViewCell.xib */; };
 		5B34A6F61EE72B0800D16842 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B34A6F31EE72B0800D16842 /* FollowingTableViewCell.swift */; };
 		5B34A6F71EE72B0800D16842 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */; };
+		5B3597981EF5FD5400C04809 /* FollowPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3597971EF5FD5400C04809 /* FollowPeople.swift */; };
 		5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B3F05751ED907B10057F596 /* Settings.storyboard */; };
 		5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */; };
 		5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */; };
@@ -329,6 +330,7 @@
 		5B34A6F21EE72B0800D16842 /* FollowingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingTableViewCell.xib; sourceTree = "<group>"; };
 		5B34A6F31EE72B0800D16842 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewCell.swift; sourceTree = "<group>"; };
 		5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
+		5B3597971EF5FD5400C04809 /* FollowPeople.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowPeople.swift; sourceTree = "<group>"; };
 		5B3F05751ED907B10057F596 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChangeUsernamePasswordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -1068,6 +1070,7 @@
 				D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */,
 				D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */,
 				5B634C861ED2584F00EBCC29 /* Share.swift */,
+				5B3597971EF5FD5400C04809 /* FollowPeople.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1774,6 +1777,7 @@
 				FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */,
 				FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */,
 				5B34A6F71EE72B0800D16842 /* FollowingViewController.swift in Sources */,
+				5B3597981EF5FD5400C04809 /* FollowPeople.swift in Sources */,
 				D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */,
 				5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */,
 				FF69ABFD1ED6498F0044BE51 /* inviteCell.swift in Sources */,
