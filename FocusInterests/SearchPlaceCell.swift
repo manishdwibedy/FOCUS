@@ -35,7 +35,7 @@ class SearchPlaceCell: UITableViewCell {
         self.followButtonOut.isSelected = false
         self.followButtonOut.roundCorners(radius: 5)
         self.followButtonOut.layer.shadowOpacity = 1.0
-        //self.followButtonOut.layer.masksToBounds = false
+        self.followButtonOut.layer.masksToBounds = false
         self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
         self.followButtonOut.layer.shadowRadius = 6.0
         //self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
@@ -76,7 +76,7 @@ class SearchPlaceCell: UITableViewCell {
             self.followButtonOut.layer.shadowOpacity = 1.0
             self.followButtonOut.layer.masksToBounds = false
             self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-            self.followButtonOut.layer.shadowRadius = 7.0
+            self.followButtonOut.layer.shadowRadius = 6.0
             self.followButtonOut.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
             self.followButtonOut.tintColor = UIColor.clear
             self.followButtonOut.setTitle("Following", for: UIControlState.normal)
@@ -97,7 +97,7 @@ class SearchPlaceCell: UITableViewCell {
             self.followButtonOut.layer.shadowOpacity = 1.0
             self.followButtonOut.layer.masksToBounds = false
             self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-            self.followButtonOut.layer.shadowRadius = 7.0
+            self.followButtonOut.layer.shadowRadius = 6.0
             self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
             self.followButtonOut.tintColor = UIColor.clear
             self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
@@ -125,12 +125,15 @@ class SearchPlaceCell: UITableViewCell {
         ivc.parentCell = self
         ivc.id = self.placeID
         ivc.place = place
+        
         if let VC = self.parentVC{
-            VC.present(ivc, animated: true, completion: { _ in })
+            VC.present(ivc, animated: true, completion: nil)
         }
         else{
-            self.searchVC?.present(ivc, animated: true, completion: { _ in })
+            self.searchVC?.present(ivc, animated: true, completion: nil)
         }
+        
+        
         
     }
     
