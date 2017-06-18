@@ -163,6 +163,8 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
             cell.parentVC = self
             cell.setupCell(notif: invArray[indexPath.row])
+            cell.seeYouThereButton.isHidden = false
+            cell.nextTimeButton.isHidden = false
              return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
