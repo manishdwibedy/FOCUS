@@ -187,7 +187,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         tableView.reloadData()
         print("switch")
         
-        print(segmentedControl.selectedSegmentIndex)
+        
         
     }
     
