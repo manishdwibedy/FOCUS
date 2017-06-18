@@ -134,17 +134,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.58431372550000005" green="0.65098039220000004" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="132" id="1QB-R0-FcG"/>
                             <constraint firstItem="8on-d7-y1V" firstAttribute="leading" secondItem="KLR-T5-BTj" secondAttribute="leading" constant="46" id="1cl-Uf-2Jd"/>
                             <constraint firstItem="dBt-EP-FC5" firstAttribute="leading" secondItem="sOb-GM-41h" secondAttribute="trailing" constant="40" id="3jJ-zS-99f"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="leading" secondItem="Jrp-IZ-pa4" secondAttribute="trailing" constant="8" id="5QG-4u-y2k"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" constant="8" id="8qf-mY-Ucw"/>
-                            <constraint firstAttribute="bottom" secondItem="8on-d7-y1V" secondAttribute="bottom" constant="18" id="Dh1-Q7-rfr"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" constant="8" id="FSU-uW-rGV"/>
                             <constraint firstItem="2vx-AD-EVj" firstAttribute="top" secondItem="sOb-GM-41h" secondAttribute="bottom" constant="1" id="Gef-gn-b7J"/>
                             <constraint firstItem="4Pr-kM-S8b" firstAttribute="leading" secondItem="KLR-T5-BTj" secondAttribute="leading" constant="44" id="HiT-40-9MN"/>
                             <constraint firstItem="dBt-EP-FC5" firstAttribute="baseline" secondItem="6Vx-MI-HiM" secondAttribute="baseline" id="Jv9-Iq-Gaf"/>
                             <constraint firstItem="4Pr-kM-S8b" firstAttribute="top" secondItem="2vx-AD-EVj" secondAttribute="bottom" constant="3" id="MqJ-Vu-xKb"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Jrp-IZ-pa4" secondAttribute="bottom" constant="86" id="Pz6-Pf-5yl"/>
                             <constraint firstAttribute="trailing" secondItem="6Vx-MI-HiM" secondAttribute="trailing" constant="14" id="RWV-dR-NFS"/>
                             <constraint firstAttribute="bottom" secondItem="6Vx-MI-HiM" secondAttribute="bottom" constant="104" id="VTI-XB-myr"/>
                             <constraint firstItem="8on-d7-y1V" firstAttribute="top" secondItem="4Pr-kM-S8b" secondAttribute="bottom" constant="3" id="bWL-IF-K2g"/>
@@ -160,7 +159,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="KLR-T5-BTj" firstAttribute="top" secondItem="n0I-2n-AQA" secondAttribute="topMargin" id="45g-eq-3Ty"/>
                     <constraint firstItem="KLR-T5-BTj" firstAttribute="trailing" secondItem="n0I-2n-AQA" secondAttribute="trailingMargin" id="4vO-ct-eBX"/>
