@@ -43,12 +43,17 @@ class notificationTabCell: UITableViewCell {
         
         data = notif.item?.data
         
+        var usernameStr = ""
+        var actionStr = ""
+        var whatStr = ""
+        
         
              Constants.DB.user.child(data["senderID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 if value != nil
                 {
-                    self.usernameLabel.text = value?["username"] as? String
+                    usernameStr = (value?["username"] as? String)!
+                    self.loadAttr(component1: usernameStr, component2: actionStr, component3: whatStr)
                 }
                 
                 let placeholderImage = UIImage(named: "empty_event")
@@ -79,19 +84,37 @@ class notificationTabCell: UITableViewCell {
         
         
         if data["actionType"] as! String == "Like"{
-            actionLabel.text = "liked your"
+            actionStr = "liked your"
             
         }else{
-            actionLabel.text = "commented on your"
+            actionStr = "commented on your"
         }
         if data["type"] as! String == "event"{
-            whatLabel.text = "event"
+            whatStr = "event"
         }else{
-            whatLabel.text = "pin"
+            whatStr = "pin"
         }
+        
+        loadAttr(component1: usernameStr, component2: actionStr, component3: whatStr)
         
        
      }
+    
+    func loadAttr(component1:String,component2:String,component3:String){
+        let attrString: NSMutableAttributedString = NSMutableAttributedString(string:component1 + " ")
+        attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1), range: NSMakeRange(0,  component1.characters.count))
+        
+        let descString: NSMutableAttributedString = NSMutableAttributedString(string: component2 + " ")
+        descString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, component2.characters.count))
+        
+        let descString2: NSMutableAttributedString = NSMutableAttributedString(string: component3)
+        descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, component3.characters.count))
+        
+        attrString.append(descString);
+        attrString.append(descString2);
+        
+        self.usernameLabel.attributedText = attrString
+    }
     
     func getTimeSince(date:Date) -> String
     {

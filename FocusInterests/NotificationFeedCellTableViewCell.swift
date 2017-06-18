@@ -47,13 +47,13 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         
         
-        var attrString: NSMutableAttributedString = NSMutableAttributedString(string: (notif.sender?.username)! + " ")
+        let attrString: NSMutableAttributedString = NSMutableAttributedString(string: (notif.sender?.username)! + " ")
         attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1), range: NSMakeRange(0,  (notif.sender?.username?.characters.count)!))
         
-        var descString: NSMutableAttributedString = NSMutableAttributedString(string: (notif.type?.rawValue)! + " ")
+        let descString: NSMutableAttributedString = NSMutableAttributedString(string: (notif.type?.rawValue)! + " ")
         descString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, (notif.type?.rawValue.characters.count)!))
         
-        var descString2: NSMutableAttributedString = NSMutableAttributedString(string: (notif.item?.itemName!)!)
+        let descString2: NSMutableAttributedString = NSMutableAttributedString(string: (notif.item?.itemName!)!)
         descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (notif.item?.itemName?.characters.count)!))
         
         attrString.append(descString);
