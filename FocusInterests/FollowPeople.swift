@@ -9,7 +9,7 @@
 import Foundation
 
 func followUser(uid: String){
-    Constants.DB.user.child("users").child(AuthApi.getFirebaseUid()!).child("following/people").childByAutoId().updateChildValues(["UID": uid])
+    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").childByAutoId().updateChildValues(["UID": uid])
 
     Constants.DB.user.child(uid).child("followers/people").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
     

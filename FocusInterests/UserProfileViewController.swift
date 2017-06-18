@@ -202,7 +202,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 //                self.descriptionText.text = description_str
                 
 //                SAMPLE description text
-                self.descriptionText.text = "laboris nisi ut aliquip ex ea commodo consequat. a;lsdkfas;dfkasd;f asdf;lkajsdf;kajsdf a;sld fka;skdlf ja;sdlkfj a;sdf jka;dslkjfa;lsd fk;as dfkj;asdfjkl a;sdfjka;sdlfjkas df"
+                //self.descriptionText.text = description
                 self.fullNameLabel.text = fullname
                 
 //        setting username to title
@@ -212,22 +212,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     if let people = followers["people"] as? [String:[String:Any]]{
                         let count = people.count
                         
-                        for (_, user) in people{
-                            let uid = user["UID"] as? String
-                            let _ = Date(timeIntervalSince1970: (user["time"] as? Double)!)
-                            
-                            Constants.DB.user.child(uid!).observeSingleEvent(of: .value, with: { snapshot in
-                                let user = snapshot.value as? [String : Any] ?? [:]
-                                
-                                let name = user["fullname"] as? String
-                                let username = user["username"] as? String
-                                let image_stirng = user["image_string"] as? String
-                                
-                                let followerUser = User(username: username, uuid: uid, userImage: nil, interests: nil, image_string: image_string)
-                                
-                                self.followers.append(followerUser)
-                            })
-                        }
                         self.followerLabel.text = "Followers: \(count)"
                     }
                 }
@@ -236,23 +220,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     if let people = followers["people"] as? [String:[String:Any]]{
                         let count = people.count
                         
-                        for (_, user) in people{
-                            let uid = user["UID"] as? String
-                            let _ = Date(timeIntervalSince1970: (user["time"] as? Double)!)
-                            
-                            Constants.DB.user.child(uid!).observeSingleEvent(of: .value, with: { snapshot in
-                                let user = snapshot.value as? [String : Any] ?? [:]
-                                
-                                let name = user["fullname"] as? String
-                                let username = user["username"] as? String
-                                let image_stirng = user["image_string"] as? String
-                                
-                                let followerUser = User(username: username, uuid: uid, userImage: nil, interests: nil, image_string: image_string)
-                                
-                                self.following.append(followerUser)
-                            })
-                        }
-
                         self.followingLabel.text = "Followers: \(count)"
                     }
                 }

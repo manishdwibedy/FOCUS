@@ -278,6 +278,13 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
     @IBAction func showCreateEvent(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
