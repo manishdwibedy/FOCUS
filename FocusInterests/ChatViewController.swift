@@ -59,6 +59,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         self.collectionView.bounces = false
         loadingMessages = false
         self.navigationItem.title = self.user["username"]! as? String
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
