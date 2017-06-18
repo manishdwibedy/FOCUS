@@ -9,88 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--General Search View Controller-->
-        <scene sceneID="8MR-3T-IWj">
-            <objects>
-                <viewController storyboardIdentifier="GeneralSearchViewController" id="MVP-5r-yXi" customClass="GeneralSearchViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZqP-8Z-Tzv"/>
-                        <viewControllerLayoutGuide type="bottom" id="HKI-8H-A4K"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GuQ-M3-IQK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="alc-hB-qgP">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="idw-CG-vmm"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Search" id="idW-dM-1k7">
-                                        <barButtonItem key="leftBarButtonItem" image="Left back arrow icon 30x30 white.png" id="WxI-dV-Fq2">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="backPressed:" destination="Tf6-eq-mUf" id="a3g-S9-GDr"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <searchBar contentMode="redraw" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPy-Te-s5Z">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <color key="barTintColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
-                            <searchBar contentMode="redraw" placeholder="Current Location" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZC-q6-tWd">
-                                <rect key="frame" x="0.0" y="108" width="375" height="44"/>
-                                <color key="barTintColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ncX-Q0-yQ0">
-                                <rect key="frame" x="0.0" y="152" width="375" height="515"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="MVP-5r-yXi" id="UQV-1Z-toH"/>
-                                    <outlet property="delegate" destination="MVP-5r-yXi" id="4SP-65-7ok"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="aZC-q6-tWd" firstAttribute="top" secondItem="HPy-Te-s5Z" secondAttribute="bottom" id="35h-Gk-6cs"/>
-                            <constraint firstAttribute="trailing" secondItem="ncX-Q0-yQ0" secondAttribute="trailing" id="3s2-SP-NDb"/>
-                            <constraint firstItem="alc-hB-qgP" firstAttribute="top" secondItem="ZqP-8Z-Tzv" secondAttribute="bottom" id="6ZX-uZ-4qd"/>
-                            <constraint firstItem="HKI-8H-A4K" firstAttribute="top" secondItem="ncX-Q0-yQ0" secondAttribute="bottom" id="87G-Pe-lw3"/>
-                            <constraint firstItem="ncX-Q0-yQ0" firstAttribute="leading" secondItem="GuQ-M3-IQK" secondAttribute="leading" id="98r-Dh-eAp"/>
-                            <constraint firstItem="alc-hB-qgP" firstAttribute="trailing" secondItem="HPy-Te-s5Z" secondAttribute="trailing" id="9VM-yS-6g4"/>
-                            <constraint firstItem="HPy-Te-s5Z" firstAttribute="top" secondItem="alc-hB-qgP" secondAttribute="bottom" id="KVE-TI-H3X"/>
-                            <constraint firstAttribute="trailing" secondItem="aZC-q6-tWd" secondAttribute="trailing" id="Snh-2O-EHx"/>
-                            <constraint firstItem="HPy-Te-s5Z" firstAttribute="leading" secondItem="GuQ-M3-IQK" secondAttribute="leading" id="UTC-mf-G1e"/>
-                            <constraint firstItem="alc-hB-qgP" firstAttribute="leading" secondItem="HPy-Te-s5Z" secondAttribute="leading" id="aMB-Su-WIA"/>
-                            <constraint firstItem="aZC-q6-tWd" firstAttribute="leading" secondItem="GuQ-M3-IQK" secondAttribute="leading" id="c1H-wA-SsF"/>
-                            <constraint firstAttribute="trailing" secondItem="HPy-Te-s5Z" secondAttribute="trailing" id="hcH-Og-Ndi"/>
-                            <constraint firstItem="ncX-Q0-yQ0" firstAttribute="top" secondItem="aZC-q6-tWd" secondAttribute="bottom" id="rBM-Dy-NXo"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="currentLocationSearchBar" destination="aZC-q6-tWd" id="EnA-Wh-6k2"/>
-                        <outlet property="generalSearchTableView" destination="ncX-Q0-yQ0" id="nsy-eA-YU6"/>
-                        <outlet property="specificLocationSearchBar" destination="HPy-Te-s5Z" id="K7z-xU-6iE"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JUG-lM-TUk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-170.40000000000001" y="188.45577211394306"/>
-        </scene>
         <!--Search View Controller-->
         <scene sceneID="ebc-qm-bJL">
             <objects>
@@ -339,7 +257,4 @@
             <point key="canvasLocation" x="577" y="184"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Left back arrow icon 30x30 white.png" width="30" height="30"/>
-    </resources>
 </document>

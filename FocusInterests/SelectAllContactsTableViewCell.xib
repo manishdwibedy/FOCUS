@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,9 +30,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esw-UB-46z">
-                        <rect key="frame" x="285" y="13" width="27" height="25"/>
+                        <rect key="frame" x="287" y="13" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="27" id="Jz6-to-rjk"/>
+                            <constraint firstAttribute="width" constant="25" id="Jz6-to-rjk"/>
                             <constraint firstAttribute="height" constant="25" id="dHM-41-U49"/>
                         </constraints>
                         <state key="normal" image="Interest_blank">
@@ -44,13 +44,12 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Esw-UB-46z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="ASh-4U-F69"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Esw-UB-46z" secondAttribute="bottom" constant="5.5" id="O4d-DU-9cC"/>
                     <constraint firstAttribute="bottomMargin" secondItem="nZe-Xf-C5m" secondAttribute="bottom" constant="7.5" id="Zc1-6K-LfS"/>
                     <constraint firstItem="nZe-Xf-C5m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="dqz-EH-4xl"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Esw-UB-46z" secondAttribute="trailing" id="icA-D4-fc2"/>
                     <constraint firstItem="nZe-Xf-C5m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="9" id="t2o-OD-zDT"/>
-                    <constraint firstItem="Esw-UB-46z" firstAttribute="leading" secondItem="nZe-Xf-C5m" secondAttribute="trailing" constant="82" id="z2Q-3h-vv9"/>
+                    <constraint firstItem="Esw-UB-46z" firstAttribute="leading" secondItem="nZe-Xf-C5m" secondAttribute="trailing" constant="84" id="z2Q-3h-vv9"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.086274509799999996" green="0.1647058824" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>

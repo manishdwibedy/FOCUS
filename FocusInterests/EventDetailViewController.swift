@@ -21,6 +21,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     @IBOutlet weak var eventInterests: UILabel!
     @IBOutlet weak var eventAmount: UILabel!
+    @IBOutlet weak var eventAmountHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
@@ -54,7 +56,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var isAttending = false
     var suggestions = [Event]()
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
-    
+    var guestList = [String:[String:String]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +67,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         eventsTableView.dataSource = self
         eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
+        if event?.price != nil && (event?.price)! > 0.0{
+            eventAmount.text = "$ \(String(describing: event?.price))"
+        }
+        else{
+            eventAmountHeight.constant = 0
+        }
         
         attendOut.layer.cornerRadius = 6
         attendOut.clipsToBounds = true
@@ -217,13 +225,20 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
             
             //attending
-            ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
+            ref.child("events").child((event?.id)!).child("attendingList").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:[String:String]]
                 if value != nil
                 {
-                    self.isAttending = true
-                    //self.attendOut.isEnabled = false
-                    self.attendOut.setTitle("Attending", for: UIControlState.normal)
+                    self.guestList = value!
+                    
+                    for (_, guest) in self.guestList{
+                        print(guest)
+                        if guest["UID"] == AuthApi.getFirebaseUid()!{
+                            self.isAttending = true
+                            self.attendOut.setTitle("Attending", for: UIControlState.normal)
+                        }
+                    }
+                    
                 }
                 
             })
@@ -255,13 +270,21 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
         
         self.commentTextField.delegate = self
+        
+        hideKeyboardWhenTappedAround()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func inviteEvent(_ sender: UIButton) {
+        let ivc = storyboard?.instantiateViewController(withIdentifier: "home") as! InviteViewController
+        ivc.type = "event"
+        ivc.id = (event?.id!)!
+        ivc.event = event
+        self.present(ivc, animated: true, completion: { _ in })
     }
     
     @IBAction func likeEvent(_ sender: UIButton) {
@@ -277,14 +300,25 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBAction func attendEvent(_ sender: UIButton) {
         if isAttending == false
         {
+            self.isAttending = true
+            
             let newAmount = attendingAmount + 1
             attendingAmount = newAmount
-            self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
+            
             let fullRef = ref.child("events").child((event?.id)!)
-            fullRef.child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+            let entry = ["UID":AuthApi.getFirebaseUid()!]
+            let newEntry = fullRef.child("attendingList").childByAutoId()
+            newEntry.updateChildValues(entry)
             fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
-           // self.attendOut.isEnabled = false
-            self.isAttending = true
+            
+            self.guestList[newEntry.key] = entry
+            
+            let guestText = "\(newAmount) guests"
+            let textRange = NSMakeRange(0, guestText.characters.count)
+            let attributedText = NSMutableAttributedString(string: guestText)
+            attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
+            self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
+            
             self.attendOut.setTitle("Attending", for: UIControlState.normal)
         }else
         {
@@ -295,14 +329,24 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     for (key,_) in value!
                     {
                         self.ref.child("events").child((self.event?.id)!).child("attendingList").child(key as! String).removeValue()
+                        self.guestList.removeValue(forKey: key as! String)
+
                     }
                     
                     let newAmount = self.attendingAmount - 1
                     self.attendingAmount = newAmount
-                    self.guestButtonOut.setTitle(String(self.attendingAmount)+" guests", for: UIControlState.normal)
                     let fullRef = self.ref.child("events").child((self.event?.id)!)
                     fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
+                    
                     self.isAttending = false
+                    
+                    let guestText = "\(newAmount) guests"
+                    let textRange = NSMakeRange(0, guestText.characters.count)
+                    let attributedText = NSMutableAttributedString(string: guestText)
+                    attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
+                    self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
+            
+                    
                     self.attendOut.setTitle("Attend", for: UIControlState.normal)
                 }
                 
@@ -371,7 +415,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     func keyboardDidShow(notification: NSNotification) {
         keyboardUp = true
-        navBackOut.title = "Cancel"
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
             //self.scrollView.contentOffset.y = (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60
@@ -382,7 +425,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     func keyboardDidHide(notification: NSNotification) {
         keyboardUp = false
-        navBackOut.title = "Back"
     }
     
     
@@ -494,6 +536,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         let ivc = storyboard.instantiateViewController(withIdentifier: "attendeeVC") as! attendeeVC
         ivc.parentVC = self
         ivc.parentEvent = event
+        ivc.guestList = self.guestList
         self.present(ivc, animated: true, completion: { _ in })
     }
    
@@ -555,21 +598,18 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         inviteOut.roundCorners(radius: 7.0)
         mapOut.roundCorners(radius: 7.0)
         
-        addCommentView.layer.borderWidth = 1
         userInfoEditButton.layer.borderWidth = 1
         descriptionEditButton.layer.borderWidth = 1
         moreCommentsButton.layer.borderWidth = 1
         postCommentsButton.layer.borderWidth = 1
         moreOtherLikesButton.layer.borderWidth = 1
         
-        addCommentView.layer.borderColor = UIColor.white.cgColor
         userInfoEditButton.layer.borderColor = UIColor.white.cgColor
         descriptionEditButton.layer.borderColor = UIColor.white.cgColor
         moreCommentsButton.layer.borderColor = UIColor.white.cgColor
         postCommentsButton.layer.borderColor = UIColor.white.cgColor
         moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
         
-        addCommentView.allCornersRounded(radius: 7.0)
         userInfoEditButton.roundCorners(radius: 7.0)
         descriptionEditButton.roundCorners(radius: 7.0)
         moreCommentsButton.roundCorners(radius: 7.0)
@@ -590,17 +630,37 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
     }
     
+    @IBAction func showComments(_ sender: Any) {
+        
+        
+        let storyboard = UIStoryboard(name: "Comments", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
+//        ivc.data = self.commentsCList
+        self.present(ivc, animated: true, completion: { _ in })
+        
+    }
     @IBAction func showGoogleMaps(_ sender: Any) {
-        let lat = Double((event?.latitude)!)!
-        let long = Double((event?.longitude)!)!
+        let latitude = Double((event?.latitude)!)!
+        let longitude = Double((event?.longitude)!)!
+
+        
+        let user_location = AuthApi.getLocation()
+        let place_location = CLLocation(latitude: latitude, longitude: longitude)
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        
+        let distanceInMeters = user_location!.distance(from: place_location)
+        
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, distanceInMeters*2, distanceInMeters*2)
         
         
-        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-            UIApplication.shared.openURL(URL(string:
-                "comgooglemaps://?daddr=\(lat),\(long)&directionsmode=driving")!)
-        } else {
-            print("Can't use comgooglemaps://");
-        }
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = event?.title
+        mapItem.openInMaps(launchOptions: options)
     }
     
     

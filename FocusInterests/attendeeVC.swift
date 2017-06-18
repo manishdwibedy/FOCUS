@@ -19,6 +19,8 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var parentVC: EventDetailViewController?
     var attendeeList = NSMutableArray()
     let ref = Database.database().reference()
+    var guestList: [String:[String:String]]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -29,22 +31,17 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.register(nib, forCellReuseIdentifier: "FollowProfileCell")
         
         navTitle.title = parentEvent?.title
+        
+        self.attendingLabel.text = "\((guestList?.count)!) Attending"
+        
         let fullRef = ref.child("events").child((parentEvent?.id)!).child("attendingList")
-        fullRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                self.attendingLabel.text = String(Int((value?.count)!)) + " Attending"
-                for (key,_) in value!
-                {
-                    let newData = followProfileCellData()
-                    newData.uid = (value?[key] as! NSDictionary)["UID"] as! String
-                    self.attendeeList.add(newData)
-            
-            
-                }
-            }
-        })
+        
+        for (key,_) in guestList!
+        {
+            let newData = followProfileCellData()
+            newData.uid = (guestList?[key] as! NSDictionary)["UID"] as! String
+            self.attendeeList.add(newData)
+        }
     
         hideKeyboardWhenTappedAround()
         
@@ -68,6 +65,8 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell:FollowProfileCell = self.tableView.dequeueReusableCell(withIdentifier: "FollowProfileCell") as! FollowProfileCell!
         cell.data = attendeeList[indexPath.row] as! followProfileCellData
         cell.loadData()
+        cell.parentVC = self
+        cell.profileImage.roundedImage()
         if cell.data.uid == AuthApi.getFirebaseUid()
         {
             cell.followOut.isHidden = true

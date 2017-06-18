@@ -16,6 +16,8 @@ class SelectAllContactsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Green.png"), for: .selected)
+        self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -25,12 +27,12 @@ class SelectAllContactsTableViewCell: UITableViewCell {
     }
     
     @IBAction func selectedAllFollowers(_ sender: Any) {
-        if(self.selectAllFollowersButton.image(for: .normal) == #imageLiteral(resourceName: "Interest_blank")){
-            self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Interest_Filled"), for: .normal)
-            delegate?.selectedAllFollowers()
+        if(self.selectAllFollowersButton.isSelected == false){
+            self.selectAllFollowersButton.isSelected = true
+//            delegate?.selectedAllFollowers()
         }else{
-            self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
-            delegate?.deselectAllFollowers()
+            self.selectAllFollowersButton.isSelected = false
+//            delegate?.deselectAllFollowers()
         }
     }
 }

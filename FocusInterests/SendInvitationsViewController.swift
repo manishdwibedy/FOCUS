@@ -61,18 +61,26 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         self.createEventButton.roundCorners(radius: 10.0)
         
-        self.searchBar.isTranslucent = false
-        
-        self.searchBar.barTintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
-        
-        self.searchBar.layer.cornerRadius  = 6;
-        self.searchBar.clipsToBounds = true
-        self.searchBar.layer.borderWidth = 1
+//        self.searchBar.isTranslucent = false
         
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
         
         self.friendsTableView.allowsSelection = false
+
+        self.searchBar.layer.borderColor = UIColor.clear.cgColor
+        var textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        
+        textFieldInsideSearchBar?.textColor = UIColor.white
+
+        
+        if let txfSearchField = self.searchBar.value(forKey: "_searchField") as? UITextField {
+            txfSearchField.borderStyle = .none
+            txfSearchField.backgroundColor = UIColor(red: 24/255.0, green: 44/255.0, blue: 67/255.0, alpha: 1.0)
+        }
+        
+        self.searchBar.isTranslucent = false
+        self.searchBar.backgroundImage = UIImage()
         
         if contacts.count <= 0 {
             contactListView.isHidden = true
@@ -272,9 +280,11 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let section = filteredSection[indexPath.section-1]
             
             let user = self.filtered[section]?[indexPath.row]
-            personToInviteCell.usernameLabel.text = user?.givenName as! String?
-            personToInviteCell.fullNameLabel.text = user?.familyName as? String
-            
+            personToInviteCell.usernameLabel.text = user?.givenName
+            personToInviteCell.fullNameLabel.text = user?.familyName
+//            personToInviteCell.usernameLabel.text = "Alex"
+//            personToInviteCell.fullNameLabel.text = "Alex Jang"
+
             return personToInviteCell
         }
     }

@@ -461,6 +461,22 @@ func saveUserInfo(){
     Crashlytics.sharedInstance().setUserName(AuthApi.getUserName())
 }
 
+func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
+    let attrs = [
+        NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15),
+        NSForegroundColorAttributeName: UIColor.white
+    ]
+    let nonBoldAttribute = [
+        NSFontAttributeName: UIFont(name: "Avenir-Book", size: 15),
+        NSForegroundColorAttributeName: UIColor.white
+        ]
+    let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
+    if let range = nonBoldRange {
+        attrStr.setAttributes(nonBoldAttribute, range: range)
+    }
+    return attrStr
+}
+
     func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
         
         let url = "https://api.yelp.com/v3/businesses/\(ID)"

@@ -1072,6 +1072,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
+        let transition = CATransition()
+        transition.duration = 0.4
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromBottom
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        
         self.present(VC, animated:true, completion:nil)        
     }
     
@@ -1091,9 +1097,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         let navigationController = UINavigationController(rootViewController: vc)
         
-//        let newController = NewViewController(nibName: "NewView", bundle: nil)
         let transition = CATransition()
-        transition.duration = 0.5
+        transition.duration = 0.4
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromBottom
         self.view.window!.layer.add(transition, forKey: kCATransition)
@@ -1102,21 +1107,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func searchClicked() {
-//        let storyboard = UIStoryboard(name: "general_search", bundle: nil)
-//        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
-//        VC?.location = self.currentLocation
-//        self.present(VC!, animated: true, completion: nil)
-        
-        let storyBoard = UIStoryboard(name: "general_search", bundle: nil)
-        let generalSearchVC = storyBoard.instantiateViewController(withIdentifier: "GeneralSearchViewController") as? GeneralSearchViewController
-        
-//        let newController = NewViewController(nibName: "NewView", bundle: nil)
+        let storyboard = UIStoryboard(name: "general_search", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
+        VC?.location = self.currentLocation
         let transition = CATransition()
-        transition.duration = 0.5
+        transition.duration = 0.4
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromBottom
         view.window!.layer.add(transition, forKey: kCATransition)
-        self.present(generalSearchVC!, animated: true, completion: nil)
+        self.present(VC!, animated: true, completion: nil)
         
         
     }

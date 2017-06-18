@@ -144,6 +144,13 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.interestTableView.dataSource = self
         self.interestTableView.delegate = self
         self.searchBar.delegate = self
+        self.searchBar.tintColor = UIColor.white
+        self.searchBar.returnKeyType = .done
+        
+        var textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        
         formatTextFields()
         setTextFieldDelegates()
         self.interestTableView.delaysContentTouches = false
@@ -160,7 +167,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         eventDescriptionTextView.textColor = .white
         
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestTableView.bounds.size.width, height: self.interestTableView.bounds.size.height))
-        backgroundView.backgroundColor = UIColor.lightGray
+        backgroundView.backgroundColor = UIColor.clear
         interestTableView.backgroundView = backgroundView
         
         for _ in 0..<Constants.interests.interests.count{
@@ -170,6 +177,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         
         self.filteredInterest = Constants.interests.interests
         self.interests = self.filteredInterest
+        self.interestNextButton.roundCorners(radius: 5.0)
         
         self.interestListView.isHidden = true
         hideKeyboardWhenTappedAround()
@@ -259,7 +267,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "chooseIcon" && validatedFields {
+        if (segue.identifier == "chooseIcon" || segue.identifier == "interestNextClicked") && validatedFields {
             if self.event != nil{
                 guard let name = eventNameTextField.text, !name.isEmpty else{
                     presentNotification(title: "Choose a name", message: "Please choose a name for this event.")
@@ -442,12 +450,12 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         eventNameTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Event Name")
         eventEndTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "End Time (if applicable)")
         eventPriceTextView.attributedPlaceholder = formatPlaceholder(placeholder: "Price (if applicable)")
-        
-        eventDateTextField.setRightIcon(iconString: "Calendar-50")
-        locationTextField.setRightIcon(iconString: "location")
-        eventTimeTextField.setRightIcon(iconString: "Clock-25")
-        eventEndTimeTextField.setRightIcon(iconString: "Clock-25")
-        eventPriceTextView.setRightIcon(iconString: "price")
+
+//        eventDateTextField.setRightIcon(iconString: "Calendar-50")
+//        locationTextField.setRightIcon(iconString: "location")
+//        eventTimeTextField.setRightIcon(iconString: "Clock-25")
+//        eventEndTimeTextField.setRightIcon(iconString: "Clock-25")
+//        eventPriceTextView.setRightIcon(iconString: "price")
         
     }
     
@@ -470,7 +478,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         cell.selectedInterestLabel.text = filteredInterest[indexPath.row]
         
         if checkInterests[indexPath.row]{
-            cell.checkedInterest.image = UIImage(named: "Interest_Filled")
+            cell.checkedInterest.image = UIImage(named: "Green.png")
         }
         else{
             cell.checkedInterest.image = UIImage(named: "Interest_blank")
@@ -495,7 +503,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         if checkInterests[indexPath.row]{
-            cell.checkedInterest.image = UIImage(named: "Interest_Filled")
+            cell.checkedInterest.image = UIImage(named: "Green.png")
         }
         else{
             cell.checkedInterest.image = UIImage(named: "Interest_blank")
@@ -524,6 +532,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBAction func chooseIcon(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "chooseIcon", sender: nil)
+    }
+    @IBAction func interestNextPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "interestNextClicked", sender: nil)
     }
     
 }
@@ -642,18 +653,22 @@ extension CreateNewEventViewController {
 //    MARK: SEARCH BAR DELEGATE FUNCTIONS
     
 //    TODO: need to increase height of view controller in order to compensate for scroll view moving up
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchBar.returnKeyType = .done
         
         if searchText.characters.count > 0{
             self.filteredInterest = self.interests.filter { $0.contains(searchText) }
             self.interestTableView.reloadData()
-            
-
         }
         else{
             self.filteredInterest = self.interests
             self.interestTableView.reloadData()
         }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
     }
     
     func searchForInterest(interest: String){

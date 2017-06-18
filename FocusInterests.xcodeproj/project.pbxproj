@@ -33,6 +33,7 @@
 		5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B34A6F21EE72B0800D16842 /* FollowingTableViewCell.xib */; };
 		5B34A6F61EE72B0800D16842 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B34A6F31EE72B0800D16842 /* FollowingTableViewCell.swift */; };
 		5B34A6F71EE72B0800D16842 /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */; };
+		5B3597981EF5FD5400C04809 /* FollowPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3597971EF5FD5400C04809 /* FollowPeople.swift */; };
 		5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B3F05751ED907B10057F596 /* Settings.storyboard */; };
 		5B3F05781ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */; };
 		5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */; };
@@ -245,9 +246,7 @@
 		EBC52C721EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */; };
 		EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */; };
 		EBD76FEF1EF2616400E4776A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FEE1EF2616400E4776A /* ForgotPasswordViewController.swift */; };
-		EBD76FF11EF2763300E4776A /* GeneralSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF01EF2763300E4776A /* GeneralSearchViewController.swift */; };
-		EBD76FF41EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF21EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift */; };
-		EBD76FF51EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD76FF31EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib */; };
+		EBD76FF71EF3527200E4776A /* UserProfileTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */; };
 		EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */; };
 		EBD980831EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */; };
 		EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */; };
@@ -333,6 +332,7 @@
 		5B34A6F21EE72B0800D16842 /* FollowingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingTableViewCell.xib; sourceTree = "<group>"; };
 		5B34A6F31EE72B0800D16842 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewCell.swift; sourceTree = "<group>"; };
 		5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
+		5B3597971EF5FD5400C04809 /* FollowPeople.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowPeople.swift; sourceTree = "<group>"; };
 		5B3F05751ED907B10057F596 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		5B3F05771ED9097F0057F596 /* ChangeUsernamePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChangeUsernamePasswordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5B4303A31ED55F6400B63D56 /* SearchEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -589,9 +589,7 @@
 		EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllContactsTableViewCell.swift; sourceTree = "<group>"; };
 		EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAllContactsTableViewCell.xib; sourceTree = "<group>"; };
 		EBD76FEE1EF2616400E4776A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		EBD76FF01EF2763300E4776A /* GeneralSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSearchViewController.swift; sourceTree = "<group>"; };
-		EBD76FF21EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSearchCellTableViewCell.swift; sourceTree = "<group>"; };
-		EBD76FF31EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralSearchCellTableViewCell.xib; sourceTree = "<group>"; };
+		EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTwoViewController.swift; sourceTree = "<group>"; };
 		EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Large_Apple_Maps.png; sourceTree = "<group>"; };
 		EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsEventDetailTableViewCell.swift; sourceTree = "<group>"; };
 		EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsEventDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -839,7 +837,6 @@
 				5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */,
 				FFBF879E1EE5A855000168F5 /* InvitePeopleViewController.swift */,
 				5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */,
-				EBD76FF01EF2763300E4776A /* GeneralSearchViewController.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -1077,6 +1074,7 @@
 				D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */,
 				D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */,
 				5B634C861ED2584F00EBCC29 /* Share.swift */,
+				5B3597971EF5FD5400C04809 /* FollowPeople.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1116,6 +1114,7 @@
 				5B959FD61ECAC9F400094FE6 /* Place */,
 				5BAB87A91EC97BB20064E5EC /* People */,
 				5B71D6F21ED154F10093A3F5 /* Search */,
+				EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1194,8 +1193,6 @@
 				EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */,
 				EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */,
 				EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */,
-				EBD76FF21EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift */,
-				EBD76FF31EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1788,6 +1785,7 @@
 				FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */,
 				FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */,
 				5B34A6F71EE72B0800D16842 /* FollowingViewController.swift in Sources */,
+				5B3597981EF5FD5400C04809 /* FollowPeople.swift in Sources */,
 				D2FDB69E1E89FF2B00D62DC2 /* SocialCrowdCell.swift in Sources */,
 				5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */,
 				FF69ABFD1ED6498F0044BE51 /* inviteCell.swift in Sources */,
@@ -1832,6 +1830,7 @@
 				5B34A6F61EE72B0800D16842 /* FollowingTableViewCell.swift in Sources */,
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
+				EBD76FF71EF3527200E4776A /* UserProfileTwoViewController.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
 				5B71D7101ED184D30093A3F5 /* allCommentsVC.swift in Sources */,
 				5B959FF21ECD452C00094FE6 /* RatingViewCell.swift in Sources */,
@@ -1863,7 +1862,6 @@
 				5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */,
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				EB5891D11EE7EB8800C35EE9 /* CommentsTableViewCell.swift in Sources */,
-				EBD76FF11EF2763300E4776A /* GeneralSearchViewController.swift in Sources */,
 				5BAB87AD1EC97BED0064E5EC /* PeopleSearchViewController.swift in Sources */,
 				5B1659301EDA6DF40002209A /* MapMarkerView.swift in Sources */,
 				D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */,
@@ -1872,7 +1870,6 @@
 				5B7BB1EA1ED54677001E60FF /* UITableView+Extensions.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 				5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */,
-				EBD76FF41EF27A4600E4776A /* GeneralSearchCellTableViewCell.swift in Sources */,
 				5B6AFA651ED1906900A82104 /* GMUSimpleClusterAlgorithm.m in Sources */,
 				5B6AFA771ED1906900A82104 /* GQTPointQuadTreeChild.m in Sources */,
 				D2ECAC541E7A255B006FFA1A /* UserProfile1ViewController.swift in Sources */,
