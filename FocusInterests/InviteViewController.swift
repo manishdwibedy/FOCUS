@@ -298,7 +298,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 let username = user["username"] as? String
                 
-                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)")
+                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)", actionType: "", type: "", item_id: "")
                 
             })
         }
