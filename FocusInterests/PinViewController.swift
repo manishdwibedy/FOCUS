@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, UITextViewDelegate{
+class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate{
     var place: Place?
     
     @IBOutlet weak var postReviewSeciontButton: UIButton!
@@ -109,9 +109,17 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
             
         })
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.callPlace))
-        phoneLabel.isUserInteractionEnabled = true
-        phoneLabel.addGestureRecognizer(tap)
+        if let phoneLabelText = phoneLabel.text {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.callPlace))
+            self.phoneLabel.isUserInteractionEnabled = true
+            
+            let textRange = NSMakeRange(0, phoneLabelText.characters.count)
+            let attributedText = NSMutableAttributedString(string: phoneLabelText)
+            attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
+
+            self.phoneLabel.attributedText = attributedText
+            self.phoneLabel.addGestureRecognizer(tap)
+        }
         
         reviewsView.alpha = 0
         categoryTop.constant = 100
@@ -234,6 +242,14 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
         phoneLabel.text = place.phone
         
         if let open_hours = place.hours{
+            print("")
+            print("")
+            print("")
+            print("Hours: \(open_hours)")
+            print("")
+            print("")
+            print("")
+            
             let hours = getOpenHours(open_hours)
             infoScreenHeight.constant += CGFloat(25 * hours.count)
             viewHeight.constant += CGFloat(25 * hours.count)
@@ -257,7 +273,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
             view.userName.text = user
             view.userName.textColor = .white
             view.delegate = self
-            
+            view.inviteButton.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
             view.image.image = UIImage(named: "UserPhoto")
         }
         
@@ -321,6 +337,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
         }else{
             
             let otherPlacesCell = self.peopleAlsoLikedTableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
+            otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
             otherPlacesCell.placeCellView.backgroundColor = UIColor.clear
             otherPlacesCell.layer.backgroundColor = UIColor.clear.cgColor
             otherPlacesCell.placeNameLabel.text = "place name"
@@ -342,6 +359,21 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDataSource, U
     
     func inviteUser(name: String) {
         print("clicked \(name)")
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+        ivc.type = "place"
+        ivc.id = (place?.id)!
+        ivc.place = place
+        self.present(ivc, animated: true, completion: { _ in })
+    }
+    
+    func inviteTestMethod(){
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+        ivc.type = "place"
+        ivc.id = (place?.id)!
+        ivc.place = place
+        self.present(ivc, animated: true, completion: { _ in })
     }
     
     
