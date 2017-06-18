@@ -235,6 +235,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                         print(guest)
                         if guest["UID"] == AuthApi.getFirebaseUid()!{
                             self.isAttending = true
+                            
+                            self.attendOut.layer.cornerRadius = 6
+                            self.attendOut.layer.borderWidth = 1
+                            self.attendOut.backgroundColor = .clear
+                            self.attendOut.layer.borderColor = UIColor.black.cgColor
+
                             self.attendOut.setTitle("Attending", for: UIControlState.normal)
                         }
                     }
@@ -319,6 +325,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
             self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
             
+            attendOut.layer.cornerRadius = 6
+            attendOut.layer.borderWidth = 1
+            attendOut.backgroundColor = .clear
+            attendOut.layer.borderColor = UIColor.black.cgColor
+
             self.attendOut.setTitle("Attending", for: UIControlState.normal)
         }else
         {
@@ -346,7 +357,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
                     self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
             
-                    
+                    self.attendOut.backgroundColor = Constants.color.green
                     self.attendOut.setTitle("Attend", for: UIControlState.normal)
                 }
                 
