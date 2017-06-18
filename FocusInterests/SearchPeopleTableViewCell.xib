@@ -179,6 +179,7 @@
                 <outlet property="followButton" destination="dBt-EP-FC5" id="ZiG-bc-2bk"/>
                 <outlet property="fullName" destination="2vx-AD-EVj" id="3Be-PK-fUz"/>
                 <outlet property="interest" destination="OHh-7b-rCo" id="0sN-hx-cAh"/>
+                <outlet property="interestView" destination="8on-d7-y1V" id="uyg-IA-Aho"/>
                 <outlet property="inviteButton" destination="6Vx-MI-HiM" id="ed2-LR-Tc5"/>
                 <outlet property="userImage" destination="Jrp-IZ-pa4" id="DKB-rM-74T"/>
                 <outlet property="username" destination="sOb-GM-41h" id="JlM-fH-z8F"/>

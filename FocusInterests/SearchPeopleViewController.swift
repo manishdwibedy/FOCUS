@@ -21,6 +21,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     var people = [User]()
     var filtered = [User]()
     var location: CLLocation?
+    var pinAvailable = [pinData?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,18 +56,39 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         _ = ref.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { snapshot in
             let users = snapshot.value as? [String : Any] ?? [:]
             
+            let count = users.count
             self.people.removeAll()
             for (_, user) in users{
                 let info = user as? [String:Any]
                 
+                
                 let user = User(username: info?["username"] as! String?, fullname: info?["fullname"]  as! String?, uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
                 
                 if user.uuid != AuthApi.getFirebaseUid() && user.uuid != nil{
-                    self.people.append(user)
+                    
+                    
+                    Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let value = snapshot.value as? NSDictionary
+                        if value != nil
+                        {
+                            var address = value?["formattedAddress"] as! String
+                            address = address.replacingOccurrences(of: ";;", with: "\n")
+                            let data = pinData(UID: value?["fromUID"] as! String, dateTS: (value?["time"] as! Double), pin: (value?["pin"] as! String), location: (value?["formattedAddress"] as! String), lat: (value?["lat"] as! Double), lng: (value?["lng"] as! Double), path: Constants.DB.pins.child(user.uuid! as! String))
+                            self.pinAvailable.append(data)
+                        }
+                        else{
+                            self.pinAvailable.append(nil)
+                        }
+                        self.people.append(user)
+                        
+                        self.filtered = self.people
+                        self.tableView.reloadData()
+                    })
                 }
+                
+                
             }
-            self.filtered = self.people
-            self.tableView.reloadData()
+            
         })
         
         let cancelButtonAttributes: [String: AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
@@ -96,53 +118,29 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             cell?.username.text = people.username
         }
         
-        cell?.fullName.text = "Full Name"
         
-        cell?.address.text = "1234 Grand Ave.\nPasadena, CA 91101"
-        cell?.distance.text = "2.1m"
+        cell?.fullName.text = people.fullname
         
-//        var addressComponents = event.fullAddress?.components(separatedBy: ",")
-//        let streetAddress = addressComponents?[0]
-//        
-//        addressComponents?.remove(at: 0)
-//        let city = addressComponents?.joined(separator: ", ")
-//        
-//        
-//        cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
-//        cell?.address.textContainer.maximumNumberOfLines = 6
+        if let pin = self.pinAvailable[indexPath.row]{
+            var address = pin.locationAddress
+            address = address.replacingOccurrences(of: ";;", with: "\n")
+            cell?.address.text = address
+            cell?.distance.text = "2.1 mi"
+        }
+        else{
+            cell?.address.text = ""
+            cell?.distance.text = ""
+            cell?.interestView?.isHidden = true
+        }
+    
         cell?.ID = people.uuid!
         cell?.interest.text = "Category"
         //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
         
-//        let reference = Constants.storage.event.child("\(event.id!).jpg")
-//        
-//        // Placeholder image
-//        _ = UIImage(named: "empty_event")
-//        
-//        reference.downloadURL(completion: { (url, error) in
-//            
-//            if error != nil {
-//                print(error?.localizedDescription ?? "")
-//                return
-//            }
-//            
-//            cell?.userImage?.sd_setImage(with: url, placeholderImage: placeHolderImage)
-//            
-//            cell?.userImage?.setShowActivityIndicator(true)
-//            cell?.userImage?.setIndicatorStyle(.gray)
-//            
-//        })
-        
         cell?.followButton.roundCorners(radius: 10)
         cell?.inviteButton.roundCorners(radius: 10)
         
-//        cell?.followButton.tag = indexPath.row
-//        cell?.followButton.addTarget(self, action: #selector(self.followUser), for: UIControlEvents.touchUpInside)
-//        
-//        cell?.inviteButton.tag = indexPath.row
-//        cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
-//        
         cell?.checkFollow()
         
         return cell!
@@ -175,7 +173,15 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
+        
+        if (self.pinAvailable[indexPath.row] != nil){
+            return 150
+        }
+        else{
+            return 80
+        }
+        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

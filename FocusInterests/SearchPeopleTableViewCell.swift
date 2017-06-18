@@ -20,8 +20,10 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var fullName: UILabel!
 
+    @IBOutlet weak var interestView: UIView!
     var ID = ""
     var parentVC: SearchPeopleViewController!
+    var pinAvailable = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
