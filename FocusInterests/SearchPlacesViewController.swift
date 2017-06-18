@@ -47,6 +47,9 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         if showPopup{
             invitePopup.alpha = 1
             invitePopup.allCornersRounded(radius: 10)
+            
+            _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector:  Selector("hidePopup"), userInfo: nil, repeats: false)
+
         }
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -74,10 +77,14 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         })
     }
     
+    func hidePopup(){
+        invitePopup.alpha = 0
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filtered.count
