@@ -19,9 +19,11 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var tableHeader: UIView!
     
+    @IBOutlet weak var invitePopup: UIView!
     var places = [Place]()
     var filtered = [Place]()
     var location: CLLocation?
+    var showPopup = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,11 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if showPopup{
+            invitePopup.alpha = 1
+            invitePopup.allCornersRounded(radius: 10)
+        }
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary

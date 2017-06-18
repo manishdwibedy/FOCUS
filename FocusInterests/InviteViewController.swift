@@ -38,7 +38,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let timeFormatter = DateFormatter()
     var inviteTime = ""
 
-    
+    var searchPlace: SearchPlacesViewController? = nil
     var image: Data?
     var selectedFriend = [Bool]()
     let store = CNContactStore()
@@ -302,7 +302,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             })
         }
-        
+        searchPlace?.showPopup = true
         dismiss(animated: true, completion: nil)
     }
     
