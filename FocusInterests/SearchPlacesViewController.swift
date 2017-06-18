@@ -99,7 +99,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
             cell.categoryLabel.text = place.categories[0].name    
         }
         
-//        cell.checkForFollow(id: place.id)
+        cell.checkForFollow(id: place.id)
         let placeHolderImage = UIImage(named: "empty_event")
         cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
         cell.checkForFollow(id: place.id)

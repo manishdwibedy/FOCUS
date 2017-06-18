@@ -90,7 +90,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
         let time = NSDate().timeIntervalSince1970
 
         if self.followButton.isSelected == false{
-            FocusInterests.followUser(uid: self.ID)
+            Follow.followUser(uid: self.ID)
             self.followButton.isSelected = true
             self.followButton.layer.borderColor = UIColor.white.cgColor
             self.followButton.layer.borderWidth = 1
@@ -104,7 +104,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
             
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
                 
-                unFollowUser(uid: self.ID)
+                Follow.unFollowUser(uid: self.ID)
                 
                 sender.isSelected = false
                 sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
