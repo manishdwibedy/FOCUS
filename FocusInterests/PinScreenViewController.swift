@@ -143,6 +143,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
         coordinates = location.coordinate
+        getAddress(loc: location, completion: {(address)in
+            self.locationLabel.text = address
+            self.formmatedAddress = address
+        })
         locationManager.stopUpdatingLocation()
      }
 
@@ -449,6 +453,27 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     
+    func getAddress(loc:CLLocation, completion: @escaping (String) -> Void){
+        
+        CLGeocoder().reverseGeocodeLocation(loc, completionHandler: {(placemarks, error) -> Void in
+            if error != nil {
+               
+                return
+            }
+            
+            if (placemarks?.count)! > 0 {
+                let pm = placemarks?[0] as! CLPlacemark
+                
+                completion(pm.locality!)
+            }
+            else {
+                
+            }
+        })
+        
+    }
+    
+    
     
     
     
@@ -460,7 +485,7 @@ extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         self.place = place
-        self.changeLocationOut.setTitle(place.formattedAddress, for: UIControlState.normal)
+        //self.changeLocationOut.setTitle(place.formattedAddress, for: UIControlState.normal)
         coordinates = self.place.coordinate
         
         var first = [String]()
