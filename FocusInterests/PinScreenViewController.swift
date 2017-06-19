@@ -107,9 +107,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         gallery.delegate = self
         
-        let width = (((collectionView.frame.width) - sidePadding)/numberOfItemsPerRow)-7
+        let width = (((collectionView.frame.width))/numberOfItemsPerRow)-7
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width + hieghtAdjustment)
+        layout.itemSize = CGSize(width: width, height: width)
         
         chosseFocusOut.layer.cornerRadius = 6
         chosseFocusOut.clipsToBounds = true
