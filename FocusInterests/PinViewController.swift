@@ -209,23 +209,22 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
         
         for (index, category) in (place.categories.enumerated()){
+            
             let textLabel = UILabel()
             
             textLabel.textColor = .white
             textLabel.text  = getInterest(yelpCategory: category.alias)
             textLabel.textAlignment = .left
             
+//            here you're adding green category dot
+            let imageAttachment = NSTextAttachment()
             
-            if index == 0{
-                textLabel.text = textLabel.text! + " ●"
-                
-                let primaryFocus = NSMutableAttributedString(string: textLabel.text!)
-                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(textLabel.text?.characters.count)! - 1,length:1))
-                textLabel.attributedText = primaryFocus
-                
-                
-                
-            }
+            imageAttachment.image = UIImage(image: UIImage(named: "Green.png"), scaledTo: CGSize(width: 12.0, height: 12.0))
+            
+            let attachmentString = NSAttributedString(attachment: imageAttachment)
+            let primaryFocus = NSMutableAttributedString(string: "\(textLabel.text!) ")
+            primaryFocus.append(attachmentString)
+            textLabel.attributedText = primaryFocus
             
             categoriesStackView.addArrangedSubview(textLabel)
             categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
@@ -241,15 +240,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         phoneLabel.text = place.phone
         
+//        TODO: THIS RETURNS NIL NEED TO FIX BACKEND SETUP SO THAT HOURS ARE ADDED
+        print("Hours: \(place.hours)")
+        
         if let open_hours = place.hours{
-            print("")
-            print("")
-            print("")
-            print("Hours: \(open_hours)")
-            print("")
-            print("")
-            print("")
-            
             let hours = getOpenHours(open_hours)
             infoScreenHeight.constant += CGFloat(25 * hours.count)
             viewHeight.constant += CGFloat(25 * hours.count)
