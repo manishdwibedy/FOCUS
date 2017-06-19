@@ -44,6 +44,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIv-Ib-jcv">
                             <rect key="frame" x="196.5" y="0.0" width="40.5" height="40"/>
+                            <inset key="imageEdgeInsets" minX="7" minY="7" maxX="7" maxY="7"/>
                             <state key="normal" image="Search"/>
                             <connections>
                                 <action selector="searchButtonPressed:" destination="-1" eventType="touchUpInside" id="T3a-4h-zpO"/>
