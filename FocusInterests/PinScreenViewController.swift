@@ -27,6 +27,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var twitterOut: UIButton!
     @IBOutlet weak var chosseFocusOut: UIButton!
     @IBOutlet weak var focusLabel: UILabel!
+    @IBOutlet weak var selectedImage: UIImageView!
+    
     
     var pinType = "normal"
     var imageArray = [UIImage]()
@@ -41,7 +43,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     var formmatedAddress = ""
     
     let sidePadding: CGFloat = 0.0
-    let numberOfItemsPerRow: CGFloat = 4.0
+    let numberOfItemsPerRow: CGFloat = 3.0
     let hieghtAdjustment: CGFloat = 0.0
     
     var isPublic = false
@@ -65,6 +67,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         profileImage.layer.cornerRadius = profileImage.frame.width/2
         profileImage.clipsToBounds = true
+        
+        selectedImage.layer.cornerRadius = selectedImage.frame.width/2
+        selectedImage.clipsToBounds = true
+        
         
 //        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
 //            let value = snapshot.value as? NSDictionary
@@ -101,7 +107,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         gallery.delegate = self
         
-        let width = ((collectionView.frame.width) - sidePadding)/numberOfItemsPerRow
+        let width = (((collectionView.frame.width) - sidePadding)/numberOfItemsPerRow)-7
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width + hieghtAdjustment)
         
@@ -266,6 +272,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                 cell.imageView.layer.borderColor = UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
                 cell.imageView.layer.borderWidth = 5
                 cell.selectedIs = true
+                
+                selectedImage.image = cell.imageView.image
             }else
             {
                 
@@ -287,6 +295,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
         galleryPicArray = images
         gallery.dismiss(animated: true, completion: nil)
+        selectedImage.image = galleryPicArray[0]
     }
     
     func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
