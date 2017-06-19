@@ -44,15 +44,16 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
         
         addButtons()
         fetchPhotos()
-        hideKeyboardWhenTappedAround()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let data = imageData{
             let _ = self.event?.saveToDB(ref: Constants.DB.event)
             self.performSegue(withIdentifier: "event_invite", sender: nil)
         }
     }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
