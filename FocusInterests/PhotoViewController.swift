@@ -39,7 +39,9 @@ class PhotoViewController: UIViewController {
 		self.view.backgroundColor = UIColor.gray
 		let backgroundImageView = UIImageView(frame: view.frame)
 		backgroundImageView.contentMode = UIViewContentMode.scaleAspectFit
-		backgroundImageView.image = backgroundImage
+        
+        
+		backgroundImageView.image = crop(image: backgroundImage, width: Double(UIScreen.main.bounds.width), height: Double(UIScreen.main.bounds.width))
 		view.addSubview(backgroundImageView)
 		let cancelButton = UIButton(frame: CGRect(x: 10.0, y: 10.0, width: 30.0, height: 30.0))
 		cancelButton.setImage(#imageLiteral(resourceName: "cancel"), for: UIControlState())
@@ -56,6 +58,54 @@ class PhotoViewController: UIViewController {
 	func cancel() {
 		dismiss(animated: true, completion: nil)
 	}
+    
+    func crop(image: UIImage, width width: Double, height height: Double) -> UIImage? {
+        
+        if let cgImage = image.cgImage {
+            
+            let contextImage: UIImage = UIImage(cgImage: cgImage)
+            
+            let contextSize: CGSize = contextImage.size
+            
+            var posX: CGFloat = 0.0
+            var posY: CGFloat = 0.0
+            var cgwidth: CGFloat = CGFloat(width)
+            var cgheight: CGFloat = CGFloat(height)
+            
+            // See what size is longer and create the center off of that
+            if contextSize.width > contextSize.height {
+                posX = ((contextSize.width - contextSize.height) / 2)
+                posY = 0
+                cgwidth = contextSize.height
+                cgheight = contextSize.height
+            } else {
+                posX = 0
+                posY = ((contextSize.height - contextSize.width) / 2)
+                cgwidth = contextSize.width
+                cgheight = contextSize.width
+            }
+            
+            let rect: CGRect = CGRect(x: posX, y: posY, width: cgwidth, height: cgheight)
+            
+            // Create bitmap image from context using the rect
+            var croppedContextImage: CGImage? = nil
+            if let contextImage = contextImage.cgImage {
+                if let croppedImage = contextImage.cropping(to: rect) {
+                    croppedContextImage = croppedImage
+                }
+            }
+            
+            // Create a new image based on the imageRef and rotate back to the original orientation
+            if let croppedImage:CGImage = croppedContextImage {
+                let image: UIImage = UIImage(cgImage: croppedImage, scale: image.scale, orientation: image.imageOrientation)
+                return image
+            }
+            
+        }
+        
+        return nil
+    }
+
     
     func done(){
 //        let _ = self.event?.saveToDB(ref: Constants.DB.event)
