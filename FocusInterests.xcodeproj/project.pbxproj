@@ -24,6 +24,8 @@
 		5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */; };
 		5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */; };
 		5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E901ED278A70075B57A /* UserProfileViewController.swift */; };
+		5B2E5E051EF7974900F0BC1B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */; };
+		5B2E5E061EF7974900F0BC1B /* SwiftyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */; };
 		5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */; };
 		5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C0541EDF8CE3007A8188 /* general_search.storyboard */; };
 		5B33C0571EDF8DF9007A8188 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */; };
@@ -323,6 +325,8 @@
 		5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestViewCell.swift; sourceTree = "<group>"; };
 		5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestViewCell.xib; sourceTree = "<group>"; };
 		5B251E901ED278A70075B57A /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyRecordButton.swift; sourceTree = "<group>"; };
 		5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B33C0541EDF8CE3007A8188 /* general_search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = general_search.storyboard; sourceTree = "<group>"; };
 		5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -874,6 +878,8 @@
 				5B71D7091ED183EE0093A3F5 /* attendeeVC.swift */,
 				5B71D70F1ED184D30093A3F5 /* allCommentsVC.swift */,
 				5B7DC2001EA866D700A1471E /* EventIconViewController.swift */,
+				5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */,
+				5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */,
 				5BA37C701EB9EADB0091189E /* InvitationViewController.swift */,
 				5B71D6F91ED181D10093A3F5 /* SendInvitationsViewController.swift */,
 				5B71D6FB1ED1820E0093A3F5 /* InviteFriendTableViewCell.swift */,
@@ -1489,7 +1495,6 @@
 				EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
 				5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */,
-				EBD76FF51EF27A4600E4776A /* GeneralSearchCellTableViewCell.xib in Resources */,
 				FFC36FF31EF49E9000D58F92 /* notificationTabCell.xib in Resources */,
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
 				EB252F0C1EE9E9F7001C163D /* NewMessageTableViewCell.xib in Resources */,
@@ -1791,6 +1796,7 @@
 				FF69ABFD1ED6498F0044BE51 /* inviteCell.swift in Sources */,
 				D25370D21E885EE40071B115 /* FollowCell.swift in Sources */,
 				5B6AFA6B1ED1906900A82104 /* GMUGeoJSONParser.m in Sources */,
+				5B2E5E061EF7974900F0BC1B /* SwiftyRecordButton.swift in Sources */,
 				D2FDB69A1E89F73800D62DC2 /* SocialGroupViewController.swift in Sources */,
 				D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */,
 				5B6AFA631ED1906900A82104 /* GMUGridBasedClusterAlgorithm.m in Sources */,
@@ -1900,6 +1906,7 @@
 				5B251E8A1ED276970075B57A /* InviteFriendsViewController.swift in Sources */,
 				5B448E671EE94C7700873F79 /* InviteViewController.swift in Sources */,
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
+				5B2E5E051EF7974900F0BC1B /* PhotoViewController.swift in Sources */,
 				EB252F131EEAA062001C163D /* UserProfileCollectionViewCell.swift in Sources */,
 				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */,
