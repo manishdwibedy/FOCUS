@@ -25,6 +25,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var publicOut: UIButton!
     @IBOutlet weak var facebookOut: UIButton!
     @IBOutlet weak var twitterOut: UIButton!
+    @IBOutlet weak var chosseFocusOut: UIButton!
+    @IBOutlet weak var focusLabel: UILabel!
     
     var pinType = "normal"
     var imageArray = [UIImage]()
@@ -45,6 +47,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     var isPublic = false
     var isTwitter = false
     var isFacebook = false
+    
+    var interest = ""
     
     
    
@@ -101,8 +105,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width + hieghtAdjustment)
         
-        cancelOut.layer.cornerRadius = 6
-        cancelOut.clipsToBounds = true
+        chosseFocusOut.layer.cornerRadius = 6
+        chosseFocusOut.clipsToBounds = true
+        chosseFocusOut.layer.borderColor =  UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
+        chosseFocusOut.layer.borderWidth = 1
         
         pinOut.layer.cornerRadius = 6
         pinOut.clipsToBounds = true
@@ -427,6 +433,21 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             twitterOut.setImage(UIImage(named: "TwitterGray"), for: UIControlState.normal)
         }
     }
+    
+    
+    @IBAction func chooseFOCUS(_ sender: Any) {
+        
+        let focusWindow = InterestsViewController(nibName:"InterestsViewController", bundle:nil)
+        self.present(focusWindow, animated: true, completion:{
+            focusWindow.saveButton.isEnabled = false
+            focusWindow.saveButton.title = ""
+            focusWindow.needsReturn = true
+            focusWindow.parentReturnVC = self
+        })
+        
+        
+    }
+    
     
     
     

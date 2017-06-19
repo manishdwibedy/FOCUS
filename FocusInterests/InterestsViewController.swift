@@ -20,7 +20,6 @@ var interest_mapping = [String: Int]()
 let sidePadding: CGFloat = 20.0
 let numberOfItemsPerRow: CGFloat = 3.0
 let hieghtAdjustment: CGFloat = 20.0
-
 class InterestsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
 
     
@@ -32,6 +31,9 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     let user_interests = AuthApi.getInterests()?.components(separatedBy: ",")
     
     var interestCells = [InterstCollectionViewCell]()
+    
+    var needsReturn = false
+    var parentReturnVC: PinScreenViewController!
     
 //    var imageArrayBlue = ["Arts Blue","Beauty Blue","Business Blue","Causes Blue","Celebration Blue","Chill Blue","Coffee Blue","Community Blue","Drinks Blue","Entertainment Blue","Fitness Blue","Food Blue","Learn Blue","Meet up Blue","Music Blue","Networking Blue","Outdoors Blue","Shopping Blue","Sports Blue","Travel Blue","Views Blue"]
 //    
@@ -179,6 +181,13 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     
     
   }
+    
+    
+    func returnValue(FOCUS:String){
+        parentReturnVC.interest = FOCUS
+        parentReturnVC.focusLabel.text = FOCUS
+        self.dismiss(animated: true, completion: nil)
+    }
     
    
 }
