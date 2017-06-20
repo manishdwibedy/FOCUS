@@ -100,8 +100,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             locationLabel.text = locationName
         }
         
-        imageArray.append(UIImage(named:"Icon-Small-50x50@1x")!)
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -206,7 +204,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     uploadImage(image: image, path: Constants.storage.pins.child(path))
                     
                 }
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic])
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text] )
 
             
             if isTwitter == true
@@ -318,6 +316,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         fetch.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         
         let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetch)
+        
+        self.imageArray.removeAll()
+        imageArray.append(#imageLiteral(resourceName: "pin_camera"))
         
         if fetchResult.count > 0
         {

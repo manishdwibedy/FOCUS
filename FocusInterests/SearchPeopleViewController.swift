@@ -73,7 +73,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                         {
                             var address = value?["formattedAddress"] as! String
                             address = address.replacingOccurrences(of: ";;", with: "\n")
-                            let data = pinData(UID: value?["fromUID"] as! String, dateTS: (value?["time"] as! Double), pin: (value?["pin"] as! String), location: (value?["formattedAddress"] as! String), lat: (value?["lat"] as! Double), lng: (value?["lng"] as! Double), path: Constants.DB.pins.child(user.uuid! as! String))
+                            let data = pinData(UID: value?["fromUID"] as! String, dateTS: (value?["time"] as! Double), pin: (value?["pin"] as! String), location: (value?["formattedAddress"] as! String), lat: (value?["lat"] as! Double), lng: (value?["lng"] as! Double), path: Constants.DB.pins.child(user.uuid! as! String), focus: value?["focus"] as! String)
                             self.pinAvailable.append(data)
                         }
                         else{

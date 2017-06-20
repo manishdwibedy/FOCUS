@@ -147,6 +147,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                     }
                 }
             }
+            
+            self.sections.sort()
             self.filteredSectionMapping = self.sectionMapping
             self.filteredSection = self.sections
             self.filtered = self.users
@@ -236,7 +238,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             self.filteredSectionMapping = self.sectionMapping
             self.filtered = self.users
         }
-        
+        self.filteredSection.sort()
         self.tableView.reloadData()
     }
     
