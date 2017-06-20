@@ -208,11 +208,17 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             view.removeFromSuperview()
         }
         
-        for (index, category) in (place.categories.enumerated()){
+        var focus_category = Set<String>()
+        
+        for category in place.categories{
+            focus_category.insert(getInterest(yelpCategory: category.alias))
+        }
+        
+        for (index, category) in focus_category.enumerated(){
             let textLabel = UILabel()
             
             textLabel.textColor = .white
-            textLabel.text  = getInterest(yelpCategory: category.alias)
+            textLabel.text  = category
             textLabel.textAlignment = .left
             
             
