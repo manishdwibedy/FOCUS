@@ -1061,7 +1061,7 @@
         <image name="Left back arrow icon 30x30 white.png" width="30" height="30"/>
         <image name="Star" width="28" height="27"/>
         <image name="Unstar.png" width="28" height="27"/>
-        <image name="pin" width="122" height="122"/>
+        <image name="pin" width="25" height="25"/>
         <image name="uber" width="123" height="123"/>
     </resources>
 </document>

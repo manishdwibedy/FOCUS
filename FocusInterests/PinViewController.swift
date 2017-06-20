@@ -42,7 +42,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
 //    @IBOutlet weak var suggestPlacesStackView: UIStackView!
+    
     @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
+    var suggestedPlaces = [Place]()
     
     @IBOutlet weak var writeReviewView: UITextView!
     @IBOutlet weak var starRatingView: UIView!
@@ -75,6 +77,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     var data = [NSDictionary]()
     var isFollowing = false
+    var place_focus = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,6 +134,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         button5.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
         
         checkFollowing()
+        
+        self.loadInfoScreen(place: self.place!)
 
     }
     
@@ -209,9 +214,14 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
         
         var focus_category = Set<String>()
+        var yelp_category = [String]()
+        
+        place_focus = getInterest(yelpCategory: place.categories[0].alias)
         
         for category in place.categories{
             focus_category.insert(getInterest(yelpCategory: category.alias))
+            yelp_category.append(category.alias)
+            
         }
         
         for (index, category) in focus_category.enumerated(){
@@ -291,6 +301,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         googleMapButton.setImage(UIImage(named: "Large_Apple_Maps.png"), for: .normal)
         googleMapButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        
+        getNearbyPlaces(categories: yelp_category.joined(separator: ","), count: 3, latitude: place.latitude, longitude: place.longitude, completion: {places in
+            self.suggestedPlaces = places
+            self.peopleAlsoLikedTableView.reloadData()
+        })
     }
 
     // function which is triggered when handleTap is called
@@ -308,7 +324,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         if (tableView.tag == 0){
             return 2
         }else{
-            return 3
+            return suggestedPlaces.count
         }
     }
     
@@ -346,10 +362,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
             otherPlacesCell.placeCellView.backgroundColor = UIColor.clear
             otherPlacesCell.layer.backgroundColor = UIColor.clear.cgColor
-            otherPlacesCell.placeNameLabel.text = "place name"
-            otherPlacesCell.ratingLabel.text = "4.3"
-            otherPlacesCell.categoryLabel.text = "Mexican"
-            otherPlacesCell.distanceLabel.text = "4.3 mi"
+            
+            let place = suggestedPlaces[indexPath.row]
+            otherPlacesCell.placeNameLabel.text = place.name
+            otherPlacesCell.ratingLabel.text = "\(place.rating)"
+            
+            let address = place.address.joined(separator: "\n")
+            
+            otherPlacesCell.addressTextView.text = address
+            otherPlacesCell.categoryLabel.text = place_focus
+            otherPlacesCell.distanceLabel.text = "\(place.distance) mi"
             
             return otherPlacesCell
         }
