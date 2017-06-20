@@ -36,7 +36,7 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         userNameTextField.setValue(UIColor.lightGray, forKeyPath: "_placeholderLabel.textColor")
         finishButton.roundCorners(radius: 10)
         
-        
+        hideKeyboardWhenTappedAround()
 
     }
     
