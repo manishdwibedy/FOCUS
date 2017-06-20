@@ -68,10 +68,10 @@ func getOpenHours(_ hours: [Hours]) -> [String]{
         else{
             // if only day was there a
             if last_day_end == last_day_start{
-                result.append("\(days[last_day_start]) \(last_start) - \(last_end)")
+                result.append("\(days[last_day_start]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end))")
             }
             else{
-                result.append("\(days[last_day_start]) - \(days[last_day_end]) \(last_start) - \(last_end)")
+                result.append("\(days[last_day_start]) - \(days[last_day_end]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end))")
             }
             last_day_start = hour.day
             last_day_end = hour.day
@@ -82,6 +82,15 @@ func getOpenHours(_ hours: [Hours]) -> [String]{
     return result
 }
 
+func convert24HourTo12Hour(_ time: String) -> String{
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HHmm"
+    let date12 = dateFormatter.date(from: time)!
+    
+    dateFormatter.dateFormat = "h:mm a"
+    return dateFormatter.string(from: date12)
+    
+}
 
 func changeTimeZone(of date: Date, from sourceTimeZone: TimeZone, to destinationTimeZone: TimeZone) -> Date{
     let str: String = date.description(with: nil)
