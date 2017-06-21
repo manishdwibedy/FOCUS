@@ -122,10 +122,14 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.fullName.text = people.fullname
         
         if let pin = self.pinAvailable[indexPath.row]{
+            cell?.interestView?.isHidden = false
             var address = pin.locationAddress
             address = address.replacingOccurrences(of: ";;", with: "\n")
             cell?.address.text = address
-            cell?.distance.text = "2.1 mi"
+            cell?.interest.text = pin.focus
+            
+            let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+            cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
         }
         else{
             cell?.address.text = ""
@@ -134,7 +138,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         }
     
         cell?.ID = people.uuid!
-        cell?.interest.text = "Category"
         //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
         
