@@ -19,7 +19,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
     
-    @IBOutlet weak var tableHeader: UIView!
+    
     @IBOutlet weak var createEventButton: UIButton!
     var events = [Event]()
     var filtered = [Event]()
@@ -28,8 +28,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableHeader.layer.cornerRadius = 10
-        self.tableHeader.clipsToBounds = true
+        
     
         tableView.clipsToBounds = true
         
@@ -197,7 +196,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.attendButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         cell?.attendButton.layer.masksToBounds = false
         cell?.attendButton.layer.shadowColor = UIColor.black.cgColor
-        cell?.attendButton.layer.shadowRadius = 10.0
+        cell?.attendButton.layer.shadowRadius = 7.0
         
         cell?.inviteButton.tag = indexPath.row
         cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
