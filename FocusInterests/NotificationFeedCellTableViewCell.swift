@@ -27,6 +27,9 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     @IBOutlet weak var contentBackView: UIView!
    
     
+    let time = DateFormatter()
+    
+    let date = DateFormatter()
     
     var selectedButton = false
     var notif: FocusNotification!
@@ -38,6 +41,9 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         self.addGestureRecognizer(tap)
         
         self.contentView.backgroundColor = Constants.color.navy
+        
+        time.dateFormat = "h:mm a"
+        date.dateFormat = "MM/dd"
         
         
     }
@@ -69,6 +75,11 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         attrString.append(descString2);
         
         
+        let notif_time = notif.time!
+        let plain_time = " at \(time.string(from: notif_time)) on \(date.string(from: notif_time))"
+        let timeString = NSMutableAttributedString(string: plain_time)
+        timeString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0,plain_time.characters.count))
+        attrString.append(timeString)
         
         self.userNameLabel.attributedText = attrString
 
