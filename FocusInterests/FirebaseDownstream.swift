@@ -81,7 +81,9 @@ class FirebaseDownstream {
                                            // }
                                         })
                                     }else if key as! String == "place"{
-                                        
+                                        print(inValue[inKey])
+                                        print(valueUID)
+                                        print("________")
                                         dbKey = "places"
                                         let item = ItemOfInterest(itemName: ((inValue[inKey] as! NSDictionary)["ID"] as? String), imageURL: "")
                                         item.type = "place"

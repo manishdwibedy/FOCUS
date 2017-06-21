@@ -42,7 +42,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
 //    @IBOutlet weak var suggestPlacesStackView: UIStackView!
+    
     @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
+    var suggestedPlaces = [Place]()
     
     @IBOutlet weak var writeReviewView: UITextView!
     @IBOutlet weak var starRatingView: UIView!
@@ -75,6 +77,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     var data = [NSDictionary]()
     var isFollowing = false
+    var place_focus = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,6 +134,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         button5.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
         
         checkFollowing()
+        
+        
+        self.loadInfoScreen(place: self.place!)
 
     }
     
@@ -138,20 +144,26 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     {
         Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
+            
+            self.followButton.setTitle("Following", for: .selected)
+            self.followButton.setTitle("Follow", for: .normal)
+            
             if value != nil {
                 self.followButton.isSelected = true
                 self.followButton.layer.borderColor = UIColor.white.cgColor
                 self.followButton.layer.borderWidth = 1
-                self.followButton.backgroundColor = UIColor.clear
-                self.followButton.setTitle("Following", for: UIControlState.normal)
+                self.followButton.layer.shadowOpacity = 1.0
+                self.followButton.layer.masksToBounds = false
+                self.followButton.layer.shadowColor = UIColor.black.cgColor
+                self.followButton.layer.shadowRadius = 5.0
+                self.followButton.backgroundColor = UIColor(red: 21/255.0, green: 41/255.0, blue: 65/255.0, alpha: 1.0)
                 self.isFollowing = true
                 
             }else{
                 self.followButton.isSelected = false
                 self.followButton.layer.borderColor = UIColor.clear.cgColor
                 self.followButton.layer.borderWidth = 0
-                self.followButton.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
-                self.followButton.setTitle("Follow", for: UIControlState.normal)
+                self.followButton.backgroundColor = UIColor(red: 122/225.0, green: 201/255.0, blue: 1/255.0, alpha: 1)
                 self.isFollowing = false
                 
             }
@@ -182,8 +194,19 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
         
         distanceLabel.text = "2 mi"
-        followButton.roundCorners(radius: 10)
-        reviewButton.roundCorners(radius: 10)
+        
+        
+        self.followButton.roundCorners(radius: 10)
+        self.followButton.layer.shadowOpacity = 1.0
+        self.followButton.layer.masksToBounds = false
+        self.followButton.layer.shadowColor = UIColor.black.cgColor
+        self.followButton.layer.shadowRadius = 7.0
+        
+        self.reviewButton.roundCorners(radius: 10)
+        self.reviewButton.layer.shadowOpacity = 1.0
+        self.reviewButton.layer.masksToBounds = false
+        self.reviewButton.layer.shadowColor = UIColor.black.cgColor
+        self.reviewButton.layer.shadowRadius = 7.0
         
         postReviewSeciontButton.layer.borderWidth = 1
         moreCategoriesSectionButton.layer.borderWidth = 1
@@ -208,25 +231,54 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             view.removeFromSuperview()
         }
         
-        for (index, category) in (place.categories.enumerated()){
+        var focus_category = Set<String>()
+        var yelp_category = [String]()
+        
+        place_focus = getInterest(yelpCategory: place.categories[0].alias)
+        
+        for category in place.categories{
+            focus_category.insert(getInterest(yelpCategory: category.alias))
+            yelp_category.append(category.alias)
             
-            let textLabel = UILabel()
+        }
+        
+        for (index, category) in focus_category.enumerated(){
+            let completeLabel = UILabel()
             
-            textLabel.textColor = .white
-            textLabel.text  = getInterest(yelpCategory: category.alias)
-            textLabel.textAlignment = .left
-            
-//            here you're adding green category dot
-            let imageAttachment = NSTextAttachment()
-            
+            //Set bound to reposition
+            let imageAttachment =  NSTextAttachment()
             imageAttachment.image = UIImage(image: UIImage(named: "Green.png"), scaledTo: CGSize(width: 12.0, height: 12.0))
             
-            let attachmentString = NSAttributedString(attachment: imageAttachment)
-            let primaryFocus = NSMutableAttributedString(string: "\(textLabel.text!) ")
-            primaryFocus.append(attachmentString)
-            textLabel.attributedText = primaryFocus
             
-            categoriesStackView.addArrangedSubview(textLabel)
+            imageAttachment.bounds = CGRect(x: 0, y: 0, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
+            
+            //Create string with attachment
+            let attachmentString = NSAttributedString(attachment: imageAttachment)
+            //Initialize mutable string
+            let primaryFocus = NSMutableAttributedString(string: "")
+            //Add image to mutable string
+            primaryFocus.append(attachmentString)
+            //Add your text to mutable string
+            
+            let textLabel = UILabel()
+            textLabel.text = category
+            textLabel.textAlignment = .center
+            
+            let textAfterIcon = NSMutableAttributedString(string: "  \(textLabel.text!)")
+            
+            primaryFocus.append(textAfterIcon)
+            
+            completeLabel.textColor = UIColor.white
+            completeLabel.textAlignment = .left
+            completeLabel.attributedText = primaryFocus
+            
+            
+//            here you're adding green category dot
+    
+//            primaryFocus.append(attachmentString)
+//            textLabel.attributedText = primaryFocus
+            
+            categoriesStackView.addArrangedSubview(completeLabel)
             categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
         }
         streetAddress.text = place.address[0]
@@ -271,7 +323,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             view.image.image = UIImage(named: "UserPhoto")
         }
         
-        webButton.setImage(UIImage(named: "Community Green"), for: .normal)
+        webButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
         webButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         uberButton.setImage(UIImage(named: "uber"), for: .normal)
@@ -279,6 +331,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         googleMapButton.setImage(UIImage(named: "Large_Apple_Maps.png"), for: .normal)
         googleMapButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        
+        getNearbyPlaces(categories: yelp_category.joined(separator: ","), count: 3, latitude: place.latitude, longitude: place.longitude, completion: {places in
+            self.suggestedPlaces = places
+            self.peopleAlsoLikedTableView.reloadData()
+        })
     }
 
     // function which is triggered when handleTap is called
@@ -296,7 +354,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         if (tableView.tag == 0){
             return 2
         }else{
-            return 3
+            return suggestedPlaces.count
         }
     }
     
@@ -309,7 +367,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             //        cell.data = data[indexPath.row]
             pinCell.usernameLabel.text = "username"
             pinCell.categoryLabel.text = "category" //add image after category here
-            pinCell.timeOfPinLabel.text = "31min"
+            pinCell.timeOfPinLabel.text = "31m"
             pinCell.commentsTextView.text = "Comments"
             //        pinCell.commentsTextView.text = data[indexPath.row]["pin"] as! String
             
@@ -334,10 +392,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
             otherPlacesCell.placeCellView.backgroundColor = UIColor.clear
             otherPlacesCell.layer.backgroundColor = UIColor.clear.cgColor
-            otherPlacesCell.placeNameLabel.text = "place name"
-            otherPlacesCell.ratingLabel.text = "4.3"
-            otherPlacesCell.categoryLabel.text = "Mexican"
-            otherPlacesCell.distanceLabel.text = "4.3 mi"
+            
+            let place = suggestedPlaces[indexPath.row]
+            otherPlacesCell.placeNameLabel.text = place.name
+            otherPlacesCell.ratingLabel.text = "\(place.rating)"
+            
+            let address = place.address.joined(separator: "\n")
+            
+            otherPlacesCell.addressTextView.text = address
+            otherPlacesCell.categoryLabel.text = place_focus
+            otherPlacesCell.distanceLabel.text = "\(place.distance) mi"
             
             return otherPlacesCell
         }

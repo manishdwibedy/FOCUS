@@ -22,6 +22,8 @@ class ForgotPasswordViewController: UIViewController {
         self.emailTextField.attributedPlaceholder = NSAttributedString(string: "Enter your email", attributes: [NSForegroundColorAttributeName : UIColor.lightGray])
         self.emailTextField.setBottomBorder()
         self.submitButton.roundCorners(radius: 6.0)
+        
+        hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {

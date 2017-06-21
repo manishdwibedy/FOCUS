@@ -38,6 +38,15 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        let imageAttachment = NSTextAttachment()
+        
+        imageAttachment.image = UIImage(image: UIImage(named: "Green.png"), scaledTo: CGSize(width: 12.0, height: 12.0))
+        
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        let primaryFocus = NSMutableAttributedString(string: "")
+        primaryFocus.append(attachmentString)
+        primaryFocus.append(NSMutableAttributedString(string: " \(data.focus) "))
+        interestsLabel.attributedText = primaryFocus
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(didDoubletap(sender:)))
         doubleTap.numberOfTapsRequired = 2
@@ -76,7 +85,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         
         let formatter = DateFormatter()
         let date = Date(timeIntervalSince1970: data.dateTimeStamp)
-        dateLabel.text = formatter.timeSince(from: date, numericDates: false)
+        dateLabel.text = formatter.timeSince(from: date, numericDates: false, shortVersion: true)
         
         //check for images
         data.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -322,9 +331,9 @@ class pinData
     var locationAddress = String()
     var coordinates = CLLocationCoordinate2D()
     var dbPath = DatabaseReference()
+    var focus = ""
     
-    
-    init(UID:String, dateTS:Double, pin: String, location: String, lat: Double, lng: Double, path: DatabaseReference) {
+    init(UID:String, dateTS:Double, pin: String, location: String, lat: Double, lng: Double, path: DatabaseReference, focus: String) {
         self.fromUID = UID
         self.dateTimeStamp = dateTS
         self.pinMessage = pin
@@ -332,7 +341,7 @@ class pinData
         self.coordinates.latitude = lat
         self.coordinates.longitude = lng
         self.dbPath = path
-    
+        self.focus = focus
         
     }
 }

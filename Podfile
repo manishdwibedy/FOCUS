@@ -48,6 +48,8 @@ target 'FocusInterests' do
     pod 'Gallery'
     pod 'BadgeSwift', '~> 5.0'
     pod 'SVPullToRefresh', :git => 'https://github.com/gabro/SVPullToRefresh', :branch => 'top-infinitescrolling'
+    pod 'SwiftyCam', '~> 2.4.0'
+
 
 end
 

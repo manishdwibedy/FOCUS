@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r5X-Z6-if9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -349,8 +349,8 @@ line 2</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Likes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0G-WK-LPf">
-                                <rect key="frame" x="127" y="543.5" width="98.5" height="23.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 likes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0G-WK-LPf">
+                                <rect key="frame" x="127" y="543.5" width="103.5" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -409,8 +409,8 @@ line 2</string>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0si-vv-Uym">
                                 <rect key="frame" x="17" y="602.5" width="291" height="59.5"/>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QE5-ed-gDA">
-                                <rect key="frame" x="274" y="556" width="75" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QE5-ed-gDA">
+                                <rect key="frame" x="279" y="556" width="75" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="9Oz-FK-ORa"/>
                                 </constraints>
@@ -447,7 +447,7 @@ line 2</string>
                             <constraint firstItem="k4d-2y-QOs" firstAttribute="top" secondItem="Vfl-p8-Tef" secondAttribute="bottom" constant="8" symbolic="YES" id="q8I-PH-GZK"/>
                             <constraint firstItem="W6f-uJ-Bg0" firstAttribute="leading" secondItem="EL7-by-RR7" secondAttribute="leading" id="qVB-Ks-q6T"/>
                             <constraint firstItem="j0G-WK-LPf" firstAttribute="leading" secondItem="rpQ-O8-xtN" secondAttribute="trailing" constant="25" id="rbf-3F-y5X"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="QE5-ed-gDA" secondAttribute="trailing" constant="10" id="tT7-ef-rqd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QE5-ed-gDA" secondAttribute="trailing" constant="5" id="tT7-ef-rqd"/>
                             <constraint firstItem="rpQ-O8-xtN" firstAttribute="leading" secondItem="89H-gt-97y" secondAttribute="leadingMargin" constant="5" id="tex-9b-iFI"/>
                             <constraint firstItem="hJE-2j-BeM" firstAttribute="trailing" secondItem="W6f-uJ-Bg0" secondAttribute="trailing" id="wxX-42-o40"/>
                         </constraints>

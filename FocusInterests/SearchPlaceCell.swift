@@ -34,20 +34,24 @@ class SearchPlaceCell: UITableViewCell {
         self.followButtonOut.clipsToBounds = true
         self.followButtonOut.isSelected = false
         self.followButtonOut.roundCorners(radius: 5)
-        self.followButtonOut.layer.shadowOpacity = 1.0
+        self.followButtonOut.layer.shadowOpacity = 0.7
         self.followButtonOut.layer.masksToBounds = false
         self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-        self.followButtonOut.layer.shadowRadius = 6.0
-        //self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
-        //self.followButtonOut.setTitle("Unfollow", for: UIControlState.selected)
+        self.followButtonOut.layer.shadowRadius = 5.0
+        
+        self.followButtonOut.setTitleColor(UIColor.white, for: .normal)
+        self.followButtonOut.setTitleColor(UIColor.white, for: .selected)
+
+        self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
+        self.followButtonOut.setTitle("Unfollow", for: UIControlState.selected)
         
 //        invite button
         self.inviteButtonOut.clipsToBounds = true
         self.inviteButtonOut.roundCorners(radius: 5)
-        self.inviteButtonOut.layer.shadowOpacity = 1.0
+        self.inviteButtonOut.layer.shadowOpacity = 0.7
         self.inviteButtonOut.layer.masksToBounds = false
         self.inviteButtonOut.layer.shadowColor = UIColor.black.cgColor
-        self.inviteButtonOut.layer.shadowRadius = 6.0
+        self.inviteButtonOut.layer.shadowRadius = 5.0
 
 //        image
         placeImage.layer.borderWidth = 1
@@ -55,7 +59,7 @@ class SearchPlaceCell: UITableViewCell {
         placeImage.roundedImage()
         
 //        cell view
-        placeCellView.allCornersRounded(radius: 6.0)
+        placeCellView.allCornersRounded(radius: 10.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -73,13 +77,12 @@ class SearchPlaceCell: UITableViewCell {
             self.followButtonOut.isSelected = true
             self.followButtonOut.layer.borderWidth = 1
             self.followButtonOut.layer.borderColor = UIColor.white.cgColor
+            self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
+            self.followButtonOut.tintColor = UIColor.clear
             self.followButtonOut.layer.shadowOpacity = 1.0
             self.followButtonOut.layer.masksToBounds = false
             self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-            self.followButtonOut.layer.shadowRadius = 6.0
-            self.followButtonOut.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
-            self.followButtonOut.tintColor = UIColor.clear
-            self.followButtonOut.setTitle("Following", for: UIControlState.normal)
+            self.followButtonOut.layer.shadowRadius = 5.0
             
             let time = NSDate().timeIntervalSince1970
             Follow.followPlace(id: (place?.id)!)
@@ -93,20 +96,18 @@ class SearchPlaceCell: UITableViewCell {
             
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
                 
-                //            follow button appearance
+//            follow button appearance
                 self.followButtonOut.isSelected = false
                 self.followButtonOut.layer.borderWidth = 1
                 self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
+                self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButtonOut.tintColor = UIColor.clear
                 self.followButtonOut.layer.shadowOpacity = 1.0
                 self.followButtonOut.layer.masksToBounds = false
                 self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-                self.followButtonOut.layer.shadowRadius = 6.0
-                self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-                self.followButtonOut.tintColor = UIColor.clear
+                self.followButtonOut.layer.shadowRadius = 5.0
 
                 Follow.unFollowPlace(id: (self.place?.id)!)
-                
-                self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
                 
             }
             
@@ -142,22 +143,30 @@ class SearchPlaceCell: UITableViewCell {
     
     func checkForFollow(id:String){
         print(id)
-        
-        if parentVC.places.contains(self.place!){
-            self.followButtonOut.isSelected = true
-            self.followButtonOut.layer.borderColor = UIColor.white.cgColor
-            self.followButtonOut.layer.borderWidth = 1
-            self.followButtonOut.backgroundColor = UIColor.clear
-            self.followButtonOut.setTitle("Following", for: UIControlState.normal)
-            
-        }
-        else{
-            self.followButtonOut.isSelected = false
-            self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
-            self.followButtonOut.layer.borderWidth = 0
-            self.followButtonOut.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
-            self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
-            
-        }
+       // print(searchVC)
+//        if (searchVC?.places.contains(self.place!))!{
+//            self.followButtonOut.isSelected = true
+//            self.followButtonOut.layer.borderColor = UIColor.white.cgColor
+//            self.followButtonOut.layer.borderWidth = 1
+//            
+//            self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
+//            self.followButtonOut.tintColor = UIColor.clear
+//            self.followButtonOut.layer.shadowOpacity = 1.0
+//            self.followButtonOut.layer.masksToBounds = false
+//            self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
+//            self.followButtonOut.layer.shadowRadius = 5.0
+//        }
+//        else{
+//            self.followButtonOut.isSelected = false
+//            self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
+//            self.followButtonOut.layer.borderWidth = 1
+//            self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+//            self.followButtonOut.tintColor = UIColor.clear
+//            self.followButtonOut.layer.shadowOpacity = 1.0
+//            self.followButtonOut.layer.masksToBounds = false
+//            self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
+//            self.followButtonOut.layer.shadowRadius = 5.0
+//
+//        }
     }
 }

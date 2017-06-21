@@ -19,7 +19,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
     
-    @IBOutlet weak var tableHeader: UIView!
+    
     @IBOutlet weak var createEventButton: UIButton!
     var events = [Event]()
     var filtered = [Event]()
@@ -27,6 +27,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     
         tableView.clipsToBounds = true
         
@@ -44,7 +46,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         self.searchBar.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
         self.searchBar.layer.cornerRadius = 6
         self.searchBar.clipsToBounds = true
-        self.searchBar.layer.borderWidth = 2
+        self.searchBar.layer.borderWidth = 0
         self.searchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
         
         
@@ -115,9 +117,15 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         addressComponents?.remove(at: 0)
         let city = addressComponents?.joined(separator: ", ")
         
+        var fullAddress = ""
+        for str in addressComponents!{
+            fullAddress = fullAddress + " " + str
+        }
+        print(fullAddress)
         
-        cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
-        cell?.address.textContainer.maximumNumberOfLines = 6
+        //cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
+        cell?.address.text = event.fullAddress 
+        cell?.address.textContainer.maximumNumberOfLines = 2
 
         let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
         cell?.distance.text = getDistance(fromLocation: self.location!, toLocation: eventLocation,addBracket: false)
@@ -183,8 +191,16 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.inviteButton.layer.shadowColor = UIColor.black.cgColor
         cell?.inviteButton.layer.shadowRadius = 10.0
         
+        cell?.attendButton.roundCorners(radius: 10)
+        cell?.attendButton.layer.shadowOpacity = 1.0
+        cell?.attendButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        cell?.attendButton.layer.masksToBounds = false
+        cell?.attendButton.layer.shadowColor = UIColor.black.cgColor
+        cell?.attendButton.layer.shadowRadius = 7.0
+        
         cell?.inviteButton.tag = indexPath.row
         cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
+        cell?.attendButton.addTarget(self, action: #selector(self.attendEvent(sender:)), for: UIControlEvents.touchUpInside)
         
         return cell!
     }

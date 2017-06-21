@@ -15,7 +15,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventDetailCommentCell" rowHeight="86" id="KGk-i7-Jjw" customClass="CommentsEventDetailTableViewCell" customModule="FocusInterests" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="372" height="86"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="372" height="85.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -76,6 +76,7 @@
                     <constraint firstAttribute="trailing" secondItem="N5c-Kd-xnp" secondAttribute="trailing" constant="293" id="yHZ-q2-Faw"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="commentsLabel" destination="fvj-VS-NLH" id="NST-G1-lrv"/>
                 <outlet property="likeHeartButton" destination="Pb3-fs-iGP" id="io0-AW-XLl"/>

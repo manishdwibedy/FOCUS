@@ -17,7 +17,6 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
-    @IBOutlet weak var tableHeader: UIView!
     
     @IBOutlet weak var invitePopup: UIView!
     var places = [Place]()
@@ -33,10 +32,10 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.clipsToBounds = true
         
         let nib = UINib(nibName: "SearchPlaceCell", bundle: nil)
+        
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
 
         self.searchBar.delegate = self
-        tableHeader.topCornersRounded(radius: 10)
         
         hideKeyboardWhenTappedAround()
     }
@@ -117,6 +116,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         let placeHolderImage = UIImage(named: "empty_event")
         cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
         cell.checkForFollow(id: place.id)
+        
         return cell
     }
     
@@ -129,7 +129,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 110
         
     }
     
