@@ -138,9 +138,6 @@ class SearchPlaceCell: UITableViewCell {
         else{
             self.searchVC?.present(ivc, animated: true, completion: nil)
         }
-        
-        
-        
     }
     
     func checkForFollow(id:String){
