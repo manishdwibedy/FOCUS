@@ -27,6 +27,8 @@ class SearchPlaceCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        addressTextView.contentInset = UIEdgeInsetsMake(-4,-4,0,0);
         // Initialization code
         
 //        Follow button

@@ -105,11 +105,14 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                 cell.addressTextView.text = "\(place.address[0])\n\(place.address[1])"
             }
         }
-        cell.distanceLabel.text = "\((place.distance * 0.000621371).roundTo(places: 1)) mi"
+        let place_location = CLLocation(latitude: place.latitude, longitude: place.longitude)
+        cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
         cell.placeID = place.id
         cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
         if place.categories.count > 0{
-            cell.categoryLabel.text = place.categories[0].name    
+            
+            addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place.categories[0].alias))
+//            cell.categoryLabel.text =
         }
         
         cell.checkForFollow(id: place.id)
