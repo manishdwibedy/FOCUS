@@ -244,6 +244,8 @@
 		EB722F9B1EE8BA3B00420DC8 /* Direct message sign.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9A1EE8BA3B00420DC8 /* Direct message sign.png */; };
 		EB722F9D1EE8BA4200420DC8 /* Dollar sign.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9C1EE8BA4200420DC8 /* Dollar sign.png */; };
 		EB722F9F1EE8BA7D00420DC8 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = EB722F9E1EE8BA7D00420DC8 /* Green.png */; };
+		EB8C8E241EF9C321004792E5 /* Yelp icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EB8C8E231EF9C321004792E5 /* Yelp icon.png */; };
+		EB8C8E261EFA00DF004792E5 /* Uber.png in Resources */ = {isa = PBXBuildFile; fileRef = EB8C8E251EFA00DF004792E5 /* Uber.png */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
 		EBC52C721EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */; };
 		EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */; };
@@ -589,6 +591,8 @@
 		EB722F9A1EE8BA3B00420DC8 /* Direct message sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Direct message sign.png"; sourceTree = "<group>"; };
 		EB722F9C1EE8BA4200420DC8 /* Dollar sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dollar sign.png"; sourceTree = "<group>"; };
 		EB722F9E1EE8BA7D00420DC8 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Green.png; sourceTree = "<group>"; };
+		EB8C8E231EF9C321004792E5 /* Yelp icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Yelp icon.png"; sourceTree = "<group>"; };
+		EB8C8E251EFA00DF004792E5 /* Uber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Uber.png; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
 		EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllContactsTableViewCell.swift; sourceTree = "<group>"; };
 		EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAllContactsTableViewCell.xib; sourceTree = "<group>"; };
@@ -1288,7 +1292,9 @@
 				EBD9808A1EEBCCD500FC54C1 /* Notifications Icon white 30x30.png */,
 				EBD9808B1EEBCCD500FC54C1 /* Search Icon white 30x30.png */,
 				EBD9808C1EEBCCD500FC54C1 /* User Icon white 30x30.png */,
+				EB8C8E231EF9C321004792E5 /* Yelp icon.png */,
 				EBD9807F1EEB41B900FC54C1 /* Large_Apple_Maps.png */,
+				EB8C8E251EFA00DF004792E5 /* Uber.png */,
 				EB252F0F1EEA7F40001C163D /* Friend Pin.png */,
 				EB252F0D1EEA712D001C163D /* Gear.png */,
 				EB722F981EE8B66700420DC8 /* Unstar.png */,
@@ -1547,11 +1553,13 @@
 				EB722F991EE8B66700420DC8 /* Unstar.png in Resources */,
 				EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */,
 				5B448E571EE72C1B00873F79 /* FollowersTableViewCell.xib in Resources */,
+				EB8C8E241EF9C321004792E5 /* Yelp icon.png in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
 				FFD32DD41EE9FF9900FE725E /* InterstCollectionViewCell.xib in Resources */,
+				EB8C8E261EFA00DF004792E5 /* Uber.png in Resources */,
 				FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */,
 				5B448E651EE94BF900873F79 /* Invites.storyboard in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,

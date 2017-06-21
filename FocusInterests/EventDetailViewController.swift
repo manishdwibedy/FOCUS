@@ -40,7 +40,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var userProfileImage: UIImageView!
     
     @IBOutlet weak var userInfoEditButton: UIButton!
-    @IBOutlet weak var descriptionEditButton: UIButton!
     @IBOutlet weak var moreCommentsButton: UIButton!
     @IBOutlet weak var postCommentsButton: UIButton!
     @IBOutlet weak var moreOtherLikesButton: UIButton!
@@ -152,7 +151,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 self.hostNameLabel.text = value?["username"] as? String
                 self.fullnameLabel.text = value?["fullname"] as? String
                 var placeHolder = NSMutableAttributedString()
-                placeHolder = NSMutableAttributedString(string:placeString, attributes: [NSFontAttributeName:UIFont(name: "Helvetica", size: 15.0)!])
+                placeHolder = NSMutableAttributedString(string:placeString, attributes: [NSFontAttributeName:UIFont(name: "Avenir Book", size: 15.0)!])
                 placeHolder.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 255, green: 255, blue: 255, alpha: 0.8), range:NSRange(location:0,length:placeString.characters.count))
                 self.commentTextField.attributedPlaceholder = placeHolder
                 
@@ -271,7 +270,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
         
         if event?.creator == AuthApi.getFirebaseUid(){
-            descriptionEditButton.isHidden = true
+            
             userInfoEditButton.isHidden = true
         }
         
@@ -514,7 +513,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
             eventCell?.addressLabel.text = suggestion.shortAddress
             eventCell?.dateAndTimeLabel.text = suggestion.date
-            eventCell?.locationLabel.text = suggestion.shortAddress
+            eventCell?.locationLabel.text = suggestion.eventDescription
             
             tableCell = eventCell!
             
@@ -603,19 +602,16 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         mapOut.roundCorners(radius: 7.0)
         
         userInfoEditButton.layer.borderWidth = 1
-        descriptionEditButton.layer.borderWidth = 1
         moreCommentsButton.layer.borderWidth = 1
         postCommentsButton.layer.borderWidth = 1
         moreOtherLikesButton.layer.borderWidth = 1
         
         userInfoEditButton.layer.borderColor = UIColor.white.cgColor
-        descriptionEditButton.layer.borderColor = UIColor.white.cgColor
         moreCommentsButton.layer.borderColor = UIColor.white.cgColor
         postCommentsButton.layer.borderColor = UIColor.white.cgColor
         moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
         
         userInfoEditButton.roundCorners(radius: 7.0)
-        descriptionEditButton.roundCorners(radius: 7.0)
         moreCommentsButton.roundCorners(radius: 7.0)
         postCommentsButton.roundCorners(radius: 7.0)
         moreOtherLikesButton.roundCorners(radius: 7.0)

@@ -135,6 +135,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         checkFollowing()
         
+        
         self.loadInfoScreen(place: self.place!)
 
     }
@@ -143,20 +144,26 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     {
         Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
+            
+            self.followButton.setTitle("Following", for: .selected)
+            self.followButton.setTitle("Follow", for: .normal)
+            
             if value != nil {
                 self.followButton.isSelected = true
                 self.followButton.layer.borderColor = UIColor.white.cgColor
                 self.followButton.layer.borderWidth = 1
-                self.followButton.backgroundColor = UIColor.clear
-                self.followButton.setTitle("Following", for: UIControlState.normal)
+                self.followButton.layer.shadowOpacity = 1.0
+                self.followButton.layer.masksToBounds = false
+                self.followButton.layer.shadowColor = UIColor.black.cgColor
+                self.followButton.layer.shadowRadius = 5.0
+                self.followButton.backgroundColor = UIColor(red: 21/255.0, green: 41/255.0, blue: 65/255.0, alpha: 1.0)
                 self.isFollowing = true
                 
             }else{
                 self.followButton.isSelected = false
                 self.followButton.layer.borderColor = UIColor.clear.cgColor
                 self.followButton.layer.borderWidth = 0
-                self.followButton.backgroundColor = UIColor(red: 31/225, green: 50/255, blue: 73/255, alpha: 1)
-                self.followButton.setTitle("Follow", for: UIControlState.normal)
+                self.followButton.backgroundColor = UIColor(red: 122/225.0, green: 201/255.0, blue: 1/255.0, alpha: 1)
                 self.isFollowing = false
                 
             }
@@ -187,8 +194,19 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
         
         distanceLabel.text = "2 mi"
-        followButton.roundCorners(radius: 10)
-        reviewButton.roundCorners(radius: 10)
+        
+        
+        self.followButton.roundCorners(radius: 10)
+        self.followButton.layer.shadowOpacity = 1.0
+        self.followButton.layer.masksToBounds = false
+        self.followButton.layer.shadowColor = UIColor.black.cgColor
+        self.followButton.layer.shadowRadius = 7.0
+        
+        self.reviewButton.roundCorners(radius: 10)
+        self.reviewButton.layer.shadowOpacity = 1.0
+        self.reviewButton.layer.masksToBounds = false
+        self.reviewButton.layer.shadowColor = UIColor.black.cgColor
+        self.reviewButton.layer.shadowRadius = 7.0
         
         postReviewSeciontButton.layer.borderWidth = 1
         moreCategoriesSectionButton.layer.borderWidth = 1
