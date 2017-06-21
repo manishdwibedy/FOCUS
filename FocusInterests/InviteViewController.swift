@@ -275,7 +275,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
                     let fullname = user["fullname"] as? String
-                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "", item_id: "")
+                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "", item_id: "",item_name: "")
                 })
                 Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime])
             }
@@ -285,7 +285,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
                     let fullname = user["fullname"] as? String
-                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "", item_id: "")
+                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "", item_id: "", item_name: "")
                 })
                 Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
             }
@@ -298,7 +298,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 let username = user["username"] as? String
                 
-                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)", actionType: "", type: "", item_id: "")
+                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)", actionType: "", type: "", item_id: "", item_name: "")
                 
             })
         }

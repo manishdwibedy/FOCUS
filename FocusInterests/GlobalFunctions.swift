@@ -198,7 +198,7 @@ func getDistance(fromLocation: CLLocation, toLocation: CLLocation, addBracket: B
     
 }
 
-func sendNotification(to id: String, title: String, body: String, actionType: String, type: String, item_id: String){
+func sendNotification(to id: String, title: String, body: String, actionType: String, type: String, item_id: String, item_name: String){
     let url = "http://focus-notifications.3hwampgg8c.us-west-2.elasticbeanstalk.com/sendMessage"
     
     let time = NSDate().timeIntervalSince1970
@@ -209,7 +209,8 @@ func sendNotification(to id: String, title: String, body: String, actionType: St
         "time": Double(time),
         "actionType": actionType,
         "type": type,
-        "id": item_id
+        "id": item_id,
+        "name": item_name
         ])
     
     Constants.DB.user.child(id).observeSingleEvent(of: .value, with: { snapshot in
@@ -548,62 +549,65 @@ func getNearbyPlaces(categories: String?, count: Int?, latitude: Double, longitu
         
     }
 }
-    func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
+
+func addGreenDot(label: UILabel, content: String){
+    
+    if content.characters.count > 0 {
+        label.text =  "● \(content)"
+        let primaryFocus = NSMutableAttributedString(string: label.text!)
         
-        let url = "https://api.yelp.com/v3/businesses/\(ID)"
         
-        let headers: HTTPHeaders = [
-            "authorization": "Bearer \(AuthApi.getYelpToken()!)",
-            "cache-contro": "no-cache"
-        ]
+        primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location: 0, length: 1))
+        label.attributedText = primaryFocus
+    }
+    else{
+        label.text = "N.A."
+    }
+}
+
+func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
+    
+    let url = "https://api.yelp.com/v3/businesses/\(ID)"
+    
+    let headers: HTTPHeaders = [
+        "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+        "cache-contro": "no-cache"
+    ]
+    
+    Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
+        let json = JSON(data: response.data!)
+        let id = json["id"].stringValue
+        let name = json["name"].stringValue
+        let image_url = json["image_url"].stringValue
+        let isClosed = json["is_closed"].boolValue
+        let reviewCount = json["review_count"].intValue
+        let rating = json["rating"].floatValue
+        let latitude = json["coordinates"]["latitude"].doubleValue
+        let longitude = json["coordinates"]["longitude"].doubleValue
+        let price = json["price"].stringValue
+        let address_json = json["location"]["display_address"].arrayValue
+        let phone = json["display_phone"].stringValue
+        let distance = json["distance"].doubleValue
+        let categories_json = json["categories"].arrayValue
+        let url = json["url"].stringValue
+        let plain_phone = json["phone"].stringValue
         
-        print("getting data")
-        Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
-            let json = JSON(data: response.data!)
-             print("got data")
-            print(json)
-            
+        var address = [String]()
+        for raw_address in address_json{
+            address.append(raw_address.stringValue)
+        }
         
-            
-            
-//            for (_, business) in json.enumerated(){
-                let id = json["id"].stringValue
-                let name = json["name"].stringValue
-                let image_url = json["image_url"].stringValue
-                let isClosed = json["is_closed"].boolValue
-                let reviewCount = json["review_count"].intValue
-                let rating = json["rating"].floatValue
-                let latitude = json["coordinates"]["latitude"].doubleValue
-                let longitude = json["coordinates"]["longitude"].doubleValue
-                let price = json["price"].stringValue
-                let address_json = json["location"]["display_address"].arrayValue
-                let phone = json["display_phone"].stringValue
-                let distance = json["distance"].doubleValue
-                let categories_json = json["categories"].arrayValue
-                let url = json["url"].stringValue
-                let plain_phone = json["phone"].stringValue
-                
-                var address = [String]()
-                for raw_address in address_json{
-                    address.append(raw_address.stringValue)
-                }
-                
-                var categories = [Category]()
-                for raw_category in categories_json as [JSON]{
-                    let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
-                    categories.append(category)
-                }
-                
-                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
-                
-                
-                completion(place)
-                
-                
-//            }
-            
-                //                    print(self.filtered[0].name)
-                
+        var categories = [Category]()
+        for raw_category in categories_json as [JSON]{
+            let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+            categories.append(category)
+        }
+        
+        let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
+        
+        
+        completion(place)
+        
             }
         
         

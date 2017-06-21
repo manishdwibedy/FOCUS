@@ -102,21 +102,6 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
     }
     
-    func setupDummyArray() {
-        
-        let notifNotif = FocusNotification(type: NotificationType.Comment, sender: NotificationUser(username: "nicolas chr", uuid: "192103", imageURL: nil) , item: ItemOfInterest(itemName: "EventDummy", imageURL: ""), time: Date())
-        
-        let notifInvite = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: "oliver", uuid: "192103", imageURL: nil) , item: ItemOfInterest(itemName:
-            "EventDummy", imageURL: ""), time: Date())
-        
-        let notifFeed = FocusNotification(type: NotificationType.Going, sender: NotificationUser(username: "leo jardim", uuid: "", imageURL: nil) , item: ItemOfInterest(itemName: "EventDummy", imageURL: ""), time: Date())
-        
-        
-        self.multipleArray.insert([notifNotif, notifNotif], at: SelectedIndex.NOTIF.rawValue)
-        //self.multipleArray.insert([notifInvite, notifInvite, notifInvite], at: SelectedIndex.INVITE.rawValue)
-        //self.multipleArray.insert([notifNotif, notifInvite, notifFeed], at: SelectedIndex.FEED.rawValue)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

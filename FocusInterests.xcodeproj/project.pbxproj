@@ -140,6 +140,7 @@
 		5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB87AE1EC984400064E5EC /* search_event.storyboard */; };
 		5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB87B01EC9861F0064E5EC /* search_place.storyboard */; };
 		5BBF7AC21EEF5C61000209D6 /* Reviews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */; };
+		5BD641EE1EFB229D003E2A4B /* SearchPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */; };
 		5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapEventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapEventInfoView.swift */; };
 		5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF0293F1EE5F7F300D54FAF /* UIViewController+Extensions.swift */; };
@@ -478,6 +479,7 @@
 		5BAB87AE1EC984400064E5EC /* search_event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = search_event.storyboard; sourceTree = "<group>"; };
 		5BAB87B01EC9861F0064E5EC /* search_place.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = search_place.storyboard; sourceTree = "<group>"; };
 		5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Reviews.storyboard; sourceTree = "<group>"; };
+		5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaces.swift; sourceTree = "<group>"; };
 		5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapEventInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapEventInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapEventInfoView.swift; sourceTree = "<group>"; };
 		5BF0293F1EE5F7F300D54FAF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -1050,6 +1052,7 @@
 			children = (
 				D2B9B0621E5A047C0002F1B1 /* FocusInterestsUITests.swift */,
 				D2B9B0641E5A047C0002F1B1 /* Info.plist */,
+				5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */,
 			);
 			path = FocusInterestsUITests;
 			sourceTree = "<group>";
@@ -1408,13 +1411,13 @@
 					};
 					D2B9B0521E5A047C0002F1B1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 5XL94NV2G5;
+						DevelopmentTeam = 66JH2JK5HD;
 						ProvisioningStyle = Automatic;
 						TestTargetID = D2B9B03B1E5A047C0002F1B1;
 					};
 					D2B9B05D1E5A047C0002F1B1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 5XL94NV2G5;
+						DevelopmentTeam = 66JH2JK5HD;
 						ProvisioningStyle = Automatic;
 						TestTargetID = D2B9B03B1E5A047C0002F1B1;
 					};
@@ -1942,6 +1945,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2B9B0631E5A047C0002F1B1 /* FocusInterestsUITests.swift in Sources */,
+				5BD641EE1EFB229D003E2A4B /* SearchPlaces.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2148,7 +2152,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 5XL94NV2G5;
+				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				INFOPLIST_FILE = FocusInterestsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FocusInterestsTests;
@@ -2164,7 +2168,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 5XL94NV2G5;
+				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				INFOPLIST_FILE = FocusInterestsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FocusInterestsTests;
@@ -2179,7 +2183,7 @@
 			baseConfigurationReference = 863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = 5XL94NV2G5;
+				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				INFOPLIST_FILE = FocusInterestsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FocusInterestsUITests;
@@ -2194,7 +2198,7 @@
 			baseConfigurationReference = 11005219457ED87053955663 /* Pods-FocusInterestsUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = 5XL94NV2G5;
+				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				INFOPLIST_FILE = FocusInterestsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FocusInterestsUITests;

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -52,6 +52,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KgY-3n-kfu">
                         <rect key="frame" x="297" y="15" width="40" height="40"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="40" id="9mQ-IT-hja"/>
                             <constraint firstAttribute="width" constant="40" id="Iok-iq-doB"/>
                         </constraints>
                     </imageView>
@@ -59,6 +60,7 @@
                         <rect key="frame" x="8" y="15" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="0Hl-Hc-qPh"/>
+                            <constraint firstAttribute="height" constant="40" id="Xuc-fS-tVf"/>
                         </constraints>
                         <state key="normal" image="UserPhoto"/>
                         <connections>
@@ -98,8 +100,6 @@
                     <constraint firstAttribute="bottomMargin" secondItem="EnX-Nm-dDd" secondAttribute="bottom" constant="47.5" id="eVL-XW-FBq"/>
                     <constraint firstItem="wK2-Jo-qA1" firstAttribute="top" secondItem="G4T-lJ-oCe" secondAttribute="bottom" constant="14" id="efH-ki-PJI"/>
                     <constraint firstItem="EnX-Nm-dDd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="efc-ng-5tB"/>
-                    <constraint firstItem="EnX-Nm-dDd" firstAttribute="bottom" secondItem="KgY-3n-kfu" secondAttribute="bottom" id="euS-Ok-3qE"/>
-                    <constraint firstItem="5Pz-GY-U38" firstAttribute="top" secondItem="KgY-3n-kfu" secondAttribute="bottom" constant="15" id="f2k-lH-DGj"/>
                     <constraint firstItem="KgY-3n-kfu" firstAttribute="trailing" secondItem="5Pz-GY-U38" secondAttribute="trailing" id="jd2-Ge-BeJ"/>
                     <constraint firstItem="KgY-3n-kfu" firstAttribute="leading" secondItem="G4T-lJ-oCe" secondAttribute="trailing" constant="22" id="k4i-3w-tPZ"/>
                     <constraint firstItem="wK2-Jo-qA1" firstAttribute="top" secondItem="5Pz-GY-U38" secondAttribute="top" id="wAa-7F-rN0"/>
