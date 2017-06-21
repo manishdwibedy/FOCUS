@@ -23,6 +23,11 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var userProfilePic: UIButton!
     
+    
+    @IBOutlet weak var contentBackView: UIView!
+   
+    
+    
     var selectedButton = false
     var notif: FocusNotification!
     var parentVC: NotificationFeedViewController!
@@ -31,6 +36,10 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         // Initialization code
         let tap = UITapGestureRecognizer(target: self, action: #selector(screenTaped))
         self.addGestureRecognizer(tap)
+        
+        self.contentView.backgroundColor = Constants.color.navy
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -63,7 +72,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         self.userNameLabel.attributedText = attrString
 
-        self.timeLabel.text = "2h"
+        
         
         self.notif = notif
     }

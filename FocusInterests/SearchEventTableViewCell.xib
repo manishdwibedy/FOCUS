@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="362" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ycg-sp-SAX" id="BSs-hv-3aY">
-                <rect key="frame" x="0.0" y="0.0" width="362" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="362" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pyj-iE-Wv2">
@@ -118,6 +118,7 @@
                             <constraint firstItem="UxW-oS-L2a" firstAttribute="baseline" secondItem="djv-ET-Cuh" secondAttribute="baseline" constant="-56" id="IuS-ae-HhE"/>
                             <constraint firstItem="wLD-te-UJm" firstAttribute="top" secondItem="FAk-rc-9Hs" secondAttribute="bottom" constant="38" id="Jeg-b0-QtU"/>
                             <constraint firstItem="3yL-ad-PJ1" firstAttribute="leading" secondItem="N3n-Fh-fvf" secondAttribute="leading" id="NAs-ZF-JG9"/>
+                            <constraint firstItem="5ln-aR-FZ6" firstAttribute="height" secondItem="FAk-rc-9Hs" secondAttribute="height" id="RuI-me-Z62"/>
                             <constraint firstItem="p3N-sR-ozX" firstAttribute="firstBaseline" secondItem="wLD-te-UJm" secondAttribute="firstBaseline" id="W0r-8N-hYS"/>
                             <constraint firstItem="p3N-sR-ozX" firstAttribute="baseline" secondItem="wLD-te-UJm" secondAttribute="baseline" id="ZaJ-7Y-fp7"/>
                             <constraint firstItem="H0b-mV-xrM" firstAttribute="top" secondItem="pyj-iE-Wv2" secondAttribute="topMargin" id="ZxM-K9-aSX"/>

@@ -18,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="352" height="111"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="352" height="111"/>
+                <rect key="frame" x="0.0" y="0.0" width="352" height="110.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wK2-Jo-qA1">
@@ -76,7 +76,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="th2-x8-nnK" secondAttribute="trailing" constant="-18" id="Bnk-P2-LGq"/>
                             <constraint firstItem="th2-x8-nnK" firstAttribute="leading" secondItem="G4T-lJ-oCe" secondAttribute="leading" constant="3" id="Ea5-7E-Fzu"/>
@@ -107,6 +107,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="contentBackView" destination="H2p-sc-9uM" id="w3M-5I-rV9"/>
                 <outlet property="locationImage" destination="KgY-3n-kfu" id="H8f-ii-4Qh"/>
                 <outlet property="nextTimeButton" destination="5Pz-GY-U38" id="8DP-MX-pW9"/>
                 <outlet property="seeYouThereButton" destination="wK2-Jo-qA1" id="qip-0W-bAg"/>

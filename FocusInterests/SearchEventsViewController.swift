@@ -46,7 +46,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         self.searchBar.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
         self.searchBar.layer.cornerRadius = 6
         self.searchBar.clipsToBounds = true
-        self.searchBar.layer.borderWidth = 2
+        self.searchBar.layer.borderWidth = 0
         self.searchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
         
         
