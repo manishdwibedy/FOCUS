@@ -15,6 +15,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 
     @IBOutlet weak var eventsCollectionView: UICollectionView!
 	@IBOutlet var userScrollView: UIScrollView!
+    
+    @IBOutlet weak var mainView: UIView!
+    
+    @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
     @IBOutlet weak var navBarItem: UINavigationItem!
     
     @IBOutlet weak var userInfoView: UIView!
@@ -68,6 +72,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     var suggestion = [Event]()
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
+    
+    let pinDataAvailable = true
     
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
@@ -138,13 +144,24 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
         getEventSuggestions()
         getPin()
+        
+        if !pinDataAvailable{
+            self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
+            userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
+            mainViewHeight.constant = 750
+        }
+        else{
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let pinDataAvailable = false
+        
         if !pinDataAvailable{
             pinViewHeight.constant = 35
+            
+            
             
             greenDotImage.isHidden = true
             //            categoryImage.isHidden = true
