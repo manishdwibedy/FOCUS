@@ -95,6 +95,7 @@
                     <constraint firstItem="DXu-4K-Wqf" firstAttribute="centerY" secondItem="thw-F2-bgQ" secondAttribute="centerY" id="xIG-Ya-w7F"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="addressLabel" destination="otm-Pt-SGC" id="1T2-lM-t92"/>
                 <outlet property="categoryImage" destination="thw-F2-bgQ" id="1Ys-Be-BHB"/>

@@ -34,7 +34,7 @@ class SearchPlaceCell: UITableViewCell {
         self.followButtonOut.clipsToBounds = true
         self.followButtonOut.isSelected = false
         self.followButtonOut.roundCorners(radius: 5)
-        self.followButtonOut.layer.shadowOpacity = 1.0
+        self.followButtonOut.layer.shadowOpacity = 0.7
         self.followButtonOut.layer.masksToBounds = false
         self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
         self.followButtonOut.layer.shadowRadius = 5.0
@@ -48,7 +48,7 @@ class SearchPlaceCell: UITableViewCell {
 //        invite button
         self.inviteButtonOut.clipsToBounds = true
         self.inviteButtonOut.roundCorners(radius: 5)
-        self.inviteButtonOut.layer.shadowOpacity = 1.0
+        self.inviteButtonOut.layer.shadowOpacity = 0.7
         self.inviteButtonOut.layer.masksToBounds = false
         self.inviteButtonOut.layer.shadowColor = UIColor.black.cgColor
         self.inviteButtonOut.layer.shadowRadius = 5.0

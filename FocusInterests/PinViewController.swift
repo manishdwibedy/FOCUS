@@ -243,23 +243,42 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
         
         for (index, category) in focus_category.enumerated(){
-            let textLabel = UILabel()
+            let completeLabel = UILabel()
             
-            textLabel.textColor = .white
-            textLabel.text  = category
-            textLabel.textAlignment = .left
-            
-//            here you're adding green category dot
-            let imageAttachment = NSTextAttachment()
-            
+            //Set bound to reposition
+            let imageAttachment =  NSTextAttachment()
             imageAttachment.image = UIImage(image: UIImage(named: "Green.png"), scaledTo: CGSize(width: 12.0, height: 12.0))
             
-            let attachmentString = NSAttributedString(attachment: imageAttachment)
-            let primaryFocus = NSMutableAttributedString(string: "\(textLabel.text!) ")
-            primaryFocus.append(attachmentString)
-            textLabel.attributedText = primaryFocus
             
-            categoriesStackView.addArrangedSubview(textLabel)
+            imageAttachment.bounds = CGRect(x: 0, y: 0, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
+            
+            //Create string with attachment
+            let attachmentString = NSAttributedString(attachment: imageAttachment)
+            //Initialize mutable string
+            let primaryFocus = NSMutableAttributedString(string: "")
+            //Add image to mutable string
+            primaryFocus.append(attachmentString)
+            //Add your text to mutable string
+            
+            let textLabel = UILabel()
+            textLabel.text = category
+            textLabel.textAlignment = .center
+            
+            let textAfterIcon = NSMutableAttributedString(string: "  \(textLabel.text!)")
+            
+            primaryFocus.append(textAfterIcon)
+            
+            completeLabel.textColor = UIColor.white
+            completeLabel.textAlignment = .left
+            completeLabel.attributedText = primaryFocus
+            
+            
+//            here you're adding green category dot
+    
+//            primaryFocus.append(attachmentString)
+//            textLabel.attributedText = primaryFocus
+            
+            categoriesStackView.addArrangedSubview(completeLabel)
             categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
         }
         streetAddress.text = place.address[0]
@@ -304,7 +323,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             view.image.image = UIImage(named: "UserPhoto")
         }
         
-        webButton.setImage(UIImage(named: "Community Green"), for: .normal)
+        webButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
         webButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         uberButton.setImage(UIImage(named: "uber"), for: .normal)
@@ -348,7 +367,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             //        cell.data = data[indexPath.row]
             pinCell.usernameLabel.text = "username"
             pinCell.categoryLabel.text = "category" //add image after category here
-            pinCell.timeOfPinLabel.text = "31min"
+            pinCell.timeOfPinLabel.text = "31m"
             pinCell.commentsTextView.text = "Comments"
             //        pinCell.commentsTextView.text = data[indexPath.row]["pin"] as! String
             
