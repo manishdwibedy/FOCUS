@@ -27,6 +27,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableHeader.layer.cornerRadius = 10
+        self.tableHeader.clipsToBounds = true
     
         tableView.clipsToBounds = true
         
@@ -115,9 +118,15 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         addressComponents?.remove(at: 0)
         let city = addressComponents?.joined(separator: ", ")
         
+        var fullAddress = ""
+        for str in addressComponents!{
+            fullAddress = fullAddress + " " + str
+        }
+        print(fullAddress)
         
-        cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
-        cell?.address.textContainer.maximumNumberOfLines = 6
+        //cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
+        cell?.address.text = event.fullAddress 
+        cell?.address.textContainer.maximumNumberOfLines = 2
 
         let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
         cell?.distance.text = getDistance(fromLocation: self.location!, toLocation: eventLocation,addBracket: false)
@@ -183,8 +192,16 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.inviteButton.layer.shadowColor = UIColor.black.cgColor
         cell?.inviteButton.layer.shadowRadius = 10.0
         
+        cell?.attendButton.roundCorners(radius: 10)
+        cell?.attendButton.layer.shadowOpacity = 1.0
+        cell?.attendButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        cell?.attendButton.layer.masksToBounds = false
+        cell?.attendButton.layer.shadowColor = UIColor.black.cgColor
+        cell?.attendButton.layer.shadowRadius = 10.0
+        
         cell?.inviteButton.tag = indexPath.row
         cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
+        cell?.attendButton.addTarget(self, action: #selector(self.attendEvent(sender:)), for: UIControlEvents.touchUpInside)
         
         return cell!
     }
