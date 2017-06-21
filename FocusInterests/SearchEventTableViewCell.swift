@@ -18,6 +18,7 @@ class SearchEventTableViewCell: UITableViewCell {
     @IBOutlet weak var guestCount: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var distance: UILabel!
+    @IBOutlet weak var attendButton: UIButton!
     
     @IBOutlet weak var inviteButton: UIButton!
 //    @IBOutlet weak var attendButton: UIButton!

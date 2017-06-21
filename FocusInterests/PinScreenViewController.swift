@@ -100,6 +100,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             locationLabel.text = locationName
         }
         
+        imageArray.append(UIImage(named:"Image")!)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         

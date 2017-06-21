@@ -96,6 +96,9 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         segmentedControl.layer.cornerRadius = 6
         segmentedControl.clipsToBounds = true
         
+        self.view.backgroundColor = Constants.color.navy
+        self.tableView.backgroundColor = Constants.color.navy
+        
         
     }
     

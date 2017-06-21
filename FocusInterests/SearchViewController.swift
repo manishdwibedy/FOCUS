@@ -44,6 +44,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.backgroundColor = UIColor.darkGray
+        textFieldInsideSearchBar?.textColor = UIColor.white
         
         for view in searchBar.subviews.last!.subviews {
             if view.isKind(of: NSClassFromString("UISearchBarBackground")!)
@@ -69,6 +70,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         
         view.addGestureRecognizer(tap)
         hideKeyboardWhenTappedAround()
+        
+        
     }
     
     //Calls this function when the tap is recognized.
