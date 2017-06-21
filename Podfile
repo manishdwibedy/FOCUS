@@ -1,3 +1,4 @@
+# coding: utf-8
 # Uncomment this line to define a global platform for your project
 platform :ios, ‘9.0’
 # Uncomment this line if you're using Swift
@@ -28,7 +29,7 @@ target 'FocusInterests' do
     pod 'FBSDKCoreKit', '~> 4.22.1'
     pod 'FBSDKLoginKit', '~> 4.22.1'
     pod 'FBSDKShareKit', '~> 4.22.1'
-    
+
     pod 'SDWebImage', '~>3.8'
     pod 'JSQMessagesViewController'
     pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
