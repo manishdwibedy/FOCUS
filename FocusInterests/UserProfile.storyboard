@@ -779,8 +779,8 @@
                                                     <constraint firstItem="VK7-Ea-kjC" firstAttribute="top" secondItem="PFE-dm-34I" secondAttribute="top" id="lbe-nx-2of"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SF4-Kb-s3b" userLabel="FOCUS View">
-                                                <rect key="frame" x="-1" y="395" width="376" height="252"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SF4-Kb-s3b" userLabel="FOCUS View">
+                                                <rect key="frame" x="-1" y="395" width="376" height="263"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOCUS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgR-nk-9yp">
                                                         <rect key="frame" x="133" y="8" width="111" height="39"/>
