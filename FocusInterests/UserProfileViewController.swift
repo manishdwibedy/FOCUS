@@ -20,6 +20,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var userInfoView: UIView!
     @IBOutlet weak var pinView: UIView!
     
+    @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
     // User data
 //	@IBOutlet var userName: UILabel!
 	@IBOutlet var descriptionText: UITextView!
@@ -139,6 +140,31 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         getPin()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let pinDataAvailable = false
+        if !pinDataAvailable{
+            pinViewHeight.constant = 35
+            
+            greenDotImage.isHidden = true
+            //            categoryImage.isHidden = true
+            pinImage.isHidden = true
+            pinLabel.isHidden = true
+            pinCategoryLabel.isHidden = true
+            pinLikesLabel.isHidden = true
+            pinAddress1Label.isHidden = true
+            pinAddress2Label.isHidden = true
+            updatePinButton.isHidden = true
+            morePinButton.isHidden = true
+            //            MARK: Do we still need this
+            //            pinDescription.isHidden = true
+        }
+        else{
+            emptyPinButton.isHidden = true
+            
+        }
+    }
+    
 //    MARK: COLLECTIONVIEW DELEGATE METHODS
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -245,40 +271,18 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             
             
             if index == 0{
-                textLabel.text = textLabel.text! + " ●"
+                textLabel.text = "● " + textLabel.text!
                 
                 let primaryFocus = NSMutableAttributedString(string: textLabel.text!)
-                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(textLabel.text?.characters.count)! - 1,length:1))
+                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:0, length:1))
                 textLabel.attributedText = primaryFocus
             }
             
-            interestStackView.addArrangedSubview(textLabel)
-            interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+            if interest.characters.count > 0{
+                interestStackView.addArrangedSubview(textLabel)
+                interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+            }
         }
-        
-        
-        let pinDataAvailable = false
-        if !pinDataAvailable{
-            
-            greenDotImage.isHidden = true
-//            categoryImage.isHidden = true
-            pinImage.isHidden = true
-            pinLabel.isHidden = true
-            pinCategoryLabel.isHidden = true
-            pinLikesLabel.isHidden = true
-            pinAddress1Label.isHidden = true
-            pinAddress2Label.isHidden = true
-            updatePinButton.isHidden = true
-            morePinButton.isHidden = true
-//            MARK: Do we still need this
-//            pinDescription.isHidden = true
-        }
-        else{
-            emptyPinButton.isHidden = true
-            self.pinView.setNeedsLayout()
-        }
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
