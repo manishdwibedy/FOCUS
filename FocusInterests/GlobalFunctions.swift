@@ -68,10 +68,10 @@ func getOpenHours(_ hours: [Hours]) -> [String]{
         else{
             // if only day was there a
             if last_day_end == last_day_start{
-                result.append("\(days[last_day_start]) \(last_start) - \(last_end)")
+                result.append("\(days[last_day_start]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end))")
             }
             else{
-                result.append("\(days[last_day_start]) - \(days[last_day_end]) \(last_start) - \(last_end)")
+                result.append("\(days[last_day_start]) - \(days[last_day_end]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end))")
             }
             last_day_start = hour.day
             last_day_end = hour.day
@@ -82,6 +82,15 @@ func getOpenHours(_ hours: [Hours]) -> [String]{
     return result
 }
 
+func convert24HourTo12Hour(_ time: String) -> String{
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HHmm"
+    let date12 = dateFormatter.date(from: time)!
+    
+    dateFormatter.dateFormat = "h:mm a"
+    return dateFormatter.string(from: date12)
+    
+}
 
 func changeTimeZone(of date: Date, from sourceTimeZone: TimeZone, to destinationTimeZone: TimeZone) -> Date{
     let str: String = date.description(with: nil)
@@ -480,6 +489,65 @@ func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttribut
     return attrStr
 }
 
+func getNearbyPlaces(categories: String?, count: Int?, latitude: Double, longitude: Double, completion: @escaping ([Place])->Void){
+    let url = "https://api.yelp.com/v3/businesses/search"
+    let parameters: [String: Any] = [
+        "limit": count ?? 20,
+        "categories": categories ?? "",
+        "latitude" : latitude,
+        "longitude" : longitude
+    ]
+    
+    var places = [Place]()
+    let headers: HTTPHeaders = [
+        "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+        "cache-contro": "no-cache"
+    ]
+    
+    Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
+        let json = JSON(data: response.data!)
+        
+        
+        for (_, business) in json["businesses"].enumerated(){
+            let id = business.1["id"].stringValue
+            let name = business.1["name"].stringValue
+            let image_url = business.1["image_url"].stringValue
+            let isClosed = business.1["is_closed"].boolValue
+            let reviewCount = business.1["review_count"].intValue
+            let rating = business.1["rating"].floatValue
+            let latitude = business.1["coordinates"]["latitude"].doubleValue
+            let longitude = business.1["coordinates"]["longitude"].doubleValue
+            let price = business.1["price"].stringValue
+            let address_json = business.1["location"]["display_address"].arrayValue
+            let phone = business.1["display_phone"].stringValue
+            let distance = business.1["distance"].doubleValue
+            let categories_json = business.1["categories"].arrayValue
+            let url = business.1["url"].stringValue
+            let plain_phone = business.1["phone"].stringValue
+            
+            var address = [String]()
+            for raw_address in address_json{
+                address.append(raw_address.stringValue)
+            }
+            
+            var categories = [Category]()
+            for raw_category in categories_json as [JSON]{
+                let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                categories.append(category)
+            }
+            
+            let miles = (distance/1609.344).roundTo(places: 1)
+            let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: miles, categories: categories, url: url, plainPhone: plain_phone)
+            
+            if !places.contains(place){
+                places.append(place)
+                
+            }
+        }
+        completion(places)
+        
+    }
+}
     func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
         
         let url = "https://api.yelp.com/v3/businesses/\(ID)"

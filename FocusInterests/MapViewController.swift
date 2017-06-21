@@ -55,6 +55,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     var popUpScreen: MapPopUpScreenView!
     
+    var lastPins = [GMSMarker]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -1226,26 +1228,27 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
+                // remove any old pins
+                for marker in self.lastPins{
+                    marker.map = nil
+                }
+                
                 for (key,_) in (value)!
                 {
-                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
+                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String), focus: (value?[key] as! NSDictionary)["focus"] as! String)
 
                     let position = CLLocationCoordinate2D(latitude: Double(data.coordinates.latitude), longitude: Double(data.coordinates.longitude))
                     let marker = GMSMarker(position: position)
                     marker.title = data.pinMessage
                     marker.map = self.mapView
                     let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
-                    image.image = UIImage(named: "map_pin")
+                    image.image = UIImage(named: "pin")
+                    image.contentMode = .scaleAspectFit
                     marker.iconView = image
                     marker.accessibilityLabel = "pin_\(self.pins.count)"
-                    self.pins.append(data)
                     
-//                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-//                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-//                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
-//                    ivc.data = data
-//                    self.present(ivc, animated: true, completion: { _ in })
-                  
+                    self.lastPins.append(marker)
+                    self.pins.append(data)
                 }
             }
         })
