@@ -36,7 +36,16 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         tableView.dataSource = self
         
         segmentedControl.selectedSegmentIndex = self.selectedSegmentIndex
+        
+        let sortedViews = segmentedControl.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
+        sortedViews[0].tintColor = Constants.color.green
+        sortedViews[0].backgroundColor = UIColor.white
 
+        for index in 1..<3{
+            sortedViews[index].tintColor = UIColor.white
+            sortedViews[index].backgroundColor = UIColor.gray
+        }
+        
         backButtonItem.image = UIImage(named: "BackArrow")
         backButtonItem.tintColor = UIColor.veryLightGrey()
         self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "#182C43")
@@ -99,7 +108,9 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         self.view.backgroundColor = Constants.color.navy
         self.tableView.backgroundColor = Constants.color.navy
         
-        
+//        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: UIControlState.selected)
+//        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: UIControlState.normal)
+//        
     }
     
     override func didReceiveMemoryWarning() {
@@ -176,6 +187,18 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         tableView.reloadData()
         print("switch")
+        
+        let sortedViews = sender.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
+        
+        for (index, view) in sortedViews.enumerated() {
+            if index == sender.selectedSegmentIndex {
+                view.tintColor = Constants.color.green
+                view.backgroundColor = UIColor.white
+            } else {
+                view.tintColor = UIColor.white
+                view.backgroundColor = UIColor.gray
+            }
+        }
         
         
         
