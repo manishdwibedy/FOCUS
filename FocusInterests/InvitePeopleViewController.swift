@@ -46,15 +46,20 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         let nib2 = UINib(nibName: "InvitePeopleEventCell", bundle: nil)
         tableView.register(nib2, forCellReuseIdentifier: "InvitePeopleEventCell")
 
-        
         searchBar.delegate = self
         
+        self.segmentedOut.layer.cornerRadius = 5
+        self.segmentedOut.layer.borderColor = UIColor.clear.cgColor
+        self.segmentedOut.layer.borderWidth = 1.0
+        self.segmentedOut.layer.masksToBounds = true
+        
+        
         let sortedViews = segmentedOut.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
-        sortedViews[0].tintColor = UIColor(red: 72/255.0, green: 255/255.0, blue: 255.0/255.0, alpha: 1.0)
+        sortedViews[0].tintColor = Constants.color.green
         sortedViews[0].backgroundColor = UIColor.white
         
         sortedViews[1].tintColor = UIColor.white
-        sortedViews[1].backgroundColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0)
+        sortedViews[1].backgroundColor = UIColor.gray
         
 
     }
@@ -340,19 +345,18 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         let segmentedControl = sender as! UISegmentedControl
         
         
-        tableView.reloadData()
-        print("switch")
+        let sortedViews = (sender as! UISegmentedControl).subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
         
-        let sortedViews = (sender as AnyObject).subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
+//        sortedViews[0].tintColor = UIColor.white
+//        sortedViews[0].backgroundColor = UIColor(red: 72/255.0, green: 255/255.0, blue: 255.0/255.0, alpha: 1.0)
+//        
+//        sortedViews[1].tintColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0)
+//        sortedViews[1].backgroundColor = UIColor.white
+//
+//        let sortedViews = sender.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
         
-        sortedViews[0].tintColor = UIColor(red: 72/255.0, green: 255/255.0, blue: 255.0/255.0, alpha: 1.0)
-        sortedViews[0].backgroundColor = UIColor.white
-        
-        sortedViews[1].tintColor = UIColor.white
-        sortedViews[1].backgroundColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0)
-
         for (index, view) in sortedViews.enumerated() {
-            if index == (sender as AnyObject).selectedSegmentIndex {
+            if index == (sender as! UISegmentedControl).selectedSegmentIndex {
                 view.tintColor = Constants.color.green
                 view.backgroundColor = UIColor.white
             } else {
@@ -360,6 +364,17 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 view.backgroundColor = UIColor.gray
             }
         }
+        
+        
+//        for (index, view) in sortedViews.enumerated() {
+//            if index == (sender as AnyObject).selectedSegmentIndex {
+//                view.tintColor = Constants.color.green
+//                view.backgroundColor = UIColor.white
+//            } else {
+//                view.tintColor = UIColor.white
+//                view.backgroundColor = UIColor.gray
+//            }
+//        }
         
         
     }
