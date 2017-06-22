@@ -269,6 +269,8 @@
 		FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */; };
 		FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */; };
 		FF12737B1EDC882E0034AA42 /* PinLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF12737A1EDC882E0034AA42 /* PinLookViewController.swift */; };
+		FF1976621EFC46BB0033C79F /* FOCUSLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1976601EFC46BB0033C79F /* FOCUSLabelCell.swift */; };
+		FF1976631EFC46BB0033C79F /* FOCUSLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF1976611EFC46BB0033C79F /* FOCUSLabelCell.xib */; };
 		FF69ABFA1ED649120044BE51 /* invitePlaceCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69ABF91ED649120044BE51 /* invitePlaceCV.swift */; };
 		FF69ABFD1ED6498F0044BE51 /* inviteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF69ABFB1ED6498F0044BE51 /* inviteCell.swift */; };
 		FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF69ABFC1ED6498F0044BE51 /* inviteCell.xib */; };
@@ -617,6 +619,8 @@
 		FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
 		FF0F9D5A1ECFA4A6004E2C90 /* SearchPlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPlaceCell.xib; sourceTree = "<group>"; };
 		FF12737A1EDC882E0034AA42 /* PinLookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PinLookViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		FF1976601EFC46BB0033C79F /* FOCUSLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FOCUSLabelCell.swift; sourceTree = "<group>"; };
+		FF1976611EFC46BB0033C79F /* FOCUSLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FOCUSLabelCell.xib; sourceTree = "<group>"; };
 		FF69ABF91ED649120044BE51 /* invitePlaceCV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = invitePlaceCV.swift; sourceTree = "<group>"; };
 		FF69ABFB1ED6498F0044BE51 /* inviteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inviteCell.swift; sourceTree = "<group>"; };
 		FF69ABFC1ED6498F0044BE51 /* inviteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = inviteCell.xib; sourceTree = "<group>"; };
@@ -1206,6 +1210,8 @@
 				EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */,
 				EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */,
 				EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */,
+				FF1976601EFC46BB0033C79F /* FOCUSLabelCell.swift */,
+				FF1976611EFC46BB0033C79F /* FOCUSLabelCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1528,6 +1534,7 @@
 				EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */,
 				5B71D70E1ED184880093A3F5 /* FollowProfileCell.xib in Resources */,
 				EB0578641EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib in Resources */,
+				FF1976631EFC46BB0033C79F /* FOCUSLabelCell.xib in Resources */,
 				EBD9808D1EEBCCD500FC54C1 /* Message Icon white 30x30.png in Resources */,
 				5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */,
 				5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */,
@@ -1799,6 +1806,7 @@
 				D25220711E5A895E00EC2014 /* Notifications.swift in Sources */,
 				FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */,
 				FFBF87A61EE5BED0000168F5 /* InvitePeopleEventCell.swift in Sources */,
+				FF1976621EFC46BB0033C79F /* FOCUSLabelCell.swift in Sources */,
 				FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */,
 				5B34A6F71EE72B0800D16842 /* FollowingViewController.swift in Sources */,
 				5B3597981EF5FD5400C04809 /* FollowPeople.swift in Sources */,
