@@ -48,6 +48,14 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
 
         
         searchBar.delegate = self
+        
+        let sortedViews = segmentedOut.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
+        sortedViews[0].tintColor = UIColor(red: 72/255.0, green: 255/255.0, blue: 255.0/255.0, alpha: 1.0)
+        sortedViews[0].backgroundColor = UIColor.white
+        
+        sortedViews[1].tintColor = UIColor.white
+        sortedViews[1].backgroundColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0)
+        
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -228,6 +236,19 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    
     func updateEvents()
     {
         Constants.DB.event.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -314,5 +335,33 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
 
 
    
+    @IBAction func indexChanged(_ sender: Any) {
+        
+        let segmentedControl = sender as! UISegmentedControl
+        
+        
+        tableView.reloadData()
+        print("switch")
+        
+        let sortedViews = (sender as AnyObject).subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
+        
+        sortedViews[0].tintColor = UIColor(red: 72/255.0, green: 255/255.0, blue: 255.0/255.0, alpha: 1.0)
+        sortedViews[0].backgroundColor = UIColor.white
+        
+        sortedViews[1].tintColor = UIColor.white
+        sortedViews[1].backgroundColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0)
+
+        for (index, view) in sortedViews.enumerated() {
+            if index == (sender as AnyObject).selectedSegmentIndex {
+                view.tintColor = Constants.color.green
+                view.backgroundColor = UIColor.white
+            } else {
+                view.tintColor = UIColor.white
+                view.backgroundColor = UIColor.gray
+            }
+        }
+        
+        
+    }
 
 }
