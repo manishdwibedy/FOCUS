@@ -49,7 +49,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         searchBar.delegate = self
         
         self.segmentedOut.layer.cornerRadius = 5
-        self.segmentedOut.layer.borderColor = UIColor.clear.cgColor
+        self.segmentedOut.layer.borderColor = UIColor.white.cgColor
         self.segmentedOut.layer.borderWidth = 1.0
         self.segmentedOut.layer.masksToBounds = true
         
