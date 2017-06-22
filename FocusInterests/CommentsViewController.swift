@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate{
 
     @IBOutlet weak var commentsTableView: UITableView!
     @IBOutlet weak var addCommentView: UIView!
@@ -24,9 +24,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         let commentsNib = UINib(nibName: "CommentsTableViewCell", bundle: nil)
         self.commentsTableView.register(commentsNib, forCellReuseIdentifier: "commentsCell")
         
-        self.addCommentView.layer.borderWidth = 2
-        self.addCommentView.layer.borderColor = UIColor.white.cgColor
-        self.addCommentView.allCornersRounded(radius: 5.0)
         self.postButton.roundCorners(radius: 5.0)
         
         Constants.DB.pins.child(data["fromUID"] as! String).child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -47,6 +44,12 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
         
+        commentsTableView.tableFooterView = UIView()
+        commentsTableView.backgroundColor = Constants.color.navy
+        
+        commentField.delegate = self
+        hideKeyboardWhenTappedAround()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,8 +67,12 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let followersCell = tableView.dequeueReusableCell(withIdentifier: "commentsCell", for: indexPath) as! CommentsTableViewCell
-        followersCell.commentLabel.text = commentData[indexPath.row]["comment"] as? String
-        followersCell.loadInfo(UID: commentData[indexPath.row]["fromUID"] as! String)
+        
+        let comment = commentData[indexPath.row]
+        let date = DateFormatter()
+        date.dateFormat = "hh:mm a MM/dd"
+        followersCell.dateLabel.text = date.string(for: Date(timeIntervalSince1970: comment["date"] as! Double))
+        followersCell.loadInfo(UID: comment["fromUID"] as! String, text: (commentData[indexPath.row]["comment"] as? String)!)
         return followersCell
     }
     
@@ -105,6 +112,12 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        let time = NSDate().timeIntervalSince1970
+        Constants.DB.pins.child(data["fromUID"] as! String).child("comments").childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "comment": commentField.text!, "date": Double(time)])
+        commentField.text = ""
 
+        textField.resignFirstResponder()
+        return true
+    }
 }

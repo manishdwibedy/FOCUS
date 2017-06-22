@@ -52,9 +52,9 @@ class FollowProfileCell: UITableViewCell {
                     }else{
                         self.fullnameLabel.text = fullNameVal
                         if let usernameLabel = self.usernameLabel.text{
-                            var usernameAttribute = NSMutableAttributedString()
-                            usernameAttribute = NSMutableAttributedString(string: usernameLabel, attributes: [NSFontAttributeName:UIFont(name: "Avenir Heavy", size: 15.0)!])
-                            self.usernameLabel.attributedText = usernameAttribute
+                            //var usernameAttribute = NSMutableAttributedString()
+                            //usernameAttribute = NSMutableAttributedString(string: usernameLabel, attributes: [NSFontAttributeName:UIFont(name: "Avenir Black", size: 15.0)!])
+                            self.usernameLabel.text = usernameLabel
                         }
                     }
                 }

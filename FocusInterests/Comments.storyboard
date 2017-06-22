@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pYf-yc-Qtf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pYf-yc-Qtf">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,35 +39,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nor-xQ-mzc">
-                                <rect key="frame" x="0.0" y="64" width="375" height="494"/>
-                                <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUN-Hw-R4h">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" red="0.24209624528884888" green="0.33750134706497192" blue="0.42442375421524048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="494" id="fxg-7A-Cpq"/>
+                                    <constraint firstAttribute="height" constant="64" id="MLs-bV-pQr"/>
                                 </constraints>
+                                <color key="barTintColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Comments" id="Tqf-Gh-846">
+                                        <barButtonItem key="leftBarButtonItem" image="BackArrow" id="WZl-E0-Jgj">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backButtonAction:" destination="MO9-xI-UHS" id="Jkt-42-fEk"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nor-xQ-mzc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="528"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="MO9-xI-UHS" id="GWZ-r7-dmy"/>
                                     <outlet property="delegate" destination="MO9-xI-UHS" id="Iig-J6-2JG"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWn-nL-sQi">
-                                <rect key="frame" x="16" y="579" width="343" height="68"/>
+                                <rect key="frame" x="16" y="592" width="343" height="75"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5hr-AB-2uG">
-                                        <rect key="frame" x="61" y="17" width="198" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5hr-AB-2uG">
+                                        <rect key="frame" x="10" y="22.5" width="253" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Direct message sign.png" translatesAutoresizingMaskIntoConstraints="NO" id="JCv-yt-LuN">
-                                        <rect key="frame" x="23" y="18" width="30" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6a-of-LZd">
-                                        <rect key="frame" x="279" y="22" width="50" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6a-of-LZd">
+                                        <rect key="frame" x="283" y="22.5" width="50" height="30"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="98G-sp-341"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                         <state key="normal" title="Post">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,40 +93,28 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUN-Hw-R4h">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <color key="backgroundColor" red="0.24209624528884888" green="0.33750134706497192" blue="0.42442375421524048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="MLs-bV-pQr"/>
+                                    <constraint firstItem="l6a-of-LZd" firstAttribute="leading" secondItem="5hr-AB-2uG" secondAttribute="trailing" constant="20" id="PiH-aH-V4C"/>
+                                    <constraint firstItem="5hr-AB-2uG" firstAttribute="centerY" secondItem="uWn-nL-sQi" secondAttribute="centerY" id="R4l-46-v8z"/>
+                                    <constraint firstItem="5hr-AB-2uG" firstAttribute="leading" secondItem="uWn-nL-sQi" secondAttribute="leading" constant="10" id="VSv-vK-vyS"/>
+                                    <constraint firstItem="l6a-of-LZd" firstAttribute="centerY" secondItem="uWn-nL-sQi" secondAttribute="centerY" id="XIX-T7-Epj"/>
+                                    <constraint firstItem="5hr-AB-2uG" firstAttribute="centerY" secondItem="uWn-nL-sQi" secondAttribute="centerY" id="XNs-0x-sLb"/>
+                                    <constraint firstAttribute="trailing" secondItem="l6a-of-LZd" secondAttribute="trailing" constant="10" id="nG5-Op-Ji8"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.24209624530000001" green="0.33750134710000002" blue="0.4244237542" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Comments" id="Tqf-Gh-846">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="WZl-E0-Jgj">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="backButtonAction:" destination="MO9-xI-UHS" id="Jkt-42-fEk"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mUN-Hw-R4h" firstAttribute="top" secondItem="ocw-D2-Ere" secondAttribute="bottom" constant="-20" id="A7r-0Y-QDo"/>
+                            <constraint firstItem="996-ay-R9w" firstAttribute="top" secondItem="uWn-nL-sQi" secondAttribute="bottom" id="AHV-jv-fnx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nor-xQ-mzc" secondAttribute="trailing" constant="-16" id="HB3-MO-5kO"/>
                             <constraint firstItem="nor-xQ-mzc" firstAttribute="centerX" secondItem="uWn-nL-sQi" secondAttribute="centerX" id="Ijq-pJ-99D"/>
                             <constraint firstItem="nor-xQ-mzc" firstAttribute="top" secondItem="mUN-Hw-R4h" secondAttribute="bottom" id="Ioz-58-D7m"/>
-                            <constraint firstItem="uWn-nL-sQi" firstAttribute="top" secondItem="nor-xQ-mzc" secondAttribute="bottom" constant="21" id="OB9-G4-2yU"/>
+                            <constraint firstAttribute="bottom" secondItem="nor-xQ-mzc" secondAttribute="bottom" constant="75" id="NGA-wR-zpF"/>
+                            <constraint firstItem="uWn-nL-sQi" firstAttribute="top" secondItem="nor-xQ-mzc" secondAttribute="bottom" id="OB9-G4-2yU"/>
                             <constraint firstItem="nor-xQ-mzc" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leadingMargin" constant="-16" id="Uli-E3-MvS"/>
                             <constraint firstItem="mUN-Hw-R4h" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leadingMargin" constant="-16" id="VKb-yk-Vjq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mUN-Hw-R4h" secondAttribute="trailing" constant="-16" id="asZ-MU-bBz"/>
-                            <constraint firstAttribute="bottom" secondItem="uWn-nL-sQi" secondAttribute="bottom" constant="20" symbolic="YES" id="eme-6J-Bh0"/>
                             <constraint firstItem="uWn-nL-sQi" firstAttribute="leading" secondItem="uLA-n2-bmV" secondAttribute="leadingMargin" id="h60-20-oZT"/>
                             <constraint firstItem="nor-xQ-mzc" firstAttribute="leading" secondItem="mUN-Hw-R4h" secondAttribute="trailing" constant="-375" id="zXL-fH-klG"/>
                         </constraints>
@@ -134,6 +137,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Direct message sign.png" width="38" height="32"/>
+        <image name="BackArrow" width="30" height="30"/>
     </resources>
 </document>
