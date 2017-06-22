@@ -141,9 +141,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
         
-        cell?.followButton.roundCorners(radius: 10)
-        cell?.inviteButton.roundCorners(radius: 10)
-        
         cell?.checkFollow()
         
         return cell!

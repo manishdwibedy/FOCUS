@@ -1090,7 +1090,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func messagesClicked() {
         
         let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
-        
         self.present(VC, animated:true, completion:nil)
     }
     

@@ -41,10 +41,10 @@ class SearchPeopleTableViewCell: UITableViewCell {
         self.followButton.clipsToBounds = true
         self.followButton.isSelected = false
         self.followButton.roundCorners(radius: 5.0)
-        self.followButton.layer.shadowOpacity = 1.0
+        self.followButton.layer.shadowOpacity = 0.7
         self.followButton.layer.masksToBounds = false
         self.followButton.layer.shadowColor = UIColor.black.cgColor
-        self.followButton.layer.shadowRadius = 6.0
+        self.followButton.layer.shadowRadius = 5.0
         
         self.followButton.setTitle("Follow", for: UIControlState.normal)
         self.followButton.setTitle("Following", for: UIControlState.selected)
@@ -52,10 +52,10 @@ class SearchPeopleTableViewCell: UITableViewCell {
         //invite button
         self.inviteButton.clipsToBounds = true
         self.inviteButton.roundCorners(radius: 5.0)
-        self.inviteButton.layer.shadowOpacity = 1.0
+        self.inviteButton.layer.shadowOpacity = 0.7
         self.inviteButton.layer.masksToBounds = false
         self.inviteButton.layer.shadowColor = UIColor.black.cgColor
-        self.inviteButton.layer.shadowRadius = 6.0
+        self.inviteButton.layer.shadowRadius = 5.0
         
     }
 
@@ -77,12 +77,22 @@ class SearchPeopleTableViewCell: UITableViewCell {
                 self.followButton.layer.borderColor = UIColor.white.cgColor
                 self.followButton.layer.borderWidth = 1
                 self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
-                self.followButton.tintColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+                self.followButton.tintColor = UIColor.clear
+                self.followButton.layer.shadowOpacity = 0.7
+                self.followButton.layer.masksToBounds = false
+                self.followButton.layer.shadowColor = UIColor.black.cgColor
+                self.followButton.layer.shadowRadius = 5.0
             } else {
                 print("follow user is checkFollow")
                 self.followButton.isSelected = false
+                self.followButton.layer.borderWidth = 1
+                self.followButton.layer.borderColor = UIColor.clear.cgColor
                 self.followButton.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-                self.followButton.tintColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButton.tintColor = UIColor.clear
+                self.followButton.layer.shadowOpacity = 0.7
+                self.followButton.layer.masksToBounds = false
+                self.followButton.layer.shadowColor = UIColor.black.cgColor
+                self.followButton.layer.shadowRadius = 5.0
             }
         })
     }

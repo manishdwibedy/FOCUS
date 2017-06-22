@@ -81,7 +81,7 @@ class SearchPlaceCell: UITableViewCell {
             self.followButtonOut.layer.borderColor = UIColor.white.cgColor
             self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
             self.followButtonOut.tintColor = UIColor.clear
-            self.followButtonOut.layer.shadowOpacity = 1.0
+            self.followButtonOut.layer.shadowOpacity = 0.7
             self.followButtonOut.layer.masksToBounds = false
             self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
             self.followButtonOut.layer.shadowRadius = 5.0
@@ -104,7 +104,7 @@ class SearchPlaceCell: UITableViewCell {
                 self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
                 self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
                 self.followButtonOut.tintColor = UIColor.clear
-                self.followButtonOut.layer.shadowOpacity = 1.0
+                self.followButtonOut.layer.shadowOpacity = 0.7
                 self.followButtonOut.layer.masksToBounds = false
                 self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
                 self.followButtonOut.layer.shadowRadius = 5.0

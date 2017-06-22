@@ -245,7 +245,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         for (index, category) in focus_category.enumerated(){
             let completeLabel = UILabel()
             
-            //Set bound to reposition
+//            here you're adding green category dot to category text
             let imageAttachment =  NSTextAttachment()
             imageAttachment.image = UIImage(image: UIImage(named: "Green.png"), scaledTo: CGSize(width: 12.0, height: 12.0))
             
@@ -271,12 +271,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             completeLabel.textColor = UIColor.white
             completeLabel.textAlignment = .left
             completeLabel.attributedText = primaryFocus
-            
-            
-//            here you're adding green category dot
-    
-//            primaryFocus.append(attachmentString)
-//            textLabel.attributedText = primaryFocus
             
             categoriesStackView.addArrangedSubview(completeLabel)
             categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
@@ -395,7 +389,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
             let place = suggestedPlaces[indexPath.row]
             otherPlacesCell.placeNameLabel.text = place.name
-            otherPlacesCell.ratingLabel.text = "\(place.rating)"
+            otherPlacesCell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
             
             let address = place.address.joined(separator: "\n")
             

@@ -14,6 +14,7 @@ class FollowProfileCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var followOut: UIButton!
+    @IBOutlet weak var fullnameLabel: UILabel!
     
     let ref = Database.database().reference()
     var data: followProfileCellData!
@@ -21,8 +22,14 @@ class FollowProfileCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        followOut.layer.cornerRadius = 6
-        followOut.clipsToBounds = true
+        self.followOut.layer.cornerRadius = 6
+        self.followOut.clipsToBounds = true
+        self.followOut.roundCorners(radius: 5)
+        self.followOut.layer.shadowOpacity = 0.7
+        self.followOut.layer.masksToBounds = false
+        self.followOut.layer.shadowColor = UIColor.black.cgColor
+        self.followOut.layer.shadowRadius = 5.0
+        self.profileImage.roundedImage()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,7 +46,19 @@ class FollowProfileCell: UITableViewCell {
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                self.usernameLabel.text = value?["username"] as? String
+                if let fullNameVal = value?["fullname"] as? String{
+                    if (fullNameVal == ""){
+                        self.usernameLabel.text = value?["username"] as? String
+                    }else{
+                        self.fullnameLabel.text = fullNameVal
+                        if let usernameLabel = self.usernameLabel.text{
+                            var usernameAttribute = NSMutableAttributedString()
+                            usernameAttribute = NSMutableAttributedString(string: usernameLabel, attributes: [NSFontAttributeName:UIFont(name: "Avenir Heavy", size: 15.0)!])
+                            self.usernameLabel.attributedText = usernameAttribute
+                        }
+                    }
+                }
+                
                 self.data.username = (value?["username"] as? String)!
                 self.ifFollowing(uid: self.data.uid, completionIt: {(boolV) -> () in
                 
