@@ -1101,15 +1101,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
         
-        let navigationController = UINavigationController(rootViewController: vc)
-        
-        let transition = CATransition()
-        transition.duration = 0.4
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromBottom
-        self.view.window!.layer.add(transition, forKey: kCATransition)
-        
-        self.present(navigationController, animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
     }
     
     func searchClicked() {

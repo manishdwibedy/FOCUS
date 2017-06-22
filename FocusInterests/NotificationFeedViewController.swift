@@ -46,12 +46,6 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             sortedViews[index].backgroundColor = UIColor.gray
         }
         
-        backButtonItem.image = UIImage(named: "BackArrow")
-        backButtonItem.tintColor = UIColor.veryLightGrey()
-        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "#182C43")
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.title = "Notifications"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         AuthApi.clearNotifications()
         
@@ -130,8 +124,12 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self.selectedSegmentIndex == 0{
             return 90
-        }else{
+        }
+        else if self.selectedSegmentIndex == 1{
             return 115.0
+        }
+        else{
+            return 80
         }
     }
     
@@ -161,23 +159,25 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         }else if self.selectedSegmentIndex == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
             cell.parentVC = self
-            cell.setupCell(notif: invArray[indexPath.row])
+            cell.isFeed = false
             cell.seeYouThereButton.isHidden = false
             cell.nextTimeButton.isHidden = false
+            
+            cell.setupCell(notif: invArray[indexPath.row])
              return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
             cell.parentVC = self
-            cell.setupCell(notif: feedAray[indexPath.row])
             cell.seeYouThereButton.isHidden = true
             cell.nextTimeButton.isHidden = true
-             return cell
+            
+            cell.isFeed = true
+            cell.setupCell(notif: feedAray[indexPath.row])
+            return cell
         }
         
         
     }
-    
-    
     
     @IBAction func indexChanged(_ sender: AnyObject) {
         
@@ -204,5 +204,8 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
     }
     
+    @IBAction func backPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 
 }

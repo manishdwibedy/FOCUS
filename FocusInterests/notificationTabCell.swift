@@ -128,19 +128,19 @@ class notificationTabCell: UITableViewCell {
         let days = hours/24
         if Int(days) >= 1
         {
-            returnString = String(Int(days)) + " days ago"
+            returnString = String(Int(days)) + "d ago"
             
         }else if Int(hours) >= 1
         {
-            returnString = String(Int(hours)) + " hours ago"
+            returnString = String(Int(hours)) + "h ago"
             
         }else if Int(minutes) >= 1
         {
-            returnString = String(Int(minutes)) + " minutes ago"
+            returnString = String(Int(minutes)) + "m ago"
             
         }else if seconds < 60
         {
-            returnString = "seconds ago"
+            returnString = "s ago"
         }
         
         return returnString

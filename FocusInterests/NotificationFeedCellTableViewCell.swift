@@ -26,10 +26,12 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var contentBackView: UIView!
    
+    @IBOutlet weak var nextTimeHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var seeYouHeight: NSLayoutConstraint!
     let time = DateFormatter()
-    
     let date = DateFormatter()
+    var isFeed = false
     
     var selectedButton = false
     var notif: FocusNotification!
@@ -57,6 +59,18 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     func setupCell(notif: FocusNotification) {
         self.roundButtonsAndPictures()
         
+        if isFeed{
+            nextTimeHeight.constant = 0
+        }
+        else{
+            nextTimeHeight.constant = 24
+        }
+        if isFeed{
+            seeYouHeight.constant = 0
+        }
+        else{
+            seeYouHeight.constant = 24
+        }
 //        self.userProfilePic.image = notif.sender?.username
         let content = (notif.sender?.username)! + " "//! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
         
@@ -68,11 +82,33 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         let descString: NSMutableAttributedString = NSMutableAttributedString(string: (notif.type?.rawValue)! + " ")
         descString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, (notif.type?.rawValue.characters.count)!))
         
+        attrString.append(descString);
+        if isFeed{
+            if (notif.item?.itemName?.contains(";;"))!{
+                let pin_name = (notif.item?.itemName!.components(separatedBy: ";;")[0])!
+                let descString2: NSMutableAttributedString = NSMutableAttributedString(string: pin_name)
+                descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (pin_name.characters.count)))
+                
+                attrString.append(descString2);
+            }
+            else{
+                let descString2: NSMutableAttributedString = NSMutableAttributedString(string: (notif.item?.itemName!)!)
+                descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (notif.item?.itemName?.characters.count)!))
+                
+                attrString.append(descString2);
+            }
+            
+        }
+        else{
+            let descString2: NSMutableAttributedString = NSMutableAttributedString(string: (notif.item?.itemName!)!)
+            descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (notif.item?.itemName?.characters.count)!))
+            attrString.append(descString2);
+        }
         let descString2: NSMutableAttributedString = NSMutableAttributedString(string: (notif.item?.itemName!)!)
         descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (notif.item?.itemName?.characters.count)!))
         
-        attrString.append(descString);
-        attrString.append(descString2);
+        
+        
         
         
         let notif_time = notif.time!
