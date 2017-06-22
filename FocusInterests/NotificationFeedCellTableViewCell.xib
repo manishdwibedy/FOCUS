@@ -73,9 +73,12 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G4T-lJ-oCe">
                         <rect key="frame" x="56" y="14" width="219" height="31.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th2-x8-nnK">
-                                <rect key="frame" x="3" y="0.0" width="234" height="34.5"/>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username asdasdasdasdasdasdas da sd asd a sd asda sd as da sd asd as das d asd as da sd asda" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th2-x8-nnK">
+                                <rect key="frame" x="3" y="0.0" width="234" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UlG-HI-iKG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <color key="textColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -85,7 +88,6 @@
                             <constraint firstAttribute="trailing" secondItem="th2-x8-nnK" secondAttribute="trailing" constant="-18" id="Bnk-P2-LGq"/>
                             <constraint firstItem="th2-x8-nnK" firstAttribute="leading" secondItem="G4T-lJ-oCe" secondAttribute="leading" constant="3" id="Ea5-7E-Fzu"/>
                             <constraint firstItem="th2-x8-nnK" firstAttribute="top" secondItem="G4T-lJ-oCe" secondAttribute="top" id="gsS-5G-yat"/>
-                            <constraint firstAttribute="bottom" secondItem="th2-x8-nnK" secondAttribute="bottom" constant="-3" id="l1h-Gj-Amx"/>
                         </constraints>
                     </view>
                 </subviews>

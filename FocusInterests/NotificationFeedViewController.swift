@@ -123,7 +123,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self.selectedSegmentIndex == 0{
-            return 90
+            return 100
         }
         else if self.selectedSegmentIndex == 1{
             return 115.0
