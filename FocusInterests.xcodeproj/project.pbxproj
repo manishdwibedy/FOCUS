@@ -24,6 +24,7 @@
 		5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */; };
 		5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */; };
 		5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E901ED278A70075B57A /* UserProfileViewController.swift */; };
+		5B2AEF491EFDA84D00B6E769 /* InvitePlaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */; };
 		5B2E5E051EF7974900F0BC1B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */; };
 		5B2E5E061EF7974900F0BC1B /* SwiftyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */; };
 		5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */; };
@@ -332,6 +333,7 @@
 		5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestViewCell.swift; sourceTree = "<group>"; };
 		5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestViewCell.xib; sourceTree = "<group>"; };
 		5B251E901ED278A70075B57A /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePlaceTests.swift; sourceTree = "<group>"; };
 		5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyRecordButton.swift; sourceTree = "<group>"; };
 		5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1062,6 +1064,7 @@
 				D2B9B0641E5A047C0002F1B1 /* Info.plist */,
 				5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */,
 				5B4B959B1EFCADE700676E64 /* LoginTests.swift */,
+				5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */,
 			);
 			path = FocusInterestsUITests;
 			sourceTree = "<group>";
@@ -1959,6 +1962,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B2AEF491EFDA84D00B6E769 /* InvitePlaceTests.swift in Sources */,
 				5B4B959C1EFCADE700676E64 /* LoginTests.swift in Sources */,
 				D2B9B0631E5A047C0002F1B1 /* FocusInterestsUITests.swift in Sources */,
 				5BD641EE1EFB229D003E2A4B /* SearchPlaces.swift in Sources */,

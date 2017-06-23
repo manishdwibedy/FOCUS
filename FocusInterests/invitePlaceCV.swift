@@ -88,22 +88,22 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
                     let fullname = user["fullname"] as? String
-                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "", item_id: "", item_name: "")
+                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: name))", body: "", actionType: "", type: "", item_id: "", item_name: "")
                 })
             Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
             }
             
-             Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!])
-            
-            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-                
-                let user = snapshot.value as? [String : Any] ?? [:]
-                
-                let username = user["username"] as? String
-                
-                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)", actionType: "", type: "", item_id: "", item_name: "")
-                
-            })
+//             Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!])
+//            
+//            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+//                
+//                let user = snapshot.value as? [String : Any] ?? [:]
+//                
+//                let username = user["username"] as? String
+//                
+//                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)", actionType: "", type: "", item_id: "", item_name: "")
+//                
+//            })
 
             
             
