@@ -70,6 +70,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 	// Collection view See more... button
     @IBOutlet weak var moreEventsButton: UIButton!
 	// (and also any of the ones after)
+    @IBOutlet weak var eventView: UIView!
 	
     var followers = [User]()
     var following = [User]()
@@ -146,8 +147,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         getEventSuggestions()
         getPin()
         
+        self.pinView.addTopBorderWithColor(color: UIColor.white, width: 1)
         self.focusView.addTopBorderWithColor(color: UIColor.white, width: 1)
-        self.focusView.addBottomBorderWithColor(color: UIColor.white, width: 1)
+        self.eventView.addTopBorderWithColor(color: UIColor.white, width: 1)
         
         self.navigationItem.title = ""
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -328,8 +330,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         }
         
         let count = interestStackView.arrangedSubviews.count
-        interestStackHeight.constant = CGFloat(37 * count)
-        interestViewHeight.constant = CGFloat(37 * count + 113)
+        interestStackHeight.constant = CGFloat(25 * count)
+        interestViewHeight.constant = CGFloat(25 * count + 113)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -365,7 +367,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             {
                 self.pinAddress2Label.text = value["pin"] as? String
                 if let likes = value["like"] as? NSDictionary{
-                    self.pinLikesLabel.text = "\(likes["num"] as! Int) likes"
+                    if let likeCount = likes["num"] as? Int{
+                        var likeLabel = "like"
+                        if likeCount > 1{
+                            likeLabel.append("s")
+                        }
+                        self.pinLikesLabel.text = "\(likeCount) \(likeLabel)"
+                    }
+                    
                 }
                 
                 let pin_location = CLLocation(latitude: value["lat"] as! Double, longitude: value["lng"] as! Double)
