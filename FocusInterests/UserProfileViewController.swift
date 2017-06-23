@@ -47,12 +47,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var greenDotImage: UIImageView!
 //    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var pinImage: UIImageView!
-    @IBOutlet weak var pinLabel: UILabel!
     @IBOutlet weak var pinCategoryLabel: UILabel!
     @IBOutlet weak var pinLikesLabel: UILabel!
-    @IBOutlet weak var pinAddress1Label: UILabel!
     @IBOutlet weak var pinAddress2Label: UILabel!
     
+    @IBOutlet weak var pinDistanceLabel: UILabel!
     
 //    MARK: Do we still need this
 //    @IBOutlet weak var pinDescription: UILabel!
@@ -60,11 +59,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var emptyPinButton: UIButton!
     
     // user interests
+    @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var interestStackView: UIStackView!
-    
-	// Haven't added:
-	// User FOCUS button
+    @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var interestStackHeight: NSLayoutConstraint!
     @IBOutlet weak var moreFocusButton: UIButton!
+    
 	// Location Description (would this be location description?)
 	// Location FOCUS button (what would this be for?)
 	// Collection view See more... button
@@ -146,6 +146,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         getEventSuggestions()
         getPin()
         
+        self.focusView.addTopBorderWithColor(color: UIColor.white, width: 1)
+        self.focusView.addBottomBorderWithColor(color: UIColor.white, width: 1)
+        
         self.navigationItem.title = ""
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -153,7 +156,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             {
                 self.emptyPinButton.isHidden = true
                 
-                self.pinAddress1Label.text = (value["formattedAddress"] as! String).replacingOccurrences(of: ";;", with: "\n")
                 self.pinCategoryLabel.text = value["focus"] as! String
                 self.pinAddress2Label.text = value["pin"] as! String
 //                let messageText = "\(String(describing: username)) \(self.data.pinMessage)"
@@ -186,11 +188,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
                 self.greenDotImage.isHidden = true
                 self.pinImage.isHidden = true
-                self.pinLabel.isHidden = true
                 self.pinCategoryLabel.isHidden = true
                 self.pinLikesLabel.isHidden = true
-                self.pinAddress1Label.isHidden = true
-                self.pinAddress2Label.isHidden = true
                 self.updatePinButton.isHidden = true
                 
             }
@@ -327,6 +326,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 interestStackView.translatesAutoresizingMaskIntoConstraints = false;
             }
         }
+        
+        let count = interestStackView.arrangedSubviews.count
+        interestStackHeight.constant = CGFloat(37 * count)
+        interestViewHeight.constant = CGFloat(37 * count + 113)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -358,22 +361,15 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            if value != nil
+            if let value = value
             {
-                self.pinAddress1Label.text = value?["formattedAddress"] as? String
-                self.pinAddress2Label.text = value?["pin"] as? String
-                if (value?["like"] as? NSDictionary) != nil{
-                self.pinLikesLabel.text = String((value?["like"] as? NSDictionary)?["num"] as! Int)
+                self.pinAddress2Label.text = value["pin"] as? String
+                if let likes = value["like"] as? NSDictionary{
+                    self.pinLikesLabel.text = "\(likes["num"] as! Int) likes"
                 }
-                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                    let value = snapshot.value as? NSDictionary
-                    if value != nil
-                    {
-                        self.pinLabel.text = value?["username"] as? String
-                    }
-                })
                 
-                
+                let pin_location = CLLocation(latitude: value["lat"] as! Double, longitude: value["lng"] as! Double)
+                self.pinDistanceLabel.text = getDistance(fromLocation: pin_location, toLocation: AuthApi.getLocation()!)
             }
         })
         
