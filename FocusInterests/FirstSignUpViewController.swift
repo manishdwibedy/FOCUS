@@ -115,13 +115,15 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
                 switch self.phoneEmailSwitcher.selectedSegmentIndex {
                 case 0:
                     self.typeOfSignUpSelected = "phone"
+                    destinationVC.usersEmailOrPhone = self.phoneTextField.text!
                 case 1:
                     self.typeOfSignUpSelected = "email"
+                    destinationVC.usersEmailOrPhone = self.emailTextField.text!
                 default:
                     return
                 }
                 destinationVC.typeOfSignUp = self.typeOfSignUpSelected
-                destinationVC.usersEmailOrPhone = validEntry
+                
             }
         }
     }

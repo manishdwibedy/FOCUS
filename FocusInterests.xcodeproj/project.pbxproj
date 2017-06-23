@@ -48,6 +48,7 @@
 		5B448E631EE7B7FC00873F79 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B448E611EE7B7FC00873F79 /* MessageTableViewCell.xib */; };
 		5B448E651EE94BF900873F79 /* Invites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B448E641EE94BF900873F79 /* Invites.storyboard */; };
 		5B448E671EE94C7700873F79 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B448E661EE94C7700873F79 /* InviteViewController.swift */; };
+		5B4B959C1EFCADE700676E64 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4B959B1EFCADE700676E64 /* LoginTests.swift */; };
 		5B519E751ED667D000B36110 /* Pin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B519E741ED667D000B36110 /* Pin.storyboard */; };
 		5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */; };
 		5B519E7A1ED677D800B36110 /* SearchPeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */; };
@@ -354,6 +355,7 @@
 		5B448E611EE7B7FC00873F79 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		5B448E641EE94BF900873F79 /* Invites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Invites.storyboard; sourceTree = "<group>"; };
 		5B448E661EE94C7700873F79 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
+		5B4B959B1EFCADE700676E64 /* LoginTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 		5B519E741ED667D000B36110 /* Pin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pin.storyboard; sourceTree = "<group>"; };
 		5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleViewController.swift; sourceTree = "<group>"; };
 		5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleTableViewCell.swift; sourceTree = "<group>"; };
@@ -1057,6 +1059,7 @@
 				D2B9B0621E5A047C0002F1B1 /* FocusInterestsUITests.swift */,
 				D2B9B0641E5A047C0002F1B1 /* Info.plist */,
 				5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */,
+				5B4B959B1EFCADE700676E64 /* LoginTests.swift */,
 			);
 			path = FocusInterestsUITests;
 			sourceTree = "<group>";
@@ -1952,6 +1955,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B4B959C1EFCADE700676E64 /* LoginTests.swift in Sources */,
 				D2B9B0631E5A047C0002F1B1 /* FocusInterestsUITests.swift in Sources */,
 				5BD641EE1EFB229D003E2A4B /* SearchPlaces.swift in Sources */,
 			);
@@ -2098,7 +2102,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				ENABLE_BITCODE = NO;
@@ -2132,7 +2136,7 @@
 				CODE_SIGN_ENTITLEMENTS = FocusInterests/FocusInterests.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -242,6 +242,12 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         {
             dismiss(animated: true, completion: nil)
         }
+        else{
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let vc: UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "home") as! UITabBarController
+            vc.selectedIndex = 2
+            self.present(vc, animated: true, completion: nil)
+        }
     
     }
     

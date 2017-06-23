@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SCLAlertView
 
 class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
 
@@ -56,6 +57,21 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
             Auth.auth().createUser(withEmail: email, password: validPassword, completion: { (user, error) in
                 if error != nil {
                     print("error occurred creating a user: \(error!.localizedDescription)")
+                    print("email - \(email) and password - \(validPassword)")
+                    if let errCode = AuthErrorCode(rawValue: error!._code) {
+                        switch errCode {
+                        case .invalidEmail:
+                            SCLAlertView().showError("Error", subTitle: "Invalid email")
+                            
+                        case .emailAlreadyInUse:
+                            SCLAlertView().showError("Error", subTitle: "Email already in user")
+                        case .weakPassword:
+                            SCLAlertView().showError("Error", subTitle: "Weak password.")
+                        default:
+                            SCLAlertView().showError("Error", subTitle: "Failed to register the users..")
+                        }    
+                    }
+                    
                 }
                 
                 if let validUser = user {
