@@ -21,7 +21,7 @@ class SearchPlaceCell: UITableViewCell {
     @IBOutlet weak var distanceLabel: UILabel!
     
     var placeID = String()
-    var parentVC: SearchPlacesViewController! = nil
+    var parentVC: SearchPlacesViewController? = nil
     var searchVC: SearchViewController? = nil
     var place: Place?
     
@@ -119,7 +119,7 @@ class SearchPlaceCell: UITableViewCell {
             
             unfollowAlertController.addAction(unfollowAction)
             unfollowAlertController.addAction(cancelAction)
-            parentVC.present(unfollowAlertController, animated: true, completion: nil)
+            parentVC?.present(unfollowAlertController, animated: true, completion: nil)
             
             
             
@@ -148,30 +148,60 @@ class SearchPlaceCell: UITableViewCell {
     
     func checkForFollow(id:String){
         print(id)
-       // print(searchVC)
-//        if (searchVC?.places.contains(self.place!))!{
-//            self.followButtonOut.isSelected = true
-//            self.followButtonOut.layer.borderColor = UIColor.white.cgColor
-//            self.followButtonOut.layer.borderWidth = 1
-//            
-//            self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
-//            self.followButtonOut.tintColor = UIColor.clear
-//            self.followButtonOut.layer.shadowOpacity = 1.0
-//            self.followButtonOut.layer.masksToBounds = false
-//            self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-//            self.followButtonOut.layer.shadowRadius = 5.0
-//        }
-//        else{
-//            self.followButtonOut.isSelected = false
-//            self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
-//            self.followButtonOut.layer.borderWidth = 1
-//            self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-//            self.followButtonOut.tintColor = UIColor.clear
-//            self.followButtonOut.layer.shadowOpacity = 1.0
-//            self.followButtonOut.layer.masksToBounds = false
-//            self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-//            self.followButtonOut.layer.shadowRadius = 5.0
-//
-//        }
+        print(searchVC)
+        
+        if let parent = parentVC{
+            if (parent.places.contains(self.place!)){
+                self.followButtonOut.isSelected = true
+                self.followButtonOut.layer.borderColor = UIColor.white.cgColor
+                self.followButtonOut.layer.borderWidth = 1
+                
+                self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
+                self.followButtonOut.tintColor = UIColor.clear
+                self.followButtonOut.layer.shadowOpacity = 1.0
+                self.followButtonOut.layer.masksToBounds = false
+                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
+                self.followButtonOut.layer.shadowRadius = 5.0
+            }
+            else{
+                self.followButtonOut.isSelected = false
+                self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
+                self.followButtonOut.layer.borderWidth = 1
+                self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButtonOut.tintColor = UIColor.clear
+                self.followButtonOut.layer.shadowOpacity = 1.0
+                self.followButtonOut.layer.masksToBounds = false
+                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
+                self.followButtonOut.layer.shadowRadius = 5.0
+                
+            }
+        }
+        else if let parent = searchVC{
+            if (parent.places.contains(self.place!)){
+                self.followButtonOut.isSelected = true
+                self.followButtonOut.layer.borderColor = UIColor.white.cgColor
+                self.followButtonOut.layer.borderWidth = 1
+                
+                self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
+                self.followButtonOut.tintColor = UIColor.clear
+                self.followButtonOut.layer.shadowOpacity = 1.0
+                self.followButtonOut.layer.masksToBounds = false
+                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
+                self.followButtonOut.layer.shadowRadius = 5.0
+            }
+            else{
+                self.followButtonOut.isSelected = false
+                self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
+                self.followButtonOut.layer.borderWidth = 1
+                self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButtonOut.tintColor = UIColor.clear
+                self.followButtonOut.layer.shadowOpacity = 1.0
+                self.followButtonOut.layer.masksToBounds = false
+                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
+                self.followButtonOut.layer.shadowRadius = 5.0
+                
+            }
+        }
+        
     }
 }

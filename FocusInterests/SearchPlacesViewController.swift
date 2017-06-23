@@ -115,6 +115,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
 //            cell.categoryLabel.text =
         }
         
+        cell.parentVC = self
         cell.checkForFollow(id: place.id)
         let placeHolderImage = UIImage(named: "empty_event")
         cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
@@ -210,15 +211,15 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                     print(results[searchText])
                     self.filtered = results[searchText]!
                     
-//                    self.filtered.sort{ //sort(_:) in Swift 3
-//                            if $0.name != $1.name {
-//                                return $0.name < $1.name
-//                            }
-//                            
-//                        else { // All other fields are tied, break ties by last name
-//                            return $0.distance < $1.distance
-//                        }
-//                    }
+                    self.filtered.sort{ //sort(_:) in Swift 3
+                            if $0.name != $1.name {
+                                return $0.name < $1.name
+                            }
+                            
+                        else { // All other fields are tied, break ties by last name
+                            return $0.distance < $1.distance
+                        }
+                    }
                     
                     print("searching finally - \(searchText)")
 //                    print(self.filtered[0].name)
