@@ -51,7 +51,7 @@ class Follow{
             let value = snapshot.value as? [String:Any]
             
             if let value = value{
-                for (id, _) in value!{
+                for (id, _) in value{
                     Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places/\(id)").removeValue()
                 }
                 
