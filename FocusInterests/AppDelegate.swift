@@ -28,6 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     let defaults = UserDefaults.standard
     let gcmMessageIDKey = "gcm.message_id"
 
+    override init() {
+        super.init()
+        UIFont.overrideInitialize()
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Register for remote notifications. This shows a permission dialog on first run, to
