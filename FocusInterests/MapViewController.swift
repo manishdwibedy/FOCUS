@@ -895,11 +895,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             username.autocapitalizationType = .none
             alert.addButton("Add user name") {
                 if (username.text?.characters.count)! > 0{
-                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
-                    AuthApi.set(username: username.text)
-                    print("Text value: \(username.text!)")
-                    alert.hideView()
-                    self.showPopup()
+                    
+                    Constants.DB.user_mapping.child(username.text).observeSingleEvent(of: .value, with: {snapshot in
+                        if snapshot.value == nil{
+                            
+                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+                            AuthApi.set(username: username.text)
+                            print("Text value: \(username.text!)")
+                            alert.hideView()
+                            self.showPopup()
+                        }
+                    })
                 }
                 
             }
