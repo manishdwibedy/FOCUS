@@ -896,14 +896,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             alert.addButton("Add user name") {
                 if (username.text?.characters.count)! > 0{
                     
-                    Constants.DB.user_mapping.child(username.text).observeSingleEvent(of: .value, with: {snapshot in
+                    Constants.DB.user_mapping.child(username.text!).observeSingleEvent(of: .value, with: {snapshot in
                         if snapshot.value == nil{
                             
                             Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+                            Constants.DB.user_mapping.child(username.text!).setValue(AuthApi.getUserEmail())
                             AuthApi.set(username: username.text)
                             print("Text value: \(username.text!)")
                             alert.hideView()
                             self.showPopup()
+                        }
+                        else{
+                            SCLAlertView().showError("Invalid username", subTitle: "Please choose a unique username.")
                         }
                     })
                 }
