@@ -919,9 +919,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             
         }
-        else{
-            
-        }
 //        changeTab()
         
     }

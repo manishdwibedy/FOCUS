@@ -141,7 +141,20 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         cell.parentVC = self
         cell.checkForFollow(id: place.id)
         let placeHolderImage = UIImage(named: "empty_event")
-        cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
+        
+        SDWebImageManager.shared().downloadImage(with: URL(string :place.image_url), options: .highPriority, progress: {
+            (receivedSize :Int, ExpectedSize :Int) in
+            
+        }, completed: {
+            (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+            
+            if error == nil{
+                cell.placeImage.image = crop(image: image!, width: 50, height: 50)
+            }
+            
+        })
+        
+        //cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
         cell.checkForFollow(id: place.id)
         
         return cell

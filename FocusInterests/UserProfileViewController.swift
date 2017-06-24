@@ -301,7 +301,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 
         }
         
-        let interests = AuthApi.getInterests()?.components(separatedBy: ",")
+        let interests = getUserInterests()?.components(separatedBy: ",")
         
         for view in interestStackView.arrangedSubviews{
             interestStackView.removeArrangedSubview(view)

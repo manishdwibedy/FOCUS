@@ -28,16 +28,11 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     let backgroundColor = UIColor.init(red: 22/255, green: 42/255, blue: 64/255, alpha: 1)
     var filtered = [Interest]()
     var searching = false
-    let user_interests = AuthApi.getInterests()?.components(separatedBy: ",")
     
     var interestCells = [InterstCollectionViewCell]()
     
     var needsReturn = false
     var parentReturnVC: PinScreenViewController!
-    
-//    var imageArrayBlue = ["Arts Blue","Beauty Blue","Business Blue","Causes Blue","Celebration Blue","Chill Blue","Coffee Blue","Community Blue","Drinks Blue","Entertainment Blue","Fitness Blue","Food Blue","Learn Blue","Meet up Blue","Music Blue","Networking Blue","Outdoors Blue","Shopping Blue","Sports Blue","Travel Blue","Views Blue"]
-//    
-//    var imageArrayGreen = ["Arts Green","Beauty Green","Business Green","Causes Green","Celebration Green","Chill Green","Coffee Green","Community Green","Drinks Green","Entertainment Green","Fitness Green","Food Green","Learn Green","Meet up Green","Music Green","Networking Green","Outdoors Green","Shopping Green","Sports Green","Travel Green","Views Green"]
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -53,8 +48,6 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         let commentsNib = UINib(nibName: "InterstCollectionViewCell", bundle: nil)
         self.collectionView.register(commentsNib, forCellWithReuseIdentifier: "interestCell")
         
-        
-        
         if AuthApi.isNewUser(){
             saveButton.title = "Done"
         }
@@ -68,9 +61,37 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
         
-        for interest in focus_string{
-            focus.append(Interest(name: interest, category: nil, image: nil, imageString: nil))
+        var selected_interests = [String:InterestStatus]()
+        if let interests = AuthApi.getInterests(){
+            let selected = interests.components(separatedBy: ",")
+            
+            var final_interest = [String]()
+            for interest in selected{
+                let interest_name = interest.components(separatedBy: "-")[0]
+                let status = interest.components(separatedBy: "-")[1]
+                
+                if status == "1"{
+                    selected_interests[interest_name] = .like
+                }
+                else{
+                    selected_interests[interest_name] = .love
+                }
+                
+            }
         }
+        
+        for interest in focus_string{
+            if let selected = selected_interests[interest]{
+                let interest = Interest(name: interest, category: nil, image: nil, imageString: nil)
+                interest.addStatus(status: selected)
+                focus.append(interest)
+            }
+            else{
+                focus.append(Interest(name: interest, category: nil, image: nil, imageString: nil))
+            }
+            
+        }
+        
         
     }
     
@@ -83,13 +104,41 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "interestCell", for: indexPath) as! InterstCollectionViewCell
-        let imageName = "\(focus[indexPath.row].name!) Blue"
-        cell.image.image = UIImage(named: imageName)
+        
+        let interest = focus[indexPath.row]
+        switch(interest.status){
+            case .normal:
+                cell.backgroundColor = UIColor.clear
+                cell.label.textColor = UIColor.white
+                let imageName = "\(interest.name!) Blue"
+                cell.image.image = UIImage(named: imageName)
+                
+                cell.view.layer.borderColor = UIColor(red: 22/255, green: 44/255, blue: 69/255, alpha: 1.0).cgColor
+                cell.view.layer.borderWidth = 5
+            case .like:
+                cell.backgroundColor = UIColor(red: 22/255, green: 44/255, blue: 69/255, alpha: 1)
+                cell.label.textColor = UIColor.white
+                
+                let imageName = "\(interest.name!) Green"
+                cell.image.image = UIImage(named: imageName)
+                
+            case .love:
+                cell.backgroundColor = UIColor.white
+                cell.label.textColor = UIColor.black
+                let imageName = "\(interest.name!) Green"
+                cell.image.image = UIImage(named: imageName)
+            default:
+                break
+        }
+        
+//        let imageName = "\(focus[indexPath.row].name!) Blue"
+//        cell.image.image = UIImage(named: imageName)
         cell.label.text = focus[indexPath.row].name
+        
         cell.parentVC = self
         cell.index = indexPath.row
         cell.indexPath = indexPath
-        interestCells.append(cell)
+//        interestCells.append(cell)
         return cell
     }
     
@@ -137,50 +186,39 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func saveInterests(_ sender: UIBarButtonItem) {
-//        let selected_interests = interest_status.filter( { return $0.status != .normal } )
-//        let interest_string = selected_interests.map(){ $0.name! }.joined(separator: ",")
-//        
-//        var interests = ""
-//        if AuthApi.isNewUser(){
-//            if selected_interests.count == 0{
-//                SCLAlertView().showError("Invalid Interests", subTitle: "Please choose atleast one interest.")
-//                return
-//            }
-//            interests = interest_string
-//        }
-//        else{
-//            let earlier_interests = AuthApi.getInterests()!
-//            interests = "\(earlier_interests),\(interest_string)"
-//        }
-//
-        
-    var interestAll = ""
-    for cell in interestCells
-    {
-        if cell.liked == true || cell.loved == true
+     
+        var selected = [String]()
+        for cell in self.focus
         {
-            interestAll = interestAll + cell.label.text!+","
+            if cell.status == .like{
+                selected.append("\(cell.name!)-1")
+            }
+            else if cell.status == .love{
+                selected.append("\(cell.name!)-2")
+            }
         }
-
-    }
         
-    Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["interests":interestAll])
-    AuthApi.set(interests: interestAll)
+        let interests = selected.joined(separator: ",")
         
-    if AuthApi.isNewUser(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["interests": interests])
+        AuthApi.set(interests: interests)
+        
+        if let interest = getUserInterests(){
+            print(interests)
+        }
+        
+        
+        if AuthApi.isNewUser(){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-        let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
 
-        present(vc, animated: true, completion: nil)
+            present(vc, animated: true, completion: nil)
+        }
+        else{
+            self.dismiss(animated: true, completion: nil)
+        }
     }
-    else{
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
-  }
     
     
     func returnValue(FOCUS:String){
