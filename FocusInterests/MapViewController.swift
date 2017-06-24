@@ -1291,7 +1291,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
 
         // Present dialog
-        present(popup, animated: true, completion: nil)
+        //present(popup, animated: true, completion: nil)
     }
     
     func changeTab(){

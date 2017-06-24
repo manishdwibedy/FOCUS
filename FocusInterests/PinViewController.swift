@@ -93,6 +93,13 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         hideKeyboardWhenTappedAround()
         
+        
+        // Round up Yelp!
+        
+        self.webButton.backgroundColor = .clear
+        self.webButton.layer.masksToBounds = true
+        self.webButton.layer.cornerRadius = 5
+        
         var address = ""
         for str in (place?.address)!
         {
