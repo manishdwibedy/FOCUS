@@ -143,19 +143,17 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         
         getPhotos()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-
+        
+        getPlaceName(location: AuthApi.getLocation()!, completion: {address in
+                self.locationLabel.text = address
+        })
         
     }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location: CLLocation = locations.last!
-        coordinates = location.coordinate
-        getAddress(loc: location, completion: {(address)in
-            self.locationLabel.text = address
-            self.formmatedAddress = address
-        })
-        locationManager.stopUpdatingLocation()
-     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -481,34 +479,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         
     }
-    
-    
-    func getAddress(loc:CLLocation, completion: @escaping (String) -> Void){
-        
-        CLGeocoder().reverseGeocodeLocation(loc, completionHandler: {(placemarks, error) -> Void in
-            if error != nil {
-               
-                return
-            }
-            
-            if (placemarks?.count)! > 0 {
-                let pm = placemarks?[0] as! CLPlacemark
-                
-                completion(pm.locality!)
-            }
-            else {
-                
-            }
-        })
-        
-    }
-    
-    
-    
-    
-    
-
- 
 }
 
 extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {

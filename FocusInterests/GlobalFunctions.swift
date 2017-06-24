@@ -430,11 +430,18 @@ func getInterest(eventBriteId: String) -> String{
 }
 
 func getInterest(yelpCategory: String) -> String{
-    let yelpParent = Constants.interests.yelpParent[yelpCategory]
+    //let yelpParent = Constants.interests.yelpParent[yelpCategory]
+    var category = yelpCategory
+    var parent = ""
+    while let yelpParent = Constants.interests.yelpParent[category]{
+        category = yelpParent
+        parent = yelpParent
+    }
+    
     for (interest, ids) in Constants.interests.yelpMapping{
         let id_list = ids.components(separatedBy: ",")
         for id in id_list{
-            if id == yelpParent{
+            if id == parent{
                 return interest
             }
         }
@@ -488,6 +495,31 @@ func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttribut
         attrStr.setAttributes(nonBoldAttribute, range: range)
     }
     return attrStr
+}
+
+func getPlaceName(location: CLLocation, completion: @escaping (String) -> Void){
+    // Add below code to get address for touch coordinates.
+    let geoCoder = CLGeocoder()
+    geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+        
+        // Place details
+        var placeMark: CLPlacemark!
+        placeMark = placemarks?[0]
+        
+        // Address dictionary
+        print(placeMark.addressDictionary as Any)
+        
+        // Location name
+        if let locationName = placeMark.addressDictionary!["Name"] as? NSString {
+            print(locationName)
+            completion(locationName as String)
+        }
+        // Street address
+        if let street = placeMark.addressDictionary!["Thoroughfare"] as? NSString {
+            print(street)
+        }
+        
+    })
 }
 
 func getNearbyPlaces(categories: String?, count: Int?, latitude: Double, longitude: Double, completion: @escaping ([Place])->Void){
