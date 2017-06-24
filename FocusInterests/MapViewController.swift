@@ -413,10 +413,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             //let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
             var distance = ""
             var pinMessage = pin.pinMessage
-            //var inte
-            //let location = pin.locationAddress
+            var interest = pin.focus
             var name = ""
-            //var timeAgo = ""
+            
             
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
             
@@ -425,7 +424,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if value != nil
                 {
                     name = value?["username"] as! String
-                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance)
+                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest)
                 }
             })
         

@@ -17,6 +17,7 @@
                 <outlet property="backImage" destination="DB7-J9-7hh" id="Bws-yD-K2a"/>
                 <outlet property="boldLabel" destination="xg5-Ky-QMS" id="0Oq-59-O95"/>
                 <outlet property="bottomText" destination="QwT-QA-9Ah" id="DAI-02-Qnd"/>
+                <outlet property="captionLeading" destination="qCJ-1j-Z2O" id="p8z-JP-0KM"/>
                 <outlet property="interestLabel" destination="0mj-Oc-hbz" id="hgI-dm-bde"/>
                 <outlet property="mileLabel" destination="FE3-LU-8We" id="PU2-Or-s7Q"/>
                 <outlet property="profileImage" destination="Ebi-Z1-NiF" id="vlY-Ps-Y6l"/>
