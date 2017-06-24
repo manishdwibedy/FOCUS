@@ -881,30 +881,32 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
-        if AuthApi.isNewUser(){
+        if !AuthApi.isNewUser(){
             AuthApi.setNewUser()
-            let appearance = SCLAlertView.SCLAppearance(
-                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
-                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
-                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-                showCloseButton: false
-            )
-            
-            let alert = SCLAlertView(appearance: appearance)
-            let username = alert.addTextField("Enter your username")
-            username.autocapitalizationType = .none
-            alert.addButton("Add user name") {
-                if (username.text?.characters.count)! > 0{
-                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
-                    print("Text value: \(username.text!)")
-                    alert.hideView()
-                    self.showPopup()
-                }
-                
-            }
-            
-            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
-            
+            self.showPopup()
+//            let appearance = SCLAlertView.SCLAppearance(
+//                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+//                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+//                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+//                showCloseButton: false
+//            )
+//            
+//            let alert = SCLAlertView(appearance: appearance)
+//            let username = alert.addTextField("Enter your username")
+//            username.autocapitalizationType = .none
+//            alert.addButton("Add user name") {
+//                if (username.text?.characters.count)! > 0{
+//                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+//                    AuthApi.set(username: username.text)
+//                    print("Text value: \(username.text!)")
+//                    alert.hideView()
+//                    self.showPopup()
+//                }
+//                
+//            }
+//            
+//            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
+//            
             
             
         }
@@ -1254,7 +1256,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         overlayAppearance.blurRadius  = 20
         overlayAppearance.blurEnabled = false
         overlayAppearance.liveBlur    = false
-        overlayAppearance.opacity     = 0.4
+        overlayAppearance.opacity     = 0.85
         
         var dialogAppearance = PopupDialogDefaultView.appearance()
         
@@ -1268,7 +1270,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         // Customize the container view appearance
         let pcv = PopupDialogContainerView.appearance()
-        pcv.backgroundColor = UIColor(red:0.23, green:0.23, blue:0.27, alpha:1.00)
+        pcv.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:1.00)
         pcv.cornerRadius    = 10
         pcv.shadowEnabled   = true
         pcv.shadowColor     = UIColor.black

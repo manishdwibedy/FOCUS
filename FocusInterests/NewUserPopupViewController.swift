@@ -18,7 +18,7 @@ class NewUserPopupViewController: UIViewController {
     var delegate: switchPinTabDelegate?
     
     let info = [
-        ["", "What if you could have an all-in-one view of the people, places and events YOU are about?", "Well, now YOU can", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
+        ["", "What if you could have an all-in-one view of the people, places and events YOU care about?", "Well, now YOU can", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
         
         ["intro_greenpin", "People", "People are shown on your map when they Pin their location and FOCUS. You can choose to view activities and places you'll both like.", "people", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
@@ -56,9 +56,9 @@ class NewUserPopupViewController: UIViewController {
         
         //appearance
         self.progressBar?.progressAppearance = DottedProgressBar.DottedProgressAppearance(
-            dotRadius: 8.0,
-            dotsColor: UIColor.orange.withAlphaComponent(0.4),
-            dotsProgressColor: UIColor.red,
+            dotRadius: 5.0,
+            dotsColor: Constants.color.navy,
+            dotsProgressColor: Constants.color.green,
             backColor: UIColor.clear
         )
         self.skipLabel.alpha = 0
@@ -110,18 +110,19 @@ class NewUserPopupViewController: UIViewController {
     }
     
     func loadValue(){
+        
         if index == 0{
-            titleTop.constant = -50
+            titleTop.constant = -70
             buttonTop.constant = 50
-            self.titleText.font = UIFont(name: "Avenir-Book", size: 15)
+            self.titleText.font = UIFont(name: "Avenir-Book", size: 20)
         }
         else{
-            titleTop.constant = 20
+            titleTop.constant = 0
             buttonTop.constant = 20
             descriptionTop.constant = 0
             
-            self.titleText.font = UIFont(name: "Avenir-Black", size: 15)
-            self.descriptionText.font = UIFont(name: "Avenir-Book", size: 15)
+            self.titleText.font = UIFont(name: "Avenir-Black", size: 20)
+            self.descriptionText.font = UIFont(name: "Avenir-Book", size: 20)
             
         }
         
