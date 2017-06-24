@@ -285,7 +285,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func inviteEvent(_ sender: UIButton) {
-        let ivc = storyboard?.instantiateViewController(withIdentifier: "home") as! InviteViewController
+        let ivc = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "event"
         ivc.id = (event?.id!)!
         ivc.event = event
