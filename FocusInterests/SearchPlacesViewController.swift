@@ -37,6 +37,29 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
 
         self.searchBar.delegate = self
         
+//        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
+        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+//        search bar placeholder
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
+        textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        
+//        search bar glass icon
+        let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        glassIconView.tintColor = UIColor.white
+        
+//        search bar clear button
+        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
+        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+        clearButton.tintColor = UIColor.white
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
+        
         hideKeyboardWhenTappedAround()
     }
     
@@ -141,8 +164,9 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
