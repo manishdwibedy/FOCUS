@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 import FBSDKLoginKit
 import FBSDKCoreKit
 import FirebaseAuth
@@ -47,7 +48,6 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         self.regularSignInButton.roundCorners(radius: 9.0)
         self.facebookLoginButton.roundCorners(radius: 27.5)
         self.googleLoginButton.roundCorners(radius: 27.5)
-        
         setUpTextFields()
         hideKeyboardWhenTappedAround()
     }
@@ -414,5 +414,4 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             
         })
     }
-
 }
