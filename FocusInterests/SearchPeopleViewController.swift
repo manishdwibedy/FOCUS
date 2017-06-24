@@ -220,6 +220,13 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         searchBar.setShowsCancelButton(false, animated: true)
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        self.filtered = self.people
+        self.tableView.reloadData()
+        searchBar.resignFirstResponder()
+    }
+    
     @IBAction func showCreateEvent(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)

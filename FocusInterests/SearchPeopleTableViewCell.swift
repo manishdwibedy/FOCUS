@@ -111,7 +111,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
  
         } else if self.followButton.isSelected == true{
             
-            let unfollowAlertController = UIAlertController(title: "Unfollow user", message: "Are you sure you want to unfollow \(self.username.text!)", preferredStyle: .actionSheet)
+            let unfollowAlertController = UIAlertController(title: "Unfollow \(self.username.text!)?", message: "", preferredStyle: .actionSheet)
             
             
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
