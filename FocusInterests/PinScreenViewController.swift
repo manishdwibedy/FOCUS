@@ -12,6 +12,7 @@ import Gallery
 import Firebase
 import GooglePlaces
 import SCLAlertView
+import FBSDKLoginKit
 
 class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate, CLLocationManagerDelegate{
 
@@ -36,6 +37,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     var cellArray = [PinImageCollectionViewCell]()
     let gallery = GalleryController()
     var galleryPicArray = [UIImage]()
+    let loginView = FBSDKLoginManager()
     
     let locationManager = CLLocationManager()
     var place: GMSPlace!
@@ -446,6 +448,33 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if isFacebook == false
         {
             isFacebook = true
+            if AuthApi.getFacebookToken() == nil{
+                
+                loginView.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
+                    if error != nil {
+                        print(error?.localizedDescription)
+                        self.showLoginFailedAlert(loginType: "Facebook")
+                    } else {
+                        if let res = result {
+                            if res.isCancelled {
+                                return
+                            }
+                            if let tokenString = FBSDKAccessToken.current().tokenString {
+                                let credential = FacebookAuthProvider.credential(withAccessToken: tokenString)
+                                Auth.auth().currentUser?.link(with: credential) { (user, error) in
+                                    if error != nil {
+                                        AuthApi.set(facebookToken: tokenString)
+                                        return
+                                    }
+                                }
+                                
+                            }
+                        } else {
+                            self.showLoginFailedAlert(loginType: "Facebook")
+                        }
+                    }
+                }
+            }
             facebookOut.setImage(UIImage(named: "facebookGreen"), for: UIControlState.normal)
         }else
         {
@@ -478,6 +507,14 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         })
         
         
+    }
+    
+    func showLoginFailedAlert(loginType: String) {
+        let alert = UIAlertController(title: "Login error", message: "There has been an error logging in with \(loginType). Please try again.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
+        alert.view.tintColor = UIColor.primaryGreen()
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
