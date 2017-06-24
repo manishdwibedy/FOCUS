@@ -112,7 +112,7 @@ class MapPopUpScreenView: UIView {
         mileLabel.text = distance
         interestLabel.text = focus
         
-        captionLeading.constant = -25
+        captionLeading.constant = -20
         
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 125/255, green: 201/255, blue: 49/255, alpha: 1).cgColor
