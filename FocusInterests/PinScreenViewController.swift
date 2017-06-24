@@ -317,7 +317,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         let imgageManager = PHImageManager()
         
         let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
+        requestOptions.isSynchronous = false
         requestOptions.deliveryMode = .opportunistic
         
         let fetch = PHFetchOptions()
