@@ -95,7 +95,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
 //                        for (id, event) in events{
 //                            let info = event as? [String:Any]
-                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id as! String, category: info["interest"] as? String)
+                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id as! String, category: info["interests"] as? String)
             
                             if let attending = info["attendingList"] as? [String:Any]{
                                 event.setAttendessCount(count: attending.count)
@@ -142,24 +142,19 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         print(fullAddress)
         
         //cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
-        cell?.address.text = event.fullAddress 
+        cell?.address.text = event.fullAddress?.replacingOccurrences(of: ";;", with: "\n")
         cell?.address.textContainer.maximumNumberOfLines = 2
 
         let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
         cell?.distance.text = getDistance(fromLocation: self.location!, toLocation: eventLocation,addBracket: false)
 
         cell?.guestCount.text = "\(event.attendeeCount) guests"
-        cell?.interest.text = "Category"
+        
+        addGreenDot(label: (cell?.interest)!, content: event.category!)
+        
         cell?.price.text = "Price"
         //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
-        
-        if let category = event.category?.components(separatedBy: ";")[0]{
-            cell?.interest.text = "\(category)"
-        }
-        else{
-            cell?.interest.text = "N.A."
-        }
         
         if let price = event.price{
             if price == 0{

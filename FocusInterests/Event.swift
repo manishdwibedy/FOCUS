@@ -53,7 +53,7 @@ class Event: NSObject, NSCoding{
             "endtime": self.endTime,
             "price": self.price,
             "creator": self.creator!,
-            "interest": self.category!,
+            "interests": self.category!,
             "price": self.price
         ] as! [String : String]
         newEvent.setValue(event)
