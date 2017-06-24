@@ -66,8 +66,8 @@ class FollowProfileCell: UITableViewCell {
     
     func ifFollowing(uid:String,completionIt: @escaping (_ result: Bool)->())
     {
-        ref.child("users").child(AuthApi.getFirebaseUid()!).child("following").queryOrdered(byChild: "UID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
+        ref.child("users").child(AuthApi.getFirebaseUid()!).child("following/people").queryOrdered(byChild: "UID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String:Any]
             if value != nil
             {
                 completionIt(true)
