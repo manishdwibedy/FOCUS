@@ -162,6 +162,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                 "term": searchText,
                 "latitude": location?.coordinate.latitude,
                 "longitude": location?.coordinate.longitude,
+                "radius": 32_186
             ] as [String : Any]
             print(location?.coordinate)
             Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in

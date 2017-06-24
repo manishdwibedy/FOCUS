@@ -881,32 +881,32 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
-        if !AuthApi.isNewUser(){
+        if AuthApi.isNewUser(){
             AuthApi.setNewUser()
-            self.showPopup()
-//            let appearance = SCLAlertView.SCLAppearance(
-//                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
-//                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
-//                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-//                showCloseButton: false
-//            )
-//            
-//            let alert = SCLAlertView(appearance: appearance)
-//            let username = alert.addTextField("Enter your username")
-//            username.autocapitalizationType = .none
-//            alert.addButton("Add user name") {
-//                if (username.text?.characters.count)! > 0{
-//                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
-//                    AuthApi.set(username: username.text)
-//                    print("Text value: \(username.text!)")
-//                    alert.hideView()
-//                    self.showPopup()
-//                }
-//                
-//            }
-//            
-//            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
-//            
+           
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: false
+            )
+            
+            let alert = SCLAlertView(appearance: appearance)
+            let username = alert.addTextField("Enter your username")
+            username.autocapitalizationType = .none
+            alert.addButton("Add user name") {
+                if (username.text?.characters.count)! > 0{
+                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+                    AuthApi.set(username: username.text)
+                    print("Text value: \(username.text!)")
+                    alert.hideView()
+                    self.showPopup()
+                }
+                
+            }
+            
+            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
+            
             
             
         }
