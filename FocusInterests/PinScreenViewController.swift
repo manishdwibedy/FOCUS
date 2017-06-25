@@ -148,6 +148,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         getPlaceName(location: AuthApi.getLocation()!, completion: {address in
             self.locationLabel.text = address
         })
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
+        profileImage.isUserInteractionEnabled = true
+
+        profileImage.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,6 +162,20 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    }
+    
+    
+    func showUserProfile(sender: UITapGestureRecognizer)
+    {
+        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+        
+        let transition = CATransition()
+        transition.duration = 0.4
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromBottom
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        
+        self.present(VC, animated:true, completion:nil)
     }
     
     @IBAction func changeLocation(_ sender: Any) {
