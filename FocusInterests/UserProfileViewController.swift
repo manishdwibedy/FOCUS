@@ -85,7 +85,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     // Back button
 	@IBAction func backButton(_ sender: Any) {
-		self.dismiss(animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
+        
+        self.present(VC!, animated: true, completion: nil)
 	}
 	
     @IBAction func moreButtonPressed(_ sender: UIButton) {

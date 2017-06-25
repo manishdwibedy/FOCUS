@@ -105,11 +105,13 @@ class EditProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {
             action in
             picker.sourceType = .camera
+            picker.allowsEditing = true
             self.present(picker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {
             action in
             picker.sourceType = .photoLibrary
+            picker.allowsEditing = true
             self.present(picker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -140,9 +142,12 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
-        profilePhotoView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        profilePhotoView.image = info[UIImagePickerControllerEditedImage] as? UIImage
         profilePhotoView.backgroundColor = UIColor.clear
         profilePhotoView.contentMode = UIViewContentMode.scaleAspectFit
+        
+        self.profilePhotoView.roundedImage()
+
         self.dismiss(animated: true, completion: nil)
     }
     
