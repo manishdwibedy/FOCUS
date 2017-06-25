@@ -39,6 +39,7 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     var focus_string = ["Meet up", "Coffee", "Chill", "Celebration", "Food", "Drinks", "Business", "Learn", "Entertainment", "Arts", "Music", "Beauty", "Shopping", "Fitness", "Sports", "Outdoors", "Views", "Causes", "Community", "Travel", "Networking"]
     var focus = [Interest]()
     
+    var old_interests = Set<String>()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,6 +61,8 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         let width = ((collectionView.frame.width) - sidePadding)/numberOfItemsPerRow
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
+        
+        self.old_interests = Set(getUserInterests().components(separatedBy: ",").map { $0 })
         
         var selected_interests = [String:InterestStatus]()
         if let interests = AuthApi.getInterests(){
@@ -188,16 +191,47 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBAction func saveInterests(_ sender: UIBarButtonItem) {
      
         var selected = [String]()
+        var new_interests = Set<String>()
         for cell in self.focus
         {
             if cell.status == .like{
                 selected.append("\(cell.name!)-1")
+                new_interests.insert(cell.name!)
             }
             else if cell.status == .love{
                 selected.append("\(cell.name!)-2")
+                new_interests.insert(cell.name!)
             }
         }
         
+        print(old_interests)
+        print(new_interests)
+        
+        var add = new_interests
+        var  remove = old_interests
+        add.subtract(old_interests)
+        remove.subtract(new_interests)
+
+        for interest in add{
+            Constants.DB.user_interests.child(interest).childByAutoId().setValue(["UID": AuthApi.getFirebaseUid()])
+        }
+
+        for interest in remove{
+            // remove interest
+            Constants.DB.user_interests.child(interest).queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil {
+                    for (key,_) in value!
+                    {
+                        print(key)
+                        Constants.DB.user_interests.child(interest).child(key as! String).removeValue()
+                    }
+                    
+                    
+                    
+                }
+            })
+        }
         let interests = selected.joined(separator: ",")
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["interests": interests])
