@@ -252,9 +252,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         }
         else{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
             let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
-            
             present(vc, animated: true, completion: nil)
         }
         

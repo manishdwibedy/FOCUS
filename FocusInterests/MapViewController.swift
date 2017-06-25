@@ -87,6 +87,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            webView.delegate = self
 //        }
         
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
+            let info = snapshot.value as! [String:Any]
+            
+            let interests = info["interests"] as? String
+            AuthApi.set(interests: interests!)
+        })
         
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -193,6 +199,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).keepSynced(true)
         Constants.DB.pins.keepSynced(true)
+        
+        
         
         saveUserInfo()
         if AuthApi.isNotificationAvailable(){
