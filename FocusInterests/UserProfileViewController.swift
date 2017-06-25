@@ -301,13 +301,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 
         }
         
-        let interests = getUserInterests()?.components(separatedBy: ",")
+        let interests = getUserInterests().components(separatedBy: ",")
         
         for view in interestStackView.arrangedSubviews{
             interestStackView.removeArrangedSubview(view)
         }
         
-        for (index, interest) in (interests?.enumerated())!{
+        for (index, interest) in (interests.enumerated()){
             let textLabel = UILabel()
             
             textLabel.textColor = .white

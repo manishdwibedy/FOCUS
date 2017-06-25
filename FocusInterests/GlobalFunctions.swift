@@ -450,10 +450,10 @@ func getInterest(yelpCategory: String) -> String{
 }
 
 func getEventBriteCategories() -> String{
-    let interests = getUserInterests()?.components(separatedBy: ",")
+    let interests = getUserInterests().components(separatedBy: ",")
     var categories = Set<String>()
     
-    for interest in interests!{
+    for interest in interests{
         if let category = Constants.interests.eventBriteMapping[interest]{
             categories.insert(category)
         }
@@ -462,10 +462,10 @@ func getEventBriteCategories() -> String{
 }
 
 func getYelpCategories() -> String{
-    let interests = getUserInterests()?.components(separatedBy: ",")
+    let interests = getUserInterests().components(separatedBy: ",")
     var categories = Set<String>()
     
-    for interest in interests!{
+    for interest in interests{
         if let category = Constants.interests.yelpMapping[interest]{
             categories.insert(category)
         }
@@ -643,7 +643,7 @@ func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
             }
 }
 
-func getUserInterests() -> String?{
+func getUserInterests() -> String{
     if let interests = AuthApi.getInterests(){
         let selected = interests.components(separatedBy: ",")
         
@@ -653,7 +653,7 @@ func getUserInterests() -> String?{
         }
         return final_interest.joined(separator: ",")
     }
-    return nil
+    return ""
 }
     
 func crop(image: UIImage, width width: Double, height height: Double) -> UIImage? {

@@ -203,11 +203,6 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["interests": interests])
         AuthApi.set(interests: interests)
         
-        if let interest = getUserInterests(){
-            print(interests)
-        }
-        
-        
         if AuthApi.isNewUser(){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
