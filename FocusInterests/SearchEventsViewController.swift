@@ -245,28 +245,41 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             sender.setTitle("Unattend", for: .normal)
         }
         else{
-            Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? [String:Any]
-                
-                for (id,_) in value!{
-                    Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
-                }
-                
-            })
             
-            Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil
-                {
-                    let attendingAmount = value?["amount"] as! Int
-                    Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
-                }
-            })
+            let alertController = UIAlertController(title: "Unattend \(event.title!)?", message: nil, preferredStyle: .actionSheet)
             
-            sender.layer.borderWidth = 0
-            sender.layer.borderColor = UIColor.clear.cgColor
-            sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-            sender.setTitle("Attend", for: .normal)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "Unattend", style: .default) { action in
+                Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? [String:Any]
+                    
+                    for (id,_) in value!{
+                        Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
+                    }
+                    
+                })
+                
+                Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    if value != nil
+                    {
+                        let attendingAmount = value?["amount"] as! Int
+                        Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
+                    }
+                })
+                
+                sender.layer.borderWidth = 0
+                sender.layer.borderColor = UIColor.clear.cgColor
+                sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                sender.setTitle("Attend", for: .normal)
+            }
+            alertController.addAction(OKAction)
+            
+            self.present(alertController, animated: true)
+            
+            
         }
         
     }
@@ -308,7 +321,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 for (id, event) in events{
                     let info = event as? [String:Any]
-                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String)
                     
                     if let attending = info?["attendingList"] as? [String:Any]{
                         event.setAttendessCount(count: attending.count)
