@@ -89,7 +89,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 	}
 	
     @IBAction func moreButtonPressed(_ sender: UIButton) {
-        print(sender.tag)
+        let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
+        self.present(selectInterests, animated: true, completion: nil)
     }
 	
 	// Edit Description button
