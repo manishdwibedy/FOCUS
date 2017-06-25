@@ -11,6 +11,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseStorage
 import ChameleonFramework
+import GeoFire
 
 struct Constants {
     
@@ -1587,6 +1588,11 @@ struct Constants {
         public static let pins = Database.database().reference().child("pins")
         public static let feedback = Database.database().reference().child("feedback")
         public static let user_mapping = Database.database().reference().child("username_mapping")
+        
+        
+        public static let event_locations = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
+        public static let pin_locations = GeoFire(firebaseRef:Database.database().reference().child("pin_locations"))
+        public static let user_interests = Database.database().reference().child("user_interests")
     }
     
     struct storage{

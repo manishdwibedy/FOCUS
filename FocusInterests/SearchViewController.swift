@@ -206,7 +206,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 
                 let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
                 
-                if user.uuid != AuthApi.getFirebaseUid(){
+                if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
                     let newData = generalSearchData()
                     newData.type = "people"
                     newData.object = user
@@ -418,7 +418,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 let place = allData[indexPath.row].object as! Place
     
                 let cell:SearchPlaceCell = tableView.dequeueReusableCell(withIdentifier: "placeCell") as! SearchPlaceCell!
-    
+                cell.place = place
                 cell.searchVC = self
     
                 cell.placeNameLabel.text = place.name
