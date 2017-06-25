@@ -167,7 +167,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             } else {
                 print("Saved location successfully!")
             }
-        }
+        })
         
         if let data = self.image{
             let imageRef = Constants.storage.event.child("\(id!).jpg")
