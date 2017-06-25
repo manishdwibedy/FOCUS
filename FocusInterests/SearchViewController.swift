@@ -195,12 +195,58 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("new text")
+        FOCUSListShouldBe = false
+        allData.removeAll()
+        let ref = Constants.DB.user
+        _ =  ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+            let users = snapshot.value as? [String : Any] ?? [:]
+            for (_, user) in users{
+                let info = user as? [String:Any]
+                
+                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                
+                if user.uuid != AuthApi.getFirebaseUid(){
+                    let newData = generalSearchData()
+                    newData.type = "people"
+                    newData.object = user
+                    print(user.uuid)
+                    Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { snapshot in
+                        let value = snapshot.value as? NSDictionary
+                        if value != nil{
+                            let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: value?["lat"] as! Double, longitude: value?["lng"] as! Double))
+                            let com = distance.components(separatedBy: " ")
+                            newData.distance = Double(com[0])!
+                            
+                        }
+                        
+                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                            let value = snapshot.value as? NSDictionary
+                            if value != nil {
+                                newData.following = true
+                                
+                            }
+                            self.allData.append(newData)
+                            self.allData = self.sortData(data: self.allData)
+                            self.tableView.reloadData()
+                        })
+                    })
+                    
+                    
+                }
+            }
+            
+            
+        })
+        print("before places search")
+        getPlaces(text: searchText)
+        //getEvents(text: searchText)
         
         
         
 //        if(searchText.characters.count > 0){
 //            self.filtered_user.removeAll()
-//            
+//
 //            let ref = Constants.DB.user
 //            let query = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
 //                let events = snapshot.value as? [String : Any] ?? [:]
@@ -413,6 +459,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if FOCUSListShouldBe == true{
+            let word = Constants.interests.interests[indexPath.row]
+        }
+    }
+    
     func attendEvent(sender:UIButton){
         let buttonRow = sender.tag
         let event = self.events[buttonRow]
@@ -472,11 +524,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     }
 
     func getPlaces(text: String){
-        if text.characters.count == 0{
-            if self.places.count > 0{
-                return
-            }
-        }
+        print("getting place")
+       
         self.filtered_places.removeAll()
         let url = "https://api.yelp.com/v3/businesses/search"
         
@@ -495,6 +544,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             let json = JSON(data: response.data!)
             
             _ = self.places.count
+            print(json)
             for (_, business) in json["businesses"].enumerated(){
                 let id = business.1["id"].stringValue
                 let name = business.1["name"].stringValue
@@ -525,12 +575,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 
                 let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                 
-                if !self.filtered_places.contains(place){
-                    self.filtered_places.append(place)
-                    if text.characters.count == 0{
+                
+                
+                    if text.characters.count >= 0{
                         let newData = generalSearchData()
                         newData.type = "place"
                         newData.object = place
+                        print(place.id)
                         let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: place.latitude, longitude: place.longitude))
                         let com = distance.components(separatedBy: " ")
                         newData.distance = Double(com[0])!
@@ -540,12 +591,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                                 newData.following = true
                                 
                             }
+                           
                             self.allData.append(newData)
                             self.allData = self.sortData(data: self.allData)
                             self.tableView.reloadData()
                         })
                         
-                    }
+                    
                 }
             }
             self.tableView.reloadData()
@@ -553,13 +605,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     }
 
     func getEvents(text: String){
-        if text.characters.count == 0{
-            if self.events.count > 0{
-                return
-            }
-        }
         
-        self.filtered_events.removeAll()
         
         let ref = Constants.DB.event
         let query = ref.queryOrdered(byChild: "title").queryStarting(atValue: text.lowercased()).queryEnding(atValue: text.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
@@ -573,8 +619,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                     event.setAttendessCount(count: attending.count)
                 }
                 
-                self.filtered_events.append(event)
-                if text.characters.count == 0{
+                
                     let newData = generalSearchData()
                     newData.type = "event"
                     newData.object = event
@@ -584,7 +629,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                     self.allData.append(newData)
                     self.allData = self.sortData(data: self.allData)
                     self.tableView.reloadData()
-                }
+                
             }
             self.tableView.reloadData()
         })
