@@ -143,18 +143,15 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         pinTextView.inputAccessoryView = doneToolbar
         
-        
         getPhotos()
+        
+        getPlaceName(location: AuthApi.getLocation()!, completion: {address in
+            self.locationLabel.text = address
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
-        getPlaceName(location: AuthApi.getLocation()!, completion: {address in
-                self.locationLabel.text = address
-        })
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -180,15 +177,15 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func cancel(_ sender: Any) {
-        pinTextView.text = "What are you up to?"
-        pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)
+        pinTextView.text = "What are you up to? Type here."
+        pinTextView.font = UIFont(name: "Avenir Book", size: 15)
         
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func pin(_ sender: Any) {
         
-        if pinTextView.text == "What are you up to?"{
+        if pinTextView.text == "What are you up to? Type here."{
             SCLAlertView().showError("Error", subTitle: "Please enter your caption")
             return
         }
@@ -237,8 +234,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                 try! Share.facebookShare(with: URL(string: "www.google.com")!, description: pinTextView.text!)
             }
         }
-        pinTextView.text = "What are you up to?"
-        pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)
+        pinTextView.text = "What are you up to? Type here."
+        pinTextView.font = UIFont(name: "Avenir Book", size: 15)
+        
         imageArray.removeAll()
         galleryPicArray.removeAll()
         pinTextView.resignFirstResponder()
@@ -381,8 +379,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             if pinTextView.text == ""
             {
-                pinTextView.text = "What are you up to?"
-                pinTextView.font = UIFont(name: "HelveticaNeue", size: 30)
+                pinTextView.text = "What are you up to? Type here."
+                pinTextView.font = UIFont(name: "Avenir Book", size: 15)        
             }
             
         }
@@ -493,6 +491,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBAction func twitterButton(_ sender: Any) {
         if isTwitter == false
         {
+            if AuthApi.getTwitterToken() != nil{
+                Share.loginTwitter()
+            }
             isTwitter = true
             twitterOut.setImage(UIImage(named: "TwitterGreen"), for: UIControlState.normal)
         }else
@@ -571,7 +572,10 @@ extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
                     second.append(a.name)
                 }
             }
-            
+            if a.type == "premise"{
+                first.append(a.name)
+                break
+            }
         }
         
         if isPlace{
@@ -586,8 +590,10 @@ extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
         }
         
         
-        
-        
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+//        UINavigationBar.appearance().translates
+        UINavigationBar.appearance().barTintColor = UIColor.black
+        UINavigationBar.appearance().tintColor = UIColor.black
         dismiss(animated: true, completion: nil)
     }
     

@@ -45,6 +45,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var showEvent = false
     var pins = [pinData]()
     var userLocation: GMSMarker? = nil
+    var showTutorial = false
     
     var searchPlacesTab: SearchPlacesViewController? = nil
     var searchEventsTab: SearchEventsViewController? = nil
@@ -226,6 +227,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             getYelpToken(completion: {token in
 //                self.fetchPlaces(token: token)
             })
+        }
+        
+        if showTutorial{
+            self.showPopup()
         }
     }
     
@@ -927,6 +932,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                             AuthApi.set(username: username.text)
                             print("Text value: \(username.text!)")
                             alert.hideView()
+                            self.showPopup()
                         }
                     })
                 }
@@ -1352,7 +1358,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
 
         // Present dialog
-        //present(popup, animated: true, completion: nil)
+        present(popup, animated: true, completion: nil)
     }
     
     func changeTab(){

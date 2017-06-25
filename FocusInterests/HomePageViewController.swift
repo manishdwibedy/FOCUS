@@ -12,6 +12,7 @@ class HomePageViewController: UITabBarController {
 
     var showEvent = false
     var location: CLLocation? = nil
+    var showTutorial = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class HomePageViewController: UITabBarController {
         
         var vc = self.viewControllers![0] as! MapViewController
         vc.showEvent = showEvent
+        vc.showTutorial = showTutorial
         if let location = self.location{
             vc.currentLocation = location
         }

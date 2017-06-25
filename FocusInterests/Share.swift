@@ -40,13 +40,7 @@ class Share{
         try shareDialog.show()
     }
     
-    static func loginAndShareTwitter(withStatus text: String){
-        
-        if AuthApi.getTwitterToken() != nil{
-            postToTwitter(withStatus: text)
-            return
-        }
-        
+    static func loginTwitter(){
         Twitter.sharedInstance().logIn { session, error in
             if (session != nil)
             {
@@ -66,7 +60,6 @@ class Share{
                             // ...
                             return
                         }
-                        postToTwitter(withStatus: text)
                     })
                     
                 }

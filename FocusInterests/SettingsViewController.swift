@@ -61,7 +61,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 4 {
+        if indexPath.row == 2{
             let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
             swCell?.backgroundColor = self.backgroundColor
             swCell?.titleLabel.text = Constants.settings.cellTitles[indexPath.row]
@@ -91,13 +91,10 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
                 self.present(selectInterests, animated: true, completion: nil)
             case 1:
-                let inviteFriendsVC = InviteFriendsViewController(nibName: "InviteFriendsViewController", bundle: nil)
-                self.present(inviteFriendsVC, animated: true, completion: nil)
-            case 3:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Change_username_password") as? ChangeUsernamePasswordViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 4:
+            case 2:
                 let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
                 if (swCell?.cellSwitch.isOn)!{
                     swCell?.cellSwitch.setOn(false, animated: true)
@@ -105,19 +102,25 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 else{
                     swCell?.cellSwitch.setOn(false, animated: true)
                 }
-            case 6:
+            case 3:
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
+                VC?.showTutorial = true
+                
+                self.present(VC!, animated: true, completion: nil)
+            case 4:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Feedback") as? FeedbackViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 8:
+            case 6:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "License") as? LicenseViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 9:
+            case 7:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Terms") as? TermsViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 10:
+            case 9:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Privacy") as? PrivacyViewController
                 self.present(VC!, animated: true, completion: nil)

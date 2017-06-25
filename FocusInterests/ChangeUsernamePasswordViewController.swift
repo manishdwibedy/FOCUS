@@ -22,14 +22,6 @@ class ChangeUsernamePasswordViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-                let ref = Constants.DB.user
-                _ = ref.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-                    let user = snapshot.value as? [String : Any] ?? [:]
-                    
-                    self.username.text = user["username"] as? String
-                    
-                })
-        
         if AuthApi.getLoginType() == .Email{
             password.isEnabled = true
             repeatPassword.isEnabled = true
@@ -48,32 +40,7 @@ class ChangeUsernamePasswordViewController: UIViewController {
     }
     
     @IBAction func updateUser(_ sender: UIButton) {
-        if !(username.text?.isEmpty)!{
-            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
-            
-            if AuthApi.getLoginType() == .Email{
-                password.isEnabled = true
-                repeatPassword.isEnabled = true
-                
-                _ = Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-                    let user = snapshot.value as? [String : Any] ?? [:]
-                    
-                    let email = user["email"] as? String
-                    Constants.DB.user_mapping.child(self.username.text!).setValue(email)
-                    
-                })
-                
-                
-            }
-        
-            
-        }
-        else{
-            SCLAlertView().showError("Invalid username", subTitle: "Please enter your username.")
-        }
-        
-        
-        if !(password.text?.isEmpty)! && password.text == repeatPassword.text{
+        if !(username.text?.isEmpty)! && !(password.text?.isEmpty)! && password.text == repeatPassword.text{
             
             Auth.auth().currentUser?.updatePassword(to: password.text!, completion: { error in
                 if error != nil{

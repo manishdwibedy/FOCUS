@@ -192,7 +192,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
         
         if twitterSwitch.isOn{
-            Share.loginAndShareTwitter(withStatus: "Please come to \(String(describing: self.event?.title))")
+            Share.postToTwitter(withStatus: "Please come to \(String(describing: self.event?.title))")
         }
         
         if facebookSwitch.isOn{
