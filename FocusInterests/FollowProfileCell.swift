@@ -44,22 +44,12 @@ class FollowProfileCell: UITableViewCell {
         print(data.uid)
         ref.child("users").child(data.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            if value != nil
+            if let value = value
             {
-                if let fullNameVal = value?["fullname"] as? String{
-                    if (fullNameVal == ""){
-                        self.usernameLabel.text = value?["username"] as? String
-                    }else{
-                        self.fullnameLabel.text = fullNameVal
-                        if let usernameLabel = self.usernameLabel.text{
-                            var usernameAttribute = NSMutableAttributedString()
-                            usernameAttribute = NSMutableAttributedString(string: usernameLabel, attributes: [NSFontAttributeName:UIFont(name: "Avenir Heavy", size: 15.0)!])
-                            self.usernameLabel.attributedText = usernameAttribute
-                        }
-                    }
-                }
+                self.fullnameLabel.text = value["fullname"] as? String
+                self.usernameLabel.text = value["username"] as? String
                 
-                self.data.username = (value?["username"] as? String)!
+                self.data.username = (value["username"] as? String)!
                 self.ifFollowing(uid: self.data.uid, completionIt: {(boolV) -> () in
                 
                     if boolV == true
@@ -76,8 +66,8 @@ class FollowProfileCell: UITableViewCell {
     
     func ifFollowing(uid:String,completionIt: @escaping (_ result: Bool)->())
     {
-        ref.child("users").child(AuthApi.getFirebaseUid()!).child("following").queryOrdered(byChild: "UID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
+        ref.child("users").child(AuthApi.getFirebaseUid()!).child("following/people").queryOrdered(byChild: "UID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String:Any]
             if value != nil
             {
                 completionIt(true)

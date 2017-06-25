@@ -13,9 +13,6 @@ class CommentsTableViewCell: UITableViewCell {
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var amountOfLikesLabel: UILabel!
-    @IBOutlet weak var commentLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,13 +26,22 @@ class CommentsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadInfo(UID:String)
+    func loadInfo(UID:String, text: String)
     {
         Constants.DB.user.child(UID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                self.userNameLabel.text = value?["username"] as? String
+                let username = value?["username"] as! String
+                let content = "\(username)  \(text)"
+                
+                var finalText = NSMutableAttributedString()
+                finalText = NSMutableAttributedString(string:content)
+                
+                finalText.setAttributes([NSFontAttributeName : UIFont(name: "Avenir Book", size: 15.0)!], range: NSRange(location:username.characters.count + 2,length:(text.characters.count)))
+
+                //finalText.addAttribute(NSFontAttributeName, value: UIFont(name: "Avenir Black", size: 15.0)!, range:)
+                self.userNameLabel.attributedText = finalText
             }
         })
     }

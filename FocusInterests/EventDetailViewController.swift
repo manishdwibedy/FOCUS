@@ -137,7 +137,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         navTitle.title = event?.title
         eventNameLabel.text = event?.title
         timeLabel.text = event?.date
-        addressLabel.text = event?.fullAddress
+        addressLabel.text = event?.fullAddress?.replacingOccurrences(of: ";;", with: ", ")
         descriptionLabel.text = event?.eventDescription
         
         

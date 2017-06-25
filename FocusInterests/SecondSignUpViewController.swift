@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SCLAlertView
 
 class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
 
@@ -53,23 +54,47 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
             })
         case "email":
             let email = self.usersEmailOrPhone
-            Auth.auth().createUser(withEmail: email, password: validPassword, completion: { (user, error) in
-                if error != nil {
-                    print("error occurred creating a user: \(error!.localizedDescription)")
+            
+            Constants.DB.user_mapping.child(userNameTextField.text!).observeSingleEvent(of: .value, with: {snapshot in
+                if snapshot.value == nil{
+                    Auth.auth().createUser(withEmail: email, password: validPassword, completion: { (user, error) in
+                        if error != nil {
+                            print("error occurred creating a user: \(error!.localizedDescription)")
+                            print("email - \(email) and password - \(validPassword)")
+                            if let errCode = AuthErrorCode(rawValue: error!._code) {
+                                switch errCode {
+                                case .invalidEmail:
+                                    SCLAlertView().showError("Error", subTitle: "Invalid email")
+                                    
+                                case .emailAlreadyInUse:
+                                    SCLAlertView().showError("Error", subTitle: "Email already in user")
+                                case .weakPassword:
+                                    SCLAlertView().showError("Error", subTitle: "Weak password.")
+                                default:
+                                    SCLAlertView().showError("Error", subTitle: "Failed to register the users..")
+                                }
+                            }
+                            
+                        }
+                        
+                        if let validUser = user {
+                            Auth.auth().signIn(withEmail: email, password: validPassword) { (user, error) in
+                                AuthApi.set(userEmail: email)
+                                AuthApi.set(firebaseUid: validUser.uid)
+                                AuthApi.setPassword(password: validPassword)
+                                AuthApi.set(loggedIn: .Email)
+                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
+                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(self.userNameTextField.text)
+                                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/fullname").setValue(self.fullNameTextField.text)
+                            }
+                        }
+                    })
                 }
-                
-                if let validUser = user {
-                    Auth.auth().signIn(withEmail: email, password: validPassword) { (user, error) in
-                        AuthApi.set(userEmail: email)
-                        AuthApi.set(firebaseUid: validUser.uid)
-                        AuthApi.setPassword(password: validPassword)
-                        AuthApi.set(loggedIn: .Email)
-                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
-                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(self.userName)
-                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/fullname").setValue(self.fullName)
-                    }
+                else{
+                    SCLAlertView().showError("Invalid username", subTitle: "Please choose a unique username.")
                 }
             })
+            
         default:
             return
         }

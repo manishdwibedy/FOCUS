@@ -11,6 +11,7 @@ import Photos
 import Gallery
 import Firebase
 import GooglePlaces
+import SCLAlertView
 
 class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate, CLLocationManagerDelegate{
 
@@ -186,6 +187,16 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func pin(_ sender: Any) {
+        
+        if pinTextView.text == "What are you up to?"{
+            SCLAlertView().showError("Error", subTitle: "Please enter your caption")
+            return
+        }
+        if self.interest.characters.count == 0{
+            SCLAlertView().showError("Error", subTitle: "Please choose a FOCUS")
+            return
+        }
+        
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).removeValue()
         for cell in cellArray
         {
@@ -194,6 +205,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                 galleryPicArray.append(cell.imageView.image!)
             }
         }
+        
         let time = NSDate().timeIntervalSince1970
         if pinTextView.text != nil && pinTextView.text != ""
         {
@@ -241,6 +253,12 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if pinType != "normal"
         {
             dismiss(animated: true, completion: nil)
+        }
+        else{
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let vc: UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "home") as! UITabBarController
+            vc.selectedIndex = 0
+            self.present(vc, animated: true, completion: nil)
         }
     
     }
@@ -311,7 +329,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         let imgageManager = PHImageManager()
         
         let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
+        requestOptions.isSynchronous = false
         requestOptions.deliveryMode = .opportunistic
         
         let fetch = PHFetchOptions()

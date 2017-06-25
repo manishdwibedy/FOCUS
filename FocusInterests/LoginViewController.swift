@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 import FBSDKLoginKit
 import FBSDKCoreKit
 import FirebaseAuth
@@ -47,7 +48,6 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         self.regularSignInButton.roundCorners(radius: 9.0)
         self.facebookLoginButton.roundCorners(radius: 27.5)
         self.googleLoginButton.roundCorners(radius: 27.5)
-        
         setUpTextFields()
         hideKeyboardWhenTappedAround()
     }
@@ -106,6 +106,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             self.emailTextField.text = ""
                             self.passwordTextField.text = ""
                             self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
+                            AuthApi.set(userEmail: email)
                             self.showHomeVC()
                         } else {
                             self.showLoginFailedAlert(loginType: "email")
@@ -189,6 +190,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                     else{
                                         self.getFacebookData(uuid: fireId, result: result)
                                     }
+                                    AuthApi.set(userEmail: user?.email)
                                     self.showHomeVC()
                                 })
 
@@ -344,6 +346,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         AuthApi.set(FCMToken: token)
                         
                         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
+                        AuthApi.set(userEmail: googleUser.profile.email)
                         self.showHomeVC()
                         
                     })
@@ -411,5 +414,4 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             
         })
     }
-
 }

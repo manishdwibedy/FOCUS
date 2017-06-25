@@ -37,6 +37,29 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
 
         self.searchBar.delegate = self
         
+//        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
+        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+//        search bar placeholder
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
+        textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        
+//        search bar glass icon
+        let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        glassIconView.tintColor = UIColor.white
+        
+//        search bar clear button
+        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
+        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+        clearButton.tintColor = UIColor.white
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
+        
         hideKeyboardWhenTappedAround()
     }
     
@@ -115,6 +138,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
 //            cell.categoryLabel.text =
         }
         
+        cell.parentVC = self
         cell.checkForFollow(id: place.id)
         let placeHolderImage = UIImage(named: "empty_event")
         cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
@@ -140,8 +164,9 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -161,6 +186,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                 "term": searchText,
                 "latitude": location?.coordinate.latitude,
                 "longitude": location?.coordinate.longitude,
+                "radius": 32_186
             ] as [String : Any]
             print(location?.coordinate)
             Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
@@ -210,15 +236,15 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                     print(results[searchText])
                     self.filtered = results[searchText]!
                     
-//                    self.filtered.sort{ //sort(_:) in Swift 3
-//                            if $0.name != $1.name {
-//                                return $0.name < $1.name
-//                            }
-//                            
-//                        else { // All other fields are tied, break ties by last name
-//                            return $0.distance < $1.distance
-//                        }
-//                    }
+                    self.filtered.sort{ //sort(_:) in Swift 3
+                            if $0.name != $1.name {
+                                return $0.name < $1.name
+                            }
+                            
+                        else { // All other fields are tied, break ties by last name
+                            return $0.distance < $1.distance
+                        }
+                    }
                     
                     print("searching finally - \(searchText)")
 //                    print(self.filtered[0].name)

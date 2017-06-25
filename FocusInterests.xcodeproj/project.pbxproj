@@ -24,6 +24,7 @@
 		5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */; };
 		5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */; };
 		5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E901ED278A70075B57A /* UserProfileViewController.swift */; };
+		5B2AEF491EFDA84D00B6E769 /* InvitePlaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */; };
 		5B2E5E051EF7974900F0BC1B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */; };
 		5B2E5E061EF7974900F0BC1B /* SwiftyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */; };
 		5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */; };
@@ -48,6 +49,7 @@
 		5B448E631EE7B7FC00873F79 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B448E611EE7B7FC00873F79 /* MessageTableViewCell.xib */; };
 		5B448E651EE94BF900873F79 /* Invites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B448E641EE94BF900873F79 /* Invites.storyboard */; };
 		5B448E671EE94C7700873F79 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B448E661EE94C7700873F79 /* InviteViewController.swift */; };
+		5B4B959C1EFCADE700676E64 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4B959B1EFCADE700676E64 /* LoginTests.swift */; };
 		5B519E751ED667D000B36110 /* Pin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B519E741ED667D000B36110 /* Pin.storyboard */; };
 		5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */; };
 		5B519E7A1ED677D800B36110 /* SearchPeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */; };
@@ -147,6 +149,7 @@
 		5BFA009F1EDA8BC200F1ACBF /* EventLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */; };
 		611734EF1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */; };
 		611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */; };
+		61603B941EFD0ABA0063F090 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61603B931EFD0ABA0063F090 /* UIFont+Extensions.swift */; };
 		61C6096F1ED572AC004098BA /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6096E1ED572AC004098BA /* EditProfileViewController.swift */; };
 		61ED203C1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61ED203B1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard */; };
 		61ED203E1EDC236100247DC5 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */; };
@@ -330,6 +333,7 @@
 		5B251E8C1ED2775B0075B57A /* InterestViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestViewCell.swift; sourceTree = "<group>"; };
 		5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestViewCell.xib; sourceTree = "<group>"; };
 		5B251E901ED278A70075B57A /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePlaceTests.swift; sourceTree = "<group>"; };
 		5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyRecordButton.swift; sourceTree = "<group>"; };
 		5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 		5B448E611EE7B7FC00873F79 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		5B448E641EE94BF900873F79 /* Invites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Invites.storyboard; sourceTree = "<group>"; };
 		5B448E661EE94C7700873F79 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
+		5B4B959B1EFCADE700676E64 /* LoginTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 		5B519E741ED667D000B36110 /* Pin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pin.storyboard; sourceTree = "<group>"; };
 		5B519E761ED6728200B36110 /* SearchPeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleViewController.swift; sourceTree = "<group>"; };
 		5B519E781ED677D800B36110 /* SearchPeopleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPeopleTableViewCell.swift; sourceTree = "<group>"; };
@@ -488,6 +493,7 @@
 		5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLocation.swift; sourceTree = "<group>"; };
 		611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFeedCellTableViewCell.swift; sourceTree = "<group>"; };
 		611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationFeedCellTableViewCell.xib; sourceTree = "<group>"; };
+		61603B931EFD0ABA0063F090 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		61C6096E1ED572AC004098BA /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		61ED203B1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notif_Invite_Feed.storyboard; sourceTree = "<group>"; };
 		61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
@@ -1057,6 +1063,8 @@
 				D2B9B0621E5A047C0002F1B1 /* FocusInterestsUITests.swift */,
 				D2B9B0641E5A047C0002F1B1 /* Info.plist */,
 				5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */,
+				5B4B959B1EFCADE700676E64 /* LoginTests.swift */,
+				5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */,
 			);
 			path = FocusInterestsUITests;
 			sourceTree = "<group>";
@@ -1076,6 +1084,7 @@
 				5B7BB1E71ED53FB1001E60FF /* UIView+Extensions.swift */,
 				5B7BB1E91ED54677001E60FF /* UITableView+Extensions.swift */,
 				5B16592B1EDA53540002209A /* UITextView+Extensions.swift */,
+				61603B931EFD0ABA0063F090 /* UIFont+Extensions.swift */,
 				5B33C0581EE0B28A007A8188 /* Double+Extensions.swift */,
 				5BF0293F1EE5F7F300D54FAF /* UIViewController+Extensions.swift */,
 			);
@@ -1634,7 +1643,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3EF8F78E107A5BD6342C5D9B /* [CP] Copy Pods Resources */ = {
@@ -1707,7 +1716,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A7D185B0FA00AE117B34AC52 /* [CP] Embed Pods Frameworks */ = {
@@ -1752,7 +1761,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1796,6 +1805,7 @@
 				5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */,
 				5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */,
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
+				61603B941EFD0ABA0063F090 /* UIFont+Extensions.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
 				EB722F931EE8B19400420DC8 /* ReviewsViewController.swift in Sources */,
 				FF8F7C251EECD0BE00AEC685 /* MapPopUpScreenView.swift in Sources */,
@@ -1952,6 +1962,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B2AEF491EFDA84D00B6E769 /* InvitePlaceTests.swift in Sources */,
+				5B4B959C1EFCADE700676E64 /* LoginTests.swift in Sources */,
 				D2B9B0631E5A047C0002F1B1 /* FocusInterestsUITests.swift in Sources */,
 				5BD641EE1EFB229D003E2A4B /* SearchPlaces.swift in Sources */,
 			);
@@ -2098,7 +2110,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				ENABLE_BITCODE = NO;
@@ -2132,7 +2144,7 @@
 				CODE_SIGN_ENTITLEMENTS = FocusInterests/FocusInterests.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

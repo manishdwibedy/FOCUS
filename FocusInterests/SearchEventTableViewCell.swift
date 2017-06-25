@@ -30,6 +30,10 @@ class SearchEventTableViewCell: UITableViewCell {
         self.eventImage.layer.borderColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0).cgColor
         self.eventImage.roundedImage()
         
+        address.textContainerInset = UIEdgeInsets.zero
+        
+        
+        
 //        self.attendButton.layer.shadowOpacity = 1.0
 //        self.attendButton.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
 //        self.attendButton.layer.masksToBounds = false

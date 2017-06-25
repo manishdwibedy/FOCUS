@@ -176,7 +176,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
         
         if (self.pinAvailable[indexPath.row] != nil){
-            return 150
+            return 115
         }
         else{
             return 80

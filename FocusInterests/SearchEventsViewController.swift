@@ -27,15 +27,11 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     
         tableView.clipsToBounds = true
         
         let nib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
-        
-        
         
         self.searchBar.delegate = self
         
@@ -49,6 +45,28 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         self.searchBar.layer.borderWidth = 0
         self.searchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
         
+        //        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
+        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+        //        search bar placeholder
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
+        textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        
+        //        search bar glass icon
+        let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        glassIconView.tintColor = UIColor.white
+        
+        //        search bar clear button
+        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
+        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+        clearButton.tintColor = UIColor.white
+    
+        UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
         
         createEventButton.roundCorners(radius: 10)
         
@@ -77,7 +95,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
 //                        for (id, event) in events{
 //                            let info = event as? [String:Any]
-                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id as! String, category: info["interest"] as? String)
+                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id as! String, category: info["interests"] as? String)
             
                             if let attending = info["attendingList"] as? [String:Any]{
                                 event.setAttendessCount(count: attending.count)
@@ -124,24 +142,19 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         print(fullAddress)
         
         //cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
-        cell?.address.text = event.fullAddress 
+        cell?.address.text = event.fullAddress?.replacingOccurrences(of: ";;", with: "\n")
         cell?.address.textContainer.maximumNumberOfLines = 2
 
         let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
         cell?.distance.text = getDistance(fromLocation: self.location!, toLocation: eventLocation,addBracket: false)
 
         cell?.guestCount.text = "\(event.attendeeCount) guests"
-        cell?.interest.text = "Category"
+        
+        addGreenDot(label: (cell?.interest)!, content: event.category!)
+        
         cell?.price.text = "Price"
         //cell.checkForFollow(id: event.id!)
         let placeHolderImage = UIImage(named: "empty_event")
-        
-        if let category = event.category?.components(separatedBy: ";")[0]{
-            cell?.interest.text = "\(category)"
-        }
-        else{
-            cell?.interest.text = "N.A."
-        }
         
         if let price = event.price{
             if price == 0{
@@ -184,19 +197,19 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
 //            
 //        })
         
-        cell?.inviteButton.roundCorners(radius: 10)
-        cell?.inviteButton.layer.shadowOpacity = 1.0
+        cell?.inviteButton.roundCorners(radius: 5.0)
+        cell?.inviteButton.layer.shadowOpacity = 0.5
         cell?.inviteButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         cell?.inviteButton.layer.masksToBounds = false
         cell?.inviteButton.layer.shadowColor = UIColor.black.cgColor
-        cell?.inviteButton.layer.shadowRadius = 10.0
+        cell?.inviteButton.layer.shadowRadius = 5.0
         
-        cell?.attendButton.roundCorners(radius: 10)
-        cell?.attendButton.layer.shadowOpacity = 1.0
+        cell?.attendButton.roundCorners(radius: 5.0)
+        cell?.attendButton.layer.shadowOpacity = 0.5
         cell?.attendButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         cell?.attendButton.layer.masksToBounds = false
         cell?.attendButton.layer.shadowColor = UIColor.black.cgColor
-        cell?.attendButton.layer.shadowRadius = 7.0
+        cell?.attendButton.layer.shadowRadius = 5.0
         
         cell?.inviteButton.tag = indexPath.row
         cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
@@ -226,6 +239,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 }
             })
             
+            sender.layer.borderWidth = 1
+            sender.layer.borderColor = UIColor.white.cgColor
             sender.backgroundColor = UIColor.clear
             sender.setTitle("Unattend", for: .normal)
         }
@@ -247,6 +262,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
                 }
             })
+            
+            sender.layer.borderWidth = 0
+            sender.layer.borderColor = UIColor.clear.cgColor
             sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
             sender.setTitle("Attend", for: .normal)
         }
@@ -277,7 +295,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 105
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -313,9 +331,11 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
     }
+    
     @IBAction func showCreateEvent(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)

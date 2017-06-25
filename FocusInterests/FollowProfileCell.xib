@@ -41,22 +41,22 @@
                             <action selector="follow:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="F19-Ha-AAx"/>
                         </connections>
                     </button>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="xdR-Jg-cSF">
-                        <rect key="frame" x="69" y="18.5" width="154" height="49"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xdR-Jg-cSF">
+                        <rect key="frame" x="69" y="21.5" width="154" height="43"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOc-8h-EIS">
                                 <rect key="frame" x="0.0" y="0.0" width="154" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="HDS-Hy-ROE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3z-fT-3vr">
-                                <rect key="frame" x="0.0" y="26" width="154" height="23"/>
+                                <rect key="frame" x="0.0" y="23" width="154" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="h17-id-P4u"/>
+                                    <constraint firstAttribute="height" constant="20" id="h17-id-P4u"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

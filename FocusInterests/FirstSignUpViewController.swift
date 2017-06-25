@@ -115,16 +115,76 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
                 switch self.phoneEmailSwitcher.selectedSegmentIndex {
                 case 0:
                     self.typeOfSignUpSelected = "phone"
+                    destinationVC.usersEmailOrPhone = self.phoneTextField.text!
                 case 1:
                     self.typeOfSignUpSelected = "email"
+                    destinationVC.usersEmailOrPhone = self.emailTextField.text!
                 default:
                     return
                 }
                 destinationVC.typeOfSignUp = self.typeOfSignUpSelected
-                destinationVC.usersEmailOrPhone = validEntry
+                
             }
         }
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == phoneTextField {
+            
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            
+            
+            let components = newString.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+            
+            let decimalString = components.joined(separator: "") as NSString
+            let length = decimalString.length
+            let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
+            
+            if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
+            {
+                let newLength = (textField.text! as NSString).length + (string as NSString).length - range.length as Int
+                
+                return (newLength > 10) ? false : true
+            }
+            var index = 0 as Int
+            let formattedString = NSMutableString()
+            
+            
+            if (length - index) > 3
+            {
+                let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat("(%@) ", areaCode)
+                index += 3
+            }
+            if length - index > 3
+            {
+                let prefix = decimalString.substring(with: NSMakeRange(index, 3))
+                formattedString.appendFormat("%@-", prefix)
+                index += 3
+            }
+            
+            let remainder = decimalString.substring(from: index)
+            formattedString.append(remainder)
+            textField.text = formattedString as String
+            return false
+            
+//            let phoneNumber = textField.text
+//            
+//            if phoneNumber?.characters.count == 3{
+//                textField.text = phoneNumber! + "-"
+//                return false
+//            }
+//            else if phoneNumber?.characters.count == 7{
+//                textField.text = phoneNumber! + "-"
+//                return false
+//            }
+//            return true
+        }
+        return true
+    }
+    
+    
+    
     // MARK - TextField Delegate Methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

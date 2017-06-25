@@ -54,9 +54,41 @@ target 'FocusInterests' do
 end
 
 target 'FocusInterestsTests' do
+    pod 'Firebase/Messaging', '~> 4.0’
+    pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Storage'
+    pod 'Firebase/Crash'
+    pod 'Firebase/Database'
+    pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+    
+    pod 'Google'
+    pod 'GoogleSignIn'
+    pod 'GooglePlaces'
+    pod 'GooglePlacePicker'
+    pod 'GoogleMaps'
+    
+    
+    
 end
 
 
 target 'FocusInterestsUITests' do
+    pod 'Firebase/Messaging', '~> 4.0’
+    pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Storage'
+    pod 'Firebase/Crash'
+    pod 'Firebase/Database'
+    pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+    
+    pod 'Google'
+    pod 'GoogleSignIn'
+    pod 'GooglePlaces'
+    pod 'GooglePlacePicker'
+    pod 'GoogleMaps'
+    
+    
+    
 end
 

@@ -950,7 +950,7 @@
                                             <constraint firstAttribute="width" secondItem="694-lq-czT" secondAttribute="height" multiplier="194:33" constant="52.666666666666657" id="WtT-VR-mw1"/>
                                         </constraints>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                 </subviews>

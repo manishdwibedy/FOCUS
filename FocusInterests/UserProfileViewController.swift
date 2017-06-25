@@ -30,25 +30,28 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 	@IBOutlet var descriptionText: UITextView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
+    
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     
 //    @IBOutlet weak var suggestionsHeight: NSLayoutConstraint!
     
     // follower and following
     @IBOutlet weak var followerLabel: UILabel!
+    @IBOutlet weak var followerCount: UIButton!
     @IBOutlet weak var followingLabel: UILabel!
+    @IBOutlet weak var followingCount: UIButton!
     
     // user pin info
     
     @IBOutlet weak var greenDotImage: UIImageView!
 //    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var pinImage: UIImageView!
-    @IBOutlet weak var pinLabel: UILabel!
     @IBOutlet weak var pinCategoryLabel: UILabel!
     @IBOutlet weak var pinLikesLabel: UILabel!
-    @IBOutlet weak var pinAddress1Label: UILabel!
     @IBOutlet weak var pinAddress2Label: UILabel!
-    @IBOutlet weak var morePinButton: UIButton!
+    
+    @IBOutlet weak var pinDistanceLabel: UILabel!
     
 //    MARK: Do we still need this
 //    @IBOutlet weak var pinDescription: UILabel!
@@ -56,24 +59,24 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var emptyPinButton: UIButton!
     
     // user interests
+    @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var interestStackView: UIStackView!
-    
-	// Haven't added:
-	// User FOCUS button
+    @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var interestStackHeight: NSLayoutConstraint!
     @IBOutlet weak var moreFocusButton: UIButton!
+    
 	// Location Description (would this be location description?)
 	// Location FOCUS button (what would this be for?)
 	// Collection view See more... button
     @IBOutlet weak var moreEventsButton: UIButton!
 	// (and also any of the ones after)
+    @IBOutlet weak var eventView: UIView!
 	
     var followers = [User]()
     var following = [User]()
     
     var suggestion = [Event]()
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
-    
-    let pinDataAvailable = true
     
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
@@ -132,7 +135,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
 //      Use tags in order to allow for only IBAction that will track
 //      each event based on the tag of the sender
-        self.morePinButton.tag = 1
         self.moreFocusButton.tag = 2
         self.moreEventsButton.tag = 3
         self.emptyPinButton.roundCorners(radius: 10)
@@ -145,41 +147,69 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         getEventSuggestions()
         getPin()
         
-        if !pinDataAvailable{
-            self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
-            userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
-            mainViewHeight.constant = 750
-        }
-        else{
-            
-        }
+        self.pinView.addTopBorderWithColor(color: UIColor.white, width: 1)
+        self.focusView.addTopBorderWithColor(color: UIColor.white, width: 1)
+        self.eventView.addTopBorderWithColor(color: UIColor.white, width: 1)
+        
+        self.navigationItem.title = ""
+        Constants.DB.pins.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if let value = value
+            {
+                self.emptyPinButton.isHidden = true
+                
+                self.pinCategoryLabel.text = value["focus"] as! String
+                self.pinAddress2Label.text = value["pin"] as! String
+//                let messageText = "\(String(describing: username)) \(self.data.pinMessage)"
+//                
+//                let length = messageText.characters.count - username.characters.count
+//                let range = NSMakeRange(username.characters.count, length)
+//                
+//                self.pinMessageLabel.attributedText = attributedString(from: messageText, nonBoldRange: range)
+                
+                //self.pinMessageLabel.text = (value?["username"] as? String)! + " " + self.data.pinMessage
+                //                print(value?["username"] as? String)
+                //                let boldText  = (value?["username"] as? String)!
+                //                let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 15)]
+                //                let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+                //
+                //                let normalText = " " + self.data.pinMessage
+                //                let normalString = NSMutableAttributedString(string:normalText)
+                //                attributedString.append(normalString)
+                //                self.pinMessageLabel.attributedText = attributedString
+                
+            }
+            else{
+                self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
+                self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
+                self.mainViewHeight.constant = 750
+                
+                self.pinViewHeight.constant = 35
+                
+                self.emptyPinButton.isHidden = false
+                
+                self.greenDotImage.isHidden = true
+                self.pinImage.isHidden = true
+                self.pinCategoryLabel.isHidden = true
+                self.pinLikesLabel.isHidden = true
+                self.updatePinButton.isHidden = true
+                
+            }
+        })
+
+//        
+//        if !pinDataAvailable{
+//            self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
+//            userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
+//            mainViewHeight.constant = 750
+//        }
+//        else{
+//            
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if !pinDataAvailable{
-            pinViewHeight.constant = 35
-            
-            
-            
-            greenDotImage.isHidden = true
-            //            categoryImage.isHidden = true
-            pinImage.isHidden = true
-            pinLabel.isHidden = true
-            pinCategoryLabel.isHidden = true
-            pinLikesLabel.isHidden = true
-            pinAddress1Label.isHidden = true
-            pinAddress2Label.isHidden = true
-            updatePinButton.isHidden = true
-            morePinButton.isHidden = true
-            //            MARK: Do we still need this
-            //            pinDescription.isHidden = true
-        }
-        else{
-            emptyPinButton.isHidden = true
-            
-        }
     }
     
 //    MARK: COLLECTIONVIEW DELEGATE METHODS
@@ -241,21 +271,19 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 let image_string = dictionnary["image_string"] as? String ?? ""
                 let fullname = dictionnary["fullname"] as? String ?? ""
                 
-//                self.userName.text = username_str
-//                self.descriptionText.text = description_str
                 
 //                SAMPLE description text
                 //self.descriptionText.text = description
                 self.fullNameLabel.text = fullname
+                self.userNameLabel.text = username_str
                 
-//        setting username to title
-//                self.navBarItem.title = self.userName.text
+                self.navBarItem.title = username_str
                 
                 if let followers = dictionnary["followers"] as? [String:Any]{
                     if let people = followers["people"] as? [String:[String:Any]]{
                         let count = people.count
                         
-                        self.followerLabel.text = "Followers: \(count)"
+                        self.followerCount.setTitle("\(count)", for: .normal)
                     }
                 }
                 
@@ -263,7 +291,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     if let people = followers["people"] as? [String:[String:Any]]{
                         let count = people.count
                         
-                        self.followingLabel.text = "Followers: \(count)"
+                        self.followingCount.setTitle("\(count)", for: .normal)
                     }
                 }
                 
@@ -300,6 +328,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 interestStackView.translatesAutoresizingMaskIntoConstraints = false;
             }
         }
+        
+        let count = interestStackView.arrangedSubviews.count
+        interestStackHeight.constant = CGFloat(25 * count)
+        interestViewHeight.constant = CGFloat(25 * count + 113)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -331,22 +363,22 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            if value != nil
+            if let value = value
             {
-                self.pinAddress1Label.text = value?["formattedAddress"] as? String
-                self.pinAddress2Label.text = value?["pin"] as? String
-                if (value?["like"] as? NSDictionary) != nil{
-                self.pinLikesLabel.text = String((value?["like"] as? NSDictionary)?["num"] as! Int)
-                }
-                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                    let value = snapshot.value as? NSDictionary
-                    if value != nil
-                    {
-                        self.pinLabel.text = value?["username"] as? String
+                self.pinAddress2Label.text = value["pin"] as? String
+                if let likes = value["like"] as? NSDictionary{
+                    if let likeCount = likes["num"] as? Int{
+                        var likeLabel = "like"
+                        if likeCount > 1{
+                            likeLabel.append("s")
+                        }
+                        self.pinLikesLabel.text = "\(likeCount) \(likeLabel)"
                     }
-                })
+                    
+                }
                 
-                
+                let pin_location = CLLocation(latitude: value["lat"] as! Double, longitude: value["lng"] as! Double)
+                self.pinDistanceLabel.text = getDistance(fromLocation: pin_location, toLocation: AuthApi.getLocation()!)
             }
         })
         
@@ -406,11 +438,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.editButton.layer.borderWidth = 1
         self.editButton.layer.borderColor = UIColor.white.cgColor
         self.editButton.roundCorners(radius: 5.0)
-        
-        self.morePinButton.layer.borderWidth = 1
-        self.morePinButton.layer.borderColor = UIColor.white.cgColor
-        self.morePinButton.roundCorners(radius: 5.0)
-        
+       
         self.moreFocusButton.layer.borderWidth = 1
         self.moreFocusButton.layer.borderColor = UIColor.white.cgColor
         self.moreFocusButton.roundCorners(radius: 5.0)

@@ -413,10 +413,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             //let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
             var distance = ""
             var pinMessage = pin.pinMessage
-            //var inte
-            //let location = pin.locationAddress
+            var interest = pin.focus
             var name = ""
-            //var timeAgo = ""
+            
             
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
             
@@ -425,7 +424,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if value != nil
                 {
                     name = value?["username"] as! String
-                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance)
+                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest)
                 }
             })
         
@@ -883,6 +882,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
         if AuthApi.isNewUser(){
             AuthApi.setNewUser()
+           
             let appearance = SCLAlertView.SCLAppearance(
                 kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
                 kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
@@ -895,10 +895,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             username.autocapitalizationType = .none
             alert.addButton("Add user name") {
                 if (username.text?.characters.count)! > 0{
-                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
-                    print("Text value: \(username.text!)")
-                    alert.hideView()
-                    self.showPopup()
+                    
+                    Constants.DB.user_mapping.child(username.text!).observeSingleEvent(of: .value, with: {snapshot in
+                        if snapshot.value == nil{
+                            
+                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+                            Constants.DB.user_mapping.child(username.text!).setValue(AuthApi.getUserEmail())
+                            AuthApi.set(username: username.text)
+                            print("Text value: \(username.text!)")
+                            alert.hideView()
+                            self.showPopup()
+                        }
+                        else{
+                            SCLAlertView().showError("Invalid username", subTitle: "Please choose a unique username.")
+                        }
+                    })
                 }
                 
             }
@@ -1226,7 +1237,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 for (key,_) in (value)!
                 {
-                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String), focus: (value?[key] as! NSDictionary)["focus"] as! String)
+                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String), focus: (value?[key] as! NSDictionary)["focus"] as? String ?? "")
 
                     let position = CLLocationCoordinate2D(latitude: Double(data.coordinates.latitude), longitude: Double(data.coordinates.longitude))
                     let marker = GMSMarker(position: position)
@@ -1254,7 +1265,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         overlayAppearance.blurRadius  = 20
         overlayAppearance.blurEnabled = false
         overlayAppearance.liveBlur    = false
-        overlayAppearance.opacity     = 0.4
+        overlayAppearance.opacity     = 0.85
         
         var dialogAppearance = PopupDialogDefaultView.appearance()
         
@@ -1268,7 +1279,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         // Customize the container view appearance
         let pcv = PopupDialogContainerView.appearance()
-        pcv.backgroundColor = UIColor(red:0.23, green:0.23, blue:0.27, alpha:1.00)
+        pcv.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:1.00)
         pcv.cornerRadius    = 10
         pcv.shadowEnabled   = true
         pcv.shadowColor     = UIColor.black
@@ -1289,7 +1300,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
 
         // Present dialog
-        present(popup, animated: true, completion: nil)
+        //present(popup, animated: true, completion: nil)
     }
     
     func changeTab(){

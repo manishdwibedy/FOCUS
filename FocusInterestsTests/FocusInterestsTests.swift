@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import FocusInterests
 
 class FocusInterestsTests: XCTestCase {
     

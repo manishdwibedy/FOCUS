@@ -28,6 +28,7 @@ class MapPopUpScreenView: UIView {
     
     @IBOutlet weak var addressLabel: UILabel!
     
+    @IBOutlet weak var captionLeading: NSLayoutConstraint!
     var object: Any!
     var type = ""
     var parentVC: MapViewController!
@@ -102,13 +103,16 @@ class MapPopUpScreenView: UIView {
         
     }
     
-    func loadPin(name: String, pin: String, distance: String)
+    func loadPin(name: String, pin: String, distance: String, focus: String)
     {
         
         self.startImage.isHidden = true
         boldLabel.text = name
         bottomText.text = pin
         mileLabel.text = distance
+        interestLabel.text = focus
+        
+        captionLeading.constant = -20
         
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 125/255, green: 201/255, blue: 49/255, alpha: 1).cgColor

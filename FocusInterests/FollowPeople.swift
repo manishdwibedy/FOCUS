@@ -28,10 +28,13 @@ class Follow{
         Constants.DB.user.child(uid).child("followers").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? [String:Any]
             
-            for (id, _) in value!{
-                Constants.DB.user.child(uid).child("followers/people/\(id)").removeValue()
-                
+            if let value = value{
+                for (id, _) in value{
+                    Constants.DB.user.child(uid).child("followers/people/\(id)").removeValue()
+                    
+                }
             }
+            
             
         })
     }
@@ -47,8 +50,11 @@ class Follow{
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").queryOrdered(byChild: "placeID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? [String:Any]
             
-            for (id, _) in value!{
-                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places/\(id)").removeValue()
+            if let value = value{
+                for (id, _) in value{
+                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places/\(id)").removeValue()
+                }
+                
             }
             
         })
