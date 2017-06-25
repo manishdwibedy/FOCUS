@@ -1559,7 +1559,7 @@ struct Constants {
     }
     
     struct settings {
-        public static let cellTitles = ["Choose Interests", "Change Username & Password", "Private Profile", "Tutorial", "Help and Feedback", "Open source libraries", "Terms", "Privacy Policy", "Clear Search History", "Logout"]
+        public static let cellTitles = ["Choose Interests", "Change Username & Password", "Private Profile", "Tutorial", "Help and Feedback", "Open source libraries", "Terms", "Privacy Policy", "Logout"]
     }
     
     struct defaultsKeys {

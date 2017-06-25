@@ -44,7 +44,7 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.gray {
             textView.text = nil
-            textView.textColor = UIColor.white
+            textView.textColor = UIColor.black
         }
     }
     

@@ -112,28 +112,41 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Feedback") as? FeedbackViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 6:
+            case 5:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "License") as? LicenseViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 7:
+            case 6:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Terms") as? TermsViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 9:
+            case 7:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Privacy") as? PrivacyViewController
                 self.present(VC!, animated: true, completion: nil)
             case Constants.settings.cellTitles.count - 1:
-                fBManager!.logOut()
-                FBSDKAccessToken.setCurrent(nil)
-                FBSDKProfile.setCurrent(nil)
-                AuthApi.setDefaultsForLogout()
-                defaults.set("notLoggedIn", forKey: "Login")
-                GIDSignIn.sharedInstance().signOut()
-                googleHandle!.signOut()
-                try! Auth.auth().signOut()
-                self.logoutDelegate?.logout()
+                
+                let alertController = UIAlertController(title: "Logout?", message: nil, preferredStyle: .actionSheet)
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                
+                let OKAction = UIAlertAction(title: "Logout", style: .default) { action in
+                    self.fBManager!.logOut()
+                    FBSDKAccessToken.setCurrent(nil)
+                    FBSDKProfile.setCurrent(nil)
+                    AuthApi.setDefaultsForLogout()
+                    UserDefaults.standard.set("notLoggedIn", forKey: "Login")
+                    GIDSignIn.sharedInstance().signOut()
+                    self.googleHandle!.signOut()
+                    try! Auth.auth().signOut()
+                    self.logoutDelegate?.logout()
+                }
+                alertController.addAction(OKAction)
+                
+                self.present(alertController, animated: true)
+                
+            
             default: break
         }        
     }

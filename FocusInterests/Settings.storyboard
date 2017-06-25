@@ -32,7 +32,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Privacy" id="VLi-GB-Jtr">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="iOh-0y-3in">
+                                        <barButtonItem key="leftBarButtonItem" image="BackArrow" id="iOh-0y-3in">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="backPressed:" destination="IGr-6D-CSz" id="rNH-gM-FhU"/>
@@ -116,7 +116,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.2196078431372549" green="0.28627450980392155" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="bix-pO-fHh" firstAttribute="leading" secondItem="eh6-aG-F12" secondAttribute="leading" constant="10" id="5Ta-xL-df5"/>
                                     <constraint firstAttribute="trailing" secondItem="bix-pO-fHh" secondAttribute="trailing" constant="10" id="YWV-Rg-egp"/>
@@ -167,7 +167,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Terms &amp; Conditions" id="KNf-zU-Fey">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Vif-EF-peI">
+                                        <barButtonItem key="leftBarButtonItem" image="BackArrow" id="Vif-EF-peI">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="backPressed:" destination="gg1-6K-5Hp" id="uUT-A7-BU7"/>
@@ -258,7 +258,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.2196078431372549" green="0.28627450980392155" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="jyo-l7-UlQ" secondAttribute="trailing" constant="8" id="246-uI-DaS"/>
                                     <constraint firstItem="jyo-l7-UlQ" firstAttribute="top" secondItem="7M5-q1-1hH" secondAttribute="top" constant="8" id="5pu-1M-ytO"/>
@@ -308,8 +308,8 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Open source licenses" id="UCo-So-QPP">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="5A6-gc-Pov">
+                                    <navigationItem title="Open Source Licenses" id="UCo-So-QPP">
+                                        <barButtonItem key="leftBarButtonItem" image="BackArrow" id="5A6-gc-Pov">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="backPressed:" destination="4UU-Wd-vcU" id="Ia2-Oq-UbK"/>
@@ -593,7 +593,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.2196078431372549" green="0.28627450980392155" blue="0.35686274509803922" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="45g-xG-DjU" secondAttribute="bottom" constant="8" id="0VI-9H-chI"/>
                                     <constraint firstItem="45g-xG-DjU" firstAttribute="top" secondItem="4HM-ut-ON2" secondAttribute="top" constant="8" id="9II-kl-M7g"/>
@@ -602,7 +602,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.2196078431372549" green="0.28627450980392155" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4HM-ut-ON2" firstAttribute="leading" secondItem="6HM-oP-ZfD" secondAttribute="leading" id="3UA-z1-gKv"/>
                             <constraint firstAttribute="trailing" secondItem="4HM-ut-ON2" secondAttribute="trailing" id="AXP-Nv-fNB"/>
@@ -638,13 +638,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="6zT-vK-r5j"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.094117647058823528" green="0.17254901960784313" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Feedback" id="A6W-Mv-kSw">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="bg4-9T-Sgi">
+                                        <barButtonItem key="leftBarButtonItem" image="BackArrow" id="bg4-9T-Sgi">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="backPressed:" destination="zq0-nP-QTl" id="6sv-BY-n6O"/>
@@ -658,11 +658,11 @@
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yof-41-T5I">
                                         <rect key="frame" x="8" y="10" width="359" height="150"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="fbm-JS-pB2"/>
                                         </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -677,7 +677,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.2196078431372549" green="0.28627450980392155" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="vS8-y1-xLs" secondAttribute="trailing" constant="30" id="QrP-Sc-pDi"/>
                                     <constraint firstAttribute="trailing" secondItem="Yof-41-T5I" secondAttribute="trailing" constant="8" id="R9f-LA-FOS"/>
