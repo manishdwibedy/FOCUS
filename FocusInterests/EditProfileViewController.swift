@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var genderTf: UITextField!
     @IBOutlet weak var phoneTf: UITextField!
@@ -29,7 +29,7 @@ class EditProfileViewController: UIViewController {
         self.fillDataFromUser()
         hideKeyboardWhenTappedAround()
         
-        genderTf.addTarget(self, action: "getGender:", forControlEvents: UIControlEvents.TouchDown)
+        genderTf.delegate = self
 
     }
 
@@ -83,22 +83,26 @@ class EditProfileViewController: UIViewController {
 
     }
     
-    func getGender(textField: UITextField) {
-        let alertController = UIAlertController(title: "Gender?", message: nil, preferredStyle: .actionSheet)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        let maleAction = UIAlertAction(title: "Male", style: .default) { action in
-            textField.text = "Male"
+    func textFieldDidBeginEditing(textField: UITextField) -> Bool {
+        if textField == genderTf {
+            let alertController = UIAlertController(title: "Gender?", message: nil, preferredStyle: .actionSheet)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            let maleAction = UIAlertAction(title: "Male", style: .default) { action in
+                textField.text = "Male"
+            }
+            let femaleAction = UIAlertAction(title: "Female", style: .default) { action in
+                textField.text = "Female"
+            }
+            alertController.addAction(maleAction)
+            alertController.addAction(femaleAction)
+            
+            self.present(alertController, animated: true)
+            return true // myTextField was touched
         }
-        let femaleAction = UIAlertAction(title: "Female", style: .default) { action in
-            textField.text = "Female"
-        }
-        alertController.addAction(maleAction)
-        alertController.addAction(femaleAction)
-        
-        self.present(alertController, animated: true)
+        return true
     }
     
     @IBAction func cancelAction(_ sender: Any) {

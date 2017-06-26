@@ -237,9 +237,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-//        
-        return self.suggestion.count
+        return self.suggestion.count > 3 ? 3 ? self.suggestion.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -444,9 +442,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func getEventSuggestions(){
+        self.moreEventsButton.isHidden = false
         
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
-        Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: ID).queryLimited(toLast: 3).observeSingleEvent(of: .value, with: { snapshot in
+        Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: ID).queryLimited(toLast: 4).observeSingleEvent(of: .value, with: { snapshot in
             let eventInfo = snapshot.value as? [String : Any]
             
             if let eventInfo = eventInfo{
@@ -460,9 +459,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             }
             
             if self.suggestion.count > 0{
+                if self.suggestion.count > 3{
+                    self.moreEventsButton.isHidden = false
+                }
                 self.eventsCollectionView.reloadData()    
             }
             else{
+                self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
                 self.createEventButton.alpha = 1
             }
             
