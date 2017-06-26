@@ -547,6 +547,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         lastCaption = pinTextView.text
         let focusWindow = InterestsViewController(nibName:"InterestsViewController", bundle:nil)
+        focusWindow.pinInterest = true
         self.present(focusWindow, animated: true, completion:{
             focusWindow.saveButton.isEnabled = false
             focusWindow.saveButton.title = ""

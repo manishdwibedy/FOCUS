@@ -34,6 +34,7 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     var needsReturn = false
     var parentReturnVC: PinScreenViewController!
     var isNewUser = false
+    var pinInterest = false
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -66,28 +67,31 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         self.old_interests = Set(getUserInterests().components(separatedBy: ",").map { $0 })
         
         var selected_interests = [String:InterestStatus]()
-        if let interests = AuthApi.getInterests(){
-            let selected = interests.components(separatedBy: ",")
-            
-            var final_interest = [String]()
-            for interest in selected{
-                if interest.characters.count > 0{
-                    let parts = interest.components(separatedBy: "-")
-                    if parts.count == 2{
-                        let interest_name = interest.components(separatedBy: "-")[0]
-                        let status = interest.components(separatedBy: "-")[1]
-                        
-                        if status == "1"{
-                            selected_interests[interest_name] = .like
-                        }
-                        else{
-                            selected_interests[interest_name] = .love
+        
+        if !pinInterest{
+            if let interests = AuthApi.getInterests(){
+                let selected = interests.components(separatedBy: ",")
+                
+                var final_interest = [String]()
+                for interest in selected{
+                    if interest.characters.count > 0{
+                        let parts = interest.components(separatedBy: "-")
+                        if parts.count == 2{
+                            let interest_name = interest.components(separatedBy: "-")[0]
+                            let status = interest.components(separatedBy: "-")[1]
+                            
+                            if status == "1"{
+                                selected_interests[interest_name] = .like
+                            }
+                            else{
+                                selected_interests[interest_name] = .love
+                            }
+                            
                         }
                         
                     }
                     
                 }
-                
             }
         }
         
