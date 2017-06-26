@@ -11,8 +11,13 @@ import SDWebImage
 import GeoFire
 import FirebaseDatabase
 
-class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate{
 
+enum previousScreen{
+    case people
+}
+
+class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate{
+    
     @IBOutlet weak var eventsCollectionView: UICollectionView!
 	@IBOutlet var userScrollView: UIScrollView!
     
@@ -84,7 +89,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     var otherUser = false
     var userID = ""
-    
+    var previousScreen: previousScreen? = nil
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
         present(vc, animated: true, completion: nil)
@@ -92,10 +97,22 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     // Back button
 	@IBAction func backButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
+        if otherUser{
+//            switch(previousScreen){
+//            case people:
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
+//                VC.
+//                self.present(VC!, animated: true, completion: nil)
+//            }
+        }
+        else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
+            
+            self.present(VC!, animated: true, completion: nil)
+        }
         
-        self.present(VC!, animated: true, completion: nil)
 	}
 	
     @IBAction func moreButtonPressed(_ sender: UIButton) {
