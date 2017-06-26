@@ -62,23 +62,16 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Green.png" translatesAutoresizingMaskIntoConstraints="NO" id="thw-F2-bgQ">
-                        <rect key="frame" x="213" y="25" width="10" height="10"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="10" id="7WR-7O-ygg"/>
-                            <constraint firstAttribute="height" constant="10" id="9Qq-3t-3YG"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="DXu-4K-Wqf" firstAttribute="centerY" secondItem="vkF-rm-0g8" secondAttribute="centerY" id="050-9I-k5D"/>
-                    <constraint firstItem="thw-F2-bgQ" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Niq-WL-Ejl" secondAttribute="trailing" constant="80" id="6gr-DS-uyM"/>
+                    <constraint firstItem="DXu-4K-Wqf" firstAttribute="centerY" secondItem="Niq-WL-Ejl" secondAttribute="centerY" id="72N-GO-ai3"/>
                     <constraint firstItem="otm-Pt-SGC" firstAttribute="trailing" secondItem="Niq-WL-Ejl" secondAttribute="trailing" id="8xP-4W-wBC"/>
-                    <constraint firstItem="Niq-WL-Ejl" firstAttribute="centerY" secondItem="thw-F2-bgQ" secondAttribute="centerY" constant="0.25" id="9KI-ax-IPH"/>
                     <constraint firstItem="ZXN-2H-D6t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="GVR-mW-OTQ"/>
                     <constraint firstItem="otm-Pt-SGC" firstAttribute="leading" secondItem="Niq-WL-Ejl" secondAttribute="leading" id="HOa-vb-OkT"/>
                     <constraint firstItem="OIK-kL-n5V" firstAttribute="leading" secondItem="Niq-WL-Ejl" secondAttribute="leading" id="Hsf-On-5ea"/>
+                    <constraint firstItem="DXu-4K-Wqf" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Niq-WL-Ejl" secondAttribute="trailing" constant="100" id="N8S-Sc-epE"/>
                     <constraint firstItem="DXu-4K-Wqf" firstAttribute="top" secondItem="vkF-rm-0g8" secondAttribute="top" id="Ubg-96-EGu"/>
                     <constraint firstItem="Niq-WL-Ejl" firstAttribute="leading" secondItem="ZXN-2H-D6t" secondAttribute="trailing" constant="7" id="Xjg-Ks-1oH"/>
                     <constraint firstItem="OIK-kL-n5V" firstAttribute="trailing" secondItem="Niq-WL-Ejl" secondAttribute="trailing" id="Ym9-Ez-JSz"/>
@@ -86,19 +79,16 @@
                     <constraint firstItem="OIK-kL-n5V" firstAttribute="centerY" secondItem="ZXN-2H-D6t" secondAttribute="centerY" id="aho-wh-lLs"/>
                     <constraint firstAttribute="trailingMargin" secondItem="DXu-4K-Wqf" secondAttribute="trailing" constant="55" id="cy6-xX-5Ze"/>
                     <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="vkF-rm-0g8" secondAttribute="trailing" constant="94" id="eVo-4m-oTY"/>
-                    <constraint firstItem="DXu-4K-Wqf" firstAttribute="leading" secondItem="thw-F2-bgQ" secondAttribute="trailing" constant="10" id="gGh-ad-Ocn"/>
                     <constraint firstItem="otm-Pt-SGC" firstAttribute="top" secondItem="OIK-kL-n5V" secondAttribute="bottom" constant="5" id="hpj-GR-mci"/>
                     <constraint firstItem="OIK-kL-n5V" firstAttribute="centerX" secondItem="Niq-WL-Ejl" secondAttribute="centerX" id="kWx-kS-Fiu"/>
                     <constraint firstItem="OIK-kL-n5V" firstAttribute="top" secondItem="Niq-WL-Ejl" secondAttribute="bottom" constant="5" id="l2g-ZZ-Q1c"/>
                     <constraint firstItem="otm-Pt-SGC" firstAttribute="centerX" secondItem="Niq-WL-Ejl" secondAttribute="centerX" id="uum-HL-GeM"/>
                     <constraint firstItem="OIK-kL-n5V" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wze-KT-yUf"/>
-                    <constraint firstItem="DXu-4K-Wqf" firstAttribute="centerY" secondItem="thw-F2-bgQ" secondAttribute="centerY" id="xIG-Ya-w7F"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="addressLabel" destination="otm-Pt-SGC" id="1T2-lM-t92"/>
-                <outlet property="categoryImage" destination="thw-F2-bgQ" id="1Ys-Be-BHB"/>
                 <outlet property="categoryLabel" destination="DXu-4K-Wqf" id="YZg-qV-cPz"/>
                 <outlet property="dateAndTimeLabel" destination="OIK-kL-n5V" id="Dvv-UC-iMF"/>
                 <outlet property="distanceLabel" destination="vkF-rm-0g8" id="T05-Xn-juo"/>
@@ -109,7 +99,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Green.png" width="82" height="82"/>
         <image name="UserPhoto" width="102" height="102"/>
     </resources>
 </document>

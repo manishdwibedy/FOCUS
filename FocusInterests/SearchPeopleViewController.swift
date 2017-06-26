@@ -41,6 +41,30 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
         
         self.searchBar.delegate = self
+        
+        //        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
+        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+        //        search bar placeholder
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
+        textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        
+        //        search bar glass icon
+        let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        glassIconView.tintColor = UIColor.white
+        
+        //        search bar clear button
+        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
+        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+        clearButton.tintColor = UIColor.white
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
+        
         self.moreButton.layer.borderColor = UIColor.white.cgColor
         self.moreButton.roundCorners(radius: 5.0)
         
@@ -122,25 +146,28 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.fullName.text = people.fullname
         
         if let pin = self.pinAvailable[indexPath.row]{
-            cell?.interestView?.isHidden = false
+
             var address = pin.locationAddress
             address = address.replacingOccurrences(of: ";;", with: "\n")
+            cell?.whiteBorder.isHidden = false
             cell?.address.text = address
-            cell?.interest.text = pin.focus
-            
+            addGreenDot(label: (cell?.interest)!, content: pin.focus)
             let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
             cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
         }
         else{
+            cell?.whiteBorder.isHidden = true
             cell?.address.text = ""
             cell?.distance.text = ""
-            cell?.interestView?.isHidden = true
+            addGreenDot(label: (cell?.interest)!, content: "N.A.")
         }
     
         cell?.ID = people.uuid!
         //cell.checkForFollow(id: event.id!)
-        let placeHolderImage = UIImage(named: "empty_event")
         
+        
+        let placeHolderImage = UIImage(named: "empty_event")
+
         cell?.checkFollow()
         
         return cell!
@@ -175,12 +202,25 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
         
-        if (self.pinAvailable[indexPath.row] != nil){
-            return 115
-        }
-        else{
-            return 80
-        }
+//        if (self.pinAvailable[indexPath.row] != nil){
+            return 110
+//        }
+//        else{
+//
+//            cell?.cellContentViewHeightConstraint.constant = 60.0
+////            cell?.subviews[0].subviews[0].frame.size.height = 70.0
+//            cell?.distanceCategoryStack.arrangedSubviews[0].removeFromSuperview()
+//            cell?.distanceCategoryStack.spacing = 0
+//            cell?.addressStack.arrangedSubviews[0].removeFromSuperview()
+//            
+//            cell?.cellContentView.clipsToBounds = true
+//            cell?.cellContentView.allCornersRounded(radius: 6.0)
+//            
+//            cell?.cellContentView.layoutIfNeeded()
+//            
+//            print(cell?.cellContentView.frame.height)
+//            return 90
+//        }
         
     }
     
@@ -216,12 +256,9 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
-    }
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
+        self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
         self.filtered = self.people
         self.tableView.reloadData()
         searchBar.resignFirstResponder()
