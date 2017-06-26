@@ -245,10 +245,10 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     
     func showHomeVC() {
         
-        if AuthApi.isNewUser(){
+        if getUserInterests().characters.count == 0{
             let interestsVC = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
+            interestsVC.isNewUser = true
             self.present(interestsVC, animated: true, completion: nil)
-            
         }
         else{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -339,6 +339,19 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 375).absoluteString)
                         }
                         
+                        if let interests = info?["interests"] as? String{
+                            AuthApi.set(interests: interests)
+                        }
+                        else{
+                            AuthApi.set(interests: "")
+                        }
+                        
+                        if let username = info?["username"] as? String{
+                            AuthApi.set(username: username)
+                        }
+                        else{
+                            AuthApi.set(username: "")
+                        }
                         let token = Messaging.messaging().fcmToken
                         Constants.DB.user.child("\(fireId)/token").setValue(token)
                         AuthApi.set(FCMToken: token)

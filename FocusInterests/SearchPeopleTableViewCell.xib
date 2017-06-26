@@ -19,6 +19,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="359" height="104.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6wk-9t-A2I">
+                        <rect key="frame" x="5" y="0.0" width="349" height="70"/>
+                        <color key="backgroundColor" red="0.26274509800000001" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="yoR-Mj-qf1"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLR-T5-BTj">
                         <rect key="frame" x="5" y="0.0" width="349" height="105"/>
                         <subviews>
@@ -128,7 +135,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.38039215686274508" green="0.45098039215686275" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.45257657766342163" green="0.52477723360061646" blue="0.57905107736587524" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dBt-EP-FC5" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" constant="11" id="0pF-Xl-kxo"/>
                             <constraint firstItem="X6O-7Q-mCg" firstAttribute="top" secondItem="Ztv-4m-kt4" secondAttribute="bottom" constant="-3" id="296-li-DSg"/>
@@ -168,8 +175,11 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="KLR-T5-BTj" firstAttribute="leading" secondItem="n0I-2n-AQA" secondAttribute="leadingMargin" constant="-3" id="PZl-wt-2P2"/>
+                    <constraint firstItem="6wk-9t-A2I" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" id="REK-7C-Ddb"/>
+                    <constraint firstItem="6wk-9t-A2I" firstAttribute="trailing" secondItem="KLR-T5-BTj" secondAttribute="trailing" id="WEH-2w-v7R"/>
                     <constraint firstAttribute="trailingMargin" secondItem="KLR-T5-BTj" secondAttribute="trailing" constant="-3" id="aZ4-nf-IZN"/>
                     <constraint firstItem="KLR-T5-BTj" firstAttribute="top" secondItem="n0I-2n-AQA" secondAttribute="topMargin" constant="-8" id="dTf-CE-o4d"/>
+                    <constraint firstItem="6wk-9t-A2I" firstAttribute="leading" secondItem="KLR-T5-BTj" secondAttribute="leading" id="hch-qb-QmH"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.90792702069999998" green="0.87262839240000001" blue="0.91347555049999996" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -184,6 +194,7 @@
                 <outlet property="fullName" destination="2vx-AD-EVj" id="3Be-PK-fUz"/>
                 <outlet property="interest" destination="OHh-7b-rCo" id="0sN-hx-cAh"/>
                 <outlet property="inviteButton" destination="6Vx-MI-HiM" id="ed2-LR-Tc5"/>
+                <outlet property="shortBackground" destination="6wk-9t-A2I" id="FA2-4B-3Hs"/>
                 <outlet property="userImage" destination="Jrp-IZ-pa4" id="DKB-rM-74T"/>
                 <outlet property="username" destination="sOb-GM-41h" id="JlM-fH-z8F"/>
                 <outlet property="whiteBorder" destination="Ztv-4m-kt4" id="AMA-ig-DBH"/>

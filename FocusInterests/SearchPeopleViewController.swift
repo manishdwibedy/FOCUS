@@ -155,7 +155,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.fullName.text = people.fullname
         
         if let pin = self.pinAvailable[indexPath.row]{
-
+            cell?.pinAvailable = true
+            cell?.shortBackground.isHidden = true
             var address = pin.locationAddress
             address = address.replacingOccurrences(of: ";;", with: "\n")
             cell?.whiteBorder.isHidden = false
@@ -163,17 +164,22 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             addGreenDot(label: (cell?.interest)!, content: pin.focus)
             let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
             cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
+            cell?.cellContentView.backgroundColor = Constants.color.gray
         }
         else{
             cell?.whiteBorder.isHidden = true
             cell?.address.text = ""
             cell?.distance.text = ""
-            addGreenDot(label: (cell?.interest)!, content: "N.A.")
+            
+//            cell?.cellHeight.constant = 70
+            cell?.interest.text = ""
+            cell?.cellContentView.backgroundColor = .clear
+            cell?.shortBackground.isHidden = false
+            
         }
     
         cell?.ID = people.uuid!
         //cell.checkForFollow(id: event.id!)
-        
         
         let placeHolderImage = UIImage(named: "empty_event")
 
@@ -212,10 +218,10 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
         
         if (self.pinAvailable[indexPath.row] != nil){
-            return 105
+            return 110
         }
         else{
-            cell?.cellHeight.constant = 70
+            
 //            cell.content
 //            cell?.cellContentViewHeightConstraint.constant = 60.0
 ////            cell?.subviews[0].subviews[0].frame.size.height = 70.0
@@ -229,7 +235,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
 //            cell?.cellContentView.layoutIfNeeded()
 //            
 //            print(cell?.cellContentView.frame.height)
-            return 70
+            return 75
         }
         
     }

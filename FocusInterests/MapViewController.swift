@@ -91,8 +91,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
             let info = snapshot.value as! [String:Any]
             
-            let interests = info["interests"] as? String
-            AuthApi.set(interests: interests!)
+            if let interests = info["interests"] as? String{
+                AuthApi.set(interests: interests)    
+            }
+            
         })
         
         locationManager = CLLocationManager()
@@ -231,6 +233,48 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         if showTutorial{
             self.showPopup()
+        }
+        
+        if AuthApi.getUserName()?.characters.count == 0{
+            
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: false,
+                shouldAutoDismiss: false
+            )
+            
+            let alert = SCLAlertView(appearance: appearance)
+            let username = alert.addTextField("Enter your username")
+            username.autocapitalizationType = .none
+            alert.addButton("Add user name") {
+                if (username.text?.characters.count)! > 0{
+                    
+                    Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
+                        if let id = (snapshot.value as? NSDictionary)?[username.text]{
+                            username.text = ""
+                            SCLAlertView().showError("Error", subTitle: "Please choose a unique error.")
+                        }
+                        else{
+                            
+                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+                            Constants.DB.user_mapping.child(username.text!).setValue("")
+                            Constants.DB.user_mapping.child(username.text!).setValue(AuthApi.getUserEmail())
+                            AuthApi.set(username: username.text)
+                            print("Text value: \(username.text!)")
+                            alert.hideView()
+                            self.showPopup()
+                        }
+                    })
+                }
+                else{
+                    SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
+                }
+                
+            }
+            
+            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
         }
     }
     
@@ -902,85 +946,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     
     func mapViewDidFinishTileRendering(_ mapView: GMSMapView) {
-        if AuthApi.isNewUser(){
-            AuthApi.setNewUser()
-           
-            let appearance = SCLAlertView.SCLAppearance(
-                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
-                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
-                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-                showCloseButton: false,
-                shouldAutoDismiss: false
-            )
-            
-            let alert = SCLAlertView(appearance: appearance)
-            let username = alert.addTextField("Enter your username")
-            username.autocapitalizationType = .none
-            alert.addButton("Add user name") {
-                if (username.text?.characters.count)! > 0{
-                    
-                    Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
-                        if let id = (snapshot.value as? NSDictionary)?[username.text]{
-                            username.text = ""
-                            SCLAlertView().showError("Error", subTitle: "Please choose a unique error.")
-                        }
-                        else{
-                            
-                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
-                            Constants.DB.user_mapping.child(username.text!).setValue("")
-                            Constants.DB.user_mapping.child(username.text!).setValue(AuthApi.getUserEmail())
-                            AuthApi.set(username: username.text)
-                            print("Text value: \(username.text!)")
-                            alert.hideView()
-                            self.showPopup()
-                        }
-                    })
-                }
-                else{
-                    SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
-                }
-                
-            }
-            
-            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
-            
-//            let appearance = SCLAlertView.SCLAppearance(
-//                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
-//                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
-//                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-//                showCloseButton: false
-//            )
-//            
-//            let alert = SCLAlertView(appearance: appearance)
-//            let username = alert.addTextField("Enter your username")
-//            username.autocapitalizationType = .none
-//            alert.addButton("Add user name") {
-//                if (username.text?.characters.count)! > 0{
-//                    
-//                    Constants.DB.user_mapping.child(username.text!).observeSingleEvent(of: .value, with: {snapshot in
-//                        if snapshot.value == nil{
-//                            
-//                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
-//                            Constants.DB.user_mapping.child(username.text!).setValue(AuthApi.getUserEmail())
-//                            AuthApi.set(username: username.text)
-//                            print("Text value: \(username.text!)")
-//                            alert.hideView()
-//                            self.showPopup()
-//                        }
-//                        else{
-//                            SCLAlertView().showError("Invalid username", subTitle: "Please choose a unique username.")
-//                        }
-//                    })
-//                }
-//                
-//            }
-//            
-//            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
-            
-            
-            
-        }
-//        changeTab()
         
     }
     

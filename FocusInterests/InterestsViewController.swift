@@ -33,6 +33,7 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     
     var needsReturn = false
     var parentReturnVC: PinScreenViewController!
+    var isNewUser = false
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -70,14 +71,21 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
             
             var final_interest = [String]()
             for interest in selected{
-                let interest_name = interest.components(separatedBy: "-")[0]
-                let status = interest.components(separatedBy: "-")[1]
-                
-                if status == "1"{
-                    selected_interests[interest_name] = .like
-                }
-                else{
-                    selected_interests[interest_name] = .love
+                if interest.characters.count > 0{
+                    let parts = interest.components(separatedBy: "-")
+                    if parts.count == 2{
+                        let interest_name = interest.components(separatedBy: "-")[0]
+                        let status = interest.components(separatedBy: "-")[1]
+                        
+                        if status == "1"{
+                            selected_interests[interest_name] = .like
+                        }
+                        else{
+                            selected_interests[interest_name] = .love
+                        }
+                        
+                    }
+                    
                 }
                 
             }
@@ -212,34 +220,43 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         add.subtract(old_interests)
         remove.subtract(new_interests)
 
-        for interest in add{
-            Constants.DB.user_interests.child(interest).childByAutoId().setValue(["UID": AuthApi.getFirebaseUid()])
+        
+        if add.count > 0{
+            for interest in add{
+                Constants.DB.user_interests.child(interest).childByAutoId().setValue(["UID": AuthApi.getFirebaseUid()])
+            }
         }
 
-        for interest in remove{
-            // remove interest
-            Constants.DB.user_interests.child(interest).queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil {
-                    for (key,_) in value!
-                    {
-                        print(key)
-                        Constants.DB.user_interests.child(interest).child(key as! String).removeValue()
-                    }
-                    
-                    
-                    
+        if remove.count > 0{
+            for interest in remove{
+                
+                if interest.characters.count > 0{
+                    // remove interest
+                    Constants.DB.user_interests.child(interest).queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let value = snapshot.value as? NSDictionary
+                        if value != nil {
+                            for (key,_) in value!
+                            {
+                                print(key)
+                                Constants.DB.user_interests.child(interest).child(key as! String).removeValue()
+                            }
+                            
+                            
+                            
+                        }
+                    })
                 }
-            })
+                
+            }
         }
+        
         let interests = selected.joined(separator: ",")
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["interests": interests])
         AuthApi.set(interests: interests)
         
-        if AuthApi.isNewUser(){
+        if isNewUser{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
             let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
 
             present(vc, animated: true, completion: nil)

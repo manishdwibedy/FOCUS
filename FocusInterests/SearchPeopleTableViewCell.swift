@@ -22,6 +22,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var distanceCategoryStack: UIStackView!
     @IBOutlet weak var whiteBorder: UIView!
 
+    @IBOutlet weak var shortBackground: UIView!
     @IBOutlet weak var addressStack: UIStackView!
     @IBOutlet weak var cellHeight: NSLayoutConstraint!
     var ID = ""
@@ -39,6 +40,8 @@ class SearchPeopleTableViewCell: UITableViewCell {
         
         //cell view
         self.cellContentView.allCornersRounded(radius: 6.0)
+        
+        self.shortBackground.allCornersRounded(radius: 6.0)
         
         //follow button
         self.followButton.clipsToBounds = true
