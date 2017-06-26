@@ -12,6 +12,7 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     
     override func viewDidLoad() {
@@ -23,6 +24,13 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
         textView.delegate = self
         
         sendButton.roundCorners(radius: 10)
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
     }
 
     override func didReceiveMemoryWarning() {

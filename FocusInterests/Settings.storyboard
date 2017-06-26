@@ -137,6 +137,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navBar" destination="uA3-5J-BQh" id="sni-Vb-S1i"/>
                         <outlet property="textView" destination="bix-pO-fHh" id="Jwg-gw-JqU"/>
                     </connections>
                 </viewController>
@@ -279,6 +280,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navBar" destination="Wct-X8-TLc" id="o1t-Be-NlW"/>
                         <outlet property="textView" destination="jyo-l7-UlQ" id="2iD-W9-aE8"/>
                     </connections>
                 </viewController>
@@ -614,6 +616,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navBar" destination="Ok8-U3-EcV" id="7M4-LQ-roA"/>
                         <outlet property="textView" destination="45g-xG-DjU" id="2xP-in-KRK"/>
                     </connections>
                 </viewController>
@@ -700,6 +703,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navBar" destination="PmP-Ho-pa0" id="tW4-rV-C2y"/>
                         <outlet property="sendButton" destination="vS8-y1-xLs" id="oS9-z8-LcQ"/>
                         <outlet property="textView" destination="Yof-41-T5I" id="jG7-xO-rfb"/>
                     </connections>
@@ -800,6 +804,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navBar" destination="7hN-f4-voJ" id="KCK-mU-HEU"/>
                         <outlet property="password" destination="7ff-bO-5Be" id="GIl-zm-pJ6"/>
                         <outlet property="repeatPassword" destination="FUb-3Z-GSk" id="C6d-k3-of7"/>
                         <outlet property="updateButton" destination="Cyj-9I-OJb" id="uZK-qV-F0z"/>

@@ -16,6 +16,7 @@ class ChangeUsernamePasswordViewController: UIViewController {
     @IBOutlet weak var repeatPassword: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var updateButton: UIButton!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,13 @@ class ChangeUsernamePasswordViewController: UIViewController {
         }
         
         updateButton.roundCorners(radius: 10)
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
         
     }
     override func didReceiveMemoryWarning() {

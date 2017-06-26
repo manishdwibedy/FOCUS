@@ -11,6 +11,7 @@ import UIKit
 class LicenseViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var navBar: UINavigationBar!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +22,13 @@ class LicenseViewController: UIViewController {
         textView.attributedText = attributedString
         
         textView.scrollRangeToVisible(NSRange(location:0, length:0))
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
     }
 
     override func didReceiveMemoryWarning() {

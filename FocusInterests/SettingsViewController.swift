@@ -17,6 +17,7 @@ protocol LogoutDelegate {
 
 class SettingsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, GIDSignInDelegate {
 
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var statusBarFillView: UIView!
     @IBOutlet weak var tableView: UITableView!
     let backgroundColor = UIColor.init(red: 22/255, green: 42/255, blue: 64/255, alpha: 1)
@@ -38,6 +39,13 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         
         tableView.tableFooterView = UIView()
         tableView.reloadData()
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
         
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
         backgroundView.backgroundColor = self.backgroundColor
@@ -71,12 +79,8 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             cell?.textLabel?.text = Constants.settings.cellTitles[indexPath.row]
             cell?.backgroundColor = self.backgroundColor
             
-            if indexPath.row == Constants.settings.cellTitles.count - 1{
-                cell?.textLabel?.textColor = UIColor.red
-            }
-            else{
-                cell?.textLabel?.textColor = UIColor.white
-            }
+            cell?.textLabel?.font = UIFont(name: "Avenir-Book", size: 15)!
+            cell?.textLabel?.textColor = UIColor.white
             
             cell?.accessoryType = .disclosureIndicator
             return cell!
@@ -131,7 +135,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 alertController.addAction(cancelAction)
                 
-                let OKAction = UIAlertAction(title: "Logout", style: .default) { action in
+                let OKAction = UIAlertAction(title: "Logout", style: .destructive) { action in
                     self.fBManager!.logOut()
                     FBSDKAccessToken.setCurrent(nil)
                     FBSDKProfile.setCurrent(nil)

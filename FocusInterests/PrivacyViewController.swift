@@ -10,6 +10,7 @@ import UIKit
 
 class PrivacyViewController: UIViewController {
 
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var textView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,12 @@ class PrivacyViewController: UIViewController {
         
         textView.scrollRangeToVisible(NSRange(location:0, length:0))
 
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
         
+        navBar.titleTextAttributes = attrs
         // Do any additional setup after loading the view.
     }
 
