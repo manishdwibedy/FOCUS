@@ -182,10 +182,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zs8-eT-TCa" userLabel="Pin View">
-                                                <rect key="frame" x="10" y="188" width="355" height="120"/>
+                                                <rect key="frame" x="15" y="188" width="345" height="120"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0Z-6t-iHC">
-                                                        <rect key="frame" x="2" y="5" width="351" height="34"/>
+                                                        <rect key="frame" x="2" y="5" width="341" height="34"/>
                                                         <color key="backgroundColor" red="0.47843137250000001" green="0.78823529410000004" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                         <state key="normal" title="Create Your First Pin">
@@ -220,19 +220,19 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="111 Likes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VK7-Ea-kjC">
-                                                        <rect key="frame" x="284.5" y="37" width="62.5" height="20.5"/>
+                                                        <rect key="frame" x="274.5" y="37" width="62.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuH-9L-XHv">
-                                                        <rect key="frame" x="73" y="38.5" width="174" height="20.5"/>
+                                                        <rect key="frame" x="73" y="38.5" width="164" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4s-5t-g9h">
-                                                        <rect key="frame" x="12" y="79" width="331" height="34"/>
+                                                        <rect key="frame" x="12" y="79" width="321" height="34"/>
                                                         <color key="backgroundColor" red="0.47843137254901957" green="0.78823529411764703" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
                                                         <state key="normal" title="Update Pin">
@@ -243,7 +243,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000 mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enR-G6-XVv">
-                                                        <rect key="frame" x="255" y="12" width="88" height="20.5"/>
+                                                        <rect key="frame" x="245" y="12" width="88" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -278,10 +278,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SF4-Kb-s3b" userLabel="FOCUS View">
-                                                <rect key="frame" x="10" y="308" width="355" height="223"/>
+                                                <rect key="frame" x="15" y="308" width="345" height="223"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgR-nk-9yp">
-                                                        <rect key="frame" x="122" y="8" width="111" height="39"/>
+                                                        <rect key="frame" x="117" y="8" width="111" height="39"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="39" id="JOx-Od-52R"/>
                                                             <constraint firstAttribute="width" constant="111" id="MPg-BB-fR5"/>
@@ -298,7 +298,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="WUe-TH-3g9">
-                                                        <rect key="frame" x="12" y="66" width="331" height="110"/>
+                                                        <rect key="frame" x="12" y="66" width="321" height="110"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="110" id="g3b-sd-6fO"/>
                                                         </constraints>
@@ -332,10 +332,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfu-XU-At8" userLabel="Events View">
-                                                <rect key="frame" x="10" y="533" width="355" height="175"/>
+                                                <rect key="frame" x="15" y="533" width="345" height="175"/>
                                                 <subviews>
                                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofW-bn-GIG">
-                                                        <rect key="frame" x="20" y="55" width="315" height="30"/>
+                                                        <rect key="frame" x="20" y="55" width="305" height="30"/>
                                                         <color key="backgroundColor" red="0.47843137250000001" green="0.78823529410000004" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" title="Create your first event">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -345,7 +345,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gs-u9-MSd">
-                                                        <rect key="frame" x="130.5" y="8" width="94" height="27"/>
+                                                        <rect key="frame" x="125.5" y="8" width="94" height="27"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="27" id="ekq-HM-bjq"/>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="94" id="ofK-C7-WUg"/>
@@ -362,7 +362,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F09-6U-2YX">
-                                                        <rect key="frame" x="27" y="43" width="301" height="150"/>
+                                                        <rect key="frame" x="27" y="43" width="291" height="150"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="150" id="JPY-Bs-t0r"/>
@@ -380,7 +380,7 @@
                                                         </connections>
                                                     </collectionView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XF-Wl-lIE">
-                                                        <rect key="frame" x="295" y="213" width="52" height="20"/>
+                                                        <rect key="frame" x="285" y="213" width="52" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="8zK-F1-SxO"/>
                                                             <constraint firstAttribute="width" constant="52" id="swA-On-RLw"/>
@@ -413,16 +413,16 @@
                                         <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="900" id="1Rj-dV-tAE"/>
-                                            <constraint firstAttribute="trailing" secondItem="SF4-Kb-s3b" secondAttribute="trailing" constant="10" id="3bj-O4-JKf"/>
-                                            <constraint firstAttribute="trailing" secondItem="zs8-eT-TCa" secondAttribute="trailing" constant="10" id="7yt-XY-mTZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="SF4-Kb-s3b" secondAttribute="trailing" constant="15" id="3bj-O4-JKf"/>
+                                            <constraint firstAttribute="trailing" secondItem="zs8-eT-TCa" secondAttribute="trailing" constant="15" id="7yt-XY-mTZ"/>
                                             <constraint firstAttribute="trailing" secondItem="Dsa-iR-ute" secondAttribute="trailing" constant="-1" id="9Ei-4d-y2I"/>
-                                            <constraint firstAttribute="trailing" secondItem="Yfu-XU-At8" secondAttribute="trailing" constant="10" id="DeS-JG-cXa"/>
+                                            <constraint firstAttribute="trailing" secondItem="Yfu-XU-At8" secondAttribute="trailing" constant="15" id="DeS-JG-cXa"/>
                                             <constraint firstItem="Yfu-XU-At8" firstAttribute="top" secondItem="SF4-Kb-s3b" secondAttribute="bottom" constant="2" id="GPX-1h-f8T"/>
-                                            <constraint firstItem="Yfu-XU-At8" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="10" id="KNn-xY-EZy"/>
+                                            <constraint firstItem="Yfu-XU-At8" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="15" id="KNn-xY-EZy"/>
                                             <constraint firstItem="zs8-eT-TCa" firstAttribute="top" secondItem="Dsa-iR-ute" secondAttribute="bottom" id="MrM-1y-VIg"/>
                                             <constraint firstItem="Dsa-iR-ute" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" id="Mvj-K2-46J"/>
-                                            <constraint firstItem="SF4-Kb-s3b" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="10" id="Pty-kz-GGF"/>
-                                            <constraint firstItem="zs8-eT-TCa" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="10" id="Qfq-ZJ-JSD"/>
+                                            <constraint firstItem="SF4-Kb-s3b" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="15" id="Pty-kz-GGF"/>
+                                            <constraint firstItem="zs8-eT-TCa" firstAttribute="leading" secondItem="wLf-1E-eSU" secondAttribute="leading" constant="15" id="Qfq-ZJ-JSD"/>
                                             <constraint firstItem="SF4-Kb-s3b" firstAttribute="top" secondItem="zs8-eT-TCa" secondAttribute="bottom" id="dfS-As-ckQ"/>
                                             <constraint firstItem="Dsa-iR-ute" firstAttribute="top" secondItem="wLf-1E-eSU" secondAttribute="top" id="uxe-be-C9W"/>
                                         </constraints>
@@ -498,6 +498,7 @@
                         <outlet property="mainViewHeight" destination="1Rj-dV-tAE" id="PZI-C8-BWA"/>
                         <outlet property="moreEventsButton" destination="1XF-Wl-lIE" id="KLy-uX-eCI"/>
                         <outlet property="moreFocusButton" destination="Kco-bc-7mH" id="ifu-Gu-vgd"/>
+                        <outlet property="navBar" destination="Oi3-pC-q5R" id="5Pg-Iw-1dx"/>
                         <outlet property="navBarItem" destination="SNQ-5X-BJ8" id="x2d-OC-eDu"/>
                         <outlet property="pinAddress2Label" destination="nuH-9L-XHv" id="Cyc-My-DP3"/>
                         <outlet property="pinCategoryLabel" destination="NRe-j8-XoK" id="Atx-4S-cAu"/>

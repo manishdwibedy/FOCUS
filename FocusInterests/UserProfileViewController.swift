@@ -20,6 +20,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
     @IBOutlet weak var navBarItem: UINavigationItem!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var userInfoView: UIView!
     @IBOutlet weak var pinView: UIView!
@@ -129,6 +130,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
 //		userScrollView.contentSize = CGSize(width: 375, height: 1600)
         // Do any additional setup after loading the view.
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
         
         let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
         let focus_header = NSAttributedString(string: "FOCUS", attributes: underlineAttribute)
