@@ -211,7 +211,18 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
+        cell?.parentVC = self
         
+        let people = filtered[indexPath.row]
+        
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = people.uuid!
+        dropfromTop(view: self.view)
+        
+        self.present(VC, animated:true, completion:nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
