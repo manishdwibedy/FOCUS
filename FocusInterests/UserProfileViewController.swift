@@ -188,10 +188,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
                 self.mainViewHeight.constant = 750
                 
-                self.pinViewHeight.constant = 35
+                self.pinViewHeight.constant = 45
                 
                 self.emptyPinButton.isHidden = false
                 
+                self.pinDistanceLabel.isHidden = true
+                self.pinAddress2Label.isHidden = true
                 self.greenDotImage.isHidden = true
                 self.pinImage.isHidden = true
                 self.pinCategoryLabel.isHidden = true
@@ -237,8 +239,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         // Placeholder image
         let placeholderImage = UIImage(named: "empty_event")
         
+        eventCell.userEventsLabel.text = suggestion.title
         
-        let reference = Constants.storage.event.child("\(suggestion.id).jpg")
+        let reference = Constants.storage.event.child("\(suggestion.id!).jpg")
         
         reference.downloadURL(completion: { (url, error) in
             
@@ -321,8 +324,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             textLabel.textAlignment = .left
             
             if interest.characters.count > 0{
-                interestStackView.addArrangedSubview(textLabel)
-                interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+                if interestStackView.arrangedSubviews.count < 3{
+                    interestStackView.addArrangedSubview(textLabel)
+                    interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+                }
             }
         }
         
@@ -403,14 +408,19 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                         event.setAttendessCount(count: attending.count)
                     }
                     
-                  self.suggestion.append(event)
+                    if self.suggestion.count < 3{
+                      self.suggestion.append(event)
+                        var rows = self.suggestion.count / 3
+                        if self.suggestion.count % 3 != 0{
+                            rows += 1
+                        }
+//                        self.suggestionsHeight.constant = CGFloat(125 * rows)
+                        
+                        
+                        self.eventsCollectionView.reloadData()
 
-                    var rows = self.suggestion.count / 3
-                    if self.suggestion.count % 3 != 0{
-                        rows += 1
                     }
-//                    self.suggestionsHeight.constant = CGFloat(125 * rows)
-                self.eventsCollectionView.reloadData()
+                  
                 })
             }
             

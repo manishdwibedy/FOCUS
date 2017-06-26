@@ -638,8 +638,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zs8-eT-TCa" userLabel="Pin View">
                                                 <rect key="frame" x="0.0" y="188" width="375" height="120"/>
                                                 <subviews>
-                                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0Z-6t-iHC">
-                                                        <rect key="frame" x="2" y="0.0" width="371" height="34"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0Z-6t-iHC">
+                                                        <rect key="frame" x="2" y="5" width="371" height="34"/>
                                                         <color key="backgroundColor" red="0.47843137250000001" green="0.78823529410000004" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                         <state key="normal" title="Create Your First Pin">
@@ -697,7 +697,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000 mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enR-G6-XVv">
-                                                        <rect key="frame" x="275" y="7" width="88" height="20.5"/>
+                                                        <rect key="frame" x="275" y="12" width="88" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -717,7 +717,7 @@
                                                     <constraint firstItem="nuH-9L-XHv" firstAttribute="leading" secondItem="AO6-Dr-guK" secondAttribute="leading" id="Kfv-P8-pxR"/>
                                                     <constraint firstItem="l0Z-6t-iHC" firstAttribute="leading" secondItem="zs8-eT-TCa" secondAttribute="leading" constant="2" id="LBb-Pc-Nxu"/>
                                                     <constraint firstAttribute="trailing" secondItem="l0Z-6t-iHC" secondAttribute="trailing" constant="2" id="NOL-Jf-ou0"/>
-                                                    <constraint firstItem="l0Z-6t-iHC" firstAttribute="top" secondItem="zs8-eT-TCa" secondAttribute="top" id="V3z-Ou-0zX"/>
+                                                    <constraint firstItem="l0Z-6t-iHC" firstAttribute="top" secondItem="zs8-eT-TCa" secondAttribute="top" constant="5" id="V3z-Ou-0zX"/>
                                                     <constraint firstItem="nuH-9L-XHv" firstAttribute="trailing" secondItem="VK7-Ea-kjC" secondAttribute="trailing" constant="-100" id="XJa-MW-dkN"/>
                                                     <constraint firstItem="hH3-Cy-m4h" firstAttribute="leading" secondItem="zs8-eT-TCa" secondAttribute="leading" constant="8" id="XlA-cT-3MY"/>
                                                     <constraint firstItem="VK7-Ea-kjC" firstAttribute="firstBaseline" secondItem="NRe-j8-XoK" secondAttribute="firstBaseline" constant="29" id="Yqd-GZ-2yJ"/>
