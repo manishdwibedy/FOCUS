@@ -210,7 +210,8 @@ func sendNotification(to id: String, title: String, body: String, actionType: St
         "actionType": actionType,
         "type": type,
         "id": item_id,
-        "name": item_name
+        "name": item_name,
+        "senderID": AuthApi.getFirebaseUid()
         ])
     
     Constants.DB.user.child(id).observeSingleEvent(of: .value, with: { snapshot in
@@ -270,7 +271,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                 if let pin = pin11{
                     let time = Date(timeIntervalSince1970: pin["time"] as! Double)
                     let address = pin["formattedAddress"] as! String
-                    let place = ItemOfInterest(itemName: address, imageURL: nil)
+                    let place = ItemOfInterest(itemName: address, imageURL: nil, type: "pin")
                     let pinFeed = FocusNotification(type: NotificationType.Pin, sender: followerUser, item: place, time: time)
                     pins.append(pinFeed)
                 }
@@ -296,7 +297,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                         
                         let time = dateFormatter.date(from: event.date!)
                         let address = event.shortAddress
-                        let place = ItemOfInterest(itemName: address, imageURL: nil)
+                        let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
                         if let time = time{
                             let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: time)
                             events.append(eventFeed)
@@ -336,7 +337,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                 
                                 let time = dateFormatter.date(from: event.date!)
                                 let address = event.shortAddress
-                                let place = ItemOfInterest(itemName: address, imageURL: nil)
+                                let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
                                 if let time = time{
                                     let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: time)
                                     invitations_event.append(eventFeed)

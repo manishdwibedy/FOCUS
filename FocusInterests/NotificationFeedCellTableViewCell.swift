@@ -32,7 +32,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     let time = DateFormatter()
     let date = DateFormatter()
     var isFeed = false
-    
+    var type = ""
     var selectedButton = false
     var notif: FocusNotification!
     var parentVC: NotificationFeedViewController!
@@ -75,6 +75,31 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         let content = (notif.sender?.username)! + " "//! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
         
         
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String:Any]
+            
+            if let value = value{
+                for (id, _) in value{
+                    let info = value[id] as? [String:Any]
+                    if let status = info?["status"] as? String{
+                        print(status)
+                        
+                        if status == "accepted"{
+                            self.seeYouThereButton.isHidden = true
+                            self.nextTimeButton.isEnabled = false
+                            
+                            self.nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
+                        }
+                        else if status == "declined"{
+                            self.seeYouThereButton.isHidden = true
+                            self.nextTimeButton.isEnabled = false
+                            
+                            self.nextTimeButton.setTitle("Declined", for: UIControlState.normal)
+                        }
+                    }
+                }
+            }
+        })
         
         let attrString: NSMutableAttributedString = NSMutableAttributedString(string: (notif.sender?.username)! + " ")
         attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1), range: NSMakeRange(0,  (notif.sender?.username?.characters.count)!))
@@ -148,6 +173,19 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             seeYouThereButton.isHidden = true
             nextTimeButton.isEnabled = false
             nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
+            
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                
+                if let value = value{
+                    for (id, _) in value{
+                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((self.notif.item?.type)!).child(id).updateChildValues(["status": "accepted"])
+                    }
+                }
+                
+                
+            })
+            
         }
         
     }
@@ -158,6 +196,17 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         nextTimeButton.isEnabled = false
         nextTimeButton.setTitle("Declined", for: UIControlState.normal)
         
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String:Any]
+            
+            if let value = value{
+                for (id, _) in value{
+                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((self.notif.item?.type)!).child(id).updateChildValues(["status": "declined"])
+                }
+            }
+            
+            
+        })
     }
     
     @IBAction func profilePicPushed(_ sender: Any) {

@@ -65,7 +65,7 @@ class FirebaseDownstream {
                                         self.ref.child(dbKey).child((inValue[inKey] as! NSDictionary)["ID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                             if let valueInviteID = snapshot.value as? NSDictionary {
                                                 let itemName = valueInviteID["title"] as! String
-                                                let item = ItemOfInterest(itemName: itemName, imageURL: "")
+                                                let item = ItemOfInterest(itemName: itemName, imageURL: "", type: "event")
                                                 item.type = "event"
                                                 item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
                                                 let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
@@ -85,7 +85,7 @@ class FirebaseDownstream {
                                         print(valueUID)
                                         print("________")
                                         dbKey = "places"
-                                        let item = ItemOfInterest(itemName: ((inValue[inKey] as! NSDictionary)["name"] as? String), imageURL: "")
+                                        let item = ItemOfInterest(itemName: ((inValue[inKey] as! NSDictionary)["name"] as? String), imageURL: "", type: "place")
                                         item.type = "place"
                                         item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
                                         let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
@@ -120,7 +120,7 @@ class FirebaseDownstream {
             ref.child("users").child(id).child("notifications").observeSingleEvent(of: .value, with: { (snapshot) in
                 if let value = snapshot.value as? NSDictionary {
                     for (key,_) in value{
-                        let item = ItemOfInterest(itemName: "", imageURL: "")
+                        let item = ItemOfInterest(itemName: "", imageURL: "", type: "")
                         item.data = value[key] as! NSDictionary
                     let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: "", uuid: "", imageURL: ""), item: item, time: Date(timeIntervalSince1970: TimeInterval((value[key] as! NSDictionary)["time"] as! Double)))
                     

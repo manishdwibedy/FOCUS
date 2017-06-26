@@ -58,10 +58,10 @@ class InvitePeopleEventCell: UITableViewCell {
             let user = snapshot.value as? [String : Any] ?? [:]
             
             let fullname = user["fullname"] as? String
-            sendNotification(to: self.UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.event.title))", body: "", actionType: "", type: "", item_id: "", item_name: "")
+            sendNotification(to: self.UID, title: "\(String(describing: fullname!)) invited you to \(String(describing: self.event.title!))", body: "", actionType: "invite", type: "event", item_id: "", item_name: "")
         })
-        Constants.DB.event.child(event.id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time)])
-        Constants.DB.user.child(UID).child("invitations").child("event").childByAutoId().updateChildValues(["ID":event.id!, "time":time,"fromUID":AuthApi.getFirebaseUid()!])
+        Constants.DB.event.child(event.id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
+        Constants.DB.user.child(UID).child("invitations").child("event").childByAutoId().updateChildValues(["ID":event.id!, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"status": "sent"])
         parentVC.dismiss(animated: true, completion: nil)
     
     }
