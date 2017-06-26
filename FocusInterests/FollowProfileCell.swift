@@ -110,7 +110,15 @@ class FollowProfileCell: UITableViewCell {
             
             unfollowAlertController.addAction(unfollowAction)
             unfollowAlertController.addAction(cancelAction)
-            parentVC?.present(unfollowAlertController, animated: true, completion: nil)
+            
+            if let parent = parentVC{
+                
+                parent.present(unfollowAlertController, animated: true, completion: nil)
+            }
+            else{
+                following?.present(unfollowAlertController, animated: true, completion: nil)
+            }
+            
             
             
             
