@@ -163,6 +163,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         if self.selectedSegmentIndex == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotifTabCell", for: indexPath) as! notificationTabCell
             cell.setupCell(notif: nofArray[indexPath.row])
+            cell.parentVC = self
             return cell
         }else if self.selectedSegmentIndex == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell

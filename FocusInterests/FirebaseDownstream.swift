@@ -122,9 +122,9 @@ class FirebaseDownstream {
                     for (key,_) in value{
                         let item = ItemOfInterest(itemName: "", imageURL: "", type: "")
                         item.data = value[key] as! NSDictionary
-                    let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: "", uuid: "", imageURL: ""), item: item, time: Date(timeIntervalSince1970: TimeInterval((value[key] as! NSDictionary)["time"] as! Double)))
+                        let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: "", uuid: item.data["senderID"] as? String, imageURL: ""), item: item, time: Date(timeIntervalSince1970: TimeInterval((value[key] as! NSDictionary)["time"] as! Double)))
                     
-                    returnNotif.append(notification)
+                        returnNotif.append(notification)
                    }
                     gotNotif(returnNotif)
                 }

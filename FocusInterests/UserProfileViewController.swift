@@ -78,6 +78,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     var suggestion = [Event]()
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
     
+    var otherUser = false
+    var userID = ""
+    
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
         present(vc, animated: true, completion: nil)
@@ -156,7 +159,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.eventView.addTopBorderWithColor(color: UIColor.white, width: 1)
         
         self.navigationItem.title = ""
-        Constants.DB.pins.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
+        Constants.DB.pins.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if let value = value
             {
@@ -164,24 +169,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
                 self.pinCategoryLabel.text = value["focus"] as! String
                 self.pinAddress2Label.text = value["pin"] as! String
-//                let messageText = "\(String(describing: username)) \(self.data.pinMessage)"
-//                
-//                let length = messageText.characters.count - username.characters.count
-//                let range = NSMakeRange(username.characters.count, length)
-//                
-//                self.pinMessageLabel.attributedText = attributedString(from: messageText, nonBoldRange: range)
-                
-                //self.pinMessageLabel.text = (value?["username"] as? String)! + " " + self.data.pinMessage
-                //                print(value?["username"] as? String)
-                //                let boldText  = (value?["username"] as? String)!
-                //                let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 15)]
-                //                let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
-                //
-                //                let normalText = " " + self.data.pinMessage
-                //                let normalString = NSMutableAttributedString(string:normalText)
-                //                attributedString.append(normalString)
-                //                self.pinMessageLabel.attributedText = attributedString
-                
             }
             else{
                 self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
@@ -202,16 +189,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
             }
         })
-
-//        
-//        if !pinDataAvailable{
-//            self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
-//            userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
-//            mainViewHeight.constant = 750
-//        }
-//        else{
-//            
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -272,8 +249,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func displayUserData() {
-        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
-            if let dictionnary = dictionnary {
+        let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
+        Constants.DB.user.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionnary = snapshot.value as? NSDictionary {
                 print(dictionnary)
                 let username_str = dictionnary["username"] as? String ?? ""
                 let description_str = dictionnary["description"] as? String ?? ""
@@ -304,36 +282,74 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     }
                 }
                 
+                if self.otherUser{
+                    if let interests = dictionnary["interests"] as? String
+                    
+                    {
+                        let selected = interests.components(separatedBy: ",")
+                        
+                        var final_interest = [String]()
+                        for interest in selected{
+                            final_interest.append(interest.components(separatedBy: "-")[0])
+                        }
+                        
+                        for view in self.interestStackView.arrangedSubviews{
+                            self.interestStackView.removeArrangedSubview(view)
+                        }
+                        
+                        for (index, interest) in (final_interest.enumerated()){
+                            let textLabel = UILabel()
+                            
+                            textLabel.textColor = .white
+                            textLabel.text  = interest
+                            textLabel.textAlignment = .left
+                            
+                            if interest.characters.count > 0{
+                                if self.interestStackView.arrangedSubviews.count < 3{
+                                    self.interestStackView.addArrangedSubview(textLabel)
+                                    self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+                                }
+                            }
+                        }
+                        
+                        let count = self.interestStackView.arrangedSubviews.count
+                        self.interestStackHeight.constant = CGFloat(25 * count)
+                        self.interestViewHeight.constant = CGFloat(25 * count + 113)
+                    }
+                }
                 self.userImage.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
                 
             }
 
-        }
+        })
         
-        let interests = getUserInterests().components(separatedBy: ",")
-        
-        for view in interestStackView.arrangedSubviews{
-            interestStackView.removeArrangedSubview(view)
-        }
-        
-        for (index, interest) in (interests.enumerated()){
-            let textLabel = UILabel()
+        if !otherUser{
+            let interests = getUserInterests().components(separatedBy: ",")
             
-            textLabel.textColor = .white
-            textLabel.text  = interest
-            textLabel.textAlignment = .left
+            for view in interestStackView.arrangedSubviews{
+                interestStackView.removeArrangedSubview(view)
+            }
             
-            if interest.characters.count > 0{
-                if interestStackView.arrangedSubviews.count < 3{
-                    interestStackView.addArrangedSubview(textLabel)
-                    interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+            for (index, interest) in (interests.enumerated()){
+                let textLabel = UILabel()
+                
+                textLabel.textColor = .white
+                textLabel.text  = interest
+                textLabel.textAlignment = .left
+                
+                if interest.characters.count > 0{
+                    if interestStackView.arrangedSubviews.count < 3{
+                        interestStackView.addArrangedSubview(textLabel)
+                        interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+                    }
                 }
             }
+            
+            let count = interestStackView.arrangedSubviews.count
+            interestStackHeight.constant = CGFloat(25 * count)
+            interestViewHeight.constant = CGFloat(25 * count + 113)
         }
         
-        let count = interestStackView.arrangedSubviews.count
-        interestStackHeight.constant = CGFloat(25 * count)
-        interestViewHeight.constant = CGFloat(25 * count + 113)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -19,6 +19,8 @@ class notificationTabCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     
     var data: NSDictionary!
+    var parentVC: NotificationFeedViewController? = nil
+    var notification: FocusNotification? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,7 +44,7 @@ class notificationTabCell: UITableViewCell {
     }
     
      func setupCell(notif: FocusNotification) {
-        
+        self.notification = notif
         data = notif.item?.data
         
         var usernameStr = ""
@@ -99,8 +101,23 @@ class notificationTabCell: UITableViewCell {
         
         loadAttr(component1: usernameStr, component2: actionStr, component3: whatStr)
         
-       
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showUser(sender:)))
+        self.profileImage.isUserInteractionEnabled = true
+        self.profileImage.addGestureRecognizer(tap)
+        
      }
+    
+    
+    func showUser(sender: UITapGestureRecognizer)
+    {
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = (self.notification?.sender?.uuid)!
+        dropfromTop(view: (parentVC?.view)!)
+        
+        parentVC?.present(VC, animated:true, completion:nil)
+    }
     
     func loadAttr(component1:String,component2:String,component3:String){
         let attrString: NSMutableAttributedString = NSMutableAttributedString(string:component1 + " ")
