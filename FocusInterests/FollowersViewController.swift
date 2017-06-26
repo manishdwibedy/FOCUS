@@ -135,6 +135,10 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         self.dismiss(animated: true, completion: nil)
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
+    }
+    
     /*
      // MARK: - Navigation
      
