@@ -19,6 +19,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var interestListLabel: UILabel!
     @IBOutlet weak var interestNextButton: UIButton!
     
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var publicLabel: UILabel!
     @IBOutlet weak var privateLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -181,6 +182,13 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         
         self.interestListView.isHidden = true
         hideKeyboardWhenTappedAround()
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
     }
     
     override func viewWillAppear(_ animated: Bool) {

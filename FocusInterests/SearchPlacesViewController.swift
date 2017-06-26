@@ -17,6 +17,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var invitePopup: UIView!
     var places = [Place]()
@@ -60,6 +61,12 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         
         UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
         
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
         hideKeyboardWhenTappedAround()
     }
     

@@ -318,15 +318,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             textLabel.text  = interest
             textLabel.textAlignment = .left
             
-            
-            if index == 0{
-                textLabel.text = "● " + textLabel.text!
-                
-                let primaryFocus = NSMutableAttributedString(string: textLabel.text!)
-                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:0, length:1))
-                textLabel.attributedText = primaryFocus
-            }
-            
             if interest.characters.count > 0{
                 interestStackView.addArrangedSubview(textLabel)
                 interestStackView.translatesAutoresizingMaskIntoConstraints = false;

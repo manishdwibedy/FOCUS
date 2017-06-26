@@ -79,6 +79,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="moreButton" destination="4bN-f3-uer" id="0Fa-1g-Xrj"/>
+                        <outlet property="navBar" destination="O91-5f-lIg" id="Jj4-60-g6I"/>
                         <outlet property="searchBar" destination="Azg-xG-CeT" id="Xui-o5-xQ8"/>
                         <outlet property="tableView" destination="PXI-1V-ZjI" id="biZ-HC-C9F"/>
                     </connections>

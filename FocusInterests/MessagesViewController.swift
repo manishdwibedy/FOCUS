@@ -18,6 +18,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     var messageMapper = [String: UserMessages]()
     private var _messages = [UserMessages]()
     
+    
     var contentMapping = [String: UserMessages]()
     
     @IBOutlet weak var messageTable: UITableView!
@@ -57,6 +58,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
 //        loadInitialTable()
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+//        navBar.titleTextAttributes = attrs
     }
     
     override func viewWillAppear(_ animated: Bool) {

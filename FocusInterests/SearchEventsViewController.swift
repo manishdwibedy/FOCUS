@@ -18,6 +18,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     
     @IBOutlet weak var createEventButton: UIButton!
@@ -73,6 +74,13 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         filtered = events
         
         hideKeyboardWhenTappedAround()
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -251,7 +259,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertController.addAction(cancelAction)
             
-            let OKAction = UIAlertAction(title: "Unattend", style: .default) { action in
+            let OKAction = UIAlertAction(title: "Unattend", style: .destructive) { action in
                 Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? [String:Any]
                     

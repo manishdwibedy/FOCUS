@@ -23,6 +23,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var pinMessageLabel: UILabel!
     @IBOutlet weak var moreOut: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var commentsStackView: UIStackView!
     var data: pinData!
@@ -33,6 +34,13 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
 
         hideKeyboardWhenTappedAround()
         profileImage.roundedImage()
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
         
     }
     

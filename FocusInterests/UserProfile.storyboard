@@ -680,7 +680,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuH-9L-XHv">
-                                                        <rect key="frame" x="73" y="38.5" width="222" height="20.5"/>
+                                                        <rect key="frame" x="73" y="38.5" width="194" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -697,7 +697,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000 mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enR-G6-XVv">
-                                                        <rect key="frame" x="303" y="7" width="60" height="20.5"/>
+                                                        <rect key="frame" x="275" y="7" width="88" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -718,7 +718,7 @@
                                                     <constraint firstItem="l0Z-6t-iHC" firstAttribute="leading" secondItem="zs8-eT-TCa" secondAttribute="leading" constant="2" id="LBb-Pc-Nxu"/>
                                                     <constraint firstAttribute="trailing" secondItem="l0Z-6t-iHC" secondAttribute="trailing" constant="2" id="NOL-Jf-ou0"/>
                                                     <constraint firstItem="l0Z-6t-iHC" firstAttribute="top" secondItem="zs8-eT-TCa" secondAttribute="top" id="V3z-Ou-0zX"/>
-                                                    <constraint firstItem="nuH-9L-XHv" firstAttribute="trailing" secondItem="VK7-Ea-kjC" secondAttribute="trailing" constant="-72" id="XJa-MW-dkN"/>
+                                                    <constraint firstItem="nuH-9L-XHv" firstAttribute="trailing" secondItem="VK7-Ea-kjC" secondAttribute="trailing" constant="-100" id="XJa-MW-dkN"/>
                                                     <constraint firstItem="hH3-Cy-m4h" firstAttribute="leading" secondItem="zs8-eT-TCa" secondAttribute="leading" constant="8" id="XlA-cT-3MY"/>
                                                     <constraint firstItem="VK7-Ea-kjC" firstAttribute="firstBaseline" secondItem="NRe-j8-XoK" secondAttribute="firstBaseline" constant="29" id="Yqd-GZ-2yJ"/>
                                                     <constraint firstItem="AO6-Dr-guK" firstAttribute="centerY" secondItem="NRe-j8-XoK" secondAttribute="centerY" id="dJw-XJ-gA9"/>

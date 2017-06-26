@@ -83,6 +83,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navBar" destination="1On-WJ-ogj" id="Qp2-Ve-LBT"/>
                         <outlet property="segmentedControl" destination="cUS-Vg-g8o" id="1f5-b7-P6A"/>
                         <outlet property="tableView" destination="8po-4l-Agk" id="9rj-Nk-p2c"/>
                     </connections>

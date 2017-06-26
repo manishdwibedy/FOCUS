@@ -96,6 +96,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="invitePopup" destination="vv4-j9-YTv" id="Tj8-OT-lUa"/>
+                        <outlet property="navBar" destination="T1q-Ba-90U" id="hcn-pc-KL3"/>
                         <outlet property="navTitle" destination="IJI-Ig-vYz" id="VXX-My-xZM"/>
                         <outlet property="searchBar" destination="e5N-ur-DBG" id="Dvr-6Q-jjN"/>
                         <outlet property="tableView" destination="eRW-87-xqd" id="yvW-s4-IcY"/>

@@ -13,6 +13,7 @@ class ReviewsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var reviewsTableView: UITableView!
+    @IBOutlet weak var navBar: UINavigationBar!
     var place: Place!
     var data = [NSDictionary]()
     
@@ -38,7 +39,12 @@ class ReviewsViewController: UIViewController, UITableViewDelegate, UITableViewD
         placeNameLabel.text = place.name
         self.reviewsTableView.tableFooterView = UIView()
         
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
         
+        navBar.titleTextAttributes = attrs
     }
 
     override func didReceiveMemoryWarning() {

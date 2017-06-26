@@ -17,6 +17,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     var people = [User]()
     var filtered = [User]()
@@ -46,6 +47,14 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         filtered = people
         hideKeyboardWhenTappedAround()
+        
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
     }
     
     override func viewWillAppear(_ animated: Bool) {

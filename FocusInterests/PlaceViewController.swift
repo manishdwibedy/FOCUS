@@ -32,6 +32,7 @@ class PlaceViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var ratingBackground: UIView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,13 @@ class PlaceViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showRating(sender:)))
         
         ratingBackground.addGestureRecognizer(tapGesture)
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
     }
     
     func showRating(sender: UITapGestureRecognizer) {

@@ -17,6 +17,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var contactList: UILabel!
     @IBOutlet weak var contactListView: UIView!
     @IBOutlet weak var timeOut: UIButton!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var friendListBottom: NSLayoutConstraint!
    
@@ -114,6 +115,13 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.friendsTableView.tableFooterView = UIView()
         hideKeyboardWhenTappedAround()
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
     }
     
     func setSelectedFriends(){

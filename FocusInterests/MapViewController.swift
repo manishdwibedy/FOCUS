@@ -1147,11 +1147,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
-        let transition = CATransition()
-        transition.duration = 0.4
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromBottom
-        self.view.window!.layer.add(transition, forKey: kCATransition)
+        
+        dropfromTop(view: self.view)
         
         self.present(VC, animated:true, completion:nil)        
     }
@@ -1159,6 +1156,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func messagesClicked() {
         
         let VC:UIViewController = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UINavigationController
+        
+        dropfromTop(view: self.view)
+        
         self.present(VC, animated:true, completion:nil)
     }
     
@@ -1169,6 +1169,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
         
+        dropfromTop(view: self.view)
+        
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -1176,11 +1178,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let storyboard = UIStoryboard(name: "general_search", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
         VC?.location = self.currentLocation
-        let transition = CATransition()
-        transition.duration = 0.4
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromBottom
-        view.window!.layer.add(transition, forKey: kCATransition)
+        
+        dropfromTop(view: self.view)
+        
         self.present(VC!, animated: true, completion: nil)
         
         

@@ -489,6 +489,7 @@ line 2</string>
                         <outlet property="likeOut" destination="eFv-QC-3S7" id="PNJ-Ab-N5t"/>
                         <outlet property="likesLabel" destination="j0G-WK-LPf" id="9Th-tQ-nQI"/>
                         <outlet property="moreOut" destination="Vfl-p8-Tef" id="nIm-rq-iH9"/>
+                        <outlet property="navBar" destination="hJE-2j-BeM" id="Qd3-jJ-9XU"/>
                         <outlet property="pinMessageLabel" destination="kSX-QC-Op4" id="ONd-y0-Jre"/>
                         <outlet property="profileImage" destination="cQ3-SI-V2f" id="x62-RK-RTK"/>
                         <outlet property="sendOut" destination="CsI-L6-VgU" id="2kw-qA-0hl"/>

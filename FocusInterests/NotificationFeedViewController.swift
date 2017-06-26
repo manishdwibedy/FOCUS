@@ -21,6 +21,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: CustomSegmentedControl!
     @IBOutlet weak var backButtonItem: UIBarButtonItem!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     var multipleArray = [[FocusNotification]]()
     var selectedSegmentIndex: Int = SelectedIndex.NOTIF.rawValue
@@ -104,6 +105,13 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
 //        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: UIControlState.selected)
 //        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: UIControlState.normal)
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
 //        
     }
     

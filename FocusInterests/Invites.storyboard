@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ii7-3r-SGo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ii7-3r-SGo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -129,6 +129,7 @@
                         <outlet property="contactListView" destination="58f-vL-hfC" id="A4u-0c-MMV"/>
                         <outlet property="friendListBottom" destination="Vg9-Jl-4Du" id="h1c-bH-ZYx"/>
                         <outlet property="friendsTableView" destination="ith-zO-7mj" id="uWQ-cp-Vgl"/>
+                        <outlet property="navBar" destination="noj-oM-whr" id="9Y1-3J-bzF"/>
                         <outlet property="sendButton" destination="9yU-hF-EgJ" id="Meu-w8-2wu"/>
                         <outlet property="timeOut" destination="7de-LD-Fht" id="1vg-YI-yIf"/>
                     </connections>

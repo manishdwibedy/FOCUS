@@ -407,6 +407,7 @@
                         <outlet property="interestNextButton" destination="OH2-HW-w53" id="zgL-uR-a5h"/>
                         <outlet property="interestTableView" destination="4mD-gv-r8q" id="C0Y-M9-0VQ"/>
                         <outlet property="locationTextField" destination="Z2l-7t-2Co" id="swX-ke-M5l"/>
+                        <outlet property="navBar" destination="fEY-9z-tRP" id="NN1-zC-laA"/>
                         <outlet property="parentView" destination="BxB-qZ-pRY" id="B23-BK-fVm"/>
                         <outlet property="privateLabel" destination="NHt-Do-t7D" id="hJw-RW-5Fy"/>
                         <outlet property="publicLabel" destination="LCG-dE-mWN" id="3o9-5Z-Tey"/>
