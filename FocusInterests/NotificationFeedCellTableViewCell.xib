@@ -68,6 +68,7 @@
                         <connections>
                             <action selector="profilePicOutsideTouch:" destination="KGk-i7-Jjw" eventType="touchUpOutside" id="10P-fy-0C5"/>
                             <action selector="profilePicPushed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dva-wo-JB2"/>
+                            <action selector="showUser:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="x1t-1H-yQt"/>
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G4T-lJ-oCe">

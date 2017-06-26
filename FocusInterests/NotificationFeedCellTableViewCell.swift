@@ -147,7 +147,23 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         
         self.notif = notif
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(showUser(sender:)))
+//        self..isUserInteractionEnabled = true
+//        self.profileImage.addGestureRecognizer(tap)
+        
     }
+    
+    
+    @IBAction func showUser(_ sender: Any) {
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = (self.notif?.sender?.uuid)!
+        dropfromTop(view: (parentVC?.view)!)
+        
+        parentVC?.present(VC, animated:true, completion:nil)
+    }
+    
     
     func roundButtonsAndPictures(){
         self.seeYouThereButton.layer.cornerRadius = 6
