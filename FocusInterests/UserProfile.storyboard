@@ -344,7 +344,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gs-u9-MSd">
-                                                        <rect key="frame" x="118" y="8" width="94" height="27"/>
+                                                        <rect key="frame" x="125.5" y="8" width="94" height="27"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="27" id="ekq-HM-bjq"/>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="94" id="ofK-C7-WUg"/>
@@ -398,8 +398,8 @@
                                                     <constraint firstItem="ofW-bn-GIG" firstAttribute="top" secondItem="1gs-u9-MSd" secondAttribute="bottom" constant="20" id="2p0-A7-hA5"/>
                                                     <constraint firstItem="ofW-bn-GIG" firstAttribute="leading" secondItem="Yfu-XU-At8" secondAttribute="leading" constant="20" id="2pT-VK-wqa"/>
                                                     <constraint firstItem="1XF-Wl-lIE" firstAttribute="top" secondItem="F09-6U-2YX" secondAttribute="bottom" constant="20" id="9sm-Ry-tdW"/>
-                                                    <constraint firstItem="1gs-u9-MSd" firstAttribute="centerX" secondItem="F09-6U-2YX" secondAttribute="centerX" id="JiO-dP-AEY"/>
                                                     <constraint firstAttribute="trailing" secondItem="F09-6U-2YX" secondAttribute="trailing" constant="27" id="NdQ-FY-Yiz"/>
+                                                    <constraint firstItem="1gs-u9-MSd" firstAttribute="centerX" secondItem="Yfu-XU-At8" secondAttribute="centerX" id="PHn-ST-J4j"/>
                                                     <constraint firstItem="1gs-u9-MSd" firstAttribute="top" secondItem="Yfu-XU-At8" secondAttribute="top" constant="8" id="V5x-r2-hTP"/>
                                                     <constraint firstItem="F09-6U-2YX" firstAttribute="top" secondItem="1gs-u9-MSd" secondAttribute="bottom" constant="8" id="aaH-0Y-KPp"/>
                                                     <constraint firstAttribute="height" constant="175" id="afv-Q0-TEP"/>
