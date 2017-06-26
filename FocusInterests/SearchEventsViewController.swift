@@ -40,23 +40,23 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         self.searchBar.backgroundImage = UIImage()
         self.searchBar.tintColor = UIColor.white
         self.searchBar.barTintColor = UIColor.white
-        self.searchBar.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+        
         self.searchBar.layer.cornerRadius = 6
         self.searchBar.clipsToBounds = true
         self.searchBar.layer.borderWidth = 0
         self.searchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
         
-        //        search bar attributes
+        // search bar attributes
         let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
         let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
         
-        //        search bar placeholder
+        // search bar placeholder
         let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
         textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
         textFieldInsideSearchBar?.textColor = UIColor.white
         
-        //        search bar glass icon
+        // search bar glass icon
         let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
         glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         glassIconView.tintColor = UIColor.white
