@@ -159,7 +159,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             var address = pin.locationAddress
             address = address.replacingOccurrences(of: ";;", with: "\n")
             cell?.whiteBorder.isHidden = false
-            cell?.address.text = address
+            cell?.address.text = pin.pinMessage
             addGreenDot(label: (cell?.interest)!, content: pin.focus)
             let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
             cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
@@ -211,11 +211,12 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
         
-//        if (self.pinAvailable[indexPath.row] != nil){
-            return 110
-//        }
-//        else{
-//
+        if (self.pinAvailable[indexPath.row] != nil){
+            return 105
+        }
+        else{
+            cell?.cellHeight.constant = 70
+//            cell.content
 //            cell?.cellContentViewHeightConstraint.constant = 60.0
 ////            cell?.subviews[0].subviews[0].frame.size.height = 70.0
 //            cell?.distanceCategoryStack.arrangedSubviews[0].removeFromSuperview()
@@ -228,8 +229,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
 //            cell?.cellContentView.layoutIfNeeded()
 //            
 //            print(cell?.cellContentView.frame.height)
-//            return 90
-//        }
+            return 70
+        }
         
     }
     

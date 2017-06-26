@@ -130,25 +130,26 @@
                         </subviews>
                         <color key="backgroundColor" red="0.38039215686274508" green="0.45098039215686275" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="dBt-EP-FC5" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" constant="11" id="0pF-Xl-kxo"/>
                             <constraint firstItem="X6O-7Q-mCg" firstAttribute="top" secondItem="Ztv-4m-kt4" secondAttribute="bottom" constant="-3" id="296-li-DSg"/>
                             <constraint firstItem="dBt-EP-FC5" firstAttribute="leading" secondItem="sOb-GM-41h" secondAttribute="trailing" constant="18" id="3jJ-zS-99f"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="leading" secondItem="Jrp-IZ-pa4" secondAttribute="trailing" constant="12" id="5QG-4u-y2k"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="bottom" secondItem="dBt-EP-FC5" secondAttribute="bottom" id="75y-IA-eRR"/>
                             <constraint firstItem="Rkn-gp-GVE" firstAttribute="leading" relation="lessThanOrEqual" secondItem="OHh-7b-rCo" secondAttribute="trailing" constant="89" id="AP6-Rx-2ud"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="width" secondItem="dBt-EP-FC5" secondAttribute="width" id="Aex-tN-IDw"/>
-                            <constraint firstItem="Jrp-IZ-pa4" firstAttribute="top" secondItem="sOb-GM-41h" secondAttribute="top" id="Arv-mA-vja"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="centerY" secondItem="dBt-EP-FC5" secondAttribute="centerY" id="BIe-AV-qEl"/>
                             <constraint firstItem="2vx-AD-EVj" firstAttribute="top" secondItem="sOb-GM-41h" secondAttribute="bottom" id="Gef-gn-b7J"/>
+                            <constraint firstAttribute="height" constant="105" id="J5v-dd-peI"/>
                             <constraint firstItem="Ztv-4m-kt4" firstAttribute="leading" secondItem="OHh-7b-rCo" secondAttribute="leading" id="Jia-ml-kNe"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="baseline" secondItem="dBt-EP-FC5" secondAttribute="baseline" constant="1" id="LKy-gG-SA3"/>
                             <constraint firstItem="X6O-7Q-mCg" firstAttribute="leading" secondItem="2vx-AD-EVj" secondAttribute="trailing" constant="-117" id="MOa-ca-d8H"/>
                             <constraint firstItem="dBt-EP-FC5" firstAttribute="leading" secondItem="2vx-AD-EVj" secondAttribute="trailing" constant="18" id="MkW-Nw-pK3"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="centerX" secondItem="2vx-AD-EVj" secondAttribute="centerX" id="PLK-7v-Yql"/>
                             <constraint firstItem="Rkn-gp-GVE" firstAttribute="top" secondItem="6Vx-MI-HiM" secondAttribute="bottom" constant="12" id="Thk-11-AsC"/>
+                            <constraint firstItem="Jrp-IZ-pa4" firstAttribute="top" secondItem="KLR-T5-BTj" secondAttribute="top" constant="11" id="WPJ-sz-BUv"/>
                             <constraint firstItem="Ztv-4m-kt4" firstAttribute="top" secondItem="OHh-7b-rCo" secondAttribute="bottom" constant="3" id="aG4-4y-h1M"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="leading" secondItem="2vx-AD-EVj" secondAttribute="leading" id="bYq-Ga-mpc"/>
                             <constraint firstItem="Ztv-4m-kt4" firstAttribute="trailing" secondItem="cpm-zK-R8B" secondAttribute="trailing" id="czv-um-6Sw"/>
-                            <constraint firstItem="OHh-7b-rCo" firstAttribute="centerY" secondItem="KLR-T5-BTj" secondAttribute="centerY" constant="3" id="dBZ-h4-xUS"/>
                             <constraint firstItem="dBt-EP-FC5" firstAttribute="baseline" secondItem="6Vx-MI-HiM" secondAttribute="baseline" id="duB-5H-lmA"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="centerX" secondItem="Rkn-gp-GVE" secondAttribute="centerX" id="dxj-Cx-20p"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="centerY" secondItem="dBt-EP-FC5" secondAttribute="centerY" id="esi-bd-l9l"/>
@@ -166,22 +167,17 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="KLR-T5-BTj" firstAttribute="centerX" secondItem="n0I-2n-AQA" secondAttribute="centerX" id="3t1-hf-lGC"/>
                     <constraint firstItem="KLR-T5-BTj" firstAttribute="leading" secondItem="n0I-2n-AQA" secondAttribute="leadingMargin" constant="-3" id="PZl-wt-2P2"/>
                     <constraint firstAttribute="trailingMargin" secondItem="KLR-T5-BTj" secondAttribute="trailing" constant="-3" id="aZ4-nf-IZN"/>
                     <constraint firstItem="KLR-T5-BTj" firstAttribute="top" secondItem="n0I-2n-AQA" secondAttribute="topMargin" constant="-8" id="dTf-CE-o4d"/>
-                    <constraint firstItem="KLR-T5-BTj" firstAttribute="bottom" secondItem="n0I-2n-AQA" secondAttribute="bottomMargin" constant="8.5" id="kgU-EZ-6Op"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.90792702069999998" green="0.87262839240000001" blue="0.91347555049999996" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="KLR-T5-BTj" firstAttribute="centerY" secondItem="mns-GT-1Sv" secondAttribute="centerY" constant="0.5" id="UJa-S1-hFZ"/>
-                <constraint firstItem="KLR-T5-BTj" firstAttribute="centerX" secondItem="mns-GT-1Sv" secondAttribute="centerX" id="oZo-qn-Jgu"/>
-            </constraints>
             <connections>
                 <outlet property="address" destination="4Pr-kM-S8b" id="VPe-nt-gxo"/>
                 <outlet property="addressStack" destination="X6O-7Q-mCg" id="pma-rk-ROr"/>
                 <outlet property="cellContentView" destination="KLR-T5-BTj" id="b8l-Jo-F5g"/>
+                <outlet property="cellHeight" destination="J5v-dd-peI" id="IOn-xs-dkL"/>
                 <outlet property="distance" destination="cpm-zK-R8B" id="qwX-pB-7e8"/>
                 <outlet property="distanceCategoryStack" destination="Rkn-gp-GVE" id="CDK-KX-2Ep"/>
                 <outlet property="followButton" destination="dBt-EP-FC5" id="ZiG-bc-2bk"/>

@@ -23,6 +23,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var whiteBorder: UIView!
 
     @IBOutlet weak var addressStack: UIStackView!
+    @IBOutlet weak var cellHeight: NSLayoutConstraint!
     var ID = ""
     var parentVC: SearchPeopleViewController!
     var pinAvailable = false
