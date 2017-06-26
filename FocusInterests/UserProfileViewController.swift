@@ -59,6 +59,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var emptyPinButton: UIButton!
     
     // user interests
+    @IBOutlet weak var focusHeader: UILabel!
     @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var interestStackView: UIStackView!
     @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
@@ -72,9 +73,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 	// (and also any of the ones after)
     @IBOutlet weak var eventView: UIView!
 	
+    @IBOutlet weak var eventHeader: UILabel!
     var followers = [User]()
     var following = [User]()
     
+    @IBOutlet weak var createEventButton: UIButton!
     var suggestion = [Event]()
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
     
@@ -127,6 +130,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 //		userScrollView.contentSize = CGSize(width: 375, height: 1600)
         // Do any additional setup after loading the view.
         
+        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+        let focus_header = NSAttributedString(string: "FOCUS", attributes: underlineAttribute)
+        let event_header = NSAttributedString(string: "Events", attributes: underlineAttribute)
+        focusHeader.attributedText = focus_header
+        eventHeader.attributedText = event_header
+        
+        
         hideKeyboardWhenTappedAround()
         
         let eventsCollectionNib = UINib(nibName: "UserProfileCollectionViewCell", bundle: nil)
@@ -160,6 +170,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
         self.navigationItem.title = ""
         
+        self.createEventButton.roundCorners(radius: 6)
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
         Constants.DB.pins.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -410,41 +421,28 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     func getEventSuggestions(){
         
-        let center = AuthApi.getLocation()
-        if let circleQuery = self.geoFire?.query(at: center, withRadius: 20.0) {
-            _ = circleQuery.observe(.keyEntered) { (key, location) in
-                print("Key '\(key)' entered the search area and is at location '\(location)'")
-                
-                Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
-                    let info = snapshot.value as? [String : Any] ?? [:]
+        let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
+        Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: ID).queryLimited(toLast: 3).observeSingleEvent(of: .value, with: { snapshot in
+            let eventInfo = snapshot.value as? [String : Any]
+            
+            if let eventInfo = eventInfo{
+                let count = eventInfo.count
+                for (id, event) in eventInfo{
+                    let info = event as? [String:Any]
+                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
                     
-                    let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
-                    
-                    if let attending = info["attendingList"] as? [String:Any]{
-                        event.setAttendessCount(count: attending.count)
-                    }
-                    
-                    if self.suggestion.count < 3{
-                      self.suggestion.append(event)
-                        var rows = self.suggestion.count / 3
-                        if self.suggestion.count % 3 != 0{
-                            rows += 1
-                        }
-//                        self.suggestionsHeight.constant = CGFloat(125 * rows)
-                        
-                        
-                        self.eventsCollectionView.reloadData()
-
-                    }
-                  
-                })
+                    self.suggestion.append(event)
+                }
             }
             
-            circleQuery.observeReady{
-                print("All initial data has been loaded and events have been fired for circle query!")
+            if self.suggestion.count > 0{
+                self.eventsCollectionView.reloadData()    
             }
-        }
-        
+            else{
+                self.createEventButton.alpha = 1
+            }
+            
+        })
     }
     
     func roundImagesAndButtons(){
@@ -476,6 +474,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let vc: UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "home") as! UITabBarController
         vc.selectedIndex = 2
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func createEvent(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
+        self.present(controller, animated: true, completion: nil)
+
     }
     /*
     // MARK: - Navigation
