@@ -12,8 +12,6 @@ class MapPopUpScreenView: UIView {
 
     @IBOutlet var view: UIView!
     
-    @IBOutlet weak var backImage: UIImageView!
-    
     @IBOutlet weak var profileImage: UIImageView!
 
     @IBOutlet weak var startImage: UIImageView!
@@ -64,11 +62,13 @@ class MapPopUpScreenView: UIView {
         interestLabel.text = interest.attributedText?.string
         addressLabel.text = address
         
+        captionLeading.constant = -25
+        
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 254/255, green: 55/255, blue: 103/255, alpha: 1).cgColor
         self.profileImage.layer.borderWidth = 1
         self.profileImage.clipsToBounds = true
-        self.profileImage.isHidden = true
+        self.profileImage.isHidden = false
 
         self.layer.borderColor = UIColor(red: 254/255, green: 55/255, blue: 103/255, alpha: 1).cgColor
         self.layer.borderWidth = 2
@@ -88,11 +88,13 @@ class MapPopUpScreenView: UIView {
         interestLabel.text = interest.attributedText?.string
         addressLabel.text = address
         
+        captionLeading.constant = 8
+        
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1).cgColor
         self.profileImage.layer.borderWidth = 1
         self.profileImage.clipsToBounds = true
-        self.profileImage.isHidden = true
+        self.profileImage.isHidden = false
         
         
         self.layer.borderColor = UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1).cgColor
@@ -103,16 +105,59 @@ class MapPopUpScreenView: UIView {
         
     }
     
-    func loadPin(name: String, pin: String, distance: String, focus: String)
+    func loadPin(name: String, pin: String, distance: String, focus: String, address: String)
     {
         
         self.startImage.isHidden = true
         boldLabel.text = name
         bottomText.text = pin
+        addressLabel.text = address
         mileLabel.text = distance
         interestLabel.text = focus
         
         captionLeading.constant = -20
+        
+        if let data = object as? pinData{
+            print(data)
+            
+            data.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    
+                    if value?["images"] != nil
+                    {
+                        var firstVal = ""
+                        print("images")
+                        print((value?["images"])!)
+                        for (key,_) in (value?["images"] as! NSDictionary)
+                        {
+                            firstVal = key as! String
+                            break
+                        }
+                        
+                        
+                        let placeholderImage = UIImage(named: "empty_event")
+                        
+                        let reference = Constants.storage.pins.child(((value?["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
+                        reference.downloadURL(completion: { (url, error) in
+                            
+                            if error != nil {
+                                print(error?.localizedDescription)
+                                return
+                            }
+                            
+                            self.profileImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                            self.profileImage.setShowActivityIndicator(true)
+                            self.profileImage.setIndicatorStyle(.gray)
+                            
+                        })
+                        
+                    }
+                    
+                }
+            })
+        }
         
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 125/255, green: 201/255, blue: 49/255, alpha: 1).cgColor

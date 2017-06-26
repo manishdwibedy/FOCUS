@@ -376,18 +376,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         return
                     }
                     
-                    self.popUpScreen.backImage.sd_setImage(with: url, placeholderImage: placeholderImage)
-                    self.popUpScreen.backImage.setShowActivityIndicator(true)
-                    self.popUpScreen.backImage.setIndicatorStyle(.gray)
+                    self.popUpScreen.profileImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                    self.popUpScreen.profileImage.setShowActivityIndicator(true)
+                    self.popUpScreen.profileImage.setIndicatorStyle(.gray)
                     
                     
                 })
                 
             }
             else{
-                popUpScreen.backImage.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
-                popUpScreen.backImage.setShowActivityIndicator(true)
-                popUpScreen.backImage.setIndicatorStyle(.gray)
+                popUpScreen.profileImage.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
+                popUpScreen.profileImage.setShowActivityIndicator(true)
+                popUpScreen.profileImage.setIndicatorStyle(.gray)
                 
             }
             
@@ -449,19 +449,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
                 marker.tracksInfoWindowChanges = false
-                self.popUpScreen.backImage.setShowActivityIndicator(false)
+                self.popUpScreen.profileImage.setShowActivityIndicator(false)
                 
             }
             
             let placeholderImage = UIImage(named: "empty_event")
             
-            popUpScreen.backImage.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
-            popUpScreen.backImage.setShowActivityIndicator(true)
-            popUpScreen.backImage.setIndicatorStyle(.gray)
+            popUpScreen.profileImage.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+            popUpScreen.profileImage.setShowActivityIndicator(true)
+            popUpScreen.profileImage.setIndicatorStyle(.gray)
             
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
             
-            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest, address: place.address.joined(separator: " "))
+            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest, address: place.address[0])
             return true
             
             
@@ -490,7 +490,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if value != nil
                 {
                     name = value?["username"] as! String
-                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest)
+                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest, address: pin.locationAddress.components(separatedBy: ";;")[0])
                 }
             })
         

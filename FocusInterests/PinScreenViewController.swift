@@ -14,7 +14,7 @@ import GooglePlaces
 import SCLAlertView
 import FBSDKLoginKit
 
-class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate, CLLocationManagerDelegate{
+class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate, CLLocationManagerDelegate, UITextViewDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
@@ -54,7 +54,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     var isFacebook = false
     
     var interest = ""
-    
+    var lastCaption = ""
     
    
     
@@ -142,7 +142,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         doneToolbar.sizeToFit()
         
         pinTextView.inputAccessoryView = doneToolbar
-        
+        pinTextView.delegate = self
         getPhotos()
         
         getPlaceName(location: AuthApi.getLocation()!, completion: {address in
@@ -203,6 +203,13 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func pin(_ sender: Any) {
+        for cell in cellArray
+        {
+            if cell.selectedIs == true
+            {
+                galleryPicArray.append(cell.imageView.image!)
+            }
+        }
         
         if pinTextView.text == "What are you up to? Type here."{
             SCLAlertView().showError("Error", subTitle: "Please enter your caption")
@@ -214,28 +221,23 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         }
         
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).removeValue()
-        for cell in cellArray
-        {
-            if cell.selectedIs == true
-            {
-                galleryPicArray.append(cell.imageView.image!)
-            }
-        }
         
         let time = NSDate().timeIntervalSince1970
         if pinTextView.text != nil && pinTextView.text != ""
         {
-                let imagePaths = NSMutableDictionary()
-                for image in galleryPicArray
-                {
-                    let random = Int(time) + Int(arc4random_uniform(10000000))
-                    let path = AuthApi.getFirebaseUid()!+"/"+String(random)
-                    imagePaths.addEntries(from: [String(random):["imagePath": path]])
-                    uploadImage(image: image, path: Constants.storage.pins.child(path))
-                    
-                }
+            let imagePaths = NSMutableDictionary()
+            for image in galleryPicArray
+            {
+                let random = Int(time) + Int(arc4random_uniform(10000000))
+                let path = AuthApi.getFirebaseUid()!+"/"+String(random)
+                imagePaths.addEntries(from: [String(random):["imagePath": path]])
+                uploadImage(image: image, path: Constants.storage.pins.child(path))
+                
+            }
+        
+            if formmatedAddress.characters.count > 0{
                 Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text] )
-
+                
                 Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
                     if (error != nil) {
                         debugPrint("An error occured: \(error)")
@@ -243,6 +245,18 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                         print("Saved location successfully!")
                     }
                 }
+            }
+            else{
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":locationLabel.text, "lat": AuthApi.getLocation()?.coordinate.latitude, "lng": AuthApi.getLocation()?.coordinate.longitude, "images": imagePaths, "public": isPublic, "focus": focusLabel.text] )
+                
+                Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
+                    if (error != nil) {
+                        debugPrint("An error occured: \(error)")
+                    } else {
+                        print("Saved location successfully!")
+                    }
+                }
+            }
                 
             if isTwitter == true
             {
@@ -372,7 +386,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                 image, error in
                     if let image = image{
                         print("got image")
-                        self.imageArray.append(image)
+                        
+                        if let data = UIImageJPEGRepresentation(image, 0.5) as NSData?{
+                            self.imageArray.append(image)
+                        }
+                        
                     }
                 })
             }
@@ -396,6 +414,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func keyboardWillHide(notification: NSNotification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            
+            pinTextView.text = lastCaption
             if pinTextView.text == ""
             {
                 pinTextView.text = "What are you up to? Type here."
@@ -525,6 +545,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     @IBAction func chooseFOCUS(_ sender: Any) {
         
+        lastCaption = pinTextView.text
         let focusWindow = InterestsViewController(nibName:"InterestsViewController", bundle:nil)
         self.present(focusWindow, animated: true, completion:{
             focusWindow.saveButton.isEnabled = false
@@ -542,6 +563,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         alert.view.tintColor = UIColor.primaryGreen()
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        lastCaption = textView.text
     }
 }
 
