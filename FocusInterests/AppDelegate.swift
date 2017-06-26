@@ -118,27 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
                 logout()
             }
             else {
-                FirebaseDownstream.shared.getCurrentUser(completion: {value in
-                    print(value)
-                    print("a")
-//                    let interests = value["interests"] as? String{
-//                        if interests.characters.count == 0{
-//                            
-//                        }
-//                        else{
-//                            
-//                        }
-//                    }
-                })
-//                if getUserInterests().characters.count == 0{
-//                    let interestsVC = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
-//                    self.window?.rootViewController = interestsVC
-//                    self.window?.makeKeyAndVisible()
-//                }
-//                else{
-//                    login()    
-//                }
-                
+                login()
             }
         } else if defaults.object(forKey: "Login") == nil {
             self.logout()
