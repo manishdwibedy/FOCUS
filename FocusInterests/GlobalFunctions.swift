@@ -298,6 +298,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                         let time = dateFormatter.date(from: event.date!)
                         let address = event.shortAddress
                         let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
+                        place.id = snapshot.key
                         if let time = time{
                             let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: time)
                             events.append(eventFeed)
@@ -338,6 +339,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                 let time = dateFormatter.date(from: event.date!)
                                 let address = event.shortAddress
                                 let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
+                                place.id = snapshot.key
                                 if let time = time{
                                     let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: time)
                                     invitations_event.append(eventFeed)

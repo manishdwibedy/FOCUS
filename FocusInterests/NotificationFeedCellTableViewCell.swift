@@ -134,13 +134,14 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         
         
+        if !isFeed{
+            let notif_time = notif.time!
+            let plain_time = " at \(time.string(from: notif_time)) on \(date.string(from: notif_time))"
+            let timeString = NSMutableAttributedString(string: plain_time)
+            timeString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0,plain_time.characters.count))
+            attrString.append(timeString)    
+        }
         
-        
-        let notif_time = notif.time!
-        let plain_time = " at \(time.string(from: notif_time)) on \(date.string(from: notif_time))"
-        let timeString = NSMutableAttributedString(string: plain_time)
-        timeString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0,plain_time.characters.count))
-        attrString.append(timeString)
         
         self.userNameLabel.attributedText = attrString
 
