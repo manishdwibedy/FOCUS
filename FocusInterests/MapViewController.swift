@@ -326,7 +326,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             var timeString = ""
             let imageView = UIImageView()
             var distance = ""
-            let interest = UILabel()
+            var interest = UILabel()
             
             var start = ""
             var end = ""
@@ -379,21 +379,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
             
-            
+            var interestText = ""
             if let category = event.category{
-                let focus = category.components(separatedBy: ",")[0]
-                interest.text =  "\(focus)"
-                
-                
-                
-                let primaryFocus = NSMutableAttributedString(string: interest.text!)
-                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
-                interest.attributedText = primaryFocus
+                interestText = category.components(separatedBy: ",")[0]
             }
-            else{
-                interest.text = "None"
-            }
-            popUpScreen.loadEvent(name: event.title!, date: start, miles: distance, interest: interest, address: (event.fullAddress?.components(separatedBy: ";;")[0])!)
+            popUpScreen.loadEvent(name: event.title!, date: start, miles: distance, interest: interestText, address: (event.fullAddress?.components(separatedBy: ";;")[0])!)
             
             return true
             
@@ -420,18 +410,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             reviews = "(\(place.reviewCount) reviews)"
             let category = place.categories.map(){ $0.alias }
             
-            let interestText = getInterest(yelpCategory: category[0])
+            var interestText = getInterest(yelpCategory: category[0])
             
-            if interestText.characters.count > 0 {
-                interest.text =  "\(interestText)"
-                let primaryFocus = NSMutableAttributedString(string: interest.text!)
-                primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location:(interest.text?.characters.count)! - 1,length:1))
-                interest.attributedText = primaryFocus
+            if interestText.characters.count == 0 {
+                interestText = "N.A."
             }
-            else{
-                interest.text = "N.A."
-            }
-            
             let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
                 marker.tracksInfoWindowChanges = false
                 self.popUpScreen.profileImage.setShowActivityIndicator(false)
@@ -446,7 +429,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
             
-            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interest, address: place.address[0])
+            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interestText, address: place.address[0])
             return true
             
             

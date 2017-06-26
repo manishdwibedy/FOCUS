@@ -53,13 +53,13 @@ class MapPopUpScreenView: UIView {
         self.view.addGestureRecognizer(tap)
         
     }
-    func loadEvent(name:String, date: String, miles: String, interest: UILabel, address: String)
+    func loadEvent(name:String, date: String, miles: String, interest: String, address: String)
     {
         self.startImage.isHidden = true
         boldLabel.text = name
         bottomText.text = date
         mileLabel.text = miles
-        interestLabel.text = interest.attributedText?.string
+        addGreenDot(label: interestLabel, content: interest)
         addressLabel.text = address
         
         captionLeading.constant = -25
@@ -79,13 +79,13 @@ class MapPopUpScreenView: UIView {
     }
     
     
-    func loadPlace(name: String, rating: String, reviews: String, miles: String, interest: UILabel, address:String)
+    func loadPlace(name: String, rating: String, reviews: String, miles: String, interest: String, address:String)
     {
         self.startImage.isHidden = false
         boldLabel.text = name
         bottomText.text = rating + "   " + reviews
         mileLabel.text = miles
-        interestLabel.text = interest.attributedText?.string
+        addGreenDot(label: interestLabel, content: interest)
         addressLabel.text = address
         
         captionLeading.constant = 8
