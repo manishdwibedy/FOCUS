@@ -28,6 +28,9 @@ class EditProfileViewController: UIViewController {
         
         self.fillDataFromUser()
         hideKeyboardWhenTappedAround()
+        
+        genderTf.addTarget(self, action: "getGender:", forControlEvents: UIControlEvents.TouchDown)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,7 +83,24 @@ class EditProfileViewController: UIViewController {
 
     }
     
-
+    func getGender(textField: UITextField) {
+        let alertController = UIAlertController(title: "Gender?", message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let maleAction = UIAlertAction(title: "Male", style: .default) { action in
+            textField.text = "Male"
+        }
+        let femaleAction = UIAlertAction(title: "Female", style: .default) { action in
+            textField.text = "Female"
+        }
+        alertController.addAction(maleAction)
+        alertController.addAction(femaleAction)
+        
+        self.present(alertController, animated: true)
+    }
+    
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -120,6 +140,8 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func editAction(_ sender: Any) {
+        let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
+        self.present(selectInterests, animated: true, completion: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
