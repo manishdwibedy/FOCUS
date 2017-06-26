@@ -19,6 +19,7 @@ class FollowProfileCell: UITableViewCell {
     let ref = Database.database().reference()
     var data: followProfileCellData!
     var parentVC: attendeeVC? = nil
+    var following: FollowersViewController? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -10,23 +10,75 @@ import UIKit
 
 class FollowersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var inviteContactsButton: UIButton!
-    @IBOutlet weak var inviteFbFriendsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    
+    @IBOutlet weak var navBar: UINavigationBar!
+    var windowTitle = "Followers"
+    var followers = [followProfileCellData]()
+    var following = [followProfileCellData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        navBar.topItem?.title = self.windowTitle
         
         tableView.delegate = self
         tableView.dataSource = self
         
         
         self.inviteContactsButton.roundCorners(radius: 9.0)
-        self.inviteFbFriendsButton.roundCorners(radius: 9.0)
         
         let nib = UINib(nibName: "FollowProfileCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "FollowProfileCell")
+        
+        tableView.tableFooterView = UIView()
+        
+        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
+            if let dictionnary = dictionnary {
+                
+                if let followers = dictionnary["followers"] as? [String:Any]{
+                    if let people = followers["people"] as? [String:[String:Any]]{
+                        let count = people.count
+                        
+                        for (id, value) in people{
+                            print("")
+                            
+                            let data = followProfileCellData()
+                            data.uid = (value["UID"] as? String)!
+                            self.followers.append(data)
+                            
+                            if self.windowTitle == "Followers" && self.followers.count == count{
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+                
+                if let following = dictionnary["following"] as? [String:Any]{
+                    if let people = following["people"] as? [String:[String:Any]]{
+                        let count = people.count
+                        
+                        for (id, value) in people{
+                            print("")
+                            
+                            let data = followProfileCellData()
+                            data.uid = (value["UID"] as? String)!
+                            self.following.append(data)
+                            
+                            if self.windowTitle == "Following" && self.following.count == count{
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+                
+                
+                
+            }
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,14 +95,40 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if windowTitle == "Followers"{
+            return followers.count
+        }
+        else{
+            return following.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //        print("you are loading cell now")
-        let followersCell = tableView.dequeueReusableCell(withIdentifier: "FollowProfileCell", for: indexPath) as! FollowProfileCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FollowProfileCell", for: indexPath) as! FollowProfileCell
         
-        return followersCell
+        var user: followProfileCellData? = nil
+        if windowTitle == "Followers"{
+            user = self.followers[indexPath.row]
+        }
+        else{
+            user = self.following[indexPath.row]
+        }
+
+        cell.data = user as! followProfileCellData
+        cell.loadData()
+        cell.following = self
+        cell.profileImage.roundedImage()
+        if cell.data.uid == AuthApi.getFirebaseUid()
+        {
+            cell.followOut.isHidden = true
+        }
+        
+        
+//        followersCell.fullnameLabel.text = user?.fullname
+//        followersCell.usernameLabel.text = user?.username
+//        followersCell.profileImage.roundedImage()
+        return cell
     }
     
     @IBAction func backAction(_ sender: Any) {
@@ -66,5 +144,8 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
      // Pass the selected object to the new view controller.
      }
      */
+    @IBAction func backPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 }
