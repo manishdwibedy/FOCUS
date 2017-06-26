@@ -348,21 +348,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
             
-            if event.endTime.characters.count > 0{
-                let time = event.endTime.components(separatedBy: "T")[1]
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "HH:mm:ss"
-                let date = dateFormatter.date(from: time)
-                
-                dateFormatter.dateFormat = "h:mm a"
-                
-                end = dateFormatter.string(from: date!)
-                timeString = "\(start) - \(end)"
-            }
-            else{
-                timeString = "\(start) onwards"
-            }
-            
             let placeholderImage = UIImage(named: "empty_event")
             
             if let id = event.id{
@@ -408,7 +393,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             else{
                 interest.text = "None"
             }
-            popUpScreen.loadEvent(name: event.title!, date: timeString, miles: distance, interest: interest, address: event.shortAddress!)
+            popUpScreen.loadEvent(name: event.title!, date: start, miles: distance, interest: interest, address: event.fullAddress?.components(separatedBy: ";;")[0])
             
             return true
             
