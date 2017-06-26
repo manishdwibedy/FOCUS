@@ -62,9 +62,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
         commentsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        eventsTableView.delegate = self
-        eventsTableView.dataSource = self
-        eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
+        self.eventsTableView.delegate = self
+        self.eventsTableView.dataSource = self
+        self.eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         if event?.price != nil && (event?.price)! > 0.0{
             eventAmount.text = "$ \(String(describing: event?.price))"
@@ -198,8 +199,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 let value = snapshot.value as? NSDictionary
                 if value != nil
                 {
-                    self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
-                    self.likeOut.isEnabled = false
+//                    self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
+//                    self.likeOut.isEnabled = false
                 }
                 
             })
@@ -252,8 +253,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             // interests
             ref.child("events").child((event?.id)!).child("interests").observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? String
-                if value != nil
-                {
+                if value != nil{
                     self.eventInterests.text = value
                     
                 }
@@ -292,15 +292,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.present(ivc, animated: true, completion: { _ in })
     }
     
-    @IBAction func likeEvent(_ sender: UIButton) {
-        let fullRef = ref.child("events").child((event?.id)!)
-        let newLike = Int(likeCount.text!)! + 1
-        fullRef.child("likeAmount").updateChildValues(["num":newLike])
-        fullRef.child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
-        likeCount.text = String(newLike)
-        likeOut.isEnabled = false
-        
-    }
+//    @IBAction func likeEvent(_ sender: UIButton) {
+//        let fullRef = ref.child("events").child((event?.id)!)
+//        let newLike = Int(likeCount.text!)! + 1
+//        fullRef.child("likeAmount").updateChildValues(["num":newLike])
+//        fullRef.child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+//        likeCount.text = String(newLike)
+//        likeOut.isEnabled = false
+//        
+//    }
     
     @IBAction func attendEvent(_ sender: UIButton) {
         if isAttending == false
@@ -330,8 +330,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             attendOut.layer.borderColor = UIColor.black.cgColor
 
             self.attendOut.setTitle("Attending", for: UIControlState.normal)
-        }else
-        {
+        }else{
             ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 if value != nil
@@ -457,7 +456,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             print("SUGGESTIONS")
             print(self.suggestions.count)
             print(self.suggestions.count)
-            rowCount = self.suggestions.count
+//            rowCount = self.suggestions.count
+            rowCount = 3
         }
         
         return rowCount
@@ -471,49 +471,58 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             let commentCell = self.commentsTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? commentCell
             commentCell?.data = (commentsCList[indexPath.row] as! commentCellData)
             commentCell?.commentLabel.text = (commentsCList[indexPath.row] as! commentCellData).comment
-            commentCell?.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
-            commentCell?.checkForLike()
+//            commentCell?.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
+//            commentCell?.checkForLike()
             
             tableCell = commentCell!
             
-        }else if(tableView.tag == 1){
+        }
+        
+        if(tableView.tag == 1){
+            
+            print("setting up event table view cell")
             let eventCell = self.eventsTableView.dequeueReusableCell(withIdentifier: "otherLikesEventCell", for: indexPath) as? OtherLikesTableViewCell
             
-            let suggestion = self.suggestions[indexPath.row]
+//            let suggestion = self.suggestions[indexPath.row]
+//            
+//            let suggestionLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double(suggestion.longitude!)!)
+//            
+//            eventCell?.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: suggestionLocation,addBracket: false)
+//            
+//            if let category = suggestion.category{
+//                eventCell?.categoryLabel.text = category.components(separatedBy: ",")[0]
+//            }
+//            else{
+//                addGreenDot(label: (eventCell?.categoryLabel)!, content: "N.A.")
+////                eventCell?.categoryLabel.text = "N.A."
+//            }
+//            
+//            let reference = Constants.storage.event.child("\(suggestion.id).jpg")
+//            
+//            let placeholderImage = UIImage(named: "empty_event")
+//            reference.downloadURL(completion: { (url, error) in
+//                
+//                if error != nil {
+//                    print(error?.localizedDescription)
+//                    return
+//                }
+//                
+//                eventCell?.userProfileImage.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: nil)
+//                
+//                
+//            })
+//            
+//
+//            eventCell?.addressLabel.text = suggestion.shortAddress
+//            eventCell?.dateAndTimeLabel.text = suggestion.date
+//            eventCell?.locationLabel.text = suggestion.eventDescription
             
-            let suggestionLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double(suggestion.longitude!)!)
             
-            eventCell?.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: suggestionLocation,addBracket: false)
-            
-            if let category = suggestion.category{
-                eventCell?.categoryLabel.text = category.components(separatedBy: ",")[0]
-            }
-            else{
-                eventCell?.categoryLabel.text = "N.A."
-            }
-            
-            let reference = Constants.storage.event.child("\(suggestion.id).jpg")
-            
-            let placeholderImage = UIImage(named: "empty_event")
-            reference.downloadURL(completion: { (url, error) in
-                
-                if error != nil {
-                    print(error?.localizedDescription)
-                    return
-                }
-                
-                
-                
-                
-                eventCell?.userProfileImage.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: nil)
-                
-                
-            })
-            
-            
-            eventCell?.addressLabel.text = suggestion.shortAddress
-            eventCell?.dateAndTimeLabel.text = suggestion.date
-            eventCell?.locationLabel.text = suggestion.eventDescription
+            eventCell?.addressLabel.text = "1435 Glendale Ave"
+            eventCell?.dateAndTimeLabel.text = "May 5 2015"
+            eventCell?.locationLabel.text = "Glendale"
+            eventCell?.distanceLabel.text = "31 mi"
+            addGreenDot(label: (eventCell?.categoryLabel)!, content: "N.A.")
             
             tableCell = eventCell!
             
@@ -533,7 +542,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         if(tableView.tag == 0){
             rowHeight = 85
         }else if(tableView.tag == 1){
-            rowHeight = 95
+            rowHeight = 80
         }
         return rowHeight
         
@@ -573,18 +582,19 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
                     let info = snapshot.value as? [String : Any] ?? [:]
                     
-//                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
-//                    
-//                        if let attending = info["attendingList"] as? [String:Any]{
-//                            event.setAttendessCount(count: attending.count)
-//                        }
-//                        
-//                        if event.id != self.event?.id{
-//                            self.suggestions.append(event)
-//                        }
-//                        
+                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
+                    
+                        if let attending = info["attendingList"] as? [String:Any]{
+                            event.setAttendessCount(count: attending.count)
+                        }
+                        
+                        if event.id != self.event?.id{
+                            self.suggestions.append(event)
+                        }
+                        
 //                    self.eventsTableView.reloadData()
                 })
+                self.eventsTableView.reloadData()
             }
     
             circleQuery.observeReady{

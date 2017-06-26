@@ -12,8 +12,8 @@ class commentCell: UITableViewCell {
     
     @IBOutlet weak var userProfilePhoto: UIImageView!
     @IBOutlet weak var commentLabel: UITextView!
-    @IBOutlet weak var likeCount: UILabel!
-    @IBOutlet weak var likeOut: UIButton!
+//    @IBOutlet weak var likeCount: UILabel!
+//    @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     
     var data: commentCellData!
@@ -29,31 +29,30 @@ class commentCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func likeButtton(_ sender: Any) {
-        
-        let newLike = data.likeCount + 1
-        data.commentFirePath.child("like").updateChildValues(["num":newLike])
-        data.commentFirePath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
-        likeCount.text = String(newLike)
-        self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
-        likeOut.isEnabled = false
-    }
+//    @IBAction func likeButtton(_ sender: Any) {
+//        
+//        let newLike = data.likeCount + 1
+//        data.commentFirePath.child("like").updateChildValues(["num":newLike])
+//        data.commentFirePath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+//        likeCount.text = String(newLike)
+//        self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
+//        likeOut.isEnabled = false
+//    }
     
-    func checkForLike()
-    {
-        data.commentFirePath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
-                self.likeOut.isEnabled = false
-            }
-            
-        })
-        
-        self.dateLabel.text = getTimeSince(date: data.date)
-        
-    }
+//    func checkForLike(){
+//        data.commentFirePath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+//            let value = snapshot.value as? NSDictionary
+//            if value != nil
+//            {
+//                self.likeOut.setTitleColor(UIColor.red, for: UIControlState.normal)
+//                self.likeOut.isEnabled = false
+//            }
+//            
+//        })
+//        
+//        self.dateLabel.text = getTimeSince(date: data.date)
+//        
+//    }
     
     
     
@@ -93,14 +92,14 @@ class commentCellData
     var from = String()
     var comment = String()
     var commentFirePath: DatabaseReference!
-    var likeCount = Int()
+//    var likeCount = Int()
     var date = Date()
     
     init(from:String,comment:String,commentFirePath: DatabaseReference, likeCount: Int, date:Date) {
         self.from = from
         self.comment = comment
         self.commentFirePath = commentFirePath
-        self.likeCount = likeCount
+//        self.likeCount = likeCount
         self.date = date
     }
 }
