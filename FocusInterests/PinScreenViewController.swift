@@ -151,8 +151,26 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
         profileImage.isUserInteractionEnabled = true
-
         profileImage.addGestureRecognizer(tap)
+        
+        let focusTap = UITapGestureRecognizer(target: self, action: #selector(self.showFocus(sender:)))
+        focusLabel.isUserInteractionEnabled = true
+        self.focusLabel.addGestureRecognizer(focusTap)
+        
+    }
+    
+    
+    func showFocus(sender: UITapGestureRecognizer)
+    {
+        lastCaption = pinTextView.text
+        let focusWindow = InterestsViewController(nibName:"InterestsViewController", bundle:nil)
+        focusWindow.pinInterest = true
+        self.present(focusWindow, animated: true, completion:{
+            focusWindow.saveButton.isEnabled = false
+            focusWindow.saveButton.title = ""
+            focusWindow.needsReturn = true
+            focusWindow.parentReturnVC = self
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
