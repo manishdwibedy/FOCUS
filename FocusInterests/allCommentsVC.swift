@@ -76,8 +76,8 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         let cell:commentCell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! commentCell!
         cell.data = (commentsCList[indexPath.row] as! commentCellData)
         cell.commentLabel.text = (commentsCList[indexPath.row] as! commentCellData).comment
-        cell.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
-        cell.checkForLike()
+//        cell.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
+//        cell.checkForLike()
         return cell
     }
     

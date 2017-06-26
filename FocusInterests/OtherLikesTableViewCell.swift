@@ -10,7 +10,7 @@ import UIKit
 
 class OtherLikesTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var categoryImage: UIImageView!
+//    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
@@ -21,7 +21,7 @@ class OtherLikesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.categoryImage.image = UIImage(named: "Green.png")
+//        self.categoryImage.image = UIImage(named: "Green.png")
         userProfileImage.roundedImage()
     }
 
