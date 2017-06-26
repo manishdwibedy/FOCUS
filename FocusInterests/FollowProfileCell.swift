@@ -93,13 +93,14 @@ class FollowProfileCell: UITableViewCell {
             
         }
         else{
-            ref.child("users").child(AuthApi.getFirebaseUid()!).child("following").childByAutoId().updateChildValues(["UID": data.uid])
-            followOut.backgroundColor = Constants.color.green
-            followOut.setTitle("Follow", for: UIControlState.normal)
             
             let unfollowAlertController = UIAlertController(title: "Unfollow", message: "Are you sure you want to unfollow \(data.username)", preferredStyle: .actionSheet)
             
-            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
+            let unfollowAction = UIAlertAction(title: "Unfollow \(data.username)", style: .destructive) { action in
+                
+                self.followOut.backgroundColor = Constants.color.green
+                self.followOut.setTitle("Follow", for: UIControlState.normal)
+                
                 Follow.unFollowUser(uid: self.data.uid)
             }
             

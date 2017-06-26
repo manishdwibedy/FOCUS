@@ -237,7 +237,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.suggestion.count > 3 ? 3 ? self.suggestion.count
+        return self.suggestion.count > 3 ? 3 : self.suggestion.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
