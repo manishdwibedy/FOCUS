@@ -425,7 +425,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             
             pinTextView.text = ""
-            pinTextView.font = UIFont(name: "HelveticaNeue", size: 20)
+            pinTextView.font = UIFont(name: "Avenir Book", size: 15)
         
         }
     }
