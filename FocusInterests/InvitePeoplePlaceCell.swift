@@ -13,7 +13,7 @@ class InvitePeoplePlaceCell: UITableViewCell {
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var addressTextView: UITextView!
-    @IBOutlet weak var followButtonOut: UIButton!
+//    @IBOutlet weak var followButtonOut: UIButton!
     @IBOutlet weak var inviteButtonOut: UIButton!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -26,8 +26,13 @@ class InvitePeoplePlaceCell: UITableViewCell {
         super.awakeFromNib()
         
         
-        inviteButtonOut.layer.cornerRadius = 6
-        inviteButtonOut.clipsToBounds = true
+        self.inviteButtonOut.layer.cornerRadius = 6
+        self.inviteButtonOut.clipsToBounds = true
+        self.inviteButtonOut.roundCorners(radius: 5)
+        self.inviteButtonOut.layer.shadowOpacity = 0.5
+        self.inviteButtonOut.layer.masksToBounds = false
+        self.inviteButtonOut.layer.shadowColor = UIColor.black.cgColor
+        self.inviteButtonOut.layer.shadowRadius = 5.0
         
         self.placeImage.roundedImage()
         self.placeImage.layer.borderWidth = 2
