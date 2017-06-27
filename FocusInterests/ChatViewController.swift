@@ -40,13 +40,13 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             self.user["firebaseUserId"]! as! String: self.user["username"]! as! String
         ]
         
-        self.collectionView.backgroundColor = UIColor(hexString: "445464")
+        self.collectionView.backgroundColor = Constants.color.navy
         
         self.inputToolbar.contentView.textView.backgroundColor = UIColor.clear
         self.inputToolbar.contentView.textView.textColor = UIColor.white
         self.inputToolbar.contentView.textView.roundCorners(radius: 5)
         
-        self.inputToolbar.contentView.backgroundColor = UIColor(hexString: "445464")
+        self.inputToolbar.contentView.backgroundColor = Constants.color.navy
         
         self.inputToolbar.contentView.textView.placeHolderTextColor = UIColor.white
         self.inputToolbar.contentView.textView.placeHolder = "Enter the message"
@@ -56,12 +56,33 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         markUnread()
         getMessageID()
         
+        
+        var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "BackArrow"), style: .plain, target: self, action: #selector(back))
+
+        self.navigationItem.leftBarButtonItem = backButton
+
         self.collectionView.bounces = false
         loadingMessages = false
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        self.navigationController?.navigationBar.titleTextAttributes = attrs
+        self.navigationController?.navigationBar.barTintColor = Constants.color.navy
+        
         self.navigationItem.title = self.user["username"]! as? String
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func back(sender: UIBarButtonItem) {
+        // Perform your custom actions
+        // ...
+        // Go back to the previous ViewController
+        self.navigationController?.popViewController(animated: true)
     }
     
     func keyboardWillAppear(notification: NSNotification){
