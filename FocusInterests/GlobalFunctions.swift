@@ -271,7 +271,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                 if let pin = pin11{
                     let time = Date(timeIntervalSince1970: pin["time"] as! Double)
                     let address = pin["formattedAddress"] as! String
-                    let place = ItemOfInterest(itemName: address, imageURL: nil, type: "pin")
+                    let place = ItemOfInterest(itemName: pin["pin"] as! String, imageURL: nil, type: "pin")
                     let pinFeed = FocusNotification(type: NotificationType.Pin, sender: followerUser, item: place, time: time)
                     pins.append(pinFeed)
                 }

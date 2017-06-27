@@ -109,10 +109,10 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         attrString.append(descString);
         if isFeed{
-            if (notif.item?.itemName?.contains(";;"))!{
-                let pin_name = (notif.item?.itemName!.components(separatedBy: ";;")[0])!
-                let descString2: NSMutableAttributedString = NSMutableAttributedString(string: pin_name)
-                descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (pin_name.characters.count)))
+            if notif.type == .Pin{
+                let pin_name = notif.item?.itemName!
+                let descString2: NSMutableAttributedString = NSMutableAttributedString(string: pin_name!)
+                descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (pin_name?.characters.count)!))
                 
                 attrString.append(descString2);
             }
