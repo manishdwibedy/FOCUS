@@ -354,7 +354,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = false
             
-            self.present(imagePicker, animated: true, completion: nil)
+            self.present(imagePicker, animated: true, completion:  {
+                self.imagePicker.navigationBar.topItem?.rightBarButtonItem?.tintColor = .black
+                self.imagePicker.navigationBar.topItem?.rightBarButtonItem?.isEnabled = true
+            })
         }
     }
     
@@ -399,6 +402,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
         print("cancelled")
     }
     
