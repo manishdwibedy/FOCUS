@@ -253,31 +253,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             let completeLabel = UILabel()
             
 //            here you're adding green category dot to category text
-            let imageAttachment =  NSTextAttachment()
-            imageAttachment.image = UIImage(image: UIImage(named: "Green.png"), scaledTo: CGSize(width: 12.0, height: 12.0))
+            completeLabel.text = category
+            completeLabel.textColor = .white
             
-            
-            imageAttachment.bounds = CGRect(x: 0, y: 0, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
-            
-            //Create string with attachment
-            let attachmentString = NSAttributedString(attachment: imageAttachment)
-            //Initialize mutable string
-            let primaryFocus = NSMutableAttributedString(string: "")
-            //Add image to mutable string
-            primaryFocus.append(attachmentString)
-            //Add your text to mutable string
-            
-            let textLabel = UILabel()
-            textLabel.text = category
-            textLabel.textAlignment = .center
-            
-            let textAfterIcon = NSMutableAttributedString(string: "  \(textLabel.text!)")
-            
-            primaryFocus.append(textAfterIcon)
-            
-            completeLabel.textColor = UIColor.white
-            completeLabel.textAlignment = .left
-            completeLabel.attributedText = primaryFocus
+            if index == 0 {
+                addGreenDot(label: completeLabel, content: category)
+            }
             
             categoriesStackView.addArrangedSubview(completeLabel)
             categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
