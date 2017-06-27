@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,7 +45,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mng-l5-Tk2">
-                        <rect key="frame" x="289" y="28" width="31" height="14.5"/>
+                        <rect key="frame" x="279" y="27" width="31" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -56,7 +56,7 @@
                     <constraint firstItem="3iG-HB-bGZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="3F9-rb-JvO"/>
                     <constraint firstItem="OVw-eE-0QC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="4e2-38-6Za"/>
                     <constraint firstItem="3iG-HB-bGZ" firstAttribute="leading" secondItem="OVw-eE-0QC" secondAttribute="trailing" constant="15" id="5X9-Kg-NwF"/>
-                    <constraint firstAttribute="trailing" secondItem="mng-l5-Tk2" secondAttribute="trailing" id="QyO-m9-nIg"/>
+                    <constraint firstAttribute="trailing" secondItem="mng-l5-Tk2" secondAttribute="trailing" constant="10" id="QyO-m9-nIg"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Phi-zd-eVQ" secondAttribute="trailing" constant="50" id="Xcd-6A-xT1"/>
                     <constraint firstItem="Phi-zd-eVQ" firstAttribute="leading" secondItem="OVw-eE-0QC" secondAttribute="trailing" constant="15" id="c7k-yh-Ilo"/>
                     <constraint firstItem="mng-l5-Tk2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ePa-2r-pWX"/>
