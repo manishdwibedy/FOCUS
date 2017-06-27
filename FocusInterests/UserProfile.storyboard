@@ -502,6 +502,7 @@
                         <outlet property="navBarItem" destination="SNQ-5X-BJ8" id="x2d-OC-eDu"/>
                         <outlet property="pinAddress2Label" destination="nuH-9L-XHv" id="Cyc-My-DP3"/>
                         <outlet property="pinCategoryLabel" destination="NRe-j8-XoK" id="Atx-4S-cAu"/>
+                        <outlet property="pinCount" destination="W70-UV-aZd" id="9Dv-nh-fRG"/>
                         <outlet property="pinDistanceLabel" destination="enR-G6-XVv" id="wbS-pX-7Vd"/>
                         <outlet property="pinImage" destination="hH3-Cy-m4h" id="0l3-67-1kU"/>
                         <outlet property="pinLikesLabel" destination="VK7-Ea-kjC" id="GZa-IM-E8i"/>

@@ -58,6 +58,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var pinAddress2Label: UILabel!
     
     @IBOutlet weak var pinDistanceLabel: UILabel!
+    @IBOutlet weak var pinCount: UIButton!
     
 //    MARK: Do we still need this
 //    @IBOutlet weak var pinDescription: UILabel!
@@ -204,6 +205,18 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
                 self.pinCategoryLabel.text = value["focus"] as! String
                 self.pinAddress2Label.text = value["pin"] as! String
+                
+                if let likes = value["like"] as? [String:Any]{
+                    let count = likes["num"] as? Int
+                    
+                    var label = "like"
+                    if count! > 1{
+                        label = "likes"
+                    }
+                    self.pinLikesLabel.text = "\(count!) \(label)"
+                    self.pinCount.setTitle("1", for: .normal)
+                }
+                
             }
             else{
                 self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
