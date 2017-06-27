@@ -23,6 +23,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     var filtered = [User]()
     var location: CLLocation?
     var pinAvailable = [pinData?]()
+    var filteredPinAvailable = [pinData?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +116,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                         self.people.append(user)
                         
                         self.filtered = self.people
+                        self.filteredPinAvailable = self.pinAvailable
                         self.tableView.reloadData()
                     })
                 }
@@ -154,7 +156,9 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         cell?.fullName.text = people.fullname
         
-        if let pin = self.pinAvailable[indexPath.row]{
+        
+        
+        if let pin = self.filteredPinAvailable[indexPath.row]{
             cell?.pinAvailable = true
             cell?.shortBackground.isHidden = true
             var address = pin.locationAddress
@@ -255,25 +259,48 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(searchText.characters.count > 0){
             self.filtered.removeAll()
+            self.filteredPinAvailable.removeAll()
             
             let ref = Constants.DB.user
-            _ = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
+            _ = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
                 let users = snapshot.value as? [String : Any] ?? [:]
                 
+                let count = users.count
                 for (_, user) in users{
                     let info = user as? [String:Any]
+                    
                     
                     let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
                     
                     if user.uuid != AuthApi.getFirebaseUid(){
-                        self.filtered.append(user)
+                        Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                            let value = snapshot.value as? NSDictionary
+                            if value != nil
+                            {
+                                var address = value?["formattedAddress"] as! String
+                                address = address.replacingOccurrences(of: ";;", with: "\n")
+                                let data = pinData(UID: value?["fromUID"] as! String, dateTS: (value?["time"] as! Double), pin: (value?["pin"] as! String), location: (value?["formattedAddress"] as! String), lat: (value?["lat"] as! Double), lng: (value?["lng"] as! Double), path: Constants.DB.pins.child(user.uuid! as! String), focus: value?["focus"] as! String)
+                                self.filteredPinAvailable.append(data)
+                            }
+                            else{
+                                self.filteredPinAvailable.append(nil)
+                            }
+                            self.filtered.append(user)
+                            
+                            if self.filtered.count == count{
+                                self.tableView.reloadData()
+                            }
+                        })
+                        
+                        
                     }
                 }
-                self.tableView.reloadData()
+                
             })
         }
         else{
             self.filtered = self.people
+            self.filteredPinAvailable = self.pinAvailable
             self.tableView.reloadData()
         }
         
@@ -288,6 +315,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         self.searchBar.text = ""
         self.searchBar.setShowsCancelButton(false, animated: true)
         self.filtered = self.people
+        self.filteredPinAvailable = self.pinAvailable
         self.tableView.reloadData()
         searchBar.resignFirstResponder()
     }
