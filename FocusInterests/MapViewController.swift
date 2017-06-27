@@ -281,11 +281,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidAppear(_ animated: Bool) {
         UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
         
-        print(popUpView.frame.size)
-        popUpScreen = MapPopUpScreenView(frame: CGRect(x: 0, y: 0, width: popUpView.frame.width, height: popUpView.frame.width))
-        popUpScreen.parentVC = self
-        self.popUpView.addSubview(popUpScreen)
-        
+//        print(popUpView.frame.size)
+//        popUpScreen = MapPopUpScreenView(frame: CGRect(x: 0, y: 0, width: popUpView.frame.width, height: popUpView.frame.width))
+//        popUpScreen.parentVC = self
+//        self.popUpView.addSubview(popUpScreen)
+//        
         Constants.DB.user_mapping.keepSynced(true)
 //        Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
 //            if let id = (snapshot.value as? NSDictionary)?["manish1"]{

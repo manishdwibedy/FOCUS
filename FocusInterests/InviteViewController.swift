@@ -9,8 +9,9 @@
 import UIKit
 import Contacts
 import FirebaseStorage
+import MessageUI
 
-class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SendInvitationsViewControllerDelegate{
+class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SendInvitationsViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var friendsTableView: UITableView!
@@ -33,6 +34,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var selected = [InviteUser:Bool]()
     
+    let store = CNContactStore()
     let datePicker = UIDatePicker()
     let timePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
@@ -42,7 +44,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchPlace: SearchPlacesViewController? = nil
     var image: Data?
     var selectedFriend = [Bool]()
-    let store = CNContactStore()
     var contacts = [CNContact]()
 
     override func viewDidLoad() {
@@ -67,42 +68,90 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        let selectedTimeListCellNib = UINib(nibName: "SelectedTimeTableViewCell", bundle: nil)
 //        friendsTableView.register(selectedTimeListCellNib, forCellReuseIdentifier: "selectedTimeCell")
         
-        
-        Constants.DB.user.observeSingleEvent(of: .value, with: { (snapshot) in
-            let data = snapshot.value as? NSDictionary
-            if let data = data
-            {
-//                self.inviteCellData.removeAll()
-                for (_,value) in data
+        if type != "invite"{
+            Constants.DB.user.observeSingleEvent(of: .value, with: { (snapshot) in
+                let data = snapshot.value as? NSDictionary
+                if let data = data
                 {
-                    if let info = value as? [String: Any]{
-                        if let uid = info["firebaseUserId"] as? String, let username = info["username"] as? String, let fullname = info["fullname"] as? String{
-                            let newData = InviteUser(UID: uid, username: username, fullname: fullname)
-                            self.selected[newData] = false
-                            if newData.UID != AuthApi.getFirebaseUid(){
-//                                self.inviteCellData.append(newData)
-                                
-                                let first = String(describing: newData.username.characters.first!).uppercased()
-                                
-                                if !self.sections.contains(first){
-                                    self.sections.append(first)
-                                    self.sectionMapping[first] = 1
-                                    self.users[first] = [newData]
+                    //                self.inviteCellData.removeAll()
+                    for (_,value) in data
+                    {
+                        if let info = value as? [String: Any]{
+                            if let uid = info["firebaseUserId"] as? String, let username = info["username"] as? String, let fullname = info["fullname"] as? String{
+                                let newData = InviteUser(UID: uid, username: username, fullname: fullname)
+                                self.selected[newData] = false
+                                if newData.UID != AuthApi.getFirebaseUid(){
+                                    //                                self.inviteCellData.append(newData)
+                                    
+                                    let first = String(describing: newData.username.characters.first!).uppercased()
+                                    
+                                    if !self.sections.contains(first){
+                                        self.sections.append(first)
+                                        self.sectionMapping[first] = 1
+                                        self.users[first] = [newData]
+                                    }
+                                    else{
+                                        self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                                        self.users[first]?.append(newData)
+                                    }
+                                    
                                 }
-                                else{
-                                    self.sectionMapping[first] = self.sectionMapping[first]! + 1
-                                    self.users[first]?.append(newData)
-                                }
-                                
                             }
                         }
                     }
                 }
+                
+                self.sections.sort()
+                self.friendsTableView.reloadData()
+            })
+        }
+        else{
+            self.sections.removeAll()
+            self.sectionMapping.removeAll()
+            self.users.removeAll()
+            do {
+                
+                let contactStore = CNContactStore()
+                let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
+                let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
+                
+                try? contactStore.enumerateContacts(with: request1) { (contact, error) in
+                    if contact.phoneNumbers.count > 0 && (contact.givenName.characters.count > 0 || contact.familyName.characters.count > 0){
+                        print(contact)
+                        self.contacts.append(contact)
+                    }
+                    
+                }
+                
+                for contact in contacts{
+                    if let name = contact.givenName as? String{
+                        let first = String(describing: name.characters.first!).uppercased()
+                        
+                        var numbers = [String]()
+                        for number in contact.phoneNumbers{
+                            numbers.append(number.value.stringValue)
+                        }
+                        let user = InviteUser(UID: numbers.joined(separator: ","), username: contact.givenName, fullname: contact.familyName)
+                        self.selected[user] = false
+                        if !self.sections.contains(first){
+                            self.sections.append(first)
+                            self.sectionMapping[first] = 1
+                            self.users[first] = [user]
+                        }
+                        else{
+                            self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                            self.users[first]?.append(user)
+                        }
+                    }
+                }
+                
+                self.sections.sort()
+                friendsTableView.reloadData()
+            } catch {
+                print(error)
             }
-            
-            self.sections.sort()
-            self.friendsTableView.reloadData()
-        })
+        }
+        
         
         
         self.timePicker.datePickerMode = .time
@@ -265,53 +314,95 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func inviteUsers(_ sender: Any) {
         
-        let time = NSDate().timeIntervalSince1970
-        
-        var inviteUIDList = [String]()
-        
-        for (user, flag) in self.selected{
-            if flag{
-                inviteUIDList.append(user.UID)
-            }
-        }
-        
-        for UID in inviteUIDList{
-            var name = ""
-            if type == "place"{
-                name = (place?.name)!
-                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-                    let user = snapshot.value as? [String : Any] ?? [:]
-                    
-                    let fullname = user["fullname"] as? String
-                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "place", item_id: "",item_name: "")
-                })
-                Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime,"status": "sent"])
-            }
-            else{
-                name = (event?.title)!
-                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-                    let user = snapshot.value as? [String : Any] ?? [:]
-                    
-                    let fullname = user["fullname"] as? String
-                    sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "event", item_id: "", item_name: "")
-                })
-                Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
+        if type != "invite"{
+            let time = NSDate().timeIntervalSince1970
+            
+            var inviteUIDList = [String]()
+            
+            for (user, flag) in self.selected{
+                if flag{
+                    inviteUIDList.append(user.UID)
+                }
             }
             
-            Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"inviteTime":inviteTime])
-            
-            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+            for UID in inviteUIDList{
+                var name = ""
+                if type == "place"{
+                    name = (place?.name)!
+                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+                        let user = snapshot.value as? [String : Any] ?? [:]
+                        
+                        let fullname = user["fullname"] as? String
+                        sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "place", item_id: "",item_name: "")
+                    })
+                    Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime,"status": "sent"])
+                }
+                else{
+                    name = (event?.title)!
+                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+                        let user = snapshot.value as? [String : Any] ?? [:]
+                        
+                        let fullname = user["fullname"] as? String
+                        sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "event", item_id: "", item_name: "")
+                    })
+                    Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
+                }
                 
-                let user = snapshot.value as? [String : Any] ?? [:]
+                Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"inviteTime":inviteTime])
                 
-                let username = user["username"] as? String
-                
-                sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)", actionType: "", type: "", item_id: "", item_name: "")
-                
-            })
+                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+                    
+                    let user = snapshot.value as? [String : Any] ?? [:]
+                    
+                    let username = user["username"] as? String
+                    
+                    sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)", actionType: "", type: "", item_id: "", item_name: "")
+                    
+                })
+            }
+            searchPlace?.showPopup = true
+            dismiss(animated: true, completion: nil)
         }
-        searchPlace?.showPopup = true
-        dismiss(animated: true, completion: nil)
+        else{
+            let messageVC = MFMessageComposeViewController()
+            
+            
+            var inviteUIDList = [String]()
+            
+            for (user, flag) in self.selected{
+                if flag{
+                    inviteUIDList.append(user.UID)
+                }
+            }
+            
+            for UID in inviteUIDList{
+                inviteUIDList.append(UID)
+            }
+            
+            messageVC.body = "Open this link to join me on FOCUS and create a Map of Your World:"
+            messageVC.recipients = inviteUIDList
+            messageVC.messageComposeDelegate = self
+            
+            self.present(messageVC, animated: false, completion: nil)
+        }
+    }
+    
+    
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController!, didFinishWith result: MessageComposeResult) {
+        switch (result) {
+        case .cancelled:
+            print("Message was cancelled")
+            self.dismiss(animated: true, completion: nil)
+        case .failed:
+            print("Message failed")
+            self.dismiss(animated: true, completion: nil)
+        case .sent:
+            print("Message was sent")
+            self.dismiss(animated: true, completion: nil)
+        default:
+            break;
+        }
     }
     
     @IBAction func timePushed(_ sender: Any) {

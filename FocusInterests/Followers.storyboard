@@ -51,6 +51,9 @@
                                         <state key="normal" title="Invite From Contacts">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="inviteUsers:" destination="f8P-3x-jbR" eventType="touchUpInside" id="raU-Jc-2Pw"/>
+                                        </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ip9-uh-BkC">
                                         <rect key="frame" x="0.0" y="87" width="375" height="467"/>

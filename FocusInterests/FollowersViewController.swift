@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Contacts
 
 class FollowersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var inviteContactsButton: UIButton!
@@ -17,7 +18,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     var windowTitle = "Followers"
     var followers = [followProfileCellData]()
     var following = [followProfileCellData]()
-    
+    let store = CNContactStore()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -156,6 +157,20 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
      */
     @IBAction func backPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func inviteUsers(_ sender: Any) {
+        if CNContactStore.authorizationStatus(for: .contacts) == .authorized{
+            let ivc = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "home") as! InviteViewController
+            ivc.type = "invite"
+            self.present(ivc, animated: true, completion: { _ in })
+        }
+        else{
+            self.store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
+                let ivc = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "home") as! InviteViewController
+                ivc.type = "invite"
+                self.present(ivc, animated: true, completion: { _ in })
+            }
+        }
     }
     
 }
