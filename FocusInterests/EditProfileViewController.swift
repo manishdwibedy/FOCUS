@@ -30,7 +30,6 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate {
         hideKeyboardWhenTappedAround()
         
         genderTf.delegate = self
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,28 +81,28 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate {
         }
 
     }
-    
-    func textFieldDidBeginEditing(textField: UITextField) -> Bool {
-        if textField == genderTf {
-            let alertController = UIAlertController(title: "Gender?", message: nil, preferredStyle: .actionSheet)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            alertController.addAction(cancelAction)
-            
-            let maleAction = UIAlertAction(title: "Male", style: .default) { action in
-                textField.text = "Male"
-            }
-            let femaleAction = UIAlertAction(title: "Female", style: .default) { action in
-                textField.text = "Female"
-            }
-            alertController.addAction(maleAction)
-            alertController.addAction(femaleAction)
-            
-            self.present(alertController, animated: true)
-            return true // myTextField was touched
-        }
-        return true
-    }
+//    
+//    func textFieldDidBeginEditing(textField: UITextField) -> Bool {
+//        if textField == genderTf {
+//            let alertController = UIAlertController(title: "Gender?", message: nil, preferredStyle: .actionSheet)
+//            
+//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//            alertController.addAction(cancelAction)
+//            
+//            let maleAction = UIAlertAction(title: "Male", style: .default) { action in
+//                textField.text = "Male"
+//            }
+//            let femaleAction = UIAlertAction(title: "Female", style: .default) { action in
+//                textField.text = "Female"
+//            }
+//            alertController.addAction(maleAction)
+//            alertController.addAction(femaleAction)
+//            
+//            self.present(alertController, animated: true)
+//            return false // myTextField was touched
+//        }
+//        return true
+//    }
     
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

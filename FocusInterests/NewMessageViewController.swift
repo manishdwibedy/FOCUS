@@ -131,18 +131,20 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             for (id, user) in users!{
                 if !self.usersInMemory.contains(id){
                     if let username = user["username"] as? String{
-                        let first = String(describing: username.characters.first!).uppercased()
-                        
-                        self.usersInMemory.insert(id)
-                        
-                        if !self.sections.contains(first){
-                            self.sections.append(first)
-                            self.sectionMapping[first] = 1
-                            self.users[first] = [user]
-                        }
-                        else{
-                            self.sectionMapping[first] = self.sectionMapping[first]! + 1
-                            self.users[first]?.append(user)
+                        if username.characters.count > 0{
+                            let first = String(describing: username.characters.first!).uppercased()
+                            
+                            self.usersInMemory.insert(id)
+                            
+                            if !self.sections.contains(first){
+                                self.sections.append(first)
+                                self.sectionMapping[first] = 1
+                                self.users[first] = [user]
+                            }
+                            else{
+                                self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                                self.users[first]?.append(user)
+                            }
                         }
                     }
                 }
