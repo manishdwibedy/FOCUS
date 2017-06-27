@@ -13,7 +13,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     var place: Place?
     
     @IBOutlet weak var postReviewSeciontButton: UIButton!
-    @IBOutlet weak var moreCategoriesSectionButton: UIButton!
     @IBOutlet weak var morePinSectionButton: UIButton!
     @IBOutlet weak var moreOtherLikesButton: UIButton!
     
@@ -32,7 +31,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var categoryBackground: UIView!
     @IBOutlet weak var categoriesStackView: UIStackView!
     
-    
+    // location info
+    @IBOutlet weak var locationInfoStackView: UIStackView!
+    @IBOutlet weak var locationInfoStackViewHeight: NSLayoutConstraint!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityStateLabel: UILabel!
     @IBOutlet weak var streetAddress: UILabel!
@@ -41,7 +42,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
-//    @IBOutlet weak var suggestPlacesStackView: UIStackView!
     
     @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
     var suggestedPlaces = [Place]()
@@ -89,7 +89,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         self.peopleAlsoLikedTableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
         
 //        placeVC?.suggestPlacesDelegate = self
-        loadInfoScreen(place: self.place!)
+//        loadInfoScreen(place: self.place!)
         
         hideKeyboardWhenTappedAround()
         
@@ -147,8 +147,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
 
     }
     
-    func checkFollowing()
-    {
+    func checkFollowing(){
         Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
@@ -175,13 +174,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 
             }
         })
-        
-        if (place?.categories.count)! > 1{
-            moreCategoriesSectionButton.isHidden = false
-        }else{
-            moreCategoriesSectionButton.isHidden = true
-        }
-        
     }
     
     func callPlace(sender:UITapGestureRecognizer) {
@@ -216,17 +208,14 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         self.reviewButton.layer.shadowRadius = 7.0
         
         postReviewSeciontButton.layer.borderWidth = 1
-        moreCategoriesSectionButton.layer.borderWidth = 1
         morePinSectionButton.layer.borderWidth = 1
         moreOtherLikesButton.layer.borderWidth = 1
         
         postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
-        moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
         morePinSectionButton.layer.borderColor = UIColor.white.cgColor
         moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
         
         postReviewSeciontButton.roundCorners(radius: 5)
-        moreCategoriesSectionButton.roundCorners(radius: 5)
         morePinSectionButton.roundCorners(radius: 5)
         moreOtherLikesButton.roundCorners(radius: 5)
         
@@ -311,6 +300,18 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 hoursStackView.addArrangedSubview(textLabel)
                 hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
             }
+        }else {
+            self.infoScreenHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
+            self.viewHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
+            
+            self.locationInfoStackView.subviews[3].removeFromSuperview()
+            self.locationInfoStackViewHeight.constant = 75
+//            let textLabel = UILabel()
+//            textLabel.text = "This location has not submitted its hours"
+//            textLabel.textAlignment = .center
+//            textLabel.textColor = UIColor.white
+//            textLabel.center = hoursStackView.center
+//            hoursStackView.addArrangedSubview(textLabel)
         }
         
         let invite = ["user1", "user2", "user3"]
@@ -353,7 +354,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tableView.tag == 0){
-            return 2
+            return 3
         }else{
             return suggestedPlaces.count
         }
@@ -367,7 +368,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
             //        cell.data = data[indexPath.row]
             pinCell.usernameLabel.text = "username"
-            pinCell.categoryLabel.text = "category" //add image after category here
+            addGreenDot(label: pinCell.categoryLabel, content: "Category")
             pinCell.timeOfPinLabel.text = "31m"
             pinCell.commentsTextView.text = "Comments"
             //        pinCell.commentsTextView.text = data[indexPath.row]["pin"] as! String
@@ -401,7 +402,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             let address = place.address.joined(separator: "\n")
             
             otherPlacesCell.addressTextView.text = address
-            otherPlacesCell.categoryLabel.text = place_focus
+            addGreenDot(label: otherPlacesCell.categoryLabel, content: place_focus)
             otherPlacesCell.distanceLabel.text = "\(place.distance) mi"
             
             return otherPlacesCell
@@ -412,7 +413,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         if(tableView.tag == 0){
             return 70
         }else{
-            return 105
+            return 110
         }
     }
     
@@ -540,7 +541,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBAction func showReview(_ sender: Any) {
         if reviewsView.alpha == 1{
             reviewsView.alpha = 0
-            categoryTop.constant = 100
+            categoryTop.constant = 90
         }
         else{
             reviewsView.alpha = 1
