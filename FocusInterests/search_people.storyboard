@@ -163,6 +163,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navBar" destination="RME-pD-v8b" id="GVQ-s5-mZn"/>
                         <outlet property="searchBar" destination="AYl-Yr-fFv" id="L8v-LE-4kh"/>
                         <outlet property="segmentedOut" destination="nZh-JF-eMk" id="ICC-sp-Fhw"/>
                         <outlet property="tableView" destination="nv6-wn-SdN" id="8AF-Ei-bI4"/>

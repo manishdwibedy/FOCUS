@@ -188,6 +188,11 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.selectedSegmentIndex == 0{
+            let notif = nofArray[indexPath.row]
+        }
+    }
     @IBAction func indexChanged(_ sender: AnyObject) {
         
         let segmentedControl = sender as! UISegmentedControl

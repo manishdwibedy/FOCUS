@@ -650,7 +650,7 @@ func dropfromTop(view: UIView){
     let transition = CATransition()
     transition.duration = 0.6
     
-    transition.type = kCATransitionMoveIn
+    transition.type = kCATransitionReveal
     transition.subtype = kCATransitionFromBottom
     
     view.window!.layer.add(transition, forKey: kCATransition)

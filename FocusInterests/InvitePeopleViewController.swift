@@ -17,6 +17,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedOut: UISegmentedControl!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     
     var UID = ""
@@ -61,7 +62,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         sortedViews[1].tintColor = UIColor.white
         sortedViews[1].backgroundColor = UIColor.gray
         
-
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

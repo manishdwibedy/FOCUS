@@ -230,7 +230,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func attendEvent(sender:UIButton){
         let buttonRow = sender.tag
-        let event = self.events[buttonRow]
+        let event = self.filtered[buttonRow]
         
         if sender.title(for: .normal) == "Attend"{
             print("attending event \(event.title) ")
@@ -324,7 +324,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             self.filtered.removeAll()
 
             let ref = Constants.DB.event
-            let query = ref.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
+            let query = ref.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
                 let events = snapshot.value as? [String : Any] ?? [:]
                 
                 for (id, event) in events{
