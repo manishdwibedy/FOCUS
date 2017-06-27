@@ -13,7 +13,7 @@ class HomePageViewController: UITabBarController {
     var showEvent = false
     var location: CLLocation? = nil
     var showTutorial = false
-    
+    var showTab = 0
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,6 +26,8 @@ class HomePageViewController: UITabBarController {
         UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .selected)
         
         setupTabBarSeparators()
+        
+        self.selectedIndex = showTab
         
         var vc = self.viewControllers![0] as! MapViewController
         vc.showEvent = showEvent

@@ -89,7 +89,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     var otherUser = false
     var userID = ""
-    var previousScreen: previousScreen? = nil
+    var previous: previousScreen? = nil
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
         present(vc, animated: true, completion: nil)
@@ -98,13 +98,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     // Back button
 	@IBAction func backButton(_ sender: Any) {
         if otherUser{
-//            switch(previousScreen){
-//            case people:
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
-//                VC.
-//                self.present(VC!, animated: true, completion: nil)
-//            }
+            switch(previous!){
+            case .people:
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
+                VC?.showTab = 1
+                self.present(VC!, animated: true, completion: nil)
+            }
         }
         else{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

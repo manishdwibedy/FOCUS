@@ -220,6 +220,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         VC.otherUser = true
         VC.userID = people.uuid!
+        VC.previous = .people
         dropfromTop(view: self.view)
         
         self.present(VC, animated:true, completion:nil)
