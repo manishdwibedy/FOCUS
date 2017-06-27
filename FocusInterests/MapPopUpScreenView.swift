@@ -113,7 +113,8 @@ class MapPopUpScreenView: UIView {
         bottomText.text = pin
         addressLabel.text = address
         mileLabel.text = distance
-        interestLabel.text = focus
+        
+        addGreenDot(label: interestLabel, content: focus)
         
         captionLeading.constant = -20
         
