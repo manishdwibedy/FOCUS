@@ -20,8 +20,11 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var timeOut: UIButton!
     @IBOutlet weak var navBar: UINavigationBar!
     
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeButton: UIButton!
     @IBOutlet weak var friendListBottom: NSLayoutConstraint!
    
+    @IBOutlet weak var inviteTableTop: NSLayoutConstraint!
     var sections = [String]()
     var sectionMapping = [String:Int]()
     var users = [String:[InviteUser]]()
@@ -106,6 +109,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             })
         }
         else{
+            inviteTableTop.constant = 0
+            timeLabel.isHidden = true
+            timeButton.isHidden = true
             self.sections.removeAll()
             self.sectionMapping.removeAll()
             self.users.removeAll()

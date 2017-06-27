@@ -129,8 +129,11 @@
                         <outlet property="contactListView" destination="58f-vL-hfC" id="A4u-0c-MMV"/>
                         <outlet property="friendListBottom" destination="Vg9-Jl-4Du" id="h1c-bH-ZYx"/>
                         <outlet property="friendsTableView" destination="ith-zO-7mj" id="uWQ-cp-Vgl"/>
+                        <outlet property="inviteTableTop" destination="9FE-3g-EOe" id="JKR-NY-3dh"/>
                         <outlet property="navBar" destination="noj-oM-whr" id="9Y1-3J-bzF"/>
                         <outlet property="sendButton" destination="9yU-hF-EgJ" id="Meu-w8-2wu"/>
+                        <outlet property="timeButton" destination="7de-LD-Fht" id="SaA-Gz-AJG"/>
+                        <outlet property="timeLabel" destination="nru-7F-n9l" id="x3h-tn-Bih"/>
                         <outlet property="timeOut" destination="7de-LD-Fht" id="1vg-YI-yIf"/>
                     </connections>
                 </viewController>
