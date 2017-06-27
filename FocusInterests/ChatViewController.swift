@@ -60,11 +60,23 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         loadingMessages = false
         self.navigationItem.title = self.user["username"]! as? String
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func keyboardWillAppear(notification: NSNotification){
+        Constants.DB.user.child("\(self.senderId!)/typing").setValue(true)
+    }
+    
+    func keyboardWillDisappear(notification: NSNotification){
+        Constants.DB.user.child("\(self.senderId!)/typing").setValue(false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.messagesRef.removeAllObservers()
         self.messageContentRef.removeAllObservers()
+        NotificationCenter.default.removeObserver(self)
+        Constants.DB.user.child("\(self.senderId!)/typing").setValue(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -305,11 +317,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         let len = textView.text.characters.count
         
         if len == 0{
-            Constants.DB.user.child("\(self.senderId!)/typing").setValue(false)
             self.inputToolbar?.contentView?.rightBarButtonItem?.isEnabled = false
         }
         else{
-            Constants.DB.user.child("\(self.senderId!)/typing").setValue(true)
             self.inputToolbar?.contentView?.rightBarButtonItem?.isEnabled = true
         }
     }
