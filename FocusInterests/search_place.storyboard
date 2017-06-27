@@ -95,6 +95,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="inviteBottomSpace" destination="wri-Mz-dwc" id="a9d-Iq-UDJ"/>
                         <outlet property="invitePopup" destination="vv4-j9-YTv" id="Tj8-OT-lUa"/>
                         <outlet property="navBar" destination="T1q-Ba-90U" id="hcn-pc-KL3"/>
                         <outlet property="navTitle" destination="IJI-Ig-vYz" id="VXX-My-xZM"/>

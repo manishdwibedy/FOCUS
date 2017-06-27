@@ -25,6 +25,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     var location: CLLocation?
     var showPopup = false
     
+    @IBOutlet weak var inviteBottomSpace: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         
