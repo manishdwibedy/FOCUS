@@ -28,6 +28,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     var addPin = false
     var pinMessage: String? = nil
     var pinImage: UIImage? = nil
+    var delay = [String: Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -426,35 +427,80 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                     // show the placeholder image
                     self.messages.append(message!)
                     
-                    let imageRef = Constants.storage.messages.child("\(snapshot.key).jpg")
-                    
-                    imageRef.downloadURL(completion: {(url, error) in
-                        if let error = error{
-                            print("Error occurred: \(error.localizedDescription)")
-                        }
-                        
-                        SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                            (receivedSize :Int, ExpectedSize :Int) in
-                            
-                        }, completed: {
-                            (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                            
-                            if image != nil && finished{
-                                let JSQimage = JSQPhotoMediaItem(image: image)
-                                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
-                                
-                                let index = self.imageMapper[snapshot.key]
-                                self.messages[index!] = message!
-                                self.collectionView.reloadData()
-                                
-                            }
-                        })
-                    })
+                    self.downloadImage(id: snapshot.key, name: name!, date: date)
+//                    let imageRef = Constants.storage.messages.child("\(snapshot.key).jpg")
+//                    
+//                    
+//
+//                    
+//                    imageRef.downloadURL(completion: {(url, error) in
+//                        if let error = error{
+//                            print("Error occurred: \(error.localizedDescription)")
+//                        }
+//                        
+//                        SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+//                            (receivedSize :Int, ExpectedSize :Int) in
+//                            
+//                        }, completed: {
+//                            (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+//                            
+//                            if image != nil && finished{
+//                                let JSQimage = JSQPhotoMediaItem(image: image)
+//                                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
+//                                
+//                                let index = self.imageMapper[snapshot.key]
+//                                self.messages[index!] = message!
+//                                self.collectionView.reloadData()
+//                                
+//                            }
+//                        })
+//                    })
                 }
                 
                 self.collectionView.reloadData()
                 self.scrollToBottom(animated: true)
             }
+        })
+    }
+    
+    func downloadImage(id: String, name: String, date: Date){
+        let imageRef = Constants.storage.messages.child("\(id).jpg")
+        
+        
+        imageRef.downloadURL(completion: {(url, error) in
+            if let error = error{
+                if let previous = self.delay[id]{
+                    self.delay[id] = previous + 1
+                }
+                else{
+                    self.delay[id] = 1
+                }
+                
+                if self.delay[id]! < 3{
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                        self.downloadImage(id: id, name: name, date: date)
+                    })
+                }
+                
+                
+            }
+            
+            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                (receivedSize :Int, ExpectedSize :Int) in
+                
+            }, completed: {
+                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                
+                if image != nil && finished{
+                    let JSQimage = JSQPhotoMediaItem(image: image)
+                    let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
+                    
+                    let index = self.imageMapper[id]
+                    self.messages[index!] = message!
+                    self.collectionView.reloadData()
+                    
+                }
+            })
         })
     }
     
