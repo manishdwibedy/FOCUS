@@ -154,7 +154,7 @@ class SearchPlaceCell: UITableViewCell {
         print(searchVC)
         
         if let parent = parentVC{
-            if (parent.places.contains(self.place!)){
+            if (parent.followingPlaces.contains(self.place!)){
                 self.followButtonOut.isSelected = true
                 self.followButtonOut.layer.borderColor = UIColor.white.cgColor
                 self.followButtonOut.layer.borderWidth = 1

@@ -316,7 +316,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         googleMapButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         
-        getNearbyPlaces(categories: yelp_category.joined(separator: ","), count: 3, latitude: place.latitude, longitude: place.longitude, completion: {places in
+        getNearbyPlaces(text: "", categories: yelp_category.joined(separator: ","), count: 3, location: CLLocation(latitude: place.latitude, longitude: place.longitude), completion: {places in
             self.suggestedPlaces = places
             self.peopleAlsoLikedTableView.reloadData()
         })

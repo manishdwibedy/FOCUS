@@ -24,6 +24,10 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     var filtered = [Place]()
     var location: CLLocation?
     var showPopup = false
+    var followingCount = 0
+    var followingPlaces = [Place]()
+    var suggestions = [Place]()
+    var suggestionCount = 0
     
     @IBOutlet weak var inviteBottomSpace: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -87,15 +91,20 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
             
             
             if let placeData = value{
-                let count = placeData.count
+                self.followingCount = placeData.count
                 self.places.removeAll()
+                self.followingPlaces.removeAll()
                 for (_,place) in placeData
                 {
                     let place_id = (place as? [String:Any])?["placeID"]
                     getYelpByID(ID: place_id as! String, completion: {place in
-                        self.places.append(place)
+                        self.followingPlaces.append(place)
                         
-                        if self.places.count == count{
+                        
+                        if self.followingPlaces.count == self.followingCount && self.suggestions.count > 0{
+                            self.places = self.followingPlaces
+                            self.places.append(contentsOf: self.suggestions)
+                            
                             self.filtered = self.places
                             self.tableView.reloadData()
                         }
@@ -103,8 +112,23 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 }
                 
+                
             }
+            
+            getNearbyPlaces(text: "", categories: getYelpCategories(), count: nil, location: AuthApi.getLocation()!, completion: {places in
+                self.suggestions = places
+                
+                if self.followingPlaces.count == self.followingCount && self.suggestions.count > 0{
+                    self.places = self.followingPlaces
+                    self.places.append(contentsOf: places)
+                    self.tableView.reloadData()
+                }
+            })
+            
+            
         })
+        
+        
     }
     
     func hidePopup(){

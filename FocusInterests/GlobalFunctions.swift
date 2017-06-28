@@ -525,13 +525,14 @@ func getPlaceName(location: CLLocation, completion: @escaping (String) -> Void){
     })
 }
 
-func getNearbyPlaces(categories: String?, count: Int?, latitude: Double, longitude: Double, completion: @escaping ([Place])->Void){
+func getNearbyPlaces(text: String?, categories: String?, count: Int?, location: CLLocation, completion: @escaping ([Place])->Void){
     let url = "https://api.yelp.com/v3/businesses/search"
     let parameters: [String: Any] = [
+        "term": text ?? "",
         "limit": count ?? 20,
         "categories": categories ?? "",
-        "latitude" : latitude,
-        "longitude" : longitude
+        "latitude" : location.coordinate.latitude,
+        "longitude" : location.coordinate.longitude
     ]
     
     var places = [Place]()
