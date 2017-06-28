@@ -166,7 +166,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             addGreenDot(label: (cell?.interest)!, content: (pin?.focus)!)
             let pinLocation = CLLocation(latitude: (pin?.coordinates.latitude)!, longitude: (pin?.coordinates.longitude)!)
             cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
-            cell?.cellContentView.backgroundColor = Constants.color.gray
+            cell?.cellContentView.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
         }
         else{
             cell?.whiteBorder.isHidden = true
