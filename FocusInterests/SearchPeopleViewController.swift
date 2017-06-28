@@ -21,9 +21,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     
     var people = [User]()
     var filtered = [User]()
+    var user_pins = [String:pinData]()
     var location: CLLocation?
-    var pinAvailable = [pinData?]()
-    var filteredPinAvailable = [pinData?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +95,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                 let info = user as? [String:Any]
                 
                 
-                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"]  as! String?, uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"]  as! String?, uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
                 
                 if user.uuid != AuthApi.getFirebaseUid() && user.uuid != nil{
                     
@@ -108,15 +107,14 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                             var address = value?["formattedAddress"] as! String
                             address = address.replacingOccurrences(of: ";;", with: "\n")
                             let data = pinData(UID: value?["fromUID"] as! String, dateTS: (value?["time"] as! Double), pin: (value?["pin"] as! String), location: (value?["formattedAddress"] as! String), lat: (value?["lat"] as! Double), lng: (value?["lng"] as! Double), path: Constants.DB.pins.child(user.uuid! as! String), focus: value?["focus"] as! String)
-                            self.pinAvailable.append(data)
-                        }
-                        else{
-                            self.pinAvailable.append(nil)
+                            self.user_pins[user.uuid!] = data
+                            user.hasPin = true
                         }
                         self.people.append(user)
                         
+                        self.people.sort { $0.hasPin && !$1.hasPin }
+
                         self.filtered = self.people
-                        self.filteredPinAvailable = self.pinAvailable
                         self.tableView.reloadData()
                     })
                 }
@@ -155,18 +153,18 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         
         cell?.fullName.text = people.fullname
+        let pin = user_pins[people.uuid!]
         
         
-        
-        if let pin = self.filteredPinAvailable[indexPath.row]{
+        if people.hasPin{
             cell?.pinAvailable = true
             cell?.shortBackground.isHidden = true
-            var address = pin.locationAddress
-            address = address.replacingOccurrences(of: ";;", with: "\n")
+            var address = pin?.locationAddress
+            address = address?.replacingOccurrences(of: ";;", with: "\n")
             cell?.whiteBorder.isHidden = false
-            cell?.address.text = pin.pinMessage
-            addGreenDot(label: (cell?.interest)!, content: pin.focus)
-            let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+            cell?.address.text = pin?.pinMessage
+            addGreenDot(label: (cell?.interest)!, content: (pin?.focus)!)
+            let pinLocation = CLLocation(latitude: (pin?.coordinates.latitude)!, longitude: (pin?.coordinates.longitude)!)
             cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
             cell?.cellContentView.backgroundColor = Constants.color.gray
         }
@@ -233,7 +231,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
         
-        if (self.pinAvailable[indexPath.row] != nil){
+        let people = filtered[indexPath.row]
+        if people.hasPin{
             return 110
         }
         else{
@@ -259,7 +258,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(searchText.characters.count > 0){
             self.filtered.removeAll()
-            self.filteredPinAvailable.removeAll()
             
             let ref = Constants.DB.user
             _ = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
@@ -270,7 +268,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                     let info = user as? [String:Any]
                     
                     
-                    let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                    let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
                     
                     if user.uuid != AuthApi.getFirebaseUid(){
                         Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -280,10 +278,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                 var address = value?["formattedAddress"] as! String
                                 address = address.replacingOccurrences(of: ";;", with: "\n")
                                 let data = pinData(UID: value?["fromUID"] as! String, dateTS: (value?["time"] as! Double), pin: (value?["pin"] as! String), location: (value?["formattedAddress"] as! String), lat: (value?["lat"] as! Double), lng: (value?["lng"] as! Double), path: Constants.DB.pins.child(user.uuid! as! String), focus: value?["focus"] as! String)
-                                self.filteredPinAvailable.append(data)
-                            }
-                            else{
-                                self.filteredPinAvailable.append(nil)
+                                user.hasPin = true
+                                self.user_pins[user.uuid!] = data
                             }
                             self.filtered.append(user)
                             
@@ -300,7 +296,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         }
         else{
             self.filtered = self.people
-            self.filteredPinAvailable = self.pinAvailable
             self.tableView.reloadData()
         }
         
@@ -315,7 +310,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         self.searchBar.text = ""
         self.searchBar.setShowsCancelButton(false, animated: true)
         self.filtered = self.people
-        self.filteredPinAvailable = self.pinAvailable
         self.tableView.reloadData()
         searchBar.resignFirstResponder()
     }

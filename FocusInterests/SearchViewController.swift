@@ -127,7 +127,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                     for (_, user) in users{
                         let info = user as? [String:Any]
         
-                        let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                        let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
         
                         if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
                             let newData = generalSearchData()
@@ -204,7 +204,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             for (_, user) in users{
                 let info = user as? [String:Any]
                 
-                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
                 
                 if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
                     let newData = generalSearchData()
