@@ -240,6 +240,12 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         }
         
         
+        if message.isMediaMessage{
+            print("id is \(message.senderId) ")
+            
+            
+        }
+        
         
         if self.senderId == message.senderId {
             cell.messageBubbleTopLabel.textInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 45)
@@ -455,6 +461,12 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                     let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
                     self.imageMapper[snapshot.key] = self.messages.count
                     
+//                    print(message.isMediaMessage)
+//                    print(message.senderId)
+//                    print(message.text)
+//                    print(message.senderDisplayName)
+//        
+                    
                     // show the placeholder image
                     self.messages.append(message!)
                     
@@ -524,10 +536,15 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 
                 if image != nil && finished{
                     let JSQimage = JSQPhotoMediaItem(image: image)
-                    let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
+//                    let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
+                    
                     
                     let index = self.imageMapper[id]
-                    self.messages[index!] = message!
+                    let message = self.messages[index!]
+                    
+                    let imageMessage = JSQMessage(senderId: message.senderId, senderDisplayName: message.senderDisplayName, date: message.date, media: JSQimage)
+                    
+                    self.messages[index!] = imageMessage!
                     self.collectionView.reloadData()
                     
                 }
