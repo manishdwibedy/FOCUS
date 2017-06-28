@@ -21,7 +21,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     
     var UID = ""
-    var filtered = [Place]()
+    var filtered = [Any]()
     var places = [Place]()
     var events = [Event]()
     var location: CLLocation?
@@ -39,6 +39,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
 
         tableView.delegate = self
         tableView.dataSource = self
+        
         tableView.layer.cornerRadius = 6
         tableView.clipsToBounds = true
         let nib = UINib(nibName: "InvitePeoplePlaceCell", bundle: nil)
@@ -69,10 +70,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         navBar.titleTextAttributes = attrs
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.filtered = places
-        self.tableView.reloadData()
+        //self.filtered = places
+        //self.tableView.reloadData()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -95,8 +97,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBAction func segmentedChanged(_ sender: Any) {
         searchBar.text = nil
-        places.removeAll()
-        events.removeAll()
+//        places.removeAll()
+//        events.removeAll()
         if segmentedOut.selectedSegmentIndex == 0
         {
             updatePlaces()
@@ -109,13 +111,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if segmentedOut.selectedSegmentIndex == 0
-        {
-        return filtered.count
-        }else
-        {
-            return events.count
-        }
+//        if segmentedOut.selectedSegmentIndex == 0
+//        {
+            return filtered.count
+//        }else
+//        {
+//            return events.count
+//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -123,7 +125,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         {
             let cell:InvitePeoplePlaceCell = self.tableView.dequeueReusableCell(withIdentifier: "InvitePeoplePlaceCell") as! InvitePeoplePlaceCell!
             
-            let place = filtered[indexPath.row]
+            let place = filtered[indexPath.row] as! Place
             cell.place = place
             cell.placeNameLabel.text = place.name
            // cell.place = place
@@ -147,10 +149,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         }else
         {
             let cell:InvitePeopleEventCell = self.tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell") as! InvitePeopleEventCell!
-            cell.name.text = events[indexPath.row].title
-            cell.address.text = events[indexPath.row].fullAddress
-            cell.interest.text = events[indexPath.row].category
-            cell.event = events[indexPath.row]
+            let event = filtered[indexPath.row] as! Event
+            cell.name.text = event.title
+            cell.address.text = event.fullAddress
+            cell.interest.text = event.category
+            cell.event = event
             cell.UID = UID
             cell.parentVC = self
             cell.loadLikes()
@@ -160,11 +163,23 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let place = self.places[indexPath.row]
-        let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
-        controller.place = place
-        self.present(controller, animated: true, completion: nil)
+        
+//        if segmentedOut.selectedSegmentIndex == 0{
+//            let cell:InvitePeoplePlaceCell = self.tableView.dequeueReusableCell(withIdentifier: "InvitePeoplePlaceCell") as! InvitePeoplePlaceCell!
+//            let place = self.filtered[indexPath.row]
+//            let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+//            controller.place = place as! Place
+//            self.present(controller, animated: true, completion: nil)
+//        }
+//        else{
+//            let event = self.filtered[indexPath.row]
+//            let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+//            controller.event = event as! Event
+//            self.present(controller, animated: true, completion: nil)
+//        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -226,9 +241,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                         
                         let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                         
-                        if !self.filtered.contains(place){
+//                        if !self.filtered.contains(where: place){
                             self.filtered.append(place)
-                        }
+//                        }
                     }
                     self.tableView.reloadData()
                 }
@@ -264,16 +279,18 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     {
         Constants.DB.event.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
+            self.filtered.removeAll()
             if value != nil
             {
                 for (id, event) in value!
                 {
                     let info = event as? [String:Any]
                     let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id as! String, category: info?["interest"] as? String)
-                    self.events.append(event)
+                    self.filtered.append(event)
                 }
+                self.tableView.reloadData()
             }
-            self.tableView.reloadData()
+            
         })
         
         
@@ -329,9 +346,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                 
-                if !self.filtered.contains(place){
+//                if !self.filtered.contains(where: place){
                     self.filtered.append(place)
-                }
+//                }
             }
             self.tableView.reloadData()
         }

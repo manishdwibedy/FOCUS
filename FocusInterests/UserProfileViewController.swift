@@ -196,6 +196,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.navigationItem.title = ""
         
         self.createEventButton.roundCorners(radius: 6)
+        
+        if otherUser{
+            self.editButton.isEnabled = false
+            self.moreFocusButton.isEnabled = false
+        }
+        
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
         Constants.DB.pins.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary

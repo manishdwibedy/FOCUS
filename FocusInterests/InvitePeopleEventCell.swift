@@ -32,8 +32,22 @@ class InvitePeopleEventCell: UITableViewCell {
         self.eventImage.layer.borderColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0).cgColor
         self.eventImage.roundedImage()
         self.inviteEventCellContentView.allCornersRounded(radius: 6.0)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tap(sender:)))
+        inviteEventCellContentView.addGestureRecognizer(tap)
         
+        //        let longP = UILongPressGestureRecognizer(target: self, action: #selector(longP(sender:)))
+        //        longP.minimumPressDuration = 0.3
+        //        self.addGestureRecognizer(longP)
     }
+    
+    func tap(sender: UITapGestureRecognizer)
+    {
+        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+        controller.event = event as! Event
+        parentVC.present(controller, animated: true, completion: nil)
+    }
+    
     
     func loadLikes()
     {
