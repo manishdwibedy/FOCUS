@@ -273,11 +273,62 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                     let address = pin["formattedAddress"] as! String
                     let place = ItemOfInterest(itemName: pin["pin"] as! String, imageURL: nil, type: "pin")
                     let pinFeed = FocusNotification(type: NotificationType.Pin, sender: followerUser, item: place, time: time)
+                    
                     pins.append(pinFeed)
+                    
+                    if let comments = pin["comments"] as? [String:Any]{
+                        pinCount += comments.count
+                        
+                        for (id, data) in comments{
+                            let commentData = data as? [String:Any]
+                            Constants.DB.user.child((commentData?["fromUID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
+                                
+                                if let data = snapshot.value as? [String:Any]{
+                                    let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: nil)
+                                    let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: place, time: time)
+                                    pins.append(pinFeed)
+                                    
+                                    if pinCount == pins.count{
+                                        gotPins(pins)
+                                        print("pin done \(pinCount)")
+                                    }
+                                }
+                                
+                            })
+                            
+                        }
+                        
+                    }
+                    
+                    if let likes = pin["like"] as? [String:Any]{
+                        let likeData = likes["likedBy"] as? [String:Any]
+                        
+                        if let likeCount = likes["num"] as? Int{
+                            pinCount += likeCount
+                        }
+                        
+                        for (id, data) in likeData!{
+                            if let likeData = data as? [String:Any]{
+                                Constants.DB.user.child((likeData["UID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
+                                    
+                                    let data = snapshot.value as? [String:Any]
+                                    let user = NotificationUser(username: data?["username"] as? String, uuid: data?["firebaseUserId"] as? String, imageURL: nil)
+                                    let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
+                                    pins.append(pinFeed)
+                                    
+                                    if pinCount == pins.count{
+                                        gotPins(pins)
+                                        print("pin done \(pinCount)")
+                                    }
+                                })
+                            }
+                            
+                        }
+                    }
                 }
                 
                 pinCount += 1
-                if pinCount == followerCount{
+                if pinCount == pins.count{
                     gotPins(pins)
                     print("pin done \(pinCount)")
                 }

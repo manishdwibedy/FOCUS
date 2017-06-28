@@ -192,8 +192,11 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 }
                 
                 let keys = value.allKeys as? [String]
-                for id in (keys?[0..<2])!{
-                    
+                for (index,id) in (keys?.enumerated())!{
+                    if index == 2{
+                        break
+                        
+                    }
                     let data = value[id] as? [String:Any]
                     Constants.DB.user.child(data?["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                         let value = snapshot.value as? NSDictionary
