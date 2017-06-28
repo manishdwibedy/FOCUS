@@ -15,6 +15,11 @@ import Agrume
 import SVPullToRefresh
 
 class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    enum source{
+        case camera
+        case gallery
+    }
+    
     var user = [String:Any]()
     var messages = [JSQMessage]()
     let messagesRef = Constants.DB.messages
@@ -308,10 +313,14 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        let OKAction = UIAlertAction(title: "Add image from gallery", style: .default) { action in
-            self.addImage()
+        let galleryAction = UIAlertAction(title: "Add image from gallery", style: .default) { action in
+            self.showImagePicker(source: source.gallery)
         }
-        alertController.addAction(OKAction)
+        let cameraAction = UIAlertAction(title: "Add image from camera", style: .default) { action in
+            self.showImagePicker(source: source.camera)
+        }
+        alertController.addAction(galleryAction)
+        alertController.addAction(cameraAction)
         
         self.present(alertController, animated: true)
 
@@ -346,19 +355,37 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         }
     }
     
-    func addImage(){
+    func showImagePicker(source: source){
         
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-            
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = false
-            
-            self.present(imagePicker, animated: true, completion:  {
-                self.imagePicker.navigationBar.topItem?.rightBarButtonItem?.tintColor = .black
-                self.imagePicker.navigationBar.topItem?.rightBarButtonItem?.isEnabled = true
-            })
+        switch source{
+        case .gallery:
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                
+                imagePicker.delegate = self
+                imagePicker.sourceType = .photoLibrary
+                imagePicker.allowsEditing = false
+                
+                self.present(imagePicker, animated: true, completion:  {
+                    self.imagePicker.navigationBar.topItem?.rightBarButtonItem?.tintColor = .black
+                    self.imagePicker.navigationBar.topItem?.rightBarButtonItem?.isEnabled = true
+                })
+            }
+        case .camera:
+            if UIImagePickerController.isSourceTypeAvailable(.camera){
+                
+                imagePicker.delegate = self
+                imagePicker.sourceType = .camera
+                imagePicker.allowsEditing = true
+//                self.present(self.pickerController, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
+//                
+//                self.present(imagePicker, animated: true, completion:  {
+//                    self.imagePicker.navigationBar.topItem?.rightBarButtonItem?.tintColor = .black
+//                    self.imagePicker.navigationBar.topItem?.rightBarButtonItem?.isEnabled = true
+//                })
+            }
         }
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
