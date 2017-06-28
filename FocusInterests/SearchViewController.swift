@@ -12,7 +12,7 @@ import Alamofire
 import CoreLocation
 import SwiftyJSON
 
-class SearchViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UITableViewDelegate,CLLocationManagerDelegate {
+class SearchViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UITableViewDelegate,CLLocationManagerDelegate{
 
     @IBOutlet weak var peopleHeaderView: UIView!
     @IBOutlet weak var placeHeaderView: UIView!
@@ -48,9 +48,40 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        // search bar setup
+        self.searchBar.delegate = self
+        
+        self.searchBar.isTranslucent = true
+        self.searchBar.backgroundImage = UIImage()
+        self.searchBar.tintColor = UIColor.white
+        self.searchBar.barTintColor = UIColor.white
+        
+        self.searchBar.layer.cornerRadius = 6
+        self.searchBar.clipsToBounds = true
+        self.searchBar.layer.borderWidth = 0
+        self.searchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
+        
+        // search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
+        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+        // search bar placeholder
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
+        textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
         textFieldInsideSearchBar?.textColor = UIColor.white
+        
+        // search bar glass icon
+        let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        glassIconView.tintColor = UIColor.white
+        
+        // search bar clear button
+        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
+        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
+        clearButton.addTarget(self, action: #selector(clearText), for: .touchUpInside)
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+        clearButton.tintColor = UIColor.white
         
         
         for view in searchBar.subviews.last!.subviews {
@@ -102,7 +133,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
         //getPlaces(text: "")
         //getEvents(text: "")
         
@@ -118,9 +148,17 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         self.dismiss(animated: true, completion: nil)
     }
     
+    func clearText(){
+        self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
+        self.FOCUSListShouldBe = true
+        self.searchBar.endEditing(true)
+        self.tableView.reloadData()
+    }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
-        FOCUSListShouldBe = false
+        searchBar.setShowsCancelButton(true, animated: true)
+        /*
                 let ref = Constants.DB.user
                 _ = ref.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { snapshot in
                     let users = snapshot.value as? [String : Any] ?? [:]
@@ -154,16 +192,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                                     self.tableView.reloadData()
                                 })
                             })
-                            
-                            
                         }
                     }
-                    
-                    
                 })
-        
-        getPlaces(text: "")
-        getEvents(text: "")
+                */
+//        getPlaces(text: "")
+//        getEvents(text: "")
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -186,96 +220,107 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     }
     
     
+    
     func keyboardWillShow(notification: NSNotification) {
-        searchBar.showsCancelButton = true
+        self.searchBar.setShowsCancelButton(true, animated: true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
+        self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
+        self.FOCUSListShouldBe = true
+        self.searchBar.endEditing(true)
+        self.tableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("new text")
-        FOCUSListShouldBe = false
-        allData.removeAll()
-        let ref = Constants.DB.user
-        _ =  ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
-            let users = snapshot.value as? [String : Any] ?? [:]
-            for (_, user) in users{
-                let info = user as? [String:Any]
-                
-                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
-                
-                if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
-                    let newData = generalSearchData()
-                    newData.type = "people"
-                    newData.object = user
-                    print(user.uuid)
-                    Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { snapshot in
-                        let value = snapshot.value as? NSDictionary
-                        if value != nil{
-                            let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: value?["lat"] as! Double, longitude: value?["lng"] as! Double))
-                            let com = distance.components(separatedBy: " ")
-                            newData.distance = Double(com[0])!
-                            
-                        }
-                        
-                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+        if(searchText == ""){
+            self.FOCUSListShouldBe = true
+            self.tableView.reloadData()
+        }else {
+            self.FOCUSListShouldBe = false
+            allData.removeAll()
+            let ref = Constants.DB.user
+            _ =  ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+                let users = snapshot.value as? [String : Any] ?? [:]
+                for (_, user) in users{
+                    let info = user as? [String:Any]
+                    
+                    let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                    
+                    if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
+                        let newData = generalSearchData()
+                        newData.type = "people"
+                        newData.object = user
+                        print(user.uuid)
+                        Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { snapshot in
                             let value = snapshot.value as? NSDictionary
-                            if value != nil {
-                                newData.following = true
+                            if value != nil{
+                                let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: value?["lat"] as! Double, longitude: value?["lng"] as! Double))
+                                let com = distance.components(separatedBy: " ")
+                                newData.distance = Double(com[0])!
                                 
                             }
-                            self.allData.append(newData)
-                            self.allData = self.sortData(data: self.allData)
-                            self.tableView.reloadData()
+                            
+                            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                let value = snapshot.value as? NSDictionary
+                                if value != nil {
+                                    newData.following = true
+                                    
+                                }
+                                self.allData.append(newData)
+                                self.allData = self.sortData(data: self.allData)
+                                self.tableView.reloadData()
+                            })
                         })
-                    })
-                    
-                    
+                        
+                        
+                    }
                 }
+                
+                
+            })
+            print("before places search")
+            getPlaces(text: searchText)
+            getEvents(text: searchText)
+            
+            if(searchText.characters.count > 0){
+                self.filtered_user.removeAll()
+
+                let ref = Constants.DB.user
+                let query = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
+                    let events = snapshot.value as? [String : Any] ?? [:]
+                    
+                    let users = snapshot.value as? [String : Any] ?? [:]
+                    
+                    for (_, user) in users{
+                        let info = user as? [String:Any]
+                        
+                        let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                        
+                        if user.uuid != AuthApi.getFirebaseUid(){
+                            self.filtered_user.append(user)
+                        }
+                    }
+                    self.tableView.reloadData()
+    //                self.people_tableView.reloadData()
+                })
+                
+                self.getPlaces(text: searchText)
+                self.getEvents(text: searchText)
             }
-            
-            
-        })
-        print("before places search")
-        getPlaces(text: searchText)
-        //getEvents(text: searchText)
-        
-        
-        
-//        if(searchText.characters.count > 0){
-//            self.filtered_user.removeAll()
-//
-//            let ref = Constants.DB.user
-//            let query = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
-//                let events = snapshot.value as? [String : Any] ?? [:]
-//                
-//                let users = snapshot.value as? [String : Any] ?? [:]
-//                
-//                for (_, user) in users{
-//                    let info = user as? [String:Any]
-//                    
-//                    let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
-//                    
-//                    if user.uuid != AuthApi.getFirebaseUid(){
-//                        self.filtered_user.append(user)
-//                    }
-//                }
-//                self.people_tableView.reloadData()
-//            })
-//            
-//            self.getPlaces(text: searchText)
-//            self.getEvents(text: searchText)
-//        }
-//        else{
-//            self.filtered_user = self.people
-//            self.people_tableView.reloadData()
-//            
-//            self.filtered_places = self.places
-//            self.place_tableView.reloadData()
-//            
-//        }
+            else{
+                self.filtered_user = self.people
+                self.tableView.reloadData()
+    //            self.people_tableView.reloadData()
+
+                self.filtered_places = self.places
+                self.tableView.reloadData()
+    //            self.place_tableView.reloadData()
+                
+            }
+        }
 
     }
     
@@ -299,7 +344,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+    
         if FOCUSListShouldBe == true{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "FOCUSLabelCell") as! FOCUSLabelCell
@@ -309,29 +354,32 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             
             
         }else if allData[indexPath.row].type == "people"{
-                let people = self.allData[indexPath.row].object as! User
-                let cell = tableView.dequeueReusableCell(withIdentifier: "peopleCell") as! SearchPeopleTableViewCell!
+            
+            print("SHOWING PEOPLE CELLS")
+            
+            let people = self.allData[indexPath.row].object as! User
+            let cell = tableView.dequeueReusableCell(withIdentifier: "peopleCell") as! SearchPeopleTableViewCell!
 
-                cell?.username.text = people.username
-                cell?.fullName.text = "Full Name"
+            cell?.username.text = people.username
+            cell?.fullName.text = "Full Name"
 
-                cell?.address.text = ""
-                cell?.distance.text = ""
+            cell?.address.text = ""
+            cell?.distance.text = ""
 
-                cell?.ID = people.uuid!
-                cell?.checkFollow()
-                cell?.interest.text = "Category"
+            cell?.ID = people.uuid!
+            cell?.checkFollow()
+            cell?.interest.text = "Category"
 
-                let placeHolderImage = UIImage(named: "empty_event")
+            let placeHolderImage = UIImage(named: "empty_event")
 
-                cell?.followButton.roundCorners(radius: 10)
-                cell?.inviteButton.roundCorners(radius: 10)
+//            cell?.followButton.roundCorners(radius: 10)
+//            cell?.inviteButton.roundCorners(radius: 10)
 
-                cell?.followButton.tag = indexPath.row
-                cell?.followButton.addTarget(self, action: #selector(self.followUser), for: UIControlEvents.touchUpInside)
-                
-                cell?.inviteButton.tag = indexPath.row
-                cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
+            cell?.followButton.tag = indexPath.row
+            cell?.followButton.addTarget(self, action: #selector(self.followUser), for: UIControlEvents.touchUpInside)
+            
+            cell?.inviteButton.tag = indexPath.row
+            cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
             
             
             Constants.DB.pins.child(people.uuid!).observeSingleEvent(of: .value, with: { snapshot in
@@ -345,10 +393,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 }
             })
             
-                return cell!
+            return cell!
                 
             }else if allData[indexPath.row].type == "event"{
-            
+                print("SHOWING EVENT CELLS")
                 let event = allData[indexPath.row].object as! Event
                 let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as! SearchEventTableViewCell!
     
@@ -393,28 +441,27 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     
     
     //            attending
-    //            Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-    //                let value = snapshot.value as? NSDictionary
-    //                if value != nil
-    //                {
-    //                    cell?.attendButton.setTitle("Attending", for: UIControlState.normal)
-    //                }
-    //
-    //            })
+//                Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+//                let value = snapshot.value as? NSDictionary
+//                 if value != nil{
+//                      cell?.attendButton.setTitle("Attending", for: UIControlState.normal)
+//                 }
+//
+//                 })
                 
-    //            cell?.attendButton.roundCorners(radius: 10)
-                cell?.inviteButton.roundCorners(radius: 10)
+//                cell?.attendButton.roundCorners(radius: 10)
+//                cell?.inviteButton.roundCorners(radius: 10)
                 
-    //            cell?.attendButton.tag = indexPath.row
-    //            cell?.attendButton.addTarget(self, action: #selector(self.attendEvent), for: UIControlEvents.touchUpInside)
-                
+//                cell?.attendButton.tag = indexPath.row
+//                cell?.attendButton.addTarget(self, action: #selector(self.attendEvent), for: UIControlEvents.touchUpInside)
+            
                 cell?.inviteButton.tag = indexPath.row
                 cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
                 
                 return cell!
                 
             }else{
-            
+                print("SHOWING PLACE CELLS")
                 let place = allData[indexPath.row].object as! Place
     
                 let cell:SearchPlaceCell = tableView.dequeueReusableCell(withIdentifier: "placeCell") as! SearchPlaceCell!
@@ -441,8 +488,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 return cell
             
             }
-
-
         }
         
         
@@ -450,17 +495,18 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
          if FOCUSListShouldBe == true{
             return 37
          }else if allData[indexPath.row].type == "people"{
-            return 114
+            return 110
         }else if allData[indexPath.row].type == "event"{
-            return 105
+            return 110
         }else{
-            return 100
+            return 110
         }
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if FOCUSListShouldBe == true{
+            self.searchBar.setShowsCancelButton(false, animated: true)
             let word = Constants.interests.interests[indexPath.row]
         }
     }
@@ -509,7 +555,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         }
         
     }
-    
     
     func followUser(sender:UIButton){
         let buttonRow = sender.tag
@@ -603,9 +648,17 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             self.tableView.reloadData()
         }
     }
-
-    func getEvents(text: String){
+    
+    func setupInterestsSet() -> [String:Array<Any>]{
+        var interestSet = [String:Array<Any>]()
         
+        for interest_index in 0...Constants.interests.interests.count-1{
+            interestSet[Constants.interests.interests[interest_index]] = []
+        }
+        return interestSet
+    }
+    
+    func getEvents(text: String){
         
         let ref = Constants.DB.event
         let query = ref.queryOrdered(byChild: "title").queryStarting(atValue: text.lowercased()).queryEnding(atValue: text.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
@@ -620,15 +673,16 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 }
                 
                 
-                    let newData = generalSearchData()
-                    newData.type = "event"
-                    newData.object = event
-                    let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.latitude!)!))
-                    let com = distance.components(separatedBy: " ")
-                    newData.distance = Double(com[0])!
-                    self.allData.append(newData)
-                    self.allData = self.sortData(data: self.allData)
-                    self.tableView.reloadData()
+                let newData = generalSearchData()
+                newData.type = "event"
+                newData.object = event
+                let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.latitude!)!))
+                let com = distance.components(separatedBy: " ")
+                newData.distance = Double(com[0])!
+                self.allData.append(newData)
+                self.allData = self.sortData(data: self.allData)
+                
+                self.tableView.reloadData()
                 
             }
             self.tableView.reloadData()

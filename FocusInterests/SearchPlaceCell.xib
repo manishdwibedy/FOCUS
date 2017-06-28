@@ -37,7 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="address aa" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzd-WM-LyK">
-                                <rect key="frame" x="66" y="31" width="211.66666666666669" height="44"/>
+                                <rect key="frame" x="66" y="31" width="201" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="LLh-SV-SEO"/>
@@ -90,16 +90,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMP-wL-5jG">
-                                <rect key="frame" x="285.66666666666674" y="41" width="50.333333333333314" height="18"/>
+                                <rect key="frame" x="275" y="41" width="61" height="18"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3d5-d3-s8t">
                                 <rect key="frame" x="233" y="79" width="103" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="103" id="YsA-VN-XmT"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -116,9 +113,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="TMP-wL-5jG" secondAttribute="trailing" constant="2" id="KrM-QN-Dca"/>
                             <constraint firstItem="vcy-mZ-WLf" firstAttribute="top" secondItem="Kzy-nD-Mhx" secondAttribute="top" constant="8" id="Qag-iY-rId"/>
                             <constraint firstItem="TMP-wL-5jG" firstAttribute="top" secondItem="60o-fN-I3e" secondAttribute="bottom" constant="13" id="Qpv-r6-A1b"/>
+                            <constraint firstItem="TMP-wL-5jG" firstAttribute="centerX" secondItem="r3K-UI-PZJ" secondAttribute="centerX" id="Rgx-AV-oHr"/>
                             <constraint firstItem="3d5-d3-s8t" firstAttribute="top" secondItem="TMP-wL-5jG" secondAttribute="bottom" constant="20" id="RvL-n3-k3b"/>
                             <constraint firstItem="3d5-d3-s8t" firstAttribute="centerY" secondItem="x3j-8h-RD4" secondAttribute="centerY" id="a76-bG-cWw"/>
-                            <constraint firstItem="3d5-d3-s8t" firstAttribute="leading" secondItem="x3j-8h-RD4" secondAttribute="trailing" constant="67" id="bWD-ae-hAZ"/>
+                            <constraint firstItem="3d5-d3-s8t" firstAttribute="leading" relation="lessThanOrEqual" secondItem="x3j-8h-RD4" secondAttribute="trailing" constant="67" id="bWD-ae-hAZ"/>
                             <constraint firstItem="60o-fN-I3e" firstAttribute="top" secondItem="Kzy-nD-Mhx" secondAttribute="top" constant="8" id="cIp-nQ-mjM"/>
                             <constraint firstItem="r3K-UI-PZJ" firstAttribute="top" secondItem="Kzy-nD-Mhx" secondAttribute="top" constant="8" id="cWv-D6-abl"/>
                             <constraint firstItem="x3j-8h-RD4" firstAttribute="leading" secondItem="vcy-mZ-WLf" secondAttribute="leading" id="cst-zd-Zq8"/>
@@ -139,6 +137,7 @@
                     <constraint firstItem="Kzy-nD-Mhx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1dn-wS-r8h"/>
                     <constraint firstAttribute="bottom" secondItem="Kzy-nD-Mhx" secondAttribute="bottom" id="O1E-rQ-QLC"/>
                     <constraint firstItem="Kzy-nD-Mhx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Vk9-ul-QGI"/>
+                    <constraint firstItem="Kzy-nD-Mhx" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="ldd-B6-3fA"/>
                     <constraint firstItem="Kzy-nD-Mhx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="usv-oR-Nai"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Kzy-nD-Mhx" secondAttribute="trailing" id="xvL-R5-g6J"/>
                 </constraints>
