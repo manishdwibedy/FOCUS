@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="362" height="105"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="362" height="104"/>
+                <rect key="frame" x="0.0" y="0.0" width="362" height="104.66666666666667"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzy-nD-Mhx">
@@ -37,7 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="address aa" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzd-WM-LyK">
-                                <rect key="frame" x="66" y="31" width="154" height="44"/>
+                                <rect key="frame" x="66" y="31" width="211.66666666666669" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="LLh-SV-SEO"/>
@@ -90,7 +90,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMP-wL-5jG">
-                                <rect key="frame" x="270" y="41" width="66" height="18"/>
+                                <rect key="frame" x="285.66666666666674" y="41" width="50.333333333333314" height="18"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -112,7 +112,6 @@
                             <constraint firstItem="TMP-wL-5jG" firstAttribute="centerY" secondItem="gzd-WM-LyK" secondAttribute="centerY" constant="-3" id="BLy-bc-t00"/>
                             <constraint firstItem="gzd-WM-LyK" firstAttribute="top" secondItem="vcy-mZ-WLf" secondAttribute="bottom" constant="2.6666666666666643" id="BOx-tq-n7t"/>
                             <constraint firstItem="gzd-WM-LyK" firstAttribute="leading" secondItem="vcy-mZ-WLf" secondAttribute="leading" id="BnH-XF-ZPz"/>
-                            <constraint firstItem="gzd-WM-LyK" firstAttribute="width" secondItem="vcy-mZ-WLf" secondAttribute="width" constant="20" id="GN1-Hf-QGW"/>
                             <constraint firstItem="3d5-d3-s8t" firstAttribute="trailing" secondItem="TMP-wL-5jG" secondAttribute="trailing" id="JUf-M4-3PX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TMP-wL-5jG" secondAttribute="trailing" constant="2" id="KrM-QN-Dca"/>
                             <constraint firstItem="vcy-mZ-WLf" firstAttribute="top" secondItem="Kzy-nD-Mhx" secondAttribute="top" constant="8" id="Qag-iY-rId"/>
@@ -126,7 +125,7 @@
                             <constraint firstItem="Ya0-NI-rmK" firstAttribute="leading" secondItem="Kzy-nD-Mhx" secondAttribute="leadingMargin" id="csx-GS-tC1"/>
                             <constraint firstItem="TMP-wL-5jG" firstAttribute="top" secondItem="r3K-UI-PZJ" secondAttribute="bottom" constant="13" id="eBr-1n-lPr"/>
                             <constraint firstItem="r3K-UI-PZJ" firstAttribute="leading" secondItem="60o-fN-I3e" secondAttribute="trailing" constant="8" id="gRE-NR-TnG"/>
-                            <constraint firstItem="TMP-wL-5jG" firstAttribute="leading" secondItem="gzd-WM-LyK" secondAttribute="trailing" constant="50" id="ifx-w7-OOr"/>
+                            <constraint firstItem="TMP-wL-5jG" firstAttribute="leading" secondItem="gzd-WM-LyK" secondAttribute="trailing" constant="8" id="ifx-w7-OOr"/>
                             <constraint firstItem="60o-fN-I3e" firstAttribute="leading" secondItem="vcy-mZ-WLf" secondAttribute="trailing" constant="6" id="jkD-Ev-7Bu"/>
                             <constraint firstItem="Ya0-NI-rmK" firstAttribute="top" secondItem="Kzy-nD-Mhx" secondAttribute="top" constant="9" id="kiR-sX-eEy"/>
                             <constraint firstItem="60o-fN-I3e" firstAttribute="baseline" secondItem="r3K-UI-PZJ" secondAttribute="baseline" id="p7C-Ze-3rG"/>
@@ -144,7 +143,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="Kzy-nD-Mhx" secondAttribute="trailing" id="xvL-R5-g6J"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="addressTextView" destination="gzd-WM-LyK" id="WqW-4K-G4y"/>
                 <outlet property="categoryLabel" destination="x3j-8h-RD4" id="9OG-jx-yc2"/>

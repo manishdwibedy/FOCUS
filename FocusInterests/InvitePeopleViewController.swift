@@ -139,7 +139,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
             //cell.placeID = place.id
             cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
-            cell.categoryLabel.text = place.categories[0].name
+            addGreenDot(label: cell.categoryLabel, content: place.categories[0].name)
             //cell.checkForFollow(id: place.id)
             let placeHolderImage = UIImage(named: "empty_event")
             cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
@@ -183,8 +183,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 115
-        
+        return 105
     }
     
     
