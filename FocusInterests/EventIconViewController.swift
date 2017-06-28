@@ -49,7 +49,6 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let data = imageData{
-            let _ = self.event?.saveToDB(ref: Constants.DB.event)
             self.performSegue(withIdentifier: "event_invite", sender: nil)
         }
     }
@@ -96,7 +95,6 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     }
     
     @objc private func dismiss(_ sender: Any) {
-        let _ = self.event?.saveToDB(ref: Constants.DB.event)
         self.performSegue(withIdentifier: "event_invite", sender: nil)
     }
     

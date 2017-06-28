@@ -1,4 +1,4 @@
-
+ 
 //
 //  SendInvitationsViewController.swift
 //  FocusInterests
@@ -216,12 +216,20 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             }
         }
         
-        messageVC.body = "Please come to \(self.event?.title)"
-        messageVC.recipients = phoneNumbers
-        messageVC.messageComposeDelegate = self;
+        if phoneNumbers.count > 0{
+            messageVC.body = "Please come to \(self.event?.title)"
+            messageVC.recipients = phoneNumbers
+            messageVC.messageComposeDelegate = self;
+            
+            self.present(messageVC, animated: false, completion: nil)
+            
+        }
         
-        self.present(messageVC, animated: false, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
         
+        
+        self.present(VC!, animated: true, completion: nil)
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController!, didFinishWith result: MessageComposeResult) {

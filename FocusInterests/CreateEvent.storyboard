@@ -298,7 +298,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="interestNextPressed:" destination="3TX-Ww-Aks" eventType="touchUpInside" id="CDg-iW-Ta2"/>
-                                                            <segue destination="eqH-re-POU" kind="show" identifier="interestNextClicked" id="fl2-53-V7T"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -730,7 +729,7 @@
         <image name="Twitter_Logo_White_On_Image" width="250" height="204"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="eLh-9t-fEY"/>
         <segue reference="amW-Q6-Hfg"/>
-        <segue reference="fl2-53-V7T"/>
     </inferredMetricsTieBreakers>
 </document>

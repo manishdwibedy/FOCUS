@@ -37,7 +37,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     var interests = [String]()
     var filteredInterest = [String]()
     
-    let validatedFields = false
+    let validatedFields = true
     
     @IBOutlet weak var canInviteFriendsLabel: UILabel!
     @IBOutlet weak var showGuestListLabel: UILabel!
@@ -275,7 +275,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "chooseIcon" || segue.identifier == "interestNextClicked") && validatedFields {
+        if segue.identifier == "chooseIcon" && validatedFields {
             if self.event != nil{
                 guard let name = eventNameTextField.text, !name.isEmpty else{
                     presentNotification(title: "Choose a name", message: "Please choose a name for this event.")
@@ -541,8 +541,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func chooseIcon(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "chooseIcon", sender: nil)
     }
+    
     @IBAction func interestNextPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "interestNextClicked", sender: nil)
+        self.performSegue(withIdentifier: "chooseIcon", sender: nil)
     }
     
 }
