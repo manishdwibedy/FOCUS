@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xPx-tM-EtF">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--EVENTS-->
+        <scene sceneID="7vf-IH-Tml">
+            <objects>
+                <viewController id="xPx-tM-EtF" customClass="SearchEventsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wns-oX-1iq"/>
+                        <viewControllerLayoutGuide type="bottom" id="qym-sJ-mVv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eF4-Ev-ETy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uw4-jh-WA0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="y1H-1h-xQX"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.093528874220000002" green="0.17284265160000001" blue="0.26158365610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Events" id="31z-0O-JgZ"/>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNT-Vt-zjc">
+                                <rect key="frame" x="245" y="117" width="120" height="30"/>
+                                <color key="backgroundColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="9yA-fQ-l8O"/>
+                                </constraints>
+                                <state key="normal" title="Create Event">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showCreateEvent:" destination="xPx-tM-EtF" eventType="touchUpInside" id="f0n-Xj-yY6"/>
+                                </connections>
+                            </button>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="z8z-95-lev">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-AA-SPe">
+                                <rect key="frame" x="5" y="155" width="365" height="455"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="xPx-tM-EtF" id="ZOg-gp-Nqw"/>
+                                    <outlet property="delegate" destination="xPx-tM-EtF" id="Ptu-K7-eu6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1215903535" green="0.19626170400000001" blue="0.28496062760000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Uw4-jh-WA0" firstAttribute="top" secondItem="eF4-Ev-ETy" secondAttribute="top" id="4el-KV-LTf"/>
+                            <constraint firstAttribute="trailing" secondItem="z8z-95-lev" secondAttribute="trailing" id="5sX-mj-VFX"/>
+                            <constraint firstItem="z8z-95-lev" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="5wg-Wn-KXm"/>
+                            <constraint firstItem="z8z-95-lev" firstAttribute="top" secondItem="Uw4-jh-WA0" secondAttribute="bottom" id="GHF-Qe-xvC"/>
+                            <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="rHT-AA-SPe" secondAttribute="bottom" constant="8" symbolic="YES" id="M02-sk-fFU"/>
+                            <constraint firstItem="Uw4-jh-WA0" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="M3G-iJ-BqP"/>
+                            <constraint firstItem="ZNT-Vt-zjc" firstAttribute="top" secondItem="z8z-95-lev" secondAttribute="bottom" constant="9" id="S6z-4S-SPC"/>
+                            <constraint firstItem="rHT-AA-SPe" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leadingMargin" constant="-11" id="XWg-lL-6ar"/>
+                            <constraint firstAttribute="trailing" secondItem="Uw4-jh-WA0" secondAttribute="trailing" id="bab-xt-oJk"/>
+                            <constraint firstAttribute="trailing" secondItem="ZNT-Vt-zjc" secondAttribute="trailing" constant="10" id="fUi-cJ-94d"/>
+                            <constraint firstItem="rHT-AA-SPe" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="8" id="iki-T5-PU9"/>
+                            <constraint firstItem="Uw4-jh-WA0" firstAttribute="centerX" secondItem="z8z-95-lev" secondAttribute="centerX" id="mmY-Ya-bw9"/>
+                            <constraint firstItem="z8z-95-lev" firstAttribute="centerX" secondItem="rHT-AA-SPe" secondAttribute="centerX" id="tPI-No-es8"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="EVENTS" id="yhf-yt-eZ8">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="createEventButton" destination="ZNT-Vt-zjc" id="cy0-BN-nMr"/>
+                        <outlet property="navBar" destination="Uw4-jh-WA0" id="n6Q-sa-R7U"/>
+                        <outlet property="navTitle" destination="31z-0O-JgZ" id="s98-9U-3hs"/>
+                        <outlet property="searchBar" destination="z8z-95-lev" id="42p-1d-s8M"/>
+                        <outlet property="tableView" destination="rHT-AA-SPe" id="qTq-7E-hFx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ii0-nb-WRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-143.19999999999999" y="88.605697151424295"/>
+        </scene>
+    </scenes>
+</document>
