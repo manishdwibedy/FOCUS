@@ -26,6 +26,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     var filtered = [Event]()
     var location: CLLocation?
     
+    var all_events = [Event]()
+    var attending = [Event]()
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -81,6 +83,22 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         ]
         
         navBar.titleTextAttributes = attrs
+        
+        Constants.DB.event.observeSingleEvent(of: .value, with: {snapshot in
+            let data = snapshot.value as? [String : Any] ?? [:]
+            
+            for (id, event) in data{
+                if let info = event as? [String:Any]{
+                    let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id as! String, category: info["interests"] as? String)
+                    
+                    if let attending = info["attendingList"] as? [String:Any]{
+                        event.setAttendessCount(count: attending.count)
+                    }
+                    
+                    self.all_events.append(event)
+                }
+            }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,7 +111,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
             if let placeData = value{
                 let count = placeData.count
-                self.events.removeAll()
                 for (_,place) in placeData
                 {
                     let id = (place as? [String:Any])?["ID"]
@@ -109,8 +126,18 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                                 event.setAttendessCount(count: attending.count)
                             }
             
-                            self.events.append(event)
-                            if self.events.count == count{
+                        
+                            self.attending.append(event)
+                            if self.attending.count == count{
+                                
+                                for event in self.attending{
+                                    if let index = self.all_events.index(where: { $0.id == event.id }) {
+                                        self.all_events.remove(at: index)
+                                    }
+                                }
+                                self.events = self.attending
+                                
+                                self.events.append(contentsOf: self.all_events)
                                 self.filtered = self.events
                                 self.tableView.reloadData()
                             }
@@ -161,7 +188,19 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         addGreenDot(label: (cell?.interest)!, content: event.category!)
         
         cell?.price.text = "Price"
-        //cell.checkForFollow(id: event.id!)
+        
+        if let index = self.all_events.index(where: { $0.id == event.id }) {
+            cell?.attendButton.layer.borderWidth = 0
+            cell?.attendButton.layer.borderColor = UIColor.clear.cgColor
+            cell?.attendButton.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+            cell?.attendButton.setTitle("Attend", for: .normal)
+        }
+        else{
+            cell?.attendButton.layer.borderWidth = 1
+            cell?.attendButton.layer.borderColor = UIColor.white.cgColor
+            cell?.attendButton.backgroundColor = UIColor.clear
+            cell?.attendButton.setTitle("Unattend", for: .normal)
+        }
         let placeHolderImage = UIImage(named: "empty_event")
         
         if let price = event.price{

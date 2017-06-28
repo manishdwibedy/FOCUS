@@ -126,4 +126,9 @@ class Event: NSObject, NSCoding{
     static func clearCache(){
         UserDefaults.standard.set(nil, forKey: "new_event")
     }
+    
+    
+    static func ==(lhs: Event, rhs: Event) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

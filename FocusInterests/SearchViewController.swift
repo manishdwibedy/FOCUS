@@ -235,31 +235,26 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("new text")
-        FOCUSListShouldBe = false
-        allData.removeAll()
-        let ref = Constants.DB.user
-        _ =  ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
-            let users = snapshot.value as? [String : Any] ?? [:]
-            for (_, user) in users{
-                let info = user as? [String:Any]
-                
-                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
-                
-                if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
-                    let newData = generalSearchData()
-                    newData.type = "people"
-                    newData.object = user
-                    print(user.uuid)
-                    Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { snapshot in
-                        let value = snapshot.value as? NSDictionary
-                        if value != nil{
-                            let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: value?["lat"] as! Double, longitude: value?["lng"] as! Double))
-                            let com = distance.components(separatedBy: " ")
-                            newData.distance = Double(com[0])!
-                            
-                        }
-                        
-                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+        if(searchText == ""){
+            self.FOCUSListShouldBe = true
+            self.tableView.reloadData()
+        }else {
+            self.FOCUSListShouldBe = false
+            allData.removeAll()
+            let ref = Constants.DB.user
+            _ =  ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+                let users = snapshot.value as? [String : Any] ?? [:]
+                for (_, user) in users{
+                    let info = user as? [String:Any]
+                    
+                    let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
+                    
+                    if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
+                        let newData = generalSearchData()
+                        newData.type = "people"
+                        newData.object = user
+                        print(user.uuid)
+                        Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { snapshot in
                             let value = snapshot.value as? NSDictionary
                             if value != nil{
                                 let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: value?["lat"] as! Double, longitude: value?["lng"] as! Double))
@@ -302,7 +297,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                     for (_, user) in users{
                         let info = user as? [String:Any]
                         
-                        let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
+                        let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
                         
                         if user.uuid != AuthApi.getFirebaseUid(){
                             self.filtered_user.append(user)
