@@ -824,7 +824,7 @@
                         <outlet property="infoView" destination="dH7-9c-Q24" id="9Sl-Zz-Zpz"/>
                         <outlet property="inviteUserStackView" destination="3p6-HE-tdh" id="3Zu-4S-STa"/>
                         <outlet property="inviteView" destination="79C-UR-Hhq" id="lVN-4E-dc5"/>
-                        <outlet property="moreCategoriesSectionButton" destination="PXX-FI-Jb6" id="K9E-lT-NvL"/>
+                        <outlet property="moreCategoriesSectionButton" destination="PXX-FI-Jb6" id="66g-nO-cf0"/>
                         <outlet property="moreOtherLikesButton" destination="KtZ-hk-yfh" id="kHV-eQ-BJq"/>
                         <outlet property="morePinSectionButton" destination="ge3-bd-8kY" id="TD4-a8-CP7"/>
                         <outlet property="peopleAlsoLikedTableView" destination="4hl-dk-leI" id="be4-eY-S6O"/>

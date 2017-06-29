@@ -15,6 +15,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var postReviewSeciontButton: UIButton!
     @IBOutlet weak var morePinSectionButton: UIButton!
     @IBOutlet weak var moreOtherLikesButton: UIButton!
+    @IBOutlet weak var moreCategoriesSectionButton: UIButton!
     
     @IBOutlet weak var reviewsView: UIView!
     @IBOutlet weak var reviewsTextView: UITextView!
@@ -207,18 +208,22 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         self.reviewButton.layer.shadowColor = UIColor.black.cgColor
         self.reviewButton.layer.shadowRadius = 7.0
         
+        moreCategoriesSectionButton.isHidden = true
+        
         postReviewSeciontButton.layer.borderWidth = 1
         morePinSectionButton.layer.borderWidth = 1
         moreOtherLikesButton.layer.borderWidth = 1
+        moreCategoriesSectionButton.layer.borderWidth = 1
         
         postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
         morePinSectionButton.layer.borderColor = UIColor.white.cgColor
         moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
+        moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
         
         postReviewSeciontButton.roundCorners(radius: 5)
         morePinSectionButton.roundCorners(radius: 5)
         moreOtherLikesButton.roundCorners(radius: 5)
-        
+        moreCategoriesSectionButton.roundCorners(radius: 5)
         
         starRatingView.topCornersRounded(radius: 10)
         writeReviewView.bottomCornersRounded(radius: 10)

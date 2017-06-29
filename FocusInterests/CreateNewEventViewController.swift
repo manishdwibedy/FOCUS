@@ -189,6 +189,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         ]
         
         navBar.titleTextAttributes = attrs
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -398,6 +399,28 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
 
         
         autoCompleteController.delegate = self
+        
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.white
+        
+        //        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!
+        ]
+        
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = placeholderAttributes
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = placeholderTextAttributes
+        
+        autoCompleteController.primaryTextColor = UIColor.white
+        autoCompleteController.primaryTextHighlightColor = Constants.color.green
+        autoCompleteController.secondaryTextColor = UIColor.white
+        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        autoCompleteController.tableCellSeparatorColor = UIColor.white
+        
         present(autoCompleteController, animated: true, completion: nil)
     }
     

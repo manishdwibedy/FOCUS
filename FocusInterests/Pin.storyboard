@@ -480,6 +480,7 @@ line 2</string>
                             <constraint firstItem="hJE-2j-BeM" firstAttribute="trailing" secondItem="W6f-uJ-Bg0" secondAttribute="trailing" id="wxX-42-o40"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="addressTopOut" destination="tVa-3J-grt" id="LhB-FQ-D5P"/>
                         <outlet property="commentOut" destination="oV5-eg-uPI" id="fAG-Ma-hno"/>

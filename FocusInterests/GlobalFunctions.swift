@@ -708,9 +708,9 @@ func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
 
 func dropfromTop(view: UIView){
     let transition = CATransition()
-    transition.duration = 0.6
-    
-    transition.type = kCATransitionReveal
+    transition.duration = 0.3
+    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+    transition.type = kCATransitionMoveIn
     transition.subtype = kCATransitionFromBottom
     
     view.window!.layer.add(transition, forKey: kCATransition)
