@@ -118,6 +118,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GbE-L0-a00" userLabel="Photo Input View">
+                                <rect key="frame" x="56" y="229" width="262" height="208"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="2x6-qQ-iyw"/>
@@ -153,6 +158,7 @@
                     <connections>
                         <outlet property="mapView" destination="05W-Qw-2Y5" id="x3W-XA-QMw"/>
                         <outlet property="navigationView" destination="bIq-Pr-ji4" id="tVe-bJ-rDh"/>
+                        <outlet property="photoInputView" destination="GbE-L0-a00" id="w3H-wl-vlj"/>
                         <outlet property="popUpView" destination="9GY-g7-gUF" id="0KR-mZ-pkT"/>
                         <outlet property="popupArrowImage" destination="to3-UK-Oze" id="5nh-bb-S3E"/>
                         <outlet property="usernameInputView" destination="4lZ-Kb-68f" id="OGO-WP-XTU"/>

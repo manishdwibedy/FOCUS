@@ -33,6 +33,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var createdEvent: Event?
     
     private var clusterManager: GMUClusterManager!
+    @IBOutlet weak var photoInputView: UIView!
 
     
     var locationManager = CLLocationManager()
@@ -239,6 +240,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             self.showPopup()
         }
         
+        
+        let photoView = PhotoInputView(frame: CGRect(x: 0, y: 0, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
+        photoInputView.addSubview(photoView)
+        photoView.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
+        photoView.isHidden = true
+        
         if AuthApi.getUserName()?.characters.count == 0 { // Change this back
             
             var usernameView = UsernameInputView(frame: CGRect(x: 0, y: 0, width: self.usernameInputView.frame.size.width, height: usernameInputView.frame.size.height), onCompletion: {username -> Void in
@@ -247,7 +254,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
                     }
                     else{
-                        
                         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username)
                         Constants.DB.user_mapping.child(username).setValue("")
                         Constants.DB.user_mapping.child(username).setValue(AuthApi.getUserEmail())
@@ -258,7 +264,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                 self.usernameInputView.isHidden = true
                         })
                         print("Text value: \(username)")
-                        self.showPopup()
+                        photoView.isHidden = false
                     }
                 })
             }, onError: {err -> Void in
@@ -325,6 +331,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            }
 //        })
         
+    }
+    
+    func showCameraRoll() {
+        let photoPicker = UIImagePickerController()
+        self.present(photoPicker, animated: true, completion: {
+            self.showPopup()
+        })
     }
     
 
