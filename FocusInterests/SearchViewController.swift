@@ -34,6 +34,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     let locationManager = CLLocationManager()
     
     var FOCUSListShouldBe = true
+    var selectedFocus = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,49 +159,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
-        /*
-                let ref = Constants.DB.user
-                _ = ref.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { snapshot in
-                    let users = snapshot.value as? [String : Any] ?? [:]
-                    for (_, user) in users{
-                        let info = user as? [String:Any]
-        
-                        let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
-        
-                        if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
-                            let newData = generalSearchData()
-                            newData.type = "people"
-                            newData.object = user
-                            print(user.uuid)
-                            Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { snapshot in
-                                let value = snapshot.value as? NSDictionary
-                                if value != nil{
-                                    let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: value?["lat"] as! Double, longitude: value?["lng"] as! Double))
-                                    let com = distance.components(separatedBy: " ")
-                                    newData.distance = Double(com[0])!
-                                    
-                                  }
-                                
-                                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
-                                    let value = snapshot.value as? NSDictionary
-                                    if value != nil {
-                                        newData.following = true
-                                
-                                    }
-                                    self.allData.append(newData)
-                                    self.allData = self.sortData(data: self.allData)
-                                    self.tableView.reloadData()
-                                })
-                            })
-                        }
-                    }
-                })
-                */
-//        getPlaces(text: "")
-//        getEvents(text: "")
     }
-    
-    
     
     func keyboardWillShow(notification: NSNotification) {
         self.searchBar.setShowsCancelButton(true, animated: true)
@@ -222,46 +181,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         }else {
             self.FOCUSListShouldBe = false
             allData.removeAll()
-            let ref = Constants.DB.user
-            _ =  ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
-                let users = snapshot.value as? [String : Any] ?? [:]
-                for (_, user) in users{
-                    let info = user as? [String:Any]
-                    
-                    let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
-                    
-                    if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
-                        let newData = generalSearchData()
-                        newData.type = "people"
-                        newData.object = user
-                        print(user.uuid)
-                        Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { snapshot in
-                            let value = snapshot.value as? NSDictionary
-                            if value != nil{
-                                let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: value?["lat"] as! Double, longitude: value?["lng"] as! Double))
-                                let com = distance.components(separatedBy: " ")
-                                newData.distance = Double(com[0])!
-                                
-                            }
-                            
-                            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
-                                let value = snapshot.value as? NSDictionary
-                                if value != nil {
-                                    newData.following = true
-                                    
-                                }
-                                self.allData.append(newData)
-//                                self.allData = self.sortData(data: self.allData)
-                                self.tableView.reloadData()
-                            })
-                        })
-                        
-                        
-                    }
-                }
-                
-                
-            })
+            
+            
+            
             print("before places search")
             getPlaces(text: searchText)
             getEvents(text: searchText)
@@ -308,15 +230,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if tableView == self.people_tableView{
-//            return filtered_user.count
-//        }
-//        else if tableView == self.place_tableView{
-//            return filtered_places.count
-//        }
-//        else{
-//            return filtered_events.count
-//        }
         if FOCUSListShouldBe == true{
             return Constants.interests.interests.count
         }else{
@@ -461,7 +374,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 }
                 cell.placeID = place.id
                 cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
-                cell.categoryLabel.text = place.categories[0].name
+            
+                addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place.categories[0].alias))
+            
                 cell.checkForFollow(id: place.id)
                 let placeHolderImage = UIImage(named: "empty_event")
                 cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
@@ -488,7 +403,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if FOCUSListShouldBe == true{
             self.searchBar.setShowsCancelButton(false, animated: true)
-            let word = Constants.interests.interests[indexPath.row]
+            self.selectedFocus = Constants.interests.interests[indexPath.row]
+            
+            self.FOCUSListShouldBe = false
+            allData.removeAll()
+            
+            getUsers(text: "")
+            getEvents(text: "")
+            getPlaces(text: "")
         }
     }
     
@@ -550,7 +472,68 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     }
 
     func getUsers(text: String){
-        
+        let ref = Constants.DB.user
+        _ =  ref.queryOrdered(byChild: "username").queryStarting(atValue: text.lowercased()).queryEnding(atValue: text.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+            let users = snapshot.value as? [String : Any] ?? [:]
+            for (_, user) in users{
+                let info = user as? [String:Any]
+                
+                let user_interest = info?["interests"] as? String ?? ""
+//                let interest = [Interest]()
+//                for interest in user.interest.components(separatedBy: ","){
+//                    interest.append(Interest(name: interest, category: nil, image: nil, imageString: nil))
+//                }
+                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
+                
+                
+                var interest = user_interest.components(separatedBy: ",")
+                var user_interests = getUserInterests().components(separatedBy: ",")
+                
+                if self.selectedFocus.characters.count > 0{
+                    user_interests = [self.selectedFocus]
+                }
+                let common = interest.filter(user_interests.contains)
+                
+//                if let common = common{
+                    if common.count > 0{
+                        if user.uuid != nil && user.uuid != AuthApi.getFirebaseUid(){
+                            let newData = generalSearchData()
+                            newData.type = "people"
+                            newData.object = user
+                            print(user.uuid)
+                            Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { snapshot in
+                                let value = snapshot.value as? NSDictionary
+                                if value != nil{
+                                    let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: value?["lat"] as! Double, longitude: value?["lng"] as! Double))
+                                    let com = distance.components(separatedBy: " ")
+                                    newData.distance = Double(com[0])!
+                                    
+                                }
+                                
+                                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                    let value = snapshot.value as? NSDictionary
+                                    if value != nil {
+                                        newData.following = true
+                                        
+                                    }
+                                    
+                                    self.allData.append(newData)
+                                    self.tableView.reloadData()
+                                    
+        //                          self.allData = self.sortData(data: self.allData)
+                                    
+                                })
+                            })
+                            
+                            
+                        }
+                    }
+//                }
+                
+            }
+            //
+            
+        })
         
     }
     
@@ -565,7 +548,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             "cache-contro": "no-cache"
         ]
         
+        var category = ""
+        if self.selectedFocus.characters.count > 0{
+            category = getYelpCategory(category: self.selectedFocus)
+        }
+        
         let parameters = [
+            "categories": category,
             "term": text,
             "latitude": location?.coordinate.latitude,
             "longitude": location?.coordinate.longitude,
@@ -603,6 +592,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                     let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
                     categories.append(category)
                 }
+                
+                getYelpCategories()
                 
                 let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                 
@@ -652,8 +643,16 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             
             for (id, event) in events{
                 let info = event as? [String:Any]
-                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String)
                 
+                let event_interests = event.category?.components(separatedBy: ",")
+                var user_interests = getUserInterests().components(separatedBy: ",")
+                
+                if self.selectedFocus.characters.count > 0{
+                    user_interests = [self.selectedFocus]
+                }
+                let common = event_interests?.filter(user_interests.contains)
+
                 if let attending = info?["attendingList"] as? [String:Any]{
                     event.setAttendessCount(count: attending.count)
                 }
@@ -665,8 +664,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.latitude!)!))
                 let com = distance.components(separatedBy: " ")
                 newData.distance = Double(com[0])!
-                self.allData.append(newData)
-//                self.allData = self.sortData(data: self.allData)
+                if let common = common{
+                    if common.count > 0{
+                        self.allData.append(newData)
+                    }
+                }
+                //                self.allData = self.sortData(data: self.allData)
                 
                 self.tableView.reloadData()
                 

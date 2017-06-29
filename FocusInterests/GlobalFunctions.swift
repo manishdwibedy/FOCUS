@@ -525,7 +525,15 @@ func getYelpCategories() -> String{
         }
     }
     return categories.joined(separator: ",")
+}
+
+func getYelpCategory(category: String)-> String{
+    var categories = Set<String>()
     
+    if let category = Constants.interests.yelpMapping[category]{
+        categories.insert(category)
+    }
+    return categories.joined(separator: ",")
 }
 
 
