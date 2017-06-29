@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UsernameInputView" customModule="FocusInterests" customModuleProvider="target">
+            <connections>
+                <outlet property="createButton" destination="RdP-N2-cDY" id="LJE-uO-M0N"/>
+                <outlet property="usernameInputField" destination="EoL-X1-ZNc" id="WU6-9D-cN2"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Wwg-rs-cyg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="268" height="225"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EoL-X1-ZNc">
+                    <rect key="frame" x="30" y="97" width="210" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="wdc-B9-b2r"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RdP-N2-cDY">
+                    <rect key="frame" x="29" y="158" width="210" height="35"/>
+                    <color key="backgroundColor" red="0.50196078431372548" green="0.76078431372549016" blue="0.082352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="0Kd-yx-0ur"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="Hah-Ev-xFV"/>
+                    </constraints>
+                    <color key="tintColor" red="0.99792640099182273" green="1" blue="0.99944892738124758" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="Create"/>
+                    <connections>
+                        <action selector="createButtonPressed:" destination="-1" eventType="touchUpInside" id="Ohz-d3-zZW"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please create a username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfT-9R-9NE">
+                    <rect key="frame" x="29" y="30" width="210" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="lWf-t7-VDc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <color key="textColor" red="0.33725490196078434" green="0.39215686274509803" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="EoL-X1-ZNc" firstAttribute="top" secondItem="bfT-9R-9NE" secondAttribute="bottom" constant="46" id="6ji-dI-iuN"/>
+                <constraint firstItem="RdP-N2-cDY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8IG-T0-ayL"/>
+                <constraint firstAttribute="trailing" secondItem="EoL-X1-ZNc" secondAttribute="trailing" constant="28" id="E01-qv-7Ki"/>
+                <constraint firstItem="EoL-X1-ZNc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="OQZ-94-8Jx"/>
+                <constraint firstItem="bfT-9R-9NE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="29" id="OVl-nZ-SOc"/>
+                <constraint firstAttribute="trailing" secondItem="bfT-9R-9NE" secondAttribute="trailing" constant="29" id="Xtb-WF-j2E"/>
+                <constraint firstItem="RdP-N2-cDY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="29" id="k2I-o5-0sz"/>
+                <constraint firstAttribute="trailing" secondItem="RdP-N2-cDY" secondAttribute="trailing" constant="29" id="nzC-z2-GDn"/>
+                <constraint firstItem="RdP-N2-cDY" firstAttribute="top" secondItem="EoL-X1-ZNc" secondAttribute="bottom" constant="31" id="o7B-Mf-OAH"/>
+                <constraint firstItem="bfT-9R-9NE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="tuf-SW-APS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-7" y="-26"/>
+        </view>
+    </objects>
+</document>

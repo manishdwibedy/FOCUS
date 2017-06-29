@@ -27,6 +27,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var popUpView: UIView!
+    @IBOutlet weak var usernameInputView: UIView!
     
     @IBOutlet weak var popupArrowImage: UIImageView!
     var createdEvent: Event?
@@ -238,8 +239,34 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             self.showPopup()
         }
         
-        if AuthApi.getUserName()?.characters.count == 0{
+        if AuthApi.getUserName()?.characters.count == 0 { // Change this back
             
+            var usernameView = UsernameInputView(frame: CGRect(x: 0, y: 0, width: self.usernameInputView.frame.size.width, height: usernameInputView.frame.size.height), onCompletion: {username -> Void in
+                Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
+                    if let id = (snapshot.value as? NSDictionary)?[username]{
+                        SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
+                    }
+                    else{
+                        
+                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username)
+                        Constants.DB.user_mapping.child(username).setValue("")
+                        Constants.DB.user_mapping.child(username).setValue(AuthApi.getUserEmail())
+                        AuthApi.set(username: username)
+                        UIView.animate(withDuration: 0.4, animations: {
+                            self.usernameInputView.alpha = 0
+                        }, completion: { compl in
+                                self.usernameInputView.isHidden = true
+                        })
+                        print("Text value: \(username)")
+                        self.showPopup()
+                    }
+                })
+            }, onError: {err -> Void in
+                SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
+            })
+            self.usernameInputView.addSubview(usernameView)
+            
+            /*
             let appearance = SCLAlertView.SCLAppearance(
                 kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
                 kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
@@ -251,6 +278,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             let alert = SCLAlertView(appearance: appearance)
             let username = alert.addTextField("Enter your username")
             username.autocapitalizationType = .none
+ 
             alert.addButton("Add user name") {
                 if (username.text?.characters.count)! > 0{
                     
@@ -278,6 +306,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
             alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
+            */
         }
     }
     
