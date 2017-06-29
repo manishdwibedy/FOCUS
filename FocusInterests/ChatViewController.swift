@@ -34,6 +34,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     var pinMessage: String? = nil
     var pinImage: UIImage? = nil
     var delay = [String: Int]()
+    var senderImage: UIImage? = nil
+    var otherUserImage: UIImage? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,48 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             self.senderId: self.senderDisplayName,
             self.user["firebaseUserId"]! as! String: self.user["username"]! as! String
         ]
+        
+        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
+            if dictionnary != nil {
+                // SET PROFILE PHOTO
+                let senderImageURL = dictionnary!["image_string"] as! String
+
+                if let url = URL(string: senderImageURL){
+                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                        (receivedSize :Int, ExpectedSize :Int) in
+                        
+                    }, completed: {
+                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                        
+                        if image != nil && finished{
+                            self.senderImage = image
+                            self.collectionView.reloadData()
+                        }
+                    })
+                }
+            }
+        }
+        
+        Constants.DB.user.child((user["firebaseUserId"] as? String)!).observeSingleEvent(of: .value, with: {snapshot in
+            let data = snapshot.value as? [String:Any]
+            let otherUserImageURL = data!["image_string"] as! String
+            
+            if let url = URL(string: otherUserImageURL){
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        self.otherUserImage = image
+                        self.collectionView.reloadData()
+                    }
+                })
+            }
+            //self.collectionView.reloadData()
+            
+        })
         
         self.collectionView.backgroundColor = Constants.color.navy
         
@@ -279,6 +323,15 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         
+        let message = messages[indexPath.row]
+        
+        if self.senderId == message.senderId && self.senderImage != nil{
+            return JSQMessagesAvatarImage(avatarImage: self.senderImage, highlightedImage: nil, placeholderImage: UIImage(named:"tinyB"))
+        }
+        else if self.senderId != message.senderId && self.otherUserImage != nil {
+            return JSQMessagesAvatarImage(avatarImage: self.otherUserImage, highlightedImage: nil, placeholderImage: UIImage(named:"tinyB"))
+        }
+
         return JSQMessagesAvatarImage(avatarImage: UIImage(named:"tinyB"), highlightedImage: nil, placeholderImage: UIImage(named:"tinyB"))
     }
     
