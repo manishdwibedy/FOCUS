@@ -24,6 +24,7 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
 
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var navBar: UINavigationBar!
     var interests = [Interest]()
     let backgroundColor = UIColor.init(red: 22/255, green: 42/255, blue: 64/255, alpha: 1)
     var filtered = [Interest]()
@@ -59,6 +60,8 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         let screenWidth = screenRect.size.width
         let cellWidth = screenWidth/3.0
         
+        
+        navBar.titleTextAttributes = Constants.navBar.attrs
         
         let width = ((collectionView.frame.width) - sidePadding)/numberOfItemsPerRow
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout

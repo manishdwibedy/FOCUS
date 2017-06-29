@@ -56,7 +56,8 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
             let email = self.usersEmailOrPhone
             
             Constants.DB.user_mapping.child(userNameTextField.text!).observeSingleEvent(of: .value, with: {snapshot in
-                if snapshot.value == nil{
+                let value = snapshot.value as? String
+                if value == nil{
                     Auth.auth().createUser(withEmail: email, password: validPassword, completion: { (user, error) in
                         if error != nil {
                             print("error occurred creating a user: \(error!.localizedDescription)")
@@ -65,7 +66,6 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
                                 switch errCode {
                                 case .invalidEmail:
                                     SCLAlertView().showError("Error", subTitle: "Invalid email")
-                                    
                                 case .emailAlreadyInUse:
                                     SCLAlertView().showError("Error", subTitle: "Email already in user")
                                 case .weakPassword:

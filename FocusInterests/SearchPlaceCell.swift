@@ -96,7 +96,7 @@ class SearchPlaceCell: UITableViewCell {
         } else if self.followButtonOut.isSelected == true {
             
             
-            let unfollowAlertController = UIAlertController(title: "Unfollow user", message: "Are you sure you want to unfollow \(self.place!.name)", preferredStyle: .actionSheet)
+            let unfollowAlertController = UIAlertController(title: "Are you sure you want to unfollow \(self.place!.name)?", message: "", preferredStyle: .actionSheet)
             
             
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in

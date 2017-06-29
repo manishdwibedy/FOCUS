@@ -42,6 +42,14 @@ struct Constants {
         public static let green = UIColor(hexString: "7ac901")
         public static let pink = UIColor(hexString: "ff3366")
     }
+    
+    struct navBar{
+        public static let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+    }
+    
     struct interests {
         
         
