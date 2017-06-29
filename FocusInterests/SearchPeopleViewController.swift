@@ -109,10 +109,18 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                             let data = pinData(UID: value?["fromUID"] as! String, dateTS: (value?["time"] as! Double), pin: (value?["pin"] as! String), location: (value?["formattedAddress"] as! String), lat: (value?["lat"] as! Double), lng: (value?["lng"] as! Double), path: Constants.DB.pins.child(user.uuid! as! String), focus: value?["focus"] as! String)
                             self.user_pins[user.uuid!] = data
                             user.hasPin = true
+                            
+                            let pinLocation = CLLocation(latitude: (value?["lat"] as! Double), longitude: (value?["lng"] as! Double))
+                            user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
                         }
                         self.people.append(user)
                         
-                        self.people.sort { $0.hasPin && !$1.hasPin }
+                        self.people.sort {
+                            if $0.hasPin && $1.hasPin{
+                                return $0.pinDistance < $1.pinDistance
+                            }
+                            return $0.hasPin && !$1.hasPin
+                        }
 
                         self.filtered = self.people
                         self.tableView.reloadData()
