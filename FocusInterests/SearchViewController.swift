@@ -262,8 +262,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
 
             cell?.ID = people.uuid!
             cell?.checkFollow()
-            addGreenDot(label: cell?.interest, content: people.interests[0].name)
+            if let interest = people.interests{
+                if interest.count > 0{
+                addGreenDot(label: (cell?.interest)!, content: (interest[0].name)!)
+                }
+                
+            }
             
+            cell?.address.text = people.pinCaption
             let placeHolderImage = UIImage(named: "empty_event")
 
 //            cell?.followButton.roundCorners(radius: 10)
@@ -482,11 +488,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 let info = user as? [String:Any]
                 
                 let user_interest = info?["interests"] as? String ?? ""
-//                let interest = [Interest]()
-//                for interest in user.interest.components(separatedBy: ","){
-//                    interest.append(Interest(name: interest, category: nil, image: nil, imageString: nil))
-//                }
-                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
+                var people_interest = [Interest]()
+                for interest in user_interest.components(separatedBy: ","){
+                    people_interest.append(Interest(name: interest, category: nil, image: nil, imageString: nil))
+                }
+                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: people_interest, image_string: nil, hasPin: false)
                 
                 
                 var interest = user_interest.components(separatedBy: ",")
@@ -510,6 +516,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                                     let distance = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: value?["lat"] as! Double, longitude: value?["lng"] as! Double))
                                     let com = distance.components(separatedBy: " ")
                                     newData.distance = Double(com[0])!
+                                    user.hasPin = true
+                                    user.pinCaption = (value?["pin"] as? String)!
                                     
                                 }
                                 

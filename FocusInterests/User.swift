@@ -19,6 +19,7 @@ class User {
     var image_string: String?
     var hasPin: Bool = false
     var pinDistance = 0.0
+    var pinCaption = ""
     
     init(username: String?, fullname: String?, uuid: String?, userImage: UIImage?, interests: [Interest]?, image_string: String?, hasPin: Bool?) {
         self.username =  username
