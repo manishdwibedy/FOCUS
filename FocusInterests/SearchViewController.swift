@@ -11,6 +11,7 @@ import SDWebImage
 import Alamofire
 import CoreLocation
 import SwiftyJSON
+import GooglePlaces
 
 class SearchViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UITableViewDelegate,CLLocationManagerDelegate{
 
@@ -18,10 +19,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     @IBOutlet weak var placeHeaderView: UIView!
     @IBOutlet weak var eventHeaderView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var changeLocationOut: UIButton!
     
+    @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    var location: CLLocation?
     var people = [User]()
     var filtered_user = [User]()
     var places = [Place]()
@@ -30,9 +30,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     var filtered_events = [Event]()
     var allData = [generalSearchData]()
     
-    var currentLocation = CLLocation()
     let locationManager = CLLocationManager()
-    
+    var location: CLLocation? = nil
     var FOCUSListShouldBe = true
     var selectedFocus = ""
     
@@ -113,18 +112,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         view.addGestureRecognizer(tap)
         hideKeyboardWhenTappedAround()
         
-         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
+        locationField.delegate = self
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location: CLLocation = locations.last!
-        self.location = location
-        
-        locationManager.stopUpdatingLocation()
-    }
-
     
     //Calls this function when the tap is recognized.
     override func dismissKeyboard() {
@@ -564,6 +555,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             category = getYelpCategory(category: self.selectedFocus)
         }
         
+        let location = self.location == nil ? AuthApi.getLocation() : self.location
         let parameters = [
             "categories": category,
             "term": text,
@@ -721,6 +713,53 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
 
 }
 
+
+extension SearchViewController: GMSAutocompleteViewControllerDelegate {
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        self.locationField.text = place.formattedAddress!
+        self.location = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        
+        print("Place name: \(place.name)")
+        
+        print("Place address: \(place.formattedAddress)")
+        
+        print("Place attributions: \(place.attributions)")
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // to do: handle error
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        self.locationField.text = ""
+        self.location = nil
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        viewController.autocompleteFilter?.country = "US"
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        viewController.autocompleteFilter?.country = "US"
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+}
+
+extension SearchViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == locationField{
+            let autoCompleteController = GMSAutocompleteViewController()
+            autoCompleteController.delegate = self
+            present(autoCompleteController, animated: true, completion: nil)
+        }
+    }
+}
 
 class generalSearchData{
     
