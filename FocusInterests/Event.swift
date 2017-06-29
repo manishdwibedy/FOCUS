@@ -25,6 +25,7 @@ class Event: NSObject, NSCoding{
     var image_url: String? = nil
     var endTime: String = ""
     var price: Double? = 0
+    var distance = 0.0
     
     init(title: String, description: String, fullAddress: String?, shortAddress: String?, latitude: String?, longitude: String?, date: String, creator: String?, id: String? = nil, category: String?) {
         self.title = title

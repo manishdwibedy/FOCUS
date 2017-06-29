@@ -122,6 +122,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
 //                            let info = event as? [String:Any]
                             let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id as! String, category: info["interests"] as? String)
             
+                            let eventLocation = CLLocation(latitude: Double((info["longitude"])! as! String)!, longitude: Double((info["longitude"])! as! String)!)
+                        
+                            event.distance = eventLocation.distance(from: AuthApi.getLocation()!)
                             if let attending = info["attendingList"] as? [String:Any]{
                                 event.setAttendessCount(count: attending.count)
                             }
@@ -135,7 +138,13 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                                         self.all_events.remove(at: index)
                                     }
                                 }
+                                
+                                self.attending.sort {
+                                    return $0.distance < $1.distance
+                                }
+
                                 self.events = self.attending
+                                
                                 
                                 self.events.append(contentsOf: self.all_events)
                                 self.filtered = self.events
