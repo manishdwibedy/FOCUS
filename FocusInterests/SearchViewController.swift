@@ -255,15 +255,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             let cell = tableView.dequeueReusableCell(withIdentifier: "peopleCell") as! SearchPeopleTableViewCell!
 
             cell?.username.text = people.username
-            cell?.fullName.text = "Full Name"
+            cell?.fullName.text = people.fullname
 
             cell?.address.text = ""
             cell?.distance.text = ""
 
             cell?.ID = people.uuid!
             cell?.checkFollow()
-            cell?.interest.text = "Category"
-
+            addGreenDot(label: cell?.interest, content: people.interests[0].name)
+            
             let placeHolderImage = UIImage(named: "empty_event")
 
 //            cell?.followButton.roundCorners(radius: 10)
@@ -296,20 +296,23 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     
                 cell?.name.text = event.title
     
-                var addressComponents = event.fullAddress?.components(separatedBy: ",")
-                let streetAddress = addressComponents?[0]
-    
-                addressComponents?.remove(at: 0)
-                let city = addressComponents?.joined(separator: ", ")
-    
-    
-                cell?.address.text = "\(streetAddress!)\n\(city!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))"
-                cell?.address.textContainer.maximumNumberOfLines = 6
-    
+                cell?.address.text = event.fullAddress?.replacingOccurrences(of: ";;", with: "\n")
+            
     
                 cell?.guestCount.text = "\(event.attendeeCount) guests"
-                cell?.interest.text = "Category"
-                cell?.price.text = "Price"
+                addGreenDot(label: (cell?.interest)!, content: event.category!)
+                if let price = event.price as? Double{
+                    if price == 0{
+                        cell?.price.text == "Free"
+                    }
+                    else{
+                        cell?.price.text == "$ \(price)"
+                    }
+                }
+                else{
+                    cell?.price.text == "Free"
+                }
+            
                 cell?.distance.text = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
                 //cell.checkForFollow(id: event.id!)
                 let placeHolderImage = UIImage(named: "empty_event")
