@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoInputView" customModule="FocusInterests" customModuleProvider="target">
+            <connections>
+                <outlet property="cameraRollButton" destination="5dA-K4-740" id="sKQ-id-AQS"/>
+                <outlet property="takePhotoButton" destination="gBC-nP-iH0" id="eS9-UK-NkH"/>
+                <outlet property="view" destination="iN0-l3-epB" id="mvE-l6-cpL"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="254"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0Z-jd-xMc">
+                    <rect key="frame" x="123" y="36" width="128" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="mNB-2K-sdw"/>
+                        <constraint firstAttribute="width" constant="128" id="siZ-u7-vkA"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                    <color key="textColor" red="0.33725490200000002" green="0.3921568627" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBC-nP-iH0">
+                    <rect key="frame" x="47" y="84" width="281" height="46"/>
+                    <color key="backgroundColor" red="0.50196078431372548" green="0.76078431372549016" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="tDx-Dw-diB"/>
+                    </constraints>
+                    <state key="normal" title="Take a Photo">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dA-K4-740">
+                    <rect key="frame" x="47" y="138" width="281" height="46"/>
+                    <color key="backgroundColor" red="0.50196078431372548" green="0.76078431372549016" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="aNx-q1-d9Q"/>
+                    </constraints>
+                    <state key="normal" title="Camera Roll">
+                        <color key="titleColor" red="0.97213039740494267" green="1" blue="0.98946931104932345" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="cameraRollButtonPressed:" destination="-1" eventType="touchUpInside" id="RJf-3a-DSJ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="c0Z-jd-xMc" firstAttribute="centerX" secondItem="gBC-nP-iH0" secondAttribute="centerX" id="Bm3-2M-dVq"/>
+                <constraint firstAttribute="trailing" secondItem="5dA-K4-740" secondAttribute="trailing" constant="47" id="D0e-K1-tKp"/>
+                <constraint firstAttribute="trailing" secondItem="gBC-nP-iH0" secondAttribute="trailing" constant="47" id="EAH-M9-c4N"/>
+                <constraint firstItem="c0Z-jd-xMc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="36" id="EVk-9R-Mbu"/>
+                <constraint firstItem="5dA-K4-740" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="47" id="GcU-3Q-Bci"/>
+                <constraint firstItem="5dA-K4-740" firstAttribute="top" secondItem="gBC-nP-iH0" secondAttribute="bottom" constant="8" id="Hn2-Jg-yef"/>
+                <constraint firstItem="gBC-nP-iH0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="47" id="aqf-xe-bGD"/>
+                <constraint firstItem="gBC-nP-iH0" firstAttribute="top" secondItem="c0Z-jd-xMc" secondAttribute="bottom" constant="24" id="lH5-eQ-u73"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-36.5" y="-195"/>
+        </view>
+    </objects>
+</document>

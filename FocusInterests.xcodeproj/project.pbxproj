@@ -156,6 +156,10 @@
 		61ED20401EDC2FBA00247DC5 /* NotificationFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */; };
 		8331B2A890A1210BB61B1ACD /* Pods_FocusInterests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */; };
 		96F2D75D974CE24C9A358244 /* Pods_FocusInterestsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B20EA149D36C9ED962ED3F /* Pods_FocusInterestsUITests.framework */; };
+		C5A99D891F04586F00D11B01 /* UsernameInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5A99D881F04586F00D11B01 /* UsernameInputView.xib */; };
+		C5A99D8B1F045A4700D11B01 /* UsernameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A99D8A1F045A4700D11B01 /* UsernameInputView.swift */; };
+		C5E505F01F047DA700EBE27A /* PhotoInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5E505EF1F047DA700EBE27A /* PhotoInputView.xib */; };
+		C5E505F21F047DB900EBE27A /* PhotoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E505F11F047DB900EBE27A /* PhotoInputView.swift */; };
 		D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317F61E5B47D300140323 /* HomViewControllerCell.swift */; };
 		D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21317F71E5B47D300140323 /* HomViewControllerCell.xib */; };
 		D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21317FA1E5B4F7B00140323 /* ItemOfInterest.swift */; };
@@ -500,6 +504,10 @@
 		61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFeedViewController.swift; sourceTree = "<group>"; };
 		863581553DCFBEBD406E50A7 /* Pods-FocusInterestsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FocusInterestsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FocusInterestsUITests/Pods-FocusInterestsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterestsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5A99D881F04586F00D11B01 /* UsernameInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsernameInputView.xib; sourceTree = "<group>"; };
+		C5A99D8A1F045A4700D11B01 /* UsernameInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameInputView.swift; sourceTree = "<group>"; };
+		C5E505EF1F047DA700EBE27A /* PhotoInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoInputView.xib; sourceTree = "<group>"; };
+		C5E505F11F047DB900EBE27A /* PhotoInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoInputView.swift; sourceTree = "<group>"; };
 		D21317F61E5B47D300140323 /* HomViewControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomViewControllerCell.swift; sourceTree = "<group>"; };
 		D21317F71E5B47D300140323 /* HomViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomViewControllerCell.xib; sourceTree = "<group>"; };
 		D21317FA1E5B4F7B00140323 /* ItemOfInterest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemOfInterest.swift; sourceTree = "<group>"; };
@@ -1221,6 +1229,10 @@
 				EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */,
 				FF1976601EFC46BB0033C79F /* FOCUSLabelCell.swift */,
 				FF1976611EFC46BB0033C79F /* FOCUSLabelCell.xib */,
+				C5A99D881F04586F00D11B01 /* UsernameInputView.xib */,
+				C5A99D8A1F045A4700D11B01 /* UsernameInputView.swift */,
+				C5E505EF1F047DA700EBE27A /* PhotoInputView.xib */,
+				C5E505F11F047DB900EBE27A /* PhotoInputView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1518,6 +1530,7 @@
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
 				EBD980801EEB41B900FC54C1 /* Large_Apple_Maps.png in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
+				C5E505F01F047DA700EBE27A /* PhotoInputView.xib in Resources */,
 				5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */,
 				FFC36FF31EF49E9000D58F92 /* notificationTabCell.xib in Resources */,
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
@@ -1570,6 +1583,7 @@
 				EB5891CE1EE7E5B300C35EE9 /* Comments.storyboard in Resources */,
 				EB722F9B1EE8BA3B00420DC8 /* Direct message sign.png in Resources */,
 				EB722F991EE8B66700420DC8 /* Unstar.png in Resources */,
+				C5A99D891F04586F00D11B01 /* UsernameInputView.xib in Resources */,
 				EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */,
 				5B448E571EE72C1B00873F79 /* FollowersTableViewCell.xib in Resources */,
 				EB8C8E241EF9C321004792E5 /* Yelp icon.png in Resources */,
@@ -1787,12 +1801,14 @@
 				5B6AFA641ED1906900A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */,
 				5B6AFA761ED1906900A82104 /* GQTPointQuadTree.m in Sources */,
+				C5E505F21F047DB900EBE27A /* PhotoInputView.swift in Sources */,
 				FFBF87A21EE5B34E000168F5 /* InvitePeoplePlaceCell.swift in Sources */,
 				5B71D7071ED1837A0093A3F5 /* commentView.swift in Sources */,
 				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
 				5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */,
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
+				C5A99D8B1F045A4700D11B01 /* UsernameInputView.swift in Sources */,
 				611734EF1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift in Sources */,
 				EB3EA2421EE7707500F61D38 /* InviteListTableViewCell.swift in Sources */,
 				EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */,
