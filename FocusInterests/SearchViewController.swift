@@ -200,25 +200,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
 //        getEvents(text: "")
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        let ref = Constants.DB.user
-//        _ = ref.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { snapshot in
-//            let users = snapshot.value as? [String : Any] ?? [:]
-//            
-//            for (_, user) in users{
-//                let info = user as? [String:Any]
-//                
-//                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil)
-//                
-//                if user.uuid != AuthApi.getFirebaseUid(){
-//                    self.people.append(user)
-//                }
-//            }
-//            self.filtered_user = self.people
-//            self.people_tableView.reloadData()
-//        })
-    }
-    
     
     
     func keyboardWillShow(notification: NSNotification) {
@@ -270,7 +251,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                                     
                                 }
                                 self.allData.append(newData)
-                                self.allData = self.sortData(data: self.allData)
+//                                self.allData = self.sortData(data: self.allData)
                                 self.tableView.reloadData()
                             })
                         })
@@ -568,6 +549,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         print("invite user \(self.people[buttonRow].username) ")
     }
 
+    func getUsers(text: String){
+        
+        
+    }
+    
     func getPlaces(text: String){
         print("getting place")
        
@@ -638,7 +624,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                             }
                            
                             self.allData.append(newData)
-                            self.allData = self.sortData(data: self.allData)
+//                            self.allData = self.sortData(data: self.allData)
                             self.tableView.reloadData()
                         })
                         
@@ -680,7 +666,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 let com = distance.components(separatedBy: " ")
                 newData.distance = Double(com[0])!
                 self.allData.append(newData)
-                self.allData = self.sortData(data: self.allData)
+//                self.allData = self.sortData(data: self.allData)
                 
                 self.tableView.reloadData()
                 
