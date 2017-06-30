@@ -281,11 +281,12 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                         
                         for (id, data) in comments{
                             let commentData = data as? [String:Any]
+                            let commentInfo = ItemOfInterest(itemName: commentData?["comment"] as? String, imageURL: nil, type: "comment")
                             Constants.DB.user.child((commentData?["fromUID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
                                 
                                 if let data = snapshot.value as? [String:Any]{
                                     let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: nil)
-                                    let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: place, time: time)
+                                    let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: time)
                                     pins.append(pinFeed)
                                     
                                     if pinCount == pins.count{

@@ -215,7 +215,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
                 self.pinInfo = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(ID as! String), focus: value["focus"] as? String ?? "")
 
-                
+                if let imageData = value["images"]{
+                    
+                }
                 self.emptyPinButton.isHidden = true
                 
                 self.pinCategoryLabel.text = value["focus"] as! String
