@@ -147,7 +147,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     override func viewWillAppear(_ animated: Bool) {
         Constants.DB.user.child(self.user["firebaseUserId"]! as! String).child("typing").observe(.value, with: {(snapshot) in
             if let typing = snapshot.value as? Bool{
-                self.showTypingIndicator = typing
+                //self.showTypingIndicator = typing
             }
             
         })
