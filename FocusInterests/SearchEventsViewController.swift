@@ -95,7 +95,15 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                         event.setAttendessCount(count: attending.count)
                     }
                     
-                    self.all_events.append(event)
+                    let event_interests = event.category?.components(separatedBy: ",")
+                    var user_interests = getUserInterests().components(separatedBy: ",")
+                    
+                    let common = event_interests?.filter(user_interests.contains)
+                    
+                    if (common != nil) && (common?.count)! > 0{
+                        self.all_events.append(event)
+                    }
+                    
                 }
             }
         })
