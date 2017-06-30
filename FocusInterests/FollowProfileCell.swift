@@ -94,7 +94,7 @@ class FollowProfileCell: UITableViewCell {
         }
         else{
             
-            let unfollowAlertController = UIAlertController(title: "Unfollow", message: "Are you sure you want to unfollow \(data.username)", preferredStyle: .actionSheet)
+            let unfollowAlertController = UIAlertController(title: "Are you sure you want to unfollow \(data.username)?", message: "", preferredStyle: .actionSheet)
             
             let unfollowAction = UIAlertAction(title: "Unfollow \(data.username)", style: .destructive) { action in
                 

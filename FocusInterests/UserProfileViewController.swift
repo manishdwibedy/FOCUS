@@ -372,7 +372,21 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 //                        self.interestViewHeight.constant = CGFloat(25 * count + 113)
                     }
                 }
-                self.userImage.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
+                
+                self.userImage.image = #imageLiteral(resourceName: "empty_event")
+                if let url = URL(string: image_string){
+                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                        (receivedSize :Int, ExpectedSize :Int) in
+                        
+                    }, completed: {
+                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                        
+                        if image != nil && finished{
+                            self.userImage.image = crop(image: image!, width: 85, height: 85)
+                        }
+                    })
+                }
+//                self.userImage.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
                 
             }
 
@@ -492,6 +506,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 if self.suggestion.count > 3{
                     self.moreEventsButton.isHidden = false
                 }
+                else{
+                    self.moreEventsButton.isHidden = true
+                }
+                
                 self.eventsCollectionView.reloadData()    
             }
             else{
