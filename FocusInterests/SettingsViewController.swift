@@ -79,7 +79,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             cell?.textLabel?.text = Constants.settings.cellTitles[indexPath.row]
             cell?.backgroundColor = self.backgroundColor
             
-            cell?.textLabel?.font = UIFont(name: "Avenir-Book", size: 15)!
+            cell?.textLabel?.font = UIFont(name: "Avenir-Book", size: 18)!
             cell?.textLabel?.textColor = UIColor.white
             
             cell?.accessoryType = .disclosureIndicator

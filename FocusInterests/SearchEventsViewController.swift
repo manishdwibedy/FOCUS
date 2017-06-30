@@ -208,7 +208,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             cell?.attendButton.layer.borderWidth = 1
             cell?.attendButton.layer.borderColor = UIColor.white.cgColor
             cell?.attendButton.backgroundColor = UIColor.clear
-            cell?.attendButton.setTitle("Unattend", for: .normal)
+            cell?.attendButton.setTitle("Attending", for: .normal)
         }
         let placeHolderImage = UIImage(named: "empty_event")
         
@@ -240,19 +240,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             cell?.eventImage?.setIndicatorStyle(.gray)
             
         })
-        
-//        MARK: THESE WERE COMMENTED OUT SINCE ATTENDING BUTTON WAS REMOVED
-//        attending
-//        Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-//            let value = snapshot.value as? NSDictionary
-//            if value != nil
-//            {
-//                cell?.attendButton.backgroundColor = UIColor.clear
-//                cell?.attendButton.setTitle("Unattend", for: UIControlState.normal)
-//            }
-//            
-//        })
-        
+     
         cell?.inviteButton.roundCorners(radius: 5.0)
         cell?.inviteButton.layer.shadowOpacity = 0.5
         cell?.inviteButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
@@ -298,7 +286,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             sender.layer.borderWidth = 1
             sender.layer.borderColor = UIColor.white.cgColor
             sender.backgroundColor = UIColor.clear
-            sender.setTitle("Unattend", for: .normal)
+            sender.setTitle("Attending", for: .normal)
         }
         else{
             
