@@ -232,8 +232,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         let reference = Constants.storage.event.child("\(event.id!).jpg")
         
-        // Placeholder image
-        _ = UIImage(named: "empty_event")
+        cell?.eventImage.image = crop(image: #imageLiteral(resourceName: "empty_event"), width: 50, height: 50)
         
         reference.downloadURL(completion: { (url, error) in
             
@@ -242,10 +241,18 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 return
             }
         
-            cell?.eventImage?.sd_setImage(with: url, placeholderImage: placeHolderImage)
             
-            cell?.eventImage?.setShowActivityIndicator(true)
-            cell?.eventImage?.setIndicatorStyle(.gray)
+            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                (receivedSize :Int, ExpectedSize :Int) in
+                
+            }, completed: {
+                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                
+                if image != nil && finished{
+                    cell?.eventImage.image = crop(image: image!, width: 50, height: 50)
+                }
+            })
+            
             
         })
      
