@@ -287,12 +287,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
             }
         }else {
-            self.infoScreenHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
-            self.viewHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
             
-            self.locationInfoStackView.subviews[3].removeFromSuperview()
-            self.locationInfoStackViewHeight.constant = 75
-//            let textLabel = UILabel()
+            // MISSING locationInfoStackView
+//            self.infoScreenHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
+//            self.viewHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
+//            
+//            self.locationInfoStackView.subviews[3].removeFromSuperview()
+//            self.locationInfoStackViewHeight.constant = 75
+
+            
+            //            let textLabel = UILabel()
 //            textLabel.text = "This location has not submitted its hours"
 //            textLabel.textAlignment = .center
 //            textLabel.textColor = UIColor.white

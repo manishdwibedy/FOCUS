@@ -59,6 +59,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     @IBOutlet weak var pinDistanceLabel: UILabel!
     @IBOutlet weak var pinCount: UIButton!
+    var pinInfo: pinData? = nil
     
 //    MARK: Do we still need this
 //    @IBOutlet weak var pinDescription: UILabel!
@@ -91,6 +92,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     var otherUser = false
     var userID = ""
     var previous: previousScreen? = nil
+    
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
         present(vc, animated: true, completion: nil)
@@ -210,6 +212,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             let value = snapshot.value as? NSDictionary
             if let value = value
             {
+                
+                self.pinInfo = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(ID as! String), focus: value["focus"] as? String ?? "")
+
+                
                 self.emptyPinButton.isHidden = true
                 
                 self.pinCategoryLabel.text = value["focus"] as! String
@@ -246,6 +252,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
             }
         })
+        
+        let pinDetail = UITapGestureRecognizer(target: self, action: #selector(self.showPin))
+        pinView.isUserInteractionEnabled = true
+        pinView.addGestureRecognizer(pinDetail)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -301,6 +311,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let followerViewController = UIStoryboard(name: "Followers", bundle: nil).instantiateViewController(withIdentifier: "FollowersViewController") as! FollowersViewController
         followerViewController.windowTitle = "Followers"
         self.present(followerViewController, animated: true, completion: nil)
+    }
+    
+    func showPin(sender: UITapGestureRecognizer){
+        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+        ivc.data = self.pinInfo
+        self.present(ivc, animated: true, completion: { _ in })
     }
     
     func displayUserData() {
