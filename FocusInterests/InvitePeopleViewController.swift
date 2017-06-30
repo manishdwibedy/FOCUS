@@ -27,7 +27,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var location: CLLocation?
     let locationManager = CLLocationManager()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +48,29 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         tableView.register(nib2, forCellReuseIdentifier: "InvitePeopleEventCell")
 
         searchBar.delegate = self
+        
+        //        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
+        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+        //        search bar placeholder
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
+        textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        
+        //        search bar glass icon
+        let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        glassIconView.tintColor = UIColor.white
+        
+        //        search bar clear button
+        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
+        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+        clearButton.tintColor = UIColor.white
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
         
         self.segmentedOut.layer.cornerRadius = 5
         self.segmentedOut.layer.borderColor = UIColor.white.cgColor
@@ -83,12 +105,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         updatePlaces()
         print("got location")
         locationManager.stopUpdatingLocation()
-        
-        
-        
-        
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
