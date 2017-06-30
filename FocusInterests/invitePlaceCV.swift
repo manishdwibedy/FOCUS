@@ -12,7 +12,7 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
 
     @IBOutlet weak var tableView: UITableView!
     var inviteCellData = [inviteData]()
-
+    
     var parentCell: SearchPlaceCell!
     var type = ""
     var id = ""

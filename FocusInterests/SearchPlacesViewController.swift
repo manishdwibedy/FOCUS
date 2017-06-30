@@ -12,6 +12,8 @@ import Alamofire
 import CoreLocation
 import SwiftyJSON
 
+
+
 class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -20,6 +22,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var invitePopup: UIView!
+    @IBOutlet weak var invitePopupBottomLayoutConstraint: NSLayoutConstraint!
     var places = [Place]()
     var filtered = [Place]()
     var location: CLLocation?
@@ -29,7 +32,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     var suggestions = [Place]()
     var suggestionCount = 0
     
-    @IBOutlet weak var inviteBottomSpace: NSLayoutConstraint!
+//    @IBOutlet weak var inviteBottomSpace: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,16 +78,30 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         hideKeyboardWhenTappedAround()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if showPopup{
             invitePopup.alpha = 1
             invitePopup.allCornersRounded(radius: 10)
+            UIView.animate(withDuration: 1.0,delay: 0.0,options: .curveEaseInOut,animations: {
+                self.invitePopupBottomLayoutConstraint.constant = 0
+                self.invitePopup.center.y -= 119
+            }, completion: nil)
+            _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector:  Selector("hidePopup"), userInfo: nil, repeats: false)
             
-            _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector:  Selector("hidePopup"), userInfo: nil, repeats: false)
-
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        if showPopup{
+//            invitePopup.alpha = 1
+//            invitePopup.allCornersRounded(radius: 10)
+//            UIView.animate(withDuration: 3.0,delay: 3.0,options: .curveEaseIn,animations: {self.invitePopupBottomLayoutConstraint.constant = 400}, completion: nil)
+//            _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector:  Selector("hidePopup"), userInfo: nil, repeats: false)
+//
+//        }
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -132,7 +149,12 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func hidePopup(){
-        invitePopup.alpha = 0
+//        invitePopup.alpha = 0
+        UIView.animate(withDuration: 1.0,delay: 0.0,options: .curveEaseInOut, animations: {
+            self.invitePopupBottomLayoutConstraint.constant = -119
+            self.invitePopup.center.y += 119
+        }, completion: nil)
+        self.showPopup = false
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

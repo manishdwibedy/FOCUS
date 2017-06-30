@@ -307,7 +307,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
         Constants.DB.user.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionnary = snapshot.value as? NSDictionary {
-                print(dictionnary)
+//                print(dictionnary)
                 let username_str = dictionnary["username"] as? String ?? ""
                 let description_str = dictionnary["description"] as? String ?? ""
                 let image_string = dictionnary["image_string"] as? String ?? ""
@@ -338,15 +338,15 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 }
                 
                 if self.otherUser{
-                    if let interests = dictionnary["interests"] as? String
-                    
-                    {
+                    if let interests = dictionnary["interests"] as? String{
                         let selected = interests.components(separatedBy: ",")
                         
                         var final_interest = [String]()
                         for interest in selected{
                             final_interest.append(interest.components(separatedBy: "-")[0])
                         }
+                        
+                        print("self.otherUser condition: \(self.interestStackView.arrangedSubviews.count)")
                         
                         for view in self.interestStackView.arrangedSubviews{
                             self.interestStackView.removeArrangedSubview(view)
@@ -367,9 +367,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             }
                         }
                         
-                        let count = self.interestStackView.arrangedSubviews.count
-                        self.interestStackHeight.constant = CGFloat(25 * count)
-                        self.interestViewHeight.constant = CGFloat(25 * count + 113)
+//                        let count = self.interestStackView.arrangedSubviews.count
+//                        self.interestStackHeight.constant = CGFloat(25 * count)
+//                        self.interestViewHeight.constant = CGFloat(25 * count + 113)
                     }
                 }
                 self.userImage.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
@@ -381,8 +381,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         if !otherUser{
             let interests = getUserInterests().components(separatedBy: ",")
             
-            for view in interestStackView.arrangedSubviews{
-                interestStackView.removeArrangedSubview(view)
+            print("!otherUser condition: \(self.interestStackView.arrangedSubviews.count)")
+            
+            if interestStackView.arrangedSubviews.count > 0{
+                var endIndex = interestStackView.arrangedSubviews.count-1
+                while endIndex >= 0{
+                    interestStackView.arrangedSubviews[endIndex].removeFromSuperview()
+                    endIndex -= 1
+                }
             }
             
             for (index, interest) in (interests.enumerated()){
@@ -400,9 +406,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 }
             }
             
-            let count = interestStackView.arrangedSubviews.count
-            interestStackHeight.constant = CGFloat(25 * count)
-            interestViewHeight.constant = CGFloat(25 * count + 113)
+            print(interestStackView.arrangedSubviews.count)
+            
+//            let count = interestStackView.arrangedSubviews.count
+//            interestStackHeight.constant = CGFloat(25 * count)
+//            interestViewHeight.constant = CGFloat(25 * count + 113)
         }
         
     }

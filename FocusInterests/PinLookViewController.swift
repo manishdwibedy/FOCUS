@@ -35,6 +35,8 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         hideKeyboardWhenTappedAround()
         profileImage.roundedImage()
         
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+        
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!

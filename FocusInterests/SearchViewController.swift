@@ -388,7 +388,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         if FOCUSListShouldBe == true{
+         if self.FOCUSListShouldBe == true{
             return 37
          }else if allData[indexPath.row].type == "people"{
             return 110
@@ -401,7 +401,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if FOCUSListShouldBe == true{
+        if self.FOCUSListShouldBe == true{
             self.searchBar.setShowsCancelButton(false, animated: true)
             self.selectedFocus = Constants.interests.interests[indexPath.row]
             

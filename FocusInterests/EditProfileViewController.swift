@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController,UITextFieldDelegate {
+class EditProfileViewController: UIViewController,UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
 
     @IBOutlet weak var genderTf: UITextField!
     @IBOutlet weak var phoneTf: UITextField!
@@ -19,22 +19,72 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var nameTf: UITextField!
     @IBOutlet weak var profilePhotoView: UIImageView!
     
+    let genders = ["Not Specified", "Male", "Female"]
+    
+    var doneButton: UIBarButtonItem!
+    var userPickerView: UIPickerView!
     var userId: String!
+    var hasSelectedGender: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         self.fillDataFromUser()
         hideKeyboardWhenTappedAround()
         
         genderTf.delegate = self
+        
+        self.userPickerView = UIPickerView(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 190))
+        self.userPickerView.delegate = self
+        self.userPickerView.dataSource = self
+        self.userPickerView.backgroundColor = UIColor.lightGray
+        self.userPickerView.alpha = 0.9
+        self.genderTf.inputView = self.userPickerView
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 25))
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        doneButton.tintColor = UIColor.blue
+        doneButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir Heavy", size: 15.0)], for: .normal)
+        
+        toolBar.setItems([flexSpace, doneButton], animated: false)
+        
+        toolBar.isUserInteractionEnabled = true
+        self.genderTf.inputAccessoryView = toolBar
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int{
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return genders.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
+         return genders[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("you have selected a row")
+        self.genderTf.text = genders[row]
+    }
+    
+    func doneButtonPressed(){
+        print("done has been pressed")
+        self.genderTf.resignFirstResponder()
     }
     
     func fillDataFromUser() {
@@ -81,28 +131,6 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate {
         }
 
     }
-//    
-//    func textFieldDidBeginEditing(textField: UITextField) -> Bool {
-//        if textField == genderTf {
-//            let alertController = UIAlertController(title: "Gender?", message: nil, preferredStyle: .actionSheet)
-//            
-//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//            alertController.addAction(cancelAction)
-//            
-//            let maleAction = UIAlertAction(title: "Male", style: .default) { action in
-//                textField.text = "Male"
-//            }
-//            let femaleAction = UIAlertAction(title: "Female", style: .default) { action in
-//                textField.text = "Female"
-//            }
-//            alertController.addAction(maleAction)
-//            alertController.addAction(femaleAction)
-//            
-//            self.present(alertController, animated: true)
-//            return false // myTextField was touched
-//        }
-//        return true
-//    }
     
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -160,7 +188,6 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
