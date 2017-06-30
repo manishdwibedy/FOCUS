@@ -131,7 +131,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                                 message?.addLastContent(lastContent: text as! String)
                             }
                             else{
-                                
+                                let message = self.contentMapping[id]
+                                message?.addLastContent(lastContent: "sent a photo")
                             }
                             
                             self.messages.append(userMessage)
