@@ -40,7 +40,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         self.setupSearchBar()
         
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
-        backgroundView.backgroundColor = UIColor(hexString: "445464")
+        backgroundView.backgroundColor = Constants.color.navy
         tableView.backgroundView = backgroundView
         
         self.tableView.separatorColor = UIColor.white

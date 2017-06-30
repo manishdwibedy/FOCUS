@@ -46,7 +46,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         messageTable.tableFooterView = UIView()
         
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.messageTable.bounds.size.width, height: self.messageTable.bounds.size.height))
-        backgroundView.backgroundColor = UIColor(hexString: "445464")
+        backgroundView.backgroundColor = Constants.color.navy
         messageTable.backgroundView = backgroundView
         
         let nib = UINib(nibName: "MessageTableViewCell", bundle: nil)

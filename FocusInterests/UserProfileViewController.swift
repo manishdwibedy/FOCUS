@@ -198,10 +198,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.createEventButton.roundCorners(radius: 6)
         
         if otherUser{
+            self.editButton.setTitle("", for: .normal)
             self.editButton.isEnabled = false
-            self.moreFocusButton.isEnabled = false
+            self.moreFocusButton.isHidden = true
+            self.createEventButton.isHidden = true
+            self.updatePinButton.isHidden = true
+            self.createEventButton.isHidden = true
         }
-        
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
         Constants.DB.pins.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
