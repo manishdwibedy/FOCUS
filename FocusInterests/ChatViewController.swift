@@ -107,19 +107,13 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         getMessageID()
         
         
-        var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "BackArrow"), style: .plain, target: self, action: #selector(back))
-
+        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "BackArrow"), style: .plain, target: self, action: #selector(back))
         self.navigationItem.leftBarButtonItem = backButton
 
         self.collectionView.bounces = false
         loadingMessages = false
         
-        let attrs = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
-        ]
-        
-        self.navigationController?.navigationBar.titleTextAttributes = attrs
+        self.navigationController?.navigationBar.titleTextAttributes = Constants.navBar.attrs
         self.navigationController?.navigationBar.barTintColor = Constants.color.navy
         
         self.navigationItem.title = self.user["username"]! as? String

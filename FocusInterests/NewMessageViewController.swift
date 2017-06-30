@@ -51,6 +51,9 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         hideKeyboardWhenTappedAround()
+        
+        self.navigationController?.navigationBar.titleTextAttributes = Constants.navBar.attrs
+        self.navigationController?.navigationBar.barTintColor = Constants.color.navy
     }
     
     override func viewWillAppear(_ animated: Bool) {

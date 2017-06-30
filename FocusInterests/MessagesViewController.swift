@@ -21,6 +21,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var contentMapping = [String: UserMessages]()
     
+    
     @IBOutlet weak var messageTable: UITableView!
     var messages: [UserMessages]{
         get{
@@ -45,6 +46,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 
         messageTable.tableFooterView = UIView()
         
+        
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.messageTable.bounds.size.width, height: self.messageTable.bounds.size.height))
         backgroundView.backgroundColor = Constants.color.navy
         messageTable.backgroundView = backgroundView
@@ -59,12 +61,22 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         // Do any additional setup after loading the view.
 //        loadInitialTable()
         
-        let attrs = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
-        ]
+        self.navigationController?.navigationBar.titleTextAttributes = Constants.navBar.attrs
+        self.navigationController?.navigationBar.barTintColor = Constants.color.navy
         
-//        navBar.titleTextAttributes = attrs
+        
+        var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "BackArrow"), style: .plain, target: self, action: #selector(compose))
+        
+        self.navigationItem.rightBarButtonItem = backButton
+
+    }
+    
+    func compose(sender: UIBarButtonItem) {
+        // Perform your custom actions
+        // ...
+        // Go back to the previous ViewController
+        let composeVC = UIStoryboard(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "compose") as! NewMessageViewController
+        self.navigationController?.pushViewController(composeVC, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
