@@ -753,13 +753,13 @@ func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
 }
 
 func dropfromTop(view: UIView){
-    let transition = CATransition()
-    transition.duration = 0.3
-    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-    transition.type = kCATransitionMoveIn
-    transition.subtype = kCATransitionFromBottom
-    
-    view.window!.layer.add(transition, forKey: kCATransition)
+//    let transition = CATransition()
+//    transition.duration = 0.3
+//    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+//    transition.type = kCATransitionMoveIn
+//    transition.subtype = kCATransitionFromBottom
+//    
+//    view.window!.layer.add(transition, forKey: kCATransition)
 }
 
 func getUserInterests() -> String{
