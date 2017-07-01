@@ -132,4 +132,49 @@ class Event: NSObject, NSCoding{
     static func ==(lhs: Event, rhs: Event) -> Bool {
         return lhs.id == rhs.id
     }
+    
+    static func toEvent(info: [String: Any]) -> Event?{
+        guard let title = info["title"]! as? String else{
+            return nil
+        }
+        
+        guard let description = info["description"]! as? String else{
+            return nil
+        }
+        
+        guard let fullAddress = info["fullAddress"]! as? String else{
+            return nil
+        }
+        
+        guard let shortAddress = info["shortAddress"]! as? String else{
+            return nil
+        }
+        
+        guard let latitude = info["latitude"]! as? String else{
+            return nil
+        }
+        
+        guard let longitude = info["longitude"]! as? String else{
+            return nil
+        }
+        
+        guard let date = info["date"]! as? String else{
+            return nil
+        }
+        
+        guard let creator = info["creator"]! as? String else{
+            return nil
+        }
+        
+        
+        guard let interest = info["interest"]! as? String else{
+            return nil
+        }
+        
+        let event = Event(title: title, description: description, fullAddress: fullAddress, shortAddress: shortAddress, latitude: latitude, longitude: longitude, date: date, creator: creator, id: nil, category: interest)
+        
+        if let attending = info["attendingList"] as? [String:Any]{
+            event.setAttendessCount(count: attending.count)
+        }
+    }
 }
