@@ -139,8 +139,8 @@ class SearchPeopleTableViewCell: UITableViewCell {
             sender.layer.shadowRadius = 5.0
  
         } else if self.followButton.isSelected == true{
-            
-            let unfollowAlertController = UIAlertController(title: "Unfollow \(self.username.text!)?", message: "", preferredStyle: .actionSheet)
+
+            let unfollowAlertController = UIAlertController(title: "Unfollow \(self.username.text!)?", message: nil, preferredStyle: .actionSheet)
             
             
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in

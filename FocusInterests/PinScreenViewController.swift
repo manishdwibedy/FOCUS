@@ -342,6 +342,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PinImageCollectionViewCell
         cell.imageView.image = imageArray[indexPath.row]
+        cell.imageView.contentMode = .scaleAspectFill
         cellArray.append(cell)
         return cell
     }
@@ -421,7 +422,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     if let image = image{
                         print("got image")
                         
-                        if let data = UIImageJPEGRepresentation(image, 0.5) as NSData?{
+                        if let data = UIImageJPEGRepresentation(image, 1) as NSData?{
                             self.imageArray.append(image)
                         }
                         
