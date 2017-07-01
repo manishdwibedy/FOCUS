@@ -166,9 +166,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         pinTextView.delegate = self
         getPhotos()
         
-        getPlaceName(location: AuthApi.getLocation()!, completion: {address in
-            self.locationLabel.text = address
-        })
+        if self.pinType != "place"{
+            getPlaceName(location: AuthApi.getLocation()!, completion: {address in
+                self.locationLabel.text = address
+            })
+        }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
         profileImage.isUserInteractionEnabled = true
