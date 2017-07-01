@@ -199,7 +199,7 @@ func getDistance(fromLocation: CLLocation, toLocation: CLLocation, addBracket: B
 }
 
 func sendNotification(to id: String, title: String, body: String, actionType: String, type: String, item_id: String, item_name: String){
-    let url = "http://focus-notifications.3hwampgg8c.us-west-2.elasticbeanstalk.com/sendMessage"
+    let url = "http://notifications-dev2.us-west-2.elasticbeanstalk.com/sendMessage"
     
     let time = NSDate().timeIntervalSince1970
     
