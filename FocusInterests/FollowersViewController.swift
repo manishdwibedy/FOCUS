@@ -54,6 +54,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
                             
                             let data = followProfileCellData()
                             data.uid = (value["UID"] as? String)!
+                            
                             self.followers.append(data)
                             
                             if self.windowTitle == "Followers" && self.followers.count == count{
