@@ -240,6 +240,33 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     self.pinLikesLabel.text = "\(count!) \(label)"
                 }
                 
+                if let images = value["images"] as? [String:Any]{
+                    let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String
+                    let pinImage = Constants.storage.pins.child(imageURL!)
+                    
+                    // Fetch the download URL
+                    pinImage.downloadURL { url, error in
+                        if let error = error {
+                            // Handle any errors
+                        } else {
+                            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                                (receivedSize :Int, ExpectedSize :Int) in
+                                
+                            }, completed: {
+                                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                                
+                                if image != nil && finished{
+                                    self.pinImage.image = image
+                                }
+                            })
+                            
+                        }
+                    }
+                    
+                    
+                }
+                
+                
             }
             else{
                 self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
