@@ -210,7 +210,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         if otherUser{
             self.editButton.setTitle("", for: .normal)
             self.editButton.isEnabled = false
-            self.moreFocusButton.isHidden = true
             self.createEventButton.isHidden = true
             self.updatePinButton.isHidden = true
             self.createEventButton.isHidden = true
@@ -399,6 +398,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                     self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                                 }
                             }
+                        }
+                        
+                        if final_interest.count > 3{
+                            self.moreFocusButton.setTitle("More", for: .normal)
                         }
                         
 //                        let count = self.interestStackView.arrangedSubviews.count
