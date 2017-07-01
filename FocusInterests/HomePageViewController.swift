@@ -11,6 +11,7 @@ import UIKit
 class HomePageViewController: UITabBarController {
 
     var showEvent = false
+    var showPin = false
     var location: CLLocation? = nil
     var showTutorial = false
     var showTab = 0

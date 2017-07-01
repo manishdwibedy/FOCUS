@@ -45,6 +45,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var placeMapping = [String: Place]()
     var hasCustomProfileImage = false
     var showEvent = false
+    var showPin = false
     var pins = [pinData]()
     var userLocation: GMSMarker? = nil
     var showTutorial = false
@@ -212,11 +213,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
         }
-        if showEvent{
+        if showEvent || showPin{
             
             let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
                                                   longitude: (currentLocation?.coordinate.longitude)!,
-                                                  zoom: 17)
+                                                  zoom: 15)
             if mapView.isHidden {
                 mapView.isHidden = false
                 mapView.camera = camera

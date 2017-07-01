@@ -198,6 +198,7 @@ class MapPopUpScreenView: UIView {
                  let storyboard = UIStoryboard(name: "Pin", bundle: nil)
                 let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
                 ivc.data = object as! pinData
+                ivc.mapView = self.parentVC
                 parentVC.present(ivc, animated: true, completion: { _ in })
                 
             }

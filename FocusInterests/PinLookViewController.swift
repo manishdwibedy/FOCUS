@@ -30,6 +30,8 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     var data: pinData!
     var dictData = NSDictionary()
     var likes = 0
+    var mapView: MapViewController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -133,6 +135,16 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     let camera = GMSCameraPosition.camera(withLatitude: self.data.coordinates.latitude, longitude: self.data.coordinates.longitude, zoom: 13)
                     let mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.viewForMap.frame.width, height: self.viewForMap.frame.height), camera: camera)
                     mapView.delegate = self
+                    
+                    let position = CLLocationCoordinate2D(latitude: Double(self.data.coordinates.latitude), longitude: Double(self.data.coordinates.longitude))
+                    
+                    let marker = GMSMarker(position: position)
+                    marker.map = mapView
+                    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+                    image.image = UIImage(named: "pin")
+                    image.contentMode = .scaleAspectFit
+                    marker.iconView = image
+                    
                     mapView.mapType = .normal
                     self.viewForMap.addSubview(mapView)
                 }
@@ -337,6 +349,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     
 
     @IBAction func back(_ sender: Any) {
+        mapView!.showPin = true
+        mapView!.currentLocation = CLLocation(latitude: self.data.coordinates.latitude, longitude: self.data.coordinates.longitude)
+        
+        
         dismiss(animated: true, completion: nil)
     }
     
