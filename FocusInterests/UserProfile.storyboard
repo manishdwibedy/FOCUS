@@ -204,9 +204,9 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRe-j8-XoK">
-                                                        <rect key="frame" x="93" y="8" width="77" height="20.5"/>
+                                                        <rect key="frame" x="93" y="8" width="120" height="20.5"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="77" id="Jnd-Jf-Xsx"/>
+                                                            <constraint firstAttribute="width" constant="120" id="Jnd-Jf-Xsx"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                         <color key="textColor" red="0.47843137254901957" green="0.78823529411764703" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
