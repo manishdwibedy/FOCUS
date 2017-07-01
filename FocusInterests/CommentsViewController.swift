@@ -87,9 +87,16 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func post(_ sender: Any) {
         let time = NSDate().timeIntervalSince1970
         Constants.DB.pins.child(data["fromUID"] as! String).child("comments").childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "comment": commentField.text!, "date": Double(time)])
-        commentField.text = ""
+        
         commentField.resignFirstResponder()
         
+        self.commentData.insert([
+            "comment": commentField.text!,
+            "date": Double(time),
+            "fromUID": AuthApi.getFirebaseUid()!
+            ], at: 0)
+        commentField.text = ""
+        self.commentsTableView.reloadData()
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
