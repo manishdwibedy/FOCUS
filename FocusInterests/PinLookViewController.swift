@@ -146,7 +146,13 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             if value != nil
             {
                 self.likes = (value?["num"] as? Int)!
-                self.likesLabel.text = String(self.likes) + " likes"
+                
+                if self.likes > 1{
+                    self.likesLabel.text = String(self.likes) + " likes"
+                }
+                else{
+                    self.likesLabel.text = String(self.likes) + " like"
+                }
             }
         })
         
@@ -257,7 +263,14 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             data.dbPath.child("like").updateChildValues(["num": likes])
             data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
             self.likeOut.isEnabled = false
-            self.likesLabel.text = String(self.likes) + " likes"
+        
+            if self.likes > 1{
+                self.likesLabel.text = String(self.likes) + " likes"
+            }
+            else{
+                self.likesLabel.text = String(self.likes) + " like"
+            }
+        
             self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
         }
        else{
@@ -275,7 +288,13 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         
 //        data.dbPath.child("like").child("likedBy").rem
         self.likeOut.isEnabled = false
-        self.likesLabel.text = String(self.likes) + " likes"
+        
+        if self.likes > 1{
+            self.likesLabel.text = String(self.likes) + " likes"
+        }
+        else{
+            self.likesLabel.text = String(self.likes) + " like"
+        }
         self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
         }
        
