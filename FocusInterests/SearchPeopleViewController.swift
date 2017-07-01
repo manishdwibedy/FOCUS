@@ -94,40 +94,36 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             for (_, user) in users{
                 let info = user as? [String:Any]
                 
-                
-                let user = User(username: info?["username"] as! String?, fullname: info?["fullname"]  as! String?, uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: nil, image_string: nil, hasPin: false)
-                
-                if user.uuid != AuthApi.getFirebaseUid() && user.uuid != nil{
-                    
-                    
-                    Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
-                        let value = snapshot.value as? NSDictionary
-                        if value != nil
-                        {
-                            var address = value?["formattedAddress"] as! String
-                            address = address.replacingOccurrences(of: ";;", with: "\n")
-                            let data = pinData(UID: value?["fromUID"] as! String, dateTS: (value?["time"] as! Double), pin: (value?["pin"] as! String), location: (value?["formattedAddress"] as! String), lat: (value?["lat"] as! Double), lng: (value?["lng"] as! Double), path: Constants.DB.pins.child(user.uuid! as! String), focus: value?["focus"] as! String)
-                            self.user_pins[user.uuid!] = data
-                            user.hasPin = true
-                            
-                            let pinLocation = CLLocation(latitude: (value?["lat"] as! Double), longitude: (value?["lng"] as! Double))
-                            user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                if let info = info{
+                    if let user = User.toUser(info: info){
+                        if user.uuid != AuthApi.getFirebaseUid(){
+                            Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                let value = snapshot.value as? NSDictionary
+                                if let value = value
+                                {
+                                    if let pin = pinData.toPin(user: user, value: value){
+                                        self.user_pins[user.uuid!] = pin
+                                        user.hasPin = true
+                                        
+                                        let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+                                        user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                    }
+                                }
+                                self.people.append(user)
+                                
+                                self.people.sort {
+                                    if $0.hasPin && $1.hasPin{
+                                        return $0.pinDistance < $1.pinDistance
+                                    }
+                                    return $0.hasPin && !$1.hasPin
+                                }
+                                
+                                self.filtered = self.people
+                                self.tableView.reloadData()
+                            })
                         }
-                        self.people.append(user)
-                        
-                        self.people.sort {
-                            if $0.hasPin && $1.hasPin{
-                                return $0.pinDistance < $1.pinDistance
-                            }
-                            return $0.hasPin && !$1.hasPin
-                        }
-
-                        self.filtered = self.people
-                        self.tableView.reloadData()
-                    })
+                    }
                 }
-                
-                
             }
             
         })

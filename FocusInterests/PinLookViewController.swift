@@ -335,26 +335,3 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
 
 }
 
-
-class pinData
-{
-    var fromUID = String()
-    var dateTimeStamp = Double()
-    var pinMessage = String()
-    var locationAddress = String()
-    var coordinates = CLLocationCoordinate2D()
-    var dbPath = DatabaseReference()
-    var focus = ""
-    
-    init(UID:String, dateTS:Double, pin: String, location: String, lat: Double, lng: Double, path: DatabaseReference, focus: String) {
-        self.fromUID = UID
-        self.dateTimeStamp = dateTS
-        self.pinMessage = pin
-        self.locationAddress = location
-        self.coordinates.latitude = lat
-        self.coordinates.longitude = lng
-        self.dbPath = path
-        self.focus = focus
-        
-    }
-}

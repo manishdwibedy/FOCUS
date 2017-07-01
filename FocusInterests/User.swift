@@ -30,4 +30,21 @@ class User {
         self.image_string = image_string
         self.hasPin = hasPin ?? false
     }
+    
+    static func toUser(info: [String: Any]) -> User?{
+        guard let username = info["username"] as? String else{
+            return nil
+        }
+        
+        guard let fullname = info["fullname"] as? String else{
+            return nil
+        }
+        
+        guard let id = info["firebaseUserId"] as? String else{
+            return nil
+        }
+        
+        return User(username: username, fullname: fullname, uuid: id, userImage: nil, interests: nil, image_string: nil, hasPin: false)
+        
+    }
 }
