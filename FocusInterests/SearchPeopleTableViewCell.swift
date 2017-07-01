@@ -21,10 +21,10 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var fullName: UILabel!
     @IBOutlet weak var distanceCategoryStack: UIStackView!
     @IBOutlet weak var whiteBorder: UIView!
-
     @IBOutlet weak var shortBackground: UIView!
     @IBOutlet weak var addressStack: UIStackView!
     @IBOutlet weak var cellHeight: NSLayoutConstraint!
+    
     var ID = ""
     var parentVC: SearchPeopleViewController!
     var pinAvailable = false
@@ -39,9 +39,9 @@ class SearchPeopleTableViewCell: UITableViewCell {
         self.userImage.roundedImage()
         
         //cell view
-        self.cellContentView.allCornersRounded(radius: 6.0)
-        
-        self.shortBackground.allCornersRounded(radius: 6.0)
+//        self.cellContentView.allCornersRounded(radius: 6.0)
+//        
+//        self.shortBackground.allCornersRounded(radius: 6.0)
         
         //follow button
         self.followButton.clipsToBounds = true
@@ -62,15 +62,34 @@ class SearchPeopleTableViewCell: UITableViewCell {
         self.inviteButton.layer.masksToBounds = false
         self.inviteButton.layer.shadowColor = UIColor.black.cgColor
         self.inviteButton.layer.shadowRadius = 5.0
-        
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.cellContentView.setNeedsLayout()
+        self.shortBackground.setNeedsLayout()
+        
+        self.cellContentView.layoutIfNeeded()
+        self.shortBackground.layoutIfNeeded()
+        
+        let path = UIBezierPath(roundedRect: self.cellContentView.bounds, cornerRadius: 10)
+        let shortBackgroundPath = UIBezierPath(roundedRect: self.shortBackground.bounds, cornerRadius: 10)
+        
+        let mask = CAShapeLayer()
+        let shortbackgroundMask = CAShapeLayer()
+        
+        mask.path = path.cgPath
+        shortbackgroundMask.path = shortBackgroundPath.cgPath
+        
+        self.cellContentView.layer.mask = mask
+        self.shortBackground.layer.mask = shortbackgroundMask
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
+    }
 
     func checkFollow(){
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: ID).observeSingleEvent(of: .value, with: { (snapshot) in

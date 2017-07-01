@@ -54,6 +54,9 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate, UIPickerV
         doneButton.tintColor = UIColor.blue
         doneButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir Heavy", size: 15.0)], for: .normal)
         
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSFontAttributeName: UIFont(name: "Avenir Book", size: 18)!]
+        
         toolBar.setItems([flexSpace, doneButton], animated: false)
         
         toolBar.isUserInteractionEnabled = true

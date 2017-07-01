@@ -94,18 +94,9 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        if showPopup{
-//            invitePopup.alpha = 1
-//            invitePopup.allCornersRounded(radius: 10)
-//            UIView.animate(withDuration: 3.0,delay: 3.0,options: .curveEaseIn,animations: {self.invitePopupBottomLayoutConstraint.constant = 400}, completion: nil)
-//            _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector:  Selector("hidePopup"), userInfo: nil, repeats: false)
-//
-//        }
-        
+    
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            
             
             if let placeData = value{
                 self.followingCount = placeData.count
@@ -156,6 +147,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         }, completion: nil)
         self.showPopup = false
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
