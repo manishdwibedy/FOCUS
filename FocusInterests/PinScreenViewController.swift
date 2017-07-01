@@ -263,19 +263,31 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                         print("Saved location successfully!")
                     }
                 }
-            }
-            else{
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":locationLabel.text, "lat": AuthApi.getLocation()?.coordinate.latitude, "lng": AuthApi.getLocation()?.coordinate.longitude, "images": imagePaths, "public": isPublic, "focus": focusLabel.text] )
                 
-                Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
-                    if (error != nil) {
-                        debugPrint("An error occured: \(error)")
-                    } else {
-                        print("Saved location successfully!")
+                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+                    let value = snapshot.value as? [String:Any]
+                    
+                    if let pinCount = value?["pinCount"] as? Int{
+                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["pinCount": pinCount + 1])
                     }
-                }
-            }
+                    else{
+                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["pinCount": 1])
+                    }
+                })
                 
+            }
+//            else{
+//                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":locationLabel.text, "lat": AuthApi.getLocation()?.coordinate.latitude, "lng": AuthApi.getLocation()?.coordinate.longitude, "images": imagePaths, "public": isPublic, "focus": focusLabel.text] )
+//                
+//                Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
+//                    if (error != nil) {
+//                        debugPrint("An error occured: \(error)")
+//                    } else {
+//                        print("Saved location successfully!")
+//                    }
+//                }
+//            }
+//                
             if isTwitter == true
             {
                 Share.postToTwitter(withStatus: pinTextView.text!)

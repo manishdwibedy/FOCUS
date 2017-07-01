@@ -435,7 +435,7 @@ line 2</string>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0si-vv-Uym">
-                                <rect key="frame" x="17" y="602.5" width="291" height="59.5"/>
+                                <rect key="frame" x="21" y="602.5" width="287" height="59.5"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QE5-ed-gDA">
                                 <rect key="frame" x="279" y="556" width="75" height="0.0"/>
@@ -466,7 +466,7 @@ line 2</string>
                             <constraint firstItem="Vfl-p8-Tef" firstAttribute="leading" secondItem="0si-vv-Uym" secondAttribute="trailing" constant="10" id="Xcp-34-aht"/>
                             <constraint firstItem="QE5-ed-gDA" firstAttribute="leading" secondItem="j0G-WK-LPf" secondAttribute="trailing" constant="48.5" id="aA5-WY-Pg5"/>
                             <constraint firstItem="W6f-uJ-Bg0" firstAttribute="trailing" secondItem="EL7-by-RR7" secondAttribute="trailing" id="b5N-1E-GwA"/>
-                            <constraint firstItem="0si-vv-Uym" firstAttribute="leading" secondItem="89H-gt-97y" secondAttribute="leadingMargin" constant="1" id="cH3-Tx-dpx"/>
+                            <constraint firstItem="0si-vv-Uym" firstAttribute="leading" secondItem="89H-gt-97y" secondAttribute="leadingMargin" constant="5" id="cH3-Tx-dpx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Vfl-p8-Tef" secondAttribute="trailing" constant="5" id="hkt-pK-rOb"/>
                             <constraint firstItem="rpQ-O8-xtN" firstAttribute="baseline" secondItem="j0G-WK-LPf" secondAttribute="baseline" id="kAP-bd-v8n"/>
                             <constraint firstItem="kSX-QC-Op4" firstAttribute="leading" secondItem="rpQ-O8-xtN" secondAttribute="leading" id="mhe-ud-OBb"/>

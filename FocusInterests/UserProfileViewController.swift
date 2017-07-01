@@ -239,7 +239,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                         label = "likes"
                     }
                     self.pinLikesLabel.text = "\(count!) \(label)"
-                    self.pinCount.setTitle("1", for: .normal)
                 }
                 
             }
@@ -363,6 +362,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                         self.followingCount.setTitle("\(count)", for: .normal)
                     }
                 }
+                
+                if let pinCount = dictionnary["pinCount"] as? Int{
+                    self.pinCount.setTitle("\(pinCount)", for: .normal)
+                }
+                else{
+                    self.pinCount.setTitle("0", for: .normal)
+                }
+                
                 
                 if self.otherUser{
                     if let interests = dictionnary["interests"] as? String{
