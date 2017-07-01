@@ -200,7 +200,19 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             
                             self.checkForSignedUp()
                             if error != nil {
-                                self.showLoginFailedAlert(loginType: "our server")
+                                
+                                if let errCode = AuthErrorCode(rawValue: error!._code) {
+                                    switch errCode {
+                                    case .invalidEmail:
+                                        SCLAlertView().showError("Error", subTitle: "Invalid email")
+                                    case .emailAlreadyInUse:
+                                        SCLAlertView().showError("Error", subTitle: "Email already in user")
+                                    case .weakPassword:
+                                        SCLAlertView().showError("Error", subTitle: "Weak password.")
+                                    default:
+                                        SCLAlertView().showError("Error", subTitle: "Failed to register the users..")
+                                    }
+                                }
                                 return
                             }
                         }
