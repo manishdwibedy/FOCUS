@@ -40,6 +40,9 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     
     func commonInit(){
         Bundle.main.loadNibNamed("MapNavigationView", owner: self, options: nil)
+        view.frame = self.bounds
+//        view.autoresizingMask = .FlexibleHeight | .FlexibleWidth
+
         self.addSubview(self.view)
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
@@ -51,10 +54,6 @@ class MapNavigationView: UIView, UISearchBarDelegate {
                 view.removeFromSuperview()
             }
         }
-//        
-//        userProfileButton.contentMode = .center
-//        userProfileButton.imageView?.contentMode = .scaleAspectFit
-//        userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100)
 
     }
     
