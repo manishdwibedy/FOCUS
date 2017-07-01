@@ -176,7 +176,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     textLabel.text  = "View \(value.count) comments"
                     textLabel.textAlignment = .left
                     
-                    let tap = UITapGestureRecognizer(target: self, action: Selector("showComments:"))
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.showComments(sender:)))
                     textLabel.addGestureRecognizer(tap)
 
                     self.commentsStackView.addArrangedSubview(textLabel)
@@ -213,6 +213,9 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                             
                             self.commentsStackView.addArrangedSubview(textLabel)
                             self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false;
+
+                            let tap = UITapGestureRecognizer(target: self, action: #selector(self.showComments(sender:)))
+                            self.commentsStackView.addGestureRecognizer(tap)
 
                         }
                     })
