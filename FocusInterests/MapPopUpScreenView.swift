@@ -202,35 +202,6 @@ class MapPopUpScreenView: UIView {
                 
             }
         
+        }
     }
-    
-    
-    
 }
-    
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

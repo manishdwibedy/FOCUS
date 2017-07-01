@@ -63,7 +63,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        popUpScreen = MapPopUpScreenView(frame: CGRect(x: 0, y: 0, width: popUpView.frame.width, height: popUpView.frame.width))
+        popUpScreen = MapPopUpScreenView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: popUpView.frame.width))
         popUpScreen.parentVC = self
         self.popUpView.addSubview(popUpScreen)
 
