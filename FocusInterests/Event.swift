@@ -176,5 +176,7 @@ class Event: NSObject, NSCoding{
         if let attending = info["attendingList"] as? [String:Any]{
             event.setAttendessCount(count: attending.count)
         }
+        
+        return event
     }
 }

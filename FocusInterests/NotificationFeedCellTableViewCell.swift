@@ -253,13 +253,14 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             Constants.DB.event.child((notif.item?.id)!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let info = snapshot.value as? [String : Any] ?? [:]
                 
-                let event = Event.toEvent(info: info)
-                event.id = notif.item?.id
-                
-                let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
-                controller.event = event
-                self.parentVC.present(controller, animated: true, completion: nil)
+                if let event = Event.toEvent(info: info){
+                    event.id = self.notif.item?.id
+                    
+                    let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+                    controller.event = event
+                    self.parentVC.present(controller, animated: true, completion: nil)
+                }
                 
                 
                 
