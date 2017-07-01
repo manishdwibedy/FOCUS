@@ -434,8 +434,11 @@ line 2</string>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0si-vv-Uym">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0si-vv-Uym">
                                 <rect key="frame" x="21" y="602.5" width="287" height="59.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="itj-WV-uYI"/>
+                                </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QE5-ed-gDA">
                                 <rect key="frame" x="279" y="556" width="75" height="0.0"/>
@@ -450,7 +453,6 @@ line 2</string>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="EL7-by-RR7" firstAttribute="top" secondItem="W6f-uJ-Bg0" secondAttribute="bottom" constant="8" symbolic="YES" id="84X-AB-oXf"/>
-                            <constraint firstItem="k4d-2y-QOs" firstAttribute="top" secondItem="0si-vv-Uym" secondAttribute="bottom" constant="5" id="86p-ER-mha"/>
                             <constraint firstItem="0si-vv-Uym" firstAttribute="top" secondItem="kSX-QC-Op4" secondAttribute="bottom" constant="5" id="9OE-IT-I0H"/>
                             <constraint firstItem="hJE-2j-BeM" firstAttribute="leading" secondItem="W6f-uJ-Bg0" secondAttribute="leading" id="B8k-hl-Fh2"/>
                             <constraint firstItem="kSX-QC-Op4" firstAttribute="top" secondItem="rpQ-O8-xtN" secondAttribute="bottom" constant="10" id="EUO-qt-KeP"/>
@@ -483,6 +485,7 @@ line 2</string>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="addressTopOut" destination="tVa-3J-grt" id="LhB-FQ-D5P"/>
+                        <outlet property="commentHeight" destination="itj-WV-uYI" id="DhE-O4-4Yi"/>
                         <outlet property="commentOut" destination="oV5-eg-uPI" id="fAG-Ma-hno"/>
                         <outlet property="commentsStackView" destination="0si-vv-Uym" id="cL0-hw-VqA"/>
                         <outlet property="dateLabel" destination="QE5-ed-gDA" id="tDw-em-aXo"/>

@@ -26,6 +26,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var commentsStackView: UIStackView!
+    @IBOutlet weak var commentHeight: NSLayoutConstraint!
     var data: pinData!
     var dictData = NSDictionary()
     var likes = 0
@@ -227,6 +228,11 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     })
                     
                 }
+                
+                if value.count < 3{
+                    self.commentHeight.constant = CGFloat(20 * value.count)
+                }
+                
 //                for (index, category) in (place.categories.enumerated()){
 //                    let textLabel = UILabel()
 //                    
