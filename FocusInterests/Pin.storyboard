@@ -54,6 +54,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DF-Ze-hpf">
                                         <rect key="frame" x="314" y="8" width="54" height="36"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Cancel"/>
                                         <connections>
                                             <action selector="cancelButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="oGh-eu-0Fe"/>

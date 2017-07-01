@@ -349,9 +349,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     
 
     @IBAction func back(_ sender: Any) {
-        mapView!.showPin = true
-        mapView!.currentLocation = CLLocation(latitude: self.data.coordinates.latitude, longitude: self.data.coordinates.longitude)
-        
+        if let parent = mapView{
+            parent.showPin = true
+            parent.currentLocation = CLLocation(latitude: self.data.coordinates.latitude, longitude: self.data.coordinates.longitude)
+        }
         
         dismiss(animated: true, completion: nil)
     }
