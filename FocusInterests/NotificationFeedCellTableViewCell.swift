@@ -249,8 +249,6 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     {
         print("screen taped")
         if notif.item?.type == "event" && notif.item?.id != nil{
-            
-            
             Constants.DB.event.child((notif.item?.id)!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let info = snapshot.value as? [String : Any] ?? [:]
                 
@@ -262,12 +260,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                     controller.event = event
                     self.parentVC.present(controller, animated: true, completion: nil)
                 }
-                
-                
-                
             })
-            
-            
         }else if notif.item?.type == "place" && notif.item?.id != nil{
             print("getting data")
             print((notif.item?.id)!)
@@ -279,11 +272,8 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                 self.parentVC.present(controller, animated: true, completion: nil)
                   
             })
-            
-
+        }
     }
-}
-
 }
     
     

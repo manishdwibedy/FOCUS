@@ -141,11 +141,13 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate, UIPickerV
             
             let url = returnUrl as String
             
-            let focusUser = FocusUser(userName: self.usernameTf.text, firebaseId: self.userId, imageString: url, currentLocation: nil, name: self.nameTf.text, website: self.websiteTf.text, email: self.emailTf.text, gender: self.genderTf.text, phone: self.phoneTf.text, description: self.infoTf.text)
+            if let focusUser = FocusUser(userName: self.usernameTf.text, firebaseId: self.userId, imageString: url, currentLocation: nil, name: self.nameTf.text, website: self.websiteTf.text, email: self.emailTf.text, gender: self.genderTf.text, phone: self.phoneTf.text, description: self.infoTf.text){
+                FirebaseUpstream.sharedInstance.addToUsers_(focusUser: focusUser)
+                self.dismiss(animated: true, completion: nil)
+            }
             
             
-            FirebaseUpstream.sharedInstance.addToUsers_(focusUser: focusUser)
-            self.dismiss(animated: true, completion: nil)
+            
         }
     }
     
