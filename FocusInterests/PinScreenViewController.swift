@@ -369,7 +369,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
         galleryPicArray = images
         gallery.dismiss(animated: true, completion: nil)
-        selectedImage.image = galleryPicArray[0]
+        
+        if galleryPicArray.count > 0{
+            selectedImage.image = galleryPicArray[0]    
+        }
+        
     }
     
     func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
