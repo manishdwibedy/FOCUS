@@ -502,7 +502,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         ivc.pinType = "place"
         for str in (place?.address)!
         {
-         ivc.formmatedAddress = ivc.formmatedAddress + " " + str
+         ivc.formmatedAddress = ivc.formmatedAddress + ";;" + str
         
         }
         ivc.coordinates.latitude = (place?.latitude)!
