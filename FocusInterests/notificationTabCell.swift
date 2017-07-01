@@ -115,6 +115,7 @@ class notificationTabCell: UITableViewCell {
         let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
         VC.otherUser = true
+        VC.previous = .notification
         VC.userID = (self.notification?.sender?.uuid)!
         dropfromTop(view: (parentVC?.view)!)
         

@@ -163,6 +163,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         VC.otherUser = true
         VC.userID = (self.notif?.sender?.uuid)!
+        VC.previous = .notification
         dropfromTop(view: (parentVC?.view)!)
         
         parentVC?.present(VC, animated:true, completion:nil)

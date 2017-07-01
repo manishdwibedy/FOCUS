@@ -14,6 +14,7 @@ import FirebaseDatabase
 
 enum previousScreen{
     case people
+    case notification
 }
 
 class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate{
@@ -107,6 +108,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
                 VC?.showTab = 1
                 self.present(VC!, animated: true, completion: nil)
+            case .notification:
+                let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
+                
+                dropfromTop(view: self.view)
+                
+                self.present(vc, animated: true, completion: nil)
             }
         }
         else{
