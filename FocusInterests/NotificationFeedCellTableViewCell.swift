@@ -248,7 +248,8 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     func screenTaped()
     {
         print("screen taped")
-        if notif.item?.type == "event"{
+        if notif.item?.type == "event" && notif.item?.id != nil{
+            
             
             Constants.DB.event.child((notif.item?.id)!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let info = snapshot.value as? [String : Any] ?? [:]
@@ -267,7 +268,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             })
             
             
-        }else if notif.item?.type == "place"{
+        }else if notif.item?.type == "place" && notif.item?.id != nil{
             print("getting data")
             print((notif.item?.id)!)
             getYelpByID(ID:(notif.item?.id)!,completion: {Place in
