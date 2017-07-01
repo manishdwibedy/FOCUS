@@ -51,8 +51,8 @@ class notificationTabCell: UITableViewCell {
         var actionStr = ""
         var whatStr = ""
         
-        
-             Constants.DB.user.child(data["senderID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+        if let sender = data["senderID"] as? String{
+            Constants.DB.user.child(sender).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 if value != nil
                 {
@@ -66,18 +66,20 @@ class notificationTabCell: UITableViewCell {
                 
                 self.profileImage.setShowActivityIndicator(true)
                 self.profileImage.setIndicatorStyle(.gray)
+                
+            })
 
-             })
+        }
+        
         if data["type"] as! String == "event"{
-        Constants.DB.event.child(data["id"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            
-            let placeholderImage = UIImage(named: "empty_event")
-            self.typePic.sd_setImage(with: URL(string:(snapshot.key)), placeholderImage: placeholderImage)
-            
-            self.profileImage.setShowActivityIndicator(true)
-            self.profileImage.setIndicatorStyle(.gray)
-            
+            Constants.DB.event.child(data["id"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                
+                let placeholderImage = UIImage(named: "empty_event")
+                self.typePic.sd_setImage(with: URL(string:(snapshot.key)), placeholderImage: placeholderImage)
+                
+                self.profileImage.setShowActivityIndicator(true)
+                self.profileImage.setIndicatorStyle(.gray)
         })
         }else{
         

@@ -125,9 +125,12 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             
         }
         else{
-            let descString2: NSMutableAttributedString = NSMutableAttributedString(string: (notif.item?.itemName!)!)
-            descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (notif.item?.itemName?.characters.count)!))
-            attrString.append(descString2);
+            if let name = notif.item?.itemName{
+                let descString2: NSMutableAttributedString = NSMutableAttributedString(string: name)
+                descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, name.characters.count))
+                attrString.append(descString2);
+            }
+            
         }
         let descString2: NSMutableAttributedString = NSMutableAttributedString(string: (notif.item?.itemName!)!)
         descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (notif.item?.itemName?.characters.count)!))
