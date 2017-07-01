@@ -90,11 +90,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         commentField.resignFirstResponder()
         
-        self.commentData.insert([
+        self.commentData.append([
             "comment": commentField.text!,
             "date": Double(time),
             "fromUID": AuthApi.getFirebaseUid()!
-            ], at: 0)
+            ])
         commentField.text = ""
         self.commentsTableView.reloadData()
     }
