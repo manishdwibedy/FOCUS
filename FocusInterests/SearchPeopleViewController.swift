@@ -269,33 +269,33 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 let count = users.count
                 for (_, user) in users{
-                    let info = user as? [String:Any]
-                    
-                    if let user = User.toUser(info: info){
-                        if user.uuid != AuthApi.getFirebaseUid(){
-                            Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
-                                let value = snapshot.value as? NSDictionary
-                                if let value = value
-                                {
-                                    if let pin = pinData.toPin(user: user, value: value){
-                                        self.user_pins[user.uuid!] = pin
-                                        user.hasPin = true
-                                        
-                                        let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
-                                        user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                    if let info = user as? [String:Any]{
+                        if let user = User.toUser(info: info){
+                            if user.uuid != AuthApi.getFirebaseUid(){
+                                Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                    let value = snapshot.value as? NSDictionary
+                                    if let value = value
+                                    {
+                                        if let pin = pinData.toPin(user: user, value: value){
+                                            self.user_pins[user.uuid!] = pin
+                                            user.hasPin = true
+                                            
+                                            let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+                                            user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                        }
                                     }
-                                }
-                                self.filtered.append(user)
-                                
-                                self.filtered.sort {
-                                    if $0.hasPin && $1.hasPin{
-                                        return $0.pinDistance < $1.pinDistance
+                                    self.filtered.append(user)
+                                    
+                                    self.filtered.sort {
+                                        if $0.hasPin && $1.hasPin{
+                                            return $0.pinDistance < $1.pinDistance
+                                        }
+                                        return $0.hasPin && !$1.hasPin
                                     }
-                                    return $0.hasPin && !$1.hasPin
-                                }
-                                
-                                self.tableView.reloadData()
-                            })
+                                    
+                                    self.tableView.reloadData()
+                                })
+                            }
                         }
                     }
                 }

@@ -560,6 +560,22 @@ func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttribut
     return attrStr
 }
 
+func attributedString(from string: String, boldRange: NSRange?) -> NSAttributedString {
+    let attrs = [
+        NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15),
+        NSForegroundColorAttributeName: UIColor.white
+    ]
+    let nonBoldAttribute = [
+        NSFontAttributeName: UIFont(name: "Avenir-Book", size: 15),
+        NSForegroundColorAttributeName: UIColor.white
+    ]
+    let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
+    if let range = boldRange {
+        attrStr.setAttributes(attrs, range: range)
+    }
+    return attrStr
+}
+
 func getPlaceName(location: CLLocation, completion: @escaping (String) -> Void){
     // Add below code to get address for touch coordinates.
     let geoCoder = CLGeocoder()

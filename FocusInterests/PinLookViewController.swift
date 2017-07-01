@@ -75,19 +75,9 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 let length = messageText.characters.count - username.characters.count
                 let range = NSMakeRange(username.characters.count, length)
 
-                self.pinMessageLabel.attributedText = attributedString(from: messageText, nonBoldRange: range)
+                self.pinMessageLabel.attributedText = attributedString(from: messageText, boldRange: range)
 
-                //self.pinMessageLabel.text = (value?["username"] as? String)! + " " + self.data.pinMessage
-//                print(value?["username"] as? String)
-//                let boldText  = (value?["username"] as? String)!
-//                let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 15)]
-//                let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
-//
-//                let normalText = " " + self.data.pinMessage
-//                let normalString = NSMutableAttributedString(string:normalText)
-//                attributedString.append(normalString)
-//                self.pinMessageLabel.attributedText = attributedString
-                
+
             }
         })
         
