@@ -14,6 +14,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var addCommentView: UIView!
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var commentField: UITextField!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     var data: NSDictionary!
     var commentData = [NSDictionary]()
@@ -49,6 +50,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         commentField.delegate = self
         hideKeyboardWhenTappedAround()
+        
+        navBar.titleTextAttributes = Constants.navBar.attrs
         
     }
 

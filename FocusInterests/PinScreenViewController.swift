@@ -13,6 +13,7 @@ import Firebase
 import GooglePlaces
 import SCLAlertView
 import FBSDKLoginKit
+import SDWebImage
 
 class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate, CLLocationManagerDelegate, UITextViewDelegate{
 
@@ -92,6 +93,26 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
 //            }
 //        })
         
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let value = snapshot.value as? [String:Any]
+            let image_string = value?["image_string"] as? String ?? ""
+            
+            
+            if let url = URL(string: image_string){
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        self.profileImage.image = crop(image: image!, width: 85, height: 85)
+                    }
+                })
+            }
+            
+        })
         
         if pinType == "normal"
         {

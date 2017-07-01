@@ -128,6 +128,7 @@
                         <outlet property="addCommentView" destination="uWn-nL-sQi" id="zVk-DZ-oao"/>
                         <outlet property="commentField" destination="5hr-AB-2uG" id="caY-Vh-Fha"/>
                         <outlet property="commentsTableView" destination="nor-xQ-mzc" id="84T-ig-Kha"/>
+                        <outlet property="navBar" destination="mUN-Hw-R4h" id="IQ6-44-lkX"/>
                         <outlet property="postButton" destination="l6a-of-LZd" id="hsG-pu-IhC"/>
                     </connections>
                 </viewController>
