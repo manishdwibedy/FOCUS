@@ -108,17 +108,20 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate, UIPickerV
                 let gender_str = dictionnary!["gender"] as? String ?? ""
                 let name_str = dictionnary!["fullname"] as? String ?? ""
                 let website_str = dictionnary!["website"] as? String ?? ""
-                //let email_str = dictionnary!["email"] as? String ?? ""
-                //let phone_str = dictionnary!["phone_nbr"] as? String ?? ""
+                let email_str = dictionnary!["email"] as? String ?? ""
+                let phone_str = dictionnary!["phone_nbr"] as? String ?? ""
 
                 
                 
                 // SET CONTENT
                 self.usernameTf.text = username_str
-                self.infoTf.text = description_str
-                self.genderTf.text = gender_str
                 self.nameTf.text = name_str
                 self.websiteTf.text = website_str
+                self.infoTf.text = description_str
+                
+                self.emailTf.text = email_str
+                self.phoneTf.text = phone_str
+                self.genderTf.text = gender_str
                 
                 // SET PROFILE PHOTO
                 let image_str = dictionnary!["image_string"] as! String
@@ -135,20 +138,21 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate, UIPickerV
     @IBAction func cancelAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func doneAction(_ sender: Any) {
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues([
+            "username": self.usernameTf.text ?? "",
+            "fullname": self.nameTf.text ?? "",
+            "website": self.websiteTf.text ?? "",
+            "description": self.infoTf.text ?? "",
+            "email": self.emailTf.text ?? "",
+            "phone_nbr": self.phoneTf.text ?? "",
+            "gender": self.genderTf.text ?? ""
+            ])
         
-        FirebaseUpstream.sharedInstance.uploadProfileImage_(image: profilePhotoView.image!) { [unowned self] (returnUrl) in
-            
-            let url = returnUrl as String
-            
-            if let focusUser = FocusUser(userName: self.usernameTf.text, firebaseId: self.userId, imageString: url, currentLocation: nil, name: self.nameTf.text, website: self.websiteTf.text, email: self.emailTf.text, gender: self.genderTf.text, phone: self.phoneTf.text, description: self.infoTf.text){
-                FirebaseUpstream.sharedInstance.addToUsers_(focusUser: focusUser)
-                self.dismiss(animated: true, completion: nil)
-            }
-            
-            
-            
-        }
+        uploadImage(image:profilePhotoView.image!, path: Constants.storage.user_profile.child(AuthApi.getFirebaseUid()!))
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func changePhotoAction(_ sender: Any) {

@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import CoreLocation
 import Crashlytics
+import FirebaseStorage
 
 func featuresToString(features: [Feature]) -> String {
     var strArray = [String]()
@@ -194,6 +195,34 @@ func getDistance(fromLocation: CLLocation, toLocation: CLLocation, addBracket: B
     }
     else{
         return "\(distance.roundTo(places: 1)) mi"
+    }
+    
+}
+
+func uploadImage(image:UIImage, path: StorageReference)
+{
+    
+    let localFile = UIImageJPEGRepresentation(image, 0.5)
+    
+    let metadata = StorageMetadata()
+    metadata.contentType = "image/jpeg"
+    
+    let userID = AuthApi.getFirebaseUid()
+    let uploadTask = path.putData(localFile!, metadata: metadata)
+    
+    uploadTask.observe(.progress) { snapshot in
+        if let progress = snapshot.progress {
+            let percentComplete = 100.0 * Double(progress.completedUnitCount) / Double(progress.totalUnitCount)
+            print(percentComplete)
+        }
+    }
+    
+    uploadTask.observe(.success) { snapshot in
+        
+    }
+    
+    uploadTask.observe(.failure) { snapshot in
+        print(snapshot.error!)
     }
     
 }

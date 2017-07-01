@@ -312,11 +312,13 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
             let OKAction = UIAlertAction(title: "Unattend", style: .destructive) { action in
                 Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                    let value = snapshot.value as? [String:Any]
-                    
-                    for (id,_) in value!{
-                        Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
+                    if let value = snapshot.value as? [String:Any]{
+                        
+                        for (id,_) in value{
+                            Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
+                        }
                     }
+                    
                     
                 })
                 

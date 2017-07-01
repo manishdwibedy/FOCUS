@@ -132,9 +132,6 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             }
             
         }
-        let descString2: NSMutableAttributedString = NSMutableAttributedString(string: (notif.item?.itemName!)!)
-        descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (notif.item?.itemName?.characters.count)!))
-        
         
         
         if !isFeed{

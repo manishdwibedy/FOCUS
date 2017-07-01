@@ -1607,6 +1607,7 @@ struct Constants {
         public static let event = Storage.storage().reference().child("events")
         public static let messages = Storage.storage().reference().child("messages")
         public static let pins = Storage.storage().reference().child("pins")
+        public static let user_profile = Storage.storage().reference().child("user_profile")
     }
     
     struct Twitter{
