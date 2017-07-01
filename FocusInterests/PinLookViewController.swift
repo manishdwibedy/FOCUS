@@ -192,7 +192,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 
                 let keys = value.allKeys as? [String]
                 for (index,id) in (keys?.enumerated())!{
-                    if index == 2{
+                    if index == 3{
                         break
                         
                     }

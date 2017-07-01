@@ -364,11 +364,11 @@ line 2</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EL7-by-RR7">
-                                <rect key="frame" x="0.0" y="135" width="375" height="371"/>
+                                <rect key="frame" x="0.0" y="135" width="375" height="352"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fixed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpQ-O8-xtN">
-                                <rect key="frame" x="21" y="547" width="125" height="20"/>
+                                <rect key="frame" x="21" y="528" width="125" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="HNX-Bi-DJh"/>
                                     <constraint firstAttribute="height" constant="20" id="nwv-9v-ktC"/>
@@ -378,13 +378,13 @@ line 2</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 likes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0G-WK-LPf">
-                                <rect key="frame" x="171" y="543.5" width="59.5" height="23.5"/>
+                                <rect key="frame" x="171" y="524.5" width="59.5" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSX-QC-Op4">
-                                <rect key="frame" x="21" y="577" width="328" height="20.5"/>
+                                <rect key="frame" x="21" y="553" width="328" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -397,7 +397,7 @@ line 2</string>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bZe-CO-fzE">
-                                <rect key="frame" x="16" y="507" width="140" height="40"/>
+                                <rect key="frame" x="16" y="488" width="140" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFv-QC-3S7">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -435,13 +435,13 @@ line 2</string>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0si-vv-Uym">
-                                <rect key="frame" x="21" y="602.5" width="287" height="59.5"/>
+                                <rect key="frame" x="21" y="573.5" width="287" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="itj-WV-uYI"/>
+                                    <constraint firstAttribute="height" constant="80" id="itj-WV-uYI"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QE5-ed-gDA">
-                                <rect key="frame" x="279" y="556" width="75" height="0.0"/>
+                                <rect key="frame" x="279" y="537" width="75" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="9Oz-FK-ORa"/>
                                 </constraints>
@@ -453,12 +453,12 @@ line 2</string>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="EL7-by-RR7" firstAttribute="top" secondItem="W6f-uJ-Bg0" secondAttribute="bottom" constant="8" symbolic="YES" id="84X-AB-oXf"/>
-                            <constraint firstItem="0si-vv-Uym" firstAttribute="top" secondItem="kSX-QC-Op4" secondAttribute="bottom" constant="5" id="9OE-IT-I0H"/>
+                            <constraint firstItem="0si-vv-Uym" firstAttribute="top" secondItem="kSX-QC-Op4" secondAttribute="bottom" id="9OE-IT-I0H"/>
                             <constraint firstItem="hJE-2j-BeM" firstAttribute="leading" secondItem="W6f-uJ-Bg0" secondAttribute="leading" id="B8k-hl-Fh2"/>
-                            <constraint firstItem="kSX-QC-Op4" firstAttribute="top" secondItem="rpQ-O8-xtN" secondAttribute="bottom" constant="10" id="EUO-qt-KeP"/>
+                            <constraint firstItem="kSX-QC-Op4" firstAttribute="top" secondItem="rpQ-O8-xtN" secondAttribute="bottom" constant="5" id="EUO-qt-KeP"/>
                             <constraint firstItem="hJE-2j-BeM" firstAttribute="top" secondItem="89H-gt-97y" secondAttribute="top" constant="20" id="GwN-4o-Osp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kSX-QC-Op4" secondAttribute="trailing" constant="10" id="JJa-1J-0Nf"/>
-                            <constraint firstItem="k4d-2y-QOs" firstAttribute="top" secondItem="EL7-by-RR7" secondAttribute="bottom" constant="161" id="Jsj-S7-lCc"/>
+                            <constraint firstItem="k4d-2y-QOs" firstAttribute="top" secondItem="EL7-by-RR7" secondAttribute="bottom" constant="180" id="Jsj-S7-lCc"/>
                             <constraint firstItem="W6f-uJ-Bg0" firstAttribute="top" secondItem="hJE-2j-BeM" secondAttribute="bottom" id="KXP-Xx-Fwt"/>
                             <constraint firstItem="bZe-CO-fzE" firstAttribute="top" secondItem="EL7-by-RR7" secondAttribute="bottom" constant="1" id="QTq-s2-4E5"/>
                             <constraint firstItem="QE5-ed-gDA" firstAttribute="centerY" secondItem="j0G-WK-LPf" secondAttribute="centerY" id="Tce-z5-PBp"/>
