@@ -130,8 +130,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             }
             
             for contact in contacts{
-                if let name = contact.givenName as? String{
-                    let first = String(describing: name.characters.first!).uppercased()
+                if !contact.givenName.isEmpty{
+                    let first = String(describing: contact.givenName.characters.first!).uppercased()
                     
                     
                     if !self.sections.contains(first){
