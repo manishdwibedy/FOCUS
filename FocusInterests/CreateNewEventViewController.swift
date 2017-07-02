@@ -10,9 +10,10 @@ import UIKit
 import GooglePlaces
 import FirebaseDatabase
 import GeoFire
+import UITextField_Navigation
 import SCLAlertView
    
-class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate{
+class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate, NavigationFieldDelegate{
     
     @IBOutlet weak var interestListView: UIView!
     @IBOutlet var parentView: UIView!
@@ -426,20 +427,22 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBAction func addEventDate(_ sender: UITextField) {
 //        showDatePicker()
+        self.eventDateTextField.inputView = self.timePicker
         self.eventDateTextField.inputAccessoryView = self.dateToolbar
-        self.eventDateTextField.inputView = datePicker
     }
     
     @IBAction func addEventTime(_ sender: UITextField) {
 //        showStartTimePicker()
-        self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
         self.eventTimeTextField.inputView = self.timePicker
+        self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
+        
     }
     
     @IBAction func addEventEndTime(_ sender: UITextField) {
 //        showEndTimePicker()
-        self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
         self.eventEndTimeTextField.inputView = self.timePicker
+        self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
+        self.eventPriceTextView.becomeFirstResponder()
     }
     
     @IBAction func addPrice(_ sender: UITextField) {
@@ -482,12 +485,6 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         eventEndTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "End Time (if applicable)")
         eventPriceTextView.attributedPlaceholder = formatPlaceholder(placeholder: "Price (if applicable)")
 
-//        eventDateTextField.setRightIcon(iconString: "Calendar-50")
-//        locationTextField.setRightIcon(iconString: "location")
-//        eventTimeTextField.setRightIcon(iconString: "Clock-25")
-//        eventEndTimeTextField.setRightIcon(iconString: "Clock-25")
-//        eventPriceTextView.setRightIcon(iconString: "price")
-        
     }
     
     func formatPlaceholder(placeholder text: String) -> NSAttributedString {
@@ -651,9 +648,9 @@ extension CreateNewEventViewController {
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-    }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        textField.becomeFirstResponder()
+//    }
     
     //    MARK: TEXT VIEW DELEGATE FUNCTIONS
     
@@ -711,25 +708,33 @@ extension CreateNewEventViewController {
     
     func keyboardNextButton(){
         if self.eventNameTextField.isFirstResponder{
+            print("locationbecome first  ")
             self.locationTextField.becomeFirstResponder()
         } else if self.eventDateTextField.isFirstResponder {
+            print("event Time become first  ")
             self.eventTimeTextField.becomeFirstResponder()
             self.eventDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
+            self.eventDateTextField.resignFirstResponder()
+//            self.eventDateTextField.endEditing(true)
         } else if self.eventTimeTextField.isFirstResponder {
+            print("locationbecome first  ")
             self.eventEndTimeTextField.becomeFirstResponder()
             self.eventTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
             self.startTime = self.timePicker.date
+            self.eventTimeTextField.resignFirstResponder()
         } else if self.eventEndTimeTextField.isFirstResponder {
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
-            
             if timePicker.date > self.startTime!{
-                self.eventPriceTextView.becomeFirstResponder()
+//                self.eventPriceTextView.becomeFirstResponder()
                 self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
                 self.endTime = timePicker.date
             }
             else{
                 SCLAlertView().showError("Invalid end time", subTitle: "Please enter end time after start time.")
             }
+            self.eventPriceTextView.becomeFirstResponder()
+            self.eventEndTimeTextField.resignFirstResponder()
+            
         } else if self.eventPriceTextView.isFirstResponder{
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
             self.eventDescriptionTextView.becomeFirstResponder()

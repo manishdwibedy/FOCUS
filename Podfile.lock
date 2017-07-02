@@ -153,6 +153,7 @@ PODS:
   - TwitterCore (3.0.0)
   - TwitterKit (3.0.3):
     - TwitterCore (>= 3.0.0)
+  - UITextField-Navigation (3.0.0)
 
 DEPENDENCIES:
   - Agrume (from `https://github.com/JanGorman/Agrume.git`)
@@ -194,6 +195,7 @@ DEPENDENCIES:
   - SwiftyCam (~> 2.4.0)
   - SwiftyJSON
   - TwitterKit
+  - UITextField-Navigation
 
 EXTERNAL SOURCES:
   Agrume:
@@ -274,7 +276,8 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
   TwitterKit: 202404be71aadd81d19f677b34579fe77d9cb67e
+  UITextField-Navigation: 20e317ede7db16990db5b42fedaaaa32997ef614
 
-PODFILE CHECKSUM: 553cb344e9db54742024bf86971462e82f08d776
+PODFILE CHECKSUM: 30abc0d3fd3000af5857b1465e852cb06005c550
 
 COCOAPODS: 1.2.1

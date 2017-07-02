@@ -63,7 +63,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.1215903535" green="0.19626170400000001" blue="0.28496062760000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.093528874220000002" green="0.17284265160000001" blue="0.26158365610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="top" secondItem="eF4-Ev-ETy" secondAttribute="top" id="4el-KV-LTf"/>
                             <constraint firstAttribute="trailing" secondItem="z8z-95-lev" secondAttribute="trailing" id="5sX-mj-VFX"/>

@@ -55,7 +55,7 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate, UIPickerV
         doneButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir Heavy", size: 15.0)], for: .normal)
         
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: "Avenir Book", size: 18)!]
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!]
         
         toolBar.setItems([flexSpace, doneButton], animated: false)
         

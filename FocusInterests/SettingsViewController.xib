@@ -49,7 +49,7 @@
                     </textAttributes>
                     <items>
                         <navigationItem title="Settings" id="RQP-mL-nn0">
-                            <barButtonItem key="leftBarButtonItem" title="Item" image="BackArrow" style="plain" id="SHt-pc-35t">
+                            <barButtonItem key="leftBarButtonItem" image="BackArrow" style="plain" id="SHt-pc-35t">
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="backButtonTapped:" destination="-1" id="62L-LX-vQH"/>
