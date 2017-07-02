@@ -71,20 +71,18 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             {
                 if let username = value?["username"] as? String{
                     self.usernameLabel.text = username
+                    
+                    let messageText = "\(String(describing: username)) \(self.data.pinMessage)"
+                    
+                    let length = messageText.characters.count - username.characters.count
+                    let range = NSMakeRange(username.characters.count, length)
+                    
+                    self.pinMessageLabel.attributedText = attributedString(from: messageText, boldRange: range)
+
                 }
                 else{
                     self.usernameLabel.text = "N.A."
                 }
-                
-                
-                let messageText = "\(String(describing: username)) \(self.data.pinMessage)"
-                
-                let length = messageText.characters.count - username.characters.count
-                let range = NSMakeRange(username.characters.count, length)
-
-                self.pinMessageLabel.attributedText = attributedString(from: messageText, boldRange: range)
-
-
             }
         })
         

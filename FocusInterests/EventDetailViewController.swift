@@ -292,15 +292,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.present(ivc, animated: true, completion: { _ in })
     }
     
-//    @IBAction func likeEvent(_ sender: UIButton) {
-//        let fullRef = ref.child("events").child((event?.id)!)
-//        let newLike = Int(likeCount.text!)! + 1
-//        fullRef.child("likeAmount").updateChildValues(["num":newLike])
-//        fullRef.child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
-//        likeCount.text = String(newLike)
-//        likeOut.isEnabled = false
-//        
-//    }
+    @IBAction func likeEvent(_ sender: UIButton) {
+        let fullRef = ref.child("events").child((event?.id)!)
+        let newLike = Int(likeCount.text!)! + 1
+        fullRef.child("likeAmount").updateChildValues(["num":newLike])
+        fullRef.child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+        likeCount.text = String(newLike)
+        likeOut.isEnabled = false
+        
+    }
     
     @IBAction func attendEvent(_ sender: UIButton) {
         if isAttending == false
