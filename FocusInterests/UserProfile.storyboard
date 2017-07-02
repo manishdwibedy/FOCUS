@@ -698,12 +698,12 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="145" id="7RO-4e-v9w"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                 <color key="textColor" red="0.76470588235294112" green="0.76862745098039209" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.2627450980392157" green="0.32941176470588235" blue="0.396078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.093528874220000002" green="0.17284265160000001" blue="0.26158365610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="Qhi-1R-jLS" firstAttribute="centerY" secondItem="g2o-tf-WGX" secondAttribute="centerY" id="KYC-kP-0pu"/>
                                             <constraint firstItem="Qhi-1R-jLS" firstAttribute="top" secondItem="g2o-tf-WGX" secondAttribute="top" constant="5" id="VtX-wX-A7i"/>

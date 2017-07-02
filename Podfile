@@ -50,7 +50,7 @@ target 'FocusInterests' do
     pod 'SVPullToRefresh', :git => 'https://github.com/gabro/SVPullToRefresh', :branch => 'top-infinitescrolling'
     pod 'SwiftyCam', '~> 2.4.0'
     pod 'Reveal-SDK', :configurations => ['Debug']
-
+    pod 'UITextField-Navigation'
 end
 
 target 'FocusInterestsTests' do
