@@ -11,6 +11,7 @@
 //TODO: Need to figure out how to readjust size of "See You There" Button
 
 import UIKit
+import SDWebImage
 
 class NotificationFeedCellTableViewCell: UITableViewCell {
 
@@ -74,7 +75,69 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
 //        self.userProfilePic.image = notif.sender?.username
         let content = (notif.sender?.username)! + " "//! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
         
+        if !isFeed{
+            if notif.item?.type == "place"{
+                let placeID = notif.item?.id
+                
+                getYelpByID(ID: placeID!, completion: { place in
+                    let url = URL(string: place.image_url)
+                    let placeholderImage = UIImage(named: "empty_event")
+                    
+                    
+                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                        (receivedSize :Int, ExpectedSize :Int) in
+                        
+                    }, completed: {
+                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                        
+                        if image != nil && finished{
+                            self.locationImage.image = image
+                        }
+                    })
+                })
+            }
+            else if notif.item?.type == "event"{
+                let eventID = notif.item?.id
+                
+                let reference = Constants.storage.event.child("\(eventID!).jpg")
+                print(reference.fullPath)
+                let placeholderImage = UIImage(named: "empty_event")
+                
+                self.locationImage.image = placeholderImage
+                reference.downloadURL(completion: { (url, error) in
+                    
+                    if error != nil {
+                        print(error?.localizedDescription)
+                        return
+                    }
+                    
+                    self.locationImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                    self.locationImage.setShowActivityIndicator(true)
+                    self.locationImage.setIndicatorStyle(.gray)
+                    
+                })
+
+            }
+        }
         
+        Constants.DB.user.child((notif.sender?.uuid)!).observeSingleEvent(of: .value, with: {snapshot in
+            if let info = snapshot.value as? [String:Any]{
+                if let image_string = info["image_string"]{
+                    SDWebImageManager.shared().downloadImage(with: URL(string: image_string as! String), options: .continueInBackground, progress: {
+                        (receivedSize :Int, ExpectedSize :Int) in
+                        
+                    }, completed: {
+                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                        
+                        if image != nil && finished{
+                            self.userProfilePic.setImage(image, for: .normal)
+                        }
+                    })
+                }
+            }
+            
+            
+        })
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? [String:Any]
             
@@ -109,10 +172,23 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         attrString.append(descString);
         if isFeed{
-            if notif.type == .Pin{
+            if notif.type == .Pin || notif.type == .Comment || notif.type == .Like{
                 let pin_name = notif.item?.itemName!
                 let descString2: NSMutableAttributedString = NSMutableAttributedString(string: pin_name!)
                 descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, (pin_name?.characters.count)!))
+                
+                if let image_string = notif.item?.imageURL{
+                    SDWebImageManager.shared().downloadImage(with: URL(string: image_string)!, options: .continueInBackground, progress: {
+                        (receivedSize :Int, ExpectedSize :Int) in
+                        
+                    }, completed: {
+                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                        
+                        if image != nil && finished{
+                            self.locationImage.image = image
+                        }
+                    })
+                }
                 
                 attrString.append(descString2);
             }

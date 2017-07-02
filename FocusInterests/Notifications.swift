@@ -10,7 +10,7 @@ enum NotificationType: String {
     case Like = "liked"
     case Invite = "invited you to"
     case Tag = "tagged you in"
-    case Comment = "commented on"
+    case Comment = "commented on your pin - "
     case Pin = "pinned"
     case Going = "is going to"
 }

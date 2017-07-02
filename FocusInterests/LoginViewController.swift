@@ -206,6 +206,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                     case .invalidEmail:
                                         SCLAlertView().showError("Error", subTitle: "Invalid email")
                                     case .emailAlreadyInUse:
+                                        
                                         SCLAlertView().showError("Error", subTitle: "Email already in user")
                                     case .weakPassword:
                                         SCLAlertView().showError("Error", subTitle: "Weak password.")

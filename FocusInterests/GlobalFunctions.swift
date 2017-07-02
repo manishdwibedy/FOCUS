@@ -277,6 +277,9 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
     var eventCount = 0
     var totalInvitation = 0
     
+    var pinImageMap = [String:String]()
+    var pinImageCount = 0
+    var totalPins = 0
     Constants.DB.user.child(userID!).observeSingleEvent(of: .value, with: { snapshot in
         
         
@@ -296,21 +299,67 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
             let followerUser = NotificationUser(username: "username", uuid: followerID, imageURL: nil)
             Constants.DB.pins.child(followerID).observeSingleEvent(of: .value, with: { snapshot in
                 let pin11 = snapshot.value as? [String : Any]
-                
+                let pinID = snapshot.key
                 if let pin = pin11{
                     let time = Date(timeIntervalSince1970: pin["time"] as! Double)
                     let address = pin["formattedAddress"] as! String
                     let place = ItemOfInterest(itemName: pin["pin"] as! String, imageURL: nil, type: "pin")
+                    place.id = pinID
+                    
                     let pinFeed = FocusNotification(type: NotificationType.Pin, sender: followerUser, item: place, time: time)
                     
                     pins.append(pinFeed)
+                    if let images = pin["images"] as? [String:Any]{
+                        let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String
+                        let pinImage = Constants.storage.pins.child(imageURL!)
+                        
+                        
+                        // Fetch the download URL
+                        pinImage.downloadURL { url, error in
+                            if let error = error {
+                                // Handle any errors
+                            } else {
+                                pinImageMap[place.id] = url?.absoluteString
+                                pinImageCount += 1
+                                if pinCount == pins.count && pinImageCount == totalPins{
+                                    // attach images for all pins
+                                    
+                                    for pin in pins{
+                                        if let image = pinImageMap[(pin.item?.id)!]{
+                                            pin.item?.imageURL = image
+                                        }
+                                    }
+                                    gotPins(pins)
+                                    print("pin done \(pinCount)")
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+                    else{
+                        pinImageCount += 1
+                        if pinCount == pins.count && pinImageCount == pinCount{
+                            // attach images for all pins
+                            
+                            for pin in pins{
+                                if let image = pinImageMap[(pin.item?.id)!]{
+                                    pin.item?.imageURL = image
+                                }
+                            }
+                            gotPins(pins)
+                            print("pin done \(pinCount)")
+                        }
+                    }
+                    
                     
                     if let comments = pin["comments"] as? [String:Any]{
                         pinCount += comments.count
                         
                         for (id, data) in comments{
                             let commentData = data as? [String:Any]
-                            let commentInfo = ItemOfInterest(itemName: commentData?["comment"] as? String, imageURL: nil, type: "comment")
+                            let commentInfo = ItemOfInterest(itemName: commentData?["comment"] as? String, imageURL: place.imageURL, type: "comment")
+                            commentInfo.id = pinID
                             Constants.DB.user.child((commentData?["fromUID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
                                 
                                 if let data = snapshot.value as? [String:Any]{
@@ -318,7 +367,14 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                     let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: time)
                                     pins.append(pinFeed)
                                     
-                                    if pinCount == pins.count{
+                                    if pinCount == pins.count && pinImageCount == pinCount{
+                                        // attach images for all pins
+                                        
+                                        for pin in pins{
+                                            if let image = pinImageMap[(pin.item?.id)!]{
+                                                pin.item?.imageURL = image
+                                            }
+                                        }
                                         gotPins(pins)
                                         print("pin done \(pinCount)")
                                     }
@@ -346,7 +402,14 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                     let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
                                     pins.append(pinFeed)
                                     
-                                    if pinCount == pins.count{
+                                    if pinCount == pins.count && pinImageCount == pinCount{
+                                        // attach images for all pins
+                                        
+                                        for pin in pins{
+                                            if let image = pinImageMap[(pin.item?.id)!]{
+                                                pin.item?.imageURL = image
+                                            }
+                                        }
                                         gotPins(pins)
                                         print("pin done \(pinCount)")
                                     }
@@ -358,6 +421,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                 }
                 
                 pinCount += 1
+                totalPins += 1
                 if pinCount == pins.count{
                     gotPins(pins)
                     print("pin done \(pinCount)")
