@@ -69,8 +69,12 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
-                let username = value?["username"] as! String
-                self.usernameLabel.text = username
+                if let username = value?["username"] as? String{
+                    self.usernameLabel.text = username
+                }
+                else{
+                    self.usernameLabel.text = "N.A."
+                }
                 
                 
                 let messageText = "\(String(describing: username)) \(self.data.pinMessage)"
