@@ -256,7 +256,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //
         Constants.DB.user_mapping.keepSynced(true)
         
-        if AuthApi.getUserName()?.characters.count == 0 { // Change this back
+        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil{ // Change this back
             
             //            var usernameView = UsernameInputView(frame: CGRect(x: 0, y: 0, width: self.usernameInputView.frame.size.width, height: usernameInputView.frame.size.height), onCompletion: {username -> Void in
             //                Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
