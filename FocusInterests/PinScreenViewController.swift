@@ -164,7 +164,38 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         pinTextView.inputAccessoryView = doneToolbar
         pinTextView.delegate = self
-        getPhotos()
+        
+        
+        // Get the current authorization state.
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        if (status == PHAuthorizationStatus.authorized) {
+            getPhotos()
+        }
+            
+        else if (status == PHAuthorizationStatus.denied) {
+            // Access has been denied.
+        }
+            
+        else if (status == PHAuthorizationStatus.notDetermined) {
+            
+            // Access has not been determined.
+            PHPhotoLibrary.requestAuthorization({ (newStatus) in
+                
+                if (newStatus == PHAuthorizationStatus.authorized) {
+                    self.getPhotos()
+                }
+                    
+                else {
+                    
+                }
+            })
+        }
+            
+        else if (status == PHAuthorizationStatus.restricted) {
+            // Restricted access - normally won't happen.
+        }
+        
         
         if self.pinType != "place"{
             getPlaceName(location: AuthApi.getLocation()!, completion: {address in
