@@ -173,9 +173,10 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat =  "h:mm a"
         
-        let date = dateFormatter.date(from: startDate!)
-        
-        timePicker.date = date!
+        if let date = startDate{
+            let startDate = dateFormatter.date(from: date)
+            timePicker.date = startDate!
+        }
         
         self.timePicker.addTarget(self, action: #selector(pickerChange(sender:)), for: UIControlEvents.valueChanged)
         

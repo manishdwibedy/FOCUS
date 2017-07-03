@@ -112,42 +112,37 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.usersRef.child(snapshot.key).keepSynced(true)
                 self.usersRef.child(snapshot.key).observeSingleEvent(of: .value, with: {(snapshot) in
                     if let value = snapshot.value{
-                        let user_info = value as! [String:Any]
-                        let username = user_info["username"] as! String
-                        let image_string = user_info["image_string"] as! String
-                        
-                        let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date, image_string: image_string)
-                        
-                        self.messageMapper[snapshot.key] = userMessage
-                        self.userInfo[snapshot.key] = user_info
-                        self.contentMapping[userMessage.messageID] = userMessage
-                        
-                        Constants.DB.message_content.child(userMessage.messageID).queryOrdered(byChild: "date").queryLimited(toLast: 1).observe(.childAdded, with: {(snapshot) in
-                            let message_data = snapshot.value as? [String:Any]
-                            let id = userMessage.messageID
+                        if let user_info = value as? [String:Any]{
+                            let username = user_info["username"] as! String
+                            let image_string = user_info["image_string"] as! String
                             
-                            if let text = message_data?["text"]{
-                                let message = self.contentMapping[id]
-                                message?.addLastContent(lastContent: text as! String)
-                            }
-                            else{
-                                let message = self.contentMapping[id]
-                                message?.addLastContent(lastContent: "sent a photo")
-                            }
+                            let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date, image_string: image_string)
                             
-                            self.messages.append(userMessage)
-                            self.messageTable.reloadData()
-                        })
+                            self.messageMapper[snapshot.key] = userMessage
+                            self.userInfo[snapshot.key] = user_info
+                            self.contentMapping[userMessage.messageID] = userMessage
+                            
+                            Constants.DB.message_content.child(userMessage.messageID).queryOrdered(byChild: "date").queryLimited(toLast: 1).observe(.childAdded, with: {(snapshot) in
+                                let message_data = snapshot.value as? [String:Any]
+                                let id = userMessage.messageID
+                                
+                                if let text = message_data?["text"]{
+                                    let message = self.contentMapping[id]
+                                    message?.addLastContent(lastContent: text as! String)
+                                }
+                                else{
+                                    let message = self.contentMapping[id]
+                                    message?.addLastContent(lastContent: "sent a photo")
+                                }
+                                
+                                self.messages.append(userMessage)
+                                self.messageTable.reloadData()
+                            })
+                        }
                     }
-                    
-                    
                 })
             }
-            
-            
-            
         })
-        
     }
     
     func listenForChanges(){
