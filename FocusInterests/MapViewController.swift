@@ -754,75 +754,79 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func fetchPlaces(around location: CLLocation, token: String){
-        let url = "https://api.yelp.com/v3/businesses/search"
-        let parameters: [String: Any] = [
-            "categories": getYelpCategories(),
-            "latitude" : Double(location.coordinate.latitude),
-            "longitude" : Double(location.coordinate.longitude)
-        ]
         
-        let headers: HTTPHeaders = [
-            "authorization": "Bearer \(AuthApi.getYelpToken()!)",
-            "cache-contro": "no-cache"
-        ]
-
-        Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
-            let json = JSON(data: response.data!)
+        for interest in getYelpCategories().components(separatedBy: ","){
+            let url = "https://api.yelp.com/v3/businesses/search"
+            let parameters: [String: Any] = [
+                "categories": interest,
+                "latitude" : Double(location.coordinate.latitude),
+                "longitude" : Double(location.coordinate.longitude)
+            ]
             
-            let initial = self.places.count
-            for (index, business) in json["businesses"].enumerated(){
-                let id = business.1["id"].stringValue
-                let name = business.1["name"].stringValue
-                let image_url = business.1["image_url"].stringValue
-                let isClosed = business.1["is_closed"].boolValue
-                let reviewCount = business.1["review_count"].intValue
-                let rating = business.1["rating"].floatValue
-                let latitude = business.1["coordinates"]["latitude"].doubleValue
-                let longitude = business.1["coordinates"]["longitude"].doubleValue
-                let price = business.1["price"].stringValue
-                let address_json = business.1["location"]["display_address"].arrayValue
-                let phone = business.1["display_phone"].stringValue
-                let distance = business.1["distance"].doubleValue
-                let categories_json = business.1["categories"].arrayValue
-                let url = business.1["url"].stringValue
-                let plain_phone = business.1["phone"].stringValue
+            let headers: HTTPHeaders = [
+                "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+                "cache-contro": "no-cache"
+            ]
+            
+            Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
+                let json = JSON(data: response.data!)
                 
-                var address = [String]()
-                for raw_address in address_json{
-                    address.append(raw_address.stringValue)
+                let initial = self.places.count
+                for (index, business) in json["businesses"].enumerated(){
+                    let id = business.1["id"].stringValue
+                    let name = business.1["name"].stringValue
+                    let image_url = business.1["image_url"].stringValue
+                    let isClosed = business.1["is_closed"].boolValue
+                    let reviewCount = business.1["review_count"].intValue
+                    let rating = business.1["rating"].floatValue
+                    let latitude = business.1["coordinates"]["latitude"].doubleValue
+                    let longitude = business.1["coordinates"]["longitude"].doubleValue
+                    let price = business.1["price"].stringValue
+                    let address_json = business.1["location"]["display_address"].arrayValue
+                    let phone = business.1["display_phone"].stringValue
+                    let distance = business.1["distance"].doubleValue
+                    let categories_json = business.1["categories"].arrayValue
+                    let url = business.1["url"].stringValue
+                    let plain_phone = business.1["phone"].stringValue
+                    
+                    var address = [String]()
+                    for raw_address in address_json{
+                        address.append(raw_address.stringValue)
+                    }
+                    
+                    var categories = [Category]()
+                    for raw_category in categories_json as [JSON]{
+                        let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                        categories.append(category)
+                    }
+                    
+                    let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
+                    
+                    if !self.places.contains(place){
+                        
+                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+                        let marker = GMSMarker(position: position)
+                        marker.icon = UIImage(named: "place_icon")
+                        marker.title = place.name
+                        marker.map = self.mapView
+                        marker.isTappable = true
+                        marker.accessibilityLabel = "place_\(self.places.count)"
+                        
+                        //                    let item = MapCluster(position: position, name: place.name, icon: UIImage(named: "place_icon")!, id: String(self.places.count), type: "place")
+                        //                    self.clusterManager.add(item)
+                        self.places.append(place)
+                        self.placeMapping[place.id] = place
+                        self.getPlaceHours(id: place.id)
+                        
+                        //self.searchPlacesTab?.places.append(place)
+                        
+                        
+                    }
                 }
-                
-                var categories = [Category]()
-                for raw_category in categories_json as [JSON]{
-                    let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
-                    categories.append(category)
-                }
-                
-                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
-                
-                if !self.places.contains(place){
-                    
-                    let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
-                    let marker = GMSMarker(position: position)
-                    marker.icon = UIImage(named: "place_icon")
-                    marker.title = place.name
-                    marker.map = self.mapView
-                    marker.isTappable = true
-                    marker.accessibilityLabel = "place_\(self.places.count)"
-                    
-//                    let item = MapCluster(position: position, name: place.name, icon: UIImage(named: "place_icon")!, id: String(self.places.count), type: "place")
-//                    self.clusterManager.add(item)
-                    self.places.append(place)
-                    self.placeMapping[place.id] = place
-                    self.getPlaceHours(id: place.id)
-                    
-                    //self.searchPlacesTab?.places.append(place)
-                    
-
-                }
+                //            self.clusterManager.cluster()
             }
-//            self.clusterManager.cluster()
         }
+        
     }
     
     func getPlaceHours(id: String){
