@@ -831,8 +831,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         self.placeMapping[place.id] = place
                         self.getPlaceHours(id: place.id)
                         
-                        //self.searchPlacesTab?.places.append(place)
-                        
+                        self.searchPlacesTab?.places.append(place)
+                        print(self.searchPlacesTab?.places.count)
                         
                     }
                 }

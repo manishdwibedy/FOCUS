@@ -29,7 +29,6 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     var showPopup = false
     var followingCount = 0
     var followingPlaces = [Place]()
-    var suggestions = [Place]()
     var suggestionCount = 0
     
 //    @IBOutlet weak var inviteBottomSpace: NSLayoutConstraint!
@@ -100,7 +99,6 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
             
             if let placeData = value{
                 self.followingCount = placeData.count
-                self.places.removeAll()
                 self.followingPlaces.removeAll()
                 for (_,place) in placeData
                 {
@@ -109,9 +107,8 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                         self.followingPlaces.append(place)
                         
                         
-                        if self.followingPlaces.count == self.followingCount && self.suggestions.count > 0{
-                            self.places = self.followingPlaces
-                            self.places.append(contentsOf: self.suggestions)
+                        if self.followingPlaces.count == self.followingCount{
+                            self.places = self.followingPlaces + self.places
                             
                             self.filtered = self.places
                             self.tableView.reloadData()
@@ -122,18 +119,6 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 
             }
-            
-            getNearbyPlaces(text: "", categories: getYelpCategories(), count: nil, location: AuthApi.getLocation()!, completion: {places in
-                self.suggestions = places
-                
-                if self.followingPlaces.count == self.followingCount && self.suggestions.count > 0{
-                    self.places = self.followingPlaces
-                    self.places.append(contentsOf: places)
-                    self.tableView.reloadData()
-                }
-            })
-            
-            
         })
         
         
@@ -225,6 +210,8 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.text = ""
+        self.filtered = self.places
+        self.tableView.reloadData()
         self.searchBar.setShowsCancelButton(false, animated: true)
     }
     
