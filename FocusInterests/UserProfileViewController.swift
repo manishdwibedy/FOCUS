@@ -336,6 +336,15 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         return eventCell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let suggestion = self.suggestion[indexPath.row]
+        
+        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+        controller.event = suggestion
+        self.present(controller, animated: true, completion: nil)
+    }
+    
     func showFollowing(sender:UITapGestureRecognizer) {
         let followerViewController = UIStoryboard(name: "Followers", bundle: nil).instantiateViewController(withIdentifier: "FollowersViewController") as! FollowersViewController
         followerViewController.windowTitle = "Following"
