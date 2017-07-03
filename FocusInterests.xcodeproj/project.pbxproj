@@ -58,7 +58,7 @@
 		5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51C8D51EA7285C007E8D99 /* Event.swift */; };
 		5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */; };
 		5B5906461EC3CB0400466AAC /* UserMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5906451EC3CB0400466AAC /* UserMessages.swift */; };
-		5B5906481EC576CA00466AAC /* map_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5906471EC576CA00466AAC /* map_style.json */; };
+		5B5906481EC576CA00466AAC /* night_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B5906471EC576CA00466AAC /* night_style.json */; };
 		5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */; };
 		5B59064E1EC7E60D00466AAC /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */; };
 		5B634C811ED1960000EBCC29 /* MapCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B634C801ED1960000EBCC29 /* MapCluster.swift */; };
@@ -143,6 +143,7 @@
 		5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB87B01EC9861F0064E5EC /* search_place.storyboard */; };
 		5BBF7AC21EEF5C61000209D6 /* Reviews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */; };
 		5BD641EE1EFB229D003E2A4B /* SearchPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */; };
+		5BE30DD01F0AF20500ECE7EF /* day_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE30DCF1F0AF20500ECE7EF /* day_style.json */; };
 		5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */; };
 		5BE31E8A1EA76094004768F0 /* MapEventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31E891EA76094004768F0 /* MapEventInfoView.swift */; };
 		5BE772541F071D2200E7D579 /* PinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE772531F071D2200E7D579 /* PinData.swift */; };
@@ -353,7 +354,7 @@
 		5B51C8D51EA7285C007E8D99 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		5B5906421EC28FEC00466AAC /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		5B5906451EC3CB0400466AAC /* UserMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMessages.swift; sourceTree = "<group>"; };
-		5B5906471EC576CA00466AAC /* map_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map_style.json; sourceTree = "<group>"; };
+		5B5906471EC576CA00466AAC /* night_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = night_style.json; sourceTree = "<group>"; };
 		5B59064B1EC7DCC700466AAC /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		5B59064D1EC7E60D00466AAC /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		5B634C801ED1960000EBCC29 /* MapCluster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCluster.swift; sourceTree = "<group>"; };
@@ -473,6 +474,7 @@
 		5BAB87B01EC9861F0064E5EC /* search_place.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = search_place.storyboard; sourceTree = "<group>"; };
 		5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Reviews.storyboard; sourceTree = "<group>"; };
 		5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaces.swift; sourceTree = "<group>"; };
+		5BE30DCF1F0AF20500ECE7EF /* day_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = day_style.json; sourceTree = "<group>"; };
 		5BE31E871EA75E6A004768F0 /* MapEventInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapEventInfoView.xib; sourceTree = "<group>"; };
 		5BE31E891EA76094004768F0 /* MapEventInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapEventInfoView.swift; sourceTree = "<group>"; };
 		5BE772531F071D2200E7D579 /* PinData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinData.swift; sourceTree = "<group>"; };
@@ -1067,7 +1069,8 @@
 			isa = PBXGroup;
 			children = (
 				5B959FD71ECAD12500094FE6 /* map.gpx */,
-				5B5906471EC576CA00466AAC /* map_style.json */,
+				5B5906471EC576CA00466AAC /* night_style.json */,
+				5BE30DCF1F0AF20500ECE7EF /* day_style.json */,
 				D25220731E5A8A7400EC2014 /* Constants.swift */,
 				D230D8C41E5B777C00025EE9 /* GlobalFunctions.swift */,
 				D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */,
@@ -1502,6 +1505,7 @@
 				EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */,
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */,
+				5BE30DD01F0AF20500ECE7EF /* day_style.json in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
@@ -1517,7 +1521,7 @@
 				FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */,
 				5B448E651EE94BF900873F79 /* Invites.storyboard in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
-				5B5906481EC576CA00466AAC /* map_style.json in Resources */,
+				5B5906481EC576CA00466AAC /* night_style.json in Resources */,
 				611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */,
 				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
 				5B71D6F41ED17F2B0093A3F5 /* CreateEvent.storyboard in Resources */,
