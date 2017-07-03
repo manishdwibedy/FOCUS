@@ -80,10 +80,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         ]
         
         navBar.titleTextAttributes = attrs
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         
         let ref = Constants.DB.user
@@ -120,7 +116,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                         }
                                         
                                         if self.followers.count == followingCount{
-                                            self.filtered = self.followers + self.filtered
+                                            self.people = self.followers + self.filtered
+                                            self.filtered = self.people
                                             self.tableView.reloadData()
                                         }
                                         
@@ -165,7 +162,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     return $0.hasPin && !$1.hasPin
                                 }
                                 
-                                self.filtered = self.followers + self.people
+                                self.people = self.followers + self.people
+                                self.filtered = self.people
                                 self.tableView.reloadData()
                             })
                         }
@@ -174,6 +172,12 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             }
             
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
         
         let cancelButtonAttributes: [String: AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
         
