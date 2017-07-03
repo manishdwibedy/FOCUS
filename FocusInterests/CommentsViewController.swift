@@ -18,6 +18,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var data: NSDictionary!
     var commentData = [[String:Any]]()
+    
+    let toolBar = UIToolbar()
+    let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(CommentsViewController.cancelPressed))
+    let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,6 +69,14 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         commentsTableView.backgroundColor = Constants.color.navy
         
         commentField.delegate = self
+        
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.sizeToFit()
+        toolBar.setItems([flexSpace, cancelButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        self.commentField.inputAccessoryView = toolBar
+        
         hideKeyboardWhenTappedAround()
         
         navBar.titleTextAttributes = Constants.navBar.attrs
@@ -144,5 +157,9 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
 
         textField.resignFirstResponder()
         return true
+    }
+    
+    func cancelPressed(){
+        self.commentField.endEditing(true)
     }
 }

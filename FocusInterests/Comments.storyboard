@@ -14,7 +14,7 @@
         <scene sceneID="hK1-Zg-svd">
             <objects>
                 <navigationController storyboardIdentifier="Comments" id="pYf-yc-Qtf" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WaK-yN-wKY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WaK-yN-wKY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,7 +75,7 @@
                                         <rect key="frame" x="10" y="22.5" width="253" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6a-of-LZd">
                                         <rect key="frame" x="283" y="22.5" width="50" height="30"/>
