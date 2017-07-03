@@ -108,7 +108,7 @@ class PlaceViewController: UIViewController {
         ratingLabel.text = "\(place.rating)"
         
         imageView.sd_setImage(with: URL(string: (place.image_url)), placeholderImage: nil)
-        self.getLatestComments()
+        //self.getLatestComments()
         fetchSuggestedPlaces(token: AuthApi.getYelpToken()!)
         
     }
