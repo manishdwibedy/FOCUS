@@ -13,7 +13,8 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var navBar: UINavigationBar!
-    
+    @IBOutlet weak var feedbackSentView: UIView!
+    @IBOutlet weak var feedbackSendBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,8 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
         textView.text = "Please enter your feedback here..."
         textView.roundCorners(radius: 10)
         textView.delegate = self
+        
+        self.feedbackSentView.allCornersRounded(radius: 10)
         
         sendButton.roundCorners(radius: 10)
         
@@ -43,6 +46,18 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
             let time = NSDate().timeIntervalSince1970
             Constants.DB.feedback.childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "feedback": textView.text])
         }
+        
+        self.feedbackSentView.isHidden = false
+        self.textView.endEditing(true)
+        UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.feedbackSentView.center.y -= 103
+            self.feedbackSendBottomConstraint.constant -= 103
+        }, completion: { animate in
+            UIView.animate(withDuration: 2.5, delay: 2.0, options: .curveEaseInOut, animations: {
+                self.feedbackSentView.center.y += 103
+                self.feedbackSendBottomConstraint.constant += 103
+            }, completion: nil)
+        })
     }
 
     @IBAction func backPressed(_ sender: Any) {

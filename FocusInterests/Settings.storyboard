@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -679,15 +680,40 @@
                                             <action selector="sendFeedback:" destination="zq0-nP-QTl" eventType="touchUpInside" id="gGa-Xa-MvN"/>
                                         </connections>
                                     </button>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJO-rB-xpx">
+                                        <rect key="frame" x="8" y="623" width="359" height="75"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="396-AG-PhL">
+                                                <rect key="frame" x="84" y="17" width="192" height="42"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                <color key="textColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="396-AG-PhL" firstAttribute="centerX" secondItem="fJO-rB-xpx" secondAttribute="centerX" id="68q-77-l3m"/>
+                                            <constraint firstAttribute="height" constant="75" id="6zF-Wa-VDa"/>
+                                            <constraint firstItem="396-AG-PhL" firstAttribute="top" secondItem="fJO-rB-xpx" secondAttribute="top" constant="17" id="Fce-iT-qtj"/>
+                                            <constraint firstItem="396-AG-PhL" firstAttribute="leading" secondItem="fJO-rB-xpx" secondAttribute="leading" constant="84" id="dCc-Ym-tgO"/>
+                                            <constraint firstItem="396-AG-PhL" firstAttribute="centerY" secondItem="fJO-rB-xpx" secondAttribute="centerY" id="ehN-xz-Jb2"/>
+                                            <constraint firstAttribute="trailing" secondItem="396-AG-PhL" secondAttribute="trailing" constant="83" id="l1x-0n-KGj"/>
+                                            <constraint firstAttribute="bottom" secondItem="396-AG-PhL" secondAttribute="bottom" constant="16" id="oHc-qu-sVb"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="fJO-rB-xpx" firstAttribute="centerX" secondItem="7qf-fK-dI2" secondAttribute="centerX" id="Dye-He-4qq"/>
                                     <constraint firstAttribute="trailing" secondItem="vS8-y1-xLs" secondAttribute="trailing" constant="30" id="QrP-Sc-pDi"/>
                                     <constraint firstAttribute="trailing" secondItem="Yof-41-T5I" secondAttribute="trailing" constant="8" id="R9f-LA-FOS"/>
                                     <constraint firstItem="Yof-41-T5I" firstAttribute="leading" secondItem="7qf-fK-dI2" secondAttribute="leading" constant="8" id="RHe-42-fg3"/>
+                                    <constraint firstItem="fJO-rB-xpx" firstAttribute="bottom" secondItem="7qf-fK-dI2" secondAttribute="bottomMargin" constant="103" id="Wdy-w9-qLB"/>
                                     <constraint firstItem="vS8-y1-xLs" firstAttribute="top" secondItem="Yof-41-T5I" secondAttribute="bottom" constant="30" id="WwY-Po-WPK"/>
+                                    <constraint firstItem="fJO-rB-xpx" firstAttribute="leading" secondItem="7qf-fK-dI2" secondAttribute="leadingMargin" id="YPA-WU-eJC"/>
                                     <constraint firstItem="Yof-41-T5I" firstAttribute="top" secondItem="7qf-fK-dI2" secondAttribute="top" constant="10" id="nDQ-DL-hYc"/>
                                     <constraint firstItem="vS8-y1-xLs" firstAttribute="leading" secondItem="7qf-fK-dI2" secondAttribute="leading" constant="30" id="qp9-Cr-dKv"/>
+                                    <constraint firstItem="fJO-rB-xpx" firstAttribute="trailing" secondItem="7qf-fK-dI2" secondAttribute="trailingMargin" id="wfn-8J-LpY"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -703,6 +729,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="feedbackSendBottomConstraint" destination="Wdy-w9-qLB" id="DrL-VU-te0"/>
+                        <outlet property="feedbackSentView" destination="fJO-rB-xpx" id="4Ds-Gy-vIK"/>
                         <outlet property="navBar" destination="PmP-Ho-pa0" id="tW4-rV-C2y"/>
                         <outlet property="sendButton" destination="vS8-y1-xLs" id="oS9-z8-LcQ"/>
                         <outlet property="textView" destination="Yof-41-T5I" id="jG7-xO-rfb"/>
