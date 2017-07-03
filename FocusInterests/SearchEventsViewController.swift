@@ -84,29 +84,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         navBar.titleTextAttributes = attrs
         
-        Constants.DB.event.observeSingleEvent(of: .value, with: {snapshot in
-            let data = snapshot.value as? [String : Any] ?? [:]
-            
-            for (id, event) in data{
-                if let info = event as? [String:Any]{
-                    let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id as! String, category: info["interests"] as? String)
-                    
-                    if let attending = info["attendingList"] as? [String:Any]{
-                        event.setAttendessCount(count: attending.count)
-                    }
-                    
-                    let event_interests = event.category?.components(separatedBy: ",")
-                    var user_interests = getUserInterests().components(separatedBy: ",")
-                    
-                    let common = event_interests?.filter(user_interests.contains)
-                    
-                    if (common != nil) && (common?.count)! > 0{
-                        self.all_events.append(event)
-                    }
-                    
-                }
-            }
-        })
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +101,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 {
                     let id = (place as? [String:Any])?["ID"]
                     
-                    Constants.DB.event.child(id as! String).observe(DataEventType.value, with: { (snapshot) in
+                    Constants.DB.event.child(id as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                         let info = snapshot.value as? [String : Any] ?? [:]
             
 //                        for (id, event) in events{
@@ -151,10 +129,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                                     return $0.distance < $1.distance
                                 }
 
-                                self.events = self.attending
+                                self.events = self.attending + self.all_events
                                 
-                                
-                                self.events.append(contentsOf: self.all_events)
                                 self.filtered = self.events
                                 self.tableView.reloadData()
                             }
@@ -407,6 +383,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.text = ""
+        self.filtered = self.events
+        self.tableView.reloadData()
         self.searchBar.setShowsCancelButton(false, animated: true)
     }
     

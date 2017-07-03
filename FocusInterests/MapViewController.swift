@@ -170,6 +170,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 marker.map = self.mapView
                 marker.accessibilityLabel = "event_\(self.events.count)"
                 self.events.append(event)
+            
+                self.searchEventsTab?.all_events.append(event)
                 
 //                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "Event")!, id: String(describing: self.events.count), type: "event")
 //                self.clusterManager.add(item)
