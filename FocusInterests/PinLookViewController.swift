@@ -186,10 +186,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         }
         
         data.dbPath.child("comments").queryOrdered(byChild: "date").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
+            let value = snapshot.value as? [String:Any]
             if let value = value
             {
-                if value.count > 2{
+                if value.count > 3{
                     let textLabel = UILabel()
 
                     textLabel.textColor = .white
@@ -204,8 +204,24 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false;
                 }
                 
-                let keys = value.allKeys as? [String]
-                for (index,id) in (keys?.enumerated())!{
+                var myArr = Array(value.keys)
+                var sortedKeys = myArr.sorted(by: {
+                    let val1 = value[$0] as? [String: Any]
+                    let val2 = value[$1] as? [String: Any]
+                    
+                    let date1 = val1!["date"] as! Double
+                    let date2 = val2!["date"] as! Double
+                    return date1 > date2
+                })
+                
+                if sortedKeys.count < 3{
+                    sortedKeys = sortedKeys.reversed()
+                }
+                else{
+                    sortedKeys = sortedKeys[0..<3].reversed()
+                }
+                
+                for (index,id) in (sortedKeys.enumerated()){
                     if index == 3{
                         break
                         
@@ -243,8 +259,11 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     
                 }
                 
-                if value.count < 3{
-                    self.commentHeight.constant = CGFloat(20 * value.count)
+                if value.count < 4{
+                    self.commentHeight.constant = CGFloat(20 * (value.count))
+                }
+                else{
+                    self.commentHeight.constant = CGFloat(20 * 4)
                 }
                 
 //                for (index, category) in (place.categories.enumerated()){

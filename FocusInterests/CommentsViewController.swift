@@ -17,7 +17,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var navBar: UINavigationBar!
     
     var data: NSDictionary!
-    var commentData = [NSDictionary]()
+    var commentData = [[String:Any]]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,13 +27,28 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.postButton.roundCorners(radius: 5.0)
         
-        Constants.DB.pins.child(data["fromUID"] as! String).child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
+        Constants.DB.pins.child(data["fromUID"] as! String).child("comments").queryOrdered(byChild: "date").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String:Any]
+            var info = [String:Any]()
             if value != nil
             {
                 for (key,_) in value!
                 {
-                    self.commentData.append(value?[key] as! NSDictionary)
+                    info[key] = value?[key] as! [String:Any]
+                }
+                
+                var myArr = Array(info.keys)
+                var sortedKeys = myArr.sorted(by: {
+                    let val1 = info[$0] as? [String: Any]
+                    let val2 = info[$1] as? [String: Any]
+                    
+                    let date1 = val1!["date"] as! Double
+                    let date2 = val2!["date"] as! Double
+                    return date1 < date2
+                })
+                
+                for key in sortedKeys{
+                    self.commentData.append(info[key] as! [String : Any])
                 }
             }
             self.commentsTableView.reloadData()
