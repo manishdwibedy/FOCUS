@@ -46,7 +46,6 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var guestListBttn: UIButton!
     @IBOutlet weak var showGuestFriendsBttn: UIButton!
     
-    @IBOutlet weak var interestTableBottom: NSLayoutConstraint!
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -265,14 +264,14 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             self.publicLabel.textColor = UIColor.white
             
             guestSettingsStackView.isHidden = false
-            interestTopConstraint.constant = 125
+            interestTopConstraint.constant = 100
             
         } else /* the switch is set to public */ {
             self.privateLabel.textColor = UIColor.white
             self.publicLabel.textColor = UIColor.primaryGreen()
             
             guestSettingsStackView.isHidden = true
-            interestTopConstraint.constant = 50
+            interestTopConstraint.constant = 0
         }
     }
     
