@@ -67,7 +67,7 @@
                                 <action selector="goBack:" destination="Tuo-yx-ZBR" id="vR1-gM-O6x"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="lO4-1O-a7p">
+                        <barButtonItem key="rightBarButtonItem" image="Compose message" id="lO4-1O-a7p">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
@@ -149,7 +149,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6vd-HE-0n2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fMv-44-lwF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -161,8 +161,9 @@
     </scenes>
     <resources>
         <image name="BackArrow" width="30" height="30"/>
+        <image name="Compose message" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xa5-EJ-3bZ"/>
+        <segue reference="JoM-WG-iMF"/>
     </inferredMetricsTieBreakers>
 </document>

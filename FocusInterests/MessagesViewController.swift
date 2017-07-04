@@ -65,7 +65,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationController?.navigationBar.barTintColor = Constants.color.navy
         
         
-        var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "BackArrow"), style: .plain, target: self, action: #selector(compose))
+        var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Compose message"), style: .plain, target: self, action: #selector(compose))
+        backButton.tintColor = .white
         
         self.navigationItem.rightBarButtonItem = backButton
 
