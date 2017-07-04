@@ -245,6 +245,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         else if textField == phoneTf{
             genderTf.becomeFirstResponder()
         }
+        return true
     }
     
 }
