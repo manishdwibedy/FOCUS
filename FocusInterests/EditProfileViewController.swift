@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController,UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
+class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
 
     @IBOutlet weak var genderTf: UITextField!
     @IBOutlet weak var phoneTf: UITextField!
@@ -199,7 +199,7 @@ class EditProfileViewController: UIViewController,UITextFieldDelegate, UIPickerV
     */
 }
 
-extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
@@ -214,6 +214,37 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+//    @IBOutlet weak var genderTf: UITextField!
+//    @IBOutlet weak var phoneTf: UITextField!
+//    @IBOutlet weak var emailTf: UITextField!
+//    @IBOutlet weak var infoTf: UITextField!
+//    @IBOutlet weak var websiteTf: UITextField!
+//    @IBOutlet weak var usernameTf: UITextField!
+//    @IBOutlet weak var nameTf: UITextField!
+//    @IBOutlet weak var profilePhotoView: UIImageView!
+//    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nameTf{
+            usernameTf.becomeFirstResponder()
+        }
+        else if textField == usernameTf{
+            websiteTf.becomeFirstResponder()
+        }
+        else if textField == websiteTf{
+            infoTf.becomeFirstResponder()
+        }
+        else if textField == infoTf{
+            emailTf.becomeFirstResponder()
+        }
+        else if textField == emailTf{
+            phoneTf.becomeFirstResponder()
+        }
+        else if textField == phoneTf{
+            genderTf.becomeFirstResponder()
+        }
     }
     
 }
