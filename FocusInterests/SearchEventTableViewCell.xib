@@ -135,6 +135,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="pyj-iE-Wv2" firstAttribute="top" secondItem="BSs-hv-3aY" secondAttribute="top" constant="5" id="4UB-rN-eKX"/>
                     <constraint firstAttribute="trailingMargin" secondItem="pyj-iE-Wv2" secondAttribute="trailing" id="c2F-lb-vCs"/>
