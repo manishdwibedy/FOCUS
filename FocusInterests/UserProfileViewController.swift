@@ -379,6 +379,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 //self.descriptionText.text = description
                 self.fullNameLabel.text = fullname
                 self.userNameLabel.text = username_str
+                self.descriptionText.text = description_str
                 
                 self.navBarItem.title = username_str
                 
