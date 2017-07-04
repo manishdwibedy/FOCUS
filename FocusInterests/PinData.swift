@@ -18,6 +18,7 @@ class pinData
     var coordinates = CLLocationCoordinate2D()
     var dbPath = DatabaseReference()
     var focus = ""
+    var username = ""
     
     init(UID:String, dateTS:Double, pin: String, location: String, lat: Double, lng: Double, path: DatabaseReference, focus: String) {
         self.fromUID = UID

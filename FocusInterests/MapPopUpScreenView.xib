@@ -82,7 +82,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="23.5" id="ki0-hY-jBF"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>

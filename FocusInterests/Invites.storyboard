@@ -88,7 +88,7 @@
                                             <constraint firstAttribute="width" constant="103" id="90T-sZ-Bhe"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="4:15">
+                                        <state key="normal">
                                             <color key="titleColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>

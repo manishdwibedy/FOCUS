@@ -65,8 +65,21 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             contactListView.isHidden = false
         }
         
-        let startDate = event?.date?.components(separatedBy: ",")[1].trimmingCharacters(in: .whitespaces)
-        timeButton.setTitle(startDate, for: .normal)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat =  "h:mm a"
+        
+        
+        if type == "event"{
+            let startDate = event?.date?.components(separatedBy: ",")[1].trimmingCharacters(in: .whitespaces)
+            timeButton.setTitle(startDate, for: .normal)
+            
+            let startDate1 = dateFormatter.date(from: startDate!)
+            timePicker.date = startDate1!
+        }
+        else if type == "place"{
+            let currentTime = Date()
+            timeButton.setTitle(dateFormatter.string(from: currentTime), for: .normal)
+        }
         
         let inviteListCellNib = UINib(nibName: "InviteListTableViewCell", bundle: nil)
         friendsTableView.register(inviteListCellNib, forCellReuseIdentifier: "personToInvite")
@@ -170,13 +183,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.dateFormatter.dateFormat = "MMM d yyyy"
         self.timeFormatter.dateFormat = "h:mm a"
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat =  "h:mm a"
         
-        if let date = startDate{
-            let startDate = dateFormatter.date(from: date)
-            timePicker.date = startDate!
-        }
         
         self.timePicker.addTarget(self, action: #selector(pickerChange(sender:)), for: UIControlEvents.valueChanged)
         

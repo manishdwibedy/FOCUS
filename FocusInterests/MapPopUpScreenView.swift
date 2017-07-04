@@ -59,7 +59,13 @@ class MapPopUpScreenView: UIView {
         boldLabel.text = name
         bottomText.text = date
         mileLabel.text = miles
-        addGreenDot(label: interestLabel, content: interest)
+        if interest.components(separatedBy: ";").count > 1{
+            addGreenDot(label: interestLabel, content: interest.components(separatedBy: ";")[0])
+        }
+        else{
+            addGreenDot(label: interestLabel, content: interest)
+        }
+        
         addressLabel.text = address
         
         captionLeading.constant = -25

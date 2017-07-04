@@ -133,7 +133,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             let camera = GMSCameraPosition.camera(withLatitude: last_pos.coordinate.latitude,
                                                   longitude: last_pos.coordinate.longitude,
-                                                  zoom: 15)
+                                                  zoom: 14)
             if mapView.isHidden {
                 mapView.isHidden = false
                 mapView.camera = camera
@@ -219,7 +219,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
                                                   longitude: (currentLocation?.coordinate.longitude)!,
-                                                  zoom: 15)
+                                                  zoom: 14)
             if mapView.isHidden {
                 mapView.isHidden = false
                 mapView.camera = camera
@@ -495,7 +495,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             var distance = ""
             var pinMessage = pin.pinMessage
             var interest = pin.focus
-            var name = ""
+            var name = pin.username
             
             
             distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
@@ -578,7 +578,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
-                                              zoom: 15)
+                                              zoom: 14)
         
         let position = CLLocationCoordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude))
 //        if self.userLocation == nil{
@@ -687,7 +687,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
         let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
                                               longitude: (currentLocation?.coordinate.longitude)!,
-                                              zoom: 15)
+                                              zoom: 14)
         
         if mapView.isHidden {
             mapView.isHidden = false
@@ -770,6 +770,36 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func fetchPlaces(around location: CLLocation, token: String){
         
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            
+            if let placeData = value{
+                for (_,place) in placeData
+                {
+                    let place_id = (place as? [String:Any])?["placeID"]
+                    getYelpByID(ID: place_id as! String, completion: {place in
+                        self.places.append(place)
+                        
+                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+                        let marker = GMSMarker(position: position)
+                        marker.icon = UIImage(named: "place_icon")
+                        marker.title = place.name
+                        marker.map = self.mapView
+                        marker.isTappable = true
+                        marker.accessibilityLabel = "place_\(self.places.count)"
+                        
+                        self.placeMapping[place.id] = place
+                        self.getPlaceHours(id: place.id)
+                        
+                        self.searchPlacesTab?.followingPlaces.append(place)
+                    })
+                    
+                }
+                
+                
+            }
+        })
+
         for interest in getYelpCategories().components(separatedBy: ","){
             let url = "https://api.yelp.com/v3/businesses/search"
             let parameters: [String: Any] = [
@@ -819,22 +849,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     
                     if !self.places.contains(place){
                         
-                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
-                        let marker = GMSMarker(position: position)
-                        marker.icon = UIImage(named: "place_icon")
-                        marker.title = place.name
-                        marker.map = self.mapView
-                        marker.isTappable = true
-                        marker.accessibilityLabel = "place_\(self.places.count)"
+//                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+//                        let marker = GMSMarker(position: position)
+//                        marker.icon = UIImage(named: "place_icon")
+//                        marker.title = place.name
+//                        marker.map = self.mapView
+//                        marker.isTappable = true
+//                        marker.accessibilityLabel = "place_\(self.places.count)"
                         
                         //                    let item = MapCluster(position: position, name: place.name, icon: UIImage(named: "place_icon")!, id: String(self.places.count), type: "place")
                         //                    self.clusterManager.add(item)
-                        self.places.append(place)
-                        self.placeMapping[place.id] = place
-                        self.getPlaceHours(id: place.id)
-                        
+//                        self.places.append(place)
+//                        self.placeMapping[place.id] = place
+//                        self.getPlaceHours(id: place.id)
+//                        
                         self.searchPlacesTab?.places.append(place)
-                        print(self.searchPlacesTab?.places.count)
                         
                     }
                 }
@@ -884,18 +913,28 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 {
                     let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String), focus: (value?[key] as! NSDictionary)["focus"] as? String ?? "")
 
-                    let position = CLLocationCoordinate2D(latitude: Double(data.coordinates.latitude), longitude: Double(data.coordinates.longitude))
-                    let marker = GMSMarker(position: position)
-                    marker.title = data.pinMessage
-                    marker.map = self.mapView
-                    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
-                    image.image = UIImage(named: "pin")
-                    image.contentMode = .scaleAspectFit
-                    marker.iconView = image
-                    marker.accessibilityLabel = "pin_\(self.pins.count)"
+                    Constants.DB.user.child(data.fromUID).observeSingleEvent(of: .value, with: {snapshot in
+                        
+                        if let info = snapshot.value as? [String:Any]{
+                            if let username = info["username"] as? String{
+                                let position = CLLocationCoordinate2D(latitude: Double(data.coordinates.latitude), longitude: Double(data.coordinates.longitude))
+                                let marker = GMSMarker(position: position)
+                                marker.title = data.pinMessage
+                                marker.map = self.mapView
+                                let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+                                image.image = UIImage(named: "pin")
+                                image.contentMode = .scaleAspectFit
+                                marker.iconView = image
+                                marker.accessibilityLabel = "pin_\(self.pins.count)"
+                                
+                                data.username = username
+                                self.lastPins.append(marker)
+                                self.pins.append(data)
+                            }
+                        }
+                        
+                    })
                     
-                    self.lastPins.append(marker)
-                    self.pins.append(data)
                 }
             }
         })

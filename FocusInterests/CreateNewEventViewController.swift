@@ -64,80 +64,80 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
 //    TOOLBARS
     
-    var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardNextButton))
-    var previousButton = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardPreviousButton))
-    var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    var fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-//    var dateDoneButon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.dateSelected))
-    var startTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.startTimeSelected))
-    var endTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.endTimeSelected))
-    var priceDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.priceSelected))
-    
+//    var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardNextButton))
+//    var previousButton = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardPreviousButton))
+//    var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//    var fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+////    var dateDoneButon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.dateSelected))
+//    var startTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.startTimeSelected))
+//    var endTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.endTimeSelected))
+//    var priceDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.priceSelected))
+//    
     
     // start and end time
     var startTime: Date? = nil
     var endTime: Date? = nil
     
-    lazy var dateToolbar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.isTranslucent = true
-        toolbar.sizeToFit()
-        
-        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-        toolbar.isUserInteractionEnabled = true
-        
-        return toolbar
-    }()
-    
-    lazy var startTimeToolbar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.isTranslucent = true
-        toolbar.sizeToFit()
-        
-        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-        toolbar.isUserInteractionEnabled = true
-        
-        return toolbar
-    }()
-    
-    lazy var endTimeToolbar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.isTranslucent = true
-        toolbar.sizeToFit()
-        
-        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-        toolbar.isUserInteractionEnabled = true
-        
-        return toolbar
-    }()
-    
-    lazy var priceToolbar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.isTranslucent = true
-        toolbar.sizeToFit()
-        
-        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-        toolbar.isUserInteractionEnabled = true
-        
-        return toolbar
-    }()
-    
-    //this toolbar is for the name, price, and description textfields
-    lazy var nextPrevToolbar: UIToolbar = {
-        var toolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.isTranslucent = true
-        toolbar.sizeToFit()
-        
-        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-        toolbar.isUserInteractionEnabled = true
-        
-        return toolbar
-    }()
+//    lazy var dateToolbar: UIToolbar = {
+//        let toolbar = UIToolbar()
+//        toolbar.barStyle = .default
+//        toolbar.isTranslucent = true
+//        toolbar.sizeToFit()
+//        
+//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+//        toolbar.isUserInteractionEnabled = true
+//        
+//        return toolbar
+//    }()
+//    
+//    lazy var startTimeToolbar: UIToolbar = {
+//        let toolbar = UIToolbar()
+//        toolbar.barStyle = .default
+//        toolbar.isTranslucent = true
+//        toolbar.sizeToFit()
+//        
+//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+//        toolbar.isUserInteractionEnabled = true
+//        
+//        return toolbar
+//    }()
+//    
+//    lazy var endTimeToolbar: UIToolbar = {
+//        let toolbar = UIToolbar()
+//        toolbar.barStyle = .default
+//        toolbar.isTranslucent = true
+//        toolbar.sizeToFit()
+//        
+//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+//        toolbar.isUserInteractionEnabled = true
+//        
+//        return toolbar
+//    }()
+//    
+//    lazy var priceToolbar: UIToolbar = {
+//        let toolbar = UIToolbar()
+//        toolbar.barStyle = .default
+//        toolbar.isTranslucent = true
+//        toolbar.sizeToFit()
+//        
+//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+//        toolbar.isUserInteractionEnabled = true
+//        
+//        return toolbar
+//    }()
+//    
+//    //this toolbar is for the name, price, and description textfields
+//    lazy var nextPrevToolbar: UIToolbar = {
+//        var toolbar = UIToolbar()
+//        toolbar.barStyle = .default
+//        toolbar.isTranslucent = true
+//        toolbar.sizeToFit()
+//        
+//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+//        toolbar.isUserInteractionEnabled = true
+//        
+//        return toolbar
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -427,25 +427,25 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func addEventDate(_ sender: UITextField) {
 //        showDatePicker()
         self.eventDateTextField.inputView = self.timePicker
-        self.eventDateTextField.inputAccessoryView = self.dateToolbar
+//        self.eventDateTextField.inputAccessoryView = self.dateToolbar
     }
     
     @IBAction func addEventTime(_ sender: UITextField) {
 //        showStartTimePicker()
         self.eventTimeTextField.inputView = self.timePicker
-        self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
+//        self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
         
     }
     
     @IBAction func addEventEndTime(_ sender: UITextField) {
 //        showEndTimePicker()
         self.eventEndTimeTextField.inputView = self.timePicker
-        self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
+//        self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
         self.eventPriceTextView.becomeFirstResponder()
     }
     
     @IBAction func addPrice(_ sender: UITextField) {
-        self.eventPriceTextView.inputAccessoryView = self.priceToolbar
+//        self.eventPriceTextView.inputAccessoryView = self.priceToolbar
     }
     
     func dateSelected(){
@@ -617,20 +617,36 @@ extension CreateNewEventViewController {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
+        
+        if textField == self.eventDateTextField {
+            self.eventDateTextField.becomeFirstResponder()
+        }
+        else if textField == self.eventTimeTextField {
+            self.eventEndTimeTextField.becomeFirstResponder()
+        }
+        else if textField == self.eventEndTimeTextField {
+            self.eventPriceTextView.becomeFirstResponder()
+        } else if textField == self.locationTextField {
+            self.eventDateTextField.becomeFirstResponder()
+        } else if textField == self.eventPriceTextView {
+            
+        } else if textField == self.eventNameTextField {
+            self.locationTextField.becomeFirstResponder()
+        }
         return false
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == self.eventDateTextField {
-            eventDateTextField.inputAccessoryView = self.dateToolbar
+//            eventDateTextField.inputAccessoryView = self.dateToolbar
             eventDateTextField.inputView = self.datePicker
         }
         else if textField == self.eventTimeTextField {
-            self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
+//            self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
             self.eventTimeTextField.inputView = self.timePicker
         }
         else if textField == self.eventEndTimeTextField {
-            self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
+//            self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
             self.eventEndTimeTextField.inputView = self.timePicker
         } else if textField == self.locationTextField {
 //            eventDateTextField.inputAccessoryView = self.datePicker
@@ -639,9 +655,9 @@ extension CreateNewEventViewController {
             autoCompleteController.delegate = self
             present(autoCompleteController, animated: true, completion: nil)
         } else if textField == self.eventPriceTextView {
-            self.eventPriceTextView.inputAccessoryView = self.priceToolbar
+//            self.eventPriceTextView.inputAccessoryView = self.priceToolbar
         } else {
-            self.eventNameTextField.inputAccessoryView = self.nextPrevToolbar
+//            self.eventNameTextField.inputAccessoryView = self.nextPrevToolbar
         }
         
         return true
@@ -674,7 +690,7 @@ extension CreateNewEventViewController {
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
 //        TODO: sometimes the tool bar works and sometimes it doesn't. need to figure out why
-        self.eventDescriptionTextView.inputAccessoryView = self.nextPrevToolbar
+//        self.eventDescriptionTextView.inputAccessoryView = self.nextPrevToolbar
         return true
     }
     

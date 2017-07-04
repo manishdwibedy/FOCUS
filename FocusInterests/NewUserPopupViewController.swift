@@ -22,7 +22,7 @@ class NewUserPopupViewController: UIViewController {
         
         ["intro_greenpin", "People", "People are shown on your Map when they Pin their location and FOCUS. You can choose to view activities and places you'll both like.", "people", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
-        ["intro_place", "Places", "You now have a personalized Map of all the places that you FOCUS on. Rather than having to search for individual places you like, they'll always be up on your Map.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
+        ["intro_place", "Places", "You now have a personalized Map of all the places that you follow. Rather than having to search for individual places every time, you'll always be able to see which of your favorite spots is nearby.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
         ["intro_event", "Events", "A real-time look at the events that match your FOCUS. As new events are created, they'll be added to your Map. You can even move around the map to find cool events around town.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
