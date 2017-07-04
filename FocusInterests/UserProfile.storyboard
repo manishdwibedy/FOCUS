@@ -799,7 +799,7 @@
                                     <constraint firstAttribute="height" constant="43" id="w30-yv-y9d"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                <state key="normal" title="Edit Interests">
+                                <state key="normal" title="Edit FOCUS">
                                     <color key="titleColor" red="0.76470588235294112" green="0.76862745098039209" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
