@@ -18,12 +18,15 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var invitePopupView: UIView!
+    @IBOutlet weak var invitePopupBottomConstraint: NSLayoutConstraint!
     
     var people = [User]()
     var filtered = [User]()
     var followers = [User]()
     var user_pins = [String:pinData]()
     var location: CLLocation?
+    var showInvitePopup = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +76,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         filtered = people
         hideKeyboardWhenTappedAround()
         
+        self.invitePopupView.allCornersRounded(radius: 10)
         
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
@@ -183,6 +187,23 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(cancelButtonAttributes, for: .normal)
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if showInvitePopup {
+            self.invitePopupView.isHidden = false
+            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= 125
+                self.invitePopupBottomConstraint.constant += 125
+            }, completion: { animate in
+                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += 125
+                    self.invitePopupBottomConstraint.constant -= 125
+                }, completion: nil)
+            })
+            self.showInvitePopup = false
+        }
     }
     
     override func didReceiveMemoryWarning() {

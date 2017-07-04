@@ -55,18 +55,38 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3n3-7O-iAJ">
+                                <rect key="frame" x="5" y="673" width="365" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Invite Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wa8-e1-NlB">
+                                        <rect key="frame" x="106" y="25" width="153" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="EXE-T3-8sG"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="O91-5f-lIg" firstAttribute="leading" secondItem="Azg-xG-CeT" secondAttribute="leading" id="8B9-cq-sES"/>
+                            <constraint firstAttribute="trailing" secondItem="3n3-7O-iAJ" secondAttribute="trailing" constant="5" id="8RM-zD-2dF"/>
                             <constraint firstItem="PXI-1V-ZjI" firstAttribute="top" secondItem="Azg-xG-CeT" secondAttribute="bottom" id="JEy-Ca-AtX"/>
                             <constraint firstItem="1yO-It-5fn" firstAttribute="top" secondItem="PXI-1V-ZjI" secondAttribute="bottom" constant="43" id="Jmp-dh-H8R"/>
                             <constraint firstItem="Azg-xG-CeT" firstAttribute="top" secondItem="O91-5f-lIg" secondAttribute="bottom" constant="9" id="LXm-5d-cXs"/>
                             <constraint firstItem="PXI-1V-ZjI" firstAttribute="leading" secondItem="Zxh-g3-Eqs" secondAttribute="leadingMargin" constant="-11" id="Ngb-sF-bGG"/>
                             <constraint firstItem="O91-5f-lIg" firstAttribute="trailing" secondItem="Azg-xG-CeT" secondAttribute="trailing" id="QWK-oo-ngj"/>
                             <constraint firstItem="O91-5f-lIg" firstAttribute="top" secondItem="Zxh-g3-Eqs" secondAttribute="top" id="Rq7-7r-Tym"/>
+                            <constraint firstItem="3n3-7O-iAJ" firstAttribute="centerX" secondItem="Zxh-g3-Eqs" secondAttribute="centerX" id="XAW-J1-mZL"/>
                             <constraint firstItem="O91-5f-lIg" firstAttribute="leading" secondItem="Zxh-g3-Eqs" secondAttribute="leading" id="YFw-iR-MbZ"/>
                             <constraint firstItem="PXI-1V-ZjI" firstAttribute="centerX" secondItem="Zxh-g3-Eqs" secondAttribute="centerX" id="Zdc-02-DRI"/>
+                            <constraint firstItem="1yO-It-5fn" firstAttribute="top" secondItem="3n3-7O-iAJ" secondAttribute="bottom" constant="-125" id="cut-Oq-Kp5"/>
+                            <constraint firstItem="3n3-7O-iAJ" firstAttribute="leading" secondItem="Zxh-g3-Eqs" secondAttribute="leading" constant="5" id="f1U-uy-9qv"/>
                             <constraint firstAttribute="trailing" secondItem="O91-5f-lIg" secondAttribute="trailing" id="h42-Bk-NsB"/>
                             <constraint firstItem="1yO-It-5fn" firstAttribute="top" secondItem="4bN-f3-uer" secondAttribute="bottom" constant="5" id="reI-xL-CXL"/>
                             <constraint firstItem="4bN-f3-uer" firstAttribute="top" secondItem="PXI-1V-ZjI" secondAttribute="bottom" constant="8" id="rhI-qW-fQs"/>
@@ -78,6 +98,8 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="invitePopupBottomConstraint" destination="cut-Oq-Kp5" id="nUv-Jo-LSc"/>
+                        <outlet property="invitePopupView" destination="3n3-7O-iAJ" id="s0g-e5-HPp"/>
                         <outlet property="moreButton" destination="4bN-f3-uer" id="0Fa-1g-Xrj"/>
                         <outlet property="navBar" destination="O91-5f-lIg" id="Jj4-60-g6I"/>
                         <outlet property="searchBar" destination="Azg-xG-CeT" id="Xui-o5-xQ8"/>

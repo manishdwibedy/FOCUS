@@ -19,15 +19,19 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var navBar: UINavigationBar!
-    
-    
     @IBOutlet weak var createEventButton: UIButton!
+    @IBOutlet weak var invitePopupView: UIView!
+    @IBOutlet weak var invitePopupViewBottomConstraint: NSLayoutConstraint!
+    
     var events = [Event]()
     var filtered = [Event]()
     var location: CLLocation?
     
     var all_events = [Event]()
     var attending = [Event]()
+    
+    var showInvitePopup = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -83,8 +87,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         ]
         
         navBar.titleTextAttributes = attrs
-        
-        
+        self.invitePopupView.allCornersRounded(radius: 10)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,6 +142,23 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 }
             }
         })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if showInvitePopup {
+            self.invitePopupView.isHidden = false
+            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= 129
+                self.invitePopupViewBottomConstraint.constant += 129
+            }, completion: { animate in
+                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += 129
+                    self.invitePopupViewBottomConstraint.constant -= 129
+                }, completion: nil)
+            })
+            self.showInvitePopup = false
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -330,6 +350,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "event"
+        ivc.searchEvent = self
         ivc.id = event.id!
         ivc.event = event
         self.present(ivc, animated: true, completion: { _ in })

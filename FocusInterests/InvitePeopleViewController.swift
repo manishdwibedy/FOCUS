@@ -25,6 +25,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var places = [Place]()
     var events = [Event]()
     var location: CLLocation?
+    var searchPeople: SearchPeopleViewController? = nil
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -375,10 +376,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         dismiss(animated: true, completion: nil)
     }
     
-    
-
-
-   
     @IBAction func indexChanged(_ sender: Any) {
         
         let segmentedControl = sender as! UISegmentedControl

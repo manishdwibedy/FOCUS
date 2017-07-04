@@ -70,6 +70,7 @@ class InvitePeoplePlaceCell: UITableViewCell {
         })
         Constants.DB.places.child(place.id).child("invitations").childByAutoId().updateChildValues(["toUID":place.id, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
         Constants.DB.user.child(UID).child("invitations").child("place").childByAutoId().updateChildValues(["ID":place.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"name": place.name,"status": "sent"])
+        parentVC.searchPeople?.showInvitePopup = true
         parentVC.dismiss(animated: true, completion: nil)
     }
     

@@ -62,15 +62,39 @@
                                     <outlet property="delegate" destination="xPx-tM-EtF" id="Ptu-K7-eu6"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxR-DK-a5n">
+                                <rect key="frame" x="5" y="670" width="365" height="77"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wvl-if-0wf">
+                                        <rect key="frame" x="103" y="26" width="160" height="25"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Wvl-if-0wf" firstAttribute="top" secondItem="dxR-DK-a5n" secondAttribute="top" constant="26" id="52U-4R-V6S"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wvl-if-0wf" secondAttribute="trailing" constant="102" id="Ad9-kd-0O9"/>
+                                    <constraint firstItem="Wvl-if-0wf" firstAttribute="centerY" secondItem="dxR-DK-a5n" secondAttribute="centerY" id="GjK-iL-Nt2"/>
+                                    <constraint firstAttribute="height" constant="77" id="Pry-sI-6HG"/>
+                                    <constraint firstItem="Wvl-if-0wf" firstAttribute="leading" secondItem="dxR-DK-a5n" secondAttribute="leading" constant="103" id="R1L-ct-rzn"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wvl-if-0wf" secondAttribute="bottom" constant="26" id="kS5-pN-3QA"/>
+                                    <constraint firstItem="Wvl-if-0wf" firstAttribute="centerX" secondItem="dxR-DK-a5n" secondAttribute="centerX" id="ogi-Ph-Cl3"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.093528874220000002" green="0.17284265160000001" blue="0.26158365610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="top" secondItem="eF4-Ev-ETy" secondAttribute="top" id="4el-KV-LTf"/>
                             <constraint firstAttribute="trailing" secondItem="z8z-95-lev" secondAttribute="trailing" id="5sX-mj-VFX"/>
                             <constraint firstItem="z8z-95-lev" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="5wg-Wn-KXm"/>
+                            <constraint firstAttribute="trailing" secondItem="dxR-DK-a5n" secondAttribute="trailing" constant="5" id="AwV-zF-DVf"/>
                             <constraint firstItem="z8z-95-lev" firstAttribute="top" secondItem="Uw4-jh-WA0" secondAttribute="bottom" id="GHF-Qe-xvC"/>
+                            <constraint firstItem="dxR-DK-a5n" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" constant="5" id="HS5-iX-hXq"/>
                             <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="rHT-AA-SPe" secondAttribute="bottom" constant="8" symbolic="YES" id="M02-sk-fFU"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="M3G-iJ-BqP"/>
+                            <constraint firstItem="dxR-DK-a5n" firstAttribute="centerX" secondItem="eF4-Ev-ETy" secondAttribute="centerX" id="O7K-Sh-TFC"/>
                             <constraint firstItem="ZNT-Vt-zjc" firstAttribute="top" secondItem="z8z-95-lev" secondAttribute="bottom" constant="9" id="S6z-4S-SPC"/>
                             <constraint firstItem="rHT-AA-SPe" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leadingMargin" constant="-11" id="XWg-lL-6ar"/>
                             <constraint firstAttribute="trailing" secondItem="Uw4-jh-WA0" secondAttribute="trailing" id="bab-xt-oJk"/>
@@ -78,6 +102,7 @@
                             <constraint firstItem="rHT-AA-SPe" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="8" id="iki-T5-PU9"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="centerX" secondItem="z8z-95-lev" secondAttribute="centerX" id="mmY-Ya-bw9"/>
                             <constraint firstItem="z8z-95-lev" firstAttribute="centerX" secondItem="rHT-AA-SPe" secondAttribute="centerX" id="tPI-No-es8"/>
+                            <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="dxR-DK-a5n" secondAttribute="bottom" constant="-129" id="wlb-er-8J2"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="EVENTS" id="yhf-yt-eZ8">
@@ -86,6 +111,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="createEventButton" destination="ZNT-Vt-zjc" id="cy0-BN-nMr"/>
+                        <outlet property="invitePopupView" destination="dxR-DK-a5n" id="I7L-o0-cUw"/>
+                        <outlet property="invitePopupViewBottomConstraint" destination="wlb-er-8J2" id="htD-M9-RKJ"/>
                         <outlet property="navBar" destination="Uw4-jh-WA0" id="n6Q-sa-R7U"/>
                         <outlet property="navTitle" destination="31z-0O-JgZ" id="s98-9U-3hs"/>
                         <outlet property="searchBar" destination="z8z-95-lev" id="42p-1d-s8M"/>
