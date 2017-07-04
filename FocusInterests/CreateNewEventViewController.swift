@@ -157,6 +157,10 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.interestTableView.delaysContentTouches = false
         self.timePicker.datePickerMode = .time
         self.timePicker.minuteInterval = 5
+        
+        var date = Date()
+        self.datePicker.minimumDate = date
+        self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d yyyy"
         self.timeFormatter.dateFormat = "h:mm a"

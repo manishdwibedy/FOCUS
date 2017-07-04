@@ -25,8 +25,13 @@ class InvitePeopleEventCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        inviteOut.layer.cornerRadius = 6
-        inviteOut.clipsToBounds = true
+        self.inviteOut.layer.cornerRadius = 6
+        self.inviteOut.clipsToBounds = true
+        self.inviteOut.roundCorners(radius: 5)
+        self.inviteOut.layer.shadowOpacity = 0.5
+        self.inviteOut.layer.masksToBounds = false
+        self.inviteOut.layer.shadowColor = UIColor.black.cgColor
+        self.inviteOut.layer.shadowRadius = 5.0
         
         self.eventImage.layer.borderWidth = 2
         self.eventImage.layer.borderColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0).cgColor
@@ -76,6 +81,7 @@ class InvitePeopleEventCell: UITableViewCell {
         })
         Constants.DB.event.child(event.id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
         Constants.DB.user.child(UID).child("invitations").child("event").childByAutoId().updateChildValues(["ID":event.id!, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"status": "sent"])
+        parentVC.searchPeople?.showInvitePopup = true
         parentVC.dismiss(animated: true, completion: nil)
     
     }

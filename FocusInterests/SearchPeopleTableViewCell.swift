@@ -173,6 +173,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
         let storyboard = UIStoryboard(name: "search_people", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
         ivc.UID = ID
+        ivc.searchPeople = parentVC
         parentVC.present(ivc, animated: true, completion: { _ in })
     }
 }

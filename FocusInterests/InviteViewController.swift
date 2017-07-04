@@ -45,6 +45,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var inviteTime = ""
 
     var searchPlace: SearchPlacesViewController? = nil
+    var searchEvent: SearchEventsViewController? = nil
     var image: Data?
     var selectedFriend = [Bool]()
     var contacts = [CNContact]()
@@ -361,6 +362,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "place", item_id: "",item_name: "")
                     })
                     Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime,"status": "sent"])
+                    searchPlace?.showPopup = true
                 }
                 else{
                     name = (event?.title)!
@@ -371,6 +373,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "event", item_id: "", item_name: "")
                     })
                     Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
+                    searchEvent?.showInvitePopup = true
                 }
                 
                 Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"inviteTime":inviteTime])
@@ -385,7 +388,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                 })
             }
-            searchPlace?.showPopup = true
             dismiss(animated: true, completion: nil)
         }
         else{
