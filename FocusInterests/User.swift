@@ -44,7 +44,11 @@ class User {
             return nil
         }
         
-        return User(username: username, fullname: fullname, uuid: id, userImage: nil, interests: nil, image_string: nil, hasPin: false)
+        guard let image = info["image_string"] as? String else{
+            return nil
+        }
+        
+        return User(username: username, fullname: fullname, uuid: id, userImage: nil, interests: nil, image_string: image, hasPin: false)
         
     }
 }

@@ -703,18 +703,18 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             "date": Date().timeIntervalSince1970,
             "read": false
         ] as [String : Any]
-        one.setValue(content)
-        two.setValue(content)
+        one.updateChildValues(content)
+        two.updateChildValues(content)
         
     }
 
     func updateDateRead(){
-        messagesRef.child("\(self.user["firebaseUserId"]! as! String)/\(self.senderId!)/date").setValue(Date().timeIntervalSince1970)
-        messagesRef.child("\(self.user["firebaseUserId"]! as! String)/\(self.senderId!)/read").setValue(false)
+        messagesRef.child("\(self.user["firebaseUserId"]! as! String)/\(self.senderId!)").updateChildValues(["date":Date().timeIntervalSince1970])
+        messagesRef.child("\(self.user["firebaseUserId"]! as! String)/\(self.senderId!)").updateChildValues(["read":false])
     }
     
     func markUnread(){
-        messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)/read").setValue(true)
+        messagesRef.child("\(self.senderId!)/\(self.user["firebaseUserId"]! as! String)").updateChildValues(["read":true])
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, didTapCellAt indexPath: IndexPath!, touchLocation: CGPoint) {

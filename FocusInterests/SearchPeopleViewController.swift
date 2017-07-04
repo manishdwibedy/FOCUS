@@ -240,6 +240,21 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         let placeHolderImage = UIImage(named: "empty_event")
 
+        if let image = people.image_string{
+            if let url = URL(string: image){
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        cell?.userImage.image = crop(image: image!, width: 50, height: 50)
+                    }
+                })
+            }
+        }
+        
         cell?.checkFollow()
         
         return cell!
@@ -291,20 +306,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             return 110
         }
         else{
-            
-//            cell.content
-//            cell?.cellContentViewHeightConstraint.constant = 60.0
-////            cell?.subviews[0].subviews[0].frame.size.height = 70.0
-//            cell?.distanceCategoryStack.arrangedSubviews[0].removeFromSuperview()
-//            cell?.distanceCategoryStack.spacing = 0
-//            cell?.addressStack.arrangedSubviews[0].removeFromSuperview()
-//            
-//            cell?.cellContentView.clipsToBounds = true
-//            cell?.cellContentView.allCornersRounded(radius: 6.0)
-//            
-//            cell?.cellContentView.layoutIfNeeded()
-//            
-//            print(cell?.cellContentView.frame.height)
             return 75
         }
         
