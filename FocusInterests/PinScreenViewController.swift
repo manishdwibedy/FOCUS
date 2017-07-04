@@ -31,7 +31,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var chosseFocusOut: UIButton!
     @IBOutlet weak var focusLabel: UILabel!
     @IBOutlet weak var selectedImage: UIImageView!
-    
+    @IBOutlet weak var focusLabelView: UIView!
     
     var pinType = "normal"
     var imageArray = [UIImage]()
@@ -56,9 +56,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     var interest = ""
     var lastCaption = ""
-    
-   
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,13 +206,14 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         let focusTap = UITapGestureRecognizer(target: self, action: #selector(self.showFocus(sender:)))
         focusLabel.isUserInteractionEnabled = true
+        
         self.focusLabel.addGestureRecognizer(focusTap)
         
+
     }
     
     
-    func showFocus(sender: UITapGestureRecognizer)
-    {
+    func showFocus(sender: UITapGestureRecognizer){
         lastCaption = pinTextView.text
         let focusWindow = InterestsViewController(nibName:"InterestsViewController", bundle:nil)
         focusWindow.pinInterest = true
@@ -447,12 +445,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
     }
     
-    
-    
-    
-    
-    func getPhotos()
-    {
+    func getPhotos(){
         let imgageManager = PHImageManager()
         
         let requestOptions = PHImageRequestOptions()
@@ -487,8 +480,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         }
         
         collectionView.reloadData()
-        
-       
         
     }
     

@@ -277,6 +277,15 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     func returnValue(FOCUS:String){
         parentReturnVC.interest = FOCUS
         parentReturnVC.focusLabel.text = FOCUS
+        parentReturnVC.focusLabel.sizeToFit()
+        print("add focus border!")
+        let borderWidth: CGFloat = 2.0;
+
+        parentReturnVC.focusLabelView.bounds.size.width += parentReturnVC.focusLabelView.frame.width
+        parentReturnVC.focusLabelView.frame = parentReturnVC.focusLabelView.frame.insetBy(dx: -borderWidth, dy: -borderWidth);
+        parentReturnVC.focusLabelView.layer.borderColor = Constants.color.green.cgColor
+        parentReturnVC.focusLabelView.layer.borderWidth = borderWidth;
+        
         self.dismiss(animated: true, completion: nil)
     }
     
