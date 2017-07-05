@@ -42,15 +42,8 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bN-f3-uer">
-                                <rect key="frame" x="323" y="583" width="36" height="30"/>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
-                                <state key="normal" title="More">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PXI-1V-ZjI">
-                                <rect key="frame" x="5" y="108" width="365" height="467"/>
+                                <rect key="frame" x="5" y="108" width="365" height="505"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -77,7 +70,7 @@
                             <constraint firstItem="O91-5f-lIg" firstAttribute="leading" secondItem="Azg-xG-CeT" secondAttribute="leading" id="8B9-cq-sES"/>
                             <constraint firstAttribute="trailing" secondItem="3n3-7O-iAJ" secondAttribute="trailing" constant="5" id="8RM-zD-2dF"/>
                             <constraint firstItem="PXI-1V-ZjI" firstAttribute="top" secondItem="Azg-xG-CeT" secondAttribute="bottom" id="JEy-Ca-AtX"/>
-                            <constraint firstItem="1yO-It-5fn" firstAttribute="top" secondItem="PXI-1V-ZjI" secondAttribute="bottom" constant="43" id="Jmp-dh-H8R"/>
+                            <constraint firstItem="1yO-It-5fn" firstAttribute="top" secondItem="PXI-1V-ZjI" secondAttribute="bottom" constant="5" id="Jmp-dh-H8R"/>
                             <constraint firstItem="Azg-xG-CeT" firstAttribute="top" secondItem="O91-5f-lIg" secondAttribute="bottom" id="LXm-5d-cXs"/>
                             <constraint firstItem="PXI-1V-ZjI" firstAttribute="leading" secondItem="Zxh-g3-Eqs" secondAttribute="leadingMargin" constant="-11" id="Ngb-sF-bGG"/>
                             <constraint firstItem="O91-5f-lIg" firstAttribute="trailing" secondItem="Azg-xG-CeT" secondAttribute="trailing" id="QWK-oo-ngj"/>
@@ -88,9 +81,6 @@
                             <constraint firstItem="1yO-It-5fn" firstAttribute="top" secondItem="3n3-7O-iAJ" secondAttribute="bottom" constant="-125" id="cut-Oq-Kp5"/>
                             <constraint firstItem="3n3-7O-iAJ" firstAttribute="leading" secondItem="Zxh-g3-Eqs" secondAttribute="leading" constant="5" id="f1U-uy-9qv"/>
                             <constraint firstAttribute="trailing" secondItem="O91-5f-lIg" secondAttribute="trailing" id="h42-Bk-NsB"/>
-                            <constraint firstItem="1yO-It-5fn" firstAttribute="top" secondItem="4bN-f3-uer" secondAttribute="bottom" constant="5" id="reI-xL-CXL"/>
-                            <constraint firstItem="4bN-f3-uer" firstAttribute="top" secondItem="PXI-1V-ZjI" secondAttribute="bottom" constant="8" id="rhI-qW-fQs"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="4bN-f3-uer" secondAttribute="trailing" id="y5i-wi-1Dy"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="PEOPLE" id="ft2-LS-Dgf">
@@ -100,7 +90,6 @@
                     <connections>
                         <outlet property="invitePopupBottomConstraint" destination="cut-Oq-Kp5" id="nUv-Jo-LSc"/>
                         <outlet property="invitePopupView" destination="3n3-7O-iAJ" id="s0g-e5-HPp"/>
-                        <outlet property="moreButton" destination="4bN-f3-uer" id="0Fa-1g-Xrj"/>
                         <outlet property="navBar" destination="O91-5f-lIg" id="Jj4-60-g6I"/>
                         <outlet property="searchBar" destination="Azg-xG-CeT" id="Xui-o5-xQ8"/>
                         <outlet property="tableView" destination="PXI-1V-ZjI" id="biZ-HC-C9F"/>

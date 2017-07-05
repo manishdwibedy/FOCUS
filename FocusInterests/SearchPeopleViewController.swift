@@ -16,7 +16,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var moreButton: UIButton!
+    
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var invitePopupView: UIView!
     @IBOutlet weak var invitePopupBottomConstraint: NSLayoutConstraint!
@@ -69,9 +69,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         clearButton.tintColor = UIColor.white
         
         UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
-        
-        self.moreButton.layer.borderColor = UIColor.white.cgColor
-        self.moreButton.roundCorners(radius: 5.0)
         
         filtered = people
         hideKeyboardWhenTappedAround()

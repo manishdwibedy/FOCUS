@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
 
@@ -233,7 +234,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         else if textField == usernameTf{
             
             Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
-                if let id = (snapshot.value as? NSDictionary)?[usernameTf.text]{
+                if let id = (snapshot.value as? NSDictionary)?[self.usernameTf.text]{
                     SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
                     textField.becomeFirstResponder()
                 }
