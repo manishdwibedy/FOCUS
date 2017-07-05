@@ -16,6 +16,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var hostNameLabel: UILabel!
     
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var fullnameLabel: UILabel!
     
@@ -46,7 +48,20 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     
     @IBOutlet weak var guestButtonOut: UIButton!
-    @IBOutlet weak var image: UIImageView!
+//    @IBOutlet weak var image: UIImageView!
+    
+    //    MARK: ATTEND TOP VIEW PROPERTIES
+    
+    @IBOutlet weak var attendButton: UIButton!
+    @IBOutlet weak var attendButtonLabel: UIButton!
+    @IBOutlet weak var attendingAmountButtonLabel: UIButton!
+    @IBOutlet weak var inviteButton: UIButton!
+    @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var pinHereButton: UIButton!
+    @IBOutlet weak var eventDescription: UILabel!
+    @IBOutlet weak var eventName: UILabel!
+    
+    
     var event: Event?
     let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
@@ -96,40 +111,60 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         self.navigationItem.title = self.event?.title
         
-        // Placeholder image
-        let placeholderImage = UIImage(named: "empty_event")
-        
-        if let id = event?.id{
-            let reference = Constants.storage.event.child("\(id).jpg")
-            
-            
-            reference.downloadURL(completion: { (url, error) in
-                
-                if error != nil {
-                    print(error?.localizedDescription ?? "")
-                    return
-                }
-                
-                self.image.sd_setImage(with: url, placeholderImage: placeholderImage)
-                self.image.setShowActivityIndicator(true)
-                self.image.setIndicatorStyle(.gray)
-                
-            })
-
-        }
-        else{
-            self.image.sd_setImage(with: URL(string:(event?.image_url)!), placeholderImage: placeholderImage)
-            self.image.setShowActivityIndicator(true)
-            self.image.setIndicatorStyle(.gray)
-            
-        }
-        
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
+//        // Placeholder image
+//        let placeholderImage = UIImage(named: "empty_event")
+//
+//        if let id = event?.id{
+//            let reference = Constants.storage.event.child("\(id).jpg")
+//
+//
+//            reference.downloadURL(completion: { (url, error) in
+//
+//                if error != nil {
+//                    print(error?.localizedDescription)
+//                    return
+//                }
+//
+//                self.image.sd_setImage(with: url, placeholderImage: placeholderImage)
+//                self.image.setShowActivityIndicator(true)
+//                self.image.setIndicatorStyle(.gray)
+//
+//            })
+//
+//        }
+//        else{
+//            self.image.sd_setImage(with: URL(string:(event?.image_url)!), placeholderImage: placeholderImage)
+//            self.image.setShowActivityIndicator(true)
+//            self.image.setIndicatorStyle(.gray) 
+//             
+//        } 
+//         
+//        image.contentMode = .scaleAspectFill 
+//        image.clipsToBounds = true
         commentTextField.layer.borderWidth = 1
         commentTextField.layer.cornerRadius = 5
         commentTextField.clipsToBounds = true
         commentTextField.layer.borderColor = UIColor.white.cgColor
+        
+        self.topView.addTopBorderWithColor(color: UIColor.white, width: 0.7)
+        
+        self.eventImage.layer.borderWidth = 1
+        self.eventImage.layer.borderColor = Constants.color.pink.cgColor
+        self.eventImage.roundedImage()
+        
+        self.attendButton.roundCorners(radius: 5.0)
+        self.checkIfAttending()
+        
+        self.inviteButton.roundCorners(radius: 5.0)
+        self.pinHereButton.roundCorners(radius: 5.0)
+        
+        self.eventName.text = "CBS Sports"
+        self.eventDescription.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        self.attendButton.setTitle("Attend", for: .normal)
+        self.attendButton.setTitleColor(UIColor.white, for: .normal)
+        self.attendButton.setTitle("Attending", for: .selected)
+        self.attendButton.setTitleColor(UIColor.white, for: .selected)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardDidHide, object: nil)
@@ -282,6 +317,13 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
         
         self.commentTextField.delegate = self
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        navBar.titleTextAttributes = attrs
         
         hideKeyboardWhenTappedAround()
     }
@@ -697,6 +739,36 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             UIApplication.shared.openURL(url!)
         }
     }
+    
+    
+    func checkIfAttending(){
+        if self.attendButton.isSelected == true{
+            self.attendButton.layer.borderWidth = 1
+            self.attendButton.layer.borderColor = UIColor.white.cgColor
+            self.attendButton.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
+            //            self.attendButton.isSelected = false
+        }else if self.attendButton.isSelected == false {
+            self.attendButton.layer.borderWidth = 0.0
+            self.attendButton.backgroundColor = Constants.color.green
+        }
+    }
+    
+    @IBAction func attendButtonPressed(_ sender: UIButton) {
+        
+        if sender.isSelected == false{
+            sender.isSelected = true
+            sender.layer.borderWidth = 1
+            sender.layer.borderColor = UIColor.white.cgColor
+            sender.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
+            sender.tintColor = UIColor.clear
+        }else if sender.isSelected == true{
+            sender.isSelected = false
+            sender.layer.borderWidth = 0.0
+            sender.backgroundColor = Constants.color.green
+            sender.tintColor = UIColor.clear
+        }
+    }
+    
 }
 
 
