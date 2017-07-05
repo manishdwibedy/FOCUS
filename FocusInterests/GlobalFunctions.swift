@@ -947,6 +947,8 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
             for (id, event) in eventInfo{
                 if let info = event as? [String:Any]{
                     
+                    let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id, category: info["interest"] as? String)
+                    
                     if let comments = info["comments"] as? [String:Any]{
                         event_comment_count += comments.count
                         for (_, commentData) in comments{
@@ -958,7 +960,8 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
                                             "type": "event",
                                             "id": id,
                                             "actionType": "comment",
-                                            "senderID": commentData["fromUID"] as? String
+                                            "senderID": commentData["fromUID"] as? String,
+                                            "event": event
                                         ]
                                         
                                         let event_comment = FocusNotification(type: NotificationType.Comment, sender: user, item: comment, time: Date(timeIntervalSince1970: commentData["date"] as! Double))
@@ -1007,6 +1010,10 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
         let pin11 = snapshot.value as? [String : Any]
         let pinID = snapshot.key
         if let pin = pin11{
+            
+            let pinInfo = pinData(UID: pin["fromUID"] as! String, dateTS: pin["time"] as! Double, pin: pin["pin"] as! String, location: pin["formattedAddress"] as! String, lat: pin["lat"] as! Double, lng: pin["lng"] as! Double, path: Constants.DB.pins.child(AuthApi.getFirebaseUid()! as! String), focus: pin["focus"] as? String ?? "")
+
+            
             let time = Date(timeIntervalSince1970: pin["time"] as! Double)
             let address = pin["formattedAddress"] as! String
             let place = ItemOfInterest(itemName: pin["pin"] as! String, imageURL: nil, type: "pin")
@@ -1015,7 +1022,8 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
                 "type": "pin",
                 "id": AuthApi.getFirebaseUid()!,
                 "actionType": "like",
-                "senderID": AuthApi.getFirebaseUid()!
+                "senderID": AuthApi.getFirebaseUid()!,
+                "pin": pinInfo
             ]
             let pinFeed = FocusNotification(type: NotificationType.Pin, sender: user, item: place, time: time)
             
@@ -1074,7 +1082,8 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
                         "type": "pin",
                         "id": id,
                         "actionType": "comment",
-                        "senderID": AuthApi.getFirebaseUid()!
+                        "senderID": AuthApi.getFirebaseUid()!,
+                        "pin": pinInfo
                     ]
                     
                     commentInfo.id = pinID

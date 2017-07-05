@@ -61,16 +61,11 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             self.tableView.reloadData()
         })
         
-//        FirebaseDownstream.shared.getUserNotifications(completion: {array in
-//            //self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)
-//            self.invArray = array!
-//            print("got NOTI")
-//            print(array)
-//            
-//        }, gotNotif: {not in
-//            self.nofArray = not
-//            self.tableView.reloadData()
-//        })
+        FirebaseDownstream.shared.getUserNotifications(completion: {array in
+            //self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)
+            self.invArray = array!
+        }, gotNotif: {not in
+        })
         
         getFeeds(gotPins: {pins in
             print("get pins")
@@ -202,6 +197,23 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.selectedSegmentIndex == 0{
             let notif = nofArray[indexPath.row]
+            
+            if let type = notif.item?.data["type"] as? String{
+                if type == "event"{
+                    let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+                    controller.event = notif.item?.data["event"] as! Event
+                    self.present(controller, animated: true, completion: nil)
+                }
+                else{
+                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+                    ivc.data = notif.item?.data["pin"] as! pinData
+                    self.present(ivc, animated: true, completion: { _ in })
+                }
+            }
+            
+            print(notif)
         }
     }
     @IBAction func indexChanged(_ sender: AnyObject) {
