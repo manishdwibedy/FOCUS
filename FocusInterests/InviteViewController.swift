@@ -480,7 +480,7 @@ class InviteUser: Hashable, Equatable{
     }
     
     static func ==(lhs: InviteUser, rhs: InviteUser) -> Bool {
-        return lhs.hashValue == rhs.hashValue
+        return lhs.UID == rhs.UID
     }
 }
 

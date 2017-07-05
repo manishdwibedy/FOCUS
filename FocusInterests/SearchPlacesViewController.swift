@@ -103,6 +103,13 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
             return $0.distance < $1.distance
         }
         
+        for place in self.followingPlaces{
+            if let index = self.places.index(where: { $0.id == place.id }) {
+                self.places.remove(at: index)
+            }
+        }
+
+        
         self.all_places = self.followingPlaces + self.places
         self.filtered = self.all_places
         
