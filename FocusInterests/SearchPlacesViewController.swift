@@ -98,6 +98,11 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         super.viewWillAppear(animated)
         
         self.all_places.removeAll()
+        
+        self.places.sort {
+            return $0.distance < $1.distance
+        }
+        
         self.all_places = self.followingPlaces + self.places
         self.filtered = self.all_places
         
