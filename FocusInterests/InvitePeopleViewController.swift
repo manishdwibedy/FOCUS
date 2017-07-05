@@ -169,11 +169,44 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             let cell:InvitePeopleEventCell = self.tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell") as! InvitePeopleEventCell!
             let event = filtered[indexPath.row] as! Event
             cell.name.text = event.title
-            cell.address.text = event.fullAddress
+            cell.address.text = event.fullAddress?.replacingOccurrences(of: ";;", with: "\n")
             cell.interest.text = event.category
             cell.event = event
             cell.UID = UID
             cell.parentVC = self
+            cell.guestCount.text = "\(event.attendeeCount) guests"
+            
+            cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price)"
+            
+            let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+            cell.distance.text = getDistance(fromLocation: eventLocation, toLocation: AuthApi.getLocation()!)
+        
+            let reference = Constants.storage.event.child("\(event.id!).jpg")
+            
+            cell.eventImage.image = crop(image: #imageLiteral(resourceName: "empty_event"), width: 50, height: 50)
+            
+            reference.downloadURL(completion: { (url, error) in
+                
+                if error != nil {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                
+                
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        cell.eventImage.image = crop(image: image!, width: 50, height: 50)
+                    }
+                })
+                
+                
+            })
+            
             cell.loadLikes()
             return cell
             

@@ -19,6 +19,7 @@ class InvitePeopleEventCell: UITableViewCell {
     @IBOutlet weak var inviteOut: UIButton!
     @IBOutlet weak var inviteEventCellContentView: UIView!
     
+    @IBOutlet weak var distance: UILabel!
     var event: Event!
     var UID: String!
     var parentVC: InvitePeopleViewController!
@@ -40,6 +41,7 @@ class InvitePeopleEventCell: UITableViewCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(sender:)))
         inviteEventCellContentView.addGestureRecognizer(tap)
         
+        address.textContainerInset = UIEdgeInsets.zero
         //        let longP = UILongPressGestureRecognizer(target: self, action: #selector(longP(sender:)))
         //        longP.minimumPressDuration = 0.3
         //        self.addGestureRecognizer(longP)
@@ -72,17 +74,28 @@ class InvitePeopleEventCell: UITableViewCell {
     }
     
     @IBAction func invite(_ sender: Any) {
-        let time = NSDate().timeIntervalSince1970
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-            let user = snapshot.value as? [String : Any] ?? [:]
-            
-            let fullname = user["fullname"] as? String
-            sendNotification(to: self.UID, title: "\(String(describing: fullname!)) invited you to \(String(describing: self.event.title!))", body: "", actionType: "invite", type: "event", item_id: "", item_name: "")
-        })
-        Constants.DB.event.child(event.id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
-        Constants.DB.user.child(UID).child("invitations").child("event").childByAutoId().updateChildValues(["ID":event.id!, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"status": "sent"])
-        parentVC.searchPeople?.showInvitePopup = true
-        parentVC.dismiss(animated: true, completion: nil)
+        
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+        ivc.type = "event"
+        ivc.id = self.event.id!
+        ivc.event = event
+        if let VC = self.parentVC{
+            VC.present(ivc, animated: true, completion: nil)
+        }
+        
+        // avoid inviting the user
+//        let time = NSDate().timeIntervalSince1970
+//        Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+//            let user = snapshot.value as? [String : Any] ?? [:]
+//            
+//            let fullname = user["fullname"] as? String
+//            sendNotification(to: self.UID, title: "\(String(describing: fullname!)) invited you to \(String(describing: self.event.title!))", body: "", actionType: "invite", type: "event", item_id: "", item_name: "")
+//        })
+//        Constants.DB.event.child(event.id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
+//        Constants.DB.user.child(UID).child("invitations").child("event").childByAutoId().updateChildValues(["ID":event.id!, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"status": "sent"])
+//        parentVC.searchPeople?.showInvitePopup = true
+//        parentVC.dismiss(animated: true, completion: nil)
     
     }
 }

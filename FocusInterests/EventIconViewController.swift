@@ -256,7 +256,6 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
 //    }
     
     private func skipPickingImage(){
-        let _ = self.event?.saveToDB(ref: Constants.DB.event)
         self.performSegue(withIdentifier: "event_invite", sender: nil)
     }
     

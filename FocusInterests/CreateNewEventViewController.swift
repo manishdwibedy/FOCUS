@@ -27,6 +27,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     var event: Event?
     var place: GMSPlace?
+    var fullAddress = ""
     let datePicker = UIDatePicker()
     let timePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
@@ -346,7 +347,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                 
                 
                 
-                self.event = Event(title: name, description: "", fullAddress: validPlace.formattedAddress!, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"))
+                self.event = Event(title: name, description: "", fullAddress: self.fullAddress, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"))
                 
                 let price = eventPriceTextView.text
                 if (price?.characters.count)! > 0{
@@ -575,13 +576,62 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         self.place = place
-        self.locationTextField.text = place.formattedAddress!
         
-        print("Place name: \(place.name)")
+        var first = [String]()
+        var second = [String]()
         
-        print("Place address: \(place.formattedAddress)")
+        var isPlace = true
+        //locality;admin area level 1; postal code
+        for a in place.addressComponents!{
+            if a.type == "street_number"{
+                first.append(a.name)
+                isPlace = false
+            }
+            if a.type == "route"{
+                first.append(a.name)
+                isPlace = false
+            }
+            
+            if a.type == "locality"{
+                if isPlace{
+                    first.append(a.name)
+                }
+                else{
+                    second.append(a.name)
+                }
+            }
+            if a.type == "administrative_area_level_1"{
+                if isPlace{
+                    first.append(a.name)
+                }
+                else{
+                    second.append(a.name)
+                }
+            }
+            if a.type == "postal_code"{
+                if isPlace{
+                    first.append(a.name)
+                }
+                else{
+                    second.append(a.name)
+                }
+            }
+            if a.type == "premise"{
+                first.append(a.name)
+                break
+            }
+        }
         
-        print("Place attributions: \(place.attributions)")
+        if isPlace{
+            second = first
+            self.locationTextField.text = place.name
+            
+            self.fullAddress = "\(place.name);;\(second.joined(separator: ", "))"
+        }
+        else{
+            self.locationTextField.text = first.joined(separator: ", ")
+            self.fullAddress = "\(first.joined(separator: " "));;\(second.joined(separator: " "))"
+        }
         
         self.eventDateTextField.becomeFirstResponder()
         dismiss(animated: true, completion: nil)

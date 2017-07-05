@@ -152,12 +152,14 @@
             <connections>
                 <outlet property="address" destination="0cs-3A-VsX" id="bFL-t3-PKe"/>
                 <outlet property="backgroundView" destination="H2p-sc-9uM" id="hIv-oB-fLo"/>
+                <outlet property="distance" destination="tAj-RA-kgB" id="mbX-bQ-dya"/>
                 <outlet property="eventImage" destination="ETM-uA-npq" id="pwf-lg-88c"/>
                 <outlet property="guestCount" destination="eR9-ia-rz0" id="cvD-hQ-a7z"/>
                 <outlet property="interest" destination="9L5-JM-0mw" id="GHC-m9-rec"/>
                 <outlet property="inviteEventCellContentView" destination="fIK-Si-Qtq" id="6pW-Pz-4kG"/>
                 <outlet property="inviteOut" destination="1ot-ti-4YO" id="ODy-or-Xlf"/>
                 <outlet property="name" destination="llf-1m-xzv" id="f0A-W6-dQi"/>
+                <outlet property="price" destination="Q8t-dN-nUs" id="LTL-Yz-HWL"/>
             </connections>
             <point key="canvasLocation" x="-18" y="43.5"/>
         </tableViewCell>
