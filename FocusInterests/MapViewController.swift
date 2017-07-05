@@ -791,7 +791,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         self.placeMapping[place.id] = place
                         self.getPlaceHours(id: place.id)
                         
-                        self.searchPlacesTab?.followingPlaces.append(place)
+                        if !(self.searchPlacesTab?.followingPlaces.contains(place))!{
+                            self.searchPlacesTab?.followingPlaces.append(place)
+                        }
+                        
                     })
                     
                 }
@@ -847,7 +850,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     
                     let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                     
-                    if !self.places.contains(place){
+                    if !(self.searchPlacesTab?.places.contains(place))!{
                         
 //                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
 //                        let marker = GMSMarker(position: position)

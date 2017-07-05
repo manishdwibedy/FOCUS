@@ -23,12 +23,15 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     
     @IBOutlet weak var invitePopup: UIView!
     @IBOutlet weak var invitePopupBottomLayoutConstraint: NSLayoutConstraint!
+    
     var places = [Place]()
+    var all_places = [Place]()
+    var followingPlaces = [Place]()
     var filtered = [Place]()
+    
     var location: CLLocation?
     var showPopup = false
     var followingCount = 0
-    var followingPlaces = [Place]()
     var suggestionCount = 0
     
 //    @IBOutlet weak var inviteBottomSpace: NSLayoutConstraint!
@@ -93,33 +96,39 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.all_places.removeAll()
+        self.all_places = self.followingPlaces + self.places
+        self.filtered = self.all_places
+        
+        self.tableView.reloadData()
     
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            
-            if let placeData = value{
-                self.followingCount = placeData.count
-                self.followingPlaces.removeAll()
-                for (_,place) in placeData
-                {
-                    let place_id = (place as? [String:Any])?["placeID"]
-                    getYelpByID(ID: place_id as! String, completion: {place in
-                        self.followingPlaces.append(place)
-                        
-                        
-                        if self.followingPlaces.count == self.followingCount{
-                            self.places = self.followingPlaces + self.places
-                            
-                            self.filtered = self.places
-                            self.tableView.reloadData()
-                        }
-                    })
-                
-                }
-                
-                
-            }
-        })
+//        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
+//            let value = snapshot.value as? NSDictionary
+//            
+//            if let placeData = value{
+//                self.followingCount = placeData.count
+//                self.followingPlaces.removeAll()
+//                for (_,place) in placeData
+//                {
+//                    let place_id = (place as? [String:Any])?["placeID"]
+//                    getYelpByID(ID: place_id as! String, completion: {place in
+//                        self.followingPlaces.append(place)
+//                        
+//                        
+//                        if self.followingPlaces.count == self.followingCount{
+//                            self.places = self.followingPlaces + self.places
+//                            
+//                            self.filtered = self.places
+//                            self.tableView.reloadData()
+//                        }
+//                    })
+//                
+//                }
+//                
+//                
+//            }
+//        })
         
         
     }
