@@ -39,7 +39,7 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         for (key,_) in guestList!
         {
             let newData = followProfileCellData()
-            newData.uid = (guestList?[key] as! NSDictionary)["UID"] as! String
+            newData.uid = (guestList?[key]! as! NSDictionary)["UID"] as! String
             self.attendeeList.add(newData)
         }
     

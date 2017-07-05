@@ -55,7 +55,7 @@ class Event: NSObject, NSCoding{
             "price": self.price ?? 0,
             "creator": self.creator!,
             "interests": self.category!
-        ] as! [String : Any]
+        ] as [String : Any] 
         newEvent.setValue(event)
         
         return newEvent.key

@@ -463,7 +463,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         var address = place?.address[0]
         address = address?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         
-        let url_string = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=\(lat)&dropoff[longitude]=\(long)&dropoff[nickname]=\(address)&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
+        let url_string = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=\(String(describing: lat))&dropoff[longitude]=\(String(describing: long))&dropoff[nickname]=\(String(describing: address))&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
         
         //let url  = URL(string: url_string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
         let url = URL(string: url_string)
@@ -587,7 +587,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         {
         let time = NSDate().timeIntervalSince1970
         Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id, "time":time])
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
         
         self.followButton.isSelected = true
         self.followButton.layer.borderWidth = 1

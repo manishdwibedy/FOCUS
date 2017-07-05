@@ -472,7 +472,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func priceSelected(){
-        print(self.eventPriceTextView.text)
+        print(self.eventPriceTextView.text ?? "")
         self.view.endEditing(true)
         self.eventDescriptionTextView.becomeFirstResponder()
     }
