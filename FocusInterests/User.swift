@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class User {
+class User: Equatable {
     
     var username: String?
     var fullname: String?
@@ -50,5 +50,10 @@ class User {
         
         return User(username: username, fullname: fullname, uuid: id, userImage: nil, interests: nil, image_string: image, hasPin: false)
         
+    }
+    
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.uuid == rhs.uuid
     }
 }

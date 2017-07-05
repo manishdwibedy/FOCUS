@@ -110,7 +110,11 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                                 user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
                                             }
                                         }
-                                        self.followers.append(user)
+                                        
+                                        if !self.followers.contains(user){
+                                            self.followers.append(user)
+                                        }
+                                        
                                         
                                         self.followers.sort {
                                             if $0.hasPin && $1.hasPin{
@@ -120,7 +124,13 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                         }
                                         
                                         if self.followers.count == followingCount{
-                                            self.people = self.followers + self.filtered
+                                            for user in self.followers{
+                                                if let index = self.people.index(where: { $0.uuid == user.uuid }) {
+                                                    self.people.remove(at: index)
+                                                }
+                                            }
+
+                                            self.people = self.followers + self.people
                                             self.filtered = self.people
                                             self.tableView.reloadData()
                                         }
@@ -133,7 +143,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                 }
             }
         })
-        _ = ref.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { snapshot in
+        _ = ref.queryLimited(toLast: 20).observeSingleEvent(of: .value, with: { snapshot in
             let users = snapshot.value as? [String : Any] ?? [:]
             
             let count = users.count
@@ -157,7 +167,10 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                         user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
                                     }
                                 }
-                                self.people.append(user)
+                                if !self.people.contains(user){
+                                    self.people.append(user)
+                                }
+                                
                                 
                                 self.people.sort {
                                     if $0.hasPin && $1.hasPin{
@@ -165,6 +178,13 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     }
                                     return $0.hasPin && !$1.hasPin
                                 }
+                                
+                                for user in self.followers{
+                                    if let index = self.people.index(where: { $0.uuid == user.uuid }) {
+                                        self.people.remove(at: index)
+                                    }
+                                }
+                                
                                 
                                 self.people = self.followers + self.people
                                 self.filtered = self.people
@@ -357,7 +377,10 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                             user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
                                         }
                                     }
-                                    self.filtered.append(user)
+                                    if !self.filtered.contains(user){
+                                        self.filtered.append(user)    
+                                    }
+                                    
                                     
                                     self.filtered.sort {
                                         if $0.hasPin && $1.hasPin{
