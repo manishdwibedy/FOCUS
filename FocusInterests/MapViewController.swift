@@ -215,6 +215,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         Constants.DB.pins.keepSynced(true)
         
         saveUserInfo()
+        Share.getUserContacts(email: "manish.dwibedy@gmail.com")
+        
         
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
@@ -428,7 +430,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
             
-            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
+            distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
             
             var interestText = ""
             if let category = event.category{
@@ -478,7 +480,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             popUpScreen.profileImage.setShowActivityIndicator(true)
             popUpScreen.profileImage.setIndicatorStyle(.gray)
             
-            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
+            
+            distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
             
             popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interestText, address: place.address[0])
             return true
@@ -502,7 +505,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             var name = pin.username
             
             
-            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
+            distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
             
             Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary

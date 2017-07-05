@@ -982,12 +982,13 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
                             if let likeData = likeData as? [String:Any]{
                                 if let user = likeData["UID"] as? String{
                                     getUserData(uid: user, gotInfo: {user in
-                                        let comment = ItemOfInterest(itemName: user.username, imageURL: nil, type: "like")
+                                        let comment = ItemOfInterest(itemName: event.title, imageURL: nil, type: "like")
                                         comment.data = [
                                             "type": "event",
                                             "id": id,
                                             "actionType": "like",
-                                            "senderID": likeData["UID"] as? String
+                                            "senderID": likeData["UID"] as? String,
+                                            "event": event
                                         ]
                                         
                                         let event_comment = FocusNotification(type: NotificationType.Comment, sender: user, item: comment, time: Date())

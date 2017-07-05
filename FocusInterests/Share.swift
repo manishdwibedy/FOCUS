@@ -109,6 +109,7 @@ class Share{
                 
                 for friend in friends{
                     print("\(String(describing: friend["first_name"]!)) \(String(describing: friend["last_name"]!) )")
+
                     print(String(describing: friend["id"]!))
                 }
             case .failed(let error):
@@ -116,5 +117,22 @@ class Share{
             }
         }
         connection.start()
+    }
+    
+    
+    static func getUserContacts(email : String){
+        var request = URLRequest(url: URL(string: "https://google.com/m8/feeds/contacts/\(email)/full")!)
+        request.timeoutInterval = 120.0
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest) {
+            (data, response, error) -> Void in
+            
+            let httpResponse = response as! HTTPURLResponse
+            let statusCode = httpResponse.statusCode
+        
+            
+        }
+        
+        task.resume()
     }
 }

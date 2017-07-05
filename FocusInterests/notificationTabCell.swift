@@ -112,9 +112,20 @@ class notificationTabCell: UITableViewCell {
             actionStr = "commented on your"
         }
         if data["type"] as! String == "event"{
-            whatStr = "event - \(notif.item!.itemName!)"
+            if data["actionType"] as! String == "like"{
+                whatStr = "Event - \(notif.item!.itemName!)"
+            }
+            else{
+                whatStr = "Event: \"\(notif.item!.itemName!)\""
+            }
         }else{
-            whatStr = "pin - \(notif.item!.itemName!)"
+            if data["actionType"] as! String == "like"{
+                whatStr = "Pin - \(notif.item!.itemName!)"
+            }
+            else{
+                whatStr = "Pin: \"\(notif.item!.itemName!)\""
+            }
+            
         }
         
         loadAttr(component1: (notif.sender?.username)!, component2: actionStr, component3: whatStr)

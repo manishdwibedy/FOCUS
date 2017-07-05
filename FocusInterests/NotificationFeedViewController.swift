@@ -195,6 +195,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         if self.selectedSegmentIndex == 0{
             let notif = nofArray[indexPath.row]
             

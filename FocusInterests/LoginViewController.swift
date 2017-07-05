@@ -191,6 +191,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                         self.getFacebookData(uuid: fireId, result: result)
                                     }
                                     AuthApi.set(userEmail: user?.email)
+                                    Share.getFacebookFriends()
                                     self.showHomeVC()
                                 })
 
@@ -425,6 +426,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             Constants.DB.user.child("\(fireId)/firebaseUserId").setValue(fireId)
             Constants.DB.user.child("\(fireId)/token").setValue(token)
             AuthApi.set(FCMToken: token)
+            
+            
             
         })
     }
