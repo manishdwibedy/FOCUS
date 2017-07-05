@@ -48,7 +48,7 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let data = imageData{
+        if imageData != nil{
             self.performSegue(withIdentifier: "event_invite", sender: nil)
         }
     }

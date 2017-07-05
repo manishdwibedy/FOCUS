@@ -53,7 +53,7 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         
         doneButton.tintColor = UIColor.blue
-        doneButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir Heavy", size: 15.0)], for: .normal)
+        doneButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir Heavy", size: 15.0)!], for: .normal)
         
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!]
@@ -234,7 +234,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         else if textField == usernameTf{
             
             Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
-                if let id = (snapshot.value as? NSDictionary)?[self.usernameTf.text]{
+                if ((snapshot.value as? NSDictionary)?[self.usernameTf.text ?? ""]) != nil{
                     SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
                     textField.becomeFirstResponder()
                 }

@@ -149,7 +149,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.searchBar.tintColor = UIColor.white
         self.searchBar.returnKeyType = .done
         
-        var textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
         
         textFieldInsideSearchBar?.textColor = UIColor.white
         
@@ -159,7 +159,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.timePicker.datePickerMode = .time
         self.timePicker.minuteInterval = 5
         
-        var date = Date()
+        let date = Date()
         self.datePicker.minimumDate = date
         self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())
         self.datePicker.datePickerMode = .date
@@ -202,7 +202,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         if let cached = Event.fetchEvent() {
             self.event = cached
             eventNameTextField.text = cached.title
-            eventDescriptionTextView.text = cached.eventDescription! ?? ""
+            eventDescriptionTextView.text = cached.eventDescription! 
             locationTextField.text = cached.fullAddress
             
             let dateTime = cached.date?.components(separatedBy: ",")
@@ -296,7 +296,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                         return
                 }
                 let dateString = "\(validDate), \(validTime)"
-                guard let creator = AuthApi.getFirebaseUid() else { return }
+                guard AuthApi.getFirebaseUid() != nil else { return }
                 
                 let interests = zip(checkInterests,Constants.interests.interests ).filter { $0.0 }.map { $1 }
                 
@@ -326,7 +326,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                     return
                 }
                 
-                let validDescrip = eventDescriptionTextView.text ?? ""
+                _ = eventDescriptionTextView.text ?? ""
                 
                 guard let validDate = eventDateTextField.text, !validDate.isEmpty,
                     let validTime = eventTimeTextField.text, !validTime.isEmpty else {

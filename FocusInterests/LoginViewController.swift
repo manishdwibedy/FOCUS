@@ -123,7 +123,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         Auth.auth().signIn(withEmail: userEmail, password: password, completion: { (user, error) in
                             if error != nil {
                                 self.showLoginFailedAlert(loginType: "email")
-                                print("there has been an error with email login: \(error?.localizedDescription)")
+                                print("there has been an error with email login: \(String(describing: error?.localizedDescription))")
                             } else {
                                 if user != nil {
                                     if let id = user?.uid {
@@ -161,7 +161,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         loginView.loginBehavior = .native
         loginView.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
                 self.showLoginFailedAlert(loginType: "Facebook")
             } else {
                 if let res = result {
@@ -188,7 +188,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                         print("Error: \(error)")
                                     }
                                     else{
-                                        self.getFacebookData(uuid: fireId, result: result)
+                                        self.getFacebookData(uuid: fireId, result: result ?? "")
                                     }
                                     AuthApi.set(userEmail: user?.email)
                                     Share.getFacebookFriends()

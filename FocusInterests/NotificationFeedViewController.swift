@@ -203,7 +203,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
                 if type == "event"{
                     let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
-                    controller.event = notif.item?.data["event"] as! Event
+                    controller.event = notif.item?.data["event"] as? Event
                     self.present(controller, animated: true, completion: nil)
                 }
                 else{

@@ -58,7 +58,7 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         
         let screenRect = UIScreen.main.bounds
         let screenWidth = screenRect.size.width
-        let cellWidth = screenWidth/3.0
+        _ = screenWidth/3.0
         
         
         navBar.titleTextAttributes = Constants.navBar.attrs
@@ -75,7 +75,7 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
             if let interests = AuthApi.getInterests(){
                 let selected = interests.components(separatedBy: ",")
                 
-                var final_interest = [String]()
+                _ = [String]()
                 for interest in selected{
                     if interest.characters.count > 0{
                         let parts = interest.components(separatedBy: "-")

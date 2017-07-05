@@ -258,8 +258,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 let parameters = [
                     "term": searchText,
-                    "latitude": location?.coordinate.latitude,
-                    "longitude": location?.coordinate.longitude,
+                    "latitude": location?.coordinate.latitude ?? 0,
+                    "longitude": location?.coordinate.longitude ?? 0,
                     ] as [String : Any]
                 
                 
@@ -341,7 +341,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 for (id, event) in value!
                 {
                     let info = event as? [String:Any]
-                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id as! String, category: info?["interest"] as? String)
+                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id as? String, category: info?["interest"] as? String)
                     self.filtered.append(event)
                 }
                 self.tableView.reloadData()
@@ -363,8 +363,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         ]
         
         let parameters = [
-            "latitude": location?.coordinate.latitude,
-            "longitude": location?.coordinate.longitude,
+            "latitude": location?.coordinate.latitude ?? 0,
+            "longitude": location?.coordinate.longitude ?? 0,
             ] as [String : Any]
         
         
@@ -417,7 +417,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBAction func indexChanged(_ sender: Any) {
         
-        let segmentedControl = sender as! UISegmentedControl
+        _ = sender as! UISegmentedControl
         
         
         let sortedViews = (sender as! UISegmentedControl).subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )

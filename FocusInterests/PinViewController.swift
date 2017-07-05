@@ -269,7 +269,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         phoneLabel.text = place.phone
         
 //        TODO: THIS RETURNS NIL NEED TO FIX BACKEND SETUP SO THAT HOURS ARE ADDED
-        print("Hours: \(place.hours)")
+        print("Hours: \(String(describing: place.hours))")
         
         if let open_hours = place.hours{
             let hours = getOpenHours(open_hours)
@@ -334,7 +334,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     // function which is triggered when handleTap is called
     func handleTap(_ sender: UITapGestureRecognizer) {
         let view = sender.view as! SuggestPlaceView
-        print("Tapped \(view.name.text)")
+        print("Tapped \(String(describing: view.name.text))")
         placeVC?.loadPlace(place: view.place!)
         self.loadInfoScreen(place: view.place!)
         
@@ -458,10 +458,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     @IBAction func openUber(_ sender: Any) {
-        let lat = place?.latitude as! Double
-        let long = place?.longitude as! Double
-        var address = place?.address[0] as! String
-        address = address.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let lat = place?.latitude
+        let long = place?.longitude
+        var address = place?.address[0]
+        address = address?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         
         let url_string = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=\(lat)&dropoff[longitude]=\(long)&dropoff[nickname]=\(address)&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
         
@@ -475,12 +475,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     @IBAction func openGoogleMaps(_ sender: Any) {
-        let latitude = place?.latitude as! Double
-        let longitude = place?.longitude as! Double
+        let latitude = place?.latitude
+        let longitude = place?.longitude
         
         let user_location = AuthApi.getLocation()
-        let place_location = CLLocation(latitude: latitude, longitude: longitude)
-        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let place_location = CLLocation(latitude: latitude!, longitude: longitude!)
+        let coordinates = CLLocationCoordinate2DMake(latitude!, longitude!)
         
         let distanceInMeters = user_location!.distance(from: place_location)
 
@@ -564,7 +564,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         if let rating = self.ratingID{
             comments.child(rating).setValue([
-                "rating": self.rating,
+                "rating": self.rating ?? 0,
                 "comment": reviewsTextView.text,
                 "date": Date().timeIntervalSince1970,
                 "user": AuthApi.getFirebaseUid()!
@@ -572,7 +572,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
         else{
             comment.setValue([
-                "rating": self.rating,
+                "rating": self.rating ?? 0,
                 "comment": reviewsTextView.text,
                 "date": Date().timeIntervalSince1970,
                 "user": AuthApi.getFirebaseUid()!

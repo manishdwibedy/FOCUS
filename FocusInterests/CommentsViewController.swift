@@ -42,8 +42,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                     info[key] = value?[key] as! [String:Any]
                 }
                 
-                var myArr = Array(info.keys)
-                var sortedKeys = myArr.sorted(by: {
+                let myArr = Array(info.keys)
+                let sortedKeys = myArr.sorted(by: {
                     let val1 = info[$0] as? [String: Any]
                     let val2 = info[$1] as? [String: Any]
                     

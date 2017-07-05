@@ -76,7 +76,7 @@ class notificationTabCell: UITableViewCell {
         
         if data["type"] as! String == "event"{
             Constants.DB.event.child(data["id"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
+                _ = snapshot.value as? NSDictionary
                 
                 let placeholderImage = UIImage(named: "empty_event")
                 
@@ -86,7 +86,7 @@ class notificationTabCell: UITableViewCell {
                 reference.downloadURL(completion: { (url, error) in
                     
                     if error != nil {
-                        print(error?.localizedDescription)
+                        print(error?.localizedDescription ?? "")
                         return
                     }
                     

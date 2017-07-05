@@ -52,7 +52,7 @@ class Event: NSObject, NSCoding{
             "longitude": self.longitude!,
             "date": self.date!,
             "endtime": self.endTime,
-            "price": self.price,
+            "price": self.price ?? 0,
             "creator": self.creator!,
             "interests": self.category!
         ] as! [String : Any]

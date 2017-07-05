@@ -106,7 +106,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             reference.downloadURL(completion: { (url, error) in
                 
                 if error != nil {
-                    print(error?.localizedDescription)
+                    print(error?.localizedDescription ?? "")
                     return
                 }
                 
@@ -421,7 +421,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardSize.height
+            _ = keyboardSize.height
             //self.scrollView.contentOffset.y = ((keyboardHeight)) + self.commentTextField.frame.height + 100
             
             
@@ -432,7 +432,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func keyboardDidShow(notification: NSNotification) {
         keyboardUp = true
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardSize.height
+            _ = keyboardSize.height
             //self.scrollView.contentOffset.y = (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60
             
             scrollView.setContentOffset(CGPoint(x: 0, y: (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60), animated: true)
@@ -584,12 +584,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         let center = CLLocation(latitude: Double((event?.latitude)!)!, longitude: Double((event?.latitude)!)!)
         if let circleQuery = self.geoFire?.query(at: center, withRadius: 20.0) {
             _ = circleQuery.observe(.keyEntered) { (key, location) in
-                    print("Key '\(key)' entered the search area and is at location '\(location)'")
+                    print("Key '\(String(describing: key))' entered the search area and is at location '\(location)'")
                 
                 Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
                     let info = snapshot.value as? [String : Any] ?? [:]
                     
-                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
+                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
                     
                         if let attending = info["attendingList"] as? [String:Any]{
                             event.setAttendessCount(count: attending.count)

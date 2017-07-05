@@ -227,7 +227,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         self.present(VC!, animated: true, completion: nil)
     }
     
-    func messageComposeViewController(_ controller: MFMessageComposeViewController!, didFinishWith result: MessageComposeResult) {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         switch (result) {
         case .cancelled:
             print("Message was cancelled")
@@ -365,21 +365,17 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             filtered.removeAll()
             filteredSectionMapping.removeAll()
             for user in filteredUser{
-                if let name = user.givenName as? String{
-                    let first = String(describing: name.characters.first!).uppercased()
-                    
-                    
-                    if !self.filteredSection.contains(first){
-                        self.filteredSection.append(first)
-                        self.filteredSectionMapping[first] = 1
-                        self.filtered[first] = [user]
-                    }
-                    else{
-                        self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
-                        self.filtered[first]?.append(user)
-                    }
-                }
+                let first = String(describing: user.givenName.characters.first!).uppercased()
                 
+                if !self.filteredSection.contains(first){
+                    self.filteredSection.append(first)
+                    self.filteredSectionMapping[first] = 1
+                    self.filtered[first] = [user]
+                }
+                else{
+                    self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
+                    self.filtered[first]?.append(user)
+                }
             }
             self.filteredSection.sort()
             self.friendsTableView.reloadData()

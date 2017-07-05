@@ -24,7 +24,7 @@ class HomePageViewController: UITabBarController {
         ]
 
         UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes(attributes ?? [:], for: .selected)
         
         setupTabBarSeparators()
         

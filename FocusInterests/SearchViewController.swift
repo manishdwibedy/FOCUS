@@ -183,8 +183,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 self.filtered_user.removeAll()
 
                 let ref = Constants.DB.user
-                let query = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
-                    let events = snapshot.value as? [String : Any] ?? [:]
+                _ = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
+                    _ = snapshot.value as? [String : Any] ?? [:]
                     
                     let users = snapshot.value as? [String : Any] ?? [:]
                     
@@ -261,7 +261,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             }
             
             cell?.address.text = people.pinCaption
-            let placeHolderImage = UIImage(named: "empty_event")
+            _ = UIImage(named: "empty_event")
 
 //            cell?.followButton.roundCorners(radius: 10)
 //            cell?.inviteButton.roundCorners(radius: 10)
@@ -298,16 +298,16 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     
                 cell?.guestCount.text = "\(event.attendeeCount) guests"
                 addGreenDot(label: (cell?.interest)!, content: event.category!)
-                if let price = event.price as? Double{
+                if let price = event.price{
                     if price == 0{
-                        cell?.price.text == "Free"
+                        cell?.price.text = "Free"
                     }
                     else{
-                        cell?.price.text == "$ \(price)"
+                        cell?.price.text = "$ \(price)"
                     }
                 }
                 else{
-                    cell?.price.text == "Free"
+                    cell?.price.text = "Free"
                 }
             
                 cell?.distance.text = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
@@ -419,7 +419,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         let event = self.events[buttonRow]
         
         if sender.title(for: .normal) == "Attend"{
-            print("attending event \(event.title) ")
+            print("attending event \(String(describing: event.title)) ")
             
             Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
             
@@ -462,13 +462,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     func followUser(sender:UIButton){
         let buttonRow = sender.tag
         
-        print("following user \(self.people[buttonRow].username) ")
+        print("following user \(String(describing: self.people[buttonRow].username)) ")
     }
     
     func inviteUser(sender:UIButton){
         let buttonRow = sender.tag
         
-        print("invite user \(self.people[buttonRow].username) ")
+        print("invite user \(String(describing: self.people[buttonRow].username)) ")
     }
 
     func getUsers(text: String){
@@ -486,7 +486,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 let user = User(username: info?["username"] as! String?, fullname: info?["fullname"] as! String? , uuid: info?["firebaseUserId"] as! String?, userImage: nil, interests: people_interest, image_string: nil, hasPin: false)
                 
                 
-                var interest = user_interest.components(separatedBy: ",")
+                let interest = user_interest.components(separatedBy: ",")
                 var user_interests = getUserInterests().components(separatedBy: ",")
                 
                 if self.selectedFocus.characters.count > 0{
@@ -500,7 +500,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                             let newData = generalSearchData()
                             newData.type = "people"
                             newData.object = user
-                            print(user.uuid)
+                            print(user.uuid ?? "")
                             Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { snapshot in
                                 let value = snapshot.value as? NSDictionary
                                 if value != nil{
@@ -559,8 +559,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
         let parameters = [
             "categories": category,
             "term": text,
-            "latitude": location?.coordinate.latitude,
-            "longitude": location?.coordinate.longitude,
+            "latitude": location?.coordinate.latitude ?? 0,
+            "longitude": location?.coordinate.longitude ?? 0,
             ] as [String : Any]
         
         Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
@@ -595,8 +595,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                     let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
                     categories.append(category)
                 }
-                
-                getYelpCategories()
                 
                 let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                 
@@ -641,12 +639,12 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
     func getEvents(text: String){
         
         let ref = Constants.DB.event
-        let query = ref.queryOrdered(byChild: "title").queryStarting(atValue: text.lowercased()).queryEnding(atValue: text.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
+        _ = ref.queryOrdered(byChild: "title").queryStarting(atValue: text.lowercased()).queryEnding(atValue: text.lowercased()+"\u{f8ff}").observe(.value, with: { snapshot in
             let events = snapshot.value as? [String : Any] ?? [:]
             
             for (id, event) in events{
                 let info = event as? [String:Any]
-                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String)
+                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as? String, latitude: (info?["latitude"])! as? String, longitude: (info?["longitude"])! as? String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interests"] as? String)
                 
                 let event_interests = event.category?.components(separatedBy: ",")
                 var user_interests = getUserInterests().components(separatedBy: ",")
@@ -722,9 +720,9 @@ extension SearchViewController: GMSAutocompleteViewControllerDelegate {
         
         print("Place name: \(place.name)")
         
-        print("Place address: \(place.formattedAddress)")
+        print("Place address: \(String(describing: place.formattedAddress))")
         
-        print("Place attributions: \(place.attributions)")
+        print("Place attributions: \(String(describing: place.attributions))")
         
         dismiss(animated: true, completion: nil)
     }

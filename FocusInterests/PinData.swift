@@ -58,7 +58,7 @@ class pinData
             return nil
         }
         
-        guard let uuid = user.uuid as? String else{
+        guard let uuid = user.uuid else{
             return nil
         }
         

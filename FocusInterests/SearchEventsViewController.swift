@@ -109,7 +109,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
 //                        for (id, event) in events{
 //                            let info = event as? [String:Any]
-                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id as! String, category: info["interests"] as? String)
+                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as? String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as? String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: id as? String, category: info["interests"] as? String)
             
                             let eventLocation = CLLocation(latitude: Double((info["longitude"])! as! String)!, longitude: Double((info["longitude"])! as! String)!)
                         
@@ -178,10 +178,10 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.name.text = event.title
         
         var addressComponents = event.fullAddress?.components(separatedBy: ",")
-        let streetAddress = addressComponents?[0]
+        _ = addressComponents?[0]
         
         addressComponents?.remove(at: 0)
-        let city = addressComponents?.joined(separator: ", ")
+        _ = addressComponents?.joined(separator: ", ")
         
         var fullAddress = ""
         for str in addressComponents!{
@@ -202,7 +202,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         cell?.price.text = "Price"
         
-        if let index = self.all_events.index(where: { $0.id == event.id }) {
+        if self.all_events.index(where: { $0.id == event.id }) != nil {
             cell?.attendButton.layer.borderWidth = 0
             cell?.attendButton.layer.borderColor = UIColor.clear.cgColor
             cell?.attendButton.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
@@ -214,7 +214,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             cell?.attendButton.backgroundColor = UIColor.clear
             cell?.attendButton.setTitle("Attending", for: .normal)
         }
-        let placeHolderImage = UIImage(named: "empty_event")
+        _ = UIImage(named: "empty_event")
         
         if let price = event.price{
             if price == 0{
@@ -280,7 +280,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let event = self.filtered[buttonRow]
         
         if sender.title(for: .normal) == "Attend"{
-            print("attending event \(event.title) ")
+            print("attending event \(String(describing: event.title)) ")
             
             Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
             
@@ -345,7 +345,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let buttonRow = sender.tag
         
         let event = self.events[buttonRow]
-        print("invite user to event \(event.title) ")
+        print("invite user to event \(String(describing: event.title)) ")
         
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
@@ -374,12 +374,12 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             self.filtered.removeAll()
 
             let ref = Constants.DB.event
-            let query = ref.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+            _ = ref.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
                 let events = snapshot.value as? [String : Any] ?? [:]
                 
                 for (id, event) in events{
                     let info = event as? [String:Any]
-                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String)
+                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String)
                     
                     if let attending = info?["attendingList"] as? [String:Any]{
                         event.setAttendessCount(count: attending.count)

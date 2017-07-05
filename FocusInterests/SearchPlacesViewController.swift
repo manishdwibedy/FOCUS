@@ -89,7 +89,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                 self.invitePopupBottomLayoutConstraint.constant = 0
                 self.invitePopup.center.y -= 119
             }, completion: nil)
-            _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector:  Selector("hidePopup"), userInfo: nil, repeats: false)
+            _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector:  #selector(SearchPlacesViewController.hidePopup), userInfo: nil, repeats: false)
             
         }
     }
@@ -192,7 +192,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         
         cell.parentVC = self
         cell.checkForFollow(id: place.id)
-        let placeHolderImage = UIImage(named: "empty_event")
+        _ = UIImage(named: "empty_event")
         
         SDWebImageManager.shared().downloadImage(with: URL(string :place.image_url), options: .highPriority, progress: {
             (receivedSize :Int, ExpectedSize :Int) in
@@ -251,11 +251,10 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
             
             let parameters = [
                 "term": searchText,
-                "latitude": location?.coordinate.latitude,
-                "longitude": location?.coordinate.longitude,
+                "latitude": location?.coordinate.latitude ?? 0,
+                "longitude": location?.coordinate.longitude ?? 0,
                 "radius": 32_186
             ] as [String : Any]
-            print(location?.coordinate)
             Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
                 let json = JSON(data: response.data!)["businesses"]
                 

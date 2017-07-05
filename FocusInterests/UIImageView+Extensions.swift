@@ -29,7 +29,7 @@ extension UIImageView {
             let urlSession = URLSession(configuration: .default)
             let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
                 if error != nil {
-                    print("There has been an image download error: \(error?.localizedDescription)")
+                    print("There has been an image download error: \(String(describing: error?.localizedDescription))")
                     return
                 } else {
                     if let httpResponse = response as? HTTPURLResponse {

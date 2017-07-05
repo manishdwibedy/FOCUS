@@ -34,7 +34,7 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         self.attendingLabel.text = "\((guestList?.count)!) Attending"
         
-        let fullRef = ref.child("events").child((parentEvent?.id)!).child("attendingList")
+        _ = ref.child("events").child((parentEvent?.id)!).child("attendingList")
         
         for (key,_) in guestList!
         {

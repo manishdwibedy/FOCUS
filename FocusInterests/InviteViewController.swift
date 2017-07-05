@@ -133,7 +133,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.sections.removeAll()
             self.sectionMapping.removeAll()
             self.users.removeAll()
-            do {
+            
                 
                 let contactStore = CNContactStore()
                 let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
@@ -148,32 +148,28 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 
                 for contact in contacts{
-                    if let name = contact.givenName as? String{
-                        let first = String(describing: name.characters.first!).uppercased()
-                        
-                        var numbers = [String]()
-                        for number in contact.phoneNumbers{
-                            numbers.append(number.value.stringValue)
-                        }
-                        let user = InviteUser(UID: numbers.joined(separator: ","), username: contact.givenName, fullname: contact.familyName)
-                        self.selected[user] = false
-                        if !self.sections.contains(first){
-                            self.sections.append(first)
-                            self.sectionMapping[first] = 1
-                            self.users[first] = [user]
-                        }
-                        else{
-                            self.sectionMapping[first] = self.sectionMapping[first]! + 1
-                            self.users[first]?.append(user)
-                        }
+                    let first = String(describing: contact.givenName.characters.first!).uppercased()
+                    
+                    var numbers = [String]()
+                    for number in contact.phoneNumbers{
+                        numbers.append(number.value.stringValue)
+                    }
+                    let user = InviteUser(UID: numbers.joined(separator: ","), username: contact.givenName, fullname: contact.familyName)
+                    self.selected[user] = false
+                    if !self.sections.contains(first){
+                        self.sections.append(first)
+                        self.sectionMapping[first] = 1
+                        self.users[first] = [user]
+                    }
+                    else{
+                        self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                        self.users[first]?.append(user)
                     }
                 }
                 
                 self.sections.sort()
                 friendsTableView.reloadData()
-            } catch {
-                print(error)
-            }
+            
         }
         
         
@@ -234,7 +230,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         tableView.scrollToRow(at: IndexPath(row: 0, section: index), at: UITableViewScrollPosition.top , animated: false)
         
-        var temp = self.sections as NSArray
+        let temp = self.sections as NSArray
         return temp.index(of: title)
     }
     
@@ -417,7 +413,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     
-    func messageComposeViewController(_ controller: MFMessageComposeViewController!, didFinishWith result: MessageComposeResult) {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         switch (result) {
         case .cancelled:
             print("Message was cancelled")
@@ -428,8 +424,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case .sent:
             print("Message was sent")
             self.dismiss(animated: true, completion: nil)
-        default:
-            break;
         }
     }
     

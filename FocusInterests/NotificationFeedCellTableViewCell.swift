@@ -73,7 +73,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             seeYouHeight.constant = 24
         }
 //        self.userProfilePic.image = notif.sender?.username
-        let content = (notif.sender?.username)! + " "//! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
+        _ = (notif.sender?.username)! + " "//! + " " + (notif.type?.rawValue)! + " " + (notif.item?.itemName!)!
         
         if !isFeed{
             if notif.item?.type == "place"{
@@ -81,7 +81,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                 
                 getYelpByID(ID: placeID!, completion: { place in
                     let url = URL(string: place.image_url)
-                    let placeholderImage = UIImage(named: "empty_event")
+                    _ = UIImage(named: "empty_event")
                     
                     
                     SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
@@ -107,7 +107,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                 reference.downloadURL(completion: { (url, error) in
                     
                     if error != nil {
-                        print(error?.localizedDescription)
+                        print(error?.localizedDescription ?? "")
                         return
                     }
                     
