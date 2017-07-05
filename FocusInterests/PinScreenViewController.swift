@@ -311,7 +311,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             }
         
             if formmatedAddress.characters.count > 0{
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text] )
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text ?? ""] )
                 
                 Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
                     if (error != nil) {

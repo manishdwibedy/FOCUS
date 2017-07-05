@@ -154,12 +154,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         Constants.DB.event.observe(DataEventType.childAdded, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
-            let info = events as? [String:Any]
+            let info = events// as? [String:Any]
 //            for (id, event) in events{
             
-                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: snapshot.key, category: info?["interests"] as? String)
+                let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: snapshot.key, category: info["interests"] as? String)
         
-                if let attending = info?["attendingList"] as? [String:Any]{
+                if let attending = info["attendingList"] as? [String:Any]{
                     event.setAttendessCount(count: attending.count)
                 }
                 
@@ -217,6 +217,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         saveUserInfo()
         Share.getUserContacts(email: "manish.dwibedy@gmail.com")
         
+        let token = Messaging.messaging().fcmToken
+        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
+        AuthApi.set(FCMToken: token)
         
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
@@ -307,7 +310,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if (username.text?.characters.count)! > 0{
                     
                     Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
-                        if let id = (snapshot.value as? NSDictionary)?[username.text]{
+                        if let id = (snapshot.value as? NSDictionary)?[username.text ?? ""]{
                             username.text = ""
                             SCLAlertView().showError("Error", subTitle: "Please choose a unique error.")
                         }

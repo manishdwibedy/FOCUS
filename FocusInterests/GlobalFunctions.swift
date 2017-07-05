@@ -132,7 +132,7 @@ func changeTimeZone(of date: Date, from sourceTimeZone: TimeZone, to destination
 func getEvents(around location: CLLocation, completion: @escaping (_ result: [Event]) -> Void){
     let url = "https://www.eventbriteapi.com/v3/events/search/"
 
-    var count = 0
+    _ = 0
     var eventList = [Event]()
     
     let parameters: [String: String] = [
@@ -227,7 +227,7 @@ func uploadImage(image:UIImage, path: StorageReference)
     let metadata = StorageMetadata()
     metadata.contentType = "image/jpeg"
     
-    let userID = AuthApi.getFirebaseUid()
+    _ = AuthApi.getFirebaseUid()
     let uploadTask = path.putData(localFile!, metadata: metadata)
     
     uploadTask.observe(.progress) { snapshot in
@@ -260,7 +260,7 @@ func sendNotification(to id: String, title: String, body: String, actionType: St
         "type": type,
         "id": item_id,
         "name": item_name,
-        "senderID": AuthApi.getFirebaseUid()
+        "senderID": AuthApi.getFirebaseUid() ?? ""
         ])
     
     Constants.DB.user.child(id).observeSingleEvent(of: .value, with: { snapshot in
@@ -279,6 +279,7 @@ func sendNotification(to id: String, title: String, body: String, actionType: St
         
         
         Alamofire.request(url, method: .get, parameters:parameters, headers: nil).response { response in
+            print(response)
         }
         
     })
@@ -322,8 +323,8 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                 let pinID = snapshot.key
                 if let pin = pin11{
                     let time = Date(timeIntervalSince1970: pin["time"] as! Double)
-                    let address = pin["formattedAddress"] as! String
-                    let place = ItemOfInterest(itemName: pin["pin"] as! String, imageURL: nil, type: "pin")
+                    _ = pin["formattedAddress"] as! String
+                    let place = ItemOfInterest(itemName: pin["pin"] as? String, imageURL: nil, type: "pin")
                     place.id = pinID
                     
                     let pinFeed = FocusNotification(type: NotificationType.Pin, sender: followerUser, item: place, time: time)
@@ -336,7 +337,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                         
                         // Fetch the download URL
                         pinImage.downloadURL { url, error in
-                            if let error = error {
+                            if error != nil {
                                 // Handle any errors
                             } else {
                                 pinImageMap[place.id] = url?.absoluteString
@@ -376,7 +377,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                     if let comments = pin["comments"] as? [String:Any]{
                         pinCount += comments.count
                         
-                        for (id, data) in comments{
+                        for (_, data) in comments{
                             let commentData = data as? [String:Any]
                             let commentInfo = ItemOfInterest(itemName: commentData?["comment"] as? String, imageURL: place.imageURL, type: "comment")
                             commentInfo.id = pinID
@@ -413,7 +414,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                             pinCount += likeCount
                         }
                         
-                        for (id, data) in likeData!{
+                        for (_, data) in likeData!{
                             if let likeData = data as? [String:Any]{
                                 Constants.DB.user.child((likeData["UID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
                                     
@@ -455,7 +456,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                 if let eventInfo = eventInfo{
                     for (id, event) in eventInfo{
                         let info = event as? [String:Any]
-                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String)
 //                        MMM dd, hh:mm
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "MMM d, h:mm a"
@@ -489,14 +490,14 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                     if let event = invitations["event"] as? [String:[String:Any]]{
                         totalInvitation += event.count
                         
-                        for (id,invite) in event{
+                        for (_,invite) in event{
                             let id = invite["ID"]  as! String
                             
                             
                             Constants.DB.event.child(id).observeSingleEvent(of: .value, with: { snapshot in
                                 let info = snapshot.value as? [String : Any]
                                 
-                                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+                                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String)
                                 
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.dateFormat = "MMM d, h:mm a"
@@ -859,7 +860,7 @@ func getUserInterests() -> String{
     return ""
 }
     
-func crop(image: UIImage, width width: Double, height height: Double) -> UIImage? {
+func crop(image: UIImage, width: Double, height: Double) -> UIImage? {
     
     if let cgImage = image.cgImage {
         

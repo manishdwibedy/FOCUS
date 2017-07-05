@@ -128,7 +128,7 @@ class Share{
             (data, response, error) -> Void in
             
             let httpResponse = response as! HTTPURLResponse
-            let statusCode = httpResponse.statusCode
+            _ = httpResponse.statusCode
         
             
         }

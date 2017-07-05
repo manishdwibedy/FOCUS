@@ -93,7 +93,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                 Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
                     if error != nil {
                         self.showLoginFailedAlert(loginType: "email")
-                        print("there has been an error with email login: \(error?.localizedDescription)")
+                        print("there has been an error with email login: \(String(describing: error?.localizedDescription))")
                     } else {
                         if user != nil {
                             if let id = user?.uid {
