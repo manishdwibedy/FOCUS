@@ -12,6 +12,8 @@ import SwiftyJSON
 import CoreLocation
 import Crashlytics
 import FirebaseStorage
+import SCLAlertView
+import FirebaseAuth
 
 func featuresToString(features: [Feature]) -> String {
     var strArray = [String]()
@@ -22,6 +24,24 @@ func featuresToString(features: [Feature]) -> String {
     return joinedStr
 }
 
+func showLoginError(_ error: Error){
+    Crashlytics.sharedInstance().recordError(error)
+
+    if let errCode = AuthErrorCode(rawValue: error._code) {
+        switch errCode {
+        case .accountExistsWithDifferentCredential:
+            SCLAlertView().showError("Whoops!", subTitle: "Registered with different provider")
+        case .invalidEmail:
+            SCLAlertView().showError("Whoops!", subTitle: "Invalid email")
+        case .emailAlreadyInUse:
+            SCLAlertView().showError("Whoops!", subTitle: "Email already in user")
+        case .weakPassword:
+            SCLAlertView().showError("Whoops!", subTitle: "Weak password.")
+        default:
+            SCLAlertView().showError("Whoops!", subTitle: "Failed to register the users.")
+        }
+    }
+}
 func getYelpToken(completion: @escaping (_ result: String) -> Void){
     let url = "https://api.yelp.com/oauth2/token"
     let parameters: [String: String] = [

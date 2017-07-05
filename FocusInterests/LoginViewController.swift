@@ -199,21 +199,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             }
                             
                             self.checkForSignedUp()
-                            if error != nil {
-                                
-                                if let errCode = AuthErrorCode(rawValue: error!._code) {
-                                    switch errCode {
-                                    case .invalidEmail:
-                                        SCLAlertView().showError("Error", subTitle: "Invalid email")
-                                    case .emailAlreadyInUse:
-                                        
-                                        SCLAlertView().showError("Error", subTitle: "Email already in user")
-                                    case .weakPassword:
-                                        SCLAlertView().showError("Error", subTitle: "Weak password.")
-                                    default:
-                                        SCLAlertView().showError("Error", subTitle: "Failed to register the users..")
-                                    }
-                                }
+                            if let error = error{
+                                showLoginError(error)
                                 return
                             }
                         }
@@ -376,7 +363,10 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                     })
                     
                 } else {
-                    self.showLoginFailedAlert(loginType: "our server")
+                    if let error = error{
+                        showLoginError(error)
+                        return
+                    }
                 }
             })
         } else {

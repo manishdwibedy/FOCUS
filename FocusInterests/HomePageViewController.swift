@@ -19,7 +19,7 @@ class HomePageViewController: UITabBarController {
         super.viewDidLoad()
 
         let attributes = [
-            NSFontAttributeName:UIFont(name: "American Typewriter", size: 15),
+            NSFontAttributeName:UIFont(name: "Avenir-Black", size: 15),
             NSForegroundColorAttributeName:UIColor.white
         ]
 
