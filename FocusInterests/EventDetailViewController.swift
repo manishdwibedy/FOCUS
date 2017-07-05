@@ -269,8 +269,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             self.attendOut.titleLabel?.textAlignment = .left
         }
         
-        if event?.creator == AuthApi.getFirebaseUid(){
-            
+        if let creator = event?.creator{
+            if creator == AuthApi.getFirebaseUid()!{
+                userInfoEditButton.isHidden = false
+            }
+            else{
+                userInfoEditButton.isHidden = true
+            }
+        }
+        else{
             userInfoEditButton.isHidden = true
         }
         
