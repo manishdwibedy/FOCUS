@@ -119,10 +119,10 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="X6O-7Q-mCg">
-                                <rect key="frame" x="63.5" y="62" width="135" height="27.5"/>
+                                <rect key="frame" x="63.5" y="62" width="272.5" height="27.5"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="address" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pr-kM-S8b">
-                                        <rect key="frame" x="0.0" y="0.0" width="135" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="272.5" height="27.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="scrollIndicatorInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,7 +132,6 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27.5" id="cEJ-hc-zul"/>
-                                    <constraint firstAttribute="width" constant="135" id="cVS-ZS-Q29"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -143,6 +142,7 @@
                             <constraint firstItem="X6O-7Q-mCg" firstAttribute="top" secondItem="Ztv-4m-kt4" secondAttribute="bottom" constant="-3" id="296-li-DSg"/>
                             <constraint firstItem="sOb-GM-41h" firstAttribute="leading" secondItem="Jrp-IZ-pa4" secondAttribute="trailing" constant="13" id="5QG-4u-y2k"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="bottom" secondItem="dBt-EP-FC5" secondAttribute="bottom" id="75y-IA-eRR"/>
+                            <constraint firstAttribute="trailing" secondItem="X6O-7Q-mCg" secondAttribute="trailing" constant="10" id="8aa-Nu-mbi"/>
                             <constraint firstItem="Ztv-4m-kt4" firstAttribute="trailing" secondItem="cpm-zK-R8B" secondAttribute="trailing" constant="1" id="97P-YH-TxE"/>
                             <constraint firstItem="Rkn-gp-GVE" firstAttribute="leading" relation="lessThanOrEqual" secondItem="OHh-7b-rCo" secondAttribute="trailing" constant="91" id="AP6-Rx-2ud"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="centerY" secondItem="dBt-EP-FC5" secondAttribute="centerY" id="BIe-AV-qEl"/>
