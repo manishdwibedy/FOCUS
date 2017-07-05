@@ -906,9 +906,222 @@ func crop(image: UIImage, width width: Double, height height: Double) -> UIImage
     return nil
 }
 
+func getUserData(uid: String, gotInfo: @escaping (_ user: NotificationUser) -> Void){
+    Constants.DB.user.child(uid).observeSingleEvent(of: .value, with: { snapshot in
+        
+        if let data = snapshot.value as? [String:Any]{
+            let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: data["image_string"] as! String)
+            
+            gotInfo(user)
+        }
+    })
+}
 
-
-
+func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotification]) -> Void, gotEventLikes: @escaping (_ comments: [FocusNotification]) -> Void, gotPins: @escaping (_ pins: [FocusNotification]) -> Void){
+//    Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
+//        if let value = snapshot.value as? [String:Any]{
+//            for (id, event) in value{
+//                let eventInfo = event as? [String:Any]
+//            }
+//        }
+//    })
+    
+    var event_comment_count = 0
+    var event_comments = [FocusNotification]()
+    var event_likes_count = 0
+    var event_likes = [FocusNotification]()
+    
+    var pins = [FocusNotification]()
+    var pinCount = 0
+    var totalPins = 0
+    var pinImageCount = 0
+    var pinImageMap = [String:String]()
+    
+    let user = NotificationUser(username: AuthApi.getUserName(), uuid: AuthApi.getFirebaseUid()!, imageURL: nil)
+    
+    Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+        let eventInfo = snapshot.value as? [String : Any]
+        
+        
+        if let eventInfo = eventInfo{
+            for (id, event) in eventInfo{
+                if let info = event as? [String:Any]{
+                    if let comments = info["comments"] as? [String:Any]{
+                        event_comment_count += comments.count
+                        for (_, commentData) in comments{
+                            if let commentData = commentData as? [String:Any]{
+                                if let user = commentData["fromUID"] as? String{
+                                    getUserData(uid: user, gotInfo: {user in
+                                        let comment = ItemOfInterest(itemName: commentData["comment"] as! String, imageURL: nil, type: "comment")
+                                        
+                                        
+                                        let event_comment = FocusNotification(type: NotificationType.Comment, sender: user, item: comment, time: Date(timeIntervalSince1970: commentData["date"] as! Double))
+                                        event_comments.append(event_comment)
+                                        
+                                        if event_comments.count == event_comment_count{
+                                            gotEventComments(event_comments)
+                                        }
+                                    })
+                                }
+                            }
+                        }
+                    }
+                    
+                    if let likes = info["likedBy"] as? [String:Any]{
+                        event_likes_count += likes.count
+                        for (_, likeData) in likes{
+                            if let likeData = likeData as? [String:Any]{
+                                if let user = likeData["UID"] as? String{
+                                    getUserData(uid: user, gotInfo: {user in
+                                        let comment = ItemOfInterest(itemName: user.username, imageURL: nil, type: "like")
+                                        
+                                        
+                                        let event_comment = FocusNotification(type: NotificationType.Comment, sender: user, item: comment, time: Date())
+                                        event_likes.append(event_comment)
+                                        
+                                        if event_likes.count == event_likes_count{
+                                            gotEventLikes(event_likes)
+                                        }
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+    
+    Constants.DB.pins.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+        let pin11 = snapshot.value as? [String : Any]
+        let pinID = snapshot.key
+        if let pin = pin11{
+            let time = Date(timeIntervalSince1970: pin["time"] as! Double)
+            let address = pin["formattedAddress"] as! String
+            let place = ItemOfInterest(itemName: pin["pin"] as! String, imageURL: nil, type: "pin")
+            place.id = pinID
+            
+            let pinFeed = FocusNotification(type: NotificationType.Pin, sender: user, item: place, time: time)
+            
+            if let images = pin["images"] as? [String:Any]{
+                let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String
+                let pinImage = Constants.storage.pins.child(imageURL!)
+                
+                
+                // Fetch the download URL
+                pinImage.downloadURL { url, error in
+                    if let error = error {
+                        // Handle any errors
+                    } else {
+                        pinImageMap[place.id] = url?.absoluteString
+                        pinImageCount += 1
+                        if pinCount == pins.count && pinImageCount == totalPins{
+                            // attach images for all pins
+                            
+                            for pin in pins{
+                                if let image = pinImageMap[(pin.item?.id)!]{
+                                    pin.item?.imageURL = image
+                                }
+                            }
+                            gotPins(pins)
+                            print("pin done \(pinCount)")
+                        }
+                    }
+                }
+                
+                
+            }
+            else{
+                pinImageCount += 1
+                if pinCount == pins.count && pinImageCount == totalPins{
+                    // attach images for all pins
+                    
+                    for pin in pins{
+                        if let image = pinImageMap[(pin.item?.id)!]{
+                            pin.item?.imageURL = image
+                        }
+                    }
+                    gotPins(pins)
+                    print("pin done \(pinCount)")
+                }
+            }
+            
+            
+            if let comments = pin["comments"] as? [String:Any]{
+                pinCount += comments.count
+                
+                for (id, data) in comments{
+                    let commentData = data as? [String:Any]
+                    let commentInfo = ItemOfInterest(itemName: commentData?["comment"] as? String, imageURL: place.imageURL, type: "comment")
+                    commentInfo.id = pinID
+                    Constants.DB.user.child((commentData?["fromUID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
+                        
+                        if let data = snapshot.value as? [String:Any]{
+                            let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: nil)
+                            let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: time)
+                            pins.append(pinFeed)
+                            
+                            if pinCount == pins.count && pinImageCount == totalPins{
+                                // attach images for all pins
+                                
+                                for pin in pins{
+                                    if let image = pinImageMap[(pin.item?.id)!]{
+                                        pin.item?.imageURL = image
+                                    }
+                                }
+                                gotPins(pins)
+                                print("pin done \(pinCount)")
+                            }
+                        }
+                        
+                    })
+                    
+                }
+                
+            }
+            
+            if let likes = pin["like"] as? [String:Any]{
+                let likeData = likes["likedBy"] as? [String:Any]
+                
+                if let likeCount = likes["num"] as? Int{
+                    pinCount += likeCount
+                }
+                
+                for (id, data) in likeData!{
+                    if let likeData = data as? [String:Any]{
+                        Constants.DB.user.child((likeData["UID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
+                            
+                            let data = snapshot.value as? [String:Any]
+                            let user = NotificationUser(username: data?["username"] as? String, uuid: data?["firebaseUserId"] as? String, imageURL: nil)
+                            let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
+                            pins.append(pinFeed)
+                            
+                            if pinCount == pins.count && pinImageCount == totalPins{
+                                // attach images for all pins
+                                
+                                for pin in pins{
+                                    if let image = pinImageMap[(pin.item?.id)!]{
+                                        pin.item?.imageURL = image
+                                    }
+                                }
+                                gotPins(pins)
+                                print("pin done \(pinCount)")
+                            }
+                        })
+                    }
+                    
+                }
+            }
+        }
+        
+        totalPins += 1
+        if pinCount == pins.count{
+            gotPins(pins)
+            print("pin done \(pinCount)")
+        }
+    })
+    
+}
 
 
 

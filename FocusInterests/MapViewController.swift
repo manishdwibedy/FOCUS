@@ -215,6 +215,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         Constants.DB.pins.keepSynced(true)
         
         saveUserInfo()
+        getNotifications(gotEventComments: {comments in
+            print(comments)
+        }, gotEventLikes: {likes in
+            print(likes)
+        }, gotPins: {pins in
+            print(pins)
+        })
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
         }
