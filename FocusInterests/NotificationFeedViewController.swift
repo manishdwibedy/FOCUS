@@ -50,16 +50,27 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         AuthApi.clearNotifications()
         
-        FirebaseDownstream.shared.getUserNotifications(completion: {array in
-            //self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)
-            self.invArray = array!
-            print("got NOTI")
-            print(array)
-            
-        }, gotNotif: {not in
-            self.nofArray = not
+        getNotifications(gotEventComments: {comments in
+            self.nofArray.append(contentsOf: comments)
+            self.tableView.reloadData()
+        }, gotEventLikes: {likes in
+            self.nofArray.append(contentsOf: likes)
+            self.tableView.reloadData()
+        }, gotPins: {pins in
+            self.nofArray.append(contentsOf: pins)
             self.tableView.reloadData()
         })
+        
+//        FirebaseDownstream.shared.getUserNotifications(completion: {array in
+//            //self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)
+//            self.invArray = array!
+//            print("got NOTI")
+//            print(array)
+//            
+//        }, gotNotif: {not in
+//            self.nofArray = not
+//            self.tableView.reloadData()
+//        })
         
         getFeeds(gotPins: {pins in
             print("get pins")

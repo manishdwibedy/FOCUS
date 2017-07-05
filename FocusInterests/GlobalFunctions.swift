@@ -946,6 +946,7 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
         if let eventInfo = eventInfo{
             for (id, event) in eventInfo{
                 if let info = event as? [String:Any]{
+                    
                     if let comments = info["comments"] as? [String:Any]{
                         event_comment_count += comments.count
                         for (_, commentData) in comments{
@@ -953,7 +954,12 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
                                 if let user = commentData["fromUID"] as? String{
                                     getUserData(uid: user, gotInfo: {user in
                                         let comment = ItemOfInterest(itemName: commentData["comment"] as! String, imageURL: nil, type: "comment")
-                                        
+                                        comment.data = [
+                                            "type": "event",
+                                            "id": id,
+                                            "actionType": "comment",
+                                            "senderID": commentData["fromUID"] as? String
+                                        ]
                                         
                                         let event_comment = FocusNotification(type: NotificationType.Comment, sender: user, item: comment, time: Date(timeIntervalSince1970: commentData["date"] as! Double))
                                         event_comments.append(event_comment)
@@ -974,7 +980,12 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
                                 if let user = likeData["UID"] as? String{
                                     getUserData(uid: user, gotInfo: {user in
                                         let comment = ItemOfInterest(itemName: user.username, imageURL: nil, type: "like")
-                                        
+                                        comment.data = [
+                                            "type": "event",
+                                            "id": id,
+                                            "actionType": "like",
+                                            "senderID": likeData["UID"] as? String
+                                        ]
                                         
                                         let event_comment = FocusNotification(type: NotificationType.Comment, sender: user, item: comment, time: Date())
                                         event_likes.append(event_comment)
@@ -1000,8 +1011,14 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
             let address = pin["formattedAddress"] as! String
             let place = ItemOfInterest(itemName: pin["pin"] as! String, imageURL: nil, type: "pin")
             place.id = pinID
-            
+            place.data = [
+                "type": "pin",
+                "id": AuthApi.getFirebaseUid()!,
+                "actionType": "like",
+                "senderID": AuthApi.getFirebaseUid()!
+            ]
             let pinFeed = FocusNotification(type: NotificationType.Pin, sender: user, item: place, time: time)
+            
             
             if let images = pin["images"] as? [String:Any]{
                 let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String
@@ -1053,12 +1070,20 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
                 for (id, data) in comments{
                     let commentData = data as? [String:Any]
                     let commentInfo = ItemOfInterest(itemName: commentData?["comment"] as? String, imageURL: place.imageURL, type: "comment")
+                    commentInfo.data = [
+                        "type": "pin",
+                        "id": id,
+                        "actionType": "comment",
+                        "senderID": AuthApi.getFirebaseUid()!
+                    ]
+                    
                     commentInfo.id = pinID
                     Constants.DB.user.child((commentData?["fromUID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
                         
                         if let data = snapshot.value as? [String:Any]{
                             let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: nil)
                             let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: time)
+                            
                             pins.append(pinFeed)
                             
                             if pinCount == pins.count && pinImageCount == totalPins{
