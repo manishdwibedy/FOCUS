@@ -125,6 +125,7 @@
                 <outlet property="addressTextView" destination="k1a-TH-G1i" id="NnI-UF-jfP"/>
                 <outlet property="backgroundView" destination="H2p-sc-9uM" id="WQ5-1f-bdA"/>
                 <outlet property="categoryLabel" destination="fa6-hI-RZL" id="lke-xS-7k3"/>
+                <outlet property="distanceLabel" destination="3T7-mo-8bK" id="26y-ow-cAE"/>
                 <outlet property="inviteButtonOut" destination="Xz7-iA-aeB" id="Tvd-WB-BQu"/>
                 <outlet property="inviteCellContentView" destination="Tfy-qO-WUG" id="4v1-vr-QBf"/>
                 <outlet property="placeImage" destination="ceH-ab-qaZ" id="Dwd-4L-6pl"/>

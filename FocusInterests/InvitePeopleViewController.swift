@@ -157,7 +157,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
             //cell.placeID = place.id
             cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
-            addGreenDot(label: cell.categoryLabel, content: place.categories[0].name)
+            
+            let place_location = CLLocation(latitude: place.latitude, longitude: place.longitude)
+            cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
+            if place.categories.count > 0{
+                addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place.categories[0].alias))
+            }
+        
             //cell.checkForFollow(id: place.id)
             let placeHolderImage = UIImage(named: "empty_event")
             cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)

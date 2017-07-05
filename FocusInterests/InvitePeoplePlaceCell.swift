@@ -18,6 +18,7 @@ class InvitePeoplePlaceCell: UITableViewCell {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var inviteCellContentView: UIView!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     var UID = ""
     var place: Place!
@@ -42,6 +43,7 @@ class InvitePeoplePlaceCell: UITableViewCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(sender:)))
         inviteCellContentView.addGestureRecognizer(tap)
         
+        addressTextView.textContainerInset = UIEdgeInsets.zero
         //        let longP = UILongPressGestureRecognizer(target: self, action: #selector(longP(sender:)))
         //        longP.minimumPressDuration = 0.3
         //        self.addGestureRecognizer(longP)
