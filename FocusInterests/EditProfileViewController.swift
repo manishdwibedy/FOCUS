@@ -231,6 +231,24 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
             usernameTf.becomeFirstResponder()
         }
         else if textField == usernameTf{
+            
+            Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
+                if let id = (snapshot.value as? NSDictionary)?[username.text]{
+                    username.text = ""
+                    SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
+                    textField.becomeFirstResponder()
+                }
+                else{
+                    Constants.DB.user_mapping.child(AuthApi.getUserName()).removeValue()
+                    Constants.DB.user_mapping.child(username.text!).setValue("")
+                    Constants.DB.user_mapping.child(username.text!).setValue(AuthApi.getUserEmail())
+                    AuthApi.set(username: username.text)
+                    print("Text value: \(username.text!)")
+                    alert.hideView()
+                    self.showPopup()
+                }
+            })
+            
             websiteTf.becomeFirstResponder()
         }
         else if textField == websiteTf{
