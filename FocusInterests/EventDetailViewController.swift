@@ -13,11 +13,12 @@ import GeoFire
 import ChameleonFramework
 
 class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate {
-    @IBOutlet weak var likeCount: UILabel!
     @IBOutlet weak var hostNameLabel: UILabel!
     
-    @IBOutlet weak var eventNameLabel: UILabel!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var fullnameLabel: UILabel!
+    @IBOutlet weak var distanceLabelInNavBar: UIButton!
     
     @IBOutlet weak var eventInterests: UILabel!
     @IBOutlet weak var eventAmount: UILabel!
@@ -26,27 +27,33 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
-    @IBOutlet weak var likeOut: UIButton!
-    @IBOutlet weak var attendOut: UIButton!
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var navBackOut: UIBarButtonItem!
     @IBOutlet weak var commentsTableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var commentTextField: UITextField!
-    @IBOutlet weak var inviteOut: UIButton!
-    @IBOutlet weak var mapOut: UIButton!
     @IBOutlet weak var eventsTableView: UITableView!
     @IBOutlet weak var addCommentView: UIView!
     @IBOutlet weak var userProfileImage: UIImageView!
     
-    @IBOutlet weak var userInfoEditButton: UIButton!
     @IBOutlet weak var moreCommentsButton: UIButton!
     @IBOutlet weak var postCommentsButton: UIButton!
     @IBOutlet weak var moreOtherLikesButton: UIButton!
     
     
     @IBOutlet weak var guestButtonOut: UIButton!
-    @IBOutlet weak var image: UIImageView!
+//    @IBOutlet weak var image: UIImageView!
+    
+    //    MARK: ATTEND TOP VIEW PROPERTIES
+    
+    @IBOutlet weak var attendButton: UIButton!
+    @IBOutlet weak var inviteButton: UIButton!
+    @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var pinHereButton: UIButton!
+    @IBOutlet weak var eventDescription: UILabel!
+    @IBOutlet weak var eventName: UILabel!
+    
+    
     var event: Event?
     let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
@@ -74,16 +81,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             eventAmountHeight.constant = 0
         }
         
-        attendOut.layer.cornerRadius = 6
-        attendOut.clipsToBounds = true
-        
-        inviteOut.layer.cornerRadius = 6
-        inviteOut.clipsToBounds = true
-        
-        mapOut.layer.cornerRadius = 6
-        mapOut.clipsToBounds = true
-        
-        
         let commentsNib = UINib(nibName: "commentCell", bundle: nil)
         commentsTableView.register(commentsNib, forCellReuseIdentifier: "cell")
         
@@ -96,51 +93,41 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         self.navigationItem.title = self.event?.title
         
-        // Placeholder image
-        let placeholderImage = UIImage(named: "empty_event")
-        
-        if let id = event?.id{
-            let reference = Constants.storage.event.child("\(id).jpg")
-            
-            
-            reference.downloadURL(completion: { (url, error) in
-                
-                if error != nil {
-                    print(error?.localizedDescription)
-                    return
-                }
-                
-                self.image.sd_setImage(with: url, placeholderImage: placeholderImage)
-                self.image.setShowActivityIndicator(true)
-                self.image.setIndicatorStyle(.gray)
-                
-            })
-
-        }
-        else{
-            self.image.sd_setImage(with: URL(string:(event?.image_url)!), placeholderImage: placeholderImage)
-            self.image.setShowActivityIndicator(true)
-            self.image.setIndicatorStyle(.gray)
-            
-        }
-        
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
         commentTextField.layer.borderWidth = 1
         commentTextField.layer.cornerRadius = 5
         commentTextField.clipsToBounds = true
         commentTextField.layer.borderColor = UIColor.white.cgColor
+        
+        self.topView.addTopBorderWithColor(color: UIColor.white, width: 0.7)
+        
+        self.eventImage.layer.borderWidth = 1
+        self.eventImage.layer.borderColor = Constants.color.pink.cgColor
+        self.eventImage.roundedImage()
+        
+        
+        self.inviteButton.roundCorners(radius: 5.0)
+        self.pinHereButton.roundCorners(radius: 5.0)
+        
+        self.eventName.text = "CBS Sports"
+        self.eventDescription.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        
+        self.attendButton.roundCorners(radius: 5.0)
+        self.attendButton.setTitle("Attend", for: .normal)
+        self.attendButton.setTitleColor(UIColor.white, for: .normal)
+        self.attendButton.setTitle("Attending", for: .selected)
+        self.attendButton.setTitleColor(UIColor.white, for: .selected)
+        self.checkIfAttending()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardDidHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
         
         navTitle.title = event?.title
-        eventNameLabel.text = event?.title
         timeLabel.text = event?.date
         addressLabel.text = event?.fullAddress?.replacingOccurrences(of: ";;", with: ", ")
-        descriptionLabel.text = event?.eventDescription
-        
+//        descriptionLabel.text = event?.eventDescription
+        descriptionLabel.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         
 //        TODO:THERE IS A BUG THAT RETURNS NIL BEFORE VIEW LOADS
         
@@ -187,13 +174,13 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             })
             
             //check for likes
-            ref.child("events").child((event?.id)!).child("likeAmount").observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil
-                {
-                    self.likeCount.text = String(value?["num"] as! Int)
-                }
-            })
+//            ref.child("events").child((event?.id)!).child("likeAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+//                let value = snapshot.value as? NSDictionary
+//                if value != nil
+//                {
+//                    self.likeCount.text = String(value?["num"] as! Int)
+//                }
+//            })
             
             ref.child("events").child((event?.id)!).child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
@@ -211,13 +198,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 if value != nil
                 {
                     self.attendingAmount = value?["amount"] as! Int
-                    let text = String(self.attendingAmount) + " guests"
+                    let text = String(self.attendingAmount) + " attendees"
                     
-                    
-                    let textRange = NSMakeRange(0, text.characters.count)
-                    let attributedText = NSMutableAttributedString(string: text)
-                    attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
-                    self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
+                    let attributeText = NSAttributedString(string: text, attributes: [NSForegroundColorAttributeName : UIColor.white])
+                    self.guestButtonOut.setAttributedTitle(attributeText, for: UIControlState.normal)
                     
                 }
             })
@@ -235,13 +219,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                         print(guest)
                         if guest["UID"] == AuthApi.getFirebaseUid()!{
                             self.isAttending = true
-                            
-                            self.attendOut.layer.cornerRadius = 6
-                            self.attendOut.layer.borderWidth = 1
-                            self.attendOut.backgroundColor = .clear
-                            self.attendOut.layer.borderColor = UIColor.black.cgColor
-
-                            self.attendOut.setTitle("Attending", for: UIControlState.normal)
+                            self.attendButton.layer.borderWidth = 1
+                            self.attendButton.layer.borderColor = UIColor.white.cgColor
+                            self.attendButton.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
                         }
                     }
                     
@@ -254,11 +234,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             ref.child("events").child((event?.id)!).child("interests").observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? String
                 if value != nil{
-                    self.eventInterests.text = value
-                    
+                    addGreenDot(label: self.eventInterests, content: value!)
                 }
                 else{
-                    self.eventInterests.text = "N.A."
+                    addGreenDot(label: self.eventInterests, content: "N.A.")
                 }
                 
             })
@@ -266,22 +245,18 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
             getEventSuggestions()
             
-            self.attendOut.titleLabel?.textAlignment = .left
-        }
-        
-        if let creator = event?.creator{
-            if creator == AuthApi.getFirebaseUid()!{
-                userInfoEditButton.isHidden = false
-            }
-            else{
-                userInfoEditButton.isHidden = true
-            }
-        }
-        else{
-            userInfoEditButton.isHidden = true
+//            self.attendOut.titleLabel?.textAlignment = .left
         }
         
         self.commentTextField.delegate = self
+        
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        self.navBar.titleTextAttributes = attrs
+        self.distanceLabelInNavBar.setTitle("31mi", for: .normal)
         
         hideKeyboardWhenTappedAround()
     }
@@ -299,19 +274,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.present(ivc, animated: true, completion: { _ in })
     }
     
-    @IBAction func likeEvent(_ sender: UIButton) {
-        let fullRef = ref.child("events").child((event?.id)!)
-        let newLike = Int(likeCount.text!)! + 1
-        fullRef.child("likeAmount").updateChildValues(["num":newLike])
-        fullRef.child("likedBy").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
-        likeCount.text = String(newLike)
-        likeOut.isEnabled = false
-        
-    }
-    
     @IBAction func attendEvent(_ sender: UIButton) {
-        if isAttending == false
-        {
+        if sender.isSelected == false{
             self.isAttending = true
             
             let newAmount = attendingAmount + 1
@@ -325,19 +289,16 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
             self.guestList[newEntry.key] = entry
             
-            let guestText = "\(newAmount) guests"
-            let textRange = NSMakeRange(0, guestText.characters.count)
-            let attributedText = NSMutableAttributedString(string: guestText)
-            attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
-            self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
+            let guestText = "\(newAmount) attendees"
+            let attributeText = NSAttributedString(string: guestText, attributes: [NSForegroundColorAttributeName : UIColor.white])
+            self.guestButtonOut.setAttributedTitle(attributeText, for: UIControlState.normal)
             
-            attendOut.layer.cornerRadius = 6
-            attendOut.layer.borderWidth = 1
-            attendOut.backgroundColor = .clear
-            attendOut.layer.borderColor = UIColor.black.cgColor
-
-            self.attendOut.setTitle("Attending", for: UIControlState.normal)
-        }else{
+            sender.isSelected = true
+            sender.layer.borderWidth = 1
+            sender.layer.borderColor = UIColor.white.cgColor
+            sender.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
+            sender.tintColor = UIColor.clear
+        }else if sender.isSelected == true{
             ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 if value != nil
@@ -356,14 +317,14 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     
                     self.isAttending = false
                     
-                    let guestText = "\(newAmount) guests"
-                    let textRange = NSMakeRange(0, guestText.characters.count)
-                    let attributedText = NSMutableAttributedString(string: guestText)
-                    attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
-                    self.guestButtonOut.setAttributedTitle(attributedText, for: UIControlState.normal)
+                    let guestText = "\(newAmount) attendees"
+                    let attributeText = NSAttributedString(string: guestText, attributes: [NSForegroundColorAttributeName : UIColor.white])
+                    self.guestButtonOut.setAttributedTitle(attributeText, for: UIControlState.normal)
             
-                    self.attendOut.backgroundColor = Constants.color.green
-                    self.attendOut.setTitle("Attend", for: UIControlState.normal)
+                    sender.isSelected = false
+                    sender.layer.borderWidth = 0.0
+                    sender.backgroundColor = Constants.color.green
+                    sender.tintColor = UIColor.clear
                 }
                 
             })
@@ -421,7 +382,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardSize.height
+            _ = keyboardSize.height
             //self.scrollView.contentOffset.y = ((keyboardHeight)) + self.commentTextField.frame.height + 100
             
             
@@ -432,7 +393,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func keyboardDidShow(notification: NSNotification) {
         keyboardUp = true
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardSize.height
+            _ = keyboardSize.height
             //self.scrollView.contentOffset.y = (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60
             
             scrollView.setContentOffset(CGPoint(x: 0, y: (self.scrollView.contentSize.height - self.scrollView.bounds.size.height) + 60), animated: true)
@@ -584,12 +545,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         let center = CLLocation(latitude: Double((event?.latitude)!)!, longitude: Double((event?.latitude)!)!)
         if let circleQuery = self.geoFire?.query(at: center, withRadius: 20.0) {
             _ = circleQuery.observe(.keyEntered) { (key, location) in
-                    print("Key '\(key)' entered the search area and is at location '\(location)'")
+                    print("Key '\(String(describing: key))' entered the search area and is at location '\(location)'")
                 
                 Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
                     let info = snapshot.value as? [String : Any] ?? [:]
                     
-                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
+                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
                     
                         if let attending = info["attendingList"] as? [String:Any]{
                             event.setAttendessCount(count: attending.count)
@@ -614,21 +575,14 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func setupViewsAndButton(){
         userProfileImage.roundedImage()
         
-        attendOut.roundCorners(radius: 7.0)
-        inviteOut.roundCorners(radius: 7.0)
-        mapOut.roundCorners(radius: 7.0)
-        
-        userInfoEditButton.layer.borderWidth = 1
         moreCommentsButton.layer.borderWidth = 1
         postCommentsButton.layer.borderWidth = 1
         moreOtherLikesButton.layer.borderWidth = 1
         
-        userInfoEditButton.layer.borderColor = UIColor.white.cgColor
         moreCommentsButton.layer.borderColor = UIColor.white.cgColor
         postCommentsButton.layer.borderColor = UIColor.white.cgColor
         moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
         
-        userInfoEditButton.roundCorners(radius: 7.0)
         moreCommentsButton.roundCorners(radius: 7.0)
         postCommentsButton.roundCorners(radius: 7.0)
         moreOtherLikesButton.roundCorners(radius: 7.0)
@@ -697,23 +651,16 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             UIApplication.shared.openURL(url!)
         }
     }
+    
+    
+    func checkIfAttending(){
+        if self.attendButton.isSelected == true{
+            self.attendButton.layer.borderWidth = 1
+            self.attendButton.layer.borderColor = UIColor.white.cgColor
+            self.attendButton.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
+        }else if self.attendButton.isSelected == false {
+            self.attendButton.layer.borderWidth = 0.0
+            self.attendButton.backgroundColor = Constants.color.green
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -34,12 +34,12 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         self.attendingLabel.text = "\((guestList?.count)!) Attending"
         
-        let fullRef = ref.child("events").child((parentEvent?.id)!).child("attendingList")
+        _ = ref.child("events").child((parentEvent?.id)!).child("attendingList")
         
         for (key,_) in guestList!
         {
             let newData = followProfileCellData()
-            newData.uid = (guestList?[key] as! NSDictionary)["UID"] as! String
+            newData.uid = (guestList?[key]! as! NSDictionary)["UID"] as! String
             self.attendeeList.add(newData)
         }
     

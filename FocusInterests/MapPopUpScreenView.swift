@@ -150,7 +150,7 @@ class MapPopUpScreenView: UIView {
                         reference.downloadURL(completion: { (url, error) in
                             
                             if error != nil {
-                                print(error?.localizedDescription)
+                                print(error?.localizedDescription ?? "")
                                 return
                             }
                             

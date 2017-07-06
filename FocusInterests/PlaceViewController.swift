@@ -34,18 +34,67 @@ class PlaceViewController: UIViewController {
     @IBOutlet weak var ratingBackground: UIView!
     @IBOutlet weak var navBar: UINavigationBar!
     
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var placeImage: UIImageView!
+    @IBOutlet weak var reviewsAmountLabel: UIButton!
+    @IBOutlet weak var followersAmountLabel: UIButton!
+    @IBOutlet weak var pinAmountLabel: UIButton!
+    @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var reviewButton: UIButton!
+    @IBOutlet weak var inviteButton: UIButton!
+    @IBOutlet weak var pinButton: UIButton!
+    @IBOutlet weak var placeDescription: UILabel!
+    @IBOutlet weak var placeName: UILabel!
+    @IBOutlet weak var distanceLabelInNavBar: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        ratingBackground.layer.cornerRadius = 5
+//        ratingBackground.layer.cornerRadius = 5
         self.loadPlace(place: self.place!)
         
         hideKeyboardWhenTappedAround()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showRating(sender:)))
         
-        ratingBackground.addGestureRecognizer(tapGesture)
+//        ratingBackground.addGestureRecognizer(tapGesture)
+        
+        self.topView.addTopBorderWithColor(color: UIColor.white, width: 1.0)
+        
+        self.placeImage.layer.borderWidth = 1.0
+        self.placeImage.layer.borderColor = Constants.color.lightBlue.cgColor
+        self.placeImage.roundedImage()
+        
+//        let followedButtonImage = UIImage(named: "Bell-1")?.withRenderingMode(.alwaysOriginal)
+//        self.followButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        self.followButton.setTitleColor(UIColor.white, for: .normal)
+        self.followButton.setTitle("Follow", for: .normal)
+        self.followButton.setTitleColor(UIColor.white, for: .selected)
+        self.followButton.setTitle("Following", for: .selected)
+//        self.followButton.setImage(followedButtonImage, for: .selected)
+        self.checkIfFollowing()
+        
+        self.followButton.roundCorners(radius: 5.0)
+        self.inviteButton.roundCorners(radius: 5.0)
+        self.reviewButton.roundCorners(radius: 5.0)
+        self.pinButton.roundCorners(radius: 5.0)
+        
+        self.placeDescription.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        
+        self.distanceLabelInNavBar.setTitleColor(UIColor.white, for: .normal)
+        self.distanceLabelInNavBar.setTitleColor(UIColor.white, for: .selected)
+        self.pinAmountLabel.setTitleColor(UIColor.white, for: .normal)
+        self.pinAmountLabel.setTitleColor(UIColor.white, for: .selected)
+        self.followersAmountLabel.setTitleColor(UIColor.white, for: .normal)
+        self.followersAmountLabel.setTitleColor(UIColor.white, for: .selected)
+        self.reviewsAmountLabel.setTitleColor(UIColor.white, for: .normal)
+        self.reviewsAmountLabel.setTitleColor(UIColor.white, for: .selected)
+        
+        self.distanceLabelInNavBar.setTitle("2.1mi", for: .normal)
+        self.pinAmountLabel.setTitle("7,365", for: .normal)
+        self.followersAmountLabel.setTitle("305K", for: .normal)
+        self.reviewsAmountLabel.setTitle("292", for: .normal)
         
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
@@ -53,6 +102,7 @@ class PlaceViewController: UIViewController {
         ]
         
         navBar.titleTextAttributes = attrs
+        
     }
     
     func showRating(sender: UITapGestureRecognizer) {
@@ -60,9 +110,6 @@ class PlaceViewController: UIViewController {
         let VC = storyboard.instantiateViewController(withIdentifier: "reviews") as? ReviewsViewController
         VC?.place = place
         self.present(VC!, animated: true, completion: nil)
-        
-        
-
     }
     
 
@@ -88,7 +135,32 @@ class PlaceViewController: UIViewController {
             })
         }
     }
+    
+    @IBAction func followButtonPressed(_ sender: UIButton) {
+        print("follow button pressed")
+        sender.isSelected  = !sender.isSelected;
+        
+        if sender.isSelected == true{
+            sender.layer.borderWidth = 1
+            sender.layer.borderColor = UIColor.white.cgColor
+            sender.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
+        }else if sender.isSelected == false {
+            sender.layer.borderWidth = 0.0
+            sender.backgroundColor = Constants.color.green
+        }
+    }
 
+    func checkIfFollowing(){
+        if self.followButton.isSelected == true{
+            self.followButton.layer.borderWidth = 1
+            self.followButton.layer.borderColor = UIColor.white.cgColor
+            self.followButton.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
+        }else if self.followButton.isSelected == false {
+            self.followButton.layer.borderWidth = 0.0
+            self.followButton.backgroundColor = Constants.color.green
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pinInfo"{
             let pin = segue.destination as! PinViewController
@@ -105,9 +177,9 @@ class PlaceViewController: UIViewController {
     
     func loadPlace(place: Place){
         navigationBar.topItem?.title = place.name
-        ratingLabel.text = "\(place.rating)"
+//        ratingLabel.text = "\(place.rating)"
         
-        imageView.sd_setImage(with: URL(string: (place.image_url)), placeholderImage: nil)
+//        imageView.sd_setImage(with: URL(string: (place.image_url)), placeholderImage: nil)
         //self.getLatestComments()
         fetchSuggestedPlaces(token: AuthApi.getYelpToken()!)
         
@@ -223,8 +295,6 @@ class PlaceViewController: UIViewController {
         }
     }
     
-    
-    
     @IBAction func reviewButon(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Reviews", bundle: nil)
@@ -233,9 +303,4 @@ class PlaceViewController: UIViewController {
         reviewVC.place = self.place
         self.present(ivc, animated: true, completion: { _ in })
     }
-    
-    
-    
-    
-
 }

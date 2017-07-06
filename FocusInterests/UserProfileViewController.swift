@@ -220,15 +220,15 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             if let value = value
             {
                 
-                self.pinInfo = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(ID as! String), focus: value["focus"] as? String ?? "")
+                self.pinInfo = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(ID ), focus: value["focus"] as? String ?? "")
 
-                if let imageData = value["images"]{
+                if value["images"] != nil{
                     
                 }
                 self.emptyPinButton.isHidden = true
                 
-                self.pinCategoryLabel.text = value["focus"] as! String
-                self.pinAddress2Label.text = value["pin"] as! String
+                self.pinCategoryLabel.text = value["focus"] as? String
+                self.pinAddress2Label.text = value["pin"] as? String
                 
                 if let likes = value["like"] as? [String:Any]{
                     let count = likes["num"] as? Int
@@ -246,7 +246,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     
                     // Fetch the download URL
                     pinImage.downloadURL { url, error in
-                        if let error = error {
+                        if error != nil {
                             // Handle any errors
                         } else {
                             SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
@@ -323,7 +323,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         reference.downloadURL(completion: { (url, error) in
             
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
                 return
             }
             
@@ -422,7 +422,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             self.interestStackView.removeArrangedSubview(view)
                         }
                         
-                        for (index, interest) in (final_interest.enumerated()){
+                        for (_, interest) in (final_interest.enumerated()){
                             let textLabel = UILabel()
                             
                             textLabel.textColor = .white
@@ -479,7 +479,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 }
             }
             
-            for (index, interest) in (interests.enumerated()){
+            for (_, interest) in (interests.enumerated()){
                 let textLabel = UILabel()
                 
                 textLabel.textColor = .white
@@ -567,10 +567,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             let eventInfo = snapshot.value as? [String : Any]
             
             if let eventInfo = eventInfo{
-                let count = eventInfo.count
+                _ = eventInfo.count
                 for (id, event) in eventInfo{
                     let info = event as? [String:Any]
-                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interest"] as? String)
+                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as? String, latitude: (info?["latitude"])! as? String, longitude: (info?["longitude"])! as? String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String)
                     
                     self.suggestion.append(event)
                 }

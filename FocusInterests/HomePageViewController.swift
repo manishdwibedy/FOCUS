@@ -24,13 +24,13 @@ class HomePageViewController: UITabBarController {
         ]
 
         UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes(attributes , for: .selected)
         
         setupTabBarSeparators()
         
         self.selectedIndex = showTab
         
-        var vc = self.viewControllers![0] as! MapViewController
+        let vc = self.viewControllers![0] as! MapViewController
         vc.showEvent = showEvent
         vc.showTutorial = showTutorial
         if let location = self.location{

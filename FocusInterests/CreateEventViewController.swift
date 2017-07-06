@@ -93,9 +93,9 @@ extension CreateEventViewController: GMSAutocompleteViewControllerDelegate {
         
         print("Place name: \(place.name)")
         
-        print("Place address: \(place.formattedAddress)")
+        print("Place address: \(String(describing: place.formattedAddress))")
         
-        print("Place attributions: \(place.attributions)")
+        print("Place attributions: \(String(describing: place.attributions))")
         
         dismiss(animated: true, completion: nil)
         

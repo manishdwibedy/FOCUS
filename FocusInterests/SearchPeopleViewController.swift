@@ -87,7 +87,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         ref.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
             if let value = snapshot.value as? [String:Any]{
-                for (id, people) in value{
+                for (_, people) in value{
                     let followingCount = value.count
                     if let peopleData = people as? [String:Any]{
                         let UID = peopleData["UID"] as! String
@@ -143,12 +143,12 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         _ = ref.queryLimited(toLast: 20).observeSingleEvent(of: .value, with: { snapshot in
             let users = snapshot.value as? [String : Any] ?? [:]
             
-            let count = users.count
+            _ = users.count
             self.people.removeAll()
             for (_, user) in users{
                 let info = user as? [String:Any]
                 
-                let userCount = users.count
+                _ = users.count
                 if let info = info{
                     if let user = User.toUser(info: info){
                         if user.uuid != AuthApi.getFirebaseUid(){
@@ -276,7 +276,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.ID = people.uuid!
         //cell.checkForFollow(id: event.id!)
         
-        let placeHolderImage = UIImage(named: "empty_event")
+        _ = UIImage(named: "empty_event")
 
         if let image = people.image_string{
             if let url = URL(string: image){
@@ -300,9 +300,9 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     
     
     func followUser(sender:UIButton){
-        let time = NSDate().timeIntervalSince1970
+        _ = NSDate().timeIntervalSince1970
         
-        let buttonRow = sender.tag
+        _ = sender.tag
         
         
         if sender.isSelected == false {
@@ -337,7 +337,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
+        _ = self.tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPeopleTableViewCell!
         
         let people = filtered[indexPath.row]
         if people.hasPin{
@@ -357,7 +357,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             _ = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
                 let users = snapshot.value as? [String : Any] ?? [:]
                 
-                let count = users.count
+                _ = users.count
                 for (_, user) in users{
                     if let info = user as? [String:Any]{
                         if let user = User.toUser(info: info){

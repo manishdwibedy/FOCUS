@@ -154,12 +154,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         Constants.DB.event.observe(DataEventType.childAdded, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
-            let info = events as? [String:Any]
+            let info = events// as? [String:Any]
 //            for (id, event) in events{
             
-                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: snapshot.key, category: info?["interests"] as? String)
+                let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as? String, longitude: (info["longitude"])! as? String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: snapshot.key, category: info["interests"] as? String)
         
-                if let attending = info?["attendingList"] as? [String:Any]{
+                if let attending = info["attendingList"] as? [String:Any]{
                     event.setAttendessCount(count: attending.count)
                 }
                 
@@ -215,6 +215,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         Constants.DB.pins.keepSynced(true)
         
         saveUserInfo()
+        Share.getUserContacts(email: "manish.dwibedy@gmail.com")
+        
+        let token = Messaging.messaging().fcmToken
+        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
+        AuthApi.set(FCMToken: token)
+        
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
         }
@@ -261,6 +267,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //
         Constants.DB.user_mapping.keepSynced(true)
         
+//<<<<<<< HEAD
         print("USername =>")
         print(AuthApi.getFirebaseUid())
         print(AuthApi.getUserName())
@@ -306,6 +313,70 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             usernameView.error = { (error) in
                 print("ERROR")
                 SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
+//=======
+//        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil{ // Change this back
+//            
+//            //            var usernameView = UsernameInputView(frame: CGRect(x: 0, y: 0, width: self.usernameInputView.frame.size.width, height: usernameInputView.frame.size.height), onCompletion: {username -> Void in
+//            //                Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
+//            //                    if let id = (snapshot.value as? NSDictionary)?[username]{
+//            //                        SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
+//            //                    }
+//            //                    else{
+//            //                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username)
+//            //                        Constants.DB.user_mapping.child(username).setValue("")
+//            //                        Constants.DB.user_mapping.child(username).setValue(AuthApi.getUserEmail())
+//            //                        AuthApi.set(username: username)
+//            //                        UIView.animate(withDuration: 0.4, animations: {
+//            //                            self.usernameInputView.alpha = 0
+//            //                        }, completion: { compl in
+//            //                                self.usernameInputView.isHidden = true
+//            //                        })
+//            //                        print("Text value: \(username)")
+//            //                        photoView.isHidden = false
+//            //                    }
+//            //                })
+//            //            }, onError: {err -> Void in
+//            //                SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
+//            //            })
+//            //            self.usernameInputView.addSubview(usernameView)
+//            
+//            
+//            let appearance = SCLAlertView.SCLAppearance(
+//                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+//                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+//                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+//                showCloseButton: false,
+//                shouldAutoDismiss: false
+//            )
+//            
+//            let alert = SCLAlertView(appearance: appearance)
+//            let username = alert.addTextField("Enter your username")
+//            username.autocapitalizationType = .none
+//            
+//            alert.addButton("Add user name") {
+//                if (username.text?.characters.count)! > 0{
+//                    
+//                    Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
+//                        if let id = (snapshot.value as? NSDictionary)?[username.text ?? ""]{
+//                            username.text = ""
+//                            SCLAlertView().showError("Error", subTitle: "Please choose a unique error.")
+//                        }
+//                        else{
+//                            
+//                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+//                            Constants.DB.user_mapping.child(username.text!).setValue("")
+//                            Constants.DB.user_mapping.child(username.text!).setValue(AuthApi.getUserEmail())
+//                            AuthApi.set(username: username.text)
+//                            print("Text value: \(username.text!)")
+//                            alert.hideView()
+//                            self.showPopup()
+//                        }
+//                    })
+//                }
+//                else{
+//                    SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
+//                }
+//>>>>>>> c065ee64692120409b102c91bd89ae6755e823e3
                 
             }
             
@@ -482,7 +553,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
             
-            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
+            distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
             
             var interestText = ""
             if let category = event.category{
@@ -532,7 +603,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             popUpScreen.profileImage.setShowActivityIndicator(true)
             popUpScreen.profileImage.setIndicatorStyle(.gray)
             
-            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
+            
+            distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
             
             popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interestText, address: place.address[0])
             return true
@@ -556,7 +628,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             var name = pin.username
             
             
-            distance = getDistance(fromLocation: self.currentLocation!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
+            distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
             
             Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
@@ -611,7 +683,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    private func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
             print("NotDetermined")

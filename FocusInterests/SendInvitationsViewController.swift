@@ -69,7 +69,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         self.friendsTableView.allowsSelection = false
 
         self.searchBar.layer.borderColor = UIColor.clear.cgColor
-        var textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
         
         textFieldInsideSearchBar?.textColor = UIColor.white
 
@@ -116,45 +116,40 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     
     func retrieveContactsWithStore(store: CNContactStore) {
         self.contacts.removeAll()
-        do {
-            
-            let contactStore = CNContactStore()
-            let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
-            let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
-            
-            try? contactStore.enumerateContacts(with: request1) { (contact, error) in
-                if contact.phoneNumbers.count > 0 && (contact.givenName.characters.count > 0 || contact.familyName.characters.count > 0){
-                    self.contacts.append(contact)
-                }
-                
+        let contactStore = CNContactStore()
+        let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
+        let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
+        
+        try? contactStore.enumerateContacts(with: request1) { (contact, error) in
+            if contact.phoneNumbers.count > 0 && (contact.givenName.characters.count > 0 || contact.familyName.characters.count > 0){
+                self.contacts.append(contact)
             }
             
-            for contact in contacts{
-                if !contact.givenName.isEmpty{
-                    let first = String(describing: contact.givenName.characters.first!).uppercased()
-                    
-                    
-                    if !self.sections.contains(first){
-                        self.sections.append(first)
-                        self.sectionMapping[first] = 1
-                        self.users[first] = [contact]
-                    }
-                    else{
-                        self.sectionMapping[first] = self.sectionMapping[first]! + 1
-                        self.users[first]?.append(contact)
-                    }
-                }
-            }
-            self.filteredSectionMapping = self.sectionMapping
-            self.filteredSection = self.sections
-            self.filtered = self.users
-            
-            self.setSelectedFriends()
-            self.filteredSection.sort()
-            friendsTableView.reloadData()
-        } catch {
-            print(error)
         }
+        
+        for contact in contacts{
+            if !contact.givenName.isEmpty{
+                let first = String(describing: contact.givenName.characters.first!).uppercased()
+                
+                
+                if !self.sections.contains(first){
+                    self.sections.append(first)
+                    self.sectionMapping[first] = 1
+                    self.users[first] = [contact]
+                }
+                else{
+                    self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                    self.users[first]?.append(contact)
+                }
+            }
+        }
+        self.filteredSectionMapping = self.sectionMapping
+        self.filteredSection = self.sections
+        self.filtered = self.users
+        
+        self.setSelectedFriends()
+        self.filteredSection.sort()
+        friendsTableView.reloadData()   
     }
 
     @IBAction func createEvent(_ sender: Any) {
@@ -163,7 +158,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         Constants.DB.event_locations!.setLocation(CLLocation(latitude: Double(event!.latitude!)!, longitude: Double(event!.longitude!)!), forKey: id) { (error) in
             if (error != nil) {
-                debugPrint("An error occured: \(error)")
+                debugPrint("An error occured: \(String(describing: error))")
             } else {
                 print("Saved location successfully!")
             }
@@ -197,7 +192,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         if facebookSwitch.isOn{
             do{
-                try Share.facebookShare(with: URL(string:"http://mapofyourworld.com")!, description: "Please come to \(self.event?.title)")
+                try Share.facebookShare(with: URL(string:"http://mapofyourworld.com")!, description: "Please come to \(String(describing: self.event?.title))")
             }
             catch{
                 SCLAlertView().showError("Facebook Error", subTitle: "Could not post to facebook")
@@ -217,7 +212,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
         
         if phoneNumbers.count > 0{
-            messageVC.body = "Please come to \(self.event?.title)"
+            messageVC.body = "Please come to \(String(describing: self.event?.title))"
             messageVC.recipients = phoneNumbers
             messageVC.messageComposeDelegate = self;
             
@@ -232,7 +227,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         self.present(VC!, animated: true, completion: nil)
     }
     
-    func messageComposeViewController(_ controller: MFMessageComposeViewController!, didFinishWith result: MessageComposeResult) {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         switch (result) {
         case .cancelled:
             print("Message was cancelled")
@@ -282,7 +277,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         tableView.scrollToRow(at: IndexPath(row: 0, section: index), at: UITableViewScrollPosition.top , animated: false)
         
-        var temp = self.filteredSection as NSArray
+        let temp = self.filteredSection as NSArray
         return temp.index(of: title)
     }
     
@@ -360,7 +355,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             var filteredUser = [CNContact]()
             for section in sections {
                 let users = self.users[section]
-                let array = (users as! NSArray).filtered(using: searchPredicate)
+                let array = (users! as NSArray).filtered(using: searchPredicate)
                 for val in array{
                     filteredUser.append(val as! CNContact)
                 }
@@ -370,21 +365,17 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             filtered.removeAll()
             filteredSectionMapping.removeAll()
             for user in filteredUser{
-                if let name = user.givenName as? String{
-                    let first = String(describing: name.characters.first!).uppercased()
-                    
-                    
-                    if !self.filteredSection.contains(first){
-                        self.filteredSection.append(first)
-                        self.filteredSectionMapping[first] = 1
-                        self.filtered[first] = [user]
-                    }
-                    else{
-                        self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
-                        self.filtered[first]?.append(user)
-                    }
-                }
+                let first = String(describing: user.givenName.characters.first!).uppercased()
                 
+                if !self.filteredSection.contains(first){
+                    self.filteredSection.append(first)
+                    self.filteredSectionMapping[first] = 1
+                    self.filtered[first] = [user]
+                }
+                else{
+                    self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
+                    self.filtered[first]?.append(user)
+                }
             }
             self.filteredSection.sort()
             self.friendsTableView.reloadData()

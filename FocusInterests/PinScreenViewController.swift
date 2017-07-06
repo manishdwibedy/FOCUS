@@ -257,6 +257,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         autoCompleteController.autocompleteFilter = filter
 
         autoCompleteController.delegate = self
+        
+        self.navigationController?.navigationBar.barTintColor = Constants.color.navy
+        UINavigationBar.appearance().barTintColor = Constants.color.navy
+        UINavigationBar.appearance().tintColor = Constants.color.navy
+        
         present(autoCompleteController, animated: true, completion: nil)
     }
     
@@ -306,11 +311,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             }
         
             if formmatedAddress.characters.count > 0{
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text] )
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text ?? ""] )
                 
                 Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
                     if (error != nil) {
-                        debugPrint("An error occured: \(error)")
+                        debugPrint("An error occured: \(String(describing: error))")
                     } else {
                         print("Saved location successfully!")
                     }
@@ -328,18 +333,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                 })
                 
             }
-//            else{
-//                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":locationLabel.text, "lat": AuthApi.getLocation()?.coordinate.latitude, "lng": AuthApi.getLocation()?.coordinate.longitude, "images": imagePaths, "public": isPublic, "focus": focusLabel.text] )
-//                
-//                Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
-//                    if (error != nil) {
-//                        debugPrint("An error occured: \(error)")
-//                    } else {
-//                        print("Saved location successfully!")
-//                    }
-//                }
-//            }
-//                
             if isTwitter == true
             {
                 Share.postToTwitter(withStatus: pinTextView.text!)
@@ -469,7 +462,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     if let image = image{
                         print("got image")
                         
-                        if let data = UIImageJPEGRepresentation(image, 1) as NSData?{
+                        if (UIImageJPEGRepresentation(image, 1) as NSData?) != nil{
                             self.imageArray.append(image)
                         }
                         
@@ -576,7 +569,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                 
                 loginView.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
                     if error != nil {
-                        print(error?.localizedDescription)
+                        print(error?.localizedDescription ?? "")
                         self.showLoginFailedAlert(loginType: "Facebook")
                     } else {
                         if let res = result {
@@ -715,10 +708,9 @@ extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
         }
         
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.black
-//        UINavigationBar.appearance().translates
-        UINavigationBar.appearance().barTintColor = UIColor.black
-        UINavigationBar.appearance().tintColor = UIColor.black
+        self.navigationController?.navigationBar.barTintColor = Constants.color.navy
+        UINavigationBar.appearance().barTintColor = Constants.color.navy
+        UINavigationBar.appearance().tintColor = Constants.color.navy
         dismiss(animated: true, completion: nil)
     }
     

@@ -47,9 +47,9 @@ class InvitationViewController: UIViewController {
     func retrieveContactsWithStore(store: CNContactStore) {
 //        do {
         
-            let contactStore = CNContactStore()
+            _ = CNContactStore()
             let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
-            let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
+            _ = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
             
 //            try? contactStore.enumerateContacts(with: request1) { (contact, error) in
 //                

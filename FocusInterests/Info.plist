@@ -44,7 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>16</string>
+	<string>18</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -85,9 +85,20 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>mapofyourworld.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+			<key>http://notifications-dev2.us-west-2.elasticbeanstalk.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -108,13 +119,13 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Focus would like access to your device's camera for certain features.</string>
+	<string>Focus would like access to your device&apos;s camera for certain features.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Focus would like access to your device's contacts for certain features.</string>
+	<string>Focus would like access to your device&apos;s contacts for certain features.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Focus would like access to your device's current position</string>
+	<string>Focus would like access to your device&apos;s current position</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Focus would like access to your device's photo library for this feature.</string>
+	<string>Focus would like access to your device&apos;s photo library for this feature.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

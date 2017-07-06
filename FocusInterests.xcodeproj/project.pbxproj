@@ -245,6 +245,8 @@
 		EB722F931EE8B19400420DC8 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */; };
 		EB722F961EE8B1BE00420DC8 /* ReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */; };
 		EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */; };
+		EBB6B32D1F0E1224000C8133 /* FeedOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */; };
+		EBB6B32E1F0E1224000C8133 /* FeedOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
 		EBC52C721EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */; };
 		EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */; };
@@ -585,6 +587,8 @@
 		EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
 		EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsTableViewCell.swift; sourceTree = "<group>"; };
 		EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewsTableViewCell.xib; sourceTree = "<group>"; };
+		EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedOneTableViewCell.swift; sourceTree = "<group>"; };
+		EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedOneTableViewCell.xib; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
 		EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllContactsTableViewCell.swift; sourceTree = "<group>"; };
 		EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAllContactsTableViewCell.xib; sourceTree = "<group>"; };
@@ -1123,6 +1127,7 @@
 		D2B9B0731E5A0A270002F1B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EBB6B32A1F0E1207000C8133 /* FeedTableCells */,
 				D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */,
 				D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */,
 				611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */,
@@ -1276,6 +1281,15 @@
 				5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */,
 			);
 			name = Following;
+			sourceTree = "<group>";
+		};
+		EBB6B32A1F0E1207000C8133 /* FeedTableCells */ = {
+			isa = PBXGroup;
+			children = (
+				EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */,
+				EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */,
+			);
+			name = FeedTableCells;
 			sourceTree = "<group>";
 		};
 		FF7C87481ED7324C004ABB1B /* Pin */ = {
@@ -1506,6 +1520,7 @@
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */,
 				5BE30DD01F0AF20500ECE7EF /* day_style.json in Resources */,
+				EBB6B32E1F0E1224000C8133 /* FeedOneTableViewCell.xib in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
 				5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
@@ -1738,6 +1753,7 @@
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
 				5B7BB1E01ED50EA0001E60FF /* UIButton+Extensions.swift in Sources */,
 				5BE31E8A1EA76094004768F0 /* MapEventInfoView.swift in Sources */,
+				EBB6B32D1F0E1224000C8133 /* FeedOneTableViewCell.swift in Sources */,
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
 				5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */,
 				5B7BB1E61ED51E9E001E60FF /* SearchEventsViewController.swift in Sources */,
@@ -2050,7 +2066,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 18;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				ENABLE_BITCODE = NO;
@@ -2084,7 +2100,7 @@
 				CODE_SIGN_ENTITLEMENTS = FocusInterests/FocusInterests.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 66JH2JK5HD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

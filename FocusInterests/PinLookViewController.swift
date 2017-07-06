@@ -122,7 +122,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     reference.downloadURL(completion: { (url, error) in
                         
                         if error != nil {
-                            print(error?.localizedDescription)
+                            print(error?.localizedDescription ?? "")
                             return
                         }
                         
@@ -204,7 +204,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false;
                 }
                 
-                var myArr = Array(value.keys)
+                let myArr = Array(value.keys)
                 var sortedKeys = myArr.sorted(by: {
                     let val1 = value[$0] as? [String: Any]
                     let val2 = value[$1] as? [String: Any]
@@ -321,7 +321,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             if value != nil
             {
 //                data.dbPath.child("like").child("likedBy").
-                print(value)
+                print(value ?? "")
             }
         })
         

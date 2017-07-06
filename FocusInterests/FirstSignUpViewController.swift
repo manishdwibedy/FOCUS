@@ -75,9 +75,9 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
         if phoneEmailSwitcher.selectedSegmentIndex == 0{
             PhoneAuthProvider.provider().verifyPhoneNumber(self.phoneTextField.text!) { (verificationID, error) in
                 if ((error) != nil) {
-                    print(error)
+                    print(error ?? "")
                 } else {
-                    print(verificationID)
+                    print(verificationID ?? "")
                     UserDefaults.standard.set(verificationID, forKey: "firebase_verification")
                     UserDefaults.standard.synchronize()
                 }
@@ -111,7 +111,7 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "next" {
             if let destinationVC = segue.destination as? SecondSignUpViewController {
-                guard let validEntry = phoneTextField.text else { return }
+                guard phoneTextField.text != nil else { return }
                 switch self.phoneEmailSwitcher.selectedSegmentIndex {
                 case 0:
                     self.typeOfSignUpSelected = "phone"

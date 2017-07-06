@@ -54,15 +54,8 @@ class notificationTabCell: UITableViewCell {
         if let sender = data["senderID"] as? String{
             Constants.DB.user.child(sender).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
-                if value != nil
-                {
-                    usernameStr = (value?["username"] as? String)!
-                    self.loadAttr(component1: usernameStr, component2: actionStr, component3: whatStr)
-                }
                 
-                let placeholderImage = UIImage(named: "empty_event")
-                self.profileImage.sd_setImage(with: URL(string:(value?["image_string"])! as! String), placeholderImage: placeholderImage)
-                
+                self.profileImage.sd_setImage(with: URL(string:(value?["image_string"])! as! String), placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
                 
                 self.profileImage.setShowActivityIndicator(true)
                 self.profileImage.setIndicatorStyle(.gray)
@@ -71,17 +64,40 @@ class notificationTabCell: UITableViewCell {
 
         }
         
+        self.profileImage.image = #imageLiteral(resourceName: "placeholder_people")
+        if let image_url = notif.sender?.imageURL{
+            self.profileImage.sd_setImage(with: URL(string:(image_url)), placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+            
+            
+            self.profileImage.setShowActivityIndicator(true)
+            self.profileImage.setIndicatorStyle(.gray)
+        }
+        
+        
         if data["type"] as! String == "event"{
             Constants.DB.event.child(data["id"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
+                _ = snapshot.value as? NSDictionary
                 
                 let placeholderImage = UIImage(named: "empty_event")
-                self.typePic.sd_setImage(with: URL(string:(snapshot.key)), placeholderImage: placeholderImage)
                 
-                self.profileImage.setShowActivityIndicator(true)
-                self.profileImage.setIndicatorStyle(.gray)
+                let reference = Constants.storage.event.child("\(self.data["id"] as! String ).jpg")
+                
+                
+                reference.downloadURL(completion: { (url, error) in
+                    
+                    if error != nil {
+                        print(error?.localizedDescription ?? "")
+                        return
+                    }
+                    
+                    self.typePic.sd_setImage(with: url, placeholderImage: placeholderImage)
+                    self.typePic.setShowActivityIndicator(true)
+                    self.typePic.setIndicatorStyle(.gray)
+                    
+                })
         })
-        }else{
+        }
+        else if data["type"] as! String == "pin"{
         
         }
         
@@ -89,19 +105,30 @@ class notificationTabCell: UITableViewCell {
         
         
         
-        if data["actionType"] as! String == "Like"{
+        if data["actionType"] as! String == "like"{
             actionStr = "liked your"
             
         }else{
             actionStr = "commented on your"
         }
         if data["type"] as! String == "event"{
-            whatStr = "event"
+            if data["actionType"] as! String == "like"{
+                whatStr = "Event - \(notif.item!.itemName!)"
+            }
+            else{
+                whatStr = "Event: \"\(notif.item!.itemName!)\""
+            }
         }else{
-            whatStr = "pin"
+            if data["actionType"] as! String == "like"{
+                whatStr = "Pin - \(notif.item!.itemName!)"
+            }
+            else{
+                whatStr = "Pin: \"\(notif.item!.itemName!)\""
+            }
+            
         }
         
-        loadAttr(component1: usernameStr, component2: actionStr, component3: whatStr)
+        loadAttr(component1: (notif.sender?.username)!, component2: actionStr, component3: whatStr)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(showUser(sender:)))
         self.profileImage.isUserInteractionEnabled = true
