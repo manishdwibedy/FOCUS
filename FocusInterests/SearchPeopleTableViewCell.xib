@@ -134,6 +134,15 @@
                                     <constraint firstAttribute="height" constant="27.5" id="cEJ-hc-zul"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnY-ck-PNX">
+                                <rect key="frame" x="206" y="42.5" width="50" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="pah-wA-nMh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.38039215686274508" green="0.45098039215686275" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -146,6 +155,7 @@
                             <constraint firstItem="Ztv-4m-kt4" firstAttribute="trailing" secondItem="cpm-zK-R8B" secondAttribute="trailing" constant="1" id="97P-YH-TxE"/>
                             <constraint firstItem="Rkn-gp-GVE" firstAttribute="leading" relation="lessThanOrEqual" secondItem="OHh-7b-rCo" secondAttribute="trailing" constant="91" id="AP6-Rx-2ud"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="centerY" secondItem="dBt-EP-FC5" secondAttribute="centerY" id="BIe-AV-qEl"/>
+                            <constraint firstItem="WnY-ck-PNX" firstAttribute="centerX" secondItem="dBt-EP-FC5" secondAttribute="centerX" id="GcF-FP-unE"/>
                             <constraint firstItem="2vx-AD-EVj" firstAttribute="top" secondItem="sOb-GM-41h" secondAttribute="bottom" id="Gef-gn-b7J"/>
                             <constraint firstAttribute="height" constant="95" id="J5v-dd-peI"/>
                             <constraint firstItem="Ztv-4m-kt4" firstAttribute="leading" secondItem="OHh-7b-rCo" secondAttribute="leading" constant="0.5" id="Jia-ml-kNe"/>
@@ -171,6 +181,7 @@
                             <constraint firstItem="dBt-EP-FC5" firstAttribute="top" secondItem="6Vx-MI-HiM" secondAttribute="top" id="tOt-cI-ty9"/>
                             <constraint firstItem="6Vx-MI-HiM" firstAttribute="trailing" secondItem="cpm-zK-R8B" secondAttribute="trailing" id="vaQ-5b-e4L"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6Vx-MI-HiM" secondAttribute="trailing" constant="2.5" id="xxI-4k-lyj"/>
+                            <constraint firstItem="WnY-ck-PNX" firstAttribute="centerY" secondItem="cpm-zK-R8B" secondAttribute="centerY" id="yl6-DP-6If"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -197,6 +208,7 @@
                 <outlet property="fullName" destination="2vx-AD-EVj" id="3Be-PK-fUz"/>
                 <outlet property="interest" destination="OHh-7b-rCo" id="0sN-hx-cAh"/>
                 <outlet property="inviteButton" destination="6Vx-MI-HiM" id="ed2-LR-Tc5"/>
+                <outlet property="pinSince" destination="WnY-ck-PNX" id="CAc-Y5-bYw"/>
                 <outlet property="shortBackground" destination="6wk-9t-A2I" id="FA2-4B-3Hs"/>
                 <outlet property="userImage" destination="Jrp-IZ-pa4" id="DKB-rM-74T"/>
                 <outlet property="username" destination="sOb-GM-41h" id="JlM-fH-z8F"/>
