@@ -172,6 +172,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         eventDescriptionTextView.text = "Description"
         eventDescriptionTextView.textColor = .white
         
+        datePicker.minuteInterval = 15
+        timePicker.minuteInterval = 15
+        
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestTableView.bounds.size.width, height: self.interestTableView.bounds.size.height))
         backgroundView.backgroundColor = UIColor.clear
         interestTableView.backgroundView = backgroundView
