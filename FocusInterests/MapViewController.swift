@@ -1050,19 +1050,23 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         
                         if let info = snapshot.value as? [String:Any]{
                             if let username = info["username"] as? String{
-                                let position = CLLocationCoordinate2D(latitude: Double(data.coordinates.latitude), longitude: Double(data.coordinates.longitude))
-                                let marker = GMSMarker(position: position)
-                                marker.title = data.pinMessage
-                                marker.map = self.mapView
-                                let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
-                                image.image = UIImage(named: "pin")
-                                image.contentMode = .scaleAspectFit
-                                marker.iconView = image
-                                marker.accessibilityLabel = "pin_\(self.pins.count)"
                                 
-                                data.username = username
-                                self.lastPins.append(marker)
-                                self.pins.append(data)
+                                
+                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                    let position = CLLocationCoordinate2D(latitude: Double(data.coordinates.latitude), longitude: Double(data.coordinates.longitude))
+                                    let marker = GMSMarker(position: position)
+                                    marker.title = data.pinMessage
+                                    marker.map = self.mapView
+                                    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+                                    image.image = UIImage(named: "pin")
+                                    image.contentMode = .scaleAspectFit
+                                    marker.iconView = image
+                                    marker.accessibilityLabel = "pin_\(self.pins.count)"
+                                    
+                                    data.username = username
+                                    self.lastPins.append(marker)
+                                    self.pins.append(data)
+                                }
                             }
                         }
                         

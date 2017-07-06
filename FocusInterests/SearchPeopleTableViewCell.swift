@@ -24,6 +24,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var shortBackground: UIView!
     @IBOutlet weak var addressStack: UIStackView!
     @IBOutlet weak var cellHeight: NSLayoutConstraint!
+    @IBOutlet weak var pinSince: UILabel!
     
     var ID = ""
     var parentVC: SearchPeopleViewController!

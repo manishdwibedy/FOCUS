@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvl-u0-F2w">
-                                <rect key="frame" x="64" y="8" width="78" height="20"/>
+                                <rect key="frame" x="64" y="8" width="206" height="20"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -93,9 +93,9 @@
                             <constraint firstItem="yYQ-rC-pZi" firstAttribute="top" secondItem="3T7-mo-8bK" secondAttribute="bottom" constant="14.5" id="FFK-dK-dnV"/>
                             <constraint firstItem="Xz7-iA-aeB" firstAttribute="leading" secondItem="3T7-mo-8bK" secondAttribute="leading" constant="-9" id="H39-Lz-XeW"/>
                             <constraint firstItem="ceH-ab-qaZ" firstAttribute="top" secondItem="Bvl-u0-F2w" secondAttribute="top" id="Hdd-ug-SUA"/>
+                            <constraint firstItem="Xz7-iA-aeB" firstAttribute="leading" secondItem="Bvl-u0-F2w" secondAttribute="trailing" constant="10" id="Ll8-cq-fjw"/>
                             <constraint firstItem="3T7-mo-8bK" firstAttribute="top" secondItem="Xz7-iA-aeB" secondAttribute="bottom" constant="7.5" id="O3p-7h-HMx"/>
                             <constraint firstItem="Xz7-iA-aeB" firstAttribute="trailing" secondItem="3T7-mo-8bK" secondAttribute="trailing" constant="1" id="SjT-be-d4G"/>
-                            <constraint firstItem="Xz7-iA-aeB" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Bvl-u0-F2w" secondAttribute="trailing" constant="141" id="TLw-yR-5dc"/>
                             <constraint firstItem="3T7-mo-8bK" firstAttribute="leading" secondItem="k1a-TH-G1i" secondAttribute="trailing" constant="23" id="Xiw-7I-7Vu"/>
                             <constraint firstItem="fa6-hI-RZL" firstAttribute="leading" secondItem="Tfy-qO-WUG" secondAttribute="leading" constant="63" id="Yb9-cy-eA3"/>
                             <constraint firstItem="fa6-hI-RZL" firstAttribute="bottom" secondItem="yYQ-rC-pZi" secondAttribute="bottom" id="bkq-TE-MSi"/>
