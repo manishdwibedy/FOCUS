@@ -208,9 +208,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.createEventButton.roundCorners(radius: 6)
         
         if otherUser{
-            self.editButton.setTitle("", for: .normal)
-            self.editButton.isEnabled = false
+            self.editButton.isHidden = true
             self.createEventButton.isHidden = true
+            self.emptyPinButton.isHidden = true
             self.updatePinButton.isHidden = true
             self.createEventButton.isHidden = true
         }
