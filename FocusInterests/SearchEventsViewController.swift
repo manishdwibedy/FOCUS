@@ -198,7 +198,14 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
 
         cell?.guestCount.text = "\(event.attendeeCount) guests"
         
-        addGreenDot(label: (cell?.interest)!, content: event.category!)
+        if let category = event.category{
+            if category.contains(";"){
+                addGreenDot(label: (cell?.interest)!, content: category.components(separatedBy: ";")[0])
+            }
+            else{
+                addGreenDot(label: (cell?.interest)!, content: category)
+            }
+        }
         
         cell?.price.text = "Price"
         
