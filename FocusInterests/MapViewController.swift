@@ -261,74 +261,129 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //
         Constants.DB.user_mapping.keepSynced(true)
         
-        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil{ // Change this back
+        print("USername =>")
+        print(AuthApi.getFirebaseUid())
+        print(AuthApi.getUserName())
+        
+        let username_str = AuthApi.getUserName()
+        
+        
+        /* Bug : 
+ 
+        Username is not visible on the databse but still present here 
+         
+         */
+        
+        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil || username_str != nil{ // Change this back
+            print("username is nil")
             
-            //            var usernameView = UsernameInputView(frame: CGRect(x: 0, y: 0, width: self.usernameInputView.frame.size.width, height: usernameInputView.frame.size.height), onCompletion: {username -> Void in
-            //                Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
-            //                    if let id = (snapshot.value as? NSDictionary)?[username]{
-            //                        SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
-            //                    }
-            //                    else{
-            //                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username)
-            //                        Constants.DB.user_mapping.child(username).setValue("")
-            //                        Constants.DB.user_mapping.child(username).setValue(AuthApi.getUserEmail())
-            //                        AuthApi.set(username: username)
-            //                        UIView.animate(withDuration: 0.4, animations: {
-            //                            self.usernameInputView.alpha = 0
-            //                        }, completion: { compl in
-            //                                self.usernameInputView.isHidden = true
-            //                        })
-            //                        print("Text value: \(username)")
-            //                        photoView.isHidden = false
-            //                    }
-            //                })
-            //            }, onError: {err -> Void in
-            //                SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
-            //            })
-            //            self.usernameInputView.addSubview(usernameView)
+            let usernameView = UsernameInputView(frame: CGRect(x:self.usernameInputView.frame.origin.x, y:self.usernameInputView.frame.origin.y, width:self.usernameInputView.frame.size.width, height: self.usernameInputView.frame.size.height))
             
+            self.view.addSubview(usernameView)
+
             
-            let appearance = SCLAlertView.SCLAppearance(
-                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
-                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
-                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-                showCloseButton: false,
-                shouldAutoDismiss: false
-            )
-            
-            let alert = SCLAlertView(appearance: appearance)
-            let username = alert.addTextField("Enter your username")
-            username.autocapitalizationType = .none
-            
-            alert.addButton("Add user name") {
-                if (username.text?.characters.count)! > 0{
-                    
-                    Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
-                        if let id = (snapshot.value as? NSDictionary)?[username.text]{
-                            username.text = ""
-                            SCLAlertView().showError("Error", subTitle: "Please choose a unique error.")
-                        }
-                        else{
-                            
-                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
-                            Constants.DB.user_mapping.child(username.text!).setValue("")
-                            Constants.DB.user_mapping.child(username.text!).setValue(AuthApi.getUserEmail())
-                            AuthApi.set(username: username.text)
-                            print("Text value: \(username.text!)")
-                            alert.hideView()
-                            self.showPopup()
-                        }
-                    })
-                }
-                else{
-                    SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
-                }
+            usernameView.completion = { (username) in
+                print(username)
+                Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
+                    if ((snapshot.value as? NSDictionary)?[username]) != nil{
+                        SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
+                    }
+                    else{
+                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username)
+                        Constants.DB.user_mapping.child(username).setValue("")
+                        Constants.DB.user_mapping.child(username).setValue(AuthApi.getUserEmail())
+                        AuthApi.set(username: username)
+                        UIView.animate(withDuration: 0.4, animations: {
+                            usernameView.alpha = 0
+                        }, completion: { compl in
+                            usernameView.isHidden = true
+                        })
+                        print("Text value: \(username)")
+                        //self.photoView.isHidden = false
+                    }
+                })
+            }
+            usernameView.error = { (error) in
+                print("ERROR")
+                SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
                 
             }
             
-            alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
             
+            
+//            let usernameView = UsernameInputView(frame: CGRect(x: 0, y: 0, width: self.usernameInputView.frame.size.width, height: usernameInputView.frame.size.height), onCompletion: {username -> Void in
+//                Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
+//                    if ((snapshot.value as? NSDictionary)?[username]) != nil{
+//                        SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
+//                    }
+//                    else{
+//                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username)
+//                        Constants.DB.user_mapping.child(username).setValue("")
+//                        Constants.DB.user_mapping.child(username).setValue(AuthApi.getUserEmail())
+//                        AuthApi.set(username: username)
+//                        UIView.animate(withDuration: 0.4, animations: {
+//                            self.usernameInputView.alpha = 0
+//                        }, completion: { compl in
+//                            self.usernameInputView.isHidden = true
+//                        })
+//                        print("Text value: \(username)")
+//                        //self.photoView.isHidden = false
+//                    }
+//                })
+//            }, onError: {err -> Void in
+//                SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
+//            })
+//            self.usernameInputView.addSubview(usernameView)
+//            self.usernameInputView.isHidden = false
+            
+            
+//            let appearance = SCLAlertView.SCLAppearance(
+//                kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+//                kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+//                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+//                showCloseButton: false,
+//                shouldAutoDismiss: false
+//            )
+            
+//            let alert = SCLAlertView(appearance: appearance)
+//            let username = alert.addTextField("Enter your username")
+//            username.autocapitalizationType = .none
+//
+//            alert.addButton("Add user name") {
+//                if (username.text?.characters.count)! > 0{
+//                    
+//                    Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
+//                        if let id = (snapshot.value as? NSDictionary)?[username.text]{
+//                            username.text = ""
+//                            SCLAlertView().showError("Error", subTitle: "Please choose a unique error.")
+//                        }
+//                        else{
+//                            
+//                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username.text)
+//                            Constants.DB.user_mapping.child(username.text!).setValue("")
+//                            Constants.DB.user_mapping.child(username.text!).setValue(AuthApi.getUserEmail())
+//                            AuthApi.set(username: username.text)
+//                            print("Text value: \(username.text!)")
+//                            alert.hideView()
+//                            self.showPopup()
+//                        }
+//                    })
+//                }
+//                else{
+//                    SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
+//                }
+//                
+//            }
+            
+            //alert.showEdit("Username", subTitle: "Please add a username so friends can find you.")
+            
+        } else {
+            print("username is not nil")
         }
+        
+        let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
+        
+        self.view.addSubview(photoViewInput)
 
 //        Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
 //            if let id = (snapshot.value as? NSDictionary)?["manish1"]{
