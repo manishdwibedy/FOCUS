@@ -95,12 +95,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //        }
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
-            let info = snapshot.value as! [String:Any]
-            
-            if let interests = info["interests"] as? String{
-                AuthApi.set(interests: interests)    
+            if let info = snapshot.value as? [String:Any]{
+                if let interests = info["interests"] as? String{
+                    AuthApi.set(interests: interests)
+                }
             }
-            
         })
         
         locationManager = CLLocationManager()

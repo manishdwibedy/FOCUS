@@ -101,7 +101,7 @@ class Share{
         let token = AccessToken(authenticationToken: AuthApi.getFacebookToken()!)
         
         let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "me/taggable_friends", parameters: params, accessToken: token)) { httpResponse, result in
+        connection.add(GraphRequest(graphPath: "friends_using_app", parameters: params, accessToken: token)) { httpResponse, result in
             switch result {
             case .success(let response):
                 //                print("Graph Request Succeeded: \(response)")
