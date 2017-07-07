@@ -121,7 +121,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             locationLabel.text = locationName
         }
         
-        imageArray.append(UIImage(named:"Image")!)
+        imageArray.append(#imageLiteral(resourceName: "pin_camera"))
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -463,6 +463,9 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                         print("got image")
                         
                         if (UIImageJPEGRepresentation(image, 1) as NSData?) != nil{
+                            self.imageArray.append(image)
+                        }
+                        if (UIImagePNGRepresentation(image) as NSData?) != nil{
                             self.imageArray.append(image)
                         }
                         
