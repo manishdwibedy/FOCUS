@@ -316,6 +316,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
         
         photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
+        
+        
+        photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
 
         
         self.view.addSubview(photoViewInput)
@@ -336,6 +339,37 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.present(photoPicker, animated: true, completion: {
             self.showPopup()
         })
+    }
+    
+    func showCamera() {
+        let picker = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.allowsEditing = false
+            picker.sourceType = UIImagePickerControllerSourceType.camera
+            picker.cameraCaptureMode = .photo
+            picker.modalPresentationStyle = .fullScreen
+            self.present(picker,animated: true,completion: {
+                self.showPopup()
+            })
+        } else {
+            self.noCamera()
+        }
+    }
+    
+    func noCamera() {
+        let alertVC = UIAlertController(
+            title: "No Camera",
+            message: "Sorry, this device has no camera",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "OK",
+            style:.default,
+            handler: nil)
+        alertVC.addAction(okAction)
+        present(
+            alertVC,
+            animated: true,
+            completion: nil)
     }
     
 
