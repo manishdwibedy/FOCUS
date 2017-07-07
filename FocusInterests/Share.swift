@@ -98,54 +98,65 @@ class Share{
     
     static func getFacebookFriends(){
         let params = ["fields": "friends{picture, name}"]
-        let token = AccessToken(authenticationToken: AuthApi.getFacebookToken()!)
-        
-        let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "me", parameters: params, accessToken: token)) { httpResponse, result in
-            switch result {
-            case .success(let response):
-                let friends = response.dictionaryValue?["friends"] as! [String : Any]
-                
-                var friend_info = [[String:String]]()
-                for friend in (friends["data"] as? [[String:Any]])!{
-                    let name = friend["name"] as? String
-                    var picture_url = ""
-                    if let picture = friend["picture"] as? [String:Any]{
-                        if let data = picture["data"] as? [String:Any]{
-                            picture_url = (data["url"] as? String)!
-                        }
-                    }
+        if let token = AuthApi.getFacebookToken(){
+            let accessToken = AccessToken(authenticationToken: token)
+            
+            let connection = GraphRequestConnection()
+            connection.add(GraphRequest(graphPath: "me", parameters: params, accessToken: accessToken)) { httpResponse, result in
+                switch result {
+                case .success(let response):
+                    let friends = response.dictionaryValue?["friends"] as! [String : Any]
                     
-                    friend_info.append([
-                        "name": name!,
-                        "image": picture_url
-                        ])
-//                    print("\(String(describing: friend["first_name"]!)) \(String(describing: friend["last_name"]!) )")
-//
-//                    print(String(describing: friend["id"]!))
+                    var friend_info = [[String:String]]()
+                    for friend in (friends["data"] as? [[String:Any]])!{
+                        let name = friend["name"] as? String
+                        var picture_url = ""
+                        if let picture = friend["picture"] as? [String:Any]{
+                            if let data = picture["data"] as? [String:Any]{
+                                picture_url = (data["url"] as? String)!
+                            }
+                        }
+                        
+                        friend_info.append([
+                            "name": name!,
+                            "image": picture_url
+                            ])
+                        //                    print("\(String(describing: friend["first_name"]!)) \(String(describing: friend["last_name"]!) )")
+                        //
+                        //                    print(String(describing: friend["id"]!))
+                    }
+                    print(friend_info)
+                case .failed(let error):
+                    print("Graph Request Failed: \(error)")
                 }
-                print(friend_info)
-            case .failed(let error):
-                print("Graph Request Failed: \(error)")
             }
+            connection.start()
         }
-        connection.start()
+        
     }
     
     
     static func getUserContacts(email : String){
-        var request = URLRequest(url: URL(string: "https://google.com/m8/feeds/contacts/\(email)/full")!)
-        request.timeoutInterval = 120.0
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) {
-            (data, response, error) -> Void in
+        if let token = AuthApi.getGoogleToken(){
+            var request = URLRequest(url: URL(string: "https://www.google.com/m8/feeds/contacts/default/thin?max-results=10000&alt=json")!)
+            request.timeoutInterval = 120.0
+            let session = URLSession.shared
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.addValue("3.0", forHTTPHeaderField: "GData-Version")
+            let task = session.dataTask(with: request as URLRequest) {
+                (data, response, error) -> Void in
+                
+                let httpResponse = response as! HTTPURLResponse
+                let status = httpResponse.statusCode
+                print(status)
+                
+                
+                
+                
+            }
             
-            let httpResponse = response as! HTTPURLResponse
-            _ = httpResponse.statusCode
-        
-            
+            task.resume()
         }
         
-        task.resume()
     }
 }

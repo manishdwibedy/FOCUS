@@ -89,7 +89,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>mapofyourworld.com</key>
+			<key>http://notifications-dev2.us-west-2.elasticbeanstalk.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -98,7 +98,7 @@
 				<key>NSTemporaryExceptionMinimumTLSVersion</key>
 				<string>TLSv1.1</string>
 			</dict>
-			<key>http://notifications-dev2.us-west-2.elasticbeanstalk.com</key>
+			<key>mapofyourworld.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>

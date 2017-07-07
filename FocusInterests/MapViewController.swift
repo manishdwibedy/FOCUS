@@ -206,7 +206,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
 
     }
-    
+    /*
+ ya29.GluABI7CQOWllDRopxbRAIT466GFeJup1lXZyxmQNXe1ldpByv-mVWtDL0Jz62t-G-sshrzO4oU21WXfAOZRHXpxjUTBs60VHL98fb7CekEILI2lGBMh6-D2hK0R
+     
+     ya29.GluABPICc41Dx5vVnqPYzBwhCaFakohw2MMfat77fuTMEN4yzyQzucbKO7mMQsOGE4azu_dBTNv_CqjIfEoOKCNYXDrb595wn4HOujgjmia-SmhGVGZVXKc_xuVk
+ */
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
