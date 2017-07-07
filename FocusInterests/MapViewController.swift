@@ -218,7 +218,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         Constants.DB.pins.keepSynced(true)
         
         saveUserInfo()
-        Share.getUserContacts(email: "manish.dwibedy@gmail.com")
+        Share.getUserContacts(email: "manish.dwibedy@gmail.com", completion: {users in
+            print(users)
+        })
         
         let token = Messaging.messaging().fcmToken
         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)

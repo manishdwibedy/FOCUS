@@ -13,6 +13,7 @@ import FirebaseAuth
 import Alamofire
 import OhhAuth
 import FacebookCore
+import SwiftyJSON
 
 class Share{
     static func facebookShare(with url: URL, description: String) throws{
@@ -136,26 +137,38 @@ class Share{
     }
     
     
-    static func getUserContacts(email : String){
+    static func getUserContacts(email : String, completion: @escaping ([[String:String]])->Void){
         if let token = AuthApi.getGoogleToken(){
-            var request = URLRequest(url: URL(string: "https://www.google.com/m8/feeds/contacts/default/thin?max-results=10000&alt=json")!)
-            request.timeoutInterval = 120.0
-            let session = URLSession.shared
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-            request.addValue("3.0", forHTTPHeaderField: "GData-Version")
-            let task = session.dataTask(with: request as URLRequest) {
-                (data, response, error) -> Void in
+            var url = URL(string: "https://www.google.com/m8/feeds/contacts/default/thin?max-results=10000&alt=json")
+            
+            var users = [[String:String]]()
+            let headers: HTTPHeaders = [
+                "authorization": "Bearer \(token)",
+                "GData-Version": "3.0"
+            ]
+            
+            Alamofire.request(url!, method: .get, parameters:nil, headers: headers).responseJSON { response in
+                let json = JSON(data: response.data!)
                 
-                let httpResponse = response as! HTTPURLResponse
-                let status = httpResponse.statusCode
-                print(status)
+                let userData = json["feed"]["entry"]
                 
-                
+                if let userData = userData.array{
+                    for user in userData{
+                        let name = user["title"]["$t"].stringValue
+                        let email = user["gd$email"][0]["address"].stringValue
+                        let image = user["link"][0]["href"].stringValue
+                        
+                        users.append([
+                            "name": name,
+                            "email": email,
+                            "image": image
+                            ])
+                    }
+                    completion(users)
+                }
                 
                 
             }
-            
-            task.resume()
         }
         
     }
