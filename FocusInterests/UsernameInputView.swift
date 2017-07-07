@@ -46,6 +46,9 @@ class UsernameInputView : UIView, UITextFieldDelegate {
         self.layer.cornerRadius = 15
         self.clipsToBounds = true
         
+        self.createButton.layer.cornerRadius = 5.0
+        self.createButton.clipsToBounds = true
+        
         styleInputField()
     }
     
