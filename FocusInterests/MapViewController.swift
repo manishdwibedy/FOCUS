@@ -266,7 +266,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //
         Constants.DB.user_mapping.keepSynced(true)
 
-        
+        Share.getFacebookFriends()
         
         /* Bug : 
  

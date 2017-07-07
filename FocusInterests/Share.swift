@@ -97,21 +97,34 @@ class Share{
     }
     
     static func getFacebookFriends(){
-        let params = ["fields": "id, first_name, last_name, middle_name, name, email, picture"]
+        let params = ["fields": "friends{picture, name}"]
         let token = AccessToken(authenticationToken: AuthApi.getFacebookToken()!)
         
         let connection = GraphRequestConnection()
-        connection.add(GraphRequest(graphPath: "friends_using_app", parameters: params, accessToken: token)) { httpResponse, result in
+        connection.add(GraphRequest(graphPath: "me", parameters: params, accessToken: token)) { httpResponse, result in
             switch result {
             case .success(let response):
-                //                print("Graph Request Succeeded: \(response)")
-                let friends = response.dictionaryValue?["data"] as! [[String : AnyObject]]
+                let friends = response.dictionaryValue?["friends"] as! [String : Any]
                 
-                for friend in friends{
-                    print("\(String(describing: friend["first_name"]!)) \(String(describing: friend["last_name"]!) )")
-
-                    print(String(describing: friend["id"]!))
+                var friend_info = [[String:String]]()
+                for friend in (friends["data"] as? [[String:Any]])!{
+                    let name = friend["name"] as? String
+                    var picture_url = ""
+                    if let picture = friend["picture"] as? [String:Any]{
+                        if let data = picture["data"] as? [String:Any]{
+                            picture_url = (data["url"] as? String)!
+                        }
+                    }
+                    
+                    friend_info.append([
+                        "name": name!,
+                        "image": picture_url
+                        ])
+//                    print("\(String(describing: friend["first_name"]!)) \(String(describing: friend["last_name"]!) )")
+//
+//                    print(String(describing: friend["id"]!))
                 }
+                print(friend_info)
             case .failed(let error):
                 print("Graph Request Failed: \(error)")
             }
