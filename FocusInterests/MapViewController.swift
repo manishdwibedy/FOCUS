@@ -217,6 +217,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).keepSynced(true)
         Constants.DB.pins.keepSynced(true)
         
+        navigationView.messagesButton.badgeString = ""
+        getUnreadCount(count: {number in
+            if number > 0{
+                self.navigationView.messagesButton.badgeString = "\(number)"
+            }
+            else{
+                self.navigationView.messagesButton.badgeString = ""
+            }
+            
+        })
+        
         saveUserInfo()
         Share.getUserContacts(email: "manish.dwibedy@gmail.com", completion: {users in
             print(users)

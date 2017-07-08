@@ -176,17 +176,37 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             if let index = self.messages.index(where: {$0.messageID == userMessage?.messageID}) {
                 // do something with fooOffset
                 let date = Date(timeIntervalSince1970: message?["date"] as! Double)
-                
                 userMessage?.lastMessageDate = date
                 userMessage?.readMessages = message?["read"] as! Bool
                 
+                Constants.DB.message_content.child((userMessage?.messageID)!).queryOrdered(byChild: "date").queryLimited(toLast: 1).observeSingleEvent(of: .value, with: {(snapshot) in
+                    let data = snapshot.value as? [String:Any]
+                    
+                    if let data = data, data.count > 0{
+                        let message_data = data[(data.keys.first!)] as? [String:Any]
+                        
+                        let id = userMessage?.messageID
+                        
+                        if let text = message_data?["text"]{
+                            let message = self.contentMapping[id!]
+                            message?.addLastContent(lastContent: text as! String)
+                        }
+                        else{
+                            let message = self.contentMapping[id!]
+                            message?.addLastContent(lastContent: "sent a photo")
+                        }
+                        self._messages[index] = userMessage!
+                        self.messages = self._messages
+                        self.messageTable.reloadData()
+                    }
+                    
+                    
+                })
                 
-                self._messages[index] = userMessage!
-                self.messages = self._messages
-                self.messageTable.reloadData()
+            
             }
 
-            
+        
         })
 
     }
@@ -222,8 +242,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.time.text = formatter.timeSince(from: date, numericDates: false)
         
         if !message.readMessages{
-            cell.username.font = UIFont(name: "Avenir-Black", size: 15)
-            cell.content.font = UIFont(name: "Avenir-Black", size: 15)
+            addGreenDot(label: cell.username, content: message.name, right: true)
         }
         
         cell.backgroundColor = .clear
@@ -233,6 +252,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let message = self.messages[indexPath.row]
         let user_info = self.userInfo[message.id]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MessageTableViewCell
+        cell.username.text = message.name
+        
         self.performSegue(withIdentifier: "show_user_chat", sender: user_info)
     }
     

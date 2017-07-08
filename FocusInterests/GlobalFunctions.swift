@@ -715,6 +715,18 @@ func getPlaceName(location: CLLocation, completion: @escaping (String) -> Void){
     })
 }
 
+func getUnreadCount(count: @escaping (Int)->Void){
+    Constants.DB.messages.child(AuthApi.getFirebaseUid()!).queryOrdered(byChild: "read").queryEqual(toValue: false).observe(.value, with: {(snapshot) in
+        
+        if let message = snapshot.value as? [String:Any]{
+            count(message.count)
+        }
+        else{
+            count(0)
+        }
+    })
+}
+
 func getNearbyPlaces(text: String?, categories: String?, count: Int?, location: CLLocation, completion: @escaping ([Place])->Void){
     let url = "https://api.yelp.com/v3/businesses/search"
     let parameters: [String: Any] = [
@@ -776,14 +788,24 @@ func getNearbyPlaces(text: String?, categories: String?, count: Int?, location: 
     }
 }
 
-func addGreenDot(label: UILabel, content: String){
+func addGreenDot(label: UILabel, content: String, right: Bool = false){
     
     if content.characters.count > 0 {
-        label.text =  "● \(content)"
+        if !right{
+            label.text =  "● \(content)"
+        }
+        else{
+            label.text =  "\(content) ●"
+        }
+        
         let primaryFocus = NSMutableAttributedString(string: label.text!)
         
-        
-        primaryFocus.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: NSRange(location: 0, length: 1))
+        if !right{
+            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: Constants.color.green, range: NSRange(location: 0, length: 1))
+        }
+        else{
+            primaryFocus.addAttribute(NSForegroundColorAttributeName, value: Constants.color.green, range: NSRange(location: content.characters.count + 1, length: 1))
+        }
         label.attributedText = primaryFocus
     }
     else{
