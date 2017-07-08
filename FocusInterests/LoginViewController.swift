@@ -121,6 +121,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
                             AuthApi.set(userEmail: email)
                             self.showHomeVC()
+                            
+                            
                         } else {
                             self.showLoginFailedAlert(loginType: "email")
                         }
@@ -154,6 +156,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                     self.passwordTextField.text = ""
                                     self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
                                     self.showHomeVC()
+                                    
                                 } else {
                                     self.showLoginFailedAlert(loginType: "email")
                                 }
@@ -442,6 +445,10 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             }
             else{
                 Constants.DB.user.child("\(fireId)/image_string").setValue(facebook_image_string)
+            }
+            
+            if let username = info?["username"] as? String{
+                AuthApi.set(username: username)
             }
             
             let token = Messaging.messaging().fcmToken

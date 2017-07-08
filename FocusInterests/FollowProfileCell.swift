@@ -50,7 +50,12 @@ class FollowProfileCell: UITableViewCell {
                 self.fullnameLabel.text = value["fullname"] as? String
                 self.usernameLabel.text = value["username"] as? String
                 
-                self.data.username = (value["username"] as? String)!
+//                self.data.username = (value["username"] as? String)!
+//                
+                if let image = value["image_string"] as? String, image.characters.count > 0{
+                    self.profileImage.sd_setImage(with: URL(string: image)!, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                }
+                
                 self.ifFollowing(uid: self.data.uid, completionIt: {(boolV) -> () in
                 
                     if boolV == true

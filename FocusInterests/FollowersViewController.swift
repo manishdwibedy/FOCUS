@@ -28,12 +28,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         
-        let attrs = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
-        ]
-        
-        navBar.titleTextAttributes = attrs
+        navBar.titleTextAttributes = Constants.navBar.attrs
         
         self.inviteContactsButton.roundCorners(radius: 9.0)
         
