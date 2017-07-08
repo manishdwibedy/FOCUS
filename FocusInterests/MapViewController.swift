@@ -168,10 +168,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 marker.title = event.title
                 marker.map = self.mapView
                 marker.accessibilityLabel = "event_\(self.events.count)"
-                self.events.append(event)
             
-                if !(self.searchEventsTab?.all_events.contains(event))!{
-                    self.searchEventsTab?.all_events.append(event)    
+                if Date(timeIntervalSince1970: Double(event.date!)!) > Date(){
+                    self.events.append(event)
+                    
+                    if !(self.searchEventsTab?.all_events.contains(event))!{
+                        self.searchEventsTab?.all_events.append(event)
+                    }
+                    
                 }
             
                 
