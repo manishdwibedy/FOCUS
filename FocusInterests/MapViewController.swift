@@ -21,6 +21,7 @@ import SDWebImage
 import MessageUI
 import ChameleonFramework
 import SCLAlertView
+import FirebaseStorage
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate {
     
@@ -151,6 +152,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //        let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
 //        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
         
+        
+        let DF = DateFormatter()
+        DF.dateFormat = "MMM d, h:mm a"
+        
         Constants.DB.event.observe(DataEventType.childAdded, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             let info = events// as? [String:Any]
@@ -161,15 +166,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if let attending = info["attendingList"] as? [String:Any]{
                     event.setAttendessCount(count: attending.count)
                 }
-                
-                let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                let marker = GMSMarker(position: position)
-                marker.icon = UIImage(named: "Event")
-                marker.title = event.title
-                marker.map = self.mapView
-                marker.accessibilityLabel = "event_\(self.events.count)"
             
-                if Date(timeIntervalSince1970: Double(event.date!)!) > Date(){
+            
+                if DF.date(from: event.date!)! > Date(){
+                    
+                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                    let marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: "Event")
+                    marker.title = event.title
+                    marker.map = self.mapView
+                    marker.accessibilityLabel = "event_\(self.events.count)"
+                    
                     self.events.append(event)
                     
                     if !(self.searchEventsTab?.all_events.contains(event))!{
@@ -295,7 +302,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
          
          */
         
-        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil ||  true { // Change this back
+        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil { // Change this back
             print("username is nil")
             
             let usernameView = UsernameInputView(frame: CGRect(x:self.usernameInputView.frame.origin.x, y:self.usernameInputView.frame.origin.y, width:self.usernameInputView.frame.size.width, height: self.usernameInputView.frame.size.height))
@@ -315,17 +322,31 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         Constants.DB.user_mapping.child(username).setValue(AuthApi.getUserEmail())
                         AuthApi.set(username: username)
                         UIView.animate(withDuration: 0.4, animations: {
-                            usernameView.alpha = 0
+                            self.usernameInputView.alpha = 0
                         }, completion: { compl in
-                            usernameView.isHidden = true
+                            self.usernameInputView.isHidden = true
+                            self.usernameInputView.sendSubview(toBack: self.mapView)
                         })
                         print("Text value: \(username)")
+                        
+                        if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0{
+                            let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
+                            
+                            photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
+                            
+                            
+                            photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
+                            
+                            
+                            self.view.addSubview(photoViewInput)
+                        }
+                        
                         //self.photoView.isHidden = false
                     }
                 })
             }
             usernameView.error = { (error) in
-                print("ERROR")
+                
                 SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
                 
             }
@@ -333,15 +354,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             print("username is not nil")
         }
         
-        let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
         
-        photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
-        
-        
-        photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
-
-        
-        self.view.addSubview(photoViewInput)
 
 //        Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
 //            if let id = (snapshot.value as? NSDictionary)?["manish1"]{
@@ -1079,4 +1092,45 @@ extension MapViewController: UIWebViewDelegate {
             self.webView.isHidden = false
         }
     }    
+}
+
+extension MapViewController: UIImagePickerControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.dismiss(animated: true, completion: { () -> Void in
+            
+        })
+        
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+        
+        // reducing the size of the image
+        let reducedImage = chosenImage.resizeWithWidth(width: 750)
+        let imageData = UIImagePNGRepresentation(reducedImage!)
+        
+        
+        if let data = imageData{
+            
+            let imageRef = Constants.storage.user_profile.child("\(AuthApi.getFirebaseUid()!).jpg")
+            
+            // Create file metadata including the content type
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            let _ = imageRef.putData(data, metadata: metadata) { (metadata, error) in
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                // Metadata contains file metadata such as size, content-type, and download URL.
+                AuthApi.set(userImage: metadata.downloadURL()?.absoluteString)
+                
+            }
+        }
+        self.photoInputView.isHidden = true
+        self.photoInputView.sendSubview(toBack: mapView)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+        print("cancelled")
+    }
 }

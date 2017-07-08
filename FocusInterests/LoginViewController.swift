@@ -358,11 +358,13 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         if let image_string = info?["image_string"] as? String{
                             if image_string.isEmpty{
                                 Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 375).absoluteString)
+                                AuthApi.set(userImage: googleUser.profile.imageURL(withDimension: 375).absoluteString)
                             }
-                            
+                            AuthApi.set(userImage: image_string)
                         }
                         else{
                             Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 375).absoluteString)
+                            AuthApi.set(userImage: googleUser.profile.imageURL(withDimension: 375).absoluteString)
                         }
                         
                         if let interests = info?["interests"] as? String{
@@ -440,11 +442,13 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             if let image_string = info?["image_string"] as? String{
                 if image_string.isEmpty{
                     Constants.DB.user.child("\(fireId)/image_string").setValue(facebook_image_string)
+                    AuthApi.set(userImage: facebook_image_string)
                 }
-                
+                AuthApi.set(userImage: image_string)
             }
             else{
                 Constants.DB.user.child("\(fireId)/image_string").setValue(facebook_image_string)
+                AuthApi.set(userImage: facebook_image_string)
             }
             
             if let username = info?["username"] as? String{

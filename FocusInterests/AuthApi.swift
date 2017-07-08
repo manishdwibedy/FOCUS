@@ -45,6 +45,19 @@ struct AuthApi {
         }
         return nil
     }
+
+    static func set(userImage: String?) {
+        if let image = userImage {
+            defaults.set(image, forKey: "userImage")
+        }
+    }
+    
+    static func getUserImage() -> String? {
+        if let userImage = defaults.object(forKey: "userImage") as? String {
+            return userImage
+        }
+        return nil
+    }
     
     static func set(username: String?) {
         if let username = username {
