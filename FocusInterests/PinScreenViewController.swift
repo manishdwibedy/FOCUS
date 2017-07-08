@@ -707,7 +707,7 @@ extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
         
         self.navigationController?.navigationBar.barTintColor = Constants.color.navy
         UINavigationBar.appearance().barTintColor = Constants.color.navy
-        UINavigationBar.appearance().tintColor = Constants.color.navy
+        UINavigationBar.appearance().tintColor = UIColor.white
         dismiss(animated: true, completion: nil)
     }
     
