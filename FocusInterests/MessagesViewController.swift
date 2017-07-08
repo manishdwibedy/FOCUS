@@ -69,7 +69,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         backButton.tintColor = .white
         
         self.navigationItem.rightBarButtonItem = backButton
-
+        
     }
     
     func compose(sender: UIBarButtonItem) {

@@ -45,10 +45,11 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         
         self.tableView.separatorColor = UIColor.white
         self.tableView.separatorInset = UIEdgeInsets.zero
-        
+        self.tableView.sectionIndexBackgroundColor = Constants.color.navy
         let nib = UINib(nibName: "NewMessageTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "newMessageCell")
-        
+        self.navigationItem.setRightBarButton(UIBarButtonItem(title: "", style: .plain, target: nil, action: nil), animated: false)
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         self.navigationController?.navigationBar.tintColor = UIColor.white
         hideKeyboardWhenTappedAround()
         
@@ -91,7 +92,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "newMessageCell", for: indexPath) as! NewMessageTableViewCell
         
         cell.textLabel?.textColor = UIColor.white
-        
+        cell.fullNameLabel.textColor = UIColor.white
         let section = filteredSection[indexPath.section]
         
         let user = self.filtered[section]?[indexPath.row]

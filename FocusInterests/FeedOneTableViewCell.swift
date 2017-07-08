@@ -19,6 +19,11 @@ class FeedOneTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.nameLabel.text = "Arya"
+        self.likesAmountLabel.text = "0 likes"
+        self.timeAmountLabel.text = "21h ago"
+        addGreenDot(label: self.interestLabel, content: "Sports")
+        self.nameDescriptionLabel.text = "Watching NBA Awards - Westbrook for MVP!"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
