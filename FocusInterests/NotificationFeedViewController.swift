@@ -161,7 +161,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             }else if indexPath.row == 1{
                 rowHeight = 130
             }else if indexPath.row == 2{
-                rowHeight = 145
+                rowHeight = 120
             }else if indexPath.row == 3{
                 rowHeight = 150
             }else if indexPath.row == 4{

@@ -414,8 +414,8 @@ line 2</string>
                                     <action selector="more:" destination="Wnn-ii-34g" eventType="touchUpInside" id="LAF-WC-ct9"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bZe-CO-fzE">
-                                <rect key="frame" x="16" y="488" width="140" height="40"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="bZe-CO-fzE">
+                                <rect key="frame" x="16" y="488" width="148" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFv-QC-3S7">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -429,7 +429,7 @@ line 2</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oV5-eg-uPI">
-                                        <rect key="frame" x="50" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="54" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="0gY-wl-XAa"/>
                                             <constraint firstAttribute="width" constant="40" id="76s-I1-OGK"/>
@@ -440,7 +440,7 @@ line 2</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CsI-L6-VgU">
-                                        <rect key="frame" x="100" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="108" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Wb4-nn-wJp"/>
                                             <constraint firstAttribute="width" constant="40" id="aBk-SG-dsI"/>

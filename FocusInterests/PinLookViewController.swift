@@ -158,16 +158,18 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         //check for likes
         data.dbPath.child("like").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
+            if value != nil{
+                self.likesLabel.isHidden = false
                 self.likes = (value?["num"] as? Int)!
                 
                 if self.likes > 1{
                     self.likesLabel.text = String(self.likes) + " likes"
                 }
-                else{
+                else if self.likes == 1{
                     self.likesLabel.text = String(self.likes) + " like"
                 }
+            }else{
+                self.likesLabel.isHidden = true
             }
         })
         
@@ -341,8 +343,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     
     func didDoubletap(sender:UITapGestureRecognizer)
     {
-        if self.likeOut.isEnabled == true
-        {
+        if self.likesLabel.isHidden == true {
+            self.likesLabel.isHidden = false
+        }
+        if self.likeOut.isEnabled == true{
             self.likes = self.likes + 1
             data.dbPath.child("like").updateChildValues(["num": likes])
             data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
@@ -385,9 +389,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         self.present(ivc, animated: true, completion: { _ in })
         
     }
-    
-
-    
 
 }
 
