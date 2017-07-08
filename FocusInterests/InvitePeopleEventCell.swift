@@ -22,6 +22,7 @@ class InvitePeopleEventCell: UITableViewCell {
     @IBOutlet weak var distance: UILabel!
     var event: Event!
     var UID: String!
+    var username = ""
     var parentVC: InvitePeopleViewController!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -79,6 +80,7 @@ class InvitePeopleEventCell: UITableViewCell {
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "event"
         ivc.id = self.event.id!
+        ivc.username = self.username
         ivc.event = event
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: nil)

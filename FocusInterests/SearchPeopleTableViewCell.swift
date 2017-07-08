@@ -27,6 +27,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBOutlet weak var pinSince: UILabel!
     
     var ID = ""
+    var username_selected = ""
     var parentVC: SearchPeopleViewController!
     var pinAvailable = false
     
@@ -173,7 +174,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
     @IBAction func inviteUser(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "search_people", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
-        ivc.UID = ID
+        ivc.username = username_selected
         ivc.searchPeople = parentVC
         parentVC.present(ivc, animated: true, completion: { _ in })
     }

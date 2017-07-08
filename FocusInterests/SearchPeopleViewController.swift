@@ -275,6 +275,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         }
     
         cell?.ID = people.uuid!
+        cell?.username_selected = people.username!
         //cell.checkForFollow(id: event.id!)
         
         _ = UIImage(named: "empty_event")

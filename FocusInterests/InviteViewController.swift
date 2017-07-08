@@ -34,7 +34,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var id = ""
     var place: Place?
     var event: Event?
-    
+
+    var username = ""
     var selected = [InviteUser:Bool]()
     
     let store = CNContactStore()
@@ -104,6 +105,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 if newData.UID != AuthApi.getFirebaseUid(){
                                     let first = String(describing: newData.username.characters.first!).uppercased()
                                     
+                                    if newData.username == self.username{
+                                        self.selected[newData] = true
+                                    }
                                     if !self.sections.contains(first){
                                         self.sections.append(first)
                                         self.sectionMapping[first] = 1
@@ -119,6 +123,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                     }
                 }
+                
                 
                 self.sections.sort()
                 self.friendsTableView.reloadData()
@@ -281,6 +286,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             contactHasBeenRemoved(contact: (user?.username)!, index: index)
         }
     }
+    
     func contactHasBeenSelected(contact: String, index: Int){
         contactListView.isHidden = false
         

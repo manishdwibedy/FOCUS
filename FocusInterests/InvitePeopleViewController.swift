@@ -21,6 +21,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     
     var UID = ""
+    var username = ""
     var filtered = [Any]()
     var places = [Place]()
     var events = [Event]()
@@ -168,6 +169,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             let placeHolderImage = UIImage(named: "empty_event")
             cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
             cell.UID = UID
+            cell.username = username
             cell.parentVC = self
             return cell
         }else
@@ -179,6 +181,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.interest.text = event.category
             cell.event = event
             cell.UID = UID
+            cell.username = username
             cell.parentVC = self
             cell.guestCount.text = "\(event.attendeeCount) guests"
             

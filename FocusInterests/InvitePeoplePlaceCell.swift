@@ -21,6 +21,7 @@ class InvitePeoplePlaceCell: UITableViewCell {
     @IBOutlet weak var distanceLabel: UILabel!
     
     var UID = ""
+    var username = ""
     var place: Place!
     var parentVC: InvitePeopleViewController!
     override func awakeFromNib() {
@@ -68,6 +69,7 @@ class InvitePeoplePlaceCell: UITableViewCell {
         ivc.type = "place"
         ivc.id = self.place.id
         ivc.place = place
+        ivc.username = self.username
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: nil)
         }
