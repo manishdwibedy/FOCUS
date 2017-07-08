@@ -18,7 +18,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     var messageMapper = [String: UserMessages]()
     private var _messages = [UserMessages]()
     
-    
+    var loadedTable = false
     var contentMapping = [String: UserMessages]()
     
     
@@ -85,7 +85,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         self.messages.removeAll()
         loadTable()
         
-        listenForChanges()
+//        listenForChanges()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,50 +103,67 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func loadTable(){
-        messageRef = Constants.DB.messages.child(AuthApi.getFirebaseUid()!).queryOrdered(byChild: "read").queryLimited(toLast: 20).observe(.childAdded, with: {(snapshot) in
+        Constants.DB.messages.child(AuthApi.getFirebaseUid()!).queryOrdered(byChild: "read").queryLimited(toLast: 20).observeSingleEvent(of: .value, with: {(snapshot) in
 
-            let message = snapshot.value as? [String:Any]
+            let messages = snapshot.value as? [String:[String:Any]]
             
-            if let unix = message?["date"] as? Double{
-                let date = Date(timeIntervalSince1970: unix)
-                
-                self.usersRef.child(snapshot.key).keepSynced(true)
-                self.usersRef.child(snapshot.key).observeSingleEvent(of: .value, with: {(snapshot) in
-                    if let value = snapshot.value{
-                        if let user_info = value as? [String:Any]{
-                            guard let username = user_info["username"] as? String else{
-                                return
-                            }
-                            guard let image_string = user_info["image_string"] as? String else{
-                                return
-                            }
-                            
-                            let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date, image_string: image_string)
-                            
-                            self.messageMapper[snapshot.key] = userMessage
-                            self.userInfo[snapshot.key] = user_info
-                            self.contentMapping[userMessage.messageID] = userMessage
-                            
-                            Constants.DB.message_content.child(userMessage.messageID).queryOrdered(byChild: "date").queryLimited(toLast: 1).observe(.childAdded, with: {(snapshot) in
-                                let message_data = snapshot.value as? [String:Any]
-                                let id = userMessage.messageID
-                                
-                                if let text = message_data?["text"]{
-                                    let message = self.contentMapping[id]
-                                    message?.addLastContent(lastContent: text as! String)
+            
+            for (user, message) in messages!{
+                if let unix = message["date"] as? Double{
+                    let date = Date(timeIntervalSince1970: unix)
+                    
+                    self.usersRef.child(user).keepSynced(true)
+                    self.usersRef.child(user).observeSingleEvent(of: .value, with: {(snapshot) in
+                        if let value = snapshot.value{
+                            if let user_info = value as? [String:Any]{
+                                guard let username = user_info["username"] as? String else{
+                                    return
                                 }
-                                else{
-                                    let message = self.contentMapping[id]
-                                    message?.addLastContent(lastContent: "sent a photo")
+                                guard let image_string = user_info["image_string"] as? String else{
+                                    return
                                 }
                                 
-                                self.messages.append(userMessage)
-                                self.messageTable.reloadData()
-                            })
+                                let userMessage = UserMessages(id: user, name: username, messageID: message["messageID"] as! String, readMessages: message["read"] as! Bool, lastMessageDate: date, image_string: image_string)
+                                
+                                self.messageMapper[snapshot.key] = userMessage
+                                self.userInfo[snapshot.key] = user_info
+                                self.contentMapping[userMessage.messageID] = userMessage
+                                
+                                Constants.DB.message_content.child(userMessage.messageID).keepSynced(true)
+                                Constants.DB.message_content.child(userMessage.messageID).queryOrdered(byChild: "date").queryLimited(toLast: 1).observeSingleEvent(of: .value, with: {(snapshot) in
+                                    let data = snapshot.value as? [String:Any]
+                                    
+                                    if let data = data, data.count > 0{
+                                        let message_data = data[(data.keys.first!)] as? [String:Any]
+                                        
+                                        let id = userMessage.messageID
+                                        
+                                        if let text = message_data?["text"]{
+                                            let message = self.contentMapping[id]
+                                            message?.addLastContent(lastContent: text as! String)
+                                        }
+                                        else{
+                                            let message = self.contentMapping[id]
+                                            message?.addLastContent(lastContent: "sent a photo")
+                                        }
+                                        self._messages.append(userMessage)
+                                        
+                                        if self._messages.count == self.userInfo.count{
+                                            self.messages = self._messages
+                                            self.messageTable.reloadData()
+                                            self.listenForChanges()
+                                        }
+                                        
+                                        
+                                    }
+                                    
+                                })
+                            }
                         }
-                    }
-                })
+                    })
+                }
             }
+            
         })
     }
     
@@ -162,7 +179,11 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 userMessage?.lastMessageDate = date
                 userMessage?.readMessages = message?["read"] as! Bool
-                self.messages[index] = userMessage!
+                
+                
+                self._messages[index] = userMessage!
+                self.messages = self._messages
+                self.messageTable.reloadData()
             }
 
             
@@ -201,13 +222,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.time.text = formatter.timeSince(from: date, numericDates: false)
         
         if !message.readMessages{
-            
-            cell.textLabel?.font = UIFont(name: "Avenir-Book", size: 15)
-            cell.detailTextLabel?.font = UIFont(name: "Avenir-Book", size: 15)
-        }
-        else{
-            cell.textLabel?.font = UIFont(name: "Avenir-Book", size: 15)
-            cell.detailTextLabel?.font = UIFont(name: "Avenir-Book", size: 15)
+            cell.username.font = UIFont(name: "Avenir-Black", size: 15)
+            cell.content.font = UIFont(name: "Avenir-Black", size: 15)
         }
         
         cell.backgroundColor = .clear
