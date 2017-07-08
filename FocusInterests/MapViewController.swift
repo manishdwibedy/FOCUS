@@ -56,7 +56,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBOutlet weak var navigationView: MapNavigationView!
     
-    @IBOutlet weak var webView: UIWebView!
     
     var popUpScreen: MapPopUpScreenView!
     
@@ -1074,7 +1073,7 @@ extension MapViewController: UIWebViewDelegate {
             let params = webView.request?.url?.absoluteString.components(separatedBy: "=")
             let access_token = (params?.last!)!
             AuthApi.set(eventBriteAccessToken: access_token)
-            self.webView.isHidden = true
+            //self.webView.isHidden = true
             
             getEvents(around: self.currentLocation!, completion: { events in
                 for event in events{
@@ -1089,7 +1088,7 @@ extension MapViewController: UIWebViewDelegate {
             })
         }
         else{
-            self.webView.isHidden = false
+            //self.webView.isHidden = false
         }
     }    
 }

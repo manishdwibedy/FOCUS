@@ -23,8 +23,13 @@ class HomePageViewController: UITabBarController {
             NSForegroundColorAttributeName:UIColor.white
         ]
 
+        let selected = [
+            NSFontAttributeName:UIFont(name: "Avenir-Black", size: 15),
+            NSForegroundColorAttributeName: Constants.color.green
+        ]
+
         UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes(attributes , for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes(selected , for: .selected)
         
         setupTabBarSeparators()
         

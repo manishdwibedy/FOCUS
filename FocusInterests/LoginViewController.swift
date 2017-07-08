@@ -390,7 +390,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         Constants.DB.user.child("\(fireId)/token").setValue(token)
                         AuthApi.set(FCMToken: token)
                         
-                        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
+                        Constants.DB.user.child("\(fireId)/firebaseUserId").setValue(AuthApi.getFirebaseUid()!)
                         AuthApi.set(userEmail: googleUser.profile.email)
                         self.showHomeVC()
                         
