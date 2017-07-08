@@ -44,6 +44,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 //    @IBOutlet weak var suggestionsHeight: NSLayoutConstraint!
     
     // follower and following
+    @IBOutlet weak var followerStackView: UIStackView!
+    @IBOutlet weak var followingStackView: UIStackView!
     @IBOutlet weak var followerLabel: UILabel!
     @IBOutlet weak var followerCount: UIButton!
     @IBOutlet weak var followingLabel: UILabel!
@@ -178,12 +180,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.eventsCollectionView.register(eventsCollectionNib, forCellWithReuseIdentifier: "eventsCollectionCell")
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.showFollowing))
-        followingLabel.isUserInteractionEnabled = true
-        followingLabel.addGestureRecognizer(tap)
+        followingStackView.isUserInteractionEnabled = true
+        followingStackView.addGestureRecognizer(tap)
         
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(self.showFollower))
-        followerLabel.isUserInteractionEnabled = true
-        followerLabel.addGestureRecognizer(tap1)
+        followingStackView.isUserInteractionEnabled = true
+        followingStackView.addGestureRecognizer(tap1)
         
 //      Use tags in order to allow for only IBAction that will track
 //      each event based on the tag of the sender

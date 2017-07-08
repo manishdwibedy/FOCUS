@@ -488,8 +488,10 @@
                         <outlet property="focusView" destination="SF4-Kb-s3b" id="vYx-0p-v3e"/>
                         <outlet property="followerCount" destination="C4p-o0-a8V" id="29Z-WO-ELs"/>
                         <outlet property="followerLabel" destination="FTF-AM-b0X" id="XQk-hG-P9P"/>
+                        <outlet property="followerStackView" destination="1qc-sQ-5I4" id="bSe-Yg-Be7"/>
                         <outlet property="followingCount" destination="OL3-In-v4c" id="ISL-Mq-g2W"/>
                         <outlet property="followingLabel" destination="2fK-T8-Z5L" id="bMp-tb-FcO"/>
+                        <outlet property="followingStackView" destination="BRp-Pk-0UM" id="XAG-1e-pcX"/>
                         <outlet property="fullNameLabel" destination="eCO-Sw-Meb" id="TdA-K9-EVV"/>
                         <outlet property="greenDotImage" destination="AO6-Dr-guK" id="1bP-Ko-bWp"/>
                         <outlet property="interestStackHeight" destination="g3b-sd-6fO" id="pUk-iZ-aje"/>
