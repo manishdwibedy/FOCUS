@@ -16,16 +16,13 @@ class FeedPlaceTableViewCell: UITableViewCell {
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var placeBeingLiked: UIButton!
     @IBOutlet weak var usernameWhoIsBeingLiked: UIButton!
-    @IBOutlet weak var usernameWhoLikedLabel: UIButton!
-    @IBOutlet weak var addressLabel: UILabel!
-    
+    @IBOutlet weak var usernameWhoLikedLabel: UIButton!    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.usernameImage.roundedImage()
         self.placePhoto.roundedImage()
         addGreenDot(label: interestLabel, content: "Food")
-        self.addressLabel.text = "2656 Ellendale Pl Los Angeles, CA 90007, USA"
         self.distanceLabel.text = "50mi"
         var pinPlace = "UCLA Pavilion"
         var pinName = "Pin: \(pinPlace)"

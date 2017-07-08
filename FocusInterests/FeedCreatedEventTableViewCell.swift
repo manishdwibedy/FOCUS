@@ -15,6 +15,7 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
     @IBOutlet weak var usernameLabel: UIButton!
     @IBOutlet weak var eventNameLabel: UIButton!
     @IBOutlet weak var searchEventTableView: UITableView!
+    @IBOutlet weak var interestLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,12 +44,23 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SearchEventTableViewCell
         cell.attendButton.roundCorners(radius: 5.0)
+        cell.attendButton.layer.shadowOpacity = 0.5
+        cell.attendButton.layer.masksToBounds = false
+        cell.attendButton.layer.shadowColor = UIColor.black.cgColor
+        cell.attendButton.layer.shadowRadius = 5.0
+        
         cell.inviteButton.roundCorners(radius: 5.0)
+        cell.inviteButton.layer.shadowOpacity = 0.5
+        cell.inviteButton.layer.masksToBounds = false
+        cell.inviteButton.layer.shadowColor = UIColor.black.cgColor
+        cell.inviteButton.layer.shadowRadius = 5.0
+        
         cell.address.text = "2656 Ellendale Pl Los Angeles, CA 90007, USA"
         cell.name.text = "Event A"
         cell.distance.text = "4.6 mi"
         self.distanceLabel.text = cell.distance.text
-        addGreenDot(label: cell.interest, content: "Meet up")
+        cell.interest.isHidden = true
+        addGreenDot(label: self.interestLabel, content: "Meet up")
         cell.guestCount.text = "5 guests"
         cell.price.text = "Free"
         return cell
