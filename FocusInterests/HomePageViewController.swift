@@ -32,12 +32,17 @@ class HomePageViewController: UITabBarController {
         
         let vc = self.viewControllers![0] as! MapViewController
         vc.showEvent = showEvent
+        vc.showPin = showPin
         vc.showTutorial = showTutorial
         if let location = self.location{
             vc.currentLocation = location
         }
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
     }
 
     override func didReceiveMemoryWarning() {

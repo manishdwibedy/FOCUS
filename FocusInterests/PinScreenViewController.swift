@@ -195,6 +195,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         
         if self.pinType != "place"{
+            self.coordinates = CLLocationCoordinate2D(latitude: AuthApi.getLocation()!.coordinate.latitude, longitude: AuthApi.getLocation()!.coordinate.longitude)
             getPlaceName(location: AuthApi.getLocation()!, completion: {address in
                 self.locationLabel.text = address
             })
@@ -368,6 +369,13 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             dismiss(animated: true, completion: nil)
         }
         else{
+//            let vc = self.tabBarController?.viewControllers![0] as! MapViewController
+//            vc.showPin = true
+//            vc.currentLocation = CLLocation(latitude: Double(coordinates.longitude), longitude: Double(coordinates.longitude))
+//            
+//            self.tabBarController?.selectedIndex = 0
+            
+            
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
             let vc: UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "home") as! UITabBarController
             vc.selectedIndex = 0
@@ -511,7 +519,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     func uploadImage(image:UIImage, path: StorageReference)
     {
         
-        let localFile = UIImageJPEGRepresentation(image, 0.5)
+        let localFile = UIImageJPEGRepresentation(image, 1)
         
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"

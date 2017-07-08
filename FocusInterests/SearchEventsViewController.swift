@@ -105,20 +105,17 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     let id = (place as? [String:Any])?["ID"]
                     
                     Constants.DB.event.child(id as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                        let info = snapshot.value as? [String : Any] ?? [:]
-            
-//                        for (id, event) in events{
-//                            let info = event as? [String:Any]
+                        if let info = snapshot.value as? [String : Any], info.count > 0{
                             let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as? String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as? String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: id as? String, category: info["interests"] as? String)
-            
+                            
                             let eventLocation = CLLocation(latitude: Double((info["longitude"])! as! String)!, longitude: Double((info["longitude"])! as! String)!)
-                        
+                            
                             event.distance = eventLocation.distance(from: AuthApi.getLocation()!)
                             if let attending = info["attendingList"] as? [String:Any]{
                                 event.setAttendessCount(count: attending.count)
                             }
-            
-                        
+                            
+                            
                             self.attending.append(event)
                             if self.attending.count == count{
                                 
@@ -131,13 +128,16 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                                 self.attending.sort {
                                     return $0.distance < $1.distance
                                 }
-
+                                
                                 self.events = self.attending + self.all_events
                                 
                                 self.filtered = self.events
                                 self.tableView.reloadData()
                             }
-//                        }
+                            
+                        }
+            
+
                     })
                 }
             }
