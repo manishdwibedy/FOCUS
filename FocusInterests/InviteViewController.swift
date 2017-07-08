@@ -98,12 +98,10 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     for (_,value) in data
                     {
                         if let info = value as? [String: Any]{
-                            if let uid = info["firebaseUserId"] as? String, let username = info["username"] as? String, let fullname = info["fullname"] as? String{
-                                let newData = InviteUser(UID: uid, username: username, fullname: fullname)
+                            if let uid = info["firebaseUserId"] as? String, let username = info["username"] as? String, let fullname = info["fullname"] as? String, let image = info["image_string"] as? String{
+                                let newData = InviteUser(UID: uid, username: username, fullname: fullname, image: image)
                                 self.selected[newData] = false
                                 if newData.UID != AuthApi.getFirebaseUid(){
-                                    //                                self.inviteCellData.append(newData)
-                                    
                                     let first = String(describing: newData.username.characters.first!).uppercased()
                                     
                                     if !self.sections.contains(first){
@@ -255,6 +253,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         personToInviteCell.usernameLabel.text = user?.username
         personToInviteCell.fullNameLabel.text = user?.fullname
+        if let image = user?.image_string, image.characters.count > 0{
+            personToInviteCell.userProfileImage?.sd_setImage(with: URL(string: image)!, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+        }
         
         personToInviteCell.inviteConfirmationButton.tag = indexPath.row
         return personToInviteCell
@@ -461,11 +462,13 @@ class InviteUser: Hashable, Equatable{
     let UID: String
     let username: String
     let fullname: String
+    let image_string: String?
     
-    init(UID: String, username: String, fullname: String) {
+    init(UID: String, username: String, fullname: String, image: String? = nil) {
         self.UID = UID
         self.username = username
         self.fullname = fullname
+        self.image_string = image
     }
     
     var hashValue : Int {
