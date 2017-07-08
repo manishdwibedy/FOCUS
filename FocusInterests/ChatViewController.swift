@@ -320,13 +320,13 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         let message = messages[indexPath.row]
         
         if self.senderId == message.senderId && self.senderImage != nil{
-            return JSQMessagesAvatarImage(avatarImage: self.senderImage, highlightedImage: nil, placeholderImage: UIImage(named:"tinyB"))
+            return JSQMessagesAvatarImage(avatarImage: self.senderImage, highlightedImage: nil, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
         }
         else if self.senderId != message.senderId && self.otherUserImage != nil {
-            return JSQMessagesAvatarImage(avatarImage: self.otherUserImage, highlightedImage: nil, placeholderImage: UIImage(named:"tinyB"))
+            return JSQMessagesAvatarImage(avatarImage: self.otherUserImage, highlightedImage: nil, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
         }
 
-        return JSQMessagesAvatarImage(avatarImage: UIImage(named:"tinyB"), highlightedImage: nil, placeholderImage: UIImage(named:"tinyB"))
+        return JSQMessagesAvatarImage(avatarImage: UIImage(named:"tinyB"), highlightedImage: nil, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MIBadgeButton_Swift
 
 protocol NavigationInteraction {
     func messagesClicked()
@@ -19,7 +20,7 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     
     @IBOutlet weak var userProfileButton: UIButton!
     @IBOutlet var view: MapNavigationView!
-    @IBOutlet weak var messagesButton: UIButton!
+    @IBOutlet weak var messagesButton: MIBadgeButton!
     
     @IBOutlet weak var notificationsButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
@@ -60,7 +61,7 @@ class MapNavigationView: UIView, UISearchBarDelegate {
         delegate?.userProfileClicked()
     }
     
-    @IBAction func messagesButtonPressed(_ sender: UIButton) {
+    @IBAction func messagesButtonPressed(_ sender: MIBadgeButton) {
         delegate?.messagesClicked()
     }
     

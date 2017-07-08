@@ -114,8 +114,12 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.usersRef.child(snapshot.key).observeSingleEvent(of: .value, with: {(snapshot) in
                     if let value = snapshot.value{
                         if let user_info = value as? [String:Any]{
-                            let username = user_info["username"] as! String
-                            let image_string = user_info["image_string"] as! String
+                            guard let username = user_info["username"] as? String else{
+                                return
+                            }
+                            guard let image_string = user_info["image_string"] as? String else{
+                                return
+                            }
                             
                             let userMessage = UserMessages(id: snapshot.key, name: username, messageID: message?["messageID"] as! String, readMessages: message?["read"] as! Bool, lastMessageDate: date, image_string: image_string)
                             

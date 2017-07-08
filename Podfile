@@ -51,6 +51,7 @@ target 'FocusInterests' do
     pod 'SwiftyCam', '~> 2.4.0'
     pod 'Reveal-SDK', :configurations => ['Debug']
     pod 'UITextField-Navigation'
+    pod 'MIBadgeButton-Swift', :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
 end
 
 target 'FocusInterestsTests' do
