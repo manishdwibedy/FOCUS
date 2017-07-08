@@ -93,8 +93,11 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             return
         }
         
-    
-        if (self.passwordTextField.text?.isEmpty)!{
+        var isNumber = false
+        if (self.emailTextField.text!.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil){
+            isNumber = true
+        }
+        if isNumber || (self.passwordTextField.text?.isEmpty)!{
             showLoginFailedAlert(loginType: "missing_password")
             return
         }
@@ -128,6 +131,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         }
                     }
                 })
+            }
+            else if isNumber{
+                //Auth.auth().signIn(with: <#T##AuthCredential#>, completion: <#T##AuthResultCallback?##AuthResultCallback?##(User?, Error?) -> Void#>)
             }
             else{
                 let ref = Constants.DB.user_mapping

@@ -1,4 +1,4 @@
-//
+   //
 //  GlobalFunctions.swift
 //  FocusInterests
 //
@@ -37,6 +37,10 @@ func showLoginError(_ error: Error){
             SCLAlertView().showError("Whoops!", subTitle: "Email already in user")
         case .weakPassword:
             SCLAlertView().showError("Whoops!", subTitle: "Weak password.")
+        case .tooManyRequests:
+            SCLAlertView().showError("Whoops!", subTitle: "Too many requests. Try after some time")
+        case .userTokenExpired:
+            SCLAlertView().showError("Whoops!", subTitle: "User token expired. Please login in again")
         default:
             SCLAlertView().showError("Whoops!", subTitle: "Failed to register the users.")
         }
@@ -683,7 +687,7 @@ func attributedString(from string: String, boldRange: NSRange?) -> NSAttributedS
         NSFontAttributeName: UIFont(name: "Avenir-Book", size: 15),
         NSForegroundColorAttributeName: UIColor.white
     ]
-    let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
+    let attrStr = NSMutableAttributedString(string: string, attributes: nonBoldAttribute)
     if let range = boldRange {
         attrStr.setAttributes(attrs, range: range)
     }

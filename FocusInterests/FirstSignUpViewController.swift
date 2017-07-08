@@ -76,30 +76,37 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
         if phoneEmailSwitcher.selectedSegmentIndex == 0{
             PhoneAuthProvider.provider().verifyPhoneNumber("+1\(self.phoneTextField.text!)") { (verificationID, error) in
                 if ((error) != nil) {
-                    print(error ?? "")
+                    showLoginError(error!)
                 } else {
                     print(verificationID ?? "")
                     UserDefaults.standard.set(verificationID, forKey: "firebase_verification")
                     UserDefaults.standard.synchronize()
-                }
-                let appearance = SCLAlertView.SCLAppearance(
-                    showCloseButton: false
-                )
-                let alertView = SCLAlertView(appearance: appearance)
-                let code = alertView.addTextField("Enter your verification code")
-                alertView.addButton("Next") {
-                    let credential = PhoneAuthProvider.provider().credential(
-                        withVerificationID: UserDefaults.standard.string(forKey: "firebase_verification")!,
-                        verificationCode: code.text!)
-                    if credential != nil{
-                        self.performSegue(withIdentifier: "next", sender: credential)
+                    
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alertView = SCLAlertView(appearance: appearance)
+                    let code = alertView.addTextField("Enter your verification code")
+                    alertView.addButton("Next") {
+                        let credential = PhoneAuthProvider.provider().credential(
+                            withVerificationID: UserDefaults.standard.string(forKey: "firebase_verification")!,
+                            verificationCode: code.text!)
+                        
+                        Auth.auth().signIn(with: credential) { (user, error) in
+                            if let error = error {
+                                showLoginError(error)
+                                return
+                            }
+                            // User is signed in
+                            // ...
+                            
+                            self.performSegue(withIdentifier: "next", sender: user)
+                        }
+
                     }
-                    else{
-                        SCLAlertView().showError("Invalid code", subTitle: "Please enter a valid code.")
-                    }
+                    alertView.showSuccess("Button View", subTitle: "This alert view has buttons")
                     
                 }
-                alertView.showSuccess("Button View", subTitle: "This alert view has buttons")
                 
             }
         }
@@ -136,7 +143,7 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
                 case 0:
                     self.typeOfSignUpSelected = "phone"
                     destinationVC.usersEmailOrPhone = self.phoneTextField.text!
-                    destinationVC.credential = sender as! PhoneAuthCredential
+                    destinationVC.user = sender as! User
                 case 1:
                     self.typeOfSignUpSelected = "email"
                     destinationVC.usersEmailOrPhone = self.emailTextField.text!

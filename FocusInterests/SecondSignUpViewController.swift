@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import SCLAlertView
 
 class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
@@ -17,7 +18,7 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
     var userName: String = ""
     var password: String = ""
     var fullName: String = ""
-    var credential: PhoneAuthCredential? = nil
+    var user: User? = nil
     
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -48,23 +49,12 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         switch typeOfSignUp {
         case "phone":
             let formatedString = formatPhoneString(phoneNumber: usersEmailOrPhone)
-            Auth.auth().signIn(with: credential!) { (user, error) in
-                if let error = error {
-                    // ...
-                    return
-                }
-                // User is signed in
-                // ...
-                
-                AuthApi.set(firebaseUid: user?.uid)
-                AuthApi.setPassword(password: validPassword)
-                AuthApi.set(loggedIn: .Email)
-                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(self.userNameTextField.text)
-                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/fullname").setValue(self.fullNameTextField.text)
-                
-                
-            }
-        
+            AuthApi.set(firebaseUid: AuthApi.getFirebaseUid()!)
+            AuthApi.setPassword(password: validPassword)
+            AuthApi.set(loggedIn: .Email)
+            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(self.userNameTextField.text)
+            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/fullname").setValue(self.fullNameTextField.text)
+            
         case "email":
             let email = self.usersEmailOrPhone
             
@@ -114,6 +104,21 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         
     }
     
+    func showHomeVC() {
+        
+        if getUserInterests().characters.count == 0{
+            let interestsVC = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
+            interestsVC.isNewUser = true
+            self.present(interestsVC, animated: true, completion: nil)
+        }
+        else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+            present(vc, animated: true, completion: nil)
+        }
+        
+        
+    }
     
     func setTextFieldDelegates(){
         let _ = [fullNameTextField,passwordTextField,userNameTextField].map{$0?.delegate = self}
