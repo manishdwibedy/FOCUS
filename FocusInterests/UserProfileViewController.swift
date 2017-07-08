@@ -40,6 +40,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     
 //    @IBOutlet weak var suggestionsHeight: NSLayoutConstraint!
     
@@ -215,6 +216,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             self.emptyPinButton.isHidden = true
             self.updatePinButton.isHidden = true
             self.createEventButton.isHidden = true
+            self.settingButton.isHidden = true
         }
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
         Constants.DB.pins.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -441,6 +443,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                         
                         if final_interest.count > 3{
                             self.moreFocusButton.setTitle("More", for: .normal)
+                        }
+                        else{
+                            self.moreFocusButton.isHidden = true
                         }
                         
 //                        let count = self.interestStackView.arrangedSubviews.count

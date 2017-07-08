@@ -133,7 +133,7 @@
                                                                     <constraint firstAttribute="height" constant="30" id="fKh-C5-IPk"/>
                                                                     <constraint firstAttribute="width" constant="30" id="yhf-EW-Dvc"/>
                                                                 </constraints>
-                                                                <state key="normal" image="Gear.png"/>
+                                                                <state key="normal" image="Gear"/>
                                                                 <connections>
                                                                     <action selector="settingButtonPressed:" destination="cU2-hP-1h7" eventType="touchUpInside" id="3NQ-fK-LIq"/>
                                                                 </connections>
@@ -511,6 +511,7 @@
                         <outlet property="pinLikesLabel" destination="VK7-Ea-kjC" id="GZa-IM-E8i"/>
                         <outlet property="pinView" destination="zs8-eT-TCa" id="oes-nI-sbz"/>
                         <outlet property="pinViewHeight" destination="ic9-zC-M6V" id="jGF-Ch-hYl"/>
+                        <outlet property="settingButton" destination="Niz-Af-QYR" id="d6m-ZH-fN6"/>
                         <outlet property="updatePinButton" destination="H4s-5t-g9h" id="fWD-De-0vz"/>
                         <outlet property="userImage" destination="22m-P8-D1B" id="0FN-cs-vKc"/>
                         <outlet property="userInfoView" destination="Dsa-iR-ute" id="hAn-d9-E7j"/>
@@ -848,7 +849,7 @@
     </scenes>
     <resources>
         <image name="BackArrow" width="30" height="30"/>
-        <image name="Gear.png" width="66" height="68"/>
+        <image name="Gear" width="66" height="68"/>
         <image name="Green.png" width="82" height="82"/>
         <image name="UserPhoto" width="102" height="102"/>
     </resources>
