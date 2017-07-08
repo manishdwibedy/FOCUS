@@ -149,7 +149,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6vd-HE-0n2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fMv-44-lwF">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -164,6 +164,6 @@
         <image name="Compose message" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JoM-WG-iMF"/>
+        <segue reference="Xa5-EJ-3bZ"/>
     </inferredMetricsTieBreakers>
 </document>

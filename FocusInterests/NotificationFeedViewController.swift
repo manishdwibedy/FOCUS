@@ -130,8 +130,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
-        navBar.titleTextAttributes = attrs
-//        
+        navBar.titleTextAttributes = attrs  
     }
     
     override func didReceiveMemoryWarning() {
