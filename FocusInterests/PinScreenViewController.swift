@@ -72,24 +72,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         selectedImage.layer.cornerRadius = selectedImage.frame.width/2
         selectedImage.clipsToBounds = true
         
-        
-//        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
-//            let value = snapshot.value as? NSDictionary
-//            if value != nil
-//            {
-//                for (key,_) in (value)!
-//                {
-//                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-//                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-//                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String))
-//                    ivc.data = data
-//                    self.present(ivc, animated: true, completion: { _ in })
-//                    
-//                    break
-//                }
-//            }
-//        })
-        
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             
             let value = snapshot.value as? [String:Any]
@@ -451,7 +433,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = false
-        requestOptions.deliveryMode = .opportunistic
+        requestOptions.deliveryMode = .highQualityFormat
+        requestOptions.isNetworkAccessAllowed = true
         
         let fetch = PHFetchOptions()
         fetch.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -472,9 +455,12 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                         
                         if (UIImageJPEGRepresentation(image, 1) as NSData?) != nil{
                             self.imageArray.append(image)
+                            self.collectionView.reloadData()
                         }
                         if (UIImagePNGRepresentation(image) as NSData?) != nil{
                             self.imageArray.append(image)
+                            self.collectionView.reloadData()
+                            
                         }
                         
                     }
@@ -483,7 +469,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             
         }
         
-        collectionView.reloadData()
+        
         
     }
     
