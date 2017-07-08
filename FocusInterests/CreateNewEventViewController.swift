@@ -350,7 +350,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                 
                 
                 
-                self.event = Event(title: name, description: "", fullAddress: self.fullAddress, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"))
+                self.event = Event(title: name, description: "", fullAddress: self.fullAddress, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"), privateEvent: publicOrPrivateSwitch.isOn)
                 
                 let price = eventPriceTextView.text
                 if (price?.characters.count)! > 0{

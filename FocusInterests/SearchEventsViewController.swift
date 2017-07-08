@@ -106,7 +106,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     
                     Constants.DB.event.child(id as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                         if let info = snapshot.value as? [String : Any], info.count > 0{
-                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as? String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as? String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: id as? String, category: info["interests"] as? String)
+                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as? String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as? String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: id as? String, category: info["interests"] as? String, privateEvent: (info["private"] as? Bool)!)
                             
                             let eventLocation = CLLocation(latitude: Double((info["longitude"])! as! String)!, longitude: Double((info["longitude"])! as! String)!)
                             
@@ -386,7 +386,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 for (id, event) in events{
                     let info = event as? [String:Any]
-                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String)
+                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String, privateEvent: (info?["private"] as? Bool)!)
                     
                     if let attending = info?["attendingList"] as? [String:Any]{
                         event.setAttendessCount(count: attending.count)

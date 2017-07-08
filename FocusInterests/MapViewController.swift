@@ -155,19 +155,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let DF = DateFormatter()
         DF.dateFormat = "MMM d, h:mm a"
         
+        Constants.DB.event.keepSynced(true)
         Constants.DB.event.observe(DataEventType.childAdded, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             let info = events// as? [String:Any]
 //            for (id, event) in events{
             
-                let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as? String, longitude: (info["longitude"])! as? String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: snapshot.key, category: info["interests"] as? String)
-        
+            if let event = Event.toEvent(info: info){
                 if let attending = info["attendingList"] as? [String:Any]{
                     event.setAttendessCount(count: attending.count)
                 }
-            
-            
-                if DF.date(from: event.date!)! > Date(){
+                
+                
+                if DF.date(from: event.date!)! > Date() && !event.privateEvent{
                     
                     let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
                     let marker = GMSMarker(position: position)
@@ -183,6 +183,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     }
                     
                 }
+            }
+//            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as? String, longitude: (info["longitude"])! as? String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: snapshot.key, category: info["interests"] as? String, privateEvent: (info["private"] as? Bool)!)
+//        
+            
             
                 
 //                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "Event")!, id: String(describing: self.events.count), type: "event")

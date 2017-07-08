@@ -26,8 +26,9 @@ class Event: NSObject, NSCoding{
     var endTime: String = ""
     var price: Double? = 0
     var distance = 0.0
+    var privateEvent = true
     
-    init(title: String, description: String, fullAddress: String?, shortAddress: String?, latitude: String?, longitude: String?, date: String, creator: String?, id: String? = nil, category: String?) {
+    init(title: String, description: String, fullAddress: String?, shortAddress: String?, latitude: String?, longitude: String?, date: String, creator: String?, id: String? = nil, category: String?, privateEvent: Bool) {
         self.title = title
         self.eventDescription = description
         self.fullAddress = fullAddress
@@ -38,6 +39,7 @@ class Event: NSObject, NSCoding{
         self.creator = creator
         self.id = id
         self.category = category
+        self.privateEvent = privateEvent
     }
     
     func saveToDB(ref: DatabaseReference) -> String{
@@ -54,7 +56,8 @@ class Event: NSObject, NSCoding{
             "endtime": self.endTime,
             "price": self.price ?? 0,
             "creator": self.creator!,
-            "interests": self.category!
+            "interests": self.category!,
+            "privateEvent": privateEvent
         ] as [String : Any] 
         newEvent.setValue(event)
         
@@ -91,7 +94,7 @@ class Event: NSObject, NSCoding{
         self.category = decoder.decodeObject(forKey: "category") as? String ?? ""
         self.endTime = decoder.decodeObject(forKey: "endTime") as? String ?? ""
         self.price = decoder.decodeObject(forKey: "price") as? Double ?? 0
-        
+        self.privateEvent = decoder.decodeObject(forKey: "privateEvent") as? Bool ?? true
     }
     
     func encode(with coder: NSCoder) {
@@ -108,6 +111,7 @@ class Event: NSObject, NSCoding{
         coder.encode(self.category, forKey: "category")
         coder.encode(self.endTime, forKey: "endTime")
         coder.encode(self.price, forKey: "price")
+        coder.encode(self.price, forKey: "privateEvent")
     }
     
     static func cacheEvent(event: Event){
@@ -166,12 +170,15 @@ class Event: NSObject, NSCoding{
             return nil
         }
         
-        
-        guard let interest = info["interest"]! as? String else{
+        guard let interest = info["interests"]! as? String else{
             return nil
         }
         
-        let event = Event(title: title, description: description, fullAddress: fullAddress, shortAddress: shortAddress, latitude: latitude, longitude: longitude, date: date, creator: creator, id: nil, category: interest)
+        guard let privateEvent = info["private"]! as? Bool else{
+            return nil
+        }
+        
+        let event = Event(title: title, description: description, fullAddress: fullAddress, shortAddress: shortAddress, latitude: latitude, longitude: longitude, date: date, creator: creator, id: nil, category: interest, privateEvent: privateEvent)
         
         if let attending = info["attendingList"] as? [String:Any]{
             event.setAttendessCount(count: attending.count)

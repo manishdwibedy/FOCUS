@@ -550,7 +550,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
                     let info = snapshot.value as? [String : Any] ?? [:]
                     
-                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String)
+                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String, privateEvent: (info["private"] as? Bool)!)
                     
                         if let attending = info["attendingList"] as? [String:Any]{
                             event.setAttendessCount(count: attending.count)

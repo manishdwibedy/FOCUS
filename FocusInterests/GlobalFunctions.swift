@@ -157,7 +157,7 @@ func getEvents(around location: CLLocation, completion: @escaping (_ result: [Ev
                 
                 let category_id = eventJson["category_id"].stringValue
 
-                let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: getInterest(eventBriteId: category_id))
+                let event = Event(title: eventJson["name"]["text"].stringValue, description: eventJson["description"]["text"].stringValue, fullAddress: nil, shortAddress: nil, latitude: nil, longitude: nil, date: eventJson["start"]["local"].stringValue, creator: "", category: getInterest(eventBriteId: category_id), privateEvent: (eventJson["private"] as? Bool)!)
                 
                 event.setEndTime(endTime: eventJson["end"]["local"].stringValue)
                 event.setImageURL(url: eventJson["logo"]["url"].stringValue
@@ -460,7 +460,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                 if let eventInfo = eventInfo{
                     for (id, event) in eventInfo{
                         let info = event as? [String:Any]
-                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String)
+                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
 //                        MMM dd, hh:mm
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "MMM d, h:mm a"
@@ -501,7 +501,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                             Constants.DB.event.child(id).observeSingleEvent(of: .value, with: { snapshot in
                                 let info = snapshot.value as? [String : Any]
                                 
-                                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as? String, longitude: (info?["longitude"])! as? String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String)
+                                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as? String, longitude: (info?["longitude"])! as? String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
                                 
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.dateFormat = "MMM d, h:mm a"
@@ -974,7 +974,7 @@ func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotificatio
             for (id, event) in eventInfo{
                 if let info = event as? [String:Any]{
                     
-                    let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id, category: info["interest"] as? String)
+                    let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id, category: info["interest"] as? String, privateEvent: (info["private"] as? Bool)!)
                     
                     if let comments = info["comments"] as? [String:Any]{
                         event_comment_count += comments.count
