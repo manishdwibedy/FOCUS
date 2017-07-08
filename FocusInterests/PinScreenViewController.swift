@@ -288,11 +288,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         }
         
         if pinTextView.text == "What are you up to? Type here."{
-            SCLAlertView().showError("Error", subTitle: "Please enter your caption")
+            SCLAlertView().showCustom("Oops!", subTitle: "Please enter your caption", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
             return
         }
         if self.interest.characters.count == 0{
-            SCLAlertView().showError("Error", subTitle: "Please choose a FOCUS")
+            SCLAlertView().showCustom("Oops!", subTitle: "Please enter your FOCUS", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
             return
         }
         
