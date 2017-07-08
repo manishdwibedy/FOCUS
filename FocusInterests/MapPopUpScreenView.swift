@@ -143,9 +143,6 @@ class MapPopUpScreenView: UIView {
                             break
                         }
                         
-                        
-                        let placeholderImage = UIImage(named: "empty_event")
-                        
                         let reference = Constants.storage.pins.child(((value?["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
                         reference.downloadURL(completion: { (url, error) in
                             
@@ -154,14 +151,16 @@ class MapPopUpScreenView: UIView {
                                 return
                             }
                             
-                            self.profileImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                            self.profileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
                             self.profileImage.setShowActivityIndicator(true)
                             self.profileImage.setIndicatorStyle(.gray)
                             
                         })
                         
                     }
-                    
+                    else{
+                        self.profileImage.sd_setImage(with: URL(string: AuthApi.getUserImage()!))
+                    }
                 }
             })
         }
