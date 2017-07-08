@@ -247,9 +247,19 @@
 		EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */; };
 		EBB6B32D1F0E1224000C8133 /* FeedOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */; };
 		EBB6B32E1F0E1224000C8133 /* FeedOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */; };
+		EBB6B3311F0EE179000C8133 /* FeedEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B32F1F0EE179000C8133 /* FeedEventTableViewCell.swift */; };
+		EBB6B3321F0EE179000C8133 /* FeedEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB6B3301F0EE179000C8133 /* FeedEventTableViewCell.xib */; };
+		EBB6B33A1F0F145B000C8133 /* FeedPlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B3381F0F145B000C8133 /* FeedPlaceTableViewCell.swift */; };
+		EBB6B33B1F0F145B000C8133 /* FeedPlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB6B3391F0F145B000C8133 /* FeedPlaceTableViewCell.xib */; };
+		EBB6B33E1F0F39F8000C8133 /* FeedCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B33C1F0F39F8000C8133 /* FeedCommentTableViewCell.swift */; };
+		EBB6B33F1F0F39F8000C8133 /* FeedCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB6B33D1F0F39F8000C8133 /* FeedCommentTableViewCell.xib */; };
 		EBB9716A1EE61E58009E88F3 /* Followers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBB971691EE61E58009E88F3 /* Followers.storyboard */; };
 		EBC52C721EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */; };
 		EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */; };
+		EBD382AB1F100D0A0068D313 /* FeedCreatedEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD382A91F100D0A0068D313 /* FeedCreatedEventTableViewCell.swift */; };
+		EBD382AC1F100D0A0068D313 /* FeedCreatedEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD382AA1F100D0A0068D313 /* FeedCreatedEventTableViewCell.xib */; };
+		EBD382AF1F10167B0068D313 /* FeedPlaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD382AD1F10167A0068D313 /* FeedPlaceImageTableViewCell.swift */; };
+		EBD382B01F10167B0068D313 /* FeedPlaceImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD382AE1F10167B0068D313 /* FeedPlaceImageTableViewCell.xib */; };
 		EBD76FEF1EF2616400E4776A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FEE1EF2616400E4776A /* ForgotPasswordViewController.swift */; };
 		EBD76FF71EF3527200E4776A /* UserProfileTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */; };
 		EBD980831EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */; };
@@ -589,9 +599,19 @@
 		EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewsTableViewCell.xib; sourceTree = "<group>"; };
 		EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedOneTableViewCell.swift; sourceTree = "<group>"; };
 		EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedOneTableViewCell.xib; sourceTree = "<group>"; };
+		EBB6B32F1F0EE179000C8133 /* FeedEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEventTableViewCell.swift; sourceTree = "<group>"; };
+		EBB6B3301F0EE179000C8133 /* FeedEventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedEventTableViewCell.xib; sourceTree = "<group>"; };
+		EBB6B3381F0F145B000C8133 /* FeedPlaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPlaceTableViewCell.swift; sourceTree = "<group>"; };
+		EBB6B3391F0F145B000C8133 /* FeedPlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedPlaceTableViewCell.xib; sourceTree = "<group>"; };
+		EBB6B33C1F0F39F8000C8133 /* FeedCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCommentTableViewCell.swift; sourceTree = "<group>"; };
+		EBB6B33D1F0F39F8000C8133 /* FeedCommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedCommentTableViewCell.xib; sourceTree = "<group>"; };
 		EBB971691EE61E58009E88F3 /* Followers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Followers.storyboard; sourceTree = "<group>"; };
 		EBC52C701EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllContactsTableViewCell.swift; sourceTree = "<group>"; };
 		EBC52C711EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAllContactsTableViewCell.xib; sourceTree = "<group>"; };
+		EBD382A91F100D0A0068D313 /* FeedCreatedEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCreatedEventTableViewCell.swift; sourceTree = "<group>"; };
+		EBD382AA1F100D0A0068D313 /* FeedCreatedEventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedCreatedEventTableViewCell.xib; sourceTree = "<group>"; };
+		EBD382AD1F10167A0068D313 /* FeedPlaceImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPlaceImageTableViewCell.swift; sourceTree = "<group>"; };
+		EBD382AE1F10167B0068D313 /* FeedPlaceImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedPlaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		EBD76FEE1EF2616400E4776A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTwoViewController.swift; sourceTree = "<group>"; };
 		EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsEventDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -1288,6 +1308,16 @@
 			children = (
 				EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */,
 				EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */,
+				EBB6B3301F0EE179000C8133 /* FeedEventTableViewCell.xib */,
+				EBB6B32F1F0EE179000C8133 /* FeedEventTableViewCell.swift */,
+				EBB6B3381F0F145B000C8133 /* FeedPlaceTableViewCell.swift */,
+				EBB6B3391F0F145B000C8133 /* FeedPlaceTableViewCell.xib */,
+				EBB6B33C1F0F39F8000C8133 /* FeedCommentTableViewCell.swift */,
+				EBB6B33D1F0F39F8000C8133 /* FeedCommentTableViewCell.xib */,
+				EBD382A91F100D0A0068D313 /* FeedCreatedEventTableViewCell.swift */,
+				EBD382AA1F100D0A0068D313 /* FeedCreatedEventTableViewCell.xib */,
+				EBD382AD1F10167A0068D313 /* FeedPlaceImageTableViewCell.swift */,
+				EBD382AE1F10167B0068D313 /* FeedPlaceImageTableViewCell.xib */,
 			);
 			name = FeedTableCells;
 			sourceTree = "<group>";
@@ -1464,6 +1494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D28EAFC01E5E7C8E001EA7E5 /* Login.storyboard in Resources */,
+				EBD382B01F10167B0068D313 /* FeedPlaceImageTableViewCell.xib in Resources */,
 				D2ECAC591E7CD9F8006FFA1A /* UserPhotoCell.xib in Resources */,
 				D25370D31E885EE40071B115 /* FollowCell.xib in Resources */,
 				EB0578601EECBE74000B0413 /* PinPlaceReviewTableViewCell.xib in Resources */,
@@ -1478,6 +1509,7 @@
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
 				5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
+				EBB6B33F1F0F39F8000C8133 /* FeedCommentTableViewCell.xib in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
 				C5E505F01F047DA700EBE27A /* PhotoInputView.xib in Resources */,
 				5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */,
@@ -1515,10 +1547,12 @@
 				5B519E7B1ED677D800B36110 /* SearchPeopleTableViewCell.xib in Resources */,
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
+				EBD382AC1F100D0A0068D313 /* FeedCreatedEventTableViewCell.xib in Resources */,
 				5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */,
 				EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */,
 				FF0F9D5C1ECFA4A6004E2C90 /* SearchPlaceCell.xib in Resources */,
 				5B448E5B1EE72C3400873F79 /* Following.storyboard in Resources */,
+				EBB6B3321F0EE179000C8133 /* FeedEventTableViewCell.xib in Resources */,
 				5BE30DD01F0AF20500ECE7EF /* day_style.json in Resources */,
 				EBB6B32E1F0E1224000C8133 /* FeedOneTableViewCell.xib in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
@@ -1537,6 +1571,7 @@
 				5B448E651EE94BF900873F79 /* Invites.storyboard in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
 				5B5906481EC576CA00466AAC /* night_style.json in Resources */,
+				EBB6B33B1F0F145B000C8133 /* FeedPlaceTableViewCell.xib in Resources */,
 				611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */,
 				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
 				5B71D6F41ED17F2B0093A3F5 /* CreateEvent.storyboard in Resources */,
@@ -1748,6 +1783,7 @@
 				D21975471E6229F100ED3345 /* UITextField+Extensions.swift in Sources */,
 				C5A99D8B1F045A4700D11B01 /* UsernameInputView.swift in Sources */,
 				611734EF1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift in Sources */,
+				EBB6B33A1F0F145B000C8133 /* FeedPlaceTableViewCell.swift in Sources */,
 				EB3EA2421EE7707500F61D38 /* InviteListTableViewCell.swift in Sources */,
 				EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */,
 				5B51C8D61EA7285C007E8D99 /* Event.swift in Sources */,
@@ -1801,6 +1837,7 @@
 				5B448E621EE7B7FC00873F79 /* MessageTableViewCell.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				5B959FF51ECD48CB00094FE6 /* PlaceRating.swift in Sources */,
+				EBD382AB1F100D0A0068D313 /* FeedCreatedEventTableViewCell.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				5B959FE81ECC14D200094FE6 /* PinTableViewCell.swift in Sources */,
 				5B6AFA661ED1906900A82104 /* GMUWrappingDictionaryKey.m in Sources */,
@@ -1812,6 +1849,7 @@
 				5B251E881ED276970075B57A /* InterestsViewController.swift in Sources */,
 				5B448E591EE72C1B00873F79 /* FollowersViewController.swift in Sources */,
 				5B7BB1DE1ED50CDD001E60FF /* SuggestPlacesViewController.swift in Sources */,
+				EBB6B33E1F0F39F8000C8133 /* FeedCommentTableViewCell.swift in Sources */,
 				EB0578631EECCD49000B0413 /* TipPlaceReviewTableViewCell.swift in Sources */,
 				5B1659281EDA33AF0002209A /* LicenseViewController.swift in Sources */,
 				5B7BB1E81ED53FB1001E60FF /* UIView+Extensions.swift in Sources */,
@@ -1863,6 +1901,7 @@
 				5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */,
 				5B6AFA651ED1906900A82104 /* GMUSimpleClusterAlgorithm.m in Sources */,
 				5B6AFA771ED1906900A82104 /* GQTPointQuadTreeChild.m in Sources */,
+				EBB6B3311F0EE179000C8133 /* FeedEventTableViewCell.swift in Sources */,
 				D2ECAC541E7A255B006FFA1A /* UserProfile1ViewController.swift in Sources */,
 				04FD5D1E1EBBDF8700D7FFB7 /* SecondSignUpViewController.swift in Sources */,
 				D2D876BB1E5FDAC500FC782E /* InterestsPickerViewController.swift in Sources */,
@@ -1878,6 +1917,7 @@
 				5B959FDA1ECADFA300094FE6 /* PinViewController.swift in Sources */,
 				FFC36FF21EF49E9000D58F92 /* notificationTabCell.swift in Sources */,
 				5B71D70A1ED183EE0093A3F5 /* attendeeVC.swift in Sources */,
+				EBD382AF1F10167B0068D313 /* FeedPlaceImageTableViewCell.swift in Sources */,
 				FFD32DD31EE9FF9900FE725E /* InterstCollectionViewCell.swift in Sources */,
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
 				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,

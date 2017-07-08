@@ -50,6 +50,24 @@ class SearchEventTableViewCell: UITableViewCell {
         self.cellContentView.allCornersRounded(radius: 10.0)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.cellContentView.setNeedsLayout()
+        
+        self.cellContentView.layoutIfNeeded()
+        
+        let path = UIBezierPath(roundedRect: self.cellContentView.bounds, cornerRadius: 10)
+        
+        let mask = CAShapeLayer()
+        let shortbackgroundMask = CAShapeLayer()
+        
+        mask.path = path.cgPath
+        
+        self.cellContentView.layer.mask = mask
+
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

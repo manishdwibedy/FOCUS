@@ -35,6 +35,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         
         segmentedControl.selectedSegmentIndex = self.selectedSegmentIndex
         
@@ -99,6 +100,18 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
         
+        tableView.register(UINib(nibName: "FeedOneTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedOneCell")
+        
+        tableView.register(UINib(nibName: "FeedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTwoCell")
+        
+        tableView.register(UINib(nibName: "FeedPlaceTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedThreeCell")
+        
+        tableView.register(UINib(nibName: "FeedCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFourCell")
+        
+        tableView.register(UINib(nibName: "FeedPlaceImageTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFiveCell")
+        
+        tableView.register(UINib(nibName: "FeedCreatedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedSixCell")
+        
         tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
         
         // Do any additional setup after loading the view.
@@ -106,8 +119,8 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         segmentedControl.layer.cornerRadius = 6
         segmentedControl.clipsToBounds = true
         
-        self.view.backgroundColor = Constants.color.navy
-        self.tableView.backgroundColor = Constants.color.navy
+        self.view.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        self.tableView.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
         
 //        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: UIControlState.selected)
 //        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: UIControlState.normal)
@@ -137,13 +150,29 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self.selectedSegmentIndex == 0{
-            return 100
+            return 115
         }
         else if self.selectedSegmentIndex == 1{
             return 115.0
         }
         else{
-            return 80
+            var rowHeight: CGFloat?
+            if indexPath.row == 0{
+                rowHeight = 115
+            }else if indexPath.row == 1{
+                rowHeight = 130
+            }else if indexPath.row == 2{
+                rowHeight = 145
+            }else if indexPath.row == 3{
+                rowHeight = 150
+            }else if indexPath.row == 4{
+                rowHeight = 280
+            }else if indexPath.row == 5{
+                rowHeight = 240
+            }else{
+                rowHeight = 80
+            }
+            return rowHeight!
         }
     }
     
@@ -153,7 +182,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.selectedSegmentIndex == 0{
-            return nofArray.count
+            return 1
         }else if self.selectedSegmentIndex == 1{
             return invArray.count
         }else if self.selectedSegmentIndex == 2{
@@ -167,10 +196,22 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if self.selectedSegmentIndex == 0{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NotifTabCell", for: indexPath) as! notificationTabCell
-            cell.setupCell(notif: nofArray[indexPath.row])
-            cell.parentVC = self
-            return cell
+            var cell: UITableViewCell?
+            if indexPath.row == 0{
+                cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as! FeedOneTableViewCell
+            }
+//            }else if indexPath.row == 1{
+//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
+//            }else if indexPath.row == 2{
+//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as! FeedPlaceTableViewCell
+//            }else if indexPath.row == 3{
+//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
+//            }else if indexPath.row == 4{
+//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
+//            }else if indexPath.row == 5{
+//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
+//            }
+            return cell!
         }else if self.selectedSegmentIndex == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
             cell.parentVC = self
@@ -181,14 +222,33 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             cell.setupCell(notif: invArray[indexPath.row])
              return cell
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
-            cell.parentVC = self
-            cell.seeYouThereButton.isHidden = true
-            cell.nextTimeButton.isHidden = true
+            var cell: UITableViewCell?
             
-            cell.isFeed = true
-            cell.setupCell(notif: feedAray[indexPath.row])
-            return cell
+            if indexPath.row == 0{
+                cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as! FeedOneTableViewCell
+            }else if indexPath.row == 1{
+                cell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
+            }else if indexPath.row == 2{
+                cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as! FeedPlaceTableViewCell
+            }else if indexPath.row == 3{
+                cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
+            }else if indexPath.row == 4{
+                cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
+            }else if indexPath.row == 5{
+                cell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
+            }else {
+                let notifFeedCell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
+
+                notifFeedCell.parentVC = self
+                notifFeedCell.seeYouThereButton.isHidden = true
+                notifFeedCell.nextTimeButton.isHidden = true
+                
+                notifFeedCell.isFeed = true
+                notifFeedCell.setupCell(notif: feedAray[indexPath.row])
+                cell = notifFeedCell
+            }
+            
+            return cell!
         }
         
         
