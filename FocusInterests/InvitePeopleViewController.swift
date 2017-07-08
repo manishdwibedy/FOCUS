@@ -153,7 +153,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     cell.addressTextView.text = "\(place.address[0])"
                 }
                 else{
-                    cell.addressTextView.text = "\(place.address[0])\n\(place.address[1])"
+                    cell.addressTextView.text = "\(place.address[0])\n\(place.address.last!)"
                 }
             }
             //cell.placeID = place.id
