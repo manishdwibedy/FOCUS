@@ -17,6 +17,7 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
     var userName: String = ""
     var password: String = ""
     var fullName: String = ""
+    var credential: PhoneAuthCredential? = nil
     
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -47,11 +48,23 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         switch typeOfSignUp {
         case "phone":
             let formatedString = formatPhoneString(phoneNumber: usersEmailOrPhone)
-            Auth.auth().createUser(withEmail: formatedString, password: validPassword, completion: { (user, error) in
-                if error != nil {
-                    print(error!.localizedDescription)
+            Auth.auth().signIn(with: credential!) { (user, error) in
+                if let error = error {
+                    // ...
+                    return
                 }
-            })
+                // User is signed in
+                // ...
+                
+                AuthApi.set(firebaseUid: user?.uid)
+                AuthApi.setPassword(password: validPassword)
+                AuthApi.set(loggedIn: .Email)
+                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(self.userNameTextField.text)
+                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/fullname").setValue(self.fullNameTextField.text)
+                
+                
+            }
+        
         case "email":
             let email = self.usersEmailOrPhone
             

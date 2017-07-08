@@ -261,8 +261,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
         if Auth.auth().canHandleNotification(userInfo) {
-//            completionHandler(UIBackgroundFetchResultNoData)
-//            completionHandler(UIBackgroundFetchResult)
+            completionHandler(UIBackgroundFetchResult.noData)
             return
         }
         
@@ -288,7 +287,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("APNs token retrieved: \(deviceToken)")
         
-        Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.prod)
+        //Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.prod)
 
         // With swizzling disabled you must set the APNs token here.
         // Messaging.messaging().apnsToken = deviceToken
