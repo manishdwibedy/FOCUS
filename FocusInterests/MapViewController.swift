@@ -252,8 +252,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             else{
                 self.navigationView.notificationsButton.badgeString = ""
             }
+            self.notifs.removeAll()
             self.notifs.append(contentsOf: notif)
         }, gotInvites: {invite in
+            self.invites.removeAll()
             self.invites.append(contentsOf: invite)
             if invite.count > 0{
                 self.navigationView.notificationsButton.badgeString = "\(invite.count)"
@@ -263,6 +265,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
         } , gotFeed: {feed in
+            self.feeds.removeAll()
             self.feeds.append(contentsOf: feed)
             if feed.count > 0{
                 self.navigationView.notificationsButton.badgeString = "\(feed.count)"
@@ -831,8 +834,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func notificationsClicked() {
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
-        vc.invArray.removeAll()
-        vc.nofArray.removeAll()
         vc.nofArray = self.notifs
         vc.invArray = self.invites
         vc.feedAray = self.feeds

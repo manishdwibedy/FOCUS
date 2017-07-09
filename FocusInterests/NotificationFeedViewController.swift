@@ -69,23 +69,15 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
         
-        // Do any additional setup after loading the view.
-        
         segmentedControl.layer.cornerRadius = 6
         segmentedControl.clipsToBounds = true
         
         self.view.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
         self.tableView.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
         
-//        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: UIControlState.selected)
-//        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: UIControlState.normal)
+        navBar.titleTextAttributes = Constants.navBar.attrs
         
-        let attrs = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
-        ]
-        
-        navBar.titleTextAttributes = attrs  
+        tableView.tableFooterView = UIView()
     }
     
     override func didReceiveMemoryWarning() {
