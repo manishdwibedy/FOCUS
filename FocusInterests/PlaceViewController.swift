@@ -272,6 +272,7 @@ class PlaceViewController: UIViewController {
                 let categories_json = business.1["categories"].arrayValue
                 let url = business.1["url"].stringValue
                 let plain_phone = business.1["phone"].stringValue
+                let is_closed = business.1["is_closed"].boolValue
                 
                 var address = [String]()
                 for raw_address in address_json{
@@ -284,7 +285,7 @@ class PlaceViewController: UIViewController {
                     categories.append(category)
                 }
                 
-                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
+                let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone, is_closed: is_closed)
                 
                 if !suggestedPlaces.contains(place){
                     suggestedPlaces.append(place)

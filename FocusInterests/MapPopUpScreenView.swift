@@ -27,6 +27,9 @@ class MapPopUpScreenView: UIView {
     @IBOutlet weak var addressLabel: UILabel!
     
     @IBOutlet weak var captionLeading: NSLayoutConstraint!
+    @IBOutlet weak var hoursLabel: UILabel!
+    
+    @IBOutlet weak var inviteButton: UIButton!
     var object: Any!
     var type = ""
     var parentVC: MapViewController!
@@ -49,6 +52,7 @@ class MapPopUpScreenView: UIView {
         self.view.frame.size = CGSize(width: self.frame.width, height: 195)
         self.view.layoutIfNeeded()
         
+        inviteButton.roundCorners(radius: 5)
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(sender:)))
         self.view.addGestureRecognizer(tap)
         
@@ -85,12 +89,14 @@ class MapPopUpScreenView: UIView {
     }
     
     
-    func loadPlace(name: String, rating: String, reviews: String, miles: String, interest: String, address:String)
+    func loadPlace(name: String, rating: String, reviews: String, miles: String, interest: String, address:String, is_closed: Bool)
     {
         self.startImage.isHidden = false
         boldLabel.text = name
+        
         bottomText.text = rating + "   " + reviews
         mileLabel.text = miles
+        
         addGreenDot(label: interestLabel, content: interest)
         addressLabel.text = address
         
@@ -102,7 +108,12 @@ class MapPopUpScreenView: UIView {
         self.profileImage.clipsToBounds = true
         self.profileImage.isHidden = false
         
-        
+        if is_closed{
+            self.hoursLabel.text = "Closed"
+        }
+        else{
+            self.hoursLabel.text = "Open"
+        }
         self.layer.borderColor = UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1).cgColor
         self.layer.borderWidth = 2
         self.clipsToBounds = true
@@ -111,7 +122,7 @@ class MapPopUpScreenView: UIView {
         
     }
     
-    func loadPin(name: String, pin: String, distance: String, focus: String, address: String)
+    func loadPin(name: String, pin: String, distance: String, focus: String, address: String, time: Double)
     {
         
         self.startImage.isHidden = true
@@ -164,6 +175,8 @@ class MapPopUpScreenView: UIView {
                 }
             })
         }
+        
+        self.hoursLabel.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (time)), numericDates: false, shortVersion: true)
         
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 125/255, green: 201/255, blue: 49/255, alpha: 1).cgColor

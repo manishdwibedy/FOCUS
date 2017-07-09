@@ -767,6 +767,7 @@ func getNearbyPlaces(text: String?, categories: String?, count: Int?, location: 
             let categories_json = business.1["categories"].arrayValue
             let url = business.1["url"].stringValue
             let plain_phone = business.1["phone"].stringValue
+            let is_closed = business.1["is_closed"].boolValue
             
             var address = [String]()
             for raw_address in address_json{
@@ -780,7 +781,7 @@ func getNearbyPlaces(text: String?, categories: String?, count: Int?, location: 
             }
             
             let miles = (distance/1609.344).roundTo(places: 1)
-            let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: miles, categories: categories, url: url, plainPhone: plain_phone)
+            let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: miles, categories: categories, url: url, plainPhone: plain_phone, is_closed: is_closed)
             
             if !places.contains(place){
                 places.append(place)
@@ -843,6 +844,7 @@ func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
         let categories_json = json["categories"].arrayValue
         let url = json["url"].stringValue
         let plain_phone = json["phone"].stringValue
+        let is_closed = json["is_closed"].boolValue
         
         var address = [String]()
         for raw_address in address_json{
@@ -855,7 +857,7 @@ func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
             categories.append(category)
         }
         
-        let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
+        let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone, is_closed: is_closed)
         
         
         completion(place)

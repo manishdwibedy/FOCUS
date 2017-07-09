@@ -49,10 +49,10 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9GY-g7-gUF">
-                                <rect key="frame" x="0.0" y="587" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="547" width="414" height="140"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="rkl-jt-jnk"/>
+                                    <constraint firstAttribute="height" constant="140" id="rkl-jt-jnk"/>
                                 </constraints>
                             </view>
                         </subviews>
