@@ -160,6 +160,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         DF.dateFormat = "MMM d, h:mm a"
         
         Constants.DB.event.keepSynced(true)
+        Constants.DB.pins.child(AuthApi.getFirebaseUid()!).keepSynced(true)
+        
         Constants.DB.event.observe(DataEventType.childAdded, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             let info = events// as? [String:Any]
