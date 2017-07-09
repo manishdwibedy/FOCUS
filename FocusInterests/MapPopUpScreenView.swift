@@ -123,7 +123,7 @@ class MapPopUpScreenView: UIView {
         addGreenDot(label: interestLabel, content: focus)
         
         captionLeading.constant = -20
-        
+        self.profileImage.image = #imageLiteral(resourceName: "placeholder_pin")
         if let data = object as? pinData{
             print(data)
             
