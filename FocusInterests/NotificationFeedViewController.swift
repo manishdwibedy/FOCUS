@@ -51,52 +51,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         AuthApi.clearNotifications()
         
-        getNotifications(gotEventComments: {comments in
-            self.nofArray.append(contentsOf: comments)
-            self.tableView.reloadData()
-        }, gotEventLikes: {likes in
-            self.nofArray.append(contentsOf: likes)
-            self.tableView.reloadData()
-        }, gotPins: {pins in
-            self.nofArray.append(contentsOf: pins)
-            self.tableView.reloadData()
-        })
-        
-        FirebaseDownstream.shared.getUserNotifications(completion: {array in
-            //self.multipleArray.insert(array!, at: SelectedIndex.INVITE.rawValue)
-            self.invArray = array!
-        }, gotNotif: {not in
-        })
-        
-        getFeeds(gotPins: {pins in
-            print("get pins")
-            print(pins)
-            for data in pins
-            {
-                self.feedAray.append(data)
-            }
-            //self.multipleArray.insert(pins, at: SelectedIndex.INVITE.rawValue)
-            
-        }, gotEvents: { events in
-            print("get events")
-            print(events)
-            for data in events
-            {
-                self.feedAray.append(data)
-            }
-            
-        }, gotInvitations: {invitations in
-            for data in invitations
-            {
-                self.feedAray.append(data)
-            }
-            print("get iniventaion")
-            print(invitations)
-            //self.multipleArray.insert(invitations, at: SelectedIndex.INVITE.rawValue)
-            
-        })
-        
-         //self.setupDummyArray()
+        tableView.reloadData()
         
         tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
         

@@ -53,6 +53,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     var searchPlacesTab: SearchPlacesViewController? = nil
     var searchEventsTab: SearchEventsViewController? = nil
+    var notifs = [FocusNotification]()
+    var invites = [FocusNotification]()
+    var feeds = [FocusNotification]()
+    
     
     @IBOutlet weak var navigationView: MapNavigationView!
     
@@ -220,11 +224,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
 
     }
-    /*
- ya29.GluABI7CQOWllDRopxbRAIT466GFeJup1lXZyxmQNXe1ldpByv-mVWtDL0Jz62t-G-sshrzO4oU21WXfAOZRHXpxjUTBs60VHL98fb7CekEILI2lGBMh6-D2hK0R
-     
-     ya29.GluABPICc41Dx5vVnqPYzBwhCaFakohw2MMfat77fuTMEN4yzyQzucbKO7mMQsOGE4azu_dBTNv_CqjIfEoOKCNYXDrb595wn4HOujgjmia-SmhGVGZVXKc_xuVk
- */
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -240,6 +240,34 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 self.navigationView.messagesButton.badgeString = ""
             }
             
+        })
+        
+        navigationView.notificationsButton.badgeString = ""
+        NotificationUtil.getNotificationCount(gotNotification: {notif in
+            if notif.count > 0{
+                navigationView.notificationsButton.badgeString = "\(notif.count)"
+            }
+            else{
+                navigationView.notificationsButton.badgeString = ""
+            }
+            self.notifs.append(contentsOf: notif)
+        }, gotInvites: {invite in
+            self.invites.append(contentsOf: invite)
+            if invite.count > 0{
+                navigationView.notificationsButton.badgeString = "\(invite.count)"
+            }
+            else{
+                navigationView.notificationsButton.badgeString = ""
+            }
+            
+        } , gotFeed: {feed in
+            self.feeds.append(contentsOf: feed)
+            if feed.count > 0{
+                navigationView.notificationsButton.badgeString = "\(feed.count)"
+            }
+            else{
+                navigationView.notificationsButton.badgeString = ""
+            }
         })
         
         saveUserInfo()
@@ -298,12 +326,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         Constants.DB.user_mapping.keepSynced(true)
 
         Share.getFacebookFriends()
-        
-        /* Bug : 
- 
-        Username is not visible on the databse but still present here 
-         
-         */
         
         if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil { // Change this back
             print("username is nil")
@@ -814,6 +836,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //        self.present(selectInterests, animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
+        vc.nofArray = self.notifs
+        vc.invArray = self.invites
+        vc.feedAray = self.feeds
         
         dropfromTop(view: self.view)
         

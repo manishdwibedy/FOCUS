@@ -141,6 +141,7 @@
 		5BAB87AD1EC97BED0064E5EC /* PeopleSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB87AC1EC97BED0064E5EC /* PeopleSearchViewController.swift */; };
 		5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB87AE1EC984400064E5EC /* search_event.storyboard */; };
 		5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BAB87B01EC9861F0064E5EC /* search_place.storyboard */; };
+		5BB2F8181F11C4B8008781BB /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2F8171F11C4B8008781BB /* Notification.swift */; };
 		5BBF7AC21EEF5C61000209D6 /* Reviews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */; };
 		5BD641EE1EFB229D003E2A4B /* SearchPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */; };
 		5BE30DD01F0AF20500ECE7EF /* day_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE30DCF1F0AF20500ECE7EF /* day_style.json */; };
@@ -484,6 +485,7 @@
 		5BAB87AC1EC97BED0064E5EC /* PeopleSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleSearchViewController.swift; sourceTree = "<group>"; };
 		5BAB87AE1EC984400064E5EC /* search_event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = search_event.storyboard; sourceTree = "<group>"; };
 		5BAB87B01EC9861F0064E5EC /* search_place.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = search_place.storyboard; sourceTree = "<group>"; };
+		5BB2F8171F11C4B8008781BB /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Reviews.storyboard; sourceTree = "<group>"; };
 		5BD641ED1EFB229D003E2A4B /* SearchPlaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaces.swift; sourceTree = "<group>"; };
 		5BE30DCF1F0AF20500ECE7EF /* day_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = day_style.json; sourceTree = "<group>"; };
@@ -1100,6 +1102,7 @@
 				D25AACCE1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift */,
 				5B634C861ED2584F00EBCC29 /* Share.swift */,
 				5B3597971EF5FD5400C04809 /* FollowPeople.swift */,
+				5BB2F8171F11C4B8008781BB /* Notification.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1880,6 +1883,7 @@
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
 				5B71D6FC1ED1820E0093A3F5 /* InviteFriendTableViewCell.swift in Sources */,
 				5B6AFA681ED1906900A82104 /* GMUStaticCluster.m in Sources */,
+				5BB2F8181F11C4B8008781BB /* Notification.swift in Sources */,
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
 				FF7C874A1ED73310004ABB1B /* PinScreenViewController.swift in Sources */,
 				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,

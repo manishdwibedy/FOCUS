@@ -22,7 +22,7 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     @IBOutlet var view: MapNavigationView!
     @IBOutlet weak var messagesButton: MIBadgeButton!
     
-    @IBOutlet weak var notificationsButton: UIButton!
+    @IBOutlet weak var notificationsButton: MIBadgeButton!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     
