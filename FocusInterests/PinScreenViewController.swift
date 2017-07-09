@@ -242,8 +242,15 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         autoCompleteController.delegate = self
         
         self.navigationController?.navigationBar.barTintColor = Constants.color.navy
+        
         UINavigationBar.appearance().barTintColor = Constants.color.navy
-        UINavigationBar.appearance().tintColor = Constants.color.navy
+        UINavigationBar.appearance().tintColor = UIColor.white
+        
+        
+        let searchBarTextAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.systemFontSize)]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = searchBarTextAttributes
+        
+        
         
         present(autoCompleteController, animated: true, completion: nil)
     }
