@@ -299,12 +299,11 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     }
     
     @IBAction func like(_ sender: Any) {
-       if (self.likeOut.imageView?.image?.isEqual(UIImage(named: "Like")))!
+       if (self.likeOut.imageView?.image?.isEqual(#imageLiteral(resourceName: "Like")))!
        {
             self.likes = self.likes + 1
             data.dbPath.child("like").updateChildValues(["num": likes])
             data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
-            self.likeOut.isEnabled = false
         
             if self.likes > 1{
                 self.likesLabel.text = String(self.likes) + " likes"
@@ -313,31 +312,30 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 self.likesLabel.text = String(self.likes) + " like"
             }
         
-            self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
+            self.likeOut.setImage(#imageLiteral(resourceName: "Liked"), for: UIControlState.normal)
         }
        else{
-        self.likes = self.likes - 1
-        data.dbPath.child("like").updateChildValues(["num": likes])
+            self.likes = self.likes - 1
+            data.dbPath.child("like").updateChildValues(["num": likes])
+
+            data.dbPath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                if let value = value
+                {
+                    for (id, _) in value{
+                        self.data.dbPath.child("like").child("likedBy").child(id).removeValue()
+                    }
+                }
+            })
         
-        data.dbPath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-//                data.dbPath.child("like").child("likedBy").
-                print(value ?? "")
+        
+            if self.likes > 1{
+                self.likesLabel.text = String(self.likes) + " likes"
             }
-        })
-        
-//        data.dbPath.child("like").child("likedBy").rem
-        self.likeOut.isEnabled = false
-        
-        if self.likes > 1{
-            self.likesLabel.text = String(self.likes) + " likes"
-        }
-        else{
-            self.likesLabel.text = String(self.likes) + " like"
-        }
-        self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
+            else{
+                self.likesLabel.text = String(self.likes) + " like"
+            }
+            self.likeOut.setImage(#imageLiteral(resourceName: "Like"), for: UIControlState.normal)
         }
        
     }
