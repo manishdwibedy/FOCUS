@@ -108,6 +108,9 @@ class NotificationUtil{
                     }
                 }
             }
+            else{
+                gotAcceptedInvites(place_invites)
+            }
             
             
         })
@@ -176,6 +179,10 @@ class NotificationUtil{
                         }
                     }
                 }
+            }
+            else{
+                gotEventLikes(event_likes)
+                gotEventComments(event_comments)
             }
         })
         

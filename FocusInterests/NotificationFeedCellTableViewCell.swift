@@ -151,6 +151,9 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                             self.seeYouThereButton.isHidden = true
                             self.nextTimeButton.isEnabled = false
                             
+                            self.nextTimeButton.backgroundColor = Constants.color.green
+                            self.nextTimeButton.setTitleColor(UIColor.white, for: .normal)
+                            
                             self.nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
                         }
                         else if status == "declined"{
@@ -266,6 +269,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             selectedButton = true
             seeYouThereButton.isHidden = true
             nextTimeButton.isEnabled = false
+         
             nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
             
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in

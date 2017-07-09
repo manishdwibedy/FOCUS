@@ -245,33 +245,52 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         })
         
         navigationView.notificationsButton.badgeString = ""
+        var not_count = 0
+        var count_received = 0
         NotificationUtil.getNotificationCount(gotNotification: {notif in
-            if notif.count > 0{
-                self.navigationView.notificationsButton.badgeString = "\(notif.count)"
-            }
-            else{
-                self.navigationView.notificationsButton.badgeString = ""
-            }
             self.notifs.removeAll()
             self.notifs.append(contentsOf: notif)
+            
+            not_count += notif.count
+            count_received += 1
+            if count_received == 6{
+                if not_count > 0{
+                    self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                }
+                else{
+                    self.navigationView.notificationsButton.badgeString = ""
+                }
+                count_received = 0
+            }
         }, gotInvites: {invite in
             self.invites.removeAll()
             self.invites.append(contentsOf: invite)
-            if invite.count > 0{
-                self.navigationView.notificationsButton.badgeString = "\(invite.count)"
-            }
-            else{
-                self.navigationView.notificationsButton.badgeString = ""
+            not_count += invite.count
+            count_received += 1
+            if count_received == 6{
+                if not_count > 0{
+                    self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                }
+                else{
+                    self.navigationView.notificationsButton.badgeString = ""
+                }
+                count_received = 0
             }
             
         } , gotFeed: {feed in
             self.feeds.removeAll()
             self.feeds.append(contentsOf: feed)
-            if feed.count > 0{
-                self.navigationView.notificationsButton.badgeString = "\(feed.count)"
-            }
-            else{
-                self.navigationView.notificationsButton.badgeString = ""
+            not_count += feed.count
+            count_received += 1
+            
+            if count_received == 6{
+                if not_count > 0{
+                    self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                }
+                else{
+                    self.navigationView.notificationsButton.badgeString = ""
+                }
+                count_received = 0
             }
         })
         
