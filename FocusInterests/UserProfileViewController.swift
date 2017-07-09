@@ -185,8 +185,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         followingStackView.addGestureRecognizer(tap)
         
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(self.showFollower))
-        followingStackView.isUserInteractionEnabled = true
-        followingStackView.addGestureRecognizer(tap1)
+        followerStackView.isUserInteractionEnabled = true
+        followerStackView.addGestureRecognizer(tap1)
         
 //      Use tags in order to allow for only IBAction that will track
 //      each event based on the tag of the sender
