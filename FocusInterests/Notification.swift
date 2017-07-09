@@ -77,15 +77,27 @@ class NotificationUtil{
                                 if let value = snapshot.value as? [String:Any]{
                                     let user = NotificationUser(username: value["username"] as? String, uuid: invite["user"] as? String, imageURL: value["image_string"] as? String)
                                     
-                                    let place = ItemOfInterest(itemName: invite["name"] as? String, imageURL: nil, type: "place")
-                                    place.id = (invite["id"] as? String)!
-
-                                    let event_comment = FocusNotification(type: NotificationType.Going, sender: user, item: place, time: Date(timeIntervalSince1970: invite["time"] as! Double))
-                                    place_invites.append(event_comment)
+                                    let invite_place = ItemOfInterest(itemName: invite["name"] as? String, imageURL: nil, type: "place")
+                                    invite_place.id = (invite["id"] as? String)!
                                     
-                                    if place_invites.count == place_count{
-                                        gotAcceptedInvites(place_invites)
-                                    }
+                                    getYelpByID(ID: invite_place.id, completion: {place in
+                                        invite_place.data = [
+                                            "type": "place",
+                                            "id": place.id,
+                                            "actionType": "going",
+                                            "senderID": invite["user"] as? String,
+                                            "place": place
+                                        ]
+                                        
+                                        
+                                        let event_comment = FocusNotification(type: NotificationType.Going, sender: user, item: invite_place, time: Date(timeIntervalSince1970: invite["time"] as! Double))
+                                        place_invites.append(event_comment)
+                                        
+                                        if place_invites.count == place_count{
+                                            gotAcceptedInvites(place_invites)
+                                        }
+                                    })
+                                    
                                 }
                                 
                             })

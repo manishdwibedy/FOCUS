@@ -104,7 +104,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self.selectedSegmentIndex == 0{
-            return 115
+            return 100
         }
         else if self.selectedSegmentIndex == 1{
             return 115.0
@@ -136,11 +136,11 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.selectedSegmentIndex == 0{
-            return 1
+            return self.nofArray.count
         }else if self.selectedSegmentIndex == 1{
             return invArray.count
         }else if self.selectedSegmentIndex == 2{
-            return feedAray.count
+            return 6
         }else
         {
         return 0
@@ -150,22 +150,10 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if self.selectedSegmentIndex == 0{
-            var cell: UITableViewCell?
-            if indexPath.row == 0{
-                cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as! FeedOneTableViewCell
-            }
-//            }else if indexPath.row == 1{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
-//            }else if indexPath.row == 2{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as! FeedPlaceTableViewCell
-//            }else if indexPath.row == 3{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
-//            }else if indexPath.row == 4{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
-//            }else if indexPath.row == 5{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
-//            }
-            return cell!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotifTabCell", for: indexPath) as! notificationTabCell
+            cell.setupCell(notif: nofArray[indexPath.row])
+            cell.parentVC = self
+            return cell
         }else if self.selectedSegmentIndex == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
             cell.parentVC = self
@@ -190,18 +178,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
                 cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
             }else if indexPath.row == 5{
                 cell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
-            }else {
-                let notifFeedCell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
-
-                notifFeedCell.parentVC = self
-                notifFeedCell.seeYouThereButton.isHidden = true
-                notifFeedCell.nextTimeButton.isHidden = true
-                
-                notifFeedCell.isFeed = true
-                notifFeedCell.setupCell(notif: feedAray[indexPath.row])
-                cell = notifFeedCell
             }
-            
             return cell!
         }
         
