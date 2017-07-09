@@ -100,11 +100,15 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                         if let value = value
                                         {
                                             if let pin = pinData.toPin(user: user, value: value){
-                                                self.user_pins[user.uuid!] = pin
-                                                user.hasPin = true
                                                 
-                                                let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
-                                                user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
+                                                    self.user_pins[user.uuid!] = pin
+                                                    user.hasPin = true
+                                                    
+                                                    let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+                                                    user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                                }
+                                                
                                             }
                                         }
                                         
@@ -157,11 +161,16 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                 if let value = value
                                 {
                                     if let pin = pinData.toPin(user: user, value: value){
-                                        self.user_pins[user.uuid!] = pin
-                                        user.hasPin = true
                                         
-                                        let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
-                                        user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                        if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
+                                            self.user_pins[user.uuid!] = pin
+                                            user.hasPin = true
+                                            
+                                            let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+                                            user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                        }
+                                        
+                                        
                                     }
                                 }
                                 if !self.people.contains(user){

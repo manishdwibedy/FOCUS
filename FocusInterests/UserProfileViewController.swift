@@ -218,6 +218,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             self.createEventButton.isHidden = true
             self.settingButton.isHidden = true
         }
+        
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
         Constants.DB.pins.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -226,49 +227,71 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
                 self.pinInfo = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(ID ), focus: value["focus"] as? String ?? "")
 
-                if value["images"] != nil{
-                    
-                }
-                self.emptyPinButton.isHidden = true
-                
-                self.pinCategoryLabel.text = value["focus"] as? String
-                self.pinAddress2Label.text = value["pin"] as? String
-                
-                if let likes = value["like"] as? [String:Any]{
-                    let count = likes["num"] as? Int
-                    
-                    var label = "like"
-                    if count! > 1{
-                        label = "likes"
+                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (self.pinInfo?.dateTimeStamp)!), to: Date()).hour ?? 0 < 24{
+                    if value["images"] != nil{
+                        
                     }
-                    self.pinLikesLabel.text = "\(count!) \(label)"
-                }
-                
-                if let images = value["images"] as? [String:Any]{
-                    let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String
-                    let pinImage = Constants.storage.pins.child(imageURL!)
+                    self.emptyPinButton.isHidden = true
                     
-                    // Fetch the download URL
-                    pinImage.downloadURL { url, error in
-                        if error != nil {
-                            // Handle any errors
-                        } else {
-                            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                                (receivedSize :Int, ExpectedSize :Int) in
+                    self.pinCategoryLabel.text = value["focus"] as? String
+                    self.pinAddress2Label.text = value["pin"] as? String
+                    
+                    if let likes = value["like"] as? [String:Any]{
+                        let count = likes["num"] as? Int
+                        
+                        var label = "like"
+                        if count! > 1{
+                            label = "likes"
+                        }
+                        self.pinLikesLabel.text = "\(count!) \(label)"
+                    }
+                    
+                    if let images = value["images"] as? [String:Any]{
+                        let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String
+                        let pinImage = Constants.storage.pins.child(imageURL!)
+                        
+                        // Fetch the download URL
+                        pinImage.downloadURL { url, error in
+                            if error != nil {
+                                // Handle any errors
+                            } else {
+                                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                                    (receivedSize :Int, ExpectedSize :Int) in
+                                    
+                                }, completed: {
+                                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                                    
+                                    if image != nil && finished{
+                                        self.pinImage.image = image
+                                    }
+                                })
                                 
-                            }, completed: {
-                                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                                
-                                if image != nil && finished{
-                                    self.pinImage.image = image
-                                }
-                            })
-                            
+                            }
                         }
                     }
+
+                }
                     
+                // OLD PIN
+                else{
+                    self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
+                    self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
+                    self.mainViewHeight.constant = 750
+                    
+                    self.pinViewHeight.constant = 45
+                    
+                    self.emptyPinButton.isHidden = false
+                    self.emptyPinButton.setTitle("Update Pin", for: .normal)
+                    self.pinDistanceLabel.isHidden = true
+                    self.pinAddress2Label.isHidden = true
+                    self.greenDotImage.isHidden = true
+                    self.pinImage.isHidden = true
+                    self.pinCategoryLabel.isHidden = true
+                    self.pinLikesLabel.isHidden = true
+                    self.updatePinButton.isHidden = true
                     
                 }
+                
                 
                 
             }
