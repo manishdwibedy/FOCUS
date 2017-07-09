@@ -30,7 +30,7 @@ class NotificationUtil{
         
         FirebaseDownstream.shared.getUserNotifications(completion: {array in
             invArray = array!
-            gotInvites(nofArray)
+            gotInvites(invArray)
         }, gotNotif: {not in
         })
         

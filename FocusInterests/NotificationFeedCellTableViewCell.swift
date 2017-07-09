@@ -268,14 +268,24 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             nextTimeButton.isEnabled = false
             nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
             
-            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? [String:Any]
-                
-                if let value = value{
-                    for (id, _) in value{
-                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((self.notif.item?.type)!).child(id).updateChildValues(["status": "accepted"])
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? [String:Any]
+                    
+                    if let value = value{
+                        for (id, invite) in value{
+                            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((self.notif.item?.type)!).child(id).updateChildValues(["status": "accepted"])
+                            if let inviteData = invite as? [String:Any]{
+                                let host = inviteData["fromUID"] as? String
+                                let accepted = Constants.DB.user.child(host!).child("send_invites").child((self.notif.item?.type)!).childByAutoId()
+                                accepted.updateChildValues(["time": NSDate().timeIntervalSince1970, "user": AuthApi.getFirebaseUid()!, "type": self.notif.item?.type, "id": self.notif.item?.id])
+                                
+                                
+                            }
+                            
+                            
+                            print("a")
+                        }
                     }
-                }
                 
                 
             })
