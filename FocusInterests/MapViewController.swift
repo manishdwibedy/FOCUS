@@ -245,28 +245,28 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         navigationView.notificationsButton.badgeString = ""
         NotificationUtil.getNotificationCount(gotNotification: {notif in
             if notif.count > 0{
-                navigationView.notificationsButton.badgeString = "\(notif.count)"
+                self.navigationView.notificationsButton.badgeString = "\(notif.count)"
             }
             else{
-                navigationView.notificationsButton.badgeString = ""
+                self.navigationView.notificationsButton.badgeString = ""
             }
             self.notifs.append(contentsOf: notif)
         }, gotInvites: {invite in
             self.invites.append(contentsOf: invite)
             if invite.count > 0{
-                navigationView.notificationsButton.badgeString = "\(invite.count)"
+                self.navigationView.notificationsButton.badgeString = "\(invite.count)"
             }
             else{
-                navigationView.notificationsButton.badgeString = ""
+                self.navigationView.notificationsButton.badgeString = ""
             }
             
         } , gotFeed: {feed in
             self.feeds.append(contentsOf: feed)
             if feed.count > 0{
-                navigationView.notificationsButton.badgeString = "\(feed.count)"
+                self.navigationView.notificationsButton.badgeString = "\(feed.count)"
             }
             else{
-                navigationView.notificationsButton.badgeString = ""
+                self.navigationView.notificationsButton.badgeString = ""
             }
         })
         
@@ -319,10 +319,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
-        
-        print(popUpView.frame.size)
-//
         Constants.DB.user_mapping.keepSynced(true)
 
         Share.getFacebookFriends()

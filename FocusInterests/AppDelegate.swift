@@ -65,21 +65,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
         
         GMSServices.provideAPIKey(Constants.keys.googleMapsAPIKey)
         GMSPlacesClient.provideAPIKey(Constants.keys.googleMapsAPIKey)
-//        var configureError: NSError?
-//        GGLContext.sharedInstance().configureWithError(&configureError)
-//        assert(configureError == nil, "Error configuring Google Services: \(configureError)")
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-//        Fabric.with([Twitter.self])
-//
-        
         Twitter.sharedInstance().start(withConsumerKey:Constants.Twitter.consumerKey, consumerSecret:Constants.Twitter.consumerSecret)
 
-        UIApplication.shared.statusBarStyle = .default
-        
+        UIApplication.shared.statusBarStyle = .lightContent
         
         checkForLogin()
         

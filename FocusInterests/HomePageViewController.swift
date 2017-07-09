@@ -43,11 +43,8 @@ class HomePageViewController: UITabBarController {
             vc.currentLocation = location
         }
         
+        self.setStatusBarStyle(UIStatusBarStyle.default)
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,7 +69,7 @@ class HomePageViewController: UITabBarController {
             self.tabBar.addSubview(separator)
         }
     }
-
+    
     /*
     // MARK: - Navigation
 
