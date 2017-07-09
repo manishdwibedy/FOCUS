@@ -111,7 +111,7 @@ class notificationTabCell: UITableViewCell {
         } else if data["actionType"] as! String == "comment"{
             actionStr = "commented on your"
         } else{
-            actionStr = " are going to your"
+            actionStr = "is coming to your"
         }
         
         if data["type"] as! String == "event"{
