@@ -238,4 +238,15 @@ struct AuthApi {
     static func clearNotifications(){
         defaults.set(false, forKey: "notification")
     }
+    
+    static func getUnreadNotifications() -> Int{
+        if let count = defaults.object(forKey: "notification_count") as? Int {
+            return count
+        }
+        return 0
+    }
+    
+    static func set(read: Int){
+        defaults.set(read, forKey: "notification_count")
+    }
 }

@@ -52,6 +52,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         AuthApi.clearNotifications()
         
         tableView.reloadData()
+        AuthApi.set(read: nofArray.count + invArray.count + feedAray.count)
         
         tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
         

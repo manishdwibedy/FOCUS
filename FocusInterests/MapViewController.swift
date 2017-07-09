@@ -247,6 +247,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         navigationView.notificationsButton.badgeString = ""
         var not_count = 0
         var count_received = 0
+        var read_notifications = AuthApi.getUnreadNotifications()
         NotificationUtil.getNotificationCount(gotNotification: {notif in
             self.notifs.removeAll()
             self.notifs.append(contentsOf: notif)
@@ -254,6 +255,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             not_count += notif.count
             count_received += 1
             if count_received == 6{
+                not_count -= read_notifications
                 if not_count > 0{
                     self.navigationView.notificationsButton.badgeString = "\(not_count)"
                 }
@@ -268,6 +270,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             not_count += invite.count
             count_received += 1
             if count_received == 6{
+                not_count -= read_notifications
                 if not_count > 0{
                     self.navigationView.notificationsButton.badgeString = "\(not_count)"
                 }
@@ -284,6 +287,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             count_received += 1
             
             if count_received == 6{
+                not_count -= read_notifications
                 if not_count > 0{
                     self.navigationView.notificationsButton.badgeString = "\(not_count)"
                 }
