@@ -17,7 +17,7 @@ extension DateFormatter {
      
      - Returns: A string with formatted `date`.
      */
-    func timeSince(from: Date, numericDates: Bool = false, shortVersion: Bool = false) -> String {
+    func timeSince(from: Date, numericDates: Bool = false, shortVersion: Bool = true) -> String {
         let calendar = Calendar.current
         let now = NSDate()
         
