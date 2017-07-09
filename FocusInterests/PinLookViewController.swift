@@ -131,6 +131,19 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                         bigImage.setShowActivityIndicator(true)
                         bigImage.setIndicatorStyle(.gray)
                         
+                        
+                        let tap = UITapGestureRecognizer(target: self, action: #selector(self.imageTap(sender:)))
+                        tap.numberOfTapsRequired = 2
+                        bigImage.isUserInteractionEnabled = true
+                        bigImage.addGestureRecognizer(tap)
+                        
+                        
+                        //        let longP = UILongPressGestureRecognizer(target: self, action: #selector(longP(sender:)))
+                        //        longP.minimumPressDuration = 0.3
+                        //        self.addGestureRecognizer(longP)
+                    
+                    
+                    
                     })
                     
                 }else
@@ -296,6 +309,23 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     }
     
     @IBAction func options(_ sender: Any) {
+    }
+    
+    func imageTap(sender: UITapGestureRecognizer){
+        if (self.likeOut.imageView?.image?.isEqual(#imageLiteral(resourceName: "Like")))!{
+            self.likes = self.likes + 1
+            data.dbPath.child("like").updateChildValues(["num": likes])
+            data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+            
+            if self.likes > 1{
+                self.likesLabel.text = String(self.likes) + " likes"
+            }
+            else{
+                self.likesLabel.text = String(self.likes) + " like"
+            }
+            
+            self.likeOut.setImage(#imageLiteral(resourceName: "Liked"), for: UIControlState.normal)
+        }
     }
     
     @IBAction func like(_ sender: Any) {
