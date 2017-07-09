@@ -62,7 +62,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     
     var popUpScreen: MapPopUpScreenView!
-    
+    var placePins = [String:GMSMarker]()
     var lastPins = [GMSMarker]()
     
     override func viewDidLoad() {
@@ -124,7 +124,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
             getYelpToken(completion: { token in
                 AuthApi.set(yelpAccessToken: token)
-                //self.fetchPlaces(around: self.currentLocation!, token: token)
             })
         }
         
@@ -299,9 +298,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         })
         
         saveUserInfo()
-        Share.getUserContacts(email: "manish.dwibedy@gmail.com", completion: {users in
-            print(users)
-        })
         
         let token = Messaging.messaging().fcmToken
         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
@@ -326,11 +322,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         fetchPins()
         
         if let token = AuthApi.getYelpToken(){
-//            fetchPlaces(token: token)
         }
         else{
             getYelpToken(completion: {token in
-//                self.fetchPlaces(token: token)
             })
         }
         
@@ -548,7 +542,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }else if parts?[0] == "place"{
             
             let index:Int! = Int(parts![1])
-            let place = self.places[index % self.places.count]
+            let place = self.places[index]
             
             popUpScreen.object = place
             popUpScreen.type = "place"
@@ -879,32 +873,39 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func fetchPlaces(around location: CLLocation, token: String){
-        
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
             if let placeData = value{
+//                self.places.removeAll()
                 for (_,place) in placeData
                 {
                     let place_id = (place as? [String:Any])?["placeID"]
                     getYelpByID(ID: place_id as! String, completion: {place in
-                        self.places.append(place)
                         
-                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
-                        let marker = GMSMarker(position: position)
-                        marker.icon = UIImage(named: "place_icon")
-                        marker.title = place.name
-                        marker.map = self.mapView
-                        marker.isTappable = true
-                        marker.accessibilityLabel = "place_\(self.places.count)"
-                        
-                        self.placeMapping[place.id] = place
-                        self.getPlaceHours(id: place.id)
-                        
-                        if !(self.searchPlacesTab?.followingPlaces.contains(place))!{
-                            self.searchPlacesTab?.followingPlaces.append(place)
+                        if !self.places.contains(place){
+                            
+                            
+                            let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+                            let marker = GMSMarker(position: position)
+                            marker.icon = UIImage(named: "place_icon")
+                            marker.title = place.name
+                            marker.map = self.mapView
+                            marker.isTappable = true
+                            marker.accessibilityLabel = "place_\(self.places.count)"
+                            if let earlier = self.placePins[place.id]{
+                                earlier.map = nil
+                            }
+                            self.placePins[place.id] = marker
+                            
+                            self.placeMapping[place.id] = place
+                            self.getPlaceHours(id: place.id)
+                            self.places.append(place)
+                            if !(self.searchPlacesTab?.followingPlaces.contains(place))!{
+                                self.searchPlacesTab?.followingPlaces.append(place)
+                            }
+                            print("places count - \(self.places.count)")
                         }
-                        
                     })
                     
                 }
