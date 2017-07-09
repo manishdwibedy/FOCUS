@@ -829,12 +829,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func notificationsClicked() {
-        
-//        let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
-//        self.present(selectInterests, animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
         vc.invArray.removeAll()
+        vc.nofArray.removeAll()
         vc.nofArray = self.notifs
         vc.invArray = self.invites
         vc.feedAray = self.feeds
