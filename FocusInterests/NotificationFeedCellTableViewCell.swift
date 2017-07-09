@@ -277,7 +277,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                             if let inviteData = invite as? [String:Any]{
                                 let host = inviteData["fromUID"] as? String
                                 let accepted = Constants.DB.user.child(host!).child("send_invites").child((self.notif.item?.type)!).childByAutoId()
-                                accepted.updateChildValues(["time": NSDate().timeIntervalSince1970, "user": AuthApi.getFirebaseUid()!, "type": self.notif.item?.type, "id": self.notif.item?.id])
+                                accepted.updateChildValues(["time": NSDate().timeIntervalSince1970, "user": AuthApi.getFirebaseUid()!, "type": self.notif.item?.type, "id": self.notif.item?.id, "name": self.notif.item?.itemName])
                                 
                                 
                             }

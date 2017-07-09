@@ -26,6 +26,9 @@ class NotificationUtil{
         }, gotPins: {pins in
             nofArray.append(contentsOf: pins)
             gotNotification(nofArray)
+        }, gotAcceptedInvites: {invites in
+            nofArray.append(contentsOf: invites)
+            gotNotification(nofArray)
         })
         
         FirebaseDownstream.shared.getUserNotifications(completion: {array in
@@ -47,8 +50,10 @@ class NotificationUtil{
 
     }
     
-    static func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotification]) -> Void, gotEventLikes: @escaping (_ comments: [FocusNotification]) -> Void, gotPins: @escaping (_ pins: [FocusNotification]) -> Void){
+    static func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotification]) -> Void, gotEventLikes: @escaping (_ comments: [FocusNotification]) -> Void, gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotAcceptedInvites: @escaping (_ comments: [FocusNotification]) -> Void){
         
+        var place_count = 0
+        var place_invites = [FocusNotification]()
         var event_comment_count = 0
         var event_comments = [FocusNotification]()
         var event_likes_count = 0
@@ -62,6 +67,38 @@ class NotificationUtil{
         
         let user = NotificationUser(username: AuthApi.getUserName(), uuid: AuthApi.getFirebaseUid()!, imageURL: nil)
         
+        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/send_invites").observeSingleEvent(of: .value, with: { snapshot in
+            if let value = snapshot.value as? [String:Any]{
+                if let places = value["place"] as? [String:Any]{
+                    place_count += places.count
+                    for (_, invite) in places{
+                        if let invite = invite as? [String:Any]{
+                            Constants.DB.user.child((invite["user"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
+                                if let value = snapshot.value as? [String:Any]{
+                                    let user = NotificationUser(username: value["username"] as? String, uuid: invite["user"] as? String, imageURL: value["image_string"] as? String)
+                                    
+                                    let place = ItemOfInterest(itemName: invite["name"] as? String, imageURL: nil, type: "place")
+                                    place.id = (invite["id"] as? String)!
+
+                                    let event_comment = FocusNotification(type: NotificationType.Going, sender: user, item: place, time: Date(timeIntervalSince1970: invite["time"] as! Double))
+                                    place_invites.append(event_comment)
+                                    
+                                    if place_invites.count == place_count{
+                                        gotAcceptedInvites(place_invites)
+                                    }
+                                }
+                                
+                            })
+                            
+                            
+                        }
+                        
+                    }
+                }
+            }
+            
+            
+        })
         Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
             let eventInfo = snapshot.value as? [String : Any]
             
