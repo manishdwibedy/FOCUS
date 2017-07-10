@@ -245,7 +245,10 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
     
     @IBAction func backPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
+        
+        self.present(VC!, animated: true, completion: nil)
     }
 
 }
