@@ -144,7 +144,7 @@ class MapPopUpScreenView: UIView {
         inviteButton.setTitle("Meetup", for: .normal)
         
         self.profileImage.image = #imageLiteral(resourceName: "placeholder_pin")
-        self.object = username
+        
         
         if let data = object as? pinData{
             print(data)
@@ -200,7 +200,7 @@ class MapPopUpScreenView: UIView {
         self.clipsToBounds = true
         
         self.type = "pin"
-        
+        self.object = username
     }
     
     

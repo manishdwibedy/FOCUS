@@ -306,7 +306,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         else{
             NotificationUtil.getNotificationCount(gotNotification: {notif in
-                self.notifs.removeAll()
                 self.notifs.append(contentsOf: notif)
                 
                 not_count += notif.count
@@ -322,7 +321,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     count_received = 0
                 }
             }, gotInvites: {invite in
-                self.invites.removeAll()
+                
                 self.invites.append(contentsOf: invite)
                 not_count += invite.count
                 count_received += 1
@@ -338,7 +337,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
                 
             } , gotFeed: {feed in
-                self.feeds.removeAll()
                 self.feeds.append(contentsOf: feed)
                 not_count += feed.count
                 count_received += 1
@@ -400,6 +398,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.feeds.removeAll()
+        self.invites.removeAll()
+        self.notifs.removeAll()
+        
+    }
     override func viewDidAppear(_ animated: Bool) {
         Constants.DB.user_mapping.keepSynced(true)
 

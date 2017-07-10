@@ -39,13 +39,13 @@ class NotificationUtil{
         
         getFeeds(gotPins: {pins in
             feedArray.append(contentsOf: pins)
-            gotFeed(nofArray)
+            gotFeed(pins)
         }, gotEvents: { events in
             feedArray.append(contentsOf: events)
-            gotFeed(nofArray)
+            gotFeed(events)
         }, gotInvitations: {invitations in
             feedArray.append(contentsOf: invitations)
-            gotFeed(nofArray)
+            gotFeed(invitations)
         })
 
     }

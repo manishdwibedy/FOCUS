@@ -73,8 +73,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             let data = snapshot.value as? [String:Any]
             let otherUserImageURL = data!["image_string"] as? String
             
-            if let url = URL(string: otherUserImageURL!){
-                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+            if let url = otherUserImageURL, let image = URL(string: url){
+                SDWebImageManager.shared().downloadImage(with: image, options: .continueInBackground, progress: {
                     (receivedSize :Int, ExpectedSize :Int) in
                     
                 }, completed: {

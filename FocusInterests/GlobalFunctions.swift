@@ -447,7 +447,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                 
                 pinCount += 1
                 totalPins += 1
-                if pinCount == pins.count{
+                if pinCount == pins.count && pinImageCount == pinCount{
                     gotPins(pins)
                     print("pin done \(pinCount)")
                 }
