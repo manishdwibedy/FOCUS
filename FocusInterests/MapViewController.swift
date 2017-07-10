@@ -253,8 +253,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 AuthApi.set(yelpAccessToken: token)
                 
                 NotificationUtil.getNotificationCount(gotNotification: {notif in
+                    
+//                    self.nofArray = Array(Set<FocusNotification>(self.nofArray))
+//                    self.invArray = Array(Set<FocusNotification>(self.invArray))
+//                    self.feedAray = Array(Set<FocusNotification>(self.feedAray))
                     self.notifs.removeAll()
-                    self.notifs.append(contentsOf: notif)
+                    self.notifs.append(contentsOf: Array(Set<FocusNotification>(notif)))
                     
                     not_count += notif.count
                     count_received += 1
@@ -269,7 +273,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         count_received = 0
                     }
                 }, gotInvites: {invite in
-                    self.invites.append(contentsOf: invite)
+                    self.invites.append(contentsOf: Array(Set<FocusNotification>(invite)))
                     not_count += invite.count
                     count_received += 1
                     if count_received == 9{
@@ -284,7 +288,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     }
                 } , gotFeed: {feed in
                     self.feeds.removeAll()
-                    self.feeds.append(contentsOf: feed)
+                    self.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
                     not_count += feed.count
                     count_received += 1
                     
@@ -304,7 +308,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         else{
             NotificationUtil.getNotificationCount(gotNotification: {notif in
-                self.notifs.append(contentsOf: notif)
+                self.notifs.append(contentsOf: Array(Set<FocusNotification>(notif)))
                 
                 not_count += notif.count
                 count_received += 1
@@ -320,7 +324,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
             }, gotInvites: {invite in
                 
-                self.invites.append(contentsOf: invite)
+                self.invites.append(contentsOf: Array(Set<FocusNotification>(invite)))
                 not_count += invite.count
                 count_received += 1
                 if count_received == 9{
@@ -335,7 +339,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
                 
             } , gotFeed: {feed in
-                self.feeds.append(contentsOf: feed)
+                self.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
                 not_count += feed.count
                 count_received += 1
                 

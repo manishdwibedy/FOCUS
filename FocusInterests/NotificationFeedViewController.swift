@@ -57,15 +57,15 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         
         
-        nofArray.sorted(by: {
+        self.nofArray = self.nofArray.sorted(by: {
             $0.time! > $1.time!
         })
         
-        invArray.sorted(by: {
+        self.invArray = self.invArray.sorted(by: {
             $0.time! > $1.time!
         })
         
-        feedAray.sorted(by: {
+        self.feedAray = self.feedAray.sorted(by: {
             $0.time! > $1.time!
         })
         
