@@ -200,7 +200,6 @@ class MapPopUpScreenView: UIView {
         self.clipsToBounds = true
         
         self.type = "pin"
-        self.object = username
     }
     
     
@@ -260,7 +259,9 @@ class MapPopUpScreenView: UIView {
         else{
             let storyboard = UIStoryboard(name: "search_people", bundle: nil)
             let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
-            ivc.username = (object as? String)!
+            
+            let data = object as? pinData
+            ivc.username = data?.username
             ivc.mapView = parentVC
             parentVC.present(ivc, animated: true, completion: { _ in })
         }
