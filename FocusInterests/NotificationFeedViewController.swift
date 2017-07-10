@@ -93,12 +93,12 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         segmentedControl.layer.cornerRadius = 6
         segmentedControl.clipsToBounds = true
         
-        self.view.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
-        self.tableView.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
-        
         navBar.titleTextAttributes = Constants.navBar.attrs
+        navBar.barTintColor = Constants.color.navy
         
         tableView.tableFooterView = UIView()
+        
+        self.view.backgroundColor = Constants.color.navy
     }
     
     override func didReceiveMemoryWarning() {

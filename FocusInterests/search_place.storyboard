@@ -27,7 +27,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="ySq-LI-AmF"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.093528874218463898" green="0.17284265160560608" blue="0.26158365607261658" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
@@ -121,11 +121,11 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uw0-0h-Imw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <color key="backgroundColor" red="0.1029044524" green="0.28270957419999998" blue="0.45421557740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="mGs-ci-n6S"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.087884031239999993" green="0.16743460299999999" blue="0.26403400300000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
@@ -149,7 +149,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.22383019330000001" green="0.29016348720000001" blue="0.37076711649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Uw0-0h-Imw" firstAttribute="top" secondItem="BNE-m3-uHn" secondAttribute="top" id="1Oa-O3-n66"/>
                             <constraint firstItem="Uw0-0h-Imw" firstAttribute="leading" secondItem="vb7-Iy-GLB" secondAttribute="leading" id="CT6-ns-Tus"/>
