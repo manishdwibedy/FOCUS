@@ -71,9 +71,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         
         Constants.DB.user.child((user["firebaseUserId"] as? String)!).observeSingleEvent(of: .value, with: {snapshot in
             let data = snapshot.value as? [String:Any]
-            let otherUserImageURL = data!["image_string"] as! String
+            let otherUserImageURL = data!["image_string"] as? String
             
-            if let url = URL(string: otherUserImageURL){
+            if let url = URL(string: otherUserImageURL!){
                 SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
                     (receivedSize :Int, ExpectedSize :Int) in
                     
@@ -86,8 +86,6 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                     }
                 })
             }
-            //self.collectionView.reloadData()
-            
         })
         
         self.collectionView.backgroundColor = Constants.color.navy
