@@ -266,7 +266,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         
                         not_count -= read_notifications
                         if not_count > 0{
-                            self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                            if not_count > 9{
+                                self.navigationView.notificationsButton.badgeString = "9+"
+                            }
+                            else{
+                                self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                            }
                         }
                         else{
                             self.navigationView.notificationsButton.badgeString = ""
@@ -283,7 +288,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         
                         not_count -= read_notifications
                         if not_count > 0{
-                            self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                            if not_count > 9{
+                                self.navigationView.notificationsButton.badgeString = "9+"
+                            }
+                            else{
+                                self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                            }
                         }
                         else{
                             self.navigationView.notificationsButton.badgeString = ""
@@ -302,7 +312,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         
                         not_count -= read_notifications
                         if not_count > 0{
-                            self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                            if not_count > 9{
+                                self.navigationView.notificationsButton.badgeString = "9+"
+                            }
+                            else{
+                                self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                            }
                         }
                         else{
                             self.navigationView.notificationsButton.badgeString = ""
@@ -332,7 +347,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         else{
                             self.navigationView.notificationsButton.badgeString = "\(not_count)"
                         }
-                        
                     }
                     else{
                         self.navigationView.notificationsButton.badgeString = ""
@@ -350,7 +364,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     
                     not_count -= read_notifications
                     if not_count > 0{
-                        self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                        if not_count > 9{
+                            self.navigationView.notificationsButton.badgeString = "9+"
+                        }
+                        else{
+                            self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                        }
                     }
                     else{
                         self.navigationView.notificationsButton.badgeString = ""
@@ -369,7 +388,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     
                     not_count -= read_notifications
                     if not_count > 0{
-                        self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                        if not_count > 9{
+                            self.navigationView.notificationsButton.badgeString = "9+"
+                        }
+                        else{
+                            self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                        }
                     }
                     else{
                         self.navigationView.notificationsButton.badgeString = ""
