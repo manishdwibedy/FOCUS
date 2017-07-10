@@ -141,7 +141,7 @@ class MapPopUpScreenView: UIView {
         addGreenDot(label: interestLabel, content: focus)
         
         captionLeading.constant = -20
-        inviteButton.setTitle("Meetup", for: .normal)
+        inviteButton.setTitle("Meet up", for: .normal)
         
         self.profileImage.image = #imageLiteral(resourceName: "placeholder_pin")
         
