@@ -88,15 +88,17 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
         
+        segmentedControl.layer.borderWidth = 1
+        segmentedControl.layer.borderColor = UIColor.white.cgColor
         segmentedControl.layer.cornerRadius = 6
         segmentedControl.clipsToBounds = true
         
-        self.view.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
-        self.tableView.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
-        
         navBar.titleTextAttributes = Constants.navBar.attrs
+        navBar.barTintColor = Constants.color.navy
         
         tableView.tableFooterView = UIView()
+        
+        self.view.backgroundColor = Constants.color.navy
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,7 +125,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         else{
             var rowHeight: CGFloat?
             if indexPath.row == 0{
-                rowHeight = 115
+                rowHeight = 165
             }else if indexPath.row == 1{
                 rowHeight = 130
             }else if indexPath.row == 2{
@@ -131,9 +133,9 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             }else if indexPath.row == 3{
                 rowHeight = 150
             }else if indexPath.row == 4{
-                rowHeight = 280
+                rowHeight = 220
             }else if indexPath.row == 5{
-                rowHeight = 240
+                rowHeight = 255
             }else{
                 rowHeight = 80
             }

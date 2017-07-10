@@ -777,7 +777,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="K5z-Xh-TOp" firstAttribute="centerX" secondItem="HGh-z7-isQ" secondAttribute="centerX" id="2A7-lu-39I"/>
                             <constraint firstItem="rY1-XT-C2R" firstAttribute="top" secondItem="lEF-pk-Jwk" secondAttribute="bottom" constant="17" id="9ef-Zd-4fw"/>
@@ -813,8 +813,8 @@
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jez-MG-yo6">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </textAttributes>
@@ -862,7 +862,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="jez-MG-yo6" firstAttribute="top" secondItem="h03-gn-y9D" secondAttribute="bottom" id="47e-Pn-RHn"/>
                             <constraint firstItem="qoY-Jd-2wR" firstAttribute="leading" secondItem="HTe-sZ-Sda" secondAttribute="leadingMargin" id="Fwe-j7-udQ"/>
@@ -954,7 +954,7 @@
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Ymi-FW-sZi" firstAttribute="top" secondItem="IZ1-Is-ldq" secondAttribute="top" constant="7" id="0hE-Iq-lp9"/>
                                     <constraint firstAttribute="bottom" secondItem="Ymi-FW-sZi" secondAttribute="bottom" constant="5" id="7vg-tH-IJK"/>
@@ -981,7 +981,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="hnt-i7-qSc" firstAttribute="leading" secondItem="IZ1-Is-ldq" secondAttribute="leading" constant="8.5" id="4iU-dc-bin"/>
                             <constraint firstItem="Hjg-x5-NzF" firstAttribute="leading" secondItem="WKd-gR-SQg" secondAttribute="leadingMargin" id="5mQ-NZ-Qiz"/>
@@ -1137,7 +1137,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JzQ-fu-gAV" firstAttribute="top" secondItem="opm-Rr-b96" secondAttribute="bottom" id="2U8-oc-zS2"/>
                             <constraint firstItem="jlX-i7-Hi5" firstAttribute="top" secondItem="sBh-qG-oNO" secondAttribute="bottom" constant="54.5" id="ApB-dw-Fcd"/>

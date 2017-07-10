@@ -24,7 +24,7 @@ class FeedEventTableViewCell: UITableViewCell {
         self.nameLabelButton.setTitle("arya", for: .normal)
         self.eventNameLabelButton.setTitle("Event B", for: .normal)
         addGreenDot(label: self.interestLabel, content: "Food")
-        self.distanceLabel.text = "21mi"
+        self.distanceLabel.text = "21 mi"
         self.usernameImage.roundedImage()
         self.eventImage.roundedImage()
         self.attendButton.layer.borderWidth = 1.0

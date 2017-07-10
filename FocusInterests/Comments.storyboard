@@ -14,10 +14,10 @@
         <scene sceneID="hK1-Zg-svd">
             <objects>
                 <navigationController storyboardIdentifier="Comments" id="pYf-yc-Qtf" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WaK-yN-wKY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="WaK-yN-wKY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
@@ -41,7 +41,7 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUN-Hw-R4h">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <color key="backgroundColor" red="0.24209624528884888" green="0.33750134706497192" blue="0.42442375421524048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="MLs-bV-pQr"/>
                                 </constraints>
@@ -92,7 +92,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="l6a-of-LZd" firstAttribute="leading" secondItem="5hr-AB-2uG" secondAttribute="trailing" constant="20" id="PiH-aH-V4C"/>
                                     <constraint firstItem="5hr-AB-2uG" firstAttribute="centerY" secondItem="uWn-nL-sQi" secondAttribute="centerY" id="R4l-46-v8z"/>
@@ -103,7 +103,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mUN-Hw-R4h" firstAttribute="top" secondItem="ocw-D2-Ere" secondAttribute="bottom" constant="-20" id="A7r-0Y-QDo"/>
                             <constraint firstItem="996-ay-R9w" firstAttribute="top" secondItem="uWn-nL-sQi" secondAttribute="bottom" id="AHV-jv-fnx"/>

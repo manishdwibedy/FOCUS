@@ -10,6 +10,7 @@ import UIKit
 
 class SearchEventTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var name: UILabel!

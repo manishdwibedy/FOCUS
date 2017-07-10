@@ -237,6 +237,8 @@
 		EB252F141EEAA062001C163D /* UserProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */; };
 		EB3EA2421EE7707500F61D38 /* InviteListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */; };
 		EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */; };
+		EB450FB11F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB450FAF1F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift */; };
+		EB450FB21F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB450FB01F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib */; };
 		EB5891C71EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891C51EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift */; };
 		EB5891C81EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5891C61EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib */; };
 		EB5891CE1EE7E5B300C35EE9 /* Comments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */; };
@@ -590,6 +592,8 @@
 		EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteListTableViewCell.swift; sourceTree = "<group>"; };
 		EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteListTableViewCell.xib; sourceTree = "<group>"; };
+		EB450FAF1F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInFeedCreatedEventTableViewCell.swift; sourceTree = "<group>"; };
+		EB450FB01F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInFeedCreatedEventTableViewCell.xib; sourceTree = "<group>"; };
 		EB5891C51EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedTimeTableViewCell.swift; sourceTree = "<group>"; };
 		EB5891C61EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectedTimeTableViewCell.xib; sourceTree = "<group>"; };
 		EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Comments.storyboard; sourceTree = "<group>"; };
@@ -1321,6 +1325,8 @@
 				EBD382AA1F100D0A0068D313 /* FeedCreatedEventTableViewCell.xib */,
 				EBD382AD1F10167A0068D313 /* FeedPlaceImageTableViewCell.swift */,
 				EBD382AE1F10167B0068D313 /* FeedPlaceImageTableViewCell.xib */,
+				EB450FAF1F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift */,
+				EB450FB01F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib */,
 			);
 			name = FeedTableCells;
 			sourceTree = "<group>";
@@ -1537,6 +1543,7 @@
 				5B959FF31ECD452C00094FE6 /* RatingViewCell.xib in Resources */,
 				EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */,
 				5B71D70E1ED184880093A3F5 /* FollowProfileCell.xib in Resources */,
+				EB450FB21F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib in Resources */,
 				EB0578641EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib in Resources */,
 				FF1976631EFC46BB0033C79F /* FOCUSLabelCell.xib in Resources */,
 				5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */,
@@ -1937,6 +1944,7 @@
 				5BA37C771EBD63BE0091189E /* HomePageViewController.swift in Sources */,
 				5B2E5E051EF7974900F0BC1B /* PhotoViewController.swift in Sources */,
 				EB252F131EEAA062001C163D /* UserProfileCollectionViewCell.swift in Sources */,
+				EB450FB11F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift in Sources */,
 				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */,
 				FF12737B1EDC882E0034AA42 /* PinLookViewController.swift in Sources */,

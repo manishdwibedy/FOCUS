@@ -40,6 +40,12 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let nib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
         
+        self.createEventButton.roundCorners(radius: 5.0)
+        self.createEventButton.layer.shadowOpacity = 0.5
+        self.createEventButton.layer.masksToBounds = false
+        self.createEventButton.layer.shadowColor = UIColor.black.cgColor
+        self.createEventButton.layer.shadowRadius = 5.0
+        
         self.searchBar.delegate = self
         
         self.searchBar.isTranslucent = true

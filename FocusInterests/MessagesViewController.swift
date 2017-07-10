@@ -48,8 +48,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.messageTable.bounds.size.width, height: self.messageTable.bounds.size.height))
-        backgroundView.backgroundColor = Constants.color.navy
-        messageTable.backgroundView = backgroundView
+//        backgroundView.backgroundColor = Constants.color.navy
+//        messageTable.backgroundView = backgroundView
         
         let nib = UINib(nibName: "MessageTableViewCell", bundle: nil)
         messageTable.register(nib, forCellReuseIdentifier: "cell")

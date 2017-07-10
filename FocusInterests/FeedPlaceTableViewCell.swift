@@ -23,7 +23,7 @@ class FeedPlaceTableViewCell: UITableViewCell {
         self.usernameImage.roundedImage()
         self.placePhoto.roundedImage()
         addGreenDot(label: interestLabel, content: "Food")
-        self.distanceLabel.text = "50mi"
+        self.distanceLabel.text = "50 mi"
         var pinPlace = "UCLA Pavilion"
         var pinName = "Pin: \(pinPlace)"
         

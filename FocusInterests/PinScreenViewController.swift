@@ -192,10 +192,38 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         focusLabel.isUserInteractionEnabled = true
         
         self.focusLabel.addGestureRecognizer(focusTap)
-        
 
+        
+        let colorAnimation = CABasicAnimation(keyPath: "borderColor")
+        colorAnimation.fromValue = UIColor.clear.cgColor
+        colorAnimation.toValue = Constants.color.green.cgColor
+        self.pinTextView.layer.borderColor = Constants.color.green.cgColor
+        
+        let widthAnimation = CABasicAnimation(keyPath: "borderWidth")
+        widthAnimation.fromValue = 1
+        widthAnimation.toValue = 2
+        widthAnimation.duration = 4
+        self.pinTextView.layer.borderWidth = 2
+        
+        let bothAnimations = CAAnimationGroup()
+        bothAnimations.duration = 2.5
+        bothAnimations.animations = [colorAnimation, widthAnimation]
+        bothAnimations.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        self.pinTextView.layer.add(bothAnimations, forKey: "color and width")
+        
+//        self.animateBorderWidth(view: self.pinTextView, from: 0, to: 0.9, duration: 2.0)
+    
     }
     
+    func animateBorderWidth(view: UIView, from: CGFloat, to: CGFloat, duration: Double) {
+        let animation:CABasicAnimation = CABasicAnimation(keyPath: "borderWidth")
+        animation.fromValue = from
+        animation.toValue = to
+        animation.duration = duration
+        view.layer.add(animation, forKey: "Width")
+        view.layer.borderWidth = to
+    }
     
     func showFocus(sender: UITapGestureRecognizer){
         lastCaption = pinTextView.text
