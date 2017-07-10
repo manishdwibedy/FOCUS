@@ -30,19 +30,20 @@ func showLoginError(_ error: Error){
     if let errCode = AuthErrorCode(rawValue: error._code) {
         switch errCode {
         case .accountExistsWithDifferentCredential:
-            SCLAlertView().showError("Whoops!", subTitle: "Registered with different provider")
+            SCLAlertView().showCustom("Oops!", subTitle: "You have registered with different provider.", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
+            SCLAlertView().showError("Oops!", subTitle: "You have registered with different provider.")
         case .invalidEmail:
-            SCLAlertView().showError("Whoops!", subTitle: "Invalid email")
+            SCLAlertView().showCustom("Oops!", subTitle: "Invalid email", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
         case .emailAlreadyInUse:
-            SCLAlertView().showError("Whoops!", subTitle: "Email already in user")
+            SCLAlertView().showCustom("Oops!", subTitle: "Email already in user", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
         case .weakPassword:
-            SCLAlertView().showError("Whoops!", subTitle: "Weak password.")
+            SCLAlertView().showCustom("Oops!", subTitle: "Weak password.", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
         case .tooManyRequests:
-            SCLAlertView().showError("Whoops!", subTitle: "Too many requests. Try after some time")
+            SCLAlertView().showCustom("Oops!", subTitle: "Too many requests. Try after some time", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
         case .userTokenExpired:
-            SCLAlertView().showError("Whoops!", subTitle: "User token expired. Please login in again")
+            SCLAlertView().showCustom("Oops!", subTitle: "User token expired. Please login in again", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
         default:
-            SCLAlertView().showError("Whoops!", subTitle: "Failed to register the users.")
+            SCLAlertView().showCustom("Oops!", subTitle: "Failed to register the users.", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
         }
     }
 }

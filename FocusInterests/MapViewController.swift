@@ -135,7 +135,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             let camera = GMSCameraPosition.camera(withLatitude: last_pos.coordinate.latitude,
                                                   longitude: last_pos.coordinate.longitude,
-                                                  zoom: 12)
+                                                  zoom: 13)
             if mapView.isHidden {
                 mapView.isHidden = false
                 mapView.camera = camera
@@ -416,7 +416,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
                                                   longitude: (currentLocation?.coordinate.longitude)!,
-                                                  zoom: 12)
+                                                  zoom: 13)
             if mapView.isHidden {
                 mapView.isHidden = false
                 mapView.camera = camera
@@ -797,7 +797,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
-                                              zoom: 12)
+                                              zoom: 13)
         
         //let position = CLLocationCoordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude))
 //        if self.userLocation == nil{
@@ -906,7 +906,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
         let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
                                               longitude: (currentLocation?.coordinate.longitude)!,
-                                              zoom: 12)
+                                              zoom: 13)
         
         if mapView.isHidden {
             mapView.isHidden = false
