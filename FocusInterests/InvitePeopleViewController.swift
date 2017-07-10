@@ -179,7 +179,16 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             let event = filtered[indexPath.row] as! Event
             cell.name.text = event.title
             cell.address.text = event.fullAddress?.replacingOccurrences(of: ";;", with: "\n")
-            cell.interest.text = event.category
+            
+            if let category = event.category{
+                if category.contains(","){
+                    addGreenDot(label: cell.interest, content: category.components(separatedBy: ",")[0])
+                }
+                else{
+                    addGreenDot(label: cell.interest, content: category)
+                }
+            }
+            
             cell.event = event
             cell.UID = UID
             cell.username = username
@@ -191,6 +200,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
             cell.distance.text = getDistance(fromLocation: eventLocation, toLocation: AuthApi.getLocation()!)
         
+            
             let reference = Constants.storage.event.child("\(event.id!).jpg")
             
             cell.eventImage.image = crop(image: #imageLiteral(resourceName: "empty_event"), width: 50, height: 50)
@@ -351,9 +361,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             {
                 for (id, event) in value!
                 {
-                    let info = event as? [String:Any]
-                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id as? String, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
-                    self.filtered.append(event)
+                    if let info = event as? [String:Any]{
+                        let event = Event.toEvent(info: info)
+                        //                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id as? String, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
+                        self.filtered.append(event)
+                    }
+                    
                 }
                 self.tableView.reloadData()
             }
@@ -434,14 +447,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         let sortedViews = (sender as! UISegmentedControl).subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
         
-//        sortedViews[0].tintColor = UIColor.white
-//        sortedViews[0].backgroundColor = UIColor(red: 72/255.0, green: 255/255.0, blue: 255.0/255.0, alpha: 1.0)
-//        
-//        sortedViews[1].tintColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0)
-//        sortedViews[1].backgroundColor = UIColor.white
-//
-//        let sortedViews = sender.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
-        
         for (index, view) in sortedViews.enumerated() {
             if index == (sender as! UISegmentedControl).selectedSegmentIndex {
                 view.tintColor = Constants.color.green
@@ -451,19 +456,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 view.backgroundColor = UIColor.gray
             }
         }
-        
-        
-//        for (index, view) in sortedViews.enumerated() {
-//            if index == (sender as AnyObject).selectedSegmentIndex {
-//                view.tintColor = Constants.color.green
-//                view.backgroundColor = UIColor.white
-//            } else {
-//                view.tintColor = UIColor.white
-//                view.backgroundColor = UIColor.gray
-//            }
-//        }
-        
-        
     }
 
 }
