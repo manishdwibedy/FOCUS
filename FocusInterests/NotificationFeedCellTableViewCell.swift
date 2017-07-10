@@ -20,10 +20,10 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     @IBOutlet weak var timeOfNotificationLabel: UILabel!
     @IBOutlet weak var locationNameLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var userProfilePic: UIButton!
     
+    @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var contentBackView: UIView!
    
@@ -46,7 +46,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         self.contentView.backgroundColor = Constants.color.navy
         
         time.dateFormat = "h:mm a"
-        date.dateFormat = "MM/dd"
+        date.dateFormat = "MM/dd/yy"
         
         
     }
@@ -215,10 +215,8 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         if !isFeed{
             let notif_time = notif.time!
-            let plain_time = " at \(time.string(from: notif_time)) on \(date.string(from: notif_time))"
-            let timeString = NSMutableAttributedString(string: plain_time)
-            timeString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0,plain_time.characters.count))
-            attrString.append(timeString)    
+            let plain_time = "\(time.string(from: notif_time)) \(date.string(from: notif_time))"
+            self.timeLabel.text = plain_time
         }
         
         
@@ -227,9 +225,6 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         
         self.notif = notif
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(showUser(sender:)))
-//        self..isUserInteractionEnabled = true
-//        self.profileImage.addGestureRecognizer(tap)
         
     }
     

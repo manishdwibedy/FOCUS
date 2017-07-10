@@ -52,15 +52,15 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         AuthApi.clearNotifications()
         
         nofArray.sort(by: {
-            $0.time! < $1.time!
+            $0.time! > $1.time!
         })
         
         invArray.sort(by: {
-            $0.time! < $1.time!
+            $0.time! > $1.time!
         })
         
         feedAray.sort(by: {
-            $0.time! < $1.time!
+            $0.time! > $1.time!
         })
         
         tableView.reloadData()
