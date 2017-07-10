@@ -55,13 +55,16 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         cell.inviteButton.layer.shadowColor = UIColor.black.cgColor
         cell.inviteButton.layer.shadowRadius = 5.0
         
-        cell.address.text = "2656 Ellendale Pl Los Angeles, CA 90007, USA"
+        cell.textViewHeight.constant -= 22
+        
+        cell.address.text = "2656 Ellendale Pl Los Angeles"
         cell.name.text = "Event A"
         cell.distance.text = "4.6 mi"
         self.distanceLabel.text = cell.distance.text
-        cell.interest.isHidden = true
+        cell.interest.textColor = UIColor.white
+        cell.interest.text = "5 attendees"
+        cell.guestCount.isHidden = true
         addGreenDot(label: self.interestLabel, content: "Meet up")
-        cell.guestCount.text = "5 guests"
         cell.price.text = "Free"
         return cell
     }

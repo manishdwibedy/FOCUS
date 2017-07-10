@@ -10,17 +10,23 @@ import UIKit
 
 class FeedPlaceImageTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var interestLabel: UILabel!
+    @IBOutlet weak var pinCaptionLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var addressLabel: UIButton!
     @IBOutlet weak var usernameLabel: UIButton!
     @IBOutlet weak var usernameImage: UIImageView!
     @IBOutlet weak var imagePlace: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
         self.usernameLabel.setTitle("arya", for: .normal)
-        self.addressLabel.setTitle("11661 Goshen Ave", for: .normal)
-        self.distanceLabel.text = "10mi"
+        self.addressLabel.setTitle("1001 Rose Bowl Dr", for: .normal)
+        self.distanceLabel.text = "10 mi"
+        self.pinCaptionLabel.text = "Rose Bowl"
+        addGreenDot(label: self.interestLabel, content: "Sports")
         self.usernameImage.roundedImage()
     }
 

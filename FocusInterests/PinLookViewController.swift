@@ -337,11 +337,11 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         
             if self.likes > 1{
                 self.likesLabel.text = String(self.likes) + " likes"
-            }
-            else{
+            }else if self.likes == 1{
                 self.likesLabel.text = String(self.likes) + " like"
+            }else{
+                self.likesLabel.isHidden = true
             }
-        
             self.likeOut.setImage(#imageLiteral(resourceName: "Liked"), for: UIControlState.normal)
         }
        else{
@@ -361,9 +361,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         
             if self.likes > 1{
                 self.likesLabel.text = String(self.likes) + " likes"
-            }
-            else{
+            }else if self.likes == 1{
                 self.likesLabel.text = String(self.likes) + " like"
+            }else{
+                self.likesLabel.isHidden = true
             }
             self.likeOut.setImage(#imageLiteral(resourceName: "Like"), for: UIControlState.normal)
         }

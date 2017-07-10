@@ -28,7 +28,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="39s-ho-Js3"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
@@ -195,7 +195,7 @@
                                                             <constraint firstAttribute="height" constant="30" id="E5v-qQ-bot"/>
                                                         </constraints>
                                                         <color key="tintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="barTintColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="barTintColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </searchBar>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4mD-gv-r8q">
@@ -235,7 +235,7 @@
                                                                         <constraint firstItem="AcQ-5l-4Pk" firstAttribute="leading" secondItem="KJK-tA-lBd" secondAttribute="leadingMargin" constant="10" id="xsC-ey-3jn"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
-                                                                <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <connections>
                                                                     <outlet property="checkedInterest" destination="ToH-JO-m5i" id="WEW-7l-gVW"/>
                                                                     <outlet property="selectedInterestLabel" destination="AcQ-5l-4Pk" id="6tZ-Ug-sWY"/>
@@ -292,7 +292,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="54" id="0Lt-c7-aL4"/>
                                                     <constraint firstItem="OH2-HW-w53" firstAttribute="top" secondItem="aLt-ZX-AGd" secondAttribute="top" constant="12" id="0oT-VS-A0o"/>
@@ -308,7 +308,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="aLt-ZX-AGd" secondAttribute="trailing" id="0WX-qu-pmo"/>
                                             <constraint firstAttribute="trailing" secondItem="DK1-Jl-3Sz" secondAttribute="trailing" id="2Qo-Iw-ejb"/>
@@ -333,6 +333,8 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EH1-4f-id0">
                                                 <rect key="frame" x="75.5" y="0.0" width="51" height="31"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="onTintColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="PrivOrPubSwtchChanged:" destination="3TX-Ww-Aks" eventType="valueChanged" id="Dsh-hi-aUe"/>
                                                 </connections>
@@ -366,7 +368,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.086274509799999996" green="0.1647058824" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="top" secondItem="r8e-iM-PkH" secondAttribute="bottom" constant="44" id="A9f-1G-6QL"/>
                             <constraint firstItem="dIH-Pg-PIk" firstAttribute="bottom" secondItem="bS8-UJ-PiN" secondAttribute="top" id="DQk-LV-BU6"/>
@@ -401,6 +403,7 @@
                         <outlet property="navBar" destination="fEY-9z-tRP" id="NN1-zC-laA"/>
                         <outlet property="parentView" destination="BxB-qZ-pRY" id="B23-BK-fVm"/>
                         <outlet property="privateLabel" destination="NHt-Do-t7D" id="hJw-RW-5Fy"/>
+                        <outlet property="privatePublicSwitch" destination="EH1-4f-id0" id="4Ng-eR-cjU"/>
                         <outlet property="publicLabel" destination="LCG-dE-mWN" id="3o9-5Z-Tey"/>
                         <outlet property="publicOrPrivateSwitch" destination="EH1-4f-id0" id="cmZ-l0-HyP"/>
                         <outlet property="scrollView" destination="dIH-Pg-PIk" id="e8w-TY-394"/>
@@ -721,7 +724,7 @@
         <image name="Twitter_Logo_White_On_Image" width="250" height="204"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eLh-9t-fEY"/>
         <segue reference="amW-Q6-Hfg"/>
+        <segue reference="eLh-9t-fEY"/>
     </inferredMetricsTieBreakers>
 </document>

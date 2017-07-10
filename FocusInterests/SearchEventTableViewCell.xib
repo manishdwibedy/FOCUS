@@ -55,7 +55,7 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djv-ET-Cuh">
-                                <rect key="frame" x="281" y="67" width="50" height="15"/>
+                                <rect key="frame" x="281" y="67" width="50" height="16.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="mdw-U2-k7A"/>
                                 </constraints>
@@ -64,15 +64,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxW-oS-L2a">
-                                <rect key="frame" x="70" y="7" width="102" height="17"/>
+                                <rect key="frame" x="70" y="7" width="102" height="18.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="asd asd" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3n-Fh-fvf">
-                                <rect key="frame" x="65" y="27" width="204" height="40"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="asd" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3n-Fh-fvf">
+                                <rect key="frame" x="65" y="28.5" width="204" height="37"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="E2O-OM-cB3"/>
+                                    <constraint firstAttribute="height" constant="37" id="tBN-ym-vEn"/>
                                 </constraints>
                                 <inset key="scrollIndicatorInsets" minX="-5" minY="-15" maxX="0.0" maxY="-15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,13 +80,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meet up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3N-sR-ozX">
-                                <rect key="frame" x="70" y="65.5" width="89" height="18"/>
+                                <rect key="frame" x="70" y="66.5" width="89" height="18"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <color key="textColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guest Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLD-te-UJm">
-                                <rect key="frame" x="169" y="66" width="101" height="16.5"/>
+                                <rect key="frame" x="169" y="66" width="101" height="18"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -123,6 +123,7 @@
                             <constraint firstItem="5xg-xc-JPg" firstAttribute="top" secondItem="FAk-rc-9Hs" secondAttribute="bottom" constant="11" id="isX-3i-UOk"/>
                             <constraint firstItem="FAk-rc-9Hs" firstAttribute="trailing" secondItem="pyj-iE-Wv2" secondAttribute="trailingMargin" constant="-2" id="l8J-EL-gju"/>
                             <constraint firstItem="UxW-oS-L2a" firstAttribute="leading" secondItem="N3n-Fh-fvf" secondAttribute="leading" constant="5" id="llo-ji-Bw6"/>
+                            <constraint firstItem="p3N-sR-ozX" firstAttribute="top" secondItem="N3n-Fh-fvf" secondAttribute="bottom" constant="1" id="nZu-3E-E94"/>
                             <constraint firstItem="UxW-oS-L2a" firstAttribute="firstBaseline" secondItem="djv-ET-Cuh" secondAttribute="firstBaseline" constant="-58" id="rGk-Vm-jB1"/>
                             <constraint firstItem="5ln-aR-FZ6" firstAttribute="baseline" secondItem="FAk-rc-9Hs" secondAttribute="baseline" id="sjB-Ze-h0M"/>
                             <constraint firstItem="djv-ET-Cuh" firstAttribute="leading" secondItem="N3n-Fh-fvf" secondAttribute="trailing" constant="12" id="t3m-hp-Al3"/>
@@ -156,6 +157,7 @@
                 <outlet property="inviteButton" destination="FAk-rc-9Hs" id="TqX-2A-gg2"/>
                 <outlet property="name" destination="UxW-oS-L2a" id="DnE-AO-GIU"/>
                 <outlet property="price" destination="djv-ET-Cuh" id="LEv-DI-AK8"/>
+                <outlet property="textViewHeight" destination="tBN-ym-vEn" id="TFX-JL-aEu"/>
             </connections>
             <point key="canvasLocation" x="58" y="55.5"/>
         </tableViewCell>

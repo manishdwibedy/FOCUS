@@ -10,6 +10,7 @@ import UIKit
 
 class FeedOneTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var nameDescriptionLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var likesAmountLabel: UILabel!
@@ -21,6 +22,7 @@ class FeedOneTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.userImage.roundedImage()
         self.nameLabel.text = "Arya"
         self.addressLabel.text = "1600 Campus Road"
         self.distanceLabel.text = "2 mi"

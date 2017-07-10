@@ -15,6 +15,7 @@ import SCLAlertView
    
 class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate, NavigationFieldDelegate{
     
+    @IBOutlet weak var privatePublicSwitch: UISwitch!
     @IBOutlet weak var interestListView: UIView!
     @IBOutlet var parentView: UIView!
     @IBOutlet weak var interestListLabel: UILabel!
@@ -142,6 +143,11 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.privatePublicSwitch.tintColor = Constants.color.green
+        self.privatePublicSwitch.layer.cornerRadius = 16
+        self.privatePublicSwitch.backgroundColor = Constants.color.green
+        self.privatePublicSwitch.onTintColor = Constants.color.green
         
         self.interestTableView.dataSource = self
         self.interestTableView.delegate = self

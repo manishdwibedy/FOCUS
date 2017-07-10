@@ -279,12 +279,29 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         parentReturnVC.focusLabel.text = FOCUS
         parentReturnVC.focusLabel.sizeToFit()
         print("add focus border!")
-        let borderWidth: CGFloat = 2.0;
-
+        
+        let borderWidth: CGFloat = 2.0
         parentReturnVC.focusLabelView.bounds.size.width += parentReturnVC.focusLabelView.frame.width
         parentReturnVC.focusLabelView.frame = parentReturnVC.focusLabelView.frame.insetBy(dx: -borderWidth, dy: -borderWidth);
         parentReturnVC.focusLabelView.layer.borderColor = Constants.color.green.cgColor
-        parentReturnVC.focusLabelView.layer.borderWidth = borderWidth;
+        
+        let colorAnimation = CABasicAnimation(keyPath: "borderColor")
+        colorAnimation.fromValue = UIColor.clear.cgColor
+        colorAnimation.toValue = Constants.color.green.cgColor
+        parentReturnVC.pinTextView.layer.borderColor = Constants.color.green.cgColor
+        
+        let widthAnimation = CABasicAnimation(keyPath: "borderWidth")
+        widthAnimation.fromValue = 1
+        widthAnimation.toValue = borderWidth
+        widthAnimation.duration = 4
+        parentReturnVC.focusLabelView.layer.borderWidth = borderWidth
+        
+        let bothAnimations = CAAnimationGroup()
+        bothAnimations.duration = 2.5
+        bothAnimations.animations = [colorAnimation, widthAnimation]
+        bothAnimations.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        parentReturnVC.pinTextView.layer.add(bothAnimations, forKey: "color and width")
         
         self.dismiss(animated: true, completion: nil)
     }
