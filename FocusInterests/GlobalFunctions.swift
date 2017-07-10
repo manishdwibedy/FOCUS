@@ -30,20 +30,19 @@ func showLoginError(_ error: Error){
     if let errCode = AuthErrorCode(rawValue: error._code) {
         switch errCode {
         case .accountExistsWithDifferentCredential:
-            SCLAlertView().showCustom("Oops!", subTitle: "You have registered with different provider.", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
-            SCLAlertView().showError("Oops!", subTitle: "You have registered with different provider.")
+            SCLAlertView().showCustom("Oops!", subTitle: "You've already signed in with a different account.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
         case .invalidEmail:
-            SCLAlertView().showCustom("Oops!", subTitle: "Invalid email", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
+            SCLAlertView().showCustom("Oops!", subTitle: "Choose a valid email.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
         case .emailAlreadyInUse:
-            SCLAlertView().showCustom("Oops!", subTitle: "Email already in user", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
+            SCLAlertView().showCustom("Oops!", subTitle: "Email already in use.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
         case .weakPassword:
-            SCLAlertView().showCustom("Oops!", subTitle: "Weak password.", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
+            SCLAlertView().showCustom("Oops!", subTitle: "Password must be min. 8 characters.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
         case .tooManyRequests:
-            SCLAlertView().showCustom("Oops!", subTitle: "Too many requests. Try after some time", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
+            SCLAlertView().showCustom("Oops!", subTitle: "Wait a moment and try again.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
         case .userTokenExpired:
-            SCLAlertView().showCustom("Oops!", subTitle: "User token expired. Please login in again", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
+            SCLAlertView().showCustom("Oops!", subTitle: "User token expired. Please login in again.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
         default:
-            SCLAlertView().showCustom("Oops!", subTitle: "Failed to register the users.", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
+            SCLAlertView().showCustom("Oops!", subTitle: "Session Expired. Please Login again.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
         }
     }
 }
