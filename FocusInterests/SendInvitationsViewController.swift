@@ -31,6 +31,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var contactList: UILabel!
     @IBOutlet weak var contactListView: UIView!
     
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var facebookSwitch: UISwitch!
     @IBOutlet weak var twitterSwitch: UISwitch!
     let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
@@ -77,6 +78,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         if let txfSearchField = self.searchBar.value(forKey: "_searchField") as? UITextField {
             txfSearchField.borderStyle = .none
             txfSearchField.backgroundColor = UIColor(red: 24/255.0, green: 44/255.0, blue: 67/255.0, alpha: 1.0)
+            txfSearchField.allCornersRounded(radius: 5.0)
         }
         
         self.searchBar.isTranslucent = false
@@ -104,6 +106,9 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
         
         self.sortContacts()
+        
+        self.navBar.backgroundColor = Constants.color.navy
+        self.view.backgroundColor = Constants.color.navy
         
         hideKeyboardWhenTappedAround()
     }
