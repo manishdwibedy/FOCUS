@@ -179,6 +179,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         if self.pinType != "place"{
             self.coordinates = CLLocationCoordinate2D(latitude: AuthApi.getLocation()!.coordinate.latitude, longitude: AuthApi.getLocation()!.coordinate.longitude)
             getPlaceName(location: AuthApi.getLocation()!, completion: {address in
+                self.formmatedAddress = address
                 self.locationLabel.text = address
             })
         }

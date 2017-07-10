@@ -244,7 +244,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 105
+        if segmentedOut.selectedSegmentIndex == 0{
+            return 115
+        }
+        else{
+            return 105
+        }
+        
     }
     
     
