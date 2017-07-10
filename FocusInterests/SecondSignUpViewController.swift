@@ -25,8 +25,6 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var finishButton: UIButton!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.finishButton.isEnabled = false
@@ -151,5 +149,16 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         checkAllTextFieldsAreFilled()
     }
 
+    let ACCEPTABLE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789_."
+
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if textField == userNameTextField{
+            let cs = CharacterSet(charactersIn: ACCEPTABLE_CHARACTERS).inverted
+            let filtered: String = (string.components(separatedBy: cs) as NSArray).componentsJoined(by: "")
+            return (string == filtered)
+
+        }
+        return true
+    }
 
 }

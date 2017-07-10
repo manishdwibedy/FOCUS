@@ -99,10 +99,11 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         cell.usernameLabel.text = user?["username"] as! String?
         cell.fullNameLabel.text = user?["fullname"] as? String
         
-//        cell.preservesSuperviewLayoutMargins = false
-//        cell.separatorInset = UIEdgeInsets.zero
-//        cell.layoutMargins = UIEdgeInsets.zero
-
+        if let image_string = user?["image_string"] as? String{
+            if let url = URL(string: image_string){
+                cell.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+            }
+        }
         
         return cell
     }
@@ -127,67 +128,49 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func loadInitialTable(){
-        print("loading user list")
-        self.userRef.queryLimited(toLast: 10).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let users = snapshot.value as? [String:[String:Any]]
-            
-            for (id, user) in users!{
-                if !self.usersInMemory.contains(id){
-                    if let username = user["username"] as? String{
-                        if username.characters.count > 0{
-                            let first = String(describing: username.characters.first!).uppercased()
-                            
-                            self.usersInMemory.insert(id)
-                            
-                            if !self.sections.contains(first){
-                                self.sections.append(first)
-                                self.sectionMapping[first] = 1
-                                self.users[first] = [user]
+        
+        let ref = Constants.DB.user
+        
+        ref.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
+            if let value = snapshot.value as? [String:Any]{
+                for (_, people) in value{
+                    let followingCount = value.count
+                    if let peopleData = people as? [String:Any]{
+                        let UID = peopleData["UID"] as! String
+                        ref.child(UID).observeSingleEvent(of: .value, with: { snapshot in
+                            if let user = snapshot.value as? [String:Any]{
+                                if let username = user["username"] as? String{
+                                    if username.characters.count > 0{
+                                        let first = String(describing: username.characters.first!).uppercased()
+                                        
+                                        self.usersInMemory.insert(user["firebaseUserId"] as! String)
+                                        
+                                        if !self.sections.contains(first){
+                                            self.sections.append(first)
+                                            self.sectionMapping[first] = 1
+                                            self.users[first] = [user]
+                                        }
+                                        else{
+                                            self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                                            self.users[first]?.append(user)
+                                        }
+                                    }
+                                    
+                                    if followingCount == self.usersInMemory.count{
+                                        self.sections.sort()
+                                        self.filteredSectionMapping = self.sectionMapping
+                                        self.filteredSection = self.sections
+                                        self.filtered = self.users
+                                        self.tableView.reloadData()
+                                    }
+                                }
                             }
-                            else{
-                                self.sectionMapping[first] = self.sectionMapping[first]! + 1
-                                self.users[first]?.append(user)
-                            }
-                        }
+                        })
                     }
                 }
             }
-            
-            self.sections.sort()
-            self.filteredSectionMapping = self.sectionMapping
-            self.filteredSection = self.sections
-            self.filtered = self.users
-            self.tableView.reloadData()
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-        
+        })
     }
-    
-//    func loadRestUsers(){
-//        userRef.observe(DataEventType.value, with: { (snapshot) in
-//            // Get user value
-//            let users = snapshot.value as? [String:[String:Any]]
-//            
-//            for (id, user) in users!{
-//                if !self.usersInMemory.contains(id){
-//                    self.users.append(user)
-//                    self.usersInMemory.insert(id)
-//                }
-//            }
-//            
-//            self.users.sort { (nameOne, nameTwo) -> Bool in
-//                var stringOfNameOne = String(describing: nameOne["username"])
-//                var stringOfNameTwo = String(describing: nameTwo["username"])
-//                
-//                return stringOfNameOne.lowercased() < stringOfNameTwo.lowercased()
-//            }
-//            
-//            self.tableView.reloadData()
-//        })
-//        
-//    }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searching = true
@@ -208,36 +191,39 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchText.characters.count > 0{
-            let searchPredicate = NSPredicate(format: "username CONTAINS[C] %@", searchText)
-            var filteredUser = [[String:Any]]()
-            for section in sections {
-                let users = self.users[section]
-                let array = (users as! NSArray).filtered(using: searchPredicate)
-                for val in array{
-                    filteredUser.append(val as! [String : Any])
-                }
-            }
             
-            filteredSection.removeAll()
-            filtered.removeAll()
-            filteredSectionMapping.removeAll()
-            for user in filteredUser{
-                if let username = user["username"] as? String{
-                    let first = String(describing: username.characters.first!).uppercased()
-                    
-                    
-                    if !self.filteredSection.contains(first){
-                        self.filteredSection.append(first)
-                        self.filteredSectionMapping[first] = 1
-                        self.filtered[first] = [user]
-                    }
-                    else{
-                        self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
-                        self.filtered[first]?.append(user)
+            self.userRef.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let users = snapshot.value as? [String:[String:Any]]
+                
+                self.filteredSection.removeAll()
+                self.filteredSectionMapping.removeAll()
+                self.filtered.removeAll()
+                
+                for (id, user) in users!{
+                    if !self.usersInMemory.contains(id){
+                        if let username = user["username"] as? String{
+                            if username.characters.count > 0{
+                                let first = String(describing: username.characters.first!).uppercased()
+                                
+                                self.usersInMemory.insert(id)
+                                
+                                if !self.filteredSection.contains(first){
+                                    self.filteredSection.append(first)
+                                    self.filteredSectionMapping[first] = 1
+                                    self.filtered[first] = [user]
+                                }
+                                else{
+                                    self.filteredSectionMapping[first] = self.sectionMapping[first]! + 1
+                                    self.filtered[first]?.append(user)
+                                }
+                            }
+                        }
                     }
                 }
-                
-            }
+                self.filteredSection.sort()
+                self.tableView.reloadData()
+            })
         }
         else{
             self.filteredSection = self.sections

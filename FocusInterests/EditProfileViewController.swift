@@ -21,6 +21,7 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var profilePhotoView: UIImageView!
     
     let genders = ["Not Specified", "Male", "Female"]
+    let ACCEPTABLE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789_."
     
     var doneButton: UIBarButtonItem!
     var userPickerView: UIPickerView!
@@ -35,6 +36,7 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
         hideKeyboardWhenTappedAround()
         
         genderTf.delegate = self
+        usernameTf.delegate = self
         
         self.userPickerView = UIPickerView(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 190))
         self.userPickerView.delegate = self
@@ -262,4 +264,12 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         return true
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if textField == usernameTf{
+            let cs = CharacterSet(charactersIn: ACCEPTABLE_CHARACTERS).inverted
+            let filtered: String = (string.components(separatedBy: cs) as NSArray).componentsJoined(by: "")
+            return (string == filtered)
+        }
+        return true
+    }
 }

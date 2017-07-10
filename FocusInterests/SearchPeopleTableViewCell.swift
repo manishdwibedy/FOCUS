@@ -55,7 +55,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
         self.followButton.layer.shadowRadius = 5.0
         
         self.followButton.setTitle("Follow", for: UIControlState.normal)
-        self.followButton.setTitle("Unfollow", for: UIControlState.selected)
+        self.followButton.setTitle("Following", for: UIControlState.selected)
         
         //invite button
         self.inviteButton.clipsToBounds = true
