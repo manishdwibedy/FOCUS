@@ -258,7 +258,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     
                     not_count += notif.count
                     count_received += 1
-                    if count_received == 6{
+                    if count_received == 9{
                         not_count -= read_notifications
                         if not_count > 0{
                             self.navigationView.notificationsButton.badgeString = "\(not_count)"
@@ -269,11 +269,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         count_received = 0
                     }
                 }, gotInvites: {invite in
-                    self.invites.removeAll()
                     self.invites.append(contentsOf: invite)
                     not_count += invite.count
                     count_received += 1
-                    if count_received == 6{
+                    if count_received == 9{
                         not_count -= read_notifications
                         if not_count > 0{
                             self.navigationView.notificationsButton.badgeString = "\(not_count)"
@@ -283,14 +282,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         }
                         count_received = 0
                     }
-                    
                 } , gotFeed: {feed in
                     self.feeds.removeAll()
                     self.feeds.append(contentsOf: feed)
                     not_count += feed.count
                     count_received += 1
                     
-                    if count_received == 6{
+                    if count_received == 9{
                         not_count -= read_notifications
                         if not_count > 0{
                             self.navigationView.notificationsButton.badgeString = "\(not_count)"

@@ -276,11 +276,10 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             cell?.address.text = ""
             cell?.distance.text = ""
             
-//            cell?.cellHeight.constant = 70
             cell?.interest.text = ""
             cell?.cellContentView.backgroundColor = .clear
             cell?.shortBackground.isHidden = false
-            
+            cell?.pinSince.text = ""
         }
     
         cell?.ID = people.uuid!
@@ -378,11 +377,14 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     if let value = value
                                     {
                                         if let pin = pinData.toPin(user: user, value: value){
-                                            self.user_pins[user.uuid!] = pin
-                                            user.hasPin = true
+                                            if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
+                                                self.user_pins[user.uuid!] = pin
+                                                user.hasPin = true
+                                                
+                                                let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+                                                user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                            }
                                             
-                                            let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
-                                            user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
                                         }
                                     }
                                     if !self.filtered.contains(user){
