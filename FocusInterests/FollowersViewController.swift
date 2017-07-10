@@ -127,7 +127,12 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.followOut.isHidden = true
         }
         
+        Constants.DB.user.child((user?.uid)!).observeSingleEvent(of: .value, with: {snapshot in
         
+            if let value = snapshot.value as? [String:Any]{
+                 cell.data.username = (value["username"] as? String)!
+            }
+        })
 //        followersCell.fullnameLabel.text = user?.fullname
 //        followersCell.usernameLabel.text = user?.username
 //        followersCell.profileImage.roundedImage()
