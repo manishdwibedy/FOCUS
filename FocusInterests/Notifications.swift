@@ -17,7 +17,19 @@ enum NotificationType: String {
 
 import Foundation
 
-class FocusNotification {
+class FocusNotification: Hashable, Equatable {
+    /// Returns a Boolean value indicating whether two values are equal.
+    ///
+    /// Equality is the inverse of inequality. For any values `a` and `b`,
+    /// `a == b` implies that `a != b` is `false`.
+    ///
+    /// - Parameters:
+    ///   - lhs: A value to compare.
+    ///   - rhs: Another value to compare.
+    static func ==(lhs: FocusNotification, rhs: FocusNotification) -> Bool {
+        return lhs.time == rhs.time && lhs.type == rhs.type
+    }
+
     
     var type: NotificationType?
     var sender: NotificationUser?
@@ -30,6 +42,13 @@ class FocusNotification {
         self.item = item
         self.time = time
     }
+    
+    var hashValue : Int {
+        get {
+            return "\(self.time)".hashValue
+        }
+    }
+    
 }
 
 

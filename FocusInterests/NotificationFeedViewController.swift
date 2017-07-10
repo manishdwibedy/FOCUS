@@ -51,15 +51,21 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         AuthApi.clearNotifications()
         
-        nofArray.sort(by: {
+        self.nofArray = Array(Set<FocusNotification>(self.nofArray))
+        self.invArray = Array(Set<FocusNotification>(self.invArray))
+        self.feedAray = Array(Set<FocusNotification>(self.feedAray))
+        
+        
+        
+        nofArray.sorted(by: {
             $0.time! > $1.time!
         })
         
-        invArray.sort(by: {
+        invArray.sorted(by: {
             $0.time! > $1.time!
         })
         
-        feedAray.sort(by: {
+        feedAray.sorted(by: {
             $0.time! > $1.time!
         })
         
