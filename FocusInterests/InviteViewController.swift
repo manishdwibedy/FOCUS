@@ -82,7 +82,12 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         else if type == "place"{
             let currentTime = Date()
-            timeButton.setTitle(dateFormatter.string(from: currentTime), for: .normal)
+            
+            let calendar = Calendar.current
+            let nextDiff = 5 - calendar.component(.minute, from: currentTime) % 5
+            let nextDate = calendar.date(byAdding: .minute, value: nextDiff, to: currentTime) ?? Date()
+
+            timeButton.setTitle(dateFormatter.string(from: nextDate), for: .normal)
         }
         
         let inviteListCellNib = UINib(nibName: "InviteListTableViewCell", bundle: nil)
@@ -106,9 +111,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 if newData.UID != AuthApi.getFirebaseUid(){
                                     let first = String(describing: newData.username.characters.first!).uppercased()
                                     
-                                    if newData.username == self.username{
-                                        self.selected[newData] = true
-                                    }
                                     if !self.sections.contains(first){
                                         self.sections.append(first)
                                         self.sectionMapping[first] = 1
@@ -117,6 +119,10 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     else{
                                         self.sectionMapping[first] = self.sectionMapping[first]! + 1
                                         self.users[first]?.append(newData)
+                                    }
+                                    if newData.username == self.username{
+                                        self.selected[newData] = true
+                                        self.contactHasBeenSelected(contact: username, index: (self.users[first]?.count)! - 1)
                                     }
                                     
                                 }
@@ -198,12 +204,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         ]
         
         navBar.titleTextAttributes = attrs
-    }
-    
-    func setSelectedFriends(){
-        for _ in 0...contacts.count{
-            selectedFriend.append(false)
-        }
     }
     
     private func formatNavBar(){
@@ -294,12 +294,12 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let section = String(describing: contact.characters.first!)
         let user = self.users[section.uppercased()]?[index]
 
-        
-        if self.selected[user!]! == false
+        var selectedFriends = [String]()
+        if !self.selected[user!]!
         {
             self.selected[user!]! = true
             
-            var selectedFriends = [String]()
+            
             for (user, flag) in self.selected{
                 if flag{
                     selectedFriends.append(user.username)
@@ -312,8 +312,15 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             contactList.text = selectedFriends.joined(separator: ", ")
             friendsTableView.reloadData()
         }
-
-        
+        else if username.characters.count > 0 && self.selected[user!]!{
+            selectedFriends.append((user?.username)!)
+            
+            if selectedFriends.count > 0{
+                friendListBottom.constant = 57
+            }
+            contactList.text = selectedFriends.joined(separator: ", ")
+            friendsTableView.reloadData()
+        }
     }
     
     func contactHasBeenRemoved(contact: String, index: Int) {
