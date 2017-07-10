@@ -27,7 +27,7 @@ class FocusNotification: Hashable, Equatable {
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
     static func ==(lhs: FocusNotification, rhs: FocusNotification) -> Bool {
-        return lhs.time == rhs.time && lhs.type == rhs.type
+        return lhs.time == rhs.time && lhs.type == rhs.type && lhs.item?.id == rhs.item?.id
     }
 
     

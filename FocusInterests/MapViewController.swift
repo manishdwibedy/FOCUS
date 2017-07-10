@@ -252,17 +252,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             getYelpToken(completion: { token in
                 AuthApi.set(yelpAccessToken: token)
                 
+                not_count = 0
                 NotificationUtil.getNotificationCount(gotNotification: {notif in
                     
-//                    self.nofArray = Array(Set<FocusNotification>(self.nofArray))
-//                    self.invArray = Array(Set<FocusNotification>(self.invArray))
-//                    self.feedAray = Array(Set<FocusNotification>(self.feedAray))
                     self.notifs.removeAll()
                     self.notifs.append(contentsOf: Array(Set<FocusNotification>(notif)))
                     
-                    not_count += notif.count
                     count_received += 1
                     if count_received == 9{
+                        not_count += Array(Set<FocusNotification>(self.feeds)).count
+                        not_count += Array(Set<FocusNotification>(self.invites)).count
+                        not_count += Array(Set<FocusNotification>(self.notifs)).count
+                        
                         not_count -= read_notifications
                         if not_count > 0{
                             self.navigationView.notificationsButton.badgeString = "\(not_count)"
@@ -274,9 +275,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     }
                 }, gotInvites: {invite in
                     self.invites.append(contentsOf: Array(Set<FocusNotification>(invite)))
-                    not_count += invite.count
                     count_received += 1
                     if count_received == 9{
+                        not_count += Array(Set<FocusNotification>(self.feeds)).count
+                        not_count += Array(Set<FocusNotification>(self.invites)).count
+                        not_count += Array(Set<FocusNotification>(self.notifs)).count
+                        
                         not_count -= read_notifications
                         if not_count > 0{
                             self.navigationView.notificationsButton.badgeString = "\(not_count)"
@@ -289,10 +293,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 } , gotFeed: {feed in
                     self.feeds.removeAll()
                     self.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
-                    not_count += feed.count
                     count_received += 1
                     
                     if count_received == 9{
+                        not_count += Array(Set<FocusNotification>(self.feeds)).count
+                        not_count += Array(Set<FocusNotification>(self.invites)).count
+                        not_count += Array(Set<FocusNotification>(self.notifs)).count
+                        
                         not_count -= read_notifications
                         if not_count > 0{
                             self.navigationView.notificationsButton.badgeString = "\(not_count)"
@@ -308,14 +315,24 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         else{
             NotificationUtil.getNotificationCount(gotNotification: {notif in
-                self.notifs.append(contentsOf: Array(Set<FocusNotification>(notif)))
+                self.notifs.append(contentsOf: notif)
                 
-                not_count += notif.count
+                not_count = 0
                 count_received += 1
                 if count_received == 9{
+                    not_count += Array(Set<FocusNotification>(self.feeds)).count
+                    not_count += Array(Set<FocusNotification>(self.invites)).count
+                    not_count += Array(Set<FocusNotification>(self.notifs)).count
+                    
                     not_count -= read_notifications
                     if not_count > 0{
-                        self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                        if not_count > 9{
+                            self.navigationView.notificationsButton.badgeString = "9+"
+                        }
+                        else{
+                            self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                        }
+                        
                     }
                     else{
                         self.navigationView.notificationsButton.badgeString = ""
@@ -324,10 +341,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
             }, gotInvites: {invite in
                 
-                self.invites.append(contentsOf: Array(Set<FocusNotification>(invite)))
-                not_count += invite.count
+                self.invites.append(contentsOf: invite)
                 count_received += 1
                 if count_received == 9{
+                    not_count += Array(Set<FocusNotification>(self.feeds)).count
+                    not_count += Array(Set<FocusNotification>(self.invites)).count
+                    not_count += Array(Set<FocusNotification>(self.notifs)).count
+                    
                     not_count -= read_notifications
                     if not_count > 0{
                         self.navigationView.notificationsButton.badgeString = "\(not_count)"
@@ -339,11 +359,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
                 
             } , gotFeed: {feed in
-                self.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
-                not_count += feed.count
+                self.feeds.append(contentsOf: feed)
                 count_received += 1
                 
                 if count_received == 9{
+                    not_count += Array(Set<FocusNotification>(self.feeds)).count
+                    not_count += Array(Set<FocusNotification>(self.invites)).count
+                    not_count += Array(Set<FocusNotification>(self.notifs)).count
+                    
                     not_count -= read_notifications
                     if not_count > 0{
                         self.navigationView.notificationsButton.badgeString = "\(not_count)"
