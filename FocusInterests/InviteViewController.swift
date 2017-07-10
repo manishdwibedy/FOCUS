@@ -47,6 +47,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     var searchPlace: SearchPlacesViewController? = nil
     var searchEvent: SearchEventsViewController? = nil
+    var mapView: MapViewController? = nil
     
     var image: Data?
     var selectedFriend = [Bool]()

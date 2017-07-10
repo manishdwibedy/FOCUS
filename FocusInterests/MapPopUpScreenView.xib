@@ -68,6 +68,9 @@
                             <state key="normal" title="Invite">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="inviteUser:" destination="-1" eventType="touchUpInside" id="b4e-yO-m64"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star" translatesAutoresizingMaskIntoConstraints="NO" id="uIs-UL-3v9">
                             <rect key="frame" x="65" y="103" width="15" height="15"/>

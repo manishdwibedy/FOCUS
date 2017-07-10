@@ -30,7 +30,7 @@ class MapPopUpScreenView: UIView {
     @IBOutlet weak var hoursLabel: UILabel!
     
     @IBOutlet weak var inviteButton: UIButton!
-    var object: Any!
+    var object: Any? = nil
     var type = ""
     var parentVC: MapViewController!
     
@@ -57,7 +57,8 @@ class MapPopUpScreenView: UIView {
         self.view.addGestureRecognizer(tap)
         
     }
-    func loadEvent(name:String, date: String, miles: String, interest: String, address: String)
+    
+    func loadEvent(name:String, date: String, miles: String, interest: String, address: String, event: Event)
     {
         self.startImage.isHidden = true
         boldLabel.text = name
@@ -69,6 +70,8 @@ class MapPopUpScreenView: UIView {
         else{
             addGreenDot(label: interestLabel, content: interest)
         }
+        
+        inviteButton.setTitle("Invite", for: .normal)
         
         addressLabel.text = address
         
@@ -85,11 +88,12 @@ class MapPopUpScreenView: UIView {
         self.clipsToBounds = true
         
         self.type = "event"
+        self.object = event
         
     }
     
     
-    func loadPlace(name: String, rating: String, reviews: String, miles: String, interest: String, address:String, is_closed: Bool)
+    func loadPlace(name: String, rating: String, reviews: String, miles: String, interest: String, address:String, is_closed: Bool, place: Place)
     {
         self.startImage.isHidden = false
         boldLabel.text = name
@@ -101,6 +105,8 @@ class MapPopUpScreenView: UIView {
         addressLabel.text = address
         
         captionLeading.constant = 8
+        
+        inviteButton.setTitle("Invite", for: .normal)
         
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1).cgColor
@@ -119,10 +125,11 @@ class MapPopUpScreenView: UIView {
         self.clipsToBounds = true
         
         self.type = "place"
+        self.object = place
         
     }
     
-    func loadPin(name: String, pin: String, distance: String, focus: String, address: String, time: Double)
+    func loadPin(name: String, pin: String, distance: String, focus: String, address: String, time: Double, username: String)
     {
         
         self.startImage.isHidden = true
@@ -134,7 +141,11 @@ class MapPopUpScreenView: UIView {
         addGreenDot(label: interestLabel, content: focus)
         
         captionLeading.constant = -20
+        inviteButton.setTitle("Meetup", for: .normal)
+        
         self.profileImage.image = #imageLiteral(resourceName: "placeholder_pin")
+        self.object = username
+        
         if let data = object as? pinData{
             print(data)
             
@@ -221,6 +232,37 @@ class MapPopUpScreenView: UIView {
                 
             }
         
+        }
+    }
+    @IBAction func inviteUser(_ sender: Any) {
+        if self.type == "event"{
+            let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+            ivc.type = "event"
+            ivc.mapView = parentVC
+            
+            let event = object as! Event
+            ivc.id = event.id!
+            ivc.event = event
+            parentVC.present(ivc, animated: true, completion: { _ in })
+        }
+        else if self.type == "place"{
+            let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+            ivc.type = "place"
+            
+            let place = object as! Place
+            ivc.id = place.id
+            ivc.place = place
+            ivc.mapView = parentVC
+            parentVC.present(ivc, animated: true, completion: { _ in })
+        }
+        else{
+            let storyboard = UIStoryboard(name: "search_people", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
+            ivc.username = (object as? String)!
+            ivc.mapView = parentVC
+            parentVC.present(ivc, animated: true, completion: { _ in })
         }
     }
 }

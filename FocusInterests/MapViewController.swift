@@ -304,6 +304,57 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
             })
         }
+        else{
+            NotificationUtil.getNotificationCount(gotNotification: {notif in
+                self.notifs.removeAll()
+                self.notifs.append(contentsOf: notif)
+                
+                not_count += notif.count
+                count_received += 1
+                if count_received == 6{
+                    not_count -= read_notifications
+                    if not_count > 0{
+                        self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                    }
+                    else{
+                        self.navigationView.notificationsButton.badgeString = ""
+                    }
+                    count_received = 0
+                }
+            }, gotInvites: {invite in
+                self.invites.removeAll()
+                self.invites.append(contentsOf: invite)
+                not_count += invite.count
+                count_received += 1
+                if count_received == 6{
+                    not_count -= read_notifications
+                    if not_count > 0{
+                        self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                    }
+                    else{
+                        self.navigationView.notificationsButton.badgeString = ""
+                    }
+                    count_received = 0
+                }
+                
+            } , gotFeed: {feed in
+                self.feeds.removeAll()
+                self.feeds.append(contentsOf: feed)
+                not_count += feed.count
+                count_received += 1
+                
+                if count_received == 6{
+                    not_count -= read_notifications
+                    if not_count > 0{
+                        self.navigationView.notificationsButton.badgeString = "\(not_count)"
+                    }
+                    else{
+                        self.navigationView.notificationsButton.badgeString = ""
+                    }
+                    count_received = 0
+                }
+            })
+        }
         
         saveUserInfo()
         
@@ -542,7 +593,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             if let category = event.category{
                 interestText = category.components(separatedBy: ",")[0]
             }
-            popUpScreen.loadEvent(name: event.title!, date: start, miles: distance, interest: interestText, address: (event.fullAddress?.components(separatedBy: ";;")[0])!)
+            popUpScreen.loadEvent(name: event.title!, date: start, miles: distance, interest: interestText, address: (event.fullAddress?.components(separatedBy: ";;")[0])!, event: event)
             
             return true
             
@@ -590,7 +641,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
             
             print(place.id)
-            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interestText, address: place.address[0], is_closed: place.is_closed)
+            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interestText, address: place.address[0], is_closed: place.is_closed, place: place)
             return true
             
             
@@ -619,7 +670,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if let value = value
                 {
 
-                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest, address: pin.locationAddress.components(separatedBy: ";;")[0], time: pin.dateTimeStamp)
+                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest, address: pin.locationAddress.components(separatedBy: ";;")[0], time: pin.dateTimeStamp, username: (value["username"] as? String)!)
                 }
             })
         

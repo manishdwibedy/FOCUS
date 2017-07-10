@@ -27,6 +27,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var events = [Event]()
     var location: CLLocation?
     var searchPeople: SearchPeopleViewController? = nil
+    var mapView: MapViewController? = nil
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
