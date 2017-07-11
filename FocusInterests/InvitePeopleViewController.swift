@@ -12,7 +12,7 @@ import Alamofire
 import CoreLocation
 import SwiftyJSON
 
-class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate {
+class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate{
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -28,6 +28,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var location: CLLocation?
     var searchPeople: SearchPeopleViewController? = nil
     var mapView: MapViewController? = nil
+    var searchPeopleDelegate: SearchPeopleViewControllerDelegate?
+    
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -94,6 +96,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         ]
         
         navBar.titleTextAttributes = attrs
+        navBar.barTintColor = Constants.color.navy
+        self.view.backgroundColor = Constants.color.navy
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -363,7 +367,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 {
                     if let info = event as? [String:Any]{
                         let event = Event.toEvent(info: info)
-                        //                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id as? String, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
+//                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id as? String, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
                         self.filtered.append(event)
                     }
                     
@@ -457,5 +461,4 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
         }
     }
-
 }

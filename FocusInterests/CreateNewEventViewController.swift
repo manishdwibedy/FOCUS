@@ -404,36 +404,36 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func addEventLocation(_ sender: UITextField) {
-        let autoCompleteController = GMSAutocompleteViewController()
+        let autoCompleteController = self.createGMSViewController()
         
-        let filter = GMSAutocompleteFilter()
-        filter.country = "US"
-        
-        autoCompleteController.autocompleteFilter = filter
-
-        
-        autoCompleteController.delegate = self
-        
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
-        UINavigationBar.appearance().tintColor = UIColor.white
-        
-        //        search bar attributes
-        let placeholderAttributes: [String : AnyObject] = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!
-        ]
-        
-        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
-        
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = placeholderAttributes
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = placeholderTextAttributes
-        
-        autoCompleteController.primaryTextColor = UIColor.white
-        autoCompleteController.primaryTextHighlightColor = Constants.color.green
-        autoCompleteController.secondaryTextColor = UIColor.white
-        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
-        autoCompleteController.tableCellSeparatorColor = UIColor.white
+//        let filter = GMSAutocompleteFilter()
+//        filter.country = "US"
+//        
+//        autoCompleteController.autocompleteFilter = filter
+//
+//        
+//        autoCompleteController.delegate = self
+//        
+//        UINavigationBar.appearance().isTranslucent = false
+//        UINavigationBar.appearance().barTintColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+//        UINavigationBar.appearance().tintColor = UIColor.white
+//        
+//        //        search bar attributes
+//        let placeholderAttributes: [String : AnyObject] = [
+//            NSForegroundColorAttributeName: UIColor.white,
+//            NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!
+//        ]
+//        
+//        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+//        
+//        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = placeholderAttributes
+//        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = placeholderTextAttributes
+//        
+//        autoCompleteController.primaryTextColor = UIColor.white
+//        autoCompleteController.primaryTextHighlightColor = Constants.color.green
+//        autoCompleteController.secondaryTextColor = UIColor.white
+//        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+//        autoCompleteController.tableCellSeparatorColor = UIColor.white
         
         present(autoCompleteController, animated: true, completion: nil)
     }
@@ -583,6 +583,41 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
 
 extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
     
+    func createGMSViewController() -> GMSAutocompleteViewController{
+        let autoCompleteController = GMSAutocompleteViewController()
+        
+        let filter = GMSAutocompleteFilter()
+        filter.country = "US"
+        
+        autoCompleteController.autocompleteFilter = filter
+        
+        
+        autoCompleteController.delegate = self
+        
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.white
+        
+        //        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!
+        ]
+        
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = placeholderAttributes
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = placeholderTextAttributes
+        
+        autoCompleteController.primaryTextColor = UIColor.white
+        autoCompleteController.primaryTextHighlightColor = Constants.color.green
+        autoCompleteController.secondaryTextColor = UIColor.white
+        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        autoCompleteController.tableCellSeparatorColor = UIColor.white
+        
+        return autoCompleteController
+    }
+    
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         self.place = place
         
@@ -714,8 +749,8 @@ extension CreateNewEventViewController {
         } else if textField == self.locationTextField {
             eventDateTextField.inputAccessoryView = self.datePicker
             
-            let autoCompleteController = GMSAutocompleteViewController()
-            autoCompleteController.delegate = self
+            let autoCompleteController = self.createGMSViewController()
+            
             present(autoCompleteController, animated: true, completion: nil)
         } else if textField == self.eventPriceTextView {
             self.eventPriceTextView.inputAccessoryView = self.priceToolbar
@@ -787,8 +822,12 @@ extension CreateNewEventViewController {
     func keyboardNextButton(){
         if self.eventNameTextField.isFirstResponder{
             print("locationbecome first  ")
+            self.eventNameTextField.resignFirstResponder()
             self.locationTextField.becomeFirstResponder()
-        } else if self.eventDateTextField.isFirstResponder {
+        } else if self.locationTextField.isFirstResponder {
+            self.locationTextField.resignFirstResponder()
+            self.eventTimeTextField.becomeFirstResponder()
+        }else if self.eventDateTextField.isFirstResponder {
             print("event Time become first  ")
             self.eventTimeTextField.becomeFirstResponder()
             self.eventDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"

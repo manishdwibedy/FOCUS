@@ -8,7 +8,11 @@
 
 import UIKit
 
-class InvitePeopleEventCell: UITableViewCell {
+protocol InvitePeopleEventCellDelegate {
+    func haveInvitedSomeoneToAnEvent()
+}
+
+class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
 
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var name: UILabel!
@@ -82,6 +86,7 @@ class InvitePeopleEventCell: UITableViewCell {
         ivc.id = self.event.id!
         ivc.username = self.username
         ivc.event = event
+        ivc.searchPeopleEventDelegate = self
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: nil)
         }
@@ -99,5 +104,11 @@ class InvitePeopleEventCell: UITableViewCell {
 //        parentVC.searchPeople?.showInvitePopup = true
 //        parentVC.dismiss(animated: true, completion: nil)
     
+    }
+    
+    func haveInvitedSomeoneToAnEvent() {
+        self.parentVC.dismiss(animated: true, completion: { inviteEvent in
+            self.parentVC.searchPeopleDelegate?.haveInvitedSomeoneToAPlaceOrAnEvent()
+        })
     }
 }

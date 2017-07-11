@@ -107,7 +107,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         self.sortContacts()
         
-        self.navBar.backgroundColor = Constants.color.navy
+        self.navBar.barTintColor = Constants.color.navy
         self.view.backgroundColor = Constants.color.navy
         
         hideKeyboardWhenTappedAround()

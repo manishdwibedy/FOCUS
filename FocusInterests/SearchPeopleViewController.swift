@@ -12,7 +12,11 @@ import Alamofire
 import CoreLocation
 import SwiftyJSON
 
-class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
+protocol SearchPeopleViewControllerDelegate {
+    func haveInvitedSomeoneToAPlaceOrAnEvent()
+}
+
+class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, SearchPeopleViewControllerDelegate{
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -433,8 +437,12 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
         self.present(controller, animated: true, completion: nil)
-        
-        
+    }
+    
+    func haveInvitedSomeoneToAPlaceOrAnEvent(){
+        //+125
+        self.showInvitePopup = true
+        print("have invited someone to an event or place!")
     }
     
 }

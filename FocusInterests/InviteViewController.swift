@@ -49,6 +49,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchEvent: SearchEventsViewController? = nil
     var mapView: MapViewController? = nil
     
+    var searchPeopleEventDelegate: InvitePeopleEventCellDelegate?
+    var searchPeoplePlaceDelegate: InvitePeoplePlaceCellDelegate?
+    
     var image: Data?
     var selectedFriend = [Bool]()
     var contacts = [CNContact]()
@@ -368,6 +371,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     })
                     Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime,"status": "sent"])
                     searchPlace?.showPopup = true
+                    self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
                 }
                 else{
                     name = (event?.title)!
@@ -379,6 +383,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     })
                     Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
                     searchEvent?.showInvitePopup = true
+                    self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
                 }
                 
                 Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"inviteTime":inviteTime, "name": name])
