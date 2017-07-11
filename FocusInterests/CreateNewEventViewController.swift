@@ -171,6 +171,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.timeFormatter.dateFormat = "h:mm a"
         
         eventNameTextField.delegate = self
+        self.eventNameTextField.becomeFirstResponder()
         
         eventDescriptionTextView.delegate = self
         eventDescriptionTextView.text = "Description"
@@ -434,7 +435,6 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
 //        autoCompleteController.secondaryTextColor = UIColor.white
 //        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
 //        autoCompleteController.tableCellSeparatorColor = UIColor.white
-        
         present(autoCompleteController, animated: true, completion: nil)
     }
     
@@ -715,22 +715,22 @@ extension CreateNewEventViewController {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
-        
-        if textField == self.eventDateTextField {
-            self.eventDateTextField.becomeFirstResponder()
-        }
-        else if textField == self.eventTimeTextField {
-            self.eventEndTimeTextField.becomeFirstResponder()
-        }
-        else if textField == self.eventEndTimeTextField {
-            self.eventPriceTextView.becomeFirstResponder()
-        } else if textField == self.locationTextField {
-            self.eventDateTextField.becomeFirstResponder()
-        } else if textField == self.eventPriceTextView {
-            
-        } else if textField == self.eventNameTextField {
-            self.locationTextField.becomeFirstResponder()
-        }
+//        
+//        if textField == self.eventDateTextField {
+//            self.eventDateTextField.becomeFirstResponder()
+//        }
+//        else if textField == self.eventTimeTextField {
+//            self.eventEndTimeTextField.becomeFirstResponder()
+//        }
+//        else if textField == self.eventEndTimeTextField {
+//            self.eventPriceTextView.becomeFirstResponder()
+//        } else if textField == self.locationTextField {
+//            self.eventDateTextField.becomeFirstResponder()
+//        } else if textField == self.eventPriceTextView {
+//            
+//        } else if textField == self.eventNameTextField {
+//            self.locationTextField.becomeFirstResponder()
+//        }
         return false
     }
     
