@@ -130,6 +130,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     func loadInitialTable(){
         
         let ref = Constants.DB.user
+        var followingIndex = 0
         
         ref.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
             if let value = snapshot.value as? [String:Any]{
@@ -144,7 +145,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                                         let first = String(describing: username.characters.first!).uppercased()
                                         
                                         self.usersInMemory.insert(user["firebaseUserId"] as! String)
-                                        
+                                        followingIndex += 1
                                         if !self.sections.contains(first){
                                             self.sections.append(first)
                                             self.sectionMapping[first] = 1
@@ -156,7 +157,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                                         }
                                     }
                                     
-                                    if followingCount == self.usersInMemory.count{
+                                    if followingCount == followingIndex{
                                         self.sections.sort()
                                         self.filteredSectionMapping = self.sectionMapping
                                         self.filteredSection = self.sections
@@ -194,35 +195,37 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             
             self.userRef.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
-                let users = snapshot.value as? [String:[String:Any]]
-                
-                self.filteredSection.removeAll()
-                self.filteredSectionMapping.removeAll()
-                self.filtered.removeAll()
-                
-                for (id, user) in users!{
-                    if !self.usersInMemory.contains(id){
-                        if let username = user["username"] as? String{
-                            if username.characters.count > 0{
-                                let first = String(describing: username.characters.first!).uppercased()
-                                
-                                self.usersInMemory.insert(id)
-                                
-                                if !self.filteredSection.contains(first){
-                                    self.filteredSection.append(first)
-                                    self.filteredSectionMapping[first] = 1
-                                    self.filtered[first] = [user]
-                                }
-                                else{
-                                    self.filteredSectionMapping[first] = self.sectionMapping[first]! + 1
-                                    self.filtered[first]?.append(user)
+                if let users = snapshot.value as? [String:[String:Any]]{
+                    self.filteredSection.removeAll()
+                    self.filteredSectionMapping.removeAll()
+                    self.filtered.removeAll()
+                    
+                    for (id, user) in users{
+                        if !self.usersInMemory.contains(id){
+                            if let username = user["username"] as? String{
+                                if username.characters.count > 0{
+                                    let first = String(describing: username.characters.first!).uppercased()
+                                    
+                                    self.usersInMemory.insert(id)
+                                    
+                                    if !self.filteredSection.contains(first){
+                                        self.filteredSection.append(first)
+                                        self.filteredSectionMapping[first] = 1
+                                        self.filtered[first] = [user]
+                                    }
+                                    else{
+                                        self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
+                                        self.filtered[first]?.append(user)
+                                    }
                                 }
                             }
                         }
                     }
+                    self.filteredSection.sort()
+                    self.tableView.reloadData()
                 }
-                self.filteredSection.sort()
-                self.tableView.reloadData()
+                
+                
             })
         }
         else{

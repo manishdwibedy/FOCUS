@@ -191,6 +191,11 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.view.endEditing(true)
     }
     
+    @IBAction func usernameChanged(_ sender: Any) {
+        let cs = CharacterSet(charactersIn: ACCEPTABLE_CHARACTERS).inverted
+        let filtered = usernameTf.text?.components(separatedBy: cs).joined(separator: "")
+        usernameTf.text = filtered
+    }
     /*
     // MARK: - Navigation
 
