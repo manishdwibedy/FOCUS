@@ -137,7 +137,7 @@ class Share{
     }
     
     
-    static func getUserContacts(email : String, completion: @escaping ([[String:String]])->Void){
+    private static func getUserContacts(completion: @escaping ([[String:String]])->Void){
         if let token = AuthApi.getGoogleToken(){
             var url = URL(string: "https://www.google.com/m8/feeds/contacts/default/thin?max-results=10000&alt=json")
             
@@ -170,6 +170,59 @@ class Share{
                 
             }
         }
+    }
+    
+    private static func getUserEmails(contacts:[[String:String]], gotEmail: @escaping (_ email: [FollowNewUser]) -> Void){
+        var emails = [String]()
+        var users = [FollowNewUser]()
         
+        Constants.DB.user.observeSingleEvent(of: .value, with: {snapshot in
+            
+            if let value = snapshot.value as? [String:[String:Any]]{
+                for (id, user) in value{
+                    if let email = user["email"] as? String, email.characters.count > 0{
+                        if email != AuthApi.getUserEmail()!{
+                            emails.append(email)
+                        }
+                    }
+                }
+                
+                for email in emails{
+                    if let user = contacts.first(where: { element in
+                        return element["email"] == email
+                    }){
+                        users.append(FollowNewUser.toFollowUser(info: user))
+                    }
+                
+                }
+                gotEmail(users)
+            }
+        })
+        
+    }
+    
+    static func getMatchingUsers(){
+        Share.getUserContacts(completion: { contacts in
+            Share.getUserEmails(contacts: contacts, gotEmail: {users in
+            
+            })
+        })
+    }
+
+}
+
+class FollowNewUser{
+    var fullname: String
+    var image: String
+    var email: String
+    
+    init(fullname: String, image: String, email: String) {
+        self.fullname = fullname
+        self.image = image
+        self.email = email
+    }
+    
+    static func toFollowUser(info: [String:String]) -> FollowNewUser{
+        return FollowNewUser(fullname: info["name"]!, image: info["image"]!, email: info["email"]!)
     }
 }

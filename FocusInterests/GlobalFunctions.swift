@@ -946,25 +946,6 @@ func getUserData(uid: String, gotInfo: @escaping (_ user: NotificationUser) -> V
     })
 }
 
-func getUserEmails(gotEmail: @escaping (_ email: [String]) -> Void){
-    var emails = [String]()
-    
-    Constants.DB.user.observeSingleEvent(of: .value, with: {snapshot in
-    
-        if let value = snapshot.value as? [String:[String:Any]]{
-            for (id, user) in value{
-                if let email = user["email"] as? String, email.characters.count > 0{
-                    emails.append(email)
-                }
-            }
-            gotEmail(emails)
-        }
-    })
-
-}
-
-
-
 
 
 
