@@ -133,14 +133,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         if let last_pos = AuthApi.getLocation(){
             
-            let camera = GMSCameraPosition.camera(withLatitude: last_pos.coordinate.latitude,
-                                                  longitude: last_pos.coordinate.longitude,
-                                                  zoom: 13)
-            if mapView.isHidden {
-                mapView.isHidden = false
-                mapView.camera = camera
-            } else {
-                mapView.animate(to: camera)
+            if !showEvent && !showPin{
+                let camera = GMSCameraPosition.camera(withLatitude: last_pos.coordinate.latitude,
+                                                      longitude: last_pos.coordinate.longitude,
+                                                      zoom: 13)
+                if mapView.isHidden {
+                    mapView.isHidden = false
+                    mapView.camera = camera
+                } else {
+                    mapView.animate(to: camera)
+                }
             }
         }
         
@@ -452,8 +454,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.feeds.removeAll()
         self.invites.removeAll()
         self.notifs.removeAll()
-        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         Constants.DB.user_mapping.keepSynced(true)
 
@@ -889,7 +891,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             })
         }
         
-        if !showEvent{
+        if !showEvent && !showPin{
             mapView.settings.myLocationButton = true
 
             if mapView.isHidden {
@@ -914,6 +916,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         } else {
             mapView.animate(to: camera)
         }
+        
+        showPin = false
+        showEvent = false
         return true
     }
     

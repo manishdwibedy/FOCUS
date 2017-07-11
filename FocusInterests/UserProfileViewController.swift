@@ -614,13 +614,68 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     self.moreEventsButton.isHidden = true
                 }
                 
-                self.eventsCollectionView.reloadData()    
+                self.eventsCollectionView.reloadData()
+                
+                self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
+                self.createEventButton.alpha = 0
             }
             else{
                 self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
                 self.createEventButton.alpha = 1
             }
             
+        })
+        
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").queryOrdered(byChild: "status").queryEqual(toValue: "accepted").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            
+            
+            if let placeData = value{
+                let count = placeData.count
+                for (_,place) in placeData
+                {
+                    let id = (place as? [String:Any])?["ID"]
+                    
+                    Constants.DB.event.child(id as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let info = snapshot.value as? [String : Any], info.count > 0{
+                            let event = Event.toEvent(info: info)
+                            event?.id = id as! String
+                            
+                            let eventLocation = CLLocation(latitude: Double((info["longitude"])! as! String)!, longitude: Double((info["longitude"])! as! String)!)
+                            
+                            event?.distance = eventLocation.distance(from: AuthApi.getLocation()!)
+                            if let attending = info["attendingList"] as? [String:Any]{
+                                event?.setAttendessCount(count: attending.count)
+                            }
+                            
+                            
+                            self.suggestion.append(event!)
+                            if self.suggestion.count == count{
+                                if self.suggestion.count > 0{
+                                    if self.suggestion.count > 3{
+                                        self.moreEventsButton.isHidden = false
+                                    }
+                                    else{
+                                        self.moreEventsButton.isHidden = true
+                                    }
+                                    
+                                    self.eventsCollectionView.reloadData()
+                                    
+                                    self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
+                                    self.createEventButton.alpha = 0
+                                }
+                                else{
+                                    self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
+                                    self.createEventButton.alpha = 1
+                                }
+                            }
+                            
+                        }
+                        
+                        
+                    })
+                }
+            }
         })
     }
     

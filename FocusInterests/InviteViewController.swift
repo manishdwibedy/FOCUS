@@ -388,7 +388,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     searchEvent?.showInvitePopup = true
                 }
                 
-                Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"inviteTime":inviteTime, "name": name])
+                Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown"])
                 
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
                     

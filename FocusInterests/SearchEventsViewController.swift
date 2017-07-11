@@ -100,7 +100,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         super.viewWillAppear(animated)
         self.location = AuthApi.getLocation()
         
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").observeSingleEvent(of: .value, with: { (snapshot) in
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").queryOrdered(byChild: "status").queryEqual(toValue: "accepted").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
             
@@ -112,17 +112,18 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     
                     Constants.DB.event.child(id as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                         if let info = snapshot.value as? [String : Any], info.count > 0{
-                            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as? String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as? String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: id as? String, category: info["interests"] as? String, privateEvent: (info["private"] as? Bool)!)
+                            let event = Event.toEvent(info: info)
+                            event?.id = id as! String
                             
                             let eventLocation = CLLocation(latitude: Double((info["longitude"])! as! String)!, longitude: Double((info["longitude"])! as! String)!)
                             
-                            event.distance = eventLocation.distance(from: AuthApi.getLocation()!)
+                            event?.distance = eventLocation.distance(from: AuthApi.getLocation()!)
                             if let attending = info["attendingList"] as? [String:Any]{
-                                event.setAttendessCount(count: attending.count)
+                                event?.setAttendessCount(count: attending.count)
                             }
                             
                             
-                            self.attending.append(event)
+                            self.attending.append(event!)
                             if self.attending.count == count{
                                 
                                 for event in self.attending{
