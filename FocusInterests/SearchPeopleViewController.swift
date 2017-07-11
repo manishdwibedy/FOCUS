@@ -440,7 +440,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func haveInvitedSomeoneToAPlaceOrAnEvent(){
-        //+125
         self.showInvitePopup = true
         print("have invited someone to an event or place!")
     }

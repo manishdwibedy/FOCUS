@@ -906,24 +906,10 @@
                                     <segue destination="H1e-hr-4VX" kind="unwind" unwindAction="unwindFromSignUPWithSender:" id="zNZ-gI-aUs"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hnt-i7-qSc">
-                                <rect key="frame" x="52" y="216.5" width="271" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="hnt-i7-qSc" secondAttribute="height" multiplier="321:28" constant="-50.333333333333371" id="RTE-mi-YDe"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Phone"/>
-                                    <segment title="Email"/>
-                                </segments>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="typeOfSignUpWasSelected:" destination="8P8-kk-dh6" eventType="valueChanged" id="6dg-4b-zQQ"/>
-                                </connections>
-                            </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZ1-Is-ldq">
-                                <rect key="frame" x="43" y="316.5" width="289" height="42.5"/>
+                                <rect key="frame" x="43" y="306.5" width="289" height="42.5"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="igb-sL-x3Y" userLabel="Email Text Field">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="igb-sL-x3Y" userLabel="Email Text Field">
                                         <rect key="frame" x="8.5" y="6" width="272" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -933,39 +919,13 @@
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="US (+1)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ymi-FW-sZi">
-                                        <rect key="frame" x="11.5" y="7" width="78" height="30.5"/>
-                                        <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Ymi-FW-sZi" secondAttribute="height" multiplier="80:31" id="CQ4-cm-LbL"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="694-lq-czT" userLabel="Phone Text Field">
-                                        <rect key="frame" x="97.5" y="11" width="184" height="22.5"/>
-                                        <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="694-lq-czT" secondAttribute="height" multiplier="194:33" constant="52.666666666666657" id="WtT-VR-mw1"/>
-                                        </constraints>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="Ymi-FW-sZi" firstAttribute="top" secondItem="IZ1-Is-ldq" secondAttribute="top" constant="7" id="0hE-Iq-lp9"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ymi-FW-sZi" secondAttribute="bottom" constant="5" id="7vg-tH-IJK"/>
                                     <constraint firstAttribute="width" secondItem="IZ1-Is-ldq" secondAttribute="height" multiplier="289:43" constant="4.1472868217051087" id="9Zr-2O-Lfm"/>
                                     <constraint firstItem="igb-sL-x3Y" firstAttribute="centerY" secondItem="IZ1-Is-ldq" secondAttribute="centerY" id="HeD-Ik-UgV"/>
                                     <constraint firstAttribute="trailing" secondItem="igb-sL-x3Y" secondAttribute="trailing" constant="8.6666666666666288" id="PPZ-UG-T7a"/>
-                                    <constraint firstItem="694-lq-czT" firstAttribute="trailing" secondItem="IZ1-Is-ldq" secondAttribute="trailingMargin" id="QEu-4M-mZd"/>
-                                    <constraint firstItem="694-lq-czT" firstAttribute="leading" secondItem="Ymi-FW-sZi" secondAttribute="trailing" constant="8" id="d31-U2-Vc1"/>
                                     <constraint firstItem="igb-sL-x3Y" firstAttribute="centerX" secondItem="IZ1-Is-ldq" secondAttribute="centerX" constant="-0.33333333333331439" id="fOL-Ay-bXY"/>
-                                    <constraint firstItem="694-lq-czT" firstAttribute="centerY" secondItem="Ymi-FW-sZi" secondAttribute="centerY" id="hBe-Je-3OT"/>
-                                    <constraint firstItem="Ymi-FW-sZi" firstAttribute="leading" secondItem="IZ1-Is-ldq" secondAttribute="leading" constant="11" id="iJV-ja-0pP"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0f-h5-cCA">
@@ -980,37 +940,41 @@
                                     <action selector="nextButtonClicked:" destination="8P8-kk-dh6" eventType="touchUpInside" id="7cX-eW-heU"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1G-24-RPq">
+                                <rect key="frame" x="43" y="212" width="289" height="33"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="hnt-i7-qSc" firstAttribute="leading" secondItem="IZ1-Is-ldq" secondAttribute="leading" constant="8.5" id="4iU-dc-bin"/>
+                            <constraint firstItem="q1G-24-RPq" firstAttribute="trailing" secondItem="IZ1-Is-ldq" secondAttribute="trailing" id="4do-Gz-JhE"/>
+                            <constraint firstItem="q1G-24-RPq" firstAttribute="centerX" secondItem="WKd-gR-SQg" secondAttribute="centerX" id="5j2-TM-OCe"/>
                             <constraint firstItem="Hjg-x5-NzF" firstAttribute="leading" secondItem="WKd-gR-SQg" secondAttribute="leadingMargin" id="5mQ-NZ-Qiz"/>
                             <constraint firstItem="IZ1-Is-ldq" firstAttribute="trailing" secondItem="r0f-h5-cCA" secondAttribute="trailing" id="66w-sj-saV"/>
-                            <constraint firstItem="hnt-i7-qSc" firstAttribute="trailing" secondItem="IZ1-Is-ldq" secondAttribute="trailing" constant="-9.5" id="I54-WM-FeL"/>
+                            <constraint firstItem="IZ1-Is-ldq" firstAttribute="top" secondItem="q1G-24-RPq" secondAttribute="bottom" constant="61.5" id="9r1-wL-kPN"/>
                             <constraint firstItem="IZ1-Is-ldq" firstAttribute="leading" secondItem="WKd-gR-SQg" secondAttribute="leadingMargin" constant="27" id="MYb-Mg-BC1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IZ1-Is-ldq" secondAttribute="trailing" constant="27" id="NDf-I9-feO"/>
                             <constraint firstItem="Hjg-x5-NzF" firstAttribute="top" secondItem="vZ6-ia-lvT" secondAttribute="bottom" id="RuN-eJ-wgN"/>
-                            <constraint firstItem="IZ1-Is-ldq" firstAttribute="top" secondItem="hnt-i7-qSc" secondAttribute="bottom" constant="71.5" id="XSV-bs-PMp"/>
-                            <constraint firstItem="r0f-h5-cCA" firstAttribute="top" secondItem="IZ1-Is-ldq" secondAttribute="bottom" constant="55" id="Y5E-bt-ley"/>
+                            <constraint firstItem="q1G-24-RPq" firstAttribute="leading" secondItem="IZ1-Is-ldq" secondAttribute="leading" id="TSZ-Ff-q89"/>
+                            <constraint firstItem="r0f-h5-cCA" firstAttribute="top" secondItem="IZ1-Is-ldq" secondAttribute="bottom" constant="65" id="Y5E-bt-ley"/>
                             <constraint firstItem="IZ1-Is-ldq" firstAttribute="centerX" secondItem="WKd-gR-SQg" secondAttribute="centerX" id="hST-P2-EPd"/>
-                            <constraint firstItem="IZ1-Is-ldq" firstAttribute="centerY" secondItem="WKd-gR-SQg" secondAttribute="centerY" constant="4.1666666666666856" id="sDx-r3-PCD"/>
+                            <constraint firstItem="IZ1-Is-ldq" firstAttribute="centerY" secondItem="WKd-gR-SQg" secondAttribute="centerY" constant="-5.75" id="sDx-r3-PCD"/>
                             <constraint firstItem="IZ1-Is-ldq" firstAttribute="leading" secondItem="r0f-h5-cCA" secondAttribute="leading" id="zPw-OK-K3E"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="igb-sL-x3Y" id="CDJ-SM-KYU"/>
                         <outlet property="nextButton" destination="r0f-h5-cCA" id="y3X-6C-fzj"/>
-                        <outlet property="phoneEmailSwitcher" destination="hnt-i7-qSc" id="WTh-Xi-J9P"/>
                         <outlet property="phoneNumberEmailView" destination="IZ1-Is-ldq" id="f81-Bp-3De"/>
-                        <outlet property="phoneTextField" destination="694-lq-czT" id="Uw7-u9-Epy"/>
-                        <outlet property="usPhoneLabel" destination="Ymi-FW-sZi" id="bC4-SX-tZV"/>
                         <segue destination="23E-AK-q7g" kind="show" identifier="next" id="SJs-J2-cg4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yum-uS-gpM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="H1e-hr-4VX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="347.82608695652175" y="1300.271739130435"/>
+            <point key="canvasLocation" x="346.39999999999998" y="1299.400299850075"/>
         </scene>
         <!--Second Sign Up View Controller-->
         <scene sceneID="OXr-Vz-imF">
