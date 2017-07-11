@@ -133,11 +133,15 @@ class notificationTabCell: UITableViewCell {
                         
                     }else
                     {
-                        self.typePic.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                        self.typePic.image = #imageLiteral(resourceName: "placeholder_pin")
                     }
                     
                 }
             })
+        }
+        else{
+            let place = notif.item?.data["place"] as? Place
+            self.typePic.sd_setImage(with: URL(string: (place?.image_url)!)!, placeholderImage: #imageLiteral(resourceName: "placeholder_place"))
         }
         
         self.timeLabel.text = getTimeSince(date: notif.time!)

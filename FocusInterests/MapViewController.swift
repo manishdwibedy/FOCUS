@@ -263,8 +263,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     self.notifs.append(contentsOf: Array(Set<FocusNotification>(notif)))
                     
                     count_received += 1
-                    if count_received == 9{
-                        not_count += Array(Set<FocusNotification>(self.feeds)).count
+                    if count_received == 5{
                         not_count += Array(Set<FocusNotification>(self.invites)).count
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
@@ -285,8 +284,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }, gotInvites: {invite in
                     self.invites.append(contentsOf: Array(Set<FocusNotification>(invite)))
                     count_received += 1
-                    if count_received == 9{
-                        not_count += Array(Set<FocusNotification>(self.feeds)).count
+                    if count_received == 5{
                         not_count += Array(Set<FocusNotification>(self.invites)).count
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
@@ -307,10 +305,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 } , gotFeed: {feed in
                     self.feeds.removeAll()
                     self.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
-                    count_received += 1
                     
-                    if count_received == 9{
-                        not_count += Array(Set<FocusNotification>(self.feeds)).count
+                    if count_received == 5{
                         not_count += Array(Set<FocusNotification>(self.invites)).count
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
@@ -333,13 +329,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             })
         }
         else{
+            not_count = 0
             NotificationUtil.getNotificationCount(gotNotification: {notif in
                 self.notifs.append(contentsOf: notif)
                 
-                not_count = 0
                 count_received += 1
-                if count_received == 9{
-                    not_count += Array(Set<FocusNotification>(self.feeds)).count
+                if count_received == 4 + 1{
                     not_count += Array(Set<FocusNotification>(self.invites)).count
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
@@ -361,8 +356,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 self.invites.append(contentsOf: invite)
                 count_received += 1
-                if count_received == 9{
-                    not_count += Array(Set<FocusNotification>(self.feeds)).count
+                if count_received == 4 + 1{
                     not_count += Array(Set<FocusNotification>(self.invites)).count
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
@@ -383,10 +377,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
             } , gotFeed: {feed in
                 self.feeds.append(contentsOf: feed)
-                count_received += 1
                 
-                if count_received == 9{
-                    not_count += Array(Set<FocusNotification>(self.feeds)).count
+                if count_received == 4 + 1{
                     not_count += Array(Set<FocusNotification>(self.invites)).count
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
@@ -453,7 +445,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.feeds.removeAll()
         self.invites.removeAll()
         self.notifs.removeAll()
     }
