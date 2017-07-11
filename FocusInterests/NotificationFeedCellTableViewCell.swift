@@ -145,23 +145,28 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                 for (id, _) in value{
                     let info = value[id] as? [String:Any]
                     if let status = info?["status"] as? String{
-                        print(status)
+                        let invite_time = info?["inviteTime"] as? String
                         
-                        if status == "accepted"{
-                            self.seeYouThereButton.isHidden = true
-                            self.nextTimeButton.isEnabled = false
-                            
-                            self.nextTimeButton.backgroundColor = Constants.color.green
-                            self.nextTimeButton.setTitleColor(UIColor.white, for: .normal)
-                            
-                            self.nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
+                        if let data = self.notif.item?.data{
+                            if invite_time == data["inviteTime"] as? String{
+                                if status == "accepted"{
+                                    self.seeYouThereButton.isHidden = true
+                                    self.nextTimeButton.isEnabled = false
+                                    
+                                    self.nextTimeButton.backgroundColor = Constants.color.green
+                                    self.nextTimeButton.setTitleColor(UIColor.white, for: .normal)
+                                    
+                                    self.nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
+                                }
+                                else if status == "declined"{
+                                    self.seeYouThereButton.isHidden = true
+                                    self.nextTimeButton.isEnabled = false
+                                    
+                                    self.nextTimeButton.setTitle("Declined", for: UIControlState.normal)
+                                }
+                            }
                         }
-                        else if status == "declined"{
-                            self.seeYouThereButton.isHidden = true
-                            self.nextTimeButton.isEnabled = false
-                            
-                            self.nextTimeButton.setTitle("Declined", for: UIControlState.normal)
-                        }
+                        
                     }
                 }
             }
@@ -212,11 +217,14 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             
         }
         
-        if let time = notif.item?.data["inviteTime"] as? String{
-            let time_string = " at \(time)"
-            let descString2: NSMutableAttributedString = NSMutableAttributedString(string: time_string)
-            descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, time_string.characters.count))
-            attrString.append(descString2);
+        if let data = notif.item?.data{
+            if let time = data["inviteTime"] as? String{
+                let time_string = " at \(time)"
+                let descString2: NSMutableAttributedString = NSMutableAttributedString(string: time_string)
+                descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, time_string.characters.count))
+                attrString.append(descString2);
+            }
+            
         }
         
         if !isFeed{
@@ -278,17 +286,18 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                     
                     if let value = value{
                         for (id, invite) in value{
-                            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((self.notif.item?.type)!).child(id).updateChildValues(["status": "accepted"])
+                            
                             if let inviteData = invite as? [String:Any]{
                                 let host = inviteData["fromUID"] as? String
-                                let accepted = Constants.DB.user.child(host!).child("send_invites").child((self.notif.item?.type)!).childByAutoId()
-                                accepted.updateChildValues(["time": NSDate().timeIntervalSince1970, "user": AuthApi.getFirebaseUid()!, "type": self.notif.item?.type, "id": self.notif.item?.id, "name": self.notif.item?.itemName])
+                                let invite_time = inviteData["inviteTime"] as? String
                                 
-                                
+                                if invite_time == self.notif.item?.data["inviteTime"] as? String{
+                                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((self.notif.item?.type)!).child(id).updateChildValues(["status": "accepted"])
+                                    
+                                    let accepted = Constants.DB.user.child(host!).child("send_invites").child((self.notif.item?.type)!).childByAutoId()
+                                    accepted.updateChildValues(["time": NSDate().timeIntervalSince1970, "user": AuthApi.getFirebaseUid()!, "type": self.notif.item?.type, "id": self.notif.item?.id, "name": self.notif.item?.itemName])
+                                }
                             }
-                            
-                            
-                            print("a")
                         }
                     }
                 
@@ -309,8 +318,15 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             let value = snapshot.value as? [String:Any]
             
             if let value = value{
-                for (id, _) in value{
-                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((self.notif.item?.type)!).child(id).updateChildValues(["status": "declined"])
+                for (id, invite) in value{
+                    if let inviteData = invite as? [String:Any]{
+                        let host = inviteData["fromUID"] as? String
+                        let invite_time = inviteData["inviteTime"] as? String
+                        
+                        if invite_time == self.notif.item?.data["inviteTime"] as? String{
+                            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((self.notif.item?.type)!).child(id).updateChildValues(["status": "declined"])
+                        }
+                    }
                 }
             }
             
