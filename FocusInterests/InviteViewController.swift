@@ -376,6 +376,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     })
                     Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime,"status": "sent"])
                     searchPlace?.showPopup = true
+                    
+                    Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeButton.titleLabel?.text!])
+                    
                 }
                 else{
                     name = (event?.title)!
@@ -387,9 +390,17 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     })
                     Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
                     searchEvent?.showInvitePopup = true
+                
+                    Constants.DB.user.child(UID).child("invitations").child(self.type).queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
+                    
+                        if snapshot.value == nil{
+                        Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":self.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeButton.titleLabel?.text!])
+                            
+                        }
+                    })
+                    
                 }
                 
-                Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeButton.titleLabel?.text!])
                 
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
                     
