@@ -8,7 +8,11 @@
 
 import UIKit
 
-class InvitePeoplePlaceCell: UITableViewCell {
+protocol InvitePeoplePlaceCellDelegate {
+    func haveInvitedSomeoneToAPlace()
+}
+
+class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
 
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
@@ -70,6 +74,7 @@ class InvitePeoplePlaceCell: UITableViewCell {
         ivc.id = self.place.id
         ivc.place = place
         ivc.username = self.username
+        ivc.searchPeoplePlaceDelegate = self
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: nil)
         }
@@ -85,6 +90,12 @@ class InvitePeoplePlaceCell: UITableViewCell {
 //        Constants.DB.user.child(UID).child("invitations").child("place").childByAutoId().updateChildValues(["ID":place.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"name": place.name,"status": "sent"])
 //        parentVC.searchPeople?.showInvitePopup = true
 //        parentVC.dismiss(animated: true, completion: nil)
+    }
+    
+    func haveInvitedSomeoneToAPlace() {
+        parentVC.dismiss(animated: true, completion: { invitePeople in
+            self.parentVC.searchPeopleDelegate?.haveInvitedSomeoneToAPlaceOrAnEvent()
+        })
     }
     
     

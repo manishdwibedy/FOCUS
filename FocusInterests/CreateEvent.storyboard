@@ -451,10 +451,10 @@
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xYK-Z5-9fw">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="387"/>
-                                        <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="sectionIndexColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="sectionIndexBackgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="sectionIndexTrackingBackgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="sectionIndexBackgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="sectionIndexTrackingBackgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="upw-Ob-YFg">
                                         <rect key="frame" x="0.0" y="330" width="375" height="57"/>
@@ -466,11 +466,11 @@
                                                     <constraint firstAttribute="height" constant="41" id="K6J-qF-a1A"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                <color key="textColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="57" id="0uF-tG-kif"/>
                                             <constraint firstAttribute="trailing" secondItem="eSf-8u-5Aj" secondAttribute="trailing" constant="8" id="57V-om-UdX"/>
@@ -529,7 +529,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Wgt-eA-b24" firstAttribute="leading" secondItem="8Zt-2R-NlV" secondAttribute="leading" constant="31" id="1MX-pA-dba"/>
                                             <constraint firstItem="SiC-RU-sSH" firstAttribute="centerY" secondItem="Vo7-Xg-Ult" secondAttribute="centerY" id="3a3-aB-2A4"/>
@@ -573,41 +573,54 @@
                                     <constraint firstItem="8Zt-2R-NlV" firstAttribute="top" secondItem="xYK-Z5-9fw" secondAttribute="bottom" constant="1" id="zNI-SF-rOA"/>
                                 </constraints>
                             </scrollView>
-                            <searchBar contentMode="redraw" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7M-Yi-1Uf">
-                                <rect key="frame" x="9" y="76" width="356" height="44"/>
-                                <color key="tintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                                <connections>
-                                    <outlet property="delegate" destination="xxR-Li-4ZG" id="Nyc-MA-ReB"/>
-                                </connections>
-                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u0X-XZ-Qz2">
+                                <rect key="frame" x="0.0" y="64" width="375" height="65"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7M-Yi-1Uf">
+                                        <rect key="frame" x="9" y="10" width="356" height="44"/>
+                                        <color key="tintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="barTintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <scopeButtonTitles>
+                                            <string>Title</string>
+                                            <string>Title</string>
+                                        </scopeButtonTitles>
+                                        <connections>
+                                            <outlet property="delegate" destination="xxR-Li-4ZG" id="Nyc-MA-ReB"/>
+                                        </connections>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="j7M-Yi-1Uf" firstAttribute="leading" secondItem="u0X-XZ-Qz2" secondAttribute="leading" constant="9" id="Geq-5D-tMS"/>
+                                    <constraint firstItem="j7M-Yi-1Uf" firstAttribute="centerX" secondItem="u0X-XZ-Qz2" secondAttribute="centerX" id="Q5B-ay-J8E"/>
+                                    <constraint firstAttribute="trailing" secondItem="j7M-Yi-1Uf" secondAttribute="trailing" constant="10" id="QNW-QB-oRs"/>
+                                    <constraint firstItem="j7M-Yi-1Uf" firstAttribute="top" secondItem="u0X-XZ-Qz2" secondAttribute="top" constant="10" id="sdM-rz-A8B"/>
+                                    <constraint firstAttribute="bottom" secondItem="j7M-Yi-1Uf" secondAttribute="bottom" constant="11" id="ueq-vT-V9S"/>
+                                    <constraint firstItem="j7M-Yi-1Uf" firstAttribute="centerY" secondItem="u0X-XZ-Qz2" secondAttribute="centerY" id="yWS-Ju-Q9o"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="x2N-eM-M3F" firstAttribute="top" secondItem="mAM-LI-rHW" secondAttribute="bottom" constant="2" id="2qD-64-UqF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="upw-Ob-YFg" secondAttribute="trailing" constant="-16" id="2zr-vn-smD"/>
-                            <constraint firstItem="mAM-LI-rHW" firstAttribute="top" secondItem="j7M-Yi-1Uf" secondAttribute="bottom" constant="9" id="3K5-Wo-W7M"/>
+                            <constraint firstItem="u0X-XZ-Qz2" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leading" id="6tb-rh-HFk"/>
+                            <constraint firstItem="mAM-LI-rHW" firstAttribute="top" secondItem="u0X-XZ-Qz2" secondAttribute="bottom" id="9tY-Cu-JRl"/>
                             <constraint firstAttribute="trailing" secondItem="kpU-5M-zQz" secondAttribute="trailing" id="B3s-Li-NCx"/>
-                            <constraint firstItem="j7M-Yi-1Uf" firstAttribute="top" secondItem="kpU-5M-zQz" secondAttribute="bottom" constant="12" id="Bve-2h-HMI"/>
                             <constraint firstItem="upw-Ob-YFg" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leadingMargin" constant="-16" id="CW4-Mg-HhW"/>
-                            <constraint firstItem="j7M-Yi-1Uf" firstAttribute="leading" secondItem="mAM-LI-rHW" secondAttribute="leading" constant="9" id="EcT-aW-2Gn"/>
-                            <constraint firstItem="kpU-5M-zQz" firstAttribute="trailing" secondItem="j7M-Yi-1Uf" secondAttribute="trailing" constant="10" id="GHa-sq-9oX"/>
+                            <constraint firstAttribute="trailing" secondItem="mAM-LI-rHW" secondAttribute="trailing" id="Gkk-Tu-GmS"/>
                             <constraint firstItem="x2N-eM-M3F" firstAttribute="top" secondItem="8Zt-2R-NlV" secondAttribute="bottom" id="M0T-jw-IUK"/>
-                            <constraint firstItem="j7M-Yi-1Uf" firstAttribute="top" secondItem="kpU-5M-zQz" secondAttribute="bottom" constant="12" id="QPI-v8-lZ2"/>
+                            <constraint firstItem="mAM-LI-rHW" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leading" id="TxG-sW-SPe"/>
                             <constraint firstItem="kpU-5M-zQz" firstAttribute="top" secondItem="7iv-yV-Zt5" secondAttribute="bottom" id="Wsx-lB-nBJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xYK-Z5-9fw" secondAttribute="trailing" constant="-16" id="YbO-c4-3lM"/>
                             <constraint firstItem="kpU-5M-zQz" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leading" id="abT-YD-uFU"/>
-                            <constraint firstItem="j7M-Yi-1Uf" firstAttribute="trailing" secondItem="mAM-LI-rHW" secondAttribute="trailing" constant="-10" id="cgU-jR-JYS"/>
                             <constraint firstItem="8Zt-2R-NlV" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leadingMargin" constant="-16" id="dVN-r7-dY0"/>
                             <constraint firstItem="xYK-Z5-9fw" firstAttribute="top" secondItem="7iv-yV-Zt5" secondAttribute="bottom" constant="109" id="gUz-eg-L0L"/>
-                            <constraint firstItem="kpU-5M-zQz" firstAttribute="leading" secondItem="j7M-Yi-1Uf" secondAttribute="leading" constant="-9" id="kOu-V0-vdj"/>
                             <constraint firstItem="xYK-Z5-9fw" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leadingMargin" constant="-16" id="qzs-7R-Qqu"/>
+                            <constraint firstAttribute="trailing" secondItem="u0X-XZ-Qz2" secondAttribute="trailing" id="tLL-fk-jBB"/>
+                            <constraint firstItem="u0X-XZ-Qz2" firstAttribute="top" secondItem="kpU-5M-zQz" secondAttribute="bottom" id="uNB-Zz-66v"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -620,6 +633,7 @@
                         <outlet property="createEventButton" destination="d9H-td-GzC" id="WEd-Dl-Q3P"/>
                         <outlet property="facebookSwitch" destination="Vo7-Xg-Ult" id="ouY-bY-455"/>
                         <outlet property="friendsTableView" destination="xYK-Z5-9fw" id="8UA-V4-9uP"/>
+                        <outlet property="navBar" destination="kpU-5M-zQz" id="3ht-w8-gzy"/>
                         <outlet property="searchBar" destination="j7M-Yi-1Uf" id="xNr-QC-Nby"/>
                         <outlet property="twitterSwitch" destination="3FE-nU-AvO" id="qgg-q2-IsJ"/>
                     </connections>
@@ -724,7 +738,7 @@
         <image name="Twitter_Logo_White_On_Image" width="250" height="204"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="eLh-9t-fEY"/>
         <segue reference="amW-Q6-Hfg"/>
-        <segue reference="pdH-Ex-mw2"/>
     </inferredMetricsTieBreakers>
 </document>

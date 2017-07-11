@@ -49,6 +49,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchEvent: SearchEventsViewController? = nil
     var mapView: MapViewController? = nil
     
+    var searchPeopleEventDelegate: InvitePeopleEventCellDelegate?
+    var searchPeoplePlaceDelegate: InvitePeoplePlaceCellDelegate?
+    
     var image: Data?
     var selectedFriend = [Bool]()
     var contacts = [CNContact]()

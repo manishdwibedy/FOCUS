@@ -52,7 +52,7 @@
                     <constraint firstItem="Esw-UB-46z" firstAttribute="leading" secondItem="nZe-Xf-C5m" secondAttribute="trailing" constant="84" id="z2Q-3h-vv9"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.086274509799999996" green="0.1647058824" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="selectAllFollowersButton" destination="Esw-UB-46z" id="ayq-lx-h22"/>
             </connections>

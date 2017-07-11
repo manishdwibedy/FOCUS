@@ -10,10 +10,9 @@ import UIKit
 import GooglePlaces
 import FirebaseDatabase
 import GeoFire
-import UITextField_Navigation
 import SCLAlertView
    
-class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate, NavigationFieldDelegate{
+class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate{
     
     @IBOutlet weak var privatePublicSwitch: UISwitch!
     @IBOutlet weak var interestListView: UIView!
@@ -66,80 +65,79 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     
 //    TOOLBARS
     
-//    var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardNextButton))
-//    var previousButton = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardPreviousButton))
-//    var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//    var fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-////    var dateDoneButon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.dateSelected))
-//    var startTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.startTimeSelected))
-//    var endTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.endTimeSelected))
-//    var priceDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.priceSelected))
-//    
+    var nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardNextButton))
+    var previousButton = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardPreviousButton))
+    var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    var fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+//    var dateDoneButon = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.dateSelected))
+    var startTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.startTimeSelected))
+    var endTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.endTimeSelected))
+    var priceDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.priceSelected))
     
     // start and end time
     var startTime: Date? = nil
     var endTime: Date? = nil
     
-//    lazy var dateToolbar: UIToolbar = {
-//        let toolbar = UIToolbar()
-//        toolbar.barStyle = .default
-//        toolbar.isTranslucent = true
-//        toolbar.sizeToFit()
-//        
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-//        toolbar.isUserInteractionEnabled = true
-//        
-//        return toolbar
-//    }()
-//    
-//    lazy var startTimeToolbar: UIToolbar = {
-//        let toolbar = UIToolbar()
-//        toolbar.barStyle = .default
-//        toolbar.isTranslucent = true
-//        toolbar.sizeToFit()
-//        
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-//        toolbar.isUserInteractionEnabled = true
-//        
-//        return toolbar
-//    }()
-//    
-//    lazy var endTimeToolbar: UIToolbar = {
-//        let toolbar = UIToolbar()
-//        toolbar.barStyle = .default
-//        toolbar.isTranslucent = true
-//        toolbar.sizeToFit()
-//        
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-//        toolbar.isUserInteractionEnabled = true
-//        
-//        return toolbar
-//    }()
-//    
-//    lazy var priceToolbar: UIToolbar = {
-//        let toolbar = UIToolbar()
-//        toolbar.barStyle = .default
-//        toolbar.isTranslucent = true
-//        toolbar.sizeToFit()
-//        
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-//        toolbar.isUserInteractionEnabled = true
-//        
-//        return toolbar
-//    }()
-//    
-//    //this toolbar is for the name, price, and description textfields
-//    lazy var nextPrevToolbar: UIToolbar = {
-//        var toolbar = UIToolbar()
-//        toolbar.barStyle = .default
-//        toolbar.isTranslucent = true
-//        toolbar.sizeToFit()
-//        
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
-//        toolbar.isUserInteractionEnabled = true
-//        
-//        return toolbar
-//    }()
+    lazy var dateToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    lazy var startTimeToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    lazy var endTimeToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    lazy var priceToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    //this toolbar is for the name, price, and description textfields
+    lazy var nextPrevToolbar: UIToolbar = {
+        var toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -203,6 +201,8 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         ]
         
         navBar.titleTextAttributes = attrs
+        navBar.barTintColor = Constants.color.navy
+        self.view.backgroundColor = Constants.color.navy
         UIApplication.shared.statusBarStyle = .default
     }
     
@@ -404,36 +404,36 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func addEventLocation(_ sender: UITextField) {
-        let autoCompleteController = GMSAutocompleteViewController()
+        let autoCompleteController = self.createGMSViewController()
         
-        let filter = GMSAutocompleteFilter()
-        filter.country = "US"
-        
-        autoCompleteController.autocompleteFilter = filter
-
-        
-        autoCompleteController.delegate = self
-        
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
-        UINavigationBar.appearance().tintColor = UIColor.white
-        
-        //        search bar attributes
-        let placeholderAttributes: [String : AnyObject] = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!
-        ]
-        
-        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
-        
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = placeholderAttributes
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = placeholderTextAttributes
-        
-        autoCompleteController.primaryTextColor = UIColor.white
-        autoCompleteController.primaryTextHighlightColor = Constants.color.green
-        autoCompleteController.secondaryTextColor = UIColor.white
-        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
-        autoCompleteController.tableCellSeparatorColor = UIColor.white
+//        let filter = GMSAutocompleteFilter()
+//        filter.country = "US"
+//        
+//        autoCompleteController.autocompleteFilter = filter
+//
+//        
+//        autoCompleteController.delegate = self
+//        
+//        UINavigationBar.appearance().isTranslucent = false
+//        UINavigationBar.appearance().barTintColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+//        UINavigationBar.appearance().tintColor = UIColor.white
+//        
+//        //        search bar attributes
+//        let placeholderAttributes: [String : AnyObject] = [
+//            NSForegroundColorAttributeName: UIColor.white,
+//            NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!
+//        ]
+//        
+//        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+//        
+//        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = placeholderAttributes
+//        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = placeholderTextAttributes
+//        
+//        autoCompleteController.primaryTextColor = UIColor.white
+//        autoCompleteController.primaryTextHighlightColor = Constants.color.green
+//        autoCompleteController.secondaryTextColor = UIColor.white
+//        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+//        autoCompleteController.tableCellSeparatorColor = UIColor.white
         
         present(autoCompleteController, animated: true, completion: nil)
     }
@@ -583,6 +583,41 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
 
 extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
     
+    func createGMSViewController() -> GMSAutocompleteViewController{
+        let autoCompleteController = GMSAutocompleteViewController()
+        
+        let filter = GMSAutocompleteFilter()
+        filter.country = "US"
+        
+        autoCompleteController.autocompleteFilter = filter
+        
+        
+        autoCompleteController.delegate = self
+        
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.white
+        
+        //        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!
+        ]
+        
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = placeholderAttributes
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = placeholderTextAttributes
+        
+        autoCompleteController.primaryTextColor = UIColor.white
+        autoCompleteController.primaryTextHighlightColor = Constants.color.green
+        autoCompleteController.secondaryTextColor = UIColor.white
+        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        autoCompleteController.tableCellSeparatorColor = UIColor.white
+        
+        return autoCompleteController
+    }
+    
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         self.place = place
         
@@ -701,26 +736,26 @@ extension CreateNewEventViewController {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == self.eventDateTextField {
-//            eventDateTextField.inputAccessoryView = self.dateToolbar
+            eventDateTextField.inputAccessoryView = self.dateToolbar
             eventDateTextField.inputView = self.datePicker
         }
         else if textField == self.eventTimeTextField {
-//            self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
+            self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
             self.eventTimeTextField.inputView = self.timePicker
         }
         else if textField == self.eventEndTimeTextField {
-//            self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
+            self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
             self.eventEndTimeTextField.inputView = self.timePicker
         } else if textField == self.locationTextField {
-//            eventDateTextField.inputAccessoryView = self.datePicker
+            eventDateTextField.inputAccessoryView = self.datePicker
             
-            let autoCompleteController = GMSAutocompleteViewController()
-            autoCompleteController.delegate = self
+            let autoCompleteController = self.createGMSViewController()
+            
             present(autoCompleteController, animated: true, completion: nil)
         } else if textField == self.eventPriceTextView {
-//            self.eventPriceTextView.inputAccessoryView = self.priceToolbar
+            self.eventPriceTextView.inputAccessoryView = self.priceToolbar
         } else {
-//            self.eventNameTextField.inputAccessoryView = self.nextPrevToolbar
+            self.eventNameTextField.inputAccessoryView = self.nextPrevToolbar
         }
         
         return true
@@ -753,7 +788,7 @@ extension CreateNewEventViewController {
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
 //        TODO: sometimes the tool bar works and sometimes it doesn't. need to figure out why
-//        self.eventDescriptionTextView.inputAccessoryView = self.nextPrevToolbar
+        self.eventDescriptionTextView.inputAccessoryView = self.nextPrevToolbar
         return true
     }
     
@@ -787,8 +822,12 @@ extension CreateNewEventViewController {
     func keyboardNextButton(){
         if self.eventNameTextField.isFirstResponder{
             print("locationbecome first  ")
+            self.eventNameTextField.resignFirstResponder()
             self.locationTextField.becomeFirstResponder()
-        } else if self.eventDateTextField.isFirstResponder {
+        } else if self.locationTextField.isFirstResponder {
+            self.locationTextField.resignFirstResponder()
+            self.eventTimeTextField.becomeFirstResponder()
+        }else if self.eventDateTextField.isFirstResponder {
             print("event Time become first  ")
             self.eventTimeTextField.becomeFirstResponder()
             self.eventDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
@@ -803,7 +842,7 @@ extension CreateNewEventViewController {
         } else if self.eventEndTimeTextField.isFirstResponder {
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
             if timePicker.date > self.startTime!{
-//                self.eventPriceTextView.becomeFirstResponder()
+                self.eventPriceTextView.becomeFirstResponder()
                 self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.timePicker.date))"
                 self.endTime = timePicker.date
             }

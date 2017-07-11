@@ -139,41 +139,54 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nZh-JF-eMk">
-                                <rect key="frame" x="66" y="119" width="243" height="29"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <segments>
-                                    <segment title="Places"/>
-                                    <segment title="Events"/>
-                                </segments>
-                                <color key="tintColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="indexChanged:" destination="9ey-Xo-CX9" eventType="valueChanged" id="tJQ-cX-B5U"/>
-                                    <action selector="segmentedChanged:" destination="9ey-Xo-CX9" eventType="valueChanged" id="KWT-ne-JNt"/>
-                                </connections>
-                            </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-wn-SdN">
-                                <rect key="frame" x="8" y="155" width="359" height="512"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTi-NK-gbC">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nZh-JF-eMk">
+                                        <rect key="frame" x="66" y="9" width="243" height="29"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <segments>
+                                            <segment title="Places"/>
+                                            <segment title="Events"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="indexChanged:" destination="9ey-Xo-CX9" eventType="valueChanged" id="tJQ-cX-B5U"/>
+                                            <action selector="segmentedChanged:" destination="9ey-Xo-CX9" eventType="valueChanged" id="KWT-ne-JNt"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-wn-SdN">
+                                        <rect key="frame" x="8" y="47" width="359" height="512"/>
+                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </tableView>
+                                <constraints>
+                                    <constraint firstItem="nZh-JF-eMk" firstAttribute="top" secondItem="HTi-NK-gbC" secondAttribute="top" constant="9" id="0gD-fB-PU9"/>
+                                    <constraint firstItem="nZh-JF-eMk" firstAttribute="leading" secondItem="HTi-NK-gbC" secondAttribute="leading" constant="66" id="9Ci-Ic-rNO"/>
+                                    <constraint firstItem="nv6-wn-SdN" firstAttribute="leading" secondItem="HTi-NK-gbC" secondAttribute="leading" constant="8" id="E1z-bf-b9C"/>
+                                    <constraint firstAttribute="trailing" secondItem="nv6-wn-SdN" secondAttribute="trailing" constant="8" id="LOn-TU-BD4"/>
+                                    <constraint firstItem="nv6-wn-SdN" firstAttribute="centerX" secondItem="nZh-JF-eMk" secondAttribute="centerX" id="X5C-61-ukk"/>
+                                    <constraint firstAttribute="bottom" secondItem="nv6-wn-SdN" secondAttribute="bottom" id="bhC-wc-UgV"/>
+                                    <constraint firstItem="nZh-JF-eMk" firstAttribute="centerX" secondItem="HTi-NK-gbC" secondAttribute="centerX" id="d6W-7y-yW2"/>
+                                    <constraint firstAttribute="trailing" secondItem="nZh-JF-eMk" secondAttribute="trailing" constant="66" id="rlV-n1-VyM"/>
+                                    <constraint firstItem="nv6-wn-SdN" firstAttribute="top" secondItem="nZh-JF-eMk" secondAttribute="bottom" constant="10" id="t1j-kb-KdB"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RME-pD-v8b" secondAttribute="trailing" id="1Zh-VX-YSN"/>
                             <constraint firstAttribute="trailing" secondItem="AYl-Yr-fFv" secondAttribute="trailing" id="3JP-Bk-dDQ"/>
+                            <constraint firstItem="HTi-NK-gbC" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="3Q3-kk-PCV"/>
                             <constraint firstItem="RME-pD-v8b" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="7bQ-sO-6CQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="nZh-JF-eMk" secondAttribute="trailing" constant="50" id="E2W-m9-CgL"/>
-                            <constraint firstItem="nv6-wn-SdN" firstAttribute="top" secondItem="nZh-JF-eMk" secondAttribute="bottom" constant="8" symbolic="YES" id="Lal-WK-jlL"/>
-                            <constraint firstItem="AYl-Yr-fFv" firstAttribute="centerX" secondItem="nZh-JF-eMk" secondAttribute="centerX" id="OAv-kW-9aQ"/>
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="top" secondItem="RME-pD-v8b" secondAttribute="bottom" id="OgL-ds-gWv"/>
-                            <constraint firstItem="nZh-JF-eMk" firstAttribute="top" secondItem="AYl-Yr-fFv" secondAttribute="bottom" constant="11" id="Vft-2B-wiN"/>
-                            <constraint firstItem="nv6-wn-SdN" firstAttribute="bottom" secondItem="7Ss-jV-UL9" secondAttribute="top" id="b0Y-1e-z2Z"/>
-                            <constraint firstItem="nZh-JF-eMk" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leadingMargin" constant="50" id="b4R-4f-EeP"/>
+                            <constraint firstAttribute="trailing" secondItem="HTi-NK-gbC" secondAttribute="trailing" id="Qz8-fz-5vG"/>
+                            <constraint firstItem="HTi-NK-gbC" firstAttribute="top" secondItem="AYl-Yr-fFv" secondAttribute="bottom" id="bqN-Gc-O6y"/>
                             <constraint firstItem="RME-pD-v8b" firstAttribute="top" secondItem="YCB-Au-Xks" secondAttribute="top" id="kSo-Vx-3mI"/>
-                            <constraint firstItem="nv6-wn-SdN" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leadingMargin" constant="-8" id="tKd-rG-oGm"/>
+                            <constraint firstItem="7Ss-jV-UL9" firstAttribute="top" secondItem="HTi-NK-gbC" secondAttribute="bottom" id="lAW-Q3-gOc"/>
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="vv3-PZ-isc"/>
-                            <constraint firstItem="nZh-JF-eMk" firstAttribute="centerX" secondItem="nv6-wn-SdN" secondAttribute="centerX" id="xXT-6s-FYm"/>
                         </constraints>
                     </view>
                     <connections>
