@@ -20,6 +20,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var currentLocationSearchBar: UISearchBar!
     
     @IBOutlet weak var invitePopup: UIView!
     @IBOutlet weak var invitePopupBottomLayoutConstraint: NSLayoutConstraint!
@@ -47,29 +48,72 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
 
         self.searchBar.delegate = self
+        self.currentLocationSearchBar.delegate = self
         
 //        search bar attributes
-        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
-        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!]
+        let cancelButtonsInSearchBar: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!]
         
-//        search bar placeholder
-        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
-        textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
-        textFieldInsideSearchBar?.textColor = UIColor.white
+//        MARK: Event Search Bar
+        self.searchBar.isTranslucent = true
+        self.searchBar.backgroundImage = UIImage()
+        self.searchBar.tintColor = UIColor.white
+        self.searchBar.barTintColor = UIColor.white
         
-//        search bar glass icon
-        let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
-        glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        glassIconView.tintColor = UIColor.white
+        self.searchBar.layer.cornerRadius = 6
+        self.searchBar.clipsToBounds = true
+        self.searchBar.layer.borderWidth = 0
         
-//        search bar clear button
-        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
-        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
-        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
-        clearButton.tintColor = UIColor.white
+        self.searchBar.setValue("Go", forKey:"_cancelButtonText")
         
-        UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
+        if let textFieldInsideSearchBar = self.searchBar.value(forKey: "_searchField") as? UITextField{
+            
+            let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+            
+            textFieldInsideSearchBar.attributedPlaceholder = attributedPlaceholder
+            textFieldInsideSearchBar.textColor = UIColor.white
+            textFieldInsideSearchBar.backgroundColor = Constants.color.darkGray
+            
+            let glassIconView = textFieldInsideSearchBar.leftView as! UIImageView
+            glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            glassIconView.tintColor = UIColor.white
+            
+            textFieldInsideSearchBar.clearButtonMode = .whileEditing
+            let clearButton = textFieldInsideSearchBar.value(forKey: "clearButton") as! UIButton
+            clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+            clearButton.tintColor = UIColor.white
+        }
+        
+        //        MARK: Current Location Search Bar
+        self.currentLocationSearchBar.isTranslucent = true
+        self.currentLocationSearchBar.backgroundImage = UIImage()
+        self.currentLocationSearchBar.tintColor = UIColor.white
+        self.currentLocationSearchBar.barTintColor = UIColor.white
+        
+        self.currentLocationSearchBar.layer.cornerRadius = 6
+        self.currentLocationSearchBar.clipsToBounds = true
+        self.currentLocationSearchBar.layer.borderWidth = 0
+        self.currentLocationSearchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
+        
+        
+        if let currentLocationTextField = self.currentLocationSearchBar.value(forKey: "_searchField") as? UITextField{
+            let currentLocationAttributePlaceHolder: NSAttributedString = NSAttributedString(string: "Current Location", attributes: placeholderAttributes)
+            
+            currentLocationTextField.attributedPlaceholder = currentLocationAttributePlaceHolder
+            currentLocationTextField.textColor = UIColor.white
+            currentLocationTextField.backgroundColor = Constants.color.darkGray
+            
+            let currentLocationIcon = currentLocationTextField.leftView as! UIImageView
+            currentLocationIcon.image = UIImage(named: "self_location")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            currentLocationIcon.tintColor = UIColor.white
+            currentLocationTextField.clearButtonMode = .whileEditing
+            
+            let currentLocationClearButton = currentLocationTextField.value(forKey: "clearButton") as! UIButton
+            currentLocationClearButton.setImage(currentLocationClearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+            currentLocationClearButton.tintColor = UIColor.white
+        }
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonsInSearchBar, for: .normal)
         
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
@@ -226,105 +270,139 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
+        if searchBar.tag == 0 {
+            self.currentLocationSearchBar.setShowsCancelButton(false, animated: true)
+            self.currentLocationSearchBar.endEditing(true)
+            self.searchBar.setShowsCancelButton(true, animated: true)
+        }else if searchBar.tag == 1{
+            print("you have Editted Location Search Bar")
+            self.searchBar.setShowsCancelButton(false, animated: true)
+            self.searchBar.endEditing(true)
+            self.currentLocationSearchBar.setShowsCancelButton(true, animated: true)
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.searchBar.text = ""
-        self.filtered = self.places
-        self.tableView.reloadData()
-        self.searchBar.setShowsCancelButton(false, animated: true)
+        if searchBar.tag == 0{
+            self.searchBar.text = ""
+            self.filtered = self.places
+            self.tableView.reloadData()
+            self.searchBar.text = ""
+            self.searchBar.setShowsCancelButton(false, animated: true)
+            self.searchBar.endEditing(true)
+        }else if searchBar.tag == 1{
+            print("you have canceled Location Search Bar")
+            self.currentLocationSearchBar.text = ""
+            self.currentLocationSearchBar.setShowsCancelButton(false, animated: true)
+            self.currentLocationSearchBar.endEditing(true)
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchBar.tag == 0{
+            self.searchBar.text = ""
+            self.searchBar.setShowsCancelButton(false, animated: true)
+            self.searchBar.endEditing(true)
+        }else if searchBar.tag == 1{
+            self.currentLocationSearchBar.text = ""
+            self.currentLocationSearchBar.setShowsCancelButton(false, animated: true)
+            self.currentLocationSearchBar.endEditing(true)
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        var results = [String: [Place]]()
-        if(searchText.characters.count > 0){
-            
-            let url = "https://api.yelp.com/v3/businesses/search"
-            
-            let headers: HTTPHeaders = [
-                "authorization": "Bearer \(AuthApi.getYelpToken()!)",
-                "cache-contro": "no-cache"
-            ]
-            
-            
-            let parameters = [
-                "term": searchText,
-                "latitude": location?.coordinate.latitude ?? 0,
-                "longitude": location?.coordinate.longitude ?? 0,
-                "radius": 32_186
-            ] as [String : Any]
-            Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
-                let json = JSON(data: response.data!)["businesses"]
+        if searchBar.tag == 0{
+            var results = [String: [Place]]()
+            if(searchText.characters.count > 0){
                 
-                var result = [Place]()
+                let url = "https://api.yelp.com/v3/businesses/search"
                 
-                _ = self.places.count
-                for (_, business) in json.enumerated(){
-                    let id = business.1["id"].stringValue
-                    let name = business.1["name"].stringValue
-                    let image_url = business.1["image_url"].stringValue
-                    let isClosed = business.1["is_closed"].boolValue
-                    let reviewCount = business.1["review_count"].intValue
-                    let rating = business.1["rating"].floatValue
-                    let latitude = business.1["coordinates"]["latitude"].doubleValue
-                    let longitude = business.1["coordinates"]["longitude"].doubleValue
-                    let price = business.1["price"].stringValue
-                    let address_json = business.1["location"]["display_address"].arrayValue
-                    let phone = business.1["display_phone"].stringValue
-                    let distance = business.1["distance"].doubleValue
-                    let categories_json = business.1["categories"].arrayValue
-                    let url = business.1["url"].stringValue
-                    let plain_phone = business.1["phone"].stringValue
-                    let is_closed = business.1["is_closed"].boolValue
+                let headers: HTTPHeaders = [
+                    "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+                    "cache-contro": "no-cache"
+                ]
+                
+                
+                let parameters = [
+                    "term": searchText,
+                    "latitude": location?.coordinate.latitude ?? 0,
+                    "longitude": location?.coordinate.longitude ?? 0,
+                    "radius": 32_186
+                    ] as [String : Any]
+                Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
+                    let json = JSON(data: response.data!)["businesses"]
                     
-                    var address = [String]()
-                    for raw_address in address_json{
-                        address.append(raw_address.stringValue)
+                    var result = [Place]()
+                    
+                    _ = self.places.count
+                    for (_, business) in json.enumerated(){
+                        let id = business.1["id"].stringValue
+                        let name = business.1["name"].stringValue
+                        let image_url = business.1["image_url"].stringValue
+                        let isClosed = business.1["is_closed"].boolValue
+                        let reviewCount = business.1["review_count"].intValue
+                        let rating = business.1["rating"].floatValue
+                        let latitude = business.1["coordinates"]["latitude"].doubleValue
+                        let longitude = business.1["coordinates"]["longitude"].doubleValue
+                        let price = business.1["price"].stringValue
+                        let address_json = business.1["location"]["display_address"].arrayValue
+                        let phone = business.1["display_phone"].stringValue
+                        let distance = business.1["distance"].doubleValue
+                        let categories_json = business.1["categories"].arrayValue
+                        let url = business.1["url"].stringValue
+                        let plain_phone = business.1["phone"].stringValue
+                        let is_closed = business.1["is_closed"].boolValue
+                        
+                        var address = [String]()
+                        for raw_address in address_json{
+                            address.append(raw_address.stringValue)
+                        }
+                        
+                        var categories = [Category]()
+                        for raw_category in categories_json as [JSON]{
+                            let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                            categories.append(category)
+                        }
+                        
+                        let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone, is_closed: is_closed)
+                        
+                        if !result.contains(place){
+                            result.append(place)
+                        }
+                    }
+                    results[searchText] = result
+                    print("searching - \(searchText)")
+                    
+                    if self.searchBar.text == searchText{
+                        print(results[searchText])
+                        self.filtered = results[searchText]!
+                        
+                        //                    self.filtered.sort{ //sort(_:) in Swift 3
+                        //                            if $0.name != $1.name {
+                        //                                return $0.name < $1.name
+                        //                            }
+                        //
+                        //                        else { // All other fields are tied, break ties by last name
+                        //                            return $0.distance < $1.distance
+                        //                        }
+                        //                    }
+                        
+                        print("searching finally - \(searchText)")
+                        //                    print(self.filtered[0].name)
+                        self.tableView.reloadData()
                     }
                     
-                    var categories = [Category]()
-                    for raw_category in categories_json as [JSON]{
-                        let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
-                        categories.append(category)
-                    }
-                    
-                    let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone, is_closed: is_closed)
-                    
-                    if !result.contains(place){
-                        result.append(place)
-                    }
                 }
-                results[searchText] = result
-                print("searching - \(searchText)")
-                
-                if self.searchBar.text == searchText{
-                    print(results[searchText])
-                    self.filtered = results[searchText]!
-                    
-//                    self.filtered.sort{ //sort(_:) in Swift 3
-//                            if $0.name != $1.name {
-//                                return $0.name < $1.name
-//                            }
-//                            
-//                        else { // All other fields are tied, break ties by last name
-//                            return $0.distance < $1.distance
-//                        }
-//                    }
-                    
-                    print("searching finally - \(searchText)")
-//                    print(self.filtered[0].name)
-                    self.tableView.reloadData()
-                }
-                
             }
+            else{
+                self.filtered = self.places
+                self.tableView.reloadData()
+            }
+        }else if searchBar.tag == 1{
+            print("you have clicked Location Search Bar")
+            self.searchBar.endEditing(true)
+            self.searchBar.setShowsCancelButton(false, animated: true)
+            self.currentLocationSearchBar.setShowsCancelButton(true, animated: true)
         }
-        else{
-            self.filtered = self.places
-            self.tableView.reloadData()
-        }
-        
-        
     }
 }
