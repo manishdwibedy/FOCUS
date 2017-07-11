@@ -373,6 +373,18 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             AuthApi.set(userImage: googleUser.profile.imageURL(withDimension: 375).absoluteString)
                         }
                         
+                        if let email = info?["email"] as? String{
+                            if email.isEmpty{
+                                Constants.DB.user.child("\(fireId)/email").setValue(googleUser.profile.email)
+                                AuthApi.set(userEmail: googleUser.profile.email)
+                            }
+                            AuthApi.set(userEmail: email)
+                        }
+                        else{
+                            Constants.DB.user.child("\(fireId)/email").setValue(googleUser.profile.email)
+                            AuthApi.set(userEmail: googleUser.profile.email)
+                        }
+                        
                         if let interests = info?["interests"] as? String{
                             AuthApi.set(interests: interests)
                         }
@@ -429,7 +441,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         let last_name = data["last_name"] as? String
         
         let facebook_image_string = (data["picture"]?["data"] as! [String:Any])["url"] as? String
-        let username = data["email"] as? String
+        let email = data["email"] as? String
         
         let userRef = Constants.DB.user.child(fireId).observeSingleEvent(of: .value, with: {(snapshot) in
             
@@ -457,9 +469,22 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                 AuthApi.set(userImage: facebook_image_string)
             }
             
+            if let email = info?["email"] as? String{
+                if email.isEmpty{
+                    Constants.DB.user.child("\(fireId)/email").setValue(email)
+                    AuthApi.set(userEmail: email)
+                }
+                AuthApi.set(userEmail: email)
+            }
+            else{
+                Constants.DB.user.child("\(fireId)/email").setValue(email)
+                AuthApi.set(userEmail: email)
+            }
+            
             if let username = info?["username"] as? String{
                 AuthApi.set(username: username)
             }
+            
             
             let token = Messaging.messaging().fcmToken
             Constants.DB.user.child("\(fireId)/firebaseUserId").setValue(fireId)

@@ -245,6 +245,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
         })
         
+        getUserEmails(gotEmail: {emails in
+            print(emails)
+        })
         navigationView.notificationsButton.badgeString = ""
         var not_count = 0
         var count_received = 0
