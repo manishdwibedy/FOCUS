@@ -69,12 +69,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="asd" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3n-Fh-fvf">
-                                <rect key="frame" x="65" y="28.5" width="204" height="37"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3n-Fh-fvf">
+                                <rect key="frame" x="65" y="28.5" width="201" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="tBN-ym-vEn"/>
                                 </constraints>
                                 <inset key="scrollIndicatorInsets" minX="-5" minY="-15" maxX="0.0" maxY="-15"/>
+                                <string key="text">asd
+asd</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -103,9 +105,9 @@
                             <constraint firstItem="FAk-rc-9Hs" firstAttribute="leading" secondItem="djv-ET-Cuh" secondAttribute="trailing" constant="-56" id="2fH-jN-Xna"/>
                             <constraint firstItem="p3N-sR-ozX" firstAttribute="leading" secondItem="UxW-oS-L2a" secondAttribute="leading" id="3gl-yM-3uk"/>
                             <constraint firstItem="5xg-xc-JPg" firstAttribute="leading" secondItem="wLD-te-UJm" secondAttribute="trailing" constant="10" id="4cq-D4-Uqb"/>
-                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="N3n-Fh-fvf" secondAttribute="trailing" constant="77" id="5Se-kY-5LU"/>
+                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="N3n-Fh-fvf" secondAttribute="trailing" constant="80" id="5Se-kY-5LU"/>
                             <constraint firstItem="UxW-oS-L2a" firstAttribute="leading" secondItem="H0b-mV-xrM" secondAttribute="trailing" constant="12" id="5ds-pG-WqO"/>
-                            <constraint firstItem="wLD-te-UJm" firstAttribute="trailing" secondItem="N3n-Fh-fvf" secondAttribute="trailing" constant="1" id="5vu-HW-GTk"/>
+                            <constraint firstItem="wLD-te-UJm" firstAttribute="trailing" secondItem="N3n-Fh-fvf" secondAttribute="trailing" constant="4" id="5vu-HW-GTk"/>
                             <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="5xg-xc-JPg" secondAttribute="trailing" constant="9.5" id="92X-A9-1Qn"/>
                             <constraint firstAttribute="trailing" secondItem="wLD-te-UJm" secondAttribute="trailing" constant="76" id="D0D-cu-O1H"/>
                             <constraint firstItem="wLD-te-UJm" firstAttribute="leading" secondItem="p3N-sR-ozX" secondAttribute="trailing" constant="10" id="EAd-R6-FVY"/>
@@ -126,7 +128,7 @@
                             <constraint firstItem="p3N-sR-ozX" firstAttribute="top" secondItem="N3n-Fh-fvf" secondAttribute="bottom" constant="1" id="nZu-3E-E94"/>
                             <constraint firstItem="UxW-oS-L2a" firstAttribute="firstBaseline" secondItem="djv-ET-Cuh" secondAttribute="firstBaseline" constant="-58" id="rGk-Vm-jB1"/>
                             <constraint firstItem="5ln-aR-FZ6" firstAttribute="baseline" secondItem="FAk-rc-9Hs" secondAttribute="baseline" id="sjB-Ze-h0M"/>
-                            <constraint firstItem="djv-ET-Cuh" firstAttribute="leading" secondItem="N3n-Fh-fvf" secondAttribute="trailing" constant="12" id="t3m-hp-Al3"/>
+                            <constraint firstItem="djv-ET-Cuh" firstAttribute="leading" secondItem="N3n-Fh-fvf" secondAttribute="trailing" constant="15" id="t3m-hp-Al3"/>
                             <constraint firstItem="wLD-te-UJm" firstAttribute="centerY" secondItem="djv-ET-Cuh" secondAttribute="centerY" constant="-1" id="tL4-CT-5UE"/>
                             <constraint firstItem="5ln-aR-FZ6" firstAttribute="centerX" secondItem="wLD-te-UJm" secondAttribute="centerX" constant="19.5" id="tjX-Dw-SnV"/>
                             <constraint firstItem="H0b-mV-xrM" firstAttribute="top" secondItem="FAk-rc-9Hs" secondAttribute="top" id="tt3-eI-cXQ"/>
