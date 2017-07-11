@@ -85,10 +85,12 @@ class FirebaseDownstream {
                                         print(valueUID)
                                         print("________")
                                         dbKey = "places"
-                                        let item = ItemOfInterest(itemName: ((inValue[inKey] as! NSDictionary)["name"] as? String), imageURL: "", type: "place")
+                                        let place_invite = inValue[inKey] as! NSDictionary
+                                        let item = ItemOfInterest(itemName: (place_invite["name"] as? String), imageURL: "", type: "place")
                                         item.type = "place"
                                         item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
-                                        let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
+                                        item.data = ["inviteTime": place_invite["inviteTime"] as? String]
+                                        let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: place_invite["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: (place_invite["time"] as? Double)!) as Date)
                                         returnableNotif.append(notification)
                                         
                                     

@@ -212,6 +212,12 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             
         }
         
+        if let time = notif.item?.data["inviteTime"] as? String{
+            let time_string = " at \(time)"
+            let descString2: NSMutableAttributedString = NSMutableAttributedString(string: time_string)
+            descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, time_string.characters.count))
+            attrString.append(descString2);
+        }
         
         if !isFeed{
             let notif_time = notif.time!
