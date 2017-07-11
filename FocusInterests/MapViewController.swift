@@ -461,7 +461,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidAppear(_ animated: Bool) {
         Constants.DB.user_mapping.keepSynced(true)
 
-        Share.getFacebookFriends()
+        Share.getFacebookFriends(completion: {friends in
+        
+        })
         
         if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil { // Change this back
             print("username is nil")

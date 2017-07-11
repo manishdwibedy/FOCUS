@@ -97,8 +97,8 @@ class Share{
         
     }
     
-    static func getFacebookFriends(){
-        let params = ["fields": "friends{picture, name}"]
+    static func getFacebookFriends(completion: @escaping ([[String:String]])->Void){
+        let params = ["fields": "friends{picture, name, email}"]
         if let token = AuthApi.getFacebookToken(){
             let accessToken = AccessToken(authenticationToken: token)
             
@@ -120,13 +120,11 @@ class Share{
                         
                         friend_info.append([
                             "name": name!,
-                            "image": picture_url
+                            "image": picture_url,
+                            "id": friend["id"] as! String
                             ])
-                        //                    print("\(String(describing: friend["first_name"]!)) \(String(describing: friend["last_name"]!) )")
-                        //
-                        //                    print(String(describing: friend["id"]!))
                     }
-                    print(friend_info)
+                    completion(friend_info)
                 case .failed(let error):
                     print("Graph Request Failed: \(error)")
                 }
@@ -180,20 +178,37 @@ class Share{
             
             if let value = snapshot.value as? [String:[String:Any]]{
                 for (id, user) in value{
-                    if let email = user["email"] as? String, email.characters.count > 0{
-                        if email != AuthApi.getUserEmail()!{
-                            emails.append(email)
+                    if AuthApi.getLoginType() == .Google{
+                        if let email = user["email"] as? String, email.characters.count > 0{
+                            if email != AuthApi.getUserEmail()!{
+                                emails.append(email)
+                            }
                         }
                     }
+                    if AuthApi.getLoginType() == .Facebook{
+                        if let facebookID = user["facebook-id"] as? String, facebookID.characters.count > 0{
+                            if user["email"] as? String != AuthApi.getUserEmail()!{
+                                emails.append(facebookID)
+                            }
+                        }
+                    }
+                    
+                    
                 }
                 
                 for email in emails{
-                    if let user = contacts.first(where: { element in
-                        return element["email"] == email
-                    }){
-                        users.append(FollowNewUser.toFollowUser(info: user))
+                    if AuthApi.getLoginType() == .Google{
+                        if let user = contacts.first(where: { element in return element["email"] == email}){
+                            users.append(FollowNewUser.toFollowUser(info: user))
+                        }
                     }
-                
+                    if AuthApi.getLoginType() == .Facebook{
+                        if let user = contacts.first(where: { element in return element["id"] == email}){
+                            users.append(FollowNewUser.toFollowUser(info: user))
+                        }
+                    }
+                    
+                    
                 }
                 gotEmail(users)
             }
@@ -202,14 +217,23 @@ class Share{
     }
     
     static func getMatchingUsers(){
-        Share.getUserContacts(completion: { contacts in
-            Share.getUserEmails(contacts: contacts, gotEmail: {users in
-            
+        if AuthApi.getLoginType() == .Google{
+            Share.getUserContacts(completion: { contacts in
+                Share.getUserEmails(contacts: contacts, gotEmail: {users in
+                    print(users)
+                })
             })
-        })
+        }
+        if AuthApi.getLoginType() == LoginTypes.Facebook{
+            Share.getFacebookFriends(completion: { contacts in
+                Share.getUserEmails(contacts: contacts, gotEmail: {users in
+                    print(users)
+                })
+            })
+        }
     }
-
 }
+
 
 class FollowNewUser{
     var fullname: String

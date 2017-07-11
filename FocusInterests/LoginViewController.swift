@@ -213,7 +213,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                         self.getFacebookData(uuid: fireId, result: result ?? "")
                                     }
                                     AuthApi.set(userEmail: user?.email)
-                                    Share.getFacebookFriends()
+                                    Share.getFacebookFriends(completion: {friends in
+                                    
+                                    })
                                     self.showHomeVC()
                                 })
 
@@ -445,6 +447,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         
         let userRef = Constants.DB.user.child(fireId).observeSingleEvent(of: .value, with: {(snapshot) in
             
+             Constants.DB.user.child("\(fireId)/facebook-id").setValue(facebook_id)
             let info = snapshot.value as? [String:Any]
             
             if let fullname = info?["fullname"] as? String{
