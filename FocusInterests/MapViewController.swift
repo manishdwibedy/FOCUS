@@ -1133,8 +1133,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     }
                     let place = self.placeMapping[id]
                     place?.setHours(hours: hours)
-                }
-                
+                }   
             }
         }
         

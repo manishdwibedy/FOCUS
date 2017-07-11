@@ -98,7 +98,46 @@ class notificationTabCell: UITableViewCell {
         })
         }
         else if data["type"] as! String == "pin"{
-        
+            let pinData = notif.item?.data["pin"] as? pinData
+            pinData?.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    
+                    if value?["images"] != nil
+                    {
+                        var firstVal = ""
+                        print("images")
+                        print((value?["images"])!)
+                        for (key,_) in (value?["images"] as! NSDictionary)
+                        {
+                            firstVal = key as! String
+                            break
+                        }
+                        
+                        let reference = Constants.storage.pins.child(((value?["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
+                        reference.downloadURL(completion: { (url, error) in
+                            
+                            if error != nil {
+                                print(error?.localizedDescription ?? "")
+                                return
+                            }
+                            
+                            self.typePic.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                            self.typePic.setShowActivityIndicator(true)
+                            self.typePic.setIndicatorStyle(.gray)
+                            
+                            
+                            
+                        })
+                        
+                    }else
+                    {
+                        self.typePic.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                    }
+                    
+                }
+            })
         }
         
         self.timeLabel.text = getTimeSince(date: notif.time!)
