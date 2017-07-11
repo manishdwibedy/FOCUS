@@ -88,6 +88,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let nextDate = calendar.date(byAdding: .minute, value: nextDiff, to: currentTime) ?? Date()
 
             timeButton.setTitle(dateFormatter.string(from: nextDate), for: .normal)
+            timePicker.date = nextDate
         }
         
         let inviteListCellNib = UINib(nibName: "InviteListTableViewCell", bundle: nil)
@@ -388,7 +389,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     searchEvent?.showInvitePopup = true
                 }
                 
-                Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown"])
+                Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeButton.titleLabel?.text!])
                 
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
                     
