@@ -17,13 +17,13 @@ import SDWebImage
 
 class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate, CLLocationManagerDelegate, UITextViewDelegate{
 
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var changeLocationOut: UIButton!
     @IBOutlet weak var pinTextView: UITextView!
     @IBOutlet weak var cancelOut: UIButton!
     @IBOutlet weak var pinOut: UIButton!
+    @IBOutlet weak var addImageButton: UIButton!
     @IBOutlet weak var cancelButtonOut: UIButton!
     @IBOutlet weak var publicOut: UIButton!
     @IBOutlet weak var facebookOut: UIButton!
@@ -105,19 +105,20 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         imageArray.append(#imageLiteral(resourceName: "pin_camera"))
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
         
         gallery.delegate = self
         
-        let width = (((collectionView.frame.width))/numberOfItemsPerRow)-7
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width)
         
         chosseFocusOut.layer.cornerRadius = 6
         chosseFocusOut.clipsToBounds = true
         chosseFocusOut.layer.borderColor =  UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
         chosseFocusOut.layer.borderWidth = 1
+        
+        
+        addImageButton.layer.cornerRadius = 6
+        addImageButton.clipsToBounds = true
+        addImageButton.layer.borderColor =  UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
+        addImageButton.layer.borderWidth = 1
         
         pinOut.layer.cornerRadius = 6
         pinOut.clipsToBounds = true
@@ -143,38 +144,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         pinTextView.inputAccessoryView = doneToolbar
         pinTextView.delegate = self
-        
-        
-        // Get the current authorization state.
-        let status = PHPhotoLibrary.authorizationStatus()
-        
-        if (status == PHAuthorizationStatus.authorized) {
-            getPhotos()
-        }
-            
-        else if (status == PHAuthorizationStatus.denied) {
-            // Access has been denied.
-        }
-            
-        else if (status == PHAuthorizationStatus.notDetermined) {
-            
-            // Access has not been determined.
-            PHPhotoLibrary.requestAuthorization({ (newStatus) in
-                
-                if (newStatus == PHAuthorizationStatus.authorized) {
-                    self.getPhotos()
-                }
-                    
-                else {
-                    
-                }
-            })
-        }
-            
-        else if (status == PHAuthorizationStatus.restricted) {
-            // Restricted access - normally won't happen.
-        }
-        
         
         if self.pinType != "place"{
             self.coordinates = CLLocationCoordinate2D(latitude: AuthApi.getLocation()!.coordinate.latitude, longitude: AuthApi.getLocation()!.coordinate.longitude)
@@ -212,8 +181,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         self.pinTextView.layer.add(bothAnimations, forKey: "color and width")
         
-//        self.animateBorderWidth(view: self.pinTextView, from: 0, to: 0.9, duration: 2.0)
-    
+        
+        Config.showsVideoTab = false
     }
     
     func animateBorderWidth(view: UIView, from: CGFloat, to: CGFloat, duration: Double) {
@@ -282,10 +251,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         present(autoCompleteController, animated: true, completion: nil)
     }
     
-    
-    @IBAction func camera(_ sender: Any) {
-        present(gallery, animated: true, completion: nil)
-    }
     
     @IBAction func cancel(_ sender: Any) {
         pinTextView.text = "What are you up to? Type here."
@@ -464,51 +429,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
     }
     
-    func getPhotos(){
-        let imgageManager = PHImageManager()
-        
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = false
-        requestOptions.deliveryMode = .highQualityFormat
-        requestOptions.isNetworkAccessAllowed = true
-        
-        let fetch = PHFetchOptions()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetch)
-        
-        self.imageArray.removeAll()
-        imageArray.append(#imageLiteral(resourceName: "pin_camera"))
-        
-        if fetchResult.count > 0
-        {
-            for i in 0..<fetchResult.count
-            {
-                imgageManager.requestImage(for: fetchResult.object(at: i) , targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: requestOptions, resultHandler: {
-                image, error in
-                    if let image = image{
-                        print("got image")
-                        
-                        if (UIImageJPEGRepresentation(image, 1) as NSData?) != nil{
-                            self.imageArray.append(image)
-                            self.collectionView.reloadData()
-                        }
-                        if (UIImagePNGRepresentation(image) as NSData?) != nil{
-                            self.imageArray.append(image)
-                            self.collectionView.reloadData()
-                            
-                        }
-                        
-                    }
-                })
-            }
-            
-        }
-        
-        
-        
-    }
-    
     func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             
@@ -662,6 +582,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         })
         
         
+    }
+    
+    @IBAction func addImage(_ sender: Any) {
+        present(gallery, animated: true, completion: nil)
     }
     
     func showLoginFailedAlert(loginType: String) {
