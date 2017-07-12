@@ -226,7 +226,7 @@ class CreateNewEventViewController: UIViewController,
         self.datePicker.minimumDate = date
         self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())
         self.datePicker.datePickerMode = .date
-        self.dateFormatter.dateFormat = "MMM d yyyy"
+        self.dateFormatter.dateFormat = "MMM d"
         
         eventNameTextField.delegate = self
         self.eventNameTextField.becomeFirstResponder()
