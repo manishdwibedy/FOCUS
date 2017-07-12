@@ -131,7 +131,7 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         let interest = focus[indexPath.row]
         switch(interest.status){
             case .normal:
-                cell.backgroundColor = UIColor.clear
+                cell.backgroundColor = UIColor(red: 22/255, green: 44/255, blue: 69/255, alpha: 0)
                 cell.label.textColor = UIColor.white
                 let imageName = "\(interest.name!) Blue"
                 cell.image.image = UIImage(named: imageName)

@@ -72,7 +72,7 @@ class InterstCollectionViewCell: UICollectionViewCell {
         
         switch(focus.status){
         case .normal:
-            self.backgroundColor = UIColor.clear
+            self.backgroundColor = UIColor(red: 22/255, green: 44/255, blue: 69/255, alpha: 0.5)
             self.label.textColor = UIColor.white
             let imageName = "\(focus.name!) Blue"
             self.image.image = UIImage(named: imageName)
