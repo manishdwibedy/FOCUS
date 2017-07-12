@@ -73,12 +73,12 @@ class FirebaseDownstream {
                                                 
                                             }
                                             valueCount = valueCount + 1
-//                                            if valueCount == totalCount - 1
-//                                            {
+                                            if valueCount == totalCount
+                                            {
                                                DispatchQueue.main.async(execute: {
                                                     completion(returnableNotif)
                                                 })
-                                           // }
+                                            }
                                         })
                                     }else if key as! String == "place"{
                                         print(inValue[inKey])
@@ -95,13 +95,13 @@ class FirebaseDownstream {
                                         
                                     
                                     valueCount = valueCount + 1
-//                                    if valueCount == totalCount - 1
-//                                    {
+                                    if valueCount == totalCount
+                                    {
                                         
                                         DispatchQueue.main.async(execute: {
                                             completion(returnableNotif)
                                         })
-                                    //}
+                                    }
                                     }
                                 
                                     

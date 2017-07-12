@@ -98,7 +98,50 @@ class notificationTabCell: UITableViewCell {
         })
         }
         else if data["type"] as! String == "pin"{
-        
+            let pinData = notif.item?.data["pin"] as? pinData
+            pinData?.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    
+                    if value?["images"] != nil
+                    {
+                        var firstVal = ""
+                        print("images")
+                        print((value?["images"])!)
+                        for (key,_) in (value?["images"] as! NSDictionary)
+                        {
+                            firstVal = key as! String
+                            break
+                        }
+                        
+                        let reference = Constants.storage.pins.child(((value?["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
+                        reference.downloadURL(completion: { (url, error) in
+                            
+                            if error != nil {
+                                print(error?.localizedDescription ?? "")
+                                return
+                            }
+                            
+                            self.typePic.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                            self.typePic.setShowActivityIndicator(true)
+                            self.typePic.setIndicatorStyle(.gray)
+                            
+                            
+                            
+                        })
+                        
+                    }else
+                    {
+                        self.typePic.image = #imageLiteral(resourceName: "placeholder_pin")
+                    }
+                    
+                }
+            })
+        }
+        else{
+            let place = notif.item?.data["place"] as? Place
+            self.typePic.sd_setImage(with: URL(string: (place?.image_url)!)!, placeholderImage: #imageLiteral(resourceName: "placeholder_place"))
         }
         
         self.timeLabel.text = getTimeSince(date: notif.time!)

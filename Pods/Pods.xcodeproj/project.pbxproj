@@ -854,6 +854,7 @@
 		EA2A68F444306BD20AB3F0C2BCB69D50 /* FBSDKShareAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A3A2E7BCE8911BDE48A5911F8D82C3 /* FBSDKShareAPI.m */; };
 		EAC4E8296D47BC3806FAFCA254D9B02B /* JSQMessagesMediaPlaceholderView.h in Headers */ = {isa = PBXBuildFile; fileRef = F2AE742C5A021275C5CAFEBF90A6928B /* JSQMessagesMediaPlaceholderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAF3BB6E82CCA6E3144E3AEA3C214B2B /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B8234BAF84896E40B61AC7C5F5FF7C /* StackView.swift */; };
+		EB1387741F15647A00F927E1 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77892F5900AF236B357C96F81F36FCC /* FirebaseDatabase.framework */; };
 		EBBEF31DB8542B7EA75C303C7B63F7DC /* FBSDKShareVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9768285CE5BDC0EB52A404C52B10A7F /* FBSDKShareVideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC0993DEAE73EDFA1E42B92454D53096 /* JSQMessagesAvatarImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E2C95C5D0BDF5C8F57EA4DCAC5FB591 /* JSQMessagesAvatarImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC4916C30B3BF94CBBC88B46B4AAA8DD /* FBSDKCoreKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B741AA4CECAF21760E91CA1564ECC7E /* FBSDKCoreKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };

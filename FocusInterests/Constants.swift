@@ -41,6 +41,7 @@ struct Constants {
         public static let lightBlue = UIColor(hexString: "1ad1dc")
         public static let green = UIColor(hexString: "7ac901")
         public static let pink = UIColor(hexString: "ff3366")
+        public static let darkGray = UIColor(hexString: "55555D")
     }
     
     struct navBar{
