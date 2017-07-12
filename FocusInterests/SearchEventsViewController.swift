@@ -358,7 +358,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     func inviteUser(sender:UIButton){
         let buttonRow = sender.tag
         
-        let event = self.events[buttonRow]
+        let event = self.filtered[buttonRow]
         print("invite user to event \(String(describing: event.title)) ")
         
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)

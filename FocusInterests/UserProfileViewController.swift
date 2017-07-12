@@ -202,10 +202,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         getEventSuggestions()
         getPin()
         
-        self.pinView.addTopBorderWithColor(color: UIColor.white, width: 1)
-        self.focusView.addTopBorderWithColor(color: UIColor.white, width: 1)
-        self.eventView.addTopBorderWithColor(color: UIColor.white, width: 1)
-        
         
         
         self.navigationItem.title = ""
@@ -323,6 +319,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.pinView.addTopBorderWithColor(color: UIColor.white, width: 1)
+        self.focusView.addTopBorderWithColor(color: UIColor.white, width: 1)
+        self.eventView.addTopBorderWithColor(color: UIColor.white, width: 1)
+        
+        
+        
         self.pinView.setNeedsLayout()
         self.pinView.layoutIfNeeded()
         self.focusView.setNeedsLayout()
