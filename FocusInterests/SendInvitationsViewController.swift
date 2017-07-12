@@ -169,7 +169,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             }
         }
     
-        for interest in (event?.category?.components(separatedBy: ","))!{
+        for interest in (event?.category?.components(separatedBy: ";"))!{
             Constants.DB.event_interests.child(interest).childByAutoId().setValue(["event-id": id])
         }
         
