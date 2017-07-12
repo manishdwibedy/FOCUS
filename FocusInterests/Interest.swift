@@ -21,7 +21,6 @@ enum InterestCategory: String {
 enum InterestStatus{
     case normal
     case like
-    case love
     case hate
     
     mutating func toggle() {
@@ -29,9 +28,7 @@ enum InterestStatus{
         case .normal:
             self = .like
         case .like:
-            self = .love
-        case .love:
-            self = .normal
+            self = .hate
         case .hate:
             break
         }

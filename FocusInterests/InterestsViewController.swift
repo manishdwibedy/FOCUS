@@ -91,10 +91,6 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
                             if status == "1"{
                                 selected_interests[interest_name] = .like
                             }
-                            else{
-                                selected_interests[interest_name] = .love
-                            }
-                            
                         }
                         
                     }
@@ -131,25 +127,18 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         let interest = focus[indexPath.row]
         switch(interest.status){
             case .normal:
-                cell.backgroundColor = UIColor(red: 22/255, green: 44/255, blue: 69/255, alpha: 0)
-                cell.label.textColor = UIColor.white
-                let imageName = "\(interest.name!) Blue"
-                cell.image.image = UIImage(named: imageName)
-                
-                cell.view.layer.borderColor = UIColor(red: 22/255, green: 44/255, blue: 69/255, alpha: 1.0).cgColor
-                cell.view.layer.borderWidth = 5
-            case .like:
                 cell.backgroundColor = UIColor(red: 22/255, green: 44/255, blue: 69/255, alpha: 1)
                 cell.label.textColor = UIColor.white
                 
                 let imageName = "\(interest.name!) Green"
                 cell.image.image = UIImage(named: imageName)
-                
-            case .love:
+            
+            case .like:
                 cell.backgroundColor = UIColor.white
                 cell.label.textColor = UIColor.black
                 let imageName = "\(interest.name!) Green"
                 cell.image.image = UIImage(named: imageName)
+                
             default:
                 break
         }
@@ -216,10 +205,6 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         {
             if cell.status == .like{
                 selected.append("\(cell.name!)-1")
-                new_interests.insert(cell.name!)
-            }
-            else if cell.status == .love{
-                selected.append("\(cell.name!)-2")
                 new_interests.insert(cell.name!)
             }
         }
