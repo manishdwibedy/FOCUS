@@ -166,7 +166,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         let colorAnimation = CABasicAnimation(keyPath: "borderColor")
         colorAnimation.fromValue = UIColor.clear.cgColor
         colorAnimation.toValue = Constants.color.green.cgColor
-        self.pinTextView.layer.borderColor = Constants.color.green.cgColor
         
         let widthAnimation = CABasicAnimation(keyPath: "borderWidth")
         widthAnimation.fromValue = 1
