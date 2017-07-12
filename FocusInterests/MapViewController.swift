@@ -1075,7 +1075,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         categories.append(category)
                     }
                     
-                    let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone, is_closed: is_closed)
+                    let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                     
                     if !(self.searchPlacesTab?.places.contains(place))!{
                         
@@ -1114,6 +1114,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
                 let json = JSON(data: response.data!)
+                let place = self.placeMapping[id]
                 
                 if json["hours"].arrayValue.count > 0{
                     let open_hours = json["hours"].arrayValue[0].dictionaryValue
@@ -1122,9 +1123,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         let hour = Hours(start: hour["start"].stringValue, end: hour["end"].stringValue, day: hour["day"].intValue)
                         hours.append(hour)
                     }
-                    let place = self.placeMapping[id]
+                    
                     place?.setHours(hours: hours)
-                }   
+                }
+                place?.set_is_open(is_open: json["is_open_now"].boolValue)
             }
         }
         

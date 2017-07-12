@@ -364,7 +364,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
                             categories.append(category)
                         }
                         
-                        let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone, is_closed: is_closed)
+                        let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                         
                         if !result.contains(place){
                             result.append(place)
