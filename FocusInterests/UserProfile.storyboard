@@ -428,6 +428,11 @@
                                             <constraint firstItem="Dsa-iR-ute" firstAttribute="top" secondItem="wLf-1E-eSU" secondAttribute="top" id="uxe-be-C9W"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efh-XS-pLE">
+                                        <rect key="frame" x="34" y="159" width="289" height="365"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -487,6 +492,7 @@
                         <outlet property="eventsCollectionView" destination="F09-6U-2YX" id="pSk-oS-s7g"/>
                         <outlet property="focusHeader" destination="lgR-nk-9yp" id="6Vt-5R-NJb"/>
                         <outlet property="focusView" destination="SF4-Kb-s3b" id="vYx-0p-v3e"/>
+                        <outlet property="followYourFriendsView" destination="efh-XS-pLE" id="bWX-Vv-NRy"/>
                         <outlet property="followerCount" destination="C4p-o0-a8V" id="29Z-WO-ELs"/>
                         <outlet property="followerLabel" destination="FTF-AM-b0X" id="XQk-hG-P9P"/>
                         <outlet property="followerStackView" destination="1qc-sQ-5I4" id="bSe-Yg-Be7"/>

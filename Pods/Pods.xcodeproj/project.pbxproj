@@ -372,7 +372,6 @@
 		5AEDA164C0AA5062F24F1DA3B8D7C7C9 /* OhhAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3859418AE38CFDAF25756689B1EDE6C8 /* OhhAuth.swift */; };
 		5B1AF8B6D07FA01316058C49151CF53A /* GTMOAuth2Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = D88014C3F95B4948DA3D3E5D64786E41 /* GTMOAuth2Authentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B415F1076AA2C7B83651E45D1BEB646 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CEE604F734DF6949306F8FD70F2E5C /* TransitionAnimator.swift */; };
-		5B5A00CF1F155BDA00D8742D /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77892F5900AF236B357C96F81F36FCC /* FirebaseDatabase.framework */; };
 		5B851EE40C78D5874F9BE0942D129D22 /* FBSDKAccessToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 367A0BCC2C444603D8A7FC688FB8D0E5 /* FBSDKAccessToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B8684E7AFA997FBDF4D4C3641F18EDB /* Pods-FocusInterests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A17F1C457163388F69063067E5A2E104 /* Pods-FocusInterests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5BE99F6AD309E4C4C497D161EB1BCC8D /* GameRequest.Recipient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1E2DF1B533E6C29075849A4233FBEE /* GameRequest.Recipient.swift */; };
@@ -393,6 +392,7 @@
 		610FBFE9733605B3458799E66A675B6D /* LikeControl.AuxilaryStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FC78C8CFCDD6382532A043D47ED4AD /* LikeControl.AuxilaryStyle.swift */; };
 		61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC3039C00DB60FC708AF5E4AF9DBBE5 /* DispatchQueue+Alamofire.swift */; };
 		61D86151490F37897862A5E305714D07 /* FBSDKGameRequestContent.h in Headers */ = {isa = PBXBuildFile; fileRef = F2A008C16DBF7B5452543157DFD6004A /* FBSDKGameRequestContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61F11B281F1567A2002B78A1 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77892F5900AF236B357C96F81F36FCC /* FirebaseDatabase.framework */; };
 		62AAAB4BA0B8E6005F0BE9AE65FBEF9C /* PublishPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE51249C5B129E0BAB4BAFBA882F95CF /* PublishPermission.swift */; };
 		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A485DE48AF66106468819159079DA49 /* ServerTrustPolicy.swift */; };
 		63694CAE09CE69A78ABD2A70BFD2E47A /* OhhAuth-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0754A464F3F8BBDBE742502BA0455 /* OhhAuth-dummy.m */; };
@@ -854,6 +854,7 @@
 		EA2A68F444306BD20AB3F0C2BCB69D50 /* FBSDKShareAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A3A2E7BCE8911BDE48A5911F8D82C3 /* FBSDKShareAPI.m */; };
 		EAC4E8296D47BC3806FAFCA254D9B02B /* JSQMessagesMediaPlaceholderView.h in Headers */ = {isa = PBXBuildFile; fileRef = F2AE742C5A021275C5CAFEBF90A6928B /* JSQMessagesMediaPlaceholderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAF3BB6E82CCA6E3144E3AEA3C214B2B /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B8234BAF84896E40B61AC7C5F5FF7C /* StackView.swift */; };
+		EB1387741F15647A00F927E1 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77892F5900AF236B357C96F81F36FCC /* FirebaseDatabase.framework */; };
 		EBBEF31DB8542B7EA75C303C7B63F7DC /* FBSDKShareVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9768285CE5BDC0EB52A404C52B10A7F /* FBSDKShareVideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC0993DEAE73EDFA1E42B92454D53096 /* JSQMessagesAvatarImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E2C95C5D0BDF5C8F57EA4DCAC5FB591 /* JSQMessagesAvatarImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC4916C30B3BF94CBBC88B46B4AAA8DD /* FBSDKCoreKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B741AA4CECAF21760E91CA1564ECC7E /* FBSDKCoreKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2702,7 +2703,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B5A00CF1F155BDA00D8742D /* FirebaseDatabase.framework in Frameworks */,
+				61F11B281F1567A2002B78A1 /* FirebaseDatabase.framework in Frameworks */,
 				C905C7C05DA47C2413D9E2492D7C4016 /* CoreLocation.framework in Frameworks */,
 				29201A2541063D958C1F622BDE21A5FC /* Foundation.framework in Frameworks */,
 				735B1005CF6967A0B2224C691D8DAB4F /* GoogleToolboxForMac.framework in Frameworks */,

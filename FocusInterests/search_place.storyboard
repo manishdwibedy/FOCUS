@@ -36,7 +36,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eRW-87-xqd">
-                                <rect key="frame" x="5" y="108" width="365" height="510"/>
+                                <rect key="frame" x="5" y="163" width="365" height="455"/>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.55294117647058827" green="0.58431372549019611" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,10 +45,10 @@
                                     <outlet property="delegate" destination="9LA-Yp-djj" id="TVU-fQ-otK"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5N-ur-DBG">
+                            <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5N-ur-DBG">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </searchBar>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vv4-j9-YTv">
@@ -70,21 +70,31 @@
                                     <constraint firstItem="kgV-Th-rMJ" firstAttribute="leading" secondItem="vv4-j9-YTv" secondAttribute="leadingMargin" id="rwj-Vu-0iC"/>
                                 </constraints>
                             </view>
+                            <searchBar tag="1" contentMode="redraw" searchBarStyle="prominent" placeholder="current location" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZV-Gb-9mm">
+                                <rect key="frame" x="0.0" y="108" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.36470588240000001" alpha="0.85862585619999998" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="vv4-j9-YTv" firstAttribute="centerX" secondItem="jIo-bt-XOn" secondAttribute="centerX" id="0Kh-ep-OWt"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leading" id="3Is-4z-t1n"/>
+                            <constraint firstItem="kZV-Gb-9mm" firstAttribute="centerX" secondItem="e5N-ur-DBG" secondAttribute="centerX" id="3xw-NJ-Bub"/>
                             <constraint firstItem="vv4-j9-YTv" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leadingMargin" constant="-11" id="ATU-Gl-6PI"/>
+                            <constraint firstItem="eRW-87-xqd" firstAttribute="top" secondItem="kZV-Gb-9mm" secondAttribute="bottom" constant="11" id="Hdi-gl-JqJ"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="trailing" secondItem="e5N-ur-DBG" secondAttribute="trailing" id="I2i-8K-bAe"/>
                             <constraint firstItem="eRW-87-xqd" firstAttribute="centerX" secondItem="e5N-ur-DBG" secondAttribute="centerX" id="LeY-o5-aFv"/>
                             <constraint firstItem="e5N-ur-DBG" firstAttribute="top" secondItem="T1q-Ba-90U" secondAttribute="bottom" id="WNh-BA-Og1"/>
+                            <constraint firstItem="kZV-Gb-9mm" firstAttribute="leading" secondItem="jIo-bt-XOn" secondAttribute="leading" id="Ws5-GN-B4G"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="top" secondItem="jIo-bt-XOn" secondAttribute="top" id="Xao-1f-yK5"/>
-                            <constraint firstItem="eRW-87-xqd" firstAttribute="top" secondItem="e5N-ur-DBG" secondAttribute="bottom" id="bvV-dx-7pc"/>
                             <constraint firstItem="qo6-RG-5nr" firstAttribute="top" secondItem="eRW-87-xqd" secondAttribute="bottom" id="cFI-13-vBa"/>
                             <constraint firstItem="eRW-87-xqd" firstAttribute="centerX" secondItem="jIo-bt-XOn" secondAttribute="centerX" id="eYF-dv-OK1"/>
                             <constraint firstItem="vv4-j9-YTv" firstAttribute="trailing" secondItem="jIo-bt-XOn" secondAttribute="trailingMargin" constant="11" id="iOL-pt-ROY"/>
+                            <constraint firstAttribute="trailing" secondItem="kZV-Gb-9mm" secondAttribute="trailing" id="qQy-Ez-5Ws"/>
                             <constraint firstAttribute="trailing" secondItem="T1q-Ba-90U" secondAttribute="trailing" id="w9d-2d-5Hn"/>
+                            <constraint firstItem="kZV-Gb-9mm" firstAttribute="top" secondItem="e5N-ur-DBG" secondAttribute="bottom" id="wIG-Jt-qk5"/>
                             <constraint firstItem="qo6-RG-5nr" firstAttribute="top" secondItem="vv4-j9-YTv" secondAttribute="bottom" constant="-119" id="wri-Mz-dwc"/>
                             <constraint firstAttribute="leadingMargin" secondItem="eRW-87-xqd" secondAttribute="leading" constant="11" id="xLp-75-DeR"/>
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="leading" secondItem="e5N-ur-DBG" secondAttribute="leading" id="xiH-UI-YcC"/>
@@ -95,6 +105,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="currentLocationSearchBar" destination="kZV-Gb-9mm" id="MfL-Sd-eJj"/>
                         <outlet property="invitePopup" destination="vv4-j9-YTv" id="Tj8-OT-lUa"/>
                         <outlet property="invitePopupBottomLayoutConstraint" destination="wri-Mz-dwc" id="pGn-oV-1pP"/>
                         <outlet property="navBar" destination="T1q-Ba-90U" id="hcn-pc-KL3"/>

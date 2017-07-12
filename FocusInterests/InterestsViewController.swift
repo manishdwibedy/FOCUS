@@ -30,10 +30,15 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     var filtered = [Interest]()
     var searching = false
     
+    var shouldOnlyReturn = false
+    
+    var onClose: ((Bool, Set<String>) -> Void)?
+    
     var interestCells = [InterstCollectionViewCell]()
     
     var needsReturn = false
     var parentReturnVC: PinScreenViewController!
+    var parentCreateEvent: CreateNewEventViewController!
     var isNewUser = false
     var pinInterest = false
     
@@ -204,7 +209,7 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func saveInterests(_ sender: UIBarButtonItem) {
-     
+        
         var selected = [String]()
         var new_interests = Set<String>()
         for cell in self.focus
@@ -221,6 +226,11 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         
         print(old_interests)
         print(new_interests)
+        
+        if (shouldOnlyReturn) {
+            self.onClose!(true, new_interests)
+            self.dismiss(animated: true, completion: nil)
+        }
         
         var add = new_interests
         var  remove = old_interests
@@ -273,6 +283,17 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         }
     }
     
+    func returnToCreateEvent(FOCUS:String) {
+        
+        //parentCreateEvent.focusList
+
+        //parentCreateEvent.interest = FOCUS
+//        
+//        parentCreateEvent.focusList.ad
+//        
+//        parentCreateEvent.focusLabel.text = FOCUS
+//        parentCreateEvent.focusLabel.sizeToFit()
+    }
     
     func returnValue(FOCUS:String){
         parentReturnVC.interest = FOCUS
