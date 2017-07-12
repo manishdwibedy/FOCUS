@@ -86,13 +86,13 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         navBar.titleTextAttributes = attrs
         
-        
+        var followingCount = 0
         let ref = Constants.DB.user
         
         ref.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
             if let value = snapshot.value as? [String:Any]{
                 for (_, people) in value{
-                    let followingCount = value.count
+                    followingCount = value.count
                     if let peopleData = people as? [String:Any]{
                         let UID = peopleData["UID"] as! String
                         ref.child(UID).observeSingleEvent(of: .value, with: { snapshot in
@@ -128,7 +128,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                             return $0.hasPin && !$1.hasPin
                                         }
                                         
-                                        if self.followers.count == followingCount{
+                                        if self.followers.count == followingCount && self.people.count > 0{
                                             for user in self.followers{
                                                 if let index = self.people.index(where: { $0.uuid == user.uuid }) {
                                                     self.people.remove(at: index)
@@ -156,7 +156,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             for (_, user) in users{
                 let info = user as? [String:Any]
                 
-                _ = users.count
+                let userCount = users.count
                 if let info = info{
                     if let user = User.toUser(info: info){
                         if user.uuid != AuthApi.getFirebaseUid(){
@@ -181,24 +181,27 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     self.people.append(user)
                                 }
                                 
-                                
-                                self.people.sort {
-                                    if $0.hasPin && $1.hasPin{
-                                        return $0.pinDistance < $1.pinDistance
+                                if self.people.count == userCount && followingCount == self.followers.count{
+                                    self.people.sort {
+                                        if $0.hasPin && $1.hasPin{
+                                            return $0.pinDistance < $1.pinDistance
+                                        }
+                                        return $0.hasPin && !$1.hasPin
                                     }
-                                    return $0.hasPin && !$1.hasPin
+                                    
+                                    for user in self.followers{
+                                        if let index = self.people.index(where: { $0.uuid == user.uuid }) {
+                                            self.people.remove(at: index)
+                                        }
+                                    }
+                                    
+                                    
+                                    self.people = self.followers + self.people
+                                    self.filtered = self.people
+                                    self.tableView.reloadData()
                                 }
                                 
-                                for user in self.followers{
-                                    if let index = self.people.index(where: { $0.uuid == user.uuid }) {
-                                        self.people.remove(at: index)
-                                    }
-                                }
                                 
-                                
-                                self.people = self.followers + self.people
-                                self.filtered = self.people
-                                self.tableView.reloadData()
                             })
                         }
                     }

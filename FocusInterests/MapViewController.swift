@@ -1113,28 +1113,31 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func getPlaceHours(id: String){
-        let url = "https://api.yelp.com/v3/businesses/\(id)"
-        
-        let headers: HTTPHeaders = [
-            "authorization": "Bearer \(AuthApi.getYelpToken()!)",
-            "cache-contro": "no-cache"
-        ]
-        
-        Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
-            let json = JSON(data: response.data!)
+        if let token = AuthApi.getYelpToken(){
+            let url = "https://api.yelp.com/v3/businesses/\(id)"
             
-            if json["hours"].arrayValue.count > 0{
-                let open_hours = json["hours"].arrayValue[0].dictionaryValue
-                var hours = [Hours]()
-                for hour in (open_hours["open"]?.arrayValue)!{
-                    let hour = Hours(start: hour["start"].stringValue, end: hour["end"].stringValue, day: hour["day"].intValue)
-                    hours.append(hour)
+            let headers: HTTPHeaders = [
+                "authorization": "Bearer \(token)",
+                "cache-contro": "no-cache"
+            ]
+            
+            Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
+                let json = JSON(data: response.data!)
+                
+                if json["hours"].arrayValue.count > 0{
+                    let open_hours = json["hours"].arrayValue[0].dictionaryValue
+                    var hours = [Hours]()
+                    for hour in (open_hours["open"]?.arrayValue)!{
+                        let hour = Hours(start: hour["start"].stringValue, end: hour["end"].stringValue, day: hour["day"].intValue)
+                        hours.append(hour)
+                    }
+                    let place = self.placeMapping[id]
+                    place?.setHours(hours: hours)
                 }
-                let place = self.placeMapping[id]
-                place?.setHours(hours: hours)
+                
             }
-            
         }
+        
     }
     
     func fetchPins()

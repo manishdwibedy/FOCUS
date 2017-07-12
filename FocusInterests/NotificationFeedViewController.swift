@@ -210,6 +210,12 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
                     controller.event = notif.item?.data["event"] as? Event
                     self.present(controller, animated: true, completion: nil)
                 }
+                else if type == "place"{
+                    let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+                    controller.place = notif.item?.data["place"] as! Place
+                    self.present(controller, animated: true, completion: nil)
+                }
                 else{
                     let storyboard = UIStoryboard(name: "Pin", bundle: nil)
                     let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController

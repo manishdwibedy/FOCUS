@@ -12,18 +12,28 @@ import FirebaseDatabase
 import GeoFire
 import SCLAlertView
    
-class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UISearchBarDelegate{
+class CreateNewEventViewController: UIViewController,
+    
+//    UITableViewDelegate, UITableViewDataSource,
+    
+    UITextFieldDelegate, UITextViewDelegate
+    
+    //,UISearchBarDelegate
+
+
+{
     
     @IBOutlet weak var privatePublicSwitch: UISwitch!
-    @IBOutlet weak var interestListView: UIView!
+    //@IBOutlet weak var interestListView: UIView!
     @IBOutlet var parentView: UIView!
     @IBOutlet weak var interestListLabel: UILabel!
-    @IBOutlet weak var interestNextButton: UIButton!
+    //@IBOutlet weak var interestNextButton: UIButton!
     
+    @IBOutlet weak var choseFocusButton: UIButton!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var publicLabel: UILabel!
     @IBOutlet weak var privateLabel: UILabel!
-    @IBOutlet weak var searchBar: UISearchBar!
+    //@IBOutlet weak var searchBar: UISearchBar!
     
     var event: Event?
     var place: GMSPlace?
@@ -33,11 +43,14 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
     
+    var focusList = Set<String>()
+    
     // Interests
     var checkInterests = [Bool]()
     var filteredCheck = [Bool]()
     var interests = [String]()
     var filteredInterest = [String]()
+    var interests_set = Set<String>()
     
     let validatedFields = true
     
@@ -57,11 +70,11 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var eventDescriptionTextView: UITextView!
     
     
-    @IBOutlet weak var interestTableView: UITableView!
+    //@IBOutlet weak var interestTableView: UITableView!
     @IBOutlet weak var publicOrPrivateSwitch: UISwitch!
     @IBOutlet weak var guestSettingsStackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var interestTopConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var interestTopConstraint: NSLayoutConstraint!
     
 //    TOOLBARS
     
@@ -147,19 +160,19 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         self.privatePublicSwitch.backgroundColor = Constants.color.green
         self.privatePublicSwitch.onTintColor = Constants.color.green
         
-        self.interestTableView.dataSource = self
-        self.interestTableView.delegate = self
-        self.searchBar.delegate = self
-        self.searchBar.tintColor = UIColor.white
-        self.searchBar.returnKeyType = .done
+        //self.interestTableView.dataSource = self
+        //self.interestTableView.delegate = self
+        //self.searchBar.delegate = self
+        //self.searchBar.tintColor = UIColor.white
+        //self.searchBar.returnKeyType = .done
         
-        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
+        //let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
         
-        textFieldInsideSearchBar?.textColor = UIColor.white
+        //textFieldInsideSearchBar?.textColor = UIColor.white
         
         formatTextFields()
         setTextFieldDelegates()
-        self.interestTableView.delaysContentTouches = false
+        //self.interestTableView.delaysContentTouches = false
         self.timePicker.datePickerMode = .time
         self.timePicker.minuteInterval = 5
         
@@ -179,9 +192,14 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         datePicker.minuteInterval = 15
         timePicker.minuteInterval = 15
         
-        let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestTableView.bounds.size.width, height: self.interestTableView.bounds.size.height))
-        backgroundView.backgroundColor = UIColor.clear
-        interestTableView.backgroundView = backgroundView
+        choseFocusButton.layer.cornerRadius = 6
+        choseFocusButton.clipsToBounds = true
+        choseFocusButton.layer.borderColor =  UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
+        choseFocusButton.layer.borderWidth = 1
+        
+//        let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestTableView.bounds.size.width, height: self.interestTableView.bounds.size.height))
+//        backgroundView.backgroundColor = UIColor.clear
+//        interestTableView.backgroundView = backgroundView
         
         for _ in 0..<Constants.interests.interests.count{
             checkInterests.append(false)
@@ -190,9 +208,9 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         
         self.filteredInterest = Constants.interests.interests
         self.interests = self.filteredInterest
-        self.interestNextButton.roundCorners(radius: 5.0)
+        //self.interestNextButton.roundCorners(radius: 5.0)
         
-        self.interestListView.isHidden = true
+        //self.interestListView.isHidden = true
         hideKeyboardWhenTappedAround()
         
         let attrs = [
@@ -206,6 +224,36 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         UIApplication.shared.statusBarStyle = .default
     }
     
+    @IBAction func choseFocusAction(_ sender: Any) {
+        
+        //var lastCaption = ""
+
+        
+        //lastCaption = pinTextView.text
+        let focusWindow = InterestsViewController(nibName:"InterestsViewController", bundle:nil)
+        focusWindow.pinInterest = true
+        self.present(focusWindow, animated: true, completion:{
+            focusWindow.saveButton.isEnabled = true
+            focusWindow.saveButton.title = "Done"
+            focusWindow.shouldOnlyReturn = true
+            focusWindow.needsReturn = true
+            focusWindow.parentCreateEvent = self
+        })
+        
+        focusWindow.onClose = { (finished, set) in
+            print("Finished")
+            print("Self focus list => \(set)")
+            
+            var str = ""
+            
+            for value in set {
+                str += "\(value) | "
+            }
+            
+            self.interestListLabel.text = str
+            
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         
         if let cached = Event.fetchEvent() {
@@ -227,7 +275,7 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                     checkInterests[index] = true
                 }
             }
-            interestTableView.reloadData()
+            //interestTableView.reloadData()
             Event.clearCache()
         }
         registerKeyboardNotifications()
@@ -278,14 +326,14 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
             self.publicLabel.textColor = UIColor.white
             
             guestSettingsStackView.isHidden = false
-            interestTopConstraint.constant = 100
+            //interestTopConstraint.constant = 100
             
         } else /* the switch is set to public */ {
             self.privateLabel.textColor = UIColor.white
             self.publicLabel.textColor = UIColor.primaryGreen()
             
             guestSettingsStackView.isHidden = true
-            interestTopConstraint.constant = 0
+            //interestTopConstraint.constant = 0
         }
     }
     
@@ -345,10 +393,12 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
                 let dateString = "\(validDate), \(validTime)"
                 guard let creator = AuthApi.getFirebaseUid() else { return }
                 
-                let interests = zip(checkInterests,Constants.interests.interests ).filter { $0.0 }.map { $1 }
+                //let interests = zip(checkInterests,Constants.interests.interests ).filter { $0.0 }.map { $1 }
+                
+                let interest = self.interests_set
                 
                 guard !interests.isEmpty else{
-                    presentNotification(title: "Choose a interest", message: "Please choose atleast one interest for this event.")
+                    presentNotification(title: "Choose an interest", message: "Please choose atleast one interest for this event.")
                     return
                 }
                 
@@ -505,52 +555,52 @@ class CreateNewEventViewController: UIViewController, UITableViewDelegate, UITab
         return newString
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredInterest.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
-        
-        cell.selectedInterestLabel.text = filteredInterest[indexPath.row]
-        
-        if checkInterests[indexPath.row]{
-            cell.checkedInterest.image = UIImage(named: "Green.png")
-        }
-        else{
-            cell.checkedInterest.image = UIImage(named: "Interest_blank")
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        interestListView.isHidden = false
-        
-        let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
-        tableView.deselectRow(at: indexPath, animated: false)
-        
-        checkInterests[indexPath.row] = !checkInterests[indexPath.row]
-        
-        if interestListLabel.text == "" || interestListLabel.text == nil{
-            self.interestListLabel.text =  filteredInterest[indexPath.row]
-        } else {
-            self.interestListLabel.text =  self.interestListLabel.text! + ", \(filteredInterest[indexPath.row])"
-        }
-        
-        if checkInterests[indexPath.row]{
-            cell.checkedInterest.image = UIImage(named: "Green.png")
-        }
-        else{
-            cell.checkedInterest.image = UIImage(named: "Interest_blank")
-        }
-        interestTableView.reloadData()
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return filteredInterest.count
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
+//        
+//        cell.selectedInterestLabel.text = filteredInterest[indexPath.row]
+//        
+//        if checkInterests[indexPath.row]{
+//            cell.checkedInterest.image = UIImage(named: "Green.png")
+//        }
+//        else{
+//            cell.checkedInterest.image = UIImage(named: "Interest_blank")
+//        }
+//        
+//        return cell
+//    }
+//    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//        //interestListView.isHidden = false
+//        
+//        let cell = interestTableView.dequeueReusableCell(withIdentifier: "selectedInterest", for: indexPath) as! InterestTableViewCell
+//        tableView.deselectRow(at: indexPath, animated: false)
+//        
+//        checkInterests[indexPath.row] = !checkInterests[indexPath.row]
+//        
+//        if interestListLabel.text == "" || interestListLabel.text == nil{
+//            self.interestListLabel.text =  filteredInterest[indexPath.row]
+//        } else {
+//            self.interestListLabel.text =  self.interestListLabel.text! + ", \(filteredInterest[indexPath.row])"
+//        }
+//        
+//        if checkInterests[indexPath.row]{
+//            cell.checkedInterest.image = UIImage(named: "Green.png")
+//        }
+//        else{
+//            cell.checkedInterest.image = UIImage(named: "Interest_blank")
+//        }
+//        interestTableView.reloadData()
+//    }
     
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
         Event.clearCache()
@@ -796,22 +846,22 @@ extension CreateNewEventViewController {
     
 //    TODO: need to increase height of view controller in order to compensate for scroll view moving up
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.searchBar.returnKeyType = .done
-        
-        if searchText.characters.count > 0{
-            self.filteredInterest = self.interests.filter { $0.contains(searchText) }
-            self.interestTableView.reloadData()
-        }
-        else{
-            self.filteredInterest = self.interests
-            self.interestTableView.reloadData()
-        }
-    }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        self.searchBar.returnKeyType = .done
+//        
+//        if searchText.characters.count > 0{
+//            self.filteredInterest = self.interests.filter { $0.contains(searchText) }
+//            self.interestTableView.reloadData()
+//        }
+//        else{
+//            self.filteredInterest = self.interests
+//            self.interestTableView.reloadData()
+//        }
+//    }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.searchBar.endEditing(true)
-    }
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        self.searchBar.endEditing(true)
+//    }
     
     func searchForInterest(interest: String){
 //        filteredCandies = candies.filter { candy in
@@ -858,15 +908,17 @@ extension CreateNewEventViewController {
             self.scrollView.setContentOffset(CGPoint(x: 0, y: 200), animated: true)
         } else if self.eventDescriptionTextView.isFirstResponder {
             self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentInset.bottom), animated: true)
-            self.searchBar.becomeFirstResponder()
+            //self.searchBar.becomeFirstResponder()
         }
     }
     
     func keyboardPreviousButton(){
-        if self.searchBar.isFirstResponder {
-            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-20), animated: true)
-            self.eventDescriptionTextView.becomeFirstResponder()
-        } else if self.eventDescriptionTextView.isFirstResponder {
+//        if self.searchBar.isFirstResponder {
+//            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-20), animated: true)
+//            self.eventDescriptionTextView.becomeFirstResponder()
+//        } else
+        
+            if self.eventDescriptionTextView.isFirstResponder {
             self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-10), animated: true)
             self.eventPriceTextView.becomeFirstResponder()
         } else if self.eventPriceTextView.isFirstResponder {

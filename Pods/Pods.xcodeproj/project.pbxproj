@@ -390,9 +390,9 @@
 		5FFD2E9637BEC39BDD4E6905E4063FBA /* FBSDKAccessTokenCacheV4.m in Sources */ = {isa = PBXBuildFile; fileRef = 542E5D3008F2A99DA40399AF00742E66 /* FBSDKAccessTokenCacheV4.m */; };
 		604286A8F8A2ACB063BDF97B09D4987C /* UILabel+Chameleon.h in Headers */ = {isa = PBXBuildFile; fileRef = F435A95F758CAA9057A5E16C39E2E50D /* UILabel+Chameleon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		610FBFE9733605B3458799E66A675B6D /* LikeControl.AuxilaryStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FC78C8CFCDD6382532A043D47ED4AD /* LikeControl.AuxilaryStyle.swift */; };
-		611317F21F15210300AB0E20 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77892F5900AF236B357C96F81F36FCC /* FirebaseDatabase.framework */; };
 		61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC3039C00DB60FC708AF5E4AF9DBBE5 /* DispatchQueue+Alamofire.swift */; };
 		61D86151490F37897862A5E305714D07 /* FBSDKGameRequestContent.h in Headers */ = {isa = PBXBuildFile; fileRef = F2A008C16DBF7B5452543157DFD6004A /* FBSDKGameRequestContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61F11B281F1567A2002B78A1 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77892F5900AF236B357C96F81F36FCC /* FirebaseDatabase.framework */; };
 		62AAAB4BA0B8E6005F0BE9AE65FBEF9C /* PublishPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE51249C5B129E0BAB4BAFBA882F95CF /* PublishPermission.swift */; };
 		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A485DE48AF66106468819159079DA49 /* ServerTrustPolicy.swift */; };
 		63694CAE09CE69A78ABD2A70BFD2E47A /* OhhAuth-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0754A464F3F8BBDBE742502BA0455 /* OhhAuth-dummy.m */; };
@@ -2702,7 +2702,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				611317F21F15210300AB0E20 /* FirebaseDatabase.framework in Frameworks */,
+				61F11B281F1567A2002B78A1 /* FirebaseDatabase.framework in Frameworks */,
 				C905C7C05DA47C2413D9E2492D7C4016 /* CoreLocation.framework in Frameworks */,
 				29201A2541063D958C1F622BDE21A5FC /* Foundation.framework in Frameworks */,
 				735B1005CF6967A0B2224C691D8DAB4F /* GoogleToolboxForMac.framework in Frameworks */,

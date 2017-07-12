@@ -36,20 +36,35 @@ class InterstCollectionViewCell: UICollectionViewCell {
     
     func tap(sender: UITapGestureRecognizer)
     {
-        if parentVC.needsReturn == false{
-        self.view.layer.borderWidth = 0
-        let interest = parentVC.focus[indexPath.row]
-        
-        if liked == false
-        {
-            liked = true
-            loved = false
+        if parentVC.needsReturn == false && parentVC.shouldOnlyReturn == false{
+            self.view.layer.borderWidth = 0
+            let interest = parentVC.focus[indexPath.row]
+            
+            if liked == false
+            {
+                liked = true
+                loved = false
+            }
+            
+            changeStatus(focus: interest)
+        } else if parentVC.shouldOnlyReturn == true {
+            self.view.layer.borderWidth = 0
+            let interest = parentVC.focus[indexPath.row]
+            
+            if liked == false
+            {
+                liked = true
+                loved = false
+            }
+            
+            changeStatus(focus: interest)
+            parentVC.returnToCreateEvent(FOCUS: label.text!)
+            
+        }
+        else{
+                parentVC.returnValue(FOCUS:label.text!)
         }
 
-        changeStatus(focus: interest)
-        }else{
-            parentVC.returnValue(FOCUS:label.text!)
-        }
     }
     
     func changeStatus(focus: Interest){
