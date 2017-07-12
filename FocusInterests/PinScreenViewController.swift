@@ -14,6 +14,7 @@ import GooglePlaces
 import SCLAlertView
 import FBSDKLoginKit
 import SDWebImage
+import Crashlytics
 
 class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate, CLLocationManagerDelegate, UITextViewDelegate{
 
@@ -207,6 +208,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        Answers.logCustomEvent(withName: "Screen",
+                               customAttributes: [
+                                "Name": "Create Pin"
+            ])
     }
 
     override func didReceiveMemoryWarning() {

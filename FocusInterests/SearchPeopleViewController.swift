@@ -11,6 +11,7 @@ import SDWebImage
 import Alamofire
 import CoreLocation
 import SwiftyJSON
+import Crashlytics
 
 protocol SearchPeopleViewControllerDelegate {
     func haveInvitedSomeoneToAPlaceOrAnEvent()
@@ -226,6 +227,11 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        Answers.logCustomEvent(withName: "Screen",
+                               customAttributes: [
+                                "Name": "Search People"
+            ])
         if showInvitePopup {
             self.invitePopupView.isHidden = false
             UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {

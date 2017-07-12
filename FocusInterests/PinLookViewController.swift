@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 class PinLookViewController: UIViewController, GMSMapViewDelegate {
 
@@ -71,6 +72,12 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             if value != nil
             {
                 if let username = value?["username"] as? String{
+                    
+                    Answers.logCustomEvent(withName: "Screen",
+                                           customAttributes: [
+                                            "Name": "View Pin",
+                                            "user": username
+                        ])
                     self.usernameLabel.text = username
                     
                     let messageText = "\(String(describing: username)) \(self.data.pinMessage)"

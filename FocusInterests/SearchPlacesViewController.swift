@@ -11,8 +11,7 @@ import SDWebImage
 import Alamofire
 import CoreLocation
 import SwiftyJSON
-
-
+import Crashlytics
 
 class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
 
@@ -126,6 +125,12 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        Answers.logCustomEvent(withName: "Screen",
+                               customAttributes: [
+                                "Name": "Search Place"
+            ])
+        
         if showPopup{
             invitePopup.alpha = 1
             invitePopup.allCornersRounded(radius: 10)

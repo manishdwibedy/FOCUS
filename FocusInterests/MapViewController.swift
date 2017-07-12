@@ -22,6 +22,7 @@ import MessageUI
 import ChameleonFramework
 import SCLAlertView
 import FirebaseStorage
+import Crashlytics
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate {
     
@@ -230,6 +231,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        Answers.logCustomEvent(withName: "Screen",
+                                       customAttributes: [
+                                        "Name": "Map View"
+            ])
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).keepSynced(true)
         Constants.DB.pins.keepSynced(true)

@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import GeoFire
 import FirebaseDatabase
-
+import Crashlytics
 
 enum previousScreen{
     case people
@@ -160,6 +160,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        Answers.logCustomEvent(withName: "Screen",
+                               customAttributes: [
+                                "Name": "User Profile"
+            ])
+        
 //		userScrollView.contentSize = CGSize(width: 375, height: 1600)
         // Do any additional setup after loading the view.
         let attrs = [

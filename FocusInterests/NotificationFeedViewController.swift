@@ -9,6 +9,7 @@
 //TODO: FIX COLOR WHEN SPECIFIC SEGMENT IS SELECTED
 
 import UIKit
+import Crashlytics
 
 enum SelectedIndex: Int {
     case NOTIF = 0
@@ -101,6 +102,13 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         self.view.backgroundColor = Constants.color.navy
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        Answers.logCustomEvent(withName: "Screen",
+                               customAttributes: [
+                                "Name": "Notifications"
+            ])
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -12,6 +12,7 @@ import Alamofire
 import CoreLocation
 import SwiftyJSON
 import FirebaseDatabase
+import Crashlytics
 
 class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
     
@@ -193,6 +194,12 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        Answers.logCustomEvent(withName: "Screen",
+                               customAttributes: [
+                                "Name": "Search Event"
+            ])
+        
         if showInvitePopup {
             self.invitePopupView.isHidden = false
             UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {

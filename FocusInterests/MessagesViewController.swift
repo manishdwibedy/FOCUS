@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import SDWebImage
+import Crashlytics
 
 class MessagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -84,6 +85,11 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewWillAppear(animated)
         self.messages.removeAll()
         loadTable()
+        
+        Answers.logCustomEvent(withName: "Screen",
+                               customAttributes: [
+                                "Name": "View Messages"
+            ])
         
 //        listenForChanges()
     }
