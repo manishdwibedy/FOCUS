@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FollowYourFriendsView" customModule="FocusInterests" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="KBy-h7-buK" id="UAq-Nv-S5e"/>
+                <outlet property="followButton" destination="gkY-SR-cga" id="a3b-dZ-vAZ"/>
+                <outlet property="followTableView" destination="JCX-yT-aRb" id="S9w-ZT-6eu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="289" height="364"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBy-h7-buK">
+                    <rect key="frame" x="264" y="0.0" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="5it-Ae-zn0"/>
+                        <constraint firstAttribute="width" constant="25" id="jvc-87-gnW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="17"/>
+                    <state key="normal" title="x">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="RXr-Qk-k4D">
+                    <rect key="frame" x="12" y="29" width="265" height="323"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow Your Friends!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taw-Eu-K0m">
+                            <rect key="frame" x="0.0" y="0.0" width="265" height="30.333333333333336"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30.329999999999998" id="Q2V-Sk-imL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
+                            <color key="textColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You may know some of the people below:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AyD-fX-UQA">
+                            <rect key="frame" x="0.0" y="33.333333333333343" width="265" height="16.666666666666664"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16.670000000000002" id="8Di-VS-DEo"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                            <color key="textColor" red="0.1029044524" green="0.28270957419999998" blue="0.45421557740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JCX-yT-aRb">
+                            <rect key="frame" x="0.0" y="53" width="265" height="206"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28I-Zo-P1Z">
+                            <rect key="frame" x="0.0" y="262" width="265" height="61"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkY-SR-cga">
+                                    <rect key="frame" x="35" y="17" width="195" height="43"/>
+                                    <color key="backgroundColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="195" id="E6d-Cq-G3J"/>
+                                        <constraint firstAttribute="height" constant="43" id="k7o-jy-fHF"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="16"/>
+                                    <state key="normal" title="Follow">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="gkY-SR-cga" firstAttribute="centerX" secondItem="28I-Zo-P1Z" secondAttribute="centerX" id="iCn-7X-eF1"/>
+                                <constraint firstAttribute="height" constant="61" id="paa-32-Y1L"/>
+                                <constraint firstAttribute="bottom" secondItem="gkY-SR-cga" secondAttribute="bottom" constant="1.3333333333333144" id="xmn-bH-4m0"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="265" id="6q8-qc-rS9"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="RXr-Qk-k4D" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0az-Ig-HZ0"/>
+                <constraint firstItem="KBy-h7-buK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VX1-ZL-O0X"/>
+                <constraint firstAttribute="bottom" secondItem="RXr-Qk-k4D" secondAttribute="bottom" constant="12" id="cbo-fT-rPl"/>
+                <constraint firstAttribute="trailing" secondItem="KBy-h7-buK" secondAttribute="trailing" id="hoX-dF-mWY"/>
+                <constraint firstItem="RXr-Qk-k4D" firstAttribute="top" secondItem="KBy-h7-buK" secondAttribute="bottom" constant="4" id="mDs-bi-LTl"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-3062.5" y="369"/>
+        </view>
+    </objects>
+</document>

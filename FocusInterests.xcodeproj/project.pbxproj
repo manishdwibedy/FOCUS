@@ -269,6 +269,12 @@
 		EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */; };
 		EBD980871EEB64C400FC54C1 /* OtherLikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */; };
 		EBD980881EEB64C400FC54C1 /* OtherLikesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */; };
+		EBE7AE431F160E3E00901F9F /* FollowYourFriendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE7AE421F160E3E00901F9F /* FollowYourFriendsView.xib */; };
+		EBE7AE451F16133800901F9F /* FollowYourFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE7AE441F16133800901F9F /* FollowYourFriendsView.swift */; };
+		EBE7AE491F16141700901F9F /* FollowYourSpecificFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE7AE471F16141700901F9F /* FollowYourSpecificFriendTableViewCell.swift */; };
+		EBE7AE4A1F16141700901F9F /* FollowYourSpecificFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE7AE481F16141700901F9F /* FollowYourSpecificFriendTableViewCell.xib */; };
+		EBE7AE4D1F16142600901F9F /* FollowAllYourFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE7AE4B1F16142600901F9F /* FollowAllYourFriendsTableViewCell.swift */; };
+		EBE7AE4E1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE7AE4C1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
 		FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */; };
@@ -624,6 +630,12 @@
 		EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsEventDetailTableViewCell.xib; sourceTree = "<group>"; };
 		EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherLikesTableViewCell.swift; sourceTree = "<group>"; };
 		EBD980861EEB64C400FC54C1 /* OtherLikesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherLikesTableViewCell.xib; sourceTree = "<group>"; };
+		EBE7AE421F160E3E00901F9F /* FollowYourFriendsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowYourFriendsView.xib; sourceTree = "<group>"; };
+		EBE7AE441F16133800901F9F /* FollowYourFriendsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowYourFriendsView.swift; sourceTree = "<group>"; };
+		EBE7AE471F16141700901F9F /* FollowYourSpecificFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowYourSpecificFriendTableViewCell.swift; sourceTree = "<group>"; };
+		EBE7AE481F16141700901F9F /* FollowYourSpecificFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowYourSpecificFriendTableViewCell.xib; sourceTree = "<group>"; };
+		EBE7AE4B1F16142600901F9F /* FollowAllYourFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowAllYourFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		EBE7AE4C1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowAllYourFriendsTableViewCell.xib; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
 		FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
@@ -1232,6 +1244,7 @@
 				C5A99D8A1F045A4700D11B01 /* UsernameInputView.swift */,
 				C5E505EF1F047DA700EBE27A /* PhotoInputView.xib */,
 				C5E505F11F047DB900EBE27A /* PhotoInputView.swift */,
+				EBE7AE461F1613E800901F9F /* FollowYourFriends */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1329,6 +1342,19 @@
 				EB450FB01F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib */,
 			);
 			name = FeedTableCells;
+			sourceTree = "<group>";
+		};
+		EBE7AE461F1613E800901F9F /* FollowYourFriends */ = {
+			isa = PBXGroup;
+			children = (
+				EBE7AE421F160E3E00901F9F /* FollowYourFriendsView.xib */,
+				EBE7AE441F16133800901F9F /* FollowYourFriendsView.swift */,
+				EBE7AE471F16141700901F9F /* FollowYourSpecificFriendTableViewCell.swift */,
+				EBE7AE481F16141700901F9F /* FollowYourSpecificFriendTableViewCell.xib */,
+				EBE7AE4B1F16142600901F9F /* FollowAllYourFriendsTableViewCell.swift */,
+				EBE7AE4C1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib */,
+			);
+			name = FollowYourFriends;
 			sourceTree = "<group>";
 		};
 		FF7C87481ED7324C004ABB1B /* Pin */ = {
@@ -1575,6 +1601,7 @@
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
+				EBE7AE4E1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib in Resources */,
 				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
 				FFD32DD41EE9FF9900FE725E /* InterstCollectionViewCell.xib in Resources */,
 				FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */,
@@ -1584,6 +1611,7 @@
 				EBB6B33B1F0F145B000C8133 /* FeedPlaceTableViewCell.xib in Resources */,
 				611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */,
 				D2C785531E9337B700BFF0E3 /* InterestListViewController.xib in Resources */,
+				EBE7AE431F160E3E00901F9F /* FollowYourFriendsView.xib in Resources */,
 				5B71D6F41ED17F2B0093A3F5 /* CreateEvent.storyboard in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				5B959FEB1ECD23C200094FE6 /* SuggestPlaceView.xib in Resources */,
@@ -1592,6 +1620,7 @@
 				5BBF7AC21EEF5C61000209D6 /* Reviews.storyboard in Resources */,
 				D2D876BC1E5FDAC500FC782E /* InterestsPickerViewController.xib in Resources */,
 				EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */,
+				EBE7AE4A1F16141700901F9F /* FollowYourSpecificFriendTableViewCell.xib in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1943,6 +1972,7 @@
 				5B251E8E1ED2775B0075B57A /* InterestViewCell.swift in Sources */,
 				FF69ABFD1ED6498F0044BE51 /* inviteCell.swift in Sources */,
 				D25370D21E885EE40071B115 /* FollowCell.swift in Sources */,
+				EBE7AE4D1F16142600901F9F /* FollowAllYourFriendsTableViewCell.swift in Sources */,
 				5B6AFA6B1ED1906900A82104 /* GMUGeoJSONParser.m in Sources */,
 				5B2E5E061EF7974900F0BC1B /* SwiftyRecordButton.swift in Sources */,
 				D2FDB69A1E89F73800D62DC2 /* SocialGroupViewController.swift in Sources */,
@@ -2045,6 +2075,7 @@
 				D230D8C81E5B7E7800025EE9 /* SettingsViewController.swift in Sources */,
 				5B959FDA1ECADFA300094FE6 /* PinViewController.swift in Sources */,
 				FFC36FF21EF49E9000D58F92 /* notificationTabCell.swift in Sources */,
+				EBE7AE491F16141700901F9F /* FollowYourSpecificFriendTableViewCell.swift in Sources */,
 				5B71D70A1ED183EE0093A3F5 /* attendeeVC.swift in Sources */,
 				EBD382AF1F10167B0068D313 /* FeedPlaceImageTableViewCell.swift in Sources */,
 				FFD32DD31EE9FF9900FE725E /* InterstCollectionViewCell.swift in Sources */,
@@ -2068,6 +2099,7 @@
 				FF12737B1EDC882E0034AA42 /* PinLookViewController.swift in Sources */,
 				04920F6D1EC277D4007D0B10 /* EventTextField.swift in Sources */,
 				5B71D7001ED1833E0093A3F5 /* EventDetailViewController.swift in Sources */,
+				EBE7AE451F16133800901F9F /* FollowYourFriendsView.swift in Sources */,
 				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,
 				5BA37C801EBDC4D90091189E /* ChatViewController.swift in Sources */,
 				EBD76FEF1EF2616400E4776A /* ForgotPasswordViewController.swift in Sources */,

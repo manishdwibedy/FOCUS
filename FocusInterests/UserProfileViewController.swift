@@ -19,6 +19,7 @@ enum previousScreen{
 
 class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate{
     
+    @IBOutlet weak var followYourFriendsView: UIView!
     @IBOutlet weak var eventsCollectionView: UICollectionView!
 	@IBOutlet var userScrollView: UIScrollView!
     
@@ -318,6 +319,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let pinDetail = UITapGestureRecognizer(target: self, action: #selector(self.showPin))
         pinView.isUserInteractionEnabled = true
         pinView.addGestureRecognizer(pinDetail)
+        
+        let followYourFriendsSubView = FollowYourFriendsView(frame: CGRect(x: 0, y: 0, width: self.followYourFriendsView.frame.size.width, height: self.followYourFriendsView.frame.size.height))
+        self.followYourFriendsView.addSubview(followYourFriendsSubView)
+        self.followYourFriendsView.allCornersRounded(radius: 8.0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
