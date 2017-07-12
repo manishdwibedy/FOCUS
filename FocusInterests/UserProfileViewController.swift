@@ -206,6 +206,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.focusView.addTopBorderWithColor(color: UIColor.white, width: 1)
         self.eventView.addTopBorderWithColor(color: UIColor.white, width: 1)
         
+        
+        
         self.navigationItem.title = ""
         
         self.createEventButton.roundCorners(radius: 6)
@@ -318,6 +320,15 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let pinDetail = UITapGestureRecognizer(target: self, action: #selector(self.showPin))
         pinView.isUserInteractionEnabled = true
         pinView.addGestureRecognizer(pinDetail)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.pinView.setNeedsLayout()
+        self.pinView.layoutIfNeeded()
+        self.focusView.setNeedsLayout()
+        self.focusView.layoutIfNeeded()
+        self.eventView.setNeedsLayout()
+        self.eventView.layoutIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {

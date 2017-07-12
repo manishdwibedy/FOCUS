@@ -54,6 +54,21 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
         //        self.addGestureRecognizer(longP)
     }
     
+    override func layoutSubviews() {
+        self.inviteCellContentView.setNeedsLayout()
+        
+        self.inviteCellContentView.layoutIfNeeded()
+        
+        let path = UIBezierPath(roundedRect: self.inviteCellContentView.bounds, cornerRadius: 10)
+        
+        let mask = CAShapeLayer()
+        let shortbackgroundMask = CAShapeLayer()
+        
+        mask.path = path.cgPath
+        
+        self.inviteCellContentView.layer.mask = mask
+    }
+    
     func tap(sender: UITapGestureRecognizer)
     {
         let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)

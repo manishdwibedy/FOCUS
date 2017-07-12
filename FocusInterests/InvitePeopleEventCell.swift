@@ -52,6 +52,21 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         //        self.addGestureRecognizer(longP)
     }
     
+    override func layoutSubviews() {
+        self.inviteEventCellContentView.setNeedsLayout()
+        
+        self.inviteEventCellContentView.layoutIfNeeded()
+        
+        let path = UIBezierPath(roundedRect: self.inviteEventCellContentView.bounds, cornerRadius: 10)
+        
+        let mask = CAShapeLayer()
+        let shortbackgroundMask = CAShapeLayer()
+        
+        mask.path = path.cgPath
+        
+        self.inviteEventCellContentView.layer.mask = mask
+    }
+    
     func tap(sender: UITapGestureRecognizer)
     {
         let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
