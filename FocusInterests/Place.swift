@@ -25,9 +25,9 @@ class Place: Equatable{
     let categories: [Category]
     var hours: [Hours]?
     var url: String
-    var is_closed: Bool
+    var is_closed = false
     
-    init(id:String, name:String, image_url: String, isClosed: Bool, reviewCount: Int, rating: Float, latitude: Double, longitude: Double, price: String, address: [String], phone: String, distance: Double, categories: [Category], url: String, plainPhone: String, is_closed: Bool){
+    init(id:String, name:String, image_url: String, isClosed: Bool, reviewCount: Int, rating: Float, latitude: Double, longitude: Double, price: String, address: [String], phone: String, distance: Double, categories: [Category], url: String, plainPhone: String){
         self.id = id
         self.name = name
         self.image_url = image_url
@@ -43,7 +43,10 @@ class Place: Equatable{
         self.categories = categories
         self.url = url
         self.plainPhone = plainPhone
-        self.is_closed = is_closed
+    }
+    
+    func set_is_open(is_open: Bool){
+        self.is_closed = !is_open
     }
     
     func setHours(hours: [Hours]){

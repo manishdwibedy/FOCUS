@@ -767,7 +767,6 @@ func getNearbyPlaces(text: String?, categories: String?, count: Int?, location: 
             let categories_json = business.1["categories"].arrayValue
             let url = business.1["url"].stringValue
             let plain_phone = business.1["phone"].stringValue
-            let is_closed = business.1["is_closed"].boolValue
             
             var address = [String]()
             for raw_address in address_json{
