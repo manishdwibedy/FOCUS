@@ -86,9 +86,10 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         navBar.titleTextAttributes = attrs
         
-        var followingCount = 0
+        
         let ref = Constants.DB.user
         
+        var followingCount = 0
         ref.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
             if let value = snapshot.value as? [String:Any]{
                 for (_, people) in value{
@@ -96,52 +97,54 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                     if let peopleData = people as? [String:Any]{
                         let UID = peopleData["UID"] as! String
                         ref.child(UID).observeSingleEvent(of: .value, with: { snapshot in
-                            let user = snapshot.value as? [String:Any]
-                            if let user = User.toUser(info: user!){
-                                if user.uuid != AuthApi.getFirebaseUid(){
-                                    Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
-                                        let value = snapshot.value as? NSDictionary
-                                        if let value = value
-                                        {
-                                            if let pin = pinData.toPin(user: user, value: value){
-                                                
-                                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
-                                                    self.user_pins[user.uuid!] = pin
-                                                    user.hasPin = true
+                            if let user = snapshot.value as? [String:Any]{
+                                if let user = User.toUser(info: user){
+                                    if user.uuid != AuthApi.getFirebaseUid(){
+                                        Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                            let value = snapshot.value as? NSDictionary
+                                            if let value = value
+                                            {
+                                                if let pin = pinData.toPin(user: user, value: value){
                                                     
-                                                    let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
-                                                    user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                                    if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
+                                                        self.user_pins[user.uuid!] = pin
+                                                        user.hasPin = true
+                                                        
+                                                        let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+                                                        user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                                    }
+                                                    
+                                                }
+                                            }
+                                            
+                                            if !self.followers.contains(user){
+                                                self.followers.append(user)
+                                            }
+                                            
+                                            
+                                            self.followers.sort {
+                                                if $0.hasPin && $1.hasPin{
+                                                    return $0.pinDistance < $1.pinDistance
+                                                }
+                                                return $0.hasPin && !$1.hasPin
+                                            }
+                                            
+                                            if self.followers.count == followingCount && self.people.count > 0{
+                                                for user in self.followers{
+                                                    if let index = self.people.index(where: { $0.uuid == user.uuid }) {
+                                                        self.people.remove(at: index)
+                                                    }
                                                 }
                                                 
+                                                self.people = self.followers + self.people
+                                                self.filtered = self.people
+                                                self.tableView.reloadData()
                                             }
-                                        }
-                                        
-                                        if !self.followers.contains(user){
-                                            self.followers.append(user)
-                                        }
-                                        
-                                        
-                                        self.followers.sort {
-                                            if $0.hasPin && $1.hasPin{
-                                                return $0.pinDistance < $1.pinDistance
-                                            }
-                                            return $0.hasPin && !$1.hasPin
-                                        }
-                                        
-                                        if self.followers.count == followingCount && self.people.count > 0{
-                                            for user in self.followers{
-                                                if let index = self.people.index(where: { $0.uuid == user.uuid }) {
-                                                    self.people.remove(at: index)
-                                                }
-                                            }
-
-                                            self.people = self.followers + self.people
-                                            self.filtered = self.people
-                                            self.tableView.reloadData()
-                                        }
-                                        
-                                    })
+                                            
+                                        })
+                                    }
                                 }
+                                
                             }
                         })
                     }
@@ -214,12 +217,11 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        
         let cancelButtonAttributes: [String: AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
         
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(cancelButtonAttributes, for: .normal)
 
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

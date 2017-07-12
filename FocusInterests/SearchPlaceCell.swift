@@ -73,6 +73,21 @@ class SearchPlaceCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.placeCellView.setNeedsLayout()
+        
+        self.placeCellView.layoutIfNeeded()
+        
+        let path = UIBezierPath(roundedRect: self.placeCellView.bounds, cornerRadius: 10)
+        
+        let mask = CAShapeLayer()
+        let shortbackgroundMask = CAShapeLayer()
+        
+        mask.path = path.cgPath
+        
+        self.placeCellView.layer.mask = mask
+    }
     @IBAction func followButton(_ sender: Any) {
         
         

@@ -16,11 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="362" height="105"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="362" height="104.66666666666667"/>
+                <rect key="frame" x="0.0" y="0.0" width="362" height="104"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzy-nD-Mhx">
-                        <rect key="frame" x="8" y="0.0" width="346" height="104"/>
+                        <rect key="frame" x="8" y="5" width="346" height="94"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FamHalloween" translatesAutoresizingMaskIntoConstraints="NO" id="Ya0-NI-rmK">
                                 <rect key="frame" x="8" y="9" width="50" height="50"/>
@@ -135,8 +135,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Kzy-nD-Mhx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1dn-wS-r8h"/>
-                    <constraint firstAttribute="bottom" secondItem="Kzy-nD-Mhx" secondAttribute="bottom" id="O1E-rQ-QLC"/>
-                    <constraint firstItem="Kzy-nD-Mhx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Vk9-ul-QGI"/>
+                    <constraint firstAttribute="bottom" secondItem="Kzy-nD-Mhx" secondAttribute="bottom" constant="5" id="O1E-rQ-QLC"/>
+                    <constraint firstItem="Kzy-nD-Mhx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Vk9-ul-QGI"/>
                     <constraint firstItem="Kzy-nD-Mhx" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="ldd-B6-3fA"/>
                     <constraint firstItem="Kzy-nD-Mhx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="usv-oR-Nai"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Kzy-nD-Mhx" secondAttribute="trailing" id="xvL-R5-g6J"/>

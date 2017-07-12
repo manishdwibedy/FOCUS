@@ -566,6 +566,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 
                 if self.delay[id]! < 3{
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                        self.scrollToBottom(animated: false)
+                        self.collectionView.reloadData()
+                        
                         self.downloadImage(id: id, name: name, date: date)
                     })
                 }
@@ -590,6 +593,8 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                     let imageMessage = JSQMessage(senderId: message.senderId, senderDisplayName: message.senderDisplayName, date: message.date, media: JSQimage)
                     
                     self.messages[index!] = imageMessage!
+                    
+                    self.scrollToBottom(animated: false)
                     self.collectionView.reloadData()
                     
                 }
