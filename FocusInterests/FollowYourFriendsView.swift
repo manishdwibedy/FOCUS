@@ -85,7 +85,6 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
                 
                 if image != nil && finished{
                     specificFriendsCell.usernameImage.image = image
-                    self.followTableView.reloadData()
                 }
             })
             cell = specificFriendsCell
