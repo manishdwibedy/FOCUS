@@ -332,7 +332,6 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         manager!.setValue("3.0", forHTTPHeaderField: "GData-Version")
         
         self.networkController = NetworkController(accessToken: accessToken!)
-        loadContacts()
         
         print("my email: \(googleUser.profile.email)")
         if let id = googleUser.authentication.accessToken, let idToken = googleUser.authentication.idToken {
@@ -497,109 +496,6 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             
             
         })
-    }
-    
-    public func loadContacts() {
-        let contactsURL : NSURL = NSURL(string: "https://www.google.com/m8/feeds/contacts/default/thin?max-results=10000")!
-        
-        
-        self.networkController.sendRequestToURL(url: contactsURL, completion: { (data, response, error) -> () in
-            print(response?.statusCode)
-            if (response?.statusCode == 200 && error == nil) {
-                
-                DispatchQueue.global(qos: .background).async {
-                    let delegate = UIApplication.shared.delegate as! AppDelegate
-                    self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-                    self.context.parent = delegate.persistentContainer.viewContext
-                    
-                    //self.parseContactsFromData(data: data!)
-                }
-                
-            } else {
-            }
-        })
-    }
-    
-    private func parseContactsFromData(data : NSData) {
-        self.parsingBuffer = ""
-        self.xmlParser = XMLParser.init(data: data as Data)
-        self.xmlParser?.delegate = self
-        self.xmlParser?.parse()
-    }
-    
-    // XML Parser delegate methods
-    func parserDidStartDocument(_ parser: XMLParser) {
-        let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-    }
-    
-    func parserDidEndDocument(_ parser: XMLParser) {
-        do {
-            try self.context.save()
-        } catch let error as NSError {
-            NSLog("Unresolved error: %@, %@", error, error.userInfo)
-        }
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        
-    }
-    
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        self.parsingBuffer = ""
-        self.parsingAttributes = attributeDict
-        
-        if elementName == "entry" {
-            
-        }
-    }
-    
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
-        self.parsingBuffer += string
-    }
-    
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        
-    }
-    
-}
-
-class NetworkController : NSObject {
-    
-    private var session : URLSession
-    private var accessToken : String? = nil
-    
-    
-    //MARK: - Setup & Teardown
-    
-    
-    override init() {
-        let sessionConfiguration : URLSessionConfiguration = URLSessionConfiguration.ephemeral
-        self.session = URLSession.init(configuration: sessionConfiguration)
-    }
-    
-    
-    init(accessToken: String) {
-        let sessionConfiguration : URLSessionConfiguration = URLSessionConfiguration.ephemeral
-        let formattedToken : NSString = NSString(format: "Bearer %@", accessToken)
-        sessionConfiguration.httpAdditionalHeaders = ["Authorization" : formattedToken, "GData-Version" : "3.0"]
-        self.accessToken = accessToken
-        self.session = URLSession.init(configuration: sessionConfiguration)
-    }
-    
-    
-    //MARK: - Public Instance Methods
-    
-    
-    public func sendRequestToURL(url : NSURL, completion: @escaping (NSData?, HTTPURLResponse?, NSError?) -> ()) {
-        let dataTask : URLSessionDataTask = (self.session.dataTask(with: url as URL, completionHandler:{(data, response, error) -> Void in
-            let httpResponse : HTTPURLResponse =  response as! HTTPURLResponse
-            DispatchQueue.main.async(execute: { () -> Void in
-                completion(data as NSData?, httpResponse, error as NSError?)
-            })
-        }))
-        
-        dataTask.resume()
-    }
-    
-    
+    }    
 }
 
