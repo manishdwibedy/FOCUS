@@ -39,6 +39,12 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     var selectedButton = false
     var notif: FocusNotification!
     var parentVC: NotificationFeedViewController!
+    var userInfo = [String:Any]()
+    
+    var nofArray = [FocusNotification]()
+    var invArray = [FocusNotification]()
+    var feedAray = [FocusNotification]()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -124,6 +130,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         Constants.DB.user.child((notif.sender?.uuid)!).observeSingleEvent(of: .value, with: {snapshot in
             if let info = snapshot.value as? [String:Any]{
+                self.userInfo = info
                 if let image_string = info["image_string"]{
                     SDWebImageManager.shared().downloadImage(with: URL(string: image_string as! String), options: .continueInBackground, progress: {
                         (receivedSize :Int, ExpectedSize :Int) in
@@ -274,7 +281,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     
     @IBAction func seeYouTherePushed(_ sender: Any) {
         
-        if selectedButton == false{
+        if seeYouThereButton.titleLabel?.text == "See You There"{
             selectedButton = true
             nextTimeButton.isHidden = true
             nextTimeButton.isEnabled = false
@@ -314,7 +321,47 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             })
             
         }
-        
+        else if seeYouThereButton.titleLabel?.text == "Message"{
+            let storyboard = UIStoryboard(name: "Messages", bundle: nil)
+            let root = storyboard.instantiateViewController(withIdentifier: "Home") as! UINavigationController
+
+            let VC = storyboard.instantiateViewController(withIdentifier: "chat") as? ChatViewController
+            VC?.user = self.userInfo
+            VC?.inviteUser = true
+            VC?.nofArray = self.nofArray
+            VC?.invArray = self.invArray
+            VC?.feedAray = self.feedAray
+            
+            root.pushViewController(VC!, animated: true)
+            
+            self.window?.rootViewController = root
+        }
+        else if seeYouThereButton.titleLabel?.text == "Undo"{
+            statusLabel.text = ""
+            seeYouThereButton.setTitle("See You There", for: .normal)
+            nextTimeButton.setTitle("Next Time", for: .normal)
+            nextTimeButton.isHidden = false
+            nextTimeButton.isEnabled = true
+            
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                
+                if let value = value{
+                    for (id, invite) in value{
+                        if let inviteData = invite as? [String:Any]{
+                            let host = inviteData["fromUID"] as? String
+                            let invite_time = inviteData["inviteTime"] as? String
+                            
+                            if invite_time == self.notif.item?.data["inviteTime"] as? String{
+                                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((self.notif.item?.type)!).child(id).updateChildValues(["status": "unknown"])
+                            }
+                        }
+                    }
+                }
+                
+                
+            })
+        }
     }
     
     @IBAction func nextTimePushed(_ sender: Any) {

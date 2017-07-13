@@ -147,7 +147,7 @@
         <!--Chat View Controller-->
         <scene sceneID="hcf-Nx-xt7">
             <objects>
-                <viewController id="sg1-OE-hfb" customClass="ChatViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chat" id="sg1-OE-hfb" customClass="ChatViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g0m-Bw-Z4G"/>
                         <viewControllerLayoutGuide type="bottom" id="6vd-HE-0n2"/>

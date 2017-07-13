@@ -182,6 +182,10 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             cell.seeYouThereButton.isHidden = false
             cell.nextTimeButton.isHidden = false
             
+            cell.nofArray = self.nofArray
+            cell.invArray = self.invArray
+            cell.feedAray = self.feedAray
+            
             cell.setupCell(notif: invArray[indexPath.row])
              return cell
         }else{

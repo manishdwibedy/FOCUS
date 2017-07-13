@@ -37,6 +37,12 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     var delay = [String: Int]()
     var senderImage: UIImage? = nil
     var otherUserImage: UIImage? = nil
+    var inviteUser = false
+    
+    var nofArray = [FocusNotification]()
+    var invArray = [FocusNotification]()
+    var feedAray = [FocusNotification]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,7 +131,19 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         // Perform your custom actions
         // ...
         // Go back to the previous ViewController
-        self.navigationController?.popViewController(animated: true)
+        if !inviteUser{
+            self.navigationController?.popViewController(animated: true)
+        }
+        else{
+            let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
+            vc.selectedSegmentIndex = 1
+            vc.nofArray = self.nofArray
+            vc.invArray = self.invArray
+            vc.feedAray = self.feedAray
+            self.present(vc, animated: true, completion: nil)
+        }
+        
     }
     
     func keyboardWillAppear(notification: NSNotification){
@@ -144,6 +162,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         Constants.DB.user.child(self.user["firebaseUserId"]! as! String).child("typing").observe(.value, with: {(snapshot) in
             if let typing = snapshot.value as? Bool{
                 //self.showTypingIndicator = typing

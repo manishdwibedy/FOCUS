@@ -403,7 +403,7 @@
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FamHalloween" translatesAutoresizingMaskIntoConstraints="NO" id="6NP-cq-0Ke">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6NP-cq-0Ke">
                                                                         <rect key="frame" x="1" y="8" width="85" height="85"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="85" id="m6Z-4l-rez"/>
@@ -757,7 +757,6 @@
     </scenes>
     <resources>
         <image name="BackArrow" width="30" height="30"/>
-        <image name="FamHalloween" width="1552" height="1546"/>
         <image name="Large_Apple_Maps.png" width="123" height="123"/>
         <image name="UserPhoto" width="102" height="102"/>
         <image name="uber" width="123" height="123"/>
