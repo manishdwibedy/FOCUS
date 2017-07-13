@@ -190,19 +190,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 
                 if DF.date(from: event.date!)! > Date() && !event.privateEvent{
-                    
-                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                    let marker = GMSMarker(position: position)
-                    marker.icon = UIImage(named: "Event")
-                    marker.title = event.title
-                    marker.map = self.mapView
-                    marker.accessibilityLabel = "event_\(self.events.count)"
-                    
-                    self.events.append(event)
-                    
+                    if Calendar.current.dateComponents([.hour], from: DF.date(from: event.date!)!, to: Date()).hour ?? 0 < 12{
+                        let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                        let marker = GMSMarker(position: position)
+                        marker.icon = UIImage(named: "Event")
+                        marker.title = event.title
+                        marker.map = self.mapView
+                        marker.accessibilityLabel = "event_\(self.events.count)"
+                        
+                        self.events.append(event)
+                    }
                     if !(self.searchEventsTab?.all_events.contains(event))!{
                         self.searchEventsTab?.all_events.append(event)
                     }
+                    
                     
                 }
             }

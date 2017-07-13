@@ -295,36 +295,39 @@ class NotificationUtil{
                 }
                 
                 if let likes = pin["like"] as? [String:Any]{
-                    let likeData = likes["likedBy"] as? [String:Any]
-                    
-                    if let likeCount = likes["num"] as? Int{
-                        pinCount += likeCount
-                    }
-                    
-                    for (id, data) in likeData!{
-                        if let likeData = data as? [String:Any]{
-                            Constants.DB.user.child((likeData["UID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
-                                
-                                let data = snapshot.value as? [String:Any]
-                                let user = NotificationUser(username: data?["username"] as? String, uuid: data?["firebaseUserId"] as? String, imageURL: nil)
-                                let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
-                                pins.append(pinFeed)
-                                
-                                if pinCount == pins.count && pinImageCount == totalPins{
-                                    // attach images for all pins
-                                    
-                                    for pin in pins{
-                                        if let image = pinImageMap[(pin.item?.id)!]{
-                                            pin.item?.imageURL = image
-                                        }
-                                    }
-                                    gotPins(pins)
-                                    print("pin done \(pinCount)")
-                                }
-                            })
+                    if let likeData = likes["likedBy"] as? [String:Any]{
+                        if let likeCount = likes["num"] as? Int{
+                            pinCount += likeCount
                         }
                         
+                        for (id, data) in likeData{
+                            if let likeData = data as? [String:Any]{
+                                Constants.DB.user.child((likeData["UID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
+                                    
+                                    let data = snapshot.value as? [String:Any]
+                                    let user = NotificationUser(username: data?["username"] as? String, uuid: data?["firebaseUserId"] as? String, imageURL: nil)
+                                    let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
+                                    pins.append(pinFeed)
+                                    
+                                    if pinCount == pins.count && pinImageCount == totalPins{
+                                        // attach images for all pins
+                                        
+                                        for pin in pins{
+                                            if let image = pinImageMap[(pin.item?.id)!]{
+                                                pin.item?.imageURL = image
+                                            }
+                                        }
+                                        gotPins(pins)
+                                        print("pin done \(pinCount)")
+                                    }
+                                })
+                            }
+                            
+                        }
                     }
+                    
+                    
+                    
                 }
             }
             
