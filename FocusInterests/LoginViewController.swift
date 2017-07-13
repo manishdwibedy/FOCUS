@@ -38,14 +38,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     var delegate: LoginDelegate?
     let appD = UIApplication.shared.delegate as! AppDelegate
     var user: User?
-
-    private var xmlParser : XMLParser? = nil
-    private var accessToken : String?
-    private var networkController : NetworkController!
-    private var parsingBuffer : String = ""
-    private var parsingAttributes = [String : String]()
-    private var context: NSManagedObjectContext!
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -330,8 +323,6 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         let manager = SDWebImageManager.shared().imageDownloader
         manager!.setValue(formattedToken, forHTTPHeaderField: "Authorization")
         manager!.setValue("3.0", forHTTPHeaderField: "GData-Version")
-        
-        self.networkController = NetworkController(accessToken: accessToken!)
         
         print("my email: \(googleUser.profile.email)")
         if let id = googleUser.authentication.accessToken, let idToken = googleUser.authentication.idToken {
