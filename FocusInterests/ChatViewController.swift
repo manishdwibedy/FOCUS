@@ -381,7 +381,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
 
         let formatter = DateFormatter()
 
-        return NSAttributedString(string: formatter.timeSince(from: date!, numericDates: false))
+        return NSAttributedString(string: formatter.timeSince(from: date!, numericDates: true))
     }
     
     override func didPressAccessoryButton(_ sender: UIButton!) {

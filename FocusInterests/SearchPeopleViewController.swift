@@ -280,7 +280,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             address = address?.replacingOccurrences(of: ";;", with: "\n")
             cell?.whiteBorder.isHidden = false
             cell?.address.text = pin?.pinMessage
-            cell?.pinSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pin?.dateTimeStamp)!), numericDates: false, shortVersion: true)
+            cell?.pinSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pin?.dateTimeStamp)!), numericDates: true, shortVersion: true)
             addGreenDot(label: (cell?.interest)!, content: (pin?.focus)!)
             let pinLocation = CLLocation(latitude: (pin?.coordinates.latitude)!, longitude: (pin?.coordinates.longitude)!)
             cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)

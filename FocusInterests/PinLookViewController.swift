@@ -98,7 +98,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         
         let formatter = DateFormatter()
         let date = Date(timeIntervalSince1970: data.dateTimeStamp)
-        dateLabel.text = formatter.timeSince(from: date, numericDates: false, shortVersion: true)
+        dateLabel.text = formatter.timeSince(from: date, numericDates: true, shortVersion: true)
         
         //check for images
         data.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in

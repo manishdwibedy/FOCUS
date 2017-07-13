@@ -433,7 +433,7 @@ line 2</string>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0si-vv-Uym">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0si-vv-Uym">
                                 <rect key="frame" x="21" y="581.5" width="287" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="itj-WV-uYI"/>

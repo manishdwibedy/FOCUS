@@ -65,7 +65,7 @@ extension DateFormatter {
             if numericDates {
                 result = shortVersion ? "1h ago":"1 hour ago"
             } else {
-                result = "An hour ago"
+                result = "1 hour ago"
             }
         } else if components.minute! >= 2 {
             result = shortVersion ? "\(components.minute!)m ago":"\(components.minute!) minutes ago"

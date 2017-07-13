@@ -245,7 +245,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.content.text = message.lastContent
         
         let date = message.lastMessageDate
-        cell.time.text = formatter.timeSince(from: date, numericDates: false)
+        cell.time.text = formatter.timeSince(from: date, numericDates: true)
         
         if !message.readMessages{
             addGreenDot(label: cell.username, content: message.name, right: true)

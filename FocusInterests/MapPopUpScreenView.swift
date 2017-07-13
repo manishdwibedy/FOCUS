@@ -187,7 +187,7 @@ class MapPopUpScreenView: UIView {
             })
         }
         
-        self.hoursLabel.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (time)), numericDates: false, shortVersion: true)
+        self.hoursLabel.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (time)), numericDates: true, shortVersion: true)
         
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 125/255, green: 201/255, blue: 49/255, alpha: 1).cgColor
