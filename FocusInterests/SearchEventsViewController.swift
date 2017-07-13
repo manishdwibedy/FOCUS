@@ -476,18 +476,21 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                                 if let eventID = event["event-id"] as? String{
                                     Constants.DB.event.child(eventID).observeSingleEvent(of: .value, with: {snapshot in
                                         
-                                        let info = event as? [String:Any]
-                                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: eventID, category: info?["interests"] as? String, privateEvent: (info?["private"] as? Bool)!)
-                                        
-                                        if let attending = info?["attendingList"] as? [String:Any]{
-                                            event.setAttendessCount(count: attending.count)
+                                        if let data = snapshot.value as? [String:Any]{
+                                            if let event = Event.toEvent(info: data){
+                                                if let attending = data["attendingList"] as? [String:Any]{
+                                                    event.setAttendessCount(count: attending.count)
+                                                }
+                                                event.id = eventID
+                                                self.filtered.append(event)
+                                                
+                                                if self.filtered.count == eventCount{
+                                                    self.tableView.reloadData()
+                                                }
+                                            }
+                                            
                                         }
                                         
-                                        self.filtered.append(event)
-                                        
-                                        if self.filtered.count == eventCount{
-                                            self.tableView.reloadData()
-                                        }
                                     })
                                 }
                                 
