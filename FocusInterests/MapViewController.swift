@@ -68,7 +68,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var lastPins = [GMSMarker]()
     var friends = [FollowNewUser]()
     
-    func closeButton(){
+    func hideFollowFriendPopup(){
         self.followYourFriendsView.isHidden = true
         self.followYourFriendsView.sendSubview(toBack: self.followYourFriendsView)
     }
@@ -76,20 +76,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        hideFollowFriendPopup()
         Share.getMatchingUsers(gotUsers: {users in
             if users.count > 0{
-                
                 self.friends = users
-                let followYourFriendsSubView = FollowYourFriendsView(frame: CGRect(x: 0, y: 0, width: self.followYourFriendsView.frame.size.width, height: self.followYourFriendsView.frame.size.height))
-                followYourFriendsSubView.users = self.friends
-                followYourFriendsSubView.closeButton.addTarget(self, action: #selector(MapViewController.closeButton), for: .touchUpInside)
-                followYourFriendsSubView.followTableView.reloadData()
-                self.followYourFriendsView.addSubview(followYourFriendsSubView)
-                self.followYourFriendsView.allCornersRounded(radius: 8.0)
-            }
-            else{
-                self.closeButton()
             }
         })
         
@@ -1329,7 +1319,7 @@ extension MapViewController: UIImagePickerControllerDelegate{
         if self.friends.count > 0{
             let followYourFriendsSubView = FollowYourFriendsView(frame: CGRect(x: 0, y: 0, width: self.followYourFriendsView.frame.size.width, height: self.followYourFriendsView.frame.size.height))
             followYourFriendsSubView.users = self.friends
-            followYourFriendsSubView.closeButton.addTarget(self, action: #selector(MapViewController.closeButton), for: .touchUpInside)
+            followYourFriendsSubView.closeButton.addTarget(self, action: #selector(MapViewController.hideFollowFriendPopup), for: .touchUpInside)
             self.followYourFriendsView.addSubview(followYourFriendsSubView)
             self.followYourFriendsView.allCornersRounded(radius: 8.0)
         }
