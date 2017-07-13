@@ -70,8 +70,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         profileImage.layer.cornerRadius = profileImage.frame.width/2
         profileImage.clipsToBounds = true
         
-        selectedImage.layer.cornerRadius = selectedImage.frame.width/2
-        selectedImage.clipsToBounds = true
+        selectedImage.roundedImage()
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -411,7 +410,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                 cell.imageView.layer.borderWidth = 5
                 cell.selectedIs = true
                 
-                selectedImage.image = cell.imageView.image
+                
+                selectedImage.image = crop(image: cell.imageView.image!, width: 50, height: 50)
             }else
             {
                 
@@ -435,7 +435,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         gallery.dismiss(animated: true, completion: nil)
         
         if galleryPicArray.count > 0{
-            selectedImage.image = galleryPicArray[0]    
+            selectedImage.image = crop(image: galleryPicArray[0], width: 50, height: 50)
         }
         
     }
