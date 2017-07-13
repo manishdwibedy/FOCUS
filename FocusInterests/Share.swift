@@ -173,6 +173,7 @@ class Share{
     private static func getUserEmails(contacts:[[String:String]], gotEmail: @escaping (_ email: [FollowNewUser]) -> Void){
         var emails = [String]()
         var users = [FollowNewUser]()
+        var emailMapping = [String:String]()
         
         Constants.DB.user.observeSingleEvent(of: .value, with: {snapshot in
             
@@ -182,6 +183,7 @@ class Share{
                         if let email = user["email"] as? String, email.characters.count > 0{
                             if email != AuthApi.getUserEmail()!{
                                 emails.append(email)
+                                emailMapping[email] = user["firebaseUserId"] as! String
                             }
                         }
                     }
@@ -189,6 +191,7 @@ class Share{
                         if let facebookID = user["facebook-id"] as? String, facebookID.characters.count > 0{
                             if user["email"] as? String != AuthApi.getUserEmail()!{
                                 emails.append(facebookID)
+                                emailMapping[user["email"] as! String] = user["firebaseUserId"] as! String
                             }
                         }
                     }
@@ -199,12 +202,17 @@ class Share{
                 for email in emails{
                     if AuthApi.getLoginType() == .Google{
                         if let user = contacts.first(where: { element in return element["email"] == email}){
-                            users.append(FollowNewUser.toFollowUser(info: user))
+                            
+                            let user = FollowNewUser.toFollowUser(info: user)
+                            user.UID = emailMapping[user.email]
+                            users.append(user)
                         }
                     }
                     if AuthApi.getLoginType() == .Facebook{
                         if let user = contacts.first(where: { element in return element["id"] == email}){
-                            users.append(FollowNewUser.toFollowUser(info: user))
+                            let user = FollowNewUser.toFollowUser(info: user)
+                            user.UID = emailMapping[user.email]
+                            users.append(user)
                         }
                     }
                     
@@ -240,16 +248,15 @@ class FollowNewUser{
     var fullname: String
     var image: String
     var email: String
-    var UID: String
+    var UID: String? = nil
     
-    init(fullname: String, image: String, email: String, UID: String) {
+    init(fullname: String, image: String, email: String) {
         self.fullname = fullname
         self.image = image
         self.email = email
-        self.UID = UID
     }
     
     static func toFollowUser(info: [String:String]) -> FollowNewUser{
-        return FollowNewUser(fullname: info["name"]!, image: info["image"]!, email: info["email"]!, UID: info["firebaseUserID"]!)
+        return FollowNewUser(fullname: info["name"]!, image: info["image"]!, email: info["email"]!)
     }
 }
