@@ -216,18 +216,19 @@ class Share{
         
     }
     
-    static func getMatchingUsers(){
+    static func getMatchingUsers(gotUsers: @escaping (_ email: [FollowNewUser]) -> Void){
         if AuthApi.getLoginType() == .Google{
             Share.getUserContacts(completion: { contacts in
                 Share.getUserEmails(contacts: contacts, gotEmail: {users in
-                    print(users)
+                    gotUsers(users)
+                    
                 })
             })
         }
         if AuthApi.getLoginType() == LoginTypes.Facebook{
             Share.getFacebookFriends(completion: { contacts in
                 Share.getUserEmails(contacts: contacts, gotEmail: {users in
-                    print(users)
+                    gotUsers(users)
                 })
             })
         }
@@ -239,14 +240,16 @@ class FollowNewUser{
     var fullname: String
     var image: String
     var email: String
+    var UID: String
     
-    init(fullname: String, image: String, email: String) {
+    init(fullname: String, image: String, email: String, UID: String) {
         self.fullname = fullname
         self.image = image
         self.email = email
+        self.UID = UID
     }
     
     static func toFollowUser(info: [String:String]) -> FollowNewUser{
-        return FollowNewUser(fullname: info["name"]!, image: info["image"]!, email: info["email"]!)
+        return FollowNewUser(fullname: info["name"]!, image: info["image"]!, email: info["email"]!, UID: info["firebaseUserID"]!)
     }
 }

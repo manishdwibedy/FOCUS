@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource {
 
@@ -15,6 +16,7 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var followButton: UIButton!
     
+    var users = [FollowNewUser]()
     override init(frame : CGRect) {
         super.init(frame: frame)
         self.setupView()
@@ -25,6 +27,7 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
         self.setupView()
     }
     
+    let manager = SDWebImageManager.shared()
     func setupView(){
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
@@ -42,6 +45,11 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
         
         self.followTableView.register(followSpecificFriendsNib, forCellReuseIdentifier: "followSpecificFriendCell")
         self.followTableView.register(followAllFriendsNib, forCellReuseIdentifier: "followAllFriendsCell")
+        
+        self.followTableView.reloadData()
+
+        manager?.setValue("Bearer \(AuthApi.getGoogleToken()!)", forKey: "authorization")
+        manager?.setValue("3.0", forKey: "GData-Version")
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,7 +60,7 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
         if section == 0{
             return 1
         }else{
-            return 6
+            return self.users.count
         }
     }
     
@@ -63,8 +71,23 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
             cell = allFriendsCell
         }else if indexPath.section == 1{
             let specificFriendsCell = self.followTableView.dequeueReusableCell(withIdentifier: "followSpecificFriendCell", for: indexPath) as! FollowYourSpecificFriendTableViewCell
-            specificFriendsCell.usernameLabel.text = "Username"
-            specificFriendsCell.fullnameLabel.text = "Firstname Lastname"
+            
+            let user = self.users[indexPath.row]
+            specificFriendsCell.usernameLabel.text = user.email
+            specificFriendsCell.fullnameLabel.text = user.fullname
+            
+            
+            manager?.downloadImage(with: URL(string: user.image), options: .continueInBackground, progress: {
+                (receivedSize :Int, ExpectedSize :Int) in
+                
+            }, completed: {
+                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                
+                if image != nil && finished{
+                    specificFriendsCell.usernameImage.image = image
+                    self.followTableView.reloadData()
+                }
+            })
             cell = specificFriendsCell
         }
         
