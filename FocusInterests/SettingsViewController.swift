@@ -102,9 +102,11 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
                 if (swCell?.cellSwitch.isOn)!{
                     swCell?.cellSwitch.setOn(false, animated: true)
+                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["private": true])
                 }
                 else{
                     swCell?.cellSwitch.setOn(false, animated: true)
+                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["private": false])
                 }
             case 3:
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)

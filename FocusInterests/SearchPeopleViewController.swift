@@ -386,7 +386,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
                 let users = snapshot.value as? [String : Any] ?? [:]
                 
-                _ = users.count
+                username_count = users.count
                 for (_, user) in users{
                     if let info = user as? [String:Any]{
                         if let user = User.toUser(info: info){
@@ -424,6 +424,12 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     
                                 })
                             }
+                            else{
+                                username_count -= 1
+                            }
+                        }
+                        else{
+                            username_count -= 1
                         }
                     }
                 }
@@ -433,7 +439,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             ref.queryOrdered(byChild: "fullname_lowered").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
                 let users = snapshot.value as? [String : Any] ?? [:]
                 
-                _ = users.count
+                fullname_count = users.count
                 for (_, user) in users{
                     if let info = user as? [String:Any]{
                         if let user = User.toUser(info: info){
@@ -453,11 +459,11 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                             
                                         }
                                     }
-                                    if !self.fullnameSearch.contains(user){
-                                        self.fullnameSearch.append(user)
+                                    if !fullnameSearch.contains(user){
+                                        fullnameSearch.append(user)
                                     }
                                     
-                                    if searchResults.count = username_count + fullname_count{
+                                    if usernameSearch.count + fullnameSearch.count == username_count + fullname_count{
                                         self.filtered = usernameSearch + fullnameSearch
                                         self.filtered.sort {
                                             if $0.hasPin && $1.hasPin{
@@ -470,6 +476,12 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     }
                                 })
                             }
+                            else{
+                                fullname_count -= 1
+                            }
+                        }
+                        else{
+                            fullname_count -= 1
                         }
                     }
                 }
