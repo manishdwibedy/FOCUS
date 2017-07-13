@@ -12,6 +12,7 @@
 
 import UIKit
 import SDWebImage
+import Crashlytics
 
 class NotificationFeedCellTableViewCell: UITableViewCell {
 
@@ -297,6 +298,14 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                                     let accepted = Constants.DB.user.child(host!).child("send_invites").child((self.notif.item?.type)!).childByAutoId()
                                     accepted.updateChildValues(["time": NSDate().timeIntervalSince1970, "user": AuthApi.getFirebaseUid()!, "type": self.notif.item?.type, "id": self.notif.item?.id, "name": self.notif.item?.itemName])
                                 }
+                                
+                                Answers.logCustomEvent(withName: "Accept Invite",
+                                                       customAttributes: [
+                                                        "type": self.notif.item?.type,
+                                                        "user": AuthApi.getFirebaseUid()!,
+                                                        "name": self.notif.item?.itemName,
+                                                        "host": inviteData["fromUID"] as? String
+                                    ])
                             }
                         }
                     }

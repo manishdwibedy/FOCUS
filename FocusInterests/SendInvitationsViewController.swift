@@ -12,7 +12,8 @@ import Contacts
 import FirebaseStorage
 import SCLAlertView
 import MessageUI
-
+import Crashlytics
+ 
 protocol SelectAllContactsDelegate {
     func selectedAllFollowers()
     func deselectAllFollowers()
@@ -160,6 +161,12 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     @IBAction func createEvent(_ sender: Any) {
         Event.clearCache()
         let id = self.event?.saveToDB(ref: Constants.DB.event)
+        
+        
+        Answers.logCustomEvent(withName: "Create Event",
+                               customAttributes: [
+                                "FOCUS": event?.category!
+            ])
         
         Constants.DB.event_locations!.setLocation(CLLocation(latitude: Double(event!.latitude!)!, longitude: Double(event!.longitude!)!), forKey: id) { (error) in
             if (error != nil) {

@@ -13,6 +13,7 @@ import FirebaseStorage
 import SDWebImage
 import Agrume
 import SVPullToRefresh
+import Crashlytics
 
 class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     enum source{
@@ -258,6 +259,13 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         }
         self.collectionView.reloadData()
         updateDateRead()
+        
+        Answers.logCustomEvent(withName: "Chat",
+                               customAttributes: [
+                                "user": AuthApi.getFirebaseUid()!,
+                                "otherUser": ""
+            ])
+        
         finishSendingMessage()
     }
     

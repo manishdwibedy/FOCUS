@@ -11,6 +11,7 @@ import SDWebImage
 import Firebase
 import GeoFire
 import ChameleonFramework
+import Crashlytics
 
 class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate {
     @IBOutlet weak var hostNameLabel: UILabel!
@@ -345,6 +346,13 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         let unixDate = NSDate().timeIntervalSince1970
         let fullRef = ref.child("events").child((event?.id)!).child("comments").childByAutoId()
         fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextField.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
+        
+        Answers.logCustomEvent(withName: "Event Comment",
+                               customAttributes: [
+                                "user": AuthApi.getFirebaseUid()!,
+                                "comment": commentTextField.text!,
+                                
+            ])
         
         let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
         if self.commentsCList.count != 0

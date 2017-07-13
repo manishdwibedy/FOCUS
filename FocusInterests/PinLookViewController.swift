@@ -332,6 +332,14 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             }
             
             self.likeOut.setImage(#imageLiteral(resourceName: "Liked"), for: UIControlState.normal)
+            
+            
+            Answers.logCustomEvent(withName: "Like Pin",
+                                   customAttributes: [
+                                    "liked": true,
+                                    "user": AuthApi.getFirebaseUid()!,
+                                    "likeCount": self.likes
+                ])
         }
     }
     
@@ -350,6 +358,14 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 self.likesLabel.isHidden = true
             }
             self.likeOut.setImage(#imageLiteral(resourceName: "Liked"), for: UIControlState.normal)
+        
+        
+        Answers.logCustomEvent(withName: "Like Pin",
+                               customAttributes: [
+                                "liked": true,
+                                "user": AuthApi.getFirebaseUid()!,
+                                "likeCount": self.likes
+            ])
         }
        else{
             self.likes = self.likes - 1
@@ -374,6 +390,13 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 self.likesLabel.isHidden = true
             }
             self.likeOut.setImage(#imageLiteral(resourceName: "Like"), for: UIControlState.normal)
+        
+        Answers.logCustomEvent(withName: "Like Pin",
+                               customAttributes: [
+                                "liked": false,
+                                "user": AuthApi.getFirebaseUid()!,
+                                "likeCount": self.likes
+            ])
         }
        
     }

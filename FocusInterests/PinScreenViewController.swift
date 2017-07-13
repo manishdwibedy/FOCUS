@@ -319,6 +319,16 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     }
                 })
                 
+                Answers.logCustomEvent(withName: "Pin",
+                                       customAttributes: [
+                                        "user": AuthApi.getFirebaseUid()!,
+                                        "interest": focusLabel.text,
+                                        "address": formmatedAddress,
+                                        "imageSelected": galleryPicArray.count > 0,
+                                        "public": isPublic
+                                        
+                                        ])
+                
             }
             if isTwitter == true
             {

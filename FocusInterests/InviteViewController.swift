@@ -10,6 +10,7 @@ import UIKit
 import Contacts
 import FirebaseStorage
 import MessageUI
+import Crashlytics
 
 class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SendInvitationsViewControllerDelegate, MFMessageComposeViewControllerDelegate{
     
@@ -382,6 +383,14 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeButton.titleLabel?.text!])
                     
+                    
+                    Answers.logCustomEvent(withName: "Invite User",
+                                           customAttributes: [
+                                            "type": "place",
+                                            "user": AuthApi.getFirebaseUid()!,
+                                            "invited": UID,
+                                            "name": name
+                        ])
                 }
                 else{
                     name = (event?.title)!
@@ -401,7 +410,13 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                         }
                     })
-                    
+                    Answers.logCustomEvent(withName: "Invite User",
+                                           customAttributes: [
+                                            "type": "event",
+                                            "user": AuthApi.getFirebaseUid()!,
+                                            "invited": UID,
+                                            "name": name
+                        ])
                 }
                 
                 
@@ -414,6 +429,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     sendNotification(to: UID, title: "Invitations", body: "\(username!) invited you to \(name)", actionType: "", type: "", item_id: "", item_name: "")
                     
                 })
+                
             }
             dismiss(animated: true, completion: nil)
         }

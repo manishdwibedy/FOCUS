@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 class SearchPeopleTableViewCell: UITableViewCell {
 
@@ -177,6 +178,13 @@ class SearchPeopleTableViewCell: UITableViewCell {
         ivc.username = username_selected
         ivc.searchPeople = parentVC
         ivc.searchPeopleDelegate = parentVC
+        
+        Answers.logCustomEvent(withName: "Meet up",
+                               customAttributes: [
+                                "user": AuthApi.getFirebaseUid()!,
+                                "inviting": username_selected
+            ])
+        
         parentVC.present(ivc, animated: true, completion: { _ in })
     }
 }

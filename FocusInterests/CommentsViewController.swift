@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate{
 
@@ -125,6 +126,12 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             ])
         commentField.text = ""
         self.commentsTableView.reloadData()
+        
+        Answers.logCustomEvent(withName: "Comment Pin",
+                               customAttributes: [
+                                "user": AuthApi.getFirebaseUid()!,
+                                "comment": commentField.text
+            ])
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

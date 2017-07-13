@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Crashlytics
 
 class Follow{
     static func followUser(uid: String){
@@ -25,9 +26,25 @@ class Follow{
             
             if value == nil{
                 Constants.DB.user.child(uid).child("followers/people").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
-                
             }
         })
+        
+        Constants.DB.user.child(uid).observeSingleEvent(of: .value, with: {snapshot in
+        
+            if let data = snapshot.value as? [String:Any]{
+                if let username = data["username"] as? String{
+                    Answers.logCustomEvent(withName: "Follow",
+                                           customAttributes: [
+                                            "follower": AuthApi.getFirebaseUid()!,
+                                            "following": username,
+                                            "type": "user"
+                                            
+                        ])
+                    
+                }
+            }
+        })
+        
     }
     
     static func unFollowUser(uid: String){
@@ -58,6 +75,27 @@ class Follow{
         
         
         Constants.DB.following_place.child(id).child("followers/places").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+        
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
+            
+            if let data = snapshot.value as? [String:Any]{
+                if let username = data["username"] as? String{
+                    
+                    getYelpByID(ID: id, completion: {place in
+                        Answers.logCustomEvent(withName: "Follow",
+                                               customAttributes: [
+                                                "follower": AuthApi.getFirebaseUid()!,
+                                                "following": place.name,
+                                                "type": "place"
+                                                
+                            ])
+                        
+                    })
+                    
+                }
+            }
+        })
+        
     }
     
     static func unFollowPlace(id: String){

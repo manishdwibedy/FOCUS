@@ -357,6 +357,13 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 }
             })
             
+            Answers.logCustomEvent(withName: "Attend Event",
+                                   customAttributes: [
+                                    "user": AuthApi.getFirebaseUid()!,
+                                    "event": event.title,
+                                    "attend": true
+                ])
+            
             sender.layer.borderWidth = 1
             sender.layer.borderColor = UIColor.white.cgColor
             sender.backgroundColor = UIColor.clear
@@ -394,6 +401,13 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 sender.layer.borderColor = UIColor.clear.cgColor
                 sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
                 sender.setTitle("Attend", for: .normal)
+                
+                Answers.logCustomEvent(withName: "Attend Event",
+                                       customAttributes: [
+                                        "user": AuthApi.getFirebaseUid()!,
+                                        "event": event.title,
+                                        "attend": false
+                    ])
             }
             alertController.addAction(OKAction)
             

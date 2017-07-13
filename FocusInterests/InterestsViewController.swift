@@ -11,6 +11,7 @@ import FacebookCore
 import FBSDKCoreKit
 import SpriteKit
 import SCLAlertView
+import Crashlytics
 
 var interest_status = [Interest]()
 var interest_mapping = [String: Int]()
@@ -253,6 +254,14 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         }
         
         let interests = selected.joined(separator: ",")
+        
+        
+        Answers.logCustomEvent(withName: "Interest",
+                               customAttributes: [
+                                "user": AuthApi.getFirebaseUid()!,
+                                "interest": interests
+                                
+            ])
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["interests": interests])
         AuthApi.set(interests: interests)
