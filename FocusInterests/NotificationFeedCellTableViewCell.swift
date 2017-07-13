@@ -28,6 +28,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var contentBackView: UIView!
    
+    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var nextTimeHeight: NSLayoutConstraint!
     
     @IBOutlet weak var seeYouHeight: NSLayoutConstraint!
@@ -151,19 +152,17 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                         if let data = self.notif.item?.data{
                             if invite_time == data["inviteTime"] as? String{
                                 if status == "accepted"{
-                                    self.seeYouThereButton.isHidden = true
+                                    self.nextTimeButton.isHidden = true
                                     self.nextTimeButton.isEnabled = false
-                                    
-                                    self.nextTimeButton.backgroundColor = Constants.color.green
-                                    self.nextTimeButton.setTitleColor(UIColor.white, for: .normal)
-                                    
-                                    self.nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
+                                    self.statusLabel.text = "Accepted"
+                                    self.seeYouThereButton.setTitle("Message", for: .normal)
                                 }
                                 else if status == "declined"{
-                                    self.seeYouThereButton.isHidden = true
+                                    self.nextTimeButton.isHidden = true
                                     self.nextTimeButton.isEnabled = false
+                                    self.statusLabel.text = "Declined"
+                                    self.seeYouThereButton.setTitle("Undo", for: .normal)
                                     
-                                    self.nextTimeButton.setTitle("Declined", for: UIControlState.normal)
                                 }
                             }
                         }
@@ -277,10 +276,11 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         if selectedButton == false{
             selectedButton = true
-            seeYouThereButton.isHidden = true
+            nextTimeButton.isHidden = true
             nextTimeButton.isEnabled = false
          
-            nextTimeButton.setTitle("Accepted", for: UIControlState.normal)
+            statusLabel.text = "Accepted"
+            seeYouThereButton.setTitle("Message", for: .normal)
             
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? [String:Any]
@@ -319,10 +319,11 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     
     @IBAction func nextTimePushed(_ sender: Any) {
         selectedButton = true
-        seeYouThereButton.isHidden = true
         nextTimeButton.isEnabled = false
-        nextTimeButton.setTitle("Declined", for: UIControlState.normal)
+        nextTimeButton.isHidden = true
         
+        seeYouThereButton.setTitle("Undo", for: .normal)
+        statusLabel.text = "Declined"
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? [String:Any]
             

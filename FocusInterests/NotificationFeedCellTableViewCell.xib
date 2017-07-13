@@ -18,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="352" height="111"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="352" height="110"/>
+                <rect key="frame" x="0.0" y="0.0" width="352" height="110.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wK2-Jo-qA1">
@@ -100,6 +100,12 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8en-yG-tGw">
+                        <rect key="frame" x="253" y="82" width="84" height="0.0"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
@@ -107,9 +113,11 @@
                     <constraint firstItem="wK2-Jo-qA1" firstAttribute="baseline" secondItem="5Pz-GY-U38" secondAttribute="firstBaseline" id="4xd-uT-mJk"/>
                     <constraint firstItem="G4T-lJ-oCe" firstAttribute="leading" secondItem="EnX-Nm-dDd" secondAttribute="trailing" constant="8" symbolic="YES" id="5cL-l7-Wge"/>
                     <constraint firstItem="ca5-vz-JL0" firstAttribute="centerY" secondItem="wK2-Jo-qA1" secondAttribute="centerY" id="BMn-bi-Ko1"/>
+                    <constraint firstItem="8en-yG-tGw" firstAttribute="centerY" secondItem="5Pz-GY-U38" secondAttribute="centerY" id="DOW-lf-9EI"/>
                     <constraint firstItem="5Pz-GY-U38" firstAttribute="leading" secondItem="wK2-Jo-qA1" secondAttribute="trailing" constant="8" symbolic="YES" id="GUk-21-GbH"/>
                     <constraint firstItem="EnX-Nm-dDd" firstAttribute="top" secondItem="KgY-3n-kfu" secondAttribute="top" id="PSs-qL-evD"/>
                     <constraint firstItem="ca5-vz-JL0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Ppi-DL-dPo"/>
+                    <constraint firstItem="8en-yG-tGw" firstAttribute="leading" secondItem="5Pz-GY-U38" secondAttribute="leading" id="S3R-b6-l9x"/>
                     <constraint firstAttribute="trailingMargin" secondItem="KgY-3n-kfu" secondAttribute="trailing" constant="7" id="ThL-xB-Xsg"/>
                     <constraint firstItem="G4T-lJ-oCe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="X6m-r1-Lzw"/>
                     <constraint firstItem="5Pz-GY-U38" firstAttribute="baseline" secondItem="wK2-Jo-qA1" secondAttribute="firstBaseline" id="duh-yE-btp"/>
@@ -119,6 +127,7 @@
                     <constraint firstItem="EnX-Nm-dDd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="vsk-Ey-4P6"/>
                     <constraint firstItem="wK2-Jo-qA1" firstAttribute="top" secondItem="5Pz-GY-U38" secondAttribute="top" id="wAa-7F-rN0"/>
                     <constraint firstAttribute="bottomMargin" secondItem="wK2-Jo-qA1" secondAttribute="bottom" constant="8.5" id="yln-F7-ueQ"/>
+                    <constraint firstItem="8en-yG-tGw" firstAttribute="trailing" secondItem="5Pz-GY-U38" secondAttribute="trailing" id="zgd-xO-bYE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -128,6 +137,7 @@
                 <outlet property="nextTimeHeight" destination="KDV-xr-Uzv" id="eGL-T7-ZD7"/>
                 <outlet property="seeYouHeight" destination="fet-2e-Lo3" id="0po-St-82M"/>
                 <outlet property="seeYouThereButton" destination="wK2-Jo-qA1" id="qip-0W-bAg"/>
+                <outlet property="statusLabel" destination="8en-yG-tGw" id="0BN-DH-lVF"/>
                 <outlet property="timeLabel" destination="ca5-vz-JL0" id="paE-yj-sVd"/>
                 <outlet property="userNameLabel" destination="th2-x8-nnK" id="OVI-jh-Ql1"/>
                 <outlet property="userProfilePic" destination="EnX-Nm-dDd" id="Xb2-oJ-BLG"/>
