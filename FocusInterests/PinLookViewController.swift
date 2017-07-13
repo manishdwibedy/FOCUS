@@ -255,7 +255,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                         if value != nil
                         {
                             let username = value?["username"] as! String
-                            self.usernameLabel.text = username
                             
                             let textLabel = UILabel()
                             

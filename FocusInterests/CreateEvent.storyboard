@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G12b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3TX-Ww-Aks">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3TX-Ww-Aks">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -49,11 +49,24 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIH-Pg-PIk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="736"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDg-uh-1wa">
+                                        <rect key="frame" x="10" y="5" width="355" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="TCL-2Y-ELf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal" title="Choose FOCUS">
+                                            <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="choseFocusAction:" destination="3TX-Ww-Aks" eventType="touchUpInside" id="aZ9-wQ-JqL"/>
+                                        </connections>
+                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-56-fhv" userLabel="textField stackViews">
-                                        <rect key="frame" x="9" y="20" width="357" height="436"/>
+                                        <rect key="frame" x="9" y="60" width="357" height="436"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SUQ-U7-3Hm">
                                                 <rect key="frame" x="0.0" y="0.0" width="357" height="45"/>
@@ -131,7 +144,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jvR-p8-idX" userLabel="guestSettingsStackView">
-                                        <rect key="frame" x="86" y="565" width="204" height="55"/>
+                                        <rect key="frame" x="86" y="605" width="204" height="55"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wNf-XX-soV">
                                                 <rect key="frame" x="0.0" y="0.0" width="132" height="25"/>
@@ -183,7 +196,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fjs-tb-4TG">
-                                        <rect key="frame" x="84" y="496" width="208" height="31"/>
+                                        <rect key="frame" x="84" y="536" width="208" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCG-dE-mWN">
                                                 <rect key="frame" x="0.0" y="0.0" width="59.5" height="31"/>
@@ -207,21 +220,8 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDg-uh-1wa">
-                                        <rect key="frame" x="17" y="683" width="343" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="QdE-TK-eNG"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <state key="normal" title="Choose FOCUS">
-                                            <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="choseFocusAction:" destination="3TX-Ww-Aks" eventType="touchUpInside" id="aZ9-wQ-JqL"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnC-oQ-rGF">
-                                        <rect key="frame" x="86" y="628" width="206" height="47"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnC-oQ-rGF">
+                                        <rect key="frame" x="86" y="668" width="206" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="hfT-DV-Yjb"/>
                                         </constraints>
@@ -235,19 +235,18 @@
                                     <constraint firstItem="gnC-oQ-rGF" firstAttribute="leading" secondItem="jvR-p8-idX" secondAttribute="leading" id="84T-D3-ymc"/>
                                     <constraint firstItem="Pss-56-fhv" firstAttribute="leading" secondItem="dIH-Pg-PIk" secondAttribute="leading" constant="9" id="E6z-Fg-Yl0"/>
                                     <constraint firstItem="gnC-oQ-rGF" firstAttribute="top" secondItem="jvR-p8-idX" secondAttribute="bottom" constant="8" symbolic="YES" id="ECA-ne-Rcp"/>
+                                    <constraint firstAttribute="trailing" secondItem="HDg-uh-1wa" secondAttribute="trailing" constant="10" id="H9f-eV-nvO"/>
                                     <constraint firstItem="gnC-oQ-rGF" firstAttribute="trailing" secondItem="Fjs-tb-4TG" secondAttribute="trailing" id="Hjw-4z-1KN"/>
+                                    <constraint firstItem="HDg-uh-1wa" firstAttribute="top" secondItem="dIH-Pg-PIk" secondAttribute="top" constant="5" id="Ibj-I4-y4W"/>
                                     <constraint firstAttribute="trailing" secondItem="Fjs-tb-4TG" secondAttribute="trailing" constant="83.5" id="Kts-WS-b9l"/>
                                     <constraint firstItem="jvR-p8-idX" firstAttribute="centerX" secondItem="dIH-Pg-PIk" secondAttribute="centerX" id="LiT-Lp-gmg"/>
+                                    <constraint firstItem="HDg-uh-1wa" firstAttribute="leading" secondItem="dIH-Pg-PIk" secondAttribute="leading" constant="10" id="NOJ-OI-5YU"/>
                                     <constraint firstItem="Fjs-tb-4TG" firstAttribute="top" secondItem="Pss-56-fhv" secondAttribute="bottom" constant="40" id="PYj-Ng-XkA"/>
                                     <constraint firstItem="Fjs-tb-4TG" firstAttribute="leading" secondItem="dIH-Pg-PIk" secondAttribute="leading" constant="84" id="Vo9-Se-vuX"/>
-                                    <constraint firstItem="Pss-56-fhv" firstAttribute="top" secondItem="dIH-Pg-PIk" secondAttribute="top" constant="20" id="VrE-78-7cn"/>
                                     <constraint firstItem="jvR-p8-idX" firstAttribute="top" secondItem="Fjs-tb-4TG" secondAttribute="bottom" constant="38" id="X28-zU-YEP"/>
-                                    <constraint firstItem="HDg-uh-1wa" firstAttribute="bottom" secondItem="dIH-Pg-PIk" secondAttribute="bottomMargin" id="aqV-Qc-dM5"/>
-                                    <constraint firstItem="HDg-uh-1wa" firstAttribute="leading" secondItem="dIH-Pg-PIk" secondAttribute="leading" constant="17" id="c6x-iv-7m2"/>
-                                    <constraint firstItem="gnC-oQ-rGF" firstAttribute="centerX" secondItem="HDg-uh-1wa" secondAttribute="centerX" id="lfl-5r-HAd"/>
-                                    <constraint firstItem="HDg-uh-1wa" firstAttribute="top" secondItem="gnC-oQ-rGF" secondAttribute="bottom" constant="8" symbolic="YES" id="qHe-3U-7GN"/>
                                     <constraint firstItem="Fjs-tb-4TG" firstAttribute="centerX" secondItem="dIH-Pg-PIk" secondAttribute="centerX" id="rtD-U6-xKB"/>
                                     <constraint firstAttribute="trailing" secondItem="Pss-56-fhv" secondAttribute="trailing" constant="9" id="voO-rJ-lSL"/>
+                                    <constraint firstItem="Pss-56-fhv" firstAttribute="top" secondItem="HDg-uh-1wa" secondAttribute="bottom" constant="10" id="vz1-Ni-yMk"/>
                                 </constraints>
                             </scrollView>
                         </subviews>

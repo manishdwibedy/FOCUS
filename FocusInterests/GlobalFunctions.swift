@@ -664,11 +664,11 @@ func saveUserInfo(){
 
 func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
     let attrs = [
-        NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15),
+        NSFontAttributeName: UIFont(name: "Avenir-Black", size: 17),
         NSForegroundColorAttributeName: UIColor.white
     ]
     let nonBoldAttribute = [
-        NSFontAttributeName: UIFont(name: "Avenir-Book", size: 15),
+        NSFontAttributeName: UIFont(name: "Avenir-Book", size: 17),
         NSForegroundColorAttributeName: UIColor.white
         ]
     let attrStr = NSMutableAttributedString(string: string, attributes: attrs ?? [:])

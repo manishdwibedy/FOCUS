@@ -737,7 +737,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if let value = value
                 {
 
-                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest, address: pin.locationAddress.components(separatedBy: ";;")[0], time: pin.dateTimeStamp, username: (value["username"] as? String)!)
+                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest, address: pin.locationAddress.components(separatedBy: ";;")[0], time: pin.dateTimeStamp, username: (value["username"] as? String)!, userImage: (value["image_string"] as? String)!)
                 }
             })
         

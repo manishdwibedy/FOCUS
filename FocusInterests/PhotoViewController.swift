@@ -60,8 +60,6 @@ class PhotoViewController: UIViewController {
 	}
     
     func done(){
-//        let _ = self.event?.saveToDB(ref: Constants.DB.event)
-//        self.performSegue(withIdentifier: "event_invite", sender: nil)
         let chosenImage = backgroundImage
         let imageData = UIImagePNGRepresentation(chosenImage)
         parentVC?.imageData = imageData!

@@ -129,7 +129,7 @@ class MapPopUpScreenView: UIView {
         
     }
     
-    func loadPin(name: String, pin: String, distance: String, focus: String, address: String, time: Double, username: String)
+    func loadPin(name: String, pin: String, distance: String, focus: String, address: String, time: Double, username: String, userImage: String)
     {
         
         self.startImage.isHidden = true
@@ -181,7 +181,7 @@ class MapPopUpScreenView: UIView {
                         
                     }
                     else{
-                        self.profileImage.sd_setImage(with: URL(string: AuthApi.getUserImage()!))
+                        self.profileImage.sd_setImage(with: URL(string: userImage))
                     }
                 }
             })
