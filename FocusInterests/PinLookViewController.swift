@@ -353,6 +353,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 self.likesLabel.text = String(self.likes) + " likes"
             }else if self.likes == 1{
                 self.likesLabel.text = String(self.likes) + " like"
+                self.likesLabel.isHidden = false
             }else{
                 self.likesLabel.isHidden = true
             }
