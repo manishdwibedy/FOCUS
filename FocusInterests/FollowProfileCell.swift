@@ -101,7 +101,7 @@ class FollowProfileCell: UITableViewCell {
             
             let unfollowAlertController = UIAlertController(title: "Are you sure you want to unfollow \(data.username)?", message: nil, preferredStyle: .actionSheet)
             
-            let unfollowAction = UIAlertAction(title: "Unfollow \(data.username)", style: .destructive) { action in
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
                 
                 self.followOut.backgroundColor = Constants.color.green
                 self.followOut.setTitle("Follow", for: UIControlState.normal)
