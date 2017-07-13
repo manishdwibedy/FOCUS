@@ -29,6 +29,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     // categories
     
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var categoryBackground: UIView!
     @IBOutlet weak var categoriesStackView: UIStackView!
     
@@ -60,12 +61,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     var ratingID: String?
     var rating: Int? = nil
     
-    
     @IBOutlet weak var webButton: UIButton!
     @IBOutlet weak var uberButton: UIButton!
     @IBOutlet weak var googleMapButton: UIButton!
     
+    @IBOutlet weak var peopleAlsoLikedTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var peopleWhoLikeThisTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var categoryTop: NSLayoutConstraint!
+    @IBOutlet weak var pinsTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var peopleAlsoLikedViewBottomConstraint: NSLayoutConstraint!
     
     //rating
     @IBOutlet weak var ratingView: UIView!
@@ -175,6 +180,14 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 
             }
         })
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let placeViewController = self.placeVC{
+            placeViewController.pinViewHeight.constant += ((self.viewHeight.constant+self.topView.frame.size.height+self.peopleAlsoLikedTopConstraint.constant+self.peopleWhoLikeThisTopConstraint.constant+self.pinsTopConstraint.constant+self.peopleAlsoLikedViewBottomConstraint.constant+self.bottomViewBottomConstraint.constant)-self.scrollView.frame.size.height)
+        }
     }
     
     func callPlace(sender:UITapGestureRecognizer) {

@@ -26,6 +26,7 @@ import Crashlytics
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate {
     
+    @IBOutlet weak var followYourFriendsView: UIView!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var popUpView: UIView!
@@ -66,13 +67,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var placePins = [String:GMSMarker]()
     var lastPins = [GMSMarker]()
     
+    func closeButton(){
+        self.followYourFriendsView.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let followYourFriendsSubView = FollowYourFriendsView(frame: CGRect(x: 0, y: 0, width: self.followYourFriendsView.frame.size.width, height: self.followYourFriendsView.frame.size.height))
+        followYourFriendsSubView.closeButton.addTarget(self, action: #selector(MapViewController.closeButton), for: .touchUpInside)
+        self.followYourFriendsView.addSubview(followYourFriendsSubView)
+        self.followYourFriendsView.allCornersRounded(radius: 8.0)
+        
         
         popUpScreen = MapPopUpScreenView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: popUpView.frame.width))
         popUpScreen.parentVC = self
         self.popUpView.addSubview(popUpScreen)
-
         
 //        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
 //            if dictionnary != nil {
@@ -224,8 +233,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
             NSForegroundColorAttributeName : UIColor.white
             ], for: .normal)
-        
-        
 
     }
     
@@ -952,8 +959,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
 //        self.present(controller, animated: true, completion: nil)
         
-        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
+        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
         dropfromTop(view: self.view)
         

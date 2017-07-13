@@ -28,5 +28,13 @@ class FollowYourSpecificFriendTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    @IBAction func followButtonClicked(_ sender: Any) {
+        self.followButton.isSelected = !self.followButton.isSelected
+        if self.followButton.isSelected{
+            self.followButton.layer.borderWidth = 1
+            self.followButton.layer.borderColor = UIColor.gray.cgColor
+            self.followButton.roundButton()
+        }
+    }
     
 }

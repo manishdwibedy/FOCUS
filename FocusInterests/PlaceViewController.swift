@@ -21,11 +21,11 @@ protocol SuggestPlacesDelegate {
 class PlaceViewController: UIViewController {
     var commentsDelegate: CommentsDelegate?
     var suggestPlacesDelegate: SuggestPlacesDelegate?
-    
     var place: Place?
     var rating = [PlaceRating]()
     var currentLocation: CLLocation?
     
+    @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var ratingLabel: UILabel!
@@ -126,12 +126,12 @@ class PlaceViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             UIView.animate(withDuration: 0.5, animations: {
                 self.pinView.alpha = 1
-                self.ratingView.alpha = 0
+//                self.ratingView.alpha = 0
             })
         } else {
             UIView.animate(withDuration: 0.5, animations: {
                 self.pinView.alpha = 0
-                self.ratingView.alpha = 1
+//                self.ratingView.alpha = 1
             })
         }
     }
@@ -168,10 +168,10 @@ class PlaceViewController: UIViewController {
             pin.place = self.place
         }
         else if segue.identifier == "rating"{
-            let rating = segue.destination as! RatingViewController
-            rating.placeVC = self
-            rating.place = self.place
-            rating.ratings = self.rating
+//            let rating = segue.destination as! RatingViewController
+//            rating.placeVC = self
+//            rating.place = self.place
+//            rating.ratings = self.rating
         }
     }
     

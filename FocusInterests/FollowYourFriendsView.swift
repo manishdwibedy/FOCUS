@@ -12,7 +12,7 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
 
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var followTableView: UITableView!
-//    @IBOutlet var contentView: UIView!
+    @IBOutlet var contentView: UIView!
     @IBOutlet weak var followButton: UIButton!
     
     override init(frame : CGRect) {
@@ -31,7 +31,7 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
         
         addSubview(view)
-
+        
         self.followButton.roundCorners(radius: 6.0)
         
         self.followTableView.dataSource = self
@@ -77,6 +77,10 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
         }else{
             return 55
         }
+    }
+    
+    @IBAction func closeButton(_ sender: Any) {
+        self.contentView.isHidden = true
     }
     
     /*
