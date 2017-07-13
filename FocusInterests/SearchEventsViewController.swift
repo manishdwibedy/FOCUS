@@ -466,22 +466,55 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             if(searchText.characters.count > 0){
                 self.filtered.removeAll()
                 
-                let ref = Constants.DB.event
-                _ = ref.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
-                    let events = snapshot.value as? [String : Any] ?? [:]
+                if Constants.interests.interests.contains(searchText){
+                    var eventCount = 0
+                    Constants.DB.event_interests.child(searchText).observeSingleEvent(of: .value, with: {snapshot in
                     
-                    for (id, event) in events{
-                        let info = event as? [String:Any]
-                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String, privateEvent: (info?["private"] as? Bool)!)
-                        
-                        if let attending = info?["attendingList"] as? [String:Any]{
-                            event.setAttendessCount(count: attending.count)
+                        if let info = snapshot.value as? [String:[String:Any]]{
+                            eventCount = info.count
+                            for (_, event) in info{
+                                if let eventID = event["event-id"] as? String{
+                                    Constants.DB.event.child(eventID).observeSingleEvent(of: .value, with: {snapshot in
+                                        
+                                        let info = event as? [String:Any]
+                                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: eventID, category: info?["interests"] as? String, privateEvent: (info?["private"] as? Bool)!)
+                                        
+                                        if let attending = info?["attendingList"] as? [String:Any]{
+                                            event.setAttendessCount(count: attending.count)
+                                        }
+                                        
+                                        self.filtered.append(event)
+                                        
+                                        if self.filtered.count == eventCount{
+                                            self.tableView.reloadData()
+                                        }
+                                    })
+                                }
+                                
+                                
+                            }
                         }
+                    })
+                }
+                else{
+                    let ref = Constants.DB.event
+                    _ = ref.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+                        let events = snapshot.value as? [String : Any] ?? [:]
                         
-                        self.filtered.append(event)
-                    }
-                    self.tableView.reloadData()
-                })
+                        for (id, event) in events{
+                            let info = event as? [String:Any]
+                            let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String, privateEvent: (info?["private"] as? Bool)!)
+                            
+                            if let attending = info?["attendingList"] as? [String:Any]{
+                                event.setAttendessCount(count: attending.count)
+                            }
+                            
+                            self.filtered.append(event)
+                        }
+                        self.tableView.reloadData()
+                    })
+                }
+                
             }
             else{
                 self.filtered = self.events

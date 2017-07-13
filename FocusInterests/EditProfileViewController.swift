@@ -153,7 +153,8 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
             "description": self.infoTf.text ?? "",
             "email": self.emailTf.text ?? "",
             "phone_nbr": self.phoneTf.text ?? "",
-            "gender": self.genderTf.text ?? ""
+            "gender": self.genderTf.text ?? "",
+            "fullname_lowered": self.nameTf.text?.lowercased() ?? "",
             ])
         
         uploadImage(image:profilePhotoView.image!, path: Constants.storage.user_profile.child(AuthApi.getFirebaseUid()!))

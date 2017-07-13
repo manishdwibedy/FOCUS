@@ -375,11 +375,15 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        var usernameSearch = [User]()
+        var fullnameSearch = [User]()
+        var username_count = 0
+        var fullname_count = 0
         if(searchText.characters.count > 0){
             self.filtered.removeAll()
             
             let ref = Constants.DB.user
-            _ = ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+            ref.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
                 let users = snapshot.value as? [String : Any] ?? [:]
                 
                 _ = users.count
@@ -402,19 +406,68 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                             
                                         }
                                     }
-                                    if !self.filtered.contains(user){
-                                        self.filtered.append(user)    
+                                    if !usernameSearch.contains(user){
+                                        usernameSearch.append(user)
                                     }
                                     
-                                    
-                                    self.filtered.sort {
-                                        if $0.hasPin && $1.hasPin{
-                                            return $0.pinDistance < $1.pinDistance
+                                    if usernameSearch.count + fullnameSearch.count == username_count + fullname_count{
+                                        self.filtered = usernameSearch + fullnameSearch
+                                        self.filtered.sort {
+                                            if $0.hasPin && $1.hasPin{
+                                                return $0.pinDistance < $1.pinDistance
+                                            }
+                                            return $0.hasPin && !$1.hasPin
                                         }
-                                        return $0.hasPin && !$1.hasPin
+                                        
+                                        self.tableView.reloadData()
                                     }
                                     
-                                    self.tableView.reloadData()
+                                })
+                            }
+                        }
+                    }
+                }
+                
+            })
+            
+            ref.queryOrdered(byChild: "fullname_lowered").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+                let users = snapshot.value as? [String : Any] ?? [:]
+                
+                _ = users.count
+                for (_, user) in users{
+                    if let info = user as? [String:Any]{
+                        if let user = User.toUser(info: info){
+                            if user.uuid != AuthApi.getFirebaseUid(){
+                                Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                    let value = snapshot.value as? NSDictionary
+                                    if let value = value
+                                    {
+                                        if let pin = pinData.toPin(user: user, value: value){
+                                            if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
+                                                self.user_pins[user.uuid!] = pin
+                                                user.hasPin = true
+                                                
+                                                let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+                                                user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                            }
+                                            
+                                        }
+                                    }
+                                    if !self.fullnameSearch.contains(user){
+                                        self.fullnameSearch.append(user)
+                                    }
+                                    
+                                    if searchResults.count = username_count + fullname_count{
+                                        self.filtered = usernameSearch + fullnameSearch
+                                        self.filtered.sort {
+                                            if $0.hasPin && $1.hasPin{
+                                                return $0.pinDistance < $1.pinDistance
+                                            }
+                                            return $0.hasPin && !$1.hasPin
+                                        }
+                                        
+                                        self.tableView.reloadData()
+                                    }
                                 })
                             }
                         }
