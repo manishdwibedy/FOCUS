@@ -762,7 +762,7 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
             self.fullAddress = "\(place.name);;\(second.joined(separator: ", "))"
         }
         else{
-            self.locationTextField.text = first.joined(separator: ", ")
+            self.locationTextField.text = first.joined(separator: " ")
             self.fullAddress = "\(first.joined(separator: " "));;\(second.joined(separator: " "))"
         }
         

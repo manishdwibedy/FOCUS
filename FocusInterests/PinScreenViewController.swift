@@ -675,7 +675,7 @@ extension PinScreenViewController: GMSAutocompleteViewControllerDelegate {
             formmatedAddress = "\(place.name);;\(second.joined(separator: ", "))"
         }
         else{
-            self.locationLabel.text = first.joined(separator: ", ")
+            self.locationLabel.text = first.joined(separator: " ")
             formmatedAddress = "\(first.joined(separator: " "));;\(second.joined(separator: " "))"
         }
         
