@@ -48,8 +48,8 @@ class FollowYourFriendsView: UIView, UITableViewDelegate, UITableViewDataSource 
         
         self.followTableView.reloadData()
 
-        manager?.setValue("Bearer \(AuthApi.getGoogleToken()!)", forKey: "authorization")
-        manager?.setValue("3.0", forKey: "GData-Version")
+//        manager?.setValue("Bearer \(AuthApi.getGoogleToken()!)", forKey: "authorization")
+//        manager?.setValue("3.0", forKey: "GData-Version")
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
