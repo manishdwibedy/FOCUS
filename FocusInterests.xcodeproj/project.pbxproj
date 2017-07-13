@@ -248,6 +248,11 @@
 		EB722F931EE8B19400420DC8 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */; };
 		EB722F961EE8B1BE00420DC8 /* ReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */; };
 		EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */; };
+		EB819E611F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB819E5F1F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.swift */; };
+		EB819E621F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB819E601F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.xib */; };
+		EB8D349B1F16C70F006EE316 /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8D349A1F16C70F006EE316 /* OtherUserProfileViewController.swift */; };
+		EB8D349E1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8D349C1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift */; };
+		EB8D349F1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */; };
 		EBB6B32D1F0E1224000C8133 /* FeedOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */; };
 		EBB6B32E1F0E1224000C8133 /* FeedOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */; };
 		EBB6B3311F0EE179000C8133 /* FeedEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B32F1F0EE179000C8133 /* FeedEventTableViewCell.swift */; };
@@ -264,7 +269,6 @@
 		EBD382AF1F10167B0068D313 /* FeedPlaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD382AD1F10167A0068D313 /* FeedPlaceImageTableViewCell.swift */; };
 		EBD382B01F10167B0068D313 /* FeedPlaceImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD382AE1F10167B0068D313 /* FeedPlaceImageTableViewCell.xib */; };
 		EBD76FEF1EF2616400E4776A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FEE1EF2616400E4776A /* ForgotPasswordViewController.swift */; };
-		EBD76FF71EF3527200E4776A /* UserProfileTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */; };
 		EBD980831EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */; };
 		EBD980841EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */; };
 		EBD980871EEB64C400FC54C1 /* OtherLikesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */; };
@@ -609,6 +613,11 @@
 		EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
 		EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsTableViewCell.swift; sourceTree = "<group>"; };
 		EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewsTableViewCell.xib; sourceTree = "<group>"; };
+		EB819E5F1F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesOtherWillLikeTableViewCell.swift; sourceTree = "<group>"; };
+		EB819E601F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlacesOtherWillLikeTableViewCell.xib; sourceTree = "<group>"; };
+		EB8D349A1F16C70F006EE316 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
+		EB8D349C1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventOtherWillLikeTableViewCell.swift; sourceTree = "<group>"; };
+		EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOtherWillLikeTableViewCell.xib; sourceTree = "<group>"; };
 		EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedOneTableViewCell.swift; sourceTree = "<group>"; };
 		EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedOneTableViewCell.xib; sourceTree = "<group>"; };
 		EBB6B32F1F0EE179000C8133 /* FeedEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -625,7 +634,6 @@
 		EBD382AD1F10167A0068D313 /* FeedPlaceImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPlaceImageTableViewCell.swift; sourceTree = "<group>"; };
 		EBD382AE1F10167B0068D313 /* FeedPlaceImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedPlaceImageTableViewCell.xib; sourceTree = "<group>"; };
 		EBD76FEE1EF2616400E4776A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTwoViewController.swift; sourceTree = "<group>"; };
 		EBD980811EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsEventDetailTableViewCell.swift; sourceTree = "<group>"; };
 		EBD980821EEB564700FC54C1 /* CommentsEventDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsEventDetailTableViewCell.xib; sourceTree = "<group>"; };
 		EBD980851EEB64C400FC54C1 /* OtherLikesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherLikesTableViewCell.swift; sourceTree = "<group>"; };
@@ -1126,6 +1134,7 @@
 		D2B9B0721E5A0A1E0002F1B1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB8D34991F16C6EA006EE316 /* UserProfile */,
 				5B448E681EE94D2000873F79 /* Invitations */,
 				EB722F911EE8B18500420DC8 /* Reviews */,
 				EB5891D51EE7EDFA00C35EE9 /* Comments */,
@@ -1135,8 +1144,6 @@
 				D2B9B0411E5A047C0002F1B1 /* HomeViewController.swift */,
 				61ED203F1EDC2FBA00247DC5 /* NotificationFeedViewController.swift */,
 				5BA37C761EBD63BE0091189E /* HomePageViewController.swift */,
-				5B251E901ED278A70075B57A /* UserProfileViewController.swift */,
-				61C6096E1ED572AC004098BA /* EditProfileViewController.swift */,
 				D252205C1E5A3C9E00EC2014 /* MapViewController.swift */,
 				5B634C821ED196BE00EBCC29 /* CustomClusterRenderer.swift */,
 				D25220671E5A846100EC2014 /* NotificationsViewController.swift */,
@@ -1158,7 +1165,6 @@
 				5B959FD61ECAC9F400094FE6 /* Place */,
 				5BAB87A91EC97BB20064E5EC /* People */,
 				5B71D6F21ED154F10093A3F5 /* Search */,
-				EBD76FF61EF3527200E4776A /* UserProfileTwoViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1321,6 +1327,20 @@
 				5B34A6F41EE72B0800D16842 /* FollowingViewController.swift */,
 			);
 			name = Following;
+			sourceTree = "<group>";
+		};
+		EB8D34991F16C6EA006EE316 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				5B251E901ED278A70075B57A /* UserProfileViewController.swift */,
+				61C6096E1ED572AC004098BA /* EditProfileViewController.swift */,
+				EB8D349A1F16C70F006EE316 /* OtherUserProfileViewController.swift */,
+				EB8D349C1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift */,
+				EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */,
+				EB819E5F1F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.swift */,
+				EB819E601F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.xib */,
+			);
+			name = UserProfile;
 			sourceTree = "<group>";
 		};
 		EBB6B32A1F0E1207000C8133 /* FeedTableCells */ = {
@@ -1583,6 +1603,7 @@
 				5B519E7B1ED677D800B36110 /* SearchPeopleTableViewCell.xib in Resources */,
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
+				EB8D349F1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib in Resources */,
 				EBD382AC1F100D0A0068D313 /* FeedCreatedEventTableViewCell.xib in Resources */,
 				5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */,
 				EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */,
@@ -1622,6 +1643,7 @@
 				EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */,
 				EBE7AE4A1F16141700901F9F /* FollowYourSpecificFriendTableViewCell.xib in Resources */,
 				D21317F91E5B47D300140323 /* HomViewControllerCell.xib in Resources */,
+				EB819E621F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1951,6 +1973,7 @@
 				5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */,
 				5B7BB1E61ED51E9E001E60FF /* SearchEventsViewController.swift in Sources */,
 				5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */,
+				EB8D349E1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift in Sources */,
 				5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */,
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
 				61603B941EFD0ABA0063F090 /* UIFont+Extensions.swift in Sources */,
@@ -2017,7 +2040,6 @@
 				5B34A6F61EE72B0800D16842 /* FollowingTableViewCell.swift in Sources */,
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
-				EBD76FF71EF3527200E4776A /* UserProfileTwoViewController.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
 				5B71D7101ED184D30093A3F5 /* allCommentsVC.swift in Sources */,
 				5B959FF21ECD452C00094FE6 /* RatingViewCell.swift in Sources */,
@@ -2030,6 +2052,7 @@
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
 				5B6AFA6A1ED1906900A82104 /* GMUDefaultClusterRenderer.m in Sources */,
 				FF7C87521ED74A8F004ABB1B /* PinImageCollectionViewCell.swift in Sources */,
+				EB8D349B1F16C70F006EE316 /* OtherUserProfileViewController.swift in Sources */,
 				EBD980831EEB564700FC54C1 /* CommentsEventDetailTableViewCell.swift in Sources */,
 				D25D5D341E91DE57007727D2 /* UserProfile1ViewController+ViewAnimator.swift in Sources */,
 				5B16592A1EDA50630002209A /* FeedbackViewController.swift in Sources */,
@@ -2101,6 +2124,7 @@
 				5B71D7001ED1833E0093A3F5 /* EventDetailViewController.swift in Sources */,
 				EBE7AE451F16133800901F9F /* FollowYourFriendsView.swift in Sources */,
 				D230D8CD1E5B875300025EE9 /* Interest.swift in Sources */,
+				EB819E611F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.swift in Sources */,
 				5BA37C801EBDC4D90091189E /* ChatViewController.swift in Sources */,
 				EBD76FEF1EF2616400E4776A /* ForgotPasswordViewController.swift in Sources */,
 				5BA37C841EBF14C50091189E /* MessagesLoadEarlierHeaderView.swift in Sources */,

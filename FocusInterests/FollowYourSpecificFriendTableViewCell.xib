@@ -47,12 +47,15 @@
                         </constraints>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7QU-yo-Hkv">
-                        <rect key="frame" x="239" y="18" width="15" height="15"/>
+                        <rect key="frame" x="239" y="16.5" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="15" id="ARm-uA-2Fe"/>
-                            <constraint firstAttribute="height" constant="15" id="HAj-Kt-KcH"/>
+                            <constraint firstAttribute="width" constant="20" id="ARm-uA-2Fe"/>
+                            <constraint firstAttribute="height" constant="20" id="HAj-Kt-KcH"/>
                         </constraints>
                         <state key="normal" image="GreyCircle"/>
+                        <connections>
+                            <action selector="followButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0Me-s4-yAq"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -61,7 +64,7 @@
                     <constraint firstItem="wJt-R5-HqL" firstAttribute="centerY" secondItem="wow-7t-o3U" secondAttribute="centerY" id="Jf7-2c-mpa"/>
                     <constraint firstItem="wow-7t-o3U" firstAttribute="leading" secondItem="wJt-R5-HqL" secondAttribute="trailing" constant="10" id="JfD-aN-cJh"/>
                     <constraint firstItem="wJt-R5-HqL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="c1i-gI-0tY"/>
-                    <constraint firstItem="7QU-yo-Hkv" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="sOe-FT-LOP"/>
+                    <constraint firstItem="7QU-yo-Hkv" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="5" id="sOe-FT-LOP"/>
                     <constraint firstItem="7QU-yo-Hkv" firstAttribute="leading" secondItem="wow-7t-o3U" secondAttribute="trailing" constant="4" id="ySp-pJ-U4C"/>
                 </constraints>
             </tableViewCellContentView>
