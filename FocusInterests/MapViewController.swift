@@ -473,7 +473,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         })
         
-        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil { // Change this back
+        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil || 1 == 1 { // Change this back
             print("username is nil")
             
             let usernameView = UsernameInputView(frame: CGRect(x:self.usernameInputView.frame.origin.x, y:self.usernameInputView.frame.origin.y, width:self.usernameInputView.frame.size.width, height: self.usernameInputView.frame.size.height))
@@ -483,6 +483,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             usernameView.completion = { (username) in
                 print(username)
+                
+                
+                
                 Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
                     if ((snapshot.value as? NSDictionary)?[username]) != nil{
                         SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
