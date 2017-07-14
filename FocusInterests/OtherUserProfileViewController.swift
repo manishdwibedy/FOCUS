@@ -21,9 +21,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var eventMoreButton: UIButton!
     @IBOutlet weak var otherEventStackView: UIStackView!
     @IBOutlet weak var otherPlaceStackView: UIStackView!
+    @IBOutlet weak var eventsCollectionViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var placesTableView: UITableView!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var recentPostTableView: UITableView!
+    @IBOutlet weak var recentPostTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var viewHeightHoldingRecentPostTableView: NSLayoutConstraint!
     
     @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
     @IBOutlet weak var navBarItem: UINavigationItem!
@@ -40,8 +44,11 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var fullNameLabel: UILabel!
     
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var settingButton: UIButton!
+    
+    @IBOutlet weak var otherUserNameInterestTitleLabel: UILabel!
+    @IBOutlet weak var inviteButton: UIButton!
+    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var followButton: UIButton!
     
     //    @IBOutlet weak var suggestionsHeight: NSLayoutConstraint!
     
@@ -89,6 +96,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var eventHeader: UILabel!
     var followers = [User]()
     var following = [User]()
+    var interestArray = [Interest]()
     
     @IBOutlet weak var createEventButton: UIButton!
     var suggestion = [Event]()
@@ -137,30 +145,36 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     // Edit Description button
     @IBAction func editDescription(_ sender: UIButton) {
-        if editButton.title(for: .normal) == "edit"{
-            let scrollPoint = CGPoint(x: 0, y: sender.frame.origin.y + 200)
-            self.userScrollView.setContentOffset(scrollPoint, animated: true)
-            
-            descriptionText.isEditable = true
-            descriptionText.textColor = .black
-            descriptionText.backgroundColor = .white
-            descriptionText.becomeFirstResponder()
-            editButton.setTitle("save", for: .normal)
-        }
-        else{
-            descriptionText.isEditable = false
-            descriptionText.textColor = .white
-            descriptionText.backgroundColor = .clear
-            descriptionText.resignFirstResponder()
-            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("description").setValue(descriptionText.text)
-            editButton.setTitle("edit", for: .normal)
-        }
+//        if editButton.title(for: .normal) == "edit"{
+//            let scrollPoint = CGPoint(x: 0, y: sender.frame.origin.y + 200)
+//            self.userScrollView.setContentOffset(scrollPoint, animated: true)
+//            
+//            descriptionText.isEditable = true
+//            descriptionText.textColor = .black
+//            descriptionText.backgroundColor = .white
+//            descriptionText.becomeFirstResponder()
+//            editButton.setTitle("save", for: .normal)
+//        }
+//        else{
+//            descriptionText.isEditable = false
+//            descriptionText.textColor = .white
+//            descriptionText.backgroundColor = .clear
+//            descriptionText.resignFirstResponder()
+//            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("description").setValue(descriptionText.text)
+//            editButton.setTitle("edit", for: .normal)
+//        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //		userScrollView.contentSize = CGSize(width: 375, height: 1600)
+        self.recentPostTableView.dataSource = self
+        self.recentPostTableView.delegate = self
+        
+        let recentPostNib = UINib(nibName: "FeedOneTableViewCell", bundle: nil)
+        self.recentPostTableView.register(recentPostNib, forCellReuseIdentifier: "recentPostCell")
+        self.recentPostTableView.rowHeight = UITableViewAutomaticDimension
+        
         self.placesTableView.dataSource = self
         self.placesTableView.delegate = self
         
@@ -173,13 +187,15 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         let eventNib = UINib(nibName: "EventOtherWillLikeTableViewCell", bundle: nil)
         self.eventsTableView.register(eventNib, forCellReuseIdentifier: "eventsCell")
         
-        self.peopleMoreButton.layer.borderWidth = 1.0
-        self.peopleMoreButton.layer.borderColor = UIColor.white.cgColor
-        self.peopleMoreButton.roundCorners(radius: 5.0)
+//        self.peopleMoreButton.layer.borderWidth = 1.0
+//        self.peopleMoreButton.layer.borderColor = UIColor.white.cgColor
+//        self.peopleMoreButton.roundCorners(radius: 5.0)
+//        
+//        self.eventMoreButton.layer.borderWidth = 1.0
+//        self.eventMoreButton.layer.borderColor = UIColor.white.cgColor
+//        self.eventMoreButton.roundCorners(radius: 5.0)
         
-        self.eventMoreButton.layer.borderWidth = 1.0
-        self.eventMoreButton.layer.borderColor = UIColor.white.cgColor
-        self.eventMoreButton.roundCorners(radius: 5.0)
+        self.otherUserNameInterestTitleLabel.text = "alex\'s FOCUS"
         
         // Do any additional setup after loading the view.
         let attrs = [
@@ -189,12 +205,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
         navBar.titleTextAttributes = attrs
         
-//        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-//        let focus_header = NSAttributedString(string: "FOCUS", attributes: underlineAttribute)
-//        let event_header = NSAttributedString(string: "Events", attributes: underlineAttribute)
-//        focusHeader.attributedText = focus_header
-//        eventHeader.attributedText = event_header
-        
+        self.followButton.roundCorners(radius: 5.0)
+        self.messageButton.roundCorners(radius: 5.0)
+        self.inviteButton.roundCorners(radius: 5.0)
         
         hideKeyboardWhenTappedAround()
         
@@ -211,7 +224,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
         //      Use tags in order to allow for only IBAction that will track
         //      each event based on the tag of the sender
-        self.moreFocusButton.tag = 2
+//        self.moreFocusButton.tag = 2
         self.moreEventsButton.tag = 3
 //        self.emptyPinButton.roundCorners(radius: 10)
         
@@ -220,26 +233,26 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: UIFont(name: "Avenir Book", size: 21)!]
         
-        getEventSuggestions()
-        getPin()
+//        getEventSuggestions()
+//        getPin()
         
 //        self.pinView.addTopBorderWithColor(color: UIColor.white, width: 1)
-        self.userInfoView.addBottomBorderWithColor(color: UIColor.white, width: 1)
-        self.otherPlaceStackView.addBottomBorderWithColor(color: UIColor.white, width: 1)
-        self.otherEventStackView.addBottomBorderWithColor(color: UIColor.white, width: 1)
-        self.focusView.addBottomBorderWithColor(color: UIColor.white, width: 1)
-        
-        self.navigationItem.title = ""
+//        self.userInfoView.addBottomBorderWithColor(color: UIColor.white, width: 0.3)
+//        self.otherPlaceStackView.addBottomBorderWithColor(color: UIColor.white, width: 0.3)
+//        self.otherEventStackView.addBottomBorderWithColor(color: UIColor.white, width: 0.3)
+//        self.focusView.addBottomBorderWithColor(color: UIColor.white, width: 0.3)
+//        self.focusView.addTopBorderWithColor(color: UIColor.white, width: 0.3)
+//        self.navigationItem.title = ""
         
         self.createEventButton.roundCorners(radius: 6)
         
         if otherUser{
-            self.editButton.isHidden = true
+//            self.editButton.isHidden = true
             self.createEventButton.isHidden = true
 //            self.emptyPinButton.isHidden = true
 //            self.updatePinButton.isHidden = true
             self.createEventButton.isHidden = true
-            self.settingButton.isHidden = true
+//            self.settingButton.isHidden = true
         }
         
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
@@ -341,6 +354,11 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         let pinDetail = UITapGestureRecognizer(target: self, action: #selector(self.showPin))
 //        pinView.isUserInteractionEnabled = true
 //        pinView.addGestureRecognizer(pinDetail)
+        
+//        let ogEventCollectionViewHeight = self.eventsCollectionViewHeight.constant
+//        self.eventsCollectionViewHeight.constant = self.eventsCollectionView.contentSize.height
+        self.eventView.bounds.size.height += (self.eventsCollectionView.contentSize.height)
+//        self.mainViewHeight.constant += (self.eventsCollectionView.contentSize.height)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -354,20 +372,24 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.suggestion.count > 3 ? 3 : self.suggestion.count
+        return 9
+//        return self.suggestion.count > 3 ? 3 : self.suggestion.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventsCollectionCell", for: indexPath) as!UserProfileCollectionViewCell
         
-        let suggestion = self.suggestion[indexPath.row]
+//        let suggestion = self.suggestion[indexPath.row]
         //        eventCell.userEventsLabel.text = suggestion.title
         
         // Placeholder image
         let placeholderImage = UIImage(named: "empty_event")
         
-        eventCell.userEventsLabel.text = suggestion.title
+        eventCell.userEventsLabel.text = "Event \((indexPath.row+1))"
         
+//        eventCell.userEventsLabel.text = suggestion.title
+        
+/*
         let reference = Constants.storage.event.child("\(suggestion.id!).jpg")
         
         reference.downloadURL(completion: { (url, error) in
@@ -380,9 +402,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             eventCell.userEventsImage.sd_setImage(with: url, placeholderImage: placeholderImage)
             eventCell.userEventsImage.setShowActivityIndicator(true)
             eventCell.userEventsImage.setIndicatorStyle(.gray)
-            
         })
-        
+*/
         return eventCell
     }
     
@@ -428,8 +449,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 //                SAMPLE description text
                 //self.descriptionText.text = description
                 self.fullNameLabel.text = fullname
-                self.userNameLabel.text = username_str
-                self.descriptionText.text = description_str
+//                self.userNameLabel.text = username_str
+                
+                self.descriptionText.text = "ctetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab"
+//                self.descriptionText.text = description_str
                 
                 self.navBarItem.title = username_str
                 
@@ -473,30 +496,39 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         }
                         
                         for (_, interest) in (final_interest.enumerated()){
-                            let textLabel = UILabel()
+//                            let textLabel = UILabel()
                             
-                            textLabel.textColor = .white
-                            textLabel.text  = interest
-                            textLabel.textAlignment = .left
+//                            textLabel.textColor = .white
+//                            textLabel.text  = interest
+//                            textLabel.textAlignment = .left
                             
                             if interest.characters.count > 0{
                                 if self.interestStackView.arrangedSubviews.count < 3{
-                                    self.interestStackView.addArrangedSubview(textLabel)
+                                    let interestView = InterestStackViewLabel()
+                                    interestView.interestLabel.text = "Interest"
+                                    let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: (interestView.frame.size.height+20)))
+                                    
+                                    interestSubView.addSubview(interestView)
+//                                    self.interestStackView.addArrangedSubview(textLabel)
+                                    self.interestStackView.addArrangedSubview(interestSubView)
+                                    self.interestStackView.bounds.size.height += interestSubView.frame.size.height
+//                                    self.interestStackHeight.constant += interestSubView.frame.size.height
+//                                    self.mainViewHeight.constant += interestSubView.frame.size.height
                                     self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                                 }
                             }
                         }
                         
                         if final_interest.count > 3{
-                            self.moreFocusButton.setTitle("More", for: .normal)
+//                            self.moreFocusButton.setTitle("More", for: .normal)
                         }
                         else{
-                            self.moreFocusButton.isHidden = true
+//                            self.moreFocusButton.isHidden = true
                         }
                         
-                        //                        let count = self.interestStackView.arrangedSubviews.count
-                        //                        self.interestStackHeight.constant = CGFloat(25 * count)
-                        //                        self.interestViewHeight.constant = CGFloat(25 * count + 113)
+//                        let count = self.interestStackView.arrangedSubviews.count
+//                        self.interestStackHeight.constant = CGFloat(25 * count)
+//                        self.interestViewHeight.constant = CGFloat(25 * count + 113)
                     }
                 }
                 
@@ -533,25 +565,35 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             }
             
             for (_, interest) in (interests.enumerated()){
-                let textLabel = UILabel()
                 
-                textLabel.textColor = .white
-                textLabel.text  = interest
-                textLabel.textAlignment = .left
+//                let textLabel = UILabel()
+//                
+//                textLabel.textColor = .white
+//                textLabel.text  = interest
+//                textLabel.textAlignment = .left
                 
                 if interest.characters.count > 0{
                     if interestStackView.arrangedSubviews.count < 3{
-                        interestStackView.addArrangedSubview(textLabel)
+//                        interestStackView.addArrangedSubview(textLabel)
+                        let interestView = InterestStackViewLabel()
+                        interestView.interestLabel.text = "Interest"
+                        let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: (interestView.frame.size.height + 20)))
+                        
+                        interestSubView.addSubview(interestView)
+                        self.interestStackView.addArrangedSubview(interestSubView)
+                        self.interestStackView.bounds.size.height += interestSubView.frame.size.height
+//                        self.interestStackHeight.constant += interestSubView.frame.size.height
+//                        self.mainViewHeight.constant += interestSubView.frame.size.height
                         interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                     }
                 }
             }
             
-            print(interestStackView.arrangedSubviews.count)
+//            print(interestStackView.arrangedSubviews.count)
             
-            //            let count = interestStackView.arrangedSubviews.count
-            //            interestStackHeight.constant = CGFloat(25 * count)
-            //            interestViewHeight.constant = CGFloat(25 * count + 113)
+//            let count = interestStackView.arrangedSubviews.count
+//            interestStackHeight.constant = CGFloat(25 * count)
+//            interestViewHeight.constant = CGFloat(25 * count + 113)
         }
         
     }
@@ -565,9 +607,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         let newSize = self.descriptionText.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         var newFrame = self.descriptionText.frame
         newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
-        self.descriptionText.frame = newFrame;
-        
-        
+        self.descriptionText.frame = newFrame
+        self.recentPostTableViewHeight.constant = self.recentPostTableView.contentSize.height
     }
     
     override func didReceiveMemoryWarning() {
@@ -629,23 +670,32 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 }
             }
             
-            if self.suggestion.count > 0{
-                if self.suggestion.count > 3{
-                    self.moreEventsButton.isHidden = false
-                }
-                else{
-                    self.moreEventsButton.isHidden = true
-                }
-                
-                self.eventsCollectionView.reloadData()
-                
-                self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
-                self.createEventButton.alpha = 0
+            if self.suggestion.count > 3{
+                self.moreEventsButton.isHidden = false
             }
             else{
-                self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
-                self.createEventButton.alpha = 1
+                self.moreEventsButton.isHidden = true
             }
+            
+            self.eventsCollectionView.reloadData()
+            
+//            if self.suggestion.count > 0{
+//                if self.suggestion.count > 3{
+//                    self.moreEventsButton.isHidden = false
+//                }
+//                else{
+//                    self.moreEventsButton.isHidden = true
+//                }
+//                
+//                self.eventsCollectionView.reloadData()
+//                
+//                self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
+//                self.createEventButton.alpha = 0
+//            }
+//            else{
+//                self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
+//                self.createEventButton.alpha = 1
+//            }
             
         })
         
@@ -674,23 +724,36 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                             
                             self.suggestion.append(event!)
                             if self.suggestion.count == count{
-                                if self.suggestion.count > 0{
-                                    if self.suggestion.count > 3{
-                                        self.moreEventsButton.isHidden = false
-                                    }
-                                    else{
-                                        self.moreEventsButton.isHidden = true
-                                    }
-                                    
-                                    self.eventsCollectionView.reloadData()
-                                    
-                                    self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
-                                    self.createEventButton.alpha = 0
+                                
+                                if self.suggestion.count > 3{
+                                    self.moreEventsButton.isHidden = false
                                 }
                                 else{
-                                    self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
-                                    self.createEventButton.alpha = 1
+                                    self.moreEventsButton.isHidden = true
                                 }
+                                
+                                self.eventsCollectionView.reloadData()
+                                
+                                self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
+                                self.createEventButton.alpha = 0
+                                
+//                                if self.suggestion.count > 0{
+//                                    if self.suggestion.count > 3{
+//                                        self.moreEventsButton.isHidden = false
+//                                    }
+//                                    else{
+//                                        self.moreEventsButton.isHidden = true
+//                                    }
+//                                    
+//                                    self.eventsCollectionView.reloadData()
+//                                    
+//                                    self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
+//                                    self.createEventButton.alpha = 0
+//                                }
+//                                else{
+//                                    self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
+//                                    self.createEventButton.alpha = 1
+//                                }
                             }
                             
                         }
@@ -713,13 +776,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //        self.pinImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
 //        self.pinImage.roundedImage()
         
-        self.editButton.layer.borderWidth = 1
-        self.editButton.layer.borderColor = UIColor.white.cgColor
-        self.editButton.roundCorners(radius: 5.0)
-        
-        self.moreFocusButton.layer.borderWidth = 1
-        self.moreFocusButton.layer.borderColor = UIColor.white.cgColor
-        self.moreFocusButton.roundCorners(radius: 5.0)
+//        self.editButton.layer.borderWidth = 1
+//        self.editButton.layer.borderColor = UIColor.white.cgColor
+//        self.editButton.roundCorners(radius: 5.0)
         
         self.moreEventsButton.layer.borderWidth = 1
         self.moreEventsButton.layer.borderColor = UIColor.white.cgColor
@@ -741,26 +800,39 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     //    MARK: TableView Delegate and Data Source Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 2
+        if tableView.tag == 0 || tableView.tag == 1{
+            return 3
+        }else{
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 0{
             let placeCell = tableView.dequeueReusableCell(withIdentifier: "placesCell", for: indexPath) as! PlacesOtherWillLikeTableViewCell
             return placeCell
-        }else{
+        }else if tableView.tag == 1{
             let eventCell = tableView.dequeueReusableCell(withIdentifier: "eventsCell", for: indexPath) as! EventOtherWillLikeTableViewCell
             return eventCell
+        }else{
+            let recentPostCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell", for: indexPath) as! FeedOneTableViewCell
+
+            return recentPostCell
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var rowHeight = CGFloat()
         if tableView.tag == 0{
-            return 90
-        }else{
-            return 90
+            rowHeight = 100
+        }else if tableView.tag == 1{
+            rowHeight = 100
+        }else if tableView.tag == 2{
+            let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
+            rowHeight = myCell.bounds.size.height;
         }
+        
+        return rowHeight
     }
     
 }

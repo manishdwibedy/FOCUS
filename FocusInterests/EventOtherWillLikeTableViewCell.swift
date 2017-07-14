@@ -28,10 +28,9 @@ class EventOtherWillLikeTableViewCell: UITableViewCell {
         self.inviteButton.roundCorners(radius: 5.0)
         self.timeLabel.text = "17:00 - 21:00"
         self.distanceLabel.text = "2.8 mi"
-        self.ratingLabel.text = "4.7 (134 ratings)"
         self.eventNameLabel.text = "Event Name"
         addGreenDot(label: self.interestLabel, content: "Interest")
-        self.eventAddress.text = "1234 Main St., Los Angeles, CA 91101"
+        self.eventAddress.text = "1234 Main St."
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

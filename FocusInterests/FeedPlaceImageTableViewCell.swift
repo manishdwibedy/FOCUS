@@ -17,6 +17,7 @@ class FeedPlaceImageTableViewCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UIButton!
     @IBOutlet weak var usernameImage: UIImageView!
     @IBOutlet weak var imagePlace: UIImageView!
+    @IBOutlet weak var cellContentView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,6 +35,24 @@ class FeedPlaceImageTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.cellContentView.setNeedsLayout()
+        
+        self.cellContentView.layoutIfNeeded()
+        
+        let path = UIBezierPath(roundedRect: self.cellContentView.bounds, cornerRadius: 10)
+        
+        let mask = CAShapeLayer()
+        let shortbackgroundMask = CAShapeLayer()
+        
+        mask.path = path.cgPath
+        
+        self.cellContentView.layer.mask = mask
+        
     }
     
 }
