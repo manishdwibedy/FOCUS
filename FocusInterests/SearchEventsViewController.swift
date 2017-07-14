@@ -16,7 +16,7 @@ import Crashlytics
 
 class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
     
-    @IBOutlet weak var currentLocationSearchBar: UISearchBar!
+    @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var navTitle: UINavigationItem!
@@ -62,13 +62,15 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
 //        MARK: Event and Location Search Bars
         self.searchBar.delegate = self
-        self.currentLocationSearchBar.delegate = self
         
         // search bar attributes
         let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!]
         let cancelButtonsInSearchBar: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!]
         
         
+        locationTextField.attributedPlaceholder = NSAttributedString(string: "Current Location", attributes: [NSForegroundColorAttributeName: UIColor.white])
+        
+    
 //        MARK: Event Search Bar
         self.searchBar.isTranslucent = true
         self.searchBar.backgroundImage = UIImage()
@@ -99,35 +101,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             clearButton.tintColor = UIColor.white
         }
         
-//        MARK: Current Location Search Bar
-        self.currentLocationSearchBar.isTranslucent = true
-        self.currentLocationSearchBar.backgroundImage = UIImage()
-        self.currentLocationSearchBar.tintColor = UIColor.white
-        self.currentLocationSearchBar.barTintColor = UIColor.white
-        
-        
-        self.currentLocationSearchBar.layer.cornerRadius = 6
-        self.currentLocationSearchBar.clipsToBounds = true
-        self.currentLocationSearchBar.layer.borderWidth = 0
-        self.currentLocationSearchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
-        
-        
-        if let currentLocationTextField = self.currentLocationSearchBar.value(forKey: "_searchField") as? UITextField{
-            let currentLocationAttributePlaceHolder: NSAttributedString = NSAttributedString(string: "Current Location", attributes: placeholderAttributes)
-            
-            currentLocationTextField.attributedPlaceholder = currentLocationAttributePlaceHolder
-            currentLocationTextField.textColor = UIColor.white
-            currentLocationTextField.backgroundColor = Constants.color.darkGray
-            
-            let currentLocationIcon = currentLocationTextField.leftView as! UIImageView
-            currentLocationIcon.image = UIImage(named: "self_location")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            currentLocationIcon.tintColor = UIColor.white
-            currentLocationTextField.clearButtonMode = .whileEditing
-            
-            let currentLocationClearButton = currentLocationTextField.value(forKey: "clearButton") as! UIButton
-            currentLocationClearButton.setImage(currentLocationClearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
-            currentLocationClearButton.tintColor = UIColor.white
-        }
         
         UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonsInSearchBar, for: .normal)
         
@@ -460,8 +433,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.tag == 0{
-            self.currentLocationSearchBar.endEditing(true)
-            self.currentLocationSearchBar.setShowsCancelButton(false, animated: true)
             self.searchBar.setShowsCancelButton(true, animated: true)
             if(searchText.characters.count > 0){
                 self.filtered.removeAll()
@@ -527,20 +498,17 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             print("you have clicked Location Search Bar")
             self.searchBar.endEditing(true)
             self.searchBar.setShowsCancelButton(false, animated: true)
-            self.currentLocationSearchBar.setShowsCancelButton(true, animated: true)
+            
         }
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if searchBar.tag == 0 {
-            self.currentLocationSearchBar.setShowsCancelButton(false, animated: true)
-            self.currentLocationSearchBar.endEditing(true)
             self.searchBar.setShowsCancelButton(true, animated: true)
         }else if searchBar.tag == 1{
             print("you have Editted Location Search Bar")
             self.searchBar.setShowsCancelButton(false, animated: true)
             self.searchBar.endEditing(true)
-            self.currentLocationSearchBar.setShowsCancelButton(true, animated: true)
         }
     }
     
@@ -551,11 +519,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             self.searchBar.text = ""
             self.searchBar.setShowsCancelButton(false, animated: true)
             self.searchBar.endEditing(true)
-        }else if searchBar.tag == 1{
-            print("you have canceled Location Search Bar")
-            self.currentLocationSearchBar.text = ""
-            self.currentLocationSearchBar.setShowsCancelButton(false, animated: true)
-            self.currentLocationSearchBar.endEditing(true)
         }
     }
     
@@ -564,10 +527,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             self.searchBar.text = ""
             self.searchBar.setShowsCancelButton(false, animated: true)
             self.searchBar.endEditing(true)
-        }else if searchBar.tag == 1{
-            self.currentLocationSearchBar.text = ""
-            self.currentLocationSearchBar.setShowsCancelButton(false, animated: true)
-            self.currentLocationSearchBar.endEditing(true)
         }
     }
     

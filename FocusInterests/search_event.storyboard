@@ -36,11 +36,19 @@
                                     <navigationItem title="Events" id="31z-0O-JgZ"/>
                                 </items>
                             </navigationBar>
+                            <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8z-95-lev">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNT-Vt-zjc">
-                                <rect key="frame" x="245" y="158" width="120" height="30"/>
+                                <rect key="frame" x="245" y="153" width="120" height="30"/>
                                 <color key="backgroundColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="9yA-fQ-l8O"/>
+                                    <constraint firstAttribute="height" constant="30" id="hPG-MB-dR9"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="wyZ-5R-XkW"/>
                                 </constraints>
                                 <state key="normal" title="Create Event">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,14 +58,8 @@
                                     <action selector="showCreateEvent:" destination="xPx-tM-EtF" eventType="touchUpInside" id="f0n-Xj-yY6"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8z-95-lev">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-AA-SPe">
-                                <rect key="frame" x="5" y="196" width="365" height="414"/>
+                                <rect key="frame" x="5" y="191" width="365" height="419"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="xPx-tM-EtF" id="ZOg-gp-Nqw"/>
@@ -85,35 +87,41 @@
                                     <constraint firstItem="Wvl-if-0wf" firstAttribute="centerX" secondItem="dxR-DK-a5n" secondAttribute="centerX" id="ogi-Ph-Cl3"/>
                                 </constraints>
                             </view>
-                            <searchBar tag="1" contentMode="redraw" searchBarStyle="prominent" placeholder="change location" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0f-Ob-Hsc">
-                                <rect key="frame" x="0.0" y="108" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.36470588235294116" alpha="0.85862585616438358" colorSpace="calibratedRGB"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zof-1G-axg">
+                                <rect key="frame" x="9" y="108" width="357" height="30"/>
+                                <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="top" secondItem="eF4-Ev-ETy" secondAttribute="top" id="4el-KV-LTf"/>
                             <constraint firstAttribute="trailing" secondItem="z8z-95-lev" secondAttribute="trailing" id="5sX-mj-VFX"/>
                             <constraint firstItem="z8z-95-lev" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="5wg-Wn-KXm"/>
+                            <constraint firstItem="ZNT-Vt-zjc" firstAttribute="top" secondItem="zof-1G-axg" secondAttribute="bottom" constant="15" id="7pF-tk-vUe"/>
                             <constraint firstAttribute="trailing" secondItem="dxR-DK-a5n" secondAttribute="trailing" constant="5" id="AwV-zF-DVf"/>
+                            <constraint firstItem="zof-1G-axg" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leadingMargin" constant="-7" id="E8z-8j-26A"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zof-1G-axg" secondAttribute="trailing" constant="-7" id="Ew7-9C-lLR"/>
                             <constraint firstItem="z8z-95-lev" firstAttribute="top" secondItem="Uw4-jh-WA0" secondAttribute="bottom" id="GHF-Qe-xvC"/>
                             <constraint firstItem="dxR-DK-a5n" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" constant="5" id="HS5-iX-hXq"/>
+                            <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="rHT-AA-SPe" secondAttribute="bottom" constant="8" id="Kuw-DB-FOZ"/>
                             <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="rHT-AA-SPe" secondAttribute="bottom" constant="8" symbolic="YES" id="M02-sk-fFU"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="M3G-iJ-BqP"/>
                             <constraint firstItem="dxR-DK-a5n" firstAttribute="centerX" secondItem="eF4-Ev-ETy" secondAttribute="centerX" id="O7K-Sh-TFC"/>
-                            <constraint firstItem="S0f-Ob-Hsc" firstAttribute="top" secondItem="z8z-95-lev" secondAttribute="bottom" id="QNQ-GC-qEk"/>
+                            <constraint firstItem="rHT-AA-SPe" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="8" id="VxX-LZ-oKs"/>
                             <constraint firstItem="rHT-AA-SPe" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leadingMargin" constant="-11" id="XWg-lL-6ar"/>
+                            <constraint firstAttribute="trailing" secondItem="rHT-AA-SPe" secondAttribute="trailing" constant="5" id="ZTr-IQ-Hpx"/>
+                            <constraint firstAttribute="trailing" secondItem="ZNT-Vt-zjc" secondAttribute="trailing" constant="10" id="ZoX-z9-PH4"/>
                             <constraint firstAttribute="trailing" secondItem="Uw4-jh-WA0" secondAttribute="trailing" id="bab-xt-oJk"/>
-                            <constraint firstItem="ZNT-Vt-zjc" firstAttribute="top" secondItem="S0f-Ob-Hsc" secondAttribute="bottom" constant="6" id="bjb-aw-QEO"/>
                             <constraint firstAttribute="trailing" secondItem="ZNT-Vt-zjc" secondAttribute="trailing" constant="10" id="fUi-cJ-94d"/>
                             <constraint firstItem="rHT-AA-SPe" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="8" id="iki-T5-PU9"/>
-                            <constraint firstAttribute="trailing" secondItem="S0f-Ob-Hsc" secondAttribute="trailing" id="jrC-RU-V5Q"/>
-                            <constraint firstItem="S0f-Ob-Hsc" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="jyU-Cm-pvb"/>
+                            <constraint firstItem="zof-1G-axg" firstAttribute="top" secondItem="z8z-95-lev" secondAttribute="bottom" id="lI3-mE-hM0"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="centerX" secondItem="z8z-95-lev" secondAttribute="centerX" id="mmY-Ya-bw9"/>
                             <constraint firstItem="z8z-95-lev" firstAttribute="centerX" secondItem="rHT-AA-SPe" secondAttribute="centerX" id="tPI-No-es8"/>
                             <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="dxR-DK-a5n" secondAttribute="bottom" constant="-129" id="wlb-er-8J2"/>
+                            <constraint firstItem="rHT-AA-SPe" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" constant="5" id="yWC-Rn-Oq2"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="EVENTS" id="yhf-yt-eZ8">
@@ -122,9 +130,9 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="createEventButton" destination="ZNT-Vt-zjc" id="cy0-BN-nMr"/>
-                        <outlet property="currentLocationSearchBar" destination="S0f-Ob-Hsc" id="Cp4-xW-8SY"/>
                         <outlet property="invitePopupView" destination="dxR-DK-a5n" id="I7L-o0-cUw"/>
                         <outlet property="invitePopupViewBottomConstraint" destination="wlb-er-8J2" id="htD-M9-RKJ"/>
+                        <outlet property="locationTextField" destination="zof-1G-axg" id="BZ2-fp-oKB"/>
                         <outlet property="navBar" destination="Uw4-jh-WA0" id="n6Q-sa-R7U"/>
                         <outlet property="navTitle" destination="31z-0O-JgZ" id="s98-9U-3hs"/>
                         <outlet property="searchBar" destination="z8z-95-lev" id="42p-1d-s8M"/>
