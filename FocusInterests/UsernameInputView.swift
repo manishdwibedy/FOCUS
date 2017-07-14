@@ -86,6 +86,25 @@ class UsernameInputView : UIView, UITextFieldDelegate {
         return false
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let characterSet = CharacterSet.letters
+        var backspacePressed = false
+        
+        if (range.length == 1 && string.isEmpty) {
+            backspacePressed = true
+        }
+        
+        let uppercase = string.characters.filter{ $0.isUppercase }
+        
+        print("\(uppercase) | Count = \(uppercase.count)")
+        
+        if (string.rangeOfCharacter(from: characterSet) != nil || string == "." || string == "_" || backspacePressed) && uppercase.count == 0 {
+            return true
+        }
+        return false
+    }
+    
     func dismissKeyboard() {
         self.endEditing(true)
     }

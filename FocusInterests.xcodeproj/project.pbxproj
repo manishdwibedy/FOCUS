@@ -153,6 +153,8 @@
 		611734EF1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */; };
 		611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */; };
 		61603B941EFD0ABA0063F090 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61603B931EFD0ABA0063F090 /* UIFont+Extensions.swift */; };
+		617C33BD1F194B7F003EEADF /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617C33BC1F194B7F003EEADF /* String+Extensions.swift */; };
+		617C33BF1F194B94003EEADF /* Character+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617C33BE1F194B94003EEADF /* Character+Extensions.swift */; };
 		61C6096F1ED572AC004098BA /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C6096E1ED572AC004098BA /* EditProfileViewController.swift */; };
 		61ED203C1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61ED203B1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard */; };
 		61ED203E1EDC236100247DC5 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */; };
@@ -513,6 +515,8 @@
 		611734ED1EE04106003E5D08 /* NotificationFeedCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFeedCellTableViewCell.swift; sourceTree = "<group>"; };
 		611734EE1EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationFeedCellTableViewCell.xib; sourceTree = "<group>"; };
 		61603B931EFD0ABA0063F090 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		617C33BC1F194B7F003EEADF /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		617C33BE1F194B94003EEADF /* Character+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Character+Extensions.swift"; sourceTree = "<group>"; };
 		61C6096E1ED572AC004098BA /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		61ED203B1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notif_Invite_Feed.storyboard; sourceTree = "<group>"; };
 		61ED203D1EDC236100247DC5 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
@@ -1119,6 +1123,8 @@
 				61603B931EFD0ABA0063F090 /* UIFont+Extensions.swift */,
 				5B33C0581EE0B28A007A8188 /* Double+Extensions.swift */,
 				5BF0293F1EE5F7F300D54FAF /* UIViewController+Extensions.swift */,
+				617C33BC1F194B7F003EEADF /* String+Extensions.swift */,
+				617C33BE1F194B94003EEADF /* Character+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1987,6 +1993,8 @@
 				D25AACCD1E7DB26F005DE49F /* UserProfile1ViewController+UIImagePickerC.swift in Sources */,
 				5B4303A51ED55F6400B63D56 /* SearchEventTableViewCell.swift in Sources */,
 				5B7BB1E61ED51E9E001E60FF /* SearchEventsViewController.swift in Sources */,
+				617C33BF1F194B94003EEADF /* Character+Extensions.swift in Sources */,
+				617C33BD1F194B7F003EEADF /* String+Extensions.swift in Sources */,
 				5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */,
 				EB8D349E1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift in Sources */,
 				5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */,
