@@ -958,7 +958,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
 //        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
-        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+        
+        let VC:UIViewController = UIStoryboard(name: "PushNotifications", bundle: nil).instantiateViewController(withIdentifier: "PushNotifications") as! PushNotificationsViewController
         
         dropfromTop(view: self.view)
         
@@ -1241,6 +1243,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.present(vc, animated: true, completion: nil)
 
     }
+    
+    @IBAction func unwindToMapViewController(segue:UIStoryboardSegue) { }
+    
 }
 
 extension MapViewController: UIWebViewDelegate {
