@@ -48,7 +48,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="w9e-02-cuC" firstAttribute="centerY" secondItem="rEz-yT-USh" secondAttribute="centerY" id="2Gf-QJ-r9W"/>
                                     <constraint firstAttribute="height" constant="27" id="7Jy-mZ-fND"/>
@@ -189,9 +189,10 @@
                     <constraint firstAttribute="trailingMargin" secondItem="G6B-rB-kYp" secondAttribute="trailing" constant="8" id="xjo-Dd-rvk"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="addressLabel" destination="WOf-fY-i6h" id="A4t-eT-Fgu"/>
+                <outlet property="cellContentView" destination="H2p-sc-9uM" id="I6t-LN-6FF"/>
                 <outlet property="distanceLabel" destination="w9e-02-cuC" id="y7f-UE-XXg"/>
                 <outlet property="imagePlace" destination="Isi-qA-oaa" id="jtW-h3-m3q"/>
                 <outlet property="interestLabel" destination="F1l-E9-r2y" id="BvM-c4-92r"/>

@@ -250,6 +250,10 @@
 		EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */; };
 		EB819E611F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB819E5F1F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.swift */; };
 		EB819E621F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB819E601F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.xib */; };
+		EB819E641F18004900F5AA94 /* InterestStackViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB819E631F18004900F5AA94 /* InterestStackViewLabel.swift */; };
+		EB819E661F18006300F5AA94 /* InterestStackViewLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB819E651F18006300F5AA94 /* InterestStackViewLabel.xib */; };
+		EB819E691F180D2900F5AA94 /* RecentPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB819E671F180D2900F5AA94 /* RecentPostTableViewCell.swift */; };
+		EB819E6A1F180D2900F5AA94 /* RecentPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB819E681F180D2900F5AA94 /* RecentPostTableViewCell.xib */; };
 		EB8D349B1F16C70F006EE316 /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8D349A1F16C70F006EE316 /* OtherUserProfileViewController.swift */; };
 		EB8D349E1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8D349C1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift */; };
 		EB8D349F1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */; };
@@ -615,6 +619,10 @@
 		EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewsTableViewCell.xib; sourceTree = "<group>"; };
 		EB819E5F1F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesOtherWillLikeTableViewCell.swift; sourceTree = "<group>"; };
 		EB819E601F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlacesOtherWillLikeTableViewCell.xib; sourceTree = "<group>"; };
+		EB819E631F18004900F5AA94 /* InterestStackViewLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestStackViewLabel.swift; sourceTree = "<group>"; };
+		EB819E651F18006300F5AA94 /* InterestStackViewLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestStackViewLabel.xib; sourceTree = "<group>"; };
+		EB819E671F180D2900F5AA94 /* RecentPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentPostTableViewCell.swift; sourceTree = "<group>"; };
+		EB819E681F180D2900F5AA94 /* RecentPostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentPostTableViewCell.xib; sourceTree = "<group>"; };
 		EB8D349A1F16C70F006EE316 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		EB8D349C1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventOtherWillLikeTableViewCell.swift; sourceTree = "<group>"; };
 		EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOtherWillLikeTableViewCell.xib; sourceTree = "<group>"; };
@@ -1339,6 +1347,10 @@
 				EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */,
 				EB819E5F1F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.swift */,
 				EB819E601F16EFDE00F5AA94 /* PlacesOtherWillLikeTableViewCell.xib */,
+				EB819E631F18004900F5AA94 /* InterestStackViewLabel.swift */,
+				EB819E651F18006300F5AA94 /* InterestStackViewLabel.xib */,
+				EB819E671F180D2900F5AA94 /* RecentPostTableViewCell.swift */,
+				EB819E681F180D2900F5AA94 /* RecentPostTableViewCell.xib */,
 			);
 			name = UserProfile;
 			sourceTree = "<group>";
@@ -1576,6 +1588,7 @@
 				FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */,
 				EB5891C81EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib in Resources */,
 				5BAB87A41EC961AB0064E5EC /* UserProfile.storyboard in Resources */,
+				EB819E6A1F180D2900F5AA94 /* RecentPostTableViewCell.xib in Resources */,
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
@@ -1628,6 +1641,7 @@
 				FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */,
 				5B448E651EE94BF900873F79 /* Invites.storyboard in Resources */,
 				D2FDB69F1E89FF2B00D62DC2 /* SocialCrowdCell.xib in Resources */,
+				EB819E661F18006300F5AA94 /* InterestStackViewLabel.xib in Resources */,
 				5B5906481EC576CA00466AAC /* night_style.json in Resources */,
 				EBB6B33B1F0F145B000C8133 /* FeedPlaceTableViewCell.xib in Resources */,
 				611734F01EE04106003E5D08 /* NotificationFeedCellTableViewCell.xib in Resources */,
@@ -1937,6 +1951,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB819E691F180D2900F5AA94 /* RecentPostTableViewCell.swift in Sources */,
 				5B634C851ED19A6900EBCC29 /* GMUPoint.m in Sources */,
 				5B634C841ED19A6300EBCC29 /* GMUPoint.h in Sources */,
 				D2C785521E9337B700BFF0E3 /* InterestListViewController.swift in Sources */,
@@ -2024,6 +2039,7 @@
 				5B6AFA661ED1906900A82104 /* GMUWrappingDictionaryKey.m in Sources */,
 				5BFA009F1EDA8BC200F1ACBF /* EventLocation.swift in Sources */,
 				5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */,
+				EB819E641F18004900F5AA94 /* InterestStackViewLabel.swift in Sources */,
 				5B634C871ED2584F00EBCC29 /* Share.swift in Sources */,
 				FF69ABFA1ED649120044BE51 /* invitePlaceCV.swift in Sources */,
 				D2B9B0401E5A047C0002F1B1 /* AppDelegate.swift in Sources */,
