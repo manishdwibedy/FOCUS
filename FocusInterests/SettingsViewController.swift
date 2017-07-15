@@ -107,24 +107,27 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                     swCell?.cellSwitch.setOn(false, animated: true)
                 }
             case 3:
+                let pushNotificationViewController = UIStoryboard(name: "PushNotifications", bundle: nil).instantiateViewController(withIdentifier: "PushNotifications") as? PushNotificationsViewController
+                self.present(pushNotificationViewController!, animated: true, completion: nil)
+            case 4:
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
                 VC?.showTutorial = true
                 
                 self.present(VC!, animated: true, completion: nil)
-            case 4:
+            case 5:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Feedback") as? FeedbackViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 5:
+            case 6:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "License") as? LicenseViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 6:
+            case 7:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Terms") as? TermsViewController
                 self.present(VC!, animated: true, completion: nil)
-            case 7:
+            case 8:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Privacy") as? PrivacyViewController
                 self.present(VC!, animated: true, completion: nil)

@@ -10,14 +10,20 @@ import UIKit
 
 class PushNotificationsViewController: UIViewController{
 
+    @IBOutlet weak var navBar: UINavigationBar!
 //    @IBOutlet weak var pushNotificationsTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.pushNotificationsTableView.sec
-//        self.pushNotificationsTableView.delegate = self
-//        self.pushNotificationsTableView.dataSource = self
         // Do any additional setup after loading the view.
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        self.navBar.titleTextAttributes = attrs
+        self.navBar.barTintColor = Constants.color.navy
+        self.view.backgroundColor = Constants.color.navy
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +32,9 @@ class PushNotificationsViewController: UIViewController{
     }
     
     
+    @IBAction func backButtonPushed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     /*
     // MARK: - Navigation

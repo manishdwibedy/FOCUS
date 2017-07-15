@@ -261,6 +261,7 @@
 		EB8D349F1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */; };
 		EB9E1B261F19794F00409DC7 /* PushNotifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB9E1B251F19794F00409DC7 /* PushNotifications.storyboard */; };
 		EB9E1B291F197BF200409DC7 /* PushNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9E1B281F197BF200409DC7 /* PushNotificationsViewController.swift */; };
+		EB9E1B2B1F19835700409DC7 /* PushNotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9E1B2A1F19835700409DC7 /* PushNotificationsTableViewController.swift */; };
 		EBB6B32D1F0E1224000C8133 /* FeedOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */; };
 		EBB6B32E1F0E1224000C8133 /* FeedOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */; };
 		EBB6B3311F0EE179000C8133 /* FeedEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B32F1F0EE179000C8133 /* FeedEventTableViewCell.swift */; };
@@ -634,6 +635,7 @@
 		EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOtherWillLikeTableViewCell.xib; sourceTree = "<group>"; };
 		EB9E1B251F19794F00409DC7 /* PushNotifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PushNotifications.storyboard; sourceTree = "<group>"; };
 		EB9E1B281F197BF200409DC7 /* PushNotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsViewController.swift; sourceTree = "<group>"; };
+		EB9E1B2A1F19835700409DC7 /* PushNotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsTableViewController.swift; sourceTree = "<group>"; };
 		EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedOneTableViewCell.swift; sourceTree = "<group>"; };
 		EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedOneTableViewCell.xib; sourceTree = "<group>"; };
 		EBB6B32F1F0EE179000C8133 /* FeedEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -1371,6 +1373,7 @@
 			isa = PBXGroup;
 			children = (
 				EB9E1B281F197BF200409DC7 /* PushNotificationsViewController.swift */,
+				EB9E1B2A1F19835700409DC7 /* PushNotificationsTableViewController.swift */,
 			);
 			name = "Push Notifications";
 			sourceTree = "<group>";
@@ -2144,6 +2147,7 @@
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
 				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,
+				EB9E1B2B1F19835700409DC7 /* PushNotificationsTableViewController.swift in Sources */,
 				FFEFA1C11EE7864A000623CB /* PlaceAllPinsViewController.swift in Sources */,
 				5B448E581EE72C1B00873F79 /* FollowersTableViewCell.swift in Sources */,
 				D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */,
