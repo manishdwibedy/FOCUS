@@ -39,6 +39,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var place: Place?
     var event: Event?
 
+    var dayText = ""
+    var monthText = ""
+    
     var username = ""
     var selected = [InviteUser:Bool]()
     
@@ -230,19 +233,50 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //    MARK: PickerView delegate methods
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return daysOfWeek[row]
+        let month = Calendar.current.component(.month, from: Date())
+        var day = Calendar.current.component(.day, from: Date())
+        
+        if component == 0{
+            let monthName = DateFormatter().monthSymbols[month-1]
+            self.monthText = monthName
+            return monthName
+            
+        }else{
+            
+            day += row
+            self.dayText = "\(day)"
+            return "\(day)"
+        }
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return daysOfWeek.count
+        var rowAmt = Int()
+        let month = Calendar.current.component(.month, from: Date())
+        let day = Calendar.current.component(.day, from: Date())
+        print(day)
+        if component == 0 {
+            if month % 2 != 0{
+                if day < 25 {
+                    rowAmt = 1
+                }else{
+                    rowAmt = 2
+                }
+            }
+        }else{
+            rowAmt = 7
+        }
+        return rowAmt
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("day chosen: \(self.daysOfWeek[self.dayPickerView.selectedRow(inComponent: component)])")
+        
+        
         self.dayPickerView.selectRow(row, inComponent: component, animated: true)
     }
     
@@ -253,8 +287,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.doneToolBar.isHidden = true
         self.dayPickerView.isHidden = true
         
-        self.dayButton.setTitle(self.daysOfWeek[self.dayPickerView.selectedRow(inComponent: 0)], for: .normal)
-        self.dayButton.setTitle(self.daysOfWeek[self.dayPickerView.selectedRow(inComponent: 0)], for: .selected)
+        self.dayButton.setTitle("\(self.monthText) \(self.dayText)", for: .normal)
+        self.dayButton.setTitle("\(self.monthText) \(self.dayText)", for: .selected)
     }
     
     func dayButtonPressed(){
