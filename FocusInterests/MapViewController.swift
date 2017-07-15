@@ -967,9 +967,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
 //        self.present(controller, animated: true, completion: nil)
         
-//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
-        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
         dropfromTop(view: self.view)
         

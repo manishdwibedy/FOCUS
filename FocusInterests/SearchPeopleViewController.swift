@@ -351,7 +351,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         let people = filtered[indexPath.row]
         
-        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
         VC.otherUser = true
         VC.userID = people.uuid!
