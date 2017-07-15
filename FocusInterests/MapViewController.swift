@@ -1254,6 +1254,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.present(vc, animated: true, completion: nil)
 
     }
+    
+    @IBAction func unwindToMapViewController(segue:UIStoryboardSegue) { }
+    
 }
 
 extension MapViewController: UIWebViewDelegate {

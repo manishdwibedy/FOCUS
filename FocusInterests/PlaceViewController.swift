@@ -25,6 +25,10 @@ class PlaceViewController: UIViewController {
     var rating = [PlaceRating]()
     var currentLocation: CLLocation?
     
+    
+    @IBOutlet weak var mapButton: UIButton!
+    @IBOutlet weak var dollarLabel: UILabel!
+    @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var pinView: UIView!
@@ -53,6 +57,9 @@ class PlaceViewController: UIViewController {
         // Do any additional setup after loading the view.
 //        ratingBackground.layer.cornerRadius = 5
         self.loadPlace(place: self.place!)
+        
+
+        self.mapButton.setImage(UIImage(image: UIImage(named: "Community Green"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
         
         hideKeyboardWhenTappedAround()
         
@@ -136,6 +143,10 @@ class PlaceViewController: UIViewController {
         }
     }
     
+    @IBAction func goBackToMap(_ sender: Any) {
+        self.performSegue(withIdentifier: "unwindToMapViewControllerWithSegue", sender: self)
+    }
+    
     @IBAction func followButtonPressed(_ sender: UIButton) {
         print("follow button pressed")
         sender.isSelected  = !sender.isSelected;
@@ -174,6 +185,7 @@ class PlaceViewController: UIViewController {
 //            rating.ratings = self.rating
         }
     }
+    
     
     func loadPlace(place: Place){
         navigationBar.topItem?.title = place.name

@@ -20,6 +20,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var reviewsView: UIView!
     @IBOutlet weak var reviewsTextView: UITextView!
     
+    @IBOutlet weak var topViewHeight: NSLayoutConstraint!
     // basic info screen
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
@@ -44,6 +45,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var reviewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
     var suggestedPlaces = [Place]()
@@ -87,6 +90,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.placeVC?.reviewButton.addTarget(self, action: #selector(PinViewController.showReviewBox), for: .touchUpInside)
+        
+        self.placeVC?.followButton.addTarget(self, action: #selector(PinViewController.followPressed), for: .touchUpInside)
         
         let pinPlaceReviewNib = UINib(nibName: "PinPlaceReviewTableViewCell", bundle: nil)
         self.table.register(pinPlaceReviewNib, forCellReuseIdentifier: "pinPlaceReviewCell")
@@ -137,8 +144,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             self.phoneLabel.addGestureRecognizer(tap)
         }
         
+//        self.view
+        self.topViewHeight.constant -= self.reviewsView.frame.size.height
+        self.placeVC?.pinViewHeight.constant -= self.reviewsView.frame.size.height
         reviewsView.alpha = 0
-        categoryTop.constant = 100
+//        categoryTop.constant = 0
         
         button1.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
         button2.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
@@ -157,25 +167,25 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
-            self.followButton.setTitle("Following", for: .selected)
-            self.followButton.setTitle("Follow", for: .normal)
+            self.placeVC?.followButton.setTitle("Following", for: .selected)
+            self.placeVC?.followButton.setTitle("Follow", for: .normal)
             
             if value != nil {
-                self.followButton.isSelected = true
-                self.followButton.layer.borderColor = UIColor.white.cgColor
-                self.followButton.layer.borderWidth = 1
-                self.followButton.layer.shadowOpacity = 1.0
-                self.followButton.layer.masksToBounds = false
-                self.followButton.layer.shadowColor = UIColor.black.cgColor
-                self.followButton.layer.shadowRadius = 5.0
-                self.followButton.backgroundColor = UIColor(red: 21/255.0, green: 41/255.0, blue: 65/255.0, alpha: 1.0)
+                self.placeVC?.followButton.isSelected = true
+                self.placeVC?.followButton.layer.borderColor = UIColor.white.cgColor
+                self.placeVC?.followButton.layer.borderWidth = 1
+//                self.placeVC?.followButton.layer.shadowOpacity = 1.0
+//                self.placeVC?.followButton.layer.masksToBounds = false
+//                self.placeVC?.followButton.layer.shadowColor = UIColor.black.cgColor
+//                self.placeVC?.followButton.layer.shadowRadius = 5.0
+                self.placeVC?.followButton.backgroundColor = UIColor(red: 21/255.0, green: 41/255.0, blue: 65/255.0, alpha: 1.0)
                 self.isFollowing = true
                 
             }else{
-                self.followButton.isSelected = false
-                self.followButton.layer.borderColor = UIColor.clear.cgColor
-                self.followButton.layer.borderWidth = 0
-                self.followButton.backgroundColor = UIColor(red: 122/225.0, green: 201/255.0, blue: 1/255.0, alpha: 1)
+                self.placeVC?.followButton.isSelected = false
+                self.placeVC?.followButton.layer.borderColor = UIColor.clear.cgColor
+                self.placeVC?.followButton.layer.borderWidth = 0
+                self.placeVC?.followButton.backgroundColor = UIColor(red: 122/225.0, green: 201/255.0, blue: 1/255.0, alpha: 1)
                 self.isFollowing = false
                 
             }
@@ -185,7 +195,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let placeViewController = self.placeVC{
+        if let placeViewController = self.placeVC {
             placeViewController.pinViewHeight.constant += ((self.viewHeight.constant+self.topView.frame.size.height+self.peopleAlsoLikedTopConstraint.constant+self.peopleWhoLikeThisTopConstraint.constant+self.pinsTopConstraint.constant+self.peopleAlsoLikedViewBottomConstraint.constant+self.bottomViewBottomConstraint.constant)-self.scrollView.frame.size.height)
         }
     }
@@ -197,53 +207,55 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func loadInfoScreen(place: Place){
         // Do any additional setup after loading the view.
-        
-        placeNameLabel.text = place.name
+        self.placeVC?.placeName.text = place.name
+//        placeNameLabel.text = place.name
         if place.price.characters.count == 0{
-            costLabel.text = "N.A."
+            self.placeVC?.dollarLabel.text = "N.A."
+//            costLabel.text = "N.A."
         }
         else{
-            costLabel.text = place.price
+            self.placeVC?.dollarLabel.text = place.price
+//            costLabel.text = place.price
         }
         
-        distanceLabel.text = "2 mi"
+//        distanceLabel.text = "2 mi"
         
         
-        self.followButton.roundCorners(radius: 10)
-        self.followButton.layer.shadowOpacity = 1.0
-        self.followButton.layer.masksToBounds = false
-        self.followButton.layer.shadowColor = UIColor.black.cgColor
-        self.followButton.layer.shadowRadius = 7.0
+//        self.followButton.roundCorners(radius: 10)
+//        self.followButton.layer.shadowOpacity = 1.0
+//        self.followButton.layer.masksToBounds = false
+//        self.followButton.layer.shadowColor = UIColor.black.cgColor
+//        self.followButton.layer.shadowRadius = 7.0
         
-        self.reviewButton.roundCorners(radius: 10)
-        self.reviewButton.layer.shadowOpacity = 1.0
-        self.reviewButton.layer.masksToBounds = false
-        self.reviewButton.layer.shadowColor = UIColor.black.cgColor
-        self.reviewButton.layer.shadowRadius = 7.0
+//        self.reviewButton.roundCorners(radius: 10)
+//        self.reviewButton.layer.shadowOpacity = 1.0
+//        self.reviewButton.layer.masksToBounds = false
+//        self.reviewButton.layer.shadowColor = UIColor.black.cgColor
+//        self.reviewButton.layer.shadowRadius = 7.0
         
-        moreCategoriesSectionButton.isHidden = true
+//        moreCategoriesSectionButton.isHidden = true
         
         postReviewSeciontButton.layer.borderWidth = 1
         morePinSectionButton.layer.borderWidth = 1
         moreOtherLikesButton.layer.borderWidth = 1
-        moreCategoriesSectionButton.layer.borderWidth = 1
+//        moreCategoriesSectionButton.layer.borderWidth = 1
         
         postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
         morePinSectionButton.layer.borderColor = UIColor.white.cgColor
         moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
-        moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
+//        moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
         
         postReviewSeciontButton.roundCorners(radius: 5)
         morePinSectionButton.roundCorners(radius: 5)
         moreOtherLikesButton.roundCorners(radius: 5)
-        moreCategoriesSectionButton.roundCorners(radius: 5)
+//        moreCategoriesSectionButton.roundCorners(radius: 5)
         
         starRatingView.topCornersRounded(radius: 10)
         writeReviewView.bottomCornersRounded(radius: 10)
         
-        for view in categoriesStackView.subviews{
-            view.removeFromSuperview()
-        }
+//        for view in categoriesStackView.subviews{
+//            view.removeFromSuperview()
+//        }
         
         var focus_category = Set<String>()
         var yelp_category = [String]()
@@ -265,10 +277,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
             if index == 0 {
                 addGreenDot(label: completeLabel, content: category)
+                addGreenDot(label: (self.placeVC?.interestLabel)!, content: category)
             }
             
-            categoriesStackView.addArrangedSubview(completeLabel)
-            categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
+//            categoriesStackView.addArrangedSubview(completeLabel)
+//            categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
         }
         streetAddress.text = place.address[0]
         if place
@@ -290,6 +303,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             viewHeight.constant += CGFloat(25 * hours.count)
             
             for (_, hour) in (hours.enumerated()){
+//                frame: CGRect(x: 0, y: 0, width: self.hoursStackView.frame.size.width, height: 25)
                 let textLabel = UILabel()
                 
                 textLabel.text  = hour
@@ -300,7 +314,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
             }
         }else {
-            
+            self.infoScreenHeight.constant -= self.hoursStackView.bounds.size.height
+            self.placeVC?.pinViewHeight.constant -= self.hoursStackView.bounds.size.height
+            self.hoursStackView.bounds.size.height = 0
             // MISSING locationInfoStackView
 //            self.infoScreenHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
 //            self.viewHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
@@ -406,7 +422,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
             otherPlacesCell.addressTextView.text = address
             addGreenDot(label: otherPlacesCell.categoryLabel, content: place_focus)
-            otherPlacesCell.distanceLabel.text = "\(place.distance) mi"
+//            otherPlacesCell.distanceLabel.text = "\(place.distance) mi"
             
             return otherPlacesCell
         }
@@ -541,6 +557,21 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         self.reviewsTextView.text = ""
     }
     
+    func showReviewBox(){
+        if reviewsView.alpha == 1{
+            reviewsView.alpha = 0
+//            categoryTop.constant = 0
+            self.topViewHeight.constant -= self.reviewsView.frame.size.height
+            self.placeVC?.pinViewHeight.constant -= self.reviewsView.frame.size.height
+        }
+        else{
+            reviewsView.alpha = 1
+//            categoryTop.constant = 132
+            self.topViewHeight.constant += self.reviewsView.frame.size.height
+            self.placeVC?.pinViewHeight.constant += self.reviewsView.frame.size.height
+        }
+    }
+    
     @IBAction func showReview(_ sender: Any) {
         if reviewsView.alpha == 1{
             reviewsView.alpha = 0
@@ -594,28 +625,27 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
     }
     
-    @IBAction func follow(_ sender: Any) {
-        
+    func followPressed(){
         if isFollowing == false
         {
-        let time = NSDate().timeIntervalSince1970
-        Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
-        
-        self.followButton.isSelected = true
-        self.followButton.layer.borderWidth = 1
-        self.followButton.layer.borderColor = UIColor.white.cgColor
-        self.followButton.layer.shadowOpacity = 1.0
-        self.followButton.layer.masksToBounds = false
-        self.followButton.layer.shadowColor = UIColor.black.cgColor
-        self.followButton.layer.shadowRadius = 7.0
-        self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
-        self.followButton.tintColor = UIColor.clear
-        self.followButton.setTitle("Following", for: UIControlState.normal)
+            let time = NSDate().timeIntervalSince1970
+            Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
+            
+            self.placeVC?.followButton.isSelected = true
+//            self.followButton.layer.borderWidth = 1
+//            self.followButton.layer.borderColor = UIColor.white.cgColor
+//            self.followButton.layer.shadowOpacity = 1.0
+//            self.followButton.layer.masksToBounds = false
+//            self.followButton.layer.shadowColor = UIColor.black.cgColor
+//            self.followButton.layer.shadowRadius = 7.0
+            self.placeVC?.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+            self.placeVC?.followButton.tintColor = UIColor.clear
+            self.placeVC?.followButton.setTitle("Following", for: UIControlState.selected)
             isFollowing = true
         }else
         {
-            self.followButton.setTitle("Follow", for: UIControlState.normal)
+            self.placeVC?.followButton.setTitle("Follow", for: UIControlState.normal)
             Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 if value != nil {
@@ -629,6 +659,43 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 }
             })
         }
+    }
+    
+    @IBAction func follow(_ sender: Any) {
+        
+//        if isFollowing == false
+//        {
+//        let time = NSDate().timeIntervalSince1970
+//        Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
+//        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
+//        
+//        self.followButton.isSelected = true
+//        self.followButton.layer.borderWidth = 1
+//        self.followButton.layer.borderColor = UIColor.white.cgColor
+//        self.followButton.layer.shadowOpacity = 1.0
+//        self.followButton.layer.masksToBounds = false
+//        self.followButton.layer.shadowColor = UIColor.black.cgColor
+//        self.followButton.layer.shadowRadius = 7.0
+//        self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+//        self.followButton.tintColor = UIColor.clear
+//        self.followButton.setTitle("Following", for: UIControlState.normal)
+//            isFollowing = true
+//        }else
+//        {
+//            self.followButton.setTitle("Follow", for: UIControlState.normal)
+//            Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+//                let value = snapshot.value as? NSDictionary
+//                if value != nil {
+//                    for (key,_) in value!
+//                    {
+//                        Constants.DB.following_place.child((self.place?.id)!).child("followers").child(key as! String).removeValue()
+//                    }
+//                    
+//                    
+//                    
+//                }
+//            })
+//        }
         //           Constants.DB.places.child(placeID).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
         
         

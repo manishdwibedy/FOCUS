@@ -259,6 +259,9 @@
 		EB8D349B1F16C70F006EE316 /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8D349A1F16C70F006EE316 /* OtherUserProfileViewController.swift */; };
 		EB8D349E1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8D349C1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift */; };
 		EB8D349F1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */; };
+		EB9E1B261F19794F00409DC7 /* PushNotifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB9E1B251F19794F00409DC7 /* PushNotifications.storyboard */; };
+		EB9E1B291F197BF200409DC7 /* PushNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9E1B281F197BF200409DC7 /* PushNotificationsViewController.swift */; };
+		EB9E1B2B1F19835700409DC7 /* PushNotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9E1B2A1F19835700409DC7 /* PushNotificationsTableViewController.swift */; };
 		EBB6B32D1F0E1224000C8133 /* FeedOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */; };
 		EBB6B32E1F0E1224000C8133 /* FeedOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */; };
 		EBB6B3311F0EE179000C8133 /* FeedEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB6B32F1F0EE179000C8133 /* FeedEventTableViewCell.swift */; };
@@ -630,6 +633,9 @@
 		EB8D349A1F16C70F006EE316 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		EB8D349C1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventOtherWillLikeTableViewCell.swift; sourceTree = "<group>"; };
 		EB8D349D1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOtherWillLikeTableViewCell.xib; sourceTree = "<group>"; };
+		EB9E1B251F19794F00409DC7 /* PushNotifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PushNotifications.storyboard; sourceTree = "<group>"; };
+		EB9E1B281F197BF200409DC7 /* PushNotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsViewController.swift; sourceTree = "<group>"; };
+		EB9E1B2A1F19835700409DC7 /* PushNotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsTableViewController.swift; sourceTree = "<group>"; };
 		EBB6B32B1F0E1224000C8133 /* FeedOneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedOneTableViewCell.swift; sourceTree = "<group>"; };
 		EBB6B32C1F0E1224000C8133 /* FeedOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedOneTableViewCell.xib; sourceTree = "<group>"; };
 		EBB6B32F1F0EE179000C8133 /* FeedEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -1026,6 +1032,7 @@
 				EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */,
 				5B448E641EE94BF900873F79 /* Invites.storyboard */,
 				5BBF7AC11EEF5C61000209D6 /* Reviews.storyboard */,
+				EB9E1B251F19794F00409DC7 /* PushNotifications.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1148,6 +1155,7 @@
 		D2B9B0721E5A0A1E0002F1B1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB9E1B271F197BD500409DC7 /* Push Notifications */,
 				EB8D34991F16C6EA006EE316 /* UserProfile */,
 				5B448E681EE94D2000873F79 /* Invitations */,
 				EB722F911EE8B18500420DC8 /* Reviews */,
@@ -1359,6 +1367,15 @@
 				EB819E681F180D2900F5AA94 /* RecentPostTableViewCell.xib */,
 			);
 			name = UserProfile;
+			sourceTree = "<group>";
+		};
+		EB9E1B271F197BD500409DC7 /* Push Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				EB9E1B281F197BF200409DC7 /* PushNotificationsViewController.swift */,
+				EB9E1B2A1F19835700409DC7 /* PushNotificationsTableViewController.swift */,
+			);
+			name = "Push Notifications";
 			sourceTree = "<group>";
 		};
 		EBB6B32A1F0E1207000C8133 /* FeedTableCells */ = {
@@ -1590,6 +1607,7 @@
 				5B16592E1EDA6DE40002209A /* MapMarkerView.xib in Resources */,
 				EB252F0C1EE9E9F7001C163D /* NewMessageTableViewCell.xib in Resources */,
 				5B448E631EE7B7FC00873F79 /* MessageTableViewCell.xib in Resources */,
+				EB9E1B261F19794F00409DC7 /* PushNotifications.storyboard in Resources */,
 				FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */,
 				FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */,
 				EB5891C81EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib in Resources */,
@@ -2129,6 +2147,7 @@
 				D23E013D1E6BB0AE00E735F5 /* FocusUser.swift in Sources */,
 				D219754E1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.swift in Sources */,
 				D230D8CB1E5B868C00025EE9 /* User.swift in Sources */,
+				EB9E1B2B1F19835700409DC7 /* PushNotificationsTableViewController.swift in Sources */,
 				FFEFA1C11EE7864A000623CB /* PlaceAllPinsViewController.swift in Sources */,
 				5B448E581EE72C1B00873F79 /* FollowersTableViewCell.swift in Sources */,
 				D23E013B1E6BAD2100E735F5 /* FirebaseDownstream.swift in Sources */,
@@ -2141,6 +2160,7 @@
 				5B2E5E051EF7974900F0BC1B /* PhotoViewController.swift in Sources */,
 				EB252F131EEAA062001C163D /* UserProfileCollectionViewCell.swift in Sources */,
 				EB450FB11F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift in Sources */,
+				EB9E1B291F197BF200409DC7 /* PushNotificationsViewController.swift in Sources */,
 				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */,
 				FF12737B1EDC882E0034AA42 /* PinLookViewController.swift in Sources */,
