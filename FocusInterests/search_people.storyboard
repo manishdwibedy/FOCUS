@@ -100,7 +100,7 @@
             </objects>
             <point key="canvasLocation" x="-143.19999999999999" y="88.605697151424295"/>
         </scene>
-        <!--Invite People View Controller-->
+        <!--EXPLORE-->
         <scene sceneID="9mv-Gu-rXL">
             <objects>
                 <viewController storyboardIdentifier="invitePeople" id="9ey-Xo-CX9" customClass="InvitePeopleViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -129,7 +129,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Meet up" id="RTd-YN-uNF">
+                                    <navigationItem title="Explore" id="RTd-YN-uNF">
                                         <barButtonItem key="leftBarButtonItem" image="BackArrow" id="FE1-iu-nrx">
                                             <color key="tintColor" red="0.61176470589999998" green="0.64313725489999995" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
@@ -140,7 +140,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTi-NK-gbC">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nZh-JF-eMk">
                                         <rect key="frame" x="66" y="9" width="243" height="29"/>
@@ -156,7 +156,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-wn-SdN">
-                                        <rect key="frame" x="8" y="47" width="359" height="512"/>
+                                        <rect key="frame" x="8" y="47" width="359" height="463"/>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableView>
@@ -183,12 +183,16 @@
                             <constraint firstItem="RME-pD-v8b" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="7bQ-sO-6CQ"/>
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="top" secondItem="RME-pD-v8b" secondAttribute="bottom" id="OgL-ds-gWv"/>
                             <constraint firstAttribute="trailing" secondItem="HTi-NK-gbC" secondAttribute="trailing" id="Qz8-fz-5vG"/>
+                            <constraint firstItem="7Ss-jV-UL9" firstAttribute="top" secondItem="HTi-NK-gbC" secondAttribute="bottom" id="blf-wS-pc4"/>
                             <constraint firstItem="HTi-NK-gbC" firstAttribute="top" secondItem="AYl-Yr-fFv" secondAttribute="bottom" id="bqN-Gc-O6y"/>
                             <constraint firstItem="RME-pD-v8b" firstAttribute="top" secondItem="YCB-Au-Xks" secondAttribute="top" id="kSo-Vx-3mI"/>
-                            <constraint firstItem="7Ss-jV-UL9" firstAttribute="top" secondItem="HTi-NK-gbC" secondAttribute="bottom" id="lAW-Q3-gOc"/>
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="vv3-PZ-isc"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="EXPLORE" id="NJ5-hj-IRg">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="navBar" destination="RME-pD-v8b" id="GVQ-s5-mZn"/>
                         <outlet property="searchBar" destination="AYl-Yr-fFv" id="L8v-LE-4kh"/>

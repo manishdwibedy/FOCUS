@@ -19,7 +19,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var segmentedOut: UISegmentedControl!
     @IBOutlet weak var navBar: UINavigationBar!
     
-    
+    var isMeetup = false
     var UID = ""
     var username = ""
     var filtered = [Any]()
@@ -98,6 +98,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         navBar.titleTextAttributes = attrs
         navBar.barTintColor = Constants.color.navy
         self.view.backgroundColor = Constants.color.navy
+        
+        if isMeetup{
+            navBar.topItem?.title = "Meet up"
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

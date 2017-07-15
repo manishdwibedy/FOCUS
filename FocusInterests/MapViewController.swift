@@ -53,7 +53,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var userLocation: GMSMarker? = nil
     var showTutorial = false
     
-    var searchPlacesTab: SearchPlacesViewController? = nil
+//    var searchPlacesTab: SearchPlacesViewController? = nil
     var searchEventsTab: SearchEventsViewController? = nil
     var notifs = [FocusNotification]()
     var invites = [FocusNotification]()
@@ -225,7 +225,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
         })
         
-        self.searchPlacesTab = self.tabBarController?.viewControllers?[3] as? SearchPlacesViewController
+//        self.searchPlacesTab = self.tabBarController?.viewControllers?[3] as? SearchPlacesViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
         let token = Messaging.messaging().fcmToken
@@ -882,7 +882,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
         self.currentLocation = location
-        self.searchPlacesTab?.location = location
+//        self.searchPlacesTab?.location = location
         
         if AuthApi.getEventBriteToken() != nil{
             getEvents(around: self.currentLocation!, completion: { events in
@@ -1038,9 +1038,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                             self.placeMapping[place.id] = place
                             self.getPlaceHours(id: place.id)
                             self.places.append(place)
-                            if !(self.searchPlacesTab?.followingPlaces.contains(place))!{
-                                self.searchPlacesTab?.followingPlaces.append(place)
-                            }
+//                            if !(self.searchPlacesTab?.followingPlaces.contains(place))!{
+//                                self.searchPlacesTab?.followingPlaces.append(place)
+//                            }
                             print("places count - \(self.places.count)")
                         }
                     })
@@ -1099,8 +1099,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     
                     let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                     
-                    if !(self.searchPlacesTab?.places.contains(place))!{
-                        
+//                    if !(self.searchPlacesTab?.places.contains(place))!{
+                    
 //                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
 //                        let marker = GMSMarker(position: position)
 //                        marker.icon = UIImage(named: "place_icon")
@@ -1115,9 +1115,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //                        self.placeMapping[place.id] = place
 //                        self.getPlaceHours(id: place.id)
 //                        
-                        self.searchPlacesTab?.places.append(place)
-                        
-                    }
+//                        self.searchPlacesTab?.places.append(place)
+                    
+//                    }
                 }
                 //            self.clusterManager.cluster()
             }

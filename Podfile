@@ -52,6 +52,8 @@ target 'FocusInterests' do
     pod 'Reveal-SDK', :configurations => ['Debug']
     pod 'UITextField-Navigation'
     pod 'MIBadgeButton-Swift', :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
+    pod 'DataCache'
+
 end
 
 target 'FocusInterestsTests' do

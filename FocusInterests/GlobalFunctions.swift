@@ -15,6 +15,7 @@ import FirebaseStorage
 import SCLAlertView
 import FirebaseAuth
 
+
 func featuresToString(features: [Feature]) -> String {
     var strArray = [String]()
     for f in features {

@@ -152,10 +152,10 @@
             </objects>
             <point key="canvasLocation" x="-319" y="1850"/>
         </scene>
-        <!--search_place-->
+        <!--invitePeople-->
         <scene sceneID="UtR-ux-scg">
             <objects>
-                <viewControllerPlaceholder storyboardName="search_place" id="b5i-xY-EUY" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="search_people" referencedIdentifier="invitePeople" id="b5i-xY-EUY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="PLACE" id="8LE-7s-vUa"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFT-ie-lv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
