@@ -66,7 +66,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         doubleTap.numberOfTapsRequired = 2
         self.viewForMap.addGestureRecognizer(doubleTap)
         
-        profileImage.sd_setImage(with: URL(string: AuthApi.getUserImage()!))
+        
         Constants.DB.user.child(data.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
@@ -90,6 +90,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 }
                 else{
                     self.usernameLabel.text = "N.A."
+                }
+                
+                if let image = value?["image_string"] as? String{
+                    self.profileImage.sd_setImage(with: URL(string: image))
                 }
             }
         })

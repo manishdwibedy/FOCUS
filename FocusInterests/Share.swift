@@ -180,10 +180,10 @@ class Share{
             if let value = snapshot.value as? [String:[String:Any]]{
                 for (id, user) in value{
                     if AuthApi.getLoginType() == .Google{
-                        if let email = user["email"] as? String, email.characters.count > 0{
+                        if let email = user["email"] as? String, email.characters.count > 0, let id = user["firebaseUserId"] as? String{
                             if email != AuthApi.getUserEmail()!{
                                 emails.append(email)
-                                emailMapping[email] = user["firebaseUserId"] as! String
+                                emailMapping[email] = id
                             }
                         }
                     }
