@@ -242,6 +242,19 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return monthName
             
         }else{
+            if month == 2{
+                if day < 22{
+                    day = 0
+                }
+            }else if month != 2 && month % 2 != 0{
+                if day < 25{
+                    day = 0
+                }
+            }else if month != 2 && month % 2 == 0{
+                if day < 24{
+                    day = 0
+                }
+            }
             
             day += row
             self.dayText = "\(day)"
@@ -260,8 +273,20 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let day = Calendar.current.component(.day, from: Date())
         print(day)
         if component == 0 {
-            if month % 2 != 0{
-                if day < 25 {
+            if month == 2{
+                if day < 22{
+                    rowAmt = 1
+                }else{
+                    rowAmt = 2
+                }
+            }else if month != 2 && month % 2 != 0{
+                if day < 25{
+                    rowAmt = 1
+                }else{
+                    rowAmt = 2
+                }
+            }else if month != 2 && month % 2 == 0{
+                if day < 24{
                     rowAmt = 1
                 }else{
                     rowAmt = 2
