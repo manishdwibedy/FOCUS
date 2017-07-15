@@ -473,7 +473,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         })
         
-        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil || 1 == 1 { // Change this back
+        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil { // Change this back
             print("username is nil")
             
             let usernameView = UsernameInputView(frame: CGRect(x:self.usernameInputView.frame.origin.x, y:self.usernameInputView.frame.origin.y, width:self.usernameInputView.frame.size.width, height: self.usernameInputView.frame.size.height))
