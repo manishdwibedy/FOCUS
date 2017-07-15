@@ -126,6 +126,7 @@
 		5B959FF21ECD452C00094FE6 /* RatingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FF01ECD452C00094FE6 /* RatingViewCell.swift */; };
 		5B959FF31ECD452C00094FE6 /* RatingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B959FF11ECD452C00094FE6 /* RatingViewCell.xib */; };
 		5B959FF51ECD48CB00094FE6 /* PlaceRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B959FF41ECD48CB00094FE6 /* PlaceRating.swift */; };
+		5B9E3A0A1F1ABB77007F33E5 /* PlaceCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E3A091F1ABB77007F33E5 /* PlaceCache.swift */; };
 		5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */; };
 		5BA37C711EB9EADB0091189E /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA37C701EB9EADB0091189E /* InvitationViewController.swift */; };
 		5BA37C731EBD4DDE0091189E /* MapNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */; };
@@ -491,6 +492,7 @@
 		5B959FF01ECD452C00094FE6 /* RatingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewCell.swift; sourceTree = "<group>"; };
 		5B959FF11ECD452C00094FE6 /* RatingViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingViewCell.xib; sourceTree = "<group>"; };
 		5B959FF41ECD48CB00094FE6 /* PlaceRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceRating.swift; sourceTree = "<group>"; };
+		5B9E3A091F1ABB77007F33E5 /* PlaceCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceCache.swift; sourceTree = "<group>"; };
 		5BA37C6D1EB9C78B0091189E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5BA37C701EB9EADB0091189E /* InvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		5BA37C721EBD4DDE0091189E /* MapNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapNavigationView.xib; sourceTree = "<group>"; };
@@ -1148,6 +1150,7 @@
 				5B634C861ED2584F00EBCC29 /* Share.swift */,
 				5B3597971EF5FD5400C04809 /* FollowPeople.swift */,
 				5BB2F8171F11C4B8008781BB /* Notification.swift */,
+				5B9E3A091F1ABB77007F33E5 /* PlaceCache.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -2083,6 +2086,7 @@
 				5B6AFA6E1ED1906900A82104 /* GMUFeature.m in Sources */,
 				D28EAFBC1E5D30C3001EA7E5 /* SwitchCell.swift in Sources */,
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
+				5B9E3A0A1F1ABB77007F33E5 /* PlaceCache.swift in Sources */,
 				5B71D7101ED184D30093A3F5 /* allCommentsVC.swift in Sources */,
 				5B959FF21ECD452C00094FE6 /* RatingViewCell.swift in Sources */,
 				5B959FE31ECBA6C600094FE6 /* InviteUserView.swift in Sources */,
