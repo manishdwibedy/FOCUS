@@ -436,6 +436,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             } else {
                 mapView.animate(to: camera)
             }
+            currentLocation = AuthApi.getLocation()
         }
         
         fetchPins()
