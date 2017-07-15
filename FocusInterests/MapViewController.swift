@@ -997,15 +997,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.present(vc, animated: true, completion: nil)
     }
     
-    func searchClicked() {
-        let storyboard = UIStoryboard(name: "general_search", bundle: nil)
-        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? SearchViewController
-        VC?.location = self.currentLocation
-        
-        dropfromTop(view: self.view)
-        
-        self.present(VC!, animated: true, completion: nil)
-        
+    func invitationClicked()  {
+        // show invitation screen
         
     }
     

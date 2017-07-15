@@ -13,6 +13,7 @@ protocol NavigationInteraction {
     func messagesClicked()
     func notificationsClicked()
     func userProfileClicked()
+    func invitationClicked()
 }
 
 class MapNavigationView: UIView, UISearchBarDelegate {
@@ -23,8 +24,8 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     @IBOutlet weak var messagesButton: MIBadgeButton!
     
     @IBOutlet weak var notificationsButton: MIBadgeButton!
-    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var invatationButton: MIBadgeButton!
     
     var showSearchBar = true
     
@@ -67,5 +68,8 @@ class MapNavigationView: UIView, UISearchBarDelegate {
     
     @IBAction func notificationsButtonPressed(_ sender: UIButton) {
         delegate?.notificationsClicked()
+    }
+    @IBAction func invitationClicked(_ sender: Any) {
+        delegate?.invitationClicked()
     }
 }
