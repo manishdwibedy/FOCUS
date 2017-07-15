@@ -161,6 +161,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 {
                     let camera = GMSCameraPosition.camera(withLatitude: self.data.coordinates.latitude, longitude: self.data.coordinates.longitude, zoom: 13)
                     let mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.viewForMap.frame.width, height: self.viewForMap.frame.height), camera: camera)
+                    mapView.settings.scrollGestures = false
                     mapView.delegate = self
                     
                     let position = CLLocationCoordinate2D(latitude: Double(self.data.coordinates.latitude), longitude: Double(self.data.coordinates.longitude))
