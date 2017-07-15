@@ -22,6 +22,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var inviteOut: UIButton!
     @IBOutlet weak var inviteEventCellContentView: UIView!
+    @IBOutlet weak var attendButton: UIButton!
     
     @IBOutlet weak var distance: UILabel!
     var event: Event!
@@ -38,6 +39,19 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         self.inviteOut.layer.masksToBounds = false
         self.inviteOut.layer.shadowColor = UIColor.black.cgColor
         self.inviteOut.layer.shadowRadius = 5.0
+        
+        self.attendButton.layer.cornerRadius = 6
+        self.attendButton.clipsToBounds = true
+        self.attendButton.roundCorners(radius: 5)
+        self.attendButton.layer.shadowOpacity = 0.5
+        self.attendButton.layer.masksToBounds = false
+        self.attendButton.layer.shadowColor = UIColor.black.cgColor
+        self.attendButton.layer.shadowRadius = 5.0
+        
+        self.attendButton.setTitle("Attend", for: .normal)
+        self.attendButton.setTitleColor(UIColor.white, for: .normal)
+        self.attendButton.setTitle("Attending", for: .selected)
+        self.attendButton.setTitleColor(UIColor.white, for: .selected)
         
         self.eventImage.layer.borderWidth = 2
         self.eventImage.layer.borderColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0).cgColor
@@ -119,6 +133,22 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
 //        parentVC.searchPeople?.showInvitePopup = true
 //        parentVC.dismiss(animated: true, completion: nil)
     
+    }
+    
+    @IBAction func attendButtonPressed(_ sender: Any) {
+        self.attendButton.isSelected = !self.attendButton.isSelected
+        if self.attendButton.isSelected == true{
+            self.attendButton.layer.borderWidth = 1
+            self.attendButton.layer.borderColor = UIColor.white.cgColor
+            self.attendButton.backgroundColor = UIColor.clear
+        }else if self.attendButton.isSelected == false {
+            self.attendButton.layer.borderWidth = 0.0
+            self.attendButton.backgroundColor = Constants.color.navy
+            self.attendButton.layer.shadowOpacity = 0.5
+            self.attendButton.layer.masksToBounds = false
+            self.attendButton.layer.shadowColor = UIColor.black.cgColor
+            self.attendButton.layer.shadowRadius = 5.0
+        }
     }
     
     func haveInvitedSomeoneToAnEvent() {

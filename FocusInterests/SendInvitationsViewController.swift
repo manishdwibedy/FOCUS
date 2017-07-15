@@ -108,6 +108,13 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         self.sortContacts()
         
+        let attrs = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
+        ]
+        
+        self.navBar.titleTextAttributes = attrs
+        
         self.navBar.barTintColor = Constants.color.navy
         self.view.backgroundColor = Constants.color.navy
         
@@ -276,7 +283,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56
+        return 60
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {

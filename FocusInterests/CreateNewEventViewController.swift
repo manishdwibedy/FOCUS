@@ -28,7 +28,9 @@ class CreateNewEventViewController: UIViewController,
     @IBOutlet var parentView: UIView!
     @IBOutlet weak var interestListLabel: UILabel!
     //@IBOutlet weak var interestNextButton: UIButton!
+    @IBOutlet weak var interestLabelTopConstraintToSwitcher: NSLayoutConstraint!
     
+    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var choseFocusButton: UIButton!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var publicLabel: UILabel!
@@ -64,6 +66,8 @@ class CreateNewEventViewController: UIViewController,
     
     let validatedFields = true
     
+    @IBOutlet weak var interestLabelBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var guestListStackTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var canInviteFriendsLabel: UILabel!
     @IBOutlet weak var showGuestListLabel: UILabel!
     
@@ -181,7 +185,7 @@ class CreateNewEventViewController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.privatePublicSwitch.isOn = false
         self.privatePublicSwitch.tintColor = Constants.color.green
         self.privatePublicSwitch.layer.cornerRadius = 16
         self.privatePublicSwitch.backgroundColor = Constants.color.green
@@ -267,6 +271,11 @@ class CreateNewEventViewController: UIViewController,
         
         navBar.titleTextAttributes = attrs
         navBar.barTintColor = Constants.color.navy
+        
+        self.guestSettingsStackView.isHidden = true
+//        self.guestListStackTopConstraint.constant -= 28
+        self.interestLabelTopConstraintToSwitcher.constant = 0
+//        self.scrollViewHeight.constant -= 71
         self.view.backgroundColor = Constants.color.navy
         UIApplication.shared.statusBarStyle = .default
     }
@@ -370,18 +379,25 @@ class CreateNewEventViewController: UIViewController,
     }
     
     @IBAction func PrivOrPubSwtchChanged(_ sender: UISwitch) {
+        sender.isOn = !sender.isOn
         if sender.isOn {
-            self.privateLabel.textColor = UIColor.primaryGreen()
+            self.privateLabel.textColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
             self.publicLabel.textColor = UIColor.white
             
+//            self.guestListStackTopConstraint.constant += 28
+            self.interestLabelTopConstraintToSwitcher.constant = 71
+//            self.scrollViewHeight.constant += 71
             guestSettingsStackView.isHidden = false
             //interestTopConstraint.constant = 100
             
         } else /* the switch is set to public */ {
             self.privateLabel.textColor = UIColor.white
-            self.publicLabel.textColor = UIColor.primaryGreen()
+            self.publicLabel.textColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
             
             guestSettingsStackView.isHidden = true
+//            self.guestListStackTopConstraint.constant -= 28
+            self.interestLabelTopConstraintToSwitcher.constant = 0
+//            self.scrollViewHeight.constant -= 71
             //interestTopConstraint.constant = 0
         }
     }
@@ -477,14 +493,14 @@ class CreateNewEventViewController: UIViewController,
     private func presentNotification(title: String, message: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
-        alert.view.tintColor = UIColor.primaryGreen()
+        alert.view.tintColor = Constants.color.green
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func showGuestListBttn(_ sender: UIButton) {
         if self.guestListBttn.isSelected == false {
-            self.guestListBttn.setImage(UIImage(named: "Interest_Filled.png"), for: .selected)
+            self.guestListBttn.setImage(UIImage(named: "Green.png"), for: .selected)
             self.guestListBttn.isSelected = true
         } else {
             self.guestListBttn.setImage(UIImage(named: "Interest_blank.png"), for: .normal)
@@ -498,7 +514,7 @@ class CreateNewEventViewController: UIViewController,
             self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Interest_blank"), for: .normal)
         } else {
             self.showGuestFriendsBttn.isSelected = true
-            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Interest_Filled"), for: .normal)
+            self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Green.png"), for: .normal)
         }
     }
     
