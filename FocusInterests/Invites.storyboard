@@ -84,7 +84,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7de-LD-Fht">
-                                        <rect key="frame" x="107" y="35" width="109" height="31"/>
+                                        <rect key="frame" x="107" y="33.5" width="109" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="109" id="90T-sZ-Bhe"/>
                                         </constraints>
@@ -106,71 +106,48 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ol-f1-Emk">
-                                        <rect key="frame" x="107" y="4" width="109" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Choose a date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAy-3u-Axx">
+                                        <rect key="frame" x="107" y="8.5" width="109" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="PV6-r1-ltC"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                        <state key="normal" title="Choose a day">
-                                            <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="uAy-3u-Axx" firstAttribute="centerX" secondItem="7de-LD-Fht" secondAttribute="centerX" id="0Bd-ID-ZeI"/>
                                     <constraint firstItem="V1s-DE-HRj" firstAttribute="leading" secondItem="nru-7F-n9l" secondAttribute="leading" id="3ht-K1-XJL"/>
+                                    <constraint firstItem="uAy-3u-Axx" firstAttribute="centerY" secondItem="V1s-DE-HRj" secondAttribute="centerY" id="BDR-Gd-GB8"/>
                                     <constraint firstItem="nru-7F-n9l" firstAttribute="leading" secondItem="rg7-5I-k1W" secondAttribute="leading" constant="20" id="D97-OA-YaR"/>
                                     <constraint firstItem="nru-7F-n9l" firstAttribute="top" secondItem="V1s-DE-HRj" secondAttribute="bottom" constant="8" id="Dpy-Tb-jNX"/>
-                                    <constraint firstItem="7de-LD-Fht" firstAttribute="top" secondItem="7Ol-f1-Emk" secondAttribute="bottom" constant="1" id="ETn-bZ-Psu"/>
                                     <constraint firstItem="V1s-DE-HRj" firstAttribute="leading" secondItem="rg7-5I-k1W" secondAttribute="leading" constant="20" id="Hps-0y-3pn"/>
-                                    <constraint firstItem="7Ol-f1-Emk" firstAttribute="centerX" secondItem="7de-LD-Fht" secondAttribute="centerX" id="KPe-Z7-l1x"/>
-                                    <constraint firstItem="7Ol-f1-Emk" firstAttribute="leading" secondItem="V1s-DE-HRj" secondAttribute="trailing" constant="48" id="TwZ-xF-WfW"/>
+                                    <constraint firstItem="uAy-3u-Axx" firstAttribute="leading" secondItem="V1s-DE-HRj" secondAttribute="trailing" constant="48" id="W8n-1J-15h"/>
                                     <constraint firstItem="7de-LD-Fht" firstAttribute="leading" secondItem="nru-7F-n9l" secondAttribute="trailing" constant="47" id="ZFt-aW-zd8"/>
                                     <constraint firstItem="V1s-DE-HRj" firstAttribute="top" secondItem="rg7-5I-k1W" secondAttribute="top" constant="9" id="b20-JV-Fhc"/>
-                                    <constraint firstItem="V1s-DE-HRj" firstAttribute="centerY" secondItem="7Ol-f1-Emk" secondAttribute="centerY" id="bPs-Ad-fEX"/>
                                     <constraint firstItem="nru-7F-n9l" firstAttribute="centerY" secondItem="7de-LD-Fht" secondAttribute="centerY" id="nbe-5w-eh7"/>
                                     <constraint firstAttribute="height" constant="70" id="nsg-t4-7FE"/>
-                                    <constraint firstItem="7Ol-f1-Emk" firstAttribute="top" secondItem="rg7-5I-k1W" secondAttribute="top" constant="4" id="zqD-ti-QnK"/>
                                 </constraints>
                             </view>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N84-21-Vk9">
-                                <rect key="frame" x="0.0" y="450" width="375" height="216"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </pickerView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rst-F4-iRx">
-                                <rect key="frame" x="0.0" y="450" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="dUA-0H-zpe"/>
-                                    <barButtonItem title="Done" id="MWx-1r-64z">
-                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="doneButtonPressed:" destination="ii7-3r-SGo" id="keM-UB-ayB"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="0gF-6J-suq" firstAttribute="top" secondItem="N84-21-Vk9" secondAttribute="bottom" constant="1" id="8DY-gb-HJ3"/>
-                            <constraint firstAttribute="trailing" secondItem="N84-21-Vk9" secondAttribute="trailing" id="9m7-1v-QCw"/>
                             <constraint firstItem="noj-oM-whr" firstAttribute="top" secondItem="UaN-7t-6P3" secondAttribute="bottom" constant="-1" id="AxJ-bS-jO0"/>
                             <constraint firstItem="58f-vL-hfC" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="Boj-ND-RSA"/>
                             <constraint firstItem="ith-zO-7mj" firstAttribute="top" secondItem="rg7-5I-k1W" secondAttribute="bottom" id="F9K-1G-ZOF"/>
                             <constraint firstItem="noj-oM-whr" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="JR6-1L-qtt"/>
                             <constraint firstAttribute="trailing" secondItem="58f-vL-hfC" secondAttribute="trailing" id="Uip-LI-uwm"/>
-                            <constraint firstAttribute="trailing" secondItem="rst-F4-iRx" secondAttribute="trailing" id="Utz-18-T3V"/>
                             <constraint firstItem="0gF-6J-suq" firstAttribute="top" secondItem="ith-zO-7mj" secondAttribute="bottom" id="Vg9-Jl-4Du"/>
                             <constraint firstItem="rg7-5I-k1W" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="WbM-sz-dxw"/>
                             <constraint firstItem="rg7-5I-k1W" firstAttribute="top" secondItem="noj-oM-whr" secondAttribute="bottom" constant="1" id="bwE-Jj-HvO"/>
-                            <constraint firstItem="rst-F4-iRx" firstAttribute="centerX" secondItem="N84-21-Vk9" secondAttribute="centerX" id="csL-P1-kpY"/>
                             <constraint firstAttribute="trailing" secondItem="rg7-5I-k1W" secondAttribute="trailing" id="gba-mD-uA1"/>
                             <constraint firstItem="0gF-6J-suq" firstAttribute="top" secondItem="58f-vL-hfC" secondAttribute="bottom" id="grY-ux-g6y"/>
                             <constraint firstItem="rg7-5I-k1W" firstAttribute="centerX" secondItem="gwv-LI-wvG" secondAttribute="centerX" id="h72-JL-Ke5"/>
                             <constraint firstItem="noj-oM-whr" firstAttribute="centerX" secondItem="rg7-5I-k1W" secondAttribute="centerX" id="ix7-vk-fon"/>
                             <constraint firstItem="ith-zO-7mj" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="jf2-T3-IHB"/>
-                            <constraint firstItem="N84-21-Vk9" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="k3a-Ft-x5l"/>
-                            <constraint firstItem="rst-F4-iRx" firstAttribute="leading" secondItem="gwv-LI-wvG" secondAttribute="leading" id="m8P-hq-VcY"/>
                             <constraint firstAttribute="trailing" secondItem="ith-zO-7mj" secondAttribute="trailing" id="xIQ-25-Bue"/>
-                            <constraint firstItem="N84-21-Vk9" firstAttribute="top" secondItem="rst-F4-iRx" secondAttribute="bottom" constant="-44" id="xSK-pb-c4r"/>
                             <constraint firstAttribute="trailing" secondItem="noj-oM-whr" secondAttribute="trailing" id="yuP-9N-Hji"/>
                         </constraints>
                     </view>
@@ -178,9 +155,7 @@
                     <connections>
                         <outlet property="contactList" destination="luS-ui-awS" id="fTv-fo-Ka0"/>
                         <outlet property="contactListView" destination="58f-vL-hfC" id="A4u-0c-MMV"/>
-                        <outlet property="dayButton" destination="7Ol-f1-Emk" id="Zst-ly-FU5"/>
-                        <outlet property="dayPickerView" destination="N84-21-Vk9" id="xul-np-mb8"/>
-                        <outlet property="doneToolBar" destination="rst-F4-iRx" id="cfc-ar-1tX"/>
+                        <outlet property="dayTextField" destination="uAy-3u-Axx" id="fJO-GI-ckm"/>
                         <outlet property="friendListBottom" destination="Vg9-Jl-4Du" id="h1c-bH-ZYx"/>
                         <outlet property="friendsTableView" destination="ith-zO-7mj" id="uWQ-cp-Vgl"/>
                         <outlet property="navBar" destination="noj-oM-whr" id="9Y1-3J-bzF"/>
