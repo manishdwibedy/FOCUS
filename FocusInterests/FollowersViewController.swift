@@ -19,6 +19,8 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     var followers = [followProfileCellData]()
     var following = [followProfileCellData]()
     let store = CNContactStore()
+    var ID = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -37,10 +39,11 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         
         tableView.tableFooterView = UIView()
         
-        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
-            if let dictionnary = dictionnary {
-                
-                if let followers = dictionnary["followers"] as? [String:Any]{
+        
+        
+        Constants.DB.user.child(ID).observeSingleEvent(of: .value, with: {snapshot in
+            if let value = snapshot.value as? [String:Any]{
+                if let followers = value["followers"] as? [String:Any]{
                     if let people = followers["people"] as? [String:[String:Any]]{
                         let count = people.count
                         
@@ -59,7 +62,7 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
                     }
                 }
                 
-                if let following = dictionnary["following"] as? [String:Any]{
+                if let following = value["following"] as? [String:Any]{
                     if let people = following["people"] as? [String:[String:Any]]{
                         let count = people.count
                         
@@ -76,12 +79,8 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
                         }
                     }
                 }
-                
-                
-                
             }
-            
-        }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {

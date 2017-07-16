@@ -419,12 +419,14 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     func showFollowing(sender:UITapGestureRecognizer) {
         let followerViewController = UIStoryboard(name: "Followers", bundle: nil).instantiateViewController(withIdentifier: "FollowersViewController") as! FollowersViewController
         followerViewController.windowTitle = "Following"
+        followerViewController.ID = self.userID
         self.present(followerViewController, animated: true, completion: nil)
     }
     
     func showFollower(sender:UITapGestureRecognizer) {
         let followerViewController = UIStoryboard(name: "Followers", bundle: nil).instantiateViewController(withIdentifier: "FollowersViewController") as! FollowersViewController
         followerViewController.windowTitle = "Followers"
+        followerViewController.ID = self.userID
         self.present(followerViewController, animated: true, completion: nil)
     }
     
