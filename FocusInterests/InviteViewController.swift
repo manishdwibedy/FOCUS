@@ -235,7 +235,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Positon date picket within a view
         
         self.dateFormatter.dateFormat = "MMM d yyyy"
-        self.dateFormatter.dateStyle = .medium
+        self.dateFormatter.dateStyle = .short
         
         self.datePicker.datePickerMode = .date
         let date = Date()
