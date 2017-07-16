@@ -38,16 +38,16 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         tableView.dataSource = self
         tableView.cellLayoutMarginsFollowReadableWidth = false
         
-        segmentedControl.selectedSegmentIndex = self.selectedSegmentIndex
+//        segmentedControl.selectedSegmentIndex = self.selectedSegmentIndex
         
-        let sortedViews = segmentedControl.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
-        sortedViews[0].tintColor = Constants.color.green
-        sortedViews[0].backgroundColor = UIColor.white
-
-        for index in 1..<3{
-            sortedViews[index].tintColor = UIColor.white
-            sortedViews[index].backgroundColor = UIColor.gray
-        }
+//        let sortedViews = segmentedControl.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
+//        sortedViews[0].tintColor = Constants.color.green
+//        sortedViews[0].backgroundColor = UIColor.white
+//
+//        for index in 1..<3{
+//            sortedViews[index].tintColor = UIColor.white
+//            sortedViews[index].backgroundColor = UIColor.gray
+//        }
         
         
         AuthApi.clearNotifications()
@@ -89,10 +89,10 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
         
-        segmentedControl.layer.borderWidth = 1
-        segmentedControl.layer.borderColor = UIColor.white.cgColor
-        segmentedControl.layer.cornerRadius = 6
-        segmentedControl.clipsToBounds = true
+//        segmentedControl.layer.borderWidth = 1
+//        segmentedControl.layer.borderColor = UIColor.white.cgColor
+//        segmentedControl.layer.cornerRadius = 6
+//        segmentedControl.clipsToBounds = true
         
         navBar.titleTextAttributes = Constants.navBar.attrs
         navBar.barTintColor = Constants.color.navy
@@ -241,9 +241,9 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
     @IBAction func indexChanged(_ sender: AnyObject) {
         
-        let segmentedControl = sender as! UISegmentedControl
+//        let segmentedControl = sender as! UISegmentedControl
         
-        self.selectedSegmentIndex = segmentedControl.selectedSegmentIndex
+//        self.selectedSegmentIndex = segmentedControl.selectedSegmentIndex
         
         tableView.reloadData()
         print("switch")

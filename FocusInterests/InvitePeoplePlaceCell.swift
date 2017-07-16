@@ -23,6 +23,7 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var inviteCellContentView: UIView!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var followButton: UIButton!
     
     var UID = ""
     var username = ""
@@ -39,6 +40,17 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
         self.inviteButtonOut.layer.masksToBounds = false
         self.inviteButtonOut.layer.shadowColor = UIColor.black.cgColor
         self.inviteButtonOut.layer.shadowRadius = 5.0
+        
+        self.followButton.layer.cornerRadius = 6
+        self.followButton.clipsToBounds = true
+        self.followButton.roundCorners(radius: 5)
+        self.followButton.layer.shadowOpacity = 0.5
+        self.followButton.layer.masksToBounds = false
+        self.followButton.layer.shadowColor = UIColor.black.cgColor
+        self.followButton.layer.shadowRadius = 5.0
+        
+        self.followButton.setTitle("Follow", for: UIControlState.normal)
+        self.followButton.setTitle("Following", for: UIControlState.selected)
         
         self.placeImage.roundedImage()
         self.placeImage.layer.borderWidth = 2
@@ -82,6 +94,28 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
 //        //super.setSelected(selected, animated: animated)
 //    }
 //    
+    
+    @IBAction func followButtonPressed(_ sender: Any) {
+        self.followButton.isSelected = !self.followButton.isSelected
+        if self.followButton.isSelected == true{
+            self.followButton.layer.borderWidth = 1
+            self.followButton.layer.borderColor = UIColor.white.cgColor
+            self.followButton.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
+            self.followButton.layer.shadowOpacity = 0.5
+            self.followButton.layer.masksToBounds = false
+            self.followButton.layer.shadowColor = UIColor.black.cgColor
+            self.followButton.layer.shadowRadius = 5.0
+        }else if self.followButton.isSelected == false {
+            self.followButton.layer.borderWidth = 0.0
+            self.followButton.backgroundColor = Constants.color.navy
+            self.followButton.layer.shadowOpacity = 0.5
+            self.followButton.layer.masksToBounds = false
+            self.followButton.layer.shadowColor = UIColor.black.cgColor
+            self.followButton.layer.shadowRadius = 5.0
+            
+        }
+    }
+    
     @IBAction func invite(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
