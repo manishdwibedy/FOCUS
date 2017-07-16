@@ -14,7 +14,7 @@ import Crashlytics
 import FirebaseStorage
 import SCLAlertView
 import FirebaseAuth
-
+import DataCache
 
 func featuresToString(features: [Feature]) -> String {
     var strArray = [String]()
@@ -818,51 +818,59 @@ func addGreenDot(label: UILabel, content: String, right: Bool = false){
     }
 }
 
+   
 func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
-    
-    let url = "https://api.yelp.com/v3/businesses/\(ID)"
-    
-    let headers: HTTPHeaders = [
-        "authorization": "Bearer \(AuthApi.getYelpToken()!)",
-        "cache-contro": "no-cache"
-    ]
-    
-    Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
-        let json = JSON(data: response.data!)
-        let id = json["id"].stringValue
-        let name = json["name"].stringValue
-        let image_url = json["image_url"].stringValue
-        let isClosed = json["is_closed"].boolValue
-        let reviewCount = json["review_count"].intValue
-        let rating = json["rating"].floatValue
-        let latitude = json["coordinates"]["latitude"].doubleValue
-        let longitude = json["coordinates"]["longitude"].doubleValue
-        let price = json["price"].stringValue
-        let address_json = json["location"]["display_address"].arrayValue
-        let phone = json["display_phone"].stringValue
-        let distance = json["distance"].doubleValue
-        let categories_json = json["categories"].arrayValue
-        let url = json["url"].stringValue
-        let plain_phone = json["phone"].stringValue
-        let is_closed = json["is_closed"].boolValue
-        
-        var address = [String]()
-        for raw_address in address_json{
-            address.append(raw_address.stringValue)
-        }
-        
-        var categories = [Category]()
-        for raw_category in categories_json as [JSON]{
-            let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
-            categories.append(category)
-        }
-        
-        let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
-        
-        
+    if let place = DataCache.instance.readObject(forKey: ID) as? Place{
         completion(place)
+    }
+    else{
         
+        let url = "https://api.yelp.com/v3/businesses/\(ID)"
+        
+        let headers: HTTPHeaders = [
+            "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+            "cache-contro": "no-cache"
+        ]
+        
+        Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
+            let json = JSON(data: response.data!)
+            let id = json["id"].stringValue
+            let name = json["name"].stringValue
+            let image_url = json["image_url"].stringValue
+            let isClosed = json["is_closed"].boolValue
+            let reviewCount = json["review_count"].intValue
+            let rating = json["rating"].floatValue
+            let latitude = json["coordinates"]["latitude"].doubleValue
+            let longitude = json["coordinates"]["longitude"].doubleValue
+            let price = json["price"].stringValue
+            let address_json = json["location"]["display_address"].arrayValue
+            let phone = json["display_phone"].stringValue
+            let distance = json["distance"].doubleValue
+            let categories_json = json["categories"].arrayValue
+            let url = json["url"].stringValue
+            let plain_phone = json["phone"].stringValue
+            let is_closed = json["is_closed"].boolValue
+            
+            var address = [String]()
+            for raw_address in address_json{
+                address.append(raw_address.stringValue)
             }
+            
+            var categories = [Category]()
+            for raw_category in categories_json as [JSON]{
+                let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                categories.append(category)
+            }
+            
+            let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
+            
+//            DataCache.instance.write(object: place, forKey: ID)
+            completion(place)
+            
+        }
+    }
+
+    
 }
 
 func dropfromTop(view: UIView){

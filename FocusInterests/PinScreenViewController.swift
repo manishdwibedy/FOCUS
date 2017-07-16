@@ -335,7 +335,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             }
             if isFacebook == true
             {
-                try! Share.facebookShare(with: URL(string: "www.google.com")!, description: pinTextView.text!)
+                try! Share.facebookShare(with: URL(string: "http://mapofyourworld.com")!, description: pinTextView.text!)
             }
         }
         pinTextView.text = "What are you up to? Type here."
@@ -532,7 +532,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBAction func facebookButton(_ sender: Any) {
         if isFacebook == false
         {
-            isFacebook = true
             if AuthApi.getFacebookToken() == nil{
                 
                 loginView.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
@@ -549,10 +548,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                                 Auth.auth().currentUser?.link(with: credential) { (user, error) in
                                     if error != nil {
                                         AuthApi.set(facebookToken: tokenString)
+                                        self.isFacebook = true
+                                        self.facebookOut.setImage(UIImage(named: "facebookGreen"), for: UIControlState.normal)
                                         return
                                     }
                                 }
-                                
                             }
                         } else {
                             self.showLoginFailedAlert(loginType: "Facebook")
@@ -560,7 +560,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     }
                 }
             }
-            facebookOut.setImage(UIImage(named: "facebookGreen"), for: UIControlState.normal)
+            else{
+                self.isFacebook = true
+                self.facebookOut.setImage(UIImage(named: "facebookGreen"), for: UIControlState.normal)
+            }
+            
         }else
         {
             isFacebook = false
@@ -571,7 +575,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBAction func twitterButton(_ sender: Any) {
         if isTwitter == false
         {
-            if AuthApi.getTwitterToken() != nil{
+            if AuthApi.getTwitterToken() == nil{
                 Share.loginTwitter()
             }
             isTwitter = true

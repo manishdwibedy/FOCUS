@@ -12,9 +12,16 @@ import FirebaseDatabase
 import FirebaseStorage
 import ChameleonFramework
 import GeoFire
+import DataCache
 
 struct Constants {
     
+    struct Cache {
+        public static var placeCache = DataCache(name: "Place")
+        
+        //placeCache.maxCachePeriodInSecond = 7 * 24 * 60 * 60
+
+    }
     struct tableCellReuseIDs {
         public static let notificationCellId = "NotificationCell"
         public static let chooseInterestId = "ChooseInterest"

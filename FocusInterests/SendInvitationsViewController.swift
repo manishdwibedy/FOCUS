@@ -56,6 +56,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     var filteredContacts = [CNContact]()
     var searchingForContact = false
     
+    var isFacebook = false
+    var isTwitter = fase
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -391,6 +393,59 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             }
             self.filteredSection.sort()
             self.friendsTableView.reloadData()
+        }
+    }
+    
+    @IBAction func shareOnFB(_ sender: Any) {
+        if AuthApi.getFacebookToken() == nil{
+            
+            loginView.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "")
+                    self.showLoginFailedAlert(loginType: "Facebook")
+                } else {
+                    if let res = result {
+                        if res.isCancelled {
+                            return
+                        }
+                        if let tokenString = FBSDKAccessToken.current().tokenString {
+                            let credential = FacebookAuthProvider.credential(withAccessToken: tokenString)
+                            Auth.auth().currentUser?.link(with: credential) { (user, error) in
+                                if error != nil {
+                                    AuthApi.set(facebookToken: tokenString)
+                                    self.isFacebook = true
+                                    self.facebookSwitch.isOn = true
+                                    return
+                                }
+                            }
+                        }
+                    } else {
+                        self.isFacebook = false
+                        self.facebookSwitch.isOn = false
+                        self.showLoginFailedAlert(loginType: "Facebook")
+                    }
+                }
+            }
+        }
+        else{
+            self.isFacebook = true
+            self.facebookSwitch.isOn = true
+        }
+    }
+    
+    @IBAction func shareOnTwitter(_ sender: Any) {
+        if AuthApi.getTwitterToken() == nil{
+            Share.loginTwitter()
+        }
+        
+        if AuthApi.getTwitterToken() != nil{
+            isTwitter = true
+            self.twitterSwitch.isOn = true
+        }
+        else{
+            isTwitter = true
+            self.twitterSwitch.isOn = true
+            
         }
     }
     

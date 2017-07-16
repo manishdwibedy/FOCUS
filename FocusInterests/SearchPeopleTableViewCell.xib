@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="362" height="105"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mns-GT-1Sv" id="n0I-2n-AQA">
-                <rect key="frame" x="0.0" y="0.0" width="362" height="104"/>
+                <rect key="frame" x="0.0" y="0.0" width="362" height="104.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6wk-9t-A2I">
@@ -135,9 +135,9 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnY-ck-PNX">
-                                <rect key="frame" x="207" y="52" width="50" height="0.0"/>
+                                <rect key="frame" x="202" y="52" width="60" height="0.0"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="pah-wA-nMh"/>
+                                    <constraint firstAttribute="width" constant="60" id="pah-wA-nMh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
