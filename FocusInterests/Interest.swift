@@ -28,7 +28,7 @@ enum InterestStatus{
         case .normal:
             self = .like
         case .like:
-            self = .hate
+            self = .normal
         case .hate:
             break
         }

@@ -13,6 +13,8 @@ import FirebaseStorage
 import SCLAlertView
 import MessageUI
 import Crashlytics
+import FBSDKLoginKit
+import FirebaseAuth
  
 protocol SelectAllContactsDelegate {
     func selectedAllFollowers()
@@ -57,7 +59,9 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     var searchingForContact = false
     
     var isFacebook = false
-    var isTwitter = fase
+    var isTwitter = false
+    let loginView = FBSDKLoginManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -478,4 +482,13 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         self.navigationController?.popViewController(animated: true)
 
     }
+    
+    func showLoginFailedAlert(loginType: String) {
+        let alert = UIAlertController(title: "Login error", message: "There has been an error logging in with \(loginType). Please try again.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
+        alert.view.tintColor = UIColor.primaryGreen()
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
