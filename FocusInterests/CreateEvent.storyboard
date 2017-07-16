@@ -391,9 +391,15 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vo7-Xg-Ult">
                                                 <rect key="frame" x="300" y="10" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="shareOnFB:" destination="xxR-Li-4ZG" eventType="valueChanged" id="WhE-a8-rj0"/>
+                                                </connections>
                                             </switch>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3FE-nU-AvO">
                                                 <rect key="frame" x="300" y="55" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="shareOnTwitter:" destination="xxR-Li-4ZG" eventType="valueChanged" id="UaG-Bf-nhc"/>
+                                                </connections>
                                             </switch>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9H-td-GzC">
                                                 <rect key="frame" x="8" y="94" width="359" height="38"/>
@@ -616,7 +622,7 @@
         <image name="Twitter_Logo_White_On_Image" width="250" height="204"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eLh-9t-fEY"/>
         <segue reference="amW-Q6-Hfg"/>
+        <segue reference="pdH-Ex-mw2"/>
     </inferredMetricsTieBreakers>
 </document>
