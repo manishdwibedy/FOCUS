@@ -80,10 +80,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwT-QA-9Ah">
-                            <rect key="frame" x="88" y="110.5" width="150" height="0.0"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="150" id="ggO-mR-TUl"/>
-                            </constraints>
+                            <rect key="frame" x="88" y="110.5" width="277" height="0.0"/>
                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -137,6 +134,7 @@
                         <constraint firstItem="Ebi-Z1-NiF" firstAttribute="leading" secondItem="IGc-ka-8U9" secondAttribute="leading" constant="8" id="XsD-gw-wTV"/>
                         <constraint firstItem="gm1-iz-FXs" firstAttribute="trailing" secondItem="FE3-LU-8We" secondAttribute="trailing" id="ap4-nm-4Oz"/>
                         <constraint firstItem="LeW-7c-Np1" firstAttribute="leading" secondItem="FE3-LU-8We" secondAttribute="leading" id="eil-uo-Glp"/>
+                        <constraint firstAttribute="trailing" secondItem="QwT-QA-9Ah" secondAttribute="trailing" constant="10" id="qWo-CL-Hi6"/>
                         <constraint firstAttribute="trailing" secondItem="LeW-7c-Np1" secondAttribute="trailing" constant="10" id="sf4-6I-aQ7"/>
                         <constraint firstItem="LeW-7c-Np1" firstAttribute="centerY" secondItem="T5k-7E-BtB" secondAttribute="centerY" id="tZx-ca-vAK"/>
                         <constraint firstItem="gm1-iz-FXs" firstAttribute="top" secondItem="IGc-ka-8U9" secondAttribute="top" constant="5" id="zot-AI-srv"/>

@@ -395,12 +395,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     func showFollowing(sender:UITapGestureRecognizer) {
         let followerViewController = UIStoryboard(name: "Followers", bundle: nil).instantiateViewController(withIdentifier: "FollowersViewController") as! FollowersViewController
         followerViewController.windowTitle = "Following"
+        followerViewController.ID = AuthApi.getFirebaseUid()!
         self.present(followerViewController, animated: true, completion: nil)
     }
     
     func showFollower(sender:UITapGestureRecognizer) {
         let followerViewController = UIStoryboard(name: "Followers", bundle: nil).instantiateViewController(withIdentifier: "FollowersViewController") as! FollowersViewController
         followerViewController.windowTitle = "Followers"
+        followerViewController.ID = AuthApi.getFirebaseUid()!
         self.present(followerViewController, animated: true, completion: nil)
     }
     

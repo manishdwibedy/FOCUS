@@ -66,6 +66,11 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
+    var places = [Place]()
+    var all_places = [Place]()
+    var followingPlaces = [Place]()
+    var filtered = [Place]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         formatNavBar()

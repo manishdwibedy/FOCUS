@@ -53,7 +53,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var userLocation: GMSMarker? = nil
     var showTutorial = false
     
-//    var searchPlacesTab: SearchPlacesViewController? = nil
+    var exploreTab: InviteViewController? = nil
     var searchEventsTab: SearchEventsViewController? = nil
     var notifs = [FocusNotification]()
     var invites = [FocusNotification]()
@@ -225,7 +225,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
         })
         
-//        self.searchPlacesTab = self.tabBarController?.viewControllers?[3] as? SearchPlacesViewController
+//        self.exploreTab = self.tabBarController?.viewControllers?[3] as? InviteViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
         let token = Messaging.messaging().fcmToken
@@ -962,14 +962,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func userProfileClicked() {
-        // testing create event
-//        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
-//        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
-//        self.present(controller, animated: true, completion: nil)
-        
         let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
-        
-//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
         dropfromTop(view: self.view)
         
@@ -1031,8 +1024,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                             self.placeMapping[place.id] = place
                             self.getPlaceHours(id: place.id)
                             self.places.append(place)
-//                            if !(self.searchPlacesTab?.followingPlaces.contains(place))!{
-//                                self.searchPlacesTab?.followingPlaces.append(place)
+//                            if !(self.exploreTab?.followingPlaces.contains(place))!{
+//                                self.exploreTab?.followingPlaces.append(place)
 //                            }
                             print("places count - \(self.places.count)")
                         }
@@ -1141,7 +1134,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     
                     place?.setHours(hours: hours)
                 }
-                place?.set_is_open(is_open: json["is_open_now"].boolValue)
+                place?.set_is_open(is_open: json["hours"][0]["is_open_now"].boolValue)
             }
         }
         
