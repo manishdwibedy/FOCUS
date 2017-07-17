@@ -993,6 +993,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func invitationClicked()  {
         // show invitation screen
         
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NewInviteViewController") as! NewInviteViewController
+        
+        dropfromTop(view: self.view)
+        
+        self.present(vc, animated: true, completion: nil)
+        
     }
     
     func fetchPlaces(around location: CLLocation, token: String){

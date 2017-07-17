@@ -30,14 +30,14 @@
                         <button opaque="NO" contentMode="scaleAspectFit" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzW-Ah-j3P">
                             <rect key="frame" x="0.0" y="0.0" width="69" height="40"/>
                             <edgeInsets key="layoutMargins" top="8" left="22" bottom="8" right="8"/>
-                            <state key="normal" image="User_Profile"/>
+                            <state key="normal" image="User Icon white 30x30"/>
                             <connections>
                                 <action selector="profileButtonPressed:" destination="-1" eventType="touchUpInside" id="Ff1-rb-4Ff"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
                             <rect key="frame" x="89" y="0.0" width="68.5" height="40"/>
-                            <state key="normal" image="Messages"/>
+                            <state key="normal" image="Message Icon white 30x30"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="badgeBackgroundColor">
                                     <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -58,7 +58,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-MD-iuK" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
                             <rect key="frame" x="177.5" y="0.0" width="69" height="40"/>
-                            <state key="normal" image="Notifications"/>
+                            <state key="normal" image="Notifications Icon white 30x30"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetRight">
                                     <real key="value" value="20"/>
@@ -115,9 +115,9 @@
         </view>
     </objects>
     <resources>
-        <image name="Messages" width="30" height="30"/>
-        <image name="Notifications" width="30" height="30"/>
-        <image name="User_Profile" width="30" height="30"/>
+        <image name="Message Icon white 30x30" width="30" height="30"/>
+        <image name="Notifications Icon white 30x30" width="30" height="30"/>
+        <image name="User Icon white 30x30" width="30" height="30"/>
         <image name="plus" width="32" height="32"/>
     </resources>
 </document>

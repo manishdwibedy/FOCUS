@@ -69,7 +69,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.globeButton.setImage(UIImage(image: UIImage(named: "Community Green"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
+    self.globeButton.setImage(UIImage(named: "Globe_White"), for: .normal)    
+//        self.globeButton.setImage(UIImage(image: UIImage(named: "web"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
         
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
