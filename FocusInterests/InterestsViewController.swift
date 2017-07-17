@@ -16,8 +16,6 @@ import Crashlytics
 var interest_status = [Interest]()
 var interest_mapping = [String: Int]()
 
-
-
 let sidePadding: CGFloat = 20.0
 let numberOfItemsPerRow: CGFloat = 3.0
 let hieghtAdjustment: CGFloat = 20.0

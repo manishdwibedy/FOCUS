@@ -329,6 +329,12 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            self.selectedAllFollowers()
+        }
+    }
+    
     func contactHasBeenSelected(contact: String, index: Int){
         selectedFriend[index] = true
         let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
@@ -482,6 +488,10 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         searchingForContact = true
         self.searchBar.endEditing(true)
         self.friendsTableView.reloadData()
+    }
+    
+    @IBAction func returnToCreateEvents(){
+        performSegue(withIdentifier: "goBackToCreateEvents", sender: self)
     }
     
     @IBAction func backPressed(_ sender: UIBarButtonItem) {

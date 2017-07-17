@@ -643,7 +643,7 @@
         <image name="Twitter_Logo_White_On_Image" width="250" height="204"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eLh-9t-fEY"/>
         <segue reference="amW-Q6-Hfg"/>
+        <segue reference="pdH-Ex-mw2"/>
     </inferredMetricsTieBreakers>
 </document>
