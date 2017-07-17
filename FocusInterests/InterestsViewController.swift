@@ -309,6 +309,8 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
         widthAnimation.fromValue = 1
         widthAnimation.toValue = borderWidth
         widthAnimation.duration = 4
+        parentReturnVC.focusLabelView.allCornersRounded(radius: 5.0)
+        parentReturnVC.focusLabelView.layer.cornerRadius = 6.0
         parentReturnVC.focusLabelView.layer.borderWidth = borderWidth
         
         let bothAnimations = CAAnimationGroup()

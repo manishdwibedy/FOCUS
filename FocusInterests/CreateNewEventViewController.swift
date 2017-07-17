@@ -261,7 +261,7 @@ class CreateNewEventViewController: UIViewController,
         
         choseFocusButton.layer.cornerRadius = 6
         choseFocusButton.clipsToBounds = true
-        choseFocusButton.layer.borderColor =  UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
+        choseFocusButton.layer.borderColor =  UIColor.white.cgColor
         choseFocusButton.layer.borderWidth = 1
         
 //        let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestTableView.bounds.size.width, height: self.interestTableView.bounds.size.height))
