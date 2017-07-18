@@ -152,7 +152,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                 }
             }
         })
-        _ = ref.queryLimited(toLast: 20).observeSingleEvent(of: .value, with: { snapshot in
+        _ = ref.observeSingleEvent(of: .value, with: { snapshot in
             let users = snapshot.value as? [String : Any] ?? [:]
             
             _ = users.count
