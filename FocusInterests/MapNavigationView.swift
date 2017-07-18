@@ -16,7 +16,7 @@ protocol NavigationInteraction {
     func invitationClicked()
 }
 
-class MapNavigationView: UIView, UISearchBarDelegate {
+class MapNavigationView: UIView, UISearchBarDelegate{
     var delegate: NavigationInteraction?
     
     @IBOutlet weak var userProfileButton: UIButton!

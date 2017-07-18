@@ -19,6 +19,26 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var usernameTf: UITextField!
     @IBOutlet weak var nameTf: UITextField!
     @IBOutlet weak var profilePhotoView: UIImageView!
+    @IBOutlet weak var privateInfoView: UIView!
+    @IBOutlet weak var navBar: UINavigationBar!
+    
+    var doneButtonToolbarItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(EditProfileViewController.donePressed))
+    var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    
+    lazy var doneToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        //        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.dateDoneButton], animated: false)
+        toolbar.setItems([self.flexibleSpaceButton, self.doneButtonToolbarItem], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    var genderPickerView = UIPickerView()
     
     let genders = ["Not Specified", "Male", "Female"]
     let ACCEPTABLE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789_."
@@ -35,8 +55,17 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.fillDataFromUser()
         hideKeyboardWhenTappedAround()
         
-        genderTf.delegate = self
-        usernameTf.delegate = self
+        self.nameTf.delegate = self
+        self.usernameTf.delegate = self
+        self.websiteTf.delegate = self
+        self.infoTf.delegate = self
+        self.emailTf.delegate = self
+        self.phoneTf.delegate = self
+        self.genderTf.delegate = self
+        
+        self.genderPickerView.delegate = self
+        
+        self.genderPickerView.dataSource = self
         
         self.userPickerView = UIPickerView(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 190))
         self.userPickerView.delegate = self
@@ -44,6 +73,10 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.userPickerView.backgroundColor = UIColor.lightGray
         self.userPickerView.alpha = 0.9
         self.genderTf.inputView = self.userPickerView
+        
+        self.view.backgroundColor = Constants.color.navy
+        self.privateInfoView.backgroundColor = Constants.color.navy
+        self.navBar.barTintColor = Constants.color.navy
         
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 25))
         toolBar.barStyle = .default
@@ -225,21 +258,63 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         dismiss(animated: true, completion: nil)
     }
     
+    func donePressed(){
+        
+        if self.nameTf.isFirstResponder{
+            self.view.endEditing(true)
+            self.nameTf.resignFirstResponder()
+        }else if self.usernameTf.isFirstResponder{
+            self.view.endEditing(true)
+            self.usernameTf.resignFirstResponder()
+        }else if self.websiteTf.isFirstResponder{
+            self.view.endEditing(true)
+            self.websiteTf.resignFirstResponder()
+        }else if self.infoTf.isFirstResponder{
+            self.view.endEditing(true)
+            self.infoTf.resignFirstResponder()
+        }else if self.emailTf.isFirstResponder{
+            self.view.endEditing(true)
+            self.emailTf.resignFirstResponder()
+        }else if self.phoneTf.isFirstResponder{
+            self.view.endEditing(true)
+            self.phoneTf.resignFirstResponder()
+        }else if self.genderTf.isFirstResponder{
+            self.view.endEditing(true)
+            self.genderTf.resignFirstResponder()
+        }
+    }
     
-//    @IBOutlet weak var genderTf: UITextField!
-//    @IBOutlet weak var phoneTf: UITextField!
-//    @IBOutlet weak var emailTf: UITextField!
-//    @IBOutlet weak var infoTf: UITextField!
-//    @IBOutlet weak var websiteTf: UITextField!
-//    @IBOutlet weak var usernameTf: UITextField!
-//    @IBOutlet weak var nameTf: UITextField!
-//    @IBOutlet weak var profilePhotoView: UIImageView!
-//    
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        switch textField {
+        case self.nameTf:
+            textField.inputAccessoryView = self.doneToolbar
+        case self.usernameTf:
+            textField.inputAccessoryView = self.doneToolbar
+        case self.websiteTf:
+            textField.inputAccessoryView = self.doneToolbar
+        case self.infoTf:
+            textField.inputAccessoryView = self.doneToolbar
+        case self.emailTf:
+            textField.inputAccessoryView = self.doneToolbar
+        case self.phoneTf:
+            textField.inputAccessoryView = self.doneToolbar
+        case self.genderTf:
+            self.genderTf.inputView = self.genderPickerView
+//            textField.inputAccessoryView = self.doneToolbar
+        default:
+            break
+        }
+        
+//        if textField == self.genderTf {
+//            self.genderTf.inputView = self.genderPickerView
+//        }
+//        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTf{
             usernameTf.becomeFirstResponder()
-        }
-        else if textField == usernameTf{
+        }else if textField == usernameTf{
             
             Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
                 if ((snapshot.value as? NSDictionary)?[self.usernameTf.text ?? ""]) != nil{

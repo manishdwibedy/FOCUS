@@ -111,13 +111,13 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         
         chosseFocusOut.layer.cornerRadius = 6
         chosseFocusOut.clipsToBounds = true
-        chosseFocusOut.layer.borderColor =  UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
+        chosseFocusOut.layer.borderColor =  UIColor.white.cgColor
         chosseFocusOut.layer.borderWidth = 1
         
         
         addImageButton.layer.cornerRadius = 6
         addImageButton.clipsToBounds = true
-        addImageButton.layer.borderColor =  UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
+        addImageButton.layer.borderColor =  UIColor.white.cgColor
         addImageButton.layer.borderWidth = 1
         
         pinOut.layer.cornerRadius = 6
@@ -170,7 +170,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         let widthAnimation = CABasicAnimation(keyPath: "borderWidth")
         widthAnimation.fromValue = 1
         widthAnimation.toValue = 2
-        widthAnimation.duration = 4
+        widthAnimation.duration = 1.0
         self.pinTextView.layer.borderWidth = 2
         
         let bothAnimations = CAAnimationGroup()
@@ -178,8 +178,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         bothAnimations.animations = [colorAnimation, widthAnimation]
         bothAnimations.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
-        self.pinTextView.layer.add(bothAnimations, forKey: "color and width")
-        
+//        self.pinTextView.layer.add(bothAnimations, forKey: "color and width")
+        self.animateBorderWidth(view: self.pinTextView, from: 0.0, to: 1.0, duration: 2.0)
         
         Config.showsVideoTab = false
     }
@@ -190,7 +190,10 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         animation.toValue = to
         animation.duration = duration
         view.layer.add(animation, forKey: "Width")
-        view.layer.borderWidth = to
+        view.allCornersRounded(radius: 5.0)
+        view.layer.cornerRadius = 8.0
+        view.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1.0/255.0, alpha: 1.0).cgColor
+//        view.layer.borderWidth = to
     }
     
     func showFocus(sender: UITapGestureRecognizer){
@@ -234,25 +237,44 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func changeLocation(_ sender: Any) {
+        let autoCompleteController = self.createGMSViewController()
+        
+        present(autoCompleteController, animated: true, completion: nil)
+    }
+    
+    func createGMSViewController() -> GMSAutocompleteViewController{
         let autoCompleteController = GMSAutocompleteViewController()
         
         let filter = GMSAutocompleteFilter()
         filter.country = "US"
         
         autoCompleteController.autocompleteFilter = filter
-
+        
+        
         autoCompleteController.delegate = self
         
-        self.navigationController?.navigationBar.barTintColor = Constants.color.navy
-        
-        UINavigationBar.appearance().barTintColor = Constants.color.navy
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = UIColor.white
         
+        //        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!
+        ]
         
-        let searchBarTextAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.systemFontSize)]
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = searchBarTextAttributes
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
         
-        present(autoCompleteController, animated: true, completion: nil)
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = placeholderAttributes
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = placeholderTextAttributes
+        
+        autoCompleteController.primaryTextColor = UIColor.white
+        autoCompleteController.primaryTextHighlightColor = Constants.color.green
+        autoCompleteController.secondaryTextColor = UIColor.white
+        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        autoCompleteController.tableCellSeparatorColor = UIColor.white
+        
+        return autoCompleteController
     }
     
     
@@ -380,9 +402,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         }
     
     }
-    
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         cellArray.removeAll()

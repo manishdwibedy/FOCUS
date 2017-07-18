@@ -58,8 +58,8 @@ class PlaceViewController: UIViewController {
 //        ratingBackground.layer.cornerRadius = 5
         self.loadPlace(place: self.place!)
         
-
-        self.mapButton.setImage(UIImage(image: UIImage(named: "Community Green"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
+    self.mapButton.setImage(UIImage(named: "Globe_White"), for: .normal)
+//        self.mapButton.setImage(UIImage(image: UIImage(named: "web"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
         
         hideKeyboardWhenTappedAround()
         

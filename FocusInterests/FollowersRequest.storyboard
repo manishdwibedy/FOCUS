@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Followers Request View Controller-->
+        <scene sceneID="xAK-ts-6Xb">
+            <objects>
+                <viewController storyboardIdentifier="FollowersRequest" id="XrM-1m-syB" customClass="FollowersRequestViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G1I-dm-bS7"/>
+                        <viewControllerLayoutGuide type="bottom" id="pKf-L6-aHR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Azr-Wy-J0b">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8k9-cX-k2D">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="60"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BlT-OY-l2M">
+                                <rect key="frame" x="50" y="19" width="150" height="21"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Df6-Ol-Cyb">
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="21"/>
+                                        <color key="backgroundColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <state key="normal" title="Accept">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="acceptedOrDeclineButtonClicked:" destination="XrM-1m-syB" eventType="touchUpInside" id="sNk-QI-eRM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLg-jg-n8e">
+                                        <rect key="frame" x="85" y="0.0" width="65" height="21"/>
+                                        <color key="backgroundColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <state key="normal" title="Decline">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="acceptedOrDeclineButtonClicked:" destination="XrM-1m-syB" eventType="touchUpInside" id="7PL-Ao-f4x"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Yor-KU-n8u"/>
+                                    <constraint firstItem="JLg-jg-n8e" firstAttribute="width" secondItem="Df6-Ol-Cyb" secondAttribute="width" id="kmP-Te-20q"/>
+                                    <constraint firstAttribute="width" constant="150" id="tSY-kw-K44"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="8k9-cX-k2D" firstAttribute="leading" secondItem="Azr-Wy-J0b" secondAttribute="leading" id="0Bn-V9-tGh"/>
+                            <constraint firstAttribute="trailing" secondItem="8k9-cX-k2D" secondAttribute="trailing" id="4fx-ra-obG"/>
+                            <constraint firstItem="8k9-cX-k2D" firstAttribute="top" secondItem="G1I-dm-bS7" secondAttribute="bottom" id="NrQ-mF-Ih2"/>
+                            <constraint firstItem="BlT-OY-l2M" firstAttribute="centerX" secondItem="Azr-Wy-J0b" secondAttribute="centerX" id="qFJ-Zb-nOQ"/>
+                            <constraint firstItem="BlT-OY-l2M" firstAttribute="centerY" secondItem="Azr-Wy-J0b" secondAttribute="centerY" id="vOb-Q2-NZw"/>
+                            <constraint firstItem="pKf-L6-aHR" firstAttribute="top" secondItem="8k9-cX-k2D" secondAttribute="bottom" id="wN6-1Z-d4X"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="150" height="60"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="60"/>
+                    <connections>
+                        <outlet property="acceptButton" destination="Df6-Ol-Cyb" id="kNN-nE-RX8"/>
+                        <outlet property="buttonStackView" destination="BlT-OY-l2M" id="FQG-Ie-flc"/>
+                        <outlet property="declineButton" destination="JLg-jg-n8e" id="5jY-xa-v9Z"/>
+                        <outlet property="ifAcceptedLabel" destination="8k9-cX-k2D" id="V0G-4H-Z1c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WaY-4R-KwX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="72" y="107.94602698650675"/>
+        </scene>
+    </scenes>
+</document>

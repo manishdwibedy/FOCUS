@@ -16,23 +16,28 @@ class SelectAllContactsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Green.png"), for: .selected)
         self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
+        self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Green.png"), for: .selected)
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+        self.selectAllFollowersButton.isSelected = selected
+        if (self.selectAllFollowersButton.isSelected == true){
+            delegate?.selectedAllFollowers()
+        }else{
+            delegate?.deselectAllFollowers()
+        }
     }
     
     @IBAction func selectedAllFollowers(_ sender: Any) {
-        if(self.selectAllFollowersButton.isSelected == false){
-            self.selectAllFollowersButton.isSelected = true
-//            delegate?.selectedAllFollowers()
+        self.selectAllFollowersButton.isSelected = !self.selectAllFollowersButton.isSelected
+        self.setSelected(self.selectAllFollowersButton.isSelected, animated: false)
+        if (self.selectAllFollowersButton.isSelected == true){
+            delegate?.selectedAllFollowers()
         }else{
-            self.selectAllFollowersButton.isSelected = false
-//            delegate?.deselectAllFollowers()
+            delegate?.deselectAllFollowers()
         }
     }
 }

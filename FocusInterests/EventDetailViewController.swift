@@ -21,6 +21,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var fullnameLabel: UILabel!
     @IBOutlet weak var distanceLabelInNavBar: UIButton!
     
+    @IBOutlet weak var globeButton: UIButton!
     @IBOutlet weak var eventInterests: UILabel!
     @IBOutlet weak var eventAmount: UILabel!
     @IBOutlet weak var eventAmountHeight: NSLayoutConstraint!
@@ -67,6 +68,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    self.globeButton.setImage(UIImage(named: "Globe_White"), for: .normal)    
+//        self.globeButton.setImage(UIImage(image: UIImage(named: "web"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
+        
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
         commentsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -536,6 +541,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
    
     
+    @IBAction func goBackToMap(_ sender: Any) {
+        performSegue(withIdentifier: "unwindToMapViewControllerWithSegue", sender: self)
+    }
     
     
     @IBAction func navBack(_ sender: Any) {
@@ -671,4 +679,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             self.attendButton.backgroundColor = Constants.color.green
         }
     }
+    
+    
 }

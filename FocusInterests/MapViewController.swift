@@ -24,7 +24,7 @@ import SCLAlertView
 import FirebaseStorage
 import Crashlytics
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate {
+class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate, UIPopoverPresentationControllerDelegate{
     
     @IBOutlet weak var followYourFriendsView: UIView!
     @IBOutlet weak var toolbar: UIToolbar!
@@ -239,8 +239,32 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
             NSForegroundColorAttributeName : UIColor.white
             ], for: .normal)
-
+        
+//        self.navigationView.notificationsButton.addTarget(self, action: #selector(MapViewController.showPopOver), for: .touchUpInside)
     }
+    
+//    MARK: this is for popover for notifications
+    /*
+    func showPopOver(_ sender: UIButton){
+        let popController = UIStoryboard(name: "FollowersRequest", bundle: nil).instantiateViewController(withIdentifier: "FollowersRequest")
+        
+        // set the presentation style
+        popController.modalPresentationStyle = UIModalPresentationStyle.popover
+        
+        popController.preferredContentSize = CGSize(width: 200, height: 60)
+        
+        // set up the popover presentation controller
+        popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+        popController.popoverPresentationController?.delegate = self
+        popController.popoverPresentationController?.sourceView = sender as! UIView // button
+        popController.popoverPresentationController?.sourceRect = sender.bounds
+        self.present(popController, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+ */
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -992,6 +1016,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func invitationClicked()  {
         // show invitation screen
+        
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NewInviteViewController") as! NewInviteViewController
+        
+        dropfromTop(view: self.view)
+        
+        self.present(vc, animated: true, completion: nil)
         
     }
     

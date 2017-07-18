@@ -49,6 +49,7 @@ class CreateNewEventViewController: UIViewController,
     var event: Event?
     var place: GMSPlace?
     var fullAddress = ""
+    var hasNotChosenFocus = true
     let datePicker = UIDatePicker()
 //    let timePicker = UIDatePicker()
     let timePicker = UIPickerView()
@@ -78,6 +79,7 @@ class CreateNewEventViewController: UIViewController,
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var eventDateTextField: UITextField!
+    @IBOutlet weak var eventEndDateTextField: UITextField!
     @IBOutlet weak var eventTimeTextField: UITextField!
     @IBOutlet weak var eventEndTimeTextField: UITextField!
     @IBOutlet weak var eventPriceTextView: UITextField!
@@ -96,13 +98,19 @@ class CreateNewEventViewController: UIViewController,
     var previousButton = UIBarButtonItem(title: "Previous", style: .plain, target: self, action: #selector(CreateNewEventViewController.keyboardPreviousButton))
     var flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     var fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-    var dateDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.dateSelected))
+    
+    
+    var dateDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.startDateSelected))
+    var endDateDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.endDateSelected))
     var startTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.startTimeSelected))
     var endTimeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.endTimeSelected))
     var priceDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.priceSelected))
     var locationDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.locationSelected))
+    var textViewDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(CreateNewEventViewController.textViewFinished))
     
     // start and end time
+    var startDate: Date? = nil
+    var endDate: Date? = nil
     var startTime: Date? = nil
     var endTime: Date? = nil
     
@@ -119,12 +127,25 @@ class CreateNewEventViewController: UIViewController,
         return toolbar
     }()
     
+    lazy var endDateToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        //        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.dateDoneButton], animated: false)
+        toolbar.setItems([self.flexibleSpaceButton, self.endDateDoneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
     lazy var startTimeToolbar: UIToolbar = {
         let toolbar = UIToolbar()
         toolbar.barStyle = .default
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.startTimeDoneButton], animated: false)
+
         toolbar.setItems([self.flexibleSpaceButton, self.startTimeDoneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
@@ -137,7 +158,6 @@ class CreateNewEventViewController: UIViewController,
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.endTimeDoneButton], animated: false)
         toolbar.setItems([self.flexibleSpaceButton, self.endTimeDoneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
@@ -150,7 +170,6 @@ class CreateNewEventViewController: UIViewController,
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.priceDoneButton], animated: false)
         toolbar.setItems([self.flexibleSpaceButton, self.priceDoneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
@@ -163,8 +182,19 @@ class CreateNewEventViewController: UIViewController,
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.locationDoneButton], animated: false)
         toolbar.setItems([self.flexibleSpaceButton, self.locationDoneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    lazy var textViewToolbar: UIToolbar = {
+        var toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.flexibleSpaceButton, self.textViewDoneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
         return toolbar
@@ -186,21 +216,10 @@ class CreateNewEventViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.privatePublicSwitch.isOn = false
-        self.privatePublicSwitch.tintColor = Constants.color.green
+        self.privatePublicSwitch.tintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
         self.privatePublicSwitch.layer.cornerRadius = 16
-        self.privatePublicSwitch.backgroundColor = Constants.color.green
-        self.privatePublicSwitch.onTintColor = Constants.color.green
-        
-        //self.interestTableView.dataSource = self
-        //self.interestTableView.delegate = self
-        //self.searchBar.delegate = self
-        //self.searchBar.tintColor = UIColor.white
-        //self.searchBar.returnKeyType = .done
-        
-        //let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
-        
-        //textFieldInsideSearchBar?.textColor = UIColor.white
-        
+        self.privatePublicSwitch.backgroundColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
+        self.privatePublicSwitch.onTintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
         formatTextFields()
         setTextFieldDelegates()
 //<<<<<<< HEAD
@@ -222,8 +241,8 @@ class CreateNewEventViewController: UIViewController,
         self.timePicker.selectRow(0, inComponent: 2, animated: false)
         self.timeFormatter.dateFormat = "hh:mm a"
         let startTimeVal = "\(String(describing: self.timerObject[0]!)):\(String(describing: self.timerObject[1]!)) \(String(describing: self.timerObject[2]!))"
-        let startDate = timeFormatter.date(from: startTimeVal)
-        self.startTime = startDate!
+        let startingTime = timeFormatter.date(from: startTimeVal)
+        self.startTime = startingTime!
 //>>>>>>> 848ee2f2a5770820bdcb26f6428a2c0b81e6a4e8
         
         let date = Date()
@@ -231,9 +250,13 @@ class CreateNewEventViewController: UIViewController,
         self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d"
+       
+        var tapGesture : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CreateNewEventViewController.choseFocusAction(_:)))
+        tapGesture.numberOfTapsRequired = 1
+        self.interestListLabel.addGestureRecognizer(tapGesture)
+        self.interestListLabel.isUserInteractionEnabled = true
         
         eventNameTextField.delegate = self
-        self.eventNameTextField.becomeFirstResponder()
         
         eventDescriptionTextView.delegate = self
         eventDescriptionTextView.text = "Description"
@@ -242,15 +265,12 @@ class CreateNewEventViewController: UIViewController,
         datePicker.minuteInterval = 15
         //timePicker.minuteInterval = 15
         
-        choseFocusButton.layer.cornerRadius = 6
-        choseFocusButton.clipsToBounds = true
-        choseFocusButton.layer.borderColor =  UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1).cgColor
-        choseFocusButton.layer.borderWidth = 1
+        datePicker.addTarget(self, action: #selector(CreateNewEventViewController.datePickerChanged), for: .valueChanged)
         
-//        let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestTableView.bounds.size.width, height: self.interestTableView.bounds.size.height))
-//        backgroundView.backgroundColor = UIColor.clear
-//        interestTableView.backgroundView = backgroundView
-
+        choseFocusButton.layer.cornerRadius = 15
+        choseFocusButton.clipsToBounds = true
+        choseFocusButton.layer.borderColor =  UIColor.white.cgColor
+        choseFocusButton.layer.borderWidth = 1
         
         for _ in 0..<Constants.interests.interests.count{
             checkInterests.append(false)
@@ -259,9 +279,7 @@ class CreateNewEventViewController: UIViewController,
         
         self.filteredInterest = Constants.interests.interests
         self.interests = self.filteredInterest
-        //self.interestNextButton.roundCorners(radius: 5.0)
         
-        //self.interestListView.isHidden = true
         hideKeyboardWhenTappedAround()
         
         let attrs = [
@@ -273,9 +291,7 @@ class CreateNewEventViewController: UIViewController,
         navBar.barTintColor = Constants.color.navy
         
         self.guestSettingsStackView.isHidden = true
-//        self.guestListStackTopConstraint.constant -= 28
         self.interestLabelTopConstraintToSwitcher.constant = 0
-//        self.scrollViewHeight.constant -= 71
         self.view.backgroundColor = Constants.color.navy
         UIApplication.shared.statusBarStyle = .default
     }
@@ -308,10 +324,12 @@ class CreateNewEventViewController: UIViewController,
                 str += "\(value) | "
             }
             
-            self.interestListLabel.text = str
-            
+            addGreenDot(label: self.interestListLabel, content: str)
+            self.hasNotChosenFocus = false
+            self.eventNameTextField.becomeFirstResponder()
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         if let cached = Event.fetchEvent() {
@@ -339,6 +357,15 @@ class CreateNewEventViewController: UIViewController,
         registerKeyboardNotifications()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if hasNotChosenFocus {
+            self.choseFocusButton.sendActions(for: .touchUpInside)
+        }else{
+            
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unregisterKeyboardNotifications()
@@ -361,7 +388,7 @@ class CreateNewEventViewController: UIViewController,
     }
     
     func setTextFieldDelegates(){
-        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventEndTimeTextField, eventPriceTextView].map{$0.delegate = self}
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventEndDateTextField, eventTimeTextField, eventEndTimeTextField, eventPriceTextView].map{$0.delegate = self}
     }
     
     func keyboardDidShow(notification: NSNotification) {
@@ -486,7 +513,7 @@ class CreateNewEventViewController: UIViewController,
             destination.event = self.event
             
             
-            let _ = [eventNameTextField, eventDateTextField, eventTimeTextField, locationTextField, eventEndTimeTextField, eventPriceTextView].map{$0.text = nil}
+            let _ = [eventNameTextField, eventDateTextField, eventEndDateTextField,eventTimeTextField, locationTextField, eventEndTimeTextField, eventPriceTextView].map{$0.text = nil}
         }
     }
     
@@ -510,11 +537,12 @@ class CreateNewEventViewController: UIViewController,
     
     @IBAction func allowForInvitingFriendsBttn(_ sender: UIButton) {
         if self.showGuestFriendsBttn.isSelected == true {
-            self.showGuestFriendsBttn.isSelected = false
             self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Interest_blank"), for: .normal)
+            self.showGuestFriendsBttn.isSelected = false
         } else {
-            self.showGuestFriendsBttn.isSelected = true
+            self.showGuestFriendsBttn.layer.borderWidth = 0.0
             self.showGuestFriendsBttn.setBackgroundImage(UIImage(named: "Green.png"), for: .normal)
+            self.showGuestFriendsBttn.isSelected = true
         }
     }
     
@@ -547,10 +575,87 @@ class CreateNewEventViewController: UIViewController,
 //        self.eventPriceTextView.inputAccessoryView = self.priceToolbar
     }
     
-    func dateSelected(){
-        self.eventDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
-        self.view.endEditing(true)
-        self.eventTimeTextField.becomeFirstResponder()
+    func datePickerChanged(){
+        if self.eventDateTextField.isFirstResponder{
+            self.datePicker.setDate(self.datePicker.date, animated: true)
+        }else if self.eventEndDateTextField.isFirstResponder{
+            self.datePicker.setDate(self.datePicker.date, animated: true)
+        }
+    }
+    
+    func startDateSelected(){
+        
+        if let endDate = self.endDate{
+            let startYear = Calendar.current.component(.year, from: self.datePicker.date)
+            let startMonth = Calendar.current.component(.month, from: self.datePicker.date)
+            let startDay = Calendar.current.component(.day, from: self.datePicker.date)
+            
+            let endYear = Calendar.current.component(.year, from: endDate)
+            let endMonth = Calendar.current.component(.month, from: endDate)
+            let endDay = Calendar.current.component(.day, from: endDate)
+            
+            if startMonth == endMonth && startDay >= endDay{
+                SCLAlertView().showError("Change end date", subTitle: "Please enter end date after start date.")
+            }else if startMonth > endMonth{
+                SCLAlertView().showError("Change end date", subTitle: "Please enter end date after start date.")
+            }
+            
+            self.startDate = self.datePicker.date
+            self.eventDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
+            self.view.endEditing(true)
+            self.eventEndDateTextField.becomeFirstResponder()
+        }else{
+            self.startDate = self.datePicker.date
+            self.eventDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
+            self.view.endEditing(true)
+            self.eventEndDateTextField.becomeFirstResponder()
+        }
+    }
+    
+    func endDateSelected(){
+        
+        if let startingDate = self.startDate{
+//            let startDate = self.dateFormatter.date(from: startingDate)
+            print("startDate: \(startingDate)")
+            let startYear = Calendar.current.component(.year, from: startingDate)
+            let startMonth = Calendar.current.component(.month, from: startingDate)
+            let startDay = Calendar.current.component(.day, from: startingDate)
+
+            let endYear = Calendar.current.component(.year, from: self.datePicker.date)
+            let endMonth = Calendar.current.component(.month, from: self.datePicker.date)
+            let endDay = Calendar.current.component(.day, from: self.datePicker.date)
+            
+            if startYear == endYear{
+                if startMonth < endMonth{
+                    self.endDate = self.datePicker.date
+                    self.eventEndDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
+                    self.view.endEditing(true)
+                    self.eventTimeTextField.becomeFirstResponder()
+                }else if startMonth == endMonth && startDay < endDay{
+                    self.endDate = self.datePicker.date
+                    self.eventEndDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
+                    self.view.endEditing(true)
+                    self.eventTimeTextField.becomeFirstResponder()
+                }else if startMonth == endMonth && startDay >= endDay{
+                    SCLAlertView().showError("Invalid end date", subTitle: "Please enter end date after start date.")
+                    self.view.endEditing(true)
+                    self.eventEndDateTextField.becomeFirstResponder()
+                    
+                }else if startMonth > endMonth{
+                    SCLAlertView().showError("Invalid end date", subTitle: "Please enter end date after start date.")
+                    self.view.endEditing(true)
+                    self.eventEndDateTextField.becomeFirstResponder()
+                }
+            }else if startYear < endYear{
+                self.endDate = self.datePicker.date
+                self.eventEndDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
+                self.view.endEditing(true)
+                self.eventTimeTextField.becomeFirstResponder()
+            }
+        }else{
+            SCLAlertView().showError("Need to select start date", subTitle: "Please choose a starting date before choosing an end date.")
+            self.view.endEditing(true)
+        }
     }
     
     func startTimeSelected(){
@@ -558,21 +663,19 @@ class CreateNewEventViewController: UIViewController,
         if let startTimeVal = self.startTime{
             self.eventTimeTextField.text = timeFormatter.string(from: startTimeVal)
         }
-        self.eventTimeTextField.resignFirstResponder()
         self.eventEndTimeTextField.becomeFirstResponder()
-        self.view.endEditing(true)
     }
     
     func endTimeSelected(){
-        
         let endDate = timeFormatter.date(from: "\(String(describing: self.timerObject[0]!)):\(String(describing: self.timerObject[1]!)) \(String(describing: self.timerObject[2]!))")
         print("endDate: \(endDate)")
         self.endTime = endDate!
         
         if self.endTime! > self.startTime! {
             self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.endTime!))"
-            self.view.endEditing(true)
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-10), animated: true)
             self.eventPriceTextView.becomeFirstResponder()
+            self.view.endEditing(true)
             print("you have choosen a valid end time")
         }else{
             self.view.endEditing(true)
@@ -591,12 +694,18 @@ class CreateNewEventViewController: UIViewController,
         self.eventDateTextField.becomeFirstResponder()
     }
     
+    func textViewFinished(){
+        self.eventDescriptionTextView.resignFirstResponder()
+        self.eventDescriptionTextView.endEditing(true)
+    }
+    
     func formatTextFields(){
-        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventTimeTextField, eventEndTimeTextField, eventDescriptionTextView, eventPriceTextView].map{
+        let _ = [eventNameTextField, locationTextField, eventDateTextField, eventEndDateTextField,eventTimeTextField, eventEndTimeTextField, eventDescriptionTextView, eventPriceTextView].map{
             self.addRoundBorder(view: $0)
         }
         
-        eventDateTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Date")
+        eventDateTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Start Date")
+        eventEndDateTextField.attributedPlaceholder = formatPlaceholder(placeholder: "End Date")
         locationTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Location")
         eventTimeTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Start Time")
         eventNameTextField.attributedPlaceholder = formatPlaceholder(placeholder: "Event Name")
@@ -696,7 +805,6 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
         
         autoCompleteController.autocompleteFilter = filter
         
-        
         autoCompleteController.delegate = self
         
         UINavigationBar.appearance().isTranslucent = false
@@ -792,11 +900,6 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
     }
     
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        if self.eventNameTextField.isFirstResponder {
-            self.eventNameTextField.becomeFirstResponder()
-        }else if self.eventDateTextField.isFirstResponder {
-            self.eventDateTextField.becomeFirstResponder()
-        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -815,17 +918,28 @@ extension CreateNewEventViewController: GMSAutocompleteViewControllerDelegate {
 
 extension CreateNewEventViewController {
     
+//    MARK: Date Picker Functions
+    
+    
 //    MARK: TEXT FIELD DELEGATE FUNCTIONS
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == self.eventNameTextField {
+            self.locationTextField.becomeFirstResponder()
+        }
         self.view.endEditing(true)
         return false
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == self.eventDateTextField {
+        if self.choseFocusButton.isFirstResponder{
+            self.eventNameTextField.becomeFirstResponder()
+        }else if textField == self.eventDateTextField {
             eventDateTextField.inputAccessoryView = self.dateToolbar
             eventDateTextField.inputView = self.datePicker
+        }else if textField == self.eventEndDateTextField{
+            eventEndDateTextField.inputAccessoryView = self.endDateToolbar
+            eventEndDateTextField.inputView = self.datePicker
         }else if textField == self.eventTimeTextField {
             self.eventTimeTextField.inputAccessoryView = self.startTimeToolbar
             self.eventTimeTextField.inputView = self.timePicker
@@ -837,8 +951,6 @@ extension CreateNewEventViewController {
             present(autoCompleteController, animated: true, completion: nil)
         } else if textField == self.eventPriceTextView {
             self.eventPriceTextView.inputAccessoryView = self.priceToolbar
-        } else {
-            self.eventNameTextField.inputAccessoryView = self.nextPrevToolbar
         }
         
         return true
@@ -861,45 +973,15 @@ extension CreateNewEventViewController {
     
     func textViewDidEndEditing(_ textView: UITextView)
     {
-        if (textView.text == "")
-        {
+        if (textView.text == ""){
             textView.text = "Description"
         }
         textView.resignFirstResponder()
     }
     
-    
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-//        TODO: sometimes the tool bar works and sometimes it doesn't. need to figure out why
-        self.eventDescriptionTextView.inputAccessoryView = self.nextPrevToolbar
+        self.eventDescriptionTextView.inputAccessoryView = self.textViewToolbar
         return true
-    }
-    
-//    MARK: SEARCH BAR DELEGATE FUNCTIONS
-    
-//    TODO: need to increase height of view controller in order to compensate for scroll view moving up
-
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        self.searchBar.returnKeyType = .done
-//        
-//        if searchText.characters.count > 0{
-//            self.filteredInterest = self.interests.filter { $0.contains(searchText) }
-//            self.interestTableView.reloadData()
-//        }
-//        else{
-//            self.filteredInterest = self.interests
-//            self.interestTableView.reloadData()
-//        }
-//    }
-    
-//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        self.searchBar.endEditing(true)
-//    }
-    
-    func searchForInterest(interest: String){
-//        filteredCandies = candies.filter { candy in
-//            return candy.name.lowercaseString.containsString(searchText.lowercaseString)
-//        }
     }
     
     func keyboardNextButton(){
@@ -1019,8 +1101,8 @@ extension CreateNewEventViewController: UIPickerViewDelegate, UIPickerViewDataSo
         print("timeString: \(timeString)")
 
         if eventTimeTextField.isFirstResponder{
-            let startDate = timeFormatter.date(from: timeString)
-            self.startTime = startDate!
+            let startingTime = timeFormatter.date(from: timeString)
+            self.startTime = startingTime!
         }
         
         self.timePicker.selectRow(row, inComponent: component, animated: true)
