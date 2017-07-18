@@ -358,6 +358,7 @@
 		5AEDA164C0AA5062F24F1DA3B8D7C7C9 /* OhhAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E193FC24F229C3362D1A2913BCE137B8 /* OhhAuth.swift */; };
 		5B1AF8B6D07FA01316058C49151CF53A /* GTMOAuth2Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = B55AA9C43BFC9B6E2B96177855A25B7E /* GTMOAuth2Authentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B851EE40C78D5874F9BE0942D129D22 /* FBSDKAccessToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 230A95F0F66E3BB93FE241760E911027 /* FBSDKAccessToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5B98D55F1F1DDE0000AB3E11 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B300648619EE24BA09120DC1DDABB70 /* FirebaseDatabase.framework */; };
 		5BE99F6AD309E4C4C497D161EB1BCC8D /* GameRequest.Recipient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D589545E2F6A1465F71FAA2868134D /* GameRequest.Recipient.swift */; };
 		5C4E9462CCC8EB93575B9766100B18DD /* FBSDKAccessTokenCacheV3_21.h in Headers */ = {isa = PBXBuildFile; fileRef = 2571AB4EF5D919B698C19A3BF4D90EB8 /* FBSDKAccessTokenCacheV3_21.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5C8ED36878D446F34726497E880494E5 /* FBSDKShareOpenGraphContent.m in Sources */ = {isa = PBXBuildFile; fileRef = DF5AB609EB7A5EB4E27DE8B817AA5B4A /* FBSDKShareOpenGraphContent.m */; };
@@ -879,7 +880,6 @@
 		EA73D0E69C15DBEEDC9EA32E108FC548 /* SourceContext.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = BD8971E77043A1F4980F52F12600F3C9 /* SourceContext.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAC4E8296D47BC3806FAFCA254D9B02B /* JSQMessagesMediaPlaceholderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 45CF8CC0BE42CB4FFA0F716B8E1A33ED /* JSQMessagesMediaPlaceholderView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAF3BB6E82CCA6E3144E3AEA3C214B2B /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE5E21D9CC3B7A65C22C63FE539BE4 /* StackView.swift */; };
-		EBB54E3D1F1AA8AF00584E89 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B300648619EE24BA09120DC1DDABB70 /* FirebaseDatabase.framework */; };
 		EBBEF31DB8542B7EA75C303C7B63F7DC /* FBSDKShareVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = 72B00725A7A96E22D1A889358F02FCF3 /* FBSDKShareVideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC0993DEAE73EDFA1E42B92454D53096 /* JSQMessagesAvatarImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 96C0B5982452AEBF9E9487400904E6E6 /* JSQMessagesAvatarImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC4916C30B3BF94CBBC88B46B4AAA8DD /* FBSDKCoreKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A8E93B0629849F655D5738FA965CEF6 /* FBSDKCoreKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2834,7 +2834,7 @@
 				65BF6C24FA79BB7171B314F881B419C1 /* Foundation.framework in Frameworks */,
 				9C3C5FD037FFDE3775F4283EBB64E5E3 /* GoogleToolboxForMac.framework in Frameworks */,
 				635E884D9324593B9F14AD73D163358D /* nanopb.framework in Frameworks */,
-				EBB54E3D1F1AA8AF00584E89 /* FirebaseDatabase.framework in Frameworks */,
+				5B98D55F1F1DDE0000AB3E11 /* FirebaseDatabase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6662,113 +6662,6 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0700;
-				TargetAttributes = {
-					00955D3877D7D5E23B1782F94F715F32 = {
-						LastSwiftMigration = 0900;
-					};
-					035523C6651D269E09C5A2F95EFBA9E0 = {
-						LastSwiftMigration = 0900;
-					};
-					15B8FA3D60E664DE7F4580B438222BB1 = {
-						LastSwiftMigration = 0900;
-					};
-					1B84FE146FAC16029864E061BA0F82BB = {
-						LastSwiftMigration = 0900;
-					};
-					21CC3EAF8EF370E0511971594B00B349 = {
-						LastSwiftMigration = 0900;
-					};
-					253343503242E3A65881B04FEB005FE3 = {
-						LastSwiftMigration = 0900;
-					};
-					2BB3C7A0D901BA50C22490631DD34A01 = {
-						LastSwiftMigration = 0900;
-					};
-					332F91393FB1DE033D370B4CEDDD5FCF = {
-						LastSwiftMigration = 0900;
-					};
-					34E1BEE5B9151B6FF42B51C88D1AF746 = {
-						LastSwiftMigration = 0900;
-					};
-					36618E7C2B179989E05D9764CFB5543F = {
-						LastSwiftMigration = 0900;
-					};
-					44CAD6CE523055ED339E87154473A254 = {
-						LastSwiftMigration = 0900;
-					};
-					49A9C8485E5EECC7FE1A5F41C3B4C1EC = {
-						LastSwiftMigration = 0900;
-					};
-					4FDC533A4360A68ABDCE852F04B30927 = {
-						LastSwiftMigration = 0900;
-					};
-					5534858DE2E76584323B9C31B12AB603 = {
-						LastSwiftMigration = 0900;
-					};
-					5748CBD6628E5BED81C1A3FF982B380B = {
-						LastSwiftMigration = 0900;
-					};
-					593E9479C06FB200807D11AB29EB50BD = {
-						LastSwiftMigration = 0900;
-					};
-					5B5AC3C06B783F8674FDB4C0F900B56A = {
-						LastSwiftMigration = 0900;
-					};
-					64E5A5D76A52C974C878D7D3CF0B18BC = {
-						LastSwiftMigration = 0900;
-					};
-					681BE6E3D02A43F9BA63777AC435C8FD = {
-						LastSwiftMigration = 0900;
-					};
-					6D17B4D0D8A5264FE67417A94F604D75 = {
-						LastSwiftMigration = 0900;
-					};
-					709B37C87082FC138C02EA729A3F8D0C = {
-						LastSwiftMigration = 0900;
-					};
-					7335E9C9689F3B8A16F063A884748533 = {
-						LastSwiftMigration = 0900;
-					};
-					76BD4592010354D6C23D6ECCA20D83A8 = {
-						LastSwiftMigration = 0900;
-					};
-					88E9EC28B8B46C3631E6B242B50F4442 = {
-						LastSwiftMigration = 0900;
-					};
-					91D48719573ABB982316B0845B73B3E1 = {
-						LastSwiftMigration = 0900;
-					};
-					A7FEAA14E89971698ACA148F7F7202F2 = {
-						LastSwiftMigration = 0900;
-					};
-					B1C4AAFAF49036C7007633DAA3C806AD = {
-						LastSwiftMigration = 0900;
-					};
-					BB4E12B19311EF52068B16873A21E70D = {
-						LastSwiftMigration = 0900;
-					};
-					C0D8BFA72D5D8C9FFC99A45232DD99B1 = {
-						LastSwiftMigration = 0900;
-					};
-					C7DCF2B547F7871B9BFD74DE93B0E173 = {
-						LastSwiftMigration = 0900;
-					};
-					D0581AF7BF4A6DA140D280B19ECC7BFF = {
-						LastSwiftMigration = 0900;
-					};
-					D2A9B8750B8E144983F41852C7D2A2BD = {
-						LastSwiftMigration = 0900;
-					};
-					D5A1E9A0EE06E6AB4EE34015BA9BAA8F = {
-						LastSwiftMigration = 0900;
-					};
-					DDBCFDE490CDFDABF6F16A26F346932D = {
-						LastSwiftMigration = 0900;
-					};
-					EDBBC05B600A366B64F04FC0BE33D09C = {
-						LastSwiftMigration = 0900;
-					};
-				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
