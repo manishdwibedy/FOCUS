@@ -80,7 +80,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7c-ZT-sxF" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
                             <rect key="frame" x="266.5" y="0.0" width="68.5" height="40"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" image="plus"/>
+                            <state key="normal" image="Invitations"/>
                             <connections>
                                 <action selector="invitationClicked:" destination="-1" eventType="touchUpInside" id="zSd-w7-xAa"/>
                             </connections>
@@ -115,9 +115,9 @@
         </view>
     </objects>
     <resources>
+        <image name="Invitations" width="35" height="36"/>
         <image name="Message Icon white 30x30" width="30" height="30"/>
         <image name="Notifications Icon white 30x30" width="30" height="30"/>
         <image name="User Icon white 30x30" width="30" height="30"/>
-        <image name="plus" width="32" height="32"/>
     </resources>
 </document>
