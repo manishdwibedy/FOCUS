@@ -402,17 +402,28 @@ line 2</string>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="bZe-CO-fzE">
                                 <rect key="frame" x="16" y="488" width="148" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFv-QC-3S7">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8F-hr-LCB">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFv-QC-3S7">
+                                                <rect key="frame" x="5" y="5" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="1FP-Q6-TES"/>
+                                                    <constraint firstAttribute="height" constant="30" id="4Zt-71-dfe"/>
+                                                </constraints>
+                                                <state key="normal" image="Like"/>
+                                                <connections>
+                                                    <action selector="like:" destination="Wnn-ii-34g" eventType="touchUpInside" id="Elk-9r-cqD"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="1FP-Q6-TES"/>
-                                            <constraint firstAttribute="height" constant="40" id="4Zt-71-dfe"/>
+                                            <constraint firstAttribute="width" constant="40" id="R3h-Gu-aaj"/>
+                                            <constraint firstItem="eFv-QC-3S7" firstAttribute="centerY" secondItem="o8F-hr-LCB" secondAttribute="centerY" id="eMv-Vf-OyL"/>
+                                            <constraint firstItem="eFv-QC-3S7" firstAttribute="centerX" secondItem="o8F-hr-LCB" secondAttribute="centerX" id="qBl-DQ-Svo"/>
                                         </constraints>
-                                        <state key="normal" image="Like"/>
-                                        <connections>
-                                            <action selector="like:" destination="Wnn-ii-34g" eventType="touchUpInside" id="Elk-9r-cqD"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oV5-eg-uPI">
                                         <rect key="frame" x="54" y="0.0" width="40" height="40"/>
                                         <constraints>
