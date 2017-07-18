@@ -111,66 +111,66 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     func loadTable(){
         Constants.DB.messages.child(AuthApi.getFirebaseUid()!).queryOrdered(byChild: "read").queryLimited(toLast: 20).observeSingleEvent(of: .value, with: {(snapshot) in
 
-            let messages = snapshot.value as? [String:[String:Any]]
-            
-            
-            for (user, message) in messages!{
-                if let unix = message["date"] as? Double{
-                    let date = Date(timeIntervalSince1970: unix)
-                    
-                    self.usersRef.child(user).keepSynced(true)
-                    self.usersRef.child(user).observeSingleEvent(of: .value, with: {(snapshot) in
-                        if let value = snapshot.value{
-                            if let user_info = value as? [String:Any]{
-                                guard let username = user_info["username"] as? String else{
-                                    return
-                                }
-                                guard let image_string = user_info["image_string"] as? String else{
-                                    return
-                                }
-                                
-                                let userMessage = UserMessages(id: user, name: username, messageID: message["messageID"] as! String, readMessages: message["read"] as! Bool, lastMessageDate: date, image_string: image_string)
-                                
-                                self.messageMapper[snapshot.key] = userMessage
-                                self.userInfo[snapshot.key] = user_info
-                                self.contentMapping[userMessage.messageID] = userMessage
-                                
-                                Constants.DB.message_content.child(userMessage.messageID).keepSynced(true)
-                                Constants.DB.message_content.child(userMessage.messageID).queryOrdered(byChild: "date").queryLimited(toLast: 1).observeSingleEvent(of: .value, with: {(snapshot) in
-                                    let data = snapshot.value as? [String:Any]
-                                    
-                                    if let data = data, data.count > 0{
-                                        let message_data = data[(data.keys.first!)] as? [String:Any]
-                                        
-                                        let id = userMessage.messageID
-                                        
-                                        if let text = message_data?["text"]{
-                                            let message = self.contentMapping[id]
-                                            message?.addLastContent(lastContent: text as! String)
-                                        }
-                                        else{
-                                            let message = self.contentMapping[id]
-                                            message?.addLastContent(lastContent: "sent a photo")
-                                        }
-                                        self._messages.append(userMessage)
-                                        
-                                        if self._messages.count == self.userInfo.count{
-                                            self.messages = self._messages
-                                            self.messageTable.reloadData()
-                                            self.listenForChanges()
-                                        }
-                                        
-                                        
+            if let messages = snapshot.value as? [String:[String:Any]]{
+                for (user, message) in messages{
+                    if let unix = message["date"] as? Double{
+                        let date = Date(timeIntervalSince1970: unix)
+                        
+                        self.usersRef.child(user).keepSynced(true)
+                        self.usersRef.child(user).observeSingleEvent(of: .value, with: {(snapshot) in
+                            if let value = snapshot.value{
+                                if let user_info = value as? [String:Any]{
+                                    guard let username = user_info["username"] as? String else{
+                                        return
+                                    }
+                                    guard let image_string = user_info["image_string"] as? String else{
+                                        return
                                     }
                                     
-                                })
+                                    let userMessage = UserMessages(id: user, name: username, messageID: message["messageID"] as! String, readMessages: message["read"] as! Bool, lastMessageDate: date, image_string: image_string)
+                                    
+                                    self.messageMapper[snapshot.key] = userMessage
+                                    self.userInfo[snapshot.key] = user_info
+                                    self.contentMapping[userMessage.messageID] = userMessage
+                                    
+                                    Constants.DB.message_content.child(userMessage.messageID).keepSynced(true)
+                                    Constants.DB.message_content.child(userMessage.messageID).queryOrdered(byChild: "date").queryLimited(toLast: 1).observeSingleEvent(of: .value, with: {(snapshot) in
+                                        let data = snapshot.value as? [String:Any]
+                                        
+                                        if let data = data, data.count > 0{
+                                            let message_data = data[(data.keys.first!)] as? [String:Any]
+                                            
+                                            let id = userMessage.messageID
+                                            
+                                            if let text = message_data?["text"]{
+                                                let message = self.contentMapping[id]
+                                                message?.addLastContent(lastContent: text as! String)
+                                            }
+                                            else{
+                                                let message = self.contentMapping[id]
+                                                message?.addLastContent(lastContent: "sent a photo")
+                                            }
+                                            self._messages.append(userMessage)
+                                            
+                                            if self._messages.count == self.userInfo.count{
+                                                self.messages = self._messages
+                                                self.messageTable.reloadData()
+                                                self.listenForChanges()
+                                            }
+                                            
+                                            
+                                        }
+                                        
+                                    })
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
             }
             
         })
+        
     }
     
     func listenForChanges(){
