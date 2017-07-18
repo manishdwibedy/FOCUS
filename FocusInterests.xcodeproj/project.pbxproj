@@ -1503,7 +1503,7 @@
 					D2B9B03B1E5A047C0002F1B1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 66JH2JK5HD;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -1517,12 +1517,14 @@
 					D2B9B0521E5A047C0002F1B1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 66JH2JK5HD;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = D2B9B03B1E5A047C0002F1B1;
 					};
 					D2B9B05D1E5A047C0002F1B1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 66JH2JK5HD;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = D2B9B03B1E5A047C0002F1B1;
 					};

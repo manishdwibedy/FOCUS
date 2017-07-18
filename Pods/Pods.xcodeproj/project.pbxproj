@@ -6662,6 +6662,113 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					00955D3877D7D5E23B1782F94F715F32 = {
+						LastSwiftMigration = 0900;
+					};
+					035523C6651D269E09C5A2F95EFBA9E0 = {
+						LastSwiftMigration = 0900;
+					};
+					15B8FA3D60E664DE7F4580B438222BB1 = {
+						LastSwiftMigration = 0900;
+					};
+					1B84FE146FAC16029864E061BA0F82BB = {
+						LastSwiftMigration = 0900;
+					};
+					21CC3EAF8EF370E0511971594B00B349 = {
+						LastSwiftMigration = 0900;
+					};
+					253343503242E3A65881B04FEB005FE3 = {
+						LastSwiftMigration = 0900;
+					};
+					2BB3C7A0D901BA50C22490631DD34A01 = {
+						LastSwiftMigration = 0900;
+					};
+					332F91393FB1DE033D370B4CEDDD5FCF = {
+						LastSwiftMigration = 0900;
+					};
+					34E1BEE5B9151B6FF42B51C88D1AF746 = {
+						LastSwiftMigration = 0900;
+					};
+					36618E7C2B179989E05D9764CFB5543F = {
+						LastSwiftMigration = 0900;
+					};
+					44CAD6CE523055ED339E87154473A254 = {
+						LastSwiftMigration = 0900;
+					};
+					49A9C8485E5EECC7FE1A5F41C3B4C1EC = {
+						LastSwiftMigration = 0900;
+					};
+					4FDC533A4360A68ABDCE852F04B30927 = {
+						LastSwiftMigration = 0900;
+					};
+					5534858DE2E76584323B9C31B12AB603 = {
+						LastSwiftMigration = 0900;
+					};
+					5748CBD6628E5BED81C1A3FF982B380B = {
+						LastSwiftMigration = 0900;
+					};
+					593E9479C06FB200807D11AB29EB50BD = {
+						LastSwiftMigration = 0900;
+					};
+					5B5AC3C06B783F8674FDB4C0F900B56A = {
+						LastSwiftMigration = 0900;
+					};
+					64E5A5D76A52C974C878D7D3CF0B18BC = {
+						LastSwiftMigration = 0900;
+					};
+					681BE6E3D02A43F9BA63777AC435C8FD = {
+						LastSwiftMigration = 0900;
+					};
+					6D17B4D0D8A5264FE67417A94F604D75 = {
+						LastSwiftMigration = 0900;
+					};
+					709B37C87082FC138C02EA729A3F8D0C = {
+						LastSwiftMigration = 0900;
+					};
+					7335E9C9689F3B8A16F063A884748533 = {
+						LastSwiftMigration = 0900;
+					};
+					76BD4592010354D6C23D6ECCA20D83A8 = {
+						LastSwiftMigration = 0900;
+					};
+					88E9EC28B8B46C3631E6B242B50F4442 = {
+						LastSwiftMigration = 0900;
+					};
+					91D48719573ABB982316B0845B73B3E1 = {
+						LastSwiftMigration = 0900;
+					};
+					A7FEAA14E89971698ACA148F7F7202F2 = {
+						LastSwiftMigration = 0900;
+					};
+					B1C4AAFAF49036C7007633DAA3C806AD = {
+						LastSwiftMigration = 0900;
+					};
+					BB4E12B19311EF52068B16873A21E70D = {
+						LastSwiftMigration = 0900;
+					};
+					C0D8BFA72D5D8C9FFC99A45232DD99B1 = {
+						LastSwiftMigration = 0900;
+					};
+					C7DCF2B547F7871B9BFD74DE93B0E173 = {
+						LastSwiftMigration = 0900;
+					};
+					D0581AF7BF4A6DA140D280B19ECC7BFF = {
+						LastSwiftMigration = 0900;
+					};
+					D2A9B8750B8E144983F41852C7D2A2BD = {
+						LastSwiftMigration = 0900;
+					};
+					D5A1E9A0EE06E6AB4EE34015BA9BAA8F = {
+						LastSwiftMigration = 0900;
+					};
+					DDBCFDE490CDFDABF6F16A26F346932D = {
+						LastSwiftMigration = 0900;
+					};
+					EDBBC05B600A366B64F04FC0BE33D09C = {
+						LastSwiftMigration = 0900;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";

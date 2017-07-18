@@ -28,55 +28,55 @@ extension DateFormatter {
         var result = ""
         
         if components.year! >= 2 {
-            result = shortVersion ? "\(components.year!)y ago":"\(components.year!) years ago"
+            result = shortVersion ? "\(components.year!)y":"\(components.year!) years"
         } else if components.year! >= 1 {
             if numericDates {
-                result =  shortVersion ? "1y ago": "1 year ago"
+                result =  shortVersion ? "1y": "1 year"
             } else {
                 result = "Last year"
             }
         } else if components.month! >= 2 {
-            result = shortVersion ? "\(components.month!)mo ago": "\(components.month!) months ago"
+            result = shortVersion ? "\(components.month!)mo": "\(components.month!) months"
         } else if components.month! >= 1 {
             if numericDates {
-                result = shortVersion ? "1mo ago":"1 month ago"
+                result = shortVersion ? "1mo":"1 month"
             } else {
                 result = "Last month"
             }
         } else if components.weekOfYear! >= 2 {
-            result = shortVersion ? "\(components.weekOfYear!)w ago":"\(components.weekOfYear!) weeks ago"
+            result = shortVersion ? "\(components.weekOfYear!)w":"\(components.weekOfYear!) weeks"
         } else if components.weekOfYear! >= 1 {
             if numericDates {
-                result = shortVersion ? "1w ago": "1 week ago"
+                result = shortVersion ? "1w": "1 week"
             } else {
                 result = "Last week"
             }
         } else if components.day! >= 2 {
-            result = shortVersion ? "\(components.day!)d ago":"\(components.day!) days ago"
+            result = shortVersion ? "\(components.day!)d":"\(components.day!) days"
         } else if components.day! >= 1 {
             if numericDates {
-                result = shortVersion ? "1d ago": "1 day ago"
+                result = shortVersion ? "1d": "1 day"
             } else {
                 result = "Yesterday"
             }
         } else if components.hour! >= 2 {
-            result = shortVersion ? "\(components.hour!)h ago": "\(components.hour!) hours ago"
+            result = shortVersion ? "\(components.hour!)h": "\(components.hour!) hours"
         } else if components.hour! >= 1 {
             if numericDates {
-                result = shortVersion ? "1h ago":"1 hour ago"
+                result = shortVersion ? "1h":"1 hour"
             } else {
-                result = "An hour ago"
+                result = "An hour"
             }
         } else if components.minute! >= 2 {
-            result = shortVersion ? "\(components.minute!)m ago":"\(components.minute!) minutes ago"
+            result = shortVersion ? "\(components.minute!)m":"\(components.minute!) minutes"
         } else if components.minute! >= 1 {
             if numericDates {
-                result = shortVersion ? "1m ago":"1 minute ago"
+                result = shortVersion ? "1m":"1 minute"
             } else {
-                result = "A minute ago"
+                result = "A minute"
             }
         } else if components.second! >= 3 {
-            result = shortVersion ? "\(components.second!)s ago": "\(components.second!) seconds ago"
+            result = shortVersion ? "\(components.second!)s": "\(components.second!) seconds"
         } else {
             result = "Just now"
         }
