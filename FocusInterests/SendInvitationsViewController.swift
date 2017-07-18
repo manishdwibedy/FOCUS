@@ -73,23 +73,31 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
-        
-        self.friendsTableView.allowsSelection = false
 
-        self.searchBar.layer.borderColor = UIColor.clear.cgColor
+        self.searchBar.layer.borderWidth = 0.0
+        
+        //        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
+        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+        //        search bar placeholder
         let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
-        
+        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
+        textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
         textFieldInsideSearchBar?.textColor = UIColor.white
-
         
-        if let txfSearchField = self.searchBar.value(forKey: "_searchField") as? UITextField {
-            txfSearchField.borderStyle = .none
-            txfSearchField.backgroundColor = UIColor(red: 24/255.0, green: 44/255.0, blue: 67/255.0, alpha: 1.0)
-            txfSearchField.allCornersRounded(radius: 5.0)
-        }
+        //        search bar glass icon
+        let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        glassIconView.tintColor = UIColor.white
         
-        self.searchBar.isTranslucent = false
-        self.searchBar.backgroundImage = UIImage()
+        //        search bar clear button
+        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
+        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+        clearButton.tintColor = UIColor.white
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
         
         if contacts.count <= 0 {
             contactListView.isHidden = true
@@ -123,9 +131,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         self.navBar.barTintColor = Constants.color.navy
         self.view.backgroundColor = Constants.color.navy
-//        self.privatePublicSwitch.tintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
-//        self.privatePublicSwitch.backgroundColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
-//        self.privatePublicSwitch.onTintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
         
         hideKeyboardWhenTappedAround()
     }
@@ -310,11 +315,12 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        print("cell with path: \(indexPath.row)")
+        var cell = UITableViewCell()
         if(indexPath.section == 0){
             let selectedAllFollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "selectAllContactsCell", for: indexPath) as! SelectAllContactsTableViewCell
             selectedAllFollowersTableCell.delegate = self
-            return selectedAllFollowersTableCell
+            cell = selectedAllFollowersTableCell
         } else {
             let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
             personToInviteCell.delegate = self
@@ -328,13 +334,24 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //            personToInviteCell.usernameLabel.text = "Alex"
 //            personToInviteCell.fullNameLabel.text = "Alex Jang"
 
-            return personToInviteCell
+            cell = personToInviteCell
         }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0{
-            self.selectedAllFollowers()
+            tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.setSelected(true, animated: false)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+//            tableView.deselectRow(at: self.friendsTableView.indexPathForSelectedRow!, animated: false)
+            let selectedAllFollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "selectAllContactsCell", for: indexPath) as! SelectAllContactsTableViewCell
+            selectedAllFollowersTableCell.setSelected(false, animated: false)
+        }else if indexPath.section == 1{
+            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
         }
     }
     

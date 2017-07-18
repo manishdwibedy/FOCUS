@@ -220,7 +220,6 @@ class CreateNewEventViewController: UIViewController,
         self.privatePublicSwitch.layer.cornerRadius = 16
         self.privatePublicSwitch.backgroundColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
         self.privatePublicSwitch.onTintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
-        
         formatTextFields()
         setTextFieldDelegates()
 //<<<<<<< HEAD
@@ -251,7 +250,11 @@ class CreateNewEventViewController: UIViewController,
         self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d"
-        
+       
+        var tapGesture : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CreateNewEventViewController.choseFocusAction(_:)))
+        tapGesture.numberOfTapsRequired = 1
+        self.interestListLabel.addGestureRecognizer(tapGesture)
+        self.interestListLabel.isUserInteractionEnabled = true
         
         eventNameTextField.delegate = self
         
@@ -321,7 +324,7 @@ class CreateNewEventViewController: UIViewController,
                 str += "\(value) | "
             }
             
-            self.interestListLabel.text = str
+            addGreenDot(label: self.interestListLabel, content: str)
             self.hasNotChosenFocus = false
             self.eventNameTextField.becomeFirstResponder()
         }

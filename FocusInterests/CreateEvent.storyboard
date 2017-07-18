@@ -485,9 +485,9 @@
                                 <subviews>
                                     <searchBar contentMode="redraw" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7M-Yi-1Uf">
                                         <rect key="frame" x="9" y="10" width="356" height="44"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="barTintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <scopeButtonTitles>
                                             <string>Title</string>
@@ -523,8 +523,8 @@
                             <constraint firstItem="kpU-5M-zQz" firstAttribute="top" secondItem="7iv-yV-Zt5" secondAttribute="bottom" id="Wsx-lB-nBJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xYK-Z5-9fw" secondAttribute="trailing" constant="-16" id="YbO-c4-3lM"/>
                             <constraint firstItem="kpU-5M-zQz" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leading" id="abT-YD-uFU"/>
+                            <constraint firstItem="xYK-Z5-9fw" firstAttribute="centerX" secondItem="u0X-XZ-Qz2" secondAttribute="centerX" id="ck5-fn-nrW"/>
                             <constraint firstItem="8Zt-2R-NlV" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leadingMargin" constant="-16" id="dVN-r7-dY0"/>
-                            <constraint firstItem="xYK-Z5-9fw" firstAttribute="top" secondItem="7iv-yV-Zt5" secondAttribute="bottom" constant="109" id="gUz-eg-L0L"/>
                             <constraint firstItem="xYK-Z5-9fw" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leadingMargin" constant="-16" id="qzs-7R-Qqu"/>
                             <constraint firstAttribute="trailing" secondItem="u0X-XZ-Qz2" secondAttribute="trailing" id="tLL-fk-jBB"/>
                             <constraint firstItem="u0X-XZ-Qz2" firstAttribute="top" secondItem="kpU-5M-zQz" secondAttribute="bottom" id="uNB-Zz-66v"/>
