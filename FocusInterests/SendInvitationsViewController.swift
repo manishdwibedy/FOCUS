@@ -123,6 +123,9 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         self.navBar.barTintColor = Constants.color.navy
         self.view.backgroundColor = Constants.color.navy
+//        self.privatePublicSwitch.tintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
+//        self.privatePublicSwitch.backgroundColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
+//        self.privatePublicSwitch.onTintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
         
         hideKeyboardWhenTappedAround()
     }

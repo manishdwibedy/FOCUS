@@ -412,12 +412,14 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vo7-Xg-Ult">
                                                 <rect key="frame" x="300" y="10" width="51" height="31"/>
+                                                <color key="onTintColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="shareOnFB:" destination="xxR-Li-4ZG" eventType="valueChanged" id="WhE-a8-rj0"/>
                                                 </connections>
                                             </switch>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3FE-nU-AvO">
                                                 <rect key="frame" x="300" y="55" width="51" height="31"/>
+                                                <color key="onTintColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="shareOnTwitter:" destination="xxR-Li-4ZG" eventType="valueChanged" id="UaG-Bf-nhc"/>
                                                 </connections>
