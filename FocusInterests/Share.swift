@@ -190,8 +190,11 @@ class Share{
                     if AuthApi.getLoginType() == .Facebook{
                         if let facebookID = user["facebook-id"] as? String, facebookID.characters.count > 0{
                             if user["email"] as? String != AuthApi.getUserEmail()!{
-                                emails.append(facebookID)
-                                emailMapping[user["email"] as! String] = user["firebaseUserId"] as! String
+                                if let id = user["firebaseUserId"] as? String{
+                                    emails.append(facebookID)
+                                    emailMapping[user["email"] as! String] = id
+                                }
+                                
                             }
                         }
                     }
