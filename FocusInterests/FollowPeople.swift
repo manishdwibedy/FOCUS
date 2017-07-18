@@ -99,29 +99,32 @@ class Follow{
     }
     
     static func unFollowPlace(id: String){
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").queryOrdered(byChild: "placeID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? [String:Any]
-            
-            if let value = value{
-                for (id, _) in value{
-                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places/\(id)").removeValue()
+        if id.characters.count > 0{
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").queryOrdered(byChild: "placeID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                
+                if let value = value{
+                    for (id, _) in value{
+                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places/\(id)").removeValue()
+                    }
+                    
                 }
                 
-            }
+            })
             
-        })
+            Constants.DB.following_place.child(id).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil {
+                    for (key,_) in value!
+                    {
+                        Constants.DB.following_place.child(id).child("followers").child(key as! String).removeValue()
+                    }
+                    
+                    
+                    
+                }
+            })   
+        }
         
-        Constants.DB.following_place.child(id).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil {
-                for (key,_) in value!
-                {
-                    Constants.DB.following_place.child(id).child("followers").child(key as! String).removeValue()
-                }
-                
-                
-                
-            }
-        })
     }
 }
