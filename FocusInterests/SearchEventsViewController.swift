@@ -42,6 +42,22 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let nib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
         
+        tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
+        
+        tableView.register(UINib(nibName: "FeedOneTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedOneCell")
+        
+        tableView.register(UINib(nibName: "FeedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTwoCell")
+        
+        tableView.register(UINib(nibName: "FeedPlaceTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedThreeCell")
+        
+        tableView.register(UINib(nibName: "FeedCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFourCell")
+        
+        tableView.register(UINib(nibName: "FeedPlaceImageTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFiveCell")
+        
+        tableView.register(UINib(nibName: "FeedCreatedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedSixCell")
+        
+        tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
+        
 //        MARK: Navigation Bar
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
@@ -194,11 +210,12 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filtered.count
+        return 6
+//        return filtered.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        /*
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! SearchEventTableViewCell!
         
         let event = filtered[indexPath.row]
@@ -306,6 +323,24 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.inviteButton.addTarget(self, action: #selector(self.inviteUser), for: UIControlEvents.touchUpInside)
         cell?.attendButton.addTarget(self, action: #selector(self.attendEvent(sender:)), for: UIControlEvents.touchUpInside)
         
+        return cell!
+        */
+        
+        var cell: UITableViewCell?
+        
+        if indexPath.row == 0{
+            cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as! FeedOneTableViewCell
+        }else if indexPath.row == 1{
+            cell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
+        }else if indexPath.row == 2{
+            cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as! FeedPlaceTableViewCell
+        }else if indexPath.row == 3{
+            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
+        }else if indexPath.row == 4{
+            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
+        }else if indexPath.row == 5{
+            cell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
+        }
         return cell!
     }
     
@@ -416,7 +451,23 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 105
+        var rowHeight: CGFloat?
+        if indexPath.row == 0{
+            rowHeight = 165
+        }else if indexPath.row == 1{
+            rowHeight = 130
+        }else if indexPath.row == 2{
+            rowHeight = 120
+        }else if indexPath.row == 3{
+            rowHeight = 150
+        }else if indexPath.row == 4{
+            rowHeight = 220
+        }else if indexPath.row == 5{
+            rowHeight = 255
+        }else{
+            rowHeight = 80
+        }
+        return rowHeight!
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {

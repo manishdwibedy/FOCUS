@@ -58,14 +58,6 @@
                                     <action selector="showCreateEvent:" destination="xPx-tM-EtF" eventType="touchUpInside" id="f0n-Xj-yY6"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-AA-SPe">
-                                <rect key="frame" x="5" y="191" width="365" height="419"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="xPx-tM-EtF" id="ZOg-gp-Nqw"/>
-                                    <outlet property="delegate" destination="xPx-tM-EtF" id="Ptu-K7-eu6"/>
-                                </connections>
-                            </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxR-DK-a5n">
                                 <rect key="frame" x="5" y="670" width="365" height="77"/>
                                 <subviews>
@@ -94,6 +86,72 @@
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZLV-Tr-jn2">
+                                <rect key="frame" x="0.0" y="191" width="375" height="427"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedOneCell" id="Djd-fx-NGI" customClass="NotificationFeedCellTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Djd-fx-NGI" id="oma-yB-nX4">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedTwoCell" id="JHq-Fr-9aX" customClass="NotificationFeedCellTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JHq-Fr-9aX" id="UVm-SA-pec">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedThreeCell" id="lk2-WU-qkI" customClass="NotificationFeedCellTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lk2-WU-qkI" id="s8n-rM-dBB">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedFourCell" id="B70-Gs-5SY" customClass="NotificationFeedCellTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B70-Gs-5SY" id="CP7-je-gea">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedFiveCell" id="0vT-KD-Hii" customClass="NotificationFeedCellTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="204" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0vT-KD-Hii" id="KEe-AO-Pkz">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedSixCell" id="PzB-Vt-TNh" customClass="NotificationFeedCellTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="248" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PzB-Vt-TNh" id="bhD-0L-DKe">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotifFeedCell" id="A1b-GA-d5t" customClass="NotificationFeedCellTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="292" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A1b-GA-d5t" id="gCN-kB-Ilk">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="xPx-tM-EtF" id="2Ni-tC-lf7"/>
+                                    <outlet property="delegate" destination="xPx-tM-EtF" id="FAD-Ra-Xi7"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -106,22 +164,19 @@
                             <constraint firstAttribute="trailingMargin" secondItem="zof-1G-axg" secondAttribute="trailing" constant="-7" id="Ew7-9C-lLR"/>
                             <constraint firstItem="z8z-95-lev" firstAttribute="top" secondItem="Uw4-jh-WA0" secondAttribute="bottom" id="GHF-Qe-xvC"/>
                             <constraint firstItem="dxR-DK-a5n" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" constant="5" id="HS5-iX-hXq"/>
-                            <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="rHT-AA-SPe" secondAttribute="bottom" constant="8" id="Kuw-DB-FOZ"/>
-                            <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="rHT-AA-SPe" secondAttribute="bottom" constant="8" symbolic="YES" id="M02-sk-fFU"/>
+                            <constraint firstAttribute="trailing" secondItem="ZLV-Tr-jn2" secondAttribute="trailing" id="KFh-Al-Lcf"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="M3G-iJ-BqP"/>
                             <constraint firstItem="dxR-DK-a5n" firstAttribute="centerX" secondItem="eF4-Ev-ETy" secondAttribute="centerX" id="O7K-Sh-TFC"/>
-                            <constraint firstItem="rHT-AA-SPe" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="8" id="VxX-LZ-oKs"/>
-                            <constraint firstItem="rHT-AA-SPe" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leadingMargin" constant="-11" id="XWg-lL-6ar"/>
-                            <constraint firstAttribute="trailing" secondItem="rHT-AA-SPe" secondAttribute="trailing" constant="5" id="ZTr-IQ-Hpx"/>
+                            <constraint firstItem="ZLV-Tr-jn2" firstAttribute="centerX" secondItem="eF4-Ev-ETy" secondAttribute="centerX" id="R9V-Z2-Ry6"/>
                             <constraint firstAttribute="trailing" secondItem="ZNT-Vt-zjc" secondAttribute="trailing" constant="10" id="ZoX-z9-PH4"/>
+                            <constraint firstItem="ZLV-Tr-jn2" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" id="bNc-qT-SA3"/>
                             <constraint firstAttribute="trailing" secondItem="Uw4-jh-WA0" secondAttribute="trailing" id="bab-xt-oJk"/>
+                            <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="ZLV-Tr-jn2" secondAttribute="bottom" id="djd-au-bGr"/>
+                            <constraint firstItem="ZLV-Tr-jn2" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="8" id="dm0-hi-JQy"/>
                             <constraint firstAttribute="trailing" secondItem="ZNT-Vt-zjc" secondAttribute="trailing" constant="10" id="fUi-cJ-94d"/>
-                            <constraint firstItem="rHT-AA-SPe" firstAttribute="top" secondItem="ZNT-Vt-zjc" secondAttribute="bottom" constant="8" id="iki-T5-PU9"/>
                             <constraint firstItem="zof-1G-axg" firstAttribute="top" secondItem="z8z-95-lev" secondAttribute="bottom" id="lI3-mE-hM0"/>
                             <constraint firstItem="Uw4-jh-WA0" firstAttribute="centerX" secondItem="z8z-95-lev" secondAttribute="centerX" id="mmY-Ya-bw9"/>
-                            <constraint firstItem="z8z-95-lev" firstAttribute="centerX" secondItem="rHT-AA-SPe" secondAttribute="centerX" id="tPI-No-es8"/>
                             <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="dxR-DK-a5n" secondAttribute="bottom" constant="-129" id="wlb-er-8J2"/>
-                            <constraint firstItem="rHT-AA-SPe" firstAttribute="leading" secondItem="eF4-Ev-ETy" secondAttribute="leading" constant="5" id="yWC-Rn-Oq2"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="EVENTS" id="yhf-yt-eZ8">
@@ -136,7 +191,7 @@
                         <outlet property="navBar" destination="Uw4-jh-WA0" id="n6Q-sa-R7U"/>
                         <outlet property="navTitle" destination="31z-0O-JgZ" id="s98-9U-3hs"/>
                         <outlet property="searchBar" destination="z8z-95-lev" id="42p-1d-s8M"/>
-                        <outlet property="tableView" destination="rHT-AA-SPe" id="qTq-7E-hFx"/>
+                        <outlet property="tableView" destination="ZLV-Tr-jn2" id="YW1-s9-xvp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ii0-nb-WRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
