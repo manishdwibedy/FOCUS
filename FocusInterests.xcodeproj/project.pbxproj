@@ -234,6 +234,8 @@
 		EB0578601EECBE74000B0413 /* PinPlaceReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB05785E1EECBE74000B0413 /* PinPlaceReviewTableViewCell.xib */; };
 		EB0578631EECCD49000B0413 /* TipPlaceReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0578611EECCD49000B0413 /* TipPlaceReviewTableViewCell.swift */; };
 		EB0578641EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB0578621EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib */; };
+		EB2203871F1DE9D000F86B73 /* FollowersRequest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2203861F1DE9D000F86B73 /* FollowersRequest.storyboard */; };
+		EB2203891F1DEA8000F86B73 /* FollowersRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2203881F1DEA8000F86B73 /* FollowersRequestViewController.swift */; };
 		EB252F0B1EE9E9F7001C163D /* NewMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */; };
 		EB252F0C1EE9E9F7001C163D /* NewMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB252F0A1EE9E9F7001C163D /* NewMessageTableViewCell.xib */; };
 		EB252F131EEAA062001C163D /* UserProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB252F111EEAA062001C163D /* UserProfileCollectionViewCell.swift */; };
@@ -610,6 +612,8 @@
 		EB05785E1EECBE74000B0413 /* PinPlaceReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinPlaceReviewTableViewCell.xib; sourceTree = "<group>"; };
 		EB0578611EECCD49000B0413 /* TipPlaceReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipPlaceReviewTableViewCell.swift; sourceTree = "<group>"; };
 		EB0578621EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipPlaceReviewTableViewCell.xib; sourceTree = "<group>"; };
+		EB2203861F1DE9D000F86B73 /* FollowersRequest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FollowersRequest.storyboard; sourceTree = "<group>"; };
+		EB2203881F1DEA8000F86B73 /* FollowersRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersRequestViewController.swift; sourceTree = "<group>"; };
 		EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageTableViewCell.swift; sourceTree = "<group>"; };
 		EB252F0A1EE9E9F7001C163D /* NewMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewMessageTableViewCell.xib; sourceTree = "<group>"; };
 		EB252F111EEAA062001C163D /* UserProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1200,6 +1204,7 @@
 		D2B9B0731E5A0A270002F1B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EB2203811F1DDCD500F86B73 /* FollowersRequest */,
 				EBB6B32A1F0E1207000C8133 /* FeedTableCells */,
 				D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */,
 				D252206C1E5A864900EC2014 /* NotificationsCellTableViewCell.xib */,
@@ -1317,6 +1322,15 @@
 				D2C785511E9337B700BFF0E3 /* InterestListViewController.xib */,
 			);
 			name = NibVCs;
+			sourceTree = "<group>";
+		};
+		EB2203811F1DDCD500F86B73 /* FollowersRequest */ = {
+			isa = PBXGroup;
+			children = (
+				EB2203861F1DE9D000F86B73 /* FollowersRequest.storyboard */,
+				EB2203881F1DEA8000F86B73 /* FollowersRequestViewController.swift */,
+			);
+			name = FollowersRequest;
 			sourceTree = "<group>";
 		};
 		EB5891D51EE7EDFA00C35EE9 /* Comments */ = {
@@ -1680,6 +1694,7 @@
 				5B71D6F41ED17F2B0093A3F5 /* CreateEvent.storyboard in Resources */,
 				D219754F1E639AA900ED3345 /* CellCollectionCellCollectionViewCell.xib in Resources */,
 				5B959FEB1ECD23C200094FE6 /* SuggestPlaceView.xib in Resources */,
+				EB2203871F1DE9D000F86B73 /* FollowersRequest.storyboard in Resources */,
 				5B71D7061ED1837A0093A3F5 /* commentCell.xib in Resources */,
 				EB252F141EEAA062001C163D /* UserProfileCollectionViewCell.xib in Resources */,
 				5BBF7AC21EEF5C61000209D6 /* Reviews.storyboard in Resources */,
@@ -2120,6 +2135,7 @@
 				5B7BB1E31ED51069001E60FF /* SuggestPlaceTableViewCell.swift in Sources */,
 				5B519E7A1ED677D800B36110 /* SearchPeopleTableViewCell.swift in Sources */,
 				D296F5D31E75BB69007EC393 /* AuthApi.swift in Sources */,
+				EB2203891F1DEA8000F86B73 /* FollowersRequestViewController.swift in Sources */,
 				5B959FCD1ECA9EBE00094FE6 /* Place.swift in Sources */,
 				D230D8C31E5B749C00025EE9 /* UIImageView+Extensions.swift in Sources */,
 				EB5891D11EE7EB8800C35EE9 /* CommentsTableViewCell.swift in Sources */,
