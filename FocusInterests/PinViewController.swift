@@ -492,14 +492,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         var address = place?.address[0]
         address = address?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         
-        let url_string = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=\(String(describing: lat))&dropoff[longitude]=\(String(describing: long))&dropoff[nickname]=\(String(describing: address))&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
+        let url_string = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=\(String(describing: lat!))&dropoff[longitude]=\(String(describing: long!))&dropoff[nickname]=\(String(describing: address!))&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
         
         //let url  = URL(string: url_string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
-        let url = URL(string: url_string)
-        if UIApplication.shared.canOpenURL(url!) == true
-        {
-            UIApplication.shared.openURL(url!)
+        if let url = URL(string: url_string){
+            if UIApplication.shared.canOpenURL(url) == true
+            {
+                UIApplication.shared.openURL(url)
+            }
         }
+        
         
     }
     
