@@ -572,6 +572,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             print("username is not nil")
         }
         
+        self.mapViewSettings.isHidden = true
         self.mapViewSettings.allCornersRounded(radius: 10.0)
 
 //        Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
