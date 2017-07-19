@@ -86,6 +86,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
         controller.event = event as! Event
+        controller.map = parentVC.tabBarController?.viewControllers?[0] as? MapViewController
         parentVC.present(controller, animated: true, completion: nil)
     }
     

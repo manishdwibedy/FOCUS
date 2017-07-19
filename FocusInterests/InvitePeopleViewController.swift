@@ -11,6 +11,7 @@ import SDWebImage
 import Alamofire
 import CoreLocation
 import SwiftyJSON
+import GooglePlaces
 
 class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate{
 
@@ -32,6 +33,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     let locationManager = CLLocationManager()
     
+    var place: GMSPlace? = nil
+    
+    @IBOutlet weak var currentLocation: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -102,6 +106,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         if isMeetup{
             navBar.topItem?.title = "Meet up"
         }
+        
+        currentLocation.delegate = self
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -284,12 +291,19 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     "cache-contro": "no-cache"
                 ]
                 
-                let parameters = [
-                    "term": searchText,
-                    "latitude": location?.coordinate.latitude ?? 0,
-                    "longitude": location?.coordinate.longitude ?? 0,
-                    ] as [String : Any]
-                
+                var parameters = [String:Any]()
+                if self.place != nil {
+                    parameters = [
+                        "latitude": self.place?.coordinate.latitude,
+                        "longitude": self.place?.coordinate.longitude
+                        ] as [String : Any]
+                }
+                else{
+                    parameters = [
+                        "latitude": location?.coordinate.latitude ?? 0,
+                        "longitude": location?.coordinate.longitude ?? 0,
+                        ] as [String : Any]
+                }
                 
                 Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
                     let json = JSON(data: response.data!)
@@ -394,10 +408,19 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             "cache-contro": "no-cache"
         ]
         
-        let parameters = [
-            "latitude": location?.coordinate.latitude ?? 0,
-            "longitude": location?.coordinate.longitude ?? 0,
-            ] as [String : Any]
+        var parameters = [String:Any]()
+        if self.place != nil {
+            parameters = [
+                "latitude": self.place?.coordinate.latitude,
+                "longitude": self.place?.coordinate.longitude
+                ] as [String : Any]
+        }
+        else{
+            parameters = [
+                "latitude": location?.coordinate.latitude ?? 0,
+                "longitude": location?.coordinate.longitude ?? 0,
+                ] as [String : Any]
+        }
         
         
         Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
@@ -466,3 +489,131 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         }
     }
 }
+
+extension InvitePeopleViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let autoCompleteController = self.createGMSViewController()
+        textField.resignFirstResponder()
+        present(autoCompleteController, animated: true, completion: nil)
+    }
+}
+
+extension InvitePeopleViewController: GMSAutocompleteViewControllerDelegate {
+    
+    func createGMSViewController() -> GMSAutocompleteViewController{
+        let autoCompleteController = GMSAutocompleteViewController()
+        
+        let filter = GMSAutocompleteFilter()
+        filter.country = "US"
+        
+        autoCompleteController.autocompleteFilter = filter
+        
+        autoCompleteController.delegate = self
+        
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.white
+        
+        //        search bar attributes
+        let placeholderAttributes: [String : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!
+        ]
+        
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = placeholderAttributes
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = placeholderTextAttributes
+        
+        autoCompleteController.primaryTextColor = UIColor.white
+        autoCompleteController.primaryTextHighlightColor = Constants.color.green
+        autoCompleteController.secondaryTextColor = UIColor.white
+        autoCompleteController.tableCellBackgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+        autoCompleteController.tableCellSeparatorColor = UIColor.white
+        
+        return autoCompleteController
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        self.place = place
+        
+        var first = [String]()
+        var second = [String]()
+        
+        var isPlace = true
+        //locality;admin area level 1; postal code
+        for a in place.addressComponents!{
+            if a.type == "street_number"{
+                first.append(a.name)
+                isPlace = false
+            }
+            if a.type == "route"{
+                first.append(a.name)
+                isPlace = false
+            }
+            
+            if a.type == "locality"{
+                if isPlace{
+                    first.append(a.name)
+                }
+                else{
+                    second.append(a.name)
+                }
+            }
+            if a.type == "administrative_area_level_1"{
+                if isPlace{
+                    first.append(a.name)
+                }
+                else{
+                    second.append(a.name)
+                }
+            }
+            if a.type == "postal_code"{
+                if isPlace{
+                    first.append(a.name)
+                }
+                else{
+                    second.append(a.name)
+                }
+            }
+            if a.type == "premise"{
+                first.append(a.name)
+                break
+            }
+        }
+        
+        if isPlace{
+            second = first
+            
+            self.currentLocation.text = "\(place.name)"
+        }
+        else{
+            self.currentLocation.text = "\(first.joined(separator: " "))"
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // to do: handle error
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        viewController.autocompleteFilter?.country = "US"
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        viewController.autocompleteFilter?.country = "US"
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+    
+}
+
+

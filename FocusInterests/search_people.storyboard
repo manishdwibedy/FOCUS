@@ -118,6 +118,16 @@
                                 <color key="barTintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Current Location" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yhT-Rz-YeA">
+                                <rect key="frame" x="7" y="108" width="361" height="30"/>
+                                <color key="backgroundColor" red="0.26274509800000001" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="sLP-2p-5qh"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RME-pD-v8b">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -140,7 +150,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTi-NK-gbC">
-                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <rect key="frame" x="0.0" y="138" width="375" height="480"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nZh-JF-eMk">
                                         <rect key="frame" x="66" y="9" width="243" height="29"/>
@@ -156,7 +166,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-wn-SdN">
-                                        <rect key="frame" x="8" y="47" width="359" height="463"/>
+                                        <rect key="frame" x="8" y="47" width="359" height="433"/>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableView>
@@ -181,10 +191,13 @@
                             <constraint firstAttribute="trailing" secondItem="AYl-Yr-fFv" secondAttribute="trailing" id="3JP-Bk-dDQ"/>
                             <constraint firstItem="HTi-NK-gbC" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="3Q3-kk-PCV"/>
                             <constraint firstItem="RME-pD-v8b" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="7bQ-sO-6CQ"/>
+                            <constraint firstItem="yhT-Rz-YeA" firstAttribute="top" secondItem="AYl-Yr-fFv" secondAttribute="bottom" id="G95-CR-D97"/>
+                            <constraint firstItem="yhT-Rz-YeA" firstAttribute="leading" secondItem="AYl-Yr-fFv" secondAttribute="leading" constant="7" id="M6R-im-IQm"/>
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="top" secondItem="RME-pD-v8b" secondAttribute="bottom" id="OgL-ds-gWv"/>
                             <constraint firstAttribute="trailing" secondItem="HTi-NK-gbC" secondAttribute="trailing" id="Qz8-fz-5vG"/>
+                            <constraint firstItem="yhT-Rz-YeA" firstAttribute="trailing" secondItem="AYl-Yr-fFv" secondAttribute="trailing" constant="-7" id="Wvy-S2-59d"/>
                             <constraint firstItem="7Ss-jV-UL9" firstAttribute="top" secondItem="HTi-NK-gbC" secondAttribute="bottom" id="blf-wS-pc4"/>
-                            <constraint firstItem="HTi-NK-gbC" firstAttribute="top" secondItem="AYl-Yr-fFv" secondAttribute="bottom" id="bqN-Gc-O6y"/>
+                            <constraint firstItem="HTi-NK-gbC" firstAttribute="top" secondItem="yhT-Rz-YeA" secondAttribute="bottom" id="cJ2-Ld-iga"/>
                             <constraint firstItem="RME-pD-v8b" firstAttribute="top" secondItem="YCB-Au-Xks" secondAttribute="top" id="kSo-Vx-3mI"/>
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="vv3-PZ-isc"/>
                         </constraints>
@@ -194,6 +207,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="currentLocation" destination="yhT-Rz-YeA" id="7WE-lv-gOc"/>
                         <outlet property="navBar" destination="RME-pD-v8b" id="GVQ-s5-mZn"/>
                         <outlet property="searchBar" destination="AYl-Yr-fFv" id="L8v-LE-4kh"/>
                         <outlet property="segmentedOut" destination="nZh-JF-eMk" id="ICC-sp-Fhw"/>

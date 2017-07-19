@@ -65,6 +65,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var suggestions = [Event]()
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
     var guestList = [String:[String:String]]()
+    var map: MapViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -418,15 +419,32 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "unwindToMapViewControllerWithSegue"{
+            let map = self.map
+            if let event = event{
+                if !(map?.events.contains(event))!{
+                    map?.events.append(event)
+                    
+                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                    let marker = GMSMarker(position: position)
+                    marker.icon = #imageLiteral(resourceName: "Event")
+                    marker.title = event.title
+                    marker.map = map?.mapView
+                    marker.isTappable = true
+                    
+                    let index = map?.events.count
+                    marker.accessibilityLabel = "event_\(index!)"
+                    
+                    map?.currentLocation = CLLocation(latitude: position.latitude, longitude: position.longitude)
+                    map?.showEvent = true
+                    map?.viewingEvent = event
+                    map?.eventPlaceMarker = marker
+                }
+            }
+        }
+    }
+
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

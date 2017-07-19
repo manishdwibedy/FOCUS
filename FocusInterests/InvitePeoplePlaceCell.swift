@@ -85,6 +85,7 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
     {
         let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+        controller.map = parentVC.tabBarController?.viewControllers?[0] as? MapViewController
         controller.place = place as! Place
         parentVC.present(controller, animated: true, completion: nil)
     }

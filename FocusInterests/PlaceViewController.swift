@@ -24,6 +24,7 @@ class PlaceViewController: UIViewController {
     var place: Place?
     var rating = [PlaceRating]()
     var currentLocation: CLLocation?
+    var map: MapViewController? = nil
     
     
     @IBOutlet weak var mapButton: UIButton!
@@ -177,6 +178,37 @@ class PlaceViewController: UIViewController {
             let pin = segue.destination as! PinViewController
             pin.placeVC = self
             pin.place = self.place
+        }
+        if segue.identifier == "unwindToMapViewControllerWithSegue"{
+            let map = self.map
+            if let place = place{
+                if !(map?.places.contains(place))!{
+                    map?.places.append(place)
+                    
+                    let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+                    let marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: "place_icon")
+                    marker.title = place.name
+                    marker.map = map?.mapView
+                    marker.isTappable = true
+                    
+                    let index = map?.places.count
+                    marker.accessibilityLabel = "place_\(index!)"
+                    
+                    map?.placePins[place.id] = marker
+                    
+                    map?.placeMapping[place.id] = place
+                    map?.getPlaceHours(id: place.id)
+                    map?.places.append(place)
+                    
+                    map?.viewingPlace = place
+                    
+                    map?.currentLocation = CLLocation(latitude: position.latitude, longitude: position.longitude)
+                    map?.showEvent = true
+                    
+                    map?.eventPlaceMarker = marker
+                }
+            }
         }
         else if segue.identifier == "rating"{
 //            let rating = segue.destination as! RatingViewController

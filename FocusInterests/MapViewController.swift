@@ -59,6 +59,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var invites = [FocusNotification]()
     var feeds = [FocusNotification]()
     
+    var eventPlaceMarker: GMSMarker? = nil
+    var viewingPlace: Place? = nil
+    var viewingEvent: Event? = nil
     
     @IBOutlet weak var navigationView: MapNavigationView!
     
@@ -489,6 +492,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         super.viewWillAppear(animated)
         self.invites.removeAll()
         self.notifs.removeAll()
+        
+        if self.eventPlaceMarker != nil{
+            eventPlaceMarker?.map = nil
+            
+            if let place = viewingPlace{
+                if let index = places.index(of: place){
+                    places.remove(at: index)
+                }
+            }
+            if let event = viewingEvent{
+                if let index = events.index(of: event){
+                    events.remove(at: index)
+                }
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -621,7 +639,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         if parts?[0] == "event"{
             let index: Int! = Int(parts![1])
-            let event = self.events[index]
+            let event = self.events[index-1]
             
             popUpScreen.object = event
             popUpScreen.type = "event"
