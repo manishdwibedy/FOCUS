@@ -192,9 +192,9 @@ class Share{
                             if let useremail = AuthApi.getUserEmail()
                             {
                                 if user["email"] as? String != useremail{
-                                    if let id = user["firebaseUserId"] as? String{
+                                    if let id = user["firebaseUserId"] as? String, let email = user["email"] as? String{
                                         emails.append(facebookID)
-                                        emailMapping[user["email"] as! String] = id
+                                        emailMapping[email] = id
                                     }
                                     
                                 }
@@ -264,6 +264,12 @@ class FollowNewUser{
     }
     
     static func toFollowUser(info: [String:String]) -> FollowNewUser{
-        return FollowNewUser(fullname: info["name"]!, image: info["image"]!, email: info["email"]!)
+        if let email = info["email"]{
+            return FollowNewUser(fullname: info["name"]!, image: info["image"]!, email: info["email"]!)
+        }
+        else{
+            return FollowNewUser(fullname: info["name"]!, image: info["image"]!, email: info["id"]!)
+        }
+        
     }
 }
