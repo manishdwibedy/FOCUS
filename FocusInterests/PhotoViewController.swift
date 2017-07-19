@@ -56,13 +56,15 @@ class PhotoViewController: UIViewController {
 	}
 
 	func cancel() {
+        parentVC?.imageData = nil
 		dismiss(animated: true, completion: nil)
 	}
     
     func done(){
-        let chosenImage = backgroundImage
+        let chosenImage = backgroundImage.correctlyOrientedImage()
         let imageData = UIImagePNGRepresentation(chosenImage)
         parentVC?.imageData = imageData!
+        parentVC?.selected = true
         dismiss(animated: true, completion: nil)
     }
 }

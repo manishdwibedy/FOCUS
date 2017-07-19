@@ -30,6 +30,7 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     var captureButton: SwiftyRecordButton!
     var lastImageButton: UIButton!
     var imagePicker = UIImagePickerController()
+    var selected = false
     //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +49,18 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if imageData != nil{
-            self.performSegue(withIdentifier: "event_invite", sender: nil)
+        
+        if !selected{
+            if let image = self.imageData{
+                let newVC = PhotoViewController(image: UIImage(data:image,scale:1.0)!)
+                newVC.parentVC = self
+                self.present(newVC, animated: true, completion: nil)
+            }
+        }
+        else{
+            if imageData != nil{
+                self.performSegue(withIdentifier: "event_invite", sender: nil)
+            }
         }
     }
     

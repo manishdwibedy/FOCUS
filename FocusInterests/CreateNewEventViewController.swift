@@ -65,7 +65,7 @@ class CreateNewEventViewController: UIViewController,
     var filteredInterest = [String]()
     var interests_set = Set<String>()
     
-    let validatedFields = true
+    let validatedFields = false
     
     @IBOutlet weak var interestLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var guestListStackTopConstraint: NSLayoutConstraint!

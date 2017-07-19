@@ -528,4 +528,12 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         self.present(alert, animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goBackToCreateEvents"{
+            let destinationVC = segue.destination as! EventIconViewController
+            destinationVC.event = self.event
+            destinationVC.imageData = self.image
+        }
+    }
+    
 }

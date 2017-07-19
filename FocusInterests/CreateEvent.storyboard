@@ -339,7 +339,7 @@
                                         <barButtonItem key="leftBarButtonItem" image="Left back arrow icon 30x30 white.png" id="Rgt-k2-Cuc">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="eqH-re-POU" kind="show" id="pdH-Ex-mw2"/>
+                                                <action selector="returnToCreateEvents" destination="xxR-Li-4ZG" id="QmP-eS-Bor"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -543,6 +543,7 @@
                         <outlet property="navBar" destination="kpU-5M-zQz" id="3ht-w8-gzy"/>
                         <outlet property="searchBar" destination="j7M-Yi-1Uf" id="xNr-QC-Nby"/>
                         <outlet property="twitterSwitch" destination="3FE-nU-AvO" id="qgg-q2-IsJ"/>
+                        <segue destination="eqH-re-POU" kind="show" identifier="goBackToCreateEvents" id="FwC-UK-p9H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajl-2Z-7Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -646,6 +647,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="amW-Q6-Hfg"/>
-        <segue reference="pdH-Ex-mw2"/>
+        <segue reference="FwC-UK-p9H"/>
     </inferredMetricsTieBreakers>
 </document>
