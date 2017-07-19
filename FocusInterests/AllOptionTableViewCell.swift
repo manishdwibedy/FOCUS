@@ -10,7 +10,9 @@ import UIKit
 
 class AllOptionTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var allButton: UIButton!
     @IBOutlet weak var checkMarkButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

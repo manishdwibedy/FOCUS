@@ -107,7 +107,7 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
         
         if type == "event"{
             let startDate = event?.date?.components(separatedBy: ",")[1].trimmingCharacters(in: .whitespaces)
-            timeOut.setTitle(startDate, for: .normal)
+//            timeOut.setTitle(startDate, for: .normal)
             
             let startDate1 = dateFormatter.date(from: startDate!)
             timePicker.date = startDate1!
@@ -119,7 +119,7 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
             let nextDiff = 5 - calendar.component(.minute, from: currentTime) % 5
             let nextDate = calendar.date(byAdding: .minute, value: nextDiff, to: currentTime) ?? Date()
             
-            timeOut.setTitle(dateFormatter.string(from: nextDate), for: .normal)
+//            timeOut.setTitle(dateFormatter.string(from: nextDate), for: .normal)
             timePicker.date = nextDate
         }
         
@@ -172,7 +172,7 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
         else{
             inviteTableTop.constant = 0
 //            timeLabel.isHidden = true
-            timeOut.isHidden = true
+//            timeOut.isHidden = true
             self.sections.removeAll()
             self.sectionMapping.removeAll()
             self.users.removeAll()
@@ -242,141 +242,10 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
         self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())
         
         
-        self.dayTextField.delegate = self
-        self.dayTextField.attributedPlaceholder = NSAttributedString(string: "Choose a date", attributes: [NSForegroundColorAttributeName: UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)])
-        //        self.dayButton.inputView
-        //        self.dayPickerView.isHidden = true
-        //        self.doneToolBar.isHidden = true
-        //        formatNavBar()
-        //        self.dayPickerView.delegate = self
-        //        self.dayPickerView.dataSource = self
-        //        self.setPickerDateToToday()
-        //        self.dayButton.addTarget(self, action: #selector(InviteViewController.dayButtonPressed), for: .touchUpInside)
+//        self.dayTextField.delegate = self
+//        self.dayTextField.attributedPlaceholder = NSAttributedString(string: "Choose a date", attributes: [NSForegroundColorAttributeName: UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)])
         
     }
-    
-    //    MARK: PickerView delegate methods
-    
-    //    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    //        let month = Calendar.current.component(.month, from: Date())
-    //        var day = Calendar.current.component(.day, from: Date())
-    //
-    //        if component == 0{
-    //            let monthName = DateFormatter().monthSymbols[month-1]
-    //            self.monthText = monthName
-    //            return monthName
-    //
-    //        }else{
-    //            if month == 2{
-    //                if day < 22{
-    //                    day = 0
-    //                }
-    //            }else if month != 2 && month % 2 != 0{
-    //                if day < 25{
-    //                    day = 0
-    //                }
-    //            }else if month != 2 && month % 2 == 0{
-    //                if day < 24{
-    //                    day = 0
-    //                }
-    //            }
-    //
-    //            day += row
-    //            self.dayText = "\(day)"
-    //            return "\(day)"
-    //        }
-    //
-    //    }
-    
-    //    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    //        return 2
-    //    }
-    //
-    //    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    //        var rowAmt = Int()
-    //        let month = Calendar.current.component(.month, from: Date())
-    //        let day = Calendar.current.component(.day, from: Date())
-    //        print(day)
-    //        if component == 0 {
-    //            if month == 2{
-    //                if day < 22{
-    //                    rowAmt = 1
-    //                }else{
-    //                    rowAmt = 2
-    //                }
-    //            }else if month != 2 && month % 2 != 0{
-    //                if day < 25{
-    //                    rowAmt = 1
-    //                }else{
-    //                    rowAmt = 2
-    //                }
-    //            }else if month != 2 && month % 2 == 0{
-    //                if day < 24{
-    //                    rowAmt = 1
-    //                }else{
-    //                    rowAmt = 2
-    //                }
-    //            }
-    //        }else{
-    //            rowAmt = 7
-    //        }
-    //        return rowAmt
-    //    }
-    //
-    //    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    //        print("day chosen: \(self.daysOfWeek[self.dayPickerView.selectedRow(inComponent: component)])")
-    //
-    //
-    //        self.dayPickerView.selectRow(row, inComponent: component, animated: true)
-    //    }
-    
-    //    @IBAction func doneButtonPressed(_ sender: Any) {
-    //        let dayNumber = Calendar.current.component(.weekday, from: Date()) // 1 - 7
-    //        let dayName = DateFormatter().weekdaySymbols[dayNumber - 1]
-    //
-    //        self.doneToolBar.isHidden = true
-    //        self.dayPickerView.isHidden = true
-    //
-    //        self.dayButton.setTitle("\(self.monthText) \(self.dayText)", for: .normal)
-    //        self.dayButton.setTitle("\(self.monthText) \(self.dayText)", for: .selected)
-    //    }
-    //
-    //    func dayButtonPressed(){
-    //
-    //    }
-    //
-    //    private func formatNavBar(){
-    //        self.navigationItem.title = "Send Invites"
-    //        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
-    //        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
-    //    }
-    //
-    //    func setPickerDateToToday(){
-    //        let dayNumber = Calendar.current.component(.weekday, from: Date()) // 1 - 7
-    //        let dayName = DateFormatter().weekdaySymbols[dayNumber - 1]
-    //        print("day Number: \(dayNumber)")
-    //        print("day of week: \(self.daysOfWeek[dayNumber-1])")
-    //        print("day of week: \(dayName)")
-    //
-    //        switch dayNumber{
-    //        case 1:
-    //            self.dayPickerView.selectRow(6, inComponent: 0, animated: true)
-    //        case 2:
-    //            self.dayPickerView.selectRow(0, inComponent: 0, animated: true)
-    //        case 3:
-    //            self.dayPickerView.selectRow(1, inComponent: 0, animated: true)
-    //        case 4:
-    //            self.dayPickerView.selectRow(2, inComponent: 0, animated: true)
-    //        case 5:
-    //            self.dayPickerView.selectRow(3, inComponent: 0, animated: true)
-    //        case 6:
-    //            self.dayPickerView.selectRow(4, inComponent: 0, animated: true)
-    //        case 7:
-    //            self.dayPickerView.selectRow(5, inComponent: 0, animated: true)
-    //        default:
-    //            break
-    //        }
-    //    }
     
     //    MARK: Textfield Delegate Methods
     
@@ -387,14 +256,14 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
-        self.dayTextField.inputAccessoryView = self.dateToolbar
-        self.dayTextField.inputView = self.datePicker
+//        self.dayTextField.inputAccessoryView = self.dateToolbar
+//        self.dayTextField.inputView = self.datePicker
         //        eventDateTextField.inputView = self.datePicker
         return true
     }
     
     func dateSelected(){
-        self.dayTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
+//        self.dayTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
         self.view.endEditing(true)
     }
     
@@ -562,7 +431,7 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
                     Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime,"status": "sent"])
                     searchPlace?.showPopup = true
                     
-                    Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeOut.titleLabel?.text!])
+//                    Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeOut.titleLabel?.text!])
                     
                     
                     Answers.logCustomEvent(withName: "Invite User",
@@ -587,7 +456,7 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
                     Constants.DB.user.child(UID).child("invitations").child(self.type).queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
                         
                         if snapshot.value == nil{
-                            Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":self.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeOut.titleLabel?.text!])
+//                            Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":self.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeOut.titleLabel?.text!])
                             
                         }
                     })
@@ -680,7 +549,7 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         let dateString = dateFormatter.string(from: sender.date)
-        timeOut.setTitle(dateString, for: UIControlState.normal)
+//        timeOut.setTitle(dateString, for: UIControlState.normal)
         inviteTime = dateString
     }
     

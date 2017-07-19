@@ -48,6 +48,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="allButton" destination="Mo6-8l-r0S" id="VWt-By-K59"/>
                 <outlet property="checkMarkButton" destination="qU8-sc-xJQ" id="6KP-rd-h7I"/>
             </connections>
         </tableViewCell>

@@ -10,6 +10,7 @@ import UIKit
 
 class FollowingOptionTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var checkMarkButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,5 +27,4 @@ class FollowingOptionTableViewCell: UITableViewCell {
     @IBAction func followingIsSelected(_ sender: Any) {
         self.checkMarkButton.isHidden = !self.checkMarkButton.isHidden
     }
-    
 }

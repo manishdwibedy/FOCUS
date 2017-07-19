@@ -394,12 +394,12 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="426-ko-s1V">
-                                <rect key="frame" x="246" y="6" width="42" height="17"/>
+                                <rect key="frame" x="246" y="11" width="42" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="Bun-NE-1l1"/>
                                     <constraint firstAttribute="height" constant="17" id="Nz4-Wu-zjS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -408,12 +408,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCQ-A8-LVs">
-                                <rect key="frame" x="12" y="5" width="16" height="18"/>
+                                <rect key="frame" x="12" y="12" width="16" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="8lR-A4-zn9"/>
                                     <constraint firstAttribute="width" constant="16" id="ZNp-lQ-kG4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <state key="normal" title="x">
                                     <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -427,13 +427,13 @@
                             <constraint firstAttribute="trailing" secondItem="426-ko-s1V" secondAttribute="trailing" constant="12" id="5Rs-4J-sUY"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="top" secondItem="XW1-Kd-q02" secondAttribute="bottom" constant="26" id="ACk-7G-jkk"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="leading" secondItem="HCQ-A8-LVs" secondAttribute="trailing" constant="1.5" id="AKc-XS-SD0"/>
-                            <constraint firstItem="HCQ-A8-LVs" firstAttribute="centerY" secondItem="426-ko-s1V" secondAttribute="centerY" id="Ex2-UY-d5w"/>
+                            <constraint firstItem="HCQ-A8-LVs" firstAttribute="centerY" secondItem="426-ko-s1V" secondAttribute="centerY" constant="1.5" id="Ex2-UY-d5w"/>
                             <constraint firstItem="HCQ-A8-LVs" firstAttribute="leading" secondItem="Vkg-MS-EEL" secondAttribute="leading" constant="12" id="PLL-nH-QnI"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="leading" secondItem="Vkg-MS-EEL" secondAttribute="leading" constant="29.5" id="T5f-48-asE"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="centerX" secondItem="Vkg-MS-EEL" secondAttribute="centerX" id="VBL-uF-Tu8"/>
                             <constraint firstItem="426-ko-s1V" firstAttribute="leading" secondItem="re9-I8-udK" secondAttribute="trailing" constant="-24.5" id="b09-qs-eGl"/>
                             <constraint firstAttribute="trailing" secondItem="re9-I8-udK" secondAttribute="trailing" constant="29.5" id="mOv-sh-z2F"/>
-                            <constraint firstItem="426-ko-s1V" firstAttribute="top" secondItem="XW1-Kd-q02" secondAttribute="bottom" constant="6" id="nNH-9D-hD6"/>
+                            <constraint firstItem="426-ko-s1V" firstAttribute="top" secondItem="XW1-Kd-q02" secondAttribute="bottom" constant="11" id="nNH-9D-hD6"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -552,12 +552,12 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVI-vb-tMY">
-                                <rect key="frame" x="29" y="4" width="13" height="13"/>
+                                <rect key="frame" x="29" y="11" width="13" height="13"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="13" id="N5G-22-PrX"/>
                                     <constraint firstAttribute="height" constant="13" id="wgp-ax-Dq6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <state key="normal" title="x">
                                     <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -572,7 +572,7 @@
                             <constraint firstItem="q4Z-4g-nao" firstAttribute="centerX" secondItem="VB0-vV-eeh" secondAttribute="centerX" id="Lzn-pf-1tz"/>
                             <constraint firstAttribute="trailing" secondItem="q4Z-4g-nao" secondAttribute="trailing" constant="29" id="OuB-7D-Lra"/>
                             <constraint firstItem="q4Z-4g-nao" firstAttribute="top" secondItem="2QZ-NM-UCh" secondAttribute="bottom" constant="28.5" id="Uo8-5s-n7p"/>
-                            <constraint firstItem="yVI-vb-tMY" firstAttribute="top" secondItem="2QZ-NM-UCh" secondAttribute="bottom" constant="4" id="cQp-Ag-2Ui"/>
+                            <constraint firstItem="yVI-vb-tMY" firstAttribute="top" secondItem="2QZ-NM-UCh" secondAttribute="bottom" constant="11" id="cQp-Ag-2Ui"/>
                             <constraint firstItem="q4Z-4g-nao" firstAttribute="leading" secondItem="yVI-vb-tMY" secondAttribute="leading" id="rMB-D6-6fT"/>
                         </constraints>
                     </view>

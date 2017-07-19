@@ -327,11 +327,14 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         */
         
         var cell: UITableViewCell?
+        //2 and 6
         
         if indexPath.row == 0{
             cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as! FeedOneTableViewCell
         }else if indexPath.row == 1{
-            cell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
+            let feedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
+            feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
+            cell = feedEventCell
         }else if indexPath.row == 2{
             cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as! FeedPlaceTableViewCell
         }else if indexPath.row == 3{
@@ -339,11 +342,18 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         }else if indexPath.row == 4{
             cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
         }else if indexPath.row == 5{
-            cell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
+            var feedCreatedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
+            var searchEventCell = feedCreatedEventCell.searchEventTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SearchEventTableViewCell
+            searchEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
+            cell = feedCreatedEventCell
         }
         return cell!
     }
     
+    func goToInvitePage(){
+        let inviteVC = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "NewInviteViewController")
+        self.present(inviteVC, animated: true, completion: nil)
+    }
     
     
     func attendEvent(sender:UIButton){

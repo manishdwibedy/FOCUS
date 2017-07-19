@@ -73,9 +73,9 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
             let followingCell = tableView.dequeueReusableCell(withIdentifier: "followingOptionCell", for: indexPath) as! FollowingOptionTableViewCell
             cell = followingCell
         }
-        
         return cell
     }
+    
 
     @IBAction func showTable(_ sender: UIButton) {
         switch sender.tag{
