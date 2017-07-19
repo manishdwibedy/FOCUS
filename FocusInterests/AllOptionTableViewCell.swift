@@ -10,9 +10,11 @@ import UIKit
 
 class AllOptionTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var checkMarkButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.checkMarkButton.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -21,4 +23,7 @@ class AllOptionTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func allisSelected(_ sender: Any) {
+        self.checkMarkButton.isHidden = !self.checkMarkButton.isHidden
+    }
 }

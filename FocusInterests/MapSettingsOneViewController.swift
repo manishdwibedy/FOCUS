@@ -19,15 +19,18 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.interestTableView.dataSource = self
+        self.interestTableView.delegate = self
+        
         self.interestTableView.register(UINib(nibName: "SelectAllInterestsTableViewCell", bundle: nil), forCellReuseIdentifier: "selectAllInterestsCell")
         
         self.interestTableView.register(UINib(nibName: "SingleInterestTableViewCell", bundle: nil), forCellReuseIdentifier: "singleInterestCell")
         self.interestTableView.isHidden = true
-        //        self.stackViewHeight.constant -= self.interestTableViewHeight.constant
         self.interestTableViewHeight.constant = 0
         self.target(forAction: #selector(MapViewSettingsOne.openOptions(_:)), withSender: self)
         self.searchFocusView.target(forAction: #selector(MapViewSettingsOne.openOptions(_:)), withSender: self)
-        searchFocusView.allCornersRounded(radius: 7.0)
+//        searchFocusView.allCornersRounded(radius: 7.0)
         
     }
     
@@ -74,6 +77,10 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        print("Closing")
+        self.parent?.view.isHidden = true
+    }
 
     /*
     // MARK: - Navigation

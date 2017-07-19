@@ -8,13 +8,22 @@
 
 import UIKit
 
+protocol MapViewSettingPageViewControllerDelegate {
+    func closeButtonPressed()
+}
+
 class MapViewSettingPageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource{
 
-    lazy var orderedViewControllers: [UIViewController] = {
-        return [self.mapSettingsVC(viewController: "MapSettingsOneViewController"),
-                self.mapSettingsVC(viewController: "MapSettingsTwoViewController")]
-    }()
+//    lazy var orderedViewControllers: [UIViewController] = {
+//        return [self.mapSettingsVC(viewController: "MapSettingsOneViewController"),
+//                self.mapSettingsVC(viewController: "MapSettingsTwoViewController")]
+//    }()
+    var orderedViewControllers = [UIViewController]()
     var pageControl = UIPageControl()
+    
+    func mapSettingsVC(viewController: String) -> UIViewController {
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(viewController)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +32,8 @@ class MapViewSettingPageViewController: UIPageViewController, UIPageViewControll
         dataSource = self
 //        setupPageControl()
         
-        print(self.view.subviews[0].subviews[2].subviews)
+        self.orderedViewControllers.append(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapSettingsOneViewController"))
+        self.orderedViewControllers.append(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapSettingsTwoViewController"))
         
         setViewControllers([orderedViewControllers.first!],direction: .forward,animated: true,completion: nil)
         
@@ -47,20 +57,6 @@ class MapViewSettingPageViewController: UIPageViewController, UIPageViewControll
             scrollView.frame = view.bounds
             view.bringSubview(toFront:control)
         }
-    }
-    
-    func setupPageControl(){
-        pageControl = UIPageControl(frame: CGRect(x: self.view.center.x,y: self.view.bounds.maxY-50,width: UIScreen.main.bounds.width,height: 50))
-        self.pageControl.numberOfPages = orderedViewControllers.count
-        self.pageControl.currentPage = 0
-        self.pageControl.tintColor = UIColor.black
-        self.pageControl.pageIndicatorTintColor = UIColor.white
-        self.pageControl.currentPageIndicatorTintColor = UIColor.black
-        self.view.addSubview(pageControl)
-    }
-    
-    func mapSettingsVC(viewController: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "\(viewController)")
     }
     
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?{
@@ -89,9 +85,12 @@ class MapViewSettingPageViewController: UIPageViewController, UIPageViewControll
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
-        
     }
 
+    func closeButtonPressed(){
+        self.view.isHidden = true
+    }
+    
     /*
     // MARK: - Navigation
 

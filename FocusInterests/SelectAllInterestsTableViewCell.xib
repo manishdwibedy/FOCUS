@@ -20,12 +20,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-UP-57a">
-                        <rect key="frame" x="8" y="8.5" width="112" height="30"/>
+                        <rect key="frame" x="8" y="0.0" width="312" height="47"/>
                         <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="13"/>
                         <state key="normal" title="Show All Interests"/>
+                        <connections>
+                            <action selector="selectAllClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cb5-8s-z76"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awz-6Y-OiS">
-                        <rect key="frame" x="280" y="8.5" width="30" height="30"/>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awz-6Y-OiS">
+                        <rect key="frame" x="290" y="8.5" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="0VD-aj-0OK"/>
                             <constraint firstAttribute="width" constant="30" id="h9o-eq-Ojj"/>
@@ -34,12 +37,19 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="awz-6Y-OiS" secondAttribute="trailing" constant="2" id="89K-ke-GjY"/>
+                    <constraint firstAttribute="bottom" secondItem="x7b-UP-57a" secondAttribute="bottom" constant="-0.5" id="5RS-eC-ezI"/>
+                    <constraint firstAttribute="trailing" secondItem="x7b-UP-57a" secondAttribute="trailing" id="7Yw-vx-qar"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="awz-6Y-OiS" secondAttribute="trailing" constant="-8" id="89K-ke-GjY"/>
                     <constraint firstItem="x7b-UP-57a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="nyE-TS-XZm"/>
                     <constraint firstItem="x7b-UP-57a" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rKO-kG-RvQ"/>
+                    <constraint firstItem="x7b-UP-57a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="rr3-J8-HCd"/>
                     <constraint firstItem="awz-6Y-OiS" firstAttribute="centerY" secondItem="x7b-UP-57a" secondAttribute="centerY" id="s6p-fb-QCp"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="checkMarkButton" destination="awz-6Y-OiS" id="Ykp-3h-bJa"/>
+                <outlet property="showAllButton" destination="x7b-UP-57a" id="Zzc-Fe-bUC"/>
+            </connections>
             <point key="canvasLocation" x="87" y="62.5"/>
         </tableViewCell>
     </objects>
