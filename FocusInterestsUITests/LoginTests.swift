@@ -69,7 +69,7 @@ class LoginTests: XCTestCase {
         
         let emailTextField = app.textFields["Email"]
         emailTextField.tap()
-        emailTextField.typeText("abcde@gmail.com")
+        emailTextField.typeText("abcdef@gmail.com")
         app.buttons["Next"].tap()
         
         let fullNameTextField = app.textFields["Full Name"]
@@ -80,7 +80,7 @@ class LoginTests: XCTestCase {
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText("qwerty1234")
         
-        let chooseUsernameSecureTextField = app.secureTextFields["Choose Username"]
+        let chooseUsernameSecureTextField = app.textFields["Choose Username"]
         chooseUsernameSecureTextField.tap()
         chooseUsernameSecureTextField.typeText("abc")
         app.buttons["Finish"].tap()
@@ -88,7 +88,48 @@ class LoginTests: XCTestCase {
         app.buttons["Finish"].tap()
         print("registering...")
         
-        sleep(100)
+        sleep(1000000)
+    }
+    
+    func testDuplicateUsername(){
+        
+        let app = XCUIApplication()
+        app.buttons["New? Map Your World"].tap()
+        
+        let emailTextField = app.textFields["Email"]
+        emailTextField.tap()
+        emailTextField.typeText("abcdefg@gmail.com")
+        app.buttons["Next"].tap()
+        
+        let fullNameTextField = app.textFields["Full Name"]
+        fullNameTextField.tap()
+        fullNameTextField.typeText("testing")
+        
+        let passwordSecureTextField = app.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("qwerty1234")
+        
+        let chooseUsernameSecureTextField = app.textFields["Choose Username"]
+        chooseUsernameSecureTextField.tap()
+        chooseUsernameSecureTextField.typeText("abc")
+        app.buttons["Finish"].tap()
+        
+        app.buttons["Finish"].tap()
+        print("registering...")
+        
+        sleep(5)
+        XCTAssert(app.buttons["Done"].exists)
+        
+        app.buttons["Done"].tap()
+        
+        
+        let chooseUsernameTextField = app.textFields["Choose Username"]
+        chooseUsernameTextField.tap()
+        chooseUsernameTextField.typeText("d")
+        app.buttons["Finish"].tap()
+        
+        sleep(1000000)
+        
     }
     
     func testEmaiAlreadyUsed(){
