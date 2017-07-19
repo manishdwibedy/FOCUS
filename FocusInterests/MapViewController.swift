@@ -26,6 +26,7 @@ import Crashlytics
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate, UIPopoverPresentationControllerDelegate{
     
+    @IBOutlet weak var mapViewSettings: UIView!
     @IBOutlet weak var followYourFriendsView: UIView!
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var mapView: GMSMapView!
@@ -553,7 +554,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             print("username is not nil")
         }
         
-        
+        self.mapViewSettings.allCornersRounded(radius: 10.0)
 
 //        Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
 //            if let id = (snapshot.value as? NSDictionary)?["manish1"]{

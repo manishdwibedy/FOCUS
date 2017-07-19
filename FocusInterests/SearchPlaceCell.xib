@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="362" height="105"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="362" height="104.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="362" height="104.66666666666667"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzy-nD-Mhx">
@@ -31,17 +31,14 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcy-mZ-WLf">
-                                <rect key="frame" x="66" y="8" width="134" height="20"/>
+                                <rect key="frame" x="66" y="8" width="134" height="20.333333333333336"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzd-WM-LyK">
-                                <rect key="frame" x="66" y="31" width="201" height="44"/>
+                                <rect key="frame" x="66" y="29" width="201" height="48"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="LLh-SV-SEO"/>
-                                </constraints>
                                 <inset key="scrollIndicatorInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
@@ -107,7 +104,7 @@
                             <constraint firstItem="3d5-d3-s8t" firstAttribute="height" secondItem="x3j-8h-RD4" secondAttribute="height" id="1f4-Cn-hPZ"/>
                             <constraint firstItem="vcy-mZ-WLf" firstAttribute="baseline" secondItem="60o-fN-I3e" secondAttribute="baseline" constant="1" id="8k0-6t-apr"/>
                             <constraint firstItem="TMP-wL-5jG" firstAttribute="centerY" secondItem="gzd-WM-LyK" secondAttribute="centerY" constant="-3" id="BLy-bc-t00"/>
-                            <constraint firstItem="gzd-WM-LyK" firstAttribute="top" secondItem="vcy-mZ-WLf" secondAttribute="bottom" constant="2.6666666666666643" id="BOx-tq-n7t"/>
+                            <constraint firstItem="gzd-WM-LyK" firstAttribute="top" secondItem="vcy-mZ-WLf" secondAttribute="bottom" constant="0.6666666666666643" id="BOx-tq-n7t"/>
                             <constraint firstItem="gzd-WM-LyK" firstAttribute="leading" secondItem="vcy-mZ-WLf" secondAttribute="leading" id="BnH-XF-ZPz"/>
                             <constraint firstItem="3d5-d3-s8t" firstAttribute="trailing" secondItem="TMP-wL-5jG" secondAttribute="trailing" id="JUf-M4-3PX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TMP-wL-5jG" secondAttribute="trailing" constant="2" id="KrM-QN-Dca"/>
@@ -128,7 +125,7 @@
                             <constraint firstItem="Ya0-NI-rmK" firstAttribute="top" secondItem="Kzy-nD-Mhx" secondAttribute="top" constant="9" id="kiR-sX-eEy"/>
                             <constraint firstItem="60o-fN-I3e" firstAttribute="baseline" secondItem="r3K-UI-PZJ" secondAttribute="baseline" id="p7C-Ze-3rG"/>
                             <constraint firstItem="vcy-mZ-WLf" firstAttribute="leading" secondItem="Ya0-NI-rmK" secondAttribute="trailing" constant="8" id="sAK-VW-hfT"/>
-                            <constraint firstItem="x3j-8h-RD4" firstAttribute="top" secondItem="gzd-WM-LyK" secondAttribute="bottom" constant="4" id="tMx-jl-dmm"/>
+                            <constraint firstItem="x3j-8h-RD4" firstAttribute="top" secondItem="gzd-WM-LyK" secondAttribute="bottom" constant="2" id="tMx-jl-dmm"/>
                             <constraint firstItem="r3K-UI-PZJ" firstAttribute="trailing" secondItem="Kzy-nD-Mhx" secondAttribute="trailingMargin" constant="-2" id="yfh-Xt-8qR"/>
                         </constraints>
                     </view>

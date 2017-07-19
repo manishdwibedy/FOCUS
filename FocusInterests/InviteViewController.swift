@@ -454,6 +454,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return personToInviteCell
     }
     
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = indexPath.row
         tableView.deselectRow(at: indexPath, animated: true)

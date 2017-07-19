@@ -915,7 +915,7 @@
                                                 <rect key="frame" x="1" y="621" width="375" height="430"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4hl-dk-leI">
-                                                        <rect key="frame" x="8" y="66" width="359" height="328"/>
+                                                        <rect key="frame" x="8" y="62" width="359" height="332"/>
                                                         <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="359" id="F7n-mg-CDB"/>
@@ -961,8 +961,8 @@
                                                     <constraint firstAttribute="trailing" secondItem="KtZ-hk-yfh" secondAttribute="trailing" constant="8" id="Jhp-Lz-tSs"/>
                                                     <constraint firstItem="k1g-kk-auN" firstAttribute="centerX" secondItem="fWo-hM-NpW" secondAttribute="centerX" id="Jmw-if-dva"/>
                                                     <constraint firstItem="fWo-hM-NpW" firstAttribute="centerX" secondItem="STY-xG-qNq" secondAttribute="centerX" id="Mq3-8L-3P9"/>
-                                                    <constraint firstItem="4hl-dk-leI" firstAttribute="top" secondItem="fWo-hM-NpW" secondAttribute="bottom" constant="9" id="c1w-ht-Lpa"/>
-                                                    <constraint firstItem="4hl-dk-leI" firstAttribute="top" secondItem="STY-xG-qNq" secondAttribute="top" constant="66" id="dty-dr-EJ2"/>
+                                                    <constraint firstItem="4hl-dk-leI" firstAttribute="top" secondItem="fWo-hM-NpW" secondAttribute="bottom" constant="5" id="c1w-ht-Lpa"/>
+                                                    <constraint firstItem="4hl-dk-leI" firstAttribute="top" secondItem="STY-xG-qNq" secondAttribute="top" constant="62" id="dty-dr-EJ2"/>
                                                     <constraint firstAttribute="bottom" secondItem="KtZ-hk-yfh" secondAttribute="bottom" constant="8" id="fn4-qf-5nZ"/>
                                                     <constraint firstItem="k1g-kk-auN" firstAttribute="top" secondItem="STY-xG-qNq" secondAttribute="top" constant="12" id="hfW-dT-Law"/>
                                                     <constraint firstItem="KtZ-hk-yfh" firstAttribute="top" secondItem="4hl-dk-leI" secondAttribute="bottom" constant="9" id="n9q-sR-ZEN"/>
@@ -1080,7 +1080,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzs-zd-iwk" userLabel="Rating View">
                                 <rect key="frame" x="26" y="10" width="323" height="120"/>
                                 <subviews>
-                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="CBJ-ZN-IGs" customClass="CosmosView" customModule="Cosmos">
+                                    <view contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CBJ-ZN-IGs" customClass="CosmosView" customModule="Cosmos">
                                         <rect key="frame" x="10" y="10" width="263" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
@@ -1114,7 +1114,7 @@
                                             <action selector="ratingSubmitted:" destination="ahA-Wd-kLn" eventType="touchUpInside" id="ACr-Mw-PI9"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Please enter your comments here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bln-g0-qfw">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" text="Please enter your comments here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bln-g0-qfw">
                                         <rect key="frame" x="10" y="60" width="254" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
