@@ -35,7 +35,7 @@ enum InterestStatus{
     }
 }
 
-class Interest {
+class Interest: Equatable, Hashable {
     
     var name: String?
     var category: InterestCategory?
@@ -53,5 +53,15 @@ class Interest {
     func addStatus(status: InterestStatus){
         self.status = status
         
+    }
+    
+    var hashValue : Int {
+        get {
+            return "\(self.name)".hashValue
+        }
+    }
+    
+    static func == (lhs: Interest, rhs: Interest) -> Bool {
+        return lhs.name == rhs.name
     }
 }

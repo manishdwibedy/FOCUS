@@ -48,7 +48,19 @@ class User: Equatable {
             return nil
         }
         
-        return User(username: username, fullname: fullname, uuid: id, userImage: nil, interests: nil, image_string: image, hasPin: false)
+        guard let interests = info["interests"] as? String else{
+            return nil
+        }
+        
+        var user_interests = [Interest]()
+        for interest in interests.components(separatedBy: ","){
+            let interest_name = interest.components(separatedBy: "-")[0]
+            
+            user_interests.append(Interest(name: interest_name, category: nil, image: nil, imageString: nil))
+        }
+        
+        
+        return User(username: username, fullname: fullname, uuid: id, userImage: nil, interests: user_interests, image_string: image, hasPin: false)
         
     }
     

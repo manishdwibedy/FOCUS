@@ -954,6 +954,22 @@ func getUserData(uid: String, gotInfo: @escaping (_ user: NotificationUser) -> V
     })
 }
 
+func matchingUserInterest(user: User) -> Bool{
+    let user_interest = AuthApi.getInterests()
+    
+    var user_interests = [Interest]()
+    for interest in (user_interest?.components(separatedBy: ","))!{
+        let interest_name = interest.components(separatedBy: "-")[0]
+        
+        user_interests.append(Interest(name: interest_name, category: nil, image: nil, imageString: nil))
+    }
+    
+    let user_interest_set:Set<Interest> = Set(user_interests)
+    let other_user:Set<Interest> = Set<Interest>(user.interests!)
+
+    
+    return other_user.intersection(user_interest_set).count > 0
+}
 
 
 

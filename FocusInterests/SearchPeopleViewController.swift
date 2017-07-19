@@ -152,61 +152,68 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                 }
             }
         })
+        
+        var userCount = 0
         _ = ref.observeSingleEvent(of: .value, with: { snapshot in
             let users = snapshot.value as? [String : Any] ?? [:]
             
-            _ = users.count
             self.people.removeAll()
             for (_, user) in users{
                 let info = user as? [String:Any]
                 
-                let userCount = users.count
+                
                 if let info = info{
                     if let user = User.toUser(info: info){
-                        if user.uuid != AuthApi.getFirebaseUid(){
-                            Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
-                                let value = snapshot.value as? NSDictionary
-                                if let value = value
-                                {
-                                    if let pin = pinData.toPin(user: user, value: value){
-                                        
-                                        if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
-                                            self.user_pins[user.uuid!] = pin
-                                            user.hasPin = true
+                        
+                        if matchingUserInterest(user: user){
+                            userCount += 1
+                            if user.uuid != AuthApi.getFirebaseUid(){
+                                Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                    let value = snapshot.value as? NSDictionary
+                                    if let value = value
+                                    {
+                                        if let pin = pinData.toPin(user: user, value: value){
                                             
-                                            let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
-                                            user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                            if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
+                                                self.user_pins[user.uuid!] = pin
+                                                user.hasPin = true
+                                                
+                                                let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+                                                user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                            }
+                                            
+                                            
+                                        }
+                                    }
+                                    if !self.people.contains(user){
+                                        self.people.append(user)
+                                    }
+                                    
+                                    print("users - \(userCount)")
+                                    print("people till now - \(self.people.count)")
+                                    if self.people.count == userCount - 1 && followingCount == self.followers.count{
+                                        self.people.sort {
+                                            if $0.hasPin && $1.hasPin{
+                                                return $0.pinDistance < $1.pinDistance
+                                            }
+                                            return $0.hasPin && !$1.hasPin
+                                        }
+                                        
+                                        for user in self.followers{
+                                            if let index = self.people.index(where: { $0.uuid == user.uuid }) {
+                                                self.people.remove(at: index)
+                                            }
                                         }
                                         
                                         
-                                    }
-                                }
-                                if !self.people.contains(user){
-                                    self.people.append(user)
-                                }
-                                
-                                if self.people.count == userCount && followingCount == self.followers.count{
-                                    self.people.sort {
-                                        if $0.hasPin && $1.hasPin{
-                                            return $0.pinDistance < $1.pinDistance
-                                        }
-                                        return $0.hasPin && !$1.hasPin
-                                    }
-                                    
-                                    for user in self.followers{
-                                        if let index = self.people.index(where: { $0.uuid == user.uuid }) {
-                                            self.people.remove(at: index)
-                                        }
+                                        self.people = self.followers + self.people
+                                        self.filtered = self.people
+                                        self.tableView.reloadData()
                                     }
                                     
                                     
-                                    self.people = self.followers + self.people
-                                    self.filtered = self.people
-                                    self.tableView.reloadData()
-                                }
-                                
-                                
-                            })
+                                })
+                            }
                         }
                     }
                 }
