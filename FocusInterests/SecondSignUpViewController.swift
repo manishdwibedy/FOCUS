@@ -74,7 +74,8 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
                                 Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(self.userNameTextField.text)
                                 Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/fullname").setValue(self.fullNameTextField.text)
                                 Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/fullname_lowered").setValue(self.fullNameTextField.text?.lowercased())
-                                
+                                Constants.DB.user_mapping.child(self.userNameTextField.text!).setValue(email)
+                                self.showHomeVC()
                                 
                             }
                         }
