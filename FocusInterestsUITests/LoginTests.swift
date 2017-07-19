@@ -66,11 +66,10 @@ class LoginTests: XCTestCase {
     func testProperRegistration(){
         let app = XCUIApplication()
         app.buttons["New? Map Your World"].tap()
-        app.buttons["Email"].tap()
         
         let emailTextField = app.textFields["Email"]
         emailTextField.tap()
-        emailTextField.typeText("testing1@gmail.com")
+        emailTextField.typeText("abcde@gmail.com")
         app.buttons["Next"].tap()
         
         let fullNameTextField = app.textFields["Full Name"]
@@ -83,7 +82,7 @@ class LoginTests: XCTestCase {
         
         let chooseUsernameSecureTextField = app.secureTextFields["Choose Username"]
         chooseUsernameSecureTextField.tap()
-        chooseUsernameSecureTextField.typeText("test")
+        chooseUsernameSecureTextField.typeText("abc")
         app.buttons["Finish"].tap()
         
         app.buttons["Finish"].tap()
