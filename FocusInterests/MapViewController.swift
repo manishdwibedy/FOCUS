@@ -572,6 +572,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             print("username is not nil")
         }
         
+        self.mapViewSettings.isHidden = true
         self.mapViewSettings.allCornersRounded(radius: 10.0)
 
 //        Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
@@ -965,6 +966,26 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        
+        let status = CLLocationManager.authorizationStatus()
+        
+        print("The status of autjorization is \(status.rawValue)")
+    
+        if (!(status == CLAuthorizationStatus.authorizedWhenInUse || status == CLAuthorizationStatus.authorizedAlways)) {
+            let alert = UIAlertController(title: "Location Authorization", message:"Please authorize use of your location in settings" , preferredStyle: UIAlertControllerStyle.alert)
+            
+            alert.addAction(UIAlertAction(title: "Go to settings", style: .default) { _ in
+                print("J'ouvre les settings")
+                UIApplication.shared.open(URL(string:"App-Prefs:root=Privacy&path=LOCATION")!, completionHandler: nil)
+            })
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            return false
+        }
+        
         let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
                                               longitude: (currentLocation?.coordinate.longitude)!,
                                               zoom: 13)

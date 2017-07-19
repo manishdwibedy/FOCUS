@@ -24,6 +24,9 @@
                         <state key="normal" title="All">
                             <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="allisSelected:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lBf-rx-4RD"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qU8-sc-xJQ">
                         <rect key="frame" x="301" y="-1" width="18" height="44"/>
@@ -44,6 +47,10 @@
                     <constraint firstItem="qU8-sc-xJQ" firstAttribute="leading" secondItem="Mo6-8l-r0S" secondAttribute="trailing" id="wet-0d-02y"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="allButton" destination="Mo6-8l-r0S" id="VWt-By-K59"/>
+                <outlet property="checkMarkButton" destination="qU8-sc-xJQ" id="6KP-rd-h7I"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

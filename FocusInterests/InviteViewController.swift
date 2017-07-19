@@ -27,6 +27,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var timeButton: UIButton!
     @IBOutlet weak var friendListBottom: NSLayoutConstraint!
     @IBOutlet weak var inviteTableTop: NSLayoutConstraint!
+    
     var sections = [String]()
     var sectionMapping = [String:Int]()
     var users = [String:[InviteUser]]()

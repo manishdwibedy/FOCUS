@@ -73,52 +73,84 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
             let followingCell = tableView.dequeueReusableCell(withIdentifier: "followingOptionCell", for: indexPath) as! FollowingOptionTableViewCell
             cell = followingCell
         }
-        
         return cell
     }
+    
 
     @IBAction func showTable(_ sender: UIButton) {
-        
-        if sender.currentTitle == "People" || sender.currentImage == UIImage(named: "intro_greenpin") || sender.tag == 2{
-            self.peopleTableView.isHidden = !self.peopleTableView.isHidden
-            self.placesTableView.isHidden = true
-            self.eventsTableView.isHidden = true
+        switch sender.tag{
+        case 0, 1, 2:
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
+//                self.placesTableView.isHidden = true
+//                self.eventsTableView.isHidden = true
                 if self.peopleTableView.isHidden{
+                    
+                    if !self.placesTableView.isHidden{
+                        self.placesTableView.isHidden = true
+                    }
+                    
+                    if !self.eventsTableView.isHidden{
+                        self.eventsTableView.isHidden = true
+                    }
+                    
                     self.peopleTableView.isHidden = false
-                    self.peopleTableViewHeight.constant = 50
+                    self.peopleTableViewHeight.constant = 100
                 }else{
                     self.peopleTableView.isHidden = true
                 }
             }, completion: nil)
-        }else if sender.currentTitle == "Places" || sender.currentImage == UIImage(named: "intro_place") || sender.tag == 5{
-            self.placesTableView.isHidden = !self.placesTableView.isHidden
-            self.peopleTableView.isHidden = true
-            self.eventsTableView.isHidden = true
+            break
+        case 3, 4, 5:
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
                 if self.placesTableView.isHidden{
+                    if !self.peopleTableView.isHidden{
+                        self.peopleTableView.isHidden = true
+                    }
+                    
+                    if !self.eventsTableView.isHidden{
+                        self.eventsTableView.isHidden = true
+                    }
+                    
                     self.placesTableView.isHidden = false
-                    self.placeTableViewHeight.constant = 50
+                    self.placeTableViewHeight.constant = 100
                 }else{
                     self.placesTableView.isHidden = true
                 }
             }, completion: nil)
-        }else if sender.currentTitle == "Events" || sender.currentImage == UIImage(named: "intro_event") || sender.tag == 8{
-            self.eventsTableView.isHidden = !self.eventsTableView.isHidden
-            self.peopleTableView.isHidden = true
-            self.placesTableView.isHidden = true
+            break
+        case 6, 7, 8:
             UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
                 if self.eventsTableView.isHidden{
+                    if !self.placesTableView.isHidden{
+                        self.placesTableView.isHidden = true
+                    }
+                    
+                    if !self.peopleTableView.isHidden{
+                        self.peopleTableView.isHidden = true
+                    }
                     self.eventsTableView.isHidden = false
-                    self.eventTableViewHeight.constant = 50
+                    self.eventTableViewHeight.constant = 100
                 }else{
                     self.eventsTableView.isHidden = true
                 }
             }, completion: nil)
+            break
+        default:
+            break
         }
-    
     }
     
+    @IBAction func closePressed(_ sender: Any) {
+        if let parent = self.parent{
+            parent.view.isHidden = true
+        }
+    }
+    
+    @IBAction func donePressed(_ sender: Any) {
+        if let parent = self.parent{
+            parent.view.isHidden = true
+        }
+    }
     
     /*
     // MARK: - Navigation

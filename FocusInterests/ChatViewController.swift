@@ -221,9 +221,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                                     let JSQimage = JSQPhotoMediaItem(image: image)
                                     let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
                                     
-                                    let index = self.imageMapper[messageID]
-                                    self.messages[index!] = message!
-                                    self.collectionView.reloadData()
+                                    if let index = self.imageMapper[messageID] {
+                                        self.messages[index] = message!
+                                        self.collectionView.reloadData()
+                                    }
                                     
                                 }
                             })
