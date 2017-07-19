@@ -14,7 +14,7 @@ import SwiftyJSON
 import FirebaseDatabase
 import Crashlytics
 
-class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
+class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -68,57 +68,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
 //        MARK: Invite Popup View
         self.invitePopupView.allCornersRounded(radius: 10)
-        
-//        MARK: Create Event Button
-        self.createEventButton.roundCorners(radius: 5.0)
-        self.createEventButton.layer.shadowOpacity = 0.5
-        self.createEventButton.layer.masksToBounds = false
-        self.createEventButton.layer.shadowColor = UIColor.black.cgColor
-        self.createEventButton.layer.shadowRadius = 5.0
-        
-//        MARK: Event and Location Search Bars
-        self.searchBar.delegate = self
-        
-        // search bar attributes
-        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!]
-        let cancelButtonsInSearchBar: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!]
-        
-        
-        locationTextField.attributedPlaceholder = NSAttributedString(string: "Current Location", attributes: [NSForegroundColorAttributeName: UIColor.white])
-        
-    
-//        MARK: Event Search Bar
-        self.searchBar.isTranslucent = true
-        self.searchBar.backgroundImage = UIImage()
-        self.searchBar.tintColor = UIColor.white
-        self.searchBar.barTintColor = UIColor.white
-        
-        self.searchBar.layer.cornerRadius = 6
-        self.searchBar.clipsToBounds = true
-        self.searchBar.layer.borderWidth = 0
-        self.searchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
-        
-        self.searchBar.setValue("Go", forKey:"_cancelButtonText")
-        
-        if let textFieldInsideSearchBar = self.searchBar.value(forKey: "_searchField") as? UITextField{
-            let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
-            
-            textFieldInsideSearchBar.attributedPlaceholder = attributedPlaceholder
-            textFieldInsideSearchBar.textColor = UIColor.white
-            textFieldInsideSearchBar.backgroundColor = Constants.color.darkGray
-            
-            let glassIconView = textFieldInsideSearchBar.leftView as! UIImageView
-            glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            glassIconView.tintColor = UIColor.white
-            
-            textFieldInsideSearchBar.clearButtonMode = .whileEditing
-            let clearButton = textFieldInsideSearchBar.value(forKey: "clearButton") as! UIButton
-            clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
-            clearButton.tintColor = UIColor.white
-        }
-        
-        
-        UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonsInSearchBar, for: .normal)
         
         filtered = events
         
@@ -480,121 +429,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         return rowHeight!
     }
     
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        if searchBar.tag == 0 {
-            self.searchBar.setShowsCancelButton(true, animated: true)
-            return true
-        }else if searchBar.tag == 1{
-            self.searchBar.setShowsCancelButton(true, animated: true)
-            return true
-        }else{
-            return false
-        }
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.tag == 0{
-            self.searchBar.setShowsCancelButton(true, animated: true)
-            if(searchText.characters.count > 0){
-                self.filtered.removeAll()
-                
-                if Constants.interests.interests.contains(searchText){
-                    var eventCount = 0
-                    Constants.DB.event_interests.child(searchText).observeSingleEvent(of: .value, with: {snapshot in
-                    
-                        if let info = snapshot.value as? [String:[String:Any]]{
-                            eventCount = info.count
-                            for (_, event) in info{
-                                if let eventID = event["event-id"] as? String{
-                                    Constants.DB.event.child(eventID).observeSingleEvent(of: .value, with: {snapshot in
-                                        
-                                        if let data = snapshot.value as? [String:Any]{
-                                            if let event = Event.toEvent(info: data){
-                                                if let attending = data["attendingList"] as? [String:Any]{
-                                                    event.setAttendessCount(count: attending.count)
-                                                }
-                                                event.id = eventID
-                                                self.filtered.append(event)
-                                                
-                                                if self.filtered.count == eventCount{
-                                                    self.tableView.reloadData()
-                                                }
-                                            }
-                                            
-                                        }
-                                        
-                                    })
-                                }
-                                
-                                
-                            }
-                        }
-                    })
-                }
-                else{
-                    let ref = Constants.DB.event
-                    _ = ref.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
-                        let events = snapshot.value as? [String : Any] ?? [:]
-                        
-                        for (id, event) in events{
-                            let info = event as? [String:Any]
-                            let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as! String, longitude: (info?["longitude"])! as! String, date: (info?["date"])! as! String, creator: (info?["creator"])! as! String, id: id, category: info?["interests"] as? String, privateEvent: (info?["private"] as? Bool)!)
-                            
-                            if let attending = info?["attendingList"] as? [String:Any]{
-                                event.setAttendessCount(count: attending.count)
-                            }
-                            
-                            self.filtered.append(event)
-                        }
-                        self.tableView.reloadData()
-                    })
-                }
-                
-            }
-            else{
-                self.filtered = self.events
-                self.tableView.reloadData()
-            }
-        }else if searchBar.tag == 1{
-            print("you have clicked Location Search Bar")
-            self.searchBar.endEditing(true)
-            self.searchBar.setShowsCancelButton(false, animated: true)
-            
-        }
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        if searchBar.tag == 0 {
-            self.searchBar.setShowsCancelButton(true, animated: true)
-        }else if searchBar.tag == 1{
-            print("you have Editted Location Search Bar")
-            self.searchBar.setShowsCancelButton(false, animated: true)
-            self.searchBar.endEditing(true)
-        }
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if searchBar.tag == 0{
-            self.filtered = self.events
-            self.tableView.reloadData()
-            self.searchBar.text = ""
-            self.searchBar.setShowsCancelButton(false, animated: true)
-            self.searchBar.endEditing(true)
-        }
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        if searchBar.tag == 0{
-            self.searchBar.text = ""
-            self.searchBar.setShowsCancelButton(false, animated: true)
-            self.searchBar.endEditing(true)
-        }
-    }
-    
-    @IBAction func showCreateEvent(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
-        self.present(controller, animated: true, completion: nil)
-    }
-
 }
