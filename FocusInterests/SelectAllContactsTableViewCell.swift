@@ -13,22 +13,18 @@ class SelectAllContactsTableViewCell: UITableViewCell {
 
     var delegate: SelectAllContactsDelegate?
     
+    @IBOutlet weak var inviteAllFollowers: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
         self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Green.png"), for: .selected)
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-        self.selectAllFollowersButton.isSelected = selected
-        if (self.selectAllFollowersButton.isSelected == true){
-            delegate?.selectedAllFollowers()
-        }else{
-            delegate?.deselectAllFollowers()
-        }
     }
     
     @IBAction func selectedAllFollowers(_ sender: Any) {

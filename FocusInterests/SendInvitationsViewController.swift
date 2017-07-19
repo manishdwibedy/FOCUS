@@ -339,21 +339,21 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0{
-            tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.setSelected(true, animated: false)
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.section == 0{
+//            tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.setSelected(true, animated: false)
+//        }
+//    }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0{
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        if indexPath.section == 0{
 //            tableView.deselectRow(at: self.friendsTableView.indexPathForSelectedRow!, animated: false)
-            let selectedAllFollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "selectAllContactsCell", for: indexPath) as! SelectAllContactsTableViewCell
-            selectedAllFollowersTableCell.setSelected(false, animated: false)
-        }else if indexPath.section == 1{
-            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
-        }
-    }
+//            let selectedAllFollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "selectAllContactsCell", for: indexPath) as! SelectAllContactsTableViewCell
+//            selectedAllFollowersTableCell.setSelected(false, animated: false)
+//        }else if indexPath.section == 1{
+//            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+//        }
+//    }
     
     func contactHasBeenSelected(contact: String, index: Int){
         selectedFriend[index] = true

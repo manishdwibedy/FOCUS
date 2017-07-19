@@ -251,6 +251,21 @@
 		EB5891D11EE7EB8800C35EE9 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */; };
 		EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */; };
 		EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */; };
+		EB71ABFF1F1E99F90024FE95 /* MapViewSettingsOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB71ABFE1F1E99F90024FE95 /* MapViewSettingsOne.xib */; };
+		EB71AC011F1E9E420024FE95 /* MapViewSettingsOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC001F1E9E410024FE95 /* MapViewSettingsOne.swift */; };
+		EB71AC041F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC021F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift */; };
+		EB71AC051F1EA1700024FE95 /* SelectAllInterestsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB71AC031F1EA1700024FE95 /* SelectAllInterestsTableViewCell.xib */; };
+		EB71AC081F1EA17E0024FE95 /* SingleInterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC061F1EA17E0024FE95 /* SingleInterestTableViewCell.swift */; };
+		EB71AC091F1EA17E0024FE95 /* SingleInterestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB71AC071F1EA17E0024FE95 /* SingleInterestTableViewCell.xib */; };
+		EB71AC0E1F1EB84E0024FE95 /* MapViewSettingsTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB71AC0D1F1EB84E0024FE95 /* MapViewSettingsTwo.xib */; };
+		EB71AC101F1EC70A0024FE95 /* MapViewSettingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC0F1F1EC70A0024FE95 /* MapViewSettingPageViewController.swift */; };
+		EB71AC121F1EC9A20024FE95 /* MapSettingsOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC111F1EC9A20024FE95 /* MapSettingsOneViewController.swift */; };
+		EB71AC141F1EC9AE0024FE95 /* MapSettingsTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC131F1EC9AE0024FE95 /* MapSettingsTwoViewController.swift */; };
+		EB71AC161F1ECA9F0024FE95 /* MapViewSettingsTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC151F1ECA9F0024FE95 /* MapViewSettingsTwo.swift */; };
+		EB71AC191F1EF1550024FE95 /* AllOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC171F1EF1550024FE95 /* AllOptionTableViewCell.swift */; };
+		EB71AC1A1F1EF1550024FE95 /* AllOptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB71AC181F1EF1550024FE95 /* AllOptionTableViewCell.xib */; };
+		EB71AC1D1F1EF1600024FE95 /* FollowingOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC1B1F1EF1600024FE95 /* FollowingOptionTableViewCell.swift */; };
+		EB71AC1E1F1EF1600024FE95 /* FollowingOptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB71AC1C1F1EF1600024FE95 /* FollowingOptionTableViewCell.xib */; };
 		EB722F931EE8B19400420DC8 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */; };
 		EB722F961EE8B1BE00420DC8 /* ReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */; };
 		EB722F971EE8B1BE00420DC8 /* ReviewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */; };
@@ -630,6 +645,21 @@
 		EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
 		EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		EB71ABFE1F1E99F90024FE95 /* MapViewSettingsOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewSettingsOne.xib; sourceTree = "<group>"; };
+		EB71AC001F1E9E410024FE95 /* MapViewSettingsOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewSettingsOne.swift; sourceTree = "<group>"; };
+		EB71AC021F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllInterestsTableViewCell.swift; sourceTree = "<group>"; };
+		EB71AC031F1EA1700024FE95 /* SelectAllInterestsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAllInterestsTableViewCell.xib; sourceTree = "<group>"; };
+		EB71AC061F1EA17E0024FE95 /* SingleInterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInterestTableViewCell.swift; sourceTree = "<group>"; };
+		EB71AC071F1EA17E0024FE95 /* SingleInterestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleInterestTableViewCell.xib; sourceTree = "<group>"; };
+		EB71AC0D1F1EB84E0024FE95 /* MapViewSettingsTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewSettingsTwo.xib; sourceTree = "<group>"; };
+		EB71AC0F1F1EC70A0024FE95 /* MapViewSettingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewSettingPageViewController.swift; sourceTree = "<group>"; };
+		EB71AC111F1EC9A20024FE95 /* MapSettingsOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSettingsOneViewController.swift; sourceTree = "<group>"; };
+		EB71AC131F1EC9AE0024FE95 /* MapSettingsTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSettingsTwoViewController.swift; sourceTree = "<group>"; };
+		EB71AC151F1ECA9F0024FE95 /* MapViewSettingsTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewSettingsTwo.swift; sourceTree = "<group>"; };
+		EB71AC171F1EF1550024FE95 /* AllOptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllOptionTableViewCell.swift; sourceTree = "<group>"; };
+		EB71AC181F1EF1550024FE95 /* AllOptionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllOptionTableViewCell.xib; sourceTree = "<group>"; };
+		EB71AC1B1F1EF1600024FE95 /* FollowingOptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingOptionTableViewCell.swift; sourceTree = "<group>"; };
+		EB71AC1C1F1EF1600024FE95 /* FollowingOptionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingOptionTableViewCell.xib; sourceTree = "<group>"; };
 		EB722F921EE8B19400420DC8 /* ReviewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
 		EB722F941EE8B1BE00420DC8 /* ReviewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsTableViewCell.swift; sourceTree = "<group>"; };
 		EB722F951EE8B1BE00420DC8 /* ReviewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewsTableViewCell.xib; sourceTree = "<group>"; };
@@ -1207,6 +1237,7 @@
 		D2B9B0731E5A0A270002F1B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EB71ABFD1F1E990F0024FE95 /* Map Settings */,
 				EB2203811F1DDCD500F86B73 /* FollowersRequest */,
 				EBB6B32A1F0E1207000C8133 /* FeedTableCells */,
 				D252206B1E5A864900EC2014 /* NotificationsCellTableViewCell.swift */,
@@ -1342,6 +1373,28 @@
 				EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */,
 			);
 			name = Comments;
+			sourceTree = "<group>";
+		};
+		EB71ABFD1F1E990F0024FE95 /* Map Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EB71ABFE1F1E99F90024FE95 /* MapViewSettingsOne.xib */,
+				EB71AC001F1E9E410024FE95 /* MapViewSettingsOne.swift */,
+				EB71AC021F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift */,
+				EB71AC031F1EA1700024FE95 /* SelectAllInterestsTableViewCell.xib */,
+				EB71AC061F1EA17E0024FE95 /* SingleInterestTableViewCell.swift */,
+				EB71AC071F1EA17E0024FE95 /* SingleInterestTableViewCell.xib */,
+				EB71AC0D1F1EB84E0024FE95 /* MapViewSettingsTwo.xib */,
+				EB71AC151F1ECA9F0024FE95 /* MapViewSettingsTwo.swift */,
+				EB71AC0F1F1EC70A0024FE95 /* MapViewSettingPageViewController.swift */,
+				EB71AC111F1EC9A20024FE95 /* MapSettingsOneViewController.swift */,
+				EB71AC131F1EC9AE0024FE95 /* MapSettingsTwoViewController.swift */,
+				EB71AC171F1EF1550024FE95 /* AllOptionTableViewCell.swift */,
+				EB71AC181F1EF1550024FE95 /* AllOptionTableViewCell.xib */,
+				EB71AC1B1F1EF1600024FE95 /* FollowingOptionTableViewCell.swift */,
+				EB71AC1C1F1EF1600024FE95 /* FollowingOptionTableViewCell.xib */,
+			);
+			name = "Map Settings";
 			sourceTree = "<group>";
 		};
 		EB722F911EE8B18500420DC8 /* Reviews */ = {
@@ -1608,6 +1661,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB71AC1E1F1EF1600024FE95 /* FollowingOptionTableViewCell.xib in Resources */,
 				D28EAFC01E5E7C8E001EA7E5 /* Login.storyboard in Resources */,
 				EBD382B01F10167B0068D313 /* FeedPlaceImageTableViewCell.xib in Resources */,
 				D2ECAC591E7CD9F8006FFA1A /* UserPhotoCell.xib in Resources */,
@@ -1619,11 +1673,13 @@
 				D252206E1E5A864900EC2014 /* NotificationsCellTableViewCell.xib in Resources */,
 				5B959FD31ECAC6E000094FE6 /* PlaceDetails.storyboard in Resources */,
 				5B71D6FE1ED182D40093A3F5 /* EventDetails.storyboard in Resources */,
+				EB71AC051F1EA1700024FE95 /* SelectAllInterestsTableViewCell.xib in Resources */,
 				61ED203C1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard in Resources */,
 				5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
 				5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
+				EB71AC091F1EA17E0024FE95 /* SingleInterestTableViewCell.xib in Resources */,
 				EBB6B33F1F0F39F8000C8133 /* FeedCommentTableViewCell.xib in Resources */,
 				5BE31E881EA75E6A004768F0 /* MapEventInfoView.xib in Resources */,
 				C5E505F01F047DA700EBE27A /* PhotoInputView.xib in Resources */,
@@ -1633,6 +1689,7 @@
 				EB252F0C1EE9E9F7001C163D /* NewMessageTableViewCell.xib in Resources */,
 				5B448E631EE7B7FC00873F79 /* MessageTableViewCell.xib in Resources */,
 				EB9E1B261F19794F00409DC7 /* PushNotifications.storyboard in Resources */,
+				EB71AC0E1F1EB84E0024FE95 /* MapViewSettingsTwo.xib in Resources */,
 				FFBF87A71EE5BED0000168F5 /* InvitePeopleEventCell.xib in Resources */,
 				FF69ABFE1ED6498F0044BE51 /* inviteCell.xib in Resources */,
 				EB5891C81EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib in Resources */,
@@ -1666,6 +1723,7 @@
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,
 				EB8D349F1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.xib in Resources */,
+				EB71ABFF1F1E99F90024FE95 /* MapViewSettingsOne.xib in Resources */,
 				EBD382AC1F100D0A0068D313 /* FeedCreatedEventTableViewCell.xib in Resources */,
 				5B4303A61ED55F6400B63D56 /* SearchEventTableViewCell.xib in Resources */,
 				EBC52C731EEE1AF6001C9863 /* SelectAllContactsTableViewCell.xib in Resources */,
@@ -1685,6 +1743,7 @@
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				EBE7AE4E1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib in Resources */,
+				EB71AC1A1F1EF1550024FE95 /* AllOptionTableViewCell.xib in Resources */,
 				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
 				FFD32DD41EE9FF9900FE725E /* InterstCollectionViewCell.xib in Resources */,
 				FFBF87A31EE5B34E000168F5 /* InvitePeoplePlaceCell.xib in Resources */,
@@ -2023,6 +2082,7 @@
 				C5E505F21F047DB900EBE27A /* PhotoInputView.swift in Sources */,
 				FFBF87A21EE5B34E000168F5 /* InvitePeoplePlaceCell.swift in Sources */,
 				5B71D7071ED1837A0093A3F5 /* commentView.swift in Sources */,
+				EB71AC011F1E9E420024FE95 /* MapViewSettingsOne.swift in Sources */,
 				D25220691E5A846100EC2014 /* NotificationsViewController.swift in Sources */,
 				5B59064C1EC7DCC700466AAC /* Dictionary+Extensions.swift in Sources */,
 				D21317FB1E5B4F7B00140323 /* ItemOfInterest.swift in Sources */,
@@ -2042,6 +2102,7 @@
 				617C33BF1F194B94003EEADF /* Character+Extensions.swift in Sources */,
 				617C33BD1F194B7F003EEADF /* String+Extensions.swift in Sources */,
 				5B519E771ED6728200B36110 /* SearchPeopleViewController.swift in Sources */,
+				EB71AC081F1EA17E0024FE95 /* SingleInterestTableViewCell.swift in Sources */,
 				EB8D349E1F16CE3B006EE316 /* EventOtherWillLikeTableViewCell.swift in Sources */,
 				5BF029401EE5F7F300D54FAF /* UIViewController+Extensions.swift in Sources */,
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
@@ -2087,6 +2148,7 @@
 				5B448E621EE7B7FC00873F79 /* MessageTableViewCell.swift in Sources */,
 				D2B9B0421E5A047C0002F1B1 /* HomeViewController.swift in Sources */,
 				5B959FF51ECD48CB00094FE6 /* PlaceRating.swift in Sources */,
+				EB71AC161F1ECA9F0024FE95 /* MapViewSettingsTwo.swift in Sources */,
 				EBD382AB1F100D0A0068D313 /* FeedCreatedEventTableViewCell.swift in Sources */,
 				D21317F81E5B47D300140323 /* HomViewControllerCell.swift in Sources */,
 				5B959FE81ECC14D200094FE6 /* PinTableViewCell.swift in Sources */,
@@ -2113,11 +2175,13 @@
 				D219754A1E62406200ED3345 /* ChooseInterestsCell.swift in Sources */,
 				5B9E3A0A1F1ABB77007F33E5 /* PlaceCache.swift in Sources */,
 				5B71D7101ED184D30093A3F5 /* allCommentsVC.swift in Sources */,
+				EB71AC1D1F1EF1600024FE95 /* FollowingOptionTableViewCell.swift in Sources */,
 				5B959FF21ECD452C00094FE6 /* RatingViewCell.swift in Sources */,
 				5B959FE31ECBA6C600094FE6 /* InviteUserView.swift in Sources */,
 				5B959FD51ECAC9EF00094FE6 /* PlaceViewController.swift in Sources */,
 				5BA37C821EBE9DE30091189E /* NewMessageViewController.swift in Sources */,
 				5BA37C7E1EBDC1C70091189E /* CustomTabController.swift in Sources */,
+				EB71AC191F1EF1550024FE95 /* AllOptionTableViewCell.swift in Sources */,
 				EB5891C71EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift in Sources */,
 				EBC52C721EEE1AF6001C9863 /* SelectAllContactsTableViewCell.swift in Sources */,
 				D252205D1E5A3C9E00EC2014 /* MapViewController.swift in Sources */,
@@ -2134,6 +2198,7 @@
 				5B6AFA681ED1906900A82104 /* GMUStaticCluster.m in Sources */,
 				5BB2F8181F11C4B8008781BB /* Notification.swift in Sources */,
 				D2B9B0791E5A0AC80002F1B1 /* UIColor+Extensions.swift in Sources */,
+				EB71AC101F1EC70A0024FE95 /* MapViewSettingPageViewController.swift in Sources */,
 				FF7C874A1ED73310004ABB1B /* PinScreenViewController.swift in Sources */,
 				D230D8C51E5B777C00025EE9 /* GlobalFunctions.swift in Sources */,
 				5B6AFA751ED1906900A82104 /* GMUStyle.m in Sources */,
@@ -2150,6 +2215,7 @@
 				D24716831E90504B00FF389D /* DisplayInterestsCell.swift in Sources */,
 				5B1659261EDA30300002209A /* TermsViewController.swift in Sources */,
 				5B71D6F61ED180930093A3F5 /* CreateNewEventViewController.swift in Sources */,
+				EB71AC121F1EC9A20024FE95 /* MapSettingsOneViewController.swift in Sources */,
 				5B7BB1EA1ED54677001E60FF /* UITableView+Extensions.swift in Sources */,
 				D25220741E5A8A7400EC2014 /* Constants.swift in Sources */,
 				5BA37C6E1EB9C78B0091189E /* LoginViewController.swift in Sources */,
@@ -2163,6 +2229,7 @@
 				D227AD2F1E6CBD5A000FB9DD /* NewLoginVC.swift in Sources */,
 				D216482A1E9735AC00AE021B /* SelectedInterestCell.swift in Sources */,
 				61ED203E1EDC236100247DC5 /* CustomSegmentedControl.swift in Sources */,
+				EB71AC041F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift in Sources */,
 				5B634C811ED1960000EBCC29 /* MapCluster.swift in Sources */,
 				5B5906461EC3CB0400466AAC /* UserMessages.swift in Sources */,
 				D23E01391E6BAD0A00E735F5 /* FirebaseUpstream.swift in Sources */,
@@ -2190,6 +2257,7 @@
 				5B2E5E051EF7974900F0BC1B /* PhotoViewController.swift in Sources */,
 				EB252F131EEAA062001C163D /* UserProfileCollectionViewCell.swift in Sources */,
 				EB450FB11F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift in Sources */,
+				EB71AC141F1EC9AE0024FE95 /* MapSettingsTwoViewController.swift in Sources */,
 				EB9E1B291F197BF200409DC7 /* PushNotificationsViewController.swift in Sources */,
 				5B959FEF1ECD2DF300094FE6 /* RatingViewController.swift in Sources */,
 				5B1659241EDA293D0002209A /* PrivacyViewController.swift in Sources */,

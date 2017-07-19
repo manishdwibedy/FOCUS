@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewSettingsOne" customModule="FocusInterests" customModuleProvider="target">
+            <connections>
+                <outlet property="interestTableView" destination="ADS-ZZ-C6P" id="qfZ-Bo-jnE"/>
+                <outlet property="interestTableViewHeight" destination="KDy-rI-hMZ" id="8E9-eD-8Qe"/>
+                <outlet property="mapSettingStackView" destination="fTC-wQ-MOe" id="Z8t-3n-SSe"/>
+                <outlet property="searchByFocusButton" destination="1kW-d3-Rvn" id="AAI-BB-27t"/>
+                <outlet property="searchFocusView" destination="dfS-f1-BO8" id="oHp-al-Mcd"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Tuo-qZ-mkZ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="301" height="487"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fTC-wQ-MOe">
+                    <rect key="frame" x="24" y="29.5" width="253" height="350"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMn-Ic-yfT">
+                            <rect key="frame" x="0.0" y="0.0" width="253" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="eUF-SN-ndE"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                            <color key="textColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Map Currently Shows:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMM-tr-IJI">
+                            <rect key="frame" x="0.0" y="40" width="253" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="PLc-Gw-T9X"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                            <color key="textColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfS-f1-BO8">
+                            <rect key="frame" x="0.0" y="80" width="253" height="50"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1kW-d3-Rvn">
+                                    <rect key="frame" x="0.0" y="0.0" width="182" height="50"/>
+                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                    <state key="normal" title="Search by FOCUS">
+                                        <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="openOptions:" destination="-1" eventType="touchUpInside" id="HP4-x1-czx"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYE-Jn-HWp">
+                                    <rect key="frame" x="182" y="0.0" width="71" height="49"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="71" id="B1G-3c-Shz"/>
+                                        <constraint firstAttribute="height" constant="49" id="rUT-Fg-r5P"/>
+                                    </constraints>
+                                    <state key="normal" image="Blue arrow in map settings"/>
+                                    <connections>
+                                        <action selector="openOptions:" destination="-1" eventType="touchUpInside" id="iRV-n8-Cwp"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="AYE-Jn-HWp" secondAttribute="trailing" id="Bf6-Rq-0fa"/>
+                                <constraint firstItem="1kW-d3-Rvn" firstAttribute="centerY" secondItem="dfS-f1-BO8" secondAttribute="centerY" id="FFd-MK-HXp"/>
+                                <constraint firstItem="AYE-Jn-HWp" firstAttribute="centerY" secondItem="1kW-d3-Rvn" secondAttribute="centerY" id="eeu-18-QRf"/>
+                                <constraint firstItem="AYE-Jn-HWp" firstAttribute="leading" secondItem="1kW-d3-Rvn" secondAttribute="trailing" id="fNc-Ad-das"/>
+                                <constraint firstAttribute="height" constant="50" id="giM-Cr-SXD"/>
+                                <constraint firstItem="1kW-d3-Rvn" firstAttribute="leading" secondItem="dfS-f1-BO8" secondAttribute="leading" id="qbs-ry-uU1"/>
+                            </constraints>
+                        </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ADS-ZZ-C6P">
+                            <rect key="frame" x="0.0" y="130" width="253" height="220"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="220" id="KDy-rI-hMZ"/>
+                            </constraints>
+                            <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="ADS-ZZ-C6P" firstAttribute="top" secondItem="dfS-f1-BO8" secondAttribute="bottom" id="E3h-k4-9XU"/>
+                    </constraints>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMa-MJ-ntF">
+                    <rect key="frame" x="14" y="10" width="13" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="13" id="hQq-cf-Q36"/>
+                        <constraint firstAttribute="height" constant="13" id="iFs-CX-erO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                    <state key="normal" title="x">
+                        <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fTC-wQ-MOe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="29.5" id="BkJ-Ba-MZi"/>
+                <constraint firstItem="fTC-wQ-MOe" firstAttribute="top" secondItem="DMa-MJ-ntF" secondAttribute="bottom" constant="6.5" id="Cy9-Pt-ApU"/>
+                <constraint firstItem="fTC-wQ-MOe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="mQo-UT-E9p"/>
+                <constraint firstItem="fTC-wQ-MOe" firstAttribute="leading" secondItem="DMa-MJ-ntF" secondAttribute="trailing" constant="-3" id="vxq-Pf-fhY"/>
+                <constraint firstItem="DMa-MJ-ntF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="w23-x5-xBc"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-27.5" y="-79.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Blue arrow in map settings" width="13" height="12"/>
+    </resources>
+</document>
