@@ -194,7 +194,7 @@ class Share{
                                 if user["email"] as? String != useremail{
                                     if let id = user["firebaseUserId"] as? String{
                                         emails.append(facebookID)
-                                        emailMapping[user["email"] as! String] = id
+                                        emailMapping[(user["email"] as? String) ?? ""] = id
                                     }
                                     
                                 }
