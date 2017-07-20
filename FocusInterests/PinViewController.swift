@@ -63,7 +63,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     var ratingID: String?
     var rating: Int? = nil
     
-    @IBOutlet weak var webButton: UIButton!
+    @IBOutlet weak var yelpButton: UIButton!
     @IBOutlet weak var uberButton: UIButton!
     @IBOutlet weak var googleMapButton: UIButton!
     
@@ -109,9 +109,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         // Round up Yelp!
         
-//        self.webButton.backgroundColor = .clear
-//        self.webButton.layer.masksToBounds = true
-//        self.webButton.layer.cornerRadius = 5
+        self.yelpButton.backgroundColor = .clear
+        self.yelpButton.layer.masksToBounds = true
+        self.yelpButton.layer.cornerRadius = 5
         
         var address = ""
         for str in (place?.address)!
@@ -341,8 +341,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             view.image.image = UIImage(named: "UserPhoto")
         }
         
-//        webButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
-//        webButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        yelpButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
+        yelpButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         uberButton.setImage(UIImage(named: "uber"), for: .normal)
         uberButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
@@ -479,7 +479,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
     }
     
-    @IBAction func openWebSite(_ sender: Any) {
+    @IBAction func openYelp(_ sender: Any) {
         UIApplication.shared.openURL(NSURL(string: (place?.url)!)! as URL)
 
     }

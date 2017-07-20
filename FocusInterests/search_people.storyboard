@@ -231,6 +231,7 @@
                     <tabBarItem key="tabBarItem" title="" image="Explore white" selectedImage="Explore green" id="NJ5-hj-IRg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="FE1-iu-nrx" id="lmI-ES-jkU"/>
                         <outlet property="createEventButton" destination="JaG-Qc-0IL" id="eFf-HU-LgD"/>
                         <outlet property="currentLocation" destination="yhT-Rz-YeA" id="7WE-lv-gOc"/>
                         <outlet property="navBar" destination="RME-pD-v8b" id="GVQ-s5-mZn"/>

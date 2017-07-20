@@ -251,6 +251,10 @@
 		EB5891D11EE7EB8800C35EE9 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */; };
 		EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */; };
 		EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */; };
+		EB694F491F215A1400C0690A /* PostReleaseInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB694F471F215A1400C0690A /* PostReleaseInviteViewController.swift */; };
+		EB694F4A1F215A1400C0690A /* PostReleaseInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB694F481F215A1400C0690A /* PostReleaseInviteViewController.xib */; };
+		EB694F4D1F215D7900C0690A /* PostReleaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB694F4B1F215D7900C0690A /* PostReleaseTableViewCell.swift */; };
+		EB694F4E1F215D7900C0690A /* PostReleaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB694F4C1F215D7900C0690A /* PostReleaseTableViewCell.xib */; };
 		EB71ABFF1F1E99F90024FE95 /* MapViewSettingsOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB71ABFE1F1E99F90024FE95 /* MapViewSettingsOne.xib */; };
 		EB71AC011F1E9E420024FE95 /* MapViewSettingsOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC001F1E9E410024FE95 /* MapViewSettingsOne.swift */; };
 		EB71AC041F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC021F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift */; };
@@ -645,6 +649,10 @@
 		EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
 		EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		EB694F471F215A1400C0690A /* PostReleaseInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostReleaseInviteViewController.swift; sourceTree = "<group>"; };
+		EB694F481F215A1400C0690A /* PostReleaseInviteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostReleaseInviteViewController.xib; sourceTree = "<group>"; };
+		EB694F4B1F215D7900C0690A /* PostReleaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostReleaseTableViewCell.swift; sourceTree = "<group>"; };
+		EB694F4C1F215D7900C0690A /* PostReleaseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostReleaseTableViewCell.xib; sourceTree = "<group>"; };
 		EB71ABFE1F1E99F90024FE95 /* MapViewSettingsOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewSettingsOne.xib; sourceTree = "<group>"; };
 		EB71AC001F1E9E410024FE95 /* MapViewSettingsOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewSettingsOne.swift; sourceTree = "<group>"; };
 		EB71AC021F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllInterestsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1341,6 +1349,7 @@
 		D2ECAC511E7A2471006FFA1A /* NibVCs */ = {
 			isa = PBXGroup;
 			children = (
+				EB694F421F21591D00C0690A /* Invite View */,
 				5B69158A1ED7D80100093AD5 /* NewUserPopupViewController.swift */,
 				5B69158B1ED7D80100093AD5 /* NewUserPopupViewController.xib */,
 				D2D876BA1E5FDAC500FC782E /* InterestsPickerViewController.xib */,
@@ -1373,6 +1382,17 @@
 				EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */,
 			);
 			name = Comments;
+			sourceTree = "<group>";
+		};
+		EB694F421F21591D00C0690A /* Invite View */ = {
+			isa = PBXGroup;
+			children = (
+				EB694F471F215A1400C0690A /* PostReleaseInviteViewController.swift */,
+				EB694F481F215A1400C0690A /* PostReleaseInviteViewController.xib */,
+				EB694F4B1F215D7900C0690A /* PostReleaseTableViewCell.swift */,
+				EB694F4C1F215D7900C0690A /* PostReleaseTableViewCell.xib */,
+			);
+			name = "Invite View";
 			sourceTree = "<group>";
 		};
 		EB71ABFD1F1E990F0024FE95 /* Map Settings */ = {
@@ -1696,6 +1716,7 @@
 				5BAB87A41EC961AB0064E5EC /* UserProfile.storyboard in Resources */,
 				EB819E6A1F180D2900F5AA94 /* RecentPostTableViewCell.xib in Resources */,
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
+				EB694F4E1F215D7900C0690A /* PostReleaseTableViewCell.xib in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
 				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
@@ -1741,6 +1762,7 @@
 				5B448E571EE72C1B00873F79 /* FollowersTableViewCell.xib in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
+				EB694F4A1F215A1400C0690A /* PostReleaseInviteViewController.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				EBE7AE4E1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib in Resources */,
 				EB71AC1A1F1EF1550024FE95 /* AllOptionTableViewCell.xib in Resources */,
@@ -2081,10 +2103,12 @@
 				61C6096F1ED572AC004098BA /* EditProfileViewController.swift in Sources */,
 				D25AACCF1E7DBAD0005DE49F /* SettingsPermissionsChecker.swift in Sources */,
 				EBD980871EEB64C400FC54C1 /* OtherLikesTableViewCell.swift in Sources */,
+				EB694F4D1F215D7900C0690A /* PostReleaseTableViewCell.swift in Sources */,
 				5B33C0571EDF8DF9007A8188 /* SearchViewController.swift in Sources */,
 				5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */,
 				5B6AFA641ED1906900A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */,
+				EB694F491F215A1400C0690A /* PostReleaseInviteViewController.swift in Sources */,
 				5BD457BE1F1F386E00E18B50 /* UIImage+Extensions.swift in Sources */,
 				5B6AFA761ED1906900A82104 /* GQTPointQuadTree.m in Sources */,
 				C5E505F21F047DB900EBE27A /* PhotoInputView.swift in Sources */,

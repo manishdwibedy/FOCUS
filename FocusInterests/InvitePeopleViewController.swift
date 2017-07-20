@@ -15,6 +15,7 @@ import GooglePlaces
 
 class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate{
 
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var createEventButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -63,18 +64,18 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         searchBar.delegate = self
         
 //        MARK: Event and Location Bars
+        self.currentLocation.backgroundColor = UIColor(red: 4/255.0, green: 34/255.0, blue: 63/255.0, alpha: 1.0)
         self.currentLocation.attributedPlaceholder = NSAttributedString(string: "Current Location", attributes: [NSForegroundColorAttributeName: UIColor.white])
-        print(self.currentLocation.subviews)
+        
+//        04223F
         
         self.searchBar.delegate = self
         // search bar attributes
         let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!]
         let cancelButtonsInSearchBar: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!]
         
-        
-        
 //        MARK: Event Search Bar
-        self.searchBar.isTranslucent = true
+//        self.searchBar.isTranslucent = true
         self.searchBar.backgroundImage = UIImage()
         self.searchBar.tintColor = UIColor.white
         self.searchBar.barTintColor = UIColor.white
@@ -129,8 +130,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         if isMeetup{
             navBar.topItem?.title = "Meet up"
+            self.backButton.isEnabled = true
+            self.backButton.tintColor = UIColor.white
+        }else{
+            self.backButton.isEnabled = false
+            self.backButton.tintColor = UIColor.clear
         }
-        
+        print(navBar.items)
         self.createEventButton.isHidden = true
         
 //        MARK: Main View
