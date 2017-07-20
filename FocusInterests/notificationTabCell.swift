@@ -156,38 +156,20 @@ class notificationTabCell: UITableViewCell {
         
         
         if data["actionType"] as! String == "like"{
-            actionStr = "liked your"
-            
+            actionStr = "liked "
         } else if data["actionType"] as! String == "comment"{
-            actionStr = "commented on your"
+            actionStr = "commented "
         } else{
-            actionStr = "is coming to your"
+            actionStr = "is coming to "
         }
         
         if data["type"] as! String == "event"{
-            if data["actionType"] as! String == "like"{
-                whatStr = "Event - \(notif.item!.itemName!)"
-            }
-            else{
-                whatStr = "Event: \"\(notif.item!.itemName!)\""
-            }
+            whatStr = "\(notif.item!.itemName!)"
         } else if data["type"] as! String == "pin"{
-            if data["actionType"] as! String == "like"{
-                whatStr = "Pin - \(notif.item!.itemName!)"
-            }
-            else{
-                whatStr = "Pin: \"\(notif.item!.itemName!)\""
-            }
-            
+            whatStr = "\(notif.item!.itemName!)"
         }
         else if data["type"] as! String == "place"{
-            if data["actionType"] as! String == "like"{
-                whatStr = "Place - \(notif.item!.itemName!)"
-            }
-            else{
-                whatStr = "Place: \"\(notif.item!.itemName!)\""
-            }
-            
+            whatStr = "\(notif.item!.itemName!)"
         }
         
         loadAttr(component1: (notif.sender?.username)!, component2: actionStr, component3: whatStr)
@@ -218,11 +200,22 @@ class notificationTabCell: UITableViewCell {
         let descString: NSMutableAttributedString = NSMutableAttributedString(string: component2 + " ")
         descString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, component2.characters.count))
         
-        let descString2: NSMutableAttributedString = NSMutableAttributedString(string: component3)
-        descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, component3.characters.count))
-        
         attrString.append(descString);
-        attrString.append(descString2);
+        if data["type"] as! String == "event"{
+            let descString2: NSMutableAttributedString = NSMutableAttributedString(string: component3)
+            descString2.addAttribute(NSForegroundColorAttributeName, value: Constants.color.pink, range: NSMakeRange(0, component3.characters.count))
+            attrString.append(descString2);
+            
+        } else if data["type"] as! String == "pin"{
+            let descString2: NSMutableAttributedString = NSMutableAttributedString(string: component3)
+            descString2.addAttribute(NSForegroundColorAttributeName, value: Constants.color.green, range: NSMakeRange(0, component3.characters.count))
+            attrString.append(descString2);
+        }
+        else if data["type"] as! String == "place"{
+            let descString2: NSMutableAttributedString = NSMutableAttributedString(string: component3)
+            descString2.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 36/255, green: 209/255, blue: 219/255, alpha: 1), range: NSMakeRange(0, component3.characters.count))
+            attrString.append(descString2);
+        }
         
         self.usernameLabel.attributedText = attrString
     }
