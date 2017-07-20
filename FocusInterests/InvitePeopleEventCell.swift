@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 protocol InvitePeopleEventCellDelegate {
     func haveInvitedSomeoneToAnEvent()
@@ -137,6 +138,84 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     }
     
     @IBAction func attendButtonPressed(_ sender: Any) {
+        
+        if let event = self.event{
+            if attendButton.title(for: .normal) == "Attend"{
+                
+                Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+                
+                
+                Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    if value != nil
+                    {
+                        let attendingAmount = value?["amount"] as! Int
+                        Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount + 1])
+                    }
+                })
+                
+                Answers.logCustomEvent(withName: "Attend Event",
+                                       customAttributes: [
+                                        "user": AuthApi.getFirebaseUid()!,
+                                        "event": event.title,
+                                        "attend": true
+                    ])
+                
+                attendButton.layer.borderWidth = 1
+                attendButton.layer.borderColor = UIColor.white.cgColor
+                attendButton.backgroundColor = UIColor.clear
+                attendButton.setTitle("Attending", for: .normal)
+            }
+            else{
+                
+                let alertController = UIAlertController(title: "Unattend \(event.title!)?", message: nil, preferredStyle: .actionSheet)
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                
+                let OKAction = UIAlertAction(title: "Unattend", style: .destructive) { action in
+                    Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let value = snapshot.value as? [String:Any]{
+                            
+                            for (id,_) in value{
+                                Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
+                            }
+                        }
+                        
+                        
+                    })
+                    
+                    Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let value = snapshot.value as? NSDictionary
+                        if value != nil
+                        {
+                            let attendingAmount = value?["amount"] as! Int
+                            Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
+                        }
+                    })
+                    
+                    self.attendButton.layer.borderWidth = 0
+                    self.attendButton.layer.borderColor = UIColor.clear.cgColor
+                    self.attendButton.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                    self.attendButton.setTitle("Attend", for: .normal)
+                    
+                    Answers.logCustomEvent(withName: "Attend Event",
+                                           customAttributes: [
+                                            "user": AuthApi.getFirebaseUid()!,
+                                            "event": event.title,
+                                            "attend": false
+                        ])
+                }
+                alertController.addAction(OKAction)
+                
+                parentVC.present(alertController, animated: true)
+                
+                
+            }
+
+        }
+        
+        /*
         self.attendButton.isSelected = !self.attendButton.isSelected
         if self.attendButton.isSelected == true{
             self.attendButton.layer.borderWidth = 1
@@ -149,7 +228,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
             self.attendButton.layer.masksToBounds = false
             self.attendButton.layer.shadowColor = UIColor.black.cgColor
             self.attendButton.layer.shadowRadius = 5.0
-        }
+        }*/
     }
     
     func haveInvitedSomeoneToAnEvent() {

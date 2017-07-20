@@ -17,7 +17,6 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var addressTextView: UITextView!
-//    @IBOutlet weak var followButtonOut: UIButton!
     @IBOutlet weak var inviteButtonOut: UIButton!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -97,6 +96,59 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
 //    
     
     @IBAction func followButtonPressed(_ sender: Any) {
+        
+        if self.followButton.isSelected == false{
+            
+            //            unfollow button appearance
+            self.followButton.isSelected = true
+            self.followButton.layer.borderWidth = 1
+            self.followButton.layer.borderColor = UIColor.white.cgColor
+            self.followButton.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
+            self.followButton.tintColor = UIColor.clear
+            self.followButton.layer.shadowOpacity = 0.5
+            self.followButton.layer.masksToBounds = false
+            self.followButton.layer.shadowColor = UIColor.black.cgColor
+            self.followButton.layer.shadowRadius = 5.0
+            
+            let time = NSDate().timeIntervalSince1970
+            Follow.followPlace(id: (place?.id)!)
+            
+            
+        } else if self.followButton.isSelected == true {
+            
+            
+            let unfollowAlertController = UIAlertController(title: "Are you sure you want to unfollow \(self.place!.name)?", message: nil, preferredStyle: .actionSheet)
+            
+            
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
+                
+                //            follow button appearance
+                self.followButton.isSelected = false
+                self.followButton.layer.borderWidth = 1
+                self.followButton.layer.borderColor = UIColor.clear.cgColor
+                self.followButton.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButton.tintColor = UIColor.clear
+                self.followButton.layer.shadowOpacity = 0.5
+                self.followButton.layer.masksToBounds = false
+                self.followButton.layer.shadowColor = UIColor.black.cgColor
+                self.followButton.layer.shadowRadius = 5.0
+                
+                Follow.unFollowPlace(id: (self.place?.id)!)
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print("cancel has been tapped")
+            }
+            
+            unfollowAlertController.addAction(unfollowAction)
+            unfollowAlertController.addAction(cancelAction)
+            parentVC?.present(unfollowAlertController, animated: true, completion: nil)
+            
+            
+            
+        }
+        /*
         self.followButton.isSelected = !self.followButton.isSelected
         if self.followButton.isSelected == true{
             self.followButton.layer.borderWidth = 1
@@ -115,6 +167,7 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
             self.followButton.layer.shadowRadius = 5.0
             
         }
+ */
     }
     
     @IBAction func invite(_ sender: Any) {
