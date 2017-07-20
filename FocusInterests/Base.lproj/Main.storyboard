@@ -62,7 +62,7 @@
                                     <constraint firstAttribute="height" constant="140" id="rkl-jt-jnk"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AX8-vj-cUX" userLabel="Map View Setting Container View">
+                            <containerView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AX8-vj-cUX" userLabel="Map View Setting Container View">
                                 <rect key="frame" x="16" y="78" width="343" height="464"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
