@@ -136,31 +136,23 @@
                                 <rect key="frame" x="0.0" y="146" width="338" height="68"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2e-c4-2Te">
-                                        <rect key="frame" x="1" y="17" width="20" height="20"/>
+                                        <rect key="frame" x="1" y="18" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="spK-rq-L5w"/>
                                             <constraint firstAttribute="height" constant="20" id="uPT-AC-j6c"/>
                                         </constraints>
                                         <state key="normal" image="Like"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdA-VM-9KF">
-                                        <rect key="frame" x="58" y="16" width="23" height="23"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="23" id="Uco-p8-QRN"/>
-                                            <constraint firstAttribute="height" constant="23" id="eMX-Uh-3EU"/>
-                                        </constraints>
-                                        <state key="normal" image="Search"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dt6-1k-ftk">
-                                        <rect key="frame" x="29" y="16" width="23" height="23"/>
+                                        <rect key="frame" x="29" y="15" width="27" height="27"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="23" id="4w2-FQ-aBl"/>
-                                            <constraint firstAttribute="height" constant="23" id="z9Z-5d-ZOe"/>
+                                            <constraint firstAttribute="width" constant="27" id="4w2-FQ-aBl"/>
+                                            <constraint firstAttribute="height" constant="27" id="z9Z-5d-ZOe"/>
                                         </constraints>
-                                        <state key="normal" image="User Icon white 30x30"/>
+                                        <state key="normal" image="Comment"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDU-Di-rJ1">
-                                        <rect key="frame" x="0.0" y="43.5" width="36.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="338" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -169,10 +161,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="dDU-Di-rJ1" firstAttribute="leading" secondItem="J2e-c4-2Te" secondAttribute="leading" constant="-1" id="4M0-vR-kLh"/>
-                                    <constraint firstItem="GdA-VM-9KF" firstAttribute="leading" secondItem="dt6-1k-ftk" secondAttribute="trailing" constant="6" id="8Fj-fm-9VV"/>
-                                    <constraint firstAttribute="bottom" secondItem="dDU-Di-rJ1" secondAttribute="bottom" constant="4" id="E7d-1a-ug9"/>
+                                    <constraint firstAttribute="bottom" secondItem="dDU-Di-rJ1" secondAttribute="bottom" constant="3" id="E7d-1a-ug9"/>
+                                    <constraint firstAttribute="trailing" secondItem="dDU-Di-rJ1" secondAttribute="trailing" id="Hyk-ma-Nfc"/>
                                     <constraint firstItem="J2e-c4-2Te" firstAttribute="leading" secondItem="BFj-ud-47E" secondAttribute="leading" constant="1" id="cdc-mQ-QWi"/>
-                                    <constraint firstItem="GdA-VM-9KF" firstAttribute="centerY" secondItem="dt6-1k-ftk" secondAttribute="centerY" id="j2J-Cg-sfm"/>
                                     <constraint firstItem="dt6-1k-ftk" firstAttribute="leading" secondItem="J2e-c4-2Te" secondAttribute="trailing" constant="8" id="lgW-ch-WTU"/>
                                     <constraint firstItem="dDU-Di-rJ1" firstAttribute="top" secondItem="J2e-c4-2Te" secondAttribute="bottom" constant="6.5" id="xhV-h5-px9"/>
                                     <constraint firstItem="J2e-c4-2Te" firstAttribute="centerY" secondItem="dt6-1k-ftk" secondAttribute="centerY" id="yH0-DG-DcJ"/>
@@ -204,11 +195,10 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Comment" width="74" height="74"/>
         <image name="Community Green" width="512" height="512"/>
         <image name="HomeTooBig" width="52" height="48"/>
         <image name="Like" width="30" height="30"/>
-        <image name="Search" width="30" height="30"/>
-        <image name="User Icon white 30x30" width="30" height="30"/>
         <image name="UserPhoto" width="102" height="102"/>
     </resources>
 </document>

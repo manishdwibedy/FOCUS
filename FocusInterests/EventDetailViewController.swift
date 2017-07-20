@@ -98,7 +98,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         // Reference to an image file in Firebase Storage
         
-        self.navigationItem.title = self.event?.title
+//        self.navigationItem.title = self.event?.title
         
         commentTextField.layer.borderWidth = 1
         commentTextField.layer.cornerRadius = 5
@@ -113,7 +113,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         
         self.inviteButton.roundCorners(radius: 5.0)
+        
         self.pinHereButton.roundCorners(radius: 5.0)
+        self.pinHereButton.setTitle("Pin Here", for: .normal)
+        self.pinHereButton.setTitleColor(UIColor.white, for: .normal)
+        self.pinHereButton.setTitle("I\'m Here!", for: .selected)
+        self.pinHereButton.setTitleColor(Constants.color.navy, for: .selected)
         
         self.eventName.text = "CBS Sports"
         self.eventDescription.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
@@ -263,6 +268,17 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         ]
         
         self.navBar.titleTextAttributes = attrs
+        
+        let titlelabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        titlelabel.text = self.event?.title
+        titlelabel.textColor = UIColor.white
+        titlelabel.font = UIFont(name: "Avenir-Black", size: 18.0)
+        titlelabel.backgroundColor = UIColor.clear
+        titlelabel.adjustsFontSizeToFitWidth = true
+        titlelabel.textAlignment = .center
+        self.navBar.topItem?.titleView = titlelabel
+        
+        
         self.distanceLabelInNavBar.setTitle("31mi", for: .normal)
         
         hideKeyboardWhenTappedAround()
@@ -686,6 +702,14 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
     }
     
+    @IBAction func pinButtonPressed(_ sender: Any) {
+        self.pinHereButton.isSelected = !self.pinHereButton.isSelected
+        if self.pinHereButton.isSelected{
+            self.pinHereButton.backgroundColor = UIColor.white
+        }else{
+            self.pinHereButton.backgroundColor = Constants.color.green
+        }
+    }
     
     func checkIfAttending(){
         if self.attendButton.isSelected == true{

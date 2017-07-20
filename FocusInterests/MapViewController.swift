@@ -80,6 +80,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         hideFollowFriendPopup()
         Share.getMatchingUsers(gotUsers: {users in
             if users.count > 0{
@@ -91,6 +92,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         popUpScreen = MapPopUpScreenView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: popUpView.frame.width))
         popUpScreen.parentVC = self
         self.popUpView.addSubview(popUpScreen)
+        
+        self.mapViewSettings.isHidden = true
+        self.mapViewSettings.layer.cornerRadius = 10.0
         
 //        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
 //            if dictionnary != nil {
@@ -571,9 +575,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         } else {
             print("username is not nil")
         }
-        
-        self.mapViewSettings.isHidden = true
-        self.mapViewSettings.allCornersRounded(radius: 10.0)
 
 //        Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
 //            if let id = (snapshot.value as? NSDictionary)?["manish1"]{
@@ -895,8 +896,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            navigationView.messagesButton.setImage(UIImage(named: "Messages"), for: .normal)
 //            navigationView.searchButton.setImage(UIImage(named: "Search"), for: .normal)
 //            navigationView.notificationsButton.setImage(UIImage(named: "Notifications"), for: .normal)
-
-            navigationView.view.backgroundColor = Constants.color.navy
             
 //            self.tabBarController!.tabBar.backgroundColor = UIColor(hexString: "435366")
 
@@ -1314,6 +1313,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBAction func unwindToMapViewController(segue:UIStoryboardSegue) { }
     
+    @IBAction func mapSettingsPressed(_ sender: Any) {
+        self.mapViewSettings.isHidden = !self.mapViewSettings.isHidden
+    }
 }
 
 extension MapViewController: UIWebViewDelegate {

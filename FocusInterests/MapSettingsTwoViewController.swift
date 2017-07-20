@@ -20,14 +20,17 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var peopleDropDownButton: UIButton!
     @IBOutlet weak var peopleLabelButton: UIButton!
     @IBOutlet weak var peopleImageButton: UIButton!
+    @IBOutlet weak var peopleTitleView: UIView!
     
     @IBOutlet weak var placesDropdownButton: UIButton!
     @IBOutlet weak var placesImageButton: UIButton!
     @IBOutlet weak var placesLabelButton: UIButton!
+    @IBOutlet weak var placeTitleView: UIView!
     
     @IBOutlet weak var eventsDropDownButton: UIButton!
     @IBOutlet weak var eventsLabelButton: UIButton!
     @IBOutlet weak var eventsImageButton: UIButton!
+    @IBOutlet weak var eventsTitleView: UIView!
     
     
     override func viewDidLoad() {
@@ -40,6 +43,10 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
         // Do any additional setup after loading the view.
         let allOptionsNib = UINib(nibName: "AllOptionTableViewCell", bundle: nil)
         let followingNib = UINib(nibName: "FollowingOptionTableViewCell", bundle: nil)
+        
+        self.peopleTitleView.layer.cornerRadius = 7.0
+        self.placeTitleView.layer.cornerRadius = 7.0
+        self.eventsTitleView.layer.cornerRadius = 7.0
         
         self.eventsTableView.register(allOptionsNib, forCellReuseIdentifier: "allOptionCell")
         self.eventsTableView.register(followingNib, forCellReuseIdentifier: "followingOptionCell")
@@ -68,14 +75,75 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
         
         if indexPath.row == 0{
             let allCell = tableView.dequeueReusableCell(withIdentifier: "allOptionCell", for: indexPath) as! AllOptionTableViewCell
+            
+            allCell.allButton.setTitle("All", for: .normal)
+            allCell.allButton.setTitleColor(Constants.color.navy, for: .normal)
+            allCell.allButton.setTitle("All", for: .selected)
+            allCell.allButton.setTitleColor(Constants.color.navy, for: .selected)
+            
+            allCell.checkMarkButton.isHidden = false
+            allCell.isSelected = true
+            allCell.allButton.isSelected = true
+            allCell.checkMarkButton.isSelected = true
             cell = allCell
         }else if indexPath.row == 1{
             let followingCell = tableView.dequeueReusableCell(withIdentifier: "followingOptionCell", for: indexPath) as! FollowingOptionTableViewCell
+            followingCell.followingButton.setTitle("Following", for: .normal)
+            followingCell.followingButton.setTitleColor(Constants.color.navy, for: .normal)
+            followingCell.followingButton.setTitle("Following", for: .selected)
+            followingCell.followingButton.setTitleColor(Constants.color.navy, for: .selected)
+            followingCell.isSelected = false
+            followingCell.followingButton.isSelected = false
+            followingCell.checkMarkButton.isSelected = false
+            followingCell.checkMarkButton.isHidden = true
             cell = followingCell
         }
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView.tag{
+        case 0:
+            self.checkTable(tableView: tableView, indexPath: indexPath)
+        case 1:
+            self.checkTable(tableView: tableView, indexPath: indexPath)
+        case 2:
+            self.checkTable(tableView: tableView, indexPath: indexPath)
+        default:
+            break
+        }
+    }
+    
+    func checkTable(tableView: UITableView, indexPath: IndexPath){
+        if indexPath.row == 0{
+            let allCell = tableView.cellForRow(at: indexPath) as! AllOptionTableViewCell
+            allCell.isSelected = true
+            allCell.allButton.isSelected = true
+            allCell.checkMarkButton.isSelected = true
+            allCell.checkMarkButton.isHidden = false
+            
+            let followingCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! FollowingOptionTableViewCell
+            followingCell.isSelected = false
+            followingCell.followingButton.isSelected = false
+            followingCell.checkMarkButton.isSelected = false
+            followingCell.checkMarkButton.isHidden = true
+            print("cell at 0 selected")
+        }else{
+            let allCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! AllOptionTableViewCell
+            allCell.isSelected = false
+            allCell.allButton.isSelected = false
+            allCell.checkMarkButton.isSelected = false
+            allCell.checkMarkButton.isHidden = true
+            
+            let followingCell = tableView.cellForRow(at: indexPath) as! FollowingOptionTableViewCell
+            followingCell.isSelected = true
+            followingCell.followingButton.isSelected = true
+            followingCell.checkMarkButton.isSelected = true
+            followingCell.checkMarkButton.isHidden = false
+            print("cell at 1 selected")
+        }
+        
+    }
 
     @IBAction func showTable(_ sender: UIButton) {
         switch sender.tag{

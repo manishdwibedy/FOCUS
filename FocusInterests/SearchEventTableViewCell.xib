@@ -57,6 +57,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djv-ET-Cuh">
                                 <rect key="frame" x="281" y="67" width="50" height="16.5"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="16.5" id="9pH-BT-OFe"/>
                                     <constraint firstAttribute="width" constant="50" id="mdw-U2-k7A"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
@@ -83,12 +84,18 @@ asd</string>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meet up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3N-sR-ozX">
                                 <rect key="frame" x="70" y="66.5" width="89" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="XM7-mq-Z9Y"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <color key="textColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guest Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLD-te-UJm">
                                 <rect key="frame" x="169" y="66" width="101" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="S7g-lU-h1u"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>

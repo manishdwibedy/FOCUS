@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--EVENTS-->
+        <!--Search Events View Controller-->
         <scene sceneID="7vf-IH-Tml">
             <objects>
                 <viewController id="xPx-tM-EtF" customClass="SearchEventsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,18 +32,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Events" id="31z-0O-JgZ">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="nz5-lQ-HKk">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BBg-S7-ElF">
-                                                <rect key="frame" x="16" y="27" width="30" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="BackArrow"/>
-                                            </button>
-                                            <connections>
-                                                <action selector="backButton:" destination="xPx-tM-EtF" id="aCP-zh-f3W"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem title="Events" id="31z-0O-JgZ"/>
                                 </items>
                             </navigationBar>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxR-DK-a5n">
@@ -150,7 +139,7 @@
                             <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="dxR-DK-a5n" secondAttribute="bottom" constant="-129" id="wlb-er-8J2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="EVENTS" id="yhf-yt-eZ8">
+                    <tabBarItem key="tabBarItem" title="" image="Feed white" selectedImage="Feed green" id="yhf-yt-eZ8">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -168,6 +157,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BackArrow" width="30" height="30"/>
+        <image name="Feed green" width="23" height="29"/>
+        <image name="Feed white" width="23" height="29"/>
     </resources>
 </document>

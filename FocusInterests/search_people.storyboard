@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--PEOPLE-->
+        <!--Search People View Controller-->
         <scene sceneID="9tT-Es-qiz">
             <objects>
                 <viewController id="sfs-g5-Ui8" customClass="SearchPeopleViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,9 +84,7 @@
                             <constraint firstAttribute="trailing" secondItem="O91-5f-lIg" secondAttribute="trailing" id="h42-Bk-NsB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PEOPLE" id="ft2-LS-Dgf">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="" image="People icon white" selectedImage="People icon white" id="ft2-LS-Dgf"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="invitePopupBottomConstraint" destination="cut-Oq-Kp5" id="nUv-Jo-LSc"/>
@@ -100,7 +98,7 @@
             </objects>
             <point key="canvasLocation" x="-143.19999999999999" y="88.605697151424295"/>
         </scene>
-        <!--EXPLORE-->
+        <!--Invite People View Controller-->
         <scene sceneID="9mv-Gu-rXL">
             <objects>
                 <viewController storyboardIdentifier="invitePeople" id="9ey-Xo-CX9" customClass="InvitePeopleViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -123,12 +121,12 @@
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Current Location" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yhT-Rz-YeA">
                                         <rect key="frame" x="7" y="0.0" width="361" height="30"/>
-                                        <color key="backgroundColor" red="0.26274509800000001" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="sLP-2p-5qh"/>
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
@@ -159,6 +157,19 @@
                                             <connections>
                                                 <action selector="back:" destination="9ey-Xo-CX9" id="j18-cH-3eb"/>
                                             </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="AFS-xl-DMU">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JaG-Qc-0IL">
+                                                <rect key="frame" x="270" y="27" width="89" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                <state key="normal" title="Create Event">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="createEventButtonPressed:" destination="9ey-Xo-CX9" eventType="touchUpInside" id="i8I-Uk-yDS"/>
+                                                </connections>
+                                            </button>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -217,11 +228,10 @@
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="vv3-PZ-isc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="EXPLORE" id="NJ5-hj-IRg">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="" image="Explore white" selectedImage="Explore green" id="NJ5-hj-IRg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="createEventButton" destination="JaG-Qc-0IL" id="eFf-HU-LgD"/>
                         <outlet property="currentLocation" destination="yhT-Rz-YeA" id="7WE-lv-gOc"/>
                         <outlet property="navBar" destination="RME-pD-v8b" id="GVQ-s5-mZn"/>
                         <outlet property="searchBar" destination="AYl-Yr-fFv" id="L8v-LE-4kh"/>
@@ -236,5 +246,8 @@
     </scenes>
     <resources>
         <image name="BackArrow" width="30" height="30"/>
+        <image name="Explore green" width="31" height="31"/>
+        <image name="Explore white" width="31" height="31"/>
+        <image name="People icon white" width="30" height="30"/>
     </resources>
 </document>

@@ -14,7 +14,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     @IBOutlet weak var postReviewSeciontButton: UIButton!
     @IBOutlet weak var morePinSectionButton: UIButton!
-    @IBOutlet weak var moreOtherLikesButton: UIButton!
     @IBOutlet weak var moreCategoriesSectionButton: UIButton!
     
     @IBOutlet weak var reviewsView: UIView!
@@ -41,7 +40,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var cityStateLabel: UILabel!
     @IBOutlet weak var streetAddress: UILabel!
     @IBOutlet weak var hoursStackView: UIStackView!
-    @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var pinTableView: UITableView!
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
@@ -68,6 +67,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var uberButton: UIButton!
     @IBOutlet weak var googleMapButton: UIButton!
     
+    @IBOutlet weak var pinsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var peopleAlsoLikedTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var peopleWhoLikeThisTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var categoryTop: NSLayoutConstraint!
@@ -96,7 +96,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         self.placeVC?.followButton.addTarget(self, action: #selector(PinViewController.followPressed), for: .touchUpInside)
         
         let pinPlaceReviewNib = UINib(nibName: "PinPlaceReviewTableViewCell", bundle: nil)
-        self.table.register(pinPlaceReviewNib, forCellReuseIdentifier: "pinPlaceReviewCell")
+        self.pinTableView.register(pinPlaceReviewNib, forCellReuseIdentifier: "pinPlaceReviewCell")
         
         let nib = UINib(nibName: "SearchPlaceCell", bundle: nil)
         self.peopleAlsoLikedTableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
@@ -109,9 +109,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         // Round up Yelp!
         
-        self.webButton.backgroundColor = .clear
-        self.webButton.layer.masksToBounds = true
-        self.webButton.layer.cornerRadius = 5
+//        self.webButton.backgroundColor = .clear
+//        self.webButton.layer.masksToBounds = true
+//        self.webButton.layer.cornerRadius = 5
         
         var address = ""
         for str in (place?.address)!
@@ -128,7 +128,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                     self.data.append(value?[key] as! NSDictionary)
                 }
             }
-            self.table.reloadData()
+            self.pinTableView.reloadData()
             
         })
         
@@ -237,17 +237,14 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         postReviewSeciontButton.layer.borderWidth = 1
         morePinSectionButton.layer.borderWidth = 1
-        moreOtherLikesButton.layer.borderWidth = 1
 //        moreCategoriesSectionButton.layer.borderWidth = 1
         
         postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
         morePinSectionButton.layer.borderColor = UIColor.white.cgColor
-        moreOtherLikesButton.layer.borderColor = UIColor.white.cgColor
 //        moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
         
         postReviewSeciontButton.roundCorners(radius: 5)
         morePinSectionButton.roundCorners(radius: 5)
-        moreOtherLikesButton.roundCorners(radius: 5)
 //        moreCategoriesSectionButton.roundCorners(radius: 5)
         
         starRatingView.topCornersRounded(radius: 10)
@@ -344,8 +341,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             view.image.image = UIImage(named: "UserPhoto")
         }
         
-        webButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
-        webButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+//        webButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
+//        webButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         uberButton.setImage(UIImage(named: "uber"), for: .normal)
         uberButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
@@ -382,7 +379,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        var cell = UITableViewCell()
         if (tableView.tag == 0){
-            let pinCell = self.table.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
+            let pinCell = self.pinTableView.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
             //        let pinCell = Bundle.main.loadNibNamed("PinPlaceReviewTableViewCell", owner: self, options: nil)?.first as! PinPlaceReviewTableViewCell
             
             //        cell.data = data[indexPath.row]
@@ -430,7 +427,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView.tag == 0){
-            return 70
+//            tableView.cellForRow(at: indexPath)?.bounds.size.height = (tableView.cellForRow(at: indexPath)?.contentView.bounds.size.height)!
+            return 80
         }else{
             return 110
         }

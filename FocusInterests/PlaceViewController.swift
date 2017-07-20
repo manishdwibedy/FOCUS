@@ -26,19 +26,21 @@ class PlaceViewController: UIViewController {
     var currentLocation: CLLocation?
     var map: MapViewController? = nil
     
-    
+    @IBOutlet weak var yelpButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var ratingButtonLabel: UIButton!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var pinView: UIView!
-    @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var ratingBackground: UIView!
     @IBOutlet weak var navBar: UINavigationBar!
     
+    @IBOutlet weak var ratingsImage: UIImageView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var reviewsAmountLabel: UIButton!
@@ -59,7 +61,13 @@ class PlaceViewController: UIViewController {
 //        ratingBackground.layer.cornerRadius = 5
         self.loadPlace(place: self.place!)
         
-    self.mapButton.setImage(UIImage(named: "Globe_White"), for: .normal)
+        self.yelpButton.backgroundColor = .clear
+        self.yelpButton.layer.masksToBounds = true
+        self.yelpButton.layer.cornerRadius = 5
+        self.yelpButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
+        self.yelpButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        self.mapButton.setImage(UIImage(named: "Globe_White"), for: .normal)
 //        self.mapButton.setImage(UIImage(image: UIImage(named: "web"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
         
         hideKeyboardWhenTappedAround()
@@ -88,8 +96,6 @@ class PlaceViewController: UIViewController {
         self.reviewButton.roundCorners(radius: 5.0)
         self.pinButton.roundCorners(radius: 5.0)
         
-        self.placeDescription.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-        
         self.distanceLabelInNavBar.setTitleColor(UIColor.white, for: .normal)
         self.distanceLabelInNavBar.setTitleColor(UIColor.white, for: .selected)
         self.pinAmountLabel.setTitleColor(UIColor.white, for: .normal)
@@ -104,12 +110,17 @@ class PlaceViewController: UIViewController {
         self.followersAmountLabel.setTitle("305K", for: .normal)
         self.reviewsAmountLabel.setTitle("292", for: .normal)
         
+        self.pinButton.setTitle("Pin Here", for: .normal)
+        self.pinButton.setTitleColor(UIColor.white, for: .normal)
+        self.pinButton.setTitle("I\'m Here!", for: .selected)
+        self.pinButton.setTitleColor(Constants.color.navy, for: .selected)
+        
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
-        navBar.titleTextAttributes = attrs
+        self.navigationBar.titleTextAttributes = attrs
         
     }
     
@@ -220,8 +231,41 @@ class PlaceViewController: UIViewController {
     
     
     func loadPlace(place: Place){
-        navigationBar.topItem?.title = place.name
-//        ratingLabel.text = "\(place.rating)"
+//        self.title = place.name
+        let titlelabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        titlelabel.text = place.name
+        titlelabel.textColor = UIColor.white
+        titlelabel.font = UIFont(name: "Avenir-Black", size: 18.0)
+        titlelabel.backgroundColor = UIColor.clear
+        titlelabel.adjustsFontSizeToFitWidth = false
+        self.navigationBar.topItem?.titleView = titlelabel
+        
+        switch place.rating{
+        case 0:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star white")
+            break
+        case 0.1...1:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star light yellow")
+            break
+        case 1.1...2:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star dark yellow")
+            break
+        case 2.1...3:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star light orange")
+            break
+        case 3.1...4:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star dark orange")
+            break
+        case 4.1...5:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star red")
+            break
+        default:
+            break
+        }
+        
+        let ratingString = String(place.rating)
+        self.ratingButtonLabel.setTitle(ratingString, for: .normal)
+        self.ratingButtonLabel.setTitle(ratingString, for: .selected)
         
 //        imageView.sd_setImage(with: URL(string: (place.image_url)), placeholderImage: nil)
         //self.getLatestComments()
@@ -337,6 +381,19 @@ class PlaceViewController: UIViewController {
             }
             
             self.suggestPlacesDelegate?.gotSuggestedPlaces(places: suggestedPlaces)
+        }
+    }
+    
+    @IBAction func openWebSite(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: (place?.url)!)! as URL)
+    }
+    
+    @IBAction func pinHerePressed(_ sender: Any) {
+        self.pinButton.isSelected = !self.pinButton.isSelected
+        if self.pinButton.isSelected{
+            self.pinButton.backgroundColor = UIColor.white
+        }else{
+            self.pinButton.backgroundColor = Constants.color.green
         }
     }
     

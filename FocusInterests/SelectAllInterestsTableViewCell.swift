@@ -12,10 +12,10 @@ class SelectAllInterestsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var checkMarkButton: UIButton!
     @IBOutlet weak var showAllButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.checkMarkButton.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,7 +24,17 @@ class SelectAllInterestsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func selectAllClicked(_ sender: Any) {
-        self.checkMarkButton.isHidden = !self.checkMarkButton.isHidden
+        
+        if self.accessoryType == .checkmark{
+            self.isSelected = false
+            self.showAllButton.isSelected = false
+            self.accessoryType = .none
+        }else{
+            self.isSelected = true
+            self.showAllButton.isSelected = true
+            self.accessoryType = .checkmark
+        }
+        
     }
     
 }

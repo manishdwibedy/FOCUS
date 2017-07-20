@@ -30,14 +30,14 @@
                         <button opaque="NO" contentMode="scaleAspectFit" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzW-Ah-j3P">
                             <rect key="frame" x="0.0" y="0.0" width="69" height="40"/>
                             <edgeInsets key="layoutMargins" top="8" left="22" bottom="8" right="8"/>
-                            <state key="normal" image="User Icon white 30x30"/>
+                            <state key="normal" image="User"/>
                             <connections>
                                 <action selector="profileButtonPressed:" destination="-1" eventType="touchUpInside" id="Ff1-rb-4Ff"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
                             <rect key="frame" x="89" y="0.0" width="68.5" height="40"/>
-                            <state key="normal" image="Message Icon white 30x30"/>
+                            <state key="normal" image="Messages"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="badgeBackgroundColor">
                                     <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -56,9 +56,17 @@
                                 <action selector="messagesButtonPressed:" destination="-1" eventType="touchUpInside" id="HhF-9i-eZZ"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7c-ZT-sxF" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
+                            <rect key="frame" x="177.5" y="0.0" width="68.5" height="40"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" image="Invite"/>
+                            <connections>
+                                <action selector="invitationClicked:" destination="-1" eventType="touchUpInside" id="zSd-w7-xAa"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-MD-iuK" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                            <rect key="frame" x="177.5" y="0.0" width="69" height="40"/>
-                            <state key="normal" image="Notifications Icon white 30x30"/>
+                            <rect key="frame" x="266" y="0.0" width="69" height="40"/>
+                            <state key="normal" image="Notifications"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetRight">
                                     <real key="value" value="20"/>
@@ -75,14 +83,6 @@
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="notificationsButtonPressed:" destination="-1" eventType="touchUpInside" id="e6r-GR-iuC"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7c-ZT-sxF" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                            <rect key="frame" x="266.5" y="0.0" width="68.5" height="40"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" image="Invitations"/>
-                            <connections>
-                                <action selector="invitationClicked:" destination="-1" eventType="touchUpInside" id="zSd-w7-xAa"/>
                             </connections>
                         </button>
                     </subviews>
@@ -104,7 +104,8 @@
                     </connections>
                 </searchBar>
             </subviews>
-            <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="iQC-En-2Gc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="MIO-t3-krd"/>
                 <constraint firstItem="iQC-En-2Gc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NR6-60-190"/>
@@ -115,9 +116,9 @@
         </view>
     </objects>
     <resources>
-        <image name="Invitations" width="35" height="36"/>
-        <image name="Message Icon white 30x30" width="30" height="30"/>
-        <image name="Notifications Icon white 30x30" width="30" height="30"/>
-        <image name="User Icon white 30x30" width="30" height="30"/>
+        <image name="Invite" width="35" height="36"/>
+        <image name="Messages" width="47" height="36"/>
+        <image name="Notifications" width="41" height="36"/>
+        <image name="User" width="36" height="36"/>
     </resources>
 </document>

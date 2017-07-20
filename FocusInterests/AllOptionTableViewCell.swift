@@ -16,7 +16,6 @@ class AllOptionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.checkMarkButton.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,5 +26,8 @@ class AllOptionTableViewCell: UITableViewCell {
     
     @IBAction func allisSelected(_ sender: Any) {
         self.checkMarkButton.isHidden = !self.checkMarkButton.isHidden
+        self.allButton.isSelected = !self.allButton.isSelected
+        self.checkMarkButton.isSelected = !self.checkMarkButton.isSelected
+        self.isSelected = !self.isSelected
     }
 }

@@ -12,22 +12,22 @@ class FeedOneTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var nameDescriptionLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var likesAmountLabel: UILabel!
     @IBOutlet weak var timeAmountLabel: UILabel!
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
 
     @IBOutlet weak var distanceLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.userImage.roundedImage()
-        self.nameLabel.text = "Arya"
+        self.usernameLabel.text = "username"
+        self.nameLabel.text = "Aryaasdfasdfa"
         self.addressLabel.text = "1600 Campus Road"
         self.distanceLabel.text = "2 mi"
-        self.likesAmountLabel.text = "0 likes"
-        self.timeAmountLabel.text = "21h ago"
         addGreenDot(label: self.interestLabel, content: "Sports")
         self.nameDescriptionLabel.text = "Watching NBA Awards - Westbrook for MVP!"
     }

@@ -10,6 +10,7 @@ import UIKit
 
 class PlaceAllPinsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
     var data = [NSDictionary]()
     var placeID = ""
@@ -30,6 +31,7 @@ class PlaceAllPinsViewController: UIViewController, UITableViewDelegate, UITable
             self.tableView.reloadData()
         })
 
+        self.navBar.titleTextAttributes = Constants.navBar.attrs
         
     }
 
