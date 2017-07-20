@@ -193,7 +193,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ODR-ok-zdv" customClass="MapViewSettingPageViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mY4-zh-1jM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3521" y="705"/>
+            <point key="canvasLocation" x="2367" y="918"/>
         </scene>
         <!--Map Settings Two View Controller-->
         <scene sceneID="fFl-nb-kdM">
@@ -512,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wWP-sO-Y5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3520" y="705"/>
+            <point key="canvasLocation" x="2725" y="1394"/>
         </scene>
         <!--Map Settings One View Controller-->
         <scene sceneID="keO-mr-uLx">
@@ -594,7 +594,7 @@
                                             <constraint firstAttribute="height" constant="3" id="YxV-HD-KjG"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q6H-qW-sAx">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q6H-qW-sAx">
                                         <rect key="frame" x="0.0" y="133" width="242" height="220"/>
                                         <color key="backgroundColor" red="0.85480856900000002" green="0.85495573280000003" blue="0.85479927060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>

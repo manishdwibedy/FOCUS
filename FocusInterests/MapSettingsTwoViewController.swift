@@ -75,6 +75,12 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
         
         if indexPath.row == 0{
             let allCell = tableView.dequeueReusableCell(withIdentifier: "allOptionCell", for: indexPath) as! AllOptionTableViewCell
+            
+            allCell.allButton.setTitle("All", for: .normal)
+            allCell.allButton.setTitleColor(Constants.color.navy, for: .normal)
+            allCell.allButton.setTitle("All", for: .selected)
+            allCell.allButton.setTitleColor(Constants.color.navy, for: .selected)
+            
             allCell.checkMarkButton.isHidden = false
             allCell.isSelected = true
             allCell.allButton.isSelected = true
@@ -82,6 +88,10 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
             cell = allCell
         }else if indexPath.row == 1{
             let followingCell = tableView.dequeueReusableCell(withIdentifier: "followingOptionCell", for: indexPath) as! FollowingOptionTableViewCell
+            followingCell.followingButton.setTitle("Following", for: .normal)
+            followingCell.followingButton.setTitleColor(Constants.color.navy, for: .normal)
+            followingCell.followingButton.setTitle("Following", for: .selected)
+            followingCell.followingButton.setTitleColor(Constants.color.navy, for: .selected)
             followingCell.isSelected = false
             followingCell.followingButton.isSelected = false
             followingCell.checkMarkButton.isSelected = false
@@ -92,6 +102,19 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView.tag{
+        case 0:
+            self.checkTable(tableView: tableView, indexPath: indexPath)
+        case 1:
+            self.checkTable(tableView: tableView, indexPath: indexPath)
+        case 2:
+            self.checkTable(tableView: tableView, indexPath: indexPath)
+        default:
+            break
+        }
+    }
+    
+    func checkTable(tableView: UITableView, indexPath: IndexPath){
         if indexPath.row == 0{
             let allCell = tableView.cellForRow(at: indexPath) as! AllOptionTableViewCell
             allCell.isSelected = true
@@ -119,8 +142,8 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
             followingCell.checkMarkButton.isHidden = false
             print("cell at 1 selected")
         }
+        
     }
-    
 
     @IBAction func showTable(_ sender: UIButton) {
         switch sender.tag{

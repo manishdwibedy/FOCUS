@@ -59,9 +59,8 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
             
             allInterestsCell.showAllButton.setTitle("Show All Interests", for: .selected)
             allInterestsCell.showAllButton.setTitleColor(Constants.color.navy, for: .selected)
-        
-            allInterestsCell.checkMarkButton.isHidden = false
-            allInterestsCell.checkMarkButton.isSelected = true
+            
+            allInterestsCell.accessoryType = .checkmark
             allInterestsCell.showAllButton.isSelected = true
             
             cell = allInterestsCell
@@ -75,6 +74,9 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
             singleInterestCell.interestLabel.setTitle(self.interests[indexPath.row-1], for: .selected)
             singleInterestCell.interestLabel.setTitleColor(UIColor.white, for: .selected)
             
+            singleInterestCell.accessoryType = .none
+            singleInterestCell.interestLabel.isSelected = false
+            singleInterestCell.interestButtonImage.isSelected = false
             cell = singleInterestCell
         }
         
@@ -82,50 +84,38 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.row == 0{
-//            let showAllCell = tableView.cellForRow(at: indexPath) as! SelectAllInterestsTableViewCell
-//            showAllCell.checkMarkButton.isHidden = false
-//            showAllCell.checkMarkButton.isSelected = true
-//            showAllCell.showAllButton.isSelected = true
-//            
-//            print(tableView.numberOfRows(inSection: 0))
-//            
-//            for interestCellIndex in 1...interests.count{
-//                let interestCell = tableView.cellForRow(at: IndexPath(row: interestCellIndex, section: 0)) as! SingleInterestTableViewCell
-//                interestCell.checkMarkButton.isHidden = true
-//                interestCell.checkMarkButton.isSelected = false
-//                interestCell.interestLabel.isSelected = false
-//                interestCell.interestButtonImage.isSelected = false
-//            }
+        if indexPath.row > 0{
             
+            //TODO: works when within range of cell. but not once leaving range
+            let selectAllCell = self.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as! SelectAllInterestsTableViewCell
+            if selectAllCell.accessoryType == .checkmark{
+                selectAllCell.accessoryType = .none
+            }
+            selectAllCell.showAllButton.isSelected = false
+            
+            let singleInterestCell = tableView.cellForRow(at: indexPath) as! SingleInterestTableViewCell
+            singleInterestCell.accessoryType = .checkmark
+            singleInterestCell.interestButtonImage.isSelected = true
+            singleInterestCell.interestLabel.isSelected = true
+            print("cell at \(indexPath.row) selected")
         }else{
-            print(tableView.indexPathsForVisibleRows)
-//            if let showAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllInterestsTableViewCell{
-//                print("showAllCell does exist")
-//                if showAllCell.checkMarkButton.isSelected && showAllCell.showAllButton.isSelected{
-//                    showAllCell.checkMarkButton.isHidden = true
-//                    showAllCell.checkMarkButton.isSelected = false
-//                    showAllCell.showAllButton.isSelected = false
-//                }
-//            }else{
-//                print("showAllCell doesn't exist")
-//            }
-//            
-//            let interestCell = tableView.cellForRow(at: indexPath) as! SingleInterestTableViewCell
-//            
-//            if interestCell.checkMarkButton.isSelected && interestCell.interestLabel.isSelected && interestCell.interestButtonImage.isSelected{
-//                interestCell.checkMarkButton.isHidden = true
-//                interestCell.checkMarkButton.isSelected = false
-//                interestCell.interestLabel.isSelected = false
-//                interestCell.interestButtonImage.isSelected = false
-//            }else{
-//                interestCell.checkMarkButton.isHidden = false
-//                interestCell.checkMarkButton.isSelected = true
-//                interestCell.interestLabel.isSelected = true
-//                interestCell.interestButtonImage.isSelected = true
-//            }
+            /*let allCell = tableView.cellForRow(at: indexPath) as! SelectAllInterestsTableViewCell
+            allCell.accessoryType = .checkmark
+            allCell.showAllButton.isSelected = true
+            
+            for index in 1...tableView.numberOfRows(inSection: 0){
+                let singleInterestCell = self.tableView(tableView, cellForRowAt: IndexPath(row: index, section: 0)) as! SingleInterestTableViewCell
+                singleInterestCell.accessoryType = .none
+                singleInterestCell.interestLabel.isSelected = false
+                singleInterestCell.interestButtonImage.isSelected = false
+            }
+            
+            print("cell at 0 selected")*/
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
     
     @IBAction func openOptions(_ sender: Any) {

@@ -31,18 +31,6 @@
                             <action selector="selectInterest:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5AO-pu-bPv"/>
                         </connections>
                     </button>
-                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLy-5K-m1x">
-                        <rect key="frame" x="289" y="3" width="34" height="47"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="47" id="8f9-g3-yDG"/>
-                            <constraint firstAttribute="width" constant="34" id="TNU-Ob-0Hf"/>
-                        </constraints>
-                        <state key="normal" image="Green_check_in_map_settings"/>
-                        <connections>
-                            <action selector="selectInterest:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aFt-Tv-b4y"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJp-KP-r5g">
                         <rect key="frame" x="45" y="0.0" width="79" height="52"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -58,9 +46,6 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="VJp-KP-r5g" firstAttribute="leading" secondItem="pmI-Ls-gIP" secondAttribute="trailing" constant="1" id="5fh-rw-NxE"/>
-                    <constraint firstAttribute="trailing" secondItem="xLy-5K-m1x" secondAttribute="trailing" constant="-3" id="6kT-2O-8cV"/>
-                    <constraint firstAttribute="bottom" secondItem="xLy-5K-m1x" secondAttribute="bottom" constant="1.5" id="9a6-y7-ncK"/>
-                    <constraint firstItem="xLy-5K-m1x" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="ZTU-kW-tyO"/>
                     <constraint firstItem="pmI-Ls-gIP" firstAttribute="centerY" secondItem="VJp-KP-r5g" secondAttribute="centerY" id="dsa-yt-Y8T"/>
                     <constraint firstItem="VJp-KP-r5g" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="oMI-Zx-b8y"/>
                     <constraint firstAttribute="bottom" secondItem="VJp-KP-r5g" secondAttribute="bottom" constant="-0.5" id="ovo-Cb-UMu"/>
@@ -70,14 +55,10 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.85480856900000002" green="0.85495573280000003" blue="0.85479927060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
-                <outlet property="checkMarkButton" destination="xLy-5K-m1x" id="bZW-H0-muI"/>
                 <outlet property="interestButtonImage" destination="pmI-Ls-gIP" id="okv-yN-QmQ"/>
                 <outlet property="interestLabel" destination="VJp-KP-r5g" id="l1H-2c-wbd"/>
             </connections>
             <point key="canvasLocation" x="25" y="56"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="Green_check_in_map_settings" width="10" height="10"/>
-    </resources>
 </document>

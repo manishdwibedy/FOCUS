@@ -17,22 +17,26 @@ class SingleInterestTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.checkMarkButton.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
-    }
+           }
     
     @IBAction func selectInterest(_ sender: Any) {
         print("select interest")
-        self.checkMarkButton.isHidden = !self.checkMarkButton.isHidden
-        self.checkMarkButton.isSelected = !self.checkMarkButton.isSelected
-        self.interestLabel.isSelected = !self.interestLabel.isSelected
-        self.interestButtonImage.isSelected = !self.interestButtonImage.isSelected
-        self.isSelected = !self.isSelected
+        if self.accessoryType == .checkmark{
+            self.isSelected = false
+            self.interestLabel.isSelected = false
+            self.interestButtonImage.isSelected = false
+            self.accessoryType = .none
+        }else{
+            self.isSelected = true
+            self.interestLabel.isSelected = true
+            self.interestButtonImage.isSelected = true
+            self.accessoryType = .checkmark
+        }
     }
     
 }
