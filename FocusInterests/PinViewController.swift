@@ -150,6 +150,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         reviewsView.alpha = 0
 //        categoryTop.constant = 0
         
+        self.button1.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        self.button2.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        self.button3.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        self.button4.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        self.button5.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        
         button1.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
         button2.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
         button3.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
@@ -586,18 +592,43 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     @IBAction func selectedRating(sender: UIButton){
         self.rating = sender.tag
-        for select in 1...sender.tag{
+        
+        switch sender.tag{
+        case 1:
+//            self.ratingsImage.image = #imageLiteral(resourceName: "Star light yellow")
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star light yellow"))
+            break
+        case 2:
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star dark yellow"))
+//            self.ratingsImage.image = #imageLiteral(resourceName: "Star dark yellow")
+            break
+        case 3:
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star light orange"))
+            break
+        case 4:
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star dark orange"))
+            break
+        case 5:
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star red"))
+            break
+        default:
+            break
+        }
+        
+    }
+    
+    func setImage(select: Int, image: UIImage){
+        for select in 1...select{
             let button = ratingView.viewWithTag(select) as! UIButton
-            button.setImage(#imageLiteral(resourceName: "Star"), for: .normal)
+            button.setImage(image, for: .normal)
         }
         
-        if sender.tag < 5{
-            for unselected in sender.tag + 1...5{
+        if select < 5{
+            for unselected in select + 1...5{
                 let button = ratingView.viewWithTag(unselected) as! UIButton
-                button.setImage(#imageLiteral(resourceName: "Unstar.png"), for: .normal)
-            }    
+                button.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+            }
         }
-        
     }
     
     @IBAction func postComment(_ sender: Any) {

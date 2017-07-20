@@ -574,7 +574,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8l-6K-QW5" userLabel="Reviews View">
-                                                <rect key="frame" x="0.0" y="94" width="375" height="120"/>
+                                                <rect key="frame" x="0.0" y="85" width="375" height="120"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sdD-F8-zH3">
                                                         <rect key="frame" x="322" y="96" width="45" height="20"/>
@@ -688,13 +688,13 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="k8l-6K-QW5" firstAttribute="top" secondItem="EYI-mS-d6G" secondAttribute="top" constant="94" id="5L7-TM-U2C"/>
+                                            <constraint firstItem="k8l-6K-QW5" firstAttribute="top" secondItem="EYI-mS-d6G" secondAttribute="top" constant="85" id="5L7-TM-U2C"/>
                                             <constraint firstAttribute="trailing" secondItem="vzw-eb-Hy5" secondAttribute="trailing" id="7mf-YH-Wl5"/>
                                             <constraint firstAttribute="height" constant="214" id="FiI-Qg-Prd"/>
                                             <constraint firstItem="vzw-eb-Hy5" firstAttribute="top" secondItem="EYI-mS-d6G" secondAttribute="top" constant="4" id="HIr-ic-Kmb"/>
                                             <constraint firstItem="k8l-6K-QW5" firstAttribute="centerX" secondItem="EYI-mS-d6G" secondAttribute="centerX" id="S6G-Ue-S2S"/>
                                             <constraint firstItem="vzw-eb-Hy5" firstAttribute="leading" secondItem="k8l-6K-QW5" secondAttribute="leading" id="YRG-pd-DgP"/>
-                                            <constraint firstItem="k8l-6K-QW5" firstAttribute="top" secondItem="vzw-eb-Hy5" secondAttribute="bottom" constant="9" id="tAL-I9-9jr"/>
+                                            <constraint firstItem="k8l-6K-QW5" firstAttribute="top" secondItem="vzw-eb-Hy5" secondAttribute="bottom" id="tAL-I9-9jr"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLc-gV-LBV">
