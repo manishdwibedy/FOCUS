@@ -141,6 +141,30 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
 //        descriptionLabel.text = event?.eventDescription
         descriptionLabel.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         
+        let reference = Constants.storage.event.child("\(event!.id!).jpg")
+        
+        reference.downloadURL(completion: { (url, error) in
+            
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+                return
+            }
+            
+            
+            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                (receivedSize :Int, ExpectedSize :Int) in
+                
+            }, completed: {
+                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                
+                if image != nil && finished{
+                    self.eventImage.image = crop(image: image!, width: 50, height: 50)
+                }
+            })
+            
+            
+        })
+        
 //        TODO:THERE IS A BUG THAT RETURNS NIL BEFORE VIEW LOADS
         
         ref.child("users").child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -155,6 +179,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 placeHolder.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 255, green: 255, blue: 255, alpha: 0.8), range:NSRange(location:0,length:placeString.characters.count))
                 self.commentTextField.attributedPlaceholder = placeHolder
                 
+                if let url = URL(string: (value?["image_string"] as? String)!){
+                    self.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                }
             }
             
         })
@@ -722,5 +749,21 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
     }
     
+    func pin(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "Home") as! PinScreenViewController
+        ivc.pinType = "event"
+        ivc.placeEventID = event?.id
+        
+        for str in (event?.address)!
+        {
+            ivc.formmatedAddress = ivc.formmatedAddress + ";;" + str
+        }
+        ivc.coordinates.latitude = (event?.latitude)!
+        ivc.coordinates.longitude = (event?.longitude)!
+        ivc.locationName = (event?.title)!
+        self.present(ivc, animated: true, completion: { _ in })
+        
+    }
     
 }

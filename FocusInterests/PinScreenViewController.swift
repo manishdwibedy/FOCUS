@@ -58,6 +58,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     var interest = ""
     var lastCaption = ""
     
+    var placeEventID = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -145,7 +147,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         pinTextView.inputAccessoryView = doneToolbar
         pinTextView.delegate = self
         
-        if self.pinType != "place"{
+        if self.pinType != "place" || self.pinType != "event"{
             self.coordinates = CLLocationCoordinate2D(latitude: AuthApi.getLocation()!.coordinate.latitude, longitude: AuthApi.getLocation()!.coordinate.longitude)
             getPlaceName(location: AuthApi.getLocation()!, completion: {address in
                 self.formmatedAddress = address
@@ -340,6 +342,13 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     }
                 })
                 
+                if pinType == "place"{
+                    Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text ?? ""] )
+                    
+                }
+                else if pinType == "event"{
+                    Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text ?? ""] )
+                }
                 Answers.logCustomEvent(withName: "Pin",
                                        customAttributes: [
                                         "user": AuthApi.getFirebaseUid()!,

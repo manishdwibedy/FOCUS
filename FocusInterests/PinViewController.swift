@@ -529,10 +529,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         let storyboard = UIStoryboard(name: "Pin", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "Home") as! PinScreenViewController
         ivc.pinType = "place"
+        ivc.placeEventID = place?.id
+        
         for str in (place?.address)!
         {
-         ivc.formmatedAddress = ivc.formmatedAddress + ";;" + str
-        
+            ivc.formmatedAddress = ivc.formmatedAddress + ";;" + str
         }
         ivc.coordinates.latitude = (place?.latitude)!
         ivc.coordinates.longitude = (place?.longitude)!
