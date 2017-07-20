@@ -156,17 +156,23 @@ class notificationTabCell: UITableViewCell {
         
         
         if data["actionType"] as! String == "like"{
-            actionStr = "liked "
+            actionStr = "liked"
         } else if data["actionType"] as! String == "comment"{
-            actionStr = "commented "
+            actionStr = "commented"
         } else{
-            actionStr = "is coming to "
+            actionStr = "is coming to"
         }
         
         if data["type"] as! String == "event"{
             whatStr = "\(notif.item!.itemName!)"
         } else if data["type"] as! String == "pin"{
-            whatStr = "\(notif.item!.itemName!)"
+            if data["actionType"] as! String == "like"{
+                whatStr = "on your Pin"
+            }
+            else{
+                whatStr = "on your Pin: \"\(notif.item!.itemName!)\""
+            }
+            
         }
         else if data["type"] as! String == "place"{
             whatStr = "\(notif.item!.itemName!)"
