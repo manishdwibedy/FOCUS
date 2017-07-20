@@ -105,7 +105,9 @@ class PlaceViewController: UIViewController {
         self.reviewsAmountLabel.setTitle("292", for: .normal)
         
         self.pinButton.setTitle("Pin Here", for: .normal)
+        self.pinButton.setTitleColor(UIColor.white, for: .normal)
         self.pinButton.setTitle("I\'m Here!", for: .selected)
+        self.pinButton.setTitleColor(Constants.color.navy, for: .selected)
         
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
@@ -374,7 +376,9 @@ class PlaceViewController: UIViewController {
     @IBAction func pinHerePressed(_ sender: Any) {
         self.pinButton.isSelected = !self.pinButton.isSelected
         if self.pinButton.isSelected{
-            
+            self.pinButton.backgroundColor = UIColor.white
+        }else{
+            self.pinButton.backgroundColor = Constants.color.green
         }
     }
     
