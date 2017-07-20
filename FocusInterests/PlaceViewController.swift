@@ -90,8 +90,6 @@ class PlaceViewController: UIViewController {
         self.reviewButton.roundCorners(radius: 5.0)
         self.pinButton.roundCorners(radius: 5.0)
         
-        self.placeDescription.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-        
         self.distanceLabelInNavBar.setTitleColor(UIColor.white, for: .normal)
         self.distanceLabelInNavBar.setTitleColor(UIColor.white, for: .selected)
         self.pinAmountLabel.setTitleColor(UIColor.white, for: .normal)
@@ -105,6 +103,9 @@ class PlaceViewController: UIViewController {
         self.pinAmountLabel.setTitle("7,365", for: .normal)
         self.followersAmountLabel.setTitle("305K", for: .normal)
         self.reviewsAmountLabel.setTitle("292", for: .normal)
+        
+        self.pinButton.setTitle("Pin Here", for: .normal)
+        self.pinButton.setTitle("I\'m Here!", for: .selected)
         
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
@@ -367,6 +368,11 @@ class PlaceViewController: UIViewController {
             
             self.suggestPlacesDelegate?.gotSuggestedPlaces(places: suggestedPlaces)
         }
+    }
+    
+    
+    @IBAction func pinHerePressed(_ sender: Any) {
+        self.pinButton.isSelected = !self.pinButton.isSelected
     }
     
     @IBAction func reviewButon(_ sender: Any) {

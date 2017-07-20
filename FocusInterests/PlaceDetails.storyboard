@@ -33,10 +33,10 @@
                                 <rect key="frame" x="0.0" y="65" width="375" height="1500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZW8-K4-PiO">
-                                        <rect key="frame" x="0.0" y="2" width="375" height="245"/>
+                                        <rect key="frame" x="0.0" y="2" width="375" height="211"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jgE-Qk-Tax">
-                                                <rect key="frame" x="16" y="4" width="343" height="237"/>
+                                                <rect key="frame" x="16" y="4" width="343" height="203"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ERF-Qz-VUu">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="114"/>
@@ -234,10 +234,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="as5-lL-1oJ">
-                                                        <rect key="frame" x="0.0" y="114" width="343" height="123"/>
+                                                        <rect key="frame" x="0.0" y="114" width="343" height="89"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Zkx-yD-0s0">
-                                                                <rect key="frame" x="1" y="7" width="341" height="115"/>
+                                                                <rect key="frame" x="1" y="7" width="341" height="81"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8R-fx-ezT">
                                                                         <rect key="frame" x="0.0" y="0.0" width="341" height="22"/>
@@ -292,14 +292,8 @@
                                                                             <constraint firstAttribute="height" constant="22.329999923706055" id="yab-cY-jGF"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pw4-LL-pbd">
-                                                                        <rect key="frame" x="0.0" y="22" width="341" height="34"/>
-                                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRe-Q4-2YT">
-                                                                        <rect key="frame" x="0.0" y="56" width="341" height="59"/>
+                                                                        <rect key="frame" x="0.0" y="22" width="341" height="59"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHA-iL-wLh">
                                                                                 <rect key="frame" x="89" y="21" width="159" height="36"/>
@@ -312,6 +306,9 @@
                                                                                 <state key="normal" title="Pin Here">
                                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="pinHerePressed:" destination="4C0-xu-no6" eventType="touchUpInside" id="cuI-QQ-fDe"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -347,8 +344,8 @@
                                             <constraint firstItem="jgE-Qk-Tax" firstAttribute="centerX" secondItem="ZW8-K4-PiO" secondAttribute="centerX" id="Z1J-uo-WAN"/>
                                         </constraints>
                                     </view>
-                                    <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKb-au-v47" userLabel="Pin View">
-                                        <rect key="frame" x="0.0" y="248" width="375" height="1252"/>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKb-au-v47" userLabel="Pin View">
+                                        <rect key="frame" x="0.0" y="214" width="375" height="1252"/>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1252" id="TAd-JS-ujJ"/>
@@ -443,7 +440,6 @@
                         <outlet property="pinButton" destination="oHA-iL-wLh" id="7IM-gK-Vnj"/>
                         <outlet property="pinView" destination="HKb-au-v47" id="dPg-RG-D2v"/>
                         <outlet property="pinViewHeight" destination="TAd-JS-ujJ" id="8OT-qG-Ep2"/>
-                        <outlet property="placeDescription" destination="Pw4-LL-pbd" id="F6g-De-RGi"/>
                         <outlet property="placeImage" destination="Mu9-FD-GgI" id="imM-1d-QRa"/>
                         <outlet property="placeName" destination="IYQ-Pb-WzX" id="GKv-U4-ueU"/>
                         <outlet property="ratingButtonLabel" destination="X8F-9T-yFz" id="OaE-Ez-wzx"/>
