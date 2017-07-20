@@ -93,7 +93,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         popUpScreen.parentVC = self
         self.popUpView.addSubview(popUpScreen)
         
-        self.mapViewSettings.isHidden = true
+//        self.mapViewSettings.isHidden = true
         self.mapViewSettings.layer.cornerRadius = 10.0
         
 //        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
