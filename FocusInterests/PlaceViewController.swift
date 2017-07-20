@@ -373,6 +373,9 @@ class PlaceViewController: UIViewController {
     
     @IBAction func pinHerePressed(_ sender: Any) {
         self.pinButton.isSelected = !self.pinButton.isSelected
+        if self.pinButton.isSelected{
+            
+        }
     }
     
     @IBAction func reviewButon(_ sender: Any) {

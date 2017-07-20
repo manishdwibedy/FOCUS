@@ -303,6 +303,7 @@
                                                                                     <constraint firstAttribute="width" constant="159" id="i8w-ni-5yq"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                 <state key="normal" title="Pin Here">
                                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 </state>

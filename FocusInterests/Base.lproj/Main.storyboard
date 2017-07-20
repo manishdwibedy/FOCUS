@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -62,12 +63,19 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AX8-vj-cUX" userLabel="Map View Setting Container View">
-                                <rect key="frame" x="16" y="78" width="343" height="451"/>
+                                <rect key="frame" x="16" y="78" width="343" height="464"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <segue destination="ODR-ok-zdv" kind="embed" id="TGU-UG-bHC"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VpH-45-PKf">
+                                <rect key="frame" x="9" y="550" width="30" height="30"/>
+                                <state key="normal" image="setting"/>
+                                <connections>
+                                    <action selector="mapSettingsPressed:" destination="VEY-4A-vsU" eventType="touchUpInside" id="4mT-qG-84t"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -76,6 +84,7 @@
                             <constraint firstAttribute="trailing" secondItem="05W-Qw-2Y5" secondAttribute="trailing" id="DHn-cC-Nm9"/>
                             <constraint firstItem="to3-UK-Oze" firstAttribute="centerX" secondItem="wPw-hG-pw7" secondAttribute="centerX" id="EN5-nb-BSt"/>
                             <constraint firstAttribute="trailing" secondItem="bIq-Pr-ji4" secondAttribute="trailing" id="H69-6o-iu0"/>
+                            <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="VpH-45-PKf" secondAttribute="bottom" constant="38" id="LM0-Ym-nZL"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="to3-UK-Oze" secondAttribute="bottom" constant="-20" id="MIK-K5-avi"/>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="Pe2-YI-lSy"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="05W-Qw-2Y5" secondAttribute="bottom" id="dIH-f6-lgF"/>
@@ -83,6 +92,7 @@
                             <constraint firstItem="9GY-g7-gUF" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="p0d-Ju-lSt"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="x8H-nN-16x"/>
                             <constraint firstAttribute="trailing" secondItem="9GY-g7-gUF" secondAttribute="trailing" id="zce-Yf-2vl"/>
+                            <constraint firstItem="VpH-45-PKf" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leadingMargin" constant="-7" id="zzH-ca-7XL"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Globe icon white" selectedImage="Globe icon white" id="lxL-bi-G7t"/>
@@ -103,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FtO-Ym-EPy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1622" y="1009"/>
+            <point key="canvasLocation" x="1621.5999999999999" y="1008.8455772113944"/>
         </scene>
         <!--search_people-->
         <scene sceneID="x3J-zP-2Fw">
@@ -183,7 +193,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ODR-ok-zdv" customClass="MapViewSettingPageViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mY4-zh-1jM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2770" y="856"/>
+            <point key="canvasLocation" x="3521" y="705"/>
         </scene>
         <!--Map Settings Two View Controller-->
         <scene sceneID="fFl-nb-kdM">
@@ -502,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wWP-sO-Y5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4061" y="878"/>
+            <point key="canvasLocation" x="3520" y="705"/>
         </scene>
         <!--Map Settings One View Controller-->
         <scene sceneID="keO-mr-uLx">
@@ -656,5 +666,6 @@
         <image name="intro_greenpin" width="100" height="100"/>
         <image name="intro_pin" width="299" height="360"/>
         <image name="intro_place" width="100" height="100"/>
+        <image name="setting" width="30" height="30"/>
     </resources>
 </document>
