@@ -61,12 +61,6 @@ class PlaceViewController: UIViewController {
 //        ratingBackground.layer.cornerRadius = 5
         self.loadPlace(place: self.place!)
         
-        self.yelpButton.backgroundColor = .clear
-        self.yelpButton.layer.masksToBounds = true
-        self.yelpButton.layer.cornerRadius = 5
-        self.yelpButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
-        self.yelpButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        
         self.mapButton.setImage(UIImage(named: "Globe_White"), for: .normal)
 //        self.mapButton.setImage(UIImage(image: UIImage(named: "web"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
         
@@ -386,10 +380,6 @@ class PlaceViewController: UIViewController {
             
             self.suggestPlacesDelegate?.gotSuggestedPlaces(places: suggestedPlaces)
         }
-    }
-    
-    @IBAction func openWebSite(_ sender: Any) {
-        UIApplication.shared.openURL(NSURL(string: (place?.url)!)! as URL)
     }
     
     @IBAction func pinHerePressed(_ sender: Any) {
