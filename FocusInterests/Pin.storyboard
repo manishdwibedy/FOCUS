@@ -264,9 +264,8 @@
                             <constraint firstAttribute="trailingMargin" secondItem="9Io-4R-FUq" secondAttribute="trailing" constant="-20" id="zE2-r3-gAx"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="map_pin" id="Zae-ix-DKq">
+                    <tabBarItem key="tabBarItem" title="" image="Pin white" selectedImage="Pin green" id="Zae-ix-DKq">
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="40"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -526,11 +525,12 @@ line 2</string>
         <image name="Green.png" width="82" height="82"/>
         <image name="Like" width="30" height="30"/>
         <image name="LockGray" width="480" height="480"/>
+        <image name="Pin green" width="54" height="54"/>
+        <image name="Pin white" width="54" height="54"/>
         <image name="SendIcon" width="38" height="32"/>
         <image name="TwitterGray" width="480" height="480"/>
         <image name="UserPhoto" width="102" height="102"/>
         <image name="facebookGray" width="480" height="480"/>
-        <image name="map_pin" width="40" height="40"/>
         <image name="placeholder_pin" width="50" height="50"/>
     </resources>
 </document>

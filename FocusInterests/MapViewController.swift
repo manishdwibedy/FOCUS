@@ -895,8 +895,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            navigationView.messagesButton.setImage(UIImage(named: "Messages"), for: .normal)
 //            navigationView.searchButton.setImage(UIImage(named: "Search"), for: .normal)
 //            navigationView.notificationsButton.setImage(UIImage(named: "Notifications"), for: .normal)
-
-            navigationView.view.backgroundColor = Constants.color.navy
             
 //            self.tabBarController!.tabBar.backgroundColor = UIColor(hexString: "435366")
 

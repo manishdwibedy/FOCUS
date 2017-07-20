@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--EVENTS-->
+        <!--Search Events View Controller-->
         <scene sceneID="7vf-IH-Tml">
             <objects>
                 <viewController id="xPx-tM-EtF" customClass="SearchEventsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -139,7 +139,7 @@
                             <constraint firstItem="qym-sJ-mVv" firstAttribute="top" secondItem="dxR-DK-a5n" secondAttribute="bottom" constant="-129" id="wlb-er-8J2"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="EVENTS" id="yhf-yt-eZ8">
+                    <tabBarItem key="tabBarItem" title="" image="Feed white" selectedImage="Feed green" id="yhf-yt-eZ8">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -156,4 +156,8 @@
             <point key="canvasLocation" x="-143.19999999999999" y="88.605697151424295"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Feed green" width="23" height="29"/>
+        <image name="Feed white" width="23" height="29"/>
+    </resources>
 </document>

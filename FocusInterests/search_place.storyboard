@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--PLACES-->
+        <!--Search Places View Controller-->
         <scene sceneID="MiT-pm-cHb">
             <objects>
                 <viewController id="9LA-Yp-djj" customClass="SearchPlacesViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -100,9 +100,7 @@
                             <constraint firstItem="T1q-Ba-90U" firstAttribute="leading" secondItem="e5N-ur-DBG" secondAttribute="leading" id="xiH-UI-YcC"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PLACES" id="tr5-NQ-jBJ">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" enabled="NO" title="" selectedImage="Explore green" id="tr5-NQ-jBJ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="currentLocationSearchBar" destination="kZV-Gb-9mm" id="MfL-Sd-eJj"/>
@@ -180,4 +178,7 @@
             <point key="canvasLocation" x="589.60000000000002" y="88.605697151424295"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Explore green" width="31" height="31"/>
+    </resources>
 </document>

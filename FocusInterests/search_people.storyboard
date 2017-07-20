@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--PEOPLE-->
+        <!--Search People View Controller-->
         <scene sceneID="9tT-Es-qiz">
             <objects>
                 <viewController id="sfs-g5-Ui8" customClass="SearchPeopleViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,9 +84,7 @@
                             <constraint firstAttribute="trailing" secondItem="O91-5f-lIg" secondAttribute="trailing" id="h42-Bk-NsB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PEOPLE" id="ft2-LS-Dgf">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="" image="People icon white" selectedImage="People icon green" id="ft2-LS-Dgf"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="invitePopupBottomConstraint" destination="cut-Oq-Kp5" id="nUv-Jo-LSc"/>
@@ -100,7 +98,7 @@
             </objects>
             <point key="canvasLocation" x="-143.19999999999999" y="88.605697151424295"/>
         </scene>
-        <!--EXPLORE-->
+        <!--Invite People View Controller-->
         <scene sceneID="9mv-Gu-rXL">
             <objects>
                 <viewController storyboardIdentifier="invitePeople" id="9ey-Xo-CX9" customClass="InvitePeopleViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
@@ -230,9 +228,7 @@
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="vv3-PZ-isc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="EXPLORE" id="NJ5-hj-IRg">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="" image="Explore white" selectedImage="Explore green" id="NJ5-hj-IRg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="createEventButton" destination="JaG-Qc-0IL" id="eFf-HU-LgD"/>
@@ -250,5 +246,9 @@
     </scenes>
     <resources>
         <image name="BackArrow" width="30" height="30"/>
+        <image name="Explore green" width="31" height="31"/>
+        <image name="Explore white" width="31" height="31"/>
+        <image name="People icon green" width="50" height="50"/>
+        <image name="People icon white" width="50" height="50"/>
     </resources>
 </document>
