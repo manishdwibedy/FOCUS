@@ -84,7 +84,7 @@
                             <constraint firstAttribute="trailing" secondItem="O91-5f-lIg" secondAttribute="trailing" id="h42-Bk-NsB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="People icon white" selectedImage="People icon green" id="ft2-LS-Dgf"/>
+                    <tabBarItem key="tabBarItem" title="" image="People icon white" selectedImage="People icon white" id="ft2-LS-Dgf"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="invitePopupBottomConstraint" destination="cut-Oq-Kp5" id="nUv-Jo-LSc"/>
@@ -248,7 +248,6 @@
         <image name="BackArrow" width="30" height="30"/>
         <image name="Explore green" width="31" height="31"/>
         <image name="Explore white" width="31" height="31"/>
-        <image name="People icon green" width="50" height="50"/>
-        <image name="People icon white" width="50" height="50"/>
+        <image name="People icon white" width="30" height="30"/>
     </resources>
 </document>

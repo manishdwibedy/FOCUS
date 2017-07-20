@@ -39,6 +39,7 @@ class PlaceViewController: UIViewController {
     @IBOutlet weak var ratingBackground: UIView!
     @IBOutlet weak var navBar: UINavigationBar!
     
+    @IBOutlet weak var ratingsImage: UIImageView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var reviewsAmountLabel: UIButton!

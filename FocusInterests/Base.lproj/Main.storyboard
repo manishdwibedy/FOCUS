@@ -85,7 +85,7 @@
                             <constraint firstAttribute="trailing" secondItem="9GY-g7-gUF" secondAttribute="trailing" id="zce-Yf-2vl"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Globe icon white" selectedImage="Globe icon green" id="lxL-bi-G7t"/>
+                    <tabBarItem key="tabBarItem" title="" image="Globe icon white" selectedImage="Globe icon white" id="lxL-bi-G7t"/>
                     <navigationItem key="navigationItem" id="pq0-gQ-8Y0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1bK-wR-02e"/>
                     </navigationItem>
@@ -109,7 +109,7 @@
         <scene sceneID="x3J-zP-2Fw">
             <objects>
                 <viewControllerPlaceholder storyboardName="search_people" id="4DZ-sJ-6ta" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="People icon white" selectedImage="People icon green" id="LKS-Lz-ohj"/>
+                    <tabBarItem key="tabBarItem" title="" image="People icon white" selectedImage="People icon white" id="LKS-Lz-ohj"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ei1-33-FMq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -648,10 +648,8 @@
         <image name="Explore white" width="31" height="31"/>
         <image name="Feed green" width="23" height="29"/>
         <image name="Feed white" width="23" height="29"/>
-        <image name="Globe icon green" width="50" height="50"/>
-        <image name="Globe icon white" width="50" height="50"/>
-        <image name="People icon green" width="50" height="50"/>
-        <image name="People icon white" width="50" height="50"/>
+        <image name="Globe icon white" width="30" height="30"/>
+        <image name="People icon white" width="30" height="30"/>
         <image name="Pin green" width="54" height="54"/>
         <image name="Pin white" width="54" height="54"/>
         <image name="intro_event" width="100" height="100"/>

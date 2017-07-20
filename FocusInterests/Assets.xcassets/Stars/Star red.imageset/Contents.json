@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Globe icon white.png",
+      "filename" : "Star red x1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Globe icon white@2x.png",
+      "filename" : "Star red x2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Globe icon white@3x.png",
+      "filename" : "Star red x3.png",
       "scale" : "3x"
     }
   ],
