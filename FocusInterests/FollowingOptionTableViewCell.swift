@@ -15,7 +15,6 @@ class FollowingOptionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.checkMarkButton.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,5 +25,8 @@ class FollowingOptionTableViewCell: UITableViewCell {
     
     @IBAction func followingIsSelected(_ sender: Any) {
         self.checkMarkButton.isHidden = !self.checkMarkButton.isHidden
+        self.followingButton.isSelected = !self.followingButton.isSelected
+        self.checkMarkButton.isSelected = !self.checkMarkButton.isSelected
+        self.isSelected = !self.isSelected
     }
 }

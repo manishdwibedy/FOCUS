@@ -15,6 +15,7 @@ import GooglePlaces
 
 class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate{
 
+    @IBOutlet weak var createEventButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedOut: UISegmentedControl!
@@ -40,12 +41,14 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        MARK: Location Manager
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 500
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
 
+//        MARK: Table View
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -59,18 +62,18 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
 
         searchBar.delegate = self
         
-//        MARK: Event and Location Search Bars
-        self.searchBar.delegate = self
+//        MARK: Event and Location Bars
+        self.currentLocation.attributedPlaceholder = NSAttributedString(string: "Current Location", attributes: [NSForegroundColorAttributeName: UIColor.white])
+        print(self.currentLocation.subviews)
         
+        self.searchBar.delegate = self
         // search bar attributes
         let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!]
         let cancelButtonsInSearchBar: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!]
         
         
-        self.currentLocation.attributedPlaceholder = NSAttributedString(string: "Current Location", attributes: [NSForegroundColorAttributeName: UIColor.white])
         
-        
-        //        MARK: Event Search Bar
+//        MARK: Event Search Bar
         self.searchBar.isTranslucent = true
         self.searchBar.backgroundImage = UIImage()
         self.searchBar.tintColor = UIColor.white
@@ -81,7 +84,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         self.searchBar.layer.borderWidth = 0
         self.searchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
         
-        self.searchBar.setValue("Go", forKey:"_cancelButtonText")
+        self.searchBar.setValue("Cancel", forKey:"_cancelButtonText")
         
         if let textFieldInsideSearchBar = self.searchBar.value(forKey: "_searchField") as? UITextField{
             let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
@@ -100,39 +103,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             clearButton.tintColor = UIColor.white
         }
         
-        
         UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonsInSearchBar, for: .normal)
         
-        //        search bar attributes
-//        let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
-//        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Search", attributes: placeholderAttributes)
-//        
-//        //        search bar placeholder
-//        let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
-//        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
-//        textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
-//        textFieldInsideSearchBar?.textColor = UIColor.white
-//        
-//        //        search bar glass icon
-//        let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
-//        glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-//        glassIconView.tintColor = UIColor.white
-//        
-//        //        search bar clear button
-//        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
-//        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
-//        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
-//        clearButton.tintColor = UIColor.white
-//        
-//        UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
-        
+//        MARK: Segmented Control
         self.segmentedOut.layer.cornerRadius = 5
         self.segmentedOut.layer.borderColor = UIColor.white.cgColor
         self.segmentedOut.layer.borderWidth = 1.0
         self.segmentedOut.layer.masksToBounds = true
-        
-        self.currentLocation.tintColor = Constants.color.darkBlue
-        self.currentLocation.backgroundColor = Constants.color.darkBlue
         
         let sortedViews = segmentedOut.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
         sortedViews[0].tintColor = Constants.color.green
@@ -141,6 +118,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         sortedViews[1].tintColor = UIColor.white
         sortedViews[1].backgroundColor = UIColor.gray
         
+//        MARK: Nav Bar
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
@@ -148,11 +126,15 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         navBar.titleTextAttributes = attrs
         navBar.barTintColor = Constants.color.navy
-        self.view.backgroundColor = Constants.color.navy
         
         if isMeetup{
             navBar.topItem?.title = "Meet up"
         }
+        
+        self.createEventButton.isHidden = true
+        
+//        MARK: Main View
+        self.view.backgroundColor = Constants.color.navy
         
         currentLocation.delegate = self
         hideKeyboardWhenTappedAround()
@@ -181,12 +163,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         searchBar.text = nil
 //        places.removeAll()
 //        events.removeAll()
-        if segmentedOut.selectedSegmentIndex == 0
-        {
+        if segmentedOut.selectedSegmentIndex == 0{
             updatePlaces()
-        }else if segmentedOut.selectedSegmentIndex == 1
-        {
+            self.createEventButton.isHidden = true
+        }else if segmentedOut.selectedSegmentIndex == 1{
             updateEvents()
+            self.createEventButton.isHidden = false
         }
         
     }
@@ -534,6 +516,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
         }
     }
+    
+    @IBAction func createEventButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
+        self.present(controller, animated: true, completion: nil)
+    }
+    
 }
 
 extension InvitePeopleViewController: UITextFieldDelegate{

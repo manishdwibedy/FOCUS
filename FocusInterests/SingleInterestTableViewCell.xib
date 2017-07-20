@@ -21,26 +21,36 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmI-Ls-gIP">
                         <rect key="frame" x="0.0" y="0.0" width="44" height="52"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="1pf-CD-Oap"/>
                             <constraint firstAttribute="height" constant="52" id="bnT-vm-3hX"/>
                         </constraints>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="selectInterest:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5AO-pu-bPv"/>
                         </connections>
                     </button>
                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLy-5K-m1x">
                         <rect key="frame" x="289" y="3" width="34" height="47"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="47" id="8f9-g3-yDG"/>
                             <constraint firstAttribute="width" constant="34" id="TNU-Ob-0Hf"/>
                         </constraints>
                         <state key="normal" image="Green_check_in_map_settings"/>
+                        <connections>
+                            <action selector="selectInterest:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aFt-Tv-b4y"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJp-KP-r5g">
-                        <rect key="frame" x="45" y="0.0" width="275" height="52"/>
+                        <rect key="frame" x="45" y="0.0" width="79" height="52"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
-                        <state key="normal" title="Interest Label"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <state key="normal" title="Interest Label">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
                         <connections>
                             <action selector="selectInterest:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iGh-cW-AwQ"/>
                         </connections>
@@ -50,7 +60,6 @@
                     <constraint firstItem="VJp-KP-r5g" firstAttribute="leading" secondItem="pmI-Ls-gIP" secondAttribute="trailing" constant="1" id="5fh-rw-NxE"/>
                     <constraint firstAttribute="trailing" secondItem="xLy-5K-m1x" secondAttribute="trailing" constant="-3" id="6kT-2O-8cV"/>
                     <constraint firstAttribute="bottom" secondItem="xLy-5K-m1x" secondAttribute="bottom" constant="1.5" id="9a6-y7-ncK"/>
-                    <constraint firstAttribute="trailing" secondItem="VJp-KP-r5g" secondAttribute="trailing" id="AeS-mk-wVR"/>
                     <constraint firstItem="xLy-5K-m1x" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="ZTU-kW-tyO"/>
                     <constraint firstItem="pmI-Ls-gIP" firstAttribute="centerY" secondItem="VJp-KP-r5g" secondAttribute="centerY" id="dsa-yt-Y8T"/>
                     <constraint firstItem="VJp-KP-r5g" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="oMI-Zx-b8y"/>
@@ -59,6 +68,7 @@
                     <constraint firstItem="VJp-KP-r5g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wPo-F3-Tpf"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.85480856900000002" green="0.85495573280000003" blue="0.85479927060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="checkMarkButton" destination="xLy-5K-m1x" id="bZW-H0-muI"/>
                 <outlet property="interestButtonImage" destination="pmI-Ls-gIP" id="okv-yN-QmQ"/>

@@ -429,8 +429,4 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         return rowHeight!
     }
     
-    @IBAction func backButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
 }

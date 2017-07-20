@@ -12,6 +12,7 @@ class SelectAllInterestsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var checkMarkButton: UIButton!
     @IBOutlet weak var showAllButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,6 +26,8 @@ class SelectAllInterestsTableViewCell: UITableViewCell {
     }
     @IBAction func selectAllClicked(_ sender: Any) {
         self.checkMarkButton.isHidden = !self.checkMarkButton.isHidden
+        self.checkMarkButton.isSelected = !self.checkMarkButton.isSelected
+        self.showAllButton.isSelected = !self.showAllButton.isSelected
     }
     
 }

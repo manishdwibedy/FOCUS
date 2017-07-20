@@ -13,6 +13,7 @@ class SingleInterestTableViewCell: UITableViewCell {
     @IBOutlet weak var checkMarkButton: UIButton!
     @IBOutlet weak var interestButtonImage: UIButton!
     @IBOutlet weak var interestLabel: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,8 +28,11 @@ class SingleInterestTableViewCell: UITableViewCell {
     
     @IBAction func selectInterest(_ sender: Any) {
         print("select interest")
-        
         self.checkMarkButton.isHidden = !self.checkMarkButton.isHidden
+        self.checkMarkButton.isSelected = !self.checkMarkButton.isSelected
+        self.interestLabel.isSelected = !self.interestLabel.isSelected
+        self.interestButtonImage.isSelected = !self.interestButtonImage.isSelected
+        self.isSelected = !self.isSelected
     }
     
 }
