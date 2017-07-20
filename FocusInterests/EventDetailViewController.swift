@@ -349,35 +349,54 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             sender.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
             sender.tintColor = UIColor.clear
         }else if sender.isSelected == true{
-            ref.child("events").child((event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil
-                {
-                    for (key,_) in value!
+            
+            let alertController = UIAlertController(title: "Unattend \(event!.title!)?", message: nil, preferredStyle: .actionSheet)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "Unattend", style: .destructive) { action in
+                
+                Constants.DB.event.child((self.event?.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    if value != nil
                     {
-                        self.ref.child("events").child((self.event?.id)!).child("attendingList").child(key as! String).removeValue()
-                        self.guestList.removeValue(forKey: key as! String)
-
+                        for (key,_) in value!
+                        {
+                            self.ref.child("events").child((self.event?.id)!).child("attendingList").child(key as! String).removeValue()
+                            self.guestList.removeValue(forKey: key as! String)
+                            
+                        }
+                        
+                        let newAmount = self.attendingAmount - 1
+                        self.attendingAmount = newAmount
+                        let fullRef = self.ref.child("events").child((self.event?.id)!)
+                        fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
+                        
+                        self.isAttending = false
+                        
+                        let guestText = "\(newAmount) attendees"
+                        let attributeText = NSAttributedString(string: guestText, attributes: [NSForegroundColorAttributeName : UIColor.white])
+                        self.guestButtonOut.setAttributedTitle(attributeText, for: UIControlState.normal)
+                        
+                        sender.isSelected = false
+                        sender.layer.borderWidth = 0.0
+                        sender.backgroundColor = Constants.color.green
+                        sender.tintColor = UIColor.clear
                     }
                     
-                    let newAmount = self.attendingAmount - 1
-                    self.attendingAmount = newAmount
-                    let fullRef = self.ref.child("events").child((self.event?.id)!)
-                    fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
-                    
-                    self.isAttending = false
-                    
-                    let guestText = "\(newAmount) attendees"
-                    let attributeText = NSAttributedString(string: guestText, attributes: [NSForegroundColorAttributeName : UIColor.white])
-                    self.guestButtonOut.setAttributedTitle(attributeText, for: UIControlState.normal)
-            
-                    sender.isSelected = false
-                    sender.layer.borderWidth = 0.0
-                    sender.backgroundColor = Constants.color.green
-                    sender.tintColor = UIColor.clear
-                }
+                })
                 
-            })
+                Answers.logCustomEvent(withName: "Attend Event",
+                                       customAttributes: [
+                                        "user": AuthApi.getFirebaseUid()!,
+                                        "event": self.event?.title,
+                                        "attend": false
+                    ])
+            }
+            alertController.addAction(OKAction)
+            
+            self.present(alertController, animated: true)
 
             
         }
@@ -753,14 +772,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         let storyboard = UIStoryboard(name: "Pin", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "Home") as! PinScreenViewController
         ivc.pinType = "event"
-        ivc.placeEventID = event?.id
+        ivc.placeEventID = (event?.id)!
         
-        for str in (event?.address)!
-        {
-            ivc.formmatedAddress = ivc.formmatedAddress + ";;" + str
-        }
-        ivc.coordinates.latitude = (event?.latitude)!
-        ivc.coordinates.longitude = (event?.longitude)!
+        ivc.formmatedAddress = (event?.shortAddress)!
+        ivc.coordinates.latitude = Double((event?.latitude)!)!
+        ivc.coordinates.longitude = Double((event?.longitude)!)!
         ivc.locationName = (event?.title)!
         self.present(ivc, animated: true, completion: { _ in })
         
