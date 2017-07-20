@@ -446,6 +446,7 @@
                         <outlet property="placeDescription" destination="Pw4-LL-pbd" id="F6g-De-RGi"/>
                         <outlet property="placeImage" destination="Mu9-FD-GgI" id="imM-1d-QRa"/>
                         <outlet property="placeName" destination="IYQ-Pb-WzX" id="GKv-U4-ueU"/>
+                        <outlet property="ratingButtonLabel" destination="X8F-9T-yFz" id="OaE-Ez-wzx"/>
                         <outlet property="ratingView" destination="bz3-43-V4a" id="dUY-ln-jq5"/>
                         <outlet property="ratingsImage" destination="dB8-nD-fhn" id="mwd-gb-CLd"/>
                         <outlet property="reviewButton" destination="REj-pA-QPW" id="Kn1-Xp-5oF"/>

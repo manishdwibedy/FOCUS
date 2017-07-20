@@ -31,9 +31,10 @@ class PlaceViewController: UIViewController {
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var ratingButtonLabel: UIButton!
     @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var pinView: UIView!
-    @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var ratingBackground: UIView!
@@ -223,6 +224,33 @@ class PlaceViewController: UIViewController {
     func loadPlace(place: Place){
         navigationBar.topItem?.title = place.name
 //        ratingLabel.text = "\(place.rating)"
+        
+        switch place.rating{
+        case 0:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star white")
+            break
+        case 0.1...1:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star light yellow")
+            break
+        case 1.1...2:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star dark yellow")
+            break
+        case 2.1...3:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star light orange")
+            break
+        case 3.1...4:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star dark orange")
+            break
+        case 4.1...5:
+            self.ratingsImage.image = #imageLiteral(resourceName: "Star red")
+            break
+        default:
+            break
+        }
+        
+        let ratingString = String(place.rating)
+        self.ratingButtonLabel.setTitle(ratingString, for: .normal)
+        self.ratingButtonLabel.setTitle(ratingString, for: .selected)
         
 //        imageView.sd_setImage(with: URL(string: (place.image_url)), placeholderImage: nil)
         //self.getLatestComments()
