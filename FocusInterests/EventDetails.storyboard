@@ -57,7 +57,7 @@
                                             </barButtonItem>
                                             <barButtonItem style="plain" id="3fd-w0-32r">
                                                 <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="S6L-G6-ihN">
-                                                    <rect key="frame" x="243" y="7" width="83" height="30"/>
+                                                    <rect key="frame" x="286" y="7" width="40" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <state key="normal">

@@ -26,6 +26,7 @@ class PlaceViewController: UIViewController {
     var currentLocation: CLLocation?
     var map: MapViewController? = nil
     
+    @IBOutlet weak var yelpButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var interestLabel: UILabel!
@@ -60,7 +61,13 @@ class PlaceViewController: UIViewController {
 //        ratingBackground.layer.cornerRadius = 5
         self.loadPlace(place: self.place!)
         
-    self.mapButton.setImage(UIImage(named: "Globe_White"), for: .normal)
+        self.yelpButton.backgroundColor = .clear
+        self.yelpButton.layer.masksToBounds = true
+        self.yelpButton.layer.cornerRadius = 5
+        self.yelpButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
+        self.yelpButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        self.mapButton.setImage(UIImage(named: "Globe_White"), for: .normal)
 //        self.mapButton.setImage(UIImage(image: UIImage(named: "web"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
         
         hideKeyboardWhenTappedAround()
@@ -113,7 +120,7 @@ class PlaceViewController: UIViewController {
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
-        navBar.titleTextAttributes = attrs
+        self.navigationBar.titleTextAttributes = attrs
         
     }
     
@@ -224,8 +231,14 @@ class PlaceViewController: UIViewController {
     
     
     func loadPlace(place: Place){
-        navigationBar.topItem?.title = place.name
-//        ratingLabel.text = "\(place.rating)"
+//        self.title = place.name
+        let titlelabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        titlelabel.text = place.name
+        titlelabel.textColor = UIColor.white
+        titlelabel.font = UIFont(name: "Avenir-Black", size: 18.0)
+        titlelabel.backgroundColor = UIColor.clear
+        titlelabel.adjustsFontSizeToFitWidth = false
+        self.navigationBar.topItem?.titleView = titlelabel
         
         switch place.rating{
         case 0:
@@ -371,6 +384,9 @@ class PlaceViewController: UIViewController {
         }
     }
     
+    @IBAction func openWebSite(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: (place?.url)!)! as URL)
+    }
     
     @IBAction func pinHerePressed(_ sender: Any) {
         self.pinButton.isSelected = !self.pinButton.isSelected

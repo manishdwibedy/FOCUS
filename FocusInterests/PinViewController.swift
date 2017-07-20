@@ -109,9 +109,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         // Round up Yelp!
         
-        self.webButton.backgroundColor = .clear
-        self.webButton.layer.masksToBounds = true
-        self.webButton.layer.cornerRadius = 5
+//        self.webButton.backgroundColor = .clear
+//        self.webButton.layer.masksToBounds = true
+//        self.webButton.layer.cornerRadius = 5
         
         var address = ""
         for str in (place?.address)!
@@ -341,8 +341,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             view.image.image = UIImage(named: "UserPhoto")
         }
         
-        webButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
-        webButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+//        webButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
+//        webButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         uberButton.setImage(UIImage(named: "uber"), for: .normal)
         uberButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit

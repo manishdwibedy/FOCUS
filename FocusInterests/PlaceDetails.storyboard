@@ -33,7 +33,7 @@
                                 <rect key="frame" x="0.0" y="65" width="375" height="1555"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZW8-K4-PiO">
-                                        <rect key="frame" x="0.0" y="2" width="375" height="211"/>
+                                        <rect key="frame" x="0.0" y="-1" width="375" height="211"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jgE-Qk-Tax">
                                                 <rect key="frame" x="16" y="4" width="343" height="203"/>
@@ -277,6 +277,18 @@
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
+                                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5C-af-WQl">
+                                                                                <rect key="frame" x="278" y="-1" width="25" height="25"/>
+                                                                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="25" id="VD5-CF-fHe"/>
+                                                                                    <constraint firstAttribute="height" constant="25" id="nBH-9f-yic"/>
+                                                                                </constraints>
+                                                                                <state key="normal" image="Yelp icon.png"/>
+                                                                                <connections>
+                                                                                    <action selector="openWebSite:" destination="4C0-xu-no6" eventType="touchUpInside" id="Rhb-pc-74o"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                         <constraints>
@@ -285,8 +297,10 @@
                                                                             <constraint firstItem="IYQ-Pb-WzX" firstAttribute="centerY" secondItem="s8R-fx-ezT" secondAttribute="centerY" id="I9S-9x-SUg"/>
                                                                             <constraint firstItem="IYQ-Pb-WzX" firstAttribute="leading" secondItem="s8R-fx-ezT" secondAttribute="leading" id="Iy5-sJ-vBa"/>
                                                                             <constraint firstItem="gYI-6F-8iP" firstAttribute="leading" secondItem="IYQ-Pb-WzX" secondAttribute="trailing" constant="8" id="PHu-TN-wyA"/>
+                                                                            <constraint firstItem="u5C-af-WQl" firstAttribute="centerY" secondItem="hnl-b7-Jub" secondAttribute="centerY" id="QiL-Ps-IrV"/>
                                                                             <constraint firstAttribute="trailing" secondItem="hnl-b7-Jub" secondAttribute="trailing" constant="0.5" id="Ucw-l4-RFn"/>
                                                                             <constraint firstItem="sh3-UX-iBW" firstAttribute="centerY" secondItem="IYQ-Pb-WzX" secondAttribute="centerY" id="nVF-ls-fLl"/>
+                                                                            <constraint firstItem="hnl-b7-Jub" firstAttribute="leading" secondItem="u5C-af-WQl" secondAttribute="trailing" constant="4" id="oZf-H2-fGF"/>
                                                                             <constraint firstItem="sh3-UX-iBW" firstAttribute="leading" secondItem="IYQ-Pb-WzX" secondAttribute="trailing" constant="13" id="vck-Y7-vYh"/>
                                                                             <constraint firstItem="IYQ-Pb-WzX" firstAttribute="centerY" secondItem="gYI-6F-8iP" secondAttribute="centerY" id="wy5-Ag-yom"/>
                                                                             <constraint firstAttribute="height" constant="22.329999923706055" id="yab-cY-jGF"/>
@@ -346,7 +360,7 @@
                                         </constraints>
                                     </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKb-au-v47" userLabel="Pin View">
-                                        <rect key="frame" x="0.0" y="214" width="375" height="1300"/>
+                                        <rect key="frame" x="0.0" y="211" width="375" height="1300"/>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1300" id="TAd-JS-ujJ"/>
@@ -358,8 +372,8 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ZW8-K4-PiO" secondAttribute="trailing" id="3i5-hW-pLp"/>
-                                    <constraint firstItem="ZW8-K4-PiO" firstAttribute="top" secondItem="NzO-EW-EoK" secondAttribute="top" constant="2" id="X37-wM-gTg"/>
-                                    <constraint firstAttribute="bottom" secondItem="HKb-au-v47" secondAttribute="bottom" id="Zou-vv-F1J"/>
+                                    <constraint firstItem="ZW8-K4-PiO" firstAttribute="top" secondItem="NzO-EW-EoK" secondAttribute="top" constant="-1" id="X37-wM-gTg"/>
+                                    <constraint firstAttribute="bottom" secondItem="HKb-au-v47" secondAttribute="bottom" constant="44" id="Zou-vv-F1J"/>
                                     <constraint firstItem="ZW8-K4-PiO" firstAttribute="leading" secondItem="NzO-EW-EoK" secondAttribute="leading" id="guJ-YL-qzA"/>
                                     <constraint firstAttribute="trailing" secondItem="HKb-au-v47" secondAttribute="trailing" id="rza-0R-4ES"/>
                                     <constraint firstItem="HKb-au-v47" firstAttribute="top" secondItem="ZW8-K4-PiO" secondAttribute="bottom" constant="1" id="sGu-WF-DBO"/>
@@ -396,11 +410,11 @@
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </barButtonItem>
                                             <barButtonItem style="plain" id="CIK-ec-0HT">
-                                                <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dPa-kf-gkg">
-                                                    <rect key="frame" x="243" y="7" width="83" height="30"/>
+                                                <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dPa-kf-gkg">
+                                                    <rect key="frame" x="276" y="7" width="40" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                    <state key="normal" title="Button">
+                                                    <state key="normal">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -435,7 +449,6 @@
                         <outlet property="interestLabel" destination="gYI-6F-8iP" id="xZ8-sS-ZeV"/>
                         <outlet property="inviteButton" destination="xNk-0o-cCa" id="ikp-9j-89O"/>
                         <outlet property="mapButton" destination="aU2-ld-zGm" id="xeU-ll-XgB"/>
-                        <outlet property="navBar" destination="ns3-qv-thK" id="bfp-JT-mEk"/>
                         <outlet property="navigationBar" destination="ns3-qv-thK" id="SVc-bE-Al6"/>
                         <outlet property="pinAmountLabel" destination="iZK-dZ-fCb" id="Yd5-me-Bgg"/>
                         <outlet property="pinButton" destination="oHA-iL-wLh" id="7IM-gK-Vnj"/>
@@ -449,6 +462,7 @@
                         <outlet property="reviewButton" destination="REj-pA-QPW" id="Kn1-Xp-5oF"/>
                         <outlet property="reviewsAmountLabel" destination="7uz-ws-5JI" id="ceh-ND-ZXL"/>
                         <outlet property="topView" destination="ZW8-K4-PiO" id="Oc1-N7-FyN"/>
+                        <outlet property="yelpButton" destination="u5C-af-WQl" id="0Kp-cm-cdw"/>
                         <segue destination="iUz-bQ-APi" kind="unwind" identifier="unwindToMapViewControllerWithSegue" unwindAction="unwindToMapViewControllerWithSegue:" id="0bR-ry-ibK"/>
                     </connections>
                 </viewController>
@@ -540,7 +554,7 @@
                                                 <rect key="frame" x="0.0" y="4" width="375" height="81"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQl-E2-yfq">
-                                                        <rect key="frame" x="68" y="9.5" width="62" height="62"/>
+                                                        <rect key="frame" x="8" y="9" width="62" height="62"/>
                                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="62" id="duB-XI-ZVr"/>
@@ -553,20 +567,8 @@
                                                             <action selector="openGoogleMaps:" destination="otb-Ee-qlq" eventType="touchUpInside" id="HBe-Mm-hxR"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBl-1X-log">
-                                                        <rect key="frame" x="8" y="15" width="54" height="51"/>
-                                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="54" id="OOK-fY-T2b"/>
-                                                            <constraint firstAttribute="height" constant="51" id="XrS-73-Pfo"/>
-                                                        </constraints>
-                                                        <state key="normal" image="Yelp icon.png"/>
-                                                        <connections>
-                                                            <action selector="openWebSite:" destination="otb-Ee-qlq" eventType="touchUpInside" id="it8-7T-plg"/>
-                                                        </connections>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6B-SG-hJC">
-                                                        <rect key="frame" x="136" y="9.5" width="62" height="62"/>
+                                                        <rect key="frame" x="76" y="9" width="62" height="62"/>
                                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="62" id="9zz-Fm-U5h"/>
@@ -580,14 +582,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="E6B-SG-hJC" secondAttribute="trailing" constant="177" id="20S-Nc-lLO"/>
-                                                    <constraint firstItem="eBl-1X-log" firstAttribute="centerY" secondItem="vzw-eb-Hy5" secondAttribute="centerY" id="9c5-z0-ln5"/>
+                                                    <constraint firstItem="iQl-E2-yfq" firstAttribute="leading" secondItem="vzw-eb-Hy5" secondAttribute="leading" constant="8" id="5ln-Q1-p6O"/>
                                                     <constraint firstItem="iQl-E2-yfq" firstAttribute="centerY" secondItem="E6B-SG-hJC" secondAttribute="centerY" id="Emr-SQ-PhH"/>
-                                                    <constraint firstItem="eBl-1X-log" firstAttribute="top" secondItem="vzw-eb-Hy5" secondAttribute="top" constant="15" id="NKu-vu-lah"/>
                                                     <constraint firstItem="E6B-SG-hJC" firstAttribute="leading" secondItem="iQl-E2-yfq" secondAttribute="trailing" constant="6" id="ZPr-k1-0Bh"/>
-                                                    <constraint firstItem="iQl-E2-yfq" firstAttribute="leading" secondItem="eBl-1X-log" secondAttribute="trailing" constant="6" id="htK-sO-VWT"/>
-                                                    <constraint firstItem="eBl-1X-log" firstAttribute="centerY" secondItem="iQl-E2-yfq" secondAttribute="centerY" id="mKI-u4-xY5"/>
-                                                    <constraint firstItem="eBl-1X-log" firstAttribute="leading" secondItem="vzw-eb-Hy5" secondAttribute="leading" constant="8" id="x6K-Tf-Aop"/>
+                                                    <constraint firstItem="iQl-E2-yfq" firstAttribute="top" secondItem="vzw-eb-Hy5" secondAttribute="top" constant="9" id="dvj-MI-dpY"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8l-6K-QW5" userLabel="Reviews View">
@@ -706,6 +704,7 @@
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="k8l-6K-QW5" firstAttribute="top" secondItem="EYI-mS-d6G" secondAttribute="top" constant="94" id="5L7-TM-U2C"/>
+                                            <constraint firstAttribute="trailing" secondItem="vzw-eb-Hy5" secondAttribute="trailing" id="7mf-YH-Wl5"/>
                                             <constraint firstAttribute="height" constant="214" id="FiI-Qg-Prd"/>
                                             <constraint firstItem="vzw-eb-Hy5" firstAttribute="top" secondItem="EYI-mS-d6G" secondAttribute="top" constant="4" id="HIr-ic-Kmb"/>
                                             <constraint firstItem="k8l-6K-QW5" firstAttribute="centerX" secondItem="EYI-mS-d6G" secondAttribute="centerX" id="S6G-Ue-S2S"/>
@@ -1039,7 +1038,6 @@
                         <outlet property="topViewHeight" destination="FiI-Qg-Prd" id="wJZ-VF-oWm"/>
                         <outlet property="uberButton" destination="E6B-SG-hJC" id="keQ-1g-xpC"/>
                         <outlet property="viewHeight" destination="INr-VV-8fi" id="lPh-7c-j6J"/>
-                        <outlet property="webButton" destination="eBl-1X-log" id="FWX-cv-MPt"/>
                         <outlet property="writeReviewView" destination="Oey-r3-XUH" id="9k3-48-e1l"/>
                         <segue destination="N5i-na-9m9" kind="show" identifier="show_suggestions" id="Uz0-o4-hiH"/>
                     </connections>
