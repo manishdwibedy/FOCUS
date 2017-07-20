@@ -257,6 +257,10 @@ class PlaceViewController: UIViewController {
             break
         }
         
+        if let url = URL(string: place.image_url){
+            placeImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_place"))
+        }
+        
         let ratingString = String(place.rating)
         self.ratingButtonLabel.setTitle(ratingString, for: .normal)
         self.ratingButtonLabel.setTitle(ratingString, for: .selected)

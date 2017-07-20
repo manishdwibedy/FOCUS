@@ -914,7 +914,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         else{
             do {
                 // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
+                if let styleURL = Bundle.main.url(forResource: "night_style", withExtension: "json") {
                     mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
                 } else {
                     NSLog("Unable to find style.json")

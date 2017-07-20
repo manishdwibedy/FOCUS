@@ -217,8 +217,20 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
         
             //cell.checkForFollow(id: place.id)
-            let placeHolderImage = UIImage(named: "empty_event")
-            cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
+            if let url = URL(string: place.image_url){
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        cell.placeImage.image = crop(image: image!, width: 50, height: 50)
+                    }
+                })
+                
+            }
+            
             cell.UID = UID
             cell.username = username
             cell.parentVC = self
