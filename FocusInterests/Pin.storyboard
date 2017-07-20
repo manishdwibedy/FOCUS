@@ -102,20 +102,20 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y9L-9E-i9r">
                                 <rect key="frame" x="189" y="328" width="170" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUx-Gb-fVd">
+                                    <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wN-XP-zBN">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="CFC-EU-udy"/>
-                                            <constraint firstAttribute="width" constant="50" id="Hxc-a3-eQQ"/>
+                                            <constraint firstAttribute="width" constant="50" id="arf-j3-O3T"/>
+                                            <constraint firstAttribute="height" constant="50" id="bqS-tL-csh"/>
                                         </constraints>
-                                        <state key="normal" image="LockGray">
+                                        <state key="normal" image="TwitterGray">
                                             <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="publicButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="UKy-7O-F4s"/>
+                                            <action selector="twitterButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="RP3-sm-664"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRf-Hh-68S">
+                                    <button opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRf-Hh-68S">
                                         <rect key="frame" x="60" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="dNF-1i-Joo"/>
@@ -128,17 +128,17 @@
                                             <action selector="facebookButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="Bas-9D-GnD"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wN-XP-zBN">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUx-Gb-fVd">
                                         <rect key="frame" x="120" y="0.0" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="arf-j3-O3T"/>
-                                            <constraint firstAttribute="height" constant="50" id="bqS-tL-csh"/>
+                                            <constraint firstAttribute="height" constant="50" id="CFC-EU-udy"/>
+                                            <constraint firstAttribute="width" constant="50" id="Hxc-a3-eQQ"/>
                                         </constraints>
-                                        <state key="normal" image="TwitterGray">
+                                        <state key="normal" image="LockGray">
                                             <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="twitterButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="RP3-sm-664"/>
+                                            <action selector="publicButton:" destination="r5X-Z6-if9" eventType="touchUpInside" id="UKy-7O-F4s"/>
                                         </connections>
                                     </button>
                                 </subviews>

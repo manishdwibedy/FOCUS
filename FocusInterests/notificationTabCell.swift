@@ -167,10 +167,10 @@ class notificationTabCell: UITableViewCell {
             whatStr = "\(notif.item!.itemName!)"
         } else if data["type"] as! String == "pin"{
             if data["actionType"] as! String == "like"{
-                whatStr = "on your Pin"
+                whatStr = "your Pin"
             }
             else{
-                whatStr = "on your Pin: \"\(notif.item!.itemName!)\""
+                whatStr = "on your Pin: \"\(notif.item!.itemName!.trimmingCharacters(in: .whitespacesAndNewlines))\""
             }
             
         }
