@@ -71,7 +71,7 @@
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VpH-45-PKf">
                                 <rect key="frame" x="9" y="550" width="30" height="30"/>
-                                <state key="normal" image="setting"/>
+                                <state key="normal" image="White_Gear"/>
                                 <connections>
                                     <action selector="mapSettingsPressed:" destination="VEY-4A-vsU" eventType="touchUpInside" id="4mT-qG-84t"/>
                                 </connections>
@@ -662,10 +662,10 @@
         <image name="People icon white" width="30" height="30"/>
         <image name="Pin green" width="54" height="54"/>
         <image name="Pin white" width="54" height="54"/>
+        <image name="White_Gear" width="30" height="30"/>
         <image name="intro_event" width="100" height="100"/>
         <image name="intro_greenpin" width="100" height="100"/>
         <image name="intro_pin" width="299" height="360"/>
         <image name="intro_place" width="100" height="100"/>
-        <image name="setting" width="30" height="30"/>
     </resources>
 </document>
