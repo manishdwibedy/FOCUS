@@ -113,7 +113,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         
         self.inviteButton.roundCorners(radius: 5.0)
+        
         self.pinHereButton.roundCorners(radius: 5.0)
+        self.pinHereButton.setTitle("Pin Here", for: .normal)
+        self.pinHereButton.setTitleColor(UIColor.white, for: .normal)
+        self.pinHereButton.setTitle("I\'m Here!", for: .selected)
+        self.pinHereButton.setTitleColor(Constants.color.navy, for: .selected)
         
         self.eventName.text = "CBS Sports"
         self.eventDescription.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
@@ -686,6 +691,14 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
     }
     
+    @IBAction func pinButtonPressed(_ sender: Any) {
+        self.pinHereButton.isSelected = !self.pinHereButton.isSelected
+        if self.pinHereButton.isSelected{
+            self.pinHereButton.backgroundColor = UIColor.white
+        }else{
+            self.pinHereButton.backgroundColor = Constants.color.green
+        }
+    }
     
     func checkIfAttending(){
         if self.attendButton.isSelected == true{

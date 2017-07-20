@@ -26,7 +26,6 @@ class PlaceViewController: UIViewController {
     var currentLocation: CLLocation?
     var map: MapViewController? = nil
     
-    
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var interestLabel: UILabel!
