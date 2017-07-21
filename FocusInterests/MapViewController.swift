@@ -23,6 +23,7 @@ import ChameleonFramework
 import SCLAlertView
 import FirebaseStorage
 import Crashlytics
+import GeoFire
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate, UIPopoverPresentationControllerDelegate{
     
@@ -79,7 +80,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         hideFollowFriendPopup()
         Share.getMatchingUsers(gotUsers: {users in

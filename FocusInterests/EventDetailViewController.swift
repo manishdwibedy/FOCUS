@@ -527,11 +527,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         if(tableView.tag == 0){
             rowCount = commentsCList.count
         }else if(tableView.tag == 1){
-            print("SUGGESTIONS")
-            print(self.suggestions.count)
-            print(self.suggestions.count)
-//            rowCount = self.suggestions.count
-            rowCount = 3
+            rowCount = self.suggestions.count
+//            rowCount = 3
         }
         
         return rowCount
@@ -572,46 +569,45 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             print("setting up event table view cell")
             let eventCell = self.eventsTableView.dequeueReusableCell(withIdentifier: "otherLikesEventCell", for: indexPath) as? OtherLikesTableViewCell
             
-//            let suggestion = self.suggestions[indexPath.row]
-//            
-//            let suggestionLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double(suggestion.longitude!)!)
-//            
-//            eventCell?.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: suggestionLocation,addBracket: false)
-//            
-//            if let category = suggestion.category{
-//                eventCell?.categoryLabel.text = category.components(separatedBy: ",")[0]
-//            }
-//            else{
-//                addGreenDot(label: (eventCell?.categoryLabel)!, content: "N.A.")
-////                eventCell?.categoryLabel.text = "N.A."
-//            }
-//            
-//            let reference = Constants.storage.event.child("\(suggestion.id).jpg")
-//            
-//            let placeholderImage = UIImage(named: "empty_event")
-//            reference.downloadURL(completion: { (url, error) in
-//                
-//                if error != nil {
-//                    print(error?.localizedDescription)
-//                    return
-//                }
-//                
-//                eventCell?.userProfileImage.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: nil)
-//                
-//                
-//            })
-//            
-//
-//            eventCell?.addressLabel.text = suggestion.shortAddress
-//            eventCell?.dateAndTimeLabel.text = suggestion.date
-//            eventCell?.locationLabel.text = suggestion.eventDescription
+            let suggestion = self.suggestions[indexPath.row]
+
+            let suggestionLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double(suggestion.longitude!)!)
+            
+            eventCell?.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: suggestionLocation,addBracket: false)
+            
+            if let category = suggestion.category{
+                addGreenDot(label: (eventCell?.categoryLabel)!, content: category.components(separatedBy: ",")[0])
+            }
+            else{
+                addGreenDot(label: (eventCell?.categoryLabel)!, content: "N.A.")
+            }
+
+            let reference = Constants.storage.event.child("\(suggestion.id!).jpg")
+            
+            let placeholderImage = UIImage(named: "empty_event")
+            reference.downloadURL(completion: { (url, error) in
+                
+                if error != nil {
+                    print(error?.localizedDescription)
+                    return
+                }
+                
+                eventCell?.userProfileImage.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: nil)
+                
+                
+            })
+            
+
+            eventCell?.addressLabel.text = suggestion.shortAddress
+            eventCell?.dateAndTimeLabel.text = suggestion.date
+            eventCell?.locationLabel.text = suggestion.title
             
             
-            eventCell?.addressLabel.text = "1435 Glendale Ave"
-            eventCell?.dateAndTimeLabel.text = "May 5 2015"
-            eventCell?.locationLabel.text = "Glendale"
-            eventCell?.distanceLabel.text = "31 mi"
-            addGreenDot(label: (eventCell?.categoryLabel)!, content: "N.A.")
+//            eventCell?.addressLabel.text = "1435 Glendale Ave"
+//            eventCell?.dateAndTimeLabel.text = "May 5 2015"
+//            eventCell?.locationLabel.text = "Glendale"
+//            eventCell?.distanceLabel.text = "31 mi"
+//            addGreenDot(label: (eventCell?.categoryLabel)!, content: "N.A.")
             
             tableCell = eventCell!
             
@@ -666,16 +662,18 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func getEventSuggestions(){
-        let center = CLLocation(latitude: Double((event?.latitude)!)!, longitude: Double((event?.latitude)!)!)
-        if let circleQuery = self.geoFire?.query(at: center, withRadius: 20.0) {
+        var suggestionCount = 0
+//        let center = CLLocation(latitude: Double((event?.latitude)!)!, longitude: Double((event?.latitude)!)!)
+        if let circleQuery = self.geoFire?.query(at: AuthApi.getLocation()!, withRadius: 20.0) {
             _ = circleQuery.observe(.keyEntered) { (key, location) in
                     print("Key '\(String(describing: key))' entered the search area and is at location '\(location)'")
+                suggestionCount += 1
                 
                 Constants.DB.event.child(key!).observeSingleEvent(of: .value, with: {snapshot in
                     let info = snapshot.value as? [String : Any] ?? [:]
                     
-                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String, privateEvent: (info["private"] as? Bool)!)
-                    
+                    if let event = Event.toEvent(info: info){
+                        event.id = key!
                         if let attending = info["attendingList"] as? [String:Any]{
                             event.setAttendessCount(count: attending.count)
                         }
@@ -684,9 +682,20 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                             self.suggestions.append(event)
                         }
                         
+                        if suggestionCount < 3 && self.suggestions.count == suggestionCount - 1{
+                            self.eventsTableView.reloadData()
+                        }
+                        else if self.suggestions.count == 3{
+                            self.eventsTableView.reloadData()
+                        }
+                    }
+//                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String, privateEvent: (info["private"] as? Bool)!)
+                    
+                    
+                        
 //                    self.eventsTableView.reloadData()
                 })
-                self.eventsTableView.reloadData()
+                
             }
     
             circleQuery.observeReady{
