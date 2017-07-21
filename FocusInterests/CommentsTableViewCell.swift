@@ -40,7 +40,11 @@ class CommentsTableViewCell: UITableViewCell {
                 
                 finalText.setAttributes([NSFontAttributeName : UIFont(name: "Avenir Book", size: 15.0)!], range: NSRange(location:username.characters.count + 2,length:(text.characters.count)))
 
-                //finalText.addAttribute(NSFontAttributeName, value: UIFont(name: "Avenir Black", size: 15.0)!, range:)
+                if let image = value?["image_string"] as? String{
+                    if let url = URL(string: image){
+                        self.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                    }
+                }
                 self.userNameLabel.attributedText = finalText
             }
         })

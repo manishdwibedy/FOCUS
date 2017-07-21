@@ -19,6 +19,10 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var data: NSDictionary!
     var commentData = [[String:Any]]()
+    var eventComments = NSMutableArray()
+    var type = ""
+    let commentDF = DateFormatter()
+    
     
     let toolBar = UIToolbar()
     let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(CommentsViewController.cancelPressed))
@@ -33,32 +37,35 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.postButton.roundCorners(radius: 5.0)
         
-        Constants.DB.pins.child(data["fromUID"] as! String).child("comments").queryOrdered(byChild: "date").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? [String:Any]
-            var info = [String:Any]()
-            if value != nil
-            {
-                for (key,_) in value!
+        if type == "pin"{
+            Constants.DB.pins.child(data["fromUID"] as! String).child("comments").queryOrdered(byChild: "date").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                var info = [String:Any]()
+                if value != nil
                 {
-                    info[key] = value?[key] as! [String:Any]
-                }
-                
-                let myArr = Array(info.keys)
-                let sortedKeys = myArr.sorted(by: {
-                    let val1 = info[$0] as? [String: Any]
-                    let val2 = info[$1] as? [String: Any]
+                    for (key,_) in value!
+                    {
+                        info[key] = value?[key] as! [String:Any]
+                    }
                     
-                    let date1 = val1!["date"] as! Double
-                    let date2 = val2!["date"] as! Double
-                    return date1 < date2
-                })
-                
-                for key in sortedKeys{
-                    self.commentData.append(info[key] as! [String : Any])
+                    let myArr = Array(info.keys)
+                    let sortedKeys = myArr.sorted(by: {
+                        let val1 = info[$0] as? [String: Any]
+                        let val2 = info[$1] as? [String: Any]
+                        
+                        let date1 = val1!["date"] as! Double
+                        let date2 = val2!["date"] as! Double
+                        return date1 < date2
+                    })
+                    
+                    for key in sortedKeys{
+                        self.commentData.append(info[key] as! [String : Any])
+                    }
                 }
-            }
-            self.commentsTableView.reloadData()
-        })
+                self.commentsTableView.reloadData()
+            })
+        }
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         
@@ -82,6 +89,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         navBar.titleTextAttributes = Constants.navBar.attrs
         
+        commentDF.dateFormat = "hh:mm a MM/dd"
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,18 +102,36 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commentData.count
+        if type == "pin"{
+            return commentData.count
+        }
+        else{
+            return eventComments.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let followersCell = tableView.dequeueReusableCell(withIdentifier: "commentsCell", for: indexPath) as! CommentsTableViewCell
+        let commentCell = tableView.dequeueReusableCell(withIdentifier: "commentsCell", for: indexPath) as! CommentsTableViewCell
         
-        let comment = commentData[indexPath.row]
-        let date = DateFormatter()
-        date.dateFormat = "hh:mm a MM/dd"
-        followersCell.dateLabel.text = date.string(for: Date(timeIntervalSince1970: comment["date"] as! Double))
-        followersCell.loadInfo(UID: comment["fromUID"] as! String, text: (commentData[indexPath.row]["comment"] as? String)!)
-        return followersCell
+        if type == "pin"{
+            let comment = commentData[indexPath.row]
+            commentCell.dateLabel.text = commentDF.string(for: Date(timeIntervalSince1970: comment["date"] as! Double))
+            commentCell.loadInfo(UID: comment["fromUID"] as! String, text: (commentData[indexPath.row]["comment"] as? String)!)
+            return commentCell
+        }
+        //else if type == "event"{
+        else{
+            if let comment = eventComments[indexPath.row] as? commentCellData{
+                
+                commentCell.loadInfo(UID: comment.from, text: comment.comment)
+                commentCell.dateLabel.text = commentDF.string(from: comment.date)
+                
+                return commentCell
+            }
+            
+        }
+        return commentCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

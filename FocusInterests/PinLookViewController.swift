@@ -426,6 +426,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         
         let storyboard = UIStoryboard(name: "Comments", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
+        ivc.type = "pin"
         ivc.data = dictData
         self.present(ivc, animated: true, completion: { _ in })
         
@@ -450,6 +451,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     func showComments(sender:UITapGestureRecognizer) {
         let storyboard = UIStoryboard(name: "Comments", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
+        ivc.type = "pin"
         ivc.data = dictData
         self.present(ivc, animated: true, completion: { _ in })
         

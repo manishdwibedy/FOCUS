@@ -69,6 +69,7 @@ class PinTableViewCell: UITableViewCell {
         
         let storyboard = UIStoryboard(name: "Comments", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
+        ivc.type = "place"
         ivc.data = data
         parentVC.present(ivc, animated: true, completion: { _ in })
     }

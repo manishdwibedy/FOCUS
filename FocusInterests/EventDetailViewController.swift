@@ -724,7 +724,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         let storyboard = UIStoryboard(name: "Comments", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
-//        ivc.data = self.commentsCList
+        ivc.type = "event"
+        ivc.eventComments = commentsCList
         self.present(ivc, animated: true, completion: { _ in })
         
     }
