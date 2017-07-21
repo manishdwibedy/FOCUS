@@ -426,4 +426,14 @@ class PlaceViewController: UIViewController {
         reviewVC.place = self.place
         self.present(ivc, animated: true, completion: { _ in })
     }
+    
+    @IBAction func inviteButtonClicked(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+        ivc.type = "place"
+        ivc.id = self.place!.id
+        ivc.place = place
+    }
+    
 }

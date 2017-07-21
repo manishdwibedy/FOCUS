@@ -140,6 +140,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Feed white" selectedImage="Feed green" id="yhf-yt-eZ8">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-15"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

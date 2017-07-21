@@ -18,6 +18,7 @@ class FeedPlaceImageTableViewCell: UITableViewCell {
     @IBOutlet weak var usernameImage: UIImageView!
     @IBOutlet weak var imagePlace: UIImageView!
     @IBOutlet weak var cellContentView: UIView!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

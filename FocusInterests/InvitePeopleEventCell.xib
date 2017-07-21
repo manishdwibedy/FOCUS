@@ -138,6 +138,7 @@
                             <constraint firstItem="0cs-3A-VsX" firstAttribute="top" secondItem="llf-1m-xzv" secondAttribute="bottom" constant="-1" id="Xev-cm-ncW"/>
                             <constraint firstItem="5bC-N9-UFb" firstAttribute="leading" secondItem="llf-1m-xzv" secondAttribute="trailing" constant="3" id="ZIS-mz-gNd"/>
                             <constraint firstItem="9L5-JM-0mw" firstAttribute="top" secondItem="0cs-3A-VsX" secondAttribute="bottom" constant="4" id="bb3-9n-xy1"/>
+                            <constraint firstItem="1ot-ti-4YO" firstAttribute="centerY" secondItem="5bC-N9-UFb" secondAttribute="centerY" id="bkP-OV-49M"/>
                             <constraint firstItem="1ot-ti-4YO" firstAttribute="leading" secondItem="5bC-N9-UFb" secondAttribute="trailing" constant="3" id="cKs-Ge-mTv"/>
                             <constraint firstItem="ETM-uA-npq" firstAttribute="top" secondItem="fIK-Si-Qtq" secondAttribute="topMargin" constant="-4" id="cu3-do-D4N"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tAj-RA-kgB" secondAttribute="trailing" constant="1" id="gMQ-fe-atC"/>
@@ -147,11 +148,7 @@
                             <constraint firstItem="Q8t-dN-nUs" firstAttribute="centerX" secondItem="tAj-RA-kgB" secondAttribute="centerX" id="nqk-Ii-oxD"/>
                             <constraint firstItem="9L5-JM-0mw" firstAttribute="firstBaseline" secondItem="eR9-ia-rz0" secondAttribute="firstBaseline" id="ovt-5K-lSk"/>
                             <constraint firstItem="eR9-ia-rz0" firstAttribute="centerY" secondItem="9L5-JM-0mw" secondAttribute="centerY" id="qH6-Xn-70B"/>
-                            <constraint firstItem="llf-1m-xzv" firstAttribute="top" secondItem="fIK-Si-Qtq" secondAttribute="top" constant="4" id="qh6-Yi-hDI"/>
-                            <constraint firstItem="llf-1m-xzv" firstAttribute="baseline" secondItem="5bC-N9-UFb" secondAttribute="baseline" constant="1" id="tGu-od-BGZ"/>
                             <constraint firstItem="tAj-RA-kgB" firstAttribute="centerY" secondItem="0cs-3A-VsX" secondAttribute="centerY" constant="-0.5" id="tLk-jZ-Bau"/>
-                            <constraint firstItem="llf-1m-xzv" firstAttribute="baseline" secondItem="1ot-ti-4YO" secondAttribute="baseline" constant="1" id="tkZ-AG-hwt"/>
-                            <constraint firstItem="0cs-3A-VsX" firstAttribute="leading" secondItem="llf-1m-xzv" secondAttribute="trailing" constant="-141" id="wbK-zG-vkq"/>
                             <constraint firstItem="eR9-ia-rz0" firstAttribute="top" secondItem="9L5-JM-0mw" secondAttribute="top" id="xaB-wQ-sfT"/>
                             <constraint firstItem="5bC-N9-UFb" firstAttribute="top" secondItem="1ot-ti-4YO" secondAttribute="top" id="zQa-7R-WJy"/>
                         </constraints>

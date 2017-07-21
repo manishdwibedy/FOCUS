@@ -55,13 +55,11 @@ class SearchEventTableViewCell: UITableViewCell {
         super.layoutSubviews()
         
         self.cellContentView.setNeedsLayout()
-        
         self.cellContentView.layoutIfNeeded()
         
         let path = UIBezierPath(roundedRect: self.cellContentView.bounds, cornerRadius: 10)
         
         let mask = CAShapeLayer()
-        let shortbackgroundMask = CAShapeLayer()
         
         mask.path = path.cgPath
         

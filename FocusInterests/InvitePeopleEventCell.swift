@@ -26,10 +26,15 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     @IBOutlet weak var attendButton: UIButton!
     
     @IBOutlet weak var distance: UILabel!
+    
     var event: Event!
     var UID: String!
     var username = ""
+    var invitePeopleVCDelegate: InvitePeopleViewControllerDelegate!
+    var isMeetup = false
     var parentVC: InvitePeopleViewController!
+    var needToGoBackToSearchPeopleViewController: Bool?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -75,7 +80,6 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         let path = UIBezierPath(roundedRect: self.inviteEventCellContentView.bounds, cornerRadius: 10)
         
         let mask = CAShapeLayer()
-        let shortbackgroundMask = CAShapeLayer()
         
         mask.path = path.cgPath
         
@@ -118,6 +122,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         ivc.username = self.username
         ivc.event = event
         ivc.searchPeopleEventDelegate = self
+        ivc.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: nil)
         }
@@ -232,8 +237,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     }
     
     func haveInvitedSomeoneToAnEvent() {
-        self.parentVC.dismiss(animated: true, completion: { inviteEvent in
-            self.parentVC.searchPeopleDelegate?.haveInvitedSomeoneToAPlaceOrAnEvent()
-        })
+        print("in invitePeopleEventCell")
+        self.invitePeopleVCDelegate.showPopupView()
     }
 }

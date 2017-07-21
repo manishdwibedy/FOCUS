@@ -14,6 +14,7 @@ class InterestStackViewLabel: UIView{
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
     
+    @IBOutlet var view: UIView!
     
     override init(frame : CGRect) {
         super.init(frame: frame)
@@ -26,14 +27,15 @@ class InterestStackViewLabel: UIView{
     }
     
     func setupView(){
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        Bundle.main.loadNibNamed("InterestStackViewLabel", owner: self, options: nil)
 
-        addSubview(view)
+        self.addSubview(view)
         
-        self.addButton.setImage(UIImage(named: "plus.png"), for: .normal)
-        self.addButton.setImage(UIImage(named: "GreenCheck.png"), for: .selected)
+//        let interestImage = "\(self.interestLabel.text!) Green"
+//        self.interestLabelImage.image = UIImage(named: interestImage)
+        self.addButton.imageView?.isUserInteractionEnabled = true
+        self.addButton.setImage(#imageLiteral(resourceName: "White_Plus_Sign"), for: .normal)
+        self.addButton.setImage(#imageLiteral(resourceName: "Green_check_sign"), for: .selected)
         
     }
     /*
@@ -43,5 +45,9 @@ class InterestStackViewLabel: UIView{
         // Drawing code
     }
     */
+    @IBAction func plusButtonPressed(_ sender: Any) {
+        print("plus pressed")
+        self.addButton.isSelected = !self.addButton.isSelected
+    }
 
 }

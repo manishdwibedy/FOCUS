@@ -45,10 +45,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     var sectionMapping = [String:Int]()
     var filteredSectionMapping = [String:Int]()
     
-    
     var users = [String:[CNContact]]()
     var filtered = [String:[CNContact]]()
-    
     
     var event: Event?
     var image: Data?

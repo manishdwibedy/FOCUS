@@ -412,7 +412,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var rowHeight: CGFloat?
         if indexPath.row == 0{
-            rowHeight = 165
+            rowHeight = 115
         }else if indexPath.row == 1{
             rowHeight = 130
         }else if indexPath.row == 2{
@@ -422,7 +422,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         }else if indexPath.row == 4{
             rowHeight = 220
         }else if indexPath.row == 5{
-            rowHeight = 255
+            rowHeight = 227
         }else{
             rowHeight = 80
         }
