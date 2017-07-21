@@ -103,9 +103,6 @@ class PlaceViewController: UIViewController {
         
         self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: placeLocation,addBracket: false, precision: 0), for: .normal)
         
-        self.pinAmountLabel.setTitle("7,365", for: .normal)
-        self.followersAmountLabel.setTitle("305K", for: .normal)
-        self.reviewsAmountLabel.setTitle("292", for: .normal)
         
         self.pinButton.setTitle("Pin Here", for: .normal)
         self.pinButton.setTitleColor(UIColor.white, for: .normal)
@@ -119,6 +116,30 @@ class PlaceViewController: UIViewController {
         
         self.navigationBar.titleTextAttributes = attrs
         
+        self.pinAmountLabel.setTitle("0", for: .normal)
+        self.followersAmountLabel.setTitle("0", for: .normal)
+        
+        Constants.DB.places.child((place?.id)!).observeSingleEvent(of: .value, with: {snapshot in
+            if let data = snapshot.value as? [String: Any]{
+                if let pins = data["pins"] as? [String: Any]{
+                    self.pinAmountLabel.setTitle("\(pins.count)", for: .normal)
+                }
+                else{
+                    self.pinAmountLabel.setTitle("0", for: .normal)
+                }
+                
+                if let following = data["following"] as? [String: Any]{
+                    self.followersAmountLabel.setTitle("\(following.count)", for: .normal)
+                }
+                else{
+                    self.followersAmountLabel.setTitle("0", for: .normal)
+                }
+            }
+            else{
+                self.pinAmountLabel.setTitle("0", for: .normal)
+                self.followersAmountLabel.setTitle("0", for: .normal)
+            }
+        })
     }
     
     func showRating(sender: UITapGestureRecognizer) {
@@ -294,6 +315,8 @@ class PlaceViewController: UIViewController {
         let ratingString = String(place.rating)
         self.ratingButtonLabel.setTitle(ratingString, for: .normal)
         self.ratingButtonLabel.setTitle(ratingString, for: .selected)
+        
+        self.reviewsAmountLabel.setTitle("\(place.reviewCount)", for: .normal)
         
 //        imageView.sd_setImage(with: URL(string: (place.image_url)), placeholderImage: nil)
         //self.getLatestComments()
