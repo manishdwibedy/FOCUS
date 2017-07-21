@@ -39,7 +39,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var id = ""
     var place: Place?
     var event: Event?
-
+    var needToGoBackToSearchPeopleViewController: Bool?
     var dayText = ""
     var monthText = ""
     
@@ -432,7 +432,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let section = sections[indexPath.section]
         let user = self.users[section]?[indexPath.row]
-
         
         let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
         personToInviteCell.delegate = self
@@ -566,7 +565,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "place", item_id: "",item_name: "")
                     })
                     Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime,"status": "sent"])
-                    searchPlace?.showPopup = true
+//                    searchPlace?.showPopup = true
                     
                     Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeButton.titleLabel?.text!])
                     
@@ -578,8 +577,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             "invited": UID,
                                             "name": name
                         ])
-                }
-                else{
+                }else{
                     name = (event?.title)!
                     Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
                         let user = snapshot.value as? [String : Any] ?? [:]
@@ -588,7 +586,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "event", item_id: "", item_name: "")
                     })
                     Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
-                    searchEvent?.showInvitePopup = true
+//                    searchEvent?.showInvitePopup = true
                 
                     Constants.DB.user.child(UID).child("invitations").child(self.type).queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
                     
@@ -603,7 +601,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             "user": AuthApi.getFirebaseUid()!,
                                             "invited": UID,
                                             "name": name
-                        ])
+                    ])
+                    
                 }
                 
                 
@@ -618,9 +617,31 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 })
                 
             }
-            dismiss(animated: true, completion: nil)
-        }
-        else{
+            
+            if type == "place"{
+                
+                if let goBackToSearchPeopleVC = needToGoBackToSearchPeopleViewController{
+                    if goBackToSearchPeopleVC{
+                        self.needToGoBackToSearchPeopleViewController = false
+                        performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegue", sender: self)
+                    }else{
+                        
+                        self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }else{
+                if let goBackToSearchPeopleVC = needToGoBackToSearchPeopleViewController{
+                    if goBackToSearchPeopleVC{
+                        self.needToGoBackToSearchPeopleViewController = false
+                        performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegue", sender: self)
+                    }else{
+                        self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }else{
             let messageVC = MFMessageComposeViewController()
             
             

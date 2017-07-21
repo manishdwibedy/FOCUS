@@ -26,8 +26,12 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
     
     var UID = ""
     var username = ""
+    var isMeetup = false
     var place: Place!
+    var invitePeopleVCDelegate: InvitePeopleViewControllerDelegate!
     var parentVC: InvitePeopleViewController!
+    var needToGoBackToSearchPeopleViewController: Bool?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -80,8 +84,7 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
         self.inviteCellContentView.layer.mask = mask
     }
     
-    func tap(sender: UITapGestureRecognizer)
-    {
+    func tap(sender: UITapGestureRecognizer){
         let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
         controller.map = parentVC.tabBarController?.viewControllers?[0] as? MapViewController
@@ -178,6 +181,7 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
         ivc.place = place
         ivc.username = self.username
         ivc.searchPeoplePlaceDelegate = self
+        ivc.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: nil)
         }
@@ -196,10 +200,7 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
     }
     
     func haveInvitedSomeoneToAPlace() {
-        parentVC.dismiss(animated: true, completion: { invitePeople in
-            self.parentVC.searchPeopleDelegate?.haveInvitedSomeoneToAPlaceOrAnEvent()
-        })
+        print("going back to invitepeoplevc")
+        self.invitePeopleVCDelegate.showPopupView()
     }
-    
-    
 }

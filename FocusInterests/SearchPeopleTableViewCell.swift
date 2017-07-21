@@ -184,7 +184,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
                                customAttributes: [
                                 "user": AuthApi.getFirebaseUid()!,
                                 "inviting": username_selected
-            ])
+        ])
         
         parentVC.present(ivc, animated: true, completion: { _ in })
     }

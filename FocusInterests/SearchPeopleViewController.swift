@@ -238,8 +238,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         Answers.logCustomEvent(withName: "Screen",
                                customAttributes: [
-                                "Name": "Search People"
-            ])
+                                "Name": "Search People"])
+        
         if showInvitePopup {
             self.invitePopupView.isHidden = false
             UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
@@ -523,6 +523,11 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
         self.present(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func unwindBackToSearchPeopleViewControllerSegue(segue: UIStoryboardSegue){
+        self.showInvitePopup = true
+        print("have invited someone to an event or place!")
     }
     
     func haveInvitedSomeoneToAPlaceOrAnEvent(){

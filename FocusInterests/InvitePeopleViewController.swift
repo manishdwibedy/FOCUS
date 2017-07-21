@@ -13,7 +13,11 @@ import CoreLocation
 import SwiftyJSON
 import GooglePlaces
 
-class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate{
+protocol InvitePeopleViewControllerDelegate {
+    func showPopupView()
+}
+
+class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, InvitePeopleViewControllerDelegate{
 
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var createEventButton: UIButton!
@@ -23,7 +27,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var currentLocation: UITextField!
     
+    @IBOutlet weak var invitePopupViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var invitePopupView: UIView!
+    
+    var showInvitePopup = false
     var isMeetup = false
+    var needToGoBackToSearchPeopleViewController = false
     var UID = ""
     var username = ""
     var filtered = [Any]()
@@ -132,14 +141,15 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             navBar.topItem?.title = "Meet up"
             self.backButton.isEnabled = true
             self.backButton.tintColor = UIColor.white
+            self.needToGoBackToSearchPeopleViewController = true
         }else{
             self.backButton.isEnabled = false
             self.backButton.tintColor = UIColor.clear
+            self.needToGoBackToSearchPeopleViewController = false
         }
-        print(navBar.items)
-        self.createEventButton.isHidden = true
         
 //        MARK: Main View
+        self.invitePopupView.allCornersRounded(radius: 10)
         self.view.backgroundColor = Constants.color.navy
         
         currentLocation.delegate = self
@@ -160,6 +170,23 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         locationManager.stopUpdatingLocation()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if showInvitePopup {
+            self.invitePopupView.isHidden = false
+            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= 125
+                self.invitePopupViewBottomConstraint.constant += 125
+            }, completion: { animate in
+                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += 125
+                    self.invitePopupViewBottomConstraint.constant -= 125
+                }, completion: nil)
+            })
+            self.showInvitePopup = false
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -174,7 +201,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.createEventButton.isHidden = true
         }else if segmentedOut.selectedSegmentIndex == 1{
             updateEvents()
-            self.createEventButton.isHidden = false
+            if isMeetup{
+                self.createEventButton.isHidden = true
+            }else{
+                self.createEventButton.isHidden = false
+            }
         }
         
     }
@@ -237,9 +268,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.UID = UID
             cell.username = username
             cell.parentVC = self
+            cell.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
+            cell.invitePeopleVCDelegate = self
             return cell
-        }else
-        {
+        }else{
             let cell:InvitePeopleEventCell = self.tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell") as! InvitePeopleEventCell!
             let event = filtered[indexPath.row] as! Event
             cell.name.text = event.title
@@ -257,9 +289,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.event = event
             cell.UID = UID
             cell.username = username
+            cell.invitePeopleVCDelegate = self
             cell.parentVC = self
             cell.guestCount.text = "\(event.attendeeCount) guests"
-            
+            cell.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
             cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price)"
             
             let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
@@ -669,7 +702,11 @@ extension InvitePeopleViewController: GMSAutocompleteViewControllerDelegate {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
-    
+    func showPopupView() {
+        print("back in invitepeoplevc")
+        self.needToGoBackToSearchPeopleViewController = false
+        self.showInvitePopup = true
+    }
 }
 
 

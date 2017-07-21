@@ -211,12 +211,32 @@
                                     <constraint firstItem="nv6-wn-SdN" firstAttribute="top" secondItem="nZh-JF-eMk" secondAttribute="bottom" constant="10" id="t1j-kb-KdB"/>
                                 </constraints>
                             </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Za9-qc-nJr" userLabel="Invite Popup View">
+                                <rect key="frame" x="5" y="673" width="365" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyE-9N-gmk">
+                                        <rect key="frame" x="8" y="8" width="349" height="54"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
+                                        <color key="textColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.82745098039999998" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="vyE-9N-gmk" firstAttribute="trailing" secondItem="Za9-qc-nJr" secondAttribute="trailingMargin" id="9pq-35-rct"/>
+                                    <constraint firstItem="vyE-9N-gmk" firstAttribute="top" secondItem="Za9-qc-nJr" secondAttribute="top" constant="8" id="KL1-bY-pbG"/>
+                                    <constraint firstItem="vyE-9N-gmk" firstAttribute="centerY" secondItem="Za9-qc-nJr" secondAttribute="centerY" id="Qje-4G-dgB"/>
+                                    <constraint firstAttribute="height" constant="70" id="TCN-1O-Gsi"/>
+                                    <constraint firstItem="vyE-9N-gmk" firstAttribute="leading" secondItem="Za9-qc-nJr" secondAttribute="leadingMargin" id="Yem-QT-FjZ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RME-pD-v8b" secondAttribute="trailing" id="1Zh-VX-YSN"/>
                             <constraint firstAttribute="trailing" secondItem="AYl-Yr-fFv" secondAttribute="trailing" id="3JP-Bk-dDQ"/>
                             <constraint firstItem="HTi-NK-gbC" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="3Q3-kk-PCV"/>
+                            <constraint firstItem="Za9-qc-nJr" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" constant="5" id="4R7-mN-uuE"/>
                             <constraint firstItem="RME-pD-v8b" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="7bQ-sO-6CQ"/>
                             <constraint firstItem="HTi-NK-gbC" firstAttribute="top" secondItem="bgb-f2-cnn" secondAttribute="bottom" id="8Gh-Wj-tiB"/>
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="top" secondItem="RME-pD-v8b" secondAttribute="bottom" id="OgL-ds-gWv"/>
@@ -226,6 +246,8 @@
                             <constraint firstItem="bgb-f2-cnn" firstAttribute="top" secondItem="AYl-Yr-fFv" secondAttribute="bottom" id="f6h-3H-7nn"/>
                             <constraint firstItem="bgb-f2-cnn" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="gda-NP-gmo"/>
                             <constraint firstItem="RME-pD-v8b" firstAttribute="top" secondItem="YCB-Au-Xks" secondAttribute="top" id="kSo-Vx-3mI"/>
+                            <constraint firstAttribute="trailing" secondItem="Za9-qc-nJr" secondAttribute="trailing" constant="5" id="kzg-dm-xMw"/>
+                            <constraint firstItem="7Ss-jV-UL9" firstAttribute="top" secondItem="Za9-qc-nJr" secondAttribute="bottom" constant="-125" id="nIK-9z-Gnr"/>
                             <constraint firstAttribute="trailing" secondItem="bgb-f2-cnn" secondAttribute="trailing" id="p1J-zd-wxY"/>
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="vv3-PZ-isc"/>
                         </constraints>
@@ -238,6 +260,8 @@
                         <outlet property="backButton" destination="FE1-iu-nrx" id="lmI-ES-jkU"/>
                         <outlet property="createEventButton" destination="JaG-Qc-0IL" id="eFf-HU-LgD"/>
                         <outlet property="currentLocation" destination="yhT-Rz-YeA" id="7WE-lv-gOc"/>
+                        <outlet property="invitePopupView" destination="Za9-qc-nJr" id="2ZJ-cr-d3M"/>
+                        <outlet property="invitePopupViewBottomConstraint" destination="nIK-9z-Gnr" id="U5j-zK-DYn"/>
                         <outlet property="navBar" destination="RME-pD-v8b" id="GVQ-s5-mZn"/>
                         <outlet property="searchBar" destination="AYl-Yr-fFv" id="L8v-LE-4kh"/>
                         <outlet property="segmentedOut" destination="nZh-JF-eMk" id="ICC-sp-Fhw"/>

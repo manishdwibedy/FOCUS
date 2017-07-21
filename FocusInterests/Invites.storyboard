@@ -163,9 +163,11 @@
                         <outlet property="timeButton" destination="7de-LD-Fht" id="SaA-Gz-AJG"/>
                         <outlet property="timeLabel" destination="nru-7F-n9l" id="x3h-tn-Bih"/>
                         <outlet property="timeOut" destination="7de-LD-Fht" id="1vg-YI-yIf"/>
+                        <segue destination="nbv-ao-3qe" kind="unwind" identifier="unwindBackToSearchPeopleViewControllerSegue" unwindAction="unwindBackToSearchPeopleViewControllerSegueWithSegue:" id="YKc-Hb-rVL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFL-YH-r49" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="nbv-ao-3qe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2273" y="107"/>
         </scene>
