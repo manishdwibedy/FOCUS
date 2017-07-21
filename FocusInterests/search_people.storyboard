@@ -84,7 +84,9 @@
                             <constraint firstAttribute="trailing" secondItem="O91-5f-lIg" secondAttribute="trailing" id="h42-Bk-NsB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="People icon white" selectedImage="People icon white" id="ft2-LS-Dgf"/>
+                    <tabBarItem key="tabBarItem" title="" image="People icon white" selectedImage="People icon white" id="ft2-LS-Dgf">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="invitePopupBottomConstraint" destination="cut-Oq-Kp5" id="nUv-Jo-LSc"/>
@@ -228,7 +230,9 @@
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="vv3-PZ-isc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Explore white" selectedImage="Explore green" id="NJ5-hj-IRg"/>
+                    <tabBarItem key="tabBarItem" title="" image="Explore white" selectedImage="Explore green" id="NJ5-hj-IRg">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="backButton" destination="FE1-iu-nrx" id="lmI-ES-jkU"/>
