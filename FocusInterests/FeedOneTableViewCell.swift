@@ -25,7 +25,6 @@ class FeedOneTableViewCell: UITableViewCell {
         // Initialization code
         self.userImage.roundedImage()
         self.usernameLabel.text = "username"
-        self.nameLabel.text = "Aryaasdfasdfa"
         self.addressLabel.text = "1600 Campus Road"
         self.distanceLabel.text = "2 mi"
         addGreenDot(label: self.interestLabel, content: "Sports")
