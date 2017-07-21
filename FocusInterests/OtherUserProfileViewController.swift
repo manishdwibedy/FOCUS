@@ -13,6 +13,8 @@ import FirebaseDatabase
 
 class OtherUserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDataSource, UITableViewDelegate{
     
+    @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var invitePopupView: UIView!
     @IBOutlet weak var followYourFriendsView: UIView!
     @IBOutlet weak var eventsCollectionView: UICollectionView!
     @IBOutlet var userScrollView: UIScrollView!
@@ -837,5 +839,22 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         return rowHeight
     }
     
+    @IBAction func inviteClicked(_ sender: Any) {
+//        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+//        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+//        ivc.type = "user"
+//        ivc.id = self.place.id
+//        ivc.place = place
+//        ivc.username = self.username
+//        ivc.searchPeoplePlaceDelegate = self
+//        ivc.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
+//        if let VC = self.parentVC{
+//            VC.present(ivc, animated: true, completion: nil)
+//        }
+    }
+    
+    func hasSentUserAnInvite(){
+        
+    }
 }
 

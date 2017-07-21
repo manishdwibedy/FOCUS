@@ -39,7 +39,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var id = ""
     var place: Place?
     var event: Event?
-    var needToGoBackToSearchPeopleViewController: Bool?
     var dayText = ""
     var monthText = ""
     
@@ -619,27 +618,11 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             
             if type == "place"{
-                
-                if let goBackToSearchPeopleVC = needToGoBackToSearchPeopleViewController{
-                    if goBackToSearchPeopleVC{
-                        self.needToGoBackToSearchPeopleViewController = false
-                        performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegue", sender: self)
-                    }else{
-                        
-                        self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                }
+                self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
+                self.dismiss(animated: true, completion: nil)
             }else{
-                if let goBackToSearchPeopleVC = needToGoBackToSearchPeopleViewController{
-                    if goBackToSearchPeopleVC{
-                        self.needToGoBackToSearchPeopleViewController = false
-                        performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegue", sender: self)
-                    }else{
-                        self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                }
+                self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
+                self.dismiss(animated: true, completion: nil)
             }
         }else{
             let messageVC = MFMessageComposeViewController()

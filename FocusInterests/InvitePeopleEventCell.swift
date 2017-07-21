@@ -114,17 +114,19 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     }
     
     @IBAction func invite(_ sender: Any) {
-        
-        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
-        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
-        ivc.type = "event"
-        ivc.id = self.event.id!
-        ivc.username = self.username
-        ivc.event = event
-        ivc.searchPeopleEventDelegate = self
-        ivc.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
-        if let VC = self.parentVC{
-            VC.present(ivc, animated: true, completion: nil)
+        if isMeetup {
+            self.parentVC.performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegueWithSegue", sender: self.parentVC)
+        }else{            
+            let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+            ivc.type = "event"
+            ivc.id = self.event.id!
+            ivc.username = self.username
+            ivc.event = event
+            ivc.searchPeopleEventDelegate = self
+            if let VC = self.parentVC{
+                VC.present(ivc, animated: true, completion: nil)
+            }
         }
         
         // avoid inviting the user

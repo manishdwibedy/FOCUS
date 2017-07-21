@@ -32,7 +32,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     var showInvitePopup = false
     var isMeetup = false
-    var needToGoBackToSearchPeopleViewController = false
     var UID = ""
     var username = ""
     var filtered = [Any]()
@@ -141,11 +140,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             navBar.topItem?.title = "Meet up"
             self.backButton.isEnabled = true
             self.backButton.tintColor = UIColor.white
-            self.needToGoBackToSearchPeopleViewController = true
         }else{
             self.backButton.isEnabled = false
             self.backButton.tintColor = UIColor.clear
-            self.needToGoBackToSearchPeopleViewController = false
         }
         
 //        MARK: Main View
@@ -265,11 +262,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
             }
             
+            cell.isMeetup = self.isMeetup
             cell.UID = UID
             cell.username = username
             cell.parentVC = self
-            cell.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
             cell.invitePeopleVCDelegate = self
+            
             return cell
         }else{
             let cell:InvitePeopleEventCell = self.tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell") as! InvitePeopleEventCell!
@@ -286,13 +284,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 }
             }
             
+            cell.isMeetup = self.isMeetup
             cell.event = event
             cell.UID = UID
             cell.username = username
             cell.invitePeopleVCDelegate = self
             cell.parentVC = self
             cell.guestCount.text = "\(event.attendeeCount) guests"
-            cell.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
             cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price)"
             
             let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
@@ -704,7 +702,6 @@ extension InvitePeopleViewController: GMSAutocompleteViewControllerDelegate {
     
     func showPopupView() {
         print("back in invitepeoplevc")
-        self.needToGoBackToSearchPeopleViewController = false
         self.showInvitePopup = true
     }
 }

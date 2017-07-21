@@ -174,16 +174,20 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
     }
     
     @IBAction func invite(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
-        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
-        ivc.type = "place"
-        ivc.id = self.place.id
-        ivc.place = place
-        ivc.username = self.username
-        ivc.searchPeoplePlaceDelegate = self
-        ivc.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
-        if let VC = self.parentVC{
-            VC.present(ivc, animated: true, completion: nil)
+        if isMeetup{
+            self.parentVC.performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegueWithSegue", sender: self.parentVC)
+        }else{
+            let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+            ivc.type = "place"
+            ivc.id = self.place.id
+            ivc.place = place
+            ivc.username = self.username
+            ivc.searchPeoplePlaceDelegate = self
+//            ivc.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
+            if let VC = self.parentVC{
+                VC.present(ivc, animated: true, completion: nil)
+            }
         }
 //        avoid inviting the user
 //        let time = NSDate().timeIntervalSince1970
