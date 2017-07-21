@@ -34,9 +34,9 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RB-L1-Zih">
-                        <rect key="frame" x="81" y="61" width="99" height="19.5"/>
+                        <rect key="frame" x="81" y="61" width="150" height="19.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="99" id="YCi-gl-ejj"/>
+                            <constraint firstAttribute="width" constant="150" id="YCi-gl-ejj"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,6 +72,7 @@
                 <outlet property="commentLabel" destination="Yco-yJ-cBW" id="kYx-YT-fVg"/>
                 <outlet property="dateLabel" destination="7RB-L1-Zih" id="XUY-5B-nIY"/>
                 <outlet property="userProfilePhoto" destination="xn0-vb-Ke6" id="C4Z-dP-IEa"/>
+                <outlet property="usernameLabel" destination="ASS-f0-e5q" id="HpD-3n-CHj"/>
             </connections>
             <point key="canvasLocation" x="28.5" y="97"/>
         </tableViewCell>

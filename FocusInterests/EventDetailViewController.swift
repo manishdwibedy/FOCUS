@@ -55,6 +55,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var eventDescription: UILabel!
     @IBOutlet weak var eventName: UILabel!
     
+    @IBOutlet weak var commentTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var noCommentLabel: UILabel!
     
     var event: Event?
     let ref = Database.database().reference()
@@ -66,6 +68,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
     var guestList = [String:[String:String]]()
     var map: MapViewController? = nil
+    
+    var commentDF = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -197,10 +201,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                         let dict = value?[key] as! NSDictionary
                         let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int, date: Date(timeIntervalSince1970: TimeInterval(dict["date"] as! Double)))
                         self.commentsCList.add(data)
-                        
-                        
-                        
                     }
+                }
+                else{
+                    self.commentTableHeight.constant = 50
+                    self.noCommentLabel.alpha = 1
+                    self.moreCommentsButton.isHidden = true
                 }
                 
                 self.commentsTableView.reloadData()
@@ -284,6 +290,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
             getEventSuggestions()
             
+            commentDF.dateFormat = "MMM d, h:mm a"
 //            self.attendOut.titleLabel?.textAlignment = .left
         }
         
@@ -531,10 +538,25 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         if(tableView.tag == 0){
             let commentCell = self.commentsTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? commentCell
             commentCell?.data = (commentsCList[indexPath.row] as! commentCellData)
-            commentCell?.commentLabel.text = (commentsCList[indexPath.row] as! commentCellData).comment
-//            commentCell?.likeCount.text = String((commentsCList[indexPath.row] as! commentCellData).likeCount)
-//            commentCell?.checkForLike()
             
+            let comment = commentsCList[indexPath.row] as! commentCellData
+            commentCell?.commentLabel.text = comment.comment
+            commentCell?.dateLabel.text = commentDF.string(from: comment.date)
+
+            Constants.DB.user.child(comment.from).observeSingleEvent(of: .value, with: {snapshot in
+                if let data = snapshot.value as? [String:Any]{
+                    if let username = data["username"] as? String{
+                        commentCell?.usernameLabel.text = username
+                    }
+                    
+                    if let image = data["image_string"] as? String{
+                        if let url = URL(string: image){
+                            commentCell?.userProfilePhoto.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                }
+                
+            })
             tableCell = commentCell!
             
         }
