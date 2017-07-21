@@ -38,7 +38,8 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     var type = ""
     var selectedButton = false
     var notif: FocusNotification!
-    var parentVC: NotificationFeedViewController!
+    var parentVC: PostReleaseInviteViewController!
+//    var parentVC: NotificationFeedViewController!
     var userInfo = [String:Any]()
     
     var nofArray = [FocusNotification]()
@@ -50,8 +51,6 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         // Initialization code
         let tap = UITapGestureRecognizer(target: self, action: #selector(screenTaped))
         self.addGestureRecognizer(tap)
-        
-        self.contentView.backgroundColor = Constants.color.navy
         
         time.dateFormat = "h:mm a"
         date.dateFormat = "MM/dd/yy"
@@ -278,7 +277,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         self.locationImage.roundedImage()
     }
     
-    
+//    TODO: Does not disable NextTime button
     @IBAction func seeYouTherePushed(_ sender: Any) {
         
         if seeYouThereButton.titleLabel?.text == "See You There"{
@@ -364,6 +363,9 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         }
     }
     
+    
+//    TODO: error that occurs is below
+//    Terminating app due to uncaught exception 'InvalidPathValidation', reason: '(child:) Must be a non-empty string and not contain '.' '#' '$' '[' or ']''
     @IBAction func nextTimePushed(_ sender: Any) {
         selectedButton = true
         nextTimeButton.isEnabled = false
@@ -423,10 +425,12 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                 }
             })
         }else if notif.item?.type == "place" && notif.item?.id != nil{
+            
+            //    TODO: error that occurs is below
+            //    Terminating app due to uncaught exception 'InvalidPathValidation', reason: '(child:) Must be a non-empty string and not contain '.' '#' '$' '[' or ']''
             print("getting data")
             print((notif.item?.id)!)
             getYelpByID(ID:(notif.item?.id)!,completion: {Place in
-                
                 let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
                 controller.place = Place

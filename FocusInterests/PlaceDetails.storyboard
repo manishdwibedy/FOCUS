@@ -215,7 +215,7 @@
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FamHalloween" translatesAutoresizingMaskIntoConstraints="NO" id="Mu9-FD-GgI">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mu9-FD-GgI">
                                                                 <rect key="frame" x="1" y="8" width="85" height="85"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="85" id="8ig-0n-ntO"/>
@@ -1273,7 +1273,6 @@
     </scenes>
     <resources>
         <image name="BackArrow" width="30" height="30"/>
-        <image name="FamHalloween" width="16" height="16"/>
         <image name="Large_Apple_Maps.png" width="123" height="123"/>
         <image name="Left back arrow icon 30x30 white.png" width="30" height="30"/>
         <image name="Star" width="28" height="27"/>

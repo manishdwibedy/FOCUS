@@ -207,6 +207,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     cell.addressTextView.text = "\(place.address[0])\n\(place.address.last!)"
                 }
             }
+            
+            print("place.id\(place.id)")
+            print("place.image\(place.image_url)")
             //cell.placeID = place.id
             cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
             

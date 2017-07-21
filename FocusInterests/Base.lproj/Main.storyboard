@@ -95,7 +95,7 @@
                             <constraint firstItem="VpH-45-PKf" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leadingMargin" constant="-7" id="zzH-ca-7XL"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Globe icon white" selectedImage="Globe icon white" id="lxL-bi-G7t"/>
+                    <tabBarItem key="tabBarItem" title="" image="Globe icon green" selectedImage="Globe icon green" id="lxL-bi-G7t"/>
                     <navigationItem key="navigationItem" id="pq0-gQ-8Y0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1bK-wR-02e"/>
                     </navigationItem>
@@ -658,7 +658,7 @@
         <image name="Explore white" width="31" height="31"/>
         <image name="Feed green" width="23" height="29"/>
         <image name="Feed white" width="23" height="29"/>
-        <image name="Globe icon white" width="30" height="30"/>
+        <image name="Globe icon green" width="30" height="30"/>
         <image name="People icon white" width="30" height="30"/>
         <image name="Pin green" width="54" height="54"/>
         <image name="Pin white" width="54" height="54"/>

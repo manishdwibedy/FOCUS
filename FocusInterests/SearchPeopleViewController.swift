@@ -191,6 +191,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     
                                     print("users - \(userCount)")
                                     print("people till now - \(self.people.count)")
+                                    print("\(self.people)")
                                     if self.people.count == userCount - 1 && followingCount == self.followers.count{
                                         self.people.sort {
                                             if $0.hasPin && $1.hasPin{
@@ -303,7 +304,9 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             cell?.shortBackground.isHidden = false
             cell?.pinSince.text = ""
         }
-    
+        
+        print("INFO: \n people.uuid:\(people.uuid) \n people.username\(people.username) \n\(people.userImage)")
+        
         cell?.ID = people.uuid!
         cell?.username_selected = people.username!
         //cell.checkForFollow(id: event.id!)
