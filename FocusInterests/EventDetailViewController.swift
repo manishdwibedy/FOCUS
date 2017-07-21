@@ -602,13 +602,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             eventCell?.dateAndTimeLabel.text = suggestion.date
             eventCell?.locationLabel.text = suggestion.title
             
-            
-//            eventCell?.addressLabel.text = "1435 Glendale Ave"
-//            eventCell?.dateAndTimeLabel.text = "May 5 2015"
-//            eventCell?.locationLabel.text = "Glendale"
-//            eventCell?.distanceLabel.text = "31 mi"
-//            addGreenDot(label: (eventCell?.categoryLabel)!, content: "N.A.")
-            
             tableCell = eventCell!
             
         }
@@ -689,17 +682,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                             self.eventsTableView.reloadData()
                         }
                     }
-//                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as? String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: snapshot.key, category: info["interests"] as? String, privateEvent: (info["private"] as? Bool)!)
-                    
-                    
-                        
-//                    self.eventsTableView.reloadData()
-                })
-                
+                })                
             }
     
             circleQuery.observeReady{
                 print("All initial data has been loaded and events have been fired for circle query!")
+                self.moreOtherLikesButton.isHidden = true
             }
         }
         
