@@ -1,5 +1,5 @@
 //
-//  PostReleaseInviteViewController.swift
+//  InvitationsViewController.swift
 //  FocusInterests
 //
 //  Created by Alex Jang on 7/20/17.
@@ -9,15 +9,15 @@
 import UIKit
 import SDWebImage
 
-class PostReleaseInviteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-
+class InvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var inviteTableView: UITableView!
     
     var nofArray = [FocusNotification]()
     var invArray = [FocusNotification]()
     var feedAray = [FocusNotification]()
-//    NotificationFeedCellTableViewCell
+    //    NotificationFeedCellTableViewCell
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class PostReleaseInviteViewController: UIViewController, UITableViewDelegate, UI
         
         self.inviteTableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -50,20 +50,19 @@ class PostReleaseInviteViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let inviteCell = tableView.dequeueReusableCell(withIdentifier: "inviteCell", for: indexPath) as! NotificationFeedCellTableViewCell
-        inviteCell.parentVC = self
+//        inviteCell.parentVC = self
         inviteCell.isFeed = false
-//        inviteCell.seeYouThereButton.isHidden = false
-//        inviteCell.nextTimeButton.isHidden = false
-//
-//        inviteCell.nofArray = self.nofArray
-//        inviteCell.invArray = self.invArray
-//        inviteCell.feedAray = self.feedAray
+        //        inviteCell.seeYouThereButton.isHidden = false
+        //        inviteCell.nextTimeButton.isHidden = false
+        //
+        //        inviteCell.nofArray = self.nofArray
+        //        inviteCell.invArray = self.invArray
+        //        inviteCell.feedAray = self.feedAray
         
-//        TODO: Error here
         inviteCell.setupCell(notif: FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: AuthApi.getUserName(), uuid: AuthApi.getFirebaseUid(), imageURL: AuthApi.getUserImage()), item: ItemOfInterest(itemName: "philz-coffee-cupertino", imageURL: "https://s3-media3.fl.yelpcdn.com/bphoto/Nuy5AjMNoD3r6hasmCofbg/o.jpg", type: "place"), time: Date())
         )
-
-//        FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: AuthApi.getUserName(), uuid: AuthApi.getFirebaseUid(), imageURL: AuthApi.getUserImage()), item: ItemOfInterest(itemName: "philz-coffee-cupertino", imageURL: "https://s3-media3.fl.yelpcdn.com/bphoto/Nuy5AjMNoD3r6hasmCofbg/o.jpg", type: "place"), time: Date())
+        
+        //        FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: AuthApi.getUserName(), uuid: AuthApi.getFirebaseUid(), imageURL: AuthApi.getUserImage()), item: ItemOfInterest(itemName: "philz-coffee-cupertino", imageURL: "https://s3-media3.fl.yelpcdn.com/bphoto/Nuy5AjMNoD3r6hasmCofbg/o.jpg", type: "place"), time: Date())
         
         if let url = URL(string: "https://s3-media3.fl.yelpcdn.com/bphoto/Nuy5AjMNoD3r6hasmCofbg/o.jpg"){
             SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
@@ -79,26 +78,26 @@ class PostReleaseInviteViewController: UIViewController, UITableViewDelegate, UI
             
         }
         
-//          MARK: Message button
+        //          MARK: Message button
         inviteCell.seeYouThereButton.roundCorners(radius: 5.0)
         
-//        MARK: Accepted button
+        //        MARK: Accepted button
         inviteCell.nextTimeButton.roundCorners(radius: 5.0)
         
-//        MARK: User Profile Image
+        //        MARK: User Profile Image
         inviteCell.userProfilePic.layer.borderWidth = 1
         inviteCell.userProfilePic.layer.borderColor = Constants.color.green.cgColor
         inviteCell.userProfilePic.roundButton()
         
-//        MARK: Username Label
-//        inviteCell.userNameLabel.text = "arya invited you to the Rose Bowl"
+        //        MARK: Username Label
+        //        inviteCell.userNameLabel.text = "arya invited you to the Rose Bowl"
         
-//        MARK: Location Image
+        //        MARK: Location Image
         inviteCell.locationImage.layer.borderWidth = 1
         inviteCell.locationImage.layer.borderColor = Constants.color.lightBlue.cgColor
         inviteCell.locationImage.roundedImage()
         
-//        inviteCell.timeLabel.text = "31 min"
+        //        inviteCell.timeLabel.text = "31 min"
         
         return inviteCell
     }
@@ -108,13 +107,12 @@ class PostReleaseInviteViewController: UIViewController, UITableViewDelegate, UI
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }

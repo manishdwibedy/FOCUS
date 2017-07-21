@@ -251,8 +251,8 @@
 		EB5891D11EE7EB8800C35EE9 /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */; };
 		EB5891D21EE7EB8800C35EE9 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */; };
 		EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */; };
-		EB694F491F215A1400C0690A /* PostReleaseInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB694F471F215A1400C0690A /* PostReleaseInviteViewController.swift */; };
-		EB694F4A1F215A1400C0690A /* PostReleaseInviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB694F481F215A1400C0690A /* PostReleaseInviteViewController.xib */; };
+		EB694F551F21A9E200C0690A /* InvitationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB694F531F21A9E200C0690A /* InvitationsViewController.swift */; };
+		EB694F561F21A9E200C0690A /* InvitationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB694F541F21A9E200C0690A /* InvitationsViewController.xib */; };
 		EB71ABFF1F1E99F90024FE95 /* MapViewSettingsOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB71ABFE1F1E99F90024FE95 /* MapViewSettingsOne.xib */; };
 		EB71AC011F1E9E420024FE95 /* MapViewSettingsOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC001F1E9E410024FE95 /* MapViewSettingsOne.swift */; };
 		EB71AC041F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC021F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift */; };
@@ -647,8 +647,8 @@
 		EB5891CF1EE7EB8800C35EE9 /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		EB5891D01EE7EB8800C35EE9 /* CommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableViewCell.xib; sourceTree = "<group>"; };
 		EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
-		EB694F471F215A1400C0690A /* PostReleaseInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostReleaseInviteViewController.swift; sourceTree = "<group>"; };
-		EB694F481F215A1400C0690A /* PostReleaseInviteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostReleaseInviteViewController.xib; sourceTree = "<group>"; };
+		EB694F531F21A9E200C0690A /* InvitationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationsViewController.swift; sourceTree = "<group>"; };
+		EB694F541F21A9E200C0690A /* InvitationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitationsViewController.xib; sourceTree = "<group>"; };
 		EB71ABFE1F1E99F90024FE95 /* MapViewSettingsOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewSettingsOne.xib; sourceTree = "<group>"; };
 		EB71AC001F1E9E410024FE95 /* MapViewSettingsOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewSettingsOne.swift; sourceTree = "<group>"; };
 		EB71AC021F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllInterestsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1383,8 +1383,8 @@
 		EB694F421F21591D00C0690A /* Invite View */ = {
 			isa = PBXGroup;
 			children = (
-				EB694F471F215A1400C0690A /* PostReleaseInviteViewController.swift */,
-				EB694F481F215A1400C0690A /* PostReleaseInviteViewController.xib */,
+				EB694F531F21A9E200C0690A /* InvitationsViewController.swift */,
+				EB694F541F21A9E200C0690A /* InvitationsViewController.xib */,
 			);
 			name = "Invite View";
 			sourceTree = "<group>";
@@ -1676,6 +1676,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB71AC1E1F1EF1600024FE95 /* FollowingOptionTableViewCell.xib in Resources */,
+				EB694F561F21A9E200C0690A /* InvitationsViewController.xib in Resources */,
 				D28EAFC01E5E7C8E001EA7E5 /* Login.storyboard in Resources */,
 				EBD382B01F10167B0068D313 /* FeedPlaceImageTableViewCell.xib in Resources */,
 				D2ECAC591E7CD9F8006FFA1A /* UserPhotoCell.xib in Resources */,
@@ -1755,7 +1756,6 @@
 				5B448E571EE72C1B00873F79 /* FollowersTableViewCell.xib in Resources */,
 				D219754B1E62406200ED3345 /* ChooseInterestsCell.xib in Resources */,
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
-				EB694F4A1F215A1400C0690A /* PostReleaseInviteViewController.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				EBE7AE4E1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib in Resources */,
 				EB71AC1A1F1EF1550024FE95 /* AllOptionTableViewCell.xib in Resources */,
@@ -2100,7 +2100,6 @@
 				5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */,
 				5B6AFA641ED1906900A82104 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				5B7DC2011EA866D700A1471E /* EventIconViewController.swift in Sources */,
-				EB694F491F215A1400C0690A /* PostReleaseInviteViewController.swift in Sources */,
 				5BD457BE1F1F386E00E18B50 /* UIImage+Extensions.swift in Sources */,
 				5B6AFA761ED1906900A82104 /* GQTPointQuadTree.m in Sources */,
 				C5E505F21F047DB900EBE27A /* PhotoInputView.swift in Sources */,
@@ -2217,6 +2216,7 @@
 				5B16592A1EDA50630002209A /* FeedbackViewController.swift in Sources */,
 				D252206D1E5A864900EC2014 /* NotificationsCellTableViewCell.swift in Sources */,
 				5B6AFA721ED1906900A82104 /* GMUPlacemark.m in Sources */,
+				EB694F551F21A9E200C0690A /* InvitationsViewController.swift in Sources */,
 				D21317FD1E5B507C00140323 /* Feature.swift in Sources */,
 				5B71D6FC1ED1820E0093A3F5 /* InviteFriendTableViewCell.swift in Sources */,
 				5B6AFA681ED1906900A82104 /* GMUStaticCluster.m in Sources */,

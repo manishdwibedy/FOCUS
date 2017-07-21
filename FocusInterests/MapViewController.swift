@@ -1056,7 +1056,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func invitationClicked()  {
         // show invitation screen
         
-        let vc = PostReleaseInviteViewController(nibName: "PostReleaseInviteViewController", bundle: nil)
+        let vc = InvitationsViewController(nibName: "InvitationsViewController", bundle: nil)
         
         dropfromTop(view: self.view)
         

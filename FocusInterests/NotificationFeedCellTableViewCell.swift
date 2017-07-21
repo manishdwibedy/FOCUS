@@ -38,7 +38,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     var type = ""
     var selectedButton = false
     var notif: FocusNotification!
-    var parentVC: PostReleaseInviteViewController!
+    var parentVC: InvitationsViewController!
 //    var parentVC: NotificationFeedViewController!
     var userInfo = [String:Any]()
     
