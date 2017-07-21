@@ -14,10 +14,7 @@ class InvitationsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var inviteTableView: UITableView!
     
-    var nofArray = [FocusNotification]()
     var invArray = [FocusNotification]()
-    var feedAray = [FocusNotification]()
-    //    NotificationFeedCellTableViewCell
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,39 +41,16 @@ class InvitationsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //            return invArray.count
-        return 1
+        return invArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let inviteCell = tableView.dequeueReusableCell(withIdentifier: "inviteCell", for: indexPath) as! NotificationFeedCellTableViewCell
 //        inviteCell.parentVC = self
         inviteCell.isFeed = false
-        //        inviteCell.seeYouThereButton.isHidden = false
-        //        inviteCell.nextTimeButton.isHidden = false
-        //
-        //        inviteCell.nofArray = self.nofArray
-        //        inviteCell.invArray = self.invArray
-        //        inviteCell.feedAray = self.feedAray
         
-        inviteCell.setupCell(notif: FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: AuthApi.getUserName(), uuid: AuthApi.getFirebaseUid(), imageURL: AuthApi.getUserImage()), item: ItemOfInterest(itemName: "philz-coffee-cupertino", imageURL: "https://s3-media3.fl.yelpcdn.com/bphoto/Nuy5AjMNoD3r6hasmCofbg/o.jpg", type: "place"), time: Date())
-        )
+        inviteCell.setupCell(notif: self.invArray[indexPath.row])
         
-        //        FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: AuthApi.getUserName(), uuid: AuthApi.getFirebaseUid(), imageURL: AuthApi.getUserImage()), item: ItemOfInterest(itemName: "philz-coffee-cupertino", imageURL: "https://s3-media3.fl.yelpcdn.com/bphoto/Nuy5AjMNoD3r6hasmCofbg/o.jpg", type: "place"), time: Date())
-        
-        if let url = URL(string: "https://s3-media3.fl.yelpcdn.com/bphoto/Nuy5AjMNoD3r6hasmCofbg/o.jpg"){
-            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                (receivedSize :Int, ExpectedSize :Int) in
-                
-            }, completed: {
-                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                
-                if image != nil && finished{
-                    inviteCell.locationImage.image = crop(image: image!, width: 50, height: 50)
-                }
-            })
-            
-        }
         
         //          MARK: Message button
         inviteCell.seeYouThereButton.roundCorners(radius: 5.0)
@@ -106,6 +80,9 @@ class InvitationsViewController: UIViewController, UITableViewDelegate, UITableV
         return 100
     }
     
+    @IBAction func backPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     /*
      // MARK: - Navigation
      

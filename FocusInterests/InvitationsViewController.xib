@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InvitationsViewController" customModule="FocusInterests" customModuleProvider="target">
             <connections>
+                <outlet property="inviteTableView" destination="MbF-8a-7RY" id="snJ-qu-XYw"/>
+                <outlet property="navBar" destination="ohM-bW-Qiu" id="jUu-qi-avV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,6 +31,9 @@
                         <navigationItem title="Invite" id="JEY-qp-b0x">
                             <barButtonItem key="leftBarButtonItem" image="BackArrow" id="SE7-6n-10r">
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="backPressed:" destination="-1" id="qfx-MU-i3a"/>
+                                </connections>
                             </barButtonItem>
                         </navigationItem>
                     </items>

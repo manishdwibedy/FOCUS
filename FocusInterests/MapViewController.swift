@@ -312,8 +312,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     self.notifs.append(contentsOf: Array(Set<FocusNotification>(notif)))
                     
                     count_received += 1
-                    if count_received == 5{
-                        not_count += Array(Set<FocusNotification>(self.invites)).count
+                    if count_received == 4{
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
                         not_count -= read_notifications
@@ -332,9 +331,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     }
                 }, gotInvites: {invite in
                     self.invites.append(contentsOf: Array(Set<FocusNotification>(invite)))
-                    count_received += 1
-                    if count_received == 5{
-                        not_count += Array(Set<FocusNotification>(self.invites)).count
+                    
+                    if count_received == 4{
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
                         not_count -= read_notifications
@@ -355,8 +353,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     self.feeds.removeAll()
                     self.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
                     
-                    if count_received == 5{
-                        not_count += Array(Set<FocusNotification>(self.invites)).count
+                    if count_received == 4{
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
                         not_count -= read_notifications
@@ -383,8 +380,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 self.notifs.append(contentsOf: notif)
                 
                 count_received += 1
-                if count_received == 4 + 1{
-                    not_count += Array(Set<FocusNotification>(self.invites)).count
+                if count_received == 4{
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
                     not_count -= read_notifications
@@ -404,9 +400,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }, gotInvites: {invite in
                 
                 self.invites.append(contentsOf: invite)
-                count_received += 1
-                if count_received == 4 + 1{
-                    not_count += Array(Set<FocusNotification>(self.invites)).count
+                //count_received += 1
+                if count_received == 4{
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
                     not_count -= read_notifications
@@ -427,8 +422,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             } , gotFeed: {feed in
                 self.feeds.append(contentsOf: feed)
                 
-                if count_received == 4 + 1{
-                    not_count += Array(Set<FocusNotification>(self.invites)).count
+                if count_received == 4{
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
                     not_count -= read_notifications
@@ -1045,7 +1039,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
         vc.nofArray = self.notifs
-        vc.invArray = self.invites
         vc.feedAray = self.feeds
         
         dropfromTop(view: self.view)
@@ -1057,7 +1050,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         // show invitation screen
         
         let vc = InvitationsViewController(nibName: "InvitationsViewController", bundle: nil)
-        
+        vc.invArray = self.invites
         dropfromTop(view: self.view)
         
         self.present(vc, animated: true, completion: nil)
