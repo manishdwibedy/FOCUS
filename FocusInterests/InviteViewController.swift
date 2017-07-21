@@ -240,6 +240,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.dateFormatter.dateStyle = .short
         
         self.datePicker.datePickerMode = .date
+        self.datePicker
         let date = Date()
         self.datePicker.minimumDate = date
         self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())

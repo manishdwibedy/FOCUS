@@ -125,7 +125,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.pinHereButton.setTitleColor(Constants.color.navy, for: .selected)
         
         self.eventName.text = "CBS Sports"
-        self.eventDescription.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         
         self.attendButton.roundCorners(radius: 5.0)
         self.attendButton.setTitle("Attend", for: .normal)
@@ -144,6 +143,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         addressLabel.text = event?.fullAddress?.replacingOccurrences(of: ";;", with: ", ")
 //        descriptionLabel.text = event?.eventDescription
         descriptionLabel.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        
+        var frame = self.descriptionLabel.frame
+        
+        frame.size = self.descriptionLabel.contentSize
+        
+        self.descriptionLabel.frame = frame
         
         let reference = Constants.storage.event.child("\(event!.id!).jpg")
         
