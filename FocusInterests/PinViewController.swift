@@ -138,7 +138,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                     ($0["time"] as! Double) < ($1["time"] as! Double)
                 })
                 if self.data.count > 3{
-                    self.data = self.data[0..<3]    
+                    
+                    print("get 3")
                 }
                 
                 //self.data.sort(by: $0["time"] as? Double < $1["time"] as? Double)
@@ -416,7 +417,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tableView.tag == 0){
-            return self.data.count
+            if self.data.count > 3{
+                return 3
+            }
+            else{
+                return self.data.count
+            }
         }else{
             return suggestedPlaces.count
         }
