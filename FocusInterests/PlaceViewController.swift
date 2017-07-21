@@ -99,7 +99,10 @@ class PlaceViewController: UIViewController {
         self.reviewsAmountLabel.setTitleColor(UIColor.white, for: .normal)
         self.reviewsAmountLabel.setTitleColor(UIColor.white, for: .selected)
         
-        self.distanceLabelInNavBar.setTitle("2.1mi", for: .normal)
+        let placeLocation = CLLocation(latitude: Double((place?.latitude)!), longitude: Double((place?.longitude)!))
+        
+        self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: placeLocation,addBracket: false, precision: 0), for: .normal)
+        
         self.pinAmountLabel.setTitle("7,365", for: .normal)
         self.followersAmountLabel.setTitle("305K", for: .normal)
         self.reviewsAmountLabel.setTitle("292", for: .normal)

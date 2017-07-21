@@ -211,15 +211,26 @@ func isValidEmail(text:String) -> Bool {
     return emailTest.evaluate(with: text)
 }
 
-func getDistance(fromLocation: CLLocation, toLocation: CLLocation, addBracket: Bool = false) -> String{
+   func getDistance(fromLocation: CLLocation, toLocation: CLLocation, addBracket: Bool = false, precision: Int = 1) -> String{
     let distanceInMeters = fromLocation.distance(from: toLocation)
     let distance = distanceInMeters/1609.344
     
     if addBracket{
-        return "(\(distance.roundTo(places: 1)) mi)"
+        if precision == 0{
+            return "\(Int(distance)) mi"
+        }
+        else{
+            return "(\(distance.roundTo(places: precision)) mi)"
+        }
+        
     }
     else{
-        return "\(distance.roundTo(places: 1)) mi"
+        if precision == 0{
+            return "\(Int(distance)) mi"
+        }
+        else{
+            return "\(distance.roundTo(places: precision)) mi"   
+        }
     }
     
 }

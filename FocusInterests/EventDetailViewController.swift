@@ -317,8 +317,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         titlelabel.textAlignment = .center
         self.navBar.topItem?.titleView = titlelabel
         
-        
-        self.distanceLabelInNavBar.setTitle("31mi", for: .normal)
+        let eventLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double((event?.longitude!)!)!)
+    
+        self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: eventLocation,addBracket: false, precision: 0), for: .normal)
         
         hideKeyboardWhenTappedAround()
     }
