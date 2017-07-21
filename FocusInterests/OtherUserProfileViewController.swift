@@ -498,24 +498,25 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         }
                         
                         for (_, interest) in (final_interest.enumerated()){
-//                            let textLabel = UILabel()
+                            let textLabel = UILabel()
                             
-//                            textLabel.textColor = .white
-//                            textLabel.text  = interest
-//                            textLabel.textAlignment = .left
+                            textLabel.textColor = .white
+                            textLabel.text  = interest
+                            textLabel.textAlignment = .left
+                            let interestView = InterestStackViewLabel()
+                            interestView.interestLabel.text = interest
+                            let interestImage = "\(interest) Green"
+                            interestView.interestLabelImage.image = UIImage(named: interestImage)
                             
                             if interest.characters.count > 0{
                                 if self.interestStackView.arrangedSubviews.count < 3{
-                                    let interestView = InterestStackViewLabel()
-                                    interestView.interestLabel.text = "Interest"
-                                    let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: (interestView.frame.size.height+20)))
-                                    
+                                    let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: 20))
                                     interestSubView.addSubview(interestView)
+                                    
 //                                    self.interestStackView.addArrangedSubview(textLabel)
                                     self.interestStackView.addArrangedSubview(interestSubView)
-                                    self.interestStackView.bounds.size.height += interestSubView.frame.size.height
-//                                    self.interestStackHeight.constant += interestSubView.frame.size.height
-//                                    self.mainViewHeight.constant += interestSubView.frame.size.height
+//                                    self.interestStackView.bounds.size.height += interestSubView.frame.size.height
+//                                    self.interestViewHeight.constant += interestSubView.frame.size.height/4
                                     self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                                 }
                             }
@@ -568,24 +569,23 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             
             for (_, interest) in (interests.enumerated()){
                 
-//                let textLabel = UILabel()
-//                
-//                textLabel.textColor = .white
-//                textLabel.text  = interest
-//                textLabel.textAlignment = .left
+                let textLabel = UILabel()
+                
+                textLabel.textColor = .white
+                textLabel.text  = interest
+                textLabel.textAlignment = .left
                 
                 if interest.characters.count > 0{
                     if interestStackView.arrangedSubviews.count < 3{
-//                        interestStackView.addArrangedSubview(textLabel)
                         let interestView = InterestStackViewLabel()
-                        interestView.interestLabel.text = "Interest"
-                        let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: (interestView.frame.size.height + 20)))
+                        interestView.interestLabel.text = interest
+                        let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: 20))
                         
                         interestSubView.addSubview(interestView)
                         self.interestStackView.addArrangedSubview(interestSubView)
-                        self.interestStackView.bounds.size.height += interestSubView.frame.size.height
-//                        self.interestStackHeight.constant += interestSubView.frame.size.height
-//                        self.mainViewHeight.constant += interestSubView.frame.size.height
+//                        self.interestStackView.bounds.size.height += interestSubView.frame.size.height
+//                        self.interestViewHeight.constant += interestSubView.frame.size.height/4
+                        
                         interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                     }
                 }

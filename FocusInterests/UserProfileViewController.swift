@@ -17,12 +17,13 @@ enum previousScreen{
     case notification
 }
 
-class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate{
+class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var eventsCollectionView: UICollectionView!
 	@IBOutlet var userScrollView: UIScrollView!
     
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var eventsViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
     @IBOutlet weak var navBarItem: UINavigationItem!
@@ -77,6 +78,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
     @IBOutlet weak var interestStackHeight: NSLayoutConstraint!
     @IBOutlet weak var moreFocusButton: UIButton!
+    @IBOutlet weak var recentPostTableView: UITableView!
+    @IBOutlet weak var recentPostTableViewHeight: NSLayoutConstraint!
     
 	// Location Description (would this be location description?)
 	// Location FOCUS button (what would this be for?)
@@ -96,6 +99,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     var otherUser = false
     var userID = ""
     var previous: previousScreen? = nil
+    
     
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
@@ -159,6 +163,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        self.recentPostTableView.delegate = self
+        self.recentPostTableView.dataSource = self
+        
         Answers.logCustomEvent(withName: "Screen",
                                customAttributes: [
                                 "Name": "User Profile"
@@ -173,14 +180,17 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
         navBar.titleTextAttributes = attrs
         
-        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-        let focus_header = NSAttributedString(string: "FOCUS", attributes: underlineAttribute)
-        let event_header = NSAttributedString(string: "Events", attributes: underlineAttribute)
-        focusHeader.attributedText = focus_header
-        eventHeader.attributedText = event_header
+//        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+//        let focus_header = NSAttributedString(string: "FOCUS", attributes: underlineAttribute)
+//        let event_header = NSAttributedString(string: "Events", attributes: underlineAttribute)
+//        focusHeader.attributedText = focus_header
+//        eventHeader.attributedText = event_header
         
         
         hideKeyboardWhenTappedAround()
+        
+        let recentPostNib = UINib(nibName: "FeedOneTableViewCell", bundle: nil)
+        self.recentPostTableView.register(recentPostNib, forCellReuseIdentifier: "recentPostCell")
         
         let eventsCollectionNib = UINib(nibName: "UserProfileCollectionViewCell", bundle: nil)
         self.eventsCollectionView.register(eventsCollectionNib, forCellWithReuseIdentifier: "eventsCollectionCell")
@@ -325,12 +335,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        self.pinView.addTopBorderWithColor(color: UIColor.white, width: 1)
-        self.focusView.addTopBorderWithColor(color: UIColor.white, width: 1)
-        self.eventView.addTopBorderWithColor(color: UIColor.white, width: 1)
-        
-        
         
         self.pinView.setNeedsLayout()
         self.pinView.layoutIfNeeded()
@@ -480,7 +484,15 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             
                             if interest.characters.count > 0{
                                 if self.interestStackView.arrangedSubviews.count < 3{
-                                    self.interestStackView.addArrangedSubview(textLabel)
+                                    let interestView = InterestStackViewLabel()
+                                    interestView.interestLabel = textLabel
+                                    let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: (interestView.frame.size.height+20)))
+                                    
+                                    interestSubView.addSubview(interestView)
+                                    self.interestStackView.addArrangedSubview(interestSubView)
+                                    self.interestStackView.bounds.size.height += interestSubView.frame.size.height
+                                    self.interestViewHeight.constant += interestSubView.frame.size.height/4
+
                                     self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                                 }
                             }
@@ -532,27 +544,48 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             }
             
             for (_, interest) in (interests.enumerated()){
-                let textLabel = UILabel()
+                let interestView = InterestStackViewLabel()
+                interestView.interestLabel.text = interest
+                let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: 20))
+//                interestView.isUserInteractionEnabled = true
+//                print(interestView.addButton.isUserInteractionEnabled)
+                print(interestSubView.isUserInteractionEnabled)
+//                interestView.addButton.isUserInteractionEnabled = true
+                interestView.addButton.setImage(#imageLiteral(resourceName: "White_Plus_Sign"), for: .normal)
+                interestView.addButton.setImage(#imageLiteral(resourceName: "Green_check_sign"), for: .selected)
                 
-                textLabel.textColor = .white
-                textLabel.text  = interest
-                textLabel.textAlignment = .left
+                interestView.addButton.target(forAction: #selector(UserProfileViewController.plusButtonPressed(interestView:)), withSender: self)
+                
+                let interestImage = "\(interest) Green"
+                interestView.interestLabelImage.image = UIImage(named: interestImage)
+                interestSubView.addSubview(interestView)
                 
                 if interest.characters.count > 0{
                     if interestStackView.arrangedSubviews.count < 3{
-                        interestStackView.addArrangedSubview(textLabel)
+
+                        self.interestStackView.addArrangedSubview(interestSubView)
+//                        self.interestStackView.bounds.size.height += interestSubView.frame.size.height
+//                        self.interestViewHeight.constant += interestSubView.frame.size.height/4
                         interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                     }
                 }
             }
             
-            print(interestStackView.arrangedSubviews.count)
+            print("End: \(interestStackView.arrangedSubviews.count)")
             
-//            let count = interestStackView.arrangedSubviews.count
-//            interestStackHeight.constant = CGFloat(25 * count)
-//            interestViewHeight.constant = CGFloat(25 * count + 113)
+//            if interestStackView.arrangedSubviews.count < 3{
+//                let count = interestStackView.arrangedSubviews.count
+//                interestStackHeight.constant -= CGFloat(20 * count)
+//                interestViewHeight.constant -= CGFloat(20 * count)
+//                mainViewHeight.constant -= CGFloat(20 * count)
+//            }
         }
         
+    }
+    
+    func plusButtonPressed(interestView: InterestStackViewLabel){
+        print("button pressed")
+        interestView.addButton.isSelected = !interestView.addButton.isSelected
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -565,8 +598,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         var newFrame = self.descriptionText.frame
         newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
         self.descriptionText.frame = newFrame;
-
-
+        self.recentPostTableViewHeight.constant = self.recentPostTableView.contentSize.height
     }
 
     override func didReceiveMemoryWarning() {
@@ -637,11 +669,16 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 }
                 
                 self.eventsCollectionView.reloadData()
-                
+                self.mainViewHeight.constant += 290
+                self.eventsViewHeight.constant += 290
+                self.moreEventsButton.isHidden = true
                 self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
                 self.createEventButton.alpha = 0
             }
             else{
+                self.mainViewHeight.constant -= 290
+                self.eventsViewHeight.constant -= 290
+                self.moreEventsButton.isHidden = true
                 self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
                 self.createEventButton.alpha = 1
             }
@@ -684,9 +721,17 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                     self.eventsCollectionView.reloadData()
                                     
                                     self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
+                                    self.mainViewHeight.constant += 300
+                                    self.eventsViewHeight.constant += 300
+                                    self.moreEventsButton.isHidden = false
+                                    self.moreEventsButton.isEnabled = true
                                     self.createEventButton.alpha = 0
                                 }
                                 else{
+                                    self.mainViewHeight.constant -= 300
+                                    self.eventsViewHeight.constant -= 300
+                                    self.moreEventsButton.isHidden = true
+                                    self.moreEventsButton.isEnabled = false
                                     self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
                                     self.createEventButton.alpha = 1
                                 }
@@ -738,6 +783,27 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.present(controller, animated: true, completion: nil)
 
     }
+    
+//    MARK: Table View Data Source and Delegate Methods
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let recentPostCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell", for: indexPath) as! FeedOneTableViewCell
+        
+        return recentPostCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
+        return myCell.bounds.size.height;
+    }
+    
     /*
     // MARK: - Navigation
 

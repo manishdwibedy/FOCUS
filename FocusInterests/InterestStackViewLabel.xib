@@ -14,6 +14,7 @@
                 <outlet property="addButton" destination="8mM-OS-ias" id="SmI-Tg-Q8g"/>
                 <outlet property="interestLabel" destination="u6q-Rt-o2o" id="b1k-fR-HhG"/>
                 <outlet property="interestLabelImage" destination="igh-fx-saS" id="nCp-E5-yfv"/>
+                <outlet property="view" destination="iN0-l3-epB" id="bNi-HZ-ajG"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,13 +22,13 @@
             <rect key="frame" x="0.0" y="0.0" width="362" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6q-Rt-o2o">
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6q-Rt-o2o">
                     <rect key="frame" x="60" y="9.5" width="36.5" height="20.5"/>
                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="igh-fx-saS">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="igh-fx-saS">
                     <rect key="frame" x="16" y="2" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="65C-Al-WkQ"/>
@@ -35,12 +36,14 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8mM-OS-ias">
-                    <rect key="frame" x="321" y="6.5" width="25" height="25"/>
+                    <rect key="frame" x="314" y="3" width="35" height="35"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="25" id="9Dw-0p-MKd"/>
-                        <constraint firstAttribute="height" constant="25" id="rvZ-Ts-No5"/>
+                        <constraint firstAttribute="width" constant="35" id="9Dw-0p-MKd"/>
+                        <constraint firstAttribute="height" constant="35" id="rvZ-Ts-No5"/>
                     </constraints>
-                    <state key="normal" image="plus"/>
+                    <connections>
+                        <action selector="plusButtonPressed:" destination="-1" eventType="touchUpInside" id="eTu-IZ-kse"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,7 +52,7 @@
                 <constraint firstItem="u6q-Rt-o2o" firstAttribute="leading" secondItem="igh-fx-saS" secondAttribute="trailing" constant="9" id="3fo-RF-vkr"/>
                 <constraint firstItem="igh-fx-saS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZPJ-Ba-Uiv"/>
                 <constraint firstItem="igh-fx-saS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="sVE-sB-Q5m"/>
-                <constraint firstAttribute="trailing" secondItem="8mM-OS-ias" secondAttribute="trailing" constant="16" id="wJr-4x-bLN"/>
+                <constraint firstAttribute="trailing" secondItem="8mM-OS-ias" secondAttribute="trailing" constant="13" id="wJr-4x-bLN"/>
                 <constraint firstItem="u6q-Rt-o2o" firstAttribute="centerY" secondItem="igh-fx-saS" secondAttribute="centerY" id="xy4-YO-uYT"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -59,6 +62,5 @@
     </objects>
     <resources>
         <image name="UserPhoto" width="102" height="102"/>
-        <image name="plus" width="32" height="32"/>
     </resources>
 </document>
