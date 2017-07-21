@@ -247,7 +247,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
         self.dayTextField.delegate = self
-        self.dayTextField.attributedPlaceholder = NSAttributedString(string: "Choose a date", attributes: [NSForegroundColorAttributeName: UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)])
+        self.dayTextField.attributedPlaceholder = NSAttributedString(string: "Today", attributes: [NSForegroundColorAttributeName: UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)])
 //        self.dayButton.inputView
 //        self.dayPickerView.isHidden = true
 //        self.doneToolBar.isHidden = true
