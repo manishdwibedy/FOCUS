@@ -1056,8 +1056,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func invitationClicked()  {
         // show invitation screen
         
-        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "NewInviteViewController") as! NewInviteViewController
+        let vc = InvitationsViewController(nibName: "InvitationsViewController", bundle: nil)
         
         dropfromTop(view: self.view)
         

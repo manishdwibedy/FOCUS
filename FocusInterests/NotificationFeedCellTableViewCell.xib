@@ -107,7 +107,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.3803921569" green="0.45098039220000002" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="EnX-Nm-dDd" firstAttribute="centerY" secondItem="G4T-lJ-oCe" secondAttribute="centerY" id="4jn-d1-uN5"/>
                     <constraint firstItem="wK2-Jo-qA1" firstAttribute="baseline" secondItem="5Pz-GY-U38" secondAttribute="firstBaseline" id="4xd-uT-mJk"/>
@@ -130,6 +130,7 @@
                     <constraint firstItem="8en-yG-tGw" firstAttribute="trailing" secondItem="5Pz-GY-U38" secondAttribute="trailing" id="zgd-xO-bYE"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="contentBackView" destination="H2p-sc-9uM" id="w3M-5I-rV9"/>
                 <outlet property="locationImage" destination="KgY-3n-kfu" id="H8f-ii-4Qh"/>

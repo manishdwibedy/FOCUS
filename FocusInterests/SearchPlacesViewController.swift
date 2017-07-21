@@ -232,6 +232,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         let place_location = CLLocation(latitude: place.latitude, longitude: place.longitude)
         cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
         cell.placeID = place.id
+        print("place.id: \(place.id)")
         cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
         if place.categories.count > 0{
             

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "People icon white.png",
+      "filename" : "People white x1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "People icon white@2x.png",
+      "filename" : "People white x2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "People icon white@3x.png",
+      "filename" : "People white x3.png",
       "scale" : "3x"
     }
   ],
