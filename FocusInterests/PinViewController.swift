@@ -166,6 +166,26 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         
         self.loadInfoScreen(place: self.place!)
+        
+        self.getUserSuggestions(gotUsers: {users in
+        
+            for (index,view) in self.inviteUserStackView.arrangedSubviews.enumerated(){
+                let inviteUser = view as? InviteUserView
+                
+                if let user = users[index] as? User{
+                    inviteUser?.userName.text = user.username
+                    
+                    if let image = user.image_string{
+                        if let url = URL(string: image){
+                            inviteUser?.image.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                }
+                else{
+                    self.inviteUserStackView.removeArrangedSubview(view)
+                }
+            }
+        })
 
     }
     
@@ -693,6 +713,39 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
     }
     
+    func getUserSuggestions(gotUsers: @escaping ([User]) -> Void){
+        var people = [User]()
+        var userCount = 0
+        Constants.DB.user.observeSingleEvent(of: .value, with: { snapshot in
+            let users = snapshot.value as? [String : Any] ?? [:]
+            
+            for (_, user) in users{
+                let info = user as? [String:Any]
+                
+                if let info = info{
+                    if let user = User.toUser(info: info){
+                        
+                        if matchingUserInterest(user: user){
+                            userCount += 1
+                            if user.uuid != AuthApi.getFirebaseUid(){
+                                if !people.contains(user){
+                                    people.append(user)
+                                }
+                                
+                                if userCount < 3 && people.count == userCount - 1{
+                                    gotUsers(people)
+                                }
+                                else if people.count == 3{
+                                    gotUsers(people)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        })
+    }
     @IBAction func follow(_ sender: Any) {
         
 //        if isFollowing == false
