@@ -88,6 +88,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     var isFollowing = false
     var place_focus = ""
     
+    @IBOutlet weak var noPinLabel: UILabel!
+    @IBOutlet weak var pinTableHeight: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -127,6 +129,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 {
                     self.data.append(value?[key] as! NSDictionary)
                 }
+            }
+            else{
+                self.pinsHeightConstraint.constant = 116
+                self.noPinLabel.alpha = 1
             }
             self.pinTableView.reloadData()
             
@@ -396,7 +402,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tableView.tag == 0){
-            return 3
+            return self.data.count
         }else{
             return suggestedPlaces.count
         }

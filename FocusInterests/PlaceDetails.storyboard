@@ -869,12 +869,15 @@
                                                     <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0im-DM-qTP">
                                                         <rect key="frame" x="10" y="35" width="355" height="250"/>
                                                         <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="250" id="aaX-xV-13f"/>
+                                                        </constraints>
                                                         <connections>
                                                             <outlet property="dataSource" destination="otb-Ee-qlq" id="CGZ-Cb-sQG"/>
                                                             <outlet property="delegate" destination="otb-Ee-qlq" id="aMV-Kf-f1F"/>
                                                         </connections>
                                                     </tableView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ge3-bd-8kY">
+                                                    <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ge3-bd-8kY">
                                                         <rect key="frame" x="320" y="289" width="45" height="19"/>
                                                         <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -889,18 +892,26 @@
                                                             <action selector="morePins:" destination="otb-Ee-qlq" eventType="touchUpInside" id="eMO-Xb-1P4"/>
                                                         </connections>
                                                     </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No pins yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wQ-Wt-Bl5">
+                                                        <rect key="frame" x="10" y="50" width="355" height="23.5"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="UIN-XR-Ajf" firstAttribute="top" secondItem="usz-Ts-PyD" secondAttribute="top" constant="5" id="7mR-wT-3xc"/>
                                                     <constraint firstAttribute="bottom" secondItem="ge3-bd-8kY" secondAttribute="bottom" constant="8" id="8wY-Nq-h6I"/>
-                                                    <constraint firstItem="ge3-bd-8kY" firstAttribute="top" secondItem="0im-DM-qTP" secondAttribute="bottom" constant="4" id="9Py-Fc-yd9"/>
                                                     <constraint firstItem="0im-DM-qTP" firstAttribute="top" secondItem="UIN-XR-Ajf" secondAttribute="bottom" constant="5" id="Bwl-Ne-TGw"/>
+                                                    <constraint firstItem="2wQ-Wt-Bl5" firstAttribute="leading" secondItem="usz-Ts-PyD" secondAttribute="leading" constant="10" id="DY6-LS-Euz"/>
+                                                    <constraint firstItem="2wQ-Wt-Bl5" firstAttribute="top" secondItem="UIN-XR-Ajf" secondAttribute="bottom" constant="20" id="Ior-uu-nkF"/>
                                                     <constraint firstAttribute="height" constant="316" id="K99-Nn-AaJ"/>
                                                     <constraint firstAttribute="trailing" secondItem="UIN-XR-Ajf" secondAttribute="trailing" constant="10" id="Ucz-ch-ZJw"/>
                                                     <constraint firstAttribute="trailing" secondItem="0im-DM-qTP" secondAttribute="trailing" constant="10" id="VQh-qo-7ew"/>
                                                     <constraint firstAttribute="trailing" secondItem="ge3-bd-8kY" secondAttribute="trailing" constant="10" id="YWo-kc-STx"/>
                                                     <constraint firstItem="0im-DM-qTP" firstAttribute="leading" secondItem="usz-Ts-PyD" secondAttribute="leading" constant="10" id="bA3-ky-Uvp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2wQ-Wt-Bl5" secondAttribute="trailing" constant="10" id="rEI-UD-OHJ"/>
                                                     <constraint firstItem="UIN-XR-Ajf" firstAttribute="leading" secondItem="usz-Ts-PyD" secondAttribute="leading" constant="10" id="ubZ-uv-Dw5"/>
                                                 </constraints>
                                             </view>
@@ -1014,6 +1025,7 @@
                         <outlet property="inviteUserStackView" destination="3p6-HE-tdh" id="3Zu-4S-STa"/>
                         <outlet property="inviteView" destination="79C-UR-Hhq" id="lVN-4E-dc5"/>
                         <outlet property="morePinSectionButton" destination="ge3-bd-8kY" id="TD4-a8-CP7"/>
+                        <outlet property="noPinLabel" destination="2wQ-Wt-Bl5" id="Rdx-Bi-uOE"/>
                         <outlet property="peopleAlsoLikedTableView" destination="4hl-dk-leI" id="be4-eY-S6O"/>
                         <outlet property="peopleAlsoLikedTopConstraint" destination="GSv-c5-9rs" id="yGF-iA-6X9"/>
                         <outlet property="peopleAlsoLikedViewBottomConstraint" destination="npH-w0-jpf" id="xcH-SO-6J7"/>
