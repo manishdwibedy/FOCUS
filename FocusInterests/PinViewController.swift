@@ -134,6 +134,13 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                     self.data.append(value?[key] as! NSDictionary)
                 }
                 
+                self.data.sorted(by: {
+                    ($0["time"] as! Double) < ($1["time"] as! Double)
+                })
+                if self.data.count > 3{
+                    self.data = self.data[0..<3]    
+                }
+                
                 //self.data.sort(by: $0["time"] as? Double < $1["time"] as? Double)
             }
             else{
