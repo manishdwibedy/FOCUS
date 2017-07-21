@@ -467,6 +467,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         ivc.type = "place"
         ivc.id = (place?.id)!
         ivc.place = place
+        
+        ivc.username = name
+        ivc.placeVC = self
+        
         self.present(ivc, animated: true, completion: { _ in })
     }
     
