@@ -377,7 +377,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
             
                 addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place.categories[0].alias))
             
-                cell.checkForFollow(id: place.id)
+                cell.checkForFollow()
                 let placeHolderImage = UIImage(named: "empty_event")
                 cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
                 cell.distanceLabel.text = getDistance(fromLocation: self.location!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))

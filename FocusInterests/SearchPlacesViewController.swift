@@ -240,7 +240,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         }
         
         cell.parentVC = self
-        cell.checkForFollow(id: place.id)
+        cell.checkForFollow()
         _ = UIImage(named: "empty_event")
         
         SDWebImageManager.shared().downloadImage(with: URL(string :place.image_url), options: .highPriority, progress: {
@@ -256,7 +256,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         })
         
         //cell.placeImage.sd_setImage(with: URL(string :place.image_url), placeholderImage: placeHolderImage)
-        cell.checkForFollow(id: place.id)
+        cell.checkForFollow()
         
         return cell
     }

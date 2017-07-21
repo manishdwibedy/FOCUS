@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SDWebImage
 
 class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate{
     var place: Place?
@@ -87,9 +88,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     var data = [NSDictionary]()
     var isFollowing = false
     var place_focus = ""
+    var pinDF = DateFormatter()
     
     @IBOutlet weak var noPinLabel: UILabel!
     @IBOutlet weak var pinTableHeight: NSLayoutConstraint!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -129,6 +133,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 {
                     self.data.append(value?[key] as! NSDictionary)
                 }
+                
+                //self.data.sort(by: $0["time"] as? Double < $1["time"] as? Double)
             }
             else{
                 self.pinsHeightConstraint.constant = 116
@@ -193,6 +199,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             }
         })
 
+        pinDF.dateFormat = "MMM d, h:mm a"
     }
     
     func checkFollowing(){
@@ -409,32 +416,21 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        var cell = UITableViewCell()
         if (tableView.tag == 0){
             let pinCell = self.pinTableView.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
-            //        let pinCell = Bundle.main.loadNibNamed("PinPlaceReviewTableViewCell", owner: self, options: nil)?.first as! PinPlaceReviewTableViewCell
             
-            //        cell.data = data[indexPath.row]
-            pinCell.usernameLabel.text = "username"
-            addGreenDot(label: pinCell.categoryLabel, content: "Category")
-            pinCell.timeOfPinLabel.text = "31m"
-            pinCell.commentsTextView.text = "Comments"
-            //        pinCell.commentsTextView.text = data[indexPath.row]["pin"] as! String
+            let data = self.data[indexPath.row]
             
-            //        cell.loadLikes()
-            //        cell.parentVC = self
+            Constants.DB.user.child((data["fromUID"] as? String)!).observeSingleEvent(of: .value, with: {snapshot in
+                if let data = snapshot.value as? [String:Any]{
+                    pinCell.usernameLabel.text = data["username"] as? String
+                }
+            })
             
-            /*
-             Constants.DB.user.child(data[indexPath.row]["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-             let value = snapshot.value as? NSDictionary
-             if value != nil
-             {
-             pinCell.usernameLabel.text = value?["username"] as? String
-             
-             }
-             
-             })
-             */
+            addGreenDot(label: pinCell.categoryLabel, content:(data["focus"] as? String)!)
+            pinCell.timeOfPinLabel.text = pinDF.string(from: Date(timeIntervalSince1970: (data["time"] as? Double)!))
+            pinCell.commentsTextView.text = data["pin"] as? String
+            
             return pinCell
         }else{
             
@@ -449,9 +445,26 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
             let address = place.address.joined(separator: "\n")
             
+            if let url = URL(string: place.image_url){
+                
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        otherPlacesCell.placeImage.image = crop(image: image!, width: 50, height: 50)
+                    }
+                })
+            }
+            
+            
+            otherPlacesCell.place = place
             otherPlacesCell.addressTextView.text = address
             addGreenDot(label: otherPlacesCell.categoryLabel, content: place_focus)
-//            otherPlacesCell.distanceLabel.text = "\(place.distance) mi"
+            
+            otherPlacesCell.checkForFollow()
             
             return otherPlacesCell
         }
@@ -486,6 +499,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         ivc.type = "place"
         ivc.id = (place?.id)!
         ivc.place = place
+        
+        ivc.username = AuthApi.getUserName()!
+        ivc.placeVC = self
+        
         self.present(ivc, animated: true, completion: { _ in })
     }
     

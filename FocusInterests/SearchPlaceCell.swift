@@ -165,10 +165,36 @@ class SearchPlaceCell: UITableViewCell {
         
     }
     
-    func checkForFollow(id:String){
-        print(id)
-        print(searchVC)
+    func checkForFollow(){
         
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").queryOrdered(byChild: "placeID").queryEqual(toValue: place!.id).observeSingleEvent(of: .value, with: {snapshot in
+        
+            if let data = snapshot.value as? [String:Any]{
+                self.followButtonOut.isSelected = true
+                self.followButtonOut.layer.borderColor = UIColor.white.cgColor
+                self.followButtonOut.layer.borderWidth = 1
+                
+                self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
+                self.followButtonOut.tintColor = UIColor.clear
+                self.followButtonOut.layer.shadowOpacity = 0.5
+                self.followButtonOut.layer.masksToBounds = false
+                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
+                self.followButtonOut.layer.shadowRadius = 5.0
+            }
+            else{
+                self.followButtonOut.isSelected = false
+                self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
+                self.followButtonOut.layer.borderWidth = 1
+                self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButtonOut.tintColor = UIColor.clear
+                self.followButtonOut.layer.shadowOpacity = 0.5
+                self.followButtonOut.layer.masksToBounds = false
+                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
+                self.followButtonOut.layer.shadowRadius = 5.0
+            }
+        })
+        
+        /*
         if let parent = parentVC{
             if (parent.followingPlaces.contains(self.place!)){
                 self.followButtonOut.isSelected = true
@@ -221,6 +247,7 @@ class SearchPlaceCell: UITableViewCell {
                 
             }
         }
+ */
         
     }
 }
