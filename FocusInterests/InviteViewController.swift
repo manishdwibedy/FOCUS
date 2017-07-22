@@ -562,7 +562,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let user = snapshot.value as? [String : Any] ?? [:]
                         
                         let fullname = user["fullname"] as? String
-                        sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "place", item_id: "",item_name: "")
+                        sendNotification(to: UID, title: "Invites", body: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", actionType: "", type: "place", item_id: "",item_name: "")
                     })
                     Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime,"status": "sent"])
 //                    searchPlace?.showPopup = true
@@ -583,7 +583,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let user = snapshot.value as? [String : Any] ?? [:]
                         
                         let fullname = user["fullname"] as? String
-                        sendNotification(to: UID, title: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", body: "", actionType: "", type: "event", item_id: "", item_name: "")
+                        sendNotification(to: UID, title: "Invites", body: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", actionType: "", type: "event", item_id: "", item_name: "")
                     })
                     Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
 //                    searchEvent?.showInvitePopup = true
