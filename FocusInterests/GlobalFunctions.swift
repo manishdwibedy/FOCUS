@@ -410,6 +410,10 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                 if let data = snapshot.value as? [String:Any]{
                                     let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: nil)
                                     let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: time)
+                                    commentInfo.data = [
+                                        "pin": pin
+                                    ]
+                                    
                                     pins.append(pinFeed)
                                     
                                     if pinCount == pins.count && pinImageCount == totalPins{
@@ -444,6 +448,10 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                         let data = snapshot.value as? [String:Any]
                                         let user = NotificationUser(username: data?["username"] as? String, uuid: data?["firebaseUserId"] as? String, imageURL: nil)
                                         let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
+                                        place.data = [
+                                            "pin": pin
+                                        ]
+                                        
                                         pins.append(pinFeed)
                                         
                                         if pinCount == pins.count && pinImageCount == totalPins{

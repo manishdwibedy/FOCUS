@@ -408,7 +408,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
                     cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
                     
-                    
+                    let caption = pinData["pin"] as! String
+                    cell.placeBeingLiked.setTitle("Pin: \(caption)", for: .normal)
                     if let images = pinData["images"] as? NSDictionary{
                         var firstVal = ""
                         for (key,_) in images
@@ -431,14 +432,58 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                         })
                     }
                 }
-                
+                return cell
             }
             
         }
         else if feed.type == .Comment{
-            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
-            
-            if let pinData = feed.item?.data["pin"] as? [String: Any]{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as? FeedCommentTableViewCell{
+                getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
+                    cell.usernameWhoCommentedLabel.setTitle(user.username, for: .normal)
+                    if let image = user.image_string{
+                        if let url = URL(string: image){
+                            cell.usernameImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                    
+                })
+                
+                if let pinData = feed.item?.data["pin"] as? [String: Any]{
+                    let user = pinData["fromUID"] as? String
+                    
+                    getUserData(id: user!, gotUser: {user in
+                        cell.usernameReceivingCommentLabel.setTitle(user.username, for: .normal)
+                    })
+                    
+                    let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
+                    cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
+                    
+                    let caption = pinData["pin"] as! String
+                    cell.eventNameLabel.setTitle("Pin: \(caption)", for: .normal)
+                    cell.commentLabel.text = feed.item?.itemName
+                    if let images = pinData["images"] as? NSDictionary{
+                        var firstVal = ""
+                        for (key,_) in images
+                        {
+                            firstVal = key as! String
+                            break
+                        }
+                        
+                        let reference = Constants.storage.pins.child((images[firstVal] as! NSDictionary)["imagePath"] as! String)
+                        reference.downloadURL(completion: { (url, error) in
+                            
+                            if error != nil {
+                                print(error?.localizedDescription ?? "")
+                                return
+                            }
+                            
+                            cell.eventImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                            cell.eventImage.setShowActivityIndicator(true)
+                            cell.eventImage.setIndicatorStyle(.gray)
+                        })
+                    }
+                }
+                return cell
             }
         }
         
