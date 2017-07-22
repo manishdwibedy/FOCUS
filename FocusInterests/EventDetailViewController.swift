@@ -13,7 +13,11 @@ import GeoFire
 import ChameleonFramework
 import Crashlytics
 
-class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate {
+protocol EventDetailViewControllerDelegate{
+    func showPopup()
+}
+
+class EventDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate, EventDetailViewControllerDelegate{
     @IBOutlet weak var hostNameLabel: UILabel!
     
     @IBOutlet weak var topView: UIView!
@@ -21,6 +25,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var fullnameLabel: UILabel!
     @IBOutlet weak var distanceLabelInNavBar: UIButton!
     
+    @IBOutlet weak var invitePopupView: UIView!
+    @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var globeButton: UIButton!
     @IBOutlet weak var eventInterests: UILabel!
     @IBOutlet weak var eventAmount: UILabel!
@@ -58,7 +64,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var commentTableHeight: NSLayoutConstraint!
     @IBOutlet weak var noCommentLabel: UILabel!
     
+    var invitePeopleEventDelegate: InvitePeopleEventCellDelegate?
     var event: Event?
+    var showInvitePopup = false
+    
     let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
     var keyboardUp = false
@@ -70,6 +79,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var map: MapViewController? = nil
     
     var commentDF = DateFormatter()
+    let screenSize = UIScreen.main.bounds
+    var screenWidth: CGFloat = 0.0
+    var screenHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +113,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.setupViewsAndButton()
         
         // Reference to an image file in Firebase Storage
-        
+        self.screenWidth = self.screenSize.width
+        self.screenHeight = self.screenSize.height
+
+        self.invitePopupView.center.y = self.screenHeight - 20
+        self.invitePopupTopConstraint.constant = self.screenHeight - 20
 //        self.navigationItem.title = self.event?.title
         
         commentTextField.layer.borderWidth = 1
@@ -115,7 +131,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.eventImage.layer.borderColor = Constants.color.pink.cgColor
         self.eventImage.roundedImage()
         
-        
+        self.invitePopupView.allCornersRounded(radius: 10.0)
         self.inviteButton.roundCorners(radius: 5.0)
         
         self.pinHereButton.roundCorners(radius: 5.0)
@@ -324,6 +340,26 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         hideKeyboardWhenTappedAround()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if showInvitePopup {
+            //            self.view.bringSubview(toFront: self.invitePopupView)
+            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= self.invitePopupView.frame.size.height
+                self.invitePopupTopConstraint.constant -= self.invitePopupView.frame.size.height
+            }, completion: { animate in
+                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += self.invitePopupView.frame.size.height
+                    self.invitePopupTopConstraint.constant += self.invitePopupView.frame.size.height
+                }, completion: { onCompletion in
+//                    self.invitePopupView.isHidden = true
+                    //                    self.scrollView.sendSubview(toBack: self.invitePopupView)
+                })
+            })
+            self.showInvitePopup = false
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -334,6 +370,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         ivc.type = "event"
         ivc.id = (event?.id!)!
         ivc.event = event
+        ivc.inviteFromEventDetails = true
+        ivc.eventDetailsDelegate = self
         self.present(ivc, animated: true, completion: { _ in })
     }
     
@@ -461,8 +499,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         ivc.parentVC = self
         ivc.parentEvent = event
         self.present(ivc, animated: true, completion: { _ in })
-        
-        
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -805,7 +841,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         ivc.coordinates.longitude = Double((event?.longitude)!)!
         ivc.locationName = (event?.title)!
         self.present(ivc, animated: true, completion: { _ in })
-        
     }
     
+    func showPopup(){
+        print("have sent invite to this place!")
+//        self.invitePopupView.isHidden = false
+        self.showInvitePopup = true
+    }
 }

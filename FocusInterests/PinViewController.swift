@@ -124,8 +124,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         hideKeyboardWhenTappedAround()
         
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+//        self.invitePopupView.frame.origin.x = 0
+//        self.invitePopupView.frame.origin.y = screenHeight + 100
+//        self.invite
         self.invitePopupView.allCornersRounded(radius: 10)
-        
+        self.invitePopupView.isHidden = true
+        self.invitePopupView.isUserInteractionEnabled = false
+//        self.scrollView.sendSubview(toBack: self.invitePopupView)
         // Round up Yelp!
         
         self.yelpButton.backgroundColor = .clear
@@ -486,7 +494,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 })
             }
             
-            
+            otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(PlaceViewController.inviteButtonClicked(_:)), for: .touchUpInside)
             otherPlacesCell.place = place
             otherPlacesCell.addressTextView.text = address
             addGreenDot(label: otherPlacesCell.categoryLabel, content: place_focus)
@@ -510,17 +518,17 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if showInvitePopup {
-            self.view.bringSubview(toFront: self.invitePopupView)
-//            //            self.invitePopupView.isHidden = false
+//            self.view.bringSubview(toFront: self.invitePopupView)
             UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.invitePopupView.center.y -= 90
-                self.invitePopupBottomConstraint.constant -= 90
+//                self.invitePopupBottomConstraint.constant -= 90
             }, completion: { animate in
                 UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
                     self.invitePopupView.center.y += 90
-                    self.invitePopupBottomConstraint.constant += 90
+//                    self.invitePopupBottomConstraint.constant += 90
                 }, completion: { onCompletion in
-                    self.scrollView.sendSubview(toBack: self.invitePopupView)
+                    self.invitePopupView.isHidden = true
+//                    self.scrollView.sendSubview(toBack: self.invitePopupView)
                 })
             })
             self.showInvitePopup = false
@@ -813,6 +821,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func showPopup(){
         print("have sent invite to this place!")
+        self.invitePopupView.isHidden = false
         self.showInvitePopup = true
     }
     
