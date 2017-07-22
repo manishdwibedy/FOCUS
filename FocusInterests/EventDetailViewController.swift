@@ -112,12 +112,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         self.setupViewsAndButton()
         
-        // Reference to an image file in Firebase Storage
         self.screenWidth = self.screenSize.width
         self.screenHeight = self.screenSize.height
-
+        
         self.invitePopupView.center.y = self.screenHeight - 20
         self.invitePopupTopConstraint.constant = self.screenHeight - 20
+        // Reference to an image file in Firebase Storage
 //        self.navigationItem.title = self.event?.title
         
         commentTextField.layer.borderWidth = 1

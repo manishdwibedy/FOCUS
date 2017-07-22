@@ -352,6 +352,27 @@
                                             <segue destination="otb-Ee-qlq" kind="embed" identifier="pinInfo" id="aMg-iD-DqQ"/>
                                         </connections>
                                     </containerView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCO-kg-XPF" userLabel="Invite Popup View">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="77"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92X-wR-p66">
+                                                <rect key="frame" x="103" y="26" width="158" height="25"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                <color key="textColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="92X-wR-p66" firstAttribute="leading" secondItem="lCO-kg-XPF" secondAttribute="leading" constant="103" id="7VG-36-kKw"/>
+                                            <constraint firstItem="92X-wR-p66" firstAttribute="centerY" secondItem="lCO-kg-XPF" secondAttribute="centerY" id="BZN-y7-IRy"/>
+                                            <constraint firstAttribute="bottom" secondItem="92X-wR-p66" secondAttribute="bottom" constant="26" id="LIm-SB-tzX"/>
+                                            <constraint firstItem="92X-wR-p66" firstAttribute="top" secondItem="lCO-kg-XPF" secondAttribute="top" constant="26" id="Rhv-00-5RV"/>
+                                            <constraint firstAttribute="height" constant="77" id="WxJ-td-Xrc"/>
+                                            <constraint firstItem="92X-wR-p66" firstAttribute="centerX" secondItem="lCO-kg-XPF" secondAttribute="centerX" constant="-5" id="g0u-XJ-EuK"/>
+                                            <constraint firstAttribute="trailing" secondItem="92X-wR-p66" secondAttribute="trailing" constant="113" id="tB8-zk-ovN"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ZW8-K4-PiO" secondAttribute="trailing" id="3i5-hW-pLp"/>
@@ -412,9 +433,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="lCO-kg-XPF" secondAttribute="trailing" constant="-15" id="2eO-ic-fqB"/>
+                            <constraint firstItem="lCO-kg-XPF" firstAttribute="top" secondItem="lUX-hZ-ugx" secondAttribute="bottom" constant="45" id="5gU-hX-Jlo"/>
                             <constraint firstItem="NzO-EW-EoK" firstAttribute="top" secondItem="ns3-qv-thK" secondAttribute="bottom" constant="1" id="AWu-BN-r1n"/>
                             <constraint firstItem="NzO-EW-EoK" firstAttribute="leading" secondItem="RKS-cE-1LS" secondAttribute="leading" id="DW9-jJ-isw"/>
                             <constraint firstAttribute="trailing" secondItem="NzO-EW-EoK" secondAttribute="trailing" id="KG1-WT-JN6"/>
+                            <constraint firstItem="lCO-kg-XPF" firstAttribute="leading" secondItem="RKS-cE-1LS" secondAttribute="leadingMargin" constant="-16" id="V4l-IU-cgu"/>
                             <constraint firstItem="ns3-qv-thK" firstAttribute="top" secondItem="lUX-hZ-ugx" secondAttribute="bottom" id="VDX-19-Gl9"/>
                             <constraint firstItem="ns3-qv-thK" firstAttribute="leading" secondItem="RKS-cE-1LS" secondAttribute="leading" id="goN-GH-o8L"/>
                             <constraint firstAttribute="trailing" secondItem="ns3-qv-thK" secondAttribute="trailing" id="kA0-l3-fNC"/>
@@ -430,6 +454,8 @@
                         <outlet property="followersAmountLabel" destination="2JC-h8-89n" id="swC-fH-2aE"/>
                         <outlet property="interestLabel" destination="gYI-6F-8iP" id="xZ8-sS-ZeV"/>
                         <outlet property="inviteButton" destination="xNk-0o-cCa" id="ikp-9j-89O"/>
+                        <outlet property="invitePopupTopConstraint" destination="5gU-hX-Jlo" id="NQ9-u6-sSH"/>
+                        <outlet property="invitePopupView" destination="lCO-kg-XPF" id="0RS-ny-5d5"/>
                         <outlet property="mapButton" destination="aU2-ld-zGm" id="xeU-ll-XgB"/>
                         <outlet property="navigationBar" destination="ns3-qv-thK" id="SVc-bE-Al6"/>
                         <outlet property="pinAmountLabel" destination="iZK-dZ-fCb" id="Yd5-me-Bgg"/>
@@ -963,38 +989,15 @@
                                             <constraint firstAttribute="trailing" secondItem="79C-UR-Hhq" secondAttribute="trailing" id="zvq-pp-dEG"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCO-kg-XPF" userLabel="Invite Sent View">
-                                        <rect key="frame" x="0.0" y="400" width="374" height="77"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92X-wR-p66">
-                                                <rect key="frame" x="103" y="26" width="158" height="25"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
-                                                <color key="textColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="92X-wR-p66" firstAttribute="leading" secondItem="lCO-kg-XPF" secondAttribute="leading" constant="103" id="7VG-36-kKw"/>
-                                            <constraint firstItem="92X-wR-p66" firstAttribute="centerY" secondItem="lCO-kg-XPF" secondAttribute="centerY" id="BZN-y7-IRy"/>
-                                            <constraint firstAttribute="bottom" secondItem="92X-wR-p66" secondAttribute="bottom" constant="26" id="LIm-SB-tzX"/>
-                                            <constraint firstItem="92X-wR-p66" firstAttribute="top" secondItem="lCO-kg-XPF" secondAttribute="top" constant="26" id="Rhv-00-5RV"/>
-                                            <constraint firstAttribute="height" constant="77" id="WxJ-td-Xrc"/>
-                                            <constraint firstItem="92X-wR-p66" firstAttribute="centerX" secondItem="lCO-kg-XPF" secondAttribute="centerX" constant="-5" id="g0u-XJ-EuK"/>
-                                            <constraint firstAttribute="trailing" secondItem="92X-wR-p66" secondAttribute="trailing" constant="113" id="tB8-zk-ovN"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="RLc-gV-LBV" secondAttribute="bottom" constant="6" id="4In-b2-tN4"/>
                                     <constraint firstItem="EYI-mS-d6G" firstAttribute="leading" secondItem="JLy-a0-Na0" secondAttribute="leading" id="9yK-EV-6Ph"/>
                                     <constraint firstAttribute="trailing" secondItem="EYI-mS-d6G" secondAttribute="trailing" id="KkS-25-fgk"/>
-                                    <constraint firstItem="lCO-kg-XPF" firstAttribute="leading" secondItem="JLy-a0-Na0" secondAttribute="leading" id="VS4-YE-f79"/>
                                     <constraint firstItem="EYI-mS-d6G" firstAttribute="leading" secondItem="RLc-gV-LBV" secondAttribute="leading" id="fGf-0I-l7D"/>
                                     <constraint firstItem="EYI-mS-d6G" firstAttribute="trailing" secondItem="RLc-gV-LBV" secondAttribute="trailing" id="fM5-YN-uO2"/>
                                     <constraint firstItem="RLc-gV-LBV" firstAttribute="top" secondItem="EYI-mS-d6G" secondAttribute="bottom" constant="-5" id="hl0-EW-LFz"/>
-                                    <constraint firstAttribute="trailing" secondItem="lCO-kg-XPF" secondAttribute="trailing" constant="1" id="jMP-By-iYP"/>
                                     <constraint firstItem="EYI-mS-d6G" firstAttribute="top" secondItem="JLy-a0-Na0" secondAttribute="top" id="yoV-KN-lzE"/>
                                     <constraint firstItem="EYI-mS-d6G" firstAttribute="centerX" secondItem="JLy-a0-Na0" secondAttribute="centerX" id="ypP-RX-ZZF"/>
                                 </constraints>
@@ -1002,7 +1005,6 @@
                         </subviews>
                         <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="lCO-kg-XPF" firstAttribute="top" secondItem="ee2-5S-bbO" secondAttribute="bottom" constant="400" id="93W-dK-Url"/>
                             <constraint firstAttribute="trailing" secondItem="JLy-a0-Na0" secondAttribute="trailing" id="DcU-qe-o8n"/>
                             <constraint firstItem="JLy-a0-Na0" firstAttribute="leading" secondItem="K59-jd-py0" secondAttribute="leading" id="K2K-bl-eYp"/>
                             <constraint firstItem="JLy-a0-Na0" firstAttribute="top" secondItem="ee2-5S-bbO" secondAttribute="bottom" id="QhU-Jj-teM"/>
@@ -1028,8 +1030,6 @@
                         <outlet property="hoursStackView" destination="8EY-28-xIf" id="YjF-Hv-Hg9"/>
                         <outlet property="infoScreenHeight" destination="GnF-Z2-Scf" id="f0c-7J-LXG"/>
                         <outlet property="infoView" destination="dH7-9c-Q24" id="9Sl-Zz-Zpz"/>
-                        <outlet property="invitePopupBottomConstraint" destination="93W-dK-Url" id="6bL-Am-xrj"/>
-                        <outlet property="invitePopupView" destination="lCO-kg-XPF" id="ALW-dX-Wha"/>
                         <outlet property="inviteUserStackView" destination="3p6-HE-tdh" id="3Zu-4S-STa"/>
                         <outlet property="inviteView" destination="79C-UR-Hhq" id="lVN-4E-dc5"/>
                         <outlet property="noPinLabel" destination="2wQ-Wt-Bl5" id="Rdx-Bi-uOE"/>
@@ -1061,7 +1061,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfy-HE-dyA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-526" y="1332"/>
+            <point key="canvasLocation" x="-894" y="2390"/>
         </scene>
         <!--Rating View Controller-->
         <scene sceneID="AO6-ce-YwT">

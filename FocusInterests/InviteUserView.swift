@@ -40,7 +40,7 @@ class InviteUserView: UIView {
     }
     
     @IBAction func invite(_ sender: UIButton) {
-        print("he")
-        delegate?.inviteUser(name: self.userName.text!)
+        print("sent user invite")
+//        delegate?.inviteUser(name: self.userName.text!)
     }    
 }

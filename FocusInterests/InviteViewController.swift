@@ -623,6 +623,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if type == "place"{
                 if self.inviteFromPlaceDetails{
                     self.placeDetailsDelegate?.hasSentInvite()
+                    self.inviteFromPlaceDetails = false
                 }else{
                     self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
                 }
@@ -630,6 +631,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }else{
                 if self.inviteFromEventDetails{
                     self.eventDetailsDelegate?.showPopup()
+                    self.inviteFromEventDetails = false
                 }else{
                     self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
                 }

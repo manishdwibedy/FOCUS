@@ -146,6 +146,7 @@ class SearchPlaceCell: UITableViewCell {
     }
    
     @IBAction func inviteButton(_ sender: Any) {
+        print("pressed invite button in searchplace")
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "place"
@@ -156,8 +157,7 @@ class SearchPlaceCell: UITableViewCell {
         
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: nil)
-        }
-        else{
+        }else{
             self.searchVC?.present(ivc, animated: true, completion: nil)
         }
         

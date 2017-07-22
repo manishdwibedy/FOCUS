@@ -25,7 +25,6 @@ protocol SendInviteFromPlaceDetailsDelegate{
 class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     var commentsDelegate: CommentsDelegate?
     var suggestPlacesDelegate: SuggestPlacesDelegate?
-    var showInvitePopupDelegate: ShowInvitePopupInPinViewControllerDelegate?
     
     var place: Place?
     var rating = [PlaceRating]()
@@ -33,8 +32,6 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     var map: MapViewController? = nil
     
     @IBOutlet weak var placeScrollView: UIScrollView!
-    @IBOutlet weak var invitePopupView: UIView!
-    @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var yelpButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
@@ -49,6 +46,8 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     @IBOutlet weak var ratingBackground: UIView!
     @IBOutlet weak var navBar: UINavigationBar!
     
+    @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var invitePopupView: UIView!
     @IBOutlet weak var ratingsImage: UIImageView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var placeImage: UIImageView!
@@ -63,6 +62,11 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     @IBOutlet weak var placeName: UILabel!
     @IBOutlet weak var distanceLabelInNavBar: UIButton!
     
+    let screenSize = UIScreen.main.bounds
+    var screenWidth: CGFloat = 0.0
+    var screenHeight: CGFloat = 0.0
+    var showInvitePopup = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,11 +77,18 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         self.mapButton.setImage(UIImage(named: "Globe_White"), for: .normal)
 //        self.mapButton.setImage(UIImage(image: UIImage(named: "web"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
         
+        self.screenWidth = self.screenSize.width
+        self.screenHeight = self.screenSize.height
+        self.invitePopupView.center.y = self.screenHeight - 20
+        self.invitePopupTopConstraint.constant = self.screenHeight - 20
+        
         hideKeyboardWhenTappedAround()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showRating(sender:)))
         
 //        ratingBackground.addGestureRecognizer(tapGesture)
+        
+        self.invitePopupView.allCornersRounded(radius: 10.0)
         
         self.topView.addTopBorderWithColor(color: UIColor.white, width: 1.0)
         
@@ -153,6 +164,7 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.showPopup()
     }
     
     func showRating(sender: UITapGestureRecognizer) {
@@ -247,6 +259,7 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
             let pin = segue.destination as! PinViewController
             pin.placeVC = self
             pin.place = self.place
+            pin.delegate = self
         }
         if segue.identifier == "unwindToMapViewControllerWithSegue"{
             let map = self.map
@@ -478,9 +491,24 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         present(ivc, animated: true, completion: nil)
     }
     
+    func showPopup(){
+        if showInvitePopup {
+            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= self.invitePopupView.frame.size.height
+                self.invitePopupTopConstraint.constant -= self.invitePopupView.frame.size.height
+            }, completion: { animate in
+                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += self.invitePopupView.frame.size.height
+                    self.invitePopupTopConstraint.constant += self.invitePopupView.frame.size.height
+                }, completion: nil)
+            })
+            self.showInvitePopup = false
+        }
+    }
+    
     func hasSentInvite(){
         print("have sent invite to this place!")
-        self.showInvitePopupDelegate?.showPopup()
+        self.showInvitePopup = true
     }
     
 }

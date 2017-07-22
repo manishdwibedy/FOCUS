@@ -10,11 +10,7 @@ import UIKit
 import MapKit
 import SDWebImage
 
-protocol ShowInvitePopupInPinViewControllerDelegate{
-    func showPopup()
-}
-
-class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate, ShowInvitePopupInPinViewControllerDelegate{
+class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate{
     var place: Place?
     
     @IBOutlet weak var postReviewSeciontButton: UIButton!
@@ -50,9 +46,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var invitePopupView: UIView!
-    @IBOutlet weak var invitePopupBottomConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var reviewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
@@ -71,6 +64,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     var ratingID: String?
     var rating: Int? = nil
     var showInvitePopup = false
+    var delegate: SendInviteFromPlaceDetailsDelegate?
     
     @IBOutlet weak var yelpButton: UIButton!
     @IBOutlet weak var uberButton: UIButton!
@@ -107,8 +101,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.placeVC?.showInvitePopupDelegate = self
-        
         self.placeVC?.reviewButton.addTarget(self, action: #selector(PinViewController.showReviewBox), for: .touchUpInside)
         
         self.placeVC?.followButton.addTarget(self, action: #selector(PinViewController.followPressed), for: .touchUpInside)
@@ -124,16 +116,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         hideKeyboardWhenTappedAround()
         
-        let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
-//        self.invitePopupView.frame.origin.x = 0
-//        self.invitePopupView.frame.origin.y = screenHeight + 100
-//        self.invite
-        self.invitePopupView.allCornersRounded(radius: 10)
-        self.invitePopupView.isHidden = true
-        self.invitePopupView.isUserInteractionEnabled = false
-//        self.scrollView.sendSubview(toBack: self.invitePopupView)
         // Round up Yelp!
         
         self.yelpButton.backgroundColor = .clear
@@ -406,7 +388,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             view.userName.text = user
             view.userName.textColor = .white
             view.delegate = self
-            view.inviteButton.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
+            view.inviteButton.addTarget(self, action: #selector(inviteSentToSingleUser), for: .touchUpInside)
             view.image.image = UIImage(named: "UserPhoto")
         }
         
@@ -494,7 +476,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 })
             }
             
-            otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(PlaceViewController.inviteButtonClicked(_:)), for: .touchUpInside)
             otherPlacesCell.place = place
             otherPlacesCell.addressTextView.text = address
             addGreenDot(label: otherPlacesCell.categoryLabel, content: place_focus)
@@ -517,22 +498,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if showInvitePopup {
-//            self.view.bringSubview(toFront: self.invitePopupView)
-            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.invitePopupView.center.y -= 90
-//                self.invitePopupBottomConstraint.constant -= 90
-            }, completion: { animate in
-                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
-                    self.invitePopupView.center.y += 90
-//                    self.invitePopupBottomConstraint.constant += 90
-                }, completion: { onCompletion in
-                    self.invitePopupView.isHidden = true
-//                    self.scrollView.sendSubview(toBack: self.invitePopupView)
-                })
-            })
-            self.showInvitePopup = false
-        }
     }
     
     func inviteUser(name: String) {
@@ -550,18 +515,27 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     func inviteTestMethod(){
+        
+        print("testing........")
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "place"
         ivc.id = (place?.id)!
         ivc.place = place
-        
+        ivc.placeDetailsDelegate = self.delegate
+        ivc.inviteFromPlaceDetails = true
         ivc.username = AuthApi.getUserName()!
         ivc.placeVC = self
         
         self.present(ivc, animated: true, completion: { _ in })
     }
     
+    func inviteSentToSingleUser(){
+
+//        TODO: need to send invite to single user, need to ask arya how to handle stack when invite sent
+        self.placeVC?.hasSentInvite()
+        self.placeVC?.showPopup()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -817,12 +791,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             }
             
         })
-    }
-    
-    func showPopup(){
-        print("have sent invite to this place!")
-        self.invitePopupView.isHidden = false
-        self.showInvitePopup = true
     }
     
     @IBAction func follow(_ sender: Any) {
