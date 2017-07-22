@@ -76,6 +76,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var uberButton: UIButton!
     @IBOutlet weak var googleMapButton: UIButton!
     
+    @IBOutlet weak var peopleAlsoLikedHeight: NSLayoutConstraint!
     @IBOutlet weak var pinsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var peopleAlsoLikedTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var peopleWhoLikeThisTopConstraint: NSLayoutConstraint!
@@ -123,7 +124,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         hideKeyboardWhenTappedAround()
         
-//        self.invitePopupView.allCornersRounded(radius: 10)
+        self.invitePopupView.allCornersRounded(radius: 10)
         
         // Round up Yelp!
         
@@ -157,7 +158,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 //self.data.sort(by: $0["time"] as? Double < $1["time"] as? Double)
             }
             else{
-//                self.pinsHeightConstraint.constant = 116
+                self.pinsHeightConstraint.constant = 116
+//                self.viewHeight.constant -= 116
+                
                 self.noPinLabel.alpha = 1
             }
             self.pinTableView.reloadData()
@@ -254,11 +257,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.peopleAlsoLikedTableView.bounds.size.height = self.peopleAlsoLikedTableView.contentSize.height
-//        self.bottomView.con
-//        if let placeViewController = self.placeVC {
+//        self.peopleAlsoLikedTableView.bounds.size.height = self.peopleAlsoLikedTableView.contentSize.height
+        if let placeViewController = self.placeVC {
+//            placeViewController.placeScrollView.bounds.size.height = self.topViewHeight.constant + self.viewHeight.constant
 //            placeViewController.pinViewHeight.constant += ((self.viewHeight.constant+self.topView.frame.size.height+self.peopleAlsoLikedTopConstraint.constant+self.peopleWhoLikeThisTopConstraint.constant+self.pinsTopConstraint.constant+self.peopleAlsoLikedViewBottomConstraint.constant+self.bottomViewBottomConstraint.constant)-self.scrollView.frame.size.height)
-//        }
+        }
     }
     
     func callPlace(sender:UITapGestureRecognizer) {
@@ -355,7 +358,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         if let open_hours = place.hours{
             let hours = getOpenHours(open_hours)
             infoScreenHeight.constant += CGFloat(25 * hours.count)
-            viewHeight.constant += CGFloat(25 * hours.count)
+//            viewHeight.constant += CGFloat(25 * hours.count)
             
             for (_, hour) in (hours.enumerated()){
 //                frame: CGRect(x: 0, y: 0, width: self.hoursStackView.frame.size.width, height: 25)
@@ -507,19 +510,19 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if showInvitePopup {
-//            self.view.bringSubview(toFront: self.invitePopupView)
+            self.view.bringSubview(toFront: self.invitePopupView)
 //            //            self.invitePopupView.isHidden = false
-//            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
-//                self.invitePopupView.center.y -= 1120
-//                self.invitePopupBottomConstraint.constant -= 1120
-//            }, completion: { animate in
-//                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
-//                    self.invitePopupView.center.y = 1120
-//                    self.invitePopupBottomConstraint.constant += 1120
-//                }, completion: { onCompletion in
-//                    self.scrollView.sendSubview(toBack: self.invitePopupView)
-//                })
-//            })
+            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= 90
+                self.invitePopupBottomConstraint.constant -= 90
+            }, completion: { animate in
+                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += 90
+                    self.invitePopupBottomConstraint.constant += 90
+                }, completion: { onCompletion in
+                    self.scrollView.sendSubview(toBack: self.invitePopupView)
+                })
+            })
             self.showInvitePopup = false
         }
     }
