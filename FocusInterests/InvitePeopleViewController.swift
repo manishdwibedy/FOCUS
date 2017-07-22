@@ -32,6 +32,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     var showInvitePopup = false
     var isMeetup = false
+    var inviteFromOtherUserProfile = false
     var UID = ""
     var username = ""
     var filtered = [Any]()
@@ -39,7 +40,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var events = [Event]()
     var location: CLLocation?
     var searchPeople: SearchPeopleViewController? = nil
+    var otherUserProfile: OtherUserProfileViewController? = nil
     var mapView: MapViewController? = nil
+    
+    var otherUserProfileDelegate: OtherUserProfileViewControllerDelegate?
     var searchPeopleDelegate: SearchPeopleViewControllerDelegate?
     
     let locationManager = CLLocationManager()
@@ -136,10 +140,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         navBar.titleTextAttributes = attrs
         navBar.barTintColor = Constants.color.navy
         
-        if isMeetup{
+        if isMeetup || inviteFromOtherUserProfile{
             navBar.topItem?.title = "Meet up"
             self.backButton.isEnabled = true
             self.backButton.tintColor = UIColor.white
+            self.createEventButton.isHidden = true
         }else{
             self.backButton.isEnabled = false
             self.backButton.tintColor = UIColor.clear
@@ -198,7 +203,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.createEventButton.isHidden = true
         }else if segmentedOut.selectedSegmentIndex == 1{
             updateEvents()
-            if isMeetup{
+            if isMeetup || inviteFromOtherUserProfile{
                 self.createEventButton.isHidden = true
             }else{
                 self.createEventButton.isHidden = false
@@ -263,6 +268,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
             
             cell.isMeetup = self.isMeetup
+            cell.inviteFromOtherUserProfile = self.inviteFromOtherUserProfile
             cell.UID = UID
             cell.username = username
             cell.parentVC = self
@@ -285,6 +291,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
             
             cell.isMeetup = self.isMeetup
+            cell.inviteFromOtherUserProfile = self.inviteFromOtherUserProfile
             cell.event = event
             cell.UID = UID
             cell.username = username

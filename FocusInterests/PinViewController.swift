@@ -10,7 +10,11 @@ import UIKit
 import MapKit
 import SDWebImage
 
-class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate{
+protocol ShowInvitePopupInPinViewControllerDelegate{
+    func showPopup()
+}
+
+class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate, ShowInvitePopupInPinViewControllerDelegate{
     var place: Place?
     
     @IBOutlet weak var postReviewSeciontButton: UIButton!
@@ -46,6 +50,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var invitePopupView: UIView!
+    @IBOutlet weak var invitePopupBottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var reviewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
@@ -63,6 +70,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     var placeVC: PlaceViewController? = nil
     var ratingID: String?
     var rating: Int? = nil
+    var showInvitePopup = false
     
     @IBOutlet weak var yelpButton: UIButton!
     @IBOutlet weak var uberButton: UIButton!
@@ -76,6 +84,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var peopleAlsoLikedViewBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var bottomView: UIView!
     //rating
     @IBOutlet weak var ratingView: UIView!
     
@@ -97,6 +106,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.placeVC?.showInvitePopupDelegate = self
+        
         self.placeVC?.reviewButton.addTarget(self, action: #selector(PinViewController.showReviewBox), for: .touchUpInside)
         
         self.placeVC?.followButton.addTarget(self, action: #selector(PinViewController.followPressed), for: .touchUpInside)
@@ -112,6 +123,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         hideKeyboardWhenTappedAround()
         
+//        self.invitePopupView.allCornersRounded(radius: 10)
         
         // Round up Yelp!
         
@@ -145,7 +157,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 //self.data.sort(by: $0["time"] as? Double < $1["time"] as? Double)
             }
             else{
-                self.pinsHeightConstraint.constant = 116
+//                self.pinsHeightConstraint.constant = 116
                 self.noPinLabel.alpha = 1
             }
             self.pinTableView.reloadData()
@@ -242,9 +254,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let placeViewController = self.placeVC {
-            placeViewController.pinViewHeight.constant += ((self.viewHeight.constant+self.topView.frame.size.height+self.peopleAlsoLikedTopConstraint.constant+self.peopleWhoLikeThisTopConstraint.constant+self.pinsTopConstraint.constant+self.peopleAlsoLikedViewBottomConstraint.constant+self.bottomViewBottomConstraint.constant)-self.scrollView.frame.size.height)
-        }
+        self.peopleAlsoLikedTableView.bounds.size.height = self.peopleAlsoLikedTableView.contentSize.height
+//        self.bottomView.con
+//        if let placeViewController = self.placeVC {
+//            placeViewController.pinViewHeight.constant += ((self.viewHeight.constant+self.topView.frame.size.height+self.peopleAlsoLikedTopConstraint.constant+self.peopleWhoLikeThisTopConstraint.constant+self.pinsTopConstraint.constant+self.peopleAlsoLikedViewBottomConstraint.constant+self.bottomViewBottomConstraint.constant)-self.scrollView.frame.size.height)
+//        }
     }
     
     func callPlace(sender:UITapGestureRecognizer) {
@@ -283,15 +297,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
 //        moreCategoriesSectionButton.isHidden = true
         
         postReviewSeciontButton.layer.borderWidth = 1
-        morePinSectionButton.layer.borderWidth = 1
 //        moreCategoriesSectionButton.layer.borderWidth = 1
         
         postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
-        morePinSectionButton.layer.borderColor = UIColor.white.cgColor
 //        moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
         
         postReviewSeciontButton.roundCorners(radius: 5)
-        morePinSectionButton.roundCorners(radius: 5)
 //        moreCategoriesSectionButton.roundCorners(radius: 5)
         
         starRatingView.topCornersRounded(radius: 10)
@@ -488,7 +499,28 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
 //            tableView.cellForRow(at: indexPath)?.bounds.size.height = (tableView.cellForRow(at: indexPath)?.contentView.bounds.size.height)!
             return 80
         }else{
-            return 110
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
+            return cell.bounds.size.height
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if showInvitePopup {
+//            self.view.bringSubview(toFront: self.invitePopupView)
+//            //            self.invitePopupView.isHidden = false
+//            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+//                self.invitePopupView.center.y -= 1120
+//                self.invitePopupBottomConstraint.constant -= 1120
+//            }, completion: { animate in
+//                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+//                    self.invitePopupView.center.y = 1120
+//                    self.invitePopupBottomConstraint.constant += 1120
+//                }, completion: { onCompletion in
+//                    self.scrollView.sendSubview(toBack: self.invitePopupView)
+//                })
+//            })
+            self.showInvitePopup = false
         }
     }
     
@@ -606,17 +638,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         ivc.locationName = (place?.name)!
         self.present(ivc, animated: true, completion: { _ in })
         
-    }
-    
-    @IBAction func morePins(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
-        let ivc = storyboard.instantiateViewController(withIdentifier: "pinList") as! PlaceAllPinsViewController
-        for str in (place?.address)!
-        {
-            ivc.placeID = ivc.placeID + " " + str
-            
-        }
-        self.present(ivc, animated: true, completion: { _ in })
     }
     
     // MARK: TEXT VIEW DELEGATE METHODS
@@ -786,6 +807,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
         })
     }
+    
+    func showPopup(){
+        print("have sent invite to this place!")
+        self.showInvitePopup = true
+    }
+    
     @IBAction func follow(_ sender: Any) {
         
 //        if isFollowing == false

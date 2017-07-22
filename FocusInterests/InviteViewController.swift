@@ -37,6 +37,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var parentCell: SearchPlaceCell!
     var type = ""
     var id = ""
+    var inviteFromPlaceDetails = false
     var place: Place?
     var event: Event?
     var dayText = ""
@@ -75,6 +76,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var searchPeopleEventDelegate: InvitePeopleEventCellDelegate?
     var searchPeoplePlaceDelegate: InvitePeoplePlaceCellDelegate?
+    var placeDetailsDelegate: SendInviteFromPlaceDetailsDelegate?
     
     var image: Data?
     var selectedFriend = [Bool]()
@@ -239,7 +241,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.dateFormatter.dateStyle = .short
         
         self.datePicker.datePickerMode = .date
-        self.datePicker
         let date = Date()
         self.datePicker.minimumDate = date
         self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())
@@ -618,7 +619,11 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             
             if type == "place"{
-                self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
+                if self.inviteFromPlaceDetails{
+                    self.placeDetailsDelegate?.hasSentInvite()
+                }else{
+                    self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
+                }
                 self.dismiss(animated: true, completion: nil)
             }else{
                 self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()

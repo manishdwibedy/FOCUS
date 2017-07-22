@@ -32,8 +32,8 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     var username = ""
     var invitePeopleVCDelegate: InvitePeopleViewControllerDelegate!
     var isMeetup = false
+    var inviteFromOtherUserProfile = false
     var parentVC: InvitePeopleViewController!
-    var needToGoBackToSearchPeopleViewController: Bool?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -114,9 +114,13 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     }
     
     @IBAction func invite(_ sender: Any) {
+        print("sending invite")
         if isMeetup {
             self.parentVC.performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegueWithSegue", sender: self.parentVC)
-        }else{            
+        }else if inviteFromOtherUserProfile{
+            self.parentVC.otherUserProfileDelegate?.hasSentUserAnInvite()
+            self.parentVC.dismiss(animated: true, completion: nil)
+        }else{
             let storyboard = UIStoryboard(name: "Invites", bundle: nil)
             let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
             ivc.type = "event"

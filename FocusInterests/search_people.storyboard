@@ -13,7 +13,7 @@
         <!--Search People View Controller-->
         <scene sceneID="9tT-Es-qiz">
             <objects>
-                <viewController id="sfs-g5-Ui8" customClass="SearchPeopleViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchPeopleViewController" id="sfs-g5-Ui8" customClass="SearchPeopleViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tnB-jW-3Xk"/>
                         <viewControllerLayoutGuide type="bottom" id="1yO-It-5fn"/>
