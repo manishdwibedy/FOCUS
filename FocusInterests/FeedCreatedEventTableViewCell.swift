@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
 
@@ -17,13 +18,17 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
     @IBOutlet weak var searchEventTableView: UITableView!
     @IBOutlet weak var interestLabel: UILabel!
     
+    var event: Event? = nil
+    var parentVC: SearchEventsViewController? = nil
+    
+    @IBOutlet weak var actionLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         self.usernameImage.roundedImage()
-        self.usernameLabel.setTitle("arya", for: .normal)
-        self.eventNameLabel.setTitle("Event A", for: .normal)
+        
+        
         self.searchEventTableView.delegate = self
         self.searchEventTableView.dataSource = self
         self.searchEventTableView.separatorStyle = .none
@@ -57,19 +62,59 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         
         cell.textViewHeight.constant -= 22
         
-        cell.address.text = "2656 Ellendale Pl Los Angeles"
-        cell.name.text = "Event A"
+        
+        self.eventNameLabel.setTitle(event!.title, for: .normal)
+        
+        cell.address.text = event?.shortAddress
+        cell.name.text = event?.title
         cell.distance.text = "4.6 mi"
         self.distanceLabel.text = cell.distance.text
         cell.interest.textColor = UIColor.white
-        cell.interest.text = "5 attendees"
+        cell.interest.text = "\(event!.attendeeCount) attendess"
         cell.guestCount.isHidden = true
-        addGreenDot(label: self.interestLabel, content: "Meet up")
-        cell.price.text = "Free"
+        addGreenDot(label: self.interestLabel, content: (event?.category)!)
+        cell.price.text = event?.price == 0 ? "Free" : "$\(event?.price)"
+        
+        cell.inviteButton.addTarget(self, action: #selector(self.goToInvitePage), for: .touchUpInside)
+        
+        
+        let eventLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double((event?.longitude!)!)!)
+        
+        distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: eventLocation,addBracket: false)
+        
+        let reference = Constants.storage.event.child("\(event!.id!).jpg")
+        
+        reference.downloadURL(completion: { (url, error) in
+            
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+                return
+            }
+            
+            
+            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                (receivedSize :Int, ExpectedSize :Int) in
+                
+            }, completed: {
+                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                
+                if image != nil && finished{
+                    cell.eventImage.image = crop(image: image!, width: 50, height: 50)
+                }
+            })
+            
+            
+        })
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
+    }
+    
+    func goToInvitePage(){
+        let inviteVC = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "NewInviteViewController")
+        parentVC?.present(inviteVC, animated: true, completion: nil)
     }
 }

@@ -208,9 +208,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         
                         self.events.append(event)
                     }
-                    if !(self.searchEventsTab?.all_events.contains(event))!{
-                        self.searchEventsTab?.all_events.append(event)
-                    }
+//                    if !(self.searchEventsTab?.all_events.contains(event))!{
+//                        self.searchEventsTab?.all_events.append(event)
+//                    }
                     
                     
                 }
@@ -295,6 +295,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
         })
+        self.searchEventsTab?.feeds.removeAll()
         
         navigationView.notificationsButton.badgeString = ""
         var not_count = 0
@@ -350,8 +351,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         count_received = 0
                     }
                 } , gotFeed: {feed in
-                    self.feeds.removeAll()
-                    self.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
+                    self.searchEventsTab?.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
                     
                     if count_received == 4{
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
@@ -420,7 +420,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
                 
             } , gotFeed: {feed in
-                self.feeds.append(contentsOf: feed)
+                self.searchEventsTab?.feeds.append(contentsOf: feed)
                 
                 if count_received == 4{
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
@@ -1039,7 +1039,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
         vc.nofArray = self.notifs
-        vc.feedAray = self.feeds
         
         dropfromTop(view: self.view)
         

@@ -31,7 +31,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
     var all_events = [Event]()
     var attending = [Event]()
-    
+    var feeds = [FocusNotification]()
     var showInvitePopup = false
     
     override func viewDidLoad() {
@@ -72,6 +72,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         filtered = events
         
         hideKeyboardWhenTappedAround()
+        tableView.tableFooterView = UIView()
         
     }
     
@@ -79,55 +80,55 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         super.viewWillAppear(animated)
         self.location = AuthApi.getLocation()
         
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").queryOrdered(byChild: "status").queryEqual(toValue: "accepted").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            
-            
-            if let placeData = value{
-                let count = placeData.count
-                for (_,place) in placeData
-                {
-                    let id = (place as? [String:Any])?["ID"]
-                    
-                    Constants.DB.event.child(id as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                        if let info = snapshot.value as? [String : Any], info.count > 0{
-                            let event = Event.toEvent(info: info)
-                            event?.id = id as! String
-                            
-                            let eventLocation = CLLocation(latitude: Double((info["longitude"])! as! String)!, longitude: Double((info["longitude"])! as! String)!)
-                            
-                            event?.distance = eventLocation.distance(from: AuthApi.getLocation()!)
-                            if let attending = info["attendingList"] as? [String:Any]{
-                                event?.setAttendessCount(count: attending.count)
-                            }
-                            
-                            
-                            self.attending.append(event!)
-                            if self.attending.count == count{
-                                
-                                for event in self.attending{
-                                    if let index = self.all_events.index(where: { $0.id == event.id }) {
-                                        self.all_events.remove(at: index)
-                                    }
-                                }
-                                
-                                self.attending.sort {
-                                    return $0.distance < $1.distance
-                                }
-                                
-                                self.events = self.attending + self.all_events
-                                
-                                self.filtered = self.events
-                                self.tableView.reloadData()
-                            }
-                            
-                        }
-            
-
-                    })
-                }
-            }
-        })
+//        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").queryOrdered(byChild: "status").queryEqual(toValue: "accepted").observeSingleEvent(of: .value, with: { (snapshot) in
+//            let value = snapshot.value as? NSDictionary
+//            
+//            
+//            if let placeData = value{
+//                let count = placeData.count
+//                for (_,place) in placeData
+//                {
+//                    let id = (place as? [String:Any])?["ID"]
+//                    
+//                    Constants.DB.event.child(id as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+//                        if let info = snapshot.value as? [String : Any], info.count > 0{
+//                            let event = Event.toEvent(info: info)
+//                            event?.id = id as! String
+//                            
+//                            let eventLocation = CLLocation(latitude: Double((info["longitude"])! as! String)!, longitude: Double((info["longitude"])! as! String)!)
+//                            
+//                            event?.distance = eventLocation.distance(from: AuthApi.getLocation()!)
+//                            if let attending = info["attendingList"] as? [String:Any]{
+//                                event?.setAttendessCount(count: attending.count)
+//                            }
+//                            
+//                            
+//                            self.attending.append(event!)
+//                            if self.attending.count == count{
+//                                
+//                                for event in self.attending{
+//                                    if let index = self.all_events.index(where: { $0.id == event.id }) {
+//                                        self.all_events.remove(at: index)
+//                                    }
+//                                }
+//                                
+//                                self.attending.sort {
+//                                    return $0.distance < $1.distance
+//                                }
+//                                
+//                                self.events = self.attending + self.all_events
+//                                
+//                                self.filtered = self.events
+//                                self.tableView.reloadData()
+//                            }
+//                            
+//                        }
+//            
+//
+//                    })
+//                }
+//            }
+//        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,19 +139,19 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                                 "Name": "Search Event"
             ])
         
-        if showInvitePopup {
-            self.invitePopupView.isHidden = false
-            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.invitePopupView.center.y -= 129
-                self.invitePopupViewBottomConstraint.constant += 129
-            }, completion: { animate in
-                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
-                    self.invitePopupView.center.y += 129
-                    self.invitePopupViewBottomConstraint.constant -= 129
-                }, completion: nil)
-            })
-            self.showInvitePopup = false
-        }
+//        if showInvitePopup {
+//            self.invitePopupView.isHidden = false
+//            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+//                self.invitePopupView.center.y -= 129
+//                self.invitePopupViewBottomConstraint.constant += 129
+//            }, completion: { animate in
+//                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+//                    self.invitePopupView.center.y += 129
+//                    self.invitePopupViewBottomConstraint.constant -= 129
+//                }, completion: nil)
+//            })
+//            self.showInvitePopup = false
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -159,8 +160,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
-//        return filtered.count
+        return self.feeds.count
+//        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -275,27 +276,139 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         return cell!
         */
         
+        
+        /*
+         
+         FeedOneCell - Pin
+         FeedTwoCell - attending event
+         FeedThreeCell - liked pin
+         FeedFourCell - event comment
+         FeedFiveCell - pin with image
+         FeedSixCell - event like
+         */
         var cell: UITableViewCell?
         //2 and 6
         
-        if indexPath.row == 0{
-            cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as! FeedOneTableViewCell
-        }else if indexPath.row == 1{
+        let feed = self.feeds[indexPath.row]
+        
+        if feed.type == .Pin && feed.item?.imageURL == nil{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as? FeedOneTableViewCell{
+                getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
+                    cell.nameLabel.text = user.username
+                    if let image = user.image_string{
+                        if let url = URL(string: image){
+                            cell.userImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                    
+                })
+                
+                if let pinData = feed.item?.data["pin"] as? [String: Any]{
+                    cell.interestLabel.text = pinData["focus"] as? String
+                    
+                    cell.addressLabel.text = pinData["formattedAddress"] as? String
+                    cell.nameDescriptionLabel.text = pinData["pin"] as? String
+                    
+                    
+                    let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
+                    cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
+                }
+                return cell
+            }
+            
+        }
+        else if feed.type == .Pin && feed.item?.imageURL != nil{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as? FeedPlaceImageTableViewCell{
+                getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
+                    cell.usernameLabel.setTitle(user.username, for: .normal)
+                    if let image = user.image_string{
+                        if let url = URL(string: image){
+                            cell.usernameImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                    
+                })
+                
+                if let pinData = feed.item?.data["pin"] as? [String: Any]{
+                    cell.interestLabel.text = pinData["focus"] as? String
+                    
+                    cell.addressLabel.setTitle(pinData["formattedAddress"] as? String, for: .normal)
+                    cell.pinCaptionLabel.text = pinData["pin"] as? String
+
+                    
+                    let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
+                    cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
+                    
+                    var firstVal = ""
+                    for (key,_) in (pinData["images"] as! NSDictionary)
+                    {
+                        firstVal = key as! String
+                        break
+                    }
+                    
+                    let reference = Constants.storage.pins.child(((pinData["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
+                    reference.downloadURL(completion: { (url, error) in
+                        
+                        if error != nil {
+                            print(error?.localizedDescription ?? "")
+                            return
+                        }
+                        
+                        cell.imagePlace.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                        cell.imagePlace.setShowActivityIndicator(true)
+                        cell.imagePlace.setIndicatorStyle(.gray)
+                    })
+                }
+                return cell
+            }
+        }
+        else if feed.type == .Created{
+            let feedCreatedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
+            feedCreatedEventCell.event = feed.item?.data["event"] as? Event
+            
+            getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
+                feedCreatedEventCell.usernameLabel.setTitle(user.username, for: .normal)
+                if let image = user.image_string{
+                    if let url = URL(string: image){
+                        feedCreatedEventCell.usernameImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                    }
+                }
+                
+            })
+            
+            feedCreatedEventCell.actionLabel.text = "created"
+            
+            feedCreatedEventCell.parentVC = self
+            cell = feedCreatedEventCell
+        }
+        else if feed.type == .Going{
             let feedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
             feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
             cell = feedEventCell
-        }else if indexPath.row == 2{
-            cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as! FeedPlaceTableViewCell
-        }else if indexPath.row == 3{
-            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
-        }else if indexPath.row == 4{
-            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
-        }else if indexPath.row == 5{
-            var feedCreatedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
-            var searchEventCell = feedCreatedEventCell.searchEventTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SearchEventTableViewCell
-            searchEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
-            cell = feedCreatedEventCell
         }
+        
+        
+//        if indexPath.row == 0{
+//            cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as! FeedOneTableViewCell
+//        }
+//        else if indexPath.row == 1{
+//            let feedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
+//            feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
+//            cell = feedEventCell
+//        }else if indexPath.row == 2{
+//            cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as! FeedPlaceTableViewCell
+//        }else if indexPath.row == 3{
+//            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
+//        }
+//        else if indexPath.row == 4{
+//            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
+//        }
+//        else if indexPath.row == 5{
+//            var feedCreatedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
+//            var searchEventCell = feedCreatedEventCell.searchEventTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SearchEventTableViewCell
+//            searchEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
+//            cell = feedCreatedEventCell
+//        }
         return cell!
     }
     
@@ -304,129 +417,155 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         self.present(inviteVC, animated: true, completion: nil)
     }
     
-    
-    func attendEvent(sender:UIButton){
-        let buttonRow = sender.tag
-        let event = self.filtered[buttonRow]
+    func getUserData(id: String, gotUser: @escaping (_ user: User) -> Void){
+        Constants.DB.user.child(id).observeSingleEvent(of: .value, with: {snapshot in
         
-        if sender.title(for: .normal) == "Attend"{
-            print("attending event \(String(describing: event.title)) ")
-            
-            Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
-            
-            
-            Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil
-                {
-                    let attendingAmount = value?["amount"] as! Int
-                    Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount + 1])
+            if let data = snapshot.value as? [String: Any]{
+                if let user = User.toUser(info: data){
+                    gotUser(user)
                 }
-            })
-            
-            Answers.logCustomEvent(withName: "Attend Event",
-                                   customAttributes: [
-                                    "user": AuthApi.getFirebaseUid()!,
-                                    "event": event.title,
-                                    "attend": true
-                ])
-            
-            sender.layer.borderWidth = 1
-            sender.layer.borderColor = UIColor.white.cgColor
-            sender.backgroundColor = UIColor.clear
-            sender.setTitle("Attending", for: .normal)
-        }
-        else{
-            
-            let alertController = UIAlertController(title: "Unattend \(event.title!)?", message: nil, preferredStyle: .actionSheet)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            alertController.addAction(cancelAction)
-            
-            let OKAction = UIAlertAction(title: "Unattend", style: .destructive) { action in
-                Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                    if let value = snapshot.value as? [String:Any]{
-                        
-                        for (id,_) in value{
-                            Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
-                        }
-                    }
-                    
-                    
-                })
-                
-                Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let value = snapshot.value as? NSDictionary
-                    if value != nil
-                    {
-                        let attendingAmount = value?["amount"] as! Int
-                        Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
-                    }
-                })
-                
-                sender.layer.borderWidth = 0
-                sender.layer.borderColor = UIColor.clear.cgColor
-                sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-                sender.setTitle("Attend", for: .normal)
-                
-                Answers.logCustomEvent(withName: "Attend Event",
-                                       customAttributes: [
-                                        "user": AuthApi.getFirebaseUid()!,
-                                        "event": event.title,
-                                        "attend": false
-                    ])
             }
-            alertController.addAction(OKAction)
-            
-            self.present(alertController, animated: true)
-            
-            
-        }
-        
+        })
     }
-    
-    func inviteUser(sender:UIButton){
-        let buttonRow = sender.tag
-        
-        let event = self.filtered[buttonRow]
-        print("invite user to event \(String(describing: event.title)) ")
-        
-        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
-        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
-        ivc.type = "event"
-        ivc.searchEvent = self
-        ivc.id = event.id!
-        ivc.event = event
-        self.present(ivc, animated: true, completion: { _ in })
-        
-    }
+//
+//    
+//    func attendEvent(sender:UIButton){
+//        let buttonRow = sender.tag
+//        let event = self.filtered[buttonRow]
+//        
+//        if sender.title(for: .normal) == "Attend"{
+//            print("attending event \(String(describing: event.title)) ")
+//            
+//            Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+//            
+//            
+//            Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+//                let value = snapshot.value as? NSDictionary
+//                if value != nil
+//                {
+//                    let attendingAmount = value?["amount"] as! Int
+//                    Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount + 1])
+//                }
+//            })
+//            
+//            Answers.logCustomEvent(withName: "Attend Event",
+//                                   customAttributes: [
+//                                    "user": AuthApi.getFirebaseUid()!,
+//                                    "event": event.title,
+//                                    "attend": true
+//                ])
+//            
+//            sender.layer.borderWidth = 1
+//            sender.layer.borderColor = UIColor.white.cgColor
+//            sender.backgroundColor = UIColor.clear
+//            sender.setTitle("Attending", for: .normal)
+//        }
+//        else{
+//            
+//            let alertController = UIAlertController(title: "Unattend \(event.title!)?", message: nil, preferredStyle: .actionSheet)
+//            
+//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//            alertController.addAction(cancelAction)
+//            
+//            let OKAction = UIAlertAction(title: "Unattend", style: .destructive) { action in
+//                Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+//                    if let value = snapshot.value as? [String:Any]{
+//                        
+//                        for (id,_) in value{
+//                            Constants.DB.event.child("\(event.id!)/attendingList/\(id)").removeValue()
+//                        }
+//                    }
+//                    
+//                    
+//                })
+//                
+//                Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
+//                    let value = snapshot.value as? NSDictionary
+//                    if value != nil
+//                    {
+//                        let attendingAmount = value?["amount"] as! Int
+//                        Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount - 1])
+//                    }
+//                })
+//                
+//                sender.layer.borderWidth = 0
+//                sender.layer.borderColor = UIColor.clear.cgColor
+//                sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+//                sender.setTitle("Attend", for: .normal)
+//                
+//                Answers.logCustomEvent(withName: "Attend Event",
+//                                       customAttributes: [
+//                                        "user": AuthApi.getFirebaseUid()!,
+//                                        "event": event.title,
+//                                        "attend": false
+//                    ])
+//            }
+//            alertController.addAction(OKAction)
+//            
+//            self.present(alertController, animated: true)
+//            
+//            
+//        }
+//        
+//    }
+//    
+//    func inviteUser(sender:UIButton){
+//        let buttonRow = sender.tag
+//        
+//        let event = self.filtered[buttonRow]
+//        print("invite user to event \(String(describing: event.title)) ")
+//        
+//        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+//        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+//        ivc.type = "event"
+//        ivc.searchEvent = self
+//        ivc.id = event.id!
+//        ivc.event = event
+//        self.present(ivc, animated: true, completion: { _ in })
+//        
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let event = self.filtered[indexPath.row]
-        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
-        controller.event = event
-        self.present(controller, animated: true, completion: nil)
+//        let event = self.filtered[indexPath.row]
+//        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+//        let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+//        controller.event = event
+//        self.present(controller, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var rowHeight: CGFloat?
-        if indexPath.row == 0{
-            rowHeight = 115
-        }else if indexPath.row == 1{
-            rowHeight = 130
-        }else if indexPath.row == 2{
-            rowHeight = 120
-        }else if indexPath.row == 3{
-            rowHeight = 150
-        }else if indexPath.row == 4{
-            rowHeight = 220
-        }else if indexPath.row == 5{
-            rowHeight = 227
-        }else{
-            rowHeight = 80
+        let feed = self.feeds[indexPath.row]
+        
+        if feed.type == .Pin && feed.item?.imageURL == nil{
+            return 115
         }
-        return rowHeight!
+        else if feed.type == .Pin && feed.item?.imageURL != nil{
+            return 220
+        }
+        else if feed.type == .Created{
+            return 227
+        }
+        else if feed.type == .Going{
+            return 130
+        }
+        
+//        if indexPath.row == 0{
+//            rowHeight = 115
+//        }else if indexPath.row == 1{
+//            rowHeight = 130
+//        }else if indexPath.row == 2{
+//            rowHeight = 120
+//        }else if indexPath.row == 3{
+//            rowHeight = 150
+//        }else if indexPath.row == 4{
+//            rowHeight = 220
+//        }else if indexPath.row == 5{
+//            rowHeight = 227
+//        }else{
+//            rowHeight = 80
+//        }
+        return 80
     }
     
 }

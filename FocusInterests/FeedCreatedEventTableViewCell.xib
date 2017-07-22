@@ -159,6 +159,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="actionLabel" destination="Lgr-WB-w4b" id="Y7T-17-TwL"/>
                 <outlet property="distanceLabel" destination="icH-N3-FXd" id="HwY-uK-ers"/>
                 <outlet property="eventNameLabel" destination="Pom-kB-8Qn" id="Au9-F8-oez"/>
                 <outlet property="interestLabel" destination="iFI-Vq-4q9" id="mVJ-G3-ELx"/>

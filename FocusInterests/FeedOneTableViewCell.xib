@@ -157,6 +157,7 @@
                 <outlet property="distanceLabel" destination="1wF-EH-cca" id="mTp-mS-zDn"/>
                 <outlet property="interestLabel" destination="Z7U-YF-Tdk" id="uRh-2R-QMl"/>
                 <outlet property="nameDescriptionLabel" destination="xHG-yn-dfh" id="pea-TN-9RH"/>
+                <outlet property="nameLabel" destination="GKR-F7-hVw" id="1f6-Zj-2xv"/>
                 <outlet property="userImage" destination="Lar-X7-bvX" id="M43-7G-bR3"/>
                 <outlet property="usernameLabel" destination="GKR-F7-hVw" id="5t8-sC-nGY"/>
             </connections>
