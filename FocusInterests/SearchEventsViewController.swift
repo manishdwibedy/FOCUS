@@ -386,6 +386,61 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
             cell = feedEventCell
         }
+        else if feed.type == .Like{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as? FeedPlaceTableViewCell{
+                getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
+                    cell.usernameWhoLikedLabel.setTitle(user.username, for: .normal)
+                    if let image = user.image_string{
+                        if let url = URL(string: image){
+                            cell.usernameImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                    
+                })
+                
+                if let pinData = feed.item?.data["pin"] as? [String: Any]{
+                    let user = pinData["fromUID"] as? String
+                    
+                    getUserData(id: user!, gotUser: {user in
+                        cell.usernameWhoIsBeingLiked.setTitle(user.username, for: .normal)
+                    })
+                    
+                    let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
+                    cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
+                    
+                    
+                    if let images = pinData["images"] as? NSDictionary{
+                        var firstVal = ""
+                        for (key,_) in images
+                        {
+                            firstVal = key as! String
+                            break
+                        }
+                        
+                        let reference = Constants.storage.pins.child((images[firstVal] as! NSDictionary)["imagePath"] as! String)
+                        reference.downloadURL(completion: { (url, error) in
+                            
+                            if error != nil {
+                                print(error?.localizedDescription ?? "")
+                                return
+                            }
+                            
+                            cell.placePhoto.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                            cell.placePhoto.setShowActivityIndicator(true)
+                            cell.placePhoto.setIndicatorStyle(.gray)
+                        })
+                    }
+                }
+                
+            }
+            
+        }
+        else if feed.type == .Comment{
+            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
+            
+            if let pinData = feed.item?.data["pin"] as? [String: Any]{
+            }
+        }
         
         
 //        if indexPath.row == 0{
@@ -548,6 +603,12 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         }
         else if feed.type == .Going{
             return 130
+        }
+        else if feed.type == .Like{
+            return 120
+        }
+        else if feed.type == .Comment{
+            return 150
         }
         
 //        if indexPath.row == 0{
