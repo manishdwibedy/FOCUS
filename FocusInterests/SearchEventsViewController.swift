@@ -460,7 +460,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     
                     let caption = pinData["pin"] as! String
                     cell.eventNameLabel.setTitle("Pin: \(caption)", for: .normal)
+                    cell.eventNameLabel.setTitleColor(Constants.color.green, for: .normal)
                     cell.commentLabel.text = feed.item?.itemName
+                    
                     if let images = pinData["images"] as? NSDictionary{
                         var firstVal = ""
                         for (key,_) in images
