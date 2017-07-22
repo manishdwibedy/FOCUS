@@ -11,8 +11,14 @@ import SDWebImage
 import GeoFire
 import FirebaseDatabase
 
-class OtherUserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDataSource, UITableViewDelegate{
+protocol OtherUserProfileViewControllerDelegate {
+    func hasSentUserAnInvite()
+}
+
+class OtherUserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDataSource, UITableViewDelegate, OtherUserProfileViewControllerDelegate{
     
+    @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var invitePopupView: UIView!
     @IBOutlet weak var followYourFriendsView: UIView!
     @IBOutlet weak var eventsCollectionView: UICollectionView!
     @IBOutlet var userScrollView: UIScrollView!
@@ -105,6 +111,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var otherUser = false
     var userID = ""
     var previous: previousScreen? = nil
+    var showInvitePopup = false
     
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
@@ -244,6 +251,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //        self.focusView.addTopBorderWithColor(color: UIColor.white, width: 0.3)
 //        self.navigationItem.title = ""
         
+        self.invitePopupView.allCornersRounded(radius: 10)
+        
         self.createEventButton.roundCorners(radius: 6)
         
         if otherUser{
@@ -363,6 +372,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        self.descriptionText.text = "ctetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab"
     }
     
     //    MARK: COLLECTIONVIEW DELEGATE METHODS
@@ -452,9 +462,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 //self.descriptionText.text = description
                 self.fullNameLabel.text = fullname
 //                self.userNameLabel.text = username_str
+                self.descriptionText.textContainer.maximumNumberOfLines = 3
+                self.descriptionText.textContainer.lineBreakMode = .byTruncatingTail
                 
-                self.descriptionText.text = "ctetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab"
-//                self.descriptionText.text = description_str
+                self.descriptionText.text = description_str
                 
                 self.navBarItem.title = username_str
                 
@@ -602,6 +613,23 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if showInvitePopup {
+            self.mainView.bringSubview(toFront: self.invitePopupView)
+//            self.invitePopupView.isHidden = false
+            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= 100
+                self.invitePopupTopConstraint.constant -= 100
+            }, completion: { animate in
+                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += 100
+                    self.invitePopupTopConstraint.constant += 100
+                }, completion: nil)
+            })
+            self.userScrollView.sendSubview(toBack: self.invitePopupView)
+            self.showInvitePopup = false
+        }
+        
         self.displayUserData()
         
         let fixedWidth = self.descriptionText.frame.size.width
@@ -831,11 +859,27 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             rowHeight = 100
         }else if tableView.tag == 2{
             let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
-            rowHeight = myCell.bounds.size.height;
+            rowHeight = myCell.bounds.size.height
         }
         
         return rowHeight
     }
     
+    @IBAction func inviteClicked(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "search_people", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
+        ivc.inviteFromOtherUserProfile = true
+        ivc.otherUserProfile = self
+        ivc.otherUserProfileDelegate = self
+        
+        self.present(ivc, animated: true, completion: nil)
+    }
+    
+//    @IBAction func unwindToOtherUserProfile(segue:UIStoryboardSegue) {}
+    
+    func hasSentUserAnInvite(){
+        self.showInvitePopup = true
+        print("in other user profile")
+    }
 }
 

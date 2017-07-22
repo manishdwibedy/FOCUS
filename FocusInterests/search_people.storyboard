@@ -13,7 +13,7 @@
         <!--Search People View Controller-->
         <scene sceneID="9tT-Es-qiz">
             <objects>
-                <viewController id="sfs-g5-Ui8" customClass="SearchPeopleViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchPeopleViewController" id="sfs-g5-Ui8" customClass="SearchPeopleViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tnB-jW-3Xk"/>
                         <viewControllerLayoutGuide type="bottom" id="1yO-It-5fn"/>
@@ -266,9 +266,11 @@
                         <outlet property="searchBar" destination="AYl-Yr-fFv" id="L8v-LE-4kh"/>
                         <outlet property="segmentedOut" destination="nZh-JF-eMk" id="ICC-sp-Fhw"/>
                         <outlet property="tableView" destination="nv6-wn-SdN" id="8AF-Ei-bI4"/>
+                        <segue destination="HM6-cm-OHM" kind="unwind" identifier="unwindBackToSearchPeopleViewControllerSegueWithSegue" unwindAction="unwindBackToSearchPeopleViewControllerSegueWithSegue:" id="E5B-L8-Zo0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOX-NZ-jU5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="HM6-cm-OHM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="581.60000000000002" y="88.605697151424295"/>
         </scene>

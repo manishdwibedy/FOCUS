@@ -32,8 +32,8 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     var username = ""
     var invitePeopleVCDelegate: InvitePeopleViewControllerDelegate!
     var isMeetup = false
+    var inviteFromOtherUserProfile = false
     var parentVC: InvitePeopleViewController!
-    var needToGoBackToSearchPeopleViewController: Bool?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -114,17 +114,23 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     }
     
     @IBAction func invite(_ sender: Any) {
-        
-        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
-        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
-        ivc.type = "event"
-        ivc.id = self.event.id!
-        ivc.username = self.username
-        ivc.event = event
-        ivc.searchPeopleEventDelegate = self
-        ivc.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
-        if let VC = self.parentVC{
-            VC.present(ivc, animated: true, completion: nil)
+        print("sending invite")
+        if isMeetup {
+            self.parentVC.performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegueWithSegue", sender: self.parentVC)
+        }else if inviteFromOtherUserProfile{
+            self.parentVC.otherUserProfileDelegate?.hasSentUserAnInvite()
+            self.parentVC.dismiss(animated: true, completion: nil)
+        }else{
+            let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+            ivc.type = "event"
+            ivc.id = self.event.id!
+            ivc.username = self.username
+            ivc.event = event
+            ivc.searchPeopleEventDelegate = self
+            if let VC = self.parentVC{
+                VC.present(ivc, animated: true, completion: nil)
+            }
         }
         
         // avoid inviting the user

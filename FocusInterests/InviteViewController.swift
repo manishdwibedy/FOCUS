@@ -37,9 +37,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var parentCell: SearchPlaceCell!
     var type = ""
     var id = ""
+    var inviteFromPlaceDetails = false
     var place: Place?
     var event: Event?
-    var needToGoBackToSearchPeopleViewController: Bool?
     var dayText = ""
     var monthText = ""
     
@@ -76,6 +76,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var searchPeopleEventDelegate: InvitePeopleEventCellDelegate?
     var searchPeoplePlaceDelegate: InvitePeoplePlaceCellDelegate?
+    var placeDetailsDelegate: SendInviteFromPlaceDetailsDelegate?
     
     var image: Data?
     var selectedFriend = [Bool]()
@@ -240,7 +241,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.dateFormatter.dateStyle = .short
         
         self.datePicker.datePickerMode = .date
-        self.datePicker
         let date = Date()
         self.datePicker.minimumDate = date
         self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())
@@ -619,27 +619,15 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             
             if type == "place"{
-                
-                if let goBackToSearchPeopleVC = needToGoBackToSearchPeopleViewController{
-                    if goBackToSearchPeopleVC{
-                        self.needToGoBackToSearchPeopleViewController = false
-                        performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegue", sender: self)
-                    }else{
-                        
-                        self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
-                        self.dismiss(animated: true, completion: nil)
-                    }
+                if self.inviteFromPlaceDetails{
+                    self.placeDetailsDelegate?.hasSentInvite()
+                }else{
+                    self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
                 }
+                self.dismiss(animated: true, completion: nil)
             }else{
-                if let goBackToSearchPeopleVC = needToGoBackToSearchPeopleViewController{
-                    if goBackToSearchPeopleVC{
-                        self.needToGoBackToSearchPeopleViewController = false
-                        performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegue", sender: self)
-                    }else{
-                        self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                }
+                self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
+                self.dismiss(animated: true, completion: nil)
             }
         }else{
             let messageVC = MFMessageComposeViewController()

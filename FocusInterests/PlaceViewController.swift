@@ -18,14 +18,23 @@ protocol SuggestPlacesDelegate {
     func gotSuggestedPlaces(places: [Place])
 }
 
-class PlaceViewController: UIViewController {
+protocol SendInviteFromPlaceDetailsDelegate{
+    func hasSentInvite()
+}
+
+class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     var commentsDelegate: CommentsDelegate?
     var suggestPlacesDelegate: SuggestPlacesDelegate?
+    var showInvitePopupDelegate: ShowInvitePopupInPinViewControllerDelegate?
+    
     var place: Place?
     var rating = [PlaceRating]()
     var currentLocation: CLLocation?
     var map: MapViewController? = nil
     
+    @IBOutlet weak var placeScrollView: UIScrollView!
+    @IBOutlet weak var invitePopupView: UIView!
+    @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var yelpButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
@@ -140,6 +149,10 @@ class PlaceViewController: UIViewController {
                 self.followersAmountLabel.setTitle("0", for: .normal)
             }
         })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     func showRating(sender: UITapGestureRecognizer) {
@@ -460,6 +473,14 @@ class PlaceViewController: UIViewController {
         ivc.type = "place"
         ivc.id = self.place!.id
         ivc.place = place
+        ivc.placeDetailsDelegate = self
+        ivc.inviteFromPlaceDetails = true
+        present(ivc, animated: true, completion: nil)
+    }
+    
+    func hasSentInvite(){
+        print("have sent invite to this place!")
+        self.showInvitePopupDelegate?.showPopup()
     }
     
 }

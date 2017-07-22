@@ -32,7 +32,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     var showInvitePopup = false
     var isMeetup = false
-    var needToGoBackToSearchPeopleViewController = false
+    var inviteFromOtherUserProfile = false
     var UID = ""
     var username = ""
     var filtered = [Any]()
@@ -40,7 +40,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var events = [Event]()
     var location: CLLocation?
     var searchPeople: SearchPeopleViewController? = nil
+    var otherUserProfile: OtherUserProfileViewController? = nil
     var mapView: MapViewController? = nil
+    
+    var otherUserProfileDelegate: OtherUserProfileViewControllerDelegate?
     var searchPeopleDelegate: SearchPeopleViewControllerDelegate?
     
     let locationManager = CLLocationManager()
@@ -137,15 +140,14 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         navBar.titleTextAttributes = attrs
         navBar.barTintColor = Constants.color.navy
         
-        if isMeetup{
+        if isMeetup || inviteFromOtherUserProfile{
             navBar.topItem?.title = "Meet up"
             self.backButton.isEnabled = true
             self.backButton.tintColor = UIColor.white
-            self.needToGoBackToSearchPeopleViewController = true
+            self.createEventButton.isHidden = true
         }else{
             self.backButton.isEnabled = false
             self.backButton.tintColor = UIColor.clear
-            self.needToGoBackToSearchPeopleViewController = false
         }
         
 //        MARK: Main View
@@ -201,7 +203,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.createEventButton.isHidden = true
         }else if segmentedOut.selectedSegmentIndex == 1{
             updateEvents()
-            if isMeetup{
+            if isMeetup || inviteFromOtherUserProfile{
                 self.createEventButton.isHidden = true
             }else{
                 self.createEventButton.isHidden = false
@@ -265,11 +267,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
             }
             
+            cell.isMeetup = self.isMeetup
+            cell.inviteFromOtherUserProfile = self.inviteFromOtherUserProfile
             cell.UID = UID
             cell.username = username
             cell.parentVC = self
-            cell.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
             cell.invitePeopleVCDelegate = self
+            
             return cell
         }else{
             let cell:InvitePeopleEventCell = self.tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell") as! InvitePeopleEventCell!
@@ -286,13 +290,14 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 }
             }
             
+            cell.isMeetup = self.isMeetup
+            cell.inviteFromOtherUserProfile = self.inviteFromOtherUserProfile
             cell.event = event
             cell.UID = UID
             cell.username = username
             cell.invitePeopleVCDelegate = self
             cell.parentVC = self
             cell.guestCount.text = "\(event.attendeeCount) guests"
-            cell.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
             cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price)"
             
             let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
@@ -704,7 +709,6 @@ extension InvitePeopleViewController: GMSAutocompleteViewControllerDelegate {
     
     func showPopupView() {
         print("back in invitepeoplevc")
-        self.needToGoBackToSearchPeopleViewController = false
         self.showInvitePopup = true
     }
 }
