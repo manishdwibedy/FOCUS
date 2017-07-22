@@ -1002,11 +1002,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="lCO-kg-XPF" firstAttribute="top" secondItem="ee2-5S-bbO" secondAttribute="bottom" constant="400" id="93W-dK-Url"/>
                             <constraint firstAttribute="trailing" secondItem="JLy-a0-Na0" secondAttribute="trailing" id="DcU-qe-o8n"/>
                             <constraint firstItem="JLy-a0-Na0" firstAttribute="leading" secondItem="K59-jd-py0" secondAttribute="leading" id="K2K-bl-eYp"/>
                             <constraint firstItem="JLy-a0-Na0" firstAttribute="top" secondItem="ee2-5S-bbO" secondAttribute="bottom" id="QhU-Jj-teM"/>
                             <constraint firstItem="Z9N-3G-yEr" firstAttribute="top" secondItem="JLy-a0-Na0" secondAttribute="bottom" constant="10" id="Z8o-ff-0dU"/>
-                            <constraint firstItem="lCO-kg-XPF" firstAttribute="top" secondItem="ee2-5S-bbO" secondAttribute="bottom" constant="400" id="ZBg-6j-KDE"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -1028,7 +1028,7 @@
                         <outlet property="hoursStackView" destination="8EY-28-xIf" id="YjF-Hv-Hg9"/>
                         <outlet property="infoScreenHeight" destination="GnF-Z2-Scf" id="f0c-7J-LXG"/>
                         <outlet property="infoView" destination="dH7-9c-Q24" id="9Sl-Zz-Zpz"/>
-                        <outlet property="invitePopupBottomConstraint" destination="ZBg-6j-KDE" id="LKP-OL-vZo"/>
+                        <outlet property="invitePopupBottomConstraint" destination="93W-dK-Url" id="6bL-Am-xrj"/>
                         <outlet property="invitePopupView" destination="lCO-kg-XPF" id="ALW-dX-Wha"/>
                         <outlet property="inviteUserStackView" destination="3p6-HE-tdh" id="3Zu-4S-STa"/>
                         <outlet property="inviteView" destination="79C-UR-Hhq" id="lVN-4E-dc5"/>

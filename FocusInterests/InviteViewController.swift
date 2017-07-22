@@ -38,6 +38,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var type = ""
     var id = ""
     var inviteFromPlaceDetails = false
+    var inviteFromEventDetails = false
     var place: Place?
     var event: Event?
     var dayText = ""
@@ -77,6 +78,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchPeopleEventDelegate: InvitePeopleEventCellDelegate?
     var searchPeoplePlaceDelegate: InvitePeoplePlaceCellDelegate?
     var placeDetailsDelegate: SendInviteFromPlaceDetailsDelegate?
+    var eventDetailsDelegate: EventDetailViewControllerDelegate?
     
     var image: Data?
     var selectedFriend = [Bool]()
@@ -626,7 +628,11 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 self.dismiss(animated: true, completion: nil)
             }else{
-                self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
+                if self.inviteFromEventDetails{
+                    self.eventDetailsDelegate?.showPopup()
+                }else{
+                    self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
+                }
                 self.dismiss(animated: true, completion: nil)
             }
         }else{
