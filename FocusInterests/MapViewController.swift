@@ -530,7 +530,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
                     if ((snapshot.value as? NSDictionary)?[username]) != nil{
-                        SCLAlertView().showError("Error", subTitle: "Please choose a unique username.")
+                        SCLAlertView().showCustom("Oops!", subTitle: "That username is already taken.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
                     }
                     else{
                         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/username").setValue(username)
