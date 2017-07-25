@@ -478,6 +478,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     func updateEvents()
     {
+        let DF = DateFormatter()
+        DF.dateFormat = "MMM d, h:mm a"
+        
         Constants.DB.event.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             self.filtered.removeAll()
@@ -488,7 +491,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     if let info = event as? [String:Any]{
                         let event = Event.toEvent(info: info)
                         event?.id = id as? String
-                        self.filtered.append(event)
+                        
+                        if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
+                            self.filtered.append(event)
+                        }
+                        
                     }
                     
                 }

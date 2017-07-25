@@ -174,6 +174,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let DF = DateFormatter()
         DF.dateFormat = "MMM d, h:mm a"
         
+        let timeDF = DateFormatter()
+        timeDF.dateFormat = "h:mm a"
+        
         Constants.DB.event.keepSynced(true)
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).keepSynced(true)
         
@@ -187,9 +190,22 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     event.setAttendessCount(count: attending.count)
                 }
                 
+                if let end = timeDF.date(from: event.endTime){
+                    let start = DF.date(from: event.date!)! > Date()
+                    if start < Date() && end > Date() && !event.privateEvent{
+                        let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                        let marker = GMSMarker(position: position)
+                        marker.icon = UIImage(named: "Event")
+                        marker.title = event.title
+                        marker.map = self.mapView
+                        marker.accessibilityLabel = "event_\(self.events.count)"
+                        
+                        self.events.append(event)
+                    }
+                }
                 
-                if DF.date(from: event.date!)! > Date() && !event.privateEvent{
-                    if Calendar.current.dateComponents([.hour], from: DF.date(from: event.date!)!, to: Date()).hour ?? 0 < 12{
+                else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
+                    if Calendar.current.dateComponents([.hour], from: DF.date(from: event.date!)!, to: Date()).hour ?? 0 < 24{
                         let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
                         let marker = GMSMarker(position: position)
                         marker.icon = UIImage(named: "Event")
@@ -916,20 +932,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.currentLocation = location
 //        self.searchPlacesTab?.location = location
         
-        if AuthApi.getEventBriteToken() != nil{
-            getEvents(around: self.currentLocation!, completion: { events in
-                for event in events{
-                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                    let marker = GMSMarker(position: position)
-                    marker.icon = UIImage(named: "Event")
-                    marker.title = event.title
-                    marker.map = self.mapView
-                    marker.accessibilityLabel = "event_\(self.events.count)"
-                    self.events.append(event)
-                }
-            })
-        }
-        
         if let token = AuthApi.getYelpToken(){
             self.fetchPlaces(around: self.currentLocation!, token: token)
         }
@@ -1302,36 +1304,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     @IBAction func mapSettingsPressed(_ sender: Any) {
         self.mapViewSettings.isHidden = !self.mapViewSettings.isHidden
     }
-}
-
-extension MapViewController: UIWebViewDelegate {
-    func webViewDidStartLoad(_ webView: UIWebView) {
-        print("Loading")
-    }
-    
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        if (webView.request?.url?.absoluteString.range(of: "access_token=") != nil) {
-            let params = webView.request?.url?.absoluteString.components(separatedBy: "=")
-            let access_token = (params?.last!)!
-            AuthApi.set(eventBriteAccessToken: access_token)
-            //self.webView.isHidden = true
-            
-            getEvents(around: self.currentLocation!, completion: { events in
-                for event in events{
-                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                    let marker = GMSMarker(position: position)
-                    marker.icon = UIImage(named: "Event")
-                    marker.title = event.title
-                    marker.map = self.mapView
-                    marker.accessibilityLabel = "event_\(self.events.count)"
-                    self.events.append(event)
-                }
-            })
-        }
-        else{
-            //self.webView.isHidden = false
-        }
-    }    
 }
 
 extension MapViewController: UIImagePickerControllerDelegate{
