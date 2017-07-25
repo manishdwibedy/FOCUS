@@ -28,12 +28,10 @@ class InterestStackViewLabel: UIView{
     
     func setupView(){
         Bundle.main.loadNibNamed("InterestStackViewLabel", owner: self, options: nil)
-
+//        self.view.frame.size.width = self.frame.size.width
+//        self.view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
         
-//        let interestImage = "\(self.interestLabel.text!) Green"
-//        self.interestLabelImage.image = UIImage(named: interestImage)
-        self.addButton.imageView?.isUserInteractionEnabled = true
         self.addButton.setImage(#imageLiteral(resourceName: "White_Plus_Sign"), for: .normal)
         self.addButton.setImage(#imageLiteral(resourceName: "Green_check_sign"), for: .selected)
         

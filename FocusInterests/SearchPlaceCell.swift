@@ -146,6 +146,7 @@ class SearchPlaceCell: UITableViewCell {
     }
    
     @IBAction func inviteButton(_ sender: Any) {
+        print("pressed invite button in searchplace")
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "place"
@@ -156,8 +157,7 @@ class SearchPlaceCell: UITableViewCell {
         
         if let VC = self.parentVC{
             VC.present(ivc, animated: true, completion: nil)
-        }
-        else{
+        }else{
             self.searchVC?.present(ivc, animated: true, completion: nil)
         }
         
@@ -191,61 +191,5 @@ class SearchPlaceCell: UITableViewCell {
                 self.followButtonOut.layer.shadowRadius = 5.0
             }
         })
-        
-        /*
-        if let parent = parentVC{
-            if (parent.followingPlaces.contains(self.place!)){
-                self.followButtonOut.isSelected = true
-                self.followButtonOut.layer.borderColor = UIColor.white.cgColor
-                self.followButtonOut.layer.borderWidth = 1
-                
-                self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
-                self.followButtonOut.tintColor = UIColor.clear
-                self.followButtonOut.layer.shadowOpacity = 0.5
-                self.followButtonOut.layer.masksToBounds = false
-                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-                self.followButtonOut.layer.shadowRadius = 5.0
-            }
-            else{
-                self.followButtonOut.isSelected = false
-                self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
-                self.followButtonOut.layer.borderWidth = 1
-                self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-                self.followButtonOut.tintColor = UIColor.clear
-                self.followButtonOut.layer.shadowOpacity = 0.5
-                self.followButtonOut.layer.masksToBounds = false
-                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-                self.followButtonOut.layer.shadowRadius = 5.0
-                
-            }
-        }
-        else if let parent = searchVC{
-            if (parent.places.contains(self.place!)){
-                self.followButtonOut.isSelected = true
-                self.followButtonOut.layer.borderColor = UIColor.white.cgColor
-                self.followButtonOut.layer.borderWidth = 1
-                
-                self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
-                self.followButtonOut.tintColor = UIColor.clear
-                self.followButtonOut.layer.shadowOpacity = 0.5
-                self.followButtonOut.layer.masksToBounds = false
-                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-                self.followButtonOut.layer.shadowRadius = 5.0
-            }
-            else{
-                self.followButtonOut.isSelected = false
-                self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
-                self.followButtonOut.layer.borderWidth = 1
-                self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-                self.followButtonOut.tintColor = UIColor.clear
-                self.followButtonOut.layer.shadowOpacity = 0.5
-                self.followButtonOut.layer.masksToBounds = false
-                self.followButtonOut.layer.shadowColor = UIColor.black.cgColor
-                self.followButtonOut.layer.shadowRadius = 5.0
-                
-            }
-        }
- */
-        
     }
 }

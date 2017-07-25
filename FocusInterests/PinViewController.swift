@@ -10,37 +10,27 @@ import UIKit
 import MapKit
 import SDWebImage
 
-protocol ShowInvitePopupInPinViewControllerDelegate{
-    func showPopup()
-}
-
-class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate, ShowInvitePopupInPinViewControllerDelegate{
+class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate{
     var place: Place?
     
+    @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var postReviewSeciontButton: UIButton!
-    @IBOutlet weak var morePinSectionButton: UIButton!
-    @IBOutlet weak var moreCategoriesSectionButton: UIButton!
     
-    @IBOutlet weak var reviewsView: UIView!
+    // reviews stack
+    @IBOutlet weak var reviewsStack: UIStackView!
     @IBOutlet weak var reviewsTextView: UITextView!
     
-    @IBOutlet weak var topViewHeight: NSLayoutConstraint!
     // basic info screen
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var uberButton: UIButton!
+    @IBOutlet weak var googleMapButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
-    @IBOutlet weak var reviewButton: UIButton!
-    
-    // categories
-    
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var categoryBackground: UIView!
-    @IBOutlet weak var categoriesStackView: UIStackView!
+    @IBOutlet weak var reviewStars: UIButton!
+    @IBOutlet weak var reviewAmountButton: UIButton!
     
     // location info
-    @IBOutlet weak var locationInfoStackView: UIStackView!
-    @IBOutlet weak var locationInfoStackViewHeight: NSLayoutConstraint!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityStateLabel: UILabel!
     @IBOutlet weak var streetAddress: UILabel!
@@ -48,12 +38,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var pinTableView: UITableView!
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
-    @IBOutlet weak var viewHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var invitePopupView: UIView!
-    @IBOutlet weak var invitePopupBottomConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var reviewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
     var suggestedPlaces = [Place]()
@@ -65,27 +49,24 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var categoryView: UIView!
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    
+    // pins stack
+    @IBOutlet weak var pinStackView: UIStackView!
+    @IBOutlet weak var pinsHeightConstraint: NSLayoutConstraint!
+    
+    
+    // people also liked stack
+    @IBOutlet weak var peopleAlsoLikedStack: UIView!
     
     var placeVC: PlaceViewController? = nil
     var ratingID: String?
     var rating: Int? = nil
     var showInvitePopup = false
+    var delegate: SendInviteFromPlaceDetailsDelegate?
     
     @IBOutlet weak var yelpButton: UIButton!
-    @IBOutlet weak var uberButton: UIButton!
-    @IBOutlet weak var googleMapButton: UIButton!
     
-    @IBOutlet weak var peopleAlsoLikedHeight: NSLayoutConstraint!
-    @IBOutlet weak var pinsHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var peopleAlsoLikedTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var peopleWhoLikeThisTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var categoryTop: NSLayoutConstraint!
-    @IBOutlet weak var pinsTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var peopleAlsoLikedViewBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var bottomView: UIView!
     //rating
     @IBOutlet weak var ratingView: UIView!
     
@@ -107,9 +88,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.placeVC?.showInvitePopupDelegate = self
-        
         self.placeVC?.reviewButton.addTarget(self, action: #selector(PinViewController.showReviewBox), for: .touchUpInside)
+        self.mainStackView.removeArrangedSubview(self.reviewsStack)
+        self.reviewsStack.isHidden = true
+//        self.view.bounds.size.height -= self.reviewsStack.frame.size.height
         
         self.placeVC?.followButton.addTarget(self, action: #selector(PinViewController.followPressed), for: .touchUpInside)
         
@@ -124,16 +106,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         hideKeyboardWhenTappedAround()
         
-        let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
-//        self.invitePopupView.frame.origin.x = 0
-//        self.invitePopupView.frame.origin.y = screenHeight + 100
-//        self.invite
-        self.invitePopupView.allCornersRounded(radius: 10)
-        self.invitePopupView.isHidden = true
-        self.invitePopupView.isUserInteractionEnabled = false
-//        self.scrollView.sendSubview(toBack: self.invitePopupView)
         // Round up Yelp!
         
         self.yelpButton.backgroundColor = .clear
@@ -166,10 +138,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 //self.data.sort(by: $0["time"] as? Double < $1["time"] as? Double)
             }
             else{
-                self.pinsHeightConstraint.constant = 116
-//                self.viewHeight.constant -= 116
-                
-                self.noPinLabel.alpha = 1
+                self.pinStackView.removeArrangedSubview(self.pinTableView)
+                self.pinView.bounds.size.height -= self.pinTableView.frame.size.height
             }
             self.pinTableView.reloadData()
             
@@ -186,12 +156,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             self.phoneLabel.attributedText = attributedText
             self.phoneLabel.addGestureRecognizer(tap)
         }
-        
-//        self.view
-        self.topViewHeight.constant -= self.reviewsView.frame.size.height
-        self.placeVC?.pinViewHeight.constant -= self.reviewsView.frame.size.height
-        reviewsView.alpha = 0
-//        categoryTop.constant = 0
         
         self.button1.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
         self.button2.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
@@ -265,11 +229,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.peopleAlsoLikedTableView.bounds.size.height = self.peopleAlsoLikedTableView.contentSize.height
-        if let placeViewController = self.placeVC {
-//            placeViewController.placeScrollView.bounds.size.height = self.topViewHeight.constant + self.viewHeight.constant
-//            placeViewController.pinViewHeight.constant += ((self.viewHeight.constant+self.topView.frame.size.height+self.peopleAlsoLikedTopConstraint.constant+self.peopleWhoLikeThisTopConstraint.constant+self.pinsTopConstraint.constant+self.peopleAlsoLikedViewBottomConstraint.constant+self.bottomViewBottomConstraint.constant)-self.scrollView.frame.size.height)
-        }
     }
     
     func callPlace(sender:UITapGestureRecognizer) {
@@ -280,48 +239,24 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     func loadInfoScreen(place: Place){
         // Do any additional setup after loading the view.
         self.placeVC?.placeName.text = place.name
-//        placeNameLabel.text = place.name
+
         if place.price.characters.count == 0{
             self.placeVC?.dollarLabel.text = "N.A."
-//            costLabel.text = "N.A."
+
         }
         else{
             self.placeVC?.dollarLabel.text = place.price
-//            costLabel.text = place.price
+
         }
         
-//        distanceLabel.text = "2 mi"
-        
-        
-//        self.followButton.roundCorners(radius: 10)
-//        self.followButton.layer.shadowOpacity = 1.0
-//        self.followButton.layer.masksToBounds = false
-//        self.followButton.layer.shadowColor = UIColor.black.cgColor
-//        self.followButton.layer.shadowRadius = 7.0
-        
-//        self.reviewButton.roundCorners(radius: 10)
-//        self.reviewButton.layer.shadowOpacity = 1.0
-//        self.reviewButton.layer.masksToBounds = false
-//        self.reviewButton.layer.shadowColor = UIColor.black.cgColor
-//        self.reviewButton.layer.shadowRadius = 7.0
-        
-//        moreCategoriesSectionButton.isHidden = true
-        
         postReviewSeciontButton.layer.borderWidth = 1
-//        moreCategoriesSectionButton.layer.borderWidth = 1
-        
         postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
-//        moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
-        
         postReviewSeciontButton.roundCorners(radius: 5)
-//        moreCategoriesSectionButton.roundCorners(radius: 5)
+
         
         starRatingView.topCornersRounded(radius: 10)
         writeReviewView.bottomCornersRounded(radius: 10)
         
-//        for view in categoriesStackView.subviews{
-//            view.removeFromSuperview()
-//        }
         
         var focus_category = Set<String>()
         var yelp_category = [String]()
@@ -346,8 +281,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 addGreenDot(label: (self.placeVC?.interestLabel)!, content: category)
             }
             
-//            categoriesStackView.addArrangedSubview(completeLabel)
-//            categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
         }
         streetAddress.text = place.address[0]
         if place
@@ -365,11 +298,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         if let open_hours = place.hours{
             let hours = getOpenHours(open_hours)
-            infoScreenHeight.constant += CGFloat(25 * hours.count)
-//            viewHeight.constant += CGFloat(25 * hours.count)
+//            infoScreenHeight.constant += CGFloat(25 * hours.count)
             
             for (_, hour) in (hours.enumerated()){
-//                frame: CGRect(x: 0, y: 0, width: self.hoursStackView.frame.size.width, height: 25)
+
                 let textLabel = UILabel()
                 
                 textLabel.text  = hour
@@ -380,23 +312,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
             }
         }else {
-            self.infoScreenHeight.constant -= self.hoursStackView.bounds.size.height
-            self.placeVC?.pinViewHeight.constant -= self.hoursStackView.bounds.size.height
+//            self.infoScreenHeight.constant -= self.hoursStackView.bounds.size.height
             self.hoursStackView.bounds.size.height = 0
-            // MISSING locationInfoStackView
-//            self.infoScreenHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
-//            self.viewHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
-//            
-//            self.locationInfoStackView.subviews[3].removeFromSuperview()
-//            self.locationInfoStackViewHeight.constant = 75
-
-            
-            //            let textLabel = UILabel()
-//            textLabel.text = "This location has not submitted its hours"
-//            textLabel.textAlignment = .center
-//            textLabel.textColor = UIColor.white
-//            textLabel.center = hoursStackView.center
-//            hoursStackView.addArrangedSubview(textLabel)
         }
         
         let invite = ["user1", "user2", "user3"]
@@ -406,7 +323,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             view.userName.text = user
             view.userName.textColor = .white
             view.delegate = self
-            view.inviteButton.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
+            view.inviteButton.addTarget(self, action: #selector(inviteSentToSingleUser), for: .touchUpInside)
             view.image.image = UIImage(named: "UserPhoto")
         }
         
@@ -433,7 +350,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         placeVC?.loadPlace(place: view.place!)
         self.loadInfoScreen(place: view.place!)
         
-        self.scrollView.setContentOffset(CGPoint(x: 0,y: -self.scrollView.contentInset.top), animated: true)
+//        self.scrollView.setContentOffset(CGPoint(x: 0,y: -self.scrollView.contentInset.top), animated: true)
 
     }
     
@@ -471,12 +388,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
             let otherPlacesCell = self.peopleAlsoLikedTableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
             otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
-            otherPlacesCell.placeCellView.backgroundColor = UIColor.clear
-            otherPlacesCell.layer.backgroundColor = UIColor.clear.cgColor
             
             let place = suggestedPlaces[indexPath.row]
             otherPlacesCell.placeNameLabel.text = place.name
-            otherPlacesCell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
+            otherPlacesCell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
             
             let address = place.address.joined(separator: "\n")
             
@@ -494,7 +409,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 })
             }
             
-            otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(PlaceViewController.inviteButtonClicked(_:)), for: .touchUpInside)
             otherPlacesCell.place = place
             otherPlacesCell.addressTextView.text = address
             addGreenDot(label: otherPlacesCell.categoryLabel, content: place_focus)
@@ -507,7 +421,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView.tag == 0){
-//            tableView.cellForRow(at: indexPath)?.bounds.size.height = (tableView.cellForRow(at: indexPath)?.contentView.bounds.size.height)!
+
             return 80
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
@@ -517,22 +431,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if showInvitePopup {
-//            self.view.bringSubview(toFront: self.invitePopupView)
-            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.invitePopupView.center.y -= 90
-//                self.invitePopupBottomConstraint.constant -= 90
-            }, completion: { animate in
-                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
-                    self.invitePopupView.center.y += 90
-//                    self.invitePopupBottomConstraint.constant += 90
-                }, completion: { onCompletion in
-                    self.invitePopupView.isHidden = true
-//                    self.scrollView.sendSubview(toBack: self.invitePopupView)
-                })
-            })
-            self.showInvitePopup = false
-        }
+        var frame = self.peopleAlsoLikedTableView.frame;
+        frame.size.height = self.peopleAlsoLikedTableView.contentSize.height
+        self.peopleAlsoLikedTableView.frame = frame;
     }
     
     func inviteUser(name: String) {
@@ -550,18 +451,27 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     func inviteTestMethod(){
+        
+        print("testing........")
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "place"
         ivc.id = (place?.id)!
         ivc.place = place
-        
+        ivc.placeDetailsDelegate = self.delegate
+        ivc.inviteFromPlaceDetails = true
         ivc.username = AuthApi.getUserName()!
         ivc.placeVC = self
         
         self.present(ivc, animated: true, completion: { _ in })
     }
     
+    func inviteSentToSingleUser(){
+
+//        TODO: need to send invite to single user, need to ask arya how to handle stack when invite sent
+        self.placeVC?.hasSentInvite()
+        self.placeVC?.showPopup()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -657,35 +567,19 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     func showReviewBox(){
-        if reviewsView.alpha == 1{
-            reviewsView.alpha = 0
-//            categoryTop.constant = 0
-            self.topViewHeight.constant -= self.reviewsView.frame.size.height
-            self.placeVC?.pinViewHeight.constant -= self.reviewsView.frame.size.height
+        self.placeVC?.reviewButton.isSelected = !(self.placeVC?.reviewButton.isSelected)!
+        if (self.placeVC?.reviewButton.isSelected)!{
+            self.reviewsStack.isHidden = false
+            self.mainStackView.insertArrangedSubview(self.reviewsStack, at: 0)
+        }else{
+            self.mainStackView.removeArrangedSubview(self.reviewsStack)
+            self.reviewsStack.isHidden = true
+//            self.view.bounds.size.height -= self.reviewsStack.frame.size.height
         }
-        else{
-            reviewsView.alpha = 1
-//            categoryTop.constant = 132
-            self.topViewHeight.constant += self.reviewsView.frame.size.height
-            self.placeVC?.pinViewHeight.constant += self.reviewsView.frame.size.height
-        }
-    }
-    
-    @IBAction func showReview(_ sender: Any) {
-        if reviewsView.alpha == 1{
-            reviewsView.alpha = 0
-            categoryTop.constant = 90
-        }
-        else{
-            reviewsView.alpha = 1
-            categoryTop.constant = 215
-        }
-        
     }
     
     @IBAction func selectedRating(sender: UIButton){
         self.rating = sender.tag
-        
         switch sender.tag{
         case 1:
 //            self.ratingsImage.image = #imageLiteral(resourceName: "Star light yellow")
@@ -707,6 +601,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         default:
             break
         }
+        
+    }
+    
+    func checkRatingsAmount(){
         
     }
     
@@ -750,8 +648,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     func followPressed(){
-        if isFollowing == false
-        {
+        if isFollowing == false{
             let time = NSDate().timeIntervalSince1970
             Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
             Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
@@ -817,52 +714,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             }
             
         })
-    }
-    
-    func showPopup(){
-        print("have sent invite to this place!")
-        self.invitePopupView.isHidden = false
-        self.showInvitePopup = true
-    }
-    
-    @IBAction func follow(_ sender: Any) {
-        
-//        if isFollowing == false
-//        {
-//        let time = NSDate().timeIntervalSince1970
-//        Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-//        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
-//        
-//        self.followButton.isSelected = true
-//        self.followButton.layer.borderWidth = 1
-//        self.followButton.layer.borderColor = UIColor.white.cgColor
-//        self.followButton.layer.shadowOpacity = 1.0
-//        self.followButton.layer.masksToBounds = false
-//        self.followButton.layer.shadowColor = UIColor.black.cgColor
-//        self.followButton.layer.shadowRadius = 7.0
-//        self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
-//        self.followButton.tintColor = UIColor.clear
-//        self.followButton.setTitle("Following", for: UIControlState.normal)
-//            isFollowing = true
-//        }else
-//        {
-//            self.followButton.setTitle("Follow", for: UIControlState.normal)
-//            Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-//                let value = snapshot.value as? NSDictionary
-//                if value != nil {
-//                    for (key,_) in value!
-//                    {
-//                        Constants.DB.following_place.child((self.place?.id)!).child("followers").child(key as! String).removeValue()
-//                    }
-//                    
-//                    
-//                    
-//                }
-//            })
-//        }
-        //           Constants.DB.places.child(placeID).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-        
-        
     }
     
     /*
