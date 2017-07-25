@@ -49,7 +49,10 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
 //            sortedViews[index].backgroundColor = UIColor.gray
 //        }
         
-        
+        self.nofArray.sorted(by: {
+            return $0.time! < $1.time!
+        })
+
         AuthApi.clearNotifications()
         
         self.nofArray = Array(Set<FocusNotification>(self.nofArray))
