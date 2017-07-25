@@ -131,6 +131,20 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                             }
                                             
                                             if self.followers.count == followingCount && self.people.count > 0{
+                                                
+                                                self.people.sort {
+                                                    if $0.hasPin && $1.hasPin{
+                                                        return $0.pinDistance < $1.pinDistance
+                                                    }
+                                                    if $0.hasPin{
+                                                        return $0.hasPin
+                                                    }
+                                                    else{
+                                                        return false
+                                                    }
+                                                    
+                                                }
+                                                
                                                 for user in self.followers{
                                                     if let index = self.people.index(where: { $0.uuid == user.uuid }) {
                                                         self.people.remove(at: index)
@@ -197,7 +211,13 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                             if $0.hasPin && $1.hasPin{
                                                 return $0.pinDistance < $1.pinDistance
                                             }
-                                            return $0.hasPin && !$1.hasPin
+                                            if $0.hasPin{
+                                                return $0.hasPin
+                                            }
+                                            if $1.hasPin{
+                                                return $1.hasPin
+                                            }
+                                            return true
                                         }
                                         
                                         for user in self.followers{
