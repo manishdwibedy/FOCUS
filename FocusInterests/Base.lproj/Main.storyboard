@@ -472,12 +472,12 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCQ-A8-LVs">
-                                <rect key="frame" x="9" y="4" width="16" height="18"/>
+                                <rect key="frame" x="25" y="4" width="16" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="8lR-A4-zn9"/>
                                     <constraint firstAttribute="width" constant="16" id="ZNp-lQ-kG4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="23"/>
                                 <state key="normal" title="x">
                                     <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -490,9 +490,9 @@
                         <constraints>
                             <constraint firstItem="HCQ-A8-LVs" firstAttribute="top" secondItem="XW1-Kd-q02" secondAttribute="bottom" constant="4" id="8Ot-iv-eUs"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="top" secondItem="XW1-Kd-q02" secondAttribute="bottom" constant="26" id="ACk-7G-jkk"/>
-                            <constraint firstItem="re9-I8-udK" firstAttribute="leading" secondItem="HCQ-A8-LVs" secondAttribute="trailing" constant="4.5" id="AKc-XS-SD0"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="leading" secondItem="Vkg-MS-EEL" secondAttribute="leading" constant="29.5" id="T5f-48-asE"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="centerX" secondItem="Vkg-MS-EEL" secondAttribute="centerX" id="VBL-uF-Tu8"/>
+                            <constraint firstItem="HCQ-A8-LVs" firstAttribute="leading" secondItem="Vkg-MS-EEL" secondAttribute="leadingMargin" constant="9" id="dyb-rk-BWt"/>
                             <constraint firstAttribute="trailing" secondItem="re9-I8-udK" secondAttribute="trailing" constant="29.5" id="mOv-sh-z2F"/>
                         </constraints>
                     </view>
@@ -522,7 +522,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wWP-sO-Y5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2725" y="1394"/>
+            <point key="canvasLocation" x="2724.8000000000002" y="1393.4032983508248"/>
         </scene>
         <!--Map Settings One View Controller-->
         <scene sceneID="keO-mr-uLx">
@@ -622,12 +622,12 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVI-vb-tMY">
-                                <rect key="frame" x="9" y="4" width="16" height="18"/>
+                                <rect key="frame" x="25" y="4" width="16" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="N5G-22-PrX"/>
                                     <constraint firstAttribute="height" constant="18" id="wgp-ax-Dq6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="23"/>
                                 <state key="normal" title="x">
                                     <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -639,9 +639,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="q4Z-4g-nao" firstAttribute="leading" secondItem="VB0-vV-eeh" secondAttribute="leading" constant="29" id="845-mU-exA"/>
-                            <constraint firstItem="q4Z-4g-nao" firstAttribute="leading" secondItem="yVI-vb-tMY" secondAttribute="trailing" constant="4" id="DGt-aW-pz2"/>
                             <constraint firstItem="q4Z-4g-nao" firstAttribute="centerX" secondItem="VB0-vV-eeh" secondAttribute="centerX" id="Lzn-pf-1tz"/>
                             <constraint firstAttribute="trailing" secondItem="q4Z-4g-nao" secondAttribute="trailing" constant="29.5" id="OuB-7D-Lra"/>
+                            <constraint firstItem="yVI-vb-tMY" firstAttribute="leading" secondItem="VB0-vV-eeh" secondAttribute="leadingMargin" constant="9" id="PCl-9J-iua"/>
                             <constraint firstItem="q4Z-4g-nao" firstAttribute="top" secondItem="2QZ-NM-UCh" secondAttribute="bottom" constant="28.5" id="Uo8-5s-n7p"/>
                             <constraint firstItem="yVI-vb-tMY" firstAttribute="top" secondItem="2QZ-NM-UCh" secondAttribute="bottom" constant="4" id="cQp-Ag-2Ui"/>
                         </constraints>

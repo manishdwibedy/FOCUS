@@ -60,7 +60,7 @@ struct Constants {
     
     struct interests {
         
-        public static let interests = ["Meet up", "Coffee","Chill","Celebration","Food","Drinks","Work","Learn","Entertainment","Arts","Music","Beauty","Fashion","Networking","Exercise","Wellness","Sports","Outdoors","Views","Causes"]
+        public static let interests = ["Meet up", "Coffee", "Chill", "Celebration", "Food", "Drinks", "Business", "Learn", "Entertainment", "Arts", "Music", "Beauty", "Shopping", "Fitness", "Sports", "Outdoors", "Views", "Causes", "Community", "Travel", "Networking"]
       
         public static let eventBriteMapping: [String:String] = [
             "Music": "103",

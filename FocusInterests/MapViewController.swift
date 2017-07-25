@@ -88,12 +88,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
         })
         
-        
+        self.view.backgroundColor = Constants.color.navy
         popUpScreen = MapPopUpScreenView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: popUpView.frame.width))
         popUpScreen.parentVC = self
         self.popUpView.addSubview(popUpScreen)
         
-//        self.mapViewSettings.isHidden = true
         self.mapViewSettings.layer.cornerRadius = 10.0
         
 //        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
