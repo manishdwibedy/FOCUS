@@ -19,23 +19,17 @@ enum previousScreen{
 
 class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource{
     
-    @IBOutlet weak var eventsCollectionView: UICollectionView!
 	@IBOutlet var userScrollView: UIScrollView!
     
     @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var eventsViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
     @IBOutlet weak var navBarItem: UINavigationItem!
     @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var userInfoView: UIView!
-    @IBOutlet weak var pinView: UIView!
-    
-    @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
     // User data
-//	@IBOutlet var userName: UILabel!
-	@IBOutlet var descriptionText: UITextView!
+	@IBOutlet var descriptionText: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     
@@ -53,10 +47,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followingCount: UIButton!
     
-    // user pin info
+    // User Pin Stack
     
-    @IBOutlet weak var greenDotImage: UIImageView!
-//    @IBOutlet weak var categoryImage: UIImageView!
+    @IBOutlet weak var createPinAndUpdatePinStack: UIStackView!
+    
+    @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var pinImage: UIImageView!
     @IBOutlet weak var pinCategoryLabel: UILabel!
     @IBOutlet weak var pinLikesLabel: UILabel!
@@ -69,7 +64,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 //    MARK: Do we still need this
 //    @IBOutlet weak var pinDescription: UILabel!
     @IBOutlet weak var updatePinButton: UIButton!
-    @IBOutlet weak var emptyPinButton: UIButton!
+    @IBOutlet weak var createPinButton: UIButton!
     
     // user interests
     @IBOutlet weak var focusHeader: UILabel!
@@ -79,11 +74,17 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var interestStackHeight: NSLayoutConstraint!
     @IBOutlet weak var moreFocusButton: UIButton!
     @IBOutlet weak var recentPostTableView: UITableView!
-    @IBOutlet weak var recentPostTableViewHeight: NSLayoutConstraint!
     
+    
+//    Events Stack
 	// Location Description (would this be location description?)
 	// Location FOCUS button (what would this be for?)
 	// Collection view See more... button
+    
+    @IBOutlet weak var eventsStackView: UIStackView!
+    @IBOutlet weak var eventsCollectionView: UICollectionView!
+    @IBOutlet weak var eventsViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var moreEventsButtonView: UIView!
     @IBOutlet weak var moreEventsButton: UIButton!
 	// (and also any of the ones after)
     @IBOutlet weak var eventView: UIView!
@@ -144,14 +145,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             let scrollPoint = CGPoint(x: 0, y: sender.frame.origin.y + 200)
             self.userScrollView.setContentOffset(scrollPoint, animated: true)
             
-            descriptionText.isEditable = true
             descriptionText.textColor = .black
             descriptionText.backgroundColor = .white
             descriptionText.becomeFirstResponder()
             editButton.setTitle("save", for: .normal)
         }
         else{
-            descriptionText.isEditable = false
             descriptionText.textColor = .white
             descriptionText.backgroundColor = .clear
             descriptionText.resignFirstResponder()
@@ -178,7 +177,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
-        navBar.titleTextAttributes = attrs
+        self.view.backgroundColor = Constants.color.navy
+        self.navBar.barTintColor = Constants.color.navy
+        self.navBar.titleTextAttributes = attrs
         
 //        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
 //        let focus_header = NSAttributedString(string: "FOCUS", attributes: underlineAttribute)
@@ -192,6 +193,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let recentPostNib = UINib(nibName: "FeedOneTableViewCell", bundle: nil)
         self.recentPostTableView.register(recentPostNib, forCellReuseIdentifier: "recentPostCell")
         
+        
+        self.eventsStackView.translatesAutoresizingMaskIntoConstraints = false;
         let eventsCollectionNib = UINib(nibName: "UserProfileCollectionViewCell", bundle: nil)
         self.eventsCollectionView.register(eventsCollectionNib, forCellWithReuseIdentifier: "eventsCollectionCell")
         
@@ -207,7 +210,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 //      each event based on the tag of the sender
         self.moreFocusButton.tag = 2
         self.moreEventsButton.tag = 3
-        self.emptyPinButton.roundCorners(radius: 10)
+        self.createPinButton.roundCorners(radius: 10)
         
         self.roundImagesAndButtons()
 
@@ -217,8 +220,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         getEventSuggestions()
         getPin()
         
-        
-        
         self.navigationItem.title = ""
         
         self.createEventButton.roundCorners(radius: 6)
@@ -226,7 +227,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         if otherUser{
             self.editButton.isHidden = true
             self.createEventButton.isHidden = true
-            self.emptyPinButton.isHidden = true
+            self.createPinButton.isHidden = true
             self.updatePinButton.isHidden = true
             self.createEventButton.isHidden = true
             self.settingButton.isHidden = true
@@ -244,9 +245,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     if value["images"] != nil{
                         
                     }
-                    self.emptyPinButton.isHidden = true
-                    
-                    self.pinCategoryLabel.text = value["focus"] as? String
+                    self.createPinButton.isHidden = true
+    
+                    if let focusVal = value["focus"] as? String{
+                        addGreenDot(label: self.pinCategoryLabel, content: focusVal)
+                    }else{
+                        addGreenDot(label: self.pinCategoryLabel, content: "N.A.")
+                    }
                     self.pinAddress2Label.text = value["pin"] as? String
                     
                     if let likes = value["like"] as? [String:Any]{
@@ -289,15 +294,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 else{
                     self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
                     self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
-                    self.mainViewHeight.constant = 750
                     
-                    self.pinViewHeight.constant = 45
-                    
-                    self.emptyPinButton.isHidden = false
-                    self.emptyPinButton.setTitle("Update Pin", for: .normal)
+                    self.createPinButton.isHidden = false
                     self.pinDistanceLabel.isHidden = true
                     self.pinAddress2Label.isHidden = true
-                    self.greenDotImage.isHidden = true
                     self.pinImage.isHidden = true
                     self.pinCategoryLabel.isHidden = true
                     self.pinLikesLabel.isHidden = true
@@ -309,17 +309,14 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
             }
             else{
-                self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
-                self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
-                self.mainViewHeight.constant = 750
+//                self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
+//                self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
                 
-                self.pinViewHeight.constant = 45
-                
-                self.emptyPinButton.isHidden = false
-                
+                self.createPinButton.isHidden = false
+                self.pinView.isHidden = true
+//                self.createPinAndUpdatePinStack.removeArrangedSubview(self.pinView)
                 self.pinDistanceLabel.isHidden = true
                 self.pinAddress2Label.isHidden = true
-                self.greenDotImage.isHidden = true
                 self.pinImage.isHidden = true
                 self.pinCategoryLabel.isHidden = true
                 self.pinLikesLabel.isHidden = true
@@ -340,8 +337,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.pinView.layoutIfNeeded()
         self.focusView.setNeedsLayout()
         self.focusView.layoutIfNeeded()
-        self.eventView.setNeedsLayout()
-        self.eventView.layoutIfNeeded()
+        self.interestStackView.setNeedsLayout()
+        self.interestStackView.layoutIfNeeded()
+//        self.eventView.setNeedsLayout()
+//        self.eventView.layoutIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -429,7 +428,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
                 
 //                SAMPLE description text
-                //self.descriptionText.text = description
+//                self.descriptionText.text = "orem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 self.fullNameLabel.text = fullname
                 self.userNameLabel.text = username_str
                 self.descriptionText.text = description_str
@@ -476,24 +475,19 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                         }
                         
                         for (_, interest) in (final_interest.enumerated()){
-                            let textLabel = UILabel()
+                            let interestLabelView = InterestStackViewLabel()
+                            interestLabelView.interestLabel.text = interest
                             
-                            textLabel.textColor = .white
-                            textLabel.text  = interest
-                            textLabel.textAlignment = .left
+                            let interestImage = "\(interest) Green"
+                            interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
                             
                             if interest.characters.count > 0{
                                 if self.interestStackView.arrangedSubviews.count < 3{
-                                    let interestView = InterestStackViewLabel()
-                                    interestView.interestLabel = textLabel
-                                    let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: (interestView.frame.size.height+20)))
-                                    
-                                    interestSubView.addSubview(interestView)
-                                    self.interestStackView.addArrangedSubview(interestSubView)
-                                    self.interestStackView.bounds.size.height += interestSubView.frame.size.height
-                                    self.interestViewHeight.constant += interestSubView.frame.size.height/4
+                                    self.interestStackView.addArrangedSubview(interestLabelView)
+//                                    self.interestStackView.bounds.size.height += interestSubView.frame.size.height
+                                    self.interestViewHeight.constant += interestLabelView.frame.size.height
 
-                                    self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+//                                    self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                                 }
                             }
                         }
@@ -544,29 +538,17 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             }
             
             for (_, interest) in (interests.enumerated()){
-                let interestView = InterestStackViewLabel()
-                interestView.interestLabel.text = interest
-                let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: 20))
-//                interestView.isUserInteractionEnabled = true
-//                print(interestView.addButton.isUserInteractionEnabled)
-                print(interestSubView.isUserInteractionEnabled)
-//                interestView.addButton.isUserInteractionEnabled = true
-                interestView.addButton.setImage(#imageLiteral(resourceName: "White_Plus_Sign"), for: .normal)
-                interestView.addButton.setImage(#imageLiteral(resourceName: "Green_check_sign"), for: .selected)
-                
-                interestView.addButton.target(forAction: #selector(UserProfileViewController.plusButtonPressed(interestView:)), withSender: self)
-                
+                let interestLabelView = InterestStackViewLabel(frame: CGRect(x: 0, y: 0, width: self.interestStackView.bounds.width, height: 30))
+                interestLabelView.view.bounds.size.width = self.interestStackView.frame.size.width
+                interestLabelView.view.center = interestLabelView.center
+                interestLabelView.interestLabel.text = interest
                 let interestImage = "\(interest) Green"
-                interestView.interestLabelImage.image = UIImage(named: interestImage)
-                interestSubView.addSubview(interestView)
+                interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
                 
                 if interest.characters.count > 0{
                     if interestStackView.arrangedSubviews.count < 3{
-
-                        self.interestStackView.addArrangedSubview(interestSubView)
-//                        self.interestStackView.bounds.size.height += interestSubView.frame.size.height
-//                        self.interestViewHeight.constant += interestSubView.frame.size.height/4
-                        interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+                        self.interestStackView.addArrangedSubview(interestLabelView)
+                        self.interestStackView.translatesAutoresizingMaskIntoConstraints = false
                     }
                 }
             }
@@ -583,22 +565,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
     }
     
-    func plusButtonPressed(interestView: InterestStackViewLabel){
-        print("button pressed")
-        interestView.addButton.isSelected = !interestView.addButton.isSelected
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.displayUserData()
-        
-        let fixedWidth = self.descriptionText.frame.size.width
-        self.descriptionText.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        let newSize = self.descriptionText.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        var newFrame = self.descriptionText.frame
-        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
-        self.descriptionText.frame = newFrame;
-        self.recentPostTableViewHeight.constant = self.recentPostTableView.contentSize.height
     }
 
     override func didReceiveMemoryWarning() {
@@ -644,7 +613,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func getEventSuggestions(){
-        self.moreEventsButton.isHidden = false
+        self.moreEventsButtonView.isHidden = false
+//        self.moreEventsButton.isHidden = false
         
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
         Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: ID).queryLimited(toLast: 4).observeSingleEvent(of: .value, with: { snapshot in
@@ -661,27 +631,29 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             }
             
             if self.suggestion.count > 0{
+                self.eventsCollectionView.reloadData()
+                self.eventsStackView.addArrangedSubview(self.eventsCollectionView)
+                //                self.eventsCollectionView.isHidden = false
+                self.eventsStackView.removeArrangedSubview(self.createEventButton)
+                self.eventsViewHeight.constant += (self.eventsCollectionView.frame.size.height - self.createEventButton.frame.size.height)
                 if self.suggestion.count > 3{
                     self.moreEventsButton.isHidden = false
-                }
-                else{
-                    self.moreEventsButton.isHidden = true
+                    self.eventsStackView.addArrangedSubview(self.moreEventsButtonView)
+                    self.eventsViewHeight.constant += self.moreEventsButtonView.frame.size.height
                 }
                 
-                self.eventsCollectionView.reloadData()
-                self.mainViewHeight.constant += 290
-                self.eventsViewHeight.constant += 290
-                self.moreEventsButton.isHidden = true
-                self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
-                self.createEventButton.alpha = 0
+            
             }
             else{
-                self.mainViewHeight.constant -= 290
-                self.eventsViewHeight.constant -= 290
+                
+                self.eventsViewHeight.constant -= (self.eventsCollectionView.frame.size.height + self.moreEventsButtonView.frame.size.height)
+                self.eventsStackView.addArrangedSubview(self.createEventButton)
                 self.moreEventsButton.isHidden = true
-                self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
-                self.createEventButton.alpha = 1
+                self.eventsStackView.removeArrangedSubview(self.moreEventsButtonView)
+                self.eventsStackView.removeArrangedSubview(self.eventsCollectionView)
             }
+            
+            self.eventsStackView.translatesAutoresizingMaskIntoConstraints = false;
             
         })
         
@@ -721,15 +693,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                     self.eventsCollectionView.reloadData()
                                     
                                     self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
-                                    self.mainViewHeight.constant += 300
-                                    self.eventsViewHeight.constant += 300
+//                                    self.eventsViewHeight.constant += 300
                                     self.moreEventsButton.isHidden = false
                                     self.moreEventsButton.isEnabled = true
                                     self.createEventButton.alpha = 0
                                 }
                                 else{
-                                    self.mainViewHeight.constant -= 300
-                                    self.eventsViewHeight.constant -= 300
+//                                    self.eventsViewHeight.constant -= 300
                                     self.moreEventsButton.isHidden = true
                                     self.moreEventsButton.isEnabled = false
                                     self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)

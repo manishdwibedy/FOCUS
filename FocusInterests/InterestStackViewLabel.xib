@@ -19,11 +19,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="362" height="40"/>
+            <rect key="frame" x="0.0" y="0.0" width="349" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6q-Rt-o2o">
-                    <rect key="frame" x="60" y="9.5" width="36.5" height="20.5"/>
+                    <rect key="frame" x="58" y="10" width="233" height="21"/>
                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8mM-OS-ias">
-                    <rect key="frame" x="314" y="3" width="35" height="35"/>
+                    <rect key="frame" x="301" y="3" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="9Dw-0p-MKd"/>
                         <constraint firstAttribute="height" constant="35" id="rvZ-Ts-No5"/>
@@ -48,16 +48,18 @@
             </subviews>
             <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="8mM-OS-ias" firstAttribute="centerY" secondItem="u6q-Rt-o2o" secondAttribute="centerY" id="15d-M1-pcW"/>
-                <constraint firstItem="u6q-Rt-o2o" firstAttribute="leading" secondItem="igh-fx-saS" secondAttribute="trailing" constant="9" id="3fo-RF-vkr"/>
+                <constraint firstItem="u6q-Rt-o2o" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1Hc-pa-PGd"/>
+                <constraint firstItem="u6q-Rt-o2o" firstAttribute="leading" secondItem="igh-fx-saS" secondAttribute="trailing" constant="7" id="3fo-RF-vkr"/>
+                <constraint firstItem="8mM-OS-ias" firstAttribute="leading" secondItem="u6q-Rt-o2o" secondAttribute="trailing" constant="10" id="LMR-6d-FKr"/>
                 <constraint firstItem="igh-fx-saS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZPJ-Ba-Uiv"/>
+                <constraint firstItem="8mM-OS-ias" firstAttribute="centerY" secondItem="u6q-Rt-o2o" secondAttribute="centerY" id="anx-X0-zIw"/>
                 <constraint firstItem="igh-fx-saS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="sVE-sB-Q5m"/>
                 <constraint firstAttribute="trailing" secondItem="8mM-OS-ias" secondAttribute="trailing" constant="13" id="wJr-4x-bLN"/>
-                <constraint firstItem="u6q-Rt-o2o" firstAttribute="centerY" secondItem="igh-fx-saS" secondAttribute="centerY" id="xy4-YO-uYT"/>
+                <constraint firstItem="u6q-Rt-o2o" firstAttribute="centerY" secondItem="igh-fx-saS" secondAttribute="centerY" constant="1" id="xy4-YO-uYT"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-125" y="254"/>
+            <point key="canvasLocation" x="-131.5" y="254"/>
         </view>
     </objects>
     <resources>
