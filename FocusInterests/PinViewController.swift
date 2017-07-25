@@ -13,14 +13,18 @@ import SDWebImage
 class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate{
     var place: Place?
     
+    @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var postReviewSeciontButton: UIButton!
-    @IBOutlet weak var morePinSectionButton: UIButton!
-    @IBOutlet weak var moreCategoriesSectionButton: UIButton!
     
-    @IBOutlet weak var reviewsView: UIView!
     @IBOutlet weak var reviewsTextView: UITextView!
     
-    @IBOutlet weak var topViewHeight: NSLayoutConstraint!
+    // Uber and googl button stack
+    @IBOutlet weak var uberButton: UIButton!
+    @IBOutlet weak var googleMapButton: UIButton!
+    
+    // reviews stack
+    @IBOutlet weak var reviewsStack: UIStackView!
+    
     // basic info screen
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
@@ -29,14 +33,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var reviewButton: UIButton!
     
     // categories
-    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var categoryBackground: UIView!
     @IBOutlet weak var categoriesStackView: UIStackView!
     
     // location info
-    @IBOutlet weak var locationInfoStackView: UIStackView!
-    @IBOutlet weak var locationInfoStackViewHeight: NSLayoutConstraint!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var cityStateLabel: UILabel!
     @IBOutlet weak var streetAddress: UILabel!
@@ -44,9 +45,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var pinTableView: UITableView!
     @IBOutlet weak var inviteUserStackView: UIStackView!
     @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
-    @IBOutlet weak var viewHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var reviewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
     var suggestedPlaces = [Place]()
@@ -58,7 +56,14 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var categoryView: UIView!
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    
+    // pins stack
+    @IBOutlet weak var pinStackView: UIStackView!
+    @IBOutlet weak var pinsHeightConstraint: NSLayoutConstraint!
+    
+    
+    // people also liked stack
+    @IBOutlet weak var peopleAlsoLikedStack: UIView!
     
     var placeVC: PlaceViewController? = nil
     var ratingID: String?
@@ -67,19 +72,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     var delegate: SendInviteFromPlaceDetailsDelegate?
     
     @IBOutlet weak var yelpButton: UIButton!
-    @IBOutlet weak var uberButton: UIButton!
-    @IBOutlet weak var googleMapButton: UIButton!
     
-    @IBOutlet weak var peopleAlsoLikedHeight: NSLayoutConstraint!
-    @IBOutlet weak var pinsHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var peopleAlsoLikedTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var peopleWhoLikeThisTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var categoryTop: NSLayoutConstraint!
-    @IBOutlet weak var pinsTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var peopleAlsoLikedViewBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var bottomView: UIView!
     //rating
     @IBOutlet weak var ratingView: UIView!
     
@@ -102,6 +96,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         super.viewDidLoad()
         
         self.placeVC?.reviewButton.addTarget(self, action: #selector(PinViewController.showReviewBox), for: .touchUpInside)
+        self.mainStackView.removeArrangedSubview(self.reviewsStack)
+        self.reviewsStack.isHidden = true
+//        self.view.bounds.size.height -= self.reviewsStack.frame.size.height
         
         self.placeVC?.followButton.addTarget(self, action: #selector(PinViewController.followPressed), for: .touchUpInside)
         
@@ -148,10 +145,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 //self.data.sort(by: $0["time"] as? Double < $1["time"] as? Double)
             }
             else{
-                self.pinsHeightConstraint.constant = 116
-//                self.viewHeight.constant -= 116
-                
-                self.noPinLabel.alpha = 1
+                self.pinStackView.removeArrangedSubview(self.pinTableView)
+                self.pinView.bounds.size.height -= self.pinTableView.frame.size.height
             }
             self.pinTableView.reloadData()
             
@@ -168,12 +163,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             self.phoneLabel.attributedText = attributedText
             self.phoneLabel.addGestureRecognizer(tap)
         }
-        
-//        self.view
-        self.topViewHeight.constant -= self.reviewsView.frame.size.height
-        self.placeVC?.pinViewHeight.constant -= self.reviewsView.frame.size.height
-        reviewsView.alpha = 0
-//        categoryTop.constant = 0
         
         self.button1.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
         self.button2.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
@@ -268,20 +257,13 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
         
         postReviewSeciontButton.layer.borderWidth = 1
-//        moreCategoriesSectionButton.layer.borderWidth = 1
-        
         postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
-//        moreCategoriesSectionButton.layer.borderColor = UIColor.white.cgColor
-        
         postReviewSeciontButton.roundCorners(radius: 5)
-//        moreCategoriesSectionButton.roundCorners(radius: 5)
+
         
         starRatingView.topCornersRounded(radius: 10)
         writeReviewView.bottomCornersRounded(radius: 10)
         
-//        for view in categoriesStackView.subviews{
-//            view.removeFromSuperview()
-//        }
         
         var focus_category = Set<String>()
         var yelp_category = [String]()
@@ -306,8 +288,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 addGreenDot(label: (self.placeVC?.interestLabel)!, content: category)
             }
             
-//            categoriesStackView.addArrangedSubview(completeLabel)
-//            categoriesStackView.translatesAutoresizingMaskIntoConstraints = false;
         }
         streetAddress.text = place.address[0]
         if place
@@ -326,10 +306,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         if let open_hours = place.hours{
             let hours = getOpenHours(open_hours)
             infoScreenHeight.constant += CGFloat(25 * hours.count)
-//            viewHeight.constant += CGFloat(25 * hours.count)
             
             for (_, hour) in (hours.enumerated()){
-//                frame: CGRect(x: 0, y: 0, width: self.hoursStackView.frame.size.width, height: 25)
+
                 let textLabel = UILabel()
                 
                 textLabel.text  = hour
@@ -341,22 +320,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             }
         }else {
             self.infoScreenHeight.constant -= self.hoursStackView.bounds.size.height
-            self.placeVC?.pinViewHeight.constant -= self.hoursStackView.bounds.size.height
             self.hoursStackView.bounds.size.height = 0
-            // MISSING locationInfoStackView
-//            self.infoScreenHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
-//            self.viewHeight.constant -= self.locationInfoStackView.subviews[3].bounds.height
-//            
-//            self.locationInfoStackView.subviews[3].removeFromSuperview()
-//            self.locationInfoStackViewHeight.constant = 75
-
-            
-            //            let textLabel = UILabel()
-//            textLabel.text = "This location has not submitted its hours"
-//            textLabel.textAlignment = .center
-//            textLabel.textColor = UIColor.white
-//            textLabel.center = hoursStackView.center
-//            hoursStackView.addArrangedSubview(textLabel)
         }
         
         let invite = ["user1", "user2", "user3"]
@@ -393,7 +357,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         placeVC?.loadPlace(place: view.place!)
         self.loadInfoScreen(place: view.place!)
         
-        self.scrollView.setContentOffset(CGPoint(x: 0,y: -self.scrollView.contentInset.top), animated: true)
+//        self.scrollView.setContentOffset(CGPoint(x: 0,y: -self.scrollView.contentInset.top), animated: true)
 
     }
     
@@ -431,12 +395,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
             let otherPlacesCell = self.peopleAlsoLikedTableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
             otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
-            otherPlacesCell.placeCellView.backgroundColor = UIColor.clear
-            otherPlacesCell.layer.backgroundColor = UIColor.clear.cgColor
             
             let place = suggestedPlaces[indexPath.row]
             otherPlacesCell.placeNameLabel.text = place.name
-            otherPlacesCell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) ratings)"
+            otherPlacesCell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
             
             let address = place.address.joined(separator: "\n")
             
@@ -466,7 +428,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView.tag == 0){
-//            tableView.cellForRow(at: indexPath)?.bounds.size.height = (tableView.cellForRow(at: indexPath)?.contentView.bounds.size.height)!
+
             return 80
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
@@ -476,6 +438,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        var frame = self.peopleAlsoLikedTableView.frame;
+        frame.size.height = self.peopleAlsoLikedTableView.contentSize.height
+        self.peopleAlsoLikedTableView.frame = frame;
     }
     
     func inviteUser(name: String) {
@@ -609,30 +574,15 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     func showReviewBox(){
-        if reviewsView.alpha == 1{
-            reviewsView.alpha = 0
-//            categoryTop.constant = 0
-            self.topViewHeight.constant -= self.reviewsView.frame.size.height
-            self.placeVC?.pinViewHeight.constant -= self.reviewsView.frame.size.height
+        self.placeVC?.reviewButton.isSelected = !(self.placeVC?.reviewButton.isSelected)!
+        if (self.placeVC?.reviewButton.isSelected)!{
+            self.reviewsStack.isHidden = false
+            self.mainStackView.insertArrangedSubview(self.reviewsStack, at: 0)
+        }else{
+            self.mainStackView.removeArrangedSubview(self.reviewsStack)
+            self.reviewsStack.isHidden = true
+//            self.view.bounds.size.height -= self.reviewsStack.frame.size.height
         }
-        else{
-            reviewsView.alpha = 1
-//            categoryTop.constant = 132
-            self.topViewHeight.constant += self.reviewsView.frame.size.height
-            self.placeVC?.pinViewHeight.constant += self.reviewsView.frame.size.height
-        }
-    }
-    
-    @IBAction func showReview(_ sender: Any) {
-        if reviewsView.alpha == 1{
-            reviewsView.alpha = 0
-            categoryTop.constant = 90
-        }
-        else{
-            reviewsView.alpha = 1
-            categoryTop.constant = 215
-        }
-        
     }
     
     @IBAction func selectedRating(sender: UIButton){

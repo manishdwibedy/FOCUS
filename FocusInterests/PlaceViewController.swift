@@ -32,19 +32,16 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     var map: MapViewController? = nil
     
     @IBOutlet weak var placeScrollView: UIScrollView!
-    @IBOutlet weak var yelpButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var dollarLabel: UILabel!
     @IBOutlet weak var interestLabel: UILabel!
-    @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
     @IBOutlet weak var ratingButtonLabel: UIButton!
-    @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var ratingBackground: UIView!
-    @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var invitePopupView: UIView!
@@ -71,11 +68,9 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        ratingBackground.layer.cornerRadius = 5
         self.loadPlace(place: self.place!)
         
         self.mapButton.setImage(UIImage(named: "Globe_White"), for: .normal)
-//        self.mapButton.setImage(UIImage(image: UIImage(named: "web"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
         
         self.screenWidth = self.screenSize.width
         self.screenHeight = self.screenSize.height
@@ -86,8 +81,6 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showRating(sender:)))
         
-//        ratingBackground.addGestureRecognizer(tapGesture)
-        
         self.invitePopupView.allCornersRounded(radius: 10.0)
         
         self.topView.addTopBorderWithColor(color: UIColor.white, width: 1.0)
@@ -96,13 +89,10 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         self.placeImage.layer.borderColor = Constants.color.lightBlue.cgColor
         self.placeImage.roundedImage()
         
-//        let followedButtonImage = UIImage(named: "Bell-1")?.withRenderingMode(.alwaysOriginal)
-//        self.followButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         self.followButton.setTitleColor(UIColor.white, for: .normal)
         self.followButton.setTitle("Follow", for: .normal)
         self.followButton.setTitleColor(UIColor.white, for: .selected)
         self.followButton.setTitle("Following", for: .selected)
-//        self.followButton.setImage(followedButtonImage, for: .selected)
         self.checkIfFollowing()
         
         self.followButton.roundCorners(radius: 5.0)
@@ -134,6 +124,8 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
+        self.view.backgroundColor = Constants.color.navy
+        self.navigationBar.barTintColor = Constants.color.navy
         self.navigationBar.titleTextAttributes = attrs
         
         self.pinAmountLabel.setTitle("0", for: .normal)
@@ -260,6 +252,7 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
             pin.placeVC = self
             pin.place = self.place
             pin.delegate = self
+            pin.view.translatesAutoresizingMaskIntoConstraints = false
         }
         if segue.identifier == "unwindToMapViewControllerWithSegue"{
             let map = self.map
@@ -468,6 +461,22 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         }else{
             self.pinButton.backgroundColor = Constants.color.green
         }
+        self.pinButton.isSelected = !self.pinButton.isSelected
+        if self.pinButton.isSelected{
+            self.pinButton.backgroundColor = UIColor.white
+        }else{
+            self.pinButton.backgroundColor = Constants.color.green
+        }
+        
+        let createEventStoryboard = UIStoryboard.init(name: "CreateEvent", bundle: nil)
+        let createEventVC = createEventStoryboard.instantiateViewController(withIdentifier: "createEvent") as! CreateNewEventViewController
+        
+        if let specificAddress = self.placeName.text{
+            createEventVC.specifiedLocation =  specificAddress
+        }
+        
+        createEventVC.specifiedLocationFromPlaceOrEventDetail = true
+        self.present(createEventVC, animated: true, completion: nil)
     }
     
     @IBAction func reviewButon(_ sender: Any) {
@@ -493,11 +502,11 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     
     func showPopup(){
         if showInvitePopup {
-            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.invitePopupView.center.y -= self.invitePopupView.frame.size.height
                 self.invitePopupTopConstraint.constant -= self.invitePopupView.frame.size.height
             }, completion: { animate in
-                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 1, delay: 3.0, options: .curveEaseInOut, animations: {
                     self.invitePopupView.center.y += self.invitePopupView.frame.size.height
                     self.invitePopupTopConstraint.constant += self.invitePopupView.frame.size.height
                 }, completion: nil)

@@ -169,7 +169,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                 "Name": "User Profile"
             ])
         
-//		userScrollView.contentSize = CGSize(width: 375, height: 1600)
         // Do any additional setup after loading the view.
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
@@ -179,13 +178,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.view.backgroundColor = Constants.color.navy
         self.navBar.barTintColor = Constants.color.navy
         self.navBar.titleTextAttributes = attrs
-        
-//        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-//        let focus_header = NSAttributedString(string: "FOCUS", attributes: underlineAttribute)
-//        let event_header = NSAttributedString(string: "Events", attributes: underlineAttribute)
-//        focusHeader.attributedText = focus_header
-//        eventHeader.attributedText = event_header
-        
         
         hideKeyboardWhenTappedAround()
         
