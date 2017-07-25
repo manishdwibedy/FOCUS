@@ -38,6 +38,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var username = ""
     var filtered = [Any]()
     var places = [Place]()
+    var followingPlaces = [Place]()
     var events = [Event]()
     var location: CLLocation?
     var searchPeople: SearchPeopleViewController? = nil
@@ -179,6 +180,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if self.segmentedOut.selectedSegmentIndex == 0{
+            self.filtered = self.followingPlaces + self.filtered
+            self.tableView.reloadData()
+        }
+        
         if showInvitePopup {
             self.invitePopupView.isHidden = false
             UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
@@ -257,7 +264,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place.categories[0].alias))
             }
         
-            //cell.checkForFollow(id: place.id)
+            
+            cell.checkForFollow()
             if let url = URL(string: place.image_url){
                 SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
                     (receivedSize :Int, ExpectedSize :Int) in
@@ -388,7 +396,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 if self.place != nil {
                     parameters = [
                         "latitude": self.place?.coordinate.latitude,
-                        "longitude": self.place?.coordinate.longitude
+                        "longitude": self.place?.coordinate.longitude,
+                        "term": searchText
                         ] as [String : Any]
                 }
                 else{
@@ -398,12 +407,14 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                         parameters = [
                             "latitude": data.coordinates.latitude ?? 0,
                             "longitude": data.coordinates.longitude ?? 0,
+                            "term": searchText
                             ] as [String : Any]
                     }
                     else{
                         parameters = [
                             "latitude": location?.coordinate.latitude ?? 0,
                             "longitude": location?.coordinate.longitude ?? 0,
+                            "term": searchText
                             ] as [String : Any]
                     }
                 }
@@ -456,7 +467,32 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
         }else if segmentedOut.selectedSegmentIndex == 1
         {
+            let DF = DateFormatter()
+            DF.dateFormat = "MMM d, h:mm a"
             
+            self.filtered.removeAll()
+            Constants.DB.event.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                self.filtered.removeAll()
+                if let value = value
+                {
+                    for (id, event) in value
+                    {
+                        if let info = event as? [String:Any]{
+                            let event = Event.toEvent(info: info)
+                            event?.id = id as? String
+                            
+                            if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
+                                self.filtered.append(event)
+                            }
+                            
+                        }
+                        
+                    }
+                    self.tableView.reloadData()
+                }
+                
+            })
         
             
         }

@@ -55,7 +55,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var userLocation: GMSMarker? = nil
     var showTutorial = false
     
-    var exploreTab: InviteViewController? = nil
+    var exploreTab: InvitePeopleViewController? = nil
     var searchEventsTab: SearchEventsViewController? = nil
     var notifs = [FocusNotification]()
     var invites = [FocusNotification]()
@@ -191,7 +191,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
                 
                 if let end = timeDF.date(from: event.endTime){
-                    let start = DF.date(from: event.date!)! > Date()
+                    let start = DF.date(from: event.date!)!
                     if start < Date() && end > Date() && !event.privateEvent{
                         let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
                         let marker = GMSMarker(position: position)
@@ -240,7 +240,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
         })
         
-//        self.exploreTab = self.tabBarController?.viewControllers?[3] as? InviteViewController
+        self.exploreTab = self.tabBarController?.viewControllers?[3] as? InvitePeopleViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
         let token = Messaging.messaging().fcmToken
@@ -1082,9 +1082,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                             self.placeMapping[place.id] = place
                             self.getPlaceHours(id: place.id)
                             self.places.append(place)
-//                            if !(self.exploreTab?.followingPlaces.contains(place))!{
-//                                self.exploreTab?.followingPlaces.append(place)
-//                            }
+                            if !(self.exploreTab?.followingPlaces.contains(place))!{
+                                self.exploreTab?.followingPlaces.append(place)
+                            }
                             print("places count - \(self.places.count)")
                         }
                     })
