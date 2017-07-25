@@ -49,7 +49,15 @@ class UsernameInputView : UIView, UITextFieldDelegate {
         self.createButton.layer.cornerRadius = 5.0
         self.createButton.clipsToBounds = true
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.removeKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
         styleInputField()
+    }
+    
+    func removeKeyboard(){
+        usernameInputField.resignFirstResponder()
     }
     
     private func styleInputField() {

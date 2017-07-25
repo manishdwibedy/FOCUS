@@ -515,11 +515,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         })
         
-        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil { // Change this back
+        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil || true { // Change this back
             print("username is nil")
             
             let usernameView = UsernameInputView(frame: CGRect(x:self.usernameInputView.frame.origin.x, y:self.usernameInputView.frame.origin.y, width:self.usernameInputView.frame.size.width, height: self.usernameInputView.frame.size.height))
             
+            self.usernameInputView = usernameView
             self.view.addSubview(usernameView)
 
             
@@ -621,6 +622,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         popUpView.isHidden = true
+        
+        if let username = usernameInputView as? UsernameInputView{
+            username.usernameInputField.resignFirstResponder()
+        }
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
