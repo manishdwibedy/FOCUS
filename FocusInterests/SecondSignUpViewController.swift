@@ -82,7 +82,7 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
                     })
                 }
                 else{
-                    SCLAlertView().showError("Invalid username", subTitle: "Please choose a unique username.")
+                    SCLAlertView().showCustom("Oops!", subTitle: "That username is already taken.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
                 }
             })
             

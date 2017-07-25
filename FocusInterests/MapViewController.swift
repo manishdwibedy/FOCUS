@@ -566,19 +566,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
                 
             }
-        } else {
-            print("username is not nil")
+        } else if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0 {
+                let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
+                
+                photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
+                
+                
+                photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
+                
+                
+                self.view.addSubview(photoViewInput)
+            }
+            
         }
-
-//        Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
-//            if let id = (snapshot.value as? NSDictionary)?["manish1"]{
-//                print(id)
-//            }
-//            else{
-//                SCLAlertView().showError("Invalid username", subTitle: "Please choose a unique username.")
-//            }
-//        })
-        
     }
     
     func showCameraRoll() {
