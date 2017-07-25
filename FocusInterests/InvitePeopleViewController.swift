@@ -30,6 +30,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var invitePopupViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var invitePopupView: UIView!
     
+    var pinData: pinData? = nil
     var showInvitePopup = false
     var isMeetup = false
     var inviteFromOtherUserProfile = false
@@ -156,6 +157,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         currentLocation.delegate = self
         hideKeyboardWhenTappedAround()
+        
+        if let data = self.pinData{
+            currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -387,10 +392,20 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                         ] as [String : Any]
                 }
                 else{
-                    parameters = [
-                        "latitude": location?.coordinate.latitude ?? 0,
-                        "longitude": location?.coordinate.longitude ?? 0,
-                        ] as [String : Any]
+                    if let data = self.pinData{
+                        currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
+                        
+                        parameters = [
+                            "latitude": data.coordinates.latitude ?? 0,
+                            "longitude": data.coordinates.longitude ?? 0,
+                            ] as [String : Any]
+                    }
+                    else{
+                        parameters = [
+                            "latitude": location?.coordinate.latitude ?? 0,
+                            "longitude": location?.coordinate.longitude ?? 0,
+                            ] as [String : Any]
+                    }
                 }
                 
                 Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in

@@ -261,6 +261,7 @@ class MapPopUpScreenView: UIView {
             let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
             
             let data = object as? pinData
+            ivc.pinData = data
             ivc.username = (data?.username)!
             ivc.mapView = parentVC
             parentVC.present(ivc, animated: true, completion: { _ in })

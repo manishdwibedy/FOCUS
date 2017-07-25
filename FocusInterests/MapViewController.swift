@@ -96,30 +96,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //        self.mapViewSettings.isHidden = true
         self.mapViewSettings.layer.cornerRadius = 10.0
         
-//        FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
-//            if dictionnary != nil {
-//                if let image_str = dictionnary!["image_string"] as? String{
-//                    if image_str.characters.count > 0{
-//                        self.navigationView.userProfileButton.sd_setImage(with: URL(string: image_str), for: .normal)
-//                        self.hasCustomProfileImage = true
-//                        self.navigationView.userProfileButton.imageView?.roundedImage()
-//                    }
-//                }
-//                
-//                
-//                
-//            }
-//            
-//        }
-        
-//        UserDefaults.standard.set(nil, forKey: "eventBriteToken")
-//        webView.isHidden = true
-//        if AuthApi.getEventBriteToken() == nil{
-//            let url = URL(string: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=34IONXEGBQSXJGZXWO&client_secret=FU6FJALJ6DBE6RCVZY2Q7QE73PQIFJRDSPMIAWBUK6XIOY4M3Q")
-//            let requestObj = URLRequest(url: url!)
-//            webView.loadRequest(requestObj)
-//            webView.delegate = self
-//        }
+        if AuthApi.getUserImage() != nil && (AuthApi.getUserImage()?.characters.count)! > 0{
+            
+            SDWebImageManager.shared().downloadImage(with: URL(string: AuthApi.getUserImage()!), options: .continueInBackground, progress: {
+                (receivedSize :Int, ExpectedSize :Int) in
+                
+            }, completed: {
+                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                
+                if image != nil && finished{
+                    let userImage = crop(image: image!, width: 35, height: 35)
+                    self.navigationView.userProfileButton.setImage(userImage, for: .normal)
+                }
+            })
+            
+        }
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
             if let info = snapshot.value as? [String:Any]{
@@ -515,7 +506,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         })
         
-        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil || true { // Change this back
+        if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil{
             print("username is nil")
             
             let usernameView = UsernameInputView(frame: CGRect(x:self.usernameInputView.frame.origin.x, y:self.usernameInputView.frame.origin.y, width:self.usernameInputView.frame.size.width, height: self.usernameInputView.frame.size.height))
