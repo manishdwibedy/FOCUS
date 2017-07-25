@@ -529,7 +529,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 
                 Constants.DB.user_mapping.observeSingleEvent(of: .value, with: {snapshot in
-                    if ((snapshot.value as? NSDictionary)?[username]) != nil{
+                    let value = snapshot.value as? String
+                    if value != nil {
                         SCLAlertView().showCustom("Oops!", subTitle: "That username is already taken.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
                     }
                     else{
@@ -577,8 +578,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 self.view.addSubview(photoViewInput)
             }
-            
-        }
     }
     
     func showCameraRoll() {
