@@ -16,26 +16,19 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var postReviewSeciontButton: UIButton!
     
-    @IBOutlet weak var reviewsTextView: UITextView!
-    
-    // Uber and googl button stack
-    @IBOutlet weak var uberButton: UIButton!
-    @IBOutlet weak var googleMapButton: UIButton!
-    
     // reviews stack
     @IBOutlet weak var reviewsStack: UIStackView!
+    @IBOutlet weak var reviewsTextView: UITextView!
     
     // basic info screen
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var uberButton: UIButton!
+    @IBOutlet weak var googleMapButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
-    @IBOutlet weak var reviewButton: UIButton!
-    
-    // categories
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var categoryBackground: UIView!
-    @IBOutlet weak var categoriesStackView: UIStackView!
+    @IBOutlet weak var reviewStars: UIButton!
+    @IBOutlet weak var reviewAmountButton: UIButton!
     
     // location info
     @IBOutlet weak var phoneLabel: UILabel!
@@ -305,7 +298,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         if let open_hours = place.hours{
             let hours = getOpenHours(open_hours)
-            infoScreenHeight.constant += CGFloat(25 * hours.count)
+//            infoScreenHeight.constant += CGFloat(25 * hours.count)
             
             for (_, hour) in (hours.enumerated()){
 
@@ -319,7 +312,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
             }
         }else {
-            self.infoScreenHeight.constant -= self.hoursStackView.bounds.size.height
+//            self.infoScreenHeight.constant -= self.hoursStackView.bounds.size.height
             self.hoursStackView.bounds.size.height = 0
         }
         
@@ -587,7 +580,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     @IBAction func selectedRating(sender: UIButton){
         self.rating = sender.tag
-        
         switch sender.tag{
         case 1:
 //            self.ratingsImage.image = #imageLiteral(resourceName: "Star light yellow")
@@ -609,6 +601,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         default:
             break
         }
+        
+    }
+    
+    func checkRatingsAmount(){
         
     }
     
@@ -652,8 +648,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     func followPressed(){
-        if isFollowing == false
-        {
+        if isFollowing == false{
             let time = NSDate().timeIntervalSince1970
             Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
             Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
@@ -719,46 +714,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             }
             
         })
-    }
-    
-    @IBAction func follow(_ sender: Any) {
-        
-//        if isFollowing == false
-//        {
-//        let time = NSDate().timeIntervalSince1970
-//        Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-//        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
-//        
-//        self.followButton.isSelected = true
-//        self.followButton.layer.borderWidth = 1
-//        self.followButton.layer.borderColor = UIColor.white.cgColor
-//        self.followButton.layer.shadowOpacity = 1.0
-//        self.followButton.layer.masksToBounds = false
-//        self.followButton.layer.shadowColor = UIColor.black.cgColor
-//        self.followButton.layer.shadowRadius = 7.0
-//        self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
-//        self.followButton.tintColor = UIColor.clear
-//        self.followButton.setTitle("Following", for: UIControlState.normal)
-//            isFollowing = true
-//        }else
-//        {
-//            self.followButton.setTitle("Follow", for: UIControlState.normal)
-//            Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-//                let value = snapshot.value as? NSDictionary
-//                if value != nil {
-//                    for (key,_) in value!
-//                    {
-//                        Constants.DB.following_place.child((self.place?.id)!).child("followers").child(key as! String).removeValue()
-//                    }
-//                    
-//                    
-//                    
-//                }
-//            })
-//        }
-        //           Constants.DB.places.child(placeID).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-        
-        
     }
     
     /*

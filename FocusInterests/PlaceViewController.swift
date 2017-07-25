@@ -252,7 +252,7 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
             pin.placeVC = self
             pin.place = self.place
             pin.delegate = self
-            pin.view.translatesAutoresizingMaskIntoConstraints = false
+//            pin.reviewAmountButton.setTitle(self.reviewsAmountLabel.titleLabel?.text, for: .normal)
         }
         if segue.identifier == "unwindToMapViewControllerWithSegue"{
             let map = self.map
@@ -342,6 +342,7 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         fetchSuggestedPlaces(token: AuthApi.getYelpToken()!)
         
     }
+    
     func getLatestComments(){
         let place = Constants.DB.places
         let comments = place.child((self.place?.id)!).child("comments")
