@@ -283,9 +283,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         Answers.logCustomEvent(withName: "Chat",
                                customAttributes: [
                                 "user": AuthApi.getFirebaseUid()!,
-                                "otherUser": ""
+                                "otherUser": self.user["username"]! as? String
             ])
         
+        sendNotification(to: (self.user["firebaseUserId"] as? String)!, title: "New Message", body: "\(self.user["username"]! as? String) sent you a message", actionType: "", type: "", item_id: "", item_name: "")
         finishSendingMessage()
     }
     
