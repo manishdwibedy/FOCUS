@@ -12,16 +12,7 @@ import FirebaseDatabase
 import GeoFire
 import SCLAlertView
    
-class CreateNewEventViewController: UIViewController,
-    
-//    UITableViewDelegate, UITableViewDataSource,
-    
-    UITextFieldDelegate, UITextViewDelegate
-    
-    //,UISearchBarDelegate
-
-
-{
+class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate{
     
     @IBOutlet weak var privatePublicSwitch: UISwitch!
     //@IBOutlet weak var interestListView: UIView!
@@ -46,6 +37,10 @@ class CreateNewEventViewController: UIViewController,
         2: ""
     ]
     
+//    these are called when a user has pressed "pin here" in either place or event details 
+    var specifiedLocationFromPlaceOrEventDetail = false
+    var specifiedLocation = ""
+    
     var event: Event?
     var place: GMSPlace?
     var fullAddress = ""
@@ -64,7 +59,7 @@ class CreateNewEventViewController: UIViewController,
     var interests = [String]()
     var filteredInterest = [String]()
     var interests_set = Set<String>()
-    
+
     let validatedFields = true
     
     @IBOutlet weak var interestLabelBottomConstraint: NSLayoutConstraint!
@@ -120,7 +115,6 @@ class CreateNewEventViewController: UIViewController,
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-//        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.dateDoneButton], animated: false)
         toolbar.setItems([self.flexibleSpaceButton, self.dateDoneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
@@ -133,7 +127,6 @@ class CreateNewEventViewController: UIViewController,
         toolbar.isTranslucent = true
         toolbar.sizeToFit()
         
-        //        toolbar.setItems([self.fixedSpaceButton, self.previousButton, self.fixedSpaceButton, self.nextButton, self.flexibleSpaceButton, self.dateDoneButton], animated: false)
         toolbar.setItems([self.flexibleSpaceButton, self.endDateDoneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
@@ -220,15 +213,10 @@ class CreateNewEventViewController: UIViewController,
         self.privatePublicSwitch.layer.cornerRadius = 16
         self.privatePublicSwitch.backgroundColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
         self.privatePublicSwitch.onTintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
+        
         formatTextFields()
         setTextFieldDelegates()
-//<<<<<<< HEAD
-//        //self.interestTableView.delaysContentTouches = false
-//        self.timePicker.datePickerMode = .time
-//        self.timePicker.minuteInterval = 5
-//=======
-        //self.interestTableView.delaysContentTouches = false
-        
+
         self.timePicker.delegate = self
         self.timePicker.dataSource = self
         
@@ -243,7 +231,6 @@ class CreateNewEventViewController: UIViewController,
         let startTimeVal = "\(String(describing: self.timerObject[0]!)):\(String(describing: self.timerObject[1]!)) \(String(describing: self.timerObject[2]!))"
         let startingTime = timeFormatter.date(from: startTimeVal)
         self.startTime = startingTime!
-//>>>>>>> 848ee2f2a5770820bdcb26f6428a2c0b81e6a4e8
         
         let date = Date()
         self.datePicker.minimumDate = date
@@ -253,10 +240,17 @@ class CreateNewEventViewController: UIViewController,
        
         var tapGesture : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CreateNewEventViewController.choseFocusAction(_:)))
         tapGesture.numberOfTapsRequired = 1
+        
+//        THIS is to not allow user to change place if they're creating a pin from event or place details
+        if self.specifiedLocationFromPlaceOrEventDetail && self.specifiedLocation != ""{
+            self.locationTextField.isUserInteractionEnabled = false
+            self.locationTextField.text = self.specifiedLocation
+        }else{
+            self.locationTextField.isUserInteractionEnabled = true
+        }
+        
         self.interestListLabel.addGestureRecognizer(tapGesture)
         self.interestListLabel.isUserInteractionEnabled = true
-        
-        eventNameTextField.delegate = self
         
         eventDescriptionTextView.delegate = self
         eventDescriptionTextView.text = "Description"
@@ -924,11 +918,16 @@ extension CreateNewEventViewController {
 //    MARK: TEXT FIELD DELEGATE FUNCTIONS
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == self.eventNameTextField {
-            self.locationTextField.becomeFirstResponder()
+        if textField == self.eventNameTextField{
+            if self.specifiedLocationFromPlaceOrEventDetail {
+                self.eventNameTextField.resignFirstResponder()
+                self.eventDateTextField.becomeFirstResponder()
+            }else{
+                let autoCompleteController = self.createGMSViewController()
+                present(autoCompleteController, animated: true, completion: nil)
+            }
         }
-        self.view.endEditing(true)
-        return false
+        return true
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

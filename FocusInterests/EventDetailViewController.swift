@@ -34,7 +34,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UITextView!
+    @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var navBackOut: UIBarButtonItem!
     @IBOutlet weak var commentsTableView: UITableView!
@@ -47,13 +47,13 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var moreCommentsButton: UIButton!
     @IBOutlet weak var postCommentsButton: UIButton!
     @IBOutlet weak var moreOtherLikesButton: UIButton!
-    
-    
     @IBOutlet weak var guestButtonOut: UIButton!
-//    @IBOutlet weak var image: UIImageView!
     
-    //    MARK: ATTEND TOP VIEW PROPERTIES
+//    MARK: Event Details View
+    @IBOutlet weak var timeAmountAddressStack: UIStackView!
+    @IBOutlet weak var eventDetailsView: UIView!
     
+//    MARK: ATTEND TOP VIEW PROPERTIES
     @IBOutlet weak var attendButton: UIButton!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var eventImage: UIImageView!
@@ -61,8 +61,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var eventDescription: UILabel!
     @IBOutlet weak var eventName: UILabel!
     
-    @IBOutlet weak var commentTableHeight: NSLayoutConstraint!
+//    MARK: Comments Stack
+    @IBOutlet weak var commentsView: UIView!
+    @IBOutlet weak var commentsStack: UIStackView!
     @IBOutlet weak var noCommentLabel: UILabel!
+    @IBOutlet weak var commentsViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var moreCommentsView: UIView!
     
     var invitePeopleEventDelegate: InvitePeopleEventCellDelegate?
     var event: Event?
@@ -99,9 +103,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         if event?.price != nil && (event?.price)! > 0.0{
             eventAmount.text = "$ \(String(describing: event?.price))"
-        }
-        else{
-            eventAmountHeight.constant = 0
+        }else{
+            self.timeAmountAddressStack.removeArrangedSubview(self.eventAmount)
+            self.eventDetailsView.bounds.size.height -= self.eventAmount.frame.size.height
         }
         
         let commentsNib = UINib(nibName: "commentCell", bundle: nil)
@@ -125,7 +129,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         commentTextField.clipsToBounds = true
         commentTextField.layer.borderColor = UIColor.white.cgColor
         
-        self.topView.addTopBorderWithColor(color: UIColor.white, width: 0.7)
+        self.navBar.addBottomBorderWithColor(color: UIColor.white, width: 0.7)
         
         self.eventImage.layer.borderWidth = 1
         self.eventImage.layer.borderColor = Constants.color.pink.cgColor
@@ -157,14 +161,14 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         navTitle.title = event?.title
         timeLabel.text = event?.date
         addressLabel.text = event?.fullAddress?.replacingOccurrences(of: ";;", with: ", ")
-//        descriptionLabel.text = event?.eventDescription
-        descriptionLabel.text = "sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. sum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         
-        var frame = self.descriptionLabel.frame
+//        self.descriptionTextView.text = event?.eventDescription
+        self.descriptionTextView.text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna"
+        var frame = self.descriptionTextView.frame
         
-        frame.size = self.descriptionLabel.contentSize
+        frame.size = self.descriptionTextView.contentSize
         
-        self.descriptionLabel.frame = frame
+        self.descriptionTextView.frame = frame
         
         let reference = Constants.storage.event.child("\(event!.id!).jpg")
         
@@ -189,8 +193,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
             
         })
-        
-//        TODO:THERE IS A BUG THAT RETURNS NIL BEFORE VIEW LOADS
         
         ref.child("users").child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -223,16 +225,24 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                         let data = commentCellData(from: dict["fromUID"] as! String, comment: dict["comment"] as! String, commentFirePath: fullRef.child(String(describing: key)), likeCount: (dict["like"] as! NSDictionary)["num"] as! Int, date: Date(timeIntervalSince1970: TimeInterval(dict["date"] as! Double)))
                         self.commentsCList.add(data)
                     }
+                    
+                    self.commentsStack.removeArrangedSubview(self.noCommentLabel)
+                    self.commentsViewHeight.constant -= self.noCommentLabel.bounds.height
                 }
                 else{
-                    self.commentTableHeight.constant = 50
-                    self.noCommentLabel.alpha = 1
+//                    self.commentTableHeight.constant = 50
+                    self.commentsStack.addArrangedSubview(self.noCommentLabel)
+                    self.commentsStack.addArrangedSubview(self.addCommentView)
+                    self.commentsStack.removeArrangedSubview(self.moreCommentsView)
+                    self.commentsStack.removeArrangedSubview(self.commentsTableView)
+                    self.commentsViewHeight.constant -= (self.commentsTableView.frame.height + self.moreCommentsView.frame.height)
                     self.moreCommentsButton.isHidden = true
+//                    self.noCommentLabel.alpha = 1
+//                    self.moreCommentsButton.isHidden = true
                 }
                 
                 self.commentsTableView.reloadData()
-                if self.commentsCList.count != 0
-                {
+                if self.commentsCList.count != 0{
                     let oldLastCellIndexPath = NSIndexPath(row: self.commentsCList.count-1, section: 0)
                     self.commentsTableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
                 }
@@ -322,6 +332,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
+        self.view.backgroundColor = Constants.color.navy
+        self.navBar.barTintColor = Constants.color.navy
         self.navBar.titleTextAttributes = attrs
         
         let titlelabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
@@ -338,6 +350,14 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: eventLocation,addBracket: false, precision: 0), for: .normal)
         
         hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.descriptionTextView.textContainer.maximumNumberOfLines = 3
+        self.descriptionTextView.textContainer.lineBreakMode = .byTruncatingTail
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -474,10 +494,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             ])
         
         let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
-        if self.commentsCList.count != 0
-        {
+        if self.commentsCList.count != 0{
             self.commentsCList.removeObject(at: 0)
         }
+        
         self.commentsCList.add(data)
         commentsTableView.reloadData()
         //tableView.beginUpdates()
@@ -817,6 +837,16 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }else{
             self.pinHereButton.backgroundColor = Constants.color.green
         }
+        
+        let createEventStoryboard = UIStoryboard.init(name: "CreateEvent", bundle: nil)
+        let createEventVC = createEventStoryboard.instantiateViewController(withIdentifier: "createEvent") as! CreateNewEventViewController
+        
+        if let specificAddress = self.addressLabel.text{
+            createEventVC.specifiedLocation =  specificAddress
+        }
+        
+        createEventVC.specifiedLocationFromPlaceOrEventDetail = true
+        self.present(createEventVC, animated: true, completion: nil)
     }
     
     func checkIfAttending(){

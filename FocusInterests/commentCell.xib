@@ -34,16 +34,13 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RB-L1-Zih">
-                        <rect key="frame" x="81" y="61" width="150" height="19.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="150" id="YCi-gl-ejj"/>
-                        </constraints>
+                        <rect key="frame" x="81" y="61" width="28.5" height="19.5"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASS-f0-e5q">
-                        <rect key="frame" x="9" y="62" width="65" height="20"/>
+                        <rect key="frame" x="9" y="61" width="65" height="19"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -58,13 +55,13 @@
                     <constraint firstItem="Yco-yJ-cBW" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="34" id="JtA-fA-VhP"/>
                     <constraint firstItem="Yco-yJ-cBW" firstAttribute="leading" secondItem="xn0-vb-Ke6" secondAttribute="trailing" constant="13" id="RUj-sI-rLw"/>
                     <constraint firstItem="ASS-f0-e5q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="SC1-EA-1Mx"/>
-                    <constraint firstItem="ASS-f0-e5q" firstAttribute="top" secondItem="xn0-vb-Ke6" secondAttribute="bottom" constant="9" id="SWZ-Yb-Yzr"/>
+                    <constraint firstItem="ASS-f0-e5q" firstAttribute="top" secondItem="xn0-vb-Ke6" secondAttribute="bottom" constant="8" id="SWZ-Yb-Yzr"/>
                     <constraint firstItem="7RB-L1-Zih" firstAttribute="top" secondItem="Yco-yJ-cBW" secondAttribute="bottom" constant="8" id="bn1-S9-Eh1"/>
                     <constraint firstItem="xn0-vb-Ke6" firstAttribute="centerY" secondItem="Yco-yJ-cBW" secondAttribute="centerY" id="fJG-hg-cBT"/>
-                    <constraint firstItem="7RB-L1-Zih" firstAttribute="centerY" secondItem="ASS-f0-e5q" secondAttribute="centerY" constant="-1" id="kTa-CB-aBN"/>
-                    <constraint firstItem="7RB-L1-Zih" firstAttribute="top" secondItem="ASS-f0-e5q" secondAttribute="top" constant="-1" id="tvA-3H-dms"/>
+                    <constraint firstItem="7RB-L1-Zih" firstAttribute="centerY" secondItem="ASS-f0-e5q" secondAttribute="centerY" constant="0.25" id="kTa-CB-aBN"/>
+                    <constraint firstItem="7RB-L1-Zih" firstAttribute="top" secondItem="ASS-f0-e5q" secondAttribute="top" id="tvA-3H-dms"/>
                     <constraint firstItem="xn0-vb-Ke6" firstAttribute="centerX" secondItem="ASS-f0-e5q" secondAttribute="centerX" id="vgw-J9-nZS"/>
-                    <constraint firstItem="7RB-L1-Zih" firstAttribute="bottom" secondItem="ASS-f0-e5q" secondAttribute="bottom" constant="-1" id="y7v-r9-Yag"/>
+                    <constraint firstItem="7RB-L1-Zih" firstAttribute="bottom" secondItem="ASS-f0-e5q" secondAttribute="bottom" constant="0.5" id="y7v-r9-Yag"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0035624755349816838" green="0.80395383883248728" blue="0.37541098387195382" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

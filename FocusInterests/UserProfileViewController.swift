@@ -71,7 +71,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var interestStackView: UIStackView!
     @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var interestStackHeight: NSLayoutConstraint!
     @IBOutlet weak var moreFocusButton: UIButton!
     @IBOutlet weak var recentPostTableView: UITableView!
     
@@ -633,7 +632,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             if self.suggestion.count > 0{
                 self.eventsCollectionView.reloadData()
                 self.eventsStackView.addArrangedSubview(self.eventsCollectionView)
-                //                self.eventsCollectionView.isHidden = false
                 self.eventsStackView.removeArrangedSubview(self.createEventButton)
                 self.eventsViewHeight.constant += (self.eventsCollectionView.frame.size.height - self.createEventButton.frame.size.height)
                 if self.suggestion.count > 3{

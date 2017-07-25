@@ -247,11 +247,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.peopleAlsoLikedTableView.bounds.size.height = self.peopleAlsoLikedTableView.contentSize.height
-        if let placeViewController = self.placeVC {
-//            placeViewController.placeScrollView.bounds.size.height = self.topViewHeight.constant + self.viewHeight.constant
-//            placeViewController.pinViewHeight.constant += ((self.viewHeight.constant+self.topView.frame.size.height+self.peopleAlsoLikedTopConstraint.constant+self.peopleWhoLikeThisTopConstraint.constant+self.pinsTopConstraint.constant+self.peopleAlsoLikedViewBottomConstraint.constant+self.bottomViewBottomConstraint.constant)-self.scrollView.frame.size.height)
-        }
     }
     
     func callPlace(sender:UITapGestureRecognizer) {
@@ -262,32 +257,15 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     func loadInfoScreen(place: Place){
         // Do any additional setup after loading the view.
         self.placeVC?.placeName.text = place.name
-//        placeNameLabel.text = place.name
+
         if place.price.characters.count == 0{
             self.placeVC?.dollarLabel.text = "N.A."
-//            costLabel.text = "N.A."
+
         }
         else{
             self.placeVC?.dollarLabel.text = place.price
-//            costLabel.text = place.price
+
         }
-        
-//        distanceLabel.text = "2 mi"
-        
-        
-//        self.followButton.roundCorners(radius: 10)
-//        self.followButton.layer.shadowOpacity = 1.0
-//        self.followButton.layer.masksToBounds = false
-//        self.followButton.layer.shadowColor = UIColor.black.cgColor
-//        self.followButton.layer.shadowRadius = 7.0
-        
-//        self.reviewButton.roundCorners(radius: 10)
-//        self.reviewButton.layer.shadowOpacity = 1.0
-//        self.reviewButton.layer.masksToBounds = false
-//        self.reviewButton.layer.shadowColor = UIColor.black.cgColor
-//        self.reviewButton.layer.shadowRadius = 7.0
-        
-//        moreCategoriesSectionButton.isHidden = true
         
         postReviewSeciontButton.layer.borderWidth = 1
 //        moreCategoriesSectionButton.layer.borderWidth = 1
