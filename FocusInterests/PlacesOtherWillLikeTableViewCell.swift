@@ -10,6 +10,7 @@ import UIKit
 
 class PlacesOtherWillLikeTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var content: UIView!
     @IBOutlet weak var placesImage: UIImageView!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var interestLabel: UILabel!
@@ -23,6 +24,8 @@ class PlacesOtherWillLikeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.content.allCornersRounded(radius: 10.0)
         self.placesImage.layer.borderWidth = 1
         self.placesImage.layer.borderColor = Constants.color.lightBlue.cgColor
         self.placesImage.roundedImage()

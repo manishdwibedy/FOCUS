@@ -185,24 +185,15 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.placesTableView.dataSource = self
         self.placesTableView.delegate = self
         
-        let placeNib = UINib(nibName: "PlacesOtherWillLikeTableViewCell", bundle: nil)
-        self.placesTableView.register(placeNib, forCellReuseIdentifier: "placesCell")
+        let placeNib = UINib(nibName: "SearchPlaceCell", bundle: nil)
+        self.placesTableView.register(placeNib, forCellReuseIdentifier: "SearchPlaceCell")
         
         self.eventsTableView.dataSource = self
         self.eventsTableView.delegate = self
         
-        let eventNib = UINib(nibName: "EventOtherWillLikeTableViewCell", bundle: nil)
-        self.eventsTableView.register(eventNib, forCellReuseIdentifier: "eventsCell")
+        let eventNib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
+        self.eventsTableView.register(eventNib, forCellReuseIdentifier: "searchEventCell")
         
-//        self.peopleMoreButton.layer.borderWidth = 1.0
-//        self.peopleMoreButton.layer.borderColor = UIColor.white.cgColor
-//        self.peopleMoreButton.roundCorners(radius: 5.0)
-//        
-//        self.eventMoreButton.layer.borderWidth = 1.0
-//        self.eventMoreButton.layer.borderColor = UIColor.white.cgColor
-//        self.eventMoreButton.roundCorners(radius: 5.0)
-        
-        self.otherUserNameInterestTitleLabel.text = "alex\'s FOCUS"
         
         // Do any additional setup after loading the view.
         let attrs = [
@@ -210,7 +201,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
-        navBar.titleTextAttributes = attrs
+        self.view.backgroundColor = Constants.color.navy
+        self.navBar.backgroundColor = Constants.color.navy
+        self.navBar.titleTextAttributes = attrs
         
         self.followButton.roundCorners(radius: 5.0)
         self.messageButton.roundCorners(radius: 5.0)
@@ -243,25 +236,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //        getEventSuggestions()
 //        getPin()
         
-//        self.pinView.addTopBorderWithColor(color: UIColor.white, width: 1)
-//        self.userInfoView.addBottomBorderWithColor(color: UIColor.white, width: 0.3)
-//        self.otherPlaceStackView.addBottomBorderWithColor(color: UIColor.white, width: 0.3)
-//        self.otherEventStackView.addBottomBorderWithColor(color: UIColor.white, width: 0.3)
-//        self.focusView.addBottomBorderWithColor(color: UIColor.white, width: 0.3)
-//        self.focusView.addTopBorderWithColor(color: UIColor.white, width: 0.3)
-//        self.navigationItem.title = ""
-        
         self.invitePopupView.allCornersRounded(radius: 10)
         
         self.createEventButton.roundCorners(radius: 6)
         
         if otherUser{
-//            self.editButton.isHidden = true
             self.createEventButton.isHidden = true
-//            self.emptyPinButton.isHidden = true
-//            self.updatePinButton.isHidden = true
             self.createEventButton.isHidden = true
-//            self.settingButton.isHidden = true
         }
         
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
@@ -372,7 +353,15 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.descriptionText.text = "ctetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab pecu, sed do eiusmod tempor incididunt ut lab"
+
+        var eventTableFrame = self.eventsTableView.frame
+        eventTableFrame.size.height = self.eventsTableView.contentSize.height
+        self.eventsTableView.frame = eventTableFrame
+        
+        var placesTableFrame = self.placesTableView.frame
+        placesTableFrame.size.height = self.placesTableView.contentSize.height
+        self.placesTableView.frame = placesTableFrame
+        
     }
     
     //    MARK: COLLECTIONVIEW DELEGATE METHODS
@@ -464,7 +453,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //                self.userNameLabel.text = username_str
                 self.descriptionText.textContainer.maximumNumberOfLines = 3
                 self.descriptionText.textContainer.lineBreakMode = .byTruncatingTail
-                
+                self.otherUserNameInterestTitleLabel.text = "\(username_str)\'s FOCUS"
                 self.descriptionText.text = description_str
                 
                 self.navBarItem.title = username_str
@@ -839,10 +828,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 0{
-            let placeCell = tableView.dequeueReusableCell(withIdentifier: "placesCell", for: indexPath) as! PlacesOtherWillLikeTableViewCell
+            let placeCell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
             return placeCell
         }else if tableView.tag == 1{
-            let eventCell = tableView.dequeueReusableCell(withIdentifier: "eventsCell", for: indexPath) as! EventOtherWillLikeTableViewCell
+            let eventCell = tableView.dequeueReusableCell(withIdentifier: "searchEventCell", for: indexPath) as! SearchEventTableViewCell
             return eventCell
         }else{
             let recentPostCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell", for: indexPath) as! FeedOneTableViewCell
@@ -854,9 +843,11 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var rowHeight = CGFloat()
         if tableView.tag == 0{
-            rowHeight = 100
+            let placeCell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
+            rowHeight = placeCell.bounds.size.height
         }else if tableView.tag == 1{
-            rowHeight = 100
+            let eventCell = tableView.dequeueReusableCell(withIdentifier: "searchEventCell") as! SearchEventTableViewCell
+            rowHeight = eventCell.bounds.size.height
         }else if tableView.tag == 2{
             let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
             rowHeight = myCell.bounds.size.height
