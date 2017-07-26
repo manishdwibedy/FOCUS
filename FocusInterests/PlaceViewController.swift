@@ -114,9 +114,9 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: placeLocation,addBracket: false, precision: 0), for: .normal)
         
         
-        self.pinButton.setTitle("Pin Here", for: .normal)
+        self.pinButton.setTitle("I\'m Here", for: .normal)
         self.pinButton.setTitleColor(UIColor.white, for: .normal)
-        self.pinButton.setTitle("I\'m Here!", for: .selected)
+        self.pinButton.setTitle("I\'m Here", for: .selected)
         self.pinButton.setTitleColor(Constants.color.navy, for: .selected)
         
         let attrs = [

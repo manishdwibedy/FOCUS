@@ -177,39 +177,6 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         cell.setupCell(notif: nofArray[indexPath.row])
         cell.parentVC = self
         return cell
-//        if self.selectedSegmentIndex == 0{
-//        }else if self.selectedSegmentIndex == 1{
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
-//            cell.parentVC = self
-//            cell.isFeed = false
-//            cell.seeYouThereButton.isHidden = false
-//            cell.nextTimeButton.isHidden = false
-//            
-//            cell.nofArray = self.nofArray
-//            cell.invArray = self.invArray
-//            cell.feedAray = self.feedAray
-//            
-//            cell.setupCell(notif: invArray[indexPath.row])
-//             return cell
-//        }else{
-//            var cell: UITableViewCell?
-//            
-//            if indexPath.row == 0{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as! FeedOneTableViewCell
-//            }else if indexPath.row == 1{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
-//            }else if indexPath.row == 2{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as! FeedPlaceTableViewCell
-//            }else if indexPath.row == 3{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
-//            }else if indexPath.row == 4{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
-//            }else if indexPath.row == 5{
-//                cell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
-//            }
-//            return cell!
-//        }
-        
         
     }
     

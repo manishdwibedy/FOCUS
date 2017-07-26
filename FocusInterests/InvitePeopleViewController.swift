@@ -79,10 +79,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         searchBar.delegate = self
         
 //        MARK: Event and Location Bars
-        self.currentLocation.backgroundColor = UIColor(red: 4/255.0, green: 34/255.0, blue: 63/255.0, alpha: 1.0)
+        self.currentLocation.backgroundColor = UIColor(red: 38/255.0, green: 83/255.0, blue: 126/255.0, alpha: 1.0)
         self.currentLocation.attributedPlaceholder = NSAttributedString(string: "Current Location", attributes: [NSForegroundColorAttributeName: UIColor.white])
         
-//        04223F
+        let locationImageView = UIImageView(image: #imageLiteral(resourceName: "location").withRenderingMode(UIImageRenderingMode.alwaysTemplate))
+        locationImageView.backgroundColor = UIColor.white
+        self.currentLocation.leftView = locationImageView
         
         self.searchBar.delegate = self
         // search bar attributes
@@ -90,15 +92,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         let cancelButtonsInSearchBar: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!]
         
 //        MARK: Event Search Bar
-//        self.searchBar.isTranslucent = true
         self.searchBar.backgroundImage = UIImage()
         self.searchBar.tintColor = UIColor.white
         self.searchBar.barTintColor = UIColor.white
         
-        self.searchBar.layer.cornerRadius = 6
         self.searchBar.clipsToBounds = true
-        self.searchBar.layer.borderWidth = 0
-        self.searchBar.layer.borderColor = UIColor(red: 119/255.0, green: 197/255.0, blue: 53/255.0, alpha: 1.0).cgColor
         
         self.searchBar.setValue("Cancel", forKey:"_cancelButtonText")
         
@@ -107,7 +105,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             
             textFieldInsideSearchBar.attributedPlaceholder = attributedPlaceholder
             textFieldInsideSearchBar.textColor = UIColor.white
-            textFieldInsideSearchBar.backgroundColor = Constants.color.darkGray
+            textFieldInsideSearchBar.backgroundColor = UIColor(red: 38/255.0, green: 83/255.0, blue: 126/255.0, alpha: 1.0)
             
             let glassIconView = textFieldInsideSearchBar.leftView as! UIImageView
             glassIconView.image = glassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
@@ -140,8 +138,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
-        navBar.titleTextAttributes = attrs
+        self.view.backgroundColor = Constants.color.navy
         navBar.barTintColor = Constants.color.navy
+        navBar.titleTextAttributes = attrs
         
         if isMeetup || inviteFromOtherUserProfile{
             navBar.topItem?.title = "Meet up"
@@ -193,11 +192,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         if showInvitePopup {
             self.invitePopupView.isHidden = false
-            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.invitePopupView.center.y -= 125
                 self.invitePopupViewBottomConstraint.constant += 125
             }, completion: { animate in
-                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 1.5, delay: 3.0, options: .curveEaseInOut, animations: {
                     self.invitePopupView.center.y += 125
                     self.invitePopupViewBottomConstraint.constant -= 125
                 }, completion: nil)
@@ -262,7 +261,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             print("place.image\(place.image_url)")
             //cell.placeID = place.id
             cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
-            
+            cell.dateAndTimeLabel.text = "7/20 10:00 P.M."
             let place_location = CLLocation(latitude: place.latitude, longitude: place.longitude)
             cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
             if place.categories.count > 0{
@@ -316,6 +315,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.invitePeopleVCDelegate = self
             cell.parentVC = self
             cell.guestCount.text = "\(event.attendeeCount) guests"
+            cell.dateAndTimeLabel.text = "7/20 10:00 P.M."
             cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price)"
             
             let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
@@ -379,7 +379,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             return 115
         }
         else{
-            return 105
+            return 115
         }
         
     }

@@ -58,7 +58,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         //        search bar placeholder
         let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
+        
+        textFieldInsideSearchBar?.backgroundColor = UIColor(red: 38/255.0, green: 83/255.0, blue: 126/255.0, alpha: 1.0)
         textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
         textFieldInsideSearchBar?.textColor = UIColor.white
         
@@ -262,11 +263,11 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         if showInvitePopup {
             self.invitePopupView.isHidden = false
-            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.invitePopupView.center.y -= 125
                 self.invitePopupBottomConstraint.constant += 125
             }, completion: { animate in
-                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 1.5, delay: 3.0, options: .curveEaseInOut, animations: {
                     self.invitePopupView.center.y += 125
                     self.invitePopupBottomConstraint.constant -= 125
                 }, completion: nil)

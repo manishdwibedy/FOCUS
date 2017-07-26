@@ -73,9 +73,10 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
         
-        commentsTableView.tableFooterView = UIView()
-        commentsTableView.backgroundColor = Constants.color.navy
         
+        commentsTableView.tableFooterView = UIView()
+        
+        commentField.attributedText = NSAttributedString(string: "Add a comment...", attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir Book", size: 12)!])
         commentField.delegate = self
         
         toolBar.barStyle = .default
@@ -83,7 +84,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         toolBar.sizeToFit()
         toolBar.setItems([flexSpace, cancelButton], animated: false)
         toolBar.isUserInteractionEnabled = true
-        self.commentField.inputAccessoryView = toolBar
+//        self.commentField.inputAccessoryView = toolBar
         
         hideKeyboardWhenTappedAround()
         

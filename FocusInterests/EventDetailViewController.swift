@@ -139,7 +139,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.inviteButton.roundCorners(radius: 5.0)
         
         self.pinHereButton.roundCorners(radius: 5.0)
-        self.pinHereButton.setTitle("Pin Here", for: .normal)
+        self.pinHereButton.setTitle("I\'m Here", for: .normal)
         self.pinHereButton.setTitleColor(UIColor.white, for: .normal)
         self.pinHereButton.setTitle("I\'m Here!", for: .selected)
         self.pinHereButton.setTitleColor(Constants.color.navy, for: .selected)

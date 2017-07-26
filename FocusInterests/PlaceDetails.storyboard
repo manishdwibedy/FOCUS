@@ -301,7 +301,7 @@
                                                                                         </constraints>
                                                                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                                        <state key="normal" title="Pin Here">
+                                                                                        <state key="normal" title="I'm Here">
                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                         </state>
                                                                                         <connections>
@@ -421,8 +421,8 @@
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </barButtonItem>
                                             <barButtonItem style="plain" id="CIK-ec-0HT">
-                                                <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dPa-kf-gkg">
-                                                    <rect key="frame" x="286" y="7" width="40" height="30"/>
+                                                <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dPa-kf-gkg">
+                                                    <rect key="frame" x="271" y="7" width="55" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                     <state key="normal">

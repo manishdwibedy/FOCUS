@@ -14,6 +14,7 @@ protocol InvitePeoplePlaceCellDelegate {
 
 class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
 
+    @IBOutlet weak var dateAndTimeLabel: UILabel!
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var addressTextView: UITextView!
@@ -220,10 +221,9 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
             
             if let data = snapshot.value as? [String:Any]{
                 self.followButton.isSelected = true
-                self.followButton.layer.borderColor = UIColor.white.cgColor
                 self.followButton.layer.borderWidth = 1
-                
-                self.followButton.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
+                self.followButton.layer.borderColor = Constants.color.navy.cgColor
+                self.followButton.backgroundColor = UIColor.white
                 self.followButton.tintColor = UIColor.clear
                 self.followButton.layer.shadowOpacity = 0.5
                 self.followButton.layer.masksToBounds = false
@@ -234,7 +234,7 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
                 self.followButton.isSelected = false
                 self.followButton.layer.borderColor = UIColor.clear.cgColor
                 self.followButton.layer.borderWidth = 1
-                self.followButton.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
                 self.followButton.tintColor = UIColor.clear
                 self.followButton.layer.shadowOpacity = 0.5
                 self.followButton.layer.masksToBounds = false

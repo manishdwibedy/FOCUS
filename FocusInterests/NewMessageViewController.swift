@@ -12,6 +12,8 @@ import JSQMessagesViewController
 
 class NewMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var backButton: UIBarButtonItem!
 
     let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
@@ -33,28 +35,31 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     var pinMessage: String? = nil
     var pinImage: UIImage? = nil
     
+    @IBOutlet weak var search: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.tableFooterView = UIView()
         self.setupSearchBar()
-        
-        let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
-        backgroundView.backgroundColor = Constants.color.navy
-        tableView.backgroundView = backgroundView
-        
+
         self.tableView.separatorColor = UIColor.white
-        self.tableView.separatorInset = UIEdgeInsets.zero
-        self.tableView.sectionIndexBackgroundColor = Constants.color.navy
+
         let nib = UINib(nibName: "NewMessageTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "newMessageCell")
+        
+        self.navigationItem.title = "New Message"
+
+        let backBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "BackArrow"), style: .done, target: self, action: #selector(NewMessageViewController.goBack))
+        backBarItem.tintColor = UIColor.white
+
+        self.navigationItem.setLeftBarButton(backBarItem, animated: true)
         self.navigationItem.setRightBarButton(UIBarButtonItem(title: "", style: .plain, target: nil, action: nil), animated: false)
         self.navigationItem.rightBarButtonItem?.isEnabled = false
-        self.navigationController?.navigationBar.tintColor = UIColor.white
         hideKeyboardWhenTappedAround()
         
-        self.navigationController?.navigationBar.titleTextAttributes = Constants.navBar.attrs
-        self.navigationController?.navigationBar.barTintColor = Constants.color.navy
+    }
+    
+    func goBack(){
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,13 +76,22 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func setupSearchBar(){
-        let search = UISearchBar()
-        search.searchBarStyle = .prominent
-        search.placeholder = "Search..."
-        let textFieldInsideSearchBar = search.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.backgroundColor = UIColor.white
-        search.delegate = self
-        self.navigationItem.titleView = search
+        self.search.searchBarStyle = .prominent
+        
+        self.search.setValue("Cancel", forKey:"_cancelButtonText")
+        self.search.placeholder = "Search"
+        let textFieldInsideSearchBar = self.search.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.white
+        textFieldInsideSearchBar?.backgroundColor = UIColor(red: 38/255.0, green: 83/255.0, blue: 126/255.0, alpha: 1.0)
+        textFieldInsideSearchBar?.clearButtonMode = .whileEditing
+        let clearButton = textFieldInsideSearchBar?.value(forKey: "clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
+        clearButton.tintColor = UIColor.white
+        
+        let cancelButtonsInSearchBar: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!]
+        UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonsInSearchBar, for: .normal)
+        
+        self.search.delegate = self
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -266,7 +280,6 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         self.filteredSection.sort()
         self.tableView.reloadData()
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show_chat"{

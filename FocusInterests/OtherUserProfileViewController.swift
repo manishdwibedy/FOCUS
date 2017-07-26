@@ -22,41 +22,34 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var followYourFriendsView: UIView!
     @IBOutlet weak var eventsCollectionView: UICollectionView!
     @IBOutlet var userScrollView: UIScrollView!
-    @IBOutlet weak var eventsTableView: UITableView!
-    @IBOutlet weak var peopleMoreButton: UIButton!
-    @IBOutlet weak var eventMoreButton: UIButton!
     @IBOutlet weak var otherEventStackView: UIStackView!
     @IBOutlet weak var otherPlaceStackView: UIStackView!
     @IBOutlet weak var eventsCollectionViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var placesTableView: UITableView!
-    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var placesTableViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var eventsTableView: UITableView!
+    @IBOutlet weak var eventsTableViewHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var recentPostTableView: UITableView!
     @IBOutlet weak var recentPostTableViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var viewHeightHoldingRecentPostTableView: NSLayoutConstraint!
     
-    @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
     @IBOutlet weak var navBarItem: UINavigationItem!
     @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var userInfoView: UIView!
-    @IBOutlet weak var pinView: UIView!
     
-    @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
     // User data
     //	@IBOutlet var userName: UILabel!
     @IBOutlet var descriptionText: UITextView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     
-    @IBOutlet weak var userNameLabel: UILabel!
-    
     @IBOutlet weak var otherUserNameInterestTitleLabel: UILabel!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
-    
-    //    @IBOutlet weak var suggestionsHeight: NSLayoutConstraint!
     
     // follower and following
     @IBOutlet weak var followerStackView: UIStackView!
@@ -66,31 +59,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followingCount: UIButton!
     
-    // user pin info
-    
-    @IBOutlet weak var greenDotImage: UIImageView!
-    //    @IBOutlet weak var categoryImage: UIImageView!
-    @IBOutlet weak var pinImage: UIImageView!
-    @IBOutlet weak var pinCategoryLabel: UILabel!
-    @IBOutlet weak var pinLikesLabel: UILabel!
-    @IBOutlet weak var pinAddress2Label: UILabel!
-    
-    @IBOutlet weak var pinDistanceLabel: UILabel!
     @IBOutlet weak var pinCount: UIButton!
     var pinInfo: pinData? = nil
     
-    //    MARK: Do we still need this
-    //    @IBOutlet weak var pinDescription: UILabel!
-    @IBOutlet weak var updatePinButton: UIButton!
-    @IBOutlet weak var emptyPinButton: UIButton!
     
     // user interests
-    @IBOutlet weak var focusHeader: UILabel!
     @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var interestStackView: UIStackView!
-    @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var interestStackHeight: NSLayoutConstraint!
-    @IBOutlet weak var moreFocusButton: UIButton!
     
     // Location Description (would this be location description?)
     // Location FOCUS button (what would this be for?)
@@ -104,7 +79,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var following = [User]()
     var interestArray = [Interest]()
     
-    @IBOutlet weak var createEventButton: UIButton!
+    
     var suggestion = [Event]()
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
     
@@ -113,11 +88,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var previous: previousScreen? = nil
     var showInvitePopup = false
     var userInfo = [String:Any]()
-    
-    @IBAction func settingButtonPressed(_ sender: Any) {
-        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
-        present(vc, animated: true, completion: nil)
-    }
     
     // Back button
     @IBAction func backButton(_ sender: Any) {
@@ -178,14 +148,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
         self.recentPostTableView.dataSource = self
         self.recentPostTableView.delegate = self
-        
+
         let recentPostNib = UINib(nibName: "FeedOneTableViewCell", bundle: nil)
         self.recentPostTableView.register(recentPostNib, forCellReuseIdentifier: "recentPostCell")
-        self.recentPostTableView.rowHeight = UITableViewAutomaticDimension
         
         self.placesTableView.dataSource = self
         self.placesTableView.delegate = self
-        
+
         let placeNib = UINib(nibName: "SearchPlaceCell", bundle: nil)
         self.placesTableView.register(placeNib, forCellReuseIdentifier: "SearchPlaceCell")
         
@@ -203,7 +172,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         ]
         
         self.view.backgroundColor = Constants.color.navy
-        self.navBar.backgroundColor = Constants.color.navy
+        self.navBar.barTintColor = Constants.color.navy
         self.navBar.titleTextAttributes = attrs
         
         self.followButton.roundCorners(radius: 5.0)
@@ -225,7 +194,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
         //      Use tags in order to allow for only IBAction that will track
         //      each event based on the tag of the sender
-//        self.moreFocusButton.tag = 2
+
         self.moreEventsButton.tag = 3
 //        self.emptyPinButton.roundCorners(radius: 10)
         
@@ -238,13 +207,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //        getPin()
         
         self.invitePopupView.allCornersRounded(radius: 10)
-        
-        self.createEventButton.roundCorners(radius: 6)
-        
-        if otherUser{
-            self.createEventButton.isHidden = true
-            self.createEventButton.isHidden = true
-        }
         
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
         Constants.DB.pins.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -301,11 +263,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                     
                     // OLD PIN
                 else{
-                    self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
-                    self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
-//                    self.mainViewHeight.constant = 750
-                    
-//                    self.pinViewHeight.constant = 45
+//                    self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
+//                    self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
                     
 //                    self.emptyPinButton.isHidden = false
 //                    self.emptyPinButton.setTitle("Update Pin", for: .normal)
@@ -321,13 +280,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 
                 
                 
-            }
-            else{
-                self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
-                self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
-//                self.mainViewHeight.constant = 750
-                
-//                self.pinViewHeight.constant = 45
+            }else{
+//                self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
+//                self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
+
                 
 //                self.emptyPinButton.isHidden = false
 //                
@@ -345,11 +301,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         let pinDetail = UITapGestureRecognizer(target: self, action: #selector(self.showPin))
 //        pinView.isUserInteractionEnabled = true
 //        pinView.addGestureRecognizer(pinDetail)
-        
-//        let ogEventCollectionViewHeight = self.eventsCollectionViewHeight.constant
-//        self.eventsCollectionViewHeight.constant = self.eventsCollectionView.contentSize.height
         self.eventView.bounds.size.height += (self.eventsCollectionView.contentSize.height)
-//        self.mainViewHeight.constant += (self.eventsCollectionView.contentSize.height)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -442,7 +394,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         Constants.DB.user.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionnary = snapshot.value as? NSDictionary {
                 
-                self.userInfo = dictionnary as? [String:Any]
+                self.userInfo = (dictionnary as? [String:Any])!
                 //                print(dictionnary)
                 let username_str = dictionnary["username"] as? String ?? ""
                 let description_str = dictionnary["description"] as? String ?? ""
@@ -450,10 +402,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 let fullname = dictionnary["fullname"] as? String ?? ""
                 
                 
-                //                SAMPLE description text
-                //self.descriptionText.text = description
+//                SAMPLE description text
+
                 self.fullNameLabel.text = fullname
-//                self.userNameLabel.text = username_str
                 self.descriptionText.textContainer.maximumNumberOfLines = 3
                 self.descriptionText.textContainer.lineBreakMode = .byTruncatingTail
                 self.otherUserNameInterestTitleLabel.text = "\(username_str)\'s FOCUS"
@@ -518,23 +469,11 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                     
 //                                    self.interestStackView.addArrangedSubview(textLabel)
                                     self.interestStackView.addArrangedSubview(interestSubView)
-//                                    self.interestStackView.bounds.size.height += interestSubView.frame.size.height
-//                                    self.interestViewHeight.constant += interestSubView.frame.size.height/4
+
                                     self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                                 }
                             }
                         }
-                        
-                        if final_interest.count > 3{
-//                            self.moreFocusButton.setTitle("More", for: .normal)
-                        }
-                        else{
-//                            self.moreFocusButton.isHidden = true
-                        }
-                        
-//                        let count = self.interestStackView.arrangedSubviews.count
-//                        self.interestStackHeight.constant = CGFloat(25 * count)
-//                        self.interestViewHeight.constant = CGFloat(25 * count + 113)
                     }
                 }
                 
@@ -586,19 +525,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         
                         interestSubView.addSubview(interestView)
                         self.interestStackView.addArrangedSubview(interestSubView)
-//                        self.interestStackView.bounds.size.height += interestSubView.frame.size.height
-//                        self.interestViewHeight.constant += interestSubView.frame.size.height/4
-                        
                         interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                     }
                 }
             }
-            
-//            print(interestStackView.arrangedSubviews.count)
-            
-//            let count = interestStackView.arrangedSubviews.count
-//            interestStackHeight.constant = CGFloat(25 * count)
-//            interestViewHeight.constant = CGFloat(25 * count + 113)
         }
         
     }
@@ -607,8 +537,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         super.viewDidAppear(animated)
         
         if showInvitePopup {
-            self.mainView.bringSubview(toFront: self.invitePopupView)
-//            self.invitePopupView.isHidden = false
             UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.invitePopupView.center.y -= 100
                 self.invitePopupTopConstraint.constant -= 100
@@ -618,18 +546,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                     self.invitePopupTopConstraint.constant += 100
                 }, completion: nil)
             })
-            self.userScrollView.sendSubview(toBack: self.invitePopupView)
             self.showInvitePopup = false
         }
         
         self.displayUserData()
         
-        let fixedWidth = self.descriptionText.frame.size.width
-        self.descriptionText.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        let newSize = self.descriptionText.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        var newFrame = self.descriptionText.frame
-        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
-        self.descriptionText.frame = newFrame
+//        self.placesTableViewHeight.constant = self.placesTableView.contentSize.height
+//        self.eventsTableViewHeight.constant = self.eventsTableView.contentSize.height
         self.recentPostTableViewHeight.constant = self.recentPostTableView.contentSize.height
     }
     
@@ -701,24 +624,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             
             self.eventsCollectionView.reloadData()
             
-//            if self.suggestion.count > 0{
-//                if self.suggestion.count > 3{
-//                    self.moreEventsButton.isHidden = false
-//                }
-//                else{
-//                    self.moreEventsButton.isHidden = true
-//                }
-//                
-//                self.eventsCollectionView.reloadData()
-//                
-//                self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
-//                self.createEventButton.alpha = 0
-//            }
-//            else{
-//                self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
-//                self.createEventButton.alpha = 1
-//            }
-            
         })
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").queryOrdered(byChild: "status").queryEqual(toValue: "accepted").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -756,26 +661,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                 
                                 self.eventsCollectionView.reloadData()
                                 
-                                self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
-                                self.createEventButton.alpha = 0
-                                
-//                                if self.suggestion.count > 0{
-//                                    if self.suggestion.count > 3{
-//                                        self.moreEventsButton.isHidden = false
-//                                    }
-//                                    else{
-//                                        self.moreEventsButton.isHidden = true
-//                                    }
-//                                    
-//                                    self.eventsCollectionView.reloadData()
-//                                    
-//                                    self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
-//                                    self.createEventButton.alpha = 0
-//                                }
-//                                else{
-//                                    self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
-//                                    self.createEventButton.alpha = 1
-//                                }
                             }
                             
                         }
@@ -814,12 +699,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.present(vc, animated: true, completion: nil)
     }
     
-    @IBAction func createEvent(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
-        self.present(controller, animated: true, completion: nil)
-    }
-    
     //    MARK: TableView Delegate and Data Source Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 0 || tableView.tag == 1{
@@ -847,10 +726,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         var rowHeight = CGFloat()
         if tableView.tag == 0{
             let placeCell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
-            rowHeight = placeCell.bounds.size.height
+            rowHeight = placeCell.frame.size.height
         }else if tableView.tag == 1{
             let eventCell = tableView.dequeueReusableCell(withIdentifier: "searchEventCell") as! SearchEventTableViewCell
-            rowHeight = eventCell.bounds.size.height
+            rowHeight = eventCell.frame.size.height
         }else if tableView.tag == 2{
             let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
             rowHeight = myCell.bounds.size.height
