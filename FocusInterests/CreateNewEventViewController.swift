@@ -589,9 +589,9 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
             let endDay = Calendar.current.component(.day, from: endDate)
             
             if startMonth == endMonth && startDay >= endDay{
-                SCLAlertView().showError("Change end date", subTitle: "Please enter end date after start date.")
+                SCLAlertView().showCustom("Oops!", subTitle: "Please enter an end date on or after the start date.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
             }else if startMonth > endMonth{
-                SCLAlertView().showError("Change end date", subTitle: "Please enter end date after start date.")
+                SCLAlertView().showCustom("Oops!", subTitle: "Please enter an end date on or after the start date.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
             }
             
             self.startDate = self.datePicker.date
