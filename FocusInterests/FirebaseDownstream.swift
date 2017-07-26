@@ -68,6 +68,9 @@ class FirebaseDownstream {
                                                 let item = ItemOfInterest(itemName: itemName, imageURL: "", type: "event")
                                                 item.type = "event"
                                                 item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
+                                                item.data = [
+                                                    "invite": inValue[inKey] as? [String:Any]
+                                                ]
                                                 let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
                                                 returnableNotif.append(notification)
                                                 
@@ -89,7 +92,10 @@ class FirebaseDownstream {
                                         let item = ItemOfInterest(itemName: (place_invite["name"] as? String), imageURL: "", type: "place")
                                         item.type = "place"
                                         item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
-                                        item.data = ["inviteTime": place_invite["inviteTime"] as? String]
+                                        item.data = [
+                                            "inviteTime": place_invite["inviteTime"] as? String,
+                                            "invite": inValue[inKey] as? [String:Any]
+                                        ]
                                         let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: place_invite["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: (place_invite["time"] as? Double)!) as Date)
                                         returnableNotif.append(notification)
                                         
