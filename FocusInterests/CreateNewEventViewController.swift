@@ -631,12 +631,12 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
                     self.view.endEditing(true)
                     self.eventTimeTextField.becomeFirstResponder()
                 }else if startMonth == endMonth && startDay >= endDay{
-                    SCLAlertView().showError("Invalid end date", subTitle: "Please enter end date after start date.")
+                    SCLAlertView().showCustom("Oops!", subTitle: "Please enter an end date on or after the start date.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
                     self.view.endEditing(true)
                     self.eventEndDateTextField.becomeFirstResponder()
                     
                 }else if startMonth > endMonth{
-                    SCLAlertView().showError("Invalid end date", subTitle: "Please enter end date after start date.")
+                    SCLAlertView().showCustom("Oops!", subTitle: "Please enter an end date on or after the start date.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
                     self.view.endEditing(true)
                     self.eventEndDateTextField.becomeFirstResponder()
                 }
@@ -673,7 +673,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
             print("you have choosen a valid end time")
         }else{
             self.view.endEditing(true)
-            SCLAlertView().showError("Invalid end time", subTitle: "Please enter end time after start time.")
+            SCLAlertView().showCustom("Oops!", subTitle: "Please enter an end date on or after the start date.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
         }
     }
     
