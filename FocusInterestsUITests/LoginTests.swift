@@ -63,13 +63,59 @@ class LoginTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
+    func testLogout(){
+        
+        
+        let app = XCUIApplication()
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).tap()
+        app.scrollViews.otherElements.buttons["Gear"].tap()
+        app.tables.staticTexts["Logout"].tap()
+        app.sheets["Logout?"].buttons["Logout"].tap()
+        
+        sleep(1000000)
+    }
+    
+    func testLogin(){
+        
+        let app = XCUIApplication()
+        
+        if !app.textFields["Username, Email or Phone Number"].exists{
+            app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button).element(boundBy: 0).tap()
+            app.scrollViews.otherElements.buttons["Gear"].tap()
+            app.tables.staticTexts["Logout"].tap()
+            app.sheets["Logout?"].buttons["Logout"].tap()
+            
+        }
+        //XCTAssert(app.textFields["Username, Email or Phone Number"].exists)
+        
+        let usernameEmailOrPhoneNumberTextField = app.textFields["Username, Email or Phone Number"]
+        usernameEmailOrPhoneNumberTextField.tap()
+        usernameEmailOrPhoneNumberTextField.typeText("abcdefgh@gmail.com")
+        
+        let passwordSecureTextField = app.secureTextFields["Password"]
+        passwordSecureTextField.tap()
+        passwordSecureTextField.typeText("qwerty1234")
+        
+        app.otherElements.containing(.image, identifier:"Transparent_Logo_225x150.png").element.tap()
+        app.buttons["Sign In"].tap()
+        
+        sleep(1000000)
+        
+        XCTAssert(!app.alerts["Login error"].exists)
+        print()
+    }
+    
+    
     func testProperRegistration(){
         let app = XCUIApplication()
+        
+        XCTAssert(app.buttons["New? Map Your World"].exists)
+        
         app.buttons["New? Map Your World"].tap()
         
         let emailTextField = app.textFields["Email"]
         emailTextField.tap()
-        emailTextField.typeText("abcdef@gmail.com")
+        emailTextField.typeText("abcdefgh@gmail.com")
         app.buttons["Next"].tap()
         
         let fullNameTextField = app.textFields["Full Name"]
@@ -82,13 +128,14 @@ class LoginTests: XCTestCase {
         
         let chooseUsernameSecureTextField = app.textFields["Choose Username"]
         chooseUsernameSecureTextField.tap()
-        chooseUsernameSecureTextField.typeText("abc")
+        chooseUsernameSecureTextField.typeText("abcdefgh")
         app.buttons["Finish"].tap()
         
         app.buttons["Finish"].tap()
         print("registering...")
         
-        sleep(1000000)
+        sleep(10)
+        XCTAssert(!app.buttons["Finish"].exists)
     }
     
     func testDuplicateUsername(){
