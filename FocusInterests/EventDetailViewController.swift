@@ -162,8 +162,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         timeLabel.text = event?.date
         addressLabel.text = event?.fullAddress?.replacingOccurrences(of: ";;", with: ", ")
         
-//        self.descriptionTextView.text = event?.eventDescription
-        self.descriptionTextView.text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna"
+        self.descriptionTextView.text = event?.eventDescription
         var frame = self.descriptionTextView.frame
         
         frame.size = self.descriptionTextView.contentSize
