@@ -109,14 +109,14 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         let selectedAllContactsCellNib = UINib(nibName: "SelectAllContactsTableViewCell", bundle: nil)
         friendsTableView.register(selectedAllContactsCellNib, forCellReuseIdentifier: "selectAllContactsCell")
         
-        if CNContactStore.authorizationStatus(for: .contacts) == .authorized{
-            self.retrieveContactsWithStore(store: self.store)
-        }
-        else{
-            self.store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
-                self.retrieveContactsWithStore(store: self.store)
-            }
-        }
+//        if CNContactStore.authorizationStatus(for: .contacts) == .authorized{
+//            self.retrieveContactsWithStore(store: self.store)
+//        }
+//        else{
+//            self.store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
+//                self.retrieveContactsWithStore(store: self.store)
+//            }
+//        }
         
         self.sortContacts()
         
