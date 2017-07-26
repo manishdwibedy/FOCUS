@@ -10,6 +10,7 @@ import UIKit
 
 class EventOtherWillLikeTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var content: UIView!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var eventImage: UIImageView!
@@ -22,6 +23,7 @@ class EventOtherWillLikeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.content.allCornersRounded(radius: 10.0)
         self.eventImage.layer.borderWidth = 1
         self.eventImage.layer.borderColor = Constants.color.pink.cgColor
         self.eventImage.roundedImage()

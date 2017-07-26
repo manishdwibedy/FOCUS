@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,18 +18,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="51.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmI-Ls-gIP">
-                        <rect key="frame" x="0.0" y="0.0" width="44" height="52"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="44" id="1pf-CD-Oap"/>
-                            <constraint firstAttribute="height" constant="52" id="bnT-vm-3hX"/>
-                        </constraints>
-                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <action selector="selectInterest:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5AO-pu-bPv"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJp-KP-r5g">
                         <rect key="frame" x="45" y="0.0" width="79" height="52"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -43,19 +30,26 @@
                             <action selector="selectInterest:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iGh-cW-AwQ"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Fb-wS-J8S">
+                        <rect key="frame" x="8" y="10" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="RHM-FY-742"/>
+                            <constraint firstAttribute="width" constant="30" id="hfR-oj-wkl"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="VJp-KP-r5g" firstAttribute="leading" secondItem="pmI-Ls-gIP" secondAttribute="trailing" constant="1" id="5fh-rw-NxE"/>
-                    <constraint firstItem="pmI-Ls-gIP" firstAttribute="centerY" secondItem="VJp-KP-r5g" secondAttribute="centerY" id="dsa-yt-Y8T"/>
+                    <constraint firstItem="8Fb-wS-J8S" firstAttribute="centerY" secondItem="VJp-KP-r5g" secondAttribute="centerY" constant="-1" id="G5J-2p-jfh"/>
+                    <constraint firstItem="VJp-KP-r5g" firstAttribute="leading" secondItem="8Fb-wS-J8S" secondAttribute="trailing" constant="7" id="fQB-rY-4eA"/>
                     <constraint firstItem="VJp-KP-r5g" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="oMI-Zx-b8y"/>
                     <constraint firstAttribute="bottom" secondItem="VJp-KP-r5g" secondAttribute="bottom" constant="-0.5" id="ovo-Cb-UMu"/>
-                    <constraint firstItem="pmI-Ls-gIP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="rAO-wG-gtS"/>
                     <constraint firstItem="VJp-KP-r5g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wPo-F3-Tpf"/>
+                    <constraint firstItem="8Fb-wS-J8S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="zaf-zR-edP"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.85480856900000002" green="0.85495573280000003" blue="0.85479927060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
-                <outlet property="interestButtonImage" destination="pmI-Ls-gIP" id="okv-yN-QmQ"/>
+                <outlet property="interestImage" destination="8Fb-wS-J8S" id="dZN-9n-297"/>
                 <outlet property="interestLabel" destination="VJp-KP-r5g" id="l1H-2c-wbd"/>
             </connections>
             <point key="canvasLocation" x="25" y="56"/>

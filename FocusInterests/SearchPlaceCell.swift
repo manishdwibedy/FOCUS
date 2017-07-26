@@ -45,7 +45,7 @@ class SearchPlaceCell: UITableViewCell {
         self.followButtonOut.setTitleColor(UIColor.white, for: .selected)
 
         self.followButtonOut.setTitle("Follow", for: UIControlState.normal)
-        self.followButtonOut.setTitle("Unfollow", for: UIControlState.selected)
+        self.followButtonOut.setTitle("Following", for: UIControlState.selected)
         
 //        invite button
         self.inviteButtonOut.clipsToBounds = true
@@ -96,8 +96,8 @@ class SearchPlaceCell: UITableViewCell {
 //            unfollow button appearance
             self.followButtonOut.isSelected = true
             self.followButtonOut.layer.borderWidth = 1
-            self.followButtonOut.layer.borderColor = UIColor.white.cgColor
-            self.followButtonOut.backgroundColor = UIColor(red: 97/255.0, green: 115/255.0, blue: 129/255.0, alpha: 1.0)
+            self.followButtonOut.layer.borderColor = Constants.color.navy.cgColor
+            self.followButtonOut.backgroundColor = UIColor.white
             self.followButtonOut.tintColor = UIColor.clear
             self.followButtonOut.layer.shadowOpacity = 0.5
             self.followButtonOut.layer.masksToBounds = false
@@ -110,7 +110,6 @@ class SearchPlaceCell: UITableViewCell {
 
         } else if self.followButtonOut.isSelected == true {
             
-            
             let unfollowAlertController = UIAlertController(title: "Are you sure you want to unfollow \(self.place!.name)?", message: nil, preferredStyle: .actionSheet)
             
             
@@ -118,9 +117,9 @@ class SearchPlaceCell: UITableViewCell {
                 
 //            follow button appearance
                 self.followButtonOut.isSelected = false
-                self.followButtonOut.layer.borderWidth = 1
+                self.followButtonOut.layer.borderWidth = 0
                 self.followButtonOut.layer.borderColor = UIColor.clear.cgColor
-                self.followButtonOut.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButtonOut.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
                 self.followButtonOut.tintColor = UIColor.clear
                 self.followButtonOut.layer.shadowOpacity = 0.5
                 self.followButtonOut.layer.masksToBounds = false

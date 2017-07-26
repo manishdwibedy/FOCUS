@@ -57,7 +57,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         self.attendButton.setTitle("Attend", for: .normal)
         self.attendButton.setTitleColor(UIColor.white, for: .normal)
         self.attendButton.setTitle("Attending", for: .selected)
-        self.attendButton.setTitleColor(UIColor.white, for: .selected)
+        self.attendButton.setTitleColor(Constants.color.navy, for: .selected)
         
         self.eventImage.layer.borderWidth = 2
         self.eventImage.layer.borderColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0).cgColor
@@ -149,9 +149,9 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     }
     
     @IBAction func attendButtonPressed(_ sender: Any) {
-        
+        self.attendButton.isSelected = !self.attendButton.isSelected
         if let event = self.event{
-            if attendButton.title(for: .normal) == "Attend"{
+            if self.attendButton.isSelected{
                 
                 Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
                 
@@ -173,11 +173,9 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
                     ])
                 
                 attendButton.layer.borderWidth = 1
-                attendButton.layer.borderColor = UIColor.white.cgColor
-                attendButton.backgroundColor = UIColor.clear
-                attendButton.setTitle("Attending", for: .normal)
-            }
-            else{
+                attendButton.layer.borderColor = Constants.color.navy.cgColor
+                attendButton.backgroundColor = UIColor.white
+            }else{
                 
                 let alertController = UIAlertController(title: "Unattend \(event.title!)?", message: nil, preferredStyle: .actionSheet)
                 
@@ -207,8 +205,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
                     
                     self.attendButton.layer.borderWidth = 0
                     self.attendButton.layer.borderColor = UIColor.clear.cgColor
-                    self.attendButton.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
-                    self.attendButton.setTitle("Attend", for: .normal)
+                    self.attendButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
                     
                     Answers.logCustomEvent(withName: "Attend Event",
                                            customAttributes: [
@@ -224,21 +221,6 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
             }
 
         }
-        
-        /*
-        self.attendButton.isSelected = !self.attendButton.isSelected
-        if self.attendButton.isSelected == true{
-            self.attendButton.layer.borderWidth = 1
-            self.attendButton.layer.borderColor = UIColor.white.cgColor
-            self.attendButton.backgroundColor = UIColor.clear
-        }else if self.attendButton.isSelected == false {
-            self.attendButton.layer.borderWidth = 0.0
-            self.attendButton.backgroundColor = Constants.color.navy
-            self.attendButton.layer.shadowOpacity = 0.5
-            self.attendButton.layer.masksToBounds = false
-            self.attendButton.layer.shadowColor = UIColor.black.cgColor
-            self.attendButton.layer.shadowRadius = 5.0
-        }*/
     }
     
     func haveSentInviteFromEventDetail(eventDetailVC: EventDetailViewController){

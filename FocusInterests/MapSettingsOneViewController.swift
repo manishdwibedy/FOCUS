@@ -32,8 +32,8 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
         self.interestTableView.register(UINib(nibName: "SingleInterestTableViewCell", bundle: nil), forCellReuseIdentifier: "singleInterestCell")
         self.interestTableView.isHidden = true
         self.interestTableViewHeight.constant = 0
-        self.target(forAction: #selector(MapViewSettingsOne.openOptions(_:)), withSender: self)
-        self.searchFocusView.target(forAction: #selector(MapViewSettingsOne.openOptions(_:)), withSender: self)
+        self.target(forAction: #selector(MapSettingsOneViewController.openOptions(_:)), withSender: self)
+        self.searchFocusView.target(forAction: #selector(MapSettingsOneViewController.openOptions(_:)), withSender: self)
 //        searchFocusView.allCornersRounded(radius: 7.0)
         
     }
@@ -68,6 +68,9 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
         }else{
             let singleInterestCell = tableView.dequeueReusableCell(withIdentifier: "singleInterestCell", for: indexPath) as! SingleInterestTableViewCell
             
+            let interest = "\(self.interests[indexPath.row-1]) Green"
+            
+            singleInterestCell.interestImage.image = UIImage(named: interest)
             singleInterestCell.interestLabel.setTitle(self.interests[indexPath.row-1], for: .normal)
             singleInterestCell.interestLabel.setTitleColor(UIColor.white, for: .normal)
             
@@ -76,7 +79,7 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
             
             singleInterestCell.accessoryType = .none
             singleInterestCell.interestLabel.isSelected = false
-            singleInterestCell.interestButtonImage.isSelected = false
+            
             cell = singleInterestCell
         }
         
@@ -95,7 +98,6 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
             
             let singleInterestCell = tableView.cellForRow(at: indexPath) as! SingleInterestTableViewCell
             singleInterestCell.accessoryType = .checkmark
-            singleInterestCell.interestButtonImage.isSelected = true
             singleInterestCell.interestLabel.isSelected = true
             print("cell at \(indexPath.row) selected")
         }else{

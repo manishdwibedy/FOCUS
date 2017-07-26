@@ -40,14 +40,19 @@ class SearchEventTableViewCell: UITableViewCell {
 //        self.attendButton.layer.masksToBounds = false
 //        self.attendButton.layer.shadowColor = UIColor.purple.cgColor
 
-//        self.attendButton.setTitle("Attend", for: .normal)
-//        self.attendButton.setTitle("Unattend", for: .selected)
+        self.attendButton.layer.cornerRadius = 6
+        self.attendButton.clipsToBounds = true
+        self.attendButton.roundCorners(radius: 5)
+        self.attendButton.layer.shadowOpacity = 0.5
+        self.attendButton.layer.masksToBounds = false
+        self.attendButton.layer.shadowColor = UIColor.black.cgColor
+        self.attendButton.layer.shadowRadius = 5.0
         
-//        self.inviteButton.layer.shadowOpacity = 1.0
-//        self.inviteButton.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
-//        self.inviteButton.layer.masksToBounds = false
-//        self.inviteButton.layer.shadowColor = UIColor.purple.cgColor
-//        self.inviteButton.layer.shadowRadius = 10.0
+        self.attendButton.setTitle("Attend", for: .normal)
+        self.attendButton.setTitleColor(UIColor.white, for: .normal)
+        self.attendButton.setTitle("Attending", for: .selected)
+        self.attendButton.setTitleColor(Constants.color.navy, for: .selected)
+        
         self.cellContentView.allCornersRounded(radius: 10.0)
     }
 
@@ -73,5 +78,36 @@ class SearchEventTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func attendClicked(_ sender: Any) {
+        self.attendButton.isSelected = !self.attendButton.isSelected
+        
+        if self.attendButton.isSelected{
+            self.attendButton.layer.cornerRadius = 6
+            self.attendButton.layer.borderWidth = 1
+            self.attendButton.layer.borderColor = Constants.color.navy.cgColor
+            self.attendButton.layer.shadowOpacity = 0.5
+            self.attendButton.layer.masksToBounds = false
+            self.attendButton.layer.shadowColor = UIColor.black.cgColor
+            self.attendButton.layer.shadowRadius = 5.0
+            
+            self.attendButton.clipsToBounds = true
+            self.attendButton.roundCorners(radius: 5)
+            self.attendButton.backgroundColor = UIColor.white
+            self.attendButton.tintColor = UIColor.clear
+        }else{
+            self.attendButton.layer.cornerRadius = 6
+            self.attendButton.layer.borderWidth = 1
+            self.attendButton.layer.borderColor = UIColor.clear.cgColor
+            self.attendButton.layer.shadowOpacity = 0.5
+            self.attendButton.layer.masksToBounds = false
+            self.attendButton.layer.shadowColor = UIColor.black.cgColor
+            self.attendButton.layer.shadowRadius = 5.0
+            
+            self.attendButton.roundCorners(radius: 5)
+            self.attendButton.clipsToBounds = true
+            self.attendButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+            self.attendButton.tintColor = UIColor.clear
+        }
+    }
     
 }

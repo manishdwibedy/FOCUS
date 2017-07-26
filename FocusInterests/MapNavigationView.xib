@@ -37,7 +37,8 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
                             <rect key="frame" x="89" y="0.0" width="68.5" height="40"/>
-                            <state key="normal" image="Messages"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="-8" maxX="3" maxY="-8"/>
+                            <state key="normal" image="Comment"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="badgeBackgroundColor">
                                     <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,7 +50,7 @@
                                     <real key="value" value="10"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetRight">
-                                    <real key="value" value="20"/>
+                                    <real key="value" value="10"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -116,8 +117,8 @@
         </view>
     </objects>
     <resources>
+        <image name="Comment" width="74" height="74"/>
         <image name="Invite" width="35" height="36"/>
-        <image name="Messages" width="47" height="36"/>
         <image name="Notifications" width="41" height="36"/>
         <image name="User" width="36" height="36"/>
     </resources>

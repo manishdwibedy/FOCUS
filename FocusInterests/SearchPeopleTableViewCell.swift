@@ -56,7 +56,10 @@ class SearchPeopleTableViewCell: UITableViewCell {
         self.followButton.layer.shadowRadius = 5.0
         
         self.followButton.setTitle("Follow", for: UIControlState.normal)
+        self.followButton.setTitleColor(UIColor.white, for: .normal)
+        
         self.followButton.setTitle("Following", for: UIControlState.selected)
+        self.followButton.setTitleColor(Constants.color.navy, for: .selected)
         
         //invite button
         self.inviteButton.clipsToBounds = true
@@ -102,9 +105,9 @@ class SearchPeopleTableViewCell: UITableViewCell {
             if value != nil {
                 print("following user is checkFollow")
                 self.followButton.isSelected = true
-                self.followButton.layer.borderColor = UIColor.white.cgColor
                 self.followButton.layer.borderWidth = 1
-                self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+                self.followButton.layer.borderColor = Constants.color.navy.cgColor
+                self.followButton.backgroundColor = UIColor.white
                 self.followButton.tintColor = UIColor.clear
                 self.followButton.layer.shadowOpacity = 0.5
                 self.followButton.layer.masksToBounds = false
@@ -115,7 +118,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
                 self.followButton.isSelected = false
                 self.followButton.layer.borderWidth = 1
                 self.followButton.layer.borderColor = UIColor.clear.cgColor
-                self.followButton.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                self.followButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
                 self.followButton.tintColor = UIColor.clear
                 self.followButton.layer.shadowOpacity = 0.5
                 self.followButton.layer.masksToBounds = false
@@ -133,8 +136,8 @@ class SearchPeopleTableViewCell: UITableViewCell {
             Follow.followUser(uid: self.ID)
             sender.isSelected = true
             sender.layer.borderWidth = 1
-            sender.layer.borderColor = UIColor.white.cgColor
-            sender.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+            sender.layer.borderColor = Constants.color.navy.cgColor
+            sender.backgroundColor = UIColor.white
             sender.tintColor = UIColor.clear
             sender.layer.shadowOpacity = 0.5
             sender.layer.masksToBounds = false
@@ -147,13 +150,11 @@ class SearchPeopleTableViewCell: UITableViewCell {
             
             
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
-                
                 Follow.unFollowUser(uid: self.ID)
-                
                 sender.isSelected = false
                 sender.layer.borderWidth = 1
                 sender.layer.borderColor = UIColor.clear.cgColor
-                sender.backgroundColor = UIColor(red: 31/255.0, green: 50/255.0, blue: 73/255.0, alpha: 1.0)
+                sender.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
                 sender.tintColor = UIColor.clear
                 sender.layer.shadowOpacity = 0.5
                 sender.layer.masksToBounds = false
