@@ -401,6 +401,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if count_received == 4 + 1{
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
+                    for invite in (self.invites as? [FocusNotification])!{
+                        if let data = invite.item?.data as? [String:Any]{
+                            if let status = data["status"] as? String{
+                                if status != "accepted" || status != "declined"{
+                                    not_count += 1
+                                }
+                            }
+                            else{
+                                not_count += 1
+                            }
+                        }
+                        
+                    }
+                    
                     not_count -= read_notifications
                     if not_count > 0{
                         if not_count > 9{
@@ -428,6 +442,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                 if status != "accepted" || status != "declined"{
                                     not_count += 1
                                 }
+                            }
+                            else{
+                                not_count += 1
                             }
                         }
                         
