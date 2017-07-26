@@ -187,3 +187,43 @@ class Event: NSObject, NSCoding{
         return event
     }
 }
+
+extension Event{
+    static func getEvents(gotEvents: @escaping (_ result: [Event]) -> Void){
+        
+        var eventList = [Event]()
+        let DF = DateFormatter()
+        DF.dateFormat = "MMM d, h:mm a"
+        
+        let timeDF = DateFormatter()
+        timeDF.dateFormat = "h:mm a"
+        
+        var count = 0
+        Constants.DB.event.observe(DataEventType.childAdded, with: { (snapshot) in
+            let events = snapshot.value as? [String : Any] ?? [:]
+            let info = events// as? [String:Any]
+            
+            if let event = Event.toEvent(info: info){
+                
+                if let end = timeDF.date(from: event.endTime){
+                    count += 1
+                    let start = DF.date(from: event.date!)!
+                    if start < Date() && end > Date() && !event.privateEvent{
+                        eventList.append(event)
+                    }
+                }
+                    
+                else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
+                    if Calendar.current.dateComponents([.hour], from: DF.date(from: event.date!)!, to: Date()).hour ?? 0 < 24{
+                        count += 1
+                        eventList.append(event)
+                    }
+                }
+                
+                if count == eventList.count{
+                    gotEvents(eventList)
+                }
+            }
+        })
+    }
+}
