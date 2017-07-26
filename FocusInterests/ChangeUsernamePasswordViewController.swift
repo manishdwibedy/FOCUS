@@ -52,8 +52,7 @@ class ChangeUsernamePasswordViewController: UIViewController {
             
             Auth.auth().currentUser?.updatePassword(to: password.text!, completion: { error in
                 if error != nil{
-                    print(error)
-                    SCLAlertView().showError("Invalid password", subTitle: "Couldn't update your password... there was an error.")
+                    showLoginError(error!)
                 }else{
                     self.dismiss(animated: true, completion: nil)
                 }
