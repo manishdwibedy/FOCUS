@@ -224,9 +224,41 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                     self.filteredSection.sort()
                     self.tableView.reloadData()
                 }
-                
-                
             })
+            
+            self.userRef.queryOrdered(byChild: "fullname_lowered").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
+                // Get user value
+                if let users = snapshot.value as? [String:[String:Any]]{
+                    self.filteredSection.removeAll()
+                    self.filteredSectionMapping.removeAll()
+                    self.filtered.removeAll()
+                    
+                    for (id, user) in users{
+                        if !self.usersInMemory.contains(id){
+                            if let username = user["username"] as? String{
+                                if username.characters.count > 0{
+                                    let first = String(describing: username.characters.first!).uppercased()
+                                    
+                                    self.usersInMemory.insert(id)
+                                    
+                                    if !self.filteredSection.contains(first){
+                                        self.filteredSection.append(first)
+                                        self.filteredSectionMapping[first] = 1
+                                        self.filtered[first] = [user]
+                                    }
+                                    else{
+                                        self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
+                                        self.filtered[first]?.append(user)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    self.filteredSection.sort()
+                    self.tableView.reloadData()
+                }
+            })
+            
         }
         else{
             self.filteredSection = self.sections

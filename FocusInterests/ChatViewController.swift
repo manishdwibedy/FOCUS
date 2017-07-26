@@ -514,7 +514,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     }
     
     func getMessages(){
-        messageContentRef.child(self.messageID!).queryOrdered(byChild: "date").queryLimited(toLast: 10).observe(.childAdded, with: {(snapshot) in
+        messageContentRef.child(self.messageID!).queryOrdered(byChild: "date").observe(.childAdded, with: {(snapshot) in
             let message_data = snapshot.value as? [String:Any]
         
             let id = message_data?["sender_id"] as! String
@@ -535,43 +535,11 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                     let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: image)
                     self.imageMapper[snapshot.key] = self.messages.count
                     
-//                    print(message.isMediaMessage)
-//                    print(message.senderId)
-//                    print(message.text)
-//                    print(message.senderDisplayName)
-//        
                     
                     // show the placeholder image
                     self.messages.append(message!)
                     
                     self.downloadImage(id: snapshot.key, name: name!, date: date)
-//                    let imageRef = Constants.storage.messages.child("\(snapshot.key).jpg")
-//                    
-//                    
-//
-//                    
-//                    imageRef.downloadURL(completion: {(url, error) in
-//                        if let error = error{
-//                            print("Error occurred: \(error.localizedDescription)")
-//                        }
-//                        
-//                        SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-//                            (receivedSize :Int, ExpectedSize :Int) in
-//                            
-//                        }, completed: {
-//                            (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-//                            
-//                            if image != nil && finished{
-//                                let JSQimage = JSQPhotoMediaItem(image: image)
-//                                let message = JSQMessage(senderId: id, senderDisplayName: name, date: date, media: JSQimage)
-//                                
-//                                let index = self.imageMapper[snapshot.key]
-//                                self.messages[index!] = message!
-//                                self.collectionView.reloadData()
-//                                
-//                            }
-//                        })
-//                    })
                 }
                 
                 self.collectionView.reloadData()
@@ -595,7 +563,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 
                 if self.delay[id]! < 3{
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                        self.scrollToBottom(animated: false)
+                        //self.scrollToBottom(animated: false)
                         self.collectionView.reloadData()
                         
                         self.downloadImage(id: id, name: name, date: date)
@@ -623,7 +591,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                     
                     self.messages[index!] = imageMessage!
                     
-                    self.scrollToBottom(animated: false)
+                    //self.scrollToBottom(animated: false)
                     self.collectionView.reloadData()
                     
                 }
