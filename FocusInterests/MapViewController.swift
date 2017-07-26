@@ -27,6 +27,7 @@ import GeoFire
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate, UIPopoverPresentationControllerDelegate{
     
+    @IBOutlet weak var settingGearButton: UIButton!
     @IBOutlet weak var mapViewSettings: UIView!
     @IBOutlet weak var followYourFriendsView: UIView!
     @IBOutlet weak var toolbar: UIToolbar!
@@ -282,6 +283,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.settingGearButton.isHidden = false
+        self.mapViewSettings.isHidden = true
         
         Answers.logCustomEvent(withName: "Screen",
                                        customAttributes: [
@@ -555,7 +559,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewDidAppear(_ animated: Bool) {
         Constants.DB.user_mapping.keepSynced(true)
-
+        
         Share.getFacebookFriends(completion: {friends in
         
         })
@@ -1340,7 +1344,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     @IBAction func unwindToMapViewController(segue:UIStoryboardSegue) { }
     
     @IBAction func mapSettingsPressed(_ sender: Any) {
-        self.mapViewSettings.isHidden = !self.mapViewSettings.isHidden
+        self.settingGearButton.isHidden = true
+        self.mapViewSettings.isHidden = false
     }
 }
 
