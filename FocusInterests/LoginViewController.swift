@@ -87,7 +87,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         }
         
         var isNumber = false
-        if (self.emailTextField.text!.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil){
+        if (self.emailTextField.text!.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil){
             isNumber = true
         }
         if isNumber || (self.passwordTextField.text?.isEmpty)!{

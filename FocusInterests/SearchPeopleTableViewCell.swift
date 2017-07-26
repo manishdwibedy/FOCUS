@@ -177,6 +177,7 @@ class SearchPeopleTableViewCell: UITableViewCell {
         let storyboard = UIStoryboard(name: "search_people", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
         ivc.isMeetup = true
+        ivc.UID = self.ID
         ivc.username = username_selected
         ivc.searchPeople = parentVC
         ivc.searchPeopleDelegate = parentVC

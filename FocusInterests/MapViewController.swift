@@ -214,9 +214,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         
                         self.events.append(event)
                     }
-//                    if !(self.searchEventsTab?.all_events.contains(event))!{
-//                        self.searchEventsTab?.all_events.append(event)
-//                    }
+                    if !(self.exploreTab?.attendingEvent.contains(event))!{
+                        self.exploreTab?.attendingEvent.append(event)
+                    }
                     
                     
                 }

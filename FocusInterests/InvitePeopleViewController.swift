@@ -39,6 +39,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var filtered = [Any]()
     var places = [Place]()
     var followingPlaces = [Place]()
+    var attendingEvent = [Event]()
     var events = [Event]()
     var location: CLLocation?
     var searchPeople: SearchPeopleViewController? = nil
@@ -183,6 +184,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         if self.segmentedOut.selectedSegmentIndex == 0{
             self.filtered = self.followingPlaces + self.filtered
+            self.tableView.reloadData()
+        }
+        else{
+            self.filtered = self.attendingEvent + self.filtered
             self.tableView.reloadData()
         }
         
