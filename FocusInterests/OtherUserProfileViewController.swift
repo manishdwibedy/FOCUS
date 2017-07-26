@@ -442,7 +442,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         Constants.DB.user.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionnary = snapshot.value as? NSDictionary {
                 
-                self.userInfo = dictionnary as? [String:Any]
+                self.userInfo = (dictionnary as? [String:Any])!
                 //                print(dictionnary)
                 let username_str = dictionnary["username"] as? String ?? ""
                 let description_str = dictionnary["description"] as? String ?? ""
