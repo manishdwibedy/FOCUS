@@ -192,13 +192,14 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchText.characters.count > 0{
+            self.filteredSection.removeAll()
+            self.filteredSectionMapping.removeAll()
+            self.filtered.removeAll()
+            
             
             self.userRef.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 if let users = snapshot.value as? [String:[String:Any]]{
-                    self.filteredSection.removeAll()
-                    self.filteredSectionMapping.removeAll()
-                    self.filtered.removeAll()
                     
                     for (id, user) in users{
                         if !self.usersInMemory.contains(id){
@@ -229,9 +230,6 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             self.userRef.queryOrdered(byChild: "fullname_lowered").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { snapshot in
                 // Get user value
                 if let users = snapshot.value as? [String:[String:Any]]{
-                    self.filteredSection.removeAll()
-                    self.filteredSectionMapping.removeAll()
-                    self.filtered.removeAll()
                     
                     for (id, user) in users{
                         if !self.usersInMemory.contains(id){
