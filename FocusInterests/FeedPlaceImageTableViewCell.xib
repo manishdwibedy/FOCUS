@@ -46,8 +46,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOf-fY-i6h">
-                                        <rect key="frame" x="45" y="4" width="45" height="23"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOf-fY-i6h">
+                                        <rect key="frame" x="45" y="4" width="210" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="zdC-3o-w6M"/>
                                         </constraints>
@@ -59,6 +59,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="w9e-02-cuC" firstAttribute="leading" secondItem="WOf-fY-i6h" secondAttribute="trailing" constant="5" id="1PW-FS-Qud"/>
                                     <constraint firstItem="w9e-02-cuC" firstAttribute="centerY" secondItem="rEz-yT-USh" secondAttribute="centerY" id="2Gf-QJ-r9W"/>
                                     <constraint firstItem="WOf-fY-i6h" firstAttribute="leading" secondItem="F1l-E9-r2y" secondAttribute="trailing" constant="7.5" id="3Sa-5j-2Y5"/>
                                     <constraint firstAttribute="height" constant="27" id="7Jy-mZ-fND"/>

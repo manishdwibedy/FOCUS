@@ -249,9 +249,6 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
             self.locationTextField.isUserInteractionEnabled = true
         }
         
-        self.interestListLabel.addGestureRecognizer(tapGesture)
-        self.interestListLabel.isUserInteractionEnabled = true
-        
         eventDescriptionTextView.delegate = self
         eventDescriptionTextView.text = "Description"
         eventDescriptionTextView.textColor = .white
@@ -285,7 +282,6 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
         navBar.barTintColor = Constants.color.navy
         
         self.guestSettingsStackView.isHidden = true
-        self.interestLabelTopConstraintToSwitcher.constant = 0
         self.view.backgroundColor = Constants.color.navy
         UIApplication.shared.statusBarStyle = .default
     }
@@ -318,7 +314,8 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
                 str += "\(value) | "
             }
             
-            addGreenDot(label: self.interestListLabel, content: str)
+            self.choseFocusButton.setTitle(str, for: .normal)
+            self.choseFocusButton.setTitle(str, for: .selected)
             self.hasNotChosenFocus = false
             self.eventNameTextField.becomeFirstResponder()
         }
@@ -353,11 +350,6 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if hasNotChosenFocus {
-            self.choseFocusButton.sendActions(for: .touchUpInside)
-        }else{
-            
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -406,7 +398,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
             self.publicLabel.textColor = UIColor.white
             
 //            self.guestListStackTopConstraint.constant += 28
-            self.interestLabelTopConstraintToSwitcher.constant = 71
+            
 //            self.scrollViewHeight.constant += 71
             guestSettingsStackView.isHidden = false
             //interestTopConstraint.constant = 100
@@ -417,7 +409,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
             
             guestSettingsStackView.isHidden = true
 //            self.guestListStackTopConstraint.constant -= 28
-            self.interestLabelTopConstraintToSwitcher.constant = 0
+            
 //            self.scrollViewHeight.constant -= 71
             //interestTopConstraint.constant = 0
         }
@@ -625,12 +617,12 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
                     self.eventEndDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
                     self.view.endEditing(true)
                     self.eventTimeTextField.becomeFirstResponder()
-                }else if startMonth == endMonth && startDay < endDay{
+                }else if startMonth == endMonth && startDay <= endDay{
                     self.endDate = self.datePicker.date
                     self.eventEndDateTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
                     self.view.endEditing(true)
                     self.eventTimeTextField.becomeFirstResponder()
-                }else if startMonth == endMonth && startDay >= endDay{
+                }else if startMonth == endMonth && startDay > endDay{
                     SCLAlertView().showCustom("Oops!", subTitle: "Please enter an end date on or after the start date.", color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
                     self.view.endEditing(true)
                     self.eventEndDateTextField.becomeFirstResponder()

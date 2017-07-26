@@ -143,7 +143,13 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBAction func closeButtonPressed(_ sender: Any) {
         print("Closing")
-        self.parent?.view.isHidden = true
+        
+        guard let mapView = self.parent?.parent as? MapViewController else{
+            return
+        }
+        
+        mapView.settingGearButton.isHidden = false
+        mapView.mapViewSettings.isHidden = true
     }
 
     /*

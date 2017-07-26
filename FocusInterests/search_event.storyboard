@@ -32,7 +32,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Events" id="31z-0O-JgZ"/>
+                                    <navigationItem title="Live" id="31z-0O-JgZ"/>
                                 </items>
                             </navigationBar>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxR-DK-a5n">

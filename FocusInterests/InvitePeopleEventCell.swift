@@ -25,6 +25,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     @IBOutlet weak var inviteEventCellContentView: UIView!
     @IBOutlet weak var attendButton: UIButton!
     
+    @IBOutlet weak var dateAndTimeLabel: UILabel!
     @IBOutlet weak var distance: UILabel!
     
     var event: Event!

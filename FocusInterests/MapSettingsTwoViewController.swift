@@ -209,15 +209,12 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     @IBAction func closePressed(_ sender: Any) {
-        if let parent = self.parent{
-            parent.view.isHidden = true
+        guard let mapView = self.parent?.parent as? MapViewController else{
+            return
         }
-    }
-    
-    @IBAction func donePressed(_ sender: Any) {
-        if let parent = self.parent{
-            parent.view.isHidden = true
-        }
+        
+        mapView.settingGearButton.isHidden = false
+        mapView.mapViewSettings.isHidden = true
     }
     
     /*

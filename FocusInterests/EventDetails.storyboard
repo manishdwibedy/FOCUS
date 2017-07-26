@@ -200,7 +200,7 @@
                                                                         <rect key="frame" x="0.0" y="40.333333333333343" width="343" height="45"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxA-NJ-gtK">
-                                                                                <rect key="frame" x="90" y="7.0000000000001279" width="159" height="36"/>
+                                                                                <rect key="frame" x="90" y="7" width="159" height="36"/>
                                                                                 <color key="backgroundColor" red="0.4667576551" green="0.77115333080000004" blue="0.2071985006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="36" id="Y5p-nP-8us"/>
@@ -208,7 +208,7 @@
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                                <state key="normal" title="Pin Here">
+                                                                                <state key="normal" title="I'm Here">
                                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 </state>
                                                                                 <connections>

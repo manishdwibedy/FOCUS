@@ -110,6 +110,7 @@
                         <outlet property="photoInputView" destination="GbE-L0-a00" id="w3H-wl-vlj"/>
                         <outlet property="popUpView" destination="9GY-g7-gUF" id="0KR-mZ-pkT"/>
                         <outlet property="popupArrowImage" destination="to3-UK-Oze" id="5nh-bb-S3E"/>
+                        <outlet property="settingGearButton" destination="VpH-45-PKf" id="aVl-X2-Iqc"/>
                         <outlet property="usernameInputView" destination="4lZ-Kb-68f" id="OGO-WP-XTU"/>
                     </connections>
                 </viewController>
@@ -629,7 +630,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="23"/>
                                 <state key="normal" title="x">
-                                    <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.13701152801513672" green="0.23321482539176941" blue="0.34121429920196533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="closeButtonPressed:" destination="f3G-pl-qcl" eventType="touchUpInside" id="cuZ-vD-PvG"/>

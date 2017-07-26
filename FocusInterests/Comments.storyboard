@@ -73,7 +73,8 @@
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5hr-AB-2uG">
                                         <rect key="frame" x="10" y="22.5" width="253" height="30"/>
-                                        <nil key="textColor"/>
+                                        <color key="backgroundColor" red="0.14884775729999999" green="0.32404775689999998" blue="0.49288792990000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>

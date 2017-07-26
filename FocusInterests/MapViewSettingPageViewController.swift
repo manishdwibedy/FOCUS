@@ -14,10 +14,6 @@ protocol MapViewSettingPageViewControllerDelegate {
 
 class MapViewSettingPageViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource{
 
-//    lazy var orderedViewControllers: [UIViewController] = {
-//        return [self.mapSettingsVC(viewController: "MapSettingsOneViewController"),
-//                self.mapSettingsVC(viewController: "MapSettingsTwoViewController")]
-//    }()
     var orderedViewControllers = [UIViewController]()
     var pageControl = UIPageControl()
     
@@ -30,8 +26,7 @@ class MapViewSettingPageViewController: UIPageViewController, UIPageViewControll
         
         delegate = self
         dataSource = self
-//        setupPageControl()
-        
+
         self.orderedViewControllers.append(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapSettingsOneViewController"))
         self.orderedViewControllers.append(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapSettingsTwoViewController"))
         
@@ -48,6 +43,7 @@ class MapViewSettingPageViewController: UIPageViewController, UIPageViewControll
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+//        this is for the small buttons at bottom of view
         if let scrollView = view.subviews.filter({ $0 is UIScrollView }).first,
             let pageControl = view.subviews.filter({ $0 is UIPageControl }).first {
             let control = pageControl as! UIPageControl
@@ -85,10 +81,6 @@ class MapViewSettingPageViewController: UIPageViewController, UIPageViewControll
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
-    }
-
-    func closeButtonPressed(){
-        self.view.isHidden = true
     }
     
     /*

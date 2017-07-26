@@ -90,9 +90,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    self.globeButton.setImage(UIImage(named: "Globe_White"), for: .normal)    
-//        self.globeButton.setImage(UIImage(image: UIImage(named: "web"), scaledTo: CGSize(width: 25.0, height: 25.0)), for: .normal)
-        
+        self.globeButton.setImage(UIImage(named: "Globe_White"), for: .normal)
+
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
         commentsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -122,7 +121,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.invitePopupView.center.y = self.screenHeight - 20
         self.invitePopupTopConstraint.constant = self.screenHeight - 20
         // Reference to an image file in Firebase Storage
-//        self.navigationItem.title = self.event?.title
+        //        self.navigationItem.title = self.event?.title
         
         commentTextField.layer.borderWidth = 1
         commentTextField.layer.cornerRadius = 5
@@ -139,7 +138,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.inviteButton.roundCorners(radius: 5.0)
         
         self.pinHereButton.roundCorners(radius: 5.0)
-        self.pinHereButton.setTitle("Pin Here", for: .normal)
+        self.pinHereButton.setTitle("I\'m Here", for: .normal)
         self.pinHereButton.setTitleColor(UIColor.white, for: .normal)
         self.pinHereButton.setTitle("I\'m Here!", for: .selected)
         self.pinHereButton.setTitleColor(Constants.color.navy, for: .selected)
@@ -229,15 +228,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     self.commentsViewHeight.constant -= self.noCommentLabel.bounds.height
                 }
                 else{
-//                    self.commentTableHeight.constant = 50
+                    //                    self.commentTableHeight.constant = 50
                     self.commentsStack.addArrangedSubview(self.noCommentLabel)
                     self.commentsStack.addArrangedSubview(self.addCommentView)
                     self.commentsStack.removeArrangedSubview(self.moreCommentsView)
                     self.commentsStack.removeArrangedSubview(self.commentsTableView)
                     self.commentsViewHeight.constant -= (self.commentsTableView.frame.height + self.moreCommentsView.frame.height)
                     self.moreCommentsButton.isHidden = true
-//                    self.noCommentLabel.alpha = 1
-//                    self.moreCommentsButton.isHidden = true
+                    //                    self.noCommentLabel.alpha = 1
+                    //                    self.moreCommentsButton.isHidden = true
                 }
                 
                 self.commentsTableView.reloadData()

@@ -12,11 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="KGk-i7-Jjw" customClass="MessageTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="KGk-i7-Jjw" customClass="MessageTableViewCell" customModule="FocusInterests" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="68.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User_Profile_Dark" translatesAutoresizingMaskIntoConstraints="NO" id="OVw-eE-0QC">
@@ -35,7 +35,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phi-zd-eVQ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phi-zd-eVQ">
                         <rect key="frame" x="50" y="31" width="187" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="MzN-Wz-0TH"/>
@@ -53,24 +53,36 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgD-Pb-g5G">
+                        <rect key="frame" x="255" y="32" width="57" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="57" id="Js3-o6-ZpE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="3iG-HB-bGZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="3F9-rb-JvO"/>
                     <constraint firstItem="OVw-eE-0QC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="4e2-38-6Za"/>
                     <constraint firstItem="3iG-HB-bGZ" firstAttribute="leading" secondItem="OVw-eE-0QC" secondAttribute="trailing" constant="8" id="5X9-Kg-NwF"/>
+                    <constraint firstItem="UgD-Pb-g5G" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="C2B-23-kAK"/>
+                    <constraint firstItem="UgD-Pb-g5G" firstAttribute="leading" secondItem="Phi-zd-eVQ" secondAttribute="trailing" constant="18" id="LTY-Kj-WZT"/>
                     <constraint firstAttribute="trailing" secondItem="mng-l5-Tk2" secondAttribute="trailing" constant="10" id="QyO-m9-nIg"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Phi-zd-eVQ" secondAttribute="trailing" constant="75" id="Xcd-6A-xT1"/>
                     <constraint firstItem="Phi-zd-eVQ" firstAttribute="leading" secondItem="OVw-eE-0QC" secondAttribute="trailing" constant="8" id="c7k-yh-Ilo"/>
+                    <constraint firstItem="UgD-Pb-g5G" firstAttribute="centerY" secondItem="Phi-zd-eVQ" secondAttribute="centerY" id="dz6-7t-VnB"/>
                     <constraint firstItem="mng-l5-Tk2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ePa-2r-pWX"/>
                     <constraint firstItem="OVw-eE-0QC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fKo-O8-Rgp"/>
                     <constraint firstItem="Phi-zd-eVQ" firstAttribute="top" secondItem="3iG-HB-bGZ" secondAttribute="bottom" constant="5" id="fcz-g4-vUL"/>
                     <constraint firstAttribute="trailing" secondItem="3iG-HB-bGZ" secondAttribute="trailing" constant="50" id="s8e-nv-nyi"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="content" destination="Phi-zd-eVQ" id="whx-s2-iAT"/>
-                <outlet property="time" destination="mng-l5-Tk2" id="qgr-Wu-j3q"/>
+                <outlet property="time" destination="UgD-Pb-g5G" id="fJd-rI-I47"/>
                 <outlet property="userImage" destination="OVw-eE-0QC" id="FXa-fR-HxH"/>
                 <outlet property="username" destination="3iG-HB-bGZ" id="Qyk-JJ-wh8"/>
             </connections>

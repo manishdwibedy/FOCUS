@@ -390,6 +390,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
             
             let place = suggestedPlaces[indexPath.row]
+            otherPlacesCell.dateAndTimeLabel.text = "7/20 10:00 P.M."
             otherPlacesCell.placeNameLabel.text = place.name
             otherPlacesCell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
             
@@ -421,11 +422,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView.tag == 0){
-
             return 80
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
-            return cell.bounds.size.height
+            return cell.frame.height
         }
     }
     

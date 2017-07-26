@@ -46,8 +46,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnC-i8-haQ">
-                                        <rect key="frame" x="45" y="4" width="36.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnC-i8-haQ">
+                                        <rect key="frame" x="45" y="4" width="216" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20.5" id="6yh-4o-IK8"/>
                                         </constraints>
@@ -64,6 +64,7 @@
                                     <constraint firstItem="Z7U-YF-Tdk" firstAttribute="centerY" secondItem="BnC-i8-haQ" secondAttribute="centerY" id="Jpi-nY-TeM"/>
                                     <constraint firstAttribute="height" constant="29" id="Qoj-Zu-vdJ"/>
                                     <constraint firstItem="Mu0-gw-nOq" firstAttribute="leading" secondItem="1wF-EH-cca" secondAttribute="trailing" constant="8" id="SRR-mh-WzG"/>
+                                    <constraint firstItem="1wF-EH-cca" firstAttribute="leading" secondItem="BnC-i8-haQ" secondAttribute="trailing" constant="5" id="UiV-9J-bzC"/>
                                     <constraint firstItem="Z7U-YF-Tdk" firstAttribute="leading" secondItem="OUR-vN-4kw" secondAttribute="leading" constant="1" id="Ycw-74-dzu"/>
                                     <constraint firstItem="Z7U-YF-Tdk" firstAttribute="leading" secondItem="OUR-vN-4kw" secondAttribute="leading" constant="1" id="fLQ-wm-mPo"/>
                                     <constraint firstItem="BnC-i8-haQ" firstAttribute="leading" secondItem="Z7U-YF-Tdk" secondAttribute="trailing" constant="7.5" id="g0y-iw-nbc"/>

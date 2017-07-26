@@ -33,10 +33,16 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var contactList: UILabel!
     @IBOutlet weak var contactListView: UIView!
-    
     @IBOutlet weak var navBar: UINavigationBar!
+    
+    //    facebook and twitter stack
+    @IBOutlet weak var twitterFacebookCreateEventStack: UIStackView!
+    @IBOutlet weak var facebookTwitterStackHeight: NSLayoutConstraint!
     @IBOutlet weak var facebookSwitch: UISwitch!
     @IBOutlet weak var twitterSwitch: UISwitch!
+    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
+    @IBOutlet weak var facebookTwitterStack: UIStackView!
+    
     let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
     var sections = [String]()
@@ -55,7 +61,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     var contacts = [CNContact]()
     var filteredContacts = [CNContact]()
     var searchingForContact = false
-    
     var isFacebook = false
     var isTwitter = false
     let loginView = FBSDKLoginManager()
@@ -67,7 +72,9 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         self.createEventButton.roundCorners(radius: 10.0)
         
-//        self.searchBar.isTranslucent = false
+        self.bottomHeight.constant -= self.facebookTwitterStackHeight.constant
+        self.twitterFacebookCreateEventStack.removeArrangedSubview(self.facebookTwitterStack)
+        self.facebookTwitterStack.removeFromSuperview()
         
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
@@ -80,9 +87,10 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         //        search bar placeholder
         let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.backgroundColor = Constants.color.navy
+
         textFieldInsideSearchBar?.attributedPlaceholder = attributedPlaceholder
         textFieldInsideSearchBar?.textColor = UIColor.white
+        textFieldInsideSearchBar?.backgroundColor = UIColor(red: 38/255.0, green: 83/255.0, blue: 126/255.0, alpha: 1.0)
         
         //        search bar glass icon
         let glassIconView = textFieldInsideSearchBar?.leftView as! UIImageView
