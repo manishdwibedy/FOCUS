@@ -160,8 +160,15 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="MGN-Sm-GaX" secondAttribute="trailing" id="NU0-4M-vUn"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="YQF-cJ-TvD" secondAttribute="trailing" id="KHN-Go-UaD"/>
+                                            <constraint firstItem="YQF-cJ-TvD" firstAttribute="leading" secondItem="2wa-hV-y5V" secondAttribute="leading" id="tf6-F4-38D"/>
+                                        </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2S6-Yw-qJG">
                                         <rect key="frame" x="270" y="0.0" width="64" height="70"/>
@@ -182,6 +189,10 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="2S6-Yw-qJG" firstAttribute="leading" secondItem="2wa-hV-y5V" secondAttribute="trailing" id="e1h-h1-8zW"/>
+                                    <constraint firstItem="2wa-hV-y5V" firstAttribute="leading" secondItem="x9c-9y-rgJ" secondAttribute="trailing" id="utd-sn-fn7"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                     </stackView>

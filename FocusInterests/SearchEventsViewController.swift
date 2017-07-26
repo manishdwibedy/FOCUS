@@ -306,7 +306,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
                     addGreenDot(label: cell.interestLabel, content: (pinData["focus"] as? String)!)
                     
-                    cell.addressLabel.text = pinData["formattedAddress"] as? String
+                    cell.addressLabel.text = (pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0]
                     cell.nameDescriptionLabel.text = pinData["pin"] as? String
                     
                     
@@ -330,9 +330,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 })
                 
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
-                    cell.interestLabel.text = pinData["focus"] as? String
+                    addGreenDot(label: cell.interestLabel, content: (pinData["focus"] as? String)!)
                     
-                    cell.addressLabel.setTitle(pinData["formattedAddress"] as? String, for: .normal)
+                    cell.addressLabel.setTitle((pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0], for: .normal)
                     cell.pinCaptionLabel.text = pinData["pin"] as? String
 
                     
