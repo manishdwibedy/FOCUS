@@ -37,7 +37,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     var delay = [String: Int]()
     var senderImage: UIImage? = nil
     var otherUserImage: UIImage? = nil
+    
     var inviteUser = false
+    var messageUser = false
     
     var nofArray = [FocusNotification]()
     var invArray = [FocusNotification]()
@@ -135,13 +137,24 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             self.navigationController?.popViewController(animated: true)
         }
         else{
-            let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
-            vc.selectedSegmentIndex = 1
-            vc.nofArray = self.nofArray
-            vc.invArray = self.invArray
-            vc.feedAray = self.feedAray
-            self.present(vc, animated: true, completion: nil)
+            if inviteUser{
+                let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
+                vc.selectedSegmentIndex = 1
+                vc.nofArray = self.nofArray
+                vc.invArray = self.invArray
+                vc.feedAray = self.feedAray
+                self.present(vc, animated: true, completion: nil)
+            }
+            if messageUser{
+                let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+                
+                VC.otherUser = true
+                VC.userID = user["firebaseUserId"] as! String
+                VC.previous = .people
+                dropfromTop(view: self.view)
+            }
+            
         }
         
     }

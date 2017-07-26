@@ -112,6 +112,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var userID = ""
     var previous: previousScreen? = nil
     var showInvitePopup = false
+    var userInfo = [String:Any]()
     
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
@@ -440,6 +441,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
         Constants.DB.user.child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionnary = snapshot.value as? NSDictionary {
+                
+                self.userInfo = dictionnary as? [String:Any]
                 //                print(dictionnary)
                 let username_str = dictionnary["username"] as? String ?? ""
                 let description_str = dictionnary["description"] as? String ?? ""
@@ -854,6 +857,17 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         }
         
         return rowHeight
+    }
+    
+    func messageUser(){
+        let storyboard = UIStoryboard(name: "Messages", bundle: nil)
+        let root = storyboard.instantiateViewController(withIdentifier: "Home") as! UINavigationController
+        
+        let VC = storyboard.instantiateViewController(withIdentifier: "chat") as? ChatViewController
+        VC?.user = self.userInfo
+        VC?.messageUser = true
+        
+        self.present(VC!, animated: true, completion: nil)
     }
     
     @IBAction func inviteClicked(_ sender: Any) {
