@@ -56,6 +56,16 @@ class FeedOneTableViewCell: UITableViewCell {
                                             "likeCount": num + 1
                         ])
                 }
+                else{
+                    self.pin?.dbPath.child("like").updateChildValues(["num": 1])
+                    
+                    Answers.logCustomEvent(withName: "Like Pin",
+                                           customAttributes: [
+                                            "liked": true,
+                                            "user": AuthApi.getFirebaseUid()!,
+                                            "likeCount":  1
+                        ])
+                }
             })
             pin?.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
             
@@ -73,8 +83,7 @@ class FeedOneTableViewCell: UITableViewCell {
                                            customAttributes: [
                                             "liked": true,
                                             "user": AuthApi.getFirebaseUid()!,
-                                            "likeCount": num -
-                                            1
+                                            "likeCount": num - 1
                         ])
                 }
             })
@@ -91,15 +100,8 @@ class FeedOneTableViewCell: UITableViewCell {
                 }
             })
             
-            
             self.likeButton.setImage(#imageLiteral(resourceName: "Like"), for: UIControlState.normal)
             
-            Answers.logCustomEvent(withName: "Like Pin",
-                                   customAttributes: [
-                                    "liked": false,
-                                    "user": AuthApi.getFirebaseUid()!,
-                                    "likeCount": self.likes
-                ])
         }
     }
 }

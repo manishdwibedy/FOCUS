@@ -346,7 +346,8 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                     totalPins += 1
                     
                     place.data = [
-                        "pin": pin
+                        "pin": pin,
+                        "key": pinID
                     ]
                     place.id = pinID
                     
@@ -411,7 +412,8 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                     let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: nil)
                                     let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: time)
                                     commentInfo.data = [
-                                        "pin": pin
+                                        "pin": pin,
+                                        "key": pinID
                                     ]
                                     
                                     pins.append(pinFeed)
@@ -449,7 +451,8 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                         let user = NotificationUser(username: data?["username"] as? String, uuid: data?["firebaseUserId"] as? String, imageURL: nil)
                                         let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
                                         place.data = [
-                                            "pin": pin
+                                            "pin": pin,
+                                            "key": pinID
                                         ]
                                         
                                         pins.append(pinFeed)

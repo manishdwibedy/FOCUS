@@ -293,7 +293,10 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         if feed.type == .Pin && feed.item?.imageURL == nil{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as? FeedOneTableViewCell{
-                cell.pin = feed.item?.data["pin"]
+                let data = feed.item?.data["pin"] as! [String:Any]
+    
+                    cell.pin = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
+
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     cell.nameLabel.text = user.username
                     if let image = user.image_string{
@@ -629,13 +632,33 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
 //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let event = self.filtered[indexPath.row]
-//        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
-//        let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
-//        controller.event = event
-//        self.present(controller, animated: true, completion: nil)
+        let feed = self.feeds[indexPath.row]
+        if feed.type == .Pin && feed.item?.imageURL == nil{
+            let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+            ivc.data = feed.item?.data["pin"] as! pinData
+            self.present(ivc, animated: true, completion: { _ in })
+        }
+        else if feed.type == .Pin && feed.item?.imageURL != nil{
+            let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+            ivc.data = feed.item?.data["pin"] as! pinData
+            self.present(ivc, animated: true, completion: { _ in })
+        }
+        else if feed.type == .Created{
+            
+        }
+        else if feed.type == .Going{
+        
+        }
+        else if feed.type == .Like{
+        
+        }
+        else if feed.type == .Comment{
+        
+        }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var rowHeight: CGFloat?
         let feed = self.feeds[indexPath.row]
