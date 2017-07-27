@@ -16,6 +16,13 @@ import FBSDKLoginKit
 import SDWebImage
 import Crashlytics
 
+enum PinType{
+    case normal
+    case update
+    case place
+    case event
+}
+
 class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GalleryControllerDelegate, CLLocationManagerDelegate, UITextViewDelegate{
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -34,7 +41,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var focusLabelView: UIView!
     
-    var pinType = "normal"
+    var pinType: PinType = .normal
     var imageArray = [UIImage]()
     var cellArray = [PinImageCollectionViewCell]()
     let gallery = GalleryController()
@@ -46,7 +53,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     var coordinates = CLLocationCoordinate2D()
     var locationName = ""
     var formmatedAddress = ""
-    
+    var focusText = ""
     let sidePadding: CGFloat = 0.0
     let numberOfItemsPerRow: CGFloat = 3.0
     let hieghtAdjustment: CGFloat = 0.0
@@ -95,18 +102,19 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             
         })
         
-        if pinType == "normal"
-        {
+        switch self.pinType{
+        case .update:
+            self.cancelButtonOut.isHidden = false
+            self.changeLocationOut.isHidden = true
+            self.locationLabel.text = locationName
+        default:
+            addGreenDot(label: self.focusLabel, content: "FOCUS")
             cancelButtonOut.isHidden = true
-        }else
-        {
-            cancelButtonOut.isHidden = false
-            changeLocationOut.isHidden = true
-            locationLabel.text = locationName
+            break
         }
         
-        imageArray.append(#imageLiteral(resourceName: "pin_camera"))
         
+        imageArray.append(#imageLiteral(resourceName: "pin_camera"))
         
         gallery.delegate = self
         
@@ -147,7 +155,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
         pinTextView.inputAccessoryView = doneToolbar
         pinTextView.delegate = self
         
-        if self.pinType != "place" || self.pinType != "event"{
+        if self.pinType != .place || self.pinType != .event{
             self.coordinates = CLLocationCoordinate2D(latitude: AuthApi.getLocation()!.coordinate.latitude, longitude: AuthApi.getLocation()!.coordinate.longitude)
             getPlaceName(location: AuthApi.getLocation()!, completion: {address in
                 self.formmatedAddress = address
@@ -342,11 +350,11 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
                     }
                 })
                 
-                if pinType == "place"{
+                if self.pinType == .place{
                     Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text ?? ""] )
                     
                 }
-                else if pinType == "event"{
+                else if self.pinType == .event{
                     Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": pinTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": imagePaths, "public": isPublic, "focus": focusLabel.text ?? ""] )
                 }
                 Answers.logCustomEvent(withName: "Pin",
@@ -390,8 +398,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             cell.imageView.layer.borderWidth = 0
         }
         
-        if pinType != "normal"
-        {
+        if self.pinType != .normal{
             dismiss(animated: true, completion: nil)
         }
         else{
@@ -617,7 +624,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
     
     
     @IBAction func chooseFOCUS(_ sender: Any) {
-        
         lastCaption = pinTextView.text
         let focusWindow = InterestsViewController(nibName:"InterestsViewController", bundle:nil)
         focusWindow.pinInterest = true
@@ -627,8 +633,6 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             focusWindow.needsReturn = true
             focusWindow.parentReturnVC = self
         })
-        
-        
     }
     
     @IBAction func addImage(_ sender: Any) {

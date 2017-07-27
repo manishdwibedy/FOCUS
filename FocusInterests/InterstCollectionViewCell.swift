@@ -34,8 +34,7 @@ class InterstCollectionViewCell: UICollectionViewCell {
 //        self.addGestureRecognizer(longP)
     }
     
-    func tap(sender: UITapGestureRecognizer)
-    {
+    func tap(sender: UITapGestureRecognizer){
         if parentVC.needsReturn == false && parentVC.shouldOnlyReturn == false{
             self.view.layer.borderWidth = 0
             let interest = parentVC.focus[indexPath.row]
@@ -60,8 +59,7 @@ class InterstCollectionViewCell: UICollectionViewCell {
             changeStatus(focus: interest)
             parentVC.returnToCreateEvent(FOCUS: label.text!)
             
-        }
-        else{
+        }else{
                 parentVC.returnValue(FOCUS:label.text!)
         }
 

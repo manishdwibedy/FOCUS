@@ -259,7 +259,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             
             print("place.id\(place.id)")
             print("place.image\(place.image_url)")
-            //cell.placeID = place.id
+            
+            cell.setRatingAmount(ratingAmount: Double(place.rating))
+            
             cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
             cell.dateAndTimeLabel.text = "7/20 10:00 P.M."
             let place_location = CLLocation(latitude: place.latitude, longitude: place.longitude)
@@ -315,7 +317,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.invitePeopleVCDelegate = self
             cell.parentVC = self
             cell.guestCount.text = "\(event.attendeeCount) guests"
-            cell.dateAndTimeLabel.text = "7/20 10:00 P.M."
+            
+//            Date formatter for date and time label in event
             cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price)"
             
             let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)

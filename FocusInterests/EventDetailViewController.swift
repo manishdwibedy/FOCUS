@@ -861,7 +861,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func pin(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Pin", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "Home") as! PinScreenViewController
-        ivc.pinType = "event"
+        ivc.pinType = .event
         ivc.placeEventID = (event?.id)!
         
         ivc.formmatedAddress = (event?.shortAddress)!

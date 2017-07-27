@@ -46,6 +46,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     
+    @IBOutlet weak var fullNameDescriptionStack: UIStackView!
     @IBOutlet weak var otherUserNameInterestTitleLabel: UILabel!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
@@ -66,6 +67,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     // user interests
     @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var interestStackView: UIStackView!
+    @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
     
     // Location Description (would this be location description?)
     // Location FOCUS button (what would this be for?)
@@ -73,12 +75,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var moreEventsButton: UIButton!
     // (and also any of the ones after)
     @IBOutlet weak var eventView: UIView!
+    @IBOutlet weak var eventsStackView: UIStackView!
+    @IBOutlet weak var moreEventsStack: UIView!
     
     @IBOutlet weak var eventHeader: UILabel!
     var followers = [User]()
     var following = [User]()
     var interestArray = [Interest]()
-    
     
     var suggestion = [Event]()
     let geoFire = GeoFire(firebaseRef: Database.database().reference().child("event_locations"))
@@ -86,8 +89,12 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var otherUser = false
     var userID = ""
     var previous: previousScreen? = nil
-    var showInvitePopup = false
     var userInfo = [String:Any]()
+    
+    let screenSize = UIScreen.main.bounds
+    var screenWidth: CGFloat = 0.0
+    var screenHeight: CGFloat = 0.0
+    var showInvitePopup = false
     
     // Back button
     @IBAction func backButton(_ sender: Any) {
@@ -119,28 +126,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBAction func moreButtonPressed(_ sender: UIButton) {
         let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
         self.present(selectInterests, animated: true, completion: nil)
-    }
-    
-    // Edit Description button
-    @IBAction func editDescription(_ sender: UIButton) {
-//        if editButton.title(for: .normal) == "edit"{
-//            let scrollPoint = CGPoint(x: 0, y: sender.frame.origin.y + 200)
-//            self.userScrollView.setContentOffset(scrollPoint, animated: true)
-//            
-//            descriptionText.isEditable = true
-//            descriptionText.textColor = .black
-//            descriptionText.backgroundColor = .white
-//            descriptionText.becomeFirstResponder()
-//            editButton.setTitle("save", for: .normal)
-//        }
-//        else{
-//            descriptionText.isEditable = false
-//            descriptionText.textColor = .white
-//            descriptionText.backgroundColor = .clear
-//            descriptionText.resignFirstResponder()
-//            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("description").setValue(descriptionText.text)
-//            editButton.setTitle("edit", for: .normal)
-//        }
     }
     
     override func viewDidLoad() {
@@ -196,14 +181,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         //      each event based on the tag of the sender
 
         self.moreEventsButton.tag = 3
-//        self.emptyPinButton.roundCorners(radius: 10)
-        
+
         self.roundImagesAndButtons()
         
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: UIFont(name: "Avenir Book", size: 21)!]
         
-//        getEventSuggestions()
+        getEventSuggestions()
 //        getPin()
         
         self.invitePopupView.allCornersRounded(radius: 10)
@@ -324,24 +308,31 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
-//        return self.suggestion.count > 3 ? 3 : self.suggestion.count
+//        return 3
+//        return 6
+//        return 9
+        return self.suggestion.count > 3 ? 3 : self.suggestion.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventsCollectionCell", for: indexPath) as!UserProfileCollectionViewCell
         
-//        let suggestion = self.suggestion[indexPath.row]
-        //        eventCell.userEventsLabel.text = suggestion.title
+        if indexPath.row == 1{
+            self.eventsCollectionViewHeight.constant = eventCell.frame.height
+        }else if indexPath.row == 3 || indexPath.row == 5{
+            self.eventsCollectionViewHeight.constant += (eventCell.frame.height + 20)
+        }
+        
+        let suggestion = self.suggestion[indexPath.row]
+        eventCell.userEventsLabel.text = suggestion.title
         
         // Placeholder image
         let placeholderImage = UIImage(named: "empty_event")
         
         eventCell.userEventsLabel.text = "Event \((indexPath.row+1))"
         
-//        eventCell.userEventsLabel.text = suggestion.title
+        eventCell.userEventsLabel.text = suggestion.title
         
-/*
         let reference = Constants.storage.event.child("\(suggestion.id!).jpg")
         
         reference.downloadURL(completion: { (url, error) in
@@ -355,7 +346,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             eventCell.userEventsImage.setShowActivityIndicator(true)
             eventCell.userEventsImage.setIndicatorStyle(.gray)
         })
-*/
+
         return eventCell
     }
     
@@ -405,10 +396,18 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //                SAMPLE description text
 
                 self.fullNameLabel.text = fullname
-                self.descriptionText.textContainer.maximumNumberOfLines = 3
-                self.descriptionText.textContainer.lineBreakMode = .byTruncatingTail
+                
+                if self.descriptionText.text == ""{
+                    self.fullNameDescriptionStack.removeArrangedSubview(self.descriptionText)
+                    self.descriptionText.removeFromSuperview()
+                }else{
+                    self.fullNameDescriptionStack.insertArrangedSubview(self.descriptionText, at: 1)
+                    self.descriptionText.textContainer.maximumNumberOfLines = 3
+                    self.descriptionText.textContainer.lineBreakMode = .byTruncatingTail
+                    self.descriptionText.text = description_str
+                }
+                
                 self.otherUserNameInterestTitleLabel.text = "\(username_str)\'s FOCUS"
-                self.descriptionText.text = description_str
                 
                 self.navBarItem.title = username_str
                 
@@ -452,28 +451,31 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         }
                         
                         for (_, interest) in (final_interest.enumerated()){
-                            let textLabel = UILabel()
-                            
-                            textLabel.textColor = .white
-                            textLabel.text  = interest
-                            textLabel.textAlignment = .left
-                            let interestView = InterestStackViewLabel()
-                            interestView.interestLabel.text = interest
-                            let interestImage = "\(interest) Green"
-                            interestView.interestLabelImage.image = UIImage(named: interestImage)
+                            let interestLabelView = InterestStackViewLabel(frame: CGRect(x: 0, y: 0, width: self.interestStackView.bounds.width, height: 30))
                             
                             if interest.characters.count > 0{
+                                interestLabelView.view.bounds.size.width = self.interestStackView.frame.size.width
+                                interestLabelView.view.center = interestLabelView.center
+                                interestLabelView.interestLabel.text = interest
+                                let interestImage = "\(interest) Green"
+                                interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
                                 if self.interestStackView.arrangedSubviews.count < 3{
-                                    let interestSubView = UIView(frame: CGRect(x: 0, y: 0, width: self.interestStackView.frame.size.width, height: 20))
-                                    interestSubView.addSubview(interestView)
-                                    
-//                                    self.interestStackView.addArrangedSubview(textLabel)
-                                    self.interestStackView.addArrangedSubview(interestSubView)
-
-                                    self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+                                    self.interestStackView.addArrangedSubview(interestLabelView)
+                                    self.interestStackView.translatesAutoresizingMaskIntoConstraints = false
                                 }
                             }
                         }
+                        
+                        guard let firstFocusView = self.interestStackView.arrangedSubviews.first else {
+                            return
+                        }
+                        
+                        if self.interestStackView.arrangedSubviews.count <= 1{
+                            self.interestViewHeight.constant = firstFocusView.frame.height
+                        }else{
+                            self.interestViewHeight.constant = CGFloat((firstFocusView.frame.height + 10) * CGFloat(self.interestStackView.arrangedSubviews.count))
+                        }
+                        
                     }
                 }
                 
@@ -617,13 +619,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             
             if self.suggestion.count > 3{
                 self.moreEventsButton.isHidden = false
-            }
-            else{
+                self.eventsStackView.addArrangedSubview(self.moreEventsStack)
+            }else{
                 self.moreEventsButton.isHidden = true
+                self.eventsStackView.removeArrangedSubview(self.moreEventsStack)
+                self.moreEventsStack.removeFromSuperview()
             }
-            
             self.eventsCollectionView.reloadData()
-            
         })
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").queryOrdered(byChild: "status").queryEqual(toValue: "accepted").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -660,7 +662,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                 }
                                 
                                 self.eventsCollectionView.reloadData()
-                                
                             }
                             
                         }

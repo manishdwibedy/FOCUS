@@ -746,84 +746,79 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8EY-28-xIf">
-                                                <rect key="frame" x="9" y="181" width="357" height="40"/>
+                                                <rect key="frame" x="9" y="174" width="357" height="47"/>
                                                 <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YMc-zy-y3d">
-                                                <rect key="frame" x="9" y="91" width="130" height="87"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RO1-bA-G5X" userLabel="Ratings Stack">
+                                                <rect key="frame" x="9" y="91" width="139" height="18"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RO1-bA-G5X" userLabel="Ratings Stack">
-                                                        <rect key="frame" x="0.0" y="0.0" width="130" height="25"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3V-sd-lJh" userLabel="Stars Button">
-                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="25"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="80" id="4QO-Ds-oKG"/>
-                                                                </constraints>
-                                                            </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yae-dy-XBd" userLabel="Reviews Button">
-                                                                <rect key="frame" x="85" y="0.0" width="45" height="25"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="45" id="GQN-tV-o6P"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
-                                                                <state key="normal" title="Button">
-                                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </state>
-                                                            </button>
-                                                        </subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A4v-4v-97V">
+                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="18"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="25" id="bTV-Dd-ZJl"/>
+                                                            <constraint firstAttribute="width" constant="95" id="Vz1-H2-5u8"/>
                                                         </constraints>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="kYU-17-ehY" userLabel="Uber and Google Stack View">
-                                                        <rect key="frame" x="0.0" y="25" width="130" height="62"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQl-E2-yfq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="62" height="62"/>
-                                                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="62" id="duB-XI-ZVr"/>
-                                                                    <constraint firstAttribute="width" constant="62" id="fCa-wY-2no"/>
-                                                                </constraints>
-                                                                <state key="normal" image="Large_Apple_Maps.png">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="openGoogleMaps:" destination="otb-Ee-qlq" eventType="touchUpInside" id="HBe-Mm-hxR"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6B-SG-hJC">
-                                                                <rect key="frame" x="68" y="0.0" width="62" height="62"/>
-                                                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="62" id="9zz-Fm-U5h"/>
-                                                                    <constraint firstAttribute="height" constant="62" id="ep4-aa-aat"/>
-                                                                </constraints>
-                                                                <state key="normal" image="uber"/>
-                                                                <connections>
-                                                                    <action selector="openUber:" destination="otb-Ee-qlq" eventType="touchUpInside" id="fLg-TK-Ao7"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yae-dy-XBd" userLabel="Reviews Button">
+                                                        <rect key="frame" x="100" y="0.0" width="39" height="18"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                        <state key="normal" title="Button">
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="bTV-Dd-ZJl"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="kYU-17-ehY" userLabel="Uber and Google Stack View">
+                                                <rect key="frame" x="9" y="110" width="130" height="62"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQl-E2-yfq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="62" height="62"/>
+                                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="62" id="duB-XI-ZVr"/>
+                                                            <constraint firstAttribute="width" constant="62" id="fCa-wY-2no"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Large_Apple_Maps.png">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="openGoogleMaps:" destination="otb-Ee-qlq" eventType="touchUpInside" id="HBe-Mm-hxR"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6B-SG-hJC">
+                                                        <rect key="frame" x="68" y="0.0" width="62" height="62"/>
+                                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="62" id="9zz-Fm-U5h"/>
+                                                            <constraint firstAttribute="height" constant="62" id="ep4-aa-aat"/>
+                                                        </constraints>
+                                                        <state key="normal" image="uber"/>
+                                                        <connections>
+                                                            <action selector="openUber:" destination="otb-Ee-qlq" eventType="touchUpInside" id="fLg-TK-Ao7"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="kYU-17-ehY" firstAttribute="leading" secondItem="8EY-28-xIf" secondAttribute="leading" id="6CZ-Su-vid"/>
                                             <constraint firstItem="qa7-m6-lhq" firstAttribute="top" secondItem="dH7-9c-Q24" secondAttribute="top" constant="11" id="6gF-Sx-ljb"/>
                                             <constraint firstItem="qa7-m6-lhq" firstAttribute="leading" secondItem="dH7-9c-Q24" secondAttribute="leading" constant="9" id="77g-q3-Rn4"/>
                                             <constraint firstItem="8EY-28-xIf" firstAttribute="leading" secondItem="dH7-9c-Q24" secondAttribute="leadingMargin" constant="1" id="AMt-hc-B8D"/>
                                             <constraint firstItem="8EY-28-xIf" firstAttribute="centerX" secondItem="dH7-9c-Q24" secondAttribute="centerX" id="Agi-uf-LDn"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="8EY-28-xIf" secondAttribute="trailing" constant="1" id="HXc-Qe-j3A"/>
-                                            <constraint firstItem="YMc-zy-y3d" firstAttribute="top" secondItem="qa7-m6-lhq" secondAttribute="bottom" constant="1" id="MXB-6C-IIj"/>
-                                            <constraint firstItem="8EY-28-xIf" firstAttribute="top" secondItem="YMc-zy-y3d" secondAttribute="bottom" constant="3" id="TEU-VK-XAM"/>
-                                            <constraint firstItem="kYU-17-ehY" firstAttribute="leading" secondItem="qa7-m6-lhq" secondAttribute="leading" id="ZDG-V9-4fO"/>
+                                            <constraint firstItem="RO1-bA-G5X" firstAttribute="top" secondItem="qa7-m6-lhq" secondAttribute="bottom" constant="1" id="Snc-i8-83F"/>
+                                            <constraint firstItem="RO1-bA-G5X" firstAttribute="leading" secondItem="qa7-m6-lhq" secondAttribute="leading" id="XPT-oe-apy"/>
+                                            <constraint firstItem="8EY-28-xIf" firstAttribute="top" secondItem="kYU-17-ehY" secondAttribute="bottom" constant="2" id="axS-9m-pvd"/>
                                             <constraint firstItem="qa7-m6-lhq" firstAttribute="top" secondItem="dH7-9c-Q24" secondAttribute="topMargin" constant="3" id="cMX-nl-UrX"/>
                                             <constraint firstItem="RGj-Tz-1pL" firstAttribute="centerY" secondItem="qa7-m6-lhq" secondAttribute="centerY" id="loh-Hr-EVs"/>
                                             <constraint firstItem="RGj-Tz-1pL" firstAttribute="leading" secondItem="qa7-m6-lhq" secondAttribute="trailing" constant="9" id="lr0-fL-twp"/>
+                                            <constraint firstItem="kYU-17-ehY" firstAttribute="top" secondItem="RO1-bA-G5X" secondAttribute="bottom" constant="1" id="m5S-Dc-Zbd"/>
                                             <constraint firstItem="qa7-m6-lhq" firstAttribute="leading" secondItem="8EY-28-xIf" secondAttribute="leading" id="mF6-eB-7Aj"/>
+                                            <constraint firstItem="kYU-17-ehY" firstAttribute="leading" secondItem="RO1-bA-G5X" secondAttribute="leading" id="vyl-Kj-99h"/>
                                             <constraint firstAttribute="bottom" secondItem="8EY-28-xIf" secondAttribute="bottom" constant="6" id="x26-91-Z4Z"/>
                                         </constraints>
                                     </view>
@@ -1062,7 +1057,7 @@
                         <outlet property="postReviewSeciontButton" destination="sdD-F8-zH3" id="ao7-eA-cmC"/>
                         <outlet property="ratingView" destination="T1I-5c-7EA" id="My0-6I-d3J"/>
                         <outlet property="reviewAmountButton" destination="Yae-dy-XBd" id="0sP-sF-NpQ"/>
-                        <outlet property="reviewStars" destination="s3V-sd-lJh" id="vGS-dZ-LVB"/>
+                        <outlet property="reviewStars" destination="A4v-4v-97V" id="Scw-iF-4p4"/>
                         <outlet property="reviewsStack" destination="cnv-wy-T49" id="iYi-rT-Trz"/>
                         <outlet property="reviewsTextView" destination="Oey-r3-XUH" id="WUT-KF-DHh"/>
                         <outlet property="starRatingView" destination="T1I-5c-7EA" id="L3h-1O-ES5"/>
@@ -1074,7 +1069,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfy-HE-dyA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="92" y="2488"/>
+            <point key="canvasLocation" x="92" y="2487.2563718140932"/>
         </scene>
         <!--Rating View Controller-->
         <scene sceneID="AO6-ce-YwT">
