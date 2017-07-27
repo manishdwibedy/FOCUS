@@ -763,6 +763,50 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.present(ivc, animated: true, completion: nil)
     }
     
+    @IBAction func followUser(_ sender: Any) {
+        let time = NSDate().timeIntervalSince1970
+        
+        if self.followButton.isSelected == false{
+            Follow.followUser(uid: self.userInfo["firebaseUserId"])
+            followButton.isSelected = true
+            followButton.layer.borderWidth = 1
+            followButton.layer.borderColor = Constants.color.navy.cgColor
+            followButton.backgroundColor = UIColor.white
+            followButton.tintColor = UIColor.clear
+            followButton.layer.shadowOpacity = 0.5
+            followButton.layer.masksToBounds = false
+            followButton.layer.shadowColor = UIColor.black.cgColor
+            followButton.layer.shadowRadius = 5.0
+            
+        } else if self.followButton.isSelected == true{
+            
+            let unfollowAlertController = UIAlertController(title: "Unfollow \(self.userInfo["username"]!)?", message: nil, preferredStyle: .actionSheet)
+            
+            
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
+                Follow.unFollowUser(uid: self.userInfo["firebaseUserId"] as! String)
+                self.followButton.isSelected = false
+                self.followButton.layer.borderWidth = 1
+                self.followButton.layer.borderColor = UIColor.clear.cgColor
+                self.followButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+                self.followButton.tintColor = UIColor.clear
+                self.followButton.layer.shadowOpacity = 0.5
+                self.followButton.layer.masksToBounds = false
+                self.followButton.layer.shadowColor = UIColor.black.cgColor
+                self.followButton.layer.shadowRadius = 5.0
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print("cancel has been tapped")
+            }
+            
+            unfollowAlertController.addAction(unfollowAction)
+            unfollowAlertController.addAction(cancelAction)
+            self.present(unfollowAlertController, animated: true, completion: nil)
+        }
+    }
+    
 //    @IBAction func unwindToOtherUserProfile(segue:UIStoryboardSegue) {}
     
     func hasSentUserAnInvite(){

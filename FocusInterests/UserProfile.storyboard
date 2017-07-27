@@ -1162,6 +1162,9 @@
                                                                         <state key="normal" title="Follow">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="followUser:" destination="zic-h3-qjZ" eventType="touchUpInside" id="Owl-h5-Zar"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7q-7M-KpS">
                                                                         <rect key="frame" x="134" y="0.0" width="124" height="25"/>
