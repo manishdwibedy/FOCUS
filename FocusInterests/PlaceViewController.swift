@@ -37,7 +37,6 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     @IBOutlet weak var interestLabel: UILabel!
     
     @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var ratingButtonLabel: UIButton!
     @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -45,18 +44,14 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     
     @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var invitePopupView: UIView!
-    @IBOutlet weak var ratingsImage: UIImageView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var placeImage: UIImageView!
-    @IBOutlet weak var reviewsAmountLabel: UIButton!
     @IBOutlet weak var followersAmountLabel: UIButton!
     @IBOutlet weak var pinAmountLabel: UIButton!
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var pinButton: UIButton!
-    @IBOutlet weak var placeDescription: UILabel!
-    @IBOutlet weak var placeName: UILabel!
     @IBOutlet weak var distanceLabelInNavBar: UIButton!
     
     let screenSize = UIScreen.main.bounds
@@ -106,8 +101,7 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         self.pinAmountLabel.setTitleColor(UIColor.white, for: .selected)
         self.followersAmountLabel.setTitleColor(UIColor.white, for: .normal)
         self.followersAmountLabel.setTitleColor(UIColor.white, for: .selected)
-        self.reviewsAmountLabel.setTitleColor(UIColor.white, for: .normal)
-        self.reviewsAmountLabel.setTitleColor(UIColor.white, for: .selected)
+        
         
         let placeLocation = CLLocation(latitude: Double((place?.latitude)!), longitude: Double((place?.longitude)!))
         
@@ -259,7 +253,7 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
             }
             
             pin.averageRatingAmount = Double(ratingAmount)
-//            pin.reviewAmountButton.setTitle(self.reviewsAmountLabel.titleLabel?.text, for: .normal)
+
         }
         if segue.identifier == "unwindToMapViewControllerWithSegue"{
             let map = self.map
@@ -311,39 +305,12 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         titlelabel.backgroundColor = UIColor.clear
         titlelabel.adjustsFontSizeToFitWidth = false
         self.navigationBar.topItem?.titleView = titlelabel
-        
-        switch place.rating{
-        case 0:
-            self.ratingsImage.image = #imageLiteral(resourceName: "Star white")
-            break
-        case 0.1...1:
-            self.ratingsImage.image = #imageLiteral(resourceName: "Star light yellow")
-            break
-        case 1.1...2:
-            self.ratingsImage.image = #imageLiteral(resourceName: "Star dark yellow")
-            break
-        case 2.1...3:
-            self.ratingsImage.image = #imageLiteral(resourceName: "Star light orange")
-            break
-        case 3.1...4:
-            self.ratingsImage.image = #imageLiteral(resourceName: "Star dark orange")
-            break
-        case 4.1...5:
-            self.ratingsImage.image = #imageLiteral(resourceName: "Star red")
-            break
-        default:
-            break
-        }
-        
+    
         if let url = URL(string: place.image_url){
             placeImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_place"))
         }
         
         let ratingString = String(place.rating)
-        self.ratingButtonLabel.setTitle(ratingString, for: .normal)
-        self.ratingButtonLabel.setTitle(ratingString, for: .selected)
-        
-        self.reviewsAmountLabel.setTitle("\(place.reviewCount)", for: .normal)
         
 //        imageView.sd_setImage(with: URL(string: (place.image_url)), placeholderImage: nil)
         //self.getLatestComments()
@@ -479,10 +446,6 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         
         let createEventStoryboard = UIStoryboard.init(name: "CreateEvent", bundle: nil)
         let createEventVC = createEventStoryboard.instantiateViewController(withIdentifier: "createEvent") as! CreateNewEventViewController
-        
-        if let specificAddress = self.placeName.text{
-            createEventVC.specifiedLocation =  specificAddress
-        }
         
         createEventVC.specifiedLocationFromPlaceOrEventDetail = true
         self.present(createEventVC, animated: true, completion: nil)

@@ -62,6 +62,12 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No messages yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pa2-4k-U1N">
+                        <rect key="frame" x="97" y="22.5" width="127.5" height="22"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -71,17 +77,20 @@
                     <constraint firstItem="UgD-Pb-g5G" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="C2B-23-kAK"/>
                     <constraint firstItem="UgD-Pb-g5G" firstAttribute="leading" secondItem="Phi-zd-eVQ" secondAttribute="trailing" constant="18" id="LTY-Kj-WZT"/>
                     <constraint firstAttribute="trailing" secondItem="mng-l5-Tk2" secondAttribute="trailing" constant="10" id="QyO-m9-nIg"/>
+                    <constraint firstItem="pa2-4k-U1N" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="R8S-bg-k9F"/>
                     <constraint firstItem="Phi-zd-eVQ" firstAttribute="leading" secondItem="OVw-eE-0QC" secondAttribute="trailing" constant="8" id="c7k-yh-Ilo"/>
                     <constraint firstItem="UgD-Pb-g5G" firstAttribute="centerY" secondItem="Phi-zd-eVQ" secondAttribute="centerY" id="dz6-7t-VnB"/>
                     <constraint firstItem="mng-l5-Tk2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ePa-2r-pWX"/>
                     <constraint firstItem="OVw-eE-0QC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fKo-O8-Rgp"/>
                     <constraint firstItem="Phi-zd-eVQ" firstAttribute="top" secondItem="3iG-HB-bGZ" secondAttribute="bottom" constant="5" id="fcz-g4-vUL"/>
                     <constraint firstAttribute="trailing" secondItem="3iG-HB-bGZ" secondAttribute="trailing" constant="50" id="s8e-nv-nyi"/>
+                    <constraint firstItem="pa2-4k-U1N" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tRC-ry-dtR"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="content" destination="Phi-zd-eVQ" id="whx-s2-iAT"/>
+                <outlet property="noMessageLabel" destination="pa2-4k-U1N" id="STL-e5-7qD"/>
                 <outlet property="time" destination="UgD-Pb-g5G" id="fJd-rI-I47"/>
                 <outlet property="userImage" destination="OVw-eE-0QC" id="FXa-fR-HxH"/>
                 <outlet property="username" destination="3iG-HB-bGZ" id="Qyk-JJ-wh8"/>

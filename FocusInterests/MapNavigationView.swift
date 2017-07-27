@@ -42,7 +42,6 @@ class MapNavigationView: UIView, UISearchBarDelegate{
     func commonInit(){
         Bundle.main.loadNibNamed("MapNavigationView", owner: self, options: nil)
         view.frame = self.bounds
-//        view.autoresizingMask = .FlexibleHeight | .FlexibleWidth
 
         self.addSubview(self.view)
         

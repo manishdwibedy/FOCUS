@@ -14,8 +14,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     var place: Place?
     
     @IBOutlet weak var mainStackView: UIStackView!
-    @IBOutlet weak var postReviewSeciontButton: UIButton!
     
+    @IBOutlet weak var postReviewSeciontButton: UIButton!
     // reviews stack
     @IBOutlet weak var reviewsStack: UIStackView!
     @IBOutlet weak var reviewsTextView: UITextView!
@@ -40,9 +40,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var hoursStackView: UIStackView!
     @IBOutlet weak var pinTableView: UITableView!
     @IBOutlet weak var inviteUserStackView: UIStackView!
-    @IBOutlet weak var infoScreenHeight: NSLayoutConstraint!
+    @IBOutlet weak var starsUberAndHoursStack: UIStackView!
     
-    @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
     var suggestedPlaces = [Place]()
     
     @IBOutlet weak var writeReviewView: UITextView!
@@ -50,16 +49,16 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var inviteView: UIView!
     @IBOutlet weak var infoView: UIView!
-    @IBOutlet weak var categoryView: UIView!
-    
+    @IBOutlet weak var infoViewScreenHeight: NSLayoutConstraint!
     
     // pins stack
     @IBOutlet weak var pinStackView: UIStackView!
     @IBOutlet weak var pinsHeightConstraint: NSLayoutConstraint!
     
-    
     // people also liked stack
     @IBOutlet weak var peopleAlsoLikedStack: UIView!
+    @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
+    @IBOutlet weak var peopleAlsoLikedTableViewHeight: NSLayoutConstraint!
     
     var placeVC: PlaceViewController? = nil
     var ratingID: String?
@@ -116,8 +115,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         self.yelpButton.layer.cornerRadius = 5
         
         var address = ""
-        for str in (place?.address)!
-        {
+        for str in (place?.address)!{
             address = address + " " + str
             
         }
@@ -142,7 +140,8 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             }
             else{
                 self.pinStackView.removeArrangedSubview(self.pinTableView)
-                self.pinView.bounds.size.height -= self.pinTableView.frame.size.height
+                self.pinTableView.removeFromSuperview()
+//                self.pinView.bounds.size.height -= self.pinTableView.frame.size.height
             }
             self.pinTableView.reloadData()
             
@@ -241,30 +240,30 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     func checkRatingAmount(){
-        self.reviewAmountButton.setTitle("\(self.averageReviewAmount) reviews", for: .normal)
+        self.reviewAmountButton.setTitle("\(Int(self.averageReviewAmount)) reviews", for: .normal)
         guard let reviewsStarImageView = self.reviewStars else{
             return
         }
         switch self.averageRatingAmount{
-        case 0.0..<0.5:
+        case 0.0...0.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_0")
-        case 0.5..<1.0:
+        case 1.0...1.5:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_1")
-        case 1.0..<1.5:
+        case 1.6...1.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_1_half")
-        case 1.5..<2.0:
+        case 2.0...2.5:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_2")
-        case 2.0..<2.5:
+        case 2.6...2.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_2_half")
-        case 2.5..<3.0:
+        case 3.0...3.5:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_3")
-        case 3.0..<3.5:
+        case 3.6...3.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_3_half")
-        case 3.5..<4.0:
+        case 4.0...4.5:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_4")
-        case 4.0..<4.5:
+        case 4.6...4.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_4_half")
-        case 4.5..<5.0:
+        case 5.0:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_5")
         default:
             break
@@ -273,7 +272,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     func loadInfoScreen(place: Place){
         // Do any additional setup after loading the view.
-        self.placeVC?.placeName.text = place.name
 
         if place.price.characters.count == 0{
             self.placeVC?.dollarLabel.text = "N.A."
@@ -333,8 +331,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
         if let open_hours = place.hours{
             let hours = getOpenHours(open_hours)
-//            infoScreenHeight.constant += CGFloat(25 * hours.count)
-            
+            self.starsUberAndHoursStack.addArrangedSubview(self.hoursStackView)
             for (_, hour) in (hours.enumerated()){
 
                 let textLabel = UILabel()
@@ -342,13 +339,15 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 textLabel.text  = hour
                 textLabel.textAlignment = .left
                 textLabel.textColor = .white
-                
+                self.infoViewScreenHeight.constant += 17.5
                 hoursStackView.addArrangedSubview(textLabel)
                 hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
             }
-        }else {
-//            self.infoScreenHeight.constant -= self.hoursStackView.bounds.size.height
-            self.hoursStackView.bounds.size.height = 0
+        }else if place.hours == nil{
+            self.infoView.frame.size.height -= self.hoursStackView.frame.height
+            self.infoViewScreenHeight.constant -= self.hoursStackView.frame.height
+            self.starsUberAndHoursStack.removeArrangedSubview(self.hoursStackView)
+            self.hoursStackView.removeFromSuperview()
         }
         
         let invite = ["user1", "user2", "user3"]
@@ -417,7 +416,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             addGreenDot(label: pinCell.categoryLabel, content:(data["focus"] as? String)!)
             pinCell.timeOfPinLabel.text = pinDF.string(from: Date(timeIntervalSince1970: (data["time"] as? Double)!))
             pinCell.commentsTextView.text = data["pin"] as? String
-            
+            self.pinTableView.frame.size.height = (pinCell.frame.height * CGFloat(indexPath.row + 1))
             return pinCell
         }else{
             
@@ -448,8 +447,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             otherPlacesCell.place = place
             otherPlacesCell.addressTextView.text = address
             addGreenDot(label: otherPlacesCell.categoryLabel, content: place_focus)
-            
             otherPlacesCell.checkForFollow()
+            
+            self.peopleAlsoLikedTableView.frame.size.height = (otherPlacesCell.frame.height * CGFloat(indexPath.row + 1))
             
             return otherPlacesCell
         }

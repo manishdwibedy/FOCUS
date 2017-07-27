@@ -295,8 +295,8 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
         let focusWindow = InterestsViewController(nibName:"InterestsViewController", bundle:nil)
         focusWindow.pinInterest = true
         self.present(focusWindow, animated: true, completion:{
-            focusWindow.saveButton.isEnabled = true
-            focusWindow.saveButton.title = "Done"
+            focusWindow.saveButton.isEnabled = false
+            focusWindow.saveButton.title = ""
             focusWindow.shouldOnlyReturn = true
             focusWindow.needsReturn = true
             focusWindow.parentCreateEvent = self

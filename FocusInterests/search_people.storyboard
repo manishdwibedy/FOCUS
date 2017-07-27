@@ -34,7 +34,21 @@
                                     <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="People" id="GWa-5t-KOw"/>
+                                    <navigationItem title="People" id="GWa-5t-KOw">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="4ry-yc-yBj">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N8v-F3-BYN">
+                                                <rect key="frame" x="16" y="24" width="35" height="35"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="UserPhoto">
+                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="goToUserProfile:" destination="sfs-g5-Ui8" eventType="touchUpInside" id="nv0-hI-PJg"/>
+                                                </connections>
+                                            </button>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Azg-xG-CeT">
@@ -94,6 +108,7 @@
                         <outlet property="navBar" destination="O91-5f-lIg" id="Jj4-60-g6I"/>
                         <outlet property="searchBar" destination="Azg-xG-CeT" id="Xui-o5-xQ8"/>
                         <outlet property="tableView" destination="PXI-1V-ZjI" id="biZ-HC-C9F"/>
+                        <outlet property="userProfileButton" destination="N8v-F3-BYN" id="18b-eX-Trb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oLI-PQ-fHj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -280,5 +295,6 @@
         <image name="Explore green" width="31" height="31"/>
         <image name="Explore white" width="31" height="31"/>
         <image name="People icon white" width="30" height="30"/>
+        <image name="UserPhoto" width="102" height="102"/>
     </resources>
 </document>

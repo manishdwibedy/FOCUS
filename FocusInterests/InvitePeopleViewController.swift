@@ -182,10 +182,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         super.viewDidAppear(animated)
         
         if self.segmentedOut.selectedSegmentIndex == 0{
+            self.createEventButton.isHidden = true
             self.filtered = self.followingPlaces + self.filtered
             self.tableView.reloadData()
         }
         else{
+            self.createEventButton.isHidden = false
             self.filtered = self.attendingEvent + self.filtered
             self.tableView.reloadData()
         }
@@ -248,6 +250,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.place = place
             cell.placeNameLabel.text = place.name
            // cell.place = place
+            print("address \(place.address)")
+            print("addressCount \(place.address.count)")
             if place.address.count > 0{
                 if place.address.count == 1{
                     cell.addressTextView.text = "\(place.address[0])"

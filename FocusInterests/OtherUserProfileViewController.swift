@@ -143,14 +143,14 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.placesTableView.dataSource = self
         self.placesTableView.delegate = self
 
-        let placeNib = UINib(nibName: "SearchPlaceCell", bundle: nil)
-        self.placesTableView.register(placeNib, forCellReuseIdentifier: "SearchPlaceCell")
+        let placeNib = UINib(nibName: "InvitePeoplePlaceCell", bundle: nil)
+        self.placesTableView.register(placeNib, forCellReuseIdentifier: "InvitePeoplePlaceCell")
         
         self.eventsTableView.dataSource = self
         self.eventsTableView.delegate = self
         
-        let eventNib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
-        self.eventsTableView.register(eventNib, forCellReuseIdentifier: "searchEventCell")
+        let eventNib = UINib(nibName: "InvitePeopleEventCell", bundle: nil)
+        self.eventsTableView.register(eventNib, forCellReuseIdentifier: "InvitePeopleEventCell")
         
         
         // Do any additional setup after loading the view.
@@ -164,9 +164,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.navBar.titleTextAttributes = attrs
         
         self.followButton.roundCorners(radius: 5.0)
-        self.messageButton.roundCorners(radius: 5.0)
         self.inviteButton.roundCorners(radius: 5.0)
         
+        self.messageButton.roundCorners(radius: 5.0)
+        self.messageButton.addTarget(self, action: #selector(OtherUserProfileViewController.messageUser), for: .touchUpInside)
         hideKeyboardWhenTappedAround()
         
         let eventsCollectionNib = UINib(nibName: "UserProfileCollectionViewCell", bundle: nil)
@@ -311,9 +312,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 3
-//        return 6
-//        return 9
         return self.suggestion.count > 3 ? 3 : self.suggestion.count
     }
     
@@ -714,10 +712,12 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 0{
-            let placeCell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
+            let placeCell = tableView.dequeueReusableCell(withIdentifier: "InvitePeoplePlaceCell", for: indexPath) as! InvitePeoplePlaceCell
+            self.placesTableViewHeight.constant = (placeCell.frame.size.height * CGFloat(indexPath.row + 1))
             return placeCell
         }else if tableView.tag == 1{
-            let eventCell = tableView.dequeueReusableCell(withIdentifier: "searchEventCell", for: indexPath) as! SearchEventTableViewCell
+            let eventCell = tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell", for: indexPath) as! InvitePeopleEventCell
+            self.eventsTableViewHeight.constant = (eventCell.frame.size.height * CGFloat(indexPath.row + 1))
             return eventCell
         }else{
             let recentPostCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell", for: indexPath) as! FeedOneTableViewCell
@@ -729,10 +729,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var rowHeight = CGFloat()
         if tableView.tag == 0{
-            let placeCell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
+            let placeCell = tableView.dequeueReusableCell(withIdentifier: "InvitePeoplePlaceCell") as! InvitePeoplePlaceCell
             rowHeight = placeCell.frame.size.height
         }else if tableView.tag == 1{
-            let eventCell = tableView.dequeueReusableCell(withIdentifier: "searchEventCell") as! SearchEventTableViewCell
+            let eventCell = tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell") as! InvitePeopleEventCell
             rowHeight = eventCell.frame.size.height
         }else if tableView.tag == 2{
             let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
@@ -741,6 +741,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
         return rowHeight
     }
+    
     
     func messageUser(){
         let storyboard = UIStoryboard(name: "Messages", bundle: nil)

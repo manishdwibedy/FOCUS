@@ -33,7 +33,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     
-    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
     
@@ -412,11 +411,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 let image_string = dictionnary["image_string"] as? String ?? ""
                 let fullname = dictionnary["fullname"] as? String ?? ""
                 
-                
-//                SAMPLE description text
-//                self.descriptionText.text = "orem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 self.fullNameLabel.text = fullname
-                self.userNameLabel.text = username_str
                 self.descriptionText.text = description_str
                 
                 self.navBarItem.title = username_str
@@ -466,7 +461,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             
                             let interestImage = "\(interest) Green"
                             interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
-                            
+                            interestLabelView.addButton.isSelected = true
                             if interest.characters.count > 0{
                                 if self.interestStackView.arrangedSubviews.count < 3{
                                     self.interestStackView.addArrangedSubview(interestLabelView)

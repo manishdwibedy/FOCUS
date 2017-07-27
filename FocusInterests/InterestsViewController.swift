@@ -283,8 +283,8 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
 //        
 //        parentCreateEvent.focusList.ad
 //        
-//        parentCreateEvent.focusLabel.text = FOCUS
-//        parentCreateEvent.focusLabel.sizeToFit()
+        parentCreateEvent.choseFocusButton.setTitle(FOCUS, for: .normal)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func returnValue(FOCUS:String){
