@@ -120,8 +120,14 @@
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
                                                             </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pin: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A52-Fz-c9k">
+                                                                <rect key="frame" x="0.0" y="26" width="33" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psY-R2-Cnt">
-                                                                <rect key="frame" x="1" y="29" width="48" height="19"/>
+                                                                <rect key="frame" x="38" y="29" width="48" height="19"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="19" id="5Uk-Ma-mnt"/>
                                                                 </constraints>
@@ -140,11 +146,13 @@
                                                             <constraint firstItem="Bb6-DM-Zlj" firstAttribute="leading" secondItem="lMm-5F-Qmd" secondAttribute="trailing" constant="4" id="IYr-Dg-My4"/>
                                                             <constraint firstItem="yAR-5l-oGU" firstAttribute="baseline" secondItem="lMm-5F-Qmd" secondAttribute="baseline" id="MMj-h9-07x"/>
                                                             <constraint firstItem="yAR-5l-oGU" firstAttribute="baseline" secondItem="Bb6-DM-Zlj" secondAttribute="baseline" id="TOd-bF-0ND"/>
-                                                            <constraint firstItem="psY-R2-Cnt" firstAttribute="leading" secondItem="2Ni-nf-DOI" secondAttribute="leading" constant="1" id="WQ8-Vz-Tl1"/>
                                                             <constraint firstItem="lMm-5F-Qmd" firstAttribute="leading" secondItem="yAR-5l-oGU" secondAttribute="trailing" constant="4" id="ZUd-gs-zAJ"/>
+                                                            <constraint firstItem="A52-Fz-c9k" firstAttribute="top" secondItem="yAR-5l-oGU" secondAttribute="bottom" id="aQx-E8-hHP"/>
                                                             <constraint firstItem="yAR-5l-oGU" firstAttribute="centerY" secondItem="lMm-5F-Qmd" secondAttribute="centerY" id="aft-az-Mi8"/>
                                                             <constraint firstItem="Bb6-DM-Zlj" firstAttribute="centerY" secondItem="lMm-5F-Qmd" secondAttribute="centerY" id="awh-vn-Ir4"/>
                                                             <constraint firstAttribute="height" constant="51" id="cCt-SK-flU"/>
+                                                            <constraint firstItem="A52-Fz-c9k" firstAttribute="leading" secondItem="2Ni-nf-DOI" secondAttribute="leading" id="dnu-d9-dd3"/>
+                                                            <constraint firstItem="psY-R2-Cnt" firstAttribute="leading" secondItem="A52-Fz-c9k" secondAttribute="trailing" constant="5" id="hGN-Gm-433"/>
                                                             <constraint firstItem="yAR-5l-oGU" firstAttribute="firstBaseline" secondItem="lMm-5F-Qmd" secondAttribute="baseline" id="vrH-Vx-sPI"/>
                                                         </constraints>
                                                     </view>

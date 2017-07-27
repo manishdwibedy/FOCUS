@@ -22,6 +22,7 @@ class FeedOneTableViewCell: UITableViewCell {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var mapImage: UIImageView!
     
     var pin: pinData? = nil
     
@@ -34,6 +35,10 @@ class FeedOneTableViewCell: UITableViewCell {
         self.distanceLabel.text = "2 mi"
         addGreenDot(label: self.interestLabel, content: "Sports")
         self.nameDescriptionLabel.text = "Watching NBA Awards - Westbrook for MVP!"
+        
+        var tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.goToMap(sender:)))
+        tapGesture.numberOfTapsRequired = 1
+        mapImage.addGestureRecognizer(tapGesture)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -103,5 +108,15 @@ class FeedOneTableViewCell: UITableViewCell {
             self.likeButton.setImage(#imageLiteral(resourceName: "Like"), for: UIControlState.normal)
             
         }
+    }
+    
+    func goToMap(sender: UITapGestureRecognizer)
+    {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+        vc.willShowPin = true
+        vc.showPin = pin
+//        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)
+        vc.selectedIndex = 0
     }
 }

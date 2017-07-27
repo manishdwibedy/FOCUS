@@ -162,6 +162,7 @@
                 <outlet property="distanceLabel" destination="1wF-EH-cca" id="mTp-mS-zDn"/>
                 <outlet property="interestLabel" destination="Z7U-YF-Tdk" id="uRh-2R-QMl"/>
                 <outlet property="likeButton" destination="eUI-Ij-6uy" id="Hk4-wA-lGR"/>
+                <outlet property="mapImage" destination="Mu0-gw-nOq" id="3Xg-La-BSe"/>
                 <outlet property="nameDescriptionLabel" destination="xHG-yn-dfh" id="pea-TN-9RH"/>
                 <outlet property="nameLabel" destination="GKR-F7-hVw" id="1f6-Zj-2xv"/>
                 <outlet property="userImage" destination="Lar-X7-bvX" id="M43-7G-bR3"/>

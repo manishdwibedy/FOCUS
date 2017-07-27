@@ -79,6 +79,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.location = AuthApi.getLocation()
+        tableView.reloadData()
         
 //        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").queryOrdered(byChild: "status").queryEqual(toValue: "accepted").observeSingleEvent(of: .value, with: { (snapshot) in
 //            let value = snapshot.value as? NSDictionary
@@ -406,14 +407,14 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     let user = pinData["fromUID"] as? String
                     
                     getUserData(id: user!, gotUser: {user in
-                        cell.usernameWhoIsBeingLiked.setTitle(user.username, for: .normal)
+                        cell.usernameWhoIsBeingLiked.setTitle("\(user.username!)'s", for: .normal)
                     })
                     
                     let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
                     cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
                     
                     let caption = pinData["pin"] as! String
-                    cell.placeBeingLiked.setTitle("Pin: \(caption)", for: .normal)
+                    cell.placeBeingLiked.setTitle("\(caption)", for: .normal)
                     if let images = pinData["images"] as? NSDictionary{
                         var firstVal = ""
                         for (key,_) in images
@@ -434,6 +435,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                             cell.placePhoto.setShowActivityIndicator(true)
                             cell.placePhoto.setIndicatorStyle(.gray)
                         })
+                    }
+                    else{
+                        cell.placePhoto.image = #imageLiteral(resourceName: "placeholder_pin")
                     }
                 }
                 return cell
@@ -456,14 +460,14 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     let user = pinData["fromUID"] as? String
                     
                     getUserData(id: user!, gotUser: {user in
-                        cell.usernameReceivingCommentLabel.setTitle(user.username, for: .normal)
+                        cell.usernameReceivingCommentLabel.setTitle("\(user.username!)'s", for: .normal)
                     })
                     
                     let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
                     cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
                     
                     let caption = pinData["pin"] as! String
-                    cell.eventNameLabel.setTitle("Pin: \(caption)", for: .normal)
+                    cell.eventNameLabel.setTitle("\(caption)", for: .normal)
                     cell.eventNameLabel.setTitleColor(Constants.color.green, for: .normal)
                     cell.commentLabel.text = feed.item?.itemName
                     
@@ -487,6 +491,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                             cell.eventImage.setShowActivityIndicator(true)
                             cell.eventImage.setIndicatorStyle(.gray)
                         })
+                    }
+                    else{
+                        cell.eventImage.image = #imageLiteral(resourceName: "placeholder_pin")
                     }
                 }
                 return cell
@@ -659,10 +666,24 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         }
         else if feed.type == .Like{
-        
+            let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+            
+            let data = feed.item?.data["pin"] as! [String:Any]
+            
+            ivc.data = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
+            
+            self.present(ivc, animated: true, completion: { _ in })
         }
         else if feed.type == .Comment{
-        
+            let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+            
+            let data = feed.item?.data["pin"] as! [String:Any]
+            
+            ivc.data = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
+            
+            self.present(ivc, animated: true, completion: { _ in })
         }
     }
 

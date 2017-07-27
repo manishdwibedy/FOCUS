@@ -119,7 +119,7 @@
                                                                 </state>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfu-6D-Wsp">
-                                                                <rect key="frame" x="1" y="26" width="48" height="21"/>
+                                                                <rect key="frame" x="38" y="26" width="48" height="21"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="yAA-cC-9ee"/>
                                                                 </constraints>
@@ -128,20 +128,28 @@
                                                                     <color key="titleColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                             </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pin: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEb-iR-lQf">
+                                                                <rect key="frame" x="0.0" y="25" width="33" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstItem="UZD-TW-Zj3" firstAttribute="leading" secondItem="q8R-Ik-Zkw" secondAttribute="leading" constant="1" id="1RQ-xv-Csh"/>
                                                             <constraint firstItem="UZD-TW-Zj3" firstAttribute="bottom" secondItem="jT9-zP-UNt" secondAttribute="bottom" id="334-dr-x6f"/>
                                                             <constraint firstItem="jT9-zP-UNt" firstAttribute="centerY" secondItem="SYu-0D-JFJ" secondAttribute="centerY" id="Bae-zY-PdD"/>
+                                                            <constraint firstItem="qEb-iR-lQf" firstAttribute="centerY" secondItem="Vfu-6D-Wsp" secondAttribute="centerY" id="CkB-vt-025"/>
                                                             <constraint firstItem="jT9-zP-UNt" firstAttribute="top" secondItem="SYu-0D-JFJ" secondAttribute="top" id="DhV-Ho-CLs"/>
+                                                            <constraint firstItem="qEb-iR-lQf" firstAttribute="leading" secondItem="q8R-Ik-Zkw" secondAttribute="leading" id="Dpx-pf-1OE"/>
                                                             <constraint firstItem="jT9-zP-UNt" firstAttribute="bottom" secondItem="SYu-0D-JFJ" secondAttribute="bottom" id="FAu-Eo-3ah"/>
                                                             <constraint firstItem="Vfu-6D-Wsp" firstAttribute="top" secondItem="UZD-TW-Zj3" secondAttribute="bottom" constant="2" id="Mhw-na-4Nz"/>
+                                                            <constraint firstItem="Vfu-6D-Wsp" firstAttribute="leading" secondItem="qEb-iR-lQf" secondAttribute="trailing" constant="5" id="cPi-ps-ZSv"/>
                                                             <constraint firstItem="UZD-TW-Zj3" firstAttribute="top" secondItem="jT9-zP-UNt" secondAttribute="top" id="dJx-qe-wOS"/>
                                                             <constraint firstItem="jT9-zP-UNt" firstAttribute="leading" secondItem="UZD-TW-Zj3" secondAttribute="trailing" constant="4" id="eaQ-jx-h9v"/>
                                                             <constraint firstItem="SYu-0D-JFJ" firstAttribute="leading" secondItem="jT9-zP-UNt" secondAttribute="trailing" constant="4" id="hII-1h-lh6"/>
                                                             <constraint firstItem="UZD-TW-Zj3" firstAttribute="top" secondItem="q8R-Ik-Zkw" secondAttribute="topMargin" constant="-5" id="jYD-uG-Wpw"/>
-                                                            <constraint firstItem="Vfu-6D-Wsp" firstAttribute="leading" secondItem="UZD-TW-Zj3" secondAttribute="leading" id="pT1-j5-yMl"/>
                                                             <constraint firstItem="UZD-TW-Zj3" firstAttribute="centerY" secondItem="jT9-zP-UNt" secondAttribute="centerY" id="w1P-CX-0lP"/>
                                                         </constraints>
                                                     </view>
