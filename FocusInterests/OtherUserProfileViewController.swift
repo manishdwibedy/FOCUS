@@ -767,7 +767,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         let time = NSDate().timeIntervalSince1970
         
         if self.followButton.isSelected == false{
-            Follow.followUser(uid: self.userInfo["firebaseUserId"])
+            Follow.followUser(uid: self.userInfo["firebaseUserId"] as! String)
             followButton.isSelected = true
             followButton.layer.borderWidth = 1
             followButton.layer.borderColor = Constants.color.navy.cgColor
