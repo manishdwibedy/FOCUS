@@ -636,13 +636,20 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         if feed.type == .Pin && feed.item?.imageURL == nil{
             let storyboard = UIStoryboard(name: "Pin", bundle: nil)
             let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-            ivc.data = feed.item?.data["pin"] as! pinData
+            
+            let data = feed.item?.data["pin"] as! [String:Any]
+            
+            ivc.data = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
             self.present(ivc, animated: true, completion: { _ in })
         }
         else if feed.type == .Pin && feed.item?.imageURL != nil{
             let storyboard = UIStoryboard(name: "Pin", bundle: nil)
             let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-            ivc.data = feed.item?.data["pin"] as! pinData
+            
+            let data = feed.item?.data["pin"] as! [String:Any]
+            
+            ivc.data = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
+            
             self.present(ivc, animated: true, completion: { _ in })
         }
         else if feed.type == .Created{
