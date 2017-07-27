@@ -1014,7 +1014,7 @@ func getUserData(uid: String, gotInfo: @escaping (_ user: NotificationUser) -> V
     })
 }
 
-func matchingUserInterest(user: User) -> Bool{
+func matchingUserInterest(user: User) -> Int{
     let user_interest = AuthApi.getInterests()
     
     var user_interests = [Interest]()
@@ -1028,7 +1028,7 @@ func matchingUserInterest(user: User) -> Bool{
     let other_user:Set<Interest> = Set<Interest>(user.interests!)
 
     
-    return other_user.intersection(user_interest_set).count > 0
+    return other_user.intersection(user_interest_set).count
 }
 
 

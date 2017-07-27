@@ -91,8 +91,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     // Back button
     @IBAction func backButton(_ sender: Any) {
-        if otherUser{
-            switch(previous!){
+        if otherUser, let previous = previous{
+            switch(previous){
             case .people:
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
@@ -106,6 +106,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 
                 self.present(vc, animated: true, completion: nil)
             }
+        }
+        else if otherUser{
+            self.dismiss(animated: true, completion: nil)
         }
         else{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

@@ -697,8 +697,56 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     }
     
     func getUserSuggestions(gotUsers: @escaping ([User]) -> Void){
-        var people = [User]()
+        var followingSuggestions = [User]()
+        var suggestions = [User]()
         var userCount = 0
+        
+        let ref = Constants.DB.user
+        
+        var followingCount = 0
+        ref.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
+            if let value = snapshot.value as? [String:Any]{
+                for (_, people) in value{
+                    
+                    if let peopleData = people as? [String:Any]{
+                        let UID = peopleData["UID"] as! String
+                        ref.child(UID).observeSingleEvent(of: .value, with: { snapshot in
+                            if let user = snapshot.value as? [String:Any]{
+                                if let user = User.toUser(info: user){
+                                    if user.uuid != AuthApi.getFirebaseUid(){
+                                        let matchingInterest = matchingUserInterest(user: user)
+                                        if matchingInterest > 0{
+                                            followingCount += 1
+                                            user.matchingInterestCount = matchingInterest
+                                            if user.uuid != AuthApi.getFirebaseUid(){
+                                                if !followingSuggestions.contains(user){
+                                                    followingSuggestions.append(user)
+                                                }
+                                                
+                                                if followingCount < 3 && followingSuggestions.count == followingCount - 1{
+                                                    followingSuggestions = followingSuggestions.sorted(by: {$0.matchingInterestCount > $1.matchingInterestCount})
+                                                    
+                                                    if suggestions.count > 0{
+                                                        gotUsers(followingSuggestions + suggestions[0..<3-followingSuggestions.count])
+                                                    }
+                                                    
+                                                }
+                                                else if suggestions.count == 3{
+                                                    followingSuggestions = followingSuggestions.sorted(by: {$0.matchingInterestCount > $1.matchingInterestCount})
+                                                    gotUsers(followingSuggestions)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        })
+                    }
+                }
+            }
+        })
+
         Constants.DB.user.observeSingleEvent(of: .value, with: { snapshot in
             let users = snapshot.value as? [String : Any] ?? [:]
             
@@ -707,19 +755,28 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 
                 if let info = info{
                     if let user = User.toUser(info: info){
-                        
-                        if matchingUserInterest(user: user){
+                        let matchingInterest = matchingUserInterest(user: user)
+                        if matchingInterest > 0{
                             userCount += 1
+                            user.matchingInterestCount = matchingInterest
                             if user.uuid != AuthApi.getFirebaseUid(){
-                                if !people.contains(user){
-                                    people.append(user)
+                                if !suggestions.contains(user){
+                                    suggestions.append(user)
                                 }
                                 
-                                if userCount < 3 && people.count == userCount - 1{
-                                    gotUsers(people)
+                                if userCount < 3 && suggestions.count == userCount - 1{
+                                    suggestions = suggestions.sorted(by: {$0.matchingInterestCount > $1.matchingInterestCount})
+                                    
+                                    if followingSuggestions.count < 3{
+                                        gotUsers(followingSuggestions + suggestions[0..<3-followingSuggestions.count])
+                                    }
                                 }
-                                else if people.count == 3{
-                                    gotUsers(people)
+                                else if suggestions.count == 3{
+                                    suggestions = suggestions.sorted(by: {$0.matchingInterestCount > $1.matchingInterestCount})
+                                    
+                                    if followingSuggestions.count < 3{
+                                        gotUsers(followingSuggestions + suggestions[0..<3-followingSuggestions.count])
+                                    }
                                 }
                             }
                         }

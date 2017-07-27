@@ -180,7 +180,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                 if let info = info{
                     if let user = User.toUser(info: info){
                         
-                        if matchingUserInterest(user: user){
+                        if matchingUserInterest(user: user) > 0{
                             userCount += 1
                             if user.uuid != AuthApi.getFirebaseUid(){
                                 Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
