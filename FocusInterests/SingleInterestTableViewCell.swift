@@ -26,11 +26,9 @@ class SingleInterestTableViewCell: UITableViewCell {
     @IBAction func selectInterest(_ sender: Any) {
         print("select interest")
         if self.accessoryType == .checkmark{
-            self.isSelected = false
             self.interestLabel.isSelected = false
             self.accessoryType = .none
         }else{
-            self.isSelected = true
             self.interestLabel.isSelected = true
             self.accessoryType = .checkmark
         }

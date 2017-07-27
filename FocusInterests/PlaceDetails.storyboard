@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4C0-xu-no6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4C0-xu-no6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -197,7 +197,7 @@
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$$$$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnl-b7-Jub">
-                                                                                        <rect key="frame" x="307.5" y="2.5" width="33.5" height="16"/>
+                                                                                        <rect key="frame" x="44" y="3" width="33.5" height="16"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                         <constraints>
@@ -211,9 +211,9 @@
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                 <constraints>
                                                                                     <constraint firstItem="gYI-6F-8iP" firstAttribute="centerY" secondItem="s8R-fx-ezT" secondAttribute="centerY" id="9QG-XG-CG5"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="hnl-b7-Jub" secondAttribute="trailing" constant="0.5" id="Ucw-l4-RFn"/>
                                                                                     <constraint firstItem="gYI-6F-8iP" firstAttribute="centerY" secondItem="hnl-b7-Jub" secondAttribute="centerY" id="g3z-gC-uau"/>
                                                                                     <constraint firstItem="gYI-6F-8iP" firstAttribute="leading" secondItem="s8R-fx-ezT" secondAttribute="leading" id="hdo-tZ-OIR"/>
+                                                                                    <constraint firstItem="hnl-b7-Jub" firstAttribute="leading" secondItem="gYI-6F-8iP" secondAttribute="trailing" constant="7.5" id="rdS-7P-3Ke"/>
                                                                                     <constraint firstAttribute="height" constant="22.329999923706055" id="yab-cY-jGF"/>
                                                                                 </constraints>
                                                                             </view>

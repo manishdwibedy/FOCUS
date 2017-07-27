@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sfs-g5-Ui8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sfs-g5-Ui8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -212,13 +212,23 @@
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="powered_by_yelp" translatesAutoresizingMaskIntoConstraints="NO" id="Gug-rR-cE7">
+                                        <rect key="frame" x="112" y="451" width="150" height="25"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Ddb-hV-gvZ"/>
+                                            <constraint firstAttribute="width" constant="150" id="xnK-Yi-t0B"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Gug-rR-cE7" secondAttribute="bottom" constant="4" id="0dl-J5-fE1"/>
                                     <constraint firstItem="nZh-JF-eMk" firstAttribute="top" secondItem="HTi-NK-gbC" secondAttribute="top" constant="9" id="0gD-fB-PU9"/>
                                     <constraint firstItem="nZh-JF-eMk" firstAttribute="leading" secondItem="HTi-NK-gbC" secondAttribute="leading" constant="66" id="9Ci-Ic-rNO"/>
                                     <constraint firstItem="nv6-wn-SdN" firstAttribute="leading" secondItem="HTi-NK-gbC" secondAttribute="leading" constant="8" id="E1z-bf-b9C"/>
                                     <constraint firstAttribute="trailing" secondItem="nv6-wn-SdN" secondAttribute="trailing" constant="8" id="LOn-TU-BD4"/>
+                                    <constraint firstItem="Gug-rR-cE7" firstAttribute="centerX" secondItem="nv6-wn-SdN" secondAttribute="centerX" id="V2a-aV-8yI"/>
                                     <constraint firstItem="nv6-wn-SdN" firstAttribute="centerX" secondItem="nZh-JF-eMk" secondAttribute="centerX" id="X5C-61-ukk"/>
                                     <constraint firstAttribute="bottom" secondItem="nv6-wn-SdN" secondAttribute="bottom" id="bhC-wc-UgV"/>
                                     <constraint firstItem="nZh-JF-eMk" firstAttribute="centerX" secondItem="HTi-NK-gbC" secondAttribute="centerX" id="d6W-7y-yW2"/>
@@ -278,9 +288,11 @@
                         <outlet property="invitePopupView" destination="Za9-qc-nJr" id="2ZJ-cr-d3M"/>
                         <outlet property="invitePopupViewBottomConstraint" destination="nIK-9z-Gnr" id="U5j-zK-DYn"/>
                         <outlet property="navBar" destination="RME-pD-v8b" id="GVQ-s5-mZn"/>
+                        <outlet property="poweredByYelpImage" destination="Gug-rR-cE7" id="bBy-0a-ZkS"/>
                         <outlet property="searchBar" destination="AYl-Yr-fFv" id="L8v-LE-4kh"/>
                         <outlet property="segmentedOut" destination="nZh-JF-eMk" id="ICC-sp-Fhw"/>
                         <outlet property="tableView" destination="nv6-wn-SdN" id="8AF-Ei-bI4"/>
+                        <outlet property="tableViewBottomConstraint" destination="bhC-wc-UgV" id="5Ef-rC-s0Q"/>
                         <segue destination="HM6-cm-OHM" kind="unwind" identifier="unwindBackToSearchPeopleViewControllerSegueWithSegue" unwindAction="unwindBackToSearchPeopleViewControllerSegueWithSegue:" id="E5B-L8-Zo0"/>
                     </connections>
                 </viewController>
@@ -296,5 +308,6 @@
         <image name="Explore white" width="31" height="31"/>
         <image name="People icon white" width="30" height="30"/>
         <image name="UserPhoto" width="102" height="102"/>
+        <image name="powered_by_yelp" width="294" height="48"/>
     </resources>
 </document>

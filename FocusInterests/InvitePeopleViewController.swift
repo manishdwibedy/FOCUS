@@ -22,13 +22,16 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var createEventButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedOut: UISegmentedControl!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var currentLocation: UITextField!
     
     @IBOutlet weak var invitePopupViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var invitePopupView: UIView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var poweredByYelpImage: UIImageView!
     
     var pinData: pinData? = nil
     var showInvitePopup = false
@@ -125,6 +128,16 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         self.segmentedOut.layer.borderWidth = 1.0
         self.segmentedOut.layer.masksToBounds = true
         
+        if self.segmentedOut.selectedSegmentIndex == 0{
+            self.createEventButton.isHidden = true
+            self.poweredByYelpImage.isHidden = false
+            self.tableViewBottomConstraint.constant = self.poweredByYelpImage.frame.height
+        }else{
+            self.createEventButton.isHidden = false
+            self.poweredByYelpImage.isHidden = true
+            self.tableViewBottomConstraint.constant = 0
+        }
+        
         let sortedViews = segmentedOut.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
         sortedViews[0].tintColor = Constants.color.green
         sortedViews[0].backgroundColor = UIColor.white
@@ -182,12 +195,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         super.viewDidAppear(animated)
         
         if self.segmentedOut.selectedSegmentIndex == 0{
-            self.createEventButton.isHidden = true
             self.filtered = self.followingPlaces + self.filtered
             self.tableView.reloadData()
         }
         else{
-            self.createEventButton.isHidden = false
             self.filtered = self.attendingEvent + self.filtered
             self.tableView.reloadData()
         }
@@ -232,13 +243,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if segmentedOut.selectedSegmentIndex == 0
-//        {
             return filtered.count
-//        }else
-//        {
-//            return events.count
-//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
