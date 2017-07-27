@@ -50,8 +50,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var places = [Place]()
     var placeMapping = [String: Place]()
     var hasCustomProfileImage = false
-    var showEvent = false
-    var showPin = false
+    
+    
+    var willShowEvent = false
+    var showEvent: Event? = nil
+    var willShowPin = false
+    var showPin: pinData? = nil
+    var willShowPlace = false
+    var showPlace: Place? = nil
+    
     var pins = [pinData]()
     var userLocation: GMSMarker? = nil
     var showTutorial = false
@@ -147,10 +154,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         if let last_pos = AuthApi.getLocation(){
             
-            if !showEvent && !showPin{
+            if !willShowEvent && !willShowPin && !willShowPlace{
                 let camera = GMSCameraPosition.camera(withLatitude: last_pos.coordinate.latitude,
                                                       longitude: last_pos.coordinate.longitude,
                                                       zoom: 13)
+                
                 if mapView.isHidden {
                     mapView.isHidden = false
                     mapView.camera = camera
@@ -500,7 +508,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
         }
-        if showEvent || showPin{
+        if willShowEvent || willShowPin || willShowPlace{
             
             let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
                                                   longitude: (currentLocation?.coordinate.longitude)!,
@@ -679,167 +687,29 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-        popUpView.isHidden = false
-        
         let accessibilityLabel = marker.accessibilityLabel
-        
         marker.tracksInfoWindowChanges = true
         
         let parts = accessibilityLabel?.components(separatedBy: "_")
-        
         if parts?[0] == "event"{
             let index: Int! = Int(parts![1])
             let event = self.events[index-1]
             
-            popUpScreen.object = event
-            popUpScreen.type = "event"
-            
-            
-            //let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
-            
-            var timeString = ""
-            //let imageView = UIImageView()
-            var distance = ""
-            //var interest = UILabel()
-            
-            var start = ""
-            //var end = ""
-            if event.date?.range(of:",") != nil{
-                let time = event.date?.components(separatedBy: ",")[1]
-                start = time!
-                
-            }
-            else{
-                let time = event.date?.components(separatedBy: "T")[1]
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "HH:mm:ss"
-                let date = dateFormatter.date(from: time!)
-                
-                dateFormatter.dateFormat = "h:mm a"
-                
-                start = dateFormatter.string(from: date!)
-            }
-            
-            
-            let placeholderImage = UIImage(named: "empty_event")
-            
-            if let id = event.id{
-                let reference = Constants.storage.event.child("\(id).jpg")
-                
-                
-                reference.downloadURL(completion: { (url, error) in
-                    
-                    if error != nil {
-                        print(error?.localizedDescription ?? "Error happend")
-                        return
-                    }
-                    
-                    self.popUpScreen.profileImage.sd_setImage(with: url, placeholderImage: placeholderImage)
-                    self.popUpScreen.profileImage.setShowActivityIndicator(true)
-                    self.popUpScreen.profileImage.setIndicatorStyle(.gray)
-                    
-                    
-                })
-                
-            }
-            else{
-                popUpScreen.profileImage.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
-                popUpScreen.profileImage.setShowActivityIndicator(true)
-                popUpScreen.profileImage.setIndicatorStyle(.gray)
-                
-            }
-            
-            
-            distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
-            
-            var interestText = ""
-            if let category = event.category{
-                interestText = category.components(separatedBy: ",")[0]
-            }
-            popUpScreen.loadEvent(name: event.title!, date: start, miles: distance, interest: interestText, address: (event.fullAddress?.components(separatedBy: ";;")[0])!, event: event)
-            
+            tapEvent(event: event)
             return true
-            
-            
-            
-        }else if parts?[0] == "place"{
-            
+        }
+        else if parts?[0] == "place"{
             let index:Int! = Int(parts![1])
             let place = self.places[index]
             
-            popUpScreen.object = place
-            popUpScreen.type = "place"
-            
-            var name = ""
-            var rating = ""
-            var reviews = ""
-            //var interest = UILabel()
-            //var imageView = UIImageView()
-            var distance = ""
-            
-            //let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
-            name = place.name
-            rating = String(place.rating)
-            reviews = "(\(place.reviewCount) reviews)"
-            let category = place.categories.map(){ $0.alias }
-            
-            var interestText = getInterest(yelpCategory: category[0])
-            
-            if interestText.characters.count == 0 {
-                interestText = "N.A."
-            }
-            let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
-                marker.tracksInfoWindowChanges = false
-                self.popUpScreen.profileImage.setShowActivityIndicator(false)
-                
-            }
-            
-            let placeholderImage = UIImage(named: "empty_event")
-            
-            popUpScreen.profileImage.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
-            popUpScreen.profileImage.setShowActivityIndicator(true)
-            popUpScreen.profileImage.setIndicatorStyle(.gray)
-            
-            
-            distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
-            
-            print(place.id)
-            popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interestText, address: place.address[0], is_closed: place.is_closed, place: place)
+            tapPlace(place: place, marker: marker)
             return true
-            
-            
-            
-            
-            
-        }else if parts?[0] == "pin"
-        {
+        }
+        else if parts?[0] == "pin"{
             let index:Int! = Int(parts![1])
             let pin = self.pins[index]
             
-            popUpScreen.object = pin
-            popUpScreen.type = "pin"
-            
-            //let infoWindow = Bundle.main.loadNibNamed("MapPopUpScreenView", owner: self, options: nil)?[0] as! MapPopUpScreenView
-            var distance = ""
-            let pinMessage = pin.pinMessage
-            let interest = pin.focus
-            let name = pin.username
-            
-            
-            distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
-            
-            Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if let value = value
-                {
-
-                    self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest, address: pin.locationAddress.components(separatedBy: ";;")[0], time: pin.dateTimeStamp, username: (value["username"] as? String)!, userImage: (value["image_string"] as? String)!)
-                }
-            })
-        
-        
-            
+            tapPin(pin: pin)
             return true
         }
         
@@ -983,7 +853,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             })
         }
         
-        if !showEvent && !showPin{
+        if !willShowEvent && !willShowPin && !willShowPlace{
             mapView.settings.myLocationButton = true
 
             if mapView.isHidden {
@@ -1029,8 +899,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             mapView.animate(to: camera)
         }
         
-        showPin = false
-        showEvent = false
+        willShowPin = false
+        willShowEvent = false
+        willShowPlace = false
         return true
     }
     
@@ -1346,6 +1217,142 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     @IBAction func mapSettingsPressed(_ sender: Any) {
         self.settingGearButton.isHidden = true
         self.mapViewSettings.isHidden = false
+    }
+}
+
+extension MapViewController{
+    func tapEvent(event: Event){
+        popUpView.isHidden = false
+        
+        popUpScreen.object = event
+        popUpScreen.type = "event"
+        
+        var timeString = ""
+        var distance = ""
+        var start = ""
+        
+        if event.date?.range(of:",") != nil{
+            let time = event.date?.components(separatedBy: ",")[1]
+            start = time!
+            
+        }
+        else{
+            let time = event.date?.components(separatedBy: "T")[1]
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm:ss"
+            let date = dateFormatter.date(from: time!)
+            
+            dateFormatter.dateFormat = "h:mm a"
+            
+            start = dateFormatter.string(from: date!)
+        }
+        
+        
+        let placeholderImage = UIImage(named: "empty_event")
+        
+        if let id = event.id{
+            let reference = Constants.storage.event.child("\(id).jpg")
+            
+            
+            reference.downloadURL(completion: { (url, error) in
+                
+                if error != nil {
+                    print(error?.localizedDescription ?? "Error happend")
+                    return
+                }
+                
+                self.popUpScreen.profileImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                self.popUpScreen.profileImage.setShowActivityIndicator(true)
+                self.popUpScreen.profileImage.setIndicatorStyle(.gray)
+                
+                
+            })
+            
+        }
+        else{
+            popUpScreen.profileImage.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
+            popUpScreen.profileImage.setShowActivityIndicator(true)
+            popUpScreen.profileImage.setIndicatorStyle(.gray)
+            
+        }
+        
+        
+        distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!))
+        
+        var interestText = ""
+        if let category = event.category{
+            interestText = category.components(separatedBy: ",")[0]
+        }
+        popUpScreen.loadEvent(name: event.title!, date: start, miles: distance, interest: interestText, address: (event.fullAddress?.components(separatedBy: ";;")[0])!, event: event)
+        
+    }
+    
+    func tapPlace(place: Place, marker: GMSMarker){
+        popUpView.isHidden = false
+        
+        popUpScreen.object = place
+        popUpScreen.type = "place"
+        
+        
+        
+        var name = ""
+        var rating = ""
+        var reviews = ""
+        var distance = ""
+        
+        name = place.name
+        rating = String(place.rating)
+        reviews = "(\(place.reviewCount) reviews)"
+        let category = place.categories.map(){ $0.alias }
+        
+        var interestText = getInterest(yelpCategory: category[0])
+        
+        if interestText.characters.count == 0 {
+            interestText = "N.A."
+        }
+        let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+            marker.tracksInfoWindowChanges = false
+            self.popUpScreen.profileImage.setShowActivityIndicator(false)
+            
+        }
+        
+        let placeholderImage = UIImage(named: "empty_event")
+        
+        popUpScreen.profileImage.sd_setImage(with: URL(string:(place.image_url)), placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+        popUpScreen.profileImage.setShowActivityIndicator(true)
+        popUpScreen.profileImage.setIndicatorStyle(.gray)
+        
+        
+        distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude)))
+        
+        print(place.id)
+        popUpScreen.loadPlace(name: name, rating: rating, reviews: reviews, miles: distance, interest: interestText, address: place.address[0], is_closed: place.is_closed, place: place)
+    }
+    
+    func tapPin(pin: pinData){
+        popUpView.isHidden = false
+        
+        popUpScreen.object = pin
+        popUpScreen.type = "pin"
+        
+        
+        var distance = ""
+        let pinMessage = pin.pinMessage
+        let interest = pin.focus
+        let name = pin.username
+        
+        
+        distance = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: CLLocation(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude)))
+        
+        Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if let value = value
+            {
+                
+                self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest, address: pin.locationAddress.components(separatedBy: ";;")[0], time: pin.dateTimeStamp, username: (value["username"] as? String)!, userImage: (value["image_string"] as? String)!)
+            }
+        })
     }
 }
 

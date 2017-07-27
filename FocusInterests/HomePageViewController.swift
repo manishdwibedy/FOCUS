@@ -10,8 +10,13 @@ import UIKit
 
 class HomePageViewController: UITabBarController {
 
-    var showEvent = false
-    var showPin = false
+    var willShowEvent = false
+    var showEvent: Event? = nil
+    var willShowPin = false
+    var showPin: pinData? = nil
+    var willShowPlace = false
+    var showPlace: Place? = nil
+    
     var location: CLLocation? = nil
     var showTutorial = false
     var showTab = 0
@@ -36,9 +41,15 @@ class HomePageViewController: UITabBarController {
         self.selectedIndex = showTab
         
         let vc = self.viewControllers![0] as! MapViewController
+        vc.willShowEvent = willShowEvent
         vc.showEvent = showEvent
+        
+        vc.willShowPin = willShowPin
         vc.showPin = showPin
-        vc.showTutorial = showTutorial
+        
+        vc.willShowPlace = willShowPlace
+        vc.showPlace = showPlace
+        
         if let location = self.location{
             vc.currentLocation = location
         }

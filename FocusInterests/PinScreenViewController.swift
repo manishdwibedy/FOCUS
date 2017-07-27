@@ -404,7 +404,8 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
             let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
-            vc.showPin = true
+            vc.willShowPin = true
+            //vc.showPin = pinData
             vc.location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
             vc.selectedIndex = 0
             self.present(vc, animated: true, completion: nil)

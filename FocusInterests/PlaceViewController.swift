@@ -279,7 +279,8 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
                     map?.viewingPlace = place
                     
                     map?.currentLocation = CLLocation(latitude: position.latitude, longitude: position.longitude)
-                    map?.showEvent = true
+                    map?.willShowPlace = true
+                    map?.tapPlace(place: place, marker: marker)
                     
                     map?.eventPlaceMarker = marker
                 }

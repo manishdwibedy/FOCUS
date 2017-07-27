@@ -474,7 +474,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBAction func mapEvent(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
-        VC?.showEvent = true
+        VC?.willShowEvent = true
+        VC?.showEvent = self.event
         VC?.location = CLLocation(latitude: Double((event?.latitude)!)!, longitude: Double((event?.longitude)!)!)
         self.present(VC!, animated: true, completion: nil)
     }
@@ -566,7 +567,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     marker.accessibilityLabel = "event_\(index!)"
                     
                     map?.currentLocation = CLLocation(latitude: position.latitude, longitude: position.longitude)
-                    map?.showEvent = true
+                    map?.willShowEvent = true
+                    map?.tapEvent(event: event)
+                    
                     map?.viewingEvent = event
                     map?.eventPlaceMarker = marker
                 }
