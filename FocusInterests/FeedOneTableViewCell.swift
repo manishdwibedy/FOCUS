@@ -33,6 +33,7 @@ class FeedOneTableViewCell: UITableViewCell {
         self.usernameLabel.text = "username"
         self.addressLabel.text = "1600 Campus Road"
         self.distanceLabel.text = "2 mi"
+        
         addGreenDot(label: self.interestLabel, content: "Sports")
         self.nameDescriptionLabel.text = "Watching NBA Awards - Westbrook for MVP!"
         

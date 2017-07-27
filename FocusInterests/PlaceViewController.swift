@@ -249,9 +249,16 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pinInfo"{
             let pin = segue.destination as! PinViewController
+            pin.delegate = self
             pin.placeVC = self
             pin.place = self.place
-            pin.delegate = self
+            pin.averageReviewAmount = Double((self.place?.reviewCount)!)
+            guard let ratingAmount = self.place?.rating else {
+                pin.averageRatingAmount = 0.0
+                return
+            }
+            
+            pin.averageRatingAmount = Double(ratingAmount)
 //            pin.reviewAmountButton.setTitle(self.reviewsAmountLabel.titleLabel?.text, for: .normal)
         }
         if segue.identifier == "unwindToMapViewControllerWithSegue"{

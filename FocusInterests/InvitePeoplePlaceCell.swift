@@ -24,6 +24,7 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
     @IBOutlet weak var inviteCellContentView: UIView!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var ratingsStarImage: UIImageView!
     
     var UID = ""
     var username = ""
@@ -242,5 +243,33 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
                 self.followButton.layer.shadowRadius = 5.0
             }
         })
+    }
+    
+    func setRatingAmount(ratingAmount: Double){
+        
+        switch ratingAmount{
+        case 0.0..<0.5:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_0")
+        case 0.5..<1.0:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_1")
+        case 1.0..<1.5:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_1_half")
+        case 1.5..<2.0:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_2")
+        case 2.0..<2.5:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_2_half")
+        case 2.5..<3.0:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_3")
+        case 3.0..<3.5:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_3_half")
+        case 3.5..<4.0:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_4")
+        case 4.0..<4.5:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_4_half")
+        case 4.5..<5.0:
+            ratingsStarImage.image = #imageLiteral(resourceName: "small_5")
+        default:
+            break
+        }
     }
 }

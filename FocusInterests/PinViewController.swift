@@ -27,8 +27,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var uberButton: UIButton!
     @IBOutlet weak var googleMapButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
-    @IBOutlet weak var reviewStars: UIButton!
+    @IBOutlet weak var reviewStars: UIImageView!
     @IBOutlet weak var reviewAmountButton: UIButton!
+    var averageRatingAmount = 0.0
+    var averageReviewAmount = 0.0
+    
     
     // location info
     @IBOutlet weak var phoneLabel: UILabel!
@@ -170,7 +173,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         button5.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
         
         checkFollowing()
-        
+        checkRatingAmount()
         
         self.loadInfoScreen(place: self.place!)
         
@@ -235,6 +238,37 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     func callPlace(sender:UITapGestureRecognizer) {
         guard let number = URL(string: "tel://" + (place?.plainPhone)!) else { return }
         UIApplication.shared.open(number)
+    }
+    
+    func checkRatingAmount(){
+        self.reviewAmountButton.setTitle("\(self.averageReviewAmount) reviews", for: .normal)
+        guard let reviewsStarImageView = self.reviewStars else{
+            return
+        }
+        switch self.averageRatingAmount{
+        case 0.0..<0.5:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_0")
+        case 0.5..<1.0:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_1")
+        case 1.0..<1.5:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_1_half")
+        case 1.5..<2.0:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_2")
+        case 2.0..<2.5:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_2_half")
+        case 2.5..<3.0:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_3")
+        case 3.0..<3.5:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_3_half")
+        case 3.5..<4.0:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_4")
+        case 4.0..<4.5:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_4_half")
+        case 4.5..<5.0:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_5")
+        default:
+            break
+        }
     }
     
     func loadInfoScreen(place: Place){
@@ -548,7 +582,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBAction func pin(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Pin", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "Home") as! PinScreenViewController
-        ivc.pinType = "place"
+        ivc.pinType = .place
         ivc.placeEventID = (place?.id)!
         
         for str in (place?.address)!
@@ -602,10 +636,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         default:
             break
         }
-        
-    }
-    
-    func checkRatingsAmount(){
         
     }
     

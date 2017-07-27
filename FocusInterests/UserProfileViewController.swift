@@ -50,21 +50,17 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     // User Pin Stack
     
     @IBOutlet weak var createPinAndUpdatePinStack: UIStackView!
-    
+    @IBOutlet weak var createPinView: UIView!
     @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var pinImage: UIImageView!
     @IBOutlet weak var pinCategoryLabel: UILabel!
     @IBOutlet weak var pinLikesLabel: UILabel!
     @IBOutlet weak var pinAddress2Label: UILabel!
-    
+    @IBOutlet weak var updatePinButton: UIButton!
+    @IBOutlet weak var createPinButton: UIButton!
     @IBOutlet weak var pinDistanceLabel: UILabel!
     @IBOutlet weak var pinCount: UIButton!
     var pinInfo: pinData? = nil
-    
-//    MARK: Do we still need this
-//    @IBOutlet weak var pinDescription: UILabel!
-    @IBOutlet weak var updatePinButton: UIButton!
-    @IBOutlet weak var createPinButton: UIButton!
     
     // user interests
     @IBOutlet weak var focusHeader: UILabel!
@@ -236,8 +232,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     if value["images"] != nil{
                         
                     }
+                    
+                    self.createPinAndUpdatePinStack.removeArrangedSubview(self.createPinView)
+                    self.createPinView.removeFromSuperview()
                     self.createPinButton.isHidden = true
-    
+
                     if let focusVal = value["focus"] as? String{
                         addGreenDot(label: self.pinCategoryLabel, content: focusVal)
                     }else{
@@ -296,8 +295,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     
                 }
                 
-                
-                
             }
             else{
 //                self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
@@ -330,8 +327,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.focusView.layoutIfNeeded()
         self.interestStackView.setNeedsLayout()
         self.interestStackView.layoutIfNeeded()
-//        self.eventView.setNeedsLayout()
-//        self.eventView.layoutIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -475,10 +470,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             if interest.characters.count > 0{
                                 if self.interestStackView.arrangedSubviews.count < 3{
                                     self.interestStackView.addArrangedSubview(interestLabelView)
-//                                    self.interestStackView.bounds.size.height += interestSubView.frame.size.height
                                     self.interestViewHeight.constant += interestLabelView.frame.size.height
-
-//                                    self.interestStackView.translatesAutoresizingMaskIntoConstraints = false;
                                 }
                             }
                         }
@@ -490,9 +482,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             self.moreFocusButton.isHidden = true
                         }
                         
-//                        let count = self.interestStackView.arrangedSubviews.count
-//                        self.interestStackHeight.constant = CGFloat(25 * count)
-//                        self.interestViewHeight.constant = CGFloat(25 * count + 113)
                     }
                 }
                 
@@ -530,13 +519,13 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             
             for (_, interest) in (interests.enumerated()){
                 let interestLabelView = InterestStackViewLabel(frame: CGRect(x: 0, y: 0, width: self.interestStackView.bounds.width, height: 30))
-                interestLabelView.view.bounds.size.width = self.interestStackView.frame.size.width
-                interestLabelView.view.center = interestLabelView.center
-                interestLabelView.interestLabel.text = interest
-                let interestImage = "\(interest) Green"
-                interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
                 
                 if interest.characters.count > 0{
+                    interestLabelView.view.bounds.size.width = self.interestStackView.frame.size.width
+                    interestLabelView.view.center = interestLabelView.center
+                    interestLabelView.interestLabel.text = interest
+                    let interestImage = "\(interest) Green"
+                    interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
                     if interestStackView.arrangedSubviews.count < 3{
                         self.interestStackView.addArrangedSubview(interestLabelView)
                         self.interestStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -544,14 +533,18 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 }
             }
             
+            guard let firstFocusView = self.interestStackView.arrangedSubviews.first else {
+                return
+            }
+            
+            if self.interestStackView.arrangedSubviews.count <= 1{
+                self.interestViewHeight.constant = firstFocusView.frame.height
+            }else{
+                self.interestViewHeight.constant = CGFloat((firstFocusView.frame.height + 10) * CGFloat(self.interestStackView.arrangedSubviews.count))
+            }
+            
             print("End: \(interestStackView.arrangedSubviews.count)")
             
-//            if interestStackView.arrangedSubviews.count < 3{
-//                let count = interestStackView.arrangedSubviews.count
-//                interestStackHeight.constant -= CGFloat(20 * count)
-//                interestViewHeight.constant -= CGFloat(20 * count)
-//                mainViewHeight.constant -= CGFloat(20 * count)
-//            }
         }
         
     }
@@ -565,12 +558,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    @IBAction func settingsButtonTapped(_ sender: UIBarButtonItem) {
-//        let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
-//        self.present(vc, animated: true, completion: nil)
-//    }
-    
     
     func getPin() {
         
@@ -683,13 +670,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                     self.eventsCollectionView.reloadData()
                                     
                                     self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
-//                                    self.eventsViewHeight.constant += 300
                                     self.moreEventsButton.isHidden = false
                                     self.moreEventsButton.isEnabled = true
                                     self.createEventButton.alpha = 0
                                 }
                                 else{
-//                                    self.eventsViewHeight.constant -= 300
                                     self.moreEventsButton.isHidden = true
                                     self.moreEventsButton.isEnabled = false
                                     self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)

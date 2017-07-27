@@ -38,6 +38,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.inviteEventCellContentView.allCornersRounded(radius: 6.0)
         
         self.inviteOut.layer.cornerRadius = 6
         self.inviteOut.clipsToBounds = true
@@ -54,7 +55,6 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         self.attendButton.layer.masksToBounds = false
         self.attendButton.layer.shadowColor = UIColor.black.cgColor
         self.attendButton.layer.shadowRadius = 5.0
-        
         self.attendButton.setTitle("Attend", for: .normal)
         self.attendButton.setTitleColor(UIColor.white, for: .normal)
         self.attendButton.setTitle("Attending", for: .selected)
@@ -63,7 +63,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         self.eventImage.layer.borderWidth = 2
         self.eventImage.layer.borderColor = UIColor(red: 255/255.0, green: 0/255.0, blue: 120/255.0, alpha: 1.0).cgColor
         self.eventImage.roundedImage()
-        self.inviteEventCellContentView.allCornersRounded(radius: 6.0)
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(tap(sender:)))
         inviteEventCellContentView.addGestureRecognizer(tap)
         

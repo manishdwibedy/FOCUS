@@ -218,11 +218,15 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self._messages.count <= 0{
+            return 1
+        }
         return self._messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MessageTableViewCell
+        
         let formatter = DateFormatter()
     
         let message = self.messages[indexPath.row]

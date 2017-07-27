@@ -289,7 +289,7 @@ class InterestsViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func returnValue(FOCUS:String){
         parentReturnVC.interest = FOCUS
-        parentReturnVC.focusLabel.text = FOCUS
+        addGreenDot(label: parentReturnVC.focusLabel, content: FOCUS)
         parentReturnVC.focusLabel.sizeToFit()
         print("add focus border!")
         
