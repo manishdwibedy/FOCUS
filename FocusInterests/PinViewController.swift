@@ -178,10 +178,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
             for (index,view) in self.inviteUserStackView.arrangedSubviews.enumerated(){
                 let inviteUser = view as? InviteUserView
+                inviteUser?.parentVC = self
                 
                 if let user = users[index] as? User{
                     inviteUser?.userName.text = user.username
-                    
+                    inviteUser?.user = user
                     if let image = user.image_string{
                         if let url = URL(string: image){
                             inviteUser?.image.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
@@ -388,7 +389,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
             let otherPlacesCell = self.peopleAlsoLikedTableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
             otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
-            
+            otherPlacesCell.placeVC = self
             let place = suggestedPlaces[indexPath.row]
             otherPlacesCell.dateAndTimeLabel.text = "7/20 10:00 P.M."
             otherPlacesCell.placeNameLabel.text = place.name
@@ -654,31 +655,44 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
             
             self.placeVC?.followButton.isSelected = true
-//            self.followButton.layer.borderWidth = 1
-//            self.followButton.layer.borderColor = UIColor.white.cgColor
-//            self.followButton.layer.shadowOpacity = 1.0
-//            self.followButton.layer.masksToBounds = false
-//            self.followButton.layer.shadowColor = UIColor.black.cgColor
-//            self.followButton.layer.shadowRadius = 7.0
             self.placeVC?.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
             self.placeVC?.followButton.tintColor = UIColor.clear
             self.placeVC?.followButton.setTitle("Following", for: UIControlState.selected)
             isFollowing = true
         }else
         {
-            self.placeVC?.followButton.setTitle("Follow", for: UIControlState.normal)
-            Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil {
-                    for (key,_) in value!
-                    {
-                        Constants.DB.following_place.child((self.place?.id)!).child("followers").child(key as! String).removeValue()
+            
+            let unfollowAlertController = UIAlertController(title: "Are you sure you want to unfollow \(place!.name)?", message: nil, preferredStyle: .actionSheet)
+            
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
+                
+                self.placeVC?.followButton.setTitle("Follow", for: UIControlState.normal)
+                Constants.DB.following_place.child((self.place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    if value != nil {
+                        for (key,_) in value!
+                        {
+                            Constants.DB.following_place.child((self.place?.id)!).child("followers").child(key as! String).removeValue()
+                        }
+                        
+                        
+                        
                     }
-                    
-                    
-                    
-                }
-            })
+                })
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print("cancel has been tapped")
+            }
+            
+            unfollowAlertController.addAction(unfollowAction)
+            unfollowAlertController.addAction(cancelAction)
+            
+            self.present(unfollowAlertController, animated: true, completion: nil)
+            
+            
+            
+            
         }
     }
     

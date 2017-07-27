@@ -19,6 +19,9 @@ class InviteUserView: UIView {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet var view: InviteUserView!
 
+    var user: User? = nil
+    var parentVC: PinViewController? = nil
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         load()
@@ -36,11 +39,27 @@ class InviteUserView: UIView {
         self.view.addSubview(userName)
         self.view.addSubview(image)
         self.view.addSubview(inviteButton)
+        
+        var tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.showProfile(sender:)))
+        tapGesture.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tapGesture)
+        
         self.addSubview(self.view)
     }
     
     @IBAction func invite(_ sender: UIButton) {
         print("sent user invite")
 //        delegate?.inviteUser(name: self.userName.text!)
-    }    
+    }
+    
+    func showProfile(sender: UITapGestureRecognizer)
+    {
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = (user?.uuid)!
+        
+        parentVC?.present(VC, animated: true, completion: nil)
+        dropfromTop(view: self.view)
+    }
 }

@@ -23,6 +23,7 @@ class SearchPlaceCell: UITableViewCell {
     
     var placeID = String()
     var parentVC: SearchPlacesViewController? = nil
+    var placeVC: PinViewController? = nil
     var searchVC: SearchViewController? = nil
     var place: Place?
     
@@ -138,7 +139,7 @@ class SearchPlaceCell: UITableViewCell {
             
             unfollowAlertController.addAction(unfollowAction)
             unfollowAlertController.addAction(cancelAction)
-            parentVC?.present(unfollowAlertController, animated: true, completion: nil)
+            placeVC?.present(unfollowAlertController, animated: true, completion: nil)
             
             
             
