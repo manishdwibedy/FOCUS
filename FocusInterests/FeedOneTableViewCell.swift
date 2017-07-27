@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 class FeedOneTableViewCell: UITableViewCell {
     
@@ -18,8 +19,12 @@ class FeedOneTableViewCell: UITableViewCell {
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
+    
+    var pin: pinData? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,4 +42,64 @@ class FeedOneTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func likePin(_ sender: Any) {
+        if (self.likeButton.imageView?.image?.isEqual(#imageLiteral(resourceName: "Like")))!
+        {
+            pin?.dbPath.child("like/num").observeSingleEvent(of: .value, with: {snapshot in
+                if let num = snapshot.value as? Int{
+                    self.pin?.dbPath.child("like").updateChildValues(["num": num + 1])
+                    
+                    Answers.logCustomEvent(withName: "Like Pin",
+                                           customAttributes: [
+                                            "liked": true,
+                                            "user": AuthApi.getFirebaseUid()!,
+                                            "likeCount": num + 1
+                        ])
+                }
+            })
+            pin?.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+            
+            self.likeButton.setImage(#imageLiteral(resourceName: "Liked"), for: UIControlState.normal)
+            
+            
+            
+        }
+        else{
+            pin?.dbPath.child("like/num").observeSingleEvent(of: .value, with: {snapshot in
+                if let num = snapshot.value as? Int{
+                    self.pin?.dbPath.child("like").updateChildValues(["num": num - 1])
+                    
+                    Answers.logCustomEvent(withName: "Like Pin",
+                                           customAttributes: [
+                                            "liked": true,
+                                            "user": AuthApi.getFirebaseUid()!,
+                                            "likeCount": num -
+                                            1
+                        ])
+                }
+            })
+            
+            pin?.dbPath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                if let value = value
+                {
+                    for (id, _) in value{
+                        self.pin?.dbPath.child("like").child("likedBy").child(id).removeValue()
+                    }
+                    
+                    
+                }
+            })
+            
+            
+            self.likeButton.setImage(#imageLiteral(resourceName: "Like"), for: UIControlState.normal)
+            
+            Answers.logCustomEvent(withName: "Like Pin",
+                                   customAttributes: [
+                                    "liked": false,
+                                    "user": AuthApi.getFirebaseUid()!,
+                                    "likeCount": self.likes
+                ])
+        }
+    }
 }

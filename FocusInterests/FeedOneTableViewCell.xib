@@ -100,6 +100,9 @@
                                                     <constraint firstAttribute="height" constant="23" id="Qva-Sa-tvG"/>
                                                 </constraints>
                                                 <state key="normal" image="Like"/>
+                                                <connections>
+                                                    <action selector="likePin:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hKR-V9-Fec"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OS0-sF-aLV">
                                                 <rect key="frame" x="135" y="-3" width="35" height="35"/>
@@ -155,8 +158,10 @@
             </constraints>
             <connections>
                 <outlet property="addressLabel" destination="BnC-i8-haQ" id="K4L-EN-re7"/>
+                <outlet property="commentButton" destination="OS0-sF-aLV" id="iWb-ke-mle"/>
                 <outlet property="distanceLabel" destination="1wF-EH-cca" id="mTp-mS-zDn"/>
                 <outlet property="interestLabel" destination="Z7U-YF-Tdk" id="uRh-2R-QMl"/>
+                <outlet property="likeButton" destination="eUI-Ij-6uy" id="Hk4-wA-lGR"/>
                 <outlet property="nameDescriptionLabel" destination="xHG-yn-dfh" id="pea-TN-9RH"/>
                 <outlet property="nameLabel" destination="GKR-F7-hVw" id="1f6-Zj-2xv"/>
                 <outlet property="userImage" destination="Lar-X7-bvX" id="M43-7G-bR3"/>

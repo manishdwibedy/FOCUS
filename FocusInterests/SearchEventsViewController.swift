@@ -293,6 +293,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         if feed.type == .Pin && feed.item?.imageURL == nil{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as? FeedOneTableViewCell{
+                cell.pin = feed.item?.data["pin"]
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     cell.nameLabel.text = user.username
                     if let image = user.image_string{
