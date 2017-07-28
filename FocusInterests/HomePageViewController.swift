@@ -54,6 +54,7 @@ class HomePageViewController: UITabBarController {
             vc.currentLocation = location
         }
         
+        vc.showTutorial = showTutorial
         self.setStatusBarStyle(UIStatusBarStyle.default)
         // Do any additional setup after loading the view.
     }
