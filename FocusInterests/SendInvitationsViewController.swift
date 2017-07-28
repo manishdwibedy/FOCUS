@@ -225,39 +225,26 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             }
         }
         
-        if twitterSwitch.isOn{
-            Share.postToTwitter(withStatus: "Please come to \(String(describing: self.event?.title))")
-        }
-        
-        if facebookSwitch.isOn{
-            do{
-                try Share.facebookShare(with: URL(string:"http://mapofyourworld.com")!, description: "Please come to \(String(describing: self.event?.title))")
-            }
-            catch{
-                SCLAlertView().showError("Facebook Error", subTitle: "Could not post to facebook")
-            }
-            
-        }
-        
-        let messageVC = MFMessageComposeViewController()
-        
-        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.phoneNumbers }
-        
-        var phoneNumbers = [String]()
-        for friendPhoneList in friendList{
-            for number in friendPhoneList{
-                phoneNumbers.append((number.value.value(forKey: "digits") as? String)!)
-            }
-        }
-        
-        if phoneNumbers.count > 0{
-            messageVC.body = "Please come to \(String(describing: self.event?.title))"
-            messageVC.recipients = phoneNumbers
-            messageVC.messageComposeDelegate = self;
-            
-            self.present(messageVC, animated: false, completion: nil)
-            
-        }
+//        Messaging
+//        let messageVC = MFMessageComposeViewController()
+//        
+//        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.phoneNumbers }
+//        
+//        var phoneNumbers = [String]()
+//        for friendPhoneList in friendList{
+//            for number in friendPhoneList{
+//                phoneNumbers.append((number.value.value(forKey: "digits") as? String)!)
+//            }
+//        }
+//        
+//        if phoneNumbers.count > 0{
+//            messageVC.body = "Please come to \(String(describing: self.event?.title))"
+//            messageVC.recipients = phoneNumbers
+//            messageVC.messageComposeDelegate = self;
+//            
+//            self.present(messageVC, animated: false, completion: nil)
+//            
+//        }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
