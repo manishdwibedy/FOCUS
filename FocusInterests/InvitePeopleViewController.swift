@@ -39,15 +39,20 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var inviteFromOtherUserProfile = false
     var UID = ""
     var username = ""
+    
     var filtered = [Any]()
     var places = [Place]()
+    var placeMapping = [String: Place]()
     var followingPlaces = [Place]()
     var attendingEvent = [Event]()
     var events = [Event]()
+    
+    
     var location: CLLocation?
     var searchPeople: SearchPeopleViewController? = nil
     var otherUserProfile: OtherUserProfileViewController? = nil
     var mapView: MapViewController? = nil
+    
     
     var otherUserProfileDelegate: OtherUserProfileViewControllerDelegate?
     var searchPeopleDelegate: SearchPeopleViewControllerDelegate?
@@ -272,7 +277,15 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.setRatingAmount(ratingAmount: Double(place.rating))
             
             cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
-            cell.dateAndTimeLabel.text = "7/20 10:00 P.M."
+            
+            let date = Date()
+            let calendar = Calendar.current
+            
+            let day = calendar.component(.weekday, from: date)
+            if let hour = place.hours?[day]{
+                cell.dateAndTimeLabel.text = "\(convert24HourTo12Hour(hour.start)) - \(convert24HourTo12Hour(hour.end))"
+            }
+            
             let place_location = CLLocation(latitude: place.latitude, longitude: place.longitude)
             cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
             if place.categories.count > 0{
@@ -471,9 +484,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                         
                         let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                         
-//                        if !self.filtered.contains(where: place){
-                            self.filtered.append(place)
-//                        }
+                        self.placeMapping[place.id] = place
+                        self.getPlaceHours(id: place.id)
+                        self.filtered.append(place)
                     }
                     self.tableView.reloadData()
                 }
@@ -767,6 +780,33 @@ extension InvitePeopleViewController: GMSAutocompleteViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    func getPlaceHours(id: String){
+        if let token = AuthApi.getYelpToken(){
+            let url = "https://api.yelp.com/v3/businesses/\(id)"
+            
+            let headers: HTTPHeaders = [
+                "authorization": "Bearer \(token)",
+                "cache-contro": "no-cache"
+            ]
+            
+            Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
+                let json = JSON(data: response.data!)
+                let place = self.placeMapping[id]
+                
+                if json["hours"].arrayValue.count > 0{
+                    let open_hours = json["hours"].arrayValue[0].dictionaryValue
+                    var hours = [Hours]()
+                    for hour in (open_hours["open"]?.arrayValue)!{
+                        let hour = Hours(start: hour["start"].stringValue, end: hour["end"].stringValue, day: hour["day"].intValue)
+                        hours.append(hour)
+                    }
+                    
+                    place?.setHours(hours: hours)
+                }
+                place?.set_is_open(is_open: json["hours"][0]["is_open_now"].boolValue)
+            }
+        }
+    }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         // to do: handle error

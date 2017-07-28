@@ -184,17 +184,14 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             
             self.people.removeAll()
             for (_, user) in users{
-                let info = user as? [String:Any]
-                
-                
-                if let info = info{
+                if let info = user as? [String:Any]{
                     if let user = User.toUser(info: info){
-                        
                         if matchingUserInterest(user: user) > 0{
                             userCount += 1
                             if user.uuid != AuthApi.getFirebaseUid(){
                                 Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
                                     let value = snapshot.value as? NSDictionary
+                                    
                                     if let value = value
                                     {
                                         if let pin = pinData.toPin(user: user, value: value){
@@ -214,9 +211,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                         self.people.append(user)
                                     }
                                     
-                                    print("users - \(userCount)")
-                                    print("people till now - \(self.people.count)")
-                                    print("\(self.people)")
                                     if self.people.count == userCount - 1 && followingCount == self.followers.count{
                                         self.people.sort {
                                             if $0.hasPin && $1.hasPin{
@@ -242,11 +236,13 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                         self.filtered = self.people
                                         self.tableView.reloadData()
                                     }
-                                    
-                                    
+
                                 })
                             }
                         }
+                    }
+                    else{
+                        print(info)
                     }
                 }
             }
