@@ -44,7 +44,13 @@ class InterestStackViewLabel: UIView{
     }
     */
     @IBAction func plusButtonPressed(_ sender: Any) {
-        print("plus pressed")
+        Constants.DB.user_interests.child(interestLabel.text!).childByAutoId().setValue(["UID": AuthApi.getFirebaseUid()])
+        
+        var user_interests = AuthApi.getInterests()!.components(separatedBy: ",")
+        user_interests.append("\(interestLabel.text!)-1")
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["interests": user_interests.joined(separator: ",")])
+        
+        self.addButton.setImage(#imageLiteral(resourceName: "Green_check_sign"), for: .normal)
         self.addButton.isSelected = !self.addButton.isSelected
     }
 
