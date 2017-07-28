@@ -58,11 +58,14 @@ class Place: Equatable, NSCoding{
     }
     
     func getHour(day: Int) -> Hours?{
-        for hour in self.hours!{
-            if hour.day == day{
-                return hour
+        if let hours = self.hours{
+            for hour in hours{
+                if hour.day == day{
+                    return hour
+                }
             }
         }
+        
         return nil
     }
     
