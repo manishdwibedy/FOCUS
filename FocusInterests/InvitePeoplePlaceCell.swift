@@ -33,6 +33,7 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
     var place: Place!
     var invitePeopleVCDelegate: InvitePeopleViewControllerDelegate!
     var parentVC: InvitePeopleViewController!
+    var otherUser: OtherUserProfileViewController? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()

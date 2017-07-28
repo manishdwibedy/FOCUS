@@ -97,6 +97,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var showInvitePopup = false
     
     var suggestedEvents = [Event]()
+    var suggestedPlaces = [Place]()
     
     // Back button
     @IBAction func backButton(_ sender: Any) {
@@ -426,6 +427,11 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                             self.eventsTableView.reloadData()
                         })
                         
+                        getSuggestedPlaces(interests: final_interest.joined(separator: ","), limit: 3, gotPlaces: {places in
+                            self.suggestedPlaces = places
+                            self.placesTableView.reloadData()
+                        })
+                        
                         print("self.otherUser condition: \(self.interestStackView.arrangedSubviews.count)")
                         
                         for view in self.interestStackView.arrangedSubviews{
@@ -696,7 +702,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     //    MARK: TableView Delegate and Data Source Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 0{
-            return 3
+            return suggestedPlaces.count
         }
         else if tableView.tag == 1{
             return suggestedEvents.count
@@ -713,9 +719,65 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 0{
-            let placeCell = tableView.dequeueReusableCell(withIdentifier: "InvitePeoplePlaceCell", for: indexPath) as! InvitePeoplePlaceCell
-            self.placesTableViewHeight.constant = (placeCell.frame.size.height * CGFloat(indexPath.row + 1))
-            return placeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "InvitePeoplePlaceCell", for: indexPath) as! InvitePeoplePlaceCell
+            self.placesTableViewHeight.constant = (cell.frame.size.height * CGFloat(indexPath.row + 1))
+            
+            let place_cell = self.suggestedPlaces[indexPath.row]
+            
+            cell.place = place_cell
+            cell.placeNameLabel.text = place_cell.name
+            // cell.place = place
+            
+            if place_cell.address.count > 0{
+                if place_cell.address.count == 1{
+                    cell.addressTextView.text = "\(place_cell.address[0])"
+                }
+                else{
+                    cell.addressTextView.text = "\(place_cell.address[0])\n\(place_cell.address.last!)"
+                }
+            }
+            
+            cell.setRatingAmount(ratingAmount: Double(place_cell.rating))
+            
+            cell.ratingLabel.text = "\(place_cell.rating) (\(place_cell.reviewCount) reviews)"
+            
+            let date = Date()
+            let calendar = Calendar.current
+            
+            let day = calendar.component(.weekday, from: date)
+            
+            if let hour = place_cell.getHour(day: day){
+                cell.dateAndTimeLabel.text = "\(convert24HourTo12Hour(hour.start)) - \(convert24HourTo12Hour(hour.end))"
+            }
+            
+            let place_location = CLLocation(latitude: place_cell.latitude, longitude: place_cell.longitude)
+            cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
+            if place_cell.categories.count > 0{
+                addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place_cell.categories[0].alias))
+            }
+            
+            
+            cell.checkForFollow()
+            if let url = URL(string: place_cell.image_url){
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        cell.placeImage.image = crop(image: image!, width: 50, height: 50)
+                    }
+                })
+                
+            }
+            
+            cell.inviteFromOtherUserProfile = true
+            cell.UID = (self.userInfo["firebaseUserId"] as? String)!
+            cell.username = (self.userInfo["username"] as? String)!
+            cell.otherUser = self
+            
+            return cell
         }else if tableView.tag == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell", for: indexPath) as! InvitePeopleEventCell
             
