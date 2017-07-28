@@ -51,8 +51,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     var sectionMapping = [String:Int]()
     var filteredSectionMapping = [String:Int]()
     
-    var users = [String:[CNContact]]()
-    var filtered = [String:[CNContact]]()
+    var users = [String:[InviteUser]]()
+    var filtered = [String:[InviteUser]]()
     
     var event: Event?
     var image: Data?
@@ -126,7 +126,49 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //            }
 //        }
         
-        self.sortContacts()
+        //self.sortContacts()
+        
+        Constants.DB.user.observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.value as? NSDictionary
+            if let data = data
+            {
+                //                self.inviteCellData.removeAll()
+                for (_,value) in data
+                {
+                    if let info = value as? [String: Any]{
+                        if let uid = info["firebaseUserId"] as? String, let username = info["username"] as? String, let fullname = info["fullname"] as? String, let image = info["image_string"] as? String{
+                            let newData = InviteUser(UID: uid, username: username, fullname: fullname, image: image)
+//                            self.selected[newData] = false
+                            if newData.UID != AuthApi.getFirebaseUid(){
+                                let first = String(describing: newData.username.characters.first!).uppercased()
+                                
+                                if !self.sections.contains(first){
+                                    self.sections.append(first)
+                                    self.sectionMapping[first] = 1
+                                    self.users[first] = [newData]
+                                }
+                                else{
+                                    self.sectionMapping[first] = self.sectionMapping[first]! + 1
+                                    self.users[first]?.append(newData)
+                                }
+//                                if newData.username == self.username{
+////                                    self.selected[newData] = true
+//                                    self.contactHasBeenSelected(contact: username, index: (self.users[first]?.count)! - 1)
+//                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            self.filteredSectionMapping = self.sectionMapping
+            self.filteredSection = self.sections
+            self.filtered = self.users
+    
+            self.setSelectedFriends()
+            self.filteredSection.sort()
+            self.friendsTableView.reloadData()
+        })
         
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,
@@ -147,43 +189,43 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
-    func retrieveContactsWithStore(store: CNContactStore) {
-        self.contacts.removeAll()
-        let contactStore = CNContactStore()
-        let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
-        let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
-        
-        try? contactStore.enumerateContacts(with: request1) { (contact, error) in
-            if contact.phoneNumbers.count > 0 && (contact.givenName.characters.count > 0 || contact.familyName.characters.count > 0){
-                self.contacts.append(contact)
-            }
-            
-        }
-        
-        for contact in contacts{
-            if !contact.givenName.isEmpty{
-                let first = String(describing: contact.givenName.characters.first!).uppercased()
-                
-                
-                if !self.sections.contains(first){
-                    self.sections.append(first)
-                    self.sectionMapping[first] = 1
-                    self.users[first] = [contact]
-                }
-                else{
-                    self.sectionMapping[first] = self.sectionMapping[first]! + 1
-                    self.users[first]?.append(contact)
-                }
-            }
-        }
-        self.filteredSectionMapping = self.sectionMapping
-        self.filteredSection = self.sections
-        self.filtered = self.users
-        
-        self.setSelectedFriends()
-        self.filteredSection.sort()
-        friendsTableView.reloadData()   
-    }
+//    func retrieveContactsWithStore(store: CNContactStore) {
+//        self.contacts.removeAll()
+//        let contactStore = CNContactStore()
+//        let keys = [CNContactPhoneNumbersKey, CNContactFamilyNameKey, CNContactGivenNameKey, CNContactNicknameKey, CNContactPhoneNumbersKey, CNContactImageDataKey]
+//        let request1 = CNContactFetchRequest(keysToFetch: keys  as [CNKeyDescriptor])
+//        
+//        try? contactStore.enumerateContacts(with: request1) { (contact, error) in
+//            if contact.phoneNumbers.count > 0 && (contact.givenName.characters.count > 0 || contact.familyName.characters.count > 0){
+//                self.contacts.append(contact)
+//            }
+//            
+//        }
+//        
+//        for contact in contacts{
+//            if !contact.givenName.isEmpty{
+//                let first = String(describing: contact.givenName.characters.first!).uppercased()
+//                
+//                
+//                if !self.sections.contains(first){
+//                    self.sections.append(first)
+//                    self.sectionMapping[first] = 1
+//                    self.users[first] = [contact]
+//                }
+//                else{
+//                    self.sectionMapping[first] = self.sectionMapping[first]! + 1
+//                    self.users[first]?.append(contact)
+//                }
+//            }
+//        }
+//        self.filteredSectionMapping = self.sectionMapping
+//        self.filteredSection = self.sections
+//        self.filtered = self.users
+//        
+//        self.setSelectedFriends()
+//        self.filteredSection.sort()
+//        friendsTableView.reloadData()   
+//    }
 
     @IBAction func createEvent(_ sender: Any) {
         Event.clearCache()
@@ -322,8 +364,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let section = filteredSection[indexPath.section-1]
             
             let user = self.filtered[section]?[indexPath.row]
-            personToInviteCell.usernameLabel.text = user?.givenName
-            personToInviteCell.fullNameLabel.text = user?.familyName
+            personToInviteCell.usernameLabel.text = user?.username
+            personToInviteCell.fullNameLabel.text = user?.fullname
 //            personToInviteCell.usernameLabel.text = "Alex"
 //            personToInviteCell.fullNameLabel.text = "Alex Jang"
 
@@ -379,53 +421,53 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     
     func selectedAllFollowers() {
         contactListView.isHidden = false
-        for contactIndex in 0...contacts.count-1{
-            contactList.text = contactList.text! + ",\(contacts[contactIndex].givenName)"
-        }
+//        for contactIndex in 0..<selectedFriend.count{
+//            contactList.text = contactList.text! + ",\(contacts[contactIndex].givenName)"
+//        }
     }
     
 //    MARK: SEARCH BAR DELEGATE METHODS
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if(self.searchBar == nil || self.searchBar.text == ""){
-            self.filteredSection = self.sections
-            self.filteredSectionMapping = self.sectionMapping
-            self.filtered = self.users
-            
-            self.searchBar.endEditing(true)
-            self.friendsTableView.reloadData()
-        }else{
-            let searchPredicate = NSPredicate(format: "givenName CONTAINS[C] %@", searchText)
-            var filteredUser = [CNContact]()
-            for section in sections {
-                let users = self.users[section]
-                let array = (users! as NSArray).filtered(using: searchPredicate)
-                for val in array{
-                    filteredUser.append(val as! CNContact)
-                }
-            }
-            
-            filteredSection.removeAll()
-            filtered.removeAll()
-            filteredSectionMapping.removeAll()
-            for user in filteredUser{
-                let first = String(describing: user.givenName.characters.first!).uppercased()
-                
-                if !self.filteredSection.contains(first){
-                    self.filteredSection.append(first)
-                    self.filteredSectionMapping[first] = 1
-                    self.filtered[first] = [user]
-                }
-                else{
-                    self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
-                    self.filtered[first]?.append(user)
-                }
-            }
-            self.filteredSection.sort()
-            self.friendsTableView.reloadData()
-        }
-    }
-    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if(self.searchBar == nil || self.searchBar.text == ""){
+//            self.filteredSection = self.sections
+//            self.filteredSectionMapping = self.sectionMapping
+//            self.filtered = self.users
+//            
+//            self.searchBar.endEditing(true)
+//            self.friendsTableView.reloadData()
+//        }else{
+//            let searchPredicate = NSPredicate(format: "givenName CONTAINS[C] %@", searchText)
+//            var filteredUser = [CNContact]()
+//            for section in sections {
+//                let users = self.users[section]
+//                let array = (users! as NSArray).filtered(using: searchPredicate)
+//                for val in array{
+//                    filteredUser.append(val as! CNContact)
+//                }
+//            }
+//            
+//            filteredSection.removeAll()
+//            filtered.removeAll()
+//            filteredSectionMapping.removeAll()
+//            for user in filteredUser{
+//                let first = String(describing: user.givenName.characters.first!).uppercased()
+//                
+//                if !self.filteredSection.contains(first){
+//                    self.filteredSection.append(first)
+//                    self.filteredSectionMapping[first] = 1
+//                    self.filtered[first] = [user]
+//                }
+//                else{
+//                    self.filteredSectionMapping[first] = self.filteredSectionMapping[first]! + 1
+//                    self.filtered[first]?.append(user)
+//                }
+//            }
+//            self.filteredSection.sort()
+//            self.friendsTableView.reloadData()
+//        }
+//    }
+//    
     @IBAction func shareOnFB(_ sender: Any) {
         if AuthApi.getFacebookToken() == nil{
             
