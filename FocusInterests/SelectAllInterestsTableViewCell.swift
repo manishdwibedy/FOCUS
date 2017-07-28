@@ -24,13 +24,10 @@ class SelectAllInterestsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func selectAllClicked(_ sender: Any) {
-        
         if self.accessoryType == .checkmark{
-            self.isSelected = false
             self.showAllButton.isSelected = false
             self.accessoryType = .none
         }else{
-            self.isSelected = true
             self.showAllButton.isSelected = true
             self.accessoryType = .checkmark
         }

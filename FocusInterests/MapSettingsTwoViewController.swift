@@ -142,7 +142,6 @@ class MapSettingsTwoViewController: UIViewController, UITableViewDataSource, UIT
             followingCell.checkMarkButton.isHidden = false
             print("cell at 1 selected")
         }
-        
     }
 
     @IBAction func showTable(_ sender: UIButton) {

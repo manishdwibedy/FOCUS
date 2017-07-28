@@ -25,6 +25,9 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        self.view.backgroundColor = Constants.color.navy
+        self.navBar.barTintColor = Constants.color.navy
+        
         navBar.topItem?.title = self.windowTitle
         
         tableView.delegate = self

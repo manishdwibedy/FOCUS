@@ -10,13 +10,16 @@ import UIKit
 
 class FollowingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+//    @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var backButon: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Constants.color.navy
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.barTintColor = Constants.color.navy
         tableView.delegate = self
         tableView.dataSource = self
         

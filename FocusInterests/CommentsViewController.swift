@@ -120,9 +120,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             commentCell.dateLabel.text = commentDF.string(for: Date(timeIntervalSince1970: comment["date"] as! Double))
             commentCell.loadInfo(UID: comment["fromUID"] as! String, text: (commentData[indexPath.row]["comment"] as? String)!)
             return commentCell
-        }
-        //else if type == "event"{
-        else{
+        }else{
             if let comment = eventComments[indexPath.row] as? commentCellData{
                 
                 commentCell.loadInfo(UID: comment.from, text: comment.comment)
@@ -159,6 +157,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                                 "user": AuthApi.getFirebaseUid()!,
                                 "comment": commentField.text
             ])
+        
     }
     
     @IBAction func backButtonAction(_ sender: Any) {

@@ -22,13 +22,16 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var createEventButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedOut: UISegmentedControl!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var currentLocation: UITextField!
     
     @IBOutlet weak var invitePopupViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var invitePopupView: UIView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var poweredByYelpImage: UIImageView!
     
     var pinData: pinData? = nil
     var showInvitePopup = false
@@ -124,6 +127,16 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         self.segmentedOut.layer.borderColor = UIColor.white.cgColor
         self.segmentedOut.layer.borderWidth = 1.0
         self.segmentedOut.layer.masksToBounds = true
+        
+        if self.segmentedOut.selectedSegmentIndex == 0{
+            self.createEventButton.isHidden = true
+            self.poweredByYelpImage.isHidden = false
+            self.tableViewBottomConstraint.constant = self.poweredByYelpImage.frame.height
+        }else{
+            self.createEventButton.isHidden = false
+            self.poweredByYelpImage.isHidden = true
+            self.tableViewBottomConstraint.constant = 0
+        }
         
         let sortedViews = segmentedOut.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
         sortedViews[0].tintColor = Constants.color.green
@@ -230,13 +243,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if segmentedOut.selectedSegmentIndex == 0
-//        {
             return filtered.count
-//        }else
-//        {
-//            return events.count
-//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -248,6 +255,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.place = place
             cell.placeNameLabel.text = place.name
            // cell.place = place
+            print("address \(place.address)")
+            print("addressCount \(place.address.count)")
             if place.address.count > 0{
                 if place.address.count == 1{
                     cell.addressTextView.text = "\(place.address[0])"

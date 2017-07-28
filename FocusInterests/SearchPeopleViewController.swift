@@ -19,6 +19,7 @@ protocol SearchPeopleViewControllerDelegate {
 
 class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, SearchPeopleViewControllerDelegate{
     
+    @IBOutlet weak var userProfileButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -40,6 +41,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
 //        greenPinImage!.imageScaled(to: CGSize(width: 10, height: 10))
 //        let greenPinImageView = UIImageView(image: greenPinImage)
 //        self.navigationItem.title =  greenPinImageView + " People"
+        
+        self.userProfileButton.roundButton()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -548,6 +551,10 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     @IBAction func unwindBackToSearchPeopleViewControllerSegue(segue: UIStoryboardSegue){
         self.showInvitePopup = true
         print("have invited someone to an event or place!")
+    }
+    
+    @IBAction func goToUserProfile(_ sender: Any) {
+        
     }
     
     func haveInvitedSomeoneToAPlaceOrAnEvent(){

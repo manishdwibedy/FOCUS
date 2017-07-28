@@ -10,6 +10,7 @@ import UIKit
 
 class MessageTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var noMessageLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var content: UILabel!

@@ -154,6 +154,10 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         if let event = self.event{
             if self.attendButton.isSelected{
                 
+                attendButton.layer.borderWidth = 1
+                attendButton.layer.borderColor = Constants.color.navy.cgColor
+                attendButton.backgroundColor = UIColor.white
+                
                 Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
                 
                 
@@ -173,9 +177,6 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
                                         "attend": true
                     ])
                 
-                attendButton.layer.borderWidth = 1
-                attendButton.layer.borderColor = Constants.color.navy.cgColor
-                attendButton.backgroundColor = UIColor.white
             }else{
                 
                 let alertController = UIAlertController(title: "Unattend \(event.title!)?", message: nil, preferredStyle: .actionSheet)
@@ -216,7 +217,6 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
                         ])
                 }
                 alertController.addAction(OKAction)
-                
                 parentVC.present(alertController, animated: true)
                 
             }

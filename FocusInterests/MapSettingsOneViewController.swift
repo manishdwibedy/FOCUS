@@ -48,9 +48,6 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cell indexpath: \(indexPath.row)")
-        var cell = UITableViewCell()
-        
         if indexPath.row == 0{
             
             let allInterestsCell = tableView.dequeueReusableCell(withIdentifier: "selectAllInterestsCell", for: indexPath) as! SelectAllInterestsTableViewCell
@@ -59,11 +56,7 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
             
             allInterestsCell.showAllButton.setTitle("Show All Interests", for: .selected)
             allInterestsCell.showAllButton.setTitleColor(Constants.color.navy, for: .selected)
-            
-            allInterestsCell.accessoryType = .checkmark
-            allInterestsCell.showAllButton.isSelected = true
-            
-            cell = allInterestsCell
+            return allInterestsCell
             
         }else{
             let singleInterestCell = tableView.dequeueReusableCell(withIdentifier: "singleInterestCell", for: indexPath) as! SingleInterestTableViewCell
@@ -76,62 +69,64 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
             
             singleInterestCell.interestLabel.setTitle(self.interests[indexPath.row-1], for: .selected)
             singleInterestCell.interestLabel.setTitleColor(UIColor.white, for: .selected)
-            
-            singleInterestCell.accessoryType = .none
-            singleInterestCell.interestLabel.isSelected = false
-            
-            cell = singleInterestCell
+            return singleInterestCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else{
+            return
         }
         
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row > 0{
-            
-            //TODO: works when within range of cell. but not once leaving range
-            let selectAllCell = self.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as! SelectAllInterestsTableViewCell
-            if selectAllCell.accessoryType == .checkmark{
-                selectAllCell.accessoryType = .none
+        guard let indexPathForSelectedRows = tableView.indexPathsForSelectedRows else {
+            print("no index path")
+            return
+        }
+        
+        let amountOfSelectedRows = indexPathForSelectedRows.count
+        
+        if indexPath.row == 0{
+            print("selected cell at 0")
+            if selectedCell.isSelected{
+                selectedCell.accessoryType = .checkmark
+                if amountOfSelectedRows <= 1{
+                    print("do not need to deselectcells")
+                }else{
+                    for cellIndex in 1...indexPathForSelectedRows.count-1{
+                        tableView.deselectRow(at: indexPathForSelectedRows[cellIndex], animated: false)
+                    }
+                }
+            }else{
+                selectedCell.accessoryType = .none
             }
-            selectAllCell.showAllButton.isSelected = false
-            
-            let singleInterestCell = tableView.cellForRow(at: indexPath) as! SingleInterestTableViewCell
-            singleInterestCell.accessoryType = .checkmark
-            singleInterestCell.interestLabel.isSelected = true
-            print("cell at \(indexPath.row) selected")
         }else{
-            /*let allCell = tableView.cellForRow(at: indexPath) as! SelectAllInterestsTableViewCell
-            allCell.accessoryType = .checkmark
-            allCell.showAllButton.isSelected = true
-            
-            for index in 1...tableView.numberOfRows(inSection: 0){
-                let singleInterestCell = self.tableView(tableView, cellForRowAt: IndexPath(row: index, section: 0)) as! SingleInterestTableViewCell
-                singleInterestCell.accessoryType = .none
-                singleInterestCell.interestLabel.isSelected = false
-                singleInterestCell.interestButtonImage.isSelected = false
+            if selectedCell.isSelected{
+                selectedCell.accessoryType = .checkmark
+            }else{
+                selectedCell.accessoryType = .none
             }
-            
-            print("cell at 0 selected")*/
+            print("selected cell not at 0")
         }
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell.isSelected{
+            cell.accessoryType = .checkmark
+        }else{
+            cell.accessoryType = .none
+        }
     }
     
     @IBAction func openOptions(_ sender: Any) {
-        UIView.animate(withDuration: 2.0, delay: 0.0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.8, delay: 0.0, options: .curveEaseInOut, animations: {
             if self.interestTableView.isHidden {
                 self.interestTableView.isHidden = false
                 self.interestTableViewHeight.constant = 225
-                //                self.stackViewHeight.constant += self.interestTableViewHeight.constant
                 
             }else{
                 self.interestTableView.isHidden = true
-                //                self.stackViewHeight.constant -= self.interestTableView.frame.size.height
-                //                self.interestTableViewHeight.constant = 0
-                
             }
         }, completion: nil)
     }
