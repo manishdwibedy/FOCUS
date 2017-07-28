@@ -204,13 +204,21 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N73-dJ-V1m">
+                        <rect key="frame" x="30" y="111" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="czB-DF-TUO" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="4fZ-Le-bha"/>
+                    <constraint firstItem="N73-dJ-V1m" firstAttribute="centerX" secondItem="Cme-w4-bSF" secondAttribute="centerX" id="GFC-9n-GxV"/>
                     <constraint firstItem="czB-DF-TUO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="9.5" id="PdW-LD-OMs"/>
                     <constraint firstItem="czB-DF-TUO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UbH-dB-MlU"/>
                     <constraint firstAttribute="trailingMargin" secondItem="czB-DF-TUO" secondAttribute="trailing" constant="10.5" id="XRG-OH-uyx"/>
                     <constraint firstItem="czB-DF-TUO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5.5" id="miC-hM-Hgr"/>
+                    <constraint firstItem="N73-dJ-V1m" firstAttribute="top" secondItem="Cme-w4-bSF" secondAttribute="bottom" constant="5" id="nhJ-ou-o32"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -220,6 +228,7 @@
                 <outlet property="eventImage" destination="x58-eK-XmF" id="2Qe-Dc-CKR"/>
                 <outlet property="eventNameLabel" destination="psY-R2-Cnt" id="Dqj-nH-vPO"/>
                 <outlet property="interestLabel" destination="rBz-Ee-4lS" id="TiT-aS-hRj"/>
+                <outlet property="timeSince" destination="N73-dJ-V1m" id="NbK-FU-B3B"/>
                 <outlet property="usernameImage" destination="Cme-w4-bSF" id="flI-Ix-XVy"/>
                 <outlet property="usernameReceivingCommentLabel" destination="Bb6-DM-Zlj" id="Cbs-6X-8Y5"/>
                 <outlet property="usernameWhoCommentedLabel" destination="yAR-5l-oGU" id="xVa-Sv-QKL"/>

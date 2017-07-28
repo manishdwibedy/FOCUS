@@ -498,6 +498,15 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                             dateFormatter.dateFormat = "MMM d, h:mm a"
                             
                             let time = dateFormatter.date(from: (event?.date!)!)
+                            
+                            let gregorianCalendar = Calendar(identifier: .gregorian)
+                            var components = gregorianCalendar.dateComponents([.year, .month, .day], from: time!)
+                            
+                            components.year = 2017
+                            let date = gregorianCalendar.date(from: components)!
+
+
+                            
                             let address = event?.shortAddress
                             let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
                             place.id = snapshot.key
@@ -506,7 +515,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                             ]
                             
                             if let time = time{
-                                let eventFeed = FocusNotification(type: NotificationType.Created, sender: followerUser, item: place, time: time)
+                                let eventFeed = FocusNotification(type: NotificationType.Created, sender: followerUser, item: place, time: date)
                                 events.append(eventFeed)
                                 
                             }

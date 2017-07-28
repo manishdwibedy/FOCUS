@@ -17,6 +17,7 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
     @IBOutlet weak var eventNameLabel: UIButton!
     @IBOutlet weak var searchEventTableView: UITableView!
     @IBOutlet weak var interestLabel: UILabel!
+    @IBOutlet weak var timeSince: UILabel!
     
     var event: Event? = nil
     var parentVC: SearchEventsViewController? = nil

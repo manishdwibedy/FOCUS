@@ -147,7 +147,17 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9a-be-WDj">
+                        <rect key="frame" x="10" y="87.5" width="33" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="X9a-be-WDj" secondAttribute="bottom" constant="5" id="75d-ID-BCA"/>
+                    <constraint firstItem="X9a-be-WDj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Jq9-lU-kUe"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -165,6 +175,7 @@
                 <outlet property="mapImage" destination="Mu0-gw-nOq" id="3Xg-La-BSe"/>
                 <outlet property="nameDescriptionLabel" destination="xHG-yn-dfh" id="pea-TN-9RH"/>
                 <outlet property="nameLabel" destination="GKR-F7-hVw" id="1f6-Zj-2xv"/>
+                <outlet property="timeSince" destination="X9a-be-WDj" id="LEk-Wa-2ox"/>
                 <outlet property="userImage" destination="Lar-X7-bvX" id="M43-7G-bR3"/>
                 <outlet property="usernameLabel" destination="GKR-F7-hVw" id="5t8-sC-nGY"/>
             </connections>

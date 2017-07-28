@@ -16,7 +16,9 @@ class FeedPlaceTableViewCell: UITableViewCell {
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var placeBeingLiked: UIButton!
     @IBOutlet weak var usernameWhoIsBeingLiked: UIButton!
-    @IBOutlet weak var usernameWhoLikedLabel: UIButton!    
+    @IBOutlet weak var usernameWhoLikedLabel: UIButton!
+    @IBOutlet weak var timeSince: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

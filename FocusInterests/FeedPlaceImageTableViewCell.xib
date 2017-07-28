@@ -144,7 +144,17 @@
                             </view>
                         </subviews>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOR-ij-lf9">
+                        <rect key="frame" x="17.5" y="196" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="VOR-ij-lf9" firstAttribute="top" secondItem="8B5-MX-qmQ" secondAttribute="bottom" constant="5" id="D8O-TD-ERt"/>
+                    <constraint firstItem="VOR-ij-lf9" firstAttribute="centerX" secondItem="8B5-MX-qmQ" secondAttribute="centerX" id="MG4-5U-W6v"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -161,6 +171,7 @@
                 <outlet property="imagePlace" destination="Isi-qA-oaa" id="jtW-h3-m3q"/>
                 <outlet property="interestLabel" destination="F1l-E9-r2y" id="BvM-c4-92r"/>
                 <outlet property="pinCaptionLabel" destination="64q-xJ-Nfs" id="bez-uM-dAy"/>
+                <outlet property="timeSince" destination="VOR-ij-lf9" id="c2k-xH-3ki"/>
                 <outlet property="usernameImage" destination="8B5-MX-qmQ" id="xHb-sn-G7o"/>
                 <outlet property="usernameLabel" destination="ulu-nU-Tjs" id="aqp-yQ-06v"/>
             </connections>

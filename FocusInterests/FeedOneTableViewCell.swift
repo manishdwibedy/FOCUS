@@ -23,6 +23,7 @@ class FeedOneTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var mapImage: UIImageView!
+    @IBOutlet weak var timeSince: UILabel!
     
     var pin: pinData? = nil
     

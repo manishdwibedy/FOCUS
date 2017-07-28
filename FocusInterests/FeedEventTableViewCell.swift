@@ -18,6 +18,9 @@ class FeedEventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var interestLabel: UILabel!
+    @IBOutlet weak var timeSince: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -180,10 +180,18 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2x0-4a-smJ">
+                        <rect key="frame" x="26.5" y="101.5" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="2x0-4a-smJ" firstAttribute="top" secondItem="3DV-0A-ViJ" secondAttribute="bottom" constant="5" id="6si-S0-60v"/>
                     <constraint firstItem="mse-mr-qsc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Byh-gE-sm9"/>
                     <constraint firstItem="mse-mr-qsc" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="FJp-dN-M1q"/>
+                    <constraint firstItem="2x0-4a-smJ" firstAttribute="centerX" secondItem="3DV-0A-ViJ" secondAttribute="centerX" id="LTP-Ee-6rJ"/>
                     <constraint firstItem="mse-mr-qsc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eT4-Qh-bZH"/>
                     <constraint firstAttribute="trailingMargin" secondItem="mse-mr-qsc" secondAttribute="trailing" constant="8" id="tnU-jj-kD9"/>
                 </constraints>
@@ -194,6 +202,7 @@
                 <outlet property="interestLabel" destination="gzv-Ut-w7x" id="uxt-2r-jVH"/>
                 <outlet property="placeBeingLiked" destination="Vfu-6D-Wsp" id="QdE-m0-xWA"/>
                 <outlet property="placePhoto" destination="BhJ-mA-aai" id="INT-R8-KhT"/>
+                <outlet property="timeSince" destination="2x0-4a-smJ" id="F68-4t-1Ul"/>
                 <outlet property="usernameImage" destination="3DV-0A-ViJ" id="6O9-x4-KF1"/>
                 <outlet property="usernameWhoIsBeingLiked" destination="SYu-0D-JFJ" id="nAQ-k7-39K"/>
                 <outlet property="usernameWhoLikedLabel" destination="UZD-TW-Zj3" id="Guk-IO-LGt"/>

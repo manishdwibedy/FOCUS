@@ -18,6 +18,7 @@ class FeedCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var usernameReceivingCommentLabel: UIButton!
     @IBOutlet weak var usernameWhoCommentedLabel: UIButton!
     @IBOutlet weak var eventNameLabel: UIButton!
+    @IBOutlet weak var timeSince: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

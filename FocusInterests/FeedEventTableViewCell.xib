@@ -191,11 +191,19 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6k-rZ-uId">
+                        <rect key="frame" x="28.5" y="124.5" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="xWk-g0-bs7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Sl9-xw-dmN"/>
                     <constraint firstItem="xWk-g0-bs7" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="agF-UA-MdP"/>
+                    <constraint firstItem="R6k-rZ-uId" firstAttribute="top" secondItem="xWk-g0-bs7" secondAttribute="bottom" constant="1" id="bnw-rM-c4G"/>
+                    <constraint firstItem="R6k-rZ-uId" firstAttribute="centerX" secondItem="ydz-iV-Dqt" secondAttribute="centerX" id="xWc-ws-Fct"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -207,6 +215,7 @@
                 <outlet property="interestLabel" destination="FaT-ew-COK" id="M0f-ln-znn"/>
                 <outlet property="inviteButton" destination="6h9-Za-eIz" id="fFo-oD-2Ox"/>
                 <outlet property="nameLabelButton" destination="rKT-hd-BMb" id="JRb-gk-RHh"/>
+                <outlet property="timeSince" destination="R6k-rZ-uId" id="Lnf-am-lNz"/>
                 <outlet property="usernameImage" destination="ydz-iV-Dqt" id="rVs-ct-Ek9"/>
             </connections>
             <point key="canvasLocation" x="94" y="131"/>

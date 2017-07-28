@@ -297,7 +297,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 let data = feed.item?.data["pin"] as! [String:Any]
     
                     cell.pin = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
-
+                cell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (cell.pin?.dateTimeStamp)!), numericDates: true, shortVersion: true)
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     cell.nameLabel.text = user.username
                     if let image = user.image_string{
@@ -335,6 +335,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 })
                 
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
+                    
+                    cell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
+                    
                     addGreenDot(label: cell.interestLabel, content: (pinData["focus"] as? String)!)
                     
                     cell.addressLabel.setTitle((pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0], for: .normal)
@@ -370,7 +373,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         else if feed.type == .Created{
             let feedCreatedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
             feedCreatedEventCell.event = feed.item?.data["event"] as? Event
-            
+            feedCreatedEventCell.timeSince.text = DateFormatter().timeSince(from: feed.time!, numericDates: true, shortVersion: true)
             getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                 feedCreatedEventCell.usernameLabel.setTitle(user.username, for: .normal)
                 if let image = user.image_string{
@@ -405,6 +408,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
                     let user = pinData["fromUID"] as? String
+                    
+                    cell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
+                    
                     
                     getUserData(id: user!, gotUser: {user in
                         cell.usernameWhoIsBeingLiked.setTitle("\(user.username!)'s", for: .normal)
@@ -458,6 +464,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
                     let user = pinData["fromUID"] as? String
+                    
+                    cell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
+                    
                     
                     getUserData(id: user!, gotUser: {user in
                         cell.usernameReceivingCommentLabel.setTitle("\(user.username!)'s", for: .normal)
