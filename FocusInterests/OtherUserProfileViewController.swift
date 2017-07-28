@@ -451,13 +451,24 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                             self.interestStackView.removeArrangedSubview(view)
                         }
                         
-                        for (_, interest) in (final_interest.enumerated()){
+                        let user_interest = Set(getUserInterests().components(separatedBy: ","))
+                        
+                        for (index, interest) in (final_interest.enumerated()){
+                            
+                            if index == 3{
+                                break
+                            }
                             let interestLabelView = InterestStackViewLabel(frame: CGRect(x: 0, y: 0, width: self.interestStackView.bounds.width, height: 30))
                             
                             if interest.characters.count > 0{
                                 interestLabelView.view.bounds.size.width = self.interestStackView.frame.size.width
                                 interestLabelView.view.center = interestLabelView.center
                                 interestLabelView.interestLabel.text = interest
+                                
+                                if user_interest.contains(interest){
+                                    interestLabelView.addButton.setImage(#imageLiteral(resourceName: "Green_check_sign"), for: .normal)
+                                }
+                                
                                 let interestImage = "\(interest) Green"
                                 interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
                                 if self.interestStackView.arrangedSubviews.count < 3{
