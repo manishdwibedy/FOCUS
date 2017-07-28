@@ -512,9 +512,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                             let event = Event.toEvent(info: info)
                             event?.id = id as? String
                             
-                            if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
+//                            if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
                                 self.filtered.append(event)
-                            }
+//                            }
                             
                         }
                         

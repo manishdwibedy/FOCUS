@@ -203,11 +203,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             {
                 
                 self.pinInfo = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(ID ), focus: value["focus"] as? String ?? "")
-                
-                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (self.pinInfo?.dateTimeStamp)!), to: Date()).hour ?? 0 < 24{
-                    if value["images"] != nil{
-                        
-                    }
+                self.recentPostTableView.reloadData()
 //                    self.emptyPinButton.isHidden = true
                     
 //                    self.pinCategoryLabel.text = value["focus"] as? String
@@ -223,31 +219,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //                        self.pinLikesLabel.text = "\(count!) \(label)"
                     }
                     
-                    if let images = value["images"] as? [String:Any]{
-                        let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String
-//                        let pinImage = Constants.storage.pins.child(imageURL!)
-                        
-                        // Fetch the download URL
-//                        pinImage.downloadURL { url, error in
-//                            if error != nil {
-//                                // Handle any errors
-//                            } else {
-//                                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-//                                    (receivedSize :Int, ExpectedSize :Int) in
-//                                    
-//                                }, completed: {
-//                                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-//                                    
-//                                    if image != nil && finished{
-//                                        self.pinImage.image = image
-//                                    }
-//                                })
-//                                
-//                            }
-//                        }
-                    }
                     
-                }
+                 
                     
                     // OLD PIN
                 else{
@@ -717,7 +690,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         if tableView.tag == 0 || tableView.tag == 1{
             return 3
         }else{
-            return 1
+            if self.pinInfo == nil{
+                return 0
+            }
+            else{
+                return 1
+            }
+            
         }
     }
     
@@ -732,7 +711,42 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             return eventCell
         }else{
             let recentPostCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell", for: indexPath) as! FeedOneTableViewCell
-
+            
+            Constants.DB.user.child((self.pinInfo?.fromUID)!).observeSingleEvent(of: .value, with: {snapshot in
+                if let value = snapshot.value as? [String:Any]{
+                    recentPostCell.usernameLabel.text = value["username"] as? String
+                }
+            })
+            
+            
+            self.pinInfo?.dbPath.observeSingleEvent(of: .value, with: {snapshot in
+                if let value = snapshot.value as? [String:Any]{
+                    if value["images"] != nil{
+                        if let images = value["images"] as? [String:Any]{
+                            if let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String{
+                                let reference = Constants.storage.pins.child(imageURL)
+                                reference.downloadURL(completion: { (url, error) in
+                                    
+                                    if error != nil {
+                                        print(error?.localizedDescription ?? "")
+                                        return
+                                    }
+                                    
+                                    recentPostCell.userImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                                })
+                            }
+                        }
+                    }
+                }
+                
+            })
+            
+            let pinLocation = CLLocation(latitude: pinInfo!.coordinates.latitude, longitude: pinInfo!.coordinates.longitude)
+            recentPostCell.distanceLabel.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
+            
+            recentPostCell.addressLabel.text = self.pinInfo?.locationAddress.components(separatedBy: ";;")[0]
+            recentPostCell.interestLabel.text = self.pinInfo?.focus
+            recentPostCell.nameDescriptionLabel.text = self.pinInfo?.pinMessage
             return recentPostCell
         }
     }
