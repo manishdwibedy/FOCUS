@@ -96,6 +96,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var screenHeight: CGFloat = 0.0
     var showInvitePopup = false
     
+    var suggestedEvents = [Event]()
+    
     // Back button
     @IBAction func backButton(_ sender: Any) {
         if otherUser, let previous = previous{
@@ -191,7 +193,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSFontAttributeName: UIFont(name: "Avenir Book", size: 21)!]
         
-        getEventSuggestions()
+        getEvents()
 //        getPin()
         
         self.invitePopupView.allCornersRounded(radius: 10)
@@ -409,6 +411,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 }
                 
                 
+                
                 if self.otherUser{
                     if let interests = dictionnary["interests"] as? String{
                         let selected = interests.components(separatedBy: ",")
@@ -417,6 +420,11 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         for interest in selected{
                             final_interest.append(interest.components(separatedBy: "-")[0])
                         }
+                
+                        getSuggestedEvents(interests: final_interest.joined(separator: ","), limit: 3, gotEvents: {events in
+                            self.suggestedEvents = events
+                            self.eventsTableView.reloadData()
+                        })
                         
                         print("self.otherUser condition: \(self.interestStackView.arrangedSubviews.count)")
                         
@@ -585,7 +593,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.present(VC!, animated: true, completion: nil)
     }
     
-    func getEventSuggestions(){
+    func getEvents(){
         self.moreEventsButton.isHidden = false
         
         let ID = otherUser ? self.userID : AuthApi.getFirebaseUid()!
@@ -687,8 +695,11 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     //    MARK: TableView Delegate and Data Source Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.tag == 0 || tableView.tag == 1{
+        if tableView.tag == 0{
             return 3
+        }
+        else if tableView.tag == 1{
+            return suggestedEvents.count
         }else{
             if self.pinInfo == nil{
                 return 0
@@ -706,9 +717,66 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             self.placesTableViewHeight.constant = (placeCell.frame.size.height * CGFloat(indexPath.row + 1))
             return placeCell
         }else if tableView.tag == 1{
-            let eventCell = tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell", for: indexPath) as! InvitePeopleEventCell
-            self.eventsTableViewHeight.constant = (eventCell.frame.size.height * CGFloat(indexPath.row + 1))
-            return eventCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "InvitePeopleEventCell", for: indexPath) as! InvitePeopleEventCell
+            
+            let event = self.suggestedEvents[indexPath.row]
+            self.eventsTableViewHeight.constant = (cell.frame.size.height * CGFloat(indexPath.row + 1))
+            
+            cell.name.text = event.title
+            cell.address.text = event.fullAddress?.replacingOccurrences(of: ";;", with: "\n")
+            
+            if let category = event.category{
+                if category.contains(","){
+                    addGreenDot(label: cell.interest, content: category.components(separatedBy: ",")[0])
+                }
+                else{
+                    addGreenDot(label: cell.interest, content: category)
+                }
+            }
+            
+            cell.inviteFromOtherUserProfile = true
+            cell.event = event
+            cell.UID = self.userInfo["firebaseUserId"] as? String
+            cell.username = (self.userInfo["username"] as? String)!
+            cell.otherUser = self
+            cell.guestCount.text = "\(event.attendeeCount) guests"
+            
+            //            Date formatter for date and time label in event
+            cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price)"
+            
+            let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+            cell.distance.text = getDistance(fromLocation: eventLocation, toLocation: AuthApi.getLocation()!)
+            
+            
+            let reference = Constants.storage.event.child("\(event.id!).jpg")
+            
+            cell.eventImage.image = crop(image: #imageLiteral(resourceName: "empty_event"), width: 50, height: 50)
+            
+            reference.downloadURL(completion: { (url, error) in
+                
+                if error != nil {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                
+                
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        cell.eventImage.image = crop(image: image!, width: 50, height: 50)
+                    }
+                })
+                
+                
+            })
+            
+            cell.loadLikes()
+
+            return cell
         }else{
             let recentPostCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell", for: indexPath) as! FeedOneTableViewCell
             

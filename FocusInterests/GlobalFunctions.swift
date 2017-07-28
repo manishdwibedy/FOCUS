@@ -1040,21 +1040,35 @@ func matchingUserInterest(user: User) -> Int{
     return other_user.intersection(user_interest_set).count
 }
 
+func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ user: [Event]) -> Void){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    var suggestions = [Event]()
+    
+    for interest in interests.components(separatedBy: ","){
+        Constants.DB.event_interests.child(interest).observeSingleEvent(of: .value, with: {snapshot in
+            if let events = snapshot.value as? [String:Any]{
+                
+                for (id, event) in events{
+                    if let event = event as? [String:Any]{
+                        if let id = event["event-id"] as? String{
+                            Constants.DB.event.child(id).observeSingleEvent(of: .value, with: {snapshot in
+                                if let info = snapshot.value as? [String:Any]{
+                                    if let event = Event.toEvent(info: info){
+                                        event.id = id
+                                        suggestions.append(event)
+                                    }
+                                    
+                                    if suggestions.count == limit{
+                                        gotEvents(suggestions)
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+                
+            }
+            
+        })
+    }
+}

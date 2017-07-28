@@ -35,6 +35,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     var isMeetup = false
     var inviteFromOtherUserProfile = false
     var parentVC: InvitePeopleViewController!
+    var otherUser: OtherUserProfileViewController? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -93,7 +94,14 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         controller.event = event as! Event
         controller.invitePeopleEventDelegate = self
         controller.map = parentVC.tabBarController?.viewControllers?[0] as? MapViewController
-        parentVC.present(controller, animated: true, completion: nil)
+        
+        if parentVC != nil{
+            parentVC.present(controller, animated: true, completion: nil)
+        }
+        else{
+            otherUser?.present(controller, animated: true, completion: nil)
+        }
+        
     }
     
     
