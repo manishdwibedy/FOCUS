@@ -59,15 +59,24 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var followerCount: UIButton!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followingCount: UIButton!
-    
+
     @IBOutlet weak var pinCount: UIButton!
     var pinInfo: pinData? = nil
     
     
     // user interests
+    
+    var hiddenInterests = [UIView]()
     @IBOutlet weak var focusView: UIView!
+    @IBOutlet weak var focusStackView: UIStackView!
     @IBOutlet weak var interestStackView: UIStackView!
     @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var containerStackForMoreOrLessButtons: UIView!
+    @IBOutlet weak var containStackForMoreOrLessButtonsHeight: NSLayoutConstraint!
+    @IBOutlet weak var moreOrLessButtonStack: UIStackView!
+    @IBOutlet weak var moreOrLessButtonStackHeight: NSLayoutConstraint!
+    @IBOutlet weak var lessButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     
     // Location Description (would this be location description?)
     // Location FOCUS button (what would this be for?)
@@ -164,6 +173,11 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.navBar.titleTextAttributes = attrs
         
         self.followButton.roundCorners(radius: 5.0)
+        self.followButton.setTitle("Follow", for: .normal)
+        self.followButton.setTitleColor(UIColor.white, for: .normal)
+        self.followButton.setTitle("Following", for: .selected)
+        self.followButton.setTitleColor(UIColor.white, for: .selected)
+        
         self.inviteButton.roundCorners(radius: 5.0)
         
         self.messageButton.roundCorners(radius: 5.0)
@@ -267,7 +281,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        self.displayUserData()
         var eventTableFrame = self.eventsTableView.frame
         eventTableFrame.size.height = self.eventsTableView.contentSize.height
         self.eventsTableView.frame = eventTableFrame
@@ -418,7 +432,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                             final_interest.append(interest.components(separatedBy: "-")[0])
                         }
                         
-                        print("self.otherUser condition: \(self.interestStackView.arrangedSubviews.count)")
+                        print("final_interest \(final_interest)")
+                        
                         
                         for view in self.interestStackView.arrangedSubviews{
                             self.interestStackView.removeArrangedSubview(view)
@@ -444,9 +459,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                 
                                 let interestImage = "\(interest) Green"
                                 interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
-                                if self.interestStackView.arrangedSubviews.count < 3{
+                                if index < 3{
+                                    print("adding interests less than 3")
                                     self.interestStackView.addArrangedSubview(interestLabelView)
                                     self.interestStackView.translatesAutoresizingMaskIntoConstraints = false
+                                }else{
+                                    print("adding interests to hidingInterests array")
+                                    self.hiddenInterests.append(interestLabelView)
                                 }
                             }
                         }
@@ -458,7 +477,19 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         if self.interestStackView.arrangedSubviews.count <= 1{
                             self.interestViewHeight.constant = firstFocusView.frame.height
                         }else{
-                            self.interestViewHeight.constant = CGFloat((firstFocusView.frame.height + 10) * CGFloat(self.interestStackView.arrangedSubviews.count))
+                            self.interestViewHeight.constant = CGFloat((firstFocusView.frame.height + 15) * CGFloat(self.interestStackView.arrangedSubviews.count))
+                        }
+                        
+                        if selected.count > 3 {
+                            self.focusStackView.addArrangedSubview(self.containerStackForMoreOrLessButtons)
+                            self.moreOrLessButtonStack.removeArrangedSubview(self.lessButton)
+                            self.lessButton.isHidden = true
+                            self.containStackForMoreOrLessButtonsHeight.constant = 20
+                            self.moreOrLessButtonStackHeight.constant = 20.0
+//                            self.lessButton.removeFromSuperview()
+                        }else{
+                            self.focusStackView.removeArrangedSubview(self.containerStackForMoreOrLessButtons)
+                            self.containerStackForMoreOrLessButtons.removeFromSuperview()
                         }
                         
                     }
@@ -512,7 +543,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         
                         interestSubView.addSubview(interestView)
                         self.interestStackView.addArrangedSubview(interestSubView)
-                        interestStackView.translatesAutoresizingMaskIntoConstraints = false;
+                        interestStackView.translatesAutoresizingMaskIntoConstraints = false
                     }
                 }
             }
@@ -520,6 +551,73 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
     }
     
+    @IBAction func moreInterestsButtonPressed(_ sender: Any) {
+        print("adding these interests \(self.hiddenInterests)")
+        
+        if self.hiddenInterests.count > 0{
+            for interestViewIndex in 0...self.hiddenInterests.count-1{
+                self.interestStackView.addArrangedSubview(self.hiddenInterests[interestViewIndex])
+            }
+            
+            guard let firstFocusView = self.interestStackView.arrangedSubviews.first else {
+                return
+            }
+            
+            self.interestViewHeight.constant = CGFloat((firstFocusView.bounds.size.height) * CGFloat(self.interestStackView.arrangedSubviews.count))
+            
+            self.lessButton.isHidden = false
+            self.moreOrLessButtonStack.addArrangedSubview(self.lessButton)
+            self.moreOrLessButtonStack.removeArrangedSubview(self.moreButton)
+            self.moreButton.isHidden = true
+            self.containStackForMoreOrLessButtonsHeight.constant = 20
+            self.moreOrLessButtonStackHeight.constant = 20.0
+        }else{
+            print("nothing to add")
+        }
+        
+//        MARK: POSSIBLY ADD ANIMATION?
+//        UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
+//            if self.placesTableView.isHidden{
+//                if !self.peopleTableView.isHidden{
+//                    self.peopleTableView.isHidden = true
+//                }
+//                
+//                if !self.eventsTableView.isHidden{
+//                    self.eventsTableView.isHidden = true
+//                }
+//                
+//                self.placesTableView.isHidden = false
+//                self.placeTableViewHeight.constant = 100
+//            }else{
+//                self.placesTableView.isHidden = true
+//            }
+//        }, completion: nil)
+    }
+    
+    @IBAction func lessInterestsButtonPressed(_ sender: Any) {
+        print("")
+        print("")
+        print("removing these interests from stackview \(self.hiddenInterests)")
+        print("")
+        print("")
+        for arrangedInterestIndex in 0...self.hiddenInterests.count-1{
+            self.interestStackView.removeArrangedSubview(self.hiddenInterests[arrangedInterestIndex])
+        }
+        
+        guard let firstFocusView = self.interestStackView.arrangedSubviews.first else {
+            return
+        }
+        
+        self.interestViewHeight.constant = CGFloat((firstFocusView.bounds.size.height) * CGFloat(self.interestStackView.arrangedSubviews.count))
+        
+        self.moreButton.isHidden = false
+        self.moreOrLessButtonStack.addArrangedSubview(self.moreButton)
+        self.moreOrLessButtonStack.removeArrangedSubview(self.lessButton)
+        self.lessButton.isHidden = true
+        self.containStackForMoreOrLessButtonsHeight.constant = 20
+        self.moreOrLessButtonStackHeight.constant = 20.0
+        
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -536,7 +634,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             self.showInvitePopup = false
         }
         
-        self.displayUserData()
+//        self.displayUserData()
         
 //        self.placesTableViewHeight.constant = self.placesTableView.contentSize.height
 //        self.eventsTableViewHeight.constant = self.eventsTableView.contentSize.height
@@ -569,14 +667,12 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         }
 //                        self.pinLikesLabel.text = "\(likeCount) \(likeLabel)"
                     }
-                    
                 }
                 
                 let pin_location = CLLocation(latitude: value["lat"] as! Double, longitude: value["lng"] as! Double)
 //                self.pinDistanceLabel.text = getDistance(fromLocation: pin_location, toLocation: AuthApi.getLocation()!)
             }
         })
-        
     }
     
     @IBAction func updatePin(_ sender: Any) {
@@ -796,8 +892,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             Follow.followUser(uid: self.userInfo["firebaseUserId"] as! String)
             followButton.isSelected = true
             followButton.layer.borderWidth = 1
-            followButton.layer.borderColor = Constants.color.navy.cgColor
-            followButton.backgroundColor = UIColor.white
+            followButton.layer.borderColor = UIColor.white.cgColor
+            followButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
             followButton.tintColor = UIColor.clear
             followButton.layer.shadowOpacity = 0.5
             followButton.layer.masksToBounds = false
@@ -814,7 +910,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 self.followButton.isSelected = false
                 self.followButton.layer.borderWidth = 1
                 self.followButton.layer.borderColor = UIColor.clear.cgColor
-                self.followButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+                self.followButton.backgroundColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
                 self.followButton.tintColor = UIColor.clear
                 self.followButton.layer.shadowOpacity = 0.5
                 self.followButton.layer.masksToBounds = false

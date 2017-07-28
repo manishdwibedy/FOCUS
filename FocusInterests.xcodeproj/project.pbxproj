@@ -243,6 +243,9 @@
 		EB252F141EEAA062001C163D /* UserProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */; };
 		EB3EA2421EE7707500F61D38 /* InviteListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */; };
 		EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */; };
+		EB426A751F2B468F008DBEF5 /* CreateEventOnMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB426A731F2B468F008DBEF5 /* CreateEventOnMapViewController.swift */; };
+		EB426A761F2B468F008DBEF5 /* CreateEventOnMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB426A741F2B468F008DBEF5 /* CreateEventOnMapViewController.xib */; };
+		EB426A781F2B6138008DBEF5 /* CreateEventOnMapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB426A771F2B6138008DBEF5 /* CreateEventOnMapViewController.storyboard */; };
 		EB450FB11F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB450FAF1F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift */; };
 		EB450FB21F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB450FB01F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib */; };
 		EB5891C71EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891C51EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift */; };
@@ -635,6 +638,9 @@
 		EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteListTableViewCell.swift; sourceTree = "<group>"; };
 		EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteListTableViewCell.xib; sourceTree = "<group>"; };
+		EB426A731F2B468F008DBEF5 /* CreateEventOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventOnMapViewController.swift; sourceTree = "<group>"; };
+		EB426A741F2B468F008DBEF5 /* CreateEventOnMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateEventOnMapViewController.xib; sourceTree = "<group>"; };
+		EB426A771F2B6138008DBEF5 /* CreateEventOnMapViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEventOnMapViewController.storyboard; sourceTree = "<group>"; };
 		EB450FAF1F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInFeedCreatedEventTableViewCell.swift; sourceTree = "<group>"; };
 		EB450FB01F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInFeedCreatedEventTableViewCell.xib; sourceTree = "<group>"; };
 		EB5891C51EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedTimeTableViewCell.swift; sourceTree = "<group>"; };
@@ -1233,6 +1239,7 @@
 		D2B9B0731E5A0A270002F1B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EB426A721F2B2A0A008DBEF5 /* CreateEventMapView */,
 				EB71ABFD1F1E990F0024FE95 /* Map Settings */,
 				EB2203811F1DDCD500F86B73 /* FollowersRequest */,
 				EBB6B32A1F0E1207000C8133 /* FeedTableCells */,
@@ -1362,6 +1369,16 @@
 				EB2203881F1DEA8000F86B73 /* FollowersRequestViewController.swift */,
 			);
 			name = FollowersRequest;
+			sourceTree = "<group>";
+		};
+		EB426A721F2B2A0A008DBEF5 /* CreateEventMapView */ = {
+			isa = PBXGroup;
+			children = (
+				EB426A731F2B468F008DBEF5 /* CreateEventOnMapViewController.swift */,
+				EB426A741F2B468F008DBEF5 /* CreateEventOnMapViewController.xib */,
+				EB426A771F2B6138008DBEF5 /* CreateEventOnMapViewController.storyboard */,
+			);
+			name = CreateEventMapView;
 			sourceTree = "<group>";
 		};
 		EB5891D51EE7EDFA00C35EE9 /* Comments */ = {
@@ -1679,6 +1696,7 @@
 				EB71AC051F1EA1700024FE95 /* SelectAllInterestsTableViewCell.xib in Resources */,
 				61ED203C1EDC13F500247DC5 /* Notif_Invite_Feed.storyboard in Resources */,
 				5BAB87AF1EC984400064E5EC /* search_event.storyboard in Resources */,
+				EB426A781F2B6138008DBEF5 /* CreateEventOnMapViewController.storyboard in Resources */,
 				D2D0A3ED1E7F49ED00B43689 /* UserDescriptionCell.xib in Resources */,
 				5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */,
 				D230D8C91E5B7E7800025EE9 /* SettingsViewController.xib in Resources */,
@@ -1698,6 +1716,7 @@
 				5BAB87A41EC961AB0064E5EC /* UserProfile.storyboard in Resources */,
 				EB819E6A1F180D2900F5AA94 /* RecentPostTableViewCell.xib in Resources */,
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
+				EB426A761F2B468F008DBEF5 /* CreateEventOnMapViewController.xib in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
 				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
@@ -2246,6 +2265,7 @@
 				5B959FDA1ECADFA300094FE6 /* PinViewController.swift in Sources */,
 				FFC36FF21EF49E9000D58F92 /* notificationTabCell.swift in Sources */,
 				EBE7AE491F16141700901F9F /* FollowYourSpecificFriendTableViewCell.swift in Sources */,
+				EB426A751F2B468F008DBEF5 /* CreateEventOnMapViewController.swift in Sources */,
 				5B71D70A1ED183EE0093A3F5 /* attendeeVC.swift in Sources */,
 				EBD382AF1F10167B0068D313 /* FeedPlaceImageTableViewCell.swift in Sources */,
 				FFD32DD31EE9FF9900FE725E /* InterstCollectionViewCell.swift in Sources */,

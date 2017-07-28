@@ -37,11 +37,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let greenPinImage = UIImage(named: "pin")
-//        greenPinImage!.imageScaled(to: CGSize(width: 10, height: 10))
-//        let greenPinImageView = UIImageView(image: greenPinImage)
-//        self.navigationItem.title =  greenPinImageView + " People"
-        
         self.userProfileButton.roundButton()
         
         tableView.delegate = self
@@ -307,7 +302,12 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             cell?.whiteBorder.isHidden = false
             cell?.address.text = pin?.pinMessage
             cell?.pinSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pin?.dateTimeStamp)!), numericDates: true, shortVersion: true)
-            addGreenDot(label: (cell?.interest)!, content: (pin?.focus)!)
+            print("this is the focus \(pin?.focus)!")
+            
+            let startIndex = pin?.focus.index((pin?.focus.startIndex)!, offsetBy: 2)
+            var interestStringWithoutDot = pin?.focus.substring(from: startIndex!)
+            
+            addGreenDot(label: (cell?.interest)!, content: interestStringWithoutDot!)
             let pinLocation = CLLocation(latitude: (pin?.coordinates.latitude)!, longitude: (pin?.coordinates.longitude)!)
             cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
         }
@@ -363,7 +363,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             sender.layer.borderWidth = 1
             sender.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
             sender.tintColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
-            
         } else if sender.isSelected == true{
             
             

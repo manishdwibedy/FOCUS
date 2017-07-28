@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -455,7 +455,7 @@
                                                         <rect key="frame" x="8" y="7.5" width="359" height="395"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5W2-Ad-9ar">
-                                                                <rect key="frame" x="14.5" y="0.0" width="330" height="24"/>
+                                                                <rect key="frame" x="14.5" y="0.0" width="330" height="10"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BS6-6t-mlI" userLabel="Breaker View">
                                                                         <rect key="frame" x="5" y="3" width="319" height="0.5"/>
@@ -468,13 +468,13 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="24" id="VRq-xk-9H4"/>
+                                                                    <constraint firstAttribute="height" constant="10" id="VRq-xk-9H4"/>
                                                                     <constraint firstItem="BS6-6t-mlI" firstAttribute="top" secondItem="5W2-Ad-9ar" secondAttribute="top" constant="3" id="nWA-rH-onV"/>
                                                                     <constraint firstItem="BS6-6t-mlI" firstAttribute="centerX" secondItem="5W2-Ad-9ar" secondAttribute="centerX" id="sqH-Tu-7HU"/>
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gs-u9-MSd">
-                                                                <rect key="frame" x="142" y="24" width="75" height="39"/>
+                                                                <rect key="frame" x="142" y="10" width="75" height="39"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="39" id="ekq-HM-bjq"/>
                                                                 </constraints>
@@ -490,7 +490,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofW-bn-GIG">
-                                                                <rect key="frame" x="19.5" y="63" width="320" height="34"/>
+                                                                <rect key="frame" x="19.5" y="49" width="320" height="34"/>
                                                                 <color key="backgroundColor" red="0.47843137250000001" green="0.78823529410000004" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="320" id="46d-Hi-ebe"/>
@@ -505,7 +505,7 @@
                                                                 </connections>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F09-6U-2YX">
-                                                                <rect key="frame" x="10" y="97" width="339" height="263"/>
+                                                                <rect key="frame" x="10" y="83" width="339" height="312"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sfc-Qz-9LF">
                                                                     <size key="itemSize" width="90" height="90"/>
@@ -519,31 +519,6 @@
                                                                     <outlet property="delegate" destination="cU2-hP-1h7" id="SHG-hE-KAP"/>
                                                                 </connections>
                                                             </collectionView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5X-Q6-8XV" userLabel="More Events Button View">
-                                                                <rect key="frame" x="0.0" y="360" width="359" height="35"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XF-Wl-lIE">
-                                                                        <rect key="frame" x="307" y="8" width="52" height="20"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="20" id="8zK-F1-SxO"/>
-                                                                            <constraint firstAttribute="width" constant="52" id="VyX-02-kzA"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                                        <state key="normal" title="More">
-                                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        </state>
-                                                                        <connections>
-                                                                            <action selector="moreButtonPressed:" destination="cU2-hP-1h7" eventType="touchUpInside" id="Yln-ic-xUf"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="1XF-Wl-lIE" secondAttribute="trailing" id="JB2-kb-x1e"/>
-                                                                    <constraint firstItem="1XF-Wl-lIE" firstAttribute="centerY" secondItem="N5X-Q6-8XV" secondAttribute="centerY" id="gyZ-e9-flc"/>
-                                                                    <constraint firstAttribute="height" constant="35" id="woG-LU-Zyu"/>
-                                                                </constraints>
-                                                            </view>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="F09-6U-2YX" secondAttribute="trailing" constant="10" id="IcM-Ho-dXg"/>
@@ -551,7 +526,6 @@
                                                             <constraint firstItem="F09-6U-2YX" firstAttribute="leading" secondItem="Qr1-yI-fZj" secondAttribute="leading" constant="10" id="N0X-Z8-V1W"/>
                                                             <constraint firstAttribute="trailing" secondItem="5W2-Ad-9ar" secondAttribute="trailing" constant="14.5" id="R4Q-H6-cab"/>
                                                             <constraint firstItem="5W2-Ad-9ar" firstAttribute="leading" secondItem="Qr1-yI-fZj" secondAttribute="leading" constant="14.5" id="rgq-jT-yOe"/>
-                                                            <constraint firstItem="N5X-Q6-8XV" firstAttribute="top" secondItem="F09-6U-2YX" secondAttribute="bottom" id="w68-yH-P4G"/>
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
@@ -627,6 +601,7 @@
                         <outlet property="eventsCollectionView" destination="F09-6U-2YX" id="pSk-oS-s7g"/>
                         <outlet property="eventsStackView" destination="Qr1-yI-fZj" id="ft1-3A-Lsz"/>
                         <outlet property="eventsViewHeight" destination="DVv-ZY-mPT" id="XZ2-eO-gNf"/>
+                        <outlet property="firstBorderHeight" destination="SM0-fb-g7W" id="sDL-RY-mo3"/>
                         <outlet property="focusHeader" destination="lgR-nk-9yp" id="6Vt-5R-NJb"/>
                         <outlet property="focusView" destination="SF4-Kb-s3b" id="vYx-0p-v3e"/>
                         <outlet property="followerCount" destination="C4p-o0-a8V" id="29Z-WO-ELs"/>
@@ -638,8 +613,6 @@
                         <outlet property="fullNameLabel" destination="eCO-Sw-Meb" id="TdA-K9-EVV"/>
                         <outlet property="interestStackView" destination="WUe-TH-3g9" id="lkG-8V-Pxg"/>
                         <outlet property="interestViewHeight" destination="Izk-t9-tYE" id="Rfi-NP-wcp"/>
-                        <outlet property="moreEventsButton" destination="1XF-Wl-lIE" id="KLy-uX-eCI"/>
-                        <outlet property="moreEventsButtonView" destination="N5X-Q6-8XV" id="V25-q0-uJY"/>
                         <outlet property="moreFocusButton" destination="Kco-bc-7mH" id="ifu-Gu-vgd"/>
                         <outlet property="navBar" destination="Oi3-pC-q5R" id="5Pg-Iw-1dx"/>
                         <outlet property="navBarItem" destination="SNQ-5X-BJ8" id="x2d-OC-eDu"/>
@@ -754,6 +727,11 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -781,6 +759,11 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="usernameChanged:" destination="fzK-Fg-Tt6" eventType="valueChanged" id="I5z-Bb-WK2"/>
                                                 </connections>
@@ -811,6 +794,11 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -838,6 +826,11 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -885,6 +878,11 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -912,6 +910,11 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -939,6 +942,11 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1060,7 +1068,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="1564"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jX0-Sr-gqD">
-                                        <rect key="frame" x="2" y="3" width="375" height="1540"/>
+                                        <rect key="frame" x="2" y="3" width="375" height="1560"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ny-td-iO2">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
@@ -1337,10 +1345,10 @@
                                                 </constraints>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcz-6y-l6N" userLabel="FOCUS View">
-                                                <rect key="frame" x="0.0" y="1133" width="375" height="157"/>
+                                                <rect key="frame" x="0.0" y="1133" width="375" height="177"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Lc-dF-pxm" userLabel="Focus Stack View">
-                                                        <rect key="frame" x="7.5" y="5" width="359" height="146"/>
+                                                        <rect key="frame" x="7.5" y="5" width="359" height="166"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBA-ge-RaF" userLabel="Border Container View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="23"/>
@@ -1384,11 +1392,53 @@
                                                                     <constraint firstAttribute="height" constant="64" id="LaD-p2-5In"/>
                                                                 </constraints>
                                                             </stackView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFK-wN-M5x">
-                                                                <rect key="frame" x="0.0" y="126" width="359" height="20"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKW-CZ-zct" userLabel="More or Less Button Stack">
+                                                                <rect key="frame" x="0.0" y="126" width="359" height="40"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hTO-6C-45F">
+                                                                        <rect key="frame" x="310" y="0.0" width="45" height="40"/>
+                                                                        <subviews>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzc-OI-Ta8" userLabel="More">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="20"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="20" id="RAi-ZU-aSN"/>
+                                                                                    <constraint firstAttribute="width" constant="45" id="xwx-uH-kPr"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                                                <state key="normal" title="More">
+                                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                </state>
+                                                                                <connections>
+                                                                                    <action selector="moreInterestsButtonPressed:" destination="zic-h3-qjZ" eventType="touchUpInside" id="if4-Hz-PQB"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdO-yK-PZH" userLabel="Less">
+                                                                                <rect key="frame" x="0.0" y="20" width="45" height="20"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="45" id="1X7-sC-Q8k"/>
+                                                                                    <constraint firstAttribute="height" constant="20" id="wIB-QK-4fR"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                                                <state key="normal" title="Less">
+                                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                </state>
+                                                                                <connections>
+                                                                                    <action selector="lessInterestsButtonPressed:" destination="zic-h3-qjZ" eventType="touchUpInside" id="cAN-He-0aT"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="40" id="nQ3-Qf-aue"/>
+                                                                        </constraints>
+                                                                    </stackView>
+                                                                </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="20" id="iP2-j6-0hG"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="hTO-6C-45F" secondAttribute="bottom" id="0l3-uB-yw4"/>
+                                                                    <constraint firstItem="hTO-6C-45F" firstAttribute="centerY" secondItem="xKW-CZ-zct" secondAttribute="centerY" id="0xi-EC-foc"/>
+                                                                    <constraint firstItem="hTO-6C-45F" firstAttribute="top" secondItem="xKW-CZ-zct" secondAttribute="top" id="23b-ga-3Mi"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="KJh-Ek-LSl"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="hTO-6C-45F" secondAttribute="trailing" constant="4" id="XcG-Sm-dbc"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -1404,7 +1454,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1D-0y-Ho8" userLabel="Events View">
-                                                <rect key="frame" x="0.0" y="1290" width="375" height="250"/>
+                                                <rect key="frame" x="0.0" y="1310" width="375" height="250"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Oa-EW-WNa">
                                                         <rect key="frame" x="8" y="7.5" width="359" height="235"/>
@@ -1476,7 +1526,6 @@
                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <action selector="moreButtonPressed:" destination="cU2-hP-1h7" eventType="touchUpInside" id="c72-RC-R8r"/>
                                                                             <action selector="moreButtonPressed:" destination="zic-h3-qjZ" eventType="touchUpInside" id="yBp-gB-Cjr"/>
                                                                         </connections>
                                                                     </button>
@@ -1565,6 +1614,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1628"/>
                     <connections>
+                        <outlet property="containStackForMoreOrLessButtonsHeight" destination="KJh-Ek-LSl" id="nJC-fv-SvR"/>
+                        <outlet property="containerStackForMoreOrLessButtons" destination="xKW-CZ-zct" id="7Yt-QF-ZUA"/>
                         <outlet property="descriptionText" destination="bvR-9c-fvq" id="zbh-eT-pNA"/>
                         <outlet property="eventView" destination="L1D-0y-Ho8" id="ntM-hC-mXD"/>
                         <outlet property="eventsCollectionView" destination="eAY-iy-r1X" id="ASA-xX-pAD"/>
@@ -1572,6 +1623,7 @@
                         <outlet property="eventsStackView" destination="9Oa-EW-WNa" id="HqK-Ck-6Rd"/>
                         <outlet property="eventsTableView" destination="FoV-pv-tzE" id="JOa-gC-9Vy"/>
                         <outlet property="eventsTableViewHeight" destination="Vsq-3s-VHN" id="9Nq-et-SFz"/>
+                        <outlet property="focusStackView" destination="2Lc-dF-pxm" id="5X0-aU-hDN"/>
                         <outlet property="focusView" destination="hcz-6y-l6N" id="R9C-bp-ygo"/>
                         <outlet property="followButton" destination="Uez-YN-oS6" id="P2s-4Z-hhe"/>
                         <outlet property="followerCount" destination="uMX-Ja-tFj" id="Q82-q1-qAT"/>
@@ -1587,9 +1639,13 @@
                         <outlet property="inviteButton" destination="cN5-vM-Kw9" id="3BD-JP-JGj"/>
                         <outlet property="invitePopupTopConstraint" destination="UW4-WF-LWG" id="bwd-2r-ThU"/>
                         <outlet property="invitePopupView" destination="afw-ap-eY6" id="nbK-TD-aGu"/>
+                        <outlet property="lessButton" destination="DdO-yK-PZH" id="xmg-Ve-rID"/>
                         <outlet property="messageButton" destination="M7q-7M-KpS" id="cmy-D4-qMv"/>
+                        <outlet property="moreButton" destination="Tzc-OI-Ta8" id="Fed-ZE-KXY"/>
                         <outlet property="moreEventsButton" destination="BVc-89-Xb0" id="h1C-vs-Z1C"/>
                         <outlet property="moreEventsStack" destination="7EM-0m-PLf" id="JCR-ls-qa1"/>
+                        <outlet property="moreOrLessButtonStack" destination="hTO-6C-45F" id="ekh-OZ-aDe"/>
+                        <outlet property="moreOrLessButtonStackHeight" destination="nQ3-Qf-aue" id="n8I-43-p09"/>
                         <outlet property="navBar" destination="e9i-G3-Hb7" id="DWe-hJ-khv"/>
                         <outlet property="navBarItem" destination="kge-L7-JD1" id="pBI-W7-IDF"/>
                         <outlet property="otherEventStackView" destination="YBH-44-GmL" id="Xvg-fu-Qag"/>

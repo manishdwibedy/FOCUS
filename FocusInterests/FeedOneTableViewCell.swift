@@ -111,8 +111,7 @@ class FeedOneTableViewCell: UITableViewCell {
         }
     }
     
-    func goToMap(sender: UITapGestureRecognizer)
-    {
+    func goToMap(sender: UITapGestureRecognizer){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
         vc.willShowPin = true
