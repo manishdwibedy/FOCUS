@@ -90,8 +90,15 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         ]
         
         navBar.titleTextAttributes = attrs
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        let cancelButtonAttributes: [String: AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
         
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(cancelButtonAttributes, for: .normal)
+
         let ref = Constants.DB.user
         
         var followingCount = 0
@@ -245,15 +252,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             }
             
         })
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let cancelButtonAttributes: [String: AnyObject] = [NSForegroundColorAttributeName: UIColor.white]
-        
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(cancelButtonAttributes, for: .normal)
-
         
     }
     
