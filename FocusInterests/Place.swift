@@ -57,6 +57,15 @@ class Place: Equatable, NSCoding{
         return lhs.id == rhs.id
     }
     
+    func getHour(day: Int) -> Hours?{
+        for hour in self.hours!{
+            if hour.day == day{
+                return hour
+            }
+        }
+        return nil
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         self.id = aDecoder.decodeObject(forKey: "id") as! String
         self.name = aDecoder.decodeObject(forKey: "name") as! String

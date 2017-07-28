@@ -256,45 +256,42 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         {
             let cell:InvitePeoplePlaceCell = self.tableView.dequeueReusableCell(withIdentifier: "InvitePeoplePlaceCell") as! InvitePeoplePlaceCell!
             
-            let place = filtered[indexPath.row] as! Place
-            cell.place = place
-            cell.placeNameLabel.text = place.name
+            let place_cell = filtered[indexPath.row] as! Place
+            cell.place = place_cell
+            cell.placeNameLabel.text = place_cell.name
            // cell.place = place
-            print("address \(place.address)")
-            print("addressCount \(place.address.count)")
-            if place.address.count > 0{
-                if place.address.count == 1{
-                    cell.addressTextView.text = "\(place.address[0])"
+            
+            if place_cell.address.count > 0{
+                if place_cell.address.count == 1{
+                    cell.addressTextView.text = "\(place_cell.address[0])"
                 }
                 else{
-                    cell.addressTextView.text = "\(place.address[0])\n\(place.address.last!)"
+                    cell.addressTextView.text = "\(place_cell.address[0])\n\(place_cell.address.last!)"
                 }
             }
             
-            print("place.id\(place.id)")
-            print("place.image\(place.image_url)")
+            cell.setRatingAmount(ratingAmount: Double(place_cell.rating))
             
-            cell.setRatingAmount(ratingAmount: Double(place.rating))
-            
-            cell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
+            cell.ratingLabel.text = "\(place_cell.rating) (\(place_cell.reviewCount) reviews)"
             
             let date = Date()
             let calendar = Calendar.current
             
             let day = calendar.component(.weekday, from: date)
-            if let hour = place.hours?[day]{
+            
+            if let hour = place_cell.getHour(day: day){
                 cell.dateAndTimeLabel.text = "\(convert24HourTo12Hour(hour.start)) - \(convert24HourTo12Hour(hour.end))"
             }
             
-            let place_location = CLLocation(latitude: place.latitude, longitude: place.longitude)
+            let place_location = CLLocation(latitude: place_cell.latitude, longitude: place_cell.longitude)
             cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
-            if place.categories.count > 0{
-                addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place.categories[0].alias))
+            if place_cell.categories.count > 0{
+                addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place_cell.categories[0].alias))
             }
         
             
             cell.checkForFollow()
-            if let url = URL(string: place.image_url){
+            if let url = URL(string: place_cell.image_url){
                 SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
                     (receivedSize :Int, ExpectedSize :Int) in
                     
@@ -497,33 +494,38 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
         }else if segmentedOut.selectedSegmentIndex == 1
         {
-            let DF = DateFormatter()
-            DF.dateFormat = "MMM d, h:mm a"
-            
-            self.filtered.removeAll()
-            Constants.DB.event.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
+            if(searchText.characters.count > 0){
+                let DF = DateFormatter()
+                DF.dateFormat = "MMM d, h:mm a"
+                
                 self.filtered.removeAll()
-                if let value = value
-                {
-                    for (id, event) in value
+                Constants.DB.event.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    self.filtered.removeAll()
+                    if let value = value
                     {
-                        if let info = event as? [String:Any]{
-                            let event = Event.toEvent(info: info)
-                            event?.id = id as? String
-                            
-//                            if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
+                        for (id, event) in value
+                        {
+                            if let info = event as? [String:Any]{
+                                let event = Event.toEvent(info: info)
+                                event?.id = id as? String
+                                
+                                //                            if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
                                 self.filtered.append(event)
-//                            }
+                                //                            }
+                                
+                            }
                             
                         }
-                        
+                        self.tableView.reloadData()
                     }
-                    self.tableView.reloadData()
-                }
-                
-            })
-        
+                    
+                })
+            }
+            else{
+                updateEvents()
+            }
+            
             
         }
         
