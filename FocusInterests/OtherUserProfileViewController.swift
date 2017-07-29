@@ -99,6 +99,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var suggestedEvents = [Event]()
     var suggestedPlaces = [Place]()
     
+    var pinImage: UIImage? = nil
     // Back button
     @IBAction func backButton(_ sender: Any) {
         if otherUser, let previous = previous{
@@ -222,43 +223,36 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //                        self.pinLikesLabel.text = "\(count!) \(label)"
                     }
                     
-                    
-                 
-                    
-                    // OLD PIN
-                else{
-//                    self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
-//                    self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
-                    
-//                    self.emptyPinButton.isHidden = false
-//                    self.emptyPinButton.setTitle("Update Pin", for: .normal)
-//                    self.pinDistanceLabel.isHidden = true
-//                    self.pinAddress2Label.isHidden = true
-//                    self.greenDotImage.isHidden = true
-//                    self.pinImage.isHidden = true
-//                    self.pinCategoryLabel.isHidden = true
-//                    self.pinLikesLabel.isHidden = true
-//                    self.updatePinButton.isHidden = true
-                    
-                }
-                
-                
-                
-            }else{
-//                self.view.frame = CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 706)
-//                self.userScrollView.frame = CGRect(x: 0, y: 0, width: Int(self.userScrollView.frame.width), height: 572)
-
-                
-//                self.emptyPinButton.isHidden = false
-//                
-//                self.pinDistanceLabel.isHidden = true
-//                self.pinAddress2Label.isHidden = true
-//                self.greenDotImage.isHidden = true
-//                self.pinImage.isHidden = true
-//                self.pinCategoryLabel.isHidden = true
-//                self.pinLikesLabel.isHidden = true
-//                self.updatePinButton.isHidden = true
-                
+        
+                    if value["images"] != nil
+                    {
+                        var firstVal = ""
+                        for (key,_) in (value["images"] as! NSDictionary)
+                        {
+                            firstVal = key as! String
+                            break
+                        }
+                        
+                        let reference = Constants.storage.pins.child(((value["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
+                        reference.downloadURL(completion: { (url, error) in
+                            
+                            if error != nil {
+                                print(error?.localizedDescription ?? "")
+                                return
+                            }
+                            
+                            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                                (receivedSize :Int, ExpectedSize :Int) in
+                                
+                            }, completed: {
+                                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                                
+                                if image != nil && finished{
+                                    self.pinImage = image
+                                }
+                            })
+                        })
+                    }
             }
         })
         
