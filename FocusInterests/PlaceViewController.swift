@@ -84,13 +84,15 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         self.placeImage.layer.borderColor = Constants.color.lightBlue.cgColor
         self.placeImage.roundedImage()
         
+        
+        self.followButton.roundCorners(radius: 5.0)
         self.followButton.setTitleColor(UIColor.white, for: .normal)
         self.followButton.setTitle("Follow", for: .normal)
         self.followButton.setTitleColor(UIColor.white, for: .selected)
         self.followButton.setTitle("Following", for: .selected)
+        
         self.checkIfFollowing()
         
-        self.followButton.roundCorners(radius: 5.0)
         self.inviteButton.roundCorners(radius: 5.0)
         self.reviewButton.roundCorners(radius: 5.0)
         self.pinButton.roundCorners(radius: 5.0)
@@ -189,26 +191,18 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     }
     
     @IBAction func followButtonPressed(_ sender: UIButton) {
-        sender.isSelected  = !sender.isSelected;
-        
-        if sender.isSelected == true{
-            sender.layer.borderWidth = 1
-            sender.layer.borderColor = UIColor.white.cgColor
-            sender.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
-            
-            let time = NSDate().timeIntervalSince1970
-            Follow.followPlace(id: (place?.id)!)
-            
-        }else if sender.isSelected == false {
+        print("changing following button")
+//        self.followButton.isSelected = !self.followButton.isSelected
+        if self.followButton.isSelected == true{
             
             let unfollowAlertController = UIAlertController(title: "Are you sure you want to unfollow \(self.place!.name)?", message: nil, preferredStyle: .actionSheet)
-            
-            
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
-                sender.layer.borderWidth = 0.0
-                sender.backgroundColor = Constants.color.green
-                
                 Follow.unFollowPlace(id: (self.place?.id)!)
+                self.followButton.layer.borderWidth = 1
+                self.followButton.layer.borderColor = UIColor.clear.cgColor
+                self.followButton.backgroundColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
+                self.followButton.tintColor = UIColor.clear
+                self.followButton.isSelected = false
             }
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
@@ -219,23 +213,32 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
             unfollowAlertController.addAction(cancelAction)
             self.present(unfollowAlertController, animated: true, completion: nil)
             
+        }else{
+            let time = NSDate().timeIntervalSince1970
+            Follow.followPlace(id: (place?.id)!)
+            self.followButton.layer.borderWidth = 1
+            self.followButton.layer.borderColor = UIColor.white.cgColor
+            self.followButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+            self.followButton.tintColor = UIColor.clear
+            self.followButton.isSelected = true
         }
     }
 
     func checkIfFollowing(){
-        
+        print("checking if being following")
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").queryOrdered(byChild: "placeID").queryEqual(toValue: place!.id).observeSingleEvent(of: .value, with: {snapshot in
             
             if let data = snapshot.value as? [String:Any]{
+                self.followButton.isSelected = true
                 self.followButton.layer.borderWidth = 1
                 self.followButton.layer.borderColor = UIColor.white.cgColor
-                self.followButton.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
-                self.followButton.isSelected = true
-            }
-            else{
-                self.followButton.layer.borderWidth = 0.0
-                self.followButton.backgroundColor = Constants.color.green
+                self.followButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+                self.followButton.tintColor = UIColor.clear
+            }else{
                 self.followButton.isSelected = false
+                self.followButton.layer.borderWidth = 0.0
+                self.followButton.backgroundColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
+                self.followButton.tintColor = UIColor.clear
             }
         })
     }

@@ -160,7 +160,6 @@ class SearchPeopleTableViewCell: UITableViewCell {
                 sender.layer.masksToBounds = false
                 sender.layer.shadowColor = UIColor.black.cgColor
                 sender.layer.shadowRadius = 5.0
-                
             }
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in

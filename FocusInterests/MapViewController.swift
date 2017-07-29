@@ -932,7 +932,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
         
         dropfromTop(view: self.view)
-        
         self.present(VC, animated:true, completion:nil)        
     }
     

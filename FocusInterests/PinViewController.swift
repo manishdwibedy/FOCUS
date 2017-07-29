@@ -427,7 +427,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             otherPlacesCell.dateAndTimeLabel.text = "7/20 10:00 P.M."
             otherPlacesCell.placeNameLabel.text = place.name
             otherPlacesCell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
-            
+            otherPlacesCell.setRatingAmountForSearchPlaceCell(ratingAmount: Double(place.rating))
             let address = place.address.joined(separator: "\n")
             
             if let url = URL(string: place.image_url){

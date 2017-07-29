@@ -51,11 +51,10 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
         if indexPath.row == 0{
             
             let allInterestsCell = tableView.dequeueReusableCell(withIdentifier: "selectAllInterestsCell", for: indexPath) as! SelectAllInterestsTableViewCell
-            allInterestsCell.showAllButton.setTitle("Show All Interests", for: .normal)
-            allInterestsCell.showAllButton.setTitleColor(Constants.color.navy, for: .normal)
-            
-            allInterestsCell.showAllButton.setTitle("Show All Interests", for: .selected)
-            allInterestsCell.showAllButton.setTitleColor(Constants.color.navy, for: .selected)
+            allInterestsCell.showAllLabel.text = "Show All Interests"
+            allInterestsCell.showAllLabel.textColor = Constants.color.navy
+            allInterestsCell.tintColor = Constants.color.green
+            print("all interest cell isselected at \(indexPath.row): \(allInterestsCell.isSelected)")
             return allInterestsCell
             
         }else{
@@ -64,11 +63,10 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
             let interest = "\(self.interests[indexPath.row-1]) Green"
             
             singleInterestCell.interestImage.image = UIImage(named: interest)
-            singleInterestCell.interestLabel.setTitle(self.interests[indexPath.row-1], for: .normal)
-            singleInterestCell.interestLabel.setTitleColor(UIColor.white, for: .normal)
+            singleInterestCell.interestLabel.text = self.interests[indexPath.row-1]
+            singleInterestCell.tintColor = Constants.color.green
+            print("interest cell isselected at \(indexPath.row): \(singleInterestCell.isSelected)")
             
-            singleInterestCell.interestLabel.setTitle(self.interests[indexPath.row-1], for: .selected)
-            singleInterestCell.interestLabel.setTitleColor(UIColor.white, for: .selected)
             return singleInterestCell
         }
     }
@@ -77,36 +75,54 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
         guard let selectedCell = tableView.cellForRow(at: indexPath) else{
             return
         }
-        
-        guard let indexPathForSelectedRows = tableView.indexPathsForSelectedRows else {
+
+        guard let indexPathForSelectedRows = tableView.indexPathsForSelectedRows?.sorted() else {
             print("no index path")
             return
         }
-        
         let amountOfSelectedRows = indexPathForSelectedRows.count
         
         if indexPath.row == 0{
             print("selected cell at 0")
-            if selectedCell.isSelected{
-                selectedCell.accessoryType = .checkmark
-                if amountOfSelectedRows <= 1{
-                    print("do not need to deselectcells")
-                }else{
-                    for cellIndex in 1...indexPathForSelectedRows.count-1{
-                        tableView.deselectRow(at: indexPathForSelectedRows[cellIndex], animated: false)
+
+            // set the accessory type for show all cell
+            selectedCell.accessoryType = .checkmark
+            
+            // check if how many selected rows there are
+            // if there's only one then skip
+            // else
+            if amountOfSelectedRows <= 1{
+                print("do not need to deselectcells")
+            }else{
+                for cellIndex in 1...indexPathForSelectedRows.count-1{
+                    tableView.deselectRow(at: IndexPath(row: indexPathForSelectedRows[cellIndex][1], section: 0), animated: false)
+                }
+                
+                for visibleCellsIndex in 1...tableView.visibleCells.count-1{
+                    if tableView.visibleCells[visibleCellsIndex].accessoryType == .checkmark{
+                        tableView.visibleCells[visibleCellsIndex].accessoryType = .none
                     }
                 }
-            }else{
-                selectedCell.accessoryType = .none
             }
         }else{
-            if selectedCell.isSelected{
-                selectedCell.accessoryType = .checkmark
-            }else{
-                selectedCell.accessoryType = .none
+            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+            let zeroIndex = tableView.indexPathsForVisibleRows?.sorted()[0][0]
+            if zeroIndex == 0 {
+                tableView.visibleCells.first?.accessoryType = .none
             }
+            
+            selectedCell.accessoryType = .checkmark
             print("selected cell not at 0")
         }
+
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else{
+            return
+        }
+        selectedCell.accessoryType = .none
     }
     
 

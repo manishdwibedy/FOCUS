@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageViewController: UITabBarController {
+class HomePageViewController: UITabBarController, UIPopoverPresentationControllerDelegate{
 
     var willShowEvent = false
     var showEvent: Event? = nil
@@ -57,6 +57,7 @@ class HomePageViewController: UITabBarController {
         vc.showTutorial = showTutorial
         self.setStatusBarStyle(UIStatusBarStyle.default)
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +81,69 @@ class HomePageViewController: UITabBarController {
             
             self.tabBar.addSubview(separator)
         }
+    }
+    
+//    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+//        if item.tag == 2{
+////            let menuViewController: ActivityPopoverViewController = storyboard.instantiateViewControllerWithIdentifier("ActivityPopoverViewController") as! ActivityPopoverViewController
+////            menuViewController.modalPresentationStyle = .Popover
+////            menuViewController.view.frame = newRect
+////            menuViewController.preferredContentSize = CGSizeMake(150, 150)
+////            
+////            if let popoverMenuViewController = menuViewController.popoverPresentationController {
+////                popoverMenuViewController.permittedArrowDirections = .Down
+////                popoverMenuViewController.delegate = menuViewController
+////                popoverMenuViewController.sourceRect = newRect
+////                popoverMenuViewController.sourceView = self.menuTabBar
+////                
+////                presentViewController(menuViewController, animated: true, completion: nil)
+////                
+////            }
+//            
+//            let tabBarItemWidth = Int(tabBar.frame.size.width) / (tabBar.items?.count)!
+//            let x = tabBarItemWidth * 2
+//            let newRect = CGRect(x: x, y: 0, width: tabBarItemWidth, height: Int(tabBar.frame.size.height))
+//            print(newRect)
+//            
+//            let popController = UIStoryboard(name: "CreateEventOnMapViewController", bundle: nil).instantiateViewController(withIdentifier: "CreateEventOnMapViewController")
+//            
+//            // set the presentation style
+//            popController.modalPresentationStyle = .popover
+//            
+//            popController.preferredContentSize = CGSize(width: popController.childViewControllers[0].view.frame.size.width, height: popController.childViewControllers[0].view.frame.size.height)
+//            
+//            if let  popoverPinViewController = popController.popoverPresentationController{
+//                
+//                popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+//                popController.popoverPresentationController?.delegate = self
+//                popController.popoverPresentationController?.sourceRect = newRect
+//                popController.popoverPresentationController?.sourceView = tabBar
+//                self.present(popController, animated: true, completion: nil)
+//            }
+//
+//        }
+//    }
+    
+    //    MARK: this is for popover for notifications
+    
+//    func showPopOver(_ sender: UIButton){
+//        let popController = UIStoryboard(name: "FollowersRequest", bundle: nil).instantiateViewController(withIdentifier: "FollowersRequest")
+//        
+//        // set the presentation style
+//        popController.modalPresentationStyle = UIModalPresentationStyle.popover
+//        
+//        popController.preferredContentSize = CGSize(width: 200, height: 60)
+//        
+//        // set up the popover presentation controller
+//        popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+//        popController.popoverPresentationController?.delegate = self
+//        popController.popoverPresentationController?.sourceView = sender as UIView // button
+//        popController.popoverPresentationController?.sourceRect = sender.bounds
+//        self.present(popController, animated: true, completion: nil)
+//    }
+//    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
     
     /*

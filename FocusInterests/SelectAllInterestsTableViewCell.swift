@@ -11,7 +11,7 @@ import UIKit
 class SelectAllInterestsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var checkMarkButton: UIButton!
-    @IBOutlet weak var showAllButton: UIButton!
+    @IBOutlet weak var showAllLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,15 +23,6 @@ class SelectAllInterestsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    @IBAction func selectAllClicked(_ sender: Any) {
-        if self.accessoryType == .checkmark{
-            self.showAllButton.isSelected = false
-            self.accessoryType = .none
-        }else{
-            self.showAllButton.isSelected = true
-            self.accessoryType = .checkmark
-        }
-        
-    }
+    
     
 }
