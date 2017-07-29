@@ -371,7 +371,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         googleMapButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         
-        getNearbyPlaces(text: "", categories: yelp_category.joined(separator: ","), count: 3, location: CLLocation(latitude: place.latitude, longitude: place.longitude), completion: {places in
+        getNearbyPlaces(text: "", id: place.id, categories: yelp_category.joined(separator: ","), count: 3, location: CLLocation(latitude: place.latitude, longitude: place.longitude), completion: {places in
             self.suggestedPlaces = places
             self.peopleAlsoLikedTableView.reloadData()
         })
@@ -454,7 +454,7 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             return otherPlacesCell
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView.tag == 0){
             return 80
@@ -463,7 +463,18 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             return cell.frame.height
         }
     }
-    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.tag == 1{
+            let place = suggestedPlaces[indexPath.row]
+            print(place)
+            let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+            controller.place = place
+            self.present(controller, animated: true, completion: nil)
+            
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         var frame = self.peopleAlsoLikedTableView.frame;

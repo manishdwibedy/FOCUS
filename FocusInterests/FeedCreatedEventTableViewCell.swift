@@ -49,6 +49,10 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SearchEventTableViewCell
+        
+        cell.event = event
+        cell.parentVC = parentVC
+        
         cell.attendButton.roundCorners(radius: 5.0)
         cell.attendButton.layer.shadowOpacity = 0.5
         cell.attendButton.layer.masksToBounds = false
