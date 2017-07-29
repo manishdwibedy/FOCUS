@@ -729,7 +729,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                             event.setAttendessCount(count: attending.count)
                         }
                         
-                        if event.id != self.event?.id{
+                        if event.id != self.event?.id && !self.suggestions.contains(event){
                             self.suggestions.append(event)
                         }
                         
