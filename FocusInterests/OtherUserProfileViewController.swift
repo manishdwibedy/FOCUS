@@ -282,7 +282,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.suggestion.count > 3 ? 3 : self.suggestion.count
+        return self.suggestion.count > 9 ? 9 : self.suggestion.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -647,7 +647,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                             self.suggestion.append(event!)
                             if self.suggestion.count == count{
                                 
-                                if self.suggestion.count > 3{
+                                if self.suggestion.count > 9{
                                     self.moreEventsButton.isHidden = false
                                 }
                                 else{
