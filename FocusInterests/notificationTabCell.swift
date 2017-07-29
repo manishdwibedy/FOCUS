@@ -51,6 +51,23 @@ class notificationTabCell: UITableViewCell {
         var actionStr = ""
         var whatStr = ""
         
+        if notif.type == .Following{
+            self.profileImage.sd_setImage(with: URL(string: notif.sender!.imageURL!)!, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+            
+            let attrString: NSMutableAttributedString = NSMutableAttributedString(string:notif.sender!.username! + " ")
+            attrString.addAttribute(NSForegroundColorAttributeName, value:Constants.color.green, range: NSMakeRange(0,  notif.sender!.username!.characters.count))
+            
+            let other = "started following you"
+            let otherAttrString: NSMutableAttributedString = NSMutableAttributedString(string:other)
+            otherAttrString.addAttribute(NSForegroundColorAttributeName, value:UIColor.white, range: NSMakeRange(0,  other.characters.count))
+            attrString.append(otherAttrString)
+            
+            self.usernameLabel.attributedText = attrString
+            self.typePic.isHidden = true
+            self.timeLabel.text = ""
+            
+            return
+        }
         if let sender = data["senderID"] as? String{
             Constants.DB.user.child(sender).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary

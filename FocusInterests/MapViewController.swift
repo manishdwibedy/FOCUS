@@ -330,7 +330,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     self.notifs.append(contentsOf: Array(Set<FocusNotification>(notif)))
                     
                     count_received += 1
-                    if count_received == 4 + 1{
+                    if count_received == 5 + 1{
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
                         not_count -= read_notifications
@@ -351,7 +351,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     self.invites.append(contentsOf: Array(Set<FocusNotification>(invites)))
                     
                     count_received += 1
-                    if count_received == 4 + 1{
+                    if count_received == 5 + 1{
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
                         for invite in (invites as? [FocusNotification])!{
@@ -382,7 +382,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 } , gotFeed: {feed in
                     self.searchEventsTab?.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
                     
-                    if count_received == 4 + 1{
+                    if count_received == 5 + 1{
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
                         not_count -= read_notifications
@@ -409,7 +409,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 self.notifs.append(contentsOf: notif)
                 
                 count_received += 1
-                if count_received == 4 + 1{
+                if count_received == 5 + 1{
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
                     for invite in (self.invites as? [FocusNotification])!{
@@ -444,7 +444,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 self.invites.append(contentsOf: invite)
                 count_received += 1
-                if count_received == 4 + 1{
+                if count_received == 5 + 1{
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
                     for invite in (self.invites as? [FocusNotification])!{
@@ -479,7 +479,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             } , gotFeed: {feed in
                 self.searchEventsTab?.feeds.append(contentsOf: feed)
                 
-                if count_received == 4 + 1{
+                if count_received == 5 + 1{
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
                     not_count -= read_notifications

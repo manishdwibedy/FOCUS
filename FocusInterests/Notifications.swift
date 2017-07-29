@@ -14,6 +14,7 @@ enum NotificationType: String {
     case Pin = "pinned"
     case Going = "is going to"
     case Created = "create an event "
+    case Following = "is following you"
 }
 
 import Foundation

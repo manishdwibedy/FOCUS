@@ -29,6 +29,9 @@ class NotificationUtil{
         }, gotAcceptedInvites: {invites in
             nofArray.append(contentsOf: invites)
             gotNotification(nofArray)
+        }, gotFollowers: {followers in
+            nofArray.append(contentsOf: followers)
+            gotNotification(nofArray)
         })
         
         FirebaseDownstream.shared.getUserNotifications(completion: {array in
@@ -50,10 +53,12 @@ class NotificationUtil{
 
     }
     
-    static func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotification]) -> Void, gotEventLikes: @escaping (_ comments: [FocusNotification]) -> Void, gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotAcceptedInvites: @escaping (_ comments: [FocusNotification]) -> Void){
+    static func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotification]) -> Void, gotEventLikes: @escaping (_ comments: [FocusNotification]) -> Void, gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotAcceptedInvites: @escaping (_ comments: [FocusNotification]) -> Void, gotFollowers: @escaping (_ followers: [FocusNotification]) -> Void){
         
         var place_count = 0
         var place_invites = [FocusNotification]()
+        var user_count = 0
+        var followers = [FocusNotification]()
         var event_comment_count = 0
         var event_comments = [FocusNotification]()
         var event_likes_count = 0
@@ -114,6 +119,43 @@ class NotificationUtil{
             
             
         })
+        
+        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/followers/people").observeSingleEvent(of: .value, with: { snapshot in
+            if let value = snapshot.value as? [String:Any]{
+                
+                    let user_count = value.count
+                    for (_, user) in value{
+                        if let user = user as? [String:Any]{
+                            Constants.DB.user.child((user["UID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
+                                if let value = snapshot.value as? [String:Any]{
+                                    let user = NotificationUser(username: value["username"] as? String, uuid: value["firebaseUserId"] as? String, imageURL: value["image_string"] as? String)
+                                    
+                                    let invite_place = ItemOfInterest(itemName: user.username, imageURL: nil, type: "")
+                                    
+                                    let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: invite_place, time: Date())
+                                    followers.append(event_comment)
+                                    
+                                    if followers.count == user_count{
+                                        gotFollowers(followers)
+                                    }
+                                    
+                                }
+                                
+                            })
+                            
+                            
+                        }
+                        
+                    }
+                
+            }
+            else{
+                gotAcceptedInvites(place_invites)
+            }
+            
+            
+        })
+        
         Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
             let eventInfo = snapshot.value as? [String : Any]
             
@@ -122,7 +164,9 @@ class NotificationUtil{
                 for (id, event) in eventInfo{
                     if let info = event as? [String:Any]{
                         
-                        let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as! String, longitude: (info["longitude"])! as! String, date: (info["date"])! as! String, creator: (info["creator"])! as! String, id: id, category: info["interest"] as? String, privateEvent: (info["private"] as? Bool)!)
+                        let event = Event.toEvent(info: info)
+                        event?.id = id
+                        
                         
                         if let comments = info["comments"] as? [String:Any]{
                             event_comment_count += comments.count
@@ -150,6 +194,9 @@ class NotificationUtil{
                                 }
                             }
                         }
+                        else{
+                            event_comment_count += 1
+                        }
                         
                         if let likes = info["likedBy"] as? [String:Any]{
                             event_likes_count += likes.count
@@ -157,7 +204,7 @@ class NotificationUtil{
                                 if let likeData = likeData as? [String:Any]{
                                     if let user = likeData["UID"] as? String{
                                         getUserData(uid: user, gotInfo: {user in
-                                            let comment = ItemOfInterest(itemName: event.title, imageURL: nil, type: "like")
+                                            let comment = ItemOfInterest(itemName: event?.title, imageURL: nil, type: "like")
                                             comment.data = [
                                                 "type": "event",
                                                 "id": id,
@@ -176,6 +223,16 @@ class NotificationUtil{
                                     }
                                 }
                             }
+                        }
+                        else{
+                            event_likes_count += 1
+                        }
+                        
+                        if event_likes_count == eventInfo.count{
+                            gotEventLikes(event_likes)
+                        }
+                        if event_comment_count == eventInfo.count{
+                            gotEventComments(event_comments)
                         }
                     }
                 }
@@ -206,6 +263,7 @@ class NotificationUtil{
                     "pin": pinInfo
                 ]
                 let pinFeed = FocusNotification(type: NotificationType.Pin, sender: user, item: place, time: time)
+                pins.append(pinFeed)
                 
                 
                 if let images = pin["images"] as? [String:Any]{
