@@ -610,7 +610,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 }
             }
             
-            if self.suggestion.count > 3{
+            if self.suggestion.count > 9{
                 self.moreEventsButton.isHidden = false
                 self.eventsStackView.addArrangedSubview(self.moreEventsStack)
             }else{
