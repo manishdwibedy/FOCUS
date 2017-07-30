@@ -1148,6 +1148,86 @@ func yelpSearch(interest: String, location: CLLocation, gotPlaces: @escaping (_ 
         gotPlaces(places)
     }
 }
+
+func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> Void){
+    var eventCount = 0
+    var events = [Event]()
+    
+    Constants.DB.user.child(uid).child("invitations/event").observeSingleEvent(of: .value, with: { (snapshot) in
+        let value = snapshot.value as? NSDictionary
+        
+        if let value = value{
+            eventCount = value.count
+            for (_,event) in value{
+                let event_id = (event as? [String:Any])?["ID"]
+                
+                Constants.DB.event.child((event_id as? String)!).observeSingleEvent(of: .value, with: {snapshot in
+                    let info = snapshot.value as? [String : Any]
+                    
+                    let event = Event.toEvent(info: info!)
+                    event?.id = event_id as! String
+                    
+                    events.append(event!)
+                    if eventCount == events.count{
+                        gotEvents(events)
+                    }
+                })
+            }
+            
+        }
+    })
+}
+   
+   
+func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> Void){
+    var eventCount = 0
+    var followers = [String]()
+    var events = [Event]()
+    
+    Constants.DB.user.child(uid).child("following/people").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let value = snapshot.value as? [String:Any]{
+            for (_, people) in value{
+                let followingCount = value.count
+                if let peopleData = people as? [String:Any]{
+                    let UID = peopleData["UID"] as! String
+                    followers.append(UID)
+                    
+                    getAttendingEvent(uid: UID, gotEvents: { event in
+                        events.append(contentsOf: event)
+                        
+                        if followers.count == followingCount{
+                            gotEvents(events)
+                        }
+                    })
+                }
+            }
+        }
+    })
+    
+    Constants.DB.user.child(uid).child("invitations/event").observeSingleEvent(of: .value, with: { (snapshot) in
+        let value = snapshot.value as? NSDictionary
+        
+        if let value = value{
+            eventCount = value.count
+            for (_,event) in value{
+                let event_id = (event as? [String:Any])?["ID"]
+                
+                Constants.DB.event.child((event_id as? String)!).observeSingleEvent(of: .value, with: {snapshot in
+                    let info = snapshot.value as? [String : Any]
+                    
+                    let event = Event.toEvent(info: info!)
+                    event?.id = event_id as! String
+                    
+                    events.append(event!)
+                    if eventCount == events.count{
+                        gotEvents(events)
+                    }
+                })
+            }
+            
+        }
+    })
+}
    
 func getFollowingPlace(uid: String, gotPlaces: @escaping (_ place: [Place]) -> Void){
     var places = [Place]()

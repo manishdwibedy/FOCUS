@@ -64,6 +64,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var followingPlaces = [Place]()
     var otherFollowingPlaces: [Place]? = nil
     
+    var attendingEvents: [Event]? = nil
+    var otherAttendingEvents: [Event]? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -182,6 +185,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         if let data = self.pinData{
             currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -201,6 +205,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     self.filtered = self.places
                     self.tableView.reloadData()
                 }
+                
+                self.updatePlaces()
+            }
+            if !self.isMeetup{
+                self.places = self.followingPlaces + self.places
+                
+                self.updatePlaces()
             }
         })
         
@@ -215,14 +226,60 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 }
             })
         }
-        //self.filtered = places
-        //self.tableView.reloadData()
+        
+        
+        getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
+            self.attendingEvents = events
+            
+            if self.otherAttendingEvents != nil{
+                var uniqueEvents = self.attendingEvents!
+                
+                for event in self.otherAttendingEvents!{
+                    if uniqueEvents.contains(event){
+                        uniqueEvents.append(event)
+                    }
+                }
+                
+                for event in self.events{
+                    if !uniqueEvents.contains(event){
+                        uniqueEvents.append(event)
+                    }
+                }
+                
+                self.events = uniqueEvents
+                
+                self.tableView.reloadData()
+            }
+        })
+        
+        getFollowingAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
+            self.otherAttendingEvents = events
+            
+            if self.attendingEvents != nil{
+                var uniqueEvents = self.attendingEvents!
+                
+                for event in self.otherAttendingEvents!{
+                    if uniqueEvents.contains(event){
+                        uniqueEvents.append(event)
+                    }
+                }
+                
+                for event in self.events{
+                    if !uniqueEvents.contains(event){
+                        uniqueEvents.append(event)
+                    }
+                }
+                
+                self.events = uniqueEvents
+                self.tableView.reloadData()
+            }
+        })
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
         self.location = location
-        updatePlaces()
+        
         print("got location")
         locationManager.stopUpdatingLocation()
     }
@@ -266,7 +323,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             tableView.reloadData()
             self.createEventButton.isHidden = true
         }else if segmentedOut.selectedSegmentIndex == 1{
-            updateEvents()
+            self.filtered = self.events
+            tableView.reloadData()
+            
             if isMeetup || inviteFromOtherUserProfile{
                 self.createEventButton.isHidden = true
             }else{
@@ -278,7 +337,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return filtered.count
+        return filtered.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -553,7 +612,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 })
             }
             else{
-                updateEvents()
+                self.filtered = self.events
+                self.tableView.reloadData()
             }
             
             
@@ -573,45 +633,36 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         searchBar.resignFirstResponder()
     }
     
+    @IBAction func back(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
-    func updateEvents()
-    {
-        Event.getEvents(gotEvents: {events in
-            self.filtered = events
-            self.tableView.reloadData()
-        })
-//        let DF = DateFormatter()
-//        DF.dateFormat = "MMM d, h:mm a"
-//        
-//        Constants.DB.event.observeSingleEvent(of: .value, with: { (snapshot) in
-//            let value = snapshot.value as? NSDictionary
-//            self.filtered.removeAll()
-//            if let value = value
-//            {
-//                for (id, event) in value
-//                {
-//                    if let info = event as? [String:Any]{
-//                        let event = Event.toEvent(info: info)
-//                        event?.id = id as? String
-//                        
-//                        if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
-//                            self.filtered.append(event)
-//                        }
-//                        
-//                    }
-//                    
-//                }
-//                self.tableView.reloadData()
-//            }
-//            
-//        })
+    @IBAction func indexChanged(_ sender: Any) {
+        
+        _ = sender as! UISegmentedControl
         
         
+        let sortedViews = (sender as! UISegmentedControl).subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
+        
+        for (index, view) in sortedViews.enumerated() {
+            if index == (sender as! UISegmentedControl).selectedSegmentIndex {
+                view.tintColor = Constants.color.green
+                view.backgroundColor = UIColor.white
+            } else {
+                view.tintColor = UIColor.white
+                view.backgroundColor = UIColor.gray
+            }
+        }
+    }
+    
+    @IBAction func createEventButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
+        self.present(controller, animated: true, completion: nil)
     }
     
     func updatePlaces()
     {
-        self.filtered.removeAll()
         let url = "https://api.yelp.com/v3/businesses/search"
         
         let headers: HTTPHeaders = [
@@ -669,43 +720,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                 
-//                if !self.filtered.contains(where: place){
-                    self.filtered.append(place)
-//                }
+                self.places.append(place)
+                self.filtered.append(place)
             }
             self.tableView.reloadData()
         }
     }
-    
-    
-    @IBAction func back(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func indexChanged(_ sender: Any) {
-        
-        _ = sender as! UISegmentedControl
-        
-        
-        let sortedViews = (sender as! UISegmentedControl).subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
-        
-        for (index, view) in sortedViews.enumerated() {
-            if index == (sender as! UISegmentedControl).selectedSegmentIndex {
-                view.tintColor = Constants.color.green
-                view.backgroundColor = UIColor.white
-            } else {
-                view.tintColor = UIColor.white
-                view.backgroundColor = UIColor.gray
-            }
-        }
-    }
-    
-    @IBAction func createEventButtonPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
-        self.present(controller, animated: true, completion: nil)
-    }
-    
 }
 
 extension InvitePeopleViewController: UITextFieldDelegate{
