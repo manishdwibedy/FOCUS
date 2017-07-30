@@ -43,7 +43,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var filtered = [Any]()
     var places = [Place]()
     var placeMapping = [String: Place]()
-    var followingPlaces = [Place]()
+    
     var attendingEvent = [Event]()
     var events = [Event]()
     
@@ -61,6 +61,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     var place: GMSPlace? = nil
     
+    var followingPlaces = [Place]()
+    var otherFollowingPlaces: [Place]? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,6 +186,35 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
+            self.followingPlaces = places
+            
+            if self.otherFollowingPlaces != nil{
+                if self.isMeetup{
+                    self.places = self.followingPlaces + self.otherFollowingPlaces! + self.places
+                    self.filtered = self.places
+                    self.tableView.reloadData()
+                }
+                else{
+                    self.places = self.followingPlaces + self.places
+                    self.filtered = self.places
+                    self.tableView.reloadData()
+                }
+            }
+        })
+        
+        if isMeetup{
+            getFollowingPlace(uid: UID, gotPlaces: {places in
+                self.otherFollowingPlaces = places
+                
+                if self.followingPlaces != nil{
+                    self.places = self.followingPlaces + self.otherFollowingPlaces! + self.places
+                    self.filtered = self.places
+                    self.tableView.reloadData()
+                }
+            })
+        }
         //self.filtered = places
         //self.tableView.reloadData()
     }
@@ -230,10 +261,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBAction func segmentedChanged(_ sender: Any) {
         searchBar.text = nil
-//        places.removeAll()
-//        events.removeAll()
         if segmentedOut.selectedSegmentIndex == 0{
-            updatePlaces()
+            self.filtered = self.places
+            tableView.reloadData()
             self.createEventButton.isHidden = true
         }else if segmentedOut.selectedSegmentIndex == 1{
             updateEvents()

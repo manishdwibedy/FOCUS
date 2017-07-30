@@ -1149,4 +1149,62 @@ func yelpSearch(interest: String, location: CLLocation, gotPlaces: @escaping (_ 
     }
 }
    
+func getFollowingPlace(uid: String, gotPlaces: @escaping (_ place: [Place]) -> Void){
+    var places = [Place]()
+    var placeCount = 0
+    
+    Constants.DB.user.child(uid).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
+        let value = snapshot.value as? NSDictionary
+        
+        if let placeData = value{
+            placeCount = placeData.count
+            //                self.places.removeAll()
+            for (_,place) in placeData
+            {
+                let place_id = (place as? [String:Any])?["placeID"]
+                getYelpByID(ID: place_id as! String, completion: {place in
+                    
+                    getPlaceHours(id: place.id, gotHour: {hours, open in
+                        if !places.contains(place){
+                            place.hours = hours
+                            place.set_is_open(is_open: open)
+                            places.append(place)
+                        }
+                        
+                        if places.count == placeCount{
+                            gotPlaces(places)
+                        }
+                    })
+                })
+            }
+        }
+    })
+}
    
+func getPlaceHours(id: String, gotHour: @escaping (_ hour: [Hours]?, _ open: Bool) -> Void){
+    if let token = AuthApi.getYelpToken(){
+        let url = "https://api.yelp.com/v3/businesses/\(id)"
+        
+        let headers: HTTPHeaders = [
+            "authorization": "Bearer \(token)",
+            "cache-contro": "no-cache"
+        ]
+        
+        Alamofire.request(url, method: .get, parameters:nil, headers: headers).responseJSON { response in
+            let json = JSON(data: response.data!)
+            
+            if json["hours"].arrayValue.count > 0{
+                let open_hours = json["hours"].arrayValue[0].dictionaryValue
+                var hours = [Hours]()
+                for hour in (open_hours["open"]?.arrayValue)!{
+                    let hour = Hours(start: hour["start"].stringValue, end: hour["end"].stringValue, day: hour["day"].intValue)
+                    hours.append(hour)
+                }
+                
+                gotHour(hours, json["hours"][0]["is_open_now"].boolValue)
+                
+            }
+            gotHour(nil, json["hours"][0]["is_open_now"].boolValue)
+        }
+    }
+}
