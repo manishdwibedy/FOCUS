@@ -674,10 +674,18 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             self.present(ivc, animated: true, completion: { _ in })
         }
         else if feed.type == .Created{
+            let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+            controller.event = feed.item?.data["event"] as! Event
             
+            self.present(controller, animated: true, completion: nil)
         }
         else if feed.type == .Going{
-        
+            let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+            controller.event = feed.item?.data["event"] as! Event
+            
+            self.present(controller, animated: true, completion: nil)
         }
         else if feed.type == .Like{
             let storyboard = UIStoryboard(name: "Pin", bundle: nil)
