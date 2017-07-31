@@ -475,13 +475,12 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
                 
                 let interests = self.interests_set
                 
-                guard !interests.isEmpty else{
+                if choseFocusButton.titleLabel?.text == "Choose FOCUS"{
                     presentNotification(title: "Choose an interest", message: "Please choose atleast one interest for this event.")
                     return
                 }
                 
                 let endTime = eventEndTimeTextField.text
-                
                 
                 
                 self.event = Event(title: name, description: "", fullAddress: self.fullAddress, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"), privateEvent: publicOrPrivateSwitch.isOn)

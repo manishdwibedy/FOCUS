@@ -210,7 +210,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
             if !self.isMeetup{
                 self.places = self.followingPlaces + self.places
-                
+            }
+            
+            if self.segmentedOut.selectedSegmentIndex == 0{
                 self.updatePlaces()
             }
         })
