@@ -43,6 +43,23 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         // Configure the view for the selected state
     }
     
+    override func layoutSubviews() {
+        let userTap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
+        usernameImage.isUserInteractionEnabled = true
+        userTap.numberOfTapsRequired = 1
+        usernameImage.addGestureRecognizer(userTap)
+        
+    }
+    
+    func showUserProfile(sender: UITapGestureRecognizer){
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = (event?.creator)!
+        
+        parentVC?.present(VC, animated:true, completion:nil)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
