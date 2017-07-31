@@ -9,6 +9,8 @@
 import Foundation
 import GooglePlaces
 import FirebaseDatabase
+import Alamofire
+import SwiftyJSON
 
 class Event: NSObject, NSCoding{
     var title: String?
@@ -225,5 +227,43 @@ extension Event{
                 }
             }
         })
+    }
+    
+    static func getNearyByEvents(gotEvents: @escaping (_ result: [Event]) -> Void){
+        var events = [Event]()
+        
+        let url = "https://app.ticketmaster.com/discovery/v2/events.json"
+        
+        let parameters: [String: Any] = [
+            "size": 20,
+            "apikey": "dScAOnFScudDodKZDJ47ehxcJ1pXnihD"
+        ]
+        
+        Alamofire.request(url, method: .get, parameters:parameters, headers: nil).responseJSON { response in
+            let json = JSON(data: response.data!)
+            
+            for data in json["_embedded"]["events"]{
+                let name = data.1["name"].stringValue
+                let desc = ""
+                
+                let address = data.1["_embedded"]["venues"].arrayValue[0]
+                let fullAddress = "\(address["address"]["line1"].stringValue);;\(address["city"]["name"].stringValue)"
+                let shortAddress = "\(address["name"].stringValue)"
+                let lat = address["location"]["latitude"].stringValue
+                let long = address["location"]["longitude"].stringValue
+                let category = data.1["classifications"][0]["segment"]["name"].stringValue
+                
+                let start = data.1["dates"]["start"]
+                let date = "\(start["localDate"].stringValue) \(start["localTime"].stringValue)"
+                
+                let price = data.1["priceRanges"]["min"].doubleValue
+                let event = Event(title: name, description: desc, fullAddress: fullAddress, shortAddress: shortAddress, latitude: lat, longitude: long, date: date, creator: "", id: data.1["id"].stringValue, category: category, privateEvent: false)
+                event.price = price
+                events.append(event)
+            }
+            
+            
+        }
+
     }
 }

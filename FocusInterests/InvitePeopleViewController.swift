@@ -66,6 +66,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     var attendingEvents: [Event]? = nil
     var otherAttendingEvents: [Event]? = nil
+    var otherEvents: [Event]? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -229,7 +230,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
             self.attendingEvents = events
             
-            if self.otherAttendingEvents != nil{
+            if self.otherAttendingEvents != nil && self.otherEvents != nil{
                 var uniqueEvents = self.attendingEvents!
                 
                 for event in self.otherAttendingEvents!{
@@ -244,8 +245,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     }
                 }
                 
-                self.events = uniqueEvents
-                
+                self.events = uniqueEvents + self.otherEvents!
                 self.tableView.reloadData()
             }
         })
@@ -253,7 +253,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         getFollowingAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
             self.otherAttendingEvents = events
             
-            if self.attendingEvents != nil{
+            if self.attendingEvents != nil && self.otherEvents != nil{
                 var uniqueEvents = self.attendingEvents!
                 
                 for event in self.otherAttendingEvents!{
@@ -268,10 +268,34 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     }
                 }
                 
-                self.events = uniqueEvents
+                self.events = uniqueEvents + self.otherEvents!
                 self.tableView.reloadData()
             }
         })
+        
+        Event.getNearyByEvents(gotEvents: {events in
+            self.otherEvents = events
+            
+            if self.attendingEvents != nil && self.otherEvents != nil{
+                var uniqueEvents = self.attendingEvents!
+                
+                for event in self.otherAttendingEvents!{
+                    if uniqueEvents.contains(event){
+                        uniqueEvents.append(event)
+                    }
+                }
+                
+                for event in self.events{
+                    if !uniqueEvents.contains(event){
+                        uniqueEvents.append(event)
+                    }
+                }
+                
+                self.events = uniqueEvents + self.otherEvents!
+                self.tableView.reloadData()
+            }
+        })
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
