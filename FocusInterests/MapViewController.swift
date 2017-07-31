@@ -523,7 +523,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             currentLocation = AuthApi.getLocation()
         }
         
-        fetchPins()
+        showPins(showAll: true, interests: "")
         
         if let token = AuthApi.getYelpToken(){
         }
@@ -1074,6 +1074,91 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
     }
     
+    func showPins(showAll: Bool, interests: String){
+        if showAll{
+            fetchAllPins(gotPin: {pins in
+                
+                // remove any old pins
+                for marker in self.lastPins{
+                    marker.map = nil
+                }
+                
+                for pin in pins{
+                    let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
+                    let marker = GMSMarker(position: position)
+                    marker.title = pin.pinMessage
+                    marker.map = self.mapView
+                    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+                    image.image = UIImage(named: "pin")
+                    image.contentMode = .scaleAspectFit
+                    marker.iconView = image
+                    marker.accessibilityLabel = "pin_\(self.pins.count)"
+                    
+                    self.lastPins.append(marker)
+                    self.pins.append(pin)
+                }
+            })
+            
+        }
+        else{
+            // remove any old pins
+            for marker in self.lastPins{
+                marker.map = nil
+            }
+            
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
+                if let people = snapshot.value as? [String:[String:Any]]{
+                    let count = people.count
+                    
+                    for (id, value) in people{
+                        let UID = (value["UID"] as? String)!
+                        
+                        Constants.DB.user.child(UID).observeSingleEvent(of: .value, with: {snapshot in
+                            let value = snapshot.value as? NSDictionary
+                            if value != nil
+                            {
+                                
+                                
+                                for (key,_) in (value)!
+                                {
+                                    let pin = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String), focus: (value?[key] as! NSDictionary)["focus"] as? String ?? "")
+                                    
+                                    Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: {snapshot in
+                                        
+                                        if let info = snapshot.value as? [String:Any]{
+                                            if let username = info["username"] as? String{
+                                                
+                                                
+                                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: pin.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                                    pin.username = username
+                                                    
+                                                    let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
+                                                    let marker = GMSMarker(position: position)
+                                                    marker.title = pin.pinMessage
+                                                    marker.map = self.mapView
+                                                    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+                                                    image.image = UIImage(named: "pin")
+                                                    image.contentMode = .scaleAspectFit
+                                                    marker.iconView = image
+                                                    marker.accessibilityLabel = "pin_\(self.pins.count)"
+                                                    
+                                                    self.lastPins.append(marker)
+                                                    self.pins.append(pin)
+                                                }
+                                            }
+                                        }
+                                        
+                                    })
+                                    
+                                }
+                            }
+                        })
+                    }
+                }
+                
+            })
+        }
+    }
     func showPlaces(showAll: Bool, interests: String){
         if showAll{
             // get all places on map of selected interest
@@ -1157,52 +1242,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
     }
     
-    func fetchPins()
-    {
-        Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                // remove any old pins
-                for marker in self.lastPins{
-                    marker.map = nil
-                }
-                
-                for (key,_) in (value)!
-                {
-                    let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String), focus: (value?[key] as! NSDictionary)["focus"] as? String ?? "")
-
-                    Constants.DB.user.child(data.fromUID).observeSingleEvent(of: .value, with: {snapshot in
-                        
-                        if let info = snapshot.value as? [String:Any]{
-                            if let username = info["username"] as? String{
-                                
-                                
-                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
-                                    let position = CLLocationCoordinate2D(latitude: Double(data.coordinates.latitude), longitude: Double(data.coordinates.longitude))
-                                    let marker = GMSMarker(position: position)
-                                    marker.title = data.pinMessage
-                                    marker.map = self.mapView
-                                    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
-                                    image.image = UIImage(named: "pin")
-                                    image.contentMode = .scaleAspectFit
-                                    marker.iconView = image
-                                    marker.accessibilityLabel = "pin_\(self.pins.count)"
-                                    
-                                    data.username = username
-                                    self.lastPins.append(marker)
-                                    self.pins.append(data)
-                                }
-                            }
-                        }
-                        
-                    })
-                    
-                }
-            }
-        })
-
-    }
     
     func showPopup(){
         
