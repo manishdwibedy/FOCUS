@@ -234,8 +234,11 @@ extension Event{
         
         let url = "https://app.ticketmaster.com/discovery/v2/events.json"
         
+        let location = AuthApi.getLocation()?.coordinate
         let parameters: [String: Any] = [
             "size": 20,
+            "latlong": "\(location!.latitude),\(location!.longitude)",
+            "radius": 20,
             "apikey": "dScAOnFScudDodKZDJ47ehxcJ1pXnihD"
         ]
         
@@ -256,11 +259,16 @@ extension Event{
                 let start = data.1["dates"]["start"]
                 let date = "\(start["localDate"].stringValue) \(start["localTime"].stringValue)"
                 
-                let price = data.1["priceRanges"]["min"].doubleValue
+                let price = data.1["priceRanges"][0]["min"].doubleValue
+                let image = data.1["images"][0]["url"].stringValue
                 let event = Event(title: name, description: desc, fullAddress: fullAddress, shortAddress: shortAddress, latitude: lat, longitude: long, date: date, creator: "", id: data.1["id"].stringValue, category: category, privateEvent: false)
+                
                 event.price = price
+                event.image_url = image
+                
                 events.append(event)
             }
+            gotEvents(events)
             
             
         }

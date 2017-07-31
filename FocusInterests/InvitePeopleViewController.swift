@@ -276,7 +276,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         Event.getNearyByEvents(gotEvents: {events in
             self.otherEvents = events
             
-            if self.attendingEvents != nil && self.otherEvents != nil{
+            if self.attendingEvents != nil && self.otherAttendingEvents != nil{
                 var uniqueEvents = self.attendingEvents!
                 
                 for event in self.otherAttendingEvents!{
@@ -453,38 +453,56 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.parentVC = self
             cell.guestCount.text = "\(event.attendeeCount) guests"
             
+            cell.dateAndTimeLabel.text = event.date!
 //            Date formatter for date and time label in event
-            cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price)"
+            cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price!)"
             
             let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
             cell.distance.text = getDistance(fromLocation: eventLocation, toLocation: AuthApi.getLocation()!)
         
             
-            let reference = Constants.storage.event.child("\(event.id!).jpg")
-            
-            cell.eventImage.image = crop(image: #imageLiteral(resourceName: "empty_event"), width: 50, height: 50)
-            
-            reference.downloadURL(completion: { (url, error) in
+            if (event.creator?.characters.count)! > 0{
+                let reference = Constants.storage.event.child("\(event.id!).jpg")
                 
-                if error != nil {
-                    print(error?.localizedDescription ?? "")
-                    return
+                cell.eventImage.image = crop(image: #imageLiteral(resourceName: "empty_event"), width: 50, height: 50)
+                
+                reference.downloadURL(completion: { (url, error) in
+                    
+                    if error != nil {
+                        print(error?.localizedDescription ?? "")
+                        return
+                    }
+                    
+                    
+                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                        (receivedSize :Int, ExpectedSize :Int) in
+                        
+                    }, completed: {
+                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                        
+                        if image != nil && finished{
+                            cell.eventImage.image = crop(image: image!, width: 50, height: 50)
+                        }
+                    })
+                    
+                    
+                })
+            }
+            else{
+                if let url = URL(string: event.image_url!){
+                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                        (receivedSize :Int, ExpectedSize :Int) in
+                        
+                    }, completed: {
+                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                        
+                        if image != nil && finished{
+                            cell.eventImage.image = crop(image: image!, width: 50, height: 50)
+                        }
+                    })
                 }
                 
-                
-                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                    (receivedSize :Int, ExpectedSize :Int) in
-                    
-                }, completed: {
-                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                    
-                    if image != nil && finished{
-                        cell.eventImage.image = crop(image: image!, width: 50, height: 50)
-                    }
-                })
-                
-                
-            })
+            }
             
             cell.loadLikes()
             return cell

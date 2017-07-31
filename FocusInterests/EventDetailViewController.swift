@@ -101,7 +101,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.eventsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         if event?.price != nil && (event?.price)! > 0.0{
-            eventAmount.text = "$ \(String(describing: event?.price))"
+            eventAmount.text = "$ \(String(describing: event!.price!))"
         }else{
             self.timeAmountAddressStack.removeArrangedSubview(self.eventAmount)
             self.eventDetailsView.bounds.size.height -= self.eventAmount.frame.size.height
@@ -192,27 +192,32 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         })
         
-        ref.child("users").child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
-                let placeString = "Add comment"
-                self.hostNameLabel.text = value?["username"] as? String
-                self.fullnameLabel.text = value?["fullname"] as? String
-                var placeHolder = NSMutableAttributedString()
-                placeHolder = NSMutableAttributedString(string:placeString, attributes: [NSFontAttributeName:UIFont(name: "Avenir Book", size: 15.0)!])
-                placeHolder.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 255, green: 255, blue: 255, alpha: 0.8), range:NSRange(location:0,length:placeString.characters.count))
-                self.commentTextField.attributedPlaceholder = placeHolder
-                
-                if let url = URL(string: (value?["image_string"] as? String)!){
-                    self.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
-                }
-            }
-            
-        })
+        
         
         if event?.id != nil{
             let fullRef = ref.child("events").child((event?.id)!).child("comments")
+            
+            if (event?.creator?.characters.count)! > 0{
+                ref.child("users").child(event!.creator!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    if value != nil
+                    {
+                        let placeString = "Add comment"
+                        self.hostNameLabel.text = value?["username"] as? String
+                        self.fullnameLabel.text = value?["fullname"] as? String
+                        var placeHolder = NSMutableAttributedString()
+                        placeHolder = NSMutableAttributedString(string:placeString, attributes: [NSFontAttributeName:UIFont(name: "Avenir Book", size: 15.0)!])
+                        placeHolder.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 255, green: 255, blue: 255, alpha: 0.8), range:NSRange(location:0,length:placeString.characters.count))
+                        self.commentTextField.attributedPlaceholder = placeHolder
+                        
+                        if let url = URL(string: (value?["image_string"] as? String)!){
+                            self.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                    
+                })
+            }
+            
             fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 3).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 if value != nil
@@ -304,19 +309,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 
             })
             
-            
-            // interests
-            ref.child("events").child((event?.id)!).child("interests").observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? String
-                if value != nil{
-                    addGreenDot(label: self.eventInterests, content: value!)
-                }
-                else{
-                    addGreenDot(label: self.eventInterests, content: "N.A.")
-                }
-                
-            })
-            
+            addGreenDot(label: self.eventInterests, content: (event?.category)!)
             
             getEventSuggestions()
             
