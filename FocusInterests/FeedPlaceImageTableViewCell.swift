@@ -21,6 +21,9 @@ class FeedPlaceImageTableViewCell: UITableViewCell {
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeSince: UILabel!
     
+    var parentVC: SearchEventsViewController? = nil
+    var pin: [String:Any]? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,6 +34,8 @@ class FeedPlaceImageTableViewCell: UITableViewCell {
         self.pinCaptionLabel.text = "Rose Bowl"
         addGreenDot(label: self.interestLabel, content: "Sports")
         self.usernameImage.roundedImage()
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -55,6 +60,19 @@ class FeedPlaceImageTableViewCell: UITableViewCell {
         
         self.cellContentView.layer.mask = mask
         
+        let userTap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
+        usernameImage.isUserInteractionEnabled = true
+        userTap.numberOfTapsRequired = 1
+        usernameImage.addGestureRecognizer(userTap)
+        
     }
     
+    func showUserProfile(sender: UITapGestureRecognizer){
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = pin?["fromUID"] as! String
+        
+        parentVC?.present(VC, animated:true, completion:nil)
+    }
 }

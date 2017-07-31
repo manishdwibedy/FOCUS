@@ -299,6 +299,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         if feed.type == .Pin && feed.item?.imageURL == nil{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as? FeedOneTableViewCell{
+                cell.parentVC = self
                 let data = feed.item?.data["pin"] as! [String:Any]
     
                     cell.pin = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
@@ -329,6 +330,11 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         }
         else if feed.type == .Pin && feed.item?.imageURL != nil{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as? FeedPlaceImageTableViewCell{
+                
+                let data = feed.item?.data["pin"] as! [String:Any]
+                cell.pin = data
+                cell.parentVC = self
+                
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     cell.usernameLabel.setTitle(user.username, for: .normal)
                     if let image = user.image_string{

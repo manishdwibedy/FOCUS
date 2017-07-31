@@ -26,6 +26,7 @@ class FeedOneTableViewCell: UITableViewCell {
     @IBOutlet weak var timeSince: UILabel!
     
     var pin: pinData? = nil
+    var parentVC: SearchEventsViewController? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,9 +39,13 @@ class FeedOneTableViewCell: UITableViewCell {
         addGreenDot(label: self.interestLabel, content: "Sports")
         self.nameDescriptionLabel.text = "Watching NBA Awards - Westbrook for MVP!"
         
-        var tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.goToMap(sender:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.goToMap(sender:)))
         tapGesture.numberOfTapsRequired = 1
         mapImage.addGestureRecognizer(tapGesture)
+        
+        let userTap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
+        userTap.numberOfTapsRequired = 1
+        userImage.addGestureRecognizer(userTap)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -119,5 +124,14 @@ class FeedOneTableViewCell: UITableViewCell {
         vc.showPin = pin
 //        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)
         vc.selectedIndex = 0
+    }
+    
+    func showUserProfile(sender: UITapGestureRecognizer){
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = (pin?.fromUID)!
+        
+        parentVC?.present(VC, animated:true, completion:nil)
     }
 }
