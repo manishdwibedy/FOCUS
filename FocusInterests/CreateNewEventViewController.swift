@@ -433,12 +433,11 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
                 let dateString = "\(validDate), \(validTime)"
                 guard AuthApi.getFirebaseUid() != nil else { return }
                 
-                let interests = zip(checkInterests,Constants.interests.interests ).filter { $0.0 }.map { $1 }
-                
-                guard !interests.isEmpty else{
-                    presentNotification(title: "Choose a interest", message: "Please choose atleast one interest for this event.")
+                if choseFocusButton.titleLabel?.text == "Choose FOCUS"{
+                    presentNotification(title: "Choose an interest", message: "Please choose atleast one interest for this event.")
                     return
                 }
+                
                 self.event?.title = eventNameTextField.text
                 self.event?.eventDescription = validDescrip
                 self.event?.date = dateString
@@ -483,7 +482,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
                 let endTime = eventEndTimeTextField.text
                 
                 
-                self.event = Event(title: name, description: "", fullAddress: self.fullAddress, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: interests.joined(separator: ";"), privateEvent: publicOrPrivateSwitch.isOn)
+                self.event = Event(title: name, description: "", fullAddress: self.fullAddress, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: choseFocusButton.titleLabel?.text, privateEvent: publicOrPrivateSwitch.isOn)
                 
                 let price = eventPriceTextView.text
                 if (price?.characters.count)! > 0{
