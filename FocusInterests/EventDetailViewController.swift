@@ -168,29 +168,42 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         self.descriptionTextView.frame = frame
         
-        let reference = Constants.storage.event.child("\(event!.id!).jpg")
-        
-        reference.downloadURL(completion: { (url, error) in
-            
-            if error != nil {
-                print(error?.localizedDescription ?? "")
-                return
+        if (event?.creator?.characters.count)! > 0{
+            let reference = Constants.storage.event.child("\(event!.id!).jpg")
+            reference.downloadURL(completion: { (url, error) in
+                
+                if error != nil {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        self.eventImage.image = crop(image: image!, width: 50, height: 50)
+                    }
+                })
+            })
+        }
+        else{
+            if let url = URL(string: (event?.image_url!)!){
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        self.eventImage.image = crop(image: image!, width: 50, height: 50)
+                    }
+                })
             }
             
-            
-            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                (receivedSize :Int, ExpectedSize :Int) in
-                
-            }, completed: {
-                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                
-                if image != nil && finished{
-                    self.eventImage.image = crop(image: image!, width: 50, height: 50)
-                }
-            })
-            
-            
-        })
+        }
         
         
         
@@ -283,8 +296,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     self.guestButtonOut.setAttributedTitle(attributeText, for: UIControlState.normal)
                     
                 }
+                else{
+                    let attributeText = NSAttributedString(string: "0 attendees", attributes: [NSForegroundColorAttributeName : UIColor.white])
+                    
+                    self.guestButtonOut.setAttributedTitle(attributeText, for: UIControlState.normal)
+                }
             })
-            
             
             
             //attending
