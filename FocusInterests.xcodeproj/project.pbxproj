@@ -243,11 +243,13 @@
 		EB252F141EEAA062001C163D /* UserProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */; };
 		EB3EA2421EE7707500F61D38 /* InviteListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */; };
 		EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */; };
+		EB41BEA11F2BE5C400C8427C /* InvitePopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB41BEA01F2BE5C400C8427C /* InvitePopoverView.swift */; };
+		EB41BEA31F2BE5D400C8427C /* InvitePopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB41BEA21F2BE5D400C8427C /* InvitePopoverView.xib */; };
 		EB426A751F2B468F008DBEF5 /* CreateEventOnMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB426A731F2B468F008DBEF5 /* CreateEventOnMapViewController.swift */; };
-		EB426A761F2B468F008DBEF5 /* CreateEventOnMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB426A741F2B468F008DBEF5 /* CreateEventOnMapViewController.xib */; };
 		EB426A781F2B6138008DBEF5 /* CreateEventOnMapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB426A771F2B6138008DBEF5 /* CreateEventOnMapViewController.storyboard */; };
 		EB450FB11F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB450FAF1F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift */; };
 		EB450FB21F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB450FB01F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib */; };
+		EB4ADCDC1F2BCD5A00C01BFF /* CreateEventContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4ADCDB1F2BCD5A00C01BFF /* CreateEventContainerViewController.swift */; };
 		EB5891C71EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891C51EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift */; };
 		EB5891C81EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5891C61EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib */; };
 		EB5891CE1EE7E5B300C35EE9 /* Comments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */; };
@@ -638,11 +640,13 @@
 		EB252F121EEAA062001C163D /* UserProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		EB3EA2401EE7707500F61D38 /* InviteListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteListTableViewCell.swift; sourceTree = "<group>"; };
 		EB3EA2411EE7707500F61D38 /* InviteListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteListTableViewCell.xib; sourceTree = "<group>"; };
+		EB41BEA01F2BE5C400C8427C /* InvitePopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePopoverView.swift; sourceTree = "<group>"; };
+		EB41BEA21F2BE5D400C8427C /* InvitePopoverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitePopoverView.xib; sourceTree = "<group>"; };
 		EB426A731F2B468F008DBEF5 /* CreateEventOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventOnMapViewController.swift; sourceTree = "<group>"; };
-		EB426A741F2B468F008DBEF5 /* CreateEventOnMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateEventOnMapViewController.xib; sourceTree = "<group>"; };
 		EB426A771F2B6138008DBEF5 /* CreateEventOnMapViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEventOnMapViewController.storyboard; sourceTree = "<group>"; };
 		EB450FAF1F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInFeedCreatedEventTableViewCell.swift; sourceTree = "<group>"; };
 		EB450FB01F13186600A9C224 /* EventInFeedCreatedEventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventInFeedCreatedEventTableViewCell.xib; sourceTree = "<group>"; };
+		EB4ADCDB1F2BCD5A00C01BFF /* CreateEventContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventContainerViewController.swift; sourceTree = "<group>"; };
 		EB5891C51EE79B0800C35EE9 /* SelectedTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedTimeTableViewCell.swift; sourceTree = "<group>"; };
 		EB5891C61EE79B0800C35EE9 /* SelectedTimeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectedTimeTableViewCell.xib; sourceTree = "<group>"; };
 		EB5891CD1EE7E5B300C35EE9 /* Comments.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Comments.storyboard; sourceTree = "<group>"; };
@@ -964,6 +968,8 @@
 				EB05785E1EECBE74000B0413 /* PinPlaceReviewTableViewCell.xib */,
 				EB0578611EECCD49000B0413 /* TipPlaceReviewTableViewCell.swift */,
 				EB0578621EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib */,
+				EB41BEA01F2BE5C400C8427C /* InvitePopoverView.swift */,
+				EB41BEA21F2BE5D400C8427C /* InvitePopoverView.xib */,
 			);
 			name = Place;
 			sourceTree = "<group>";
@@ -1375,8 +1381,8 @@
 			isa = PBXGroup;
 			children = (
 				EB426A731F2B468F008DBEF5 /* CreateEventOnMapViewController.swift */,
-				EB426A741F2B468F008DBEF5 /* CreateEventOnMapViewController.xib */,
 				EB426A771F2B6138008DBEF5 /* CreateEventOnMapViewController.storyboard */,
+				EB4ADCDB1F2BCD5A00C01BFF /* CreateEventContainerViewController.swift */,
 			);
 			name = CreateEventMapView;
 			sourceTree = "<group>";
@@ -1716,7 +1722,6 @@
 				5BAB87A41EC961AB0064E5EC /* UserProfile.storyboard in Resources */,
 				EB819E6A1F180D2900F5AA94 /* RecentPostTableViewCell.xib in Resources */,
 				5BAB87B11EC9861F0064E5EC /* search_place.storyboard in Resources */,
-				EB426A761F2B468F008DBEF5 /* CreateEventOnMapViewController.xib in Resources */,
 				D2FDB69B1E89F73800D62DC2 /* SocialGroupViewController.xib in Resources */,
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
 				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
@@ -1763,6 +1768,7 @@
 				5B7BB1E41ED51069001E60FF /* SuggestPlaceTableViewCell.xib in Resources */,
 				D28EAFBD1E5D30C3001EA7E5 /* SwitchCell.xib in Resources */,
 				EBE7AE4E1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib in Resources */,
+				EB41BEA31F2BE5D400C8427C /* InvitePopoverView.xib in Resources */,
 				EB71AC1A1F1EF1550024FE95 /* AllOptionTableViewCell.xib in Resources */,
 				5BA37C791EBDB7EA0091189E /* Messages.storyboard in Resources */,
 				FFD32DD41EE9FF9900FE725E /* InterstCollectionViewCell.xib in Resources */,
@@ -2135,6 +2141,7 @@
 				5B6AFA711ED1906900A82104 /* GMULineString.m in Sources */,
 				61603B941EFD0ABA0063F090 /* UIFont+Extensions.swift in Sources */,
 				D2B9B0481E5A047C0002F1B1 /* FocusInterests.xcdatamodeld in Sources */,
+				EB4ADCDC1F2BCD5A00C01BFF /* CreateEventContainerViewController.swift in Sources */,
 				EB722F931EE8B19400420DC8 /* ReviewsViewController.swift in Sources */,
 				FF8F7C251EECD0BE00AEC685 /* MapPopUpScreenView.swift in Sources */,
 				FFBF879F1EE5A855000168F5 /* InvitePeopleViewController.swift in Sources */,
@@ -2203,6 +2210,7 @@
 				5B71D7101ED184D30093A3F5 /* allCommentsVC.swift in Sources */,
 				EB71AC1D1F1EF1600024FE95 /* FollowingOptionTableViewCell.swift in Sources */,
 				5B959FF21ECD452C00094FE6 /* RatingViewCell.swift in Sources */,
+				EB41BEA11F2BE5C400C8427C /* InvitePopoverView.swift in Sources */,
 				5B959FE31ECBA6C600094FE6 /* InviteUserView.swift in Sources */,
 				5B959FD51ECAC9EF00094FE6 /* PlaceViewController.swift in Sources */,
 				5BA37C821EBE9DE30091189E /* NewMessageViewController.swift in Sources */,

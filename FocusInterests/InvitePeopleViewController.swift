@@ -138,11 +138,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         if self.segmentedOut.selectedSegmentIndex == 0{
             self.createEventButton.isHidden = true
             self.poweredByYelpImage.isHidden = false
-            self.tableViewBottomConstraint.constant = self.poweredByYelpImage.frame.height
-        }else{
-            self.createEventButton.isHidden = false
-            self.poweredByYelpImage.isHidden = true
-            self.tableViewBottomConstraint.constant = 0
+            self.tableViewBottomConstraint.constant = 35
         }
         
         let sortedViews = segmentedOut.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
@@ -265,13 +261,19 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.filtered = self.places
             tableView.reloadData()
             self.createEventButton.isHidden = true
+            self.poweredByYelpImage.isHidden = false
+            self.tableViewBottomConstraint.constant = 35
         }else if segmentedOut.selectedSegmentIndex == 1{
             updateEvents()
+            
             if isMeetup || inviteFromOtherUserProfile{
                 self.createEventButton.isHidden = true
             }else{
                 self.createEventButton.isHidden = false
             }
+            
+            self.poweredByYelpImage.isHidden = true
+            self.tableViewBottomConstraint.constant = 0
         }
         
     }

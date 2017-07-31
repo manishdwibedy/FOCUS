@@ -130,18 +130,6 @@
             </objects>
             <point key="canvasLocation" x="1050" y="1849"/>
         </scene>
-        <!--Pin-->
-        <scene sceneID="Nnu-K9-sIW">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aks-2I-R3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewControllerPlaceholder storyboardName="Pin" id="Ole-J7-YI8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Pin white" selectedImage="Pin green" id="qcP-8k-Fia">
-                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
-                    </tabBarItem>
-                </viewControllerPlaceholder>
-            </objects>
-            <point key="canvasLocation" x="618" y="1849"/>
-        </scene>
         <!--Home Page View Controller-->
         <scene sceneID="9nB-XK-GZ8">
             <objects>
@@ -153,6 +141,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.26047572493553162" green="0.32424676418304443" blue="0.39912468194961548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.47843137250000001" green="0.78823529410000004" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.47843137254901957" green="0.78823529411764703" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -165,7 +154,7 @@
                     <connections>
                         <segue destination="VEY-4A-vsU" kind="relationship" relationship="viewControllers" id="QCV-Df-Bcq"/>
                         <segue destination="4DZ-sJ-6ta" kind="relationship" relationship="viewControllers" id="aFC-3v-mpp"/>
-                        <segue destination="Ole-J7-YI8" kind="relationship" relationship="viewControllers" id="STk-b6-Zx6"/>
+                        <segue destination="CuM-aU-N7W" kind="relationship" relationship="viewControllers" id="A4L-2M-yiL"/>
                         <segue destination="b5i-xY-EUY" kind="relationship" relationship="viewControllers" id="AqH-oJ-cPB"/>
                         <segue destination="FSH-QB-bWv" kind="relationship" relationship="viewControllers" id="g0W-wD-Shp"/>
                     </connections>
@@ -305,12 +294,14 @@
                                             <constraint firstAttribute="height" constant="2" id="uAZ-Tr-IWW"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z5e-fk-9jZ" userLabel="People Table View">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z5e-fk-9jZ" userLabel="People Table View">
                                         <rect key="frame" x="0.0" y="133" width="241" height="70"/>
                                         <color key="backgroundColor" red="0.85480856900000002" green="0.85495573280000003" blue="0.85479927060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="Y2m-Fj-ZcJ"/>
                                         </constraints>
+                                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <connections>
                                             <outlet property="dataSource" destination="Jec-lg-XgO" id="iZJ-6V-R0Q"/>
                                             <outlet property="delegate" destination="Jec-lg-XgO" id="1aS-BJ-LP3"/>
@@ -382,12 +373,14 @@
                                             <constraint firstAttribute="height" constant="2" id="1oH-ef-Lb4"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b8i-pL-unF" userLabel="Places Table View">
+                                    <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b8i-pL-unF" userLabel="Places Table View">
                                         <rect key="frame" x="0.0" y="242" width="241" height="70"/>
                                         <color key="backgroundColor" red="0.85480856900000002" green="0.85495573280000003" blue="0.85479927060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="mx2-xc-1Cn"/>
                                         </constraints>
+                                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <connections>
                                             <outlet property="dataSource" destination="Jec-lg-XgO" id="rBh-au-Dw5"/>
                                             <outlet property="delegate" destination="Jec-lg-XgO" id="fKQ-YC-qBj"/>
@@ -459,12 +452,14 @@
                                             <constraint firstAttribute="height" constant="2" id="CNy-zf-Bs8"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hwq-TO-dY6" userLabel="Events Table View">
+                                    <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hwq-TO-dY6" userLabel="Events Table View">
                                         <rect key="frame" x="0.0" y="351" width="241" height="70"/>
                                         <color key="backgroundColor" red="0.85480856900000002" green="0.85495573280000003" blue="0.85479927060000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="xz6-44-GC6"/>
                                         </constraints>
+                                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <connections>
                                             <outlet property="dataSource" destination="Jec-lg-XgO" id="8Qo-6a-3Pl"/>
                                             <outlet property="delegate" destination="Jec-lg-XgO" id="A18-iB-Cjv"/>
@@ -611,7 +606,8 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="kMV-Nb-aMW"/>
                                         </constraints>
-                                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <connections>
                                             <outlet property="dataSource" destination="f3G-pl-qcl" id="tXh-56-uU3"/>
                                             <outlet property="delegate" destination="f3G-pl-qcl" id="Anp-5D-9ll"/>
@@ -661,6 +657,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="612-Ea-50z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3034" y="793"/>
+        </scene>
+        <!--Create Event Container View Controller-->
+        <scene sceneID="G6G-wb-wXe">
+            <objects>
+                <viewController storyboardIdentifier="CreateEventContainerViewController" id="CuM-aU-N7W" customClass="CreateEventContainerViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gI7-DG-B4L"/>
+                        <viewControllerLayoutGuide type="bottom" id="OWj-lh-WpZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2CK-B2-GfA">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="354"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-mp-bju">
+                                <rect key="frame" x="0.0" y="0.0" width="343" height="305"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="t4s-AC-mtJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="305"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJY-SL-ln0">
+                                            <rect key="frame" x="124" y="116" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sbh-mp-bju" firstAttribute="top" secondItem="gI7-DG-B4L" secondAttribute="bottom" id="5Wz-f4-U8M"/>
+                            <constraint firstAttribute="trailing" secondItem="sbh-mp-bju" secondAttribute="trailing" id="IHI-q1-dOZ"/>
+                            <constraint firstItem="sbh-mp-bju" firstAttribute="leading" secondItem="2CK-B2-GfA" secondAttribute="leading" id="cN1-wi-tQb"/>
+                            <constraint firstItem="OWj-lh-WpZ" firstAttribute="top" secondItem="sbh-mp-bju" secondAttribute="bottom" id="dRs-id-0KW"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="Pin white" selectedImage="Pin green" id="jaR-tm-Hk4">
+                        <inset key="imageInsets" minX="0.0" minY="8" maxX="0.0" maxY="-8"/>
+                    </tabBarItem>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="343" height="354"/>
+                    <connections>
+                        <outlet property="tabBar" destination="jaR-tm-Hk4" id="BnN-6y-Ag8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F7a-Ig-FmW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="677.60000000000002" y="2031.1844077961021"/>
         </scene>
     </scenes>
     <resources>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageViewController: UITabBarController, UIPopoverPresentationControllerDelegate{
+class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIPopoverPresentationControllerDelegate{
 
     var willShowEvent = false
     var showEvent: Event? = nil
@@ -22,7 +22,8 @@ class HomePageViewController: UITabBarController, UIPopoverPresentationControlle
     var showTab = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.delegate = self
         let attributes = [
             NSFontAttributeName:UIFont(name: "Avenir-Black", size: 15),
             NSForegroundColorAttributeName:UIColor.white
@@ -83,77 +84,49 @@ class HomePageViewController: UITabBarController, UIPopoverPresentationControlle
         }
     }
     
-//    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-//        if item.tag == 2{
-////            let menuViewController: ActivityPopoverViewController = storyboard.instantiateViewControllerWithIdentifier("ActivityPopoverViewController") as! ActivityPopoverViewController
-////            menuViewController.modalPresentationStyle = .Popover
-////            menuViewController.view.frame = newRect
-////            menuViewController.preferredContentSize = CGSizeMake(150, 150)
-////            
-////            if let popoverMenuViewController = menuViewController.popoverPresentationController {
-////                popoverMenuViewController.permittedArrowDirections = .Down
-////                popoverMenuViewController.delegate = menuViewController
-////                popoverMenuViewController.sourceRect = newRect
-////                popoverMenuViewController.sourceView = self.menuTabBar
-////                
-////                presentViewController(menuViewController, animated: true, completion: nil)
-////                
-////            }
-//            
-//            let tabBarItemWidth = Int(tabBar.frame.size.width) / (tabBar.items?.count)!
-//            let x = tabBarItemWidth * 2
-//            let newRect = CGRect(x: x, y: 0, width: tabBarItemWidth, height: Int(tabBar.frame.size.height))
-//            print(newRect)
-//            
-//            let popController = UIStoryboard(name: "CreateEventOnMapViewController", bundle: nil).instantiateViewController(withIdentifier: "CreateEventOnMapViewController")
-//            
-//            // set the presentation style
-//            popController.modalPresentationStyle = .popover
-//            
-//            popController.preferredContentSize = CGSize(width: popController.childViewControllers[0].view.frame.size.width, height: popController.childViewControllers[0].view.frame.size.height)
-//            
-//            if let  popoverPinViewController = popController.popoverPresentationController{
-//                
-//                popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
-//                popController.popoverPresentationController?.delegate = self
-//                popController.popoverPresentationController?.sourceRect = newRect
-//                popController.popoverPresentationController?.sourceView = tabBar
-//                self.present(popController, animated: true, completion: nil)
-//            }
-//
-//        }
-//    }
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        print(viewController)
+        if viewController is CreateEventContainerViewController{
+            print("shouldn\'t select")
+            let tabBarItemWidth = Int(tabBar.frame.size.width) / (tabBar.items?.count)!
+            let x = tabBarItemWidth * 2
+            let newRect = CGRect(x: x, y: 0, width: tabBarItemWidth, height: Int(tabBar.frame.size.height))
+            print(newRect)
+            
+            let popController = UIStoryboard(name: "CreateEventOnMapViewController", bundle: nil).instantiateViewController(withIdentifier: "CreateEventOnMapViewController") as! CreateEventOnMapViewController
+                
+                popController.modalPresentationStyle = UIModalPresentationStyle.popover
+                
+                popController.preferredContentSize = CGSize(width: 345, height: 354)
+                
+                // set up the popover presentation controller
+                popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+                popController.popoverPresentationController?.delegate = self
+                popController.popoverPresentationController?.sourceView = self.tabBar
+                popController.popoverPresentationController?.sourceRect = newRect
+                tabBarController.present(popController, animated: true, completion: nil)
+                return false
+
+        }
+        return true
+    }
+
     
-    //    MARK: this is for popover for notifications
-    
-//    func showPopOver(_ sender: UIButton){
-//        let popController = UIStoryboard(name: "FollowersRequest", bundle: nil).instantiateViewController(withIdentifier: "FollowersRequest")
-//        
-//        // set the presentation style
-//        popController.modalPresentationStyle = UIModalPresentationStyle.popover
-//        
-//        popController.preferredContentSize = CGSize(width: 200, height: 60)
-//        
-//        // set up the popover presentation controller
-//        popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
-//        popController.popoverPresentationController?.delegate = self
-//        popController.popoverPresentationController?.sourceView = sender as UIView // button
-//        popController.popoverPresentationController?.sourceRect = sender.bounds
-//        self.present(popController, animated: true, completion: nil)
-//    }
-//    
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
+        return .none
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "createEventPopover" {
+            let popoverViewController = segue.destination as! CreateEventOnMapViewController
+            popoverViewController.modalPresentationStyle = .popover
+            popoverViewController.popoverPresentationController!.delegate = self
+        }
     }
-    */
+ 
 
 }
