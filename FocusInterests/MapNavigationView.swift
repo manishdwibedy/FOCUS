@@ -12,7 +12,6 @@ import MIBadgeButton_Swift
 protocol NavigationInteraction {
     func messagesClicked()
     func notificationsClicked()
-    func userProfileClicked()
     func invitationClicked()
 }
 
@@ -55,10 +54,6 @@ class MapNavigationView: UIView, UISearchBarDelegate{
             }
         }
 
-    }
-    
-    @IBAction func profileButtonPressed(_ sender: UIButton) {
-        delegate?.userProfileClicked()
     }
     
     @IBAction func messagesButtonPressed(_ sender: MIBadgeButton) {

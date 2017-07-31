@@ -65,6 +65,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     var exploreTab: InvitePeopleViewController? = nil
     var searchEventsTab: SearchEventsViewController? = nil
+    var createEventPopover: CreateEventOnMapViewController? = nil
     var notifs = [FocusNotification]()
     var invites = [FocusNotification]()
     var feeds = [FocusNotification]()
@@ -103,7 +104,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         popUpScreen = MapPopUpScreenView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: popUpView.frame.width))
         popUpScreen.parentVC = self
         self.popUpView.addSubview(popUpScreen)
-        
         self.mapViewSettings.layer.cornerRadius = 10.0
         
         if AuthApi.getUserImage() != nil && (AuthApi.getUserImage()?.characters.count)! > 0{
@@ -114,10 +114,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }, completed: {
                 (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
                 
-                if image != nil && finished{
-                    let userImage = crop(image: image!, width: 35, height: 35)
-                    self.navigationView.userProfileButton.setImage(userImage, for: .normal)
-                }
             })
             
         }
@@ -250,6 +246,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 //            self.clusterManager.setDelegate(self, mapDelegate: self)
             
         })
+        
+        self.createEventPopover = self.tabBarController?.viewControllers?[2] as? CreateEventOnMapViewController
         
         self.exploreTab = self.tabBarController?.viewControllers?[3] as? InvitePeopleViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
@@ -931,12 +929,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         print("Error: \(error)")
     }
     
-    func userProfileClicked() {
-        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
-        
-        dropfromTop(view: self.view)
-        self.present(VC, animated:true, completion:nil)        
-    }
     
     func messagesClicked() {
         
