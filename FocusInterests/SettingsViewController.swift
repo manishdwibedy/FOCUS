@@ -35,7 +35,6 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         let switchNib = UINib(nibName: "SwitchCell", bundle: nil)
         tableView.register(switchNib, forCellReuseIdentifier: "SwitchCell")
-        statusBarFillView.backgroundColor = UIColor.primaryGreen()
         
         tableView.tableFooterView = UIView()
         tableView.reloadData()
@@ -45,6 +44,8 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
+        self.view.backgroundColor = Constants.color.navy
+        self.navBar.barTintColor = Constants.color.navy
         navBar.titleTextAttributes = attrs
         
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))

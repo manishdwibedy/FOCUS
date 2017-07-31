@@ -35,7 +35,9 @@ class ChangeUsernamePasswordViewController: UIViewController {
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
-        navBar.titleTextAttributes = attrs
+        self.view.backgroundColor = Constants.color.navy
+        self.navBar.backgroundColor = Constants.color.navy
+        self.navBar.titleTextAttributes = attrs
         
     }
     override func didReceiveMemoryWarning() {

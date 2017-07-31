@@ -8,8 +8,11 @@
 
 import UIKit
 
-class FeedPlaceImageTableViewCell: UITableViewCell {
+class FeedPlaceImageTableViewCell: UITableViewCell, UITextFieldDelegate{
 
+    @IBOutlet weak var mapImage: UIImageView!
+    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var pinCaptionLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -28,8 +31,10 @@ class FeedPlaceImageTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        self.commentTextField.delegate = self
         self.usernameLabel.setTitle("arya", for: .normal)
         self.addressLabel.setTitle("1001 Rose Bowl Dr", for: .normal)
+        self.postButton.allCornersRounded(radius: 4.0)
         self.distanceLabel.text = "10 mi"
         self.pinCaptionLabel.text = "Rose Bowl"
         addGreenDot(label: self.interestLabel, content: "Sports")

@@ -23,15 +23,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Transparent_Logo_225x150.png" translatesAutoresizingMaskIntoConstraints="NO" id="rY1-XT-C2R">
-                                <rect key="frame" x="61.5" y="37" width="252" height="157"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FOCUS_login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rY1-XT-C2R">
+                                <rect key="frame" x="62" y="71" width="252" height="101"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="157" id="Bp3-tP-cQn"/>
-                                    <constraint firstAttribute="width" secondItem="rY1-XT-C2R" secondAttribute="height" multiplier="248:215" constant="70.902325581395331" id="aQI-Rb-YmO"/>
+                                    <constraint firstAttribute="height" constant="101" id="Bp3-tP-cQn"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="K5z-Xh-TOp">
-                                <rect key="frame" x="61.5" y="199" width="252" height="360"/>
+                                <rect key="frame" x="61.5" y="183" width="252" height="360"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="2ks-og-0RJ" userLabel="textFields+ForgotPwordBttn">
                                         <rect key="frame" x="11" y="0.0" width="230" height="148"/>
@@ -218,13 +217,39 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KD0-S0-07M" userLabel="Invite Popup View">
+                                <rect key="frame" x="0.0" y="671" width="374" height="77"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Email Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wA-9z-7bp">
+                                        <rect key="frame" x="103" y="26" width="158" height="25"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" red="0.094117647060000004" green="0.17254901959999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="9wA-9z-7bp" firstAttribute="top" secondItem="KD0-S0-07M" secondAttribute="top" constant="26" id="3jm-Ig-x9v"/>
+                                    <constraint firstAttribute="height" constant="77" id="PzF-ad-iFG"/>
+                                    <constraint firstAttribute="bottom" secondItem="9wA-9z-7bp" secondAttribute="bottom" constant="26" id="X9j-XB-tah"/>
+                                    <constraint firstItem="9wA-9z-7bp" firstAttribute="leading" secondItem="KD0-S0-07M" secondAttribute="leading" constant="103" id="XVH-rc-wpZ"/>
+                                    <constraint firstItem="9wA-9z-7bp" firstAttribute="centerY" secondItem="KD0-S0-07M" secondAttribute="centerY" id="mQ1-oR-Tmc"/>
+                                    <constraint firstAttribute="trailing" secondItem="9wA-9z-7bp" secondAttribute="trailing" constant="113" id="pfg-eI-g5a"/>
+                                    <constraint firstItem="9wA-9z-7bp" firstAttribute="centerX" secondItem="KD0-S0-07M" secondAttribute="centerX" constant="-5" id="qCq-2x-3Vu"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="K5z-Xh-TOp" firstAttribute="centerX" secondItem="HGh-z7-isQ" secondAttribute="centerX" id="2A7-lu-39I"/>
-                            <constraint firstItem="rY1-XT-C2R" firstAttribute="top" secondItem="lEF-pk-Jwk" secondAttribute="bottom" constant="17" id="9ef-Zd-4fw"/>
-                            <constraint firstItem="K5z-Xh-TOp" firstAttribute="top" secondItem="rY1-XT-C2R" secondAttribute="bottom" constant="5" id="N1Z-RE-yon"/>
+                            <constraint firstItem="rY1-XT-C2R" firstAttribute="leading" secondItem="K5z-Xh-TOp" secondAttribute="leading" id="3vd-hY-Szq"/>
+                            <constraint firstItem="KD0-S0-07M" firstAttribute="leading" secondItem="HGh-z7-isQ" secondAttribute="leading" id="63f-vV-sxv"/>
+                            <constraint firstItem="rY1-XT-C2R" firstAttribute="top" secondItem="lEF-pk-Jwk" secondAttribute="bottom" constant="51" id="9ef-Zd-4fw"/>
+                            <constraint firstItem="K5z-Xh-TOp" firstAttribute="top" secondItem="rY1-XT-C2R" secondAttribute="bottom" constant="11" id="N1Z-RE-yon"/>
+                            <constraint firstItem="rY1-XT-C2R" firstAttribute="trailing" secondItem="K5z-Xh-TOp" secondAttribute="trailing" id="Rc7-nn-bP7"/>
                             <constraint firstItem="rY1-XT-C2R" firstAttribute="centerX" secondItem="HGh-z7-isQ" secondAttribute="centerX" id="TBd-hy-7BX"/>
+                            <constraint firstItem="vbA-Iy-ofu" firstAttribute="top" secondItem="KD0-S0-07M" secondAttribute="bottom" constant="-81" id="aH9-sx-xUs"/>
+                            <constraint firstAttribute="trailing" secondItem="KD0-S0-07M" secondAttribute="trailing" constant="1" id="bTl-gw-ahv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -234,11 +259,13 @@
                         <outlet property="orView" destination="QHk-Tp-jKq" id="y9C-cN-sCK"/>
                         <outlet property="passwordTextField" destination="jhs-w0-osX" id="t49-ZR-M2k"/>
                         <outlet property="regularSignInButton" destination="e17-3M-27h" id="lEh-Rt-ffR"/>
+                        <outlet property="resetPopupView" destination="KD0-S0-07M" id="zXc-gI-qfV"/>
+                        <outlet property="resetPopupViewBottomConstraint" destination="aH9-sx-xUs" id="52p-Gy-8I0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bi4-gb-HQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="347.82608695652175" y="535.59782608695662"/>
+            <point key="canvasLocation" x="346.39999999999998" y="534.78260869565224"/>
         </scene>
         <!--Forgot Password View Controller-->
         <scene sceneID="Hrw-U3-BHO">
@@ -262,7 +289,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Forgot Password" id="fy9-uo-c9p">
-                                        <barButtonItem key="leftBarButtonItem" image="Left back arrow icon 30x30 white.png" id="AKd-6Z-bOs">
+                                        <barButtonItem key="leftBarButtonItem" image="BackArrow" id="AKd-6Z-bOs">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="backButtonPressed:" destination="vya-I2-0iY" id="pTx-r9-yUX"/>
@@ -341,7 +368,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hjg-x5-NzF">
                                 <rect key="frame" x="16" y="20" width="30" height="30"/>
-                                <state key="normal" image="Left back arrow icon 30x30 white.png">
+                                <state key="normal" image="BackArrow">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -467,7 +494,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JzQ-fu-gAV">
                                 <rect key="frame" x="16" y="20" width="30" height="30"/>
-                                <state key="normal" image="Left back arrow icon 30x30 white.png">
+                                <state key="normal" image="BackArrow">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -517,7 +544,7 @@
                                         </constraints>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1dq-g6-lCI">
                                         <rect key="frame" x="0.0" y="39" width="280" height="24"/>
@@ -570,9 +597,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackArrow" width="30" height="30"/>
+        <image name="FOCUS_login_logo" width="250" height="100"/>
         <image name="GoogleSignIn" width="252" height="46"/>
-        <image name="Left back arrow icon 30x30 white.png" width="30" height="30"/>
-        <image name="Transparent_Logo_225x150.png" width="225" height="150"/>
         <image name="signInWithFacebook" width="252" height="46"/>
     </resources>
 </document>

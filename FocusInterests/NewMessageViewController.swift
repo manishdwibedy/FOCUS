@@ -54,6 +54,9 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         self.navigationItem.setLeftBarButton(backBarItem, animated: true)
         self.navigationItem.setRightBarButton(UIBarButtonItem(title: "", style: .plain, target: nil, action: nil), animated: false)
         self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.view.backgroundColor = Constants.color.navy
+        self.navigationController?.navigationBar.titleTextAttributes = Constants.navBar.attrs
+        self.navigationController?.navigationBar.barTintColor = Constants.color.navy
         hideKeyboardWhenTappedAround()
         
     }

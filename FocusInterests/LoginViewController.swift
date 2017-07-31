@@ -24,13 +24,19 @@ enum LoginTypes: String {
     case Google = "google"
 }
 
-class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate, XMLParserDelegate {
+protocol LoginViewControllerDelegate {
+    func showPopup()
+}
+
+class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate, XMLParserDelegate, LoginViewControllerDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var regularSignInButton: UIButton!
     @IBOutlet weak var orView: UIView!
+    @IBOutlet weak var resetPopupView: UIView!
+    @IBOutlet weak var resetPopupViewBottomConstraint: NSLayoutConstraint!
     
     let handle = Auth.auth()
     let loginView = FBSDKLoginManager()
@@ -38,6 +44,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     var delegate: LoginDelegate?
     let appD = UIApplication.shared.delegate as! AppDelegate
     var user: User?
+    var showResetPopup = false
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +79,22 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         handle.removeStateDidChangeListener(handle)
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if showResetPopup {
+            self.resetPopupView.isHidden = false
+            UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.resetPopupView.center.y -= 125
+                self.resetPopupViewBottomConstraint.constant += 125
+            }, completion: { animate in
+                UIView.animate(withDuration: 1.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.resetPopupView.center.y += 125
+                    self.resetPopupViewBottomConstraint.constant -= 125
+                }, completion: nil)
+            })
+            self.showResetPopup = false
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -484,9 +506,18 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             Constants.DB.user.child("\(fireId)/token").setValue(token)
             AuthApi.set(FCMToken: token)
             
-            
-            
         })
-    }    
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "forgotPassword"{
+            var vc = segue.destination as! ForgotPasswordViewController
+            vc.delegate = self
+        }
+    }
+    
+    func showPopup() {
+        self.showResetPopup = true
+    }
 }
 

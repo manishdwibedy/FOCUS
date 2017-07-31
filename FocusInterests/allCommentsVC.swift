@@ -15,6 +15,7 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var navBackOut: UIBarButtonItem!
     @IBOutlet weak var postOut: UIButton!
     
+    @IBOutlet weak var navBAr: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
     var parentEvent: Event?
     var parentVC: EventDetailViewController?
@@ -64,6 +65,9 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
 
         })
         
+        self.view.backgroundColor = Constants.color.navy
+        self.navBAr.backgroundColor = Constants.color.navy
+        self.navBAr.titleTextAttributes = Constants.navBar.attrs
         hideKeyboardWhenTappedAround()
     }
     

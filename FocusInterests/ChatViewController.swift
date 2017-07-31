@@ -106,13 +106,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         self.inputToolbar.contentView.backgroundColor = Constants.color.navy
         
         self.inputToolbar.contentView.textView.placeHolderTextColor = UIColor.white
-        self.inputToolbar.contentView.textView.placeHolder = "Enter the message"
-        
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.inputToolbar.contentView.textView.placeHolder = "Type here..."
         
         markUnread()
         getMessageID()
-        
         
         let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "BackArrow"), style: .plain, target: self, action: #selector(back))
         self.navigationItem.leftBarButtonItem = backButton
@@ -120,6 +117,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         self.collectionView.bounces = false
         loadingMessages = false
         
+        self.view.backgroundColor = Constants.color.navy
         self.navigationController?.navigationBar.titleTextAttributes = Constants.navBar.attrs
         self.navigationController?.navigationBar.barTintColor = Constants.color.navy
         

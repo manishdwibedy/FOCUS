@@ -62,6 +62,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
         // Do any additional setup after loading the view.
 //        loadInitialTable()
         
+        self.view.backgroundColor = Constants.color.navy
         self.navigationController?.navigationBar.titleTextAttributes = Constants.navBar.attrs
         self.navigationController?.navigationBar.barTintColor = Constants.color.navy
         
@@ -224,35 +225,42 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MessageTableViewCell
         
-        let formatter = DateFormatter()
-    
-        let message = self.messages[indexPath.row]
-        cell.username.text = message.name
-        
-        
-        
-        let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
-            cell.userImage.roundedImage()
+        if messages.count <= 0{
+            cell.noMessageLabel.isHidden = false
+            cell.username.isHidden = true
+            cell.content.isHidden = true
+            cell.time.isHidden = true
+            cell.userImage.isHidden = true
+        }else{
+            let formatter = DateFormatter()
+            
+            let message = self.messages[indexPath.row]
+            cell.username.text = message.name
+            
+            let block: SDWebImageCompletionBlock = {(image, error, cacheType, imageURL) -> Void in
+                cell.userImage.roundedImage()
+            }
+            
+            let placeholderImage = UIImage(named: "UserPhoto")
+            
+            if let url = URL(string: message.image_string){
+                cell.userImage.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
+                cell.userImage.setShowActivityIndicator(true)
+                cell.userImage.setIndicatorStyle(.gray)
+            }
+            
+            cell.content.text = message.lastContent
+            
+            let date = message.lastMessageDate
+            cell.time.text = formatter.timeSince(from: date, numericDates: true)
+            
+            if !message.readMessages{
+                addGreenDot(label: cell.username, content: message.name, right: true)
+            }
+            
+            cell.backgroundColor = .clear
         }
         
-        let placeholderImage = UIImage(named: "UserPhoto")
-        
-        if let url = URL(string: message.image_string){
-            cell.userImage.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: block)
-            cell.userImage.setShowActivityIndicator(true)
-            cell.userImage.setIndicatorStyle(.gray)
-        }
-        
-        cell.content.text = message.lastContent
-        
-        let date = message.lastMessageDate
-        cell.time.text = formatter.timeSince(from: date, numericDates: true)
-        
-        if !message.readMessages{
-            addGreenDot(label: cell.username, content: message.name, right: true)
-        }
-        
-        cell.backgroundColor = .clear
         return cell
     }
     

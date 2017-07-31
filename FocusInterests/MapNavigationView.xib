@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapNavigationView" customModule="FocusInterests" customModuleProvider="target">
             <connections>
-                <outlet property="invatationButton" destination="K7c-ZT-sxF" id="xHv-Ae-7np"/>
                 <outlet property="messagesButton" destination="CZk-k0-NPd" id="SlS-Dv-yom"/>
                 <outlet property="notificationsButton" destination="NJp-MD-iuK" id="P7c-Ck-nvS"/>
                 <outlet property="searchBar" destination="clg-Ba-1dC" id="pCU-Ia-ING"/>
@@ -23,66 +22,89 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-En-2Gc" userLabel="icons">
-                    <rect key="frame" x="20" y="0.0" width="335" height="40"/>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="avP-NM-JE1">
+                    <rect key="frame" x="20" y="0.0" width="334" height="40"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                            <rect key="frame" x="0.0" y="0.0" width="98" height="40"/>
-                            <inset key="contentEdgeInsets" minX="3" minY="-8" maxX="3" maxY="-8"/>
-                            <state key="normal" image="Comment"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="badgeBackgroundColor">
-                                    <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="badgeTextColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetTop">
-                                    <real key="value" value="10"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetRight">
-                                    <real key="value" value="10"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="messagesButtonPressed:" destination="-1" eventType="touchUpInside" id="HhF-9i-eZZ"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7c-ZT-sxF" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                            <rect key="frame" x="118" y="0.0" width="98.5" height="40"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" image="Invite"/>
-                            <connections>
-                                <action selector="invitationClicked:" destination="-1" eventType="touchUpInside" id="zSd-w7-xAa"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-MD-iuK" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                            <rect key="frame" x="236.5" y="0.0" width="98.5" height="40"/>
-                            <state key="normal" image="Notifications"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetRight">
-                                    <real key="value" value="20"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetTop">
-                                    <real key="value" value="10"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="badgeBackgroundColor">
-                                    <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="badgeTextColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="notificationsButtonPressed:" destination="-1" eventType="touchUpInside" id="e6r-GR-iuC"/>
-                            </connections>
-                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVi-yT-Cyr" userLabel="Message View">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
+                                    <rect key="frame" x="-5" y="-5" width="60" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="GIZ-Tl-zGI"/>
+                                        <constraint firstAttribute="height" constant="50" id="uTF-jJ-Agj"/>
+                                    </constraints>
+                                    <state key="normal" image="Comment"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="badgeBackgroundColor">
+                                            <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="badgeTextColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetTop">
+                                            <real key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetRight">
+                                            <real key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="messagesButtonPressed:" destination="-1" eventType="touchUpInside" id="HhF-9i-eZZ"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="9SP-hS-mvX"/>
+                                <constraint firstAttribute="width" constant="50" id="D3M-OU-nD3"/>
+                                <constraint firstItem="CZk-k0-NPd" firstAttribute="centerX" secondItem="aVi-yT-Cyr" secondAttribute="centerX" id="IpW-5Z-aWk"/>
+                                <constraint firstItem="CZk-k0-NPd" firstAttribute="centerY" secondItem="aVi-yT-Cyr" secondAttribute="centerY" id="JN1-Rz-IPP"/>
+                            </constraints>
+                        </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FOCUS_maps_logo" translatesAutoresizingMaskIntoConstraints="NO" id="iPI-ZI-bnz">
+                            <rect key="frame" x="92" y="0.0" width="150" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="lAj-2U-715"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sv1-Oy-9us" userLabel="Notifications View">
+                            <rect key="frame" x="284" y="0.0" width="50" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-MD-iuK" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
+                                    <rect key="frame" x="-5" y="0.0" width="60" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="0n8-cg-D2B"/>
+                                        <constraint firstAttribute="width" constant="60" id="vXI-OT-ftH"/>
+                                    </constraints>
+                                    <state key="normal" image="Map_Notifications"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetRight">
+                                            <real key="value" value="20"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetTop">
+                                            <real key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="badgeBackgroundColor">
+                                            <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="badgeTextColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="notificationsButtonPressed:" destination="-1" eventType="touchUpInside" id="e6r-GR-iuC"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="NJp-MD-iuK" firstAttribute="centerY" secondItem="sv1-Oy-9us" secondAttribute="centerY" id="EjF-L8-jyS"/>
+                                <constraint firstItem="NJp-MD-iuK" firstAttribute="centerX" secondItem="sv1-Oy-9us" secondAttribute="centerX" id="v7i-GJ-XeF"/>
+                                <constraint firstAttribute="width" constant="50" id="zDB-8h-qyq"/>
+                            </constraints>
+                        </view>
                     </subviews>
-                    <constraints>
-                        <constraint firstItem="CZk-k0-NPd" firstAttribute="width" secondItem="NJp-MD-iuK" secondAttribute="width" id="Ced-IQ-apX"/>
-                        <constraint firstAttribute="height" constant="40" id="MVK-cr-fWS"/>
-                        <constraint firstItem="K7c-ZT-sxF" firstAttribute="width" secondItem="NJp-MD-iuK" secondAttribute="width" id="WfL-nM-Vr8"/>
-                    </constraints>
                 </stackView>
                 <searchBar alpha="0.0" contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="Search" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clg-Ba-1dC">
                     <rect key="frame" x="0.0" y="76" width="375" height="44"/>
@@ -98,17 +120,16 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="iQC-En-2Gc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="MIO-t3-krd"/>
-                <constraint firstItem="iQC-En-2Gc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NR6-60-190"/>
-                <constraint firstAttribute="trailing" secondItem="iQC-En-2Gc" secondAttribute="trailing" constant="20" id="Pu9-Wn-nSU"/>
+                <constraint firstItem="avP-NM-JE1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Hdn-VD-cHW"/>
+                <constraint firstItem="avP-NM-JE1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uaI-l9-4G0"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-84.5" y="363"/>
+            <point key="canvasLocation" x="-127.5" y="355"/>
         </view>
     </objects>
     <resources>
         <image name="Comment" width="74" height="74"/>
-        <image name="Invite" width="35" height="36"/>
-        <image name="Notifications" width="41" height="36"/>
+        <image name="FOCUS_maps_logo" width="150" height="40"/>
+        <image name="Map_Notifications" width="30" height="30"/>
     </resources>
 </document>

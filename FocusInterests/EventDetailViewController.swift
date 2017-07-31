@@ -104,6 +104,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             eventAmount.text = "$ \(String(describing: event!.price!))"
         }else{
             self.timeAmountAddressStack.removeArrangedSubview(self.eventAmount)
+            self.eventAmount.isHidden = true
             self.eventDetailsView.bounds.size.height -= self.eventAmount.frame.size.height
         }
         
@@ -141,9 +142,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.pinHereButton.setTitle("I\'m Here", for: .normal)
         self.pinHereButton.setTitleColor(UIColor.white, for: .normal)
         self.pinHereButton.setTitle("I\'m Here!", for: .selected)
-        self.pinHereButton.setTitleColor(Constants.color.navy, for: .selected)
-        
-        self.eventName.text = "CBS Sports"
+        self.pinHereButton.setTitleColor(UIColor.white, for: .selected)
         
         self.attendButton.roundCorners(radius: 5.0)
         self.attendButton.setTitle("Attend", for: .normal)
@@ -160,8 +159,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         navTitle.title = event?.title
         timeLabel.text = event?.date
         addressLabel.text = event?.fullAddress?.replacingOccurrences(of: ";;", with: ", ")
-        
-        self.descriptionTextView.text = event?.eventDescription
+        self.descriptionTextView.text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud"
+//        self.descriptionTextView.text = event?.eventDescription
         var frame = self.descriptionTextView.frame
         
         frame.size = self.descriptionTextView.contentSize
@@ -243,10 +242,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     }
                     
                     self.commentsStack.removeArrangedSubview(self.noCommentLabel)
+                    self.noCommentLabel.isHidden = true
                     self.commentsViewHeight.constant -= self.noCommentLabel.bounds.height
                 }
                 else{
                     //                    self.commentTableHeight.constant = 50
+                    self.noCommentLabel.isHidden = false
                     self.commentsStack.addArrangedSubview(self.noCommentLabel)
                     self.commentsStack.addArrangedSubview(self.addCommentView)
                     self.commentsStack.removeArrangedSubview(self.moreCommentsView)
@@ -649,7 +650,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             else{
                 addGreenDot(label: (eventCell?.categoryLabel)!, content: "N.A.")
             }
-
+            
+            
             let reference = Constants.storage.event.child("\(suggestion.id!).jpg")
             
             let placeholderImage = UIImage(named: "empty_event")
@@ -844,11 +846,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     @IBAction func pinButtonPressed(_ sender: Any) {
         self.pinHereButton.isSelected = !self.pinHereButton.isSelected
-        if self.pinHereButton.isSelected{
-            self.pinHereButton.backgroundColor = UIColor.white
-        }else{
-            self.pinHereButton.backgroundColor = Constants.color.green
-        }
         
         let createEventStoryboard = UIStoryboard.init(name: "CreateEvent", bundle: nil)
         let createEventVC = createEventStoryboard.instantiateViewController(withIdentifier: "createEvent") as! CreateNewEventViewController

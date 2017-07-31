@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var navBackOut: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -42,7 +43,10 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             newData.uid = (guestList?[key]! as! NSDictionary)["UID"] as! String
             self.attendeeList.add(newData)
         }
-    
+        
+        self.view.backgroundColor = Constants.color.navy
+        self.navBar.backgroundColor = Constants.color.navy
+        self.navBar.titleTextAttributes = Constants.navBar.attrs
         hideKeyboardWhenTappedAround()
         
     }
@@ -51,10 +55,6 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    
-   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return attendeeList.count

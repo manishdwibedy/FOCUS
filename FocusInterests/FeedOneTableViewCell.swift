@@ -9,8 +9,11 @@
 import UIKit
 import Crashlytics
 
-class FeedOneTableViewCell: UITableViewCell {
+class FeedOneTableViewCell: UITableViewCell, UITextFieldDelegate{
     
+    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var mainStack: UIStackView!
+    @IBOutlet weak var commentPostView: UIView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var nameDescriptionLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -22,8 +25,9 @@ class FeedOneTableViewCell: UITableViewCell {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
-    @IBOutlet weak var mapImage: UIImageView!
+    @IBOutlet weak var mapImage: UIButton!
     @IBOutlet weak var timeSince: UILabel!
+    @IBOutlet weak var postButton: UIButton!
     
     var pin: pinData? = nil
     var parentVC: SearchEventsViewController? = nil
@@ -31,11 +35,15 @@ class FeedOneTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.commentTextField.delegate = self
         self.userImage.roundedImage()
         self.usernameLabel.text = "username"
         self.addressLabel.text = "1600 Campus Road"
         self.distanceLabel.text = "2 mi"
-        
+        self.postButton.allCornersRounded(radius: 5.0)
+        self.mainStack.removeArrangedSubview(self.commentPostView)
+        self.commentPostView.isHidden = true
         addGreenDot(label: self.interestLabel, content: "Sports")
         self.nameDescriptionLabel.text = "Watching NBA Awards - Westbrook for MVP!"
         
@@ -115,6 +123,11 @@ class FeedOneTableViewCell: UITableViewCell {
             self.likeButton.setImage(#imageLiteral(resourceName: "Like"), for: UIControlState.normal)
             
         }
+    }
+    
+    @IBAction func commentPressed(_ sender: Any) {
+        self.commentPostView.isHidden = false
+        self.mainStack.addArrangedSubview(self.commentPostView)
     }
     
     func goToMap(sender: UITapGestureRecognizer){
