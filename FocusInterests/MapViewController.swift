@@ -73,6 +73,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var viewingPlace: Place? = nil
     var viewingEvent: Event? = nil
     
+    var followingPlacesMarker = [GMSMarker]()
+    var allPlacesMarker = [GMSMarker]()
+    
     @IBOutlet weak var navigationView: MapNavigationView!
     
     
@@ -970,7 +973,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             let value = snapshot.value as? NSDictionary
             
             if let placeData = value{
-//                self.places.removeAll()
                 for (_,place) in placeData
                 {
                     let place_id = (place as? [String:Any])?["placeID"]
@@ -989,6 +991,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                             if let earlier = self.placePins[place.id]{
                                 earlier.map = nil
                             }
+                            
+                            self.followingPlacesMarker.append(marker)
                             self.placePins[place.id] = marker
                             
                             self.placeMapping[place.id] = place
@@ -1002,8 +1006,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     })
                     
                 }
-                
-                
             }
         })
 
@@ -1078,7 +1080,60 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 //            self.clusterManager.cluster()
             }
         }
-        
+    }
+    
+    func showPlaces(showAll: Bool, interests: String){
+        if showAll{
+            // get all places on map of selected interest
+            for marker in self.followingPlacesMarker{
+                marker.map = nil
+            }
+            
+            for interest in interests.components(separatedBy: ","){
+                let yelpInterst = Constants.interests.yelpMapping[interest]
+            
+                yelpSearch(interest: yelpInterst!, location: currentLocation!, gotPlaces: {nearByPlaces in
+                    for place in nearByPlaces{
+                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+                        let marker = GMSMarker(position: position)
+                        marker.icon = UIImage(named: "place_icon")
+                        marker.title = place.name
+                        marker.map = self.mapView
+                        marker.isTappable = true
+                        marker.accessibilityLabel = "place_\(self.places.count)"
+                        if let earlier = self.placePins[place.id]{
+                            earlier.map = nil
+                        }
+                        
+                        self.allPlacesMarker.append(marker)
+                        self.placePins[place.id] = marker
+                        
+                        self.placeMapping[place.id] = place
+                        self.getPlaceHours(id: place.id)
+                        self.places.append(place)
+                        if !(self.exploreTab?.followingPlaces.contains(place))!{
+                            self.exploreTab?.followingPlaces.append(place)
+                        }
+                    }
+                })
+            }
+        }
+        else{
+            // pending remove all marker pins
+            for marker in self.allPlacesMarker{
+                marker.map = nil
+            }
+            
+            if let token = AuthApi.getYelpToken(){
+                self.fetchPlaces(around: currentLocation!, token: token)
+            }
+            else{
+                getYelpToken(completion: {(token) in
+                    self.fetchPlaces(around:
+                        self.currentLocation!, token: token)
+                })
+            }
+        }
     }
     
     func getPlaceHours(id: String){
