@@ -107,6 +107,9 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         self.searchLocationTableView.dataSource = self
         self.searchLocationTableView.layer.cornerRadius = 5.0
         
+        
+        let currentLocationNib = UINib(nibName: "SingleInterestTableViewCell", bundle: nil)
+        self.searchLocationTableView.register(currentLocationNib, forCellReuseIdentifier: "singleInterestCell")
         let searchPlaceCell = UINib(nibName: "SearchPlaceCell", bundle: nil)
         self.searchLocationTableView.register(searchPlaceCell, forCellReuseIdentifier: "SearchPlaceCell")
         self.currentLocationStack.removeArrangedSubview(self.searchLocationTableView)
@@ -159,7 +162,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 0{
-            return 1
+            return 2
         }else{
             return Constants.interests.interests.count
         }
@@ -167,9 +170,22 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 0 {
-            let searchPlace = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
-            searchPlace.backgroundColor = UIColor.lightGray
-            return searchPlace
+            if indexPath.row == 0{
+                let currentLocationCell = tableView.dequeueReusableCell(withIdentifier: "singleInterestCell", for: indexPath) as! SingleInterestTableViewCell
+                currentLocationCell.interestLabel.text = "Current Location"
+                currentLocationCell.interestImage.frame.size.height = 23
+                currentLocationCell.interestImage.frame.size.width = 20
+                currentLocationCell.interestImage.image = #imageLiteral(resourceName: "Pin icon x1")
+                currentLocationCell.layoutIfNeeded()
+                currentLocationCell.backgroundColor = UIColor.lightGray
+                currentLocationCell.accessoryType = .checkmark
+                return currentLocationCell
+            }else{
+                let searchPlace = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
+                searchPlace.backgroundColor = UIColor.lightGray
+                return searchPlace
+            }
+            
         }else{
             let interestCell = tableView.dequeueReusableCell(withIdentifier: "singleInterestCell", for: indexPath) as! SingleInterestTableViewCell
             let interestName = Constants.interests.interests[indexPath.row]
@@ -181,7 +197,9 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.tag == 1{
+        if tableView.tag == 0{
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        }else if tableView.tag == 1{
             let interestCell = tableView.cellForRow(at: indexPath) as! SingleInterestTableViewCell
             
             interestCell.accessoryType = .checkmark
@@ -205,7 +223,11 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView.tag == 0{
-            return 110
+            if indexPath.row == 0{
+                return 40
+            }else{
+                return 110
+            }
         }else{
             return 40
         }

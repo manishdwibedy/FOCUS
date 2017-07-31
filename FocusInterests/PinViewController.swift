@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import SDWebImage
 
-class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate{
+class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate, UIPopoverPresentationControllerDelegate{
     var place: Place?
     
     @IBOutlet weak var mainStackView: UIStackView!
@@ -247,21 +247,21 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         switch self.averageRatingAmount{
         case 0.0...0.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_0")
-        case 1.0...1.5:
+        case 1.0...1.4:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_1")
-        case 1.6...1.9:
+        case 1.5...1.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_1_half")
-        case 2.0...2.5:
+        case 2.0...2.4:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_2")
-        case 2.6...2.9:
+        case 2.5...2.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_2_half")
-        case 3.0...3.5:
+        case 3.0...3.4:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_3")
-        case 3.6...3.9:
+        case 3.5...3.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_3_half")
-        case 4.0...4.5:
+        case 4.0...4.4:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_4")
-        case 4.6...4.9:
+        case 4.5...4.9:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_4_half")
         case 5.0:
             reviewsStarImageView.image = #imageLiteral(resourceName: "small_5")

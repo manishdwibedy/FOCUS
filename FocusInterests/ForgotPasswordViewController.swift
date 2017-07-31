@@ -14,6 +14,8 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
+    var delegate: LoginViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,7 +40,7 @@ class ForgotPasswordViewController: UIViewController {
                 
             }
         }
-        
+        self.delegate?.showPopup()
         self.dismiss(animated: true, completion: nil)
     }
 

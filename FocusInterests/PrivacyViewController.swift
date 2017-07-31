@@ -28,6 +28,8 @@ class PrivacyViewController: UIViewController {
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 18)!
         ]
         
+        self.view.backgroundColor = Constants.color.navy
+        self.navBar.barTintColor = Constants.color.navy
         navBar.titleTextAttributes = attrs
         // Do any additional setup after loading the view.
     }

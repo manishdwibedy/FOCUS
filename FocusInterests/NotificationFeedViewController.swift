@@ -173,9 +173,15 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NotifTabCell", for: indexPath) as! notificationTabCell
-        cell.setupCell(notif: nofArray[indexPath.row])
-        cell.parentVC = self
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
+        cell.userProfilePic.roundButton()
+        cell.nextTimeButton.allCornersRounded(radius: 5.0)
+        cell.seeYouThereButton.allCornersRounded(radius: 5.0)
+        cell.locationImage.roundedImage()
+        cell.userNameLabel.text = "username"
+        
+//        cell.setupCell(notif: nofArray[indexPath.row])
+//        cell.parentVC = self
         return cell
         
     }

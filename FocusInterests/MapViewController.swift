@@ -247,8 +247,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
         })
         
-        self.createEventPopover = self.tabBarController?.viewControllers?[2] as? CreateEventOnMapViewController
-        
         self.exploreTab = self.tabBarController?.viewControllers?[3] as? InvitePeopleViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
@@ -1378,8 +1376,6 @@ extension MapViewController{
         
         popUpScreen.object = place
         popUpScreen.type = "place"
-        
-        
         
         var name = ""
         var rating = ""
