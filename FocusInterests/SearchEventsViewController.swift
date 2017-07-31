@@ -79,6 +79,11 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.location = AuthApi.getLocation()
+        
+        self.feeds = self.feeds.sorted(by: {
+            $0.time! >= $1.time!
+        })
+        
         tableView.reloadData()
         
 //        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations/event").queryOrdered(byChild: "status").queryEqual(toValue: "accepted").observeSingleEvent(of: .value, with: { (snapshot) in
