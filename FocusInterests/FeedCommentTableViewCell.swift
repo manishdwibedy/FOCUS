@@ -20,6 +20,9 @@ class FeedCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var eventNameLabel: UIButton!
     @IBOutlet weak var timeSince: UILabel!
     
+    var pin: [String:Any]? = nil
+    var parentVC: SearchEventsViewController? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,6 +45,23 @@ class FeedCommentTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func layoutSubviews() {
+        let userTap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
+        usernameImage.isUserInteractionEnabled = true
+        userTap.numberOfTapsRequired = 1
+        usernameImage.addGestureRecognizer(userTap)
+        
+    }
+    
+    func showUserProfile(sender: UITapGestureRecognizer){
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = pin?["fromUID"] as! String
+        
+        parentVC?.present(VC, animated:true, completion:nil)
     }
     
 }

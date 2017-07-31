@@ -407,6 +407,11 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         }
         else if feed.type == .Like{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as? FeedPlaceTableViewCell{
+                
+                let data = feed.item?.data["pin"] as! [String:Any]
+                cell.pin = data
+                cell.parentVC = self
+                
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     cell.usernameWhoLikedLabel.setTitle(user.username, for: .normal)
                     if let image = user.image_string{
@@ -463,6 +468,12 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         }
         else if feed.type == .Comment{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as? FeedCommentTableViewCell{
+                
+                let data = feed.item?.data["pin"] as! [String:Any]
+                cell.pin = data
+                cell.parentVC = self
+                
+                
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     cell.usernameWhoCommentedLabel.setTitle(user.username, for: .normal)
                     if let image = user.image_string{
