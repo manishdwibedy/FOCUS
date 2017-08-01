@@ -44,6 +44,17 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func finishBttnPressed(_ sender: Any) {
         print("bttn was pressed")
         let validPassword = self.passwordTextField.text as! String
+        
+        let usernameLength = userNameTextField.text?.characters.count
+        if usernameLength < 2{
+            showError(message: "Your username is too short")
+            return
+        }
+        else if usernameLength > 20{
+            showError(message: "Your username is too long")
+            return 
+        }
+        
         switch typeOfSignUp {
         case "phone":
             let formatedString = formatPhoneString(phoneNumber: usersEmailOrPhone)
