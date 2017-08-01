@@ -54,6 +54,9 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
             showError(message: "Your username is too long")
             return 
         }
+        else if self.fullNameTextField.text!.components(separatedBy: " ").count == 1{
+            showError(message: "Please enter you full name")
+        }
         
         switch typeOfSignUp {
         case "phone":
