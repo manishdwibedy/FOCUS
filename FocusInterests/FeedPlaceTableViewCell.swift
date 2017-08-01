@@ -9,15 +9,16 @@
 import UIKit
 
 class FeedPlaceTableViewCell: UITableViewCell {
-    @IBOutlet weak var usernameImage: UIImageView!
-
+    
+    @IBOutlet weak var usernameImage: UIButton!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var placePhoto: UIImageView!
+    @IBOutlet weak var placePhoto: UIButton!
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var placeBeingLiked: UIButton!
     @IBOutlet weak var usernameWhoIsBeingLiked: UIButton!
     @IBOutlet weak var usernameWhoLikedLabel: UIButton!
     @IBOutlet weak var timeSince: UILabel!
+    @IBOutlet weak var globeButton: UIButton!
     
     var pin: [String:Any]? = nil
     var parentVC: SearchEventsViewController? = nil
@@ -25,8 +26,8 @@ class FeedPlaceTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.usernameImage.roundedImage()
-        self.placePhoto.roundedImage()
+        self.usernameImage.roundButton()
+        self.placePhoto.roundButton()
         addGreenDot(label: interestLabel, content: "Food")
         self.distanceLabel.text = "50 mi"
         var pinPlace = "UCLA Pavilion"
@@ -43,15 +44,16 @@ class FeedPlaceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    override func layoutSubviews() {
-        let userTap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
-        usernameImage.isUserInteractionEnabled = true
-        userTap.numberOfTapsRequired = 1
-        usernameImage.addGestureRecognizer(userTap)
-        
+    @IBAction func goBackToMap(_ sender: Any){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+        vc.willShowPin = true
+        //        vc.showPin = pin
+        //        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)
+        vc.selectedIndex = 0
     }
     
-    func showUserProfile(sender: UITapGestureRecognizer){
+    @IBAction func showUserProfile(){
         let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
         VC.otherUser = true

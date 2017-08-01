@@ -9,12 +9,13 @@
 import UIKit
 import Crashlytics
 
-class FeedOneTableViewCell: UITableViewCell, UITextFieldDelegate{
+class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
     
-    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var dateAndTimeLabel: UILabel!
+    @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var mainStack: UIStackView!
     @IBOutlet weak var commentPostView: UIView!
-    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userImage: UIButton!
     @IBOutlet weak var nameDescriptionLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var likesAmountLabel: UILabel!
@@ -25,9 +26,10 @@ class FeedOneTableViewCell: UITableViewCell, UITextFieldDelegate{
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
-    @IBOutlet weak var mapImage: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var timeSince: UILabel!
     @IBOutlet weak var postButton: UIButton!
+    @IBOutlet weak var commentStackHeight: NSLayoutConstraint!
     
     var pin: pinData? = nil
     var parentVC: SearchEventsViewController? = nil
@@ -36,24 +38,25 @@ class FeedOneTableViewCell: UITableViewCell, UITextFieldDelegate{
         super.awakeFromNib()
         // Initialization code
         
-        self.commentTextField.delegate = self
-        self.userImage.roundedImage()
+        self.commentTextView.delegate = self
+        self.commentTextView.textContainer.maximumNumberOfLines = 0
+        self.userImage.roundButton()
         self.usernameLabel.text = "username"
         self.addressLabel.text = "1600 Campus Road"
         self.distanceLabel.text = "2 mi"
         self.postButton.allCornersRounded(radius: 5.0)
-        self.mainStack.removeArrangedSubview(self.commentPostView)
+        
+        let placeholderAttributes: [String : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!
+        ]
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Post a comment", attributes: placeholderAttributes)
+        
+        self.commentTextView.attributedText = placeholderTextAttributes
         self.commentPostView.isHidden = true
         addGreenDot(label: self.interestLabel, content: "Sports")
         self.nameDescriptionLabel.text = "Watching NBA Awards - Westbrook for MVP!"
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.goToMap(sender:)))
-        tapGesture.numberOfTapsRequired = 1
-        mapImage.addGestureRecognizer(tapGesture)
-        
-        let userTap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
-        userTap.numberOfTapsRequired = 1
-        userImage.addGestureRecognizer(userTap)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -125,26 +128,49 @@ class FeedOneTableViewCell: UITableViewCell, UITextFieldDelegate{
         }
     }
     
-    @IBAction func commentPressed(_ sender: Any) {
-        self.commentPostView.isHidden = false
-        self.mainStack.addArrangedSubview(self.commentPostView)
+    @IBAction func postButtonPressed(_ sender: Any) {
+        print("post button pressed")
     }
     
-    func goToMap(sender: UITapGestureRecognizer){
+    @IBAction func commentPressed(_ sender: Any) {
+        UIView.animate(withDuration: 0.3) {
+            self.commentPostView.isHidden = !self.commentPostView.isHidden
+        }
+    }
+    
+    @IBAction func goBackToMap(_ sender: Any){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
         vc.willShowPin = true
         vc.showPin = pin
-//        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)
+
         vc.selectedIndex = 0
+        
     }
     
-    func showUserProfile(sender: UITapGestureRecognizer){
+    @IBAction func showUserProfile(){
         let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
         VC.otherUser = true
         VC.userID = (pin?.fromUID)!
         
         parentVC?.present(VC, animated:true, completion:nil)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        UIView.animate(withDuration: 0.3) {
+            self.commentPostView.isHidden = true
+        }
+        self.endEditing(true)
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Post a comment"{
+            textView.text = ""
+        }
     }
 }

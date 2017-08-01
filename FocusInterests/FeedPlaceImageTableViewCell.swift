@@ -8,21 +8,24 @@
 
 import UIKit
 
-class FeedPlaceImageTableViewCell: UITableViewCell, UITextFieldDelegate{
+class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
 
-    @IBOutlet weak var mapImage: UIImageView!
-    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var globeButton: UIButton!
+    @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var pinCaptionLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var addressLabel: UIButton!
     @IBOutlet weak var usernameLabel: UIButton!
-    @IBOutlet weak var usernameImage: UIImageView!
+    @IBOutlet weak var usernameImage: UIButton!
     @IBOutlet weak var imagePlace: UIImageView!
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeSince: UILabel!
+    @IBOutlet weak var commentPostView: UIView!
+    @IBOutlet weak var likeButton: UIButton!
     
     var parentVC: SearchEventsViewController? = nil
     var pin: [String:Any]? = nil
@@ -31,19 +34,25 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextFieldDelegate{
         super.awakeFromNib()
         // Initialization code
         
-        self.commentTextField.delegate = self
+        self.commentTextView.delegate = self
+        self.commentTextView.layer.borderWidth = 1.0
+        self.commentTextView.layer.borderColor = UIColor.white.cgColor
         self.usernameLabel.setTitle("arya", for: .normal)
         self.addressLabel.setTitle("1001 Rose Bowl Dr", for: .normal)
         self.postButton.allCornersRounded(radius: 4.0)
         self.distanceLabel.text = "10 mi"
         self.pinCaptionLabel.text = "Rose Bowl"
         addGreenDot(label: self.interestLabel, content: "Sports")
-        self.usernameImage.roundedImage()
-        var tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.goToMap(sender:)))
-        tapGesture.numberOfTapsRequired = 1
-        mapImage.addGestureRecognizer(tapGesture)
+        let placeholderAttributes: [String : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!
+        ]
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Post a comment", attributes: placeholderAttributes)
+        self.commentTextView.attributedText = placeholderTextAttributes
         
-        
+        self.usernameImage.roundButton()
+        self.likeButton.setImage(#imageLiteral(resourceName: "Liked"), for: .selected)
+        self.likeButton.setImage(#imageLiteral(resourceName: "Like"), for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -68,14 +77,37 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextFieldDelegate{
         
         self.cellContentView.layer.mask = mask
         
-        let userTap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
-        usernameImage.isUserInteractionEnabled = true
-        userTap.numberOfTapsRequired = 1
-        usernameImage.addGestureRecognizer(userTap)
+        
         
     }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        UIView.animate(withDuration: 0.3) {
+            self.commentPostView.isHidden = true
+        }
+        self.endEditing(true)
+    }
     
-    func goToMap(sender: UITapGestureRecognizer){
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Post a comment"{
+            textView.text = ""
+        }
+    }
+    
+    @IBAction func commentButtonPressed(_ sender: Any) {
+        UIView.animate(withDuration: 0.3) {
+            self.commentPostView.isHidden = !self.commentPostView.isHidden
+        }
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        self.likeButton.isSelected = !self.likeButton.isSelected
+    }
+    @IBAction func goBackToMap(_ sender: Any){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
         vc.willShowPin = true
@@ -84,7 +116,11 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextFieldDelegate{
         vc.selectedIndex = 0
     }
     
-    func showUserProfile(sender: UITapGestureRecognizer){
+    @IBAction func postButtonPressed(_ sender: Any) {
+        print("post button pressed")
+    }
+    
+    @IBAction func showUserProfile(){
         let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
         VC.otherUser = true

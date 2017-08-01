@@ -12,12 +12,15 @@ import SDWebImage
 class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var usernameImage: UIImageView!
+    @IBOutlet weak var usernameImage: UIButton!
     @IBOutlet weak var usernameLabel: UIButton!
     @IBOutlet weak var eventNameLabel: UIButton!
-    @IBOutlet weak var searchEventTableView: UITableView!
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var timeSince: UILabel!
+    @IBOutlet weak var mainStack: UIStackView!
+    @IBOutlet weak var searchEventTableView: UITableView!
+    @IBOutlet weak var searchEventTableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var globeButton: UIButton!
     
     var event: Event? = nil
     var parentVC: SearchEventsViewController? = nil
@@ -27,13 +30,15 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         super.awakeFromNib()
         // Initialization code
         
-        self.usernameImage.roundedImage()
+        self.usernameImage.roundButton()
         
-        
+        self.mainStack.translatesAutoresizingMaskIntoConstraints = false
         self.searchEventTableView.delegate = self
         self.searchEventTableView.dataSource = self
         self.searchEventTableView.separatorStyle = .none
         self.searchEventTableView.register(UINib(nibName: "SearchEventTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        self.searchEventTableView.rowHeight = UITableViewAutomaticDimension
+        self.searchEventTableView.estimatedRowHeight = 90.0
         
     }
     
@@ -43,15 +48,7 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         // Configure the view for the selected state
     }
     
-    override func layoutSubviews() {
-        let userTap = UITapGestureRecognizer(target: self, action: #selector(self.showUserProfile(sender:)))
-        usernameImage.isUserInteractionEnabled = true
-        userTap.numberOfTapsRequired = 1
-        usernameImage.addGestureRecognizer(userTap)
-        
-    }
-    
-    func showUserProfile(sender: UITapGestureRecognizer){
+    @IBAction func showUserProfile(){
         let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
         VC.otherUser = true
@@ -81,24 +78,20 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         cell.inviteButton.layer.masksToBounds = false
         cell.inviteButton.layer.shadowColor = UIColor.black.cgColor
         cell.inviteButton.layer.shadowRadius = 5.0
-        
-        cell.textViewHeight.constant -= 22
-        
-        
         self.eventNameLabel.setTitle(event!.title, for: .normal)
-        
+        cell.dateAndTimeLabel.text = "7/20 9:00 P.M."
+        cell.placeDateAndTimeStack.addArrangedSubview(cell.dateAndTimeLabel)
+        cell.dateAndTimeLabel.isHidden = false
         cell.address.text = event?.shortAddress
         cell.name.text = event?.title
         cell.distance.text = "4.6 mi"
         self.distanceLabel.text = cell.distance.text
-        cell.interest.textColor = UIColor.white
-        cell.interest.text = "\(event!.attendeeCount) attendess"
+        cell.interest.text = "\(event!.attendeeCount) attendees"
         cell.guestCount.isHidden = true
         addGreenDot(label: self.interestLabel, content: (event?.category)!)
         cell.price.text = event?.price == 0 ? "Free" : "$\(event?.price)"
         
         cell.inviteButton.addTarget(self, action: #selector(self.goToInvitePage), for: .touchUpInside)
-        
         
         let eventLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double((event?.longitude!)!)!)
         
@@ -122,21 +115,53 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
                 
                 if image != nil && finished{
                     cell.eventImage.image = crop(image: image!, width: 50, height: 50)
+                    var tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.goToEventDetail))
+                    tapGesture.numberOfTapsRequired = 1
+                    cell.eventImage.addGestureRecognizer(tapGesture)
                 }
             })
             
             
         })
-
+        self.searchEventTableViewHeightConstraint.constant = cell.contentView.frame.size.height
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        print(self.searchEventTableView.visibleCells)
+        if let cell = self.searchEventTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SearchEventTableViewCell{
+            return cell.frame.height
+        }
+        return 100
+    }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("did select event detail cell")
+//        print("\(tableView.cellForRow(at: indexPath)?)")
+//        let inviteVC = UIStoryboard(name: "eventDetailVC", bundle: nil).instantiateViewController(withIdentifier: "EventDetailViewController") as! EventDetailViewController
+//        
+//        parentVC?.present(inviteVC, animated: true, completion: nil)
+//    }
+
+    func goToEventDetail(){
+        let inviteVC = UIStoryboard(name: "eventDetailVC", bundle: nil).instantiateViewController(withIdentifier: "EventDetailViewController") as! EventDetailViewController
+
+        parentVC?.present(inviteVC, animated: true, completion: nil)
     }
     
     func goToInvitePage(){
-        let inviteVC = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "NewInviteViewController")
+        let inviteVC = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "NewInviteViewController") as! NewInviteViewController
+        inviteVC.type = "event"
+        
         parentVC?.present(inviteVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func goBackToMap(_ sender: Any){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+        vc.willShowPin = true
+        //        vc.showPin = pin
+        //        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)
+        vc.selectedIndex = 0
     }
 }

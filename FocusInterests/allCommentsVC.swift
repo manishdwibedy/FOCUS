@@ -102,7 +102,6 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     override func viewDidDisappear(_ animated: Bool) {
         commentTextField.resignFirstResponder()
         parentVC?.scrollView.frame.origin.y = 0
-        
     }
     
     
@@ -122,8 +121,6 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
         self.view.frame.origin.y = 0
         let oldLastCellIndexPath = NSIndexPath(row: commentsCList.count-1, section: 0)
         self.tableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
-        
-        
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -151,12 +148,10 @@ class allCommentsVC: UIViewController, UITableViewDelegate,UITableViewDataSource
     
     
     @IBAction func navBack(_ sender: Any) {
-        
         if keyboardUp == false
         {
             dismiss(animated: true, completion: nil)
-        }else
-        {
+        }else{
             commentTextField.resignFirstResponder()
             commentTextField.text = ""
         }

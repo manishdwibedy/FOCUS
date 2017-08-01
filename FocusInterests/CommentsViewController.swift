@@ -183,6 +183,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.text = ""
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
         let time = NSDate().timeIntervalSince1970
         Constants.DB.pins.child(data["fromUID"] as! String).child("comments").childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "comment": commentField.text!, "date": Double(time)])
