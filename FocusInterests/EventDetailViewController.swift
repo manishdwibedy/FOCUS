@@ -357,7 +357,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         let eventLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double((event?.longitude!)!)!)
     
-        self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: eventLocation,addBracket: false, precision: 0), for: .normal)
+        self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: eventLocation,addBracket: false, precision: 1), for: .normal)
         
         hideKeyboardWhenTappedAround()
     }

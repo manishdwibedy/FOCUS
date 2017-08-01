@@ -107,7 +107,7 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         
         let placeLocation = CLLocation(latitude: Double((place?.latitude)!), longitude: Double((place?.longitude)!))
         
-        self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: placeLocation,addBracket: false, precision: 0), for: .normal)
+        self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: placeLocation,addBracket: false, precision: 1), for: .normal)
         
         
         self.pinButton.setTitle("I\'m Here", for: .normal)
