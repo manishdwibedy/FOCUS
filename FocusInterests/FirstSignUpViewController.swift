@@ -92,7 +92,7 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
 //        else{
 //            self.performSegue(withIdentifier: "next", sender: nil)
 //        }
-        if isValidEmail(text: email){
+        if isValidEmail(text: emailTextField.text!){
             self.performSegue(withIdentifier: "next", sender: nil)
         }
         else{

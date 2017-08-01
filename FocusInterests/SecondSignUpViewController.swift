@@ -46,11 +46,11 @@ class SecondSignUpViewController: BaseViewController, UITextFieldDelegate {
         let validPassword = self.passwordTextField.text as! String
         
         let usernameLength = userNameTextField.text?.characters.count
-        if usernameLength < 2{
+        if usernameLength! < 2{
             showError(message: "Your username is too short")
             return
         }
-        else if usernameLength > 20{
+        else if usernameLength! > 20{
             showError(message: "Your username is too long")
             return 
         }

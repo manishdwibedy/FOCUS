@@ -234,6 +234,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
         
         let date = Date()
         self.datePicker.minimumDate = date
+
         self.datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: +100, to: Date())
         self.datePicker.datePickerMode = .date
         self.dateFormatter.dateFormat = "MMM d"
@@ -643,8 +644,11 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     }
     
     func startTimeSelected(){
-        print("start time: \(self.timePicker.selectedRow(inComponent: 0)): \(self.timePicker.selectedRow(inComponent: 1)) \(self.timePicker.selectedRow(inComponent: 2))")
         if let startTimeVal = self.startTime{
+            if startTimeVal < Date(){
+                showError(message: "Please enter a valid time")
+                return
+            }
             self.eventTimeTextField.text = timeFormatter.string(from: startTimeVal)
         }
         self.eventEndTimeTextField.becomeFirstResponder()
