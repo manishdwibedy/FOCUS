@@ -247,7 +247,7 @@ extension Event{
             
             for data in json["_embedded"]["events"]{
                 let name = data.1["name"].stringValue
-                let desc = ""
+                
                 
                 let address = data.1["_embedded"]["venues"].arrayValue[0]
                 let fullAddress = "\(address["address"]["line1"].stringValue);;\(address["city"]["name"].stringValue)"
@@ -261,6 +261,13 @@ extension Event{
                 
                 let price = data.1["priceRanges"][0]["min"].doubleValue
                 let image = data.1["images"][0]["url"].stringValue
+                
+                let parkingInfo = address["parkingDetail"].stringValue
+                let info = data.1["info"].stringValue
+                let boxOfficeInfo = address["boxOfficeInfo"].stringValue
+                let pleaseNoteInfo = data.1["pleaseNote"].stringValue
+                let desc = "\(info)\n\(pleaseNoteInfo)\n\(boxOfficeInfo)\(parkingInfo)"
+                
                 let event = Event(title: name, description: desc, fullAddress: fullAddress, shortAddress: shortAddress, latitude: lat, longitude: long, date: date, creator: "", id: data.1["id"].stringValue, category: category, privateEvent: false)
                 
                 event.price = price
