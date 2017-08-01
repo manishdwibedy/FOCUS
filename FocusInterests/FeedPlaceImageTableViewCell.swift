@@ -39,6 +39,9 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextFieldDelegate{
         self.pinCaptionLabel.text = "Rose Bowl"
         addGreenDot(label: self.interestLabel, content: "Sports")
         self.usernameImage.roundedImage()
+        var tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.goToMap(sender:)))
+        tapGesture.numberOfTapsRequired = 1
+        mapImage.addGestureRecognizer(tapGesture)
         
         
     }
@@ -72,6 +75,15 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextFieldDelegate{
         
     }
     
+    func goToMap(sender: UITapGestureRecognizer){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+        vc.willShowPin = true
+//        vc.showPin = pin
+        //        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)
+        vc.selectedIndex = 0
+    }
+    
     func showUserProfile(sender: UITapGestureRecognizer){
         let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
@@ -80,4 +92,5 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextFieldDelegate{
         
         parentVC?.present(VC, animated:true, completion:nil)
     }
+    
 }

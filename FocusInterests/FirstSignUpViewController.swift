@@ -92,8 +92,13 @@ class FirstSignUpViewController: BaseViewController, UITextFieldDelegate {
 //        else{
 //            self.performSegue(withIdentifier: "next", sender: nil)
 //        }
+        if isValidEmail(text: email){
+            self.performSegue(withIdentifier: "next", sender: nil)
+        }
+        else{
+            showError(message: "Please enter a valid email")
+        }
         
-        self.performSegue(withIdentifier: "next", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -47,6 +47,11 @@ func showLoginError(_ error: Error){
         }
     }
 }
+   
+func showError(message: String){
+    SCLAlertView().showCustom("Oops!", subTitle: message, color: UIColor.orange, icon: #imageLiteral(resourceName: "error"))
+}
+   
 func getYelpToken(completion: @escaping (_ result: String) -> Void){
     let url = "https://api.yelp.com/oauth2/token"
     let parameters: [String: String] = [
