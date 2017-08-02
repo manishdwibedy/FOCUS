@@ -645,11 +645,18 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     
     func startTimeSelected(){
         if let startTimeVal = self.startTime{
-            if startTimeVal < Date(){
-                showError(message: "Please enter a valid time")
-                return
+            if let startDate = self.startDate{
+                if startDate < Date(){
+                    showError(message: "Please enter a valid time")
+                    return
+                }
+                else{
+                    self.eventTimeTextField.text = timeFormatter.string(from: startTimeVal)
+                }
             }
-            self.eventTimeTextField.text = timeFormatter.string(from: startTimeVal)
+            else{
+                showError(message: "Please choose the start date")
+            }
         }
         self.eventEndTimeTextField.becomeFirstResponder()
     }
