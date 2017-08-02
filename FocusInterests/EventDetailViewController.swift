@@ -84,6 +84,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     var commentDF = DateFormatter()
     var eventDateDF = DateFormatter()
+    var ticketMasterDF = DateFormatter()
     let screenSize = UIScreen.main.bounds
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
@@ -169,6 +170,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.descriptionTextView.frame = frame
         
         eventDateDF.dateFormat = "MMM d, hh:mm a"
+        ticketMasterDF.dateFormat = "yyyy-MM-d hh:mm:ss"
         if (event?.creator?.characters.count)! > 0{
             let reference = Constants.storage.event.child("\(event!.id!).jpg")
             reference.downloadURL(completion: { (url, error) in
@@ -206,10 +208,20 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         }
         
-        if eventDateDF.date(from: (event?.date)!)! < Date(){
-            self.attendButton.isEnabled = false
-            self.pinHereButton.isEnabled = false
-            self.inviteButton.isEnabled = false
+        if let date = eventDateDF.date(from: (event?.date)!){
+            if date < Date(){
+                self.attendButton.isEnabled = false
+                self.pinHereButton.isEnabled = false
+                self.inviteButton.isEnabled = false
+            }
+            
+        }
+        else if let date = ticketMasterDF.date(from: (event?.date)!){
+            if date < Date(){
+                self.attendButton.isEnabled = false
+                self.pinHereButton.isEnabled = false
+                self.inviteButton.isEnabled = false
+            }
         }
         
         if event?.id != nil{
@@ -514,9 +526,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.commentsCList.add(data)
         self.commentsStack.removeArrangedSubview(self.noCommentLabel)
         self.noCommentLabel.isHidden = true
-        self.commentsTableViewHeight.constant = ((self.commentsTableView.cellForRow(at: IndexPath(row: 0, section: 0))?.frame.size.height)! * CGFloat(self.commentsCList.count))
+        self.commentsTableViewHeight.constant = 44 * CGFloat(self.commentsCList.count)
         commentsTableView.reloadData()
-        //tableView.beginUpdates()
+        //tableView.beginUpdates()self.commentsTableView.cellForRow
         //tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
         //tableView.endUpdates()
         commentTextField.resignFirstResponder()

@@ -140,6 +140,10 @@ class Event: NSObject, NSCoding{
     }
     
     static func toEvent(info: [String: Any]) -> Event?{
+        if !info.keys.contains("title"){
+            return nil
+        }
+        
         guard let title = info["title"]! as? String else{
             return nil
         }
