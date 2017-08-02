@@ -39,6 +39,21 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         self.userProfileButton.roundButton()
         
+        if let userImage = AuthApi.getUserImage(){
+            if let url = URL(string: userImage){
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        self.userProfileButton.setImage(crop(image: image!, width: 30, height: 30), for: .normal)
+                    }
+                })
+                
+            }
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layer.cornerRadius = 6
