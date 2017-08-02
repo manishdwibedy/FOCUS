@@ -127,6 +127,17 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         self.pinAmountLabel.setTitle("0", for: .normal)
         self.followersAmountLabel.setTitle("0", for: .normal)
         
+        Constants.DB.following_place.child((place?.id)!).child("followers").observeSingleEvent(of: .value, with: {snapshot in
+            if let data = snapshot.value as? [String: Any]{
+                let count = data.count
+                self.followersAmountLabel.setTitle("\(count)", for: .normal)
+                
+            }
+            else{
+                self.followersAmountLabel.setTitle("0", for: .normal)
+            }
+        })
+        
         Constants.DB.places.child((place?.id)!).observeSingleEvent(of: .value, with: {snapshot in
             if let data = snapshot.value as? [String: Any]{
                 if let pins = data["pins"] as? [String: Any]{
@@ -135,17 +146,9 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
                 else{
                     self.pinAmountLabel.setTitle("0", for: .normal)
                 }
-                
-                if let following = data["following"] as? [String: Any]{
-                    self.followersAmountLabel.setTitle("\(following.count)", for: .normal)
-                }
-                else{
-                    self.followersAmountLabel.setTitle("0", for: .normal)
-                }
             }
             else{
                 self.pinAmountLabel.setTitle("0", for: .normal)
-                self.followersAmountLabel.setTitle("0", for: .normal)
             }
         })
     }
