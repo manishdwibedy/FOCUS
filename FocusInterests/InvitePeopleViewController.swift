@@ -65,6 +65,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var otherFollowingPlaces: [Place]? = nil
     
     var attendingEvents: [Event]? = nil
+    var followingAttendingEvents: [Event]? = nil
     var otherAttendingEvents: [Event]? = nil
     var otherEvents: [Event]? = nil
     
@@ -193,7 +194,22 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             
             if self.otherFollowingPlaces != nil{
                 if self.isMeetup{
-                    self.places = self.followingPlaces + self.otherFollowingPlaces! + self.places
+                    var uniquePlaces = self.places
+                    for place in self.followingPlaces!{
+                        if !uniquePlaces.contains(place){
+                            uniquePlaces.append(place)
+                        }
+                    }
+                    
+                    for place in self.otherFollowingPlaces!{
+                        if !uniquePlaces.contains(place){
+                            uniquePlaces.append(place)
+                        }
+                    }
+                    
+                    
+                    self.places = uniquePlaces
+                    
                     self.filtered = self.places
                     self.tableView.reloadData()
                 }
@@ -219,7 +235,23 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 self.otherFollowingPlaces = places
                 
                 if self.followingPlaces != nil{
-                    self.places = self.followingPlaces + self.otherFollowingPlaces! + self.places
+                    
+                    var uniquePlaces = self.places
+                    for place in self.followingPlaces!{
+                        if !uniquePlaces.contains(place){
+                            uniquePlaces.append(place)
+                        }
+                    }
+                    
+                    for place in self.otherFollowingPlaces!{
+                        if !uniquePlaces.contains(place){
+                            uniquePlaces.append(place)
+                        }
+                    }
+                    
+                    
+                    self.places = uniquePlaces
+                    
                     self.filtered = self.places
                     self.tableView.reloadData()
                 }
@@ -230,11 +262,17 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
             self.attendingEvents = events
             
-            if self.otherAttendingEvents != nil && self.otherEvents != nil{
+            if self.followingAttendingEvents != nil && self.otherEvents != nil{
                 var uniqueEvents = self.attendingEvents!
                 
+                for event in self.followingAttendingEvents!{
+                    if !uniqueEvents.contains(event){
+                        uniqueEvents.append(event)
+                    }
+                }
+                
                 for event in self.otherAttendingEvents!{
-                    if uniqueEvents.contains(event){
+                    if !uniqueEvents.contains(event){
                         uniqueEvents.append(event)
                     }
                 }
@@ -251,13 +289,19 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         })
         
         getFollowingAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
-            self.otherAttendingEvents = events
+            self.followingAttendingEvents = events
             
             if self.attendingEvents != nil && self.otherEvents != nil{
                 var uniqueEvents = self.attendingEvents!
                 
+                for event in self.followingAttendingEvents!{
+                    if !uniqueEvents.contains(event){
+                        uniqueEvents.append(event)
+                    }
+                }
+                
                 for event in self.otherAttendingEvents!{
-                    if uniqueEvents.contains(event){
+                    if !uniqueEvents.contains(event){
                         uniqueEvents.append(event)
                     }
                 }
@@ -273,14 +317,46 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
         })
         
+        if isMeetup{
+            getAttendingEvent(uid: UID, gotEvents: {events in
+                self.otherAttendingEvents = events
+                
+                if self.followingAttendingEvents != nil && self.otherEvents != nil{
+                    var uniqueEvents = self.attendingEvents!
+                    
+                    for event in self.followingAttendingEvents!{
+                        if !uniqueEvents.contains(event){
+                            uniqueEvents.append(event)
+                        }
+                    }
+                    
+                    for event in self.otherAttendingEvents!{
+                        if !uniqueEvents.contains(event){
+                            uniqueEvents.append(event)
+                        }
+                    }
+                    
+                    for event in self.events{
+                        if !uniqueEvents.contains(event){
+                            uniqueEvents.append(event)
+                        }
+                    }
+                    
+                    self.events = uniqueEvents + self.otherEvents!
+                    self.tableView.reloadData()
+                }
+            })
+        }
+
+        
         Event.getNearyByEvents(gotEvents: {events in
             self.otherEvents = events
             
-            if self.attendingEvents != nil && self.otherAttendingEvents != nil{
+            if self.attendingEvents != nil && self.followingAttendingEvents != nil{
                 var uniqueEvents = self.attendingEvents!
                 
-                for event in self.otherAttendingEvents!{
-                    if uniqueEvents.contains(event){
+                for event in self.followingAttendingEvents!{
+                    if !uniqueEvents.contains(event){
                         uniqueEvents.append(event)
                     }
                 }
