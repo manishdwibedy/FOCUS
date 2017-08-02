@@ -146,11 +146,15 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                                             if let text = message_data?["text"]{
                                                 let message = self.contentMapping[id]
                                                 message?.addLastContent(lastContent: text as! String)
+                                                message?.sender_id = (message_data?["sender_id"] as? String)!
                                             }
                                             else{
                                                 let message = self.contentMapping[id]
                                                 message?.addLastContent(lastContent: "sent a photo")
+                                                message?.sender_id = (message_data?["sender_id"] as? String)!
+                                                message?.type = .image
                                             }
+                                            
                                             self._messages.append(userMessage)
                                             
                                             if self._messages.count == self.userInfo.count{
@@ -248,8 +252,18 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                 cell.userImage.setShowActivityIndicator(true)
                 cell.userImage.setIndicatorStyle(.gray)
             }
+            if message.type == .image{
+                if message.id == AuthApi.getFirebaseUid()!{
+                    cell.content.text = "you sent a photo"
+                }
+                else{
+                    cell.content.text = "\(message.name) sent a photo"
+                }
+            }
+            else{
+                cell.content.text = "\(message.lastContent!)"
+            }
             
-            cell.content.text = message.lastContent
             
             let date = message.lastMessageDate
             cell.time.text = formatter.timeSince(from: date, numericDates: true)

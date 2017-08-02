@@ -9,13 +9,15 @@
 import Foundation
 
 class UserMessages{
-    let id: String
+    var id: String
     let name: String
     var readMessages: Bool
     let messageID: String
     var lastMessageDate: Date
     var lastContent: String?
     var image_string: String
+    var type = messageContent.text
+    var sender_id: String?
     
     init(id: String, name: String, messageID: String, readMessages: Bool, lastMessageDate: Date, image_string: String){
         self.id = id
@@ -29,4 +31,9 @@ class UserMessages{
     func addLastContent(lastContent: String){
         self.lastContent = lastContent
     }
+}
+
+enum messageContent{
+    case text
+    case image
 }
