@@ -14,7 +14,7 @@ import SwiftyJSON
 import FirebaseDatabase
 import Crashlytics
 
-class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
+class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate{
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -39,11 +39,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
     
         tableView.clipsToBounds = true
         
-        let nib = UINib(nibName: "SearchEventTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "cell")
-        
-        tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
-        
         tableView.register(UINib(nibName: "FeedOneTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedOneCell")
         
         tableView.register(UINib(nibName: "FeedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTwoCell")
@@ -56,7 +51,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         tableView.register(UINib(nibName: "FeedCreatedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedSixCell")
         
-        tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 150.0
         
 //        MARK: Navigation Bar
         let attrs = [
@@ -72,7 +68,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         filtered = events
         
         hideKeyboardWhenTappedAround()
-        tableView.tableFooterView = UIView()
+//        tableView.tableFooterView = UIView()
         
     }
     
@@ -145,19 +141,19 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                                 "Name": "Search Event"
             ])
         
-//        if showInvitePopup {
-//            self.invitePopupView.isHidden = false
-//            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
-//                self.invitePopupView.center.y -= 129
-//                self.invitePopupViewBottomConstraint.constant += 129
-//            }, completion: { animate in
-//                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
-//                    self.invitePopupView.center.y += 129
-//                    self.invitePopupViewBottomConstraint.constant -= 129
-//                }, completion: nil)
-//            })
-//            self.showInvitePopup = false
-//        }
+        if showInvitePopup {
+            self.invitePopupView.isHidden = false
+            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= 129
+                self.invitePopupViewBottomConstraint.constant += 129
+            }, completion: { animate in
+                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += 129
+                    self.invitePopupViewBottomConstraint.constant -= 129
+                }, completion: nil)
+            })
+            self.showInvitePopup = false
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -298,48 +294,65 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         let feed = self.feeds[indexPath.row]
         
         if feed.type == .Pin && feed.item?.imageURL == nil{
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as? FeedOneTableViewCell{
-                cell.parentVC = self
+            if let feedOneCell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as? FeedOneTableViewCell{
                 let data = feed.item?.data["pin"] as! [String:Any]
     
-                    cell.pin = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
-                cell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (cell.pin?.dateTimeStamp)!), numericDates: true, shortVersion: true)
+                feedOneCell.pin = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
+                feedOneCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (feedOneCell.pin?.dateTimeStamp)!), numericDates: true, shortVersion: true)
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
-                    cell.nameLabel.text = user.username
+                    feedOneCell.nameLabel.text = user.username
                     if let image = user.image_string{
                         if let url = URL(string: image){
-                            cell.userImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedOneCell.userImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedOneCell.userImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
                         }
                     }
                     
                 })
                 
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
-                    addGreenDot(label: cell.interestLabel, content: (pinData["focus"] as? String)!)
+                    if let pinFocus = pinData["focus"] as? String{
+                        if pinFocus.characters.first == "●"{
+                            let startIndex = pinFocus.index(pinFocus.startIndex, offsetBy: 2)
+                            let interestStringWithoutDot = pinFocus.substring(from: startIndex)
+                            addGreenDot(label: feedOneCell.interestLabel, content: interestStringWithoutDot)
+                        }else{
+                            addGreenDot(label: feedOneCell.interestLabel, content: pinFocus)
+                        }
+                    }else{
+                        addGreenDot(label: feedOneCell.interestLabel, content: "N.A")
+                    }
                     
-                    cell.addressLabel.text = (pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0]
-                    cell.nameDescriptionLabel.text = pinData["pin"] as? String
+                    
+                    
+                    
+                    feedOneCell.addressLabel.text = (pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0]
+                    feedOneCell.nameDescriptionLabel.text = pinData["pin"] as? String
                     
                     
                     let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
-                    cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
+                    feedOneCell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
                 }
-                return cell
+                feedOneCell.mapButton.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
+                feedOneCell.commentTextView.delegate = self
+                feedOneCell.commentButton.addTarget(self, action: #selector(SearchEventsViewController.commentPressed(_:)), for: .touchUpInside)
+                cell = feedOneCell
             }
             
         }
         else if feed.type == .Pin && feed.item?.imageURL != nil{
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as? FeedPlaceImageTableViewCell{
+            if let feedFiveCell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as? FeedPlaceImageTableViewCell{
                 
                 let data = feed.item?.data["pin"] as! [String:Any]
-                cell.pin = data
-                cell.parentVC = self
+                feedFiveCell.pin = data
+                feedFiveCell.parentVC = self
                 
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
-                    cell.usernameLabel.setTitle(user.username, for: .normal)
+                    feedFiveCell.usernameLabel.setTitle(user.username, for: .normal)
                     if let image = user.image_string{
                         if let url = URL(string: image){
-                            cell.usernameImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedFiveCell.usernameImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedFiveCell.usernameImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
                         }
                     }
                     
@@ -347,16 +360,17 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
                     
-                    cell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
+                    feedFiveCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
                     
-                    addGreenDot(label: cell.interestLabel, content: (pinData["focus"] as? String)!)
+                    addGreenDot(label: feedFiveCell.interestLabel, content: (pinData["focus"] as? String)!)
                     
-                    cell.addressLabel.setTitle((pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0], for: .normal)
-                    cell.pinCaptionLabel.text = pinData["pin"] as? String
-
-                    
+                    feedFiveCell.commentTextView.delegate = self
+                    feedFiveCell.globeButton.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
+                    feedFiveCell.addressLabel.setTitle((pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0], for: .normal)
+                    feedFiveCell.pinCaptionLabel.text = pinData["pin"] as? String
+                    feedFiveCell.commentButton.addTarget(self, action: #selector(SearchEventsViewController.commentPressed(_:)), for: .touchUpInside)
                     let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
-                    cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
+                    feedFiveCell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
                     
                     var firstVal = ""
                     for (key,_) in (pinData["images"] as! NSDictionary)
@@ -373,15 +387,16 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                             return
                         }
                         
-                        cell.imagePlace.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
-                        cell.imagePlace.setShowActivityIndicator(true)
-                        cell.imagePlace.setIndicatorStyle(.gray)
+                        feedFiveCell.imagePlace.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                        feedFiveCell.imagePlace.setShowActivityIndicator(true)
+                        feedFiveCell.imagePlace.setIndicatorStyle(.gray)
                     })
                 }
-                return cell
+                cell = feedFiveCell
             }
         }
         else if feed.type == .Created{
+            
             let feedCreatedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
             feedCreatedEventCell.event = feed.item?.data["event"] as? Event
             feedCreatedEventCell.timeSince.text = DateFormatter().timeSince(from: feed.time!, numericDates: true, shortVersion: true)
@@ -389,34 +404,36 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 feedCreatedEventCell.usernameLabel.setTitle(user.username, for: .normal)
                 if let image = user.image_string{
                     if let url = URL(string: image){
-                        feedCreatedEventCell.usernameImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        feedCreatedEventCell.usernameImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        feedCreatedEventCell.usernameImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
                     }
                 }
                 
             })
             
             feedCreatedEventCell.actionLabel.text = "created"
-            
             feedCreatedEventCell.parentVC = self
+            feedCreatedEventCell.globeButton.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
             cell = feedCreatedEventCell
         }
         else if feed.type == .Going{
             let feedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
+            feedEventCell.globeImage.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
             feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
             cell = feedEventCell
         }
         else if feed.type == .Like{
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as? FeedPlaceTableViewCell{
-                
+            if let feedPlaceCell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as? FeedPlaceTableViewCell{
                 let data = feed.item?.data["pin"] as! [String:Any]
-                cell.pin = data
-                cell.parentVC = self
+                feedPlaceCell.pin = data
+                feedPlaceCell.parentVC = self
                 
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
-                    cell.usernameWhoLikedLabel.setTitle(user.username, for: .normal)
+                    feedPlaceCell.usernameWhoLikedLabel.setTitle(user.username, for: .normal)
                     if let image = user.image_string{
                         if let url = URL(string: image){
-                            cell.usernameImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedPlaceCell.usernameImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedPlaceCell.usernameImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
                         }
                     }
                     
@@ -425,18 +442,18 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
                     let user = pinData["fromUID"] as? String
                     
-                    cell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
+                    feedPlaceCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
                     
                     
                     getUserData(id: user!, gotUser: {user in
-                        cell.usernameWhoIsBeingLiked.setTitle("\(user.username!)'s", for: .normal)
+                        feedPlaceCell.usernameWhoIsBeingLiked.setTitle("\(user.username!)'s", for: .normal)
                     })
                     
                     let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
-                    cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
+                    feedPlaceCell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
                     
                     let caption = pinData["pin"] as! String
-                    cell.placeBeingLiked.setTitle("\(caption)", for: .normal)
+                    feedPlaceCell.placeBeingLiked.setTitle("\(caption)", for: .normal)
                     if let images = pinData["images"] as? NSDictionary{
                         var firstVal = ""
                         for (key,_) in images
@@ -453,32 +470,34 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                                 return
                             }
                             
-                            cell.placePhoto.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
-                            cell.placePhoto.setShowActivityIndicator(true)
-                            cell.placePhoto.setIndicatorStyle(.gray)
+                            feedPlaceCell.placePhoto.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedPlaceCell.placePhoto.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            
+//                            feedPlaceCell.placePhoto.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+//                            feedPlaceCell.placePhoto.setShowActivityIndicator(true)
+//                            feedPlaceCell.placePhoto.setIndicatorStyle(.gray)
                         })
                     }
                     else{
-                        cell.placePhoto.image = #imageLiteral(resourceName: "placeholder_pin")
+                        feedPlaceCell.placePhoto.isEnabled = false
+                        feedPlaceCell.placePhoto.isHidden = true
                     }
                 }
-                return cell
+                cell = feedPlaceCell
             }
             
         }
         else if feed.type == .Comment{
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as? FeedCommentTableViewCell{
-                
+            if let feedFourCell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as? FeedCommentTableViewCell{
                 let data = feed.item?.data["pin"] as! [String:Any]
-                cell.pin = data
-                cell.parentVC = self
-                
-                
+                feedFourCell.pin = data
+                feedFourCell.parentVC = self
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
-                    cell.usernameWhoCommentedLabel.setTitle(user.username, for: .normal)
+                    feedFourCell.usernameWhoCommentedLabel.setTitle(user.username, for: .normal)
                     if let image = user.image_string{
                         if let url = URL(string: image){
-                            cell.usernameImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedFourCell.usernameImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedFourCell.usernameImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
                         }
                     }
                     
@@ -487,20 +506,23 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
                     let user = pinData["fromUID"] as? String
                     
-                    cell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
-                    
+                    feedFourCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
                     
                     getUserData(id: user!, gotUser: {user in
-                        cell.usernameReceivingCommentLabel.setTitle("\(user.username!)'s", for: .normal)
+                        feedFourCell.usernameReceivingCommentLabel.setTitle("\(user.username!)'s", for: .normal)
                     })
                     
-                    let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
-                    cell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
                     
+                    feedFourCell.checkLengthOfLabel()
+                    let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
+                    feedFourCell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
+                    feedFourCell.globeImage.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
                     let caption = pinData["pin"] as! String
-                    cell.eventNameLabel.setTitle("\(caption)", for: .normal)
-                    cell.eventNameLabel.setTitleColor(Constants.color.green, for: .normal)
-                    cell.commentLabel.text = feed.item?.itemName
+                    
+                    feedFourCell.eventNameLabel.setTitle("\(caption)", for: .normal)
+                    feedFourCell.eventNameLabel.setTitleColor(Constants.color.green, for: .normal)
+                    
+                    feedFourCell.commentLabel.text = "\"\((feed.item?.itemName)!)\""
                     
                     if let images = pinData["images"] as? NSDictionary{
                         var firstVal = ""
@@ -518,41 +540,19 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                                 return
                             }
                             
-                            cell.eventImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
-                            cell.eventImage.setShowActivityIndicator(true)
-                            cell.eventImage.setIndicatorStyle(.gray)
+                            feedFourCell.eventImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            feedFourCell.eventImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            
                         })
                     }
                     else{
-                        cell.eventImage.image = #imageLiteral(resourceName: "placeholder_pin")
+                        feedFourCell.eventImage.isEnabled = false
+                        feedFourCell.eventImage.isHidden = true
                     }
                 }
-                return cell
+                cell = feedFourCell
             }
         }
-        
-        
-//        if indexPath.row == 0{
-//            cell = tableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as! FeedOneTableViewCell
-//        }
-//        else if indexPath.row == 1{
-//            let feedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
-//            feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
-//            cell = feedEventCell
-//        }else if indexPath.row == 2{
-//            cell = tableView.dequeueReusableCell(withIdentifier: "FeedThreeCell", for: indexPath) as! FeedPlaceTableViewCell
-//        }else if indexPath.row == 3{
-//            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFourCell", for: indexPath) as! FeedCommentTableViewCell
-//        }
-//        else if indexPath.row == 4{
-//            cell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as! FeedPlaceImageTableViewCell
-//        }
-//        else if indexPath.row == 5{
-//            var feedCreatedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
-//            var searchEventCell = feedCreatedEventCell.searchEventTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SearchEventTableViewCell
-//            searchEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
-//            cell = feedCreatedEventCell
-//        }
         return cell!
     }
     
@@ -725,46 +725,45 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             self.present(ivc, animated: true, completion: { _ in })
         }
     }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var rowHeight: CGFloat?
-        let feed = self.feeds[indexPath.row]
-        
-        if feed.type == .Pin && feed.item?.imageURL == nil{
-            return 115
-        }
-        else if feed.type == .Pin && feed.item?.imageURL != nil{
-            return 220
-        }
-        else if feed.type == .Created{
-            return 227
-        }
-        else if feed.type == .Going{
-            return 130
-        }
-        else if feed.type == .Like{
-            return 120
-        }
-        else if feed.type == .Comment{
-            return 150
-        }
-        
-//        if indexPath.row == 0{
-//            rowHeight = 115
-//        }else if indexPath.row == 1{
-//            rowHeight = 130
-//        }else if indexPath.row == 2{
-//            rowHeight = 120
-//        }else if indexPath.row == 3{
-//            rowHeight = 150
-//        }else if indexPath.row == 4{
-//            rowHeight = 220
-//        }else if indexPath.row == 5{
-//            rowHeight = 227
-//        }else{
-//            rowHeight = 80
-//        }
-        return 80
+    
+    
+    func textViewDidChange(_ textView: UITextView) {
+        var textFrame = textView.frame
+        textFrame.size.height = textView.contentSize.height
+        textView.frame = textFrame
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
     }
     
+    func commentPressed(_ sender: Any) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    func goToMap() {
+        self.performSegue(withIdentifier: "unwindToMapViewControllerWithSegue", sender: self)
+    }
+    
+    func goToUserProfile(_ sender: Any) {
+//        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+//        self.present(VC, animated:true, completion:nil)
+    }
+    
+    func goToPlaceDetail(_ sender: Any) {
+//        let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+//        let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+//        controller.place = place
+//        self.present(controller, animated: true, completion: nil)
+    }
+    
+    func goToEventDetail(_ sender: Any) {
+//        let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+//        let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+//        controller.event = suggestion
+//        self.present(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func unwindBackToSearchEventViewController(sender: UIStoryboardSegue){
+        self.showInvitePopup = true
+    }
 }

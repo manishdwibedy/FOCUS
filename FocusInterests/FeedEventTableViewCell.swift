@@ -10,15 +10,16 @@ import UIKit
 
 class FeedEventTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabelButton: UIButton!
-    @IBOutlet weak var usernameImage: UIImageView!
+    @IBOutlet weak var usernameImage: UIButton!
     @IBOutlet weak var eventNameLabelButton: UIButton!
     @IBOutlet weak var attendButton: UIButton!
     @IBOutlet weak var inviteButton: UIButton!
-    @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var eventImage: UIButton!
     
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var interestLabel: UILabel!
     @IBOutlet weak var timeSince: UILabel!
+    @IBOutlet weak var globeImage: UIButton!
     
     
     override func awakeFromNib() {
@@ -28,8 +29,8 @@ class FeedEventTableViewCell: UITableViewCell {
         self.eventNameLabelButton.setTitle("Event B", for: .normal)
         addGreenDot(label: self.interestLabel, content: "Food")
         self.distanceLabel.text = "21 mi"
-        self.usernameImage.roundedImage()
-        self.eventImage.roundedImage()
+        self.usernameImage.roundButton()
+        self.eventImage.roundButton()
         self.attendButton.layer.borderWidth = 1.0
         self.attendButton.layer.borderColor = UIColor.white.cgColor
         self.attendButton.roundCorners(radius: 6.0)
@@ -40,6 +41,16 @@ class FeedEventTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    
+    @IBAction func goBackToMap(_ sender: Any){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+        vc.willShowPin = true
+        //        vc.showPin = pin
+        //        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)
+        vc.selectedIndex = 0
     }
     
 }

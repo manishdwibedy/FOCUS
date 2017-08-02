@@ -11,6 +11,8 @@ import Crashlytics
 
 class SearchEventTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var placeDateAndTimeStack: UIStackView!
+    @IBOutlet weak var dateAndTimeLabel: UILabel!
     @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var eventImage: UIImageView!
@@ -37,7 +39,8 @@ class SearchEventTableViewCell: UITableViewCell {
         address.textContainerInset = UIEdgeInsets.zero
         
         
-        
+        self.placeDateAndTimeStack.removeArrangedSubview(self.dateAndTimeLabel)
+        self.dateAndTimeLabel.isHidden = true
 //        self.attendButton.layer.shadowOpacity = 1.0
 //        self.attendButton.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
 //        self.attendButton.layer.masksToBounds = false

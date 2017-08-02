@@ -65,7 +65,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var commentsView: UIView!
     @IBOutlet weak var commentsStack: UIStackView!
     @IBOutlet weak var noCommentLabel: UILabel!
-    @IBOutlet weak var commentsViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var commentsTableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var moreCommentsView: UIView!
     
     var invitePeopleEventDelegate: InvitePeopleEventCellDelegate?
@@ -249,19 +249,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     
                     self.commentsStack.removeArrangedSubview(self.noCommentLabel)
                     self.noCommentLabel.isHidden = true
-                    self.commentsViewHeight.constant -= self.noCommentLabel.bounds.height
-                }
-                else{
-                    //                    self.commentTableHeight.constant = 50
+                }else{
+                    
                     self.noCommentLabel.isHidden = false
                     self.commentsStack.addArrangedSubview(self.noCommentLabel)
                     self.commentsStack.addArrangedSubview(self.addCommentView)
                     self.commentsStack.removeArrangedSubview(self.moreCommentsView)
                     self.commentsStack.removeArrangedSubview(self.commentsTableView)
-                    self.commentsViewHeight.constant -= (self.commentsTableView.frame.height + self.moreCommentsView.frame.height)
                     self.moreCommentsButton.isHidden = true
-                    //                    self.noCommentLabel.alpha = 1
-                    //                    self.moreCommentsButton.isHidden = true
+                    
                 }
                 
                 self.commentsTableView.reloadData()
@@ -370,7 +366,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.descriptionTextView.textContainer.maximumNumberOfLines = 3
         self.descriptionTextView.textContainer.lineBreakMode = .byTruncatingTail
         
@@ -516,6 +511,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
         
         self.commentsCList.add(data)
+        self.commentsStack.removeArrangedSubview(self.noCommentLabel)
+        self.noCommentLabel.isHidden = true
+        self.commentsTableViewHeight.constant = ((self.commentsTableView.cellForRow(at: IndexPath(row: 0, section: 0))?.frame.size.height)! * CGFloat(self.commentsCList.count))
         commentsTableView.reloadData()
         //tableView.beginUpdates()
         //tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)

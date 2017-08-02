@@ -46,12 +46,11 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         
         self.view.backgroundColor = Constants.color.navy
         self.navBar.barTintColor = Constants.color.navy
-        navBar.titleTextAttributes = attrs
+        self.navBar.titleTextAttributes = attrs
         
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
         backgroundView.backgroundColor = self.backgroundColor
         self.tableView.backgroundView = backgroundView
-
     }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {

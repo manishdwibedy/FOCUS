@@ -968,7 +968,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                         return
                                     }
                                     
-                                    recentPostCell.userImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                                    recentPostCell.userImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                                    recentPostCell.userImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                
                                 })
                             }
                         }

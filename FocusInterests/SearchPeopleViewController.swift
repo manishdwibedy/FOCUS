@@ -44,7 +44,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         tableView.layer.cornerRadius = 6
         tableView.clipsToBounds = true
         
-        
         let nib = UINib(nibName: "SearchPeopleTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
         

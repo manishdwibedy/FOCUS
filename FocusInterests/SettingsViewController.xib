@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="FocusInterests" customModuleProvider="target">
             <connections>
                 <outlet property="navBar" destination="oVc-Rz-LyX" id="vD2-GS-7au"/>
-                <outlet property="statusBarFillView" destination="fKJ-Y0-gMk" id="RJ6-iV-geV"/>
                 <outlet property="tableView" destination="9bk-Fb-arF" id="qzL-7e-YKt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,13 +21,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKJ-Y0-gMk">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="22"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="22" id="yQN-qA-zc2"/>
-                    </constraints>
-                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9bk-Fb-arF">
                     <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,7 +30,7 @@
                         <outlet property="delegate" destination="-1" id="xAt-EC-bMm"/>
                     </connections>
                 </tableView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVc-Rz-LyX">
+                <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVc-Rz-LyX">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="soJ-C8-cmT"/>
@@ -63,13 +55,10 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="oVc-Rz-LyX" secondAttribute="trailing" id="GFR-a0-GWf"/>
                 <constraint firstAttribute="trailing" secondItem="9bk-Fb-arF" secondAttribute="trailing" id="MZn-ti-eY2"/>
-                <constraint firstItem="fKJ-Y0-gMk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OHv-Db-6RJ"/>
                 <constraint firstItem="oVc-Rz-LyX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WFK-m3-Sb7"/>
                 <constraint firstItem="oVc-Rz-LyX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="cjo-Ld-bXx"/>
                 <constraint firstItem="9bk-Fb-arF" firstAttribute="top" secondItem="oVc-Rz-LyX" secondAttribute="bottom" id="dmk-el-B5Z"/>
-                <constraint firstItem="fKJ-Y0-gMk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fbB-T6-ANL"/>
                 <constraint firstAttribute="bottom" secondItem="9bk-Fb-arF" secondAttribute="bottom" id="mne-hV-0fJ"/>
-                <constraint firstAttribute="trailing" secondItem="fKJ-Y0-gMk" secondAttribute="trailing" id="pMf-W2-EkA"/>
                 <constraint firstItem="9bk-Fb-arF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="t50-hO-lR0"/>
             </constraints>
             <point key="canvasLocation" x="29.5" y="57.5"/>
