@@ -50,6 +50,8 @@ class InterestStackViewLabel: UIView{
         user_interests.append("\(interestLabel.text!)-1")
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["interests": user_interests.joined(separator: ",")])
         
+        AuthApi.set(interests: user_interests.joined(separator: ","))
+        
         self.addButton.setImage(#imageLiteral(resourceName: "Green_check_sign"), for: .normal)
         self.addButton.isSelected = !self.addButton.isSelected
     }
