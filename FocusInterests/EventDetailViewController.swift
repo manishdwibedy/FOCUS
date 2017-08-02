@@ -83,6 +83,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var map: MapViewController? = nil
     
     var commentDF = DateFormatter()
+    var eventDateDF = DateFormatter()
     let screenSize = UIScreen.main.bounds
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
@@ -167,6 +168,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         self.descriptionTextView.frame = frame
         
+        eventDateDF.dateFormat = "MMM d hh:mm a"
         if (event?.creator?.characters.count)! > 0{
             let reference = Constants.storage.event.child("\(event!.id!).jpg")
             reference.downloadURL(completion: { (url, error) in
@@ -204,7 +206,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         }
         
-        
+        if eventDateDF.date(from: (event?.date)!)! > Date(){
+            self.attendButton.isEnabled = false
+            self.pinHereButton.isEnabled = false
+        }
         
         if event?.id != nil{
             let fullRef = ref.child("events").child((event?.id)!).child("comments")
@@ -229,6 +234,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     
                 })
             }
+            
             
             fullRef.queryOrdered(byChild: "date").queryLimited(toFirst: 3).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary

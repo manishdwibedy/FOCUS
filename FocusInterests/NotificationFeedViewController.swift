@@ -215,6 +215,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             print(notif)
         }
     }
+    
     @IBAction func indexChanged(_ sender: AnyObject) {
         
 //        let segmentedControl = sender as! UISegmentedControl
