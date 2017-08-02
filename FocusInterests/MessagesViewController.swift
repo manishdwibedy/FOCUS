@@ -257,7 +257,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                     cell.content.text = "you sent a photo"
                 }
                 else{
-                    cell.content.text = "\(message.name) sent a photo"
+                    cell.content.text = "sent a photo"
                 }
             }
             else{

@@ -213,6 +213,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
             self.filteredSectionMapping.removeAll()
             self.filtered.removeAll()
             
+            self.usersInMemory.removeAll()
             
             self.userRef.queryOrdered(byChild: "username").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
