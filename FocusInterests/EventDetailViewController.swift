@@ -168,7 +168,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         self.descriptionTextView.frame = frame
         
-        eventDateDF.dateFormat = "MMM d hh:mm a"
+        eventDateDF.dateFormat = "MMM d, hh:mm a"
         if (event?.creator?.characters.count)! > 0{
             let reference = Constants.storage.event.child("\(event!.id!).jpg")
             reference.downloadURL(completion: { (url, error) in
@@ -206,9 +206,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         }
         
-        if eventDateDF.date(from: (event?.date)!)! > Date(){
+        if eventDateDF.date(from: (event?.date)!)! < Date(){
             self.attendButton.isEnabled = false
             self.pinHereButton.isEnabled = false
+            self.inviteButton.isEnabled = false
         }
         
         if event?.id != nil{
