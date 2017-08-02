@@ -325,24 +325,24 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     override func viewWillAppear(_ animated: Bool) {
         
         if let cached = Event.fetchEvent() {
-            self.event = cached
-            eventNameTextField.text = cached.title
-            eventDescriptionTextView.text = cached.eventDescription! 
-            locationTextField.text = cached.fullAddress
-            
-            let dateTime = cached.date?.components(separatedBy: ",")
-            eventDateTextField.text = dateTime?[0]
-            eventTimeTextField.text = dateTime?[1]
-            eventEndTimeTextField.text = cached.endTime
-            eventPriceTextView.text = String(describing: cached.price)
-            
-            let interests = cached.category?.components(separatedBy: ",")
-            
-            for (index, interest) in Constants.interests.interests.enumerated(){
-                if (interests?.contains(interest))!{
-                    checkInterests[index] = true
-                }
-            }
+//            self.event = cached
+//            eventNameTextField.text = cached.title
+//            eventDescriptionTextView.text = cached.eventDescription! 
+//            locationTextField.text = cached.fullAddress
+//            
+//            let dateTime = cached.date?.components(separatedBy: ",")
+//            eventDateTextField.text = dateTime?[0]
+//            eventTimeTextField.text = dateTime?[1]
+//            eventEndTimeTextField.text = cached.endTime
+//            eventPriceTextView.text = String(describing: cached.price)
+//            
+//            let interests = cached.category?.components(separatedBy: ",")
+//            
+//            for (index, interest) in Constants.interests.interests.enumerated(){
+//                if (interests?.contains(interest))!{
+//                    checkInterests[index] = true
+//                }
+//            }
             //interestTableView.reloadData()
             Event.clearCache()
         }
