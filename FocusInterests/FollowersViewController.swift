@@ -141,6 +141,25 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var user: followProfileCellData? = nil
+        if windowTitle == "Followers"{
+            user = self.followers[indexPath.row]
+        }
+        else{
+            user = self.following[indexPath.row]
+        }
+        
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = (user?.uid)!
+        dropfromTop(view: self.view)
+        
+        self.present(VC, animated:true, completion:nil)
+
+    }
+    
     @IBAction func backAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
