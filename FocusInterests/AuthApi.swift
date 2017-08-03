@@ -50,7 +50,9 @@ struct AuthApi {
         if let image = userImage {
             defaults.set(image, forKey: "userImage")
         }
-        defaults.set(nil, forKey: "userImage")
+        else{
+            defaults.set(nil, forKey: "userImage")
+        }
     }
     
     static func getUserImage() -> String? {
