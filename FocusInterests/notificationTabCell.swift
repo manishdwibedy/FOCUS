@@ -90,112 +90,117 @@ class notificationTabCell: UITableViewCell {
             self.profileImage.setIndicatorStyle(.gray)
         }
         
-        
-        if data["type"] as! String == "event"{
-            Constants.DB.event.child(data["id"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                _ = snapshot.value as? NSDictionary
-                
-                let placeholderImage = UIImage(named: "empty_event")
-                
-                let reference = Constants.storage.event.child("\(self.data["id"] as! String ).jpg")
-                
-                
-                reference.downloadURL(completion: { (url, error) in
+        if let type = data["type"] as? String{
+            if type == "event"{
+                Constants.DB.event.child(data["id"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                    _ = snapshot.value as? NSDictionary
                     
-                    if error != nil {
-                        print(error?.localizedDescription ?? "")
-                        return
-                    }
+                    let placeholderImage = UIImage(named: "empty_event")
                     
-                    self.typePic.sd_setImage(with: url, placeholderImage: placeholderImage)
-                    self.typePic.setShowActivityIndicator(true)
-                    self.typePic.setIndicatorStyle(.gray)
+                    let reference = Constants.storage.event.child("\(self.data["id"] as! String ).jpg")
                     
-                })
-        })
-        }
-        else if data["type"] as! String == "pin"{
-            let pinData = notif.item?.data["pin"] as? pinData
-            pinData?.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                if value != nil
-                {
                     
-                    if value?["images"] != nil
-                    {
-                        var firstVal = ""
-                        print("images")
-                        print((value?["images"])!)
-                        for (key,_) in (value?["images"] as! NSDictionary)
-                        {
-                            firstVal = key as! String
-                            break
+                    reference.downloadURL(completion: { (url, error) in
+                        
+                        if error != nil {
+                            print(error?.localizedDescription ?? "")
+                            return
                         }
                         
-                        let reference = Constants.storage.pins.child(((value?["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
-                        reference.downloadURL(completion: { (url, error) in
-                            
-                            if error != nil {
-                                print(error?.localizedDescription ?? "")
-                                return
+                        self.typePic.sd_setImage(with: url, placeholderImage: placeholderImage)
+                        self.typePic.setShowActivityIndicator(true)
+                        self.typePic.setIndicatorStyle(.gray)
+                        
+                    })
+                })
+            }
+            else if type == "pin"{
+                let pinData = notif.item?.data["pin"] as? pinData
+                pinData?.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    if value != nil
+                    {
+                        
+                        if value?["images"] != nil
+                        {
+                            var firstVal = ""
+                            print("images")
+                            print((value?["images"])!)
+                            for (key,_) in (value?["images"] as! NSDictionary)
+                            {
+                                firstVal = key as! String
+                                break
                             }
                             
-                            self.typePic.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
-                            self.typePic.setShowActivityIndicator(true)
-                            self.typePic.setIndicatorStyle(.gray)
+                            let reference = Constants.storage.pins.child(((value?["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
+                            reference.downloadURL(completion: { (url, error) in
+                                
+                                if error != nil {
+                                    print(error?.localizedDescription ?? "")
+                                    return
+                                }
+                                
+                                self.typePic.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
+                                self.typePic.setShowActivityIndicator(true)
+                                self.typePic.setIndicatorStyle(.gray)
+                                
+                                
+                                
+                            })
                             
-                            
-                            
-                        })
+                        }else
+                        {
+                            self.typePic.image = #imageLiteral(resourceName: "placeholder_pin")
+                        }
                         
-                    }else
-                    {
-                        self.typePic.image = #imageLiteral(resourceName: "placeholder_pin")
+                    }
+                })
+            }
+            else{
+                let place = notif.item?.data["place"] as? Place
+                
+                if let image = place?.image_url{
+                    if let url = URL(string: image){
+                        self.typePic.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_place"))
                     }
                     
-                }
-            })
-        }
-        else{
-            let place = notif.item?.data["place"] as? Place
-            
-            if let image = place?.image_url{
-                if let url = URL(string: image){
-                    self.typePic.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_place"))
                 }
                 
             }
-            
+
         }
         
         self.timeLabel.text = getTimeSince(date: notif.time!)
         
-        
-        
-        if data["actionType"] as! String == "like"{
-            actionStr = "liked"
-        } else if data["actionType"] as! String == "comment"{
-            actionStr = "commented"
-        } else{
-            actionStr = "is coming to"
-        }
-        
-        if data["type"] as! String == "event"{
-            whatStr = "\(notif.item!.itemName!)"
-        } else if data["type"] as! String == "pin"{
-            if data["actionType"] as! String == "like"{
-                whatStr = "your Pin"
+        if let actionType = data["actionType"] as? String{
+            if actionType == "like"{
+                actionStr = "liked"
+            } else if actionType == "comment"{
+                actionStr = "commented"
+            } else{
+                actionStr = "is coming to"
             }
-            else{
-                whatStr = "on your Pin: \"\(notif.item!.itemName!.trimmingCharacters(in: .whitespacesAndNewlines))\""
+        
+            if data["type"] as! String == "event"{
+                whatStr = "\(notif.item!.itemName!)"
+            } else if data["type"] as! String == "pin"{
+                if data["actionType"] as! String == "like"{
+                    whatStr = "your Pin"
+                }
+                else{
+                    whatStr = "on your Pin: \"\(notif.item!.itemName!.trimmingCharacters(in: .whitespacesAndNewlines))\""
+                }
+                
+            }
+            else if data["type"] as! String == "place"{
+                whatStr = "\(notif.item!.itemName!)"
             }
             
-        }
-        else if data["type"] as! String == "place"{
-            whatStr = "\(notif.item!.itemName!)"
+            loadAttr(component1: (notif.sender?.username)!, component2: actionStr, component3: whatStr)
         }
         
-        loadAttr(component1: (notif.sender?.username)!, component2: actionStr, component3: whatStr)
+        
+        
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(showUser(sender:)))
         self.profileImage.isUserInteractionEnabled = true

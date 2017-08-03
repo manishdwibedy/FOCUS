@@ -38,8 +38,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
     var type = ""
     var selectedButton = false
     var notif: FocusNotification!
-    var parentVC: InvitationsViewController!
-//    var parentVC: NotificationFeedViewController!
+    var parentVC: NotificationFeedViewController!
     var userInfo = [String:Any]()
     
     var nofArray = [FocusNotification]()
@@ -146,37 +145,41 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             
             
         })
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child((notif.item?.type)!).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? [String:Any]
-            
-            if let value = value{
-                for (id, _) in value{
-                    let info = value[id] as? [String:Any]
-                    if let status = info?["status"] as? String{
-                        let invite_time = info?["inviteTime"] as? String
-                        
-                        if let data = self.notif.item?.data{
-                            if invite_time == data["inviteTime"] as? String{
-                                if status == "accepted"{
-                                    self.nextTimeButton.isHidden = true
-                                    self.nextTimeButton.isEnabled = false
-                                    self.statusLabel.text = "Accepted"
-                                    self.seeYouThereButton.setTitle("Message", for: .normal)
-                                }
-                                else if status == "declined"{
-                                    self.nextTimeButton.isHidden = true
-                                    self.nextTimeButton.isEnabled = false
-                                    self.statusLabel.text = "Declined"
-                                    self.seeYouThereButton.setTitle("Undo", for: .normal)
-                                    
+        
+        if let type = notif.item?.type, type.characters.count > 0{
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("invitations").child(type).queryOrdered(byChild: "ID").queryEqual(toValue: notif.item?.id).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? [String:Any]
+                
+                if let value = value{
+                    for (id, _) in value{
+                        let info = value[id] as? [String:Any]
+                        if let status = info?["status"] as? String{
+                            let invite_time = info?["inviteTime"] as? String
+                            
+                            if let data = self.notif.item?.data{
+                                if invite_time == data["inviteTime"] as? String{
+                                    if status == "accepted"{
+                                        self.nextTimeButton.isHidden = true
+                                        self.nextTimeButton.isEnabled = false
+                                        self.statusLabel.text = "Accepted"
+                                        self.seeYouThereButton.setTitle("Message", for: .normal)
+                                    }
+                                    else if status == "declined"{
+                                        self.nextTimeButton.isHidden = true
+                                        self.nextTimeButton.isEnabled = false
+                                        self.statusLabel.text = "Declined"
+                                        self.seeYouThereButton.setTitle("Undo", for: .normal)
+                                        
+                                    }
                                 }
                             }
+                            
                         }
-                        
                     }
                 }
-            }
-        })
+            })
+        }
+        
         
         let attrString: NSMutableAttributedString = NSMutableAttributedString(string: (notif.sender?.username)! + " ")
         attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 122/255, green: 201/255, blue: 1/255, alpha: 1), range: NSMakeRange(0,  (notif.sender?.username?.characters.count)!))

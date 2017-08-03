@@ -17,6 +17,7 @@ enum NotificationType: String {
     case Following = "is following you"
 }
 
+
 import Foundation
 
 class FocusNotification: Hashable, Equatable {
@@ -32,11 +33,17 @@ class FocusNotification: Hashable, Equatable {
         return lhs.time == rhs.time && lhs.type == rhs.type && lhs.item?.id == rhs.item?.id
     }
 
+    enum notif_type{
+        case notification
+        case invite
+    }
+
     
     var type: NotificationType?
     var sender: NotificationUser?
     var item: ItemOfInterest?
     var time: Date?
+    var notif_type: notif_type?
     
     init(type: NotificationType?, sender: NotificationUser?, item: ItemOfInterest?, time: Date) {
         self.type = type

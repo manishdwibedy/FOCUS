@@ -38,28 +38,11 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         tableView.dataSource = self
         tableView.cellLayoutMarginsFollowReadableWidth = false
         
-//        segmentedControl.selectedSegmentIndex = self.selectedSegmentIndex
-        
-//        let sortedViews = segmentedControl.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
-//        sortedViews[0].tintColor = Constants.color.green
-//        sortedViews[0].backgroundColor = UIColor.white
-//
-//        for index in 1..<3{
-//            sortedViews[index].tintColor = UIColor.white
-//            sortedViews[index].backgroundColor = UIColor.gray
-//        }
-        
-        self.nofArray.sorted(by: {
-            return $0.time! < $1.time!
-        })
-
         AuthApi.clearNotifications()
         
         self.nofArray = Array(Set<FocusNotification>(self.nofArray))
         self.invArray = Array(Set<FocusNotification>(self.invArray))
         self.feedAray = Array(Set<FocusNotification>(self.feedAray))
-        
-        
         
         self.nofArray = self.nofArray.sorted(by: {
             $0.time! > $1.time!
@@ -69,33 +52,13 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             $0.time! > $1.time!
         })
         
-        self.feedAray = self.feedAray.sorted(by: {
-            $0.time! > $1.time!
-        })
         
         tableView.reloadData()
-        AuthApi.set(read: nofArray.count + invArray.count + feedAray.count)
+        AuthApi.set(read: nofArray.count + invArray.count)
         
         tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
         
-        tableView.register(UINib(nibName: "FeedOneTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedOneCell")
-        
-        tableView.register(UINib(nibName: "FeedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTwoCell")
-        
-        tableView.register(UINib(nibName: "FeedPlaceTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedThreeCell")
-        
-        tableView.register(UINib(nibName: "FeedCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFourCell")
-        
-        tableView.register(UINib(nibName: "FeedPlaceImageTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFiveCell")
-        
-        tableView.register(UINib(nibName: "FeedCreatedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedSixCell")
-        
         tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
-        
-//        segmentedControl.layer.borderWidth = 1
-//        segmentedControl.layer.borderColor = UIColor.white.cgColor
-//        segmentedControl.layer.cornerRadius = 6
-//        segmentedControl.clipsToBounds = true
         
         navBar.titleTextAttributes = Constants.navBar.attrs
         navBar.barTintColor = Constants.color.navy
@@ -112,6 +75,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
                                 "Name": "Notifications"
             ])
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -127,7 +91,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+//        return 100
 //        if self.selectedSegmentIndex == 0{
 //        }
 //        else if self.selectedSegmentIndex == 1{
@@ -152,6 +116,8 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
 //            }
 //            return rowHeight!
 //        }
+        
+        return 100
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -159,7 +125,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.nofArray.count
+        return self.nofArray.count + self.invArray.count
 //        if self.selectedSegmentIndex == 0{
 //        }else if self.selectedSegmentIndex == 1{
 //            return invArray.count
@@ -172,48 +138,56 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let notification = self.nofArray[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
-        cell.userProfilePic.roundButton()
-        cell.nextTimeButton.allCornersRounded(radius: 5.0)
-        cell.seeYouThereButton.allCornersRounded(radius: 5.0)
-        cell.locationImage.roundedImage()
-        cell.userNameLabel.text = "username"
-        
-//        cell.setupCell(notif: nofArray[indexPath.row])
-//        cell.parentVC = self
-        return cell
-        
+        if notification.notif_type == .invite{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotifFeedCell", for: indexPath) as! NotificationFeedCellTableViewCell
+            cell.userProfilePic.roundButton()
+            cell.nextTimeButton.allCornersRounded(radius: 5.0)
+            cell.seeYouThereButton.allCornersRounded(radius: 5.0)
+            cell.locationImage.roundedImage()
+            
+            cell.setupCell(notif: nofArray[indexPath.row])
+            cell.parentVC = self
+            return cell
+        }
+        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotifTabCell", for: indexPath) as! notificationTabCell
+            cell.setupCell(notif: nofArray[indexPath.row])
+            cell.parentVC = self
+            return cell
+
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        if self.selectedSegmentIndex == 0{
-            let notif = nofArray[indexPath.row]
-            
-            if let type = notif.item?.data["type"] as? String{
-                if type == "event"{
-                    let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
-                    let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
-                    controller.event = notif.item?.data["event"] as? Event
-                    self.present(controller, animated: true, completion: nil)
-                }
-                else if type == "place"{
-                    let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
-                    let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
-                    controller.place = notif.item?.data["place"] as! Place
-                    self.present(controller, animated: true, completion: nil)
-                }
-                else{
-                    let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-                    let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
-                    ivc.data = notif.item?.data["pin"] as! pinData
-                    self.present(ivc, animated: true, completion: { _ in })
-                }
+        
+        let notif = nofArray[indexPath.row]
+        
+        if let type = notif.item?.data["type"] as? String{
+            if type == "event"{
+                let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+                controller.event = notif.item?.data["event"] as? Event
+                self.present(controller, animated: true, completion: nil)
             }
-            
-            print(notif)
+            else if type == "place"{
+                let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+                controller.place = notif.item?.data["place"] as! Place
+                self.present(controller, animated: true, completion: nil)
+            }
+            else{
+                let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+                let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+                ivc.data = notif.item?.data["pin"] as! pinData
+                self.present(ivc, animated: true, completion: { _ in })
+            }
         }
+        
+        print(notif)
+    
     }
     
     @IBAction func indexChanged(_ sender: AnyObject) {

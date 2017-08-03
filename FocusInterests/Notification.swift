@@ -96,6 +96,7 @@ class NotificationUtil{
                                         
                                         
                                         let event_comment = FocusNotification(type: NotificationType.Going, sender: user, item: invite_place, time: Date(timeIntervalSince1970: invite["time"] as! Double))
+                                        event_comment.notif_type = .invite
                                         place_invites.append(event_comment)
                                         
                                         if place_invites.count == place_count{
@@ -133,6 +134,7 @@ class NotificationUtil{
                                     let invite_place = ItemOfInterest(itemName: user.username, imageURL: nil, type: "")
                                     
                                     let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: invite_place, time: Date())
+                                    event_comment.notif_type = .notification
                                     followers.append(event_comment)
                                     
                                     if followers.count == user_count{
@@ -184,6 +186,7 @@ class NotificationUtil{
                                             ]
                                             
                                             let event_comment = FocusNotification(type: NotificationType.Comment, sender: user, item: comment, time: Date(timeIntervalSince1970: commentData["date"] as! Double))
+                                            event_comment.notif_type = .notification
                                             event_comments.append(event_comment)
                                             
                                             if event_comments.count == event_comment_count{
@@ -214,6 +217,7 @@ class NotificationUtil{
                                             ]
                                             
                                             let event_comment = FocusNotification(type: NotificationType.Comment, sender: user, item: comment, time: Date())
+                                            event_comment.notif_type = .notification
                                             event_likes.append(event_comment)
                                             
                                             if event_likes.count == event_likes_count{
@@ -263,6 +267,7 @@ class NotificationUtil{
                     "pin": pinInfo
                 ]
                 let pinFeed = FocusNotification(type: NotificationType.Pin, sender: user, item: place, time: time)
+                pinFeed.notif_type = .notification
                 pins.append(pinFeed)
                 
                 
@@ -330,7 +335,7 @@ class NotificationUtil{
                             if let data = snapshot.value as? [String:Any]{
                                 let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: nil)
                                 let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: time)
-                                
+                                pinFeed.notif_type = .notification
                                 pins.append(pinFeed)
                                 
                                 if pinCount == pins.count && pinImageCount == totalPins{
@@ -365,6 +370,7 @@ class NotificationUtil{
                                     let data = snapshot.value as? [String:Any]
                                     let user = NotificationUser(username: data?["username"] as? String, uuid: data?["firebaseUserId"] as? String, imageURL: nil)
                                     let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
+                                    pinFeed.notif_type = .notification
                                     pins.append(pinFeed)
                                     
                                     if pinCount == pins.count && pinImageCount == totalPins{

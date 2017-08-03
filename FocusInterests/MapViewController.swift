@@ -940,7 +940,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func notificationsClicked() {
         let storyboard = UIStoryboard(name: "Notif_Invite_Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "NotifViewController") as! NotificationFeedViewController
-        vc.nofArray = self.notifs
+        vc.nofArray = self.notifs + self.invites
         
         dropfromTop(view: self.view)
         
