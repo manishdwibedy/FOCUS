@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AMPopTip
 
 class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIPopoverPresentationControllerDelegate{
 
@@ -20,6 +21,7 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
     var location: CLLocation? = nil
     var showTutorial = false
     var showTab = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,6 +119,35 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
         return .none
     }
     
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        
+        if AuthApi.isNewToPage(index: item.tag){
+            let popTip = PopTip()
+            if let view = item.value(forKey: "view") as? UIView{
+                var text = ""
+                switch(item.tag){
+                case 0:
+                    text = "Map"
+                case 1:
+                    text = "People"
+                case 2:
+                    text = "Create Pin"
+                case 3:
+                    text = "Explore"
+                case 4:
+                    text = "Feed"
+                default :
+                    break
+                }
+                
+                popTip.show(text: text, direction: .up, maxWidth: 200, in: view, from: view.frame, duration: 3)
+                popTip.entranceAnimation = .scale;
+                popTip.actionAnimation = .bounce(20)
+                popTip.shouldDismissOnTap = true
+            }
+
+        }
+    }
     
     // MARK: - Navigation
 

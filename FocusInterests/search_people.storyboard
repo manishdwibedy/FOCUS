@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sfs-g5-Ui8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sfs-g5-Ui8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -98,7 +98,7 @@
                             <constraint firstAttribute="trailing" secondItem="O91-5f-lIg" secondAttribute="trailing" id="h42-Bk-NsB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="People icon white" selectedImage="People icon white" id="ft2-LS-Dgf">
+                    <tabBarItem key="tabBarItem" tag="1" title="" image="People icon white" selectedImage="People icon white" id="ft2-LS-Dgf">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -277,7 +277,7 @@
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="vv3-PZ-isc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Explore white" selectedImage="Explore green" id="NJ5-hj-IRg">
+                    <tabBarItem key="tabBarItem" tag="3" title="" image="Explore white" selectedImage="Explore green" id="NJ5-hj-IRg">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

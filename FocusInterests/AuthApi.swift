@@ -68,6 +68,21 @@ struct AuthApi {
         }
     }
     
+    static func isNewToPage(index: Int) -> Bool {
+        if let isNewToPage = defaults.object(forKey: "isNewToPage") as? [Bool] {
+            return isNewToPage[index]
+        }
+        return true
+    }
+    
+    static func setIsNewToPage(index: Int) {
+        if let isNewToPage = defaults.object(forKey: "isNewToPage") as? [Bool] {
+            var modified = isNewToPage
+            modified[index] = false
+            defaults.set(modified, forKey: "isNewToPage")
+        }
+    }
+    
     static func getUserName() -> String? {
         if let username = defaults.object(forKey: "username") as? String {
             return username
