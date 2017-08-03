@@ -69,6 +69,10 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         self.googleLoginButton.roundCorners(radius: 27.5)
         setUpTextFields()
         hideKeyboardWhenTappedAround()
+        
+        // testing only
+        self.emailTextField.text = "focusdummy2@gmail.com"
+        self.passwordTextField.text = "focusdummy"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,9 +121,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         }
         
         var isNumber = false
-        if (self.emailTextField.text!.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil){
-            isNumber = true
-        }
+//        if (self.emailTextField.text!.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil){
+//            isNumber = true
+//        }
         if isNumber || (self.passwordTextField.text?.isEmpty)!{
             showLoginFailedAlert(loginType: "missing_password")
             return
@@ -139,6 +143,22 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                 AuthApi.set(firebaseUid: id)
                                 AuthApi.set(loggedIn: .Email)
                             }
+                            
+                            let userRef = Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {(snapshot) in
+                                
+                                let info = snapshot.value as? [String:Any]
+                                
+                                if let image_string = info?["image_string"] as? String{
+                                    if image_string.isEmpty{
+                                        AuthApi.set(userImage: image_string)
+                                    }
+                                    AuthApi.set(userImage: nil)
+                                }
+                                else{
+                                    AuthApi.set(userImage: nil)
+                                }
+                                
+                            })
                             
                             Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
                             
@@ -174,6 +194,23 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                         AuthApi.set(firebaseUid: id)
                                         AuthApi.set(loggedIn: .Email)
                                     }
+                                    
+                                    let userRef = Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {(snapshot) in
+                                        
+                                        let info = snapshot.value as? [String:Any]
+                                        
+                                        if let image_string = info?["image_string"] as? String{
+                                            if image_string.isEmpty{
+                                                AuthApi.set(userImage: image_string)
+                                            }
+                                            AuthApi.set(userImage: nil)
+                                        }
+                                        else{
+                                            AuthApi.set(userImage: nil)
+                                        }
+                                        
+                                    })
+                                    
                                     
                                     Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
                                     
