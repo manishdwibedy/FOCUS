@@ -93,13 +93,17 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
         controller.event = event as! Event
         controller.invitePeopleEventDelegate = self
-        controller.map = parentVC.tabBarController?.viewControllers?[0] as? MapViewController
-        
         if parentVC != nil{
-            parentVC.present(controller, animated: true, completion: nil)
+            controller.map = parentVC.tabBarController?.viewControllers?[0] as? MapViewController    
         }
-        else{
-            otherUser?.present(controller, animated: true, completion: nil)
+        
+        
+        
+        if let VC = parentVC{
+            VC.present(controller, animated: true, completion: nil)
+        }
+        else if let VC = otherUser{
+            VC.present(controller, animated: true, completion: nil)
         }
         
     }
@@ -127,8 +131,16 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
         if isMeetup {
             self.parentVC.performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegueWithSegue", sender: self.parentVC)
         }else if inviteFromOtherUserProfile{
-            self.parentVC.otherUserProfileDelegate?.hasSentUserAnInvite()
-            self.parentVC.dismiss(animated: true, completion: nil)
+            let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+            ivc.type = "event"
+            ivc.id = self.event.id!
+            ivc.username = self.username
+            ivc.event = event
+            ivc.searchPeopleEventDelegate = self
+            if let VC = self.otherUser{
+                VC.present(ivc, animated: true, completion: nil)
+            }
         }else{
             let storyboard = UIStoryboard(name: "Invites", bundle: nil)
             let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
@@ -225,7 +237,13 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
                         ])
                 }
                 alertController.addAction(OKAction)
-                parentVC.present(alertController, animated: true)
+                
+                if let VC = parentVC{
+                    VC.present(alertController, animated: true, completion: nil)
+                }
+                else if let VC = otherUser{
+                    VC.present(alertController, animated: true, completion: nil)
+                }
                 
             }
 
