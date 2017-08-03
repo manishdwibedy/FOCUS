@@ -832,6 +832,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             
             cell.place = place_cell
             cell.placeNameLabel.text = place_cell.name
+            cell.otherUser = self
             // cell.place = place
             
             if place_cell.address.count > 0{

@@ -151,10 +151,13 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
             
             unfollowAlertController.addAction(unfollowAction)
             unfollowAlertController.addAction(cancelAction)
-            parentVC?.present(unfollowAlertController, animated: true, completion: nil)
             
-            
-            
+            if let VC = parentVC{
+                VC.present(unfollowAlertController, animated: true, completion: nil)
+            }
+            else if let VC = otherUser{
+                VC.present(unfollowAlertController, animated: true, completion: nil)
+            }
         }
         /*
         self.followButton.isSelected = !self.followButton.isSelected
