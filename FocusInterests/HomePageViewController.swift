@@ -52,6 +52,7 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
         vc.showPlace = showPlace
         
         if let location = self.location{
+            print(vc.willShowPin)
             vc.currentLocation = location
         }
         

@@ -19,7 +19,7 @@ struct AuthApi {
     static func getLoginType() -> LoginTypes{
         return LoginTypes(rawValue: defaults.value(forKey: "Login") as! String)!
     }
-    
+
     static func set(firebaseUid: String?) {
         if let id = firebaseUid {
             defaults.set(id, forKey: "firebaseUid")
@@ -248,5 +248,16 @@ struct AuthApi {
     
     static func set(read: Int){
         defaults.set(read, forKey: "notification_count")
+    }
+    
+    static func showPin() -> Bool{
+        if let showPin = defaults.object(forKey: "show_pin") as? Bool {
+            return showPin
+        }
+        return false
+    }
+    
+    static func setShowPin(show: Bool){
+        defaults.set(show, forKey: "show_pin")
     }
 }

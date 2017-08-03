@@ -141,10 +141,20 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
         vc.willShowPin = true
-        vc.showPin = pin
-
-        vc.selectedIndex = 0
         
+        vc.location = CLLocation(latitude: (pin?.coordinates.latitude)!, longitude: (pin?.coordinates.longitude)!)
+        vc.selectedIndex = 0
+        vc.showPin = pin
+        AuthApi.setShowPin(show: true)
+        //parentVC?.present(vc, animated: true, completion: nil)
+        
+//        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+//        vc.willShowPin = true
+//        vc.showPin = pin
+//
+//        vc.selectedIndex = 0
+//        
     }
     
     @IBAction func showUserProfile(){

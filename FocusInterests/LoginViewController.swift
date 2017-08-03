@@ -420,6 +420,11 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         else{
                             AuthApi.set(username: "")
                         }
+                        
+                        if let isNewUser = info?["isNewUser"] as? Bool{
+                            AuthApi.setNewUser()
+                        }
+                        
                         let token = Messaging.messaging().fcmToken
                         Constants.DB.user.child("\(fireId)/token").setValue(token)
                         AuthApi.set(FCMToken: token)
@@ -508,6 +513,9 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                 AuthApi.set(username: username)
             }
             
+            if let isNewUser = info?["isNewUser"] as? Bool{
+                AuthApi.setNewUser()
+            }
             
             let token = Messaging.messaging().fcmToken
             Constants.DB.user.child("\(fireId)/firebaseUserId").setValue(fireId)

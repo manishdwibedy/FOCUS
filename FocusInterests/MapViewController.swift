@@ -518,7 +518,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
         }
-        if willShowEvent || willShowPin || willShowPlace{
+        if willShowEvent || willShowPin || willShowPlace || AuthApi.showPin(){
             
             let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
                                                   longitude: (currentLocation?.coordinate.longitude)!,
@@ -651,7 +651,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 SCLAlertView().showError("Error", subTitle: "Please add a username so friends can find you.")
                 
             }
-        } else if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0 {
+        }
+        else if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0 {
             let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
             
             photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
@@ -661,6 +662,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             
             self.view.addSubview(photoViewInput)
+        }
+        else if AuthApi.isNewUser(){
+            self.showPopup()
         }
     }
     
@@ -941,6 +945,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         willShowPin = false
         willShowEvent = false
         willShowPlace = false
+        AuthApi.setShowPin(show: false)
         return true
     }
     
@@ -1322,7 +1327,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         popup.view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
         
 
-
+        AuthApi.setNewUser()
+        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/isNewUser").setValue(false)
         // Present dialog
         present(popup, animated: true, completion: nil)
     }
