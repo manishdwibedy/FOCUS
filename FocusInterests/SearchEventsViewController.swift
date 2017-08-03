@@ -440,6 +440,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 let data = feed.item?.data["pin"] as! [String:Any]
                 feedPlaceCell.pin = data
                 feedPlaceCell.parentVC = self
+                feedPlaceCell.feed = feed
+                
                 
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     feedPlaceCell.usernameWhoLikedLabel.setTitle(user.username, for: .normal)
