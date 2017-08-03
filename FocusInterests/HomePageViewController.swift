@@ -145,6 +145,7 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
                 popTip.actionAnimation = .bounce(20)
                 popTip.shouldDismissOnTap = true
             }
+            AuthApi.setIsNewToPage(index: item.tag)
 
         }
     }
