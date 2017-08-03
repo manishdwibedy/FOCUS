@@ -586,6 +586,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
             }
             
+            cell.checkIfAttending()
             cell.loadLikes()
             return cell
             
