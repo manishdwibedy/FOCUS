@@ -64,15 +64,19 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     var pinInfo: pinData? = nil
     
     // user interests
+    var hiddenInterests = [UIView]()
     @IBOutlet weak var focusHeader: UILabel!
     @IBOutlet weak var focusView: UIView!
     @IBOutlet weak var interestStackView: UIStackView!
     @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
     @IBOutlet weak var moreFocusButton: UIButton!
-    @IBOutlet weak var recentPostTableView: UITableView!
-    @IBOutlet weak var recentPostStackHeight: NSLayoutConstraint!
-    @IBOutlet weak var recentPostTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var moreOrLessButtonStackHeight: NSLayoutConstraint!
+    @IBOutlet weak var moreOrLessButtonStack: UIStackView!
+    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var lessButton: UIButton!
     
+    // recent post stack
+    @IBOutlet weak var recentPostTableView: UITableView!
     
 //    Events Stack
 	// Location Description (would this be location description?)
@@ -185,6 +189,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let recentPostNib = UINib(nibName: "FeedOneTableViewCell", bundle: nil)
         self.recentPostTableView.register(recentPostNib, forCellReuseIdentifier: "recentPostCell")
         
+        self.moreButton.layer.borderWidth = 1.0
+        self.moreButton.layer.borderColor = UIColor.white.cgColor
+        self.moreButton.roundCorners(radius: 5.0)
+        self.lessButton.layer.borderWidth = 1.0
+        self.lessButton.layer.borderColor = UIColor.white.cgColor
+        self.lessButton.roundCorners(radius: 5.0)
         
         self.eventsStackView.translatesAutoresizingMaskIntoConstraints = false;
         let eventsCollectionNib = UINib(nibName: "UserProfileCollectionViewCell", bundle: nil)
@@ -304,17 +314,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         pinView.isUserInteractionEnabled = true
         pinView.addGestureRecognizer(pinDetail)
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        
-//        self.pinView.setNeedsLayout()
-//        self.pinView.layoutIfNeeded()
-//        self.focusView.setNeedsLayout()
-//        self.focusView.layoutIfNeeded()
-//        self.interestStackView.setNeedsLayout()
-//        self.interestStackView.layoutIfNeeded()
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -453,8 +452,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             if interest.characters.count > 0{
                                 self.interestStackView.addArrangedSubview(interestLabelView)
                                 self.interestViewHeight.constant += interestLabelView.frame.size.height
-//                                if self.interestStackView.arrangedSubviews.count < 3{
-//                                }
                             }
                         }
                         
@@ -491,6 +488,16 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             let interests = getUserInterests().components(separatedBy: ",")
             
             print("!otherUser condition: \(self.interestStackView.arrangedSubviews.count)")
+            print("interests amount: \(interests)")
+            if interests.count > 3 {
+                self.moreOrLessButtonStack.isHidden = false
+                self.moreOrLessButtonStack.removeArrangedSubview(self.lessButton)
+                self.lessButton.isHidden = true
+                self.moreOrLessButtonStackHeight.constant = 20.0
+            }else{
+                self.moreOrLessButtonStack.isHidden = true
+                //                self.containerStackForMoreOrLessButtons.removeFromSuperview()
+            }
             
             if interestStackView.arrangedSubviews.count > 0{
                 var endIndex = interestStackView.arrangedSubviews.count-1
@@ -500,7 +507,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 }
             }
             
-            for (_, interest) in (interests.enumerated()){
+            for (index, interest) in (interests.enumerated()){
                 let interestLabelView = InterestStackViewLabel(frame: CGRect(x: 0, y: 0, width: self.interestStackView.bounds.width, height: 30))
                 
                 if interest.characters.count > 0{
@@ -509,11 +516,17 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     interestLabelView.interestLabel.text = interest
                     let interestImage = "\(interest) Green"
                     interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
-                    interestLabelView.addButton.isSelected = true
-                    self.interestStackView.addArrangedSubview(interestLabelView)
-                    self.interestStackView.translatesAutoresizingMaskIntoConstraints = false
-//                    if interestStackView.arrangedSubviews.count < 3{
-//                    }
+                    
+                    
+                    if index < 3{
+                        print("adding interests less than 3")
+                        interestLabelView.addButton.isSelected = true
+                        self.interestStackView.addArrangedSubview(interestLabelView)
+                        self.interestStackView.translatesAutoresizingMaskIntoConstraints = false
+                    }else{
+                        print("adding interests to hidingInterests array")
+                        self.hiddenInterests.append(interestLabelView)
+                    }
                 }
             }
             
@@ -532,6 +545,54 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         }
         
     }
+    
+    @IBAction func moreInterestsButtonPressed(_ sender: Any) {
+        print("adding these interests \(self.hiddenInterests)")
+        if self.hiddenInterests.count > 0{
+            for interestViewIndex in 0...self.hiddenInterests.count-1{
+                self.interestStackView.addArrangedSubview(self.hiddenInterests[interestViewIndex])
+            }
+            
+            guard let firstFocusView = self.interestStackView.arrangedSubviews.first else {
+                return
+            }
+            
+            self.interestViewHeight.constant = CGFloat((firstFocusView.bounds.size.height) * CGFloat(self.interestStackView.arrangedSubviews.count))
+            
+            self.lessButton.isHidden = false
+            self.moreOrLessButtonStack.addArrangedSubview(self.lessButton)
+            self.moreOrLessButtonStack.removeArrangedSubview(self.moreButton)
+            self.moreButton.isHidden = true
+            self.moreOrLessButtonStackHeight.constant = 20.0
+        }else{
+            print("nothing to add")
+        }
+    }
+    
+    @IBAction func lessButtonPressed(_ sender: Any) {
+        print("")
+        print("")
+        print("removing these interests from stackview \(self.hiddenInterests)")
+        print("")
+        print("")
+        for arrangedInterestIndex in 0...self.hiddenInterests.count-1{
+            self.interestStackView.removeArrangedSubview(self.hiddenInterests[arrangedInterestIndex])
+        }
+        
+        guard let firstFocusView = self.interestStackView.arrangedSubviews.first else {
+            return
+        }
+        
+        self.interestViewHeight.constant = CGFloat((firstFocusView.bounds.size.height) * CGFloat(self.interestStackView.arrangedSubviews.count))
+        
+        self.moreButton.isHidden = false
+        self.moreOrLessButtonStack.addArrangedSubview(self.moreButton)
+        self.moreOrLessButtonStack.removeArrangedSubview(self.lessButton)
+        self.lessButton.isHidden = true
+        self.moreOrLessButtonStackHeight.constant = 20.0
+    }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

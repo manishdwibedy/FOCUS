@@ -172,7 +172,4 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
     }
     */
     
-    func injected() {
-        print("I've been injected: \(self)")
-    }
 }
