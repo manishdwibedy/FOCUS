@@ -844,14 +844,14 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 }
             }
             
-            cell.setRatingAmount(ratingAmount: Double(place_cell.rating))
-            
-            cell.ratingLabel.text = "\(place_cell.rating) (\(place_cell.reviewCount) reviews)"
-            
             let date = Date()
             let calendar = Calendar.current
             
             let day = calendar.component(.weekday, from: date)
+            
+            cell.setRatingAmount(ratingAmount: Double(place_cell.rating))
+            
+            cell.ratingLabel.text = "\(place_cell.rating) (\(place_cell.reviewCount) reviews)"
             
             if let hour = place_cell.getHour(day: day){
                 cell.dateAndTimeLabel.text = "\(convert24HourTo12Hour(hour.start)) - \(convert24HourTo12Hour(hour.end))"

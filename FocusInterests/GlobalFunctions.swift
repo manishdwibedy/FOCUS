@@ -1090,11 +1090,18 @@ func getSuggestedPlaces(interests: String, limit: Int, gotPlaces: @escaping (_ u
     
     for interest in categories{
         yelpSearch(interest: interest, location: AuthApi.getLocation()!, gotPlaces: { places in
-            suggestions.append(contentsOf: places)
-            
-            if suggestions.count >= limit{
-                let final_suggestion = Array(suggestions[0..<limit])
-                gotPlaces(final_suggestion)
+            for place in places{
+                getPlaceHours(id: place.id, gotHour: {hours, is_closed in
+                    if hours != nil && !is_closed{
+                        place.hours = hours
+                        place.is_closed = is_closed
+                        suggestions.append(place)
+                        
+                        if suggestions.count == limit{
+                            gotPlaces(suggestions)
+                        }
+                    }
+                })
             }
         })
     }
