@@ -505,6 +505,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 let data = feed.item?.data["pin"] as! [String:Any]
                 feedFourCell.pin = data
                 feedFourCell.parentVC = self
+                feedFourCell.feed = feed
+                
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     feedFourCell.usernameWhoCommentedLabel.setTitle(user.username, for: .normal)
                     if let image = user.image_string{
@@ -525,7 +527,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                         feedFourCell.usernameReceivingCommentLabel.setTitle("\(user.username!)'s", for: .normal)
                     })
                     
-                    
+                    feedFourCell.parentVC = self
                     feedFourCell.checkLengthOfLabel()
                     let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
                     feedFourCell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)

@@ -25,6 +25,7 @@ class FeedCommentTableViewCell: UITableViewCell {
     
     var pin: [String:Any]? = nil
     var parentVC: SearchEventsViewController? = nil
+    var feed: FocusNotification? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -80,6 +81,19 @@ class FeedCommentTableViewCell: UITableViewCell {
         VC.userID = pin?["fromUID"] as! String
         
         parentVC?.present(VC, animated:true, completion:nil)
+    }
+    
+    @IBAction func showDetail(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+        
+        if let data = pin{
+            ivc.data = pinData(UID: data["fromUID"] as! String, dateTS: data["time"] as! Double, pin: data["pin"] as! String, location: data["formattedAddress"] as! String, lat: data["lat"] as! Double, lng: data["lng"] as! Double, path: Constants.DB.pins.child(feed?.item?.data["key"] as! String), focus: data["focus"] as? String ?? "")
+    
+        }
+        
+        
+        parentVC?.present(ivc, animated: true, completion: { _ in })
     }
     
 }
