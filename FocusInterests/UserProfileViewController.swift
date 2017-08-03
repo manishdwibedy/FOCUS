@@ -228,7 +228,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
                 self.pinInfo = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(ID ), focus: value["focus"] as? String ?? "")
 
-                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (self.pinInfo?.dateTimeStamp)!), to: Date()).hour ?? 0 < 24{
+                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (self.pinInfo?.dateTimeStamp)!), to: Date()).hour ?? 0 >= 0{
                     if value["images"] != nil{
                         
                     }
@@ -278,7 +278,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             }
                         }
                     }
-
+                    else{
+                        self.pinImage.image = #imageLiteral(resourceName: "placeholder_pin")
+                    }
                 }else{ // FOR OLD PIN
                     self.createPinAndUpdatePinStack.addArrangedSubview(self.pinView)
                     self.createPinAndUpdatePinStack.removeArrangedSubview(self.createPinView)
