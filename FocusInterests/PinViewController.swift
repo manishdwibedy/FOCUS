@@ -232,6 +232,12 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
+        getSuggestedPlaces(interests: getInterest(yelpCategory: (place?.categories[0].alias)!), limit: 3, gotPlaces: {places in
+            self.suggestedPlaces = places
+            self.peopleAlsoLikedTableView.reloadData()
+        })
     }
     
     func callPlace(sender:UITapGestureRecognizer) {
