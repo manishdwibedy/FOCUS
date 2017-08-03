@@ -52,7 +52,18 @@ class notificationTabCell: UITableViewCell {
         var whatStr = ""
         
         if notif.type == .Following{
-            self.profileImage.sd_setImage(with: URL(string: notif.sender!.imageURL!)!, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+            if let image_string = notif.sender?.imageURL{
+                if let url = URL(string: image_string){
+                    self.profileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                }
+                else{
+                    self.profileImage.image = #imageLiteral(resourceName: "placeholder_place")
+                }
+            }
+            else{
+                self.profileImage.image = #imageLiteral(resourceName: "placeholder_place")
+            }
+            
             
             let attrString: NSMutableAttributedString = NSMutableAttributedString(string:notif.sender!.username! + " ")
             attrString.addAttribute(NSForegroundColorAttributeName, value:Constants.color.green, range: NSMakeRange(0,  notif.sender!.username!.characters.count))
