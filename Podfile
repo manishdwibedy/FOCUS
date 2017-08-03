@@ -53,6 +53,7 @@ target 'FocusInterests' do
     pod 'UITextField-Navigation'
     pod 'MIBadgeButton-Swift', :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
     pod 'DataCache'
+    pod 'AMPopTip'
 end
 
 target 'FocusInterestsTests' do

@@ -1,6 +1,7 @@
 PODS:
   - Agrume (3.2.1)
   - Alamofire (4.5.0)
+  - AMPopTip (2.1.6)
   - BadgeSwift (5.0.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -166,6 +167,7 @@ PODS:
 DEPENDENCIES:
   - Agrume (from `https://github.com/JanGorman/Agrume.git`)
   - Alamofire
+  - AMPopTip
   - BadgeSwift (~> 5.0)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - Cosmos (~> 9.0)
@@ -241,6 +243,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Agrume: abf26210c3371bc6c74bbf2ced7a19d937bf8f0a
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  AMPopTip: 81f57556ae12500d30ff595078b1b6d11076ced8
   BadgeSwift: 3defa56f504bfb46f2300122c4a565ec9e405c1e
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
@@ -297,6 +300,6 @@ SPEC CHECKSUMS:
   TwitterKit: 202404be71aadd81d19f677b34579fe77d9cb67e
   UITextField-Navigation: 20e317ede7db16990db5b42fedaaaa32997ef614
 
-PODFILE CHECKSUM: 10ee8b8238e66715f293d71dadb3bdc68be8ace8
+PODFILE CHECKSUM: 5322e0a65f277811f9173e076a9b84cf4c8e20c5
 
-COCOAPODS: 1.3.0.beta.2
+COCOAPODS: 1.2.1
