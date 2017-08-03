@@ -332,6 +332,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                         if guest["UID"] == AuthApi.getFirebaseUid()!{
                             self.attendButton.isSelected = true
                             self.isAttending = true
+                            
                             self.attendButton.layer.borderWidth = 1
                             self.attendButton.layer.borderColor = UIColor.white.cgColor
                             self.attendButton.backgroundColor = UIColor(red: 25/255.0, green: 54/255.0, blue: 81/255.0, alpha: 1.0)
