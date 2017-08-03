@@ -9,13 +9,16 @@
 import UIKit
 import Crashlytics
 
-class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate{
+class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var commentsTableView: UITableView!
     @IBOutlet weak var addCommentView: UIView!
     @IBOutlet weak var postButton: UIButton!
-    @IBOutlet weak var commentField: UITextField!
+    @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var commentsTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var addCommentsViewBottomConstraint: NSLayoutConstraint!
     
     var data: NSDictionary!
     var commentData = [[String:Any]]()
@@ -23,6 +26,9 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     var type = ""
     let commentDF = DateFormatter()
     
+    let screenSize = UIScreen.main.bounds
+    var screenWidth: CGFloat = 0.0
+    var screenHeight: CGFloat = 0.0
     
     let toolBar = UIToolbar()
     let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(CommentsViewController.cancelPressed))
@@ -69,15 +75,25 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
+        self.addCommentView.frame.origin.y = self.screenSize.height - self.addCommentView.frame.size.height
+//        self.scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: (self.view.frame.size.height - self.navBar.frame.height))
         
+        self.commentsTableView.tableFooterView = UIView()
         
-        commentsTableView.tableFooterView = UIView()
+        self.commentTextView.delegate = self
+        self.commentTextView.textContainer.maximumNumberOfLines = 0
+        self.commentTextView.layer.borderWidth = 1.0
+        self.commentTextView.layer.borderColor = UIColor.white.cgColor
+        self.commentTextView.layer.cornerRadius = 5.0
         
-        commentField.attributedText = NSAttributedString(string: "Add a comment...", attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir Book", size: 12)!])
-        commentField.delegate = self
+        let placeholderAttributes: [String : AnyObject] = [
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!
+        ]
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Add a comment", attributes: placeholderAttributes)
+        self.commentTextView.attributedText = placeholderTextAttributes
         
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
@@ -139,24 +155,30 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func post(_ sender: Any) {
-        let time = NSDate().timeIntervalSince1970
-        Constants.DB.pins.child(data["fromUID"] as! String).child("comments").childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "comment": commentField.text!, "date": Double(time)])
         
-        commentField.resignFirstResponder()
-        
-        self.commentData.append([
-            "comment": commentField.text!,
-            "date": Double(time),
-            "fromUID": AuthApi.getFirebaseUid()!
-            ])
-        commentField.text = ""
-        self.commentsTableView.reloadData()
-        
-        Answers.logCustomEvent(withName: "Comment Pin",
-                               customAttributes: [
-                                "user": AuthApi.getFirebaseUid()!,
-                                "comment": commentField.text
-            ])
+        if self.commentTextView.text == "" || self.commentTextView.text == "Add a comment"{
+            self.postButton.isEnabled = false
+        }else{
+            self.postButton.isEnabled = true
+            let time = NSDate().timeIntervalSince1970
+            Constants.DB.pins.child(data["fromUID"] as! String).child("comments").childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "comment": commentTextView.text!, "date": Double(time)])
+            
+            commentTextView.resignFirstResponder()
+            
+            self.commentData.append([
+                "comment": commentTextView.text!,
+                "date": Double(time),
+                "fromUID": AuthApi.getFirebaseUid()!
+                ])
+            commentTextView.text = ""
+            self.commentsTableView.reloadData()
+            
+            Answers.logCustomEvent(withName: "Comment Pin",
+                                   customAttributes: [
+                                    "user": AuthApi.getFirebaseUid()!,
+                                    "comment": commentTextView.text
+                ])
+        }
         
     }
     
@@ -165,39 +187,61 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardSize.height
-            self.addCommentView.frame.origin.y = self.view.frame.height - self.addCommentView.frame.height - 10 - keyboardHeight
-            
-            self.commentsTableView.frame.size = CGSize(width: self.commentsTableView.frame.width, height: self.addCommentView.frame.origin.y - self.commentsTableView.frame.origin.y-10)
-            
-        }
-    }
-    
-    func keyboardDidShow(notification: NSNotification) {
-        let oldLastCellIndexPath = NSIndexPath(row: commentData.count-1, section: 0)
-        if commentData.count != 0
-        {
-            self.commentsTableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
-        }
+//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//            let keyboardHeight = keyboardSize.height
+//            if self.view.frame.origin.y == 0{
+//                self.view.frame.origin.y -= keyboardHeight
+//            }
+//            self.addCommentView.frame.origin.y = self.view.frame.height - self.addCommentView.frame.height - 10 - keyboardHeight
+//            
+//            
+//        }
         
+        //Need to calculate keyboard exact size due to Apple suggestions
+        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
+//        keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        contentInset.bottom = keyboardFrame.size.height
+        self.scrollView.contentInset = contentInset
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.text = ""
+//    func keyboardDidShow(notification: NSNotification) {
+//        let oldLastCellIndexPath = NSIndexPath(row: commentData.count-1, section: 0)
+//        if commentData.count != 0{
+//            self.commentsTableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
+//        }
+//        
+//    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        self.scrollView.contentInset = contentInset
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         return true
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
-        let time = NSDate().timeIntervalSince1970
-        Constants.DB.pins.child(data["fromUID"] as! String).child("comments").childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "comment": commentField.text!, "date": Double(time)])
-        commentField.text = ""
-
-        textField.resignFirstResponder()
-        return true
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Add a comment"{
+            textView.text = ""
+        }
     }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if self.commentTextView.text == "" || self.commentTextView.text == "Add a comment"{
+            self.postButton.isEnabled = false
+        }else{
+            self.postButton.isEnabled = true
+            textView.resignFirstResponder()
+        }
+    }
+    
     
     func cancelPressed(){
-        self.commentField.endEditing(true)
+        self.commentTextView.endEditing(true)
     }
 }

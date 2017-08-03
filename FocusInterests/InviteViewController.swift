@@ -37,6 +37,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var parentCell: SearchPlaceCell!
     var type = ""
     var id = ""
+    var inviteFromMapView = false
     var inviteFromPlaceDetails = false
     var inviteFromEventDetails = false
     var place: Place?
@@ -74,7 +75,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchEvent: SearchEventsViewController? = nil
     var placeVC: PinViewController? = nil
     var mapView: MapViewController? = nil
-    
+
     var searchPeopleEventDelegate: InvitePeopleEventCellDelegate?
     var searchPeoplePlaceDelegate: InvitePeoplePlaceCellDelegate?
     var placeDetailsDelegate: SendInviteFromPlaceDetailsDelegate?
@@ -635,6 +636,10 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if self.inviteFromPlaceDetails{
                     self.placeDetailsDelegate?.hasSentInvite()
                     self.inviteFromPlaceDetails = false
+                }else if self.inviteFromMapView{
+                    self.mapView?.showInvitePopup()
+                    print("going back to map view")
+                    self.inviteFromMapView = false
                 }else{
                     self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
                 }
@@ -643,6 +648,10 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if self.inviteFromEventDetails{
                     self.eventDetailsDelegate?.showPopup()
                     self.inviteFromEventDetails = false
+                }else if inviteFromMapView{
+                    self.mapView?.showInvitePopup()
+                    print("going back to map view")
+                    self.inviteFromMapView = false
                 }else{
                     self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
                 }

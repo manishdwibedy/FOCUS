@@ -17,7 +17,7 @@ enum previousScreen{
     case notification
 }
 
-class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource{
+class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
     
 	@IBOutlet var userScrollView: UIScrollView!
     
@@ -70,6 +70,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var interestViewHeight: NSLayoutConstraint!
     @IBOutlet weak var moreFocusButton: UIButton!
     @IBOutlet weak var recentPostTableView: UITableView!
+    @IBOutlet weak var recentPostStackHeight: NSLayoutConstraint!
+    @IBOutlet weak var recentPostTableViewHeight: NSLayoutConstraint!
     
     
 //    Events Stack
@@ -160,6 +162,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
         self.recentPostTableView.delegate = self
         self.recentPostTableView.dataSource = self
+        self.recentPostTableView.rowHeight = UITableViewAutomaticDimension
+        self.recentPostTableView.estimatedRowHeight = 100
         
         Answers.logCustomEvent(withName: "Screen",
                                customAttributes: [
@@ -209,7 +213,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
         self.navigationItem.title = ""
         
-        self.createEventButton.roundCorners(radius: 6)
+        self.createEventButton.roundCorners(radius: 10.0)
         
         if otherUser{
             self.editButton.isHidden = true
@@ -447,10 +451,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
                             interestLabelView.addButton.isSelected = true
                             if interest.characters.count > 0{
-                                if self.interestStackView.arrangedSubviews.count < 3{
-                                    self.interestStackView.addArrangedSubview(interestLabelView)
-                                    self.interestViewHeight.constant += interestLabelView.frame.size.height
-                                }
+                                self.interestStackView.addArrangedSubview(interestLabelView)
+                                self.interestViewHeight.constant += interestLabelView.frame.size.height
+//                                if self.interestStackView.arrangedSubviews.count < 3{
+//                                }
                             }
                         }
                         
@@ -506,10 +510,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     let interestImage = "\(interest) Green"
                     interestLabelView.interestLabelImage.image = UIImage(named: interestImage)
                     interestLabelView.addButton.isSelected = true
-                    if interestStackView.arrangedSubviews.count < 3{
-                        self.interestStackView.addArrangedSubview(interestLabelView)
-                        self.interestStackView.translatesAutoresizingMaskIntoConstraints = false
-                    }
+                    self.interestStackView.addArrangedSubview(interestLabelView)
+                    self.interestStackView.translatesAutoresizingMaskIntoConstraints = false
+//                    if interestStackView.arrangedSubviews.count < 3{
+//                    }
                 }
             }
             
@@ -520,7 +524,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             if self.interestStackView.arrangedSubviews.count <= 1{
                 self.interestViewHeight.constant = firstFocusView.frame.height
             }else{
-                self.interestViewHeight.constant = CGFloat((firstFocusView.frame.height + 10) * CGFloat(self.interestStackView.arrangedSubviews.count))
+                self.interestViewHeight.constant = CGFloat((firstFocusView.frame.height + 15) * CGFloat(self.interestStackView.arrangedSubviews.count))
             }
             
             print("End: \(interestStackView.arrangedSubviews.count)")
@@ -702,14 +706,25 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let recentPostCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell", for: indexPath) as! FeedOneTableViewCell
-        
+//        recentPostCell.commentButton.addTarget(self, action: #selector(commentButtonPressed), for: .touchUpInside)
+        recentPostCell.commentTextView.delegate = self
         return recentPostCell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
-        return myCell.bounds.size.height;
+    
+    func textViewDidChange(_ textView: UITextView) {
+        var textFrame = textView.frame
+        textFrame.size.height = textView.contentSize.height
+        textView.frame = textFrame
+        
+        self.recentPostTableView.beginUpdates()
+        self.recentPostTableView.endUpdates()
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
+//        return myCell.bounds.size.height;
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
@@ -725,5 +740,4 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         // Pass the selected object to the new view controller.
     }
     */
-
 }

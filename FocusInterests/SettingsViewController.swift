@@ -49,7 +49,6 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         self.navBar.titleTextAttributes = attrs
         
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
-        backgroundView.backgroundColor = self.backgroundColor
         self.tableView.backgroundView = backgroundView
     }
     
@@ -71,13 +70,13 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
         
         if indexPath.row == 2{
             let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
-            swCell?.backgroundColor = self.backgroundColor
+            swCell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
             swCell?.titleLabel.text = Constants.settings.cellTitles[indexPath.row]
             return swCell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
             cell?.textLabel?.text = Constants.settings.cellTitles[indexPath.row]
-            cell?.backgroundColor = self.backgroundColor
+            cell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
             
             cell?.textLabel?.font = UIFont(name: "Avenir-Book", size: 18)!
             cell?.textLabel?.textColor = UIColor.white

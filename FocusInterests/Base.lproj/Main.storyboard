@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mnx-Qg-K9a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mnx-Qg-K9a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -76,20 +76,40 @@
                                     <action selector="mapSettingsPressed:" destination="VEY-4A-vsU" eventType="touchUpInside" id="4mT-qG-84t"/>
                                 </connections>
                             </button>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gfa-vo-Zxo" userLabel="Invite Popup View">
+                                <rect key="frame" x="5" y="669" width="365" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaM-yH-rOB">
+                                        <rect key="frame" x="138" y="22" width="89.5" height="26"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
+                                        <color key="textColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.82745098039999998" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="9eJ-La-cjc"/>
+                                    <constraint firstItem="qaM-yH-rOB" firstAttribute="centerY" secondItem="Gfa-vo-Zxo" secondAttribute="centerY" id="T0H-Tn-mVJ"/>
+                                    <constraint firstItem="qaM-yH-rOB" firstAttribute="centerX" secondItem="Gfa-vo-Zxo" secondAttribute="centerX" id="amk-Bk-lbg"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="2x6-qQ-iyw"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="3r4-0c-HZ5"/>
+                            <constraint firstAttribute="bottom" secondItem="Gfa-vo-Zxo" secondAttribute="bottom" constant="-121" id="586-3p-Y7P"/>
                             <constraint firstAttribute="trailing" secondItem="05W-Qw-2Y5" secondAttribute="trailing" id="DHn-cC-Nm9"/>
                             <constraint firstItem="to3-UK-Oze" firstAttribute="centerX" secondItem="wPw-hG-pw7" secondAttribute="centerX" id="EN5-nb-BSt"/>
                             <constraint firstAttribute="trailing" secondItem="bIq-Pr-ji4" secondAttribute="trailing" id="H69-6o-iu0"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="VpH-45-PKf" secondAttribute="bottom" constant="38" id="LM0-Ym-nZL"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="to3-UK-Oze" secondAttribute="bottom" constant="-20" id="MIK-K5-avi"/>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="Pe2-YI-lSy"/>
+                            <constraint firstItem="Gfa-vo-Zxo" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" constant="5" id="Srs-34-UVg"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="05W-Qw-2Y5" secondAttribute="bottom" id="dIH-f6-lgF"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="9GY-g7-gUF" secondAttribute="bottom" id="ndc-Hh-qgn"/>
                             <constraint firstItem="9GY-g7-gUF" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="p0d-Ju-lSt"/>
+                            <constraint firstAttribute="trailing" secondItem="Gfa-vo-Zxo" secondAttribute="trailing" constant="5" id="pHB-Ty-8fI"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="x8H-nN-16x"/>
                             <constraint firstAttribute="trailing" secondItem="9GY-g7-gUF" secondAttribute="trailing" id="zce-Yf-2vl"/>
                             <constraint firstItem="VpH-45-PKf" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leadingMargin" constant="-7" id="zzH-ca-7XL"/>
@@ -104,6 +124,8 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="followYourFriendsView" destination="4Vi-EG-jX7" id="j50-mt-ejv"/>
+                        <outlet property="invitePopupView" destination="Gfa-vo-Zxo" id="5Sv-ob-Uin"/>
+                        <outlet property="invitePopupViewBottomConstraint" destination="586-3p-Y7P" id="v5S-sY-j3x"/>
                         <outlet property="mapView" destination="05W-Qw-2Y5" id="x3W-XA-QMw"/>
                         <outlet property="mapViewSettings" destination="AX8-vj-cUX" id="5hZ-bx-qQ9"/>
                         <outlet property="navigationView" destination="bIq-Pr-ji4" id="tVe-bJ-rDh"/>
@@ -480,12 +502,12 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCQ-A8-LVs">
-                                <rect key="frame" x="31" y="7" width="16" height="18"/>
+                                <rect key="frame" x="33" y="10" width="16" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="8lR-A4-zn9"/>
                                     <constraint firstAttribute="width" constant="16" id="ZNp-lQ-kG4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="26"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="30"/>
                                 <state key="normal" title="x">
                                     <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -496,11 +518,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="HCQ-A8-LVs" firstAttribute="top" secondItem="XW1-Kd-q02" secondAttribute="bottom" constant="7" id="8Ot-iv-eUs"/>
+                            <constraint firstItem="HCQ-A8-LVs" firstAttribute="top" secondItem="XW1-Kd-q02" secondAttribute="bottom" constant="10" id="8Ot-iv-eUs"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="top" secondItem="XW1-Kd-q02" secondAttribute="bottom" constant="26" id="ACk-7G-jkk"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="leading" secondItem="Vkg-MS-EEL" secondAttribute="leading" constant="29.5" id="T5f-48-asE"/>
                             <constraint firstItem="re9-I8-udK" firstAttribute="centerX" secondItem="Vkg-MS-EEL" secondAttribute="centerX" id="VBL-uF-Tu8"/>
-                            <constraint firstItem="HCQ-A8-LVs" firstAttribute="leading" secondItem="Vkg-MS-EEL" secondAttribute="leadingMargin" constant="15" id="dyb-rk-BWt"/>
+                            <constraint firstItem="HCQ-A8-LVs" firstAttribute="leading" secondItem="Vkg-MS-EEL" secondAttribute="leadingMargin" constant="17" id="dyb-rk-BWt"/>
                             <constraint firstAttribute="trailing" secondItem="re9-I8-udK" secondAttribute="trailing" constant="29.5" id="mOv-sh-z2F"/>
                         </constraints>
                     </view>
@@ -631,12 +653,12 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVI-vb-tMY">
-                                <rect key="frame" x="31" y="7" width="16" height="18"/>
+                                <rect key="frame" x="33" y="10" width="16" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="N5G-22-PrX"/>
                                     <constraint firstAttribute="height" constant="18" id="wgp-ax-Dq6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="26"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="30"/>
                                 <state key="normal" title="x">
                                     <color key="titleColor" red="0.13701152801513672" green="0.23321482539176941" blue="0.34121429920196533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -650,9 +672,9 @@
                             <constraint firstItem="q4Z-4g-nao" firstAttribute="leading" secondItem="VB0-vV-eeh" secondAttribute="leading" constant="29" id="845-mU-exA"/>
                             <constraint firstItem="q4Z-4g-nao" firstAttribute="centerX" secondItem="VB0-vV-eeh" secondAttribute="centerX" id="Lzn-pf-1tz"/>
                             <constraint firstAttribute="trailing" secondItem="q4Z-4g-nao" secondAttribute="trailing" constant="29.5" id="OuB-7D-Lra"/>
-                            <constraint firstItem="yVI-vb-tMY" firstAttribute="leading" secondItem="VB0-vV-eeh" secondAttribute="leadingMargin" constant="15" id="PCl-9J-iua"/>
+                            <constraint firstItem="yVI-vb-tMY" firstAttribute="leading" secondItem="VB0-vV-eeh" secondAttribute="leadingMargin" constant="17" id="PCl-9J-iua"/>
                             <constraint firstItem="q4Z-4g-nao" firstAttribute="top" secondItem="2QZ-NM-UCh" secondAttribute="bottom" constant="28.5" id="Uo8-5s-n7p"/>
-                            <constraint firstItem="yVI-vb-tMY" firstAttribute="top" secondItem="2QZ-NM-UCh" secondAttribute="bottom" constant="7" id="cQp-Ag-2Ui"/>
+                            <constraint firstItem="yVI-vb-tMY" firstAttribute="top" secondItem="2QZ-NM-UCh" secondAttribute="bottom" constant="10" id="cQp-Ag-2Ui"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

@@ -9,20 +9,30 @@
 import UIKit
 import FirebaseAuth
 
-class ForgotPasswordViewController: UIViewController {
+class ForgotPasswordViewController: UIViewController, UITextViewDelegate{
 
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var emailTextFieldWidth: NSLayoutConstraint!
+    @IBOutlet weak var emailTextView: UITextView!
     @IBOutlet weak var submitButton: UIButton!
     
     var delegate: LoginViewControllerDelegate?
+    
+    let screenSize = UIScreen.main.bounds
+    var screenWidth: CGFloat = 0.0
+    var screenHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.emailTextView.delegate = self
+        self.emailTextView.textContainer.maximumNumberOfLines = 1
+        let myString = NSMutableAttributedString(string: "Enter your email", attributes : [NSForegroundColorAttributeName: UIColor.lightGray,NSFontAttributeName: UIFont(name: "Avenir Book", size: 19)!,NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
         
-        self.emailTextField.attributedPlaceholder = NSAttributedString(string: "Enter your email", attributes: [NSForegroundColorAttributeName : UIColor.lightGray])
-        self.emailTextField.setBottomBorder()
+        
+        self.emailTextView.attributedText = myString
+        self.emailTextView.textAlignment = .center
+        
         self.submitButton.roundCorners(radius: 6.0)
         
         hideKeyboardWhenTappedAround()
@@ -35,7 +45,7 @@ class ForgotPasswordViewController: UIViewController {
     
     @IBAction func submitPressed(_ sender: Any) {
         print("sending email to user")
-        Auth.auth().sendPasswordReset(withEmail: emailTextField.text!) { (error) in
+        Auth.auth().sendPasswordReset(withEmail: emailTextView.text!) { (error) in
             if error == nil{
                 
             }
@@ -47,6 +57,15 @@ class ForgotPasswordViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.emailTextView.text = ""
+        if self.emailTextView.intrinsicContentSize.width >= (self.screenSize.width - 32){
+            self.emailTextView.adjustsFontForContentSizeCategory = true
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

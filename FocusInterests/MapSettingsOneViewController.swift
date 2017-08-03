@@ -54,7 +54,6 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
             allInterestsCell.showAllLabel.text = "Show All Interests"
             allInterestsCell.showAllLabel.textColor = Constants.color.navy
             allInterestsCell.tintColor = Constants.color.green
-            print("all interest cell isselected at \(indexPath.row): \(allInterestsCell.isSelected)")
             return allInterestsCell
             
         }else{
@@ -172,5 +171,8 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    func injected() {
+        print("I've been injected: \(self)")
+    }
 }

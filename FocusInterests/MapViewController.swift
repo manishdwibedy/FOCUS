@@ -79,6 +79,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBOutlet weak var navigationView: MapNavigationView!
     
+    @IBOutlet weak var invitePopupView: UIView!
+    @IBOutlet weak var invitePopupViewBottomConstraint: NSLayoutConstraint!
+    var showInvitePopupView = false
+    let screenSize = UIScreen.main.bounds
+    var screenWidth: CGFloat = 0.0
+    var screenHeight: CGFloat = 0.0
+    
     
     var popUpScreen: MapPopUpScreenView!
     var placePins = [String:GMSMarker]()
@@ -92,6 +99,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.invitePopupView.layer.cornerRadius = 10.0
         
         hideFollowFriendPopup()
         Share.getMatchingUsers(gotUsers: {users in
@@ -261,6 +270,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
             NSForegroundColorAttributeName : UIColor.white
             ], for: .normal)
+        
+        self.invitePopupView.isHidden = true
         
 //        self.navigationView.notificationsButton.addTarget(self, action: #selector(MapViewController.showPopOver), for: .touchUpInside)
     }
@@ -565,6 +576,22 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        if showInvitePopupView {
+            self.invitePopupView.isHidden = false
+            UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= (self.invitePopupView.frame.size.height + (self.tabBarController?.tabBar.frame.height)!)
+                self.invitePopupViewBottomConstraint.constant += (self.invitePopupView.frame.size.height + (self.tabBarController?.tabBar.frame.height)!)
+            }, completion: { animate in
+                UIView.animate(withDuration: 1.5, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += (self.invitePopupView.frame.size.height + (self.tabBarController?.tabBar.frame.height)!)
+                    self.invitePopupViewBottomConstraint.constant -= (
+                        self.invitePopupView.frame.size.height + (self.tabBarController?.tabBar.frame.height)!)
+                }, completion: nil)
+            })
+            self.showInvitePopupView = false
+        }
+        
         Constants.DB.user_mapping.keepSynced(true)
         
         Share.getFacebookFriends(completion: {friends in
@@ -625,16 +652,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
             }
         } else if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0 {
-                let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
-                
-                photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
-                
-                
-                photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
-                
-                
-                self.view.addSubview(photoViewInput)
-            }
+            let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
+            
+            photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
+            
+            
+            photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
+            
+            
+            self.view.addSubview(photoViewInput)
+        }
     }
     
     func showCameraRoll() {
@@ -677,6 +704,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
 
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        
+        if self.mapViewSettings.isHidden == true{
+            self.settingGearButton.isHidden = false
+        }else{
+            self.settingGearButton.isHidden = true
+        }
+        
+        if self.settingGearButton.isHidden && self.popUpView.isHidden && (self.mapViewSettings.isHidden == false){
+            self.mapViewSettings.isHidden = true
+            self.settingGearButton.isHidden = false
+        }
+        
         popUpView.isHidden = true
         
         if let username = usernameInputView as? UsernameInputView{
@@ -685,7 +724,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        
+        self.settingGearButton.isHidden = true
+    
         let accessibilityLabel = marker.accessibilityLabel
         marker.tracksInfoWindowChanges = true
         
@@ -1305,6 +1345,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
 extension MapViewController{
     func tapEvent(event: Event){
+    
         popUpView.isHidden = false
         
         popUpScreen.object = event
@@ -1348,8 +1389,6 @@ extension MapViewController{
                 self.popUpScreen.profileImage.sd_setImage(with: url, placeholderImage: placeholderImage)
                 self.popUpScreen.profileImage.setShowActivityIndicator(true)
                 self.popUpScreen.profileImage.setIndicatorStyle(.gray)
-                
-                
             })
             
         }
@@ -1372,6 +1411,7 @@ extension MapViewController{
     }
     
     func tapPlace(place: Place, marker: GMSMarker){
+
         popUpView.isHidden = false
         
         popUpScreen.object = place
@@ -1384,6 +1424,7 @@ extension MapViewController{
         
         name = place.name
         rating = String(place.rating)
+        popUpScreen.checkReviewsAmount(reviewsAmount: Double(place.rating))
         reviews = "(\(place.reviewCount) reviews)"
         let category = place.categories.map(){ $0.alias }
         
@@ -1416,7 +1457,6 @@ extension MapViewController{
         
         popUpScreen.object = pin
         popUpScreen.type = "pin"
-        
         
         var distance = ""
         let pinMessage = pin.pinMessage
@@ -1485,5 +1525,10 @@ extension MapViewController: UIImagePickerControllerDelegate{
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
         print("cancelled")
+    }
+    
+    func showInvitePopup(){
+        self.showInvitePopupView = true
+        self.popUpView.isHidden = true
     }
 }

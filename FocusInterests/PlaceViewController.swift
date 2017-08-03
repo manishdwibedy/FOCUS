@@ -76,7 +76,7 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showRating(sender:)))
         
-        self.invitePopupView.allCornersRounded(radius: 10.0)
+        self.invitePopupView.layer.cornerRadius = 10.0
         
         self.topView.addTopBorderWithColor(color: UIColor.white, width: 1.0)
         
