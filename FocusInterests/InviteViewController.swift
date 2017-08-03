@@ -91,6 +91,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var followingPlaces = [Place]()
     var filtered = [Place]()
     
+    var ticketMasterDF = DateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sendButton.roundCorners(radius: 10.0)
@@ -109,14 +111,23 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat =  "h:mm a"
-        
+        ticketMasterDF.dateFormat = "yyyy-MM-d hh:mm:ss"
         
         if type == "event"{
-            let startDate = event?.date?.components(separatedBy: ",")[1].trimmingCharacters(in: .whitespaces)
-            timeButton.setTitle(startDate, for: .normal)
+            if (event?.date?.contains(","))!{
+                let startDate = event?.date?.components(separatedBy: ",")[1].trimmingCharacters(in: .whitespaces)
+                timeButton.setTitle(startDate, for: .normal)
+                
+                let startDate1 = dateFormatter.date(from: startDate!)
+                timePicker.date = startDate1!
+            }
+            else{
+                let startDate = ticketMasterDF.date(from: (event?.date)!)
+                timeButton.setTitle(dateFormatter.string(for: startDate), for: .normal)
+                
+                timePicker.date = startDate!
+            }
             
-            let startDate1 = dateFormatter.date(from: startDate!)
-            timePicker.date = startDate1!
         }
         else if type == "place"{
             let currentTime = Date()

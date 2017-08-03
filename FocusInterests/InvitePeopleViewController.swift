@@ -195,7 +195,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             if self.otherFollowingPlaces != nil{
                 if self.isMeetup{
                     var uniquePlaces = self.places
-                    for place in self.followingPlaces!{
+                    for place in self.followingPlaces{
                         if !uniquePlaces.contains(place){
                             uniquePlaces.append(place)
                         }
@@ -237,7 +237,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 if self.followingPlaces != nil{
                     
                     var uniquePlaces = self.places
-                    for place in self.followingPlaces!{
+                    for place in self.followingPlaces{
                         if !uniquePlaces.contains(place){
                             uniquePlaces.append(place)
                         }
@@ -271,12 +271,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     }
                 }
                 
-                for event in self.otherAttendingEvents!{
-                    if !uniqueEvents.contains(event){
-                        uniqueEvents.append(event)
+                if !self.isMeetup, let otherAttendingEvents = self.otherAttendingEvents{
+                    for event in otherAttendingEvents{
+                        if !uniqueEvents.contains(event){
+                            uniqueEvents.append(event)
+                        }
                     }
                 }
-                
                 for event in self.events{
                     if !uniqueEvents.contains(event){
                         uniqueEvents.append(event)
@@ -300,9 +301,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     }
                 }
                 
-                for event in self.otherAttendingEvents!{
-                    if !uniqueEvents.contains(event){
-                        uniqueEvents.append(event)
+                if !self.isMeetup, let otherAttendingEvents = self.otherAttendingEvents{
+                    for event in otherAttendingEvents{
+                        if !uniqueEvents.contains(event){
+                            uniqueEvents.append(event)
+                        }
                     }
                 }
                 
@@ -330,9 +333,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                         }
                     }
                     
-                    for event in self.otherAttendingEvents!{
-                        if !uniqueEvents.contains(event){
-                            uniqueEvents.append(event)
+                    if let otherAttendingEvents = self.otherAttendingEvents{
+                        for event in otherAttendingEvents{
+                            if !uniqueEvents.contains(event){
+                                uniqueEvents.append(event)
+                            }
                         }
                     }
                     

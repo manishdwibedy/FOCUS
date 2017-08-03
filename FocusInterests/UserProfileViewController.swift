@@ -589,12 +589,17 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 self.eventsStackView.addArrangedSubview(self.eventsCollectionView)
                 self.eventsStackView.removeArrangedSubview(self.createEventButton)
                 self.eventsViewHeight.constant += (self.eventsCollectionView.frame.size.height - self.createEventButton.frame.size.height)
+                
+                self.createEventButton.superview?.sendSubview(toBack: self.createEventButton)
+                self.createEventButton.alpha = 0
             }
             else{
-                
                 self.eventsViewHeight.constant -= self.eventsCollectionView.frame.size.height
                 self.eventsStackView.addArrangedSubview(self.createEventButton)
                 self.eventsStackView.removeArrangedSubview(self.eventsCollectionView)
+                
+                self.createEventButton.superview?.bringSubview(toFront: self.createEventButton)
+                self.createEventButton.alpha = 1
             }
             
             self.eventsStackView.translatesAutoresizingMaskIntoConstraints = false;

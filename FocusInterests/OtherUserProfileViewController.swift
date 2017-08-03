@@ -1073,8 +1073,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
 //    @IBAction func unwindToOtherUserProfile(segue:UIStoryboardSegue) {}
     @IBAction func sendMessage(_ sender: Any) {
-        let messageVC = UIStoryboard.init(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "chat")
-        self.present(messageVC, animated: true, completion: nil)
+        let messageVC = UIStoryboard.init(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "chat") as? ChatViewController
+        messageVC?.user = userInfo
+        self.present(messageVC!, animated: true, completion: nil)
     }
     
     func hasSentUserAnInvite(){
