@@ -36,6 +36,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var pinData: pinData? = nil
     var showInvitePopup = false
     var isMeetup = false
+    var inviteFromMapView = false
     var inviteFromOtherUserProfile = false
     var UID = ""
     var username = ""
@@ -174,7 +175,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         
 //        MARK: Main View
-        self.invitePopupView.allCornersRounded(radius: 10)
+        self.invitePopupView.layer.cornerRadius = 10.0
         self.view.backgroundColor = Constants.color.navy
         
         currentLocation.delegate = self

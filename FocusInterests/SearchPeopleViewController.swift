@@ -91,7 +91,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         filtered = people
         hideKeyboardWhenTappedAround()
         
-        self.invitePopupView.allCornersRounded(radius: 10)
+        self.invitePopupView.layer.cornerRadius = 10.0
         
         let attrs = [
             NSForegroundColorAttributeName: UIColor.white,

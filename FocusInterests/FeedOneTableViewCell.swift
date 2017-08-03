@@ -40,23 +40,22 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
         
         self.commentTextView.delegate = self
         self.commentTextView.textContainer.maximumNumberOfLines = 0
+        self.commentTextView.layer.borderWidth = 1.0
+        self.commentTextView.layer.borderColor = UIColor.white.cgColor
+        self.commentTextView.layer.cornerRadius = 5.0
+//        self.commentTextView.contentInset = UIEdgeInsetsMake(-7.0,0.0,0,0.0)
         self.userImage.roundButton()
-        self.usernameLabel.text = "username"
-        self.addressLabel.text = "1600 Campus Road"
-        self.distanceLabel.text = "2 mi"
+        
         self.postButton.allCornersRounded(radius: 5.0)
         
         let placeholderAttributes: [String : AnyObject] = [
-            NSForegroundColorAttributeName: UIColor.white,
+            NSForegroundColorAttributeName: Constants.color.navy,
             NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!
         ]
-        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Post a comment", attributes: placeholderAttributes)
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Add a comment", attributes: placeholderAttributes)
         
         self.commentTextView.attributedText = placeholderTextAttributes
         self.commentPostView.isHidden = true
-        addGreenDot(label: self.interestLabel, content: "Sports")
-        self.nameDescriptionLabel.text = "Watching NBA Awards - Westbrook for MVP!"
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -166,11 +165,5 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         return true
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Post a comment"{
-            textView.text = ""
-        }
     }
 }

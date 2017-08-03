@@ -133,7 +133,7 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate,UITableV
         
         if showPopup{
             invitePopup.alpha = 1
-            invitePopup.allCornersRounded(radius: 10)
+            self.invitePopup.layer.cornerRadius = 10.0
             UIView.animate(withDuration: 1.0,delay: 0.0,options: .curveEaseInOut,animations: {
                 self.invitePopupBottomLayoutConstraint.constant = 0
                 self.invitePopup.center.y -= 119

@@ -10,6 +10,7 @@ import UIKit
 
 class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
 
+    @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var globeButton: UIButton!
     @IBOutlet weak var commentTextView: UITextView!
@@ -26,6 +27,7 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
     @IBOutlet weak var timeSince: UILabel!
     @IBOutlet weak var commentPostView: UIView!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var commentViewHeightConstraint: NSLayoutConstraint!
     
     var parentVC: SearchEventsViewController? = nil
     var pin: [String:Any]? = nil
@@ -35,8 +37,11 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
         // Initialization code
         
         self.commentTextView.delegate = self
+        self.commentTextView.textContainer.maximumNumberOfLines = 0
         self.commentTextView.layer.borderWidth = 1.0
         self.commentTextView.layer.borderColor = UIColor.white.cgColor
+        self.commentTextView.layer.cornerRadius = 5.0
+//        self.commentTextView.contentInset = UIEdgeInsetsMake(-7.0,0.0,0,0.0)
         self.usernameLabel.setTitle("arya", for: .normal)
         self.addressLabel.setTitle("1001 Rose Bowl Dr", for: .normal)
         self.postButton.allCornersRounded(radius: 4.0)
@@ -47,7 +52,7 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
             NSForegroundColorAttributeName: UIColor.white,
             NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!
         ]
-        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Post a comment", attributes: placeholderAttributes)
+        let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Add a comment", attributes: placeholderAttributes)
         self.commentTextView.attributedText = placeholderTextAttributes
         
         self.usernameImage.roundButton()
@@ -92,12 +97,6 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
         return true
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Post a comment"{
-            textView.text = ""
-        }
-    }
-    
     @IBAction func commentButtonPressed(_ sender: Any) {
         UIView.animate(withDuration: 0.3) {
             self.commentPostView.isHidden = !self.commentPostView.isHidden
@@ -118,6 +117,11 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
     
     @IBAction func postButtonPressed(_ sender: Any) {
         print("post button pressed")
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        var textFrame = textView.frame
+        self.commentViewHeightConstraint.constant = textView.contentSize.height + 9
     }
     
     @IBAction func showUserProfile(){

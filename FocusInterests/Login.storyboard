@@ -299,7 +299,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHp-UF-9BI">
-                                <rect key="frame" x="82" y="397.5" width="211" height="36"/>
+                                <rect key="frame" x="82" y="397" width="211" height="36"/>
                                 <color key="backgroundColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="BHp-UF-9BI" secondAttribute="height" multiplier="88:15" id="Oqh-7u-dv6"/>
@@ -312,17 +312,8 @@
                                     <action selector="submitPressed:" destination="vya-I2-0iY" eventType="touchUpInside" id="6x9-IM-Chb"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LhF-Ff-l5B">
-                                <rect key="frame" x="87.5" y="320.5" width="198" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="LhF-Ff-l5B" secondAttribute="height" multiplier="49:5" constant="-56.800000000000011" id="0Mp-dX-aNi"/>
-                                </constraints>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your email to receive a Reset Password link." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="qoY-Jd-2wR">
-                                <rect key="frame" x="16" y="216.5" width="343" height="76"/>
+                                <rect key="frame" x="16" y="215.5" width="343" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="kFf-Z0-115"/>
                                 </constraints>
@@ -330,29 +321,53 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" usesAttributedText="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iYI-Gg-hio">
+                                <rect key="frame" x="16" y="321" width="343" height="37"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="BIN-gf-As2"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Enter your email">
+                                        <attributes>
+                                            <color key="NSBackgroundColor" white="0.33333333333333331" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="19" name="Avenir-Book"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vya-I2-0iY" id="y5S-FO-2rW"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="jez-MG-yo6" firstAttribute="top" secondItem="h03-gn-y9D" secondAttribute="bottom" id="47e-Pn-RHn"/>
+                            <constraint firstItem="iYI-Gg-hio" firstAttribute="leading" secondItem="HTe-sZ-Sda" secondAttribute="leadingMargin" id="7Ol-Wc-oeV"/>
+                            <constraint firstItem="iYI-Gg-hio" firstAttribute="centerX" secondItem="BHp-UF-9BI" secondAttribute="centerX" id="7he-0B-sU3"/>
+                            <constraint firstItem="iYI-Gg-hio" firstAttribute="trailing" secondItem="HTe-sZ-Sda" secondAttribute="trailingMargin" id="Bg6-1R-vza"/>
                             <constraint firstItem="qoY-Jd-2wR" firstAttribute="leading" secondItem="HTe-sZ-Sda" secondAttribute="leadingMargin" id="Fwe-j7-udQ"/>
                             <constraint firstAttribute="trailing" secondItem="jez-MG-yo6" secondAttribute="trailing" id="JJV-FS-G3H"/>
-                            <constraint firstItem="LhF-Ff-l5B" firstAttribute="centerY" secondItem="HTe-sZ-Sda" secondAttribute="centerY" id="QXZ-Ot-pjE"/>
-                            <constraint firstItem="LhF-Ff-l5B" firstAttribute="centerX" secondItem="HTe-sZ-Sda" secondAttribute="centerX" constant="-1" id="R2Q-dX-Y7e"/>
+                            <constraint firstItem="iYI-Gg-hio" firstAttribute="centerY" secondItem="HTe-sZ-Sda" secondAttribute="centerY" constant="6" id="P7n-oA-gnq"/>
                             <constraint firstItem="qoY-Jd-2wR" firstAttribute="centerX" secondItem="BHp-UF-9BI" secondAttribute="centerX" id="UcA-vf-sMb"/>
+                            <constraint firstItem="iYI-Gg-hio" firstAttribute="centerX" secondItem="HTe-sZ-Sda" secondAttribute="centerX" id="ZY2-hn-Qrt"/>
+                            <constraint firstItem="BHp-UF-9BI" firstAttribute="top" secondItem="iYI-Gg-hio" secondAttribute="bottom" constant="39" id="eCL-WC-ku2"/>
                             <constraint firstItem="jez-MG-yo6" firstAttribute="leading" secondItem="HTe-sZ-Sda" secondAttribute="leading" id="fwD-ez-AGf"/>
-                            <constraint firstItem="LhF-Ff-l5B" firstAttribute="top" secondItem="qoY-Jd-2wR" secondAttribute="bottom" constant="28" id="gcb-8j-amO"/>
-                            <constraint firstItem="BHp-UF-9BI" firstAttribute="top" secondItem="LhF-Ff-l5B" secondAttribute="bottom" constant="51" id="krh-V5-BbD"/>
-                            <constraint firstItem="BHp-UF-9BI" firstAttribute="centerX" secondItem="LhF-Ff-l5B" secondAttribute="centerX" constant="0.25" id="mCR-75-UIj"/>
+                            <constraint firstItem="iYI-Gg-hio" firstAttribute="top" secondItem="qoY-Jd-2wR" secondAttribute="bottom" constant="29.5" id="wBq-ig-cMh"/>
+                            <constraint firstItem="iYI-Gg-hio" firstAttribute="centerX" secondItem="qoY-Jd-2wR" secondAttribute="centerX" id="xif-GV-9YK"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="LhF-Ff-l5B" id="XsX-QI-9kc"/>
+                        <outlet property="emailTextView" destination="iYI-Gg-hio" id="hqr-BQ-gMd"/>
                         <outlet property="submitButton" destination="BHp-UF-9BI" id="hPb-mz-LFH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0tu-lK-pon" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1149.2753623188407" y="534.78260869565224"/>
+            <point key="canvasLocation" x="1148" y="534.78260869565224"/>
         </scene>
         <!--First Sign Up View Controller-->
         <scene sceneID="mU0-8M-eC7">

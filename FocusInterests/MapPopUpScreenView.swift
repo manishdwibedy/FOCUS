@@ -215,7 +215,6 @@ class MapPopUpScreenView: UIView {
                 parentVC.present(controller, animated: true, completion: nil)
                 
             }else if type == "place"{
-                
                 let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
                 controller.map = parentVC
@@ -240,7 +239,7 @@ class MapPopUpScreenView: UIView {
             let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
             ivc.type = "event"
             ivc.mapView = parentVC
-            
+            ivc.inviteFromMapView = true
             let event = object as! Event
             ivc.id = event.id!
             ivc.event = event
@@ -254,6 +253,7 @@ class MapPopUpScreenView: UIView {
             let place = object as! Place
             ivc.id = place.id
             ivc.place = place
+            ivc.inviteFromMapView = true
             ivc.mapView = parentVC
             parentVC.present(ivc, animated: true, completion: { _ in })
         }
@@ -264,8 +264,16 @@ class MapPopUpScreenView: UIView {
             let data = object as? pinData
             ivc.pinData = data
             ivc.username = (data?.username)!
+            ivc.inviteFromMapView = true
             ivc.mapView = parentVC
             parentVC.present(ivc, animated: true, completion: { _ in })
         }
     }
+
+    
+    func checkReviewsAmount(reviewsAmount: Double){
+        setRatingAmountImage(ratingAmount: reviewsAmount, ratingsStarImage: self.startImage)
+    }
+    
+    
 }

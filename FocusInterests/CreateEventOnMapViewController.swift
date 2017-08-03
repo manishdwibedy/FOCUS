@@ -286,6 +286,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         if textView.text != "" {
             textView.text = ""
         }
+        textView.textColor = Constants.color.navy
     }
     
     /*

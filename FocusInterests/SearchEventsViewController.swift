@@ -63,7 +63,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         navBar.titleTextAttributes = attrs
         
 //        MARK: Invite Popup View
-        self.invitePopupView.allCornersRounded(radius: 10)
+        self.invitePopupView.layer.cornerRadius = 10.0
         
         filtered = events
         
@@ -362,7 +362,17 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     
                     feedFiveCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
                     
-                    addGreenDot(label: feedFiveCell.interestLabel, content: (pinData["focus"] as? String)!)
+                    if let pinFocus = pinData["focus"] as? String{
+                        if pinFocus.characters.first == "●"{
+                            let startIndex = pinFocus.index(pinFocus.startIndex, offsetBy: 2)
+                            let interestStringWithoutDot = pinFocus.substring(from: startIndex)
+                            addGreenDot(label: feedFiveCell.interestLabel, content: interestStringWithoutDot)
+                        }else{
+                            addGreenDot(label: feedFiveCell.interestLabel, content: pinFocus)
+                        }
+                    }else{
+                        addGreenDot(label: feedFiveCell.interestLabel, content: "N.A")
+                    }
                     
                     feedFiveCell.commentTextView.delegate = self
                     feedFiveCell.globeButton.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
@@ -386,6 +396,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                             print(error?.localizedDescription ?? "")
                             return
                         }
+                        
+                        
                         
                         feedFiveCell.imagePlace.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_pin"))
                         feedFiveCell.imagePlace.setShowActivityIndicator(true)
@@ -731,8 +743,15 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         var textFrame = textView.frame
         textFrame.size.height = textView.contentSize.height
         textView.frame = textFrame
+        
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Add a comment"{
+            textView.text = ""
+        }
     }
     
     func commentPressed(_ sender: Any) {

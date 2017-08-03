@@ -60,7 +60,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         FirebaseDownstream.shared.getCurrentUser {[unowned self] (dictionnary) in
             if dictionnary != nil {
                 // SET PROFILE PHOTO
-                let senderImageURL = dictionnary!["image_string"] as! String
+                guard let senderImageURL = dictionnary?["image_string"] as? String else{
+                    return
+                }
 
                 if let url = URL(string: senderImageURL){
                     SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
@@ -97,13 +99,13 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             }
         })
         
-        self.collectionView.backgroundColor = Constants.color.navy
+        self.collectionView.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
         
         self.inputToolbar.contentView.textView.backgroundColor = UIColor.clear
         self.inputToolbar.contentView.textView.textColor = UIColor.white
         self.inputToolbar.contentView.textView.roundCorners(radius: 5)
         
-        self.inputToolbar.contentView.backgroundColor = Constants.color.navy
+        self.inputToolbar.contentView.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
         
         self.inputToolbar.contentView.textView.placeHolderTextColor = UIColor.white
         self.inputToolbar.contentView.textView.placeHolder = "Type here..."
@@ -112,6 +114,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         getMessageID()
         
         let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "BackArrow"), style: .plain, target: self, action: #selector(back))
+        backButton.tintColor = UIColor.white
         self.navigationItem.leftBarButtonItem = backButton
 
         self.collectionView.bounces = false

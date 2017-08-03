@@ -46,10 +46,16 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     var user: User?
     var showResetPopup = false
  
+    let screenSize = UIScreen.main.bounds
+    var screenWidth: CGFloat = 0.0
+    var screenHeight: CGFloat = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.resetPopupView.allCornersRounded(radius: 10.0)
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
@@ -82,14 +88,16 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if showResetPopup {
+            
             self.resetPopupView.isHidden = false
+            
             UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.resetPopupView.center.y -= 125
-                self.resetPopupViewBottomConstraint.constant += 125
+                self.resetPopupView.center.y -= self.resetPopupView.frame.size.height
+                self.resetPopupViewBottomConstraint.constant += self.resetPopupView.frame.size.height
             }, completion: { animate in
                 UIView.animate(withDuration: 1.5, delay: 3.0, options: .curveEaseInOut, animations: {
-                    self.resetPopupView.center.y += 125
-                    self.resetPopupViewBottomConstraint.constant -= 125
+                    self.resetPopupView.center.y += self.resetPopupView.frame.size.height
+                    self.resetPopupViewBottomConstraint.constant -= self.resetPopupView.frame.size.height
                 }, completion: nil)
             })
             self.showResetPopup = false

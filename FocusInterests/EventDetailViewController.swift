@@ -137,7 +137,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.eventImage.layer.borderColor = Constants.color.pink.cgColor
         self.eventImage.roundedImage()
         
-        self.invitePopupView.allCornersRounded(radius: 10.0)
+        self.invitePopupView.layer.cornerRadius = 10.0
         self.inviteButton.roundCorners(radius: 5.0)
         
         self.pinHereButton.roundCorners(radius: 5.0)
@@ -232,7 +232,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     let value = snapshot.value as? NSDictionary
                     if value != nil
                     {
-                        let placeString = "Add comment"
+                        let placeString = "Add a comment"
                         self.hostNameLabel.text = value?["username"] as? String
                         self.fullnameLabel.text = value?["fullname"] as? String
                         var placeHolder = NSMutableAttributedString()
@@ -371,7 +371,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.navBar.topItem?.titleView = titlelabel
         
         let eventLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double((event?.longitude!)!)!)
-    
+        
+        self.distanceLabelInNavBar.titleLabel?.adjustsFontSizeToFitWidth = true
         self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: eventLocation,addBracket: false, precision: 1), for: .normal)
         
         hideKeyboardWhenTappedAround()
@@ -798,7 +799,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     
     @IBAction func valueChanged(_ sender: UITextField) {
-        
         if (sender.text?.characters.count)! > 0{
             postCommentsButton.setTitleColor(UIColor(hexString: "7ac901"), for: .normal)
             postCommentsButton.isEnabled = true
@@ -903,5 +903,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         print("have sent invite to this place!")
 //        self.invitePopupView.isHidden = false
         self.showInvitePopup = true
+        self.pinHereButton.isEnabled = false
     }
 }

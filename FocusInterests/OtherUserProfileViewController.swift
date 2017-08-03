@@ -212,7 +212,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         getEvents()
 //        getPin()
         
-        self.invitePopupView.allCornersRounded(radius: 10)
+        self.invitePopupView.layer.cornerRadius = 10.0
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").queryOrdered(byChild: "UID").queryEqual(toValue: userID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? [String:Any]
@@ -290,6 +290,36 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //        pinView.isUserInteractionEnabled = true
 //        pinView.addGestureRecognizer(pinDetail)
         self.eventView.bounds.size.height += (self.eventsCollectionView.contentSize.height)
+        
+        let infoButton = UIButton(type: .infoLight)
+        
+        // You will need to configure the target action for the button itself, not the bar button itemr
+        infoButton.tintColor = UIColor.white
+        infoButton.addTarget(self, action: #selector(showUserBlockAlertAction), for: .touchUpInside)
+        
+        // Create a bar button item using the info button as its custom view
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        
+        // Use it as required
+        self.navBar.topItem?.rightBarButtonItem = infoBarButtonItem
+
+    }
+    
+    func showUserBlockAlertAction(){
+        let unfollowAlertController = UIAlertController(title: "Block \(self.userInfo["username"]!)?", message: nil, preferredStyle: .actionSheet)
+        
+        
+        let unfollowAction = UIAlertAction(title: "Block", style: .destructive) { action in
+            print("now blocking user!!!!!!!! :(")
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            print("cancel has been tapped")
+        }
+        
+        unfollowAlertController.addAction(unfollowAction)
+        unfollowAlertController.addAction(cancelAction)
+        self.present(unfollowAlertController, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -466,10 +496,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         let user_interest = Set(getUserInterests().components(separatedBy: ","))
                         
                         for (index, interest) in (final_interest.enumerated()){
-                            
-                            if index == 3{
-                                break
-                            }
+//                            MARK: ARE WE KEEPING THE LIST TO MORE THAN THREE OR NOT?! IF WE R THEN REMOVE THE FOLLOWING COMMENTED LINES
+//                            if index == 3{
+//                                break
+//                            }
                             let interestLabelView = InterestStackViewLabel(frame: CGRect(x: 0, y: 0, width: self.interestStackView.bounds.width, height: 30))
                             
                             if interest.characters.count > 0{
@@ -987,7 +1017,18 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             recentPostCell.distanceLabel.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
             
             recentPostCell.addressLabel.text = self.pinInfo?.locationAddress.components(separatedBy: ";;")[0]
-            recentPostCell.interestLabel.text = self.pinInfo?.focus
+            if let pinFocus = self.pinInfo?.focus{
+                if pinFocus.characters.first == "●"{
+                    let startIndex = pinFocus.index(pinFocus.startIndex, offsetBy: 2)
+                    let interestStringWithoutDot = pinFocus.substring(from: startIndex)
+                    addGreenDot(label: recentPostCell.interestLabel, content: interestStringWithoutDot)
+                }else{
+                    addGreenDot(label: recentPostCell.interestLabel, content: pinFocus)
+                }
+            }else{
+                addGreenDot(label: recentPostCell.interestLabel, content: "N.A")
+            }
+        
             recentPostCell.nameDescriptionLabel.text = self.pinInfo?.pinMessage
             return recentPostCell
         }
@@ -1003,7 +1044,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             rowHeight = eventCell.frame.size.height
         }else if tableView.tag == 2{
             let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
-            rowHeight = myCell.bounds.size.height
+            self.recentPostTableViewHeight.constant = myCell.contentView.frame.size.height
+            rowHeight = myCell.contentView.frame.size.height
         }
         
         return rowHeight
