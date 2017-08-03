@@ -903,6 +903,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 }
             }
             
+            cell.dateAndTimeLabel.text = event.date!
+
             cell.inviteFromOtherUserProfile = true
             cell.event = event
             cell.UID = self.userInfo["firebaseUserId"] as? String
@@ -955,6 +957,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 }
             })
             
+            recentPostCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (self.pinInfo!.dateTimeStamp)), numericDates: true, shortVersion: true)
             
             self.pinInfo?.dbPath.observeSingleEvent(of: .value, with: {snapshot in
                 if let value = snapshot.value as? [String:Any]{
