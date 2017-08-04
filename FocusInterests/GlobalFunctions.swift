@@ -1199,6 +1199,7 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
     var eventCount = 0
     var followers = [String]()
     var events = [Event]()
+    var gotPlace = 0
     
     Constants.DB.user.child(uid).child("following/people").observeSingleEvent(of: .value, with: { (snapshot) in
         if let value = snapshot.value as? [String:Any]{
@@ -1216,6 +1217,13 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
                         }
                     })
                 }
+            }
+        }
+        else{
+            gotPlace += 1
+            
+            if gotPlace == 2{
+                gotEvents(events)
             }
         }
     })
@@ -1241,6 +1249,13 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
                 })
             }
             
+        }
+        else{
+            gotPlace += 1
+            
+            if gotPlace == 2{
+                gotEvents(events)
+            }
         }
     })
 }
@@ -1273,6 +1288,9 @@ func getFollowingPlace(uid: String, gotPlaces: @escaping (_ place: [Place]) -> V
                     })
                 })
             }
+        }
+        else{
+            gotPlaces(places)
         }
     })
 }

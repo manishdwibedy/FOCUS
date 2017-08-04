@@ -639,6 +639,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func showCameraRoll() {
         let photoPicker = UIImagePickerController()
+        photoPicker.delegate = self
         self.present(photoPicker, animated: true, completion: {
             self.showPopup()
         })
@@ -650,6 +651,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             picker.allowsEditing = false
             picker.sourceType = UIImagePickerControllerSourceType.camera
             picker.cameraCaptureMode = .photo
+            picker.delegate = self
             picker.modalPresentationStyle = .fullScreen
             self.present(picker,animated: true,completion: {
                 self.showPopup()
@@ -1452,7 +1454,7 @@ extension MapViewController{
     }
 }
 
-extension MapViewController: UIImagePickerControllerDelegate{
+extension MapViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         self.dismiss(animated: true, completion: { () -> Void in
             

@@ -110,7 +110,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func loadTable(){
-        Constants.DB.messages.child(AuthApi.getFirebaseUid()!).queryOrdered(byChild: "read").queryLimited(toLast: 20).observeSingleEvent(of: .value, with: {(snapshot) in
+        Constants.DB.messages.child(AuthApi.getFirebaseUid()!).queryOrdered(byChild: "read").observeSingleEvent(of: .value, with: {(snapshot) in
 
             if let messages = snapshot.value as? [String:[String:Any]]{
                 for (user, message) in messages{
