@@ -1188,6 +1188,9 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
             }
             
         }
+        else{
+            gotEvents(events)
+        }
     })
 }
    
