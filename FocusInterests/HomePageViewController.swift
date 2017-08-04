@@ -21,6 +21,7 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
     var location: CLLocation? = nil
     var showTutorial = false
     var showTab = 0
+    let popTip = PopTip()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +62,11 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
         vc.showTutorial = showTutorial
         self.setStatusBarStyle(UIStatusBarStyle.default)
         // Do any additional setup after loading the view.
+        
+        popTip.edgeMargin = 5
+        popTip.entranceAnimation = .scale;
+        popTip.actionAnimation = .bounce(20)
+        popTip.shouldDismissOnTap = true
         
     }
 
@@ -120,26 +126,29 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
+//        popTip.hide()
         if AuthApi.isNewToPage(index: item.tag) && item.tag != 0  && item.tag != 2 {
-            let popTip = PopTip()
+            
+            
             if let view = item.value(forKey: "view") as? UIView{
                 var text = ""
+                var width = 300
+//                var ps = CGRect(x: 400, 400, 10, 10)
+
                 switch(item.tag){
                 case 1:
                     text = "See what your friends are upto and who's nearby!"
+                    width = 125
                 case 3:
                     text = "Your personalized list of Places and Events around you"
+                    var width = 350
                 case 4:
                     text = "A Live look at everything going on in your world"
+                    width = 400
                 default :
                     break
                 }
-                
-                popTip.show(text: text, direction: .up, maxWidth: 500, in: view, from: view.frame, duration: 3)
-                popTip.entranceAnimation = .scale;
-                popTip.actionAnimation = .bounce(20)
-                popTip.shouldDismissOnTap = true
+                popTip.show(text: text, direction: .up, maxWidth: CGFloat(width), in: view, from: view.frame, duration: 3)
             }
             AuthApi.setIsNewToPage(index: item.tag)
 

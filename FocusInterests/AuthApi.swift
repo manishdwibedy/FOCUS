@@ -81,6 +81,11 @@ struct AuthApi {
             modified[index] = false
             defaults.set(modified, forKey: "isNewToPage")
         }
+        else{
+            var modified = [true,true,true,true,true,true]
+            modified[index] = false
+            defaults.set(modified, forKey: "isNewToPage")
+        }
     }
     
     static func getUserName() -> String? {
