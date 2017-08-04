@@ -41,7 +41,7 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
         self.commentTextView.layer.borderWidth = 1.0
         self.commentTextView.layer.borderColor = UIColor.white.cgColor
         self.commentTextView.layer.cornerRadius = 5.0
-//        self.commentTextView.contentInset = UIEdgeInsetsMake(-7.0,0.0,0,0.0)
+        self.commentTextView.contentInset = UIEdgeInsetsMake(-5.0,0.0,0,0.0)
         self.usernameLabel.setTitle("arya", for: .normal)
         self.addressLabel.setTitle("1001 Rose Bowl Dr", for: .normal)
         self.postButton.allCornersRounded(radius: 4.0)
