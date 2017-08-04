@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="1086"/>
                                 <subviews>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="167-Kd-xcs" userLabel="Main Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1084"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1099"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dsa-iR-ute">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
@@ -365,10 +365,10 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SF4-Kb-s3b" userLabel="FOCUS View">
-                                                <rect key="frame" x="0.0" y="521" width="375" height="153"/>
+                                                <rect key="frame" x="0.0" y="521" width="375" height="168"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rWm-rQ-eGU" userLabel="Focus Stack View">
-                                                        <rect key="frame" x="7.5" y="5" width="359" height="142"/>
+                                                        <rect key="frame" x="7.5" y="5" width="359" height="157"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-QS-bEP" userLabel="Border Containter View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="23"/>
@@ -413,10 +413,46 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdS-4E-ffb">
-                                                                <rect key="frame" x="0.0" y="112" width="359" height="30"/>
+                                                                <rect key="frame" x="0.0" y="112" width="359" height="45"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kco-bc-7mH">
-                                                                        <rect key="frame" x="303" y="5" width="52" height="20"/>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DK2-Vm-lJp">
+                                                                        <rect key="frame" x="314" y="3" width="45" height="40"/>
+                                                                        <subviews>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sml-8X-C4b" userLabel="More">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="20"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="45" id="EdW-bZ-gdH"/>
+                                                                                    <constraint firstAttribute="height" constant="20" id="ZDH-Lu-axO"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                                                <state key="normal" title="More">
+                                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                </state>
+                                                                                <connections>
+                                                                                    <action selector="moreInterestsButtonPressed:" destination="cU2-hP-1h7" eventType="touchUpInside" id="kEi-zN-eWb"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xF1-P1-zEM" userLabel="Less">
+                                                                                <rect key="frame" x="0.0" y="20" width="45" height="20"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="45" id="2bW-MS-6q1"/>
+                                                                                    <constraint firstAttribute="height" constant="20" id="Ufv-X7-Hbl"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                                                <state key="normal" title="Less">
+                                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                </state>
+                                                                                <connections>
+                                                                                    <action selector="lessButtonPressed:" destination="cU2-hP-1h7" eventType="touchUpInside" id="74T-g2-61c"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="40" id="tLg-41-J2R"/>
+                                                                        </constraints>
+                                                                    </stackView>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kco-bc-7mH" userLabel="Edit Focus Button">
+                                                                        <rect key="frame" x="8" y="13" width="52" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="WhV-ln-fNn"/>
                                                                             <constraint firstAttribute="width" constant="52" id="guf-Y0-fvZ"/>
@@ -432,9 +468,11 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="Kco-bc-7mH" secondAttribute="trailing" constant="4" id="2gi-MG-UTa"/>
+                                                                    <constraint firstItem="Kco-bc-7mH" firstAttribute="leading" secondItem="hdS-4E-ffb" secondAttribute="leading" constant="8" id="0hI-IZ-uB3"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="DK2-Vm-lJp" secondAttribute="trailing" id="3LV-EX-Uxt"/>
                                                                     <constraint firstItem="Kco-bc-7mH" firstAttribute="centerY" secondItem="hdS-4E-ffb" secondAttribute="centerY" id="DQz-Jd-19O"/>
-                                                                    <constraint firstAttribute="height" constant="30" id="f6T-Jg-nFY"/>
+                                                                    <constraint firstItem="DK2-Vm-lJp" firstAttribute="centerY" secondItem="Kco-bc-7mH" secondAttribute="centerY" id="FlO-jd-6Bl"/>
+                                                                    <constraint firstAttribute="height" constant="45" id="f6T-Jg-nFY"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -450,7 +488,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfu-XU-At8" userLabel="Events View">
-                                                <rect key="frame" x="0.0" y="674" width="375" height="410"/>
+                                                <rect key="frame" x="0.0" y="689" width="375" height="410"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Qr1-yI-fZj">
                                                         <rect key="frame" x="8" y="7.5" width="359" height="395"/>
@@ -614,7 +652,11 @@
                         <outlet property="fullNameLabel" destination="eCO-Sw-Meb" id="TdA-K9-EVV"/>
                         <outlet property="interestStackView" destination="WUe-TH-3g9" id="lkG-8V-Pxg"/>
                         <outlet property="interestViewHeight" destination="Izk-t9-tYE" id="Rfi-NP-wcp"/>
+                        <outlet property="lessButton" destination="xF1-P1-zEM" id="CyL-Lc-W6f"/>
+                        <outlet property="moreButton" destination="Sml-8X-C4b" id="Rss-cE-nUG"/>
                         <outlet property="moreFocusButton" destination="Kco-bc-7mH" id="ifu-Gu-vgd"/>
+                        <outlet property="moreOrLessButtonStack" destination="DK2-Vm-lJp" id="8q9-po-0se"/>
+                        <outlet property="moreOrLessButtonStackHeight" destination="tLg-41-J2R" id="roz-xm-ciE"/>
                         <outlet property="navBar" destination="Oi3-pC-q5R" id="5Pg-Iw-1dx"/>
                         <outlet property="navBarItem" destination="SNQ-5X-BJ8" id="x2d-OC-eDu"/>
                         <outlet property="pinAddress2Label" destination="nuH-9L-XHv" id="Cyc-My-DP3"/>
