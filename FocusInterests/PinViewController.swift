@@ -86,7 +86,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
     @IBOutlet weak var noPinLabel: UILabel!
     @IBOutlet weak var pinTableHeight: NSLayoutConstraint!
     
-    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -200,6 +202,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         pinDF.dateFormat = "MMM d, h:mm a"
     }
     
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func checkFollowing(){
         Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
@@ -230,6 +236,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -240,11 +249,17 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         })
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func callPlace(sender:UITapGestureRecognizer) {
         guard let number = URL(string: "tel://" + (place?.plainPhone)!) else { return }
         UIApplication.shared.open(number)
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func checkRatingAmount(){
         self.reviewAmountButton.setTitle("\(Int(self.averageReviewAmount)) reviews", for: .normal)
         guard let reviewsStarImageView = self.reviewStars else{
@@ -275,7 +290,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             break
         }
     }
-    
+
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func loadInfoScreen(place: Place){
         // Do any additional setup after loading the view.
 
@@ -394,6 +412,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
 
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tableView.tag == 0){
             if self.data.count > 3{
@@ -407,6 +428,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (tableView.tag == 0){
             let pinCell = self.pinTableView.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
@@ -460,7 +484,11 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             return otherPlacesCell
         }
     }
-
+    
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView.tag == 0){
             return 80
@@ -470,6 +498,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
     }
 
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.tag == 1{
             let place = suggestedPlaces[indexPath.row]
@@ -481,13 +512,25 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
         }
     }
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         var frame = self.peopleAlsoLikedTableView.frame;
         frame.size.height = self.peopleAlsoLikedTableView.contentSize.height
         self.peopleAlsoLikedTableView.frame = frame;
+        
+        getSuggestedPlaces(interests: getInterest(yelpCategory: (place?.categories[0].alias)!), limit: 3, gotPlaces: {places in
+            self.suggestedPlaces = places
+            self.peopleAlsoLikedTableView.reloadData()
+        })
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func inviteUser(name: String) {
         print("clicked \(name)")
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
@@ -502,6 +545,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         self.present(ivc, animated: true, completion: { _ in })
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func inviteTestMethod(){
         
         print("testing........")
@@ -518,6 +564,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         self.present(ivc, animated: true, completion: { _ in })
     }
     
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func inviteSentToSingleUser(){
 
 //        TODO: need to send invite to single user, need to ask arya how to handle stack when invite sent
@@ -550,11 +600,18 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
     }
     
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     @IBAction func openYelp(_ sender: Any) {
         UIApplication.shared.openURL(NSURL(string: (place?.url)!)! as URL)
 
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     @IBAction func openUber(_ sender: Any) {
         let lat = place?.latitude
         let long = place?.longitude
@@ -574,6 +631,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     @IBAction func openGoogleMaps(_ sender: Any) {
         let latitude = place?.latitude
         let longitude = place?.longitude
@@ -596,6 +656,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         mapItem.openInMaps(launchOptions: options)
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     @IBAction func pin(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Pin", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "Home") as! PinScreenViewController
@@ -613,11 +676,19 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
     }
     
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     // MARK: TEXT VIEW DELEGATE METHODS
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.reviewsTextView.text = ""
     }
     
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func showReviewBox(){
         self.placeVC?.reviewButton.isSelected = !(self.placeVC?.reviewButton.isSelected)!
         if (self.placeVC?.reviewButton.isSelected)!{
@@ -630,6 +701,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
     }
     
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     @IBAction func selectedRating(sender: UIButton){
         self.rating = sender.tag
         switch sender.tag{
@@ -656,6 +730,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         
     }
     
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func setImage(select: Int, image: UIImage){
         for select in 1...select{
             let button = ratingView.viewWithTag(select) as! UIButton
@@ -670,6 +748,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
     }
     
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     @IBAction func postComment(_ sender: Any) {
         let place = Constants.DB.places
         let comments = place.child((self.place?.id)!).child("comments")
@@ -695,6 +777,10 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
         }
     }
     
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func followPressed(){
         if isFollowing == false{
             let time = NSDate().timeIntervalSince1970
@@ -737,12 +823,13 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
             
             self.present(unfollowAlertController, animated: true, completion: nil)
             
-            
-            
-            
         }
     }
     
+    
+/////////////////////////////////////
+////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
+/////////////////////////////////////
     func getUserSuggestions(gotUsers: @escaping ([User]) -> Void){
         var followingSuggestions = [User]()
         var suggestions = [User]()

@@ -74,6 +74,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchPlace: SearchPlacesViewController? = nil
     var searchEvent: SearchEventsViewController? = nil
     var placeVC: PinViewController? = nil
+    var placeViewController: PlaceViewController? = nil
     var mapView: MapViewController? = nil
 
     var searchPeopleEventDelegate: InvitePeopleEventCellDelegate?

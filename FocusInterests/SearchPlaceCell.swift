@@ -25,6 +25,7 @@ class SearchPlaceCell: UITableViewCell {
     var placeID = String()
     var parentVC: SearchPlacesViewController? = nil
     var placeVC: PinViewController? = nil
+    var placeViewController: PlaceViewController? = nil
     var searchVC: SearchViewController? = nil
     var place: Place?
     

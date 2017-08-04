@@ -21,6 +21,7 @@ class InviteUserView: UIView {
 
     var user: User? = nil
     var parentVC: PinViewController? = nil
+    var placeVC: PlaceViewController? = nil
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,7 +60,7 @@ class InviteUserView: UIView {
         VC.otherUser = true
         VC.userID = (user?.uuid)!
         
-        parentVC?.present(VC, animated: true, completion: nil)
+        placeVC?.present(VC, animated: true, completion: nil)
         dropfromTop(view: self.view)
     }
 }
