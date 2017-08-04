@@ -621,7 +621,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
             }
         }
-        else if AuthApi.getUserImage() != nil || AuthApi.getUserImage()?.characters.count == 0 {
+        else if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0 {
             let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
             
             photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
