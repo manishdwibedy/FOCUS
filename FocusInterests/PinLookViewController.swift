@@ -346,6 +346,9 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                                     "user": AuthApi.getFirebaseUid()!,
                                     "likeCount": self.likes
                 ])
+            
+            sendNotification(to: data.fromUID, title: "New Like", body: "\(AuthApi.getUserName()!) liked your Pin", actionType: "", type: "", item_id: "", item_name: "")
+            
         }
     }
     
@@ -366,6 +369,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             }
             self.likeOut.setImage(#imageLiteral(resourceName: "Liked"), for: UIControlState.normal)
         
+            sendNotification(to: data.fromUID, title: "New Like", body: "\(AuthApi.getUserName()!) liked your Pin", actionType: "", type: "", item_id: "", item_name: "")
         
         Answers.logCustomEvent(withName: "Like Pin",
                                customAttributes: [

@@ -18,8 +18,13 @@ class Follow{
             if value == nil{
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").childByAutoId().updateChildValues(["UID": uid])
                 
+                
+                sendNotification(to: uid, title: "New Follower", body: "\(AuthApi.getUserName()!) started following you", actionType: "", type: "", item_id: "", item_name: "")
+                
             }
         })
+        
+        
         
         Constants.DB.user.child(uid).child("followers").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? [String:Any]

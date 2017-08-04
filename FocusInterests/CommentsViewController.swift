@@ -173,6 +173,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             commentTextView.text = ""
             self.commentsTableView.reloadData()
             
+            sendNotification(to: data["fromUID"] as! String, title: "New Comment", body: "\(AuthApi.getUserName()!) commented on your Pin", actionType: "", type: "", item_id: "", item_name: "")
+            
             Answers.logCustomEvent(withName: "Comment Pin",
                                    customAttributes: [
                                     "user": AuthApi.getFirebaseUid()!,
