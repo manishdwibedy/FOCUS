@@ -33,8 +33,6 @@ class notificationTabCell: UITableViewCell {
         self.typePic.layer.borderWidth = 2
         self.typePic.layer.cornerRadius = self.profileImage.frame.width/2
         self.typePic.clipsToBounds = true
-        
-        self.contentView.backgroundColor = Constants.color.navy
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -1557,7 +1557,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzs-zd-iwk" userLabel="Rating View">
                                 <rect key="frame" x="26" y="30" width="323" height="120"/>
                                 <subviews>
-                                    <view contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CBJ-ZN-IGs" customClass="CosmosView" customModule="Cosmos">
+                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="CBJ-ZN-IGs" customClass="CosmosView" customModule="Cosmos">
                                         <rect key="frame" x="10" y="10" width="263" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
@@ -1591,7 +1591,7 @@
                                             <action selector="ratingSubmitted:" destination="ahA-Wd-kLn" eventType="touchUpInside" id="ACr-Mw-PI9"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" text="Please enter your comments here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bln-g0-qfw">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="Please enter your comments here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bln-g0-qfw">
                                         <rect key="frame" x="10" y="60" width="254" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
