@@ -71,8 +71,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         hideKeyboardWhenTappedAround()
         
         // testing only
-        self.emailTextField.text = "focusdummy2@gmail.com"
-        self.passwordTextField.text = "focusdummy"
+//        self.emailTextField.text = "focusdummy2@gmail.com"
+//        self.passwordTextField.text = "focusdummy"
     }
     
     override func viewWillAppear(_ animated: Bool) {
