@@ -272,32 +272,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             ], for: .normal)
         
         self.invitePopupView.isHidden = true
-        
-//        self.navigationView.notificationsButton.addTarget(self, action: #selector(MapViewController.showPopOver), for: .touchUpInside)
     }
-    
-//    MARK: this is for popover for notifications
-    /*
-    func showPopOver(_ sender: UIButton){
-        let popController = UIStoryboard(name: "FollowersRequest", bundle: nil).instantiateViewController(withIdentifier: "FollowersRequest")
-        
-        // set the presentation style
-        popController.modalPresentationStyle = UIModalPresentationStyle.popover
-        
-        popController.preferredContentSize = CGSize(width: 200, height: 60)
-        
-        // set up the popover presentation controller
-        popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
-        popController.popoverPresentationController?.delegate = self
-        popController.popoverPresentationController?.sourceView = sender as! UIView // button
-        popController.popoverPresentationController?.sourceRect = sender.bounds
-        self.present(popController, animated: true, completion: nil)
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
-    }
- */
+   
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -545,13 +521,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if showTutorial{
             self.showPopup()
         }
-        
-//        
-//        let photoView = PhotoInputView(frame: CGRect(x: 0, y: 0, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
-//        photoInputView.addSubview(photoView)
-//        photoView.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
-//        photoView.isHidden = true
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -652,7 +621,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
             }
         }
-        else if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0 {
+        else if AuthApi.getUserImage() != nil || AuthApi.getUserImage()?.characters.count == 0 {
             let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
             
             photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
