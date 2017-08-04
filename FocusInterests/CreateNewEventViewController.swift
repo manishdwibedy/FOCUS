@@ -646,44 +646,13 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     func startTimeSelected(){
         if let startTimeVal = self.startTime{
             if let startDate = self.startDate{
-                let gregorian = Calendar(identifier: .gregorian)
-
-                var startDate = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startDate)
-                var startTime = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startTimeVal)
-                
-                startDate.hour = startTime.hour
-                startDate.minute = startTime.minute
-                
-                let date = gregorian.date(from: startDate)!
-
-                let dateFormatter = DateFormatter()
-                dateFormatter.timeZone = NSTimeZone.default
-                dateFormatter.dateFormat = "MM/dd/yy, hh:mm a"
-                
-                let currentDate = Date()
-                print(currentDate)
-                
-                let dateString = "\(startDate.month!) \(startDate.day!) \(startDate.year!), \(startTime.hour!):\(startTime.minute!) \(self.timerObject[2]!)"
-                let df = DateFormatter()
-                df.timeZone = NSTimeZone.default
-                df.dateFormat = "MM d yyyy, h:mm a"
-                if let dateFromString = df.date(from: dateString){
-                    print(dateFromString)  // "2015-01-14 10:53:00 +0000\n"
-                    df.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!
-                    let stringFromDate = df.string(from: dateFromString) //"Jan 14, 2015, 10:53 AM"
-                    print(stringFromDate)
-                    
-                    print(dateFromString)
-                    if dateFromString < Date(){
-                        showError(message: "Please enter a valid time")
-                        return
-                    }
-                    else{
-                        self.eventTimeTextField.text = timeFormatter.string(from: startTimeVal)
-                    }
+                if startDate < Date(){
+                    showError(message: "Please enter a valid time")
+                    return
                 }
-
-                
+                else{
+                    self.eventTimeTextField.text = timeFormatter.string(from: startTimeVal)
+                }
             }
             else{
                 showError(message: "Please choose the start date")
