@@ -211,18 +211,6 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
                 VC.present(ivc, animated: true, completion: nil)
             }
         }
-//        avoid inviting the user
-//        let time = NSDate().timeIntervalSince1970
-//        Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-//            let user = snapshot.value as? [String : Any] ?? [:]
-//            
-//            let fullname = user["fullname"] as? String
-//            sendNotification(to: self.UID, title: "\(String(describing: fullname!)) invited you to \(String(describing: self.place!.name))", body: "", actionType: "", type: "place", item_id: "", item_name: "")
-//        })
-//        Constants.DB.places.child(place.id).child("invitations").childByAutoId().updateChildValues(["toUID":place.id, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
-//        Constants.DB.user.child(UID).child("invitations").child("place").childByAutoId().updateChildValues(["ID":place.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"name": place.name,"status": "sent"])
-//        parentVC.searchPeople?.showInvitePopup = true
-//        parentVC.dismiss(animated: true, completion: nil)
     }
     
     func haveInvitedSomeoneToAPlace() {

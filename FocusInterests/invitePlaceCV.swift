@@ -77,8 +77,8 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in 
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
-                    let fullname = user["fullname"] as? String
-                    sendNotification(to: UID, title: "Invites", body: "\(String(describing: fullname)) invited you to \(String(describing: self.place?.name))", actionType: "", type: "place", item_id: "", item_name: (self.place?.name)!)
+                    let username = user["username"] as! String
+                    sendNotification(to: UID, title: "New Invite", body: "\(String(describing: username)) invited you to \(String(describing: self.place?.name))", actionType: "", type: "place", item_id: "", item_name: (self.place?.name)!)
                 })
             Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
             }
@@ -87,8 +87,8 @@ class invitePlaceCV: UIViewController, UITableViewDelegate,UITableViewDataSource
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
                     let user = snapshot.value as? [String : Any] ?? [:]
                     
-                    let fullname = user["fullname"] as? String
-                    sendNotification(to: UID, title: "Invites", body: "\(String(describing: fullname)) invited you to \(String(describing: name))", actionType: "", type: "event", item_id: "", item_name: "")
+                    let username = user["username"] as! String
+                    sendNotification(to: UID, title: "New Invite", body: "\(String(describing: username)) invited you to \(String(describing: name))", actionType: "", type: "event", item_id: "", item_name: "")
                 })
             Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
             }

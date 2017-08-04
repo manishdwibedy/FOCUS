@@ -153,20 +153,6 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
                 VC.present(ivc, animated: true, completion: nil)
             }
         }
-        
-        // avoid inviting the user
-//        let time = NSDate().timeIntervalSince1970
-//        Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-//            let user = snapshot.value as? [String : Any] ?? [:]
-//            
-//            let fullname = user["fullname"] as? String
-//            sendNotification(to: self.UID, title: "\(String(describing: fullname!)) invited you to \(String(describing: self.event.title!))", body: "", actionType: "invite", type: "event", item_id: "", item_name: "")
-//        })
-//        Constants.DB.event.child(event.id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
-//        Constants.DB.user.child(UID).child("invitations").child("event").childByAutoId().updateChildValues(["ID":event.id!, "time":time,"fromUID":AuthApi.getFirebaseUid()!,"status": "sent"])
-//        parentVC.searchPeople?.showInvitePopup = true
-//        parentVC.dismiss(animated: true, completion: nil)
-    
     }
     
     @IBAction func attendButtonPressed(_ sender: Any) {
