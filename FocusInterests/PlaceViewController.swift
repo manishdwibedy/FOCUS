@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import MapKit
+import SDWebImage
 
 protocol CommentsDelegate {
     func gotComments(comments: [PlaceRating])
@@ -22,28 +24,44 @@ protocol SendInviteFromPlaceDetailsDelegate{
     func hasSentInvite()
 }
 
-class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
+class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UITableViewDataSource,SendInviteFromPlaceDetailsDelegate, UITextViewDelegate{
+    
     var commentsDelegate: CommentsDelegate?
     var suggestPlacesDelegate: SuggestPlacesDelegate?
+    var suggestedPlaces = [Place]()
     
     var place: Place?
     var rating = [PlaceRating]()
     var currentLocation: CLLocation?
     var map: MapViewController? = nil
     
-    @IBOutlet weak var placeScrollView: UIScrollView!
-    @IBOutlet weak var mapButton: UIButton!
-    @IBOutlet weak var dollarLabel: UILabel!
-    @IBOutlet weak var interestLabel: UILabel!
+    var data = [NSDictionary]()
+    var isFollowing = false
+    var place_focus = ""
+    var pinDF = DateFormatter()
     
-    @IBOutlet weak var pinViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var pinView: UIView!
-    @IBOutlet weak var imageView: UIImageView!
+    var ratingID: String?
+    var starRatingTag: Int? = nil
+    var showInvitePopup = false
+    
+    
+    @IBOutlet weak var mainStackView: UIStackView!
+//    nav bar
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var ratingBackground: UIView!
-    
+    @IBOutlet weak var distanceLabelInNavBar: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
+
+//    invite popup
     @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var invitePopupView: UIView!
+    let screenSize = UIScreen.main.bounds
+    var screenWidth: CGFloat = 0.0
+    var screenHeight: CGFloat = 0.0
+    
+//    scroll view
+    @IBOutlet weak var placeScrollView: UIScrollView!
+    
+//    top view
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var followersAmountLabel: UIButton!
@@ -52,12 +70,61 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var pinButton: UIButton!
-    @IBOutlet weak var distanceLabelInNavBar: UIButton!
+    @IBOutlet weak var dollarLabel: UILabel!
+    @IBOutlet weak var interestLabel: UILabel!
     
-    let screenSize = UIScreen.main.bounds
-    var screenWidth: CGFloat = 0.0
-    var screenHeight: CGFloat = 0.0
-    var showInvitePopup = false
+    
+    // reviews stack
+    @IBOutlet weak var reviewsStack: UIStackView!
+    @IBOutlet weak var reviewsTextView: UITextView!
+    @IBOutlet weak var ratingView: UIView!
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    @IBOutlet weak var button5: UIButton!
+    @IBOutlet weak var writeReviewView: UITextView!
+    @IBOutlet weak var starRatingView: UIView!
+    @IBOutlet weak var postReviewSeciontButton: UIButton!
+    
+    // place info stack
+    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var infoViewScreenHeight: NSLayoutConstraint!
+        // basic info screen
+        @IBOutlet weak var phoneLabel: UILabel!
+        @IBOutlet weak var cityStateLabel: UILabel!
+        @IBOutlet weak var streetAddress: UILabel!
+    
+    
+        @IBOutlet weak var reviewStars: UIImageView!
+        @IBOutlet weak var reviewAmountButton: UIButton!
+        var averageRatingAmount = 0.0
+        var averageReviewAmount = 0.0
+    
+    
+        // location info
+        @IBOutlet weak var hoursStackView: UIStackView!
+        @IBOutlet weak var starsUberAndHoursStack: UIStackView!
+        @IBOutlet weak var yelpButton: UIButton!
+        @IBOutlet weak var uberButton: UIButton!
+        @IBOutlet weak var googleMapButton: UIButton!
+    
+    
+    // invite stack
+    @IBOutlet weak var inviteUserStackView: UIStackView!
+    @IBOutlet weak var inviteView: UIView!
+    
+    // pins stack
+    @IBOutlet weak var pinView: UIView!
+    @IBOutlet weak var pinStackView: UIStackView!
+    @IBOutlet weak var pinTableView: UITableView!
+    @IBOutlet weak var pinTableHeightConstraint: NSLayoutConstraint!
+    
+    // people also liked stack
+    @IBOutlet weak var peopleAlsoLikedStack: UIView!
+    @IBOutlet weak var peopleAlsoLikedStackHeight: NSLayoutConstraint!
+    @IBOutlet weak var peopleAlsoLikedTableView: UITableView!
+    @IBOutlet weak var peopleAlsoLikeTableViewHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,12 +138,18 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         self.screenHeight = self.screenSize.height
         self.invitePopupView.center.y = self.screenHeight - 20
         self.invitePopupTopConstraint.constant = self.screenHeight - 20
+        self.invitePopupView.layer.cornerRadius = 10.0
+        self.invitePopupView.isHidden = true
         
-        hideKeyboardWhenTappedAround()
+        self.mainStackView.removeArrangedSubview(self.reviewsStack)
+        self.reviewsStack.isHidden = true
+        self.reviewButton.setTitle("Review", for: .normal)
+        self.reviewButton.setTitleColor(UIColor.white, for: .normal)
+        self.reviewButton.setTitle("Review", for: .selected)
+        self.reviewButton.setTitleColor(UIColor.white, for: .selected)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showRating(sender:)))
         
-        self.invitePopupView.layer.cornerRadius = 10.0
         
         self.topView.addTopBorderWithColor(color: UIColor.white, width: 1.0)
         
@@ -110,6 +183,23 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: placeLocation,addBracket: false, precision: 1), for: .normal)
         
         
+        self.pinTableView.delegate = self
+        self.pinTableView.dataSource = self
+        let pinPlaceReviewNib = UINib(nibName: "PinPlaceReviewTableViewCell", bundle: nil)
+        self.pinTableView.register(pinPlaceReviewNib, forCellReuseIdentifier: "pinPlaceReviewCell")
+        
+        self.peopleAlsoLikedTableView.delegate = self
+        self.peopleAlsoLikedTableView.dataSource = self
+        self.peopleAlsoLikedTableView.translatesAutoresizingMaskIntoConstraints = false
+        let nib = UINib(nibName: "SearchPlaceCell", bundle: nil)
+        self.peopleAlsoLikedTableView.register(nib, forCellReuseIdentifier: "SearchPlaceCell")
+        self.peopleAlsoLikedTableView.rowHeight = UITableViewAutomaticDimension
+        self.peopleAlsoLikedTableView.estimatedRowHeight = 150.0
+        
+        self.yelpButton.backgroundColor = .clear
+        self.yelpButton.layer.masksToBounds = true
+        self.yelpButton.layer.cornerRadius = 5
+        
         self.pinButton.setTitle("I\'m Here", for: .normal)
         self.pinButton.setTitleColor(UIColor.white, for: .normal)
         self.pinButton.setTitle("I\'m Here", for: .selected)
@@ -126,6 +216,18 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         
         self.pinAmountLabel.setTitle("0", for: .normal)
         self.followersAmountLabel.setTitle("0", for: .normal)
+        
+        self.button1.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        self.button2.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        self.button3.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        self.button4.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        self.button5.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+        
+        button1.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+        button2.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+        button3.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+        button4.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
+        button5.addTarget(self, action: #selector(selectedRating), for: .touchUpInside)
         
         Constants.DB.following_place.child((place?.id)!).child("followers").observeSingleEvent(of: .value, with: {snapshot in
             if let data = snapshot.value as? [String: Any]{
@@ -151,11 +253,128 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
                 self.pinAmountLabel.setTitle("0", for: .normal)
             }
         })
+        
+        
+        
+        //        placeVC?.suggestPlacesDelegate = self
+        //        loadInfoScreen(place: self.place!)
+        
+        hideKeyboardWhenTappedAround()
+        
+        // Round up Yelp!
+        var address = ""
+        for str in (place?.address)!{
+            address = address + " " + str
+            
+        }
+        
+//       set rating
+        self.averageReviewAmount = Double((self.place?.reviewCount)!)
+        guard let ratingAmount = self.place?.rating else {
+            self.averageRatingAmount = 0.0
+            return
+        }
+        self.averageRatingAmount = Double(ratingAmount)
+
+        Constants.DB.pins.queryOrdered(byChild: "formattedAddress").queryEqual(toValue: address).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            if value != nil
+            {
+                for (key,_) in value!
+                {
+                    self.data.append(value?[key] as! NSDictionary)
+                }
+                
+                self.data.sorted(by: {
+                    ($0["time"] as! Double) < ($1["time"] as! Double)
+                })
+                if self.data.count > 3{
+                    
+                    print("get 3")
+                }
+                
+                //self.data.sort(by: $0["time"] as? Double < $1["time"] as? Double)
+            }
+            else{
+                self.pinStackView.removeArrangedSubview(self.pinTableView)
+                self.pinTableView.removeFromSuperview()
+                //                self.pinView.bounds.size.height -= self.pinTableView.frame.size.height
+            }
+            self.pinTableView.reloadData()
+            
+        })
+        
+        if let phoneLabelText = phoneLabel.text {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.callPlace))
+            self.phoneLabel.isUserInteractionEnabled = true
+            
+            let textRange = NSMakeRange(0, phoneLabelText.characters.count)
+            let attributedText = NSMutableAttributedString(string: phoneLabelText)
+            attributedText.addAttribute(NSUnderlineStyleAttributeName , value: NSUnderlineStyle.styleSingle.rawValue, range: textRange)
+            
+            self.phoneLabel.attributedText = attributedText
+            self.phoneLabel.addGestureRecognizer(tap)
+        }
+        
+        checkFollowing()
+        checkRatingAmount()
+        
+        self.loadInfoScreen(place: self.place!)
+        
+        self.getUserSuggestions(gotUsers: {users in
+            
+            for (index,view) in self.inviteUserStackView.arrangedSubviews.enumerated(){
+                let inviteUser = view as? InviteUserView
+                inviteUser?.placeVC = self
+                
+                if let user = users[index] as? User{
+                    inviteUser?.userName.text = user.username
+                    inviteUser?.user = user
+                    if let image = user.image_string{
+                        if let url = URL(string: image){
+                            inviteUser?.image.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                }
+                else{
+                    self.inviteUserStackView.removeArrangedSubview(view)
+                }
+            }
+        })
+        
+        pinDF.dateFormat = "MMM d, h:mm a"
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+//        getSuggestedPlaces(interests: getInterest(yelpCategory: (place?.categories[0].alias)!), limit: 3, gotPlaces: {places in
+//            self.suggestedPlaces = places
+//            self.peopleAlsoLikedTableView.reloadData()
+//        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         self.showPopup()
+        getSuggestedPlaces(interests: getInterest(yelpCategory: (place?.categories[0].alias)!), limit: 3, gotPlaces: {places in
+            self.suggestedPlaces = places
+            self.peopleAlsoLikedTableView.reloadData()
+        })
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func callPlace(sender:UITapGestureRecognizer) {
+        guard let number = URL(string: "tel://" + (place?.plainPhone)!) else { return }
+        UIApplication.shared.open(number)
     }
     
     func showRating(sender: UITapGestureRecognizer) {
@@ -165,32 +384,166 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         self.present(VC!, animated: true, completion: nil)
     }
     
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (tableView.tag == 0){
+            if self.data.count > 3{
+                return 3
+            }
+            else{
+                return self.data.count
+            }
+        }else{
+            return suggestedPlaces.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (tableView.tag == 0){
+            let pinCell = self.pinTableView.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
+            
+            let data = self.data[indexPath.row]
+            
+            Constants.DB.user.child((data["fromUID"] as? String)!).observeSingleEvent(of: .value, with: {snapshot in
+                if let data = snapshot.value as? [String:Any]{
+                    pinCell.usernameLabel.text = data["username"] as? String
+                }
+            })
+            
+            addGreenDot(label: pinCell.categoryLabel, content:(data["focus"] as? String)!)
+            pinCell.timeOfPinLabel.text = pinDF.string(from: Date(timeIntervalSince1970: (data["time"] as? Double)!))
+            pinCell.commentsTextView.text = data["pin"] as? String
+            self.pinTableView.frame.size.height = (pinCell.frame.height * CGFloat(indexPath.row + 1))
+            return pinCell
+        }else{
+            let otherPlacesCell = self.peopleAlsoLikedTableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
+            otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
+            otherPlacesCell.placeViewController = self
+            let place = suggestedPlaces[indexPath.row]
+            otherPlacesCell.dateAndTimeLabel.text = "7/20 10:00 P.M."
+            otherPlacesCell.placeNameLabel.text = place.name
+            otherPlacesCell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
+            otherPlacesCell.setRatingAmountForSearchPlaceCell(ratingAmount: Double(place.rating))
+            let address = place.address.joined(separator: "\n")
+            
+            if let url = URL(string: place.image_url){
+                
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        otherPlacesCell.placeImage.image = crop(image: image!, width: 50, height: 50)
+                    }
+                })
+            }
+            
+            otherPlacesCell.place = place
+            otherPlacesCell.addressTextView.text = address
+            addGreenDot(label: otherPlacesCell.categoryLabel, content: place_focus)
+            otherPlacesCell.checkForFollow()
+            
+            self.peopleAlsoLikedTableView.frame.size.height = (otherPlacesCell.frame.height * CGFloat(indexPath.row + 1))
+            
+            return otherPlacesCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(tableView.tag == 0){
+            return 80
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
+            
+            self.peopleAlsoLikeTableViewHeight.constant = cell.contentView.frame.height * CGFloat(indexPath.row + 1)
+            
+            return cell.contentView.frame.height
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.tag == 1{
+            let place = suggestedPlaces[indexPath.row]
+            print(place)
+            let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "home") as! PlaceViewController
+            controller.place = place
+            self.present(controller, animated: true, completion: nil)
+            
+        }
+    }
+    
+    // MARK: TEXT VIEW DELEGATE METHODS
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.reviewsTextView.text = ""
+    }
+    
+    @IBAction func showReviewBox(){
+        self.reviewButton.isSelected = !(self.reviewButton.isSelected)
+        if (self.reviewButton.isSelected){
+            self.reviewsStack.isHidden = false
+            self.mainStackView.insertArrangedSubview(self.reviewsStack, at: 0)
+        }else{
+            self.mainStackView.removeArrangedSubview(self.reviewsStack)
+            self.reviewsStack.isHidden = true
+            //            self.view.bounds.size.height -= self.reviewsStack.frame.size.height
+        }
+    }
+    
+    
+    @IBAction func goBackToMap(_ sender: Any) {
+        self.performSegue(withIdentifier: "unwindToMapViewControllerWithSegue", sender: self)
     }
     
     @IBAction func backPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func valueChanged(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.pinView.alpha = 1
-//                self.ratingView.alpha = 0
-            })
-        } else {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.pinView.alpha = 0
-//                self.ratingView.alpha = 1
-            })
-        }
+    @IBAction func openYelp(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: (place?.url)!)! as URL)
+        
     }
     
-    @IBAction func goBackToMap(_ sender: Any) {
-        self.performSegue(withIdentifier: "unwindToMapViewControllerWithSegue", sender: self)
+    @IBAction func openGoogleMaps(_ sender: Any) {
+        let latitude = place?.latitude
+        let longitude = place?.longitude
+        
+        let user_location = AuthApi.getLocation()
+        let place_location = CLLocation(latitude: latitude!, longitude: longitude!)
+        let coordinates = CLLocationCoordinate2DMake(latitude!, longitude!)
+        
+        let distanceInMeters = user_location!.distance(from: place_location)
+        
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, distanceInMeters*2, distanceInMeters*2)
+        
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = place?.name
+        mapItem.openInMaps(launchOptions: options)
+    }
+    
+    @IBAction func openUber(_ sender: Any) {
+        let lat = place?.latitude
+        let long = place?.longitude
+        var address = place?.address[0]
+        address = address?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        let url_string = "uber://?client_id=1Z-d5Wq4PQoVsSJFyMOVdm1nExWzrpqI&action=setPickup&pickup=my_location&dropoff[latitude]=\(String(describing: lat!))&dropoff[longitude]=\(String(describing: long!))&dropoff[nickname]=\(String(describing: address!))&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
+        
+        //let url  = URL(string: url_string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
+        if let url = URL(string: url_string){
+            if UIApplication.shared.canOpenURL(url) == true
+            {
+                UIApplication.shared.openURL(url)
+            }
+        }
+        
+        
     }
     
     @IBAction func followButtonPressed(_ sender: UIButton) {
@@ -226,6 +579,78 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
             self.followButton.isSelected = true
         }
     }
+    
+    
+    @IBAction func followPressed(){
+        if isFollowing == false{
+            let time = NSDate().timeIntervalSince1970
+            Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
+            
+            self.followButton.isSelected = true
+            self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
+            self.followButton.tintColor = UIColor.clear
+            self.followButton.setTitle("Following", for: UIControlState.selected)
+            isFollowing = true
+        }else
+        {
+            
+            let unfollowAlertController = UIAlertController(title: "Are you sure you want to unfollow \(place!.name)?", message: nil, preferredStyle: .actionSheet)
+            
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
+                
+                self.followButton.setTitle("Follow", for: UIControlState.normal)
+                Constants.DB.following_place.child((self.place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    if value != nil {
+                        for (key,_) in value!
+                        {
+                            Constants.DB.following_place.child((self.place?.id)!).child("followers").child(key as! String).removeValue()
+                        }
+                        
+                        
+                        
+                    }
+                })
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+                print("cancel has been tapped")
+            }
+            
+            unfollowAlertController.addAction(unfollowAction)
+            unfollowAlertController.addAction(cancelAction)
+            
+            self.present(unfollowAlertController, animated: true, completion: nil)
+            
+        }
+    }
+    
+    
+    @IBAction func postComment(_ sender: Any) {
+        let place = Constants.DB.places
+        let comments = place.child((self.place?.id)!).child("comments")
+        
+        let comment = comments.childByAutoId()
+        
+        if let rating = self.ratingID{
+            comments.child(rating).setValue([
+                "rating": self.rating ?? 0,
+                "comment": reviewsTextView.text,
+                "date": Date().timeIntervalSince1970,
+                "user": AuthApi.getFirebaseUid()!
+                ])
+        }
+        else{
+            comment.setValue([
+                "rating": self.rating ?? 0,
+                "comment": reviewsTextView.text,
+                "date": Date().timeIntervalSince1970,
+                "user": AuthApi.getFirebaseUid()!
+                ])
+            self.ratingID = comment.key
+        }
+    }
 
     func checkIfFollowing(){
         print("checking if being following")
@@ -247,20 +672,20 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "pinInfo"{
-            let pin = segue.destination as! PinViewController
-            pin.delegate = self
-            pin.placeVC = self
-            pin.place = self.place
-            pin.averageReviewAmount = Double((self.place?.reviewCount)!)
-            guard let ratingAmount = self.place?.rating else {
-                pin.averageRatingAmount = 0.0
-                return
-            }
-            
-            pin.averageRatingAmount = Double(ratingAmount)
-
-        }
+//        if segue.identifier == "pinInfo"{
+//            let pin = segue.destination as! PinViewController
+//            pin.delegate = self
+//            pin.placeVC = self
+//            pin.place = self.place
+//            pin.averageReviewAmount = Double((self.place?.reviewCount)!)
+//            guard let ratingAmount = self.place?.rating else {
+//                pin.averageRatingAmount = 0.0
+//                return
+//            }
+//            
+//            pin.averageRatingAmount = Double(ratingAmount)
+//
+//        }
         if segue.identifier == "unwindToMapViewControllerWithSegue"{
             let map = self.map
             if let place = place{
@@ -292,12 +717,6 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
                     map?.eventPlaceMarker = marker
                 }
             }
-        }
-        else if segue.identifier == "rating"{
-//            let rating = segue.destination as! RatingViewController
-//            rating.placeVC = self
-//            rating.place = self.place
-//            rating.ratings = self.rating
         }
     }
     
@@ -365,18 +784,125 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         })
     }
     
+    func loadInfoScreen(place: Place){
+        // Do any additional setup after loading the view.
+        
+        if place.price.characters.count == 0{
+            self.dollarLabel.text = "N.A."
+            
+        }
+        else{
+            self.dollarLabel.text = place.price
+            
+        }
+        
+        postReviewSeciontButton.layer.borderWidth = 1
+        postReviewSeciontButton.layer.borderColor = UIColor.white.cgColor
+        postReviewSeciontButton.roundCorners(radius: 5)
+        
+        
+        starRatingView.topCornersRounded(radius: 10)
+        writeReviewView.bottomCornersRounded(radius: 10)
+        
+        
+        var focus_category = Set<String>()
+        var yelp_category = [String]()
+        
+        place_focus = getInterest(yelpCategory: place.categories[0].alias)
+        
+        for category in place.categories{
+            focus_category.insert(getInterest(yelpCategory: category.alias))
+            yelp_category.append(category.alias)
+            
+        }
+        
+        for (index, category) in focus_category.enumerated(){
+            let completeLabel = UILabel()
+            
+            //            here you're adding green category dot to category text
+            completeLabel.text = category
+            completeLabel.textColor = .white
+            
+            if index == 0 {
+                addGreenDot(label: completeLabel, content: category)
+                addGreenDot(label: (self.interestLabel)!, content: category)
+            }
+            
+        }
+        streetAddress.text = place.address[0]
+        if place
+            .address.count == 2{
+            cityStateLabel.text = place.address[1]
+        }
+        else{
+            cityStateLabel.text = ""
+        }
+        
+        phoneLabel.text = place.phone
+        
+        print("Hours: \(String(describing: place.hours))")
+        
+        if let open_hours = place.hours{
+            let hours = getOpenHours(open_hours)
+            self.starsUberAndHoursStack.addArrangedSubview(self.hoursStackView)
+            for (_, hour) in (hours.enumerated()){
+                
+                let textLabel = UILabel()
+                
+                textLabel.text  = hour
+                textLabel.textAlignment = .left
+                textLabel.textColor = .white
+                self.infoViewScreenHeight.constant += 17.5
+                hoursStackView.addArrangedSubview(textLabel)
+                hoursStackView.translatesAutoresizingMaskIntoConstraints = false;
+            }
+        }else if place.hours == nil{
+            self.infoView.frame.size.height -= self.hoursStackView.frame.height
+            self.infoViewScreenHeight.constant -= self.hoursStackView.frame.height
+            self.starsUberAndHoursStack.removeArrangedSubview(self.hoursStackView)
+            self.hoursStackView.removeFromSuperview()
+        }
+        
+        let invite = ["user1", "user2", "user3"]
+        
+        for (index, user) in invite.enumerated(){
+            let view = inviteUserStackView.arrangedSubviews[index] as! InviteUserView
+            view.userName.text = user
+            view.userName.textColor = .white
+            view.delegate = self
+            view.inviteButton.addTarget(self, action: #selector(inviteSentToSingleUser), for: .touchUpInside)
+            view.image.image = UIImage(named: "UserPhoto")
+        }
+        
+        yelpButton.setImage(UIImage(named: "Yelp icon.png"), for: .normal)
+        yelpButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        uberButton.setImage(UIImage(named: "uber"), for: .normal)
+        uberButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        googleMapButton.setImage(UIImage(named: "Large_Apple_Maps.png"), for: .normal)
+        googleMapButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+
+        getNearbyPlaces(text: nil, id: place.id, categories: yelp_category.joined(separator: ","), count: 3, location: CLLocation(latitude: place.latitude, longitude: place.longitude), completion: {places in
+            self.suggestedPlaces = places
+            self.peopleAlsoLikedTableView.reloadData()
+        })
+    }
+
+    
     func fetchSuggestedPlaces(token: String){
         if let location = self.currentLocation{
-            getNearbyPlaces(location: location)
+            getNearbyLocations(location: location)
         }
         else{
             let location = CLLocation(latitude: (self.place?.latitude)!, longitude: (self.place?.longitude)!)
-            getNearbyPlaces(location: location)
+            getNearbyLocations(location: location)
         }
         
     }
     
-    func getNearbyPlaces(location: CLLocation){
+    func getNearbyLocations(location: CLLocation){
         let url = "https://api.yelp.com/v3/businesses/search"
         let categories = self.place?.categories.map { $0.alias }.joined(separator: ",")
         
@@ -436,6 +962,97 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         }
     }
     
+    func getUserSuggestions(gotUsers: @escaping ([User]) -> Void){
+        var followingSuggestions = [User]()
+        var suggestions = [User]()
+        var userCount = 0
+        
+        let ref = Constants.DB.user
+        
+        var followingCount = 0
+        ref.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
+            if let value = snapshot.value as? [String:Any]{
+                for (_, people) in value{
+                    
+                    if let peopleData = people as? [String:Any]{
+                        let UID = peopleData["UID"] as! String
+                        ref.child(UID).observeSingleEvent(of: .value, with: { snapshot in
+                            if let user = snapshot.value as? [String:Any]{
+                                if let user = User.toUser(info: user){
+                                    if user.uuid != AuthApi.getFirebaseUid(){
+                                        let matchingInterest = matchingUserInterest(user: user)
+                                        if matchingInterest > 0{
+                                            followingCount += 1
+                                            user.matchingInterestCount = matchingInterest
+                                            if user.uuid != AuthApi.getFirebaseUid(){
+                                                if !followingSuggestions.contains(user){
+                                                    followingSuggestions.append(user)
+                                                }
+                                                
+                                                if followingCount < 3 && followingSuggestions.count == followingCount - 1{
+                                                    followingSuggestions = followingSuggestions.sorted(by: {$0.matchingInterestCount > $1.matchingInterestCount})
+                                                    
+                                                    if suggestions.count > 0{
+                                                        gotUsers(followingSuggestions + suggestions[0..<3-followingSuggestions.count])
+                                                    }
+                                                    
+                                                }
+                                                else if suggestions.count == 3{
+                                                    followingSuggestions = followingSuggestions.sorted(by: {$0.matchingInterestCount > $1.matchingInterestCount})
+                                                    gotUsers(followingSuggestions)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        })
+                    }
+                }
+            }
+        })
+        
+        Constants.DB.user.observeSingleEvent(of: .value, with: { snapshot in
+            let users = snapshot.value as? [String : Any] ?? [:]
+            
+            for (_, user) in users{
+                let info = user as? [String:Any]
+                
+                if let info = info{
+                    if let user = User.toUser(info: info){
+                        let matchingInterest = matchingUserInterest(user: user)
+                        if matchingInterest > 0{
+                            userCount += 1
+                            user.matchingInterestCount = matchingInterest
+                            if user.uuid != AuthApi.getFirebaseUid(){
+                                if !suggestions.contains(user){
+                                    suggestions.append(user)
+                                }
+                                
+                                if userCount < 3 && suggestions.count == userCount - 1{
+                                    suggestions = suggestions.sorted(by: {$0.matchingInterestCount > $1.matchingInterestCount})
+                                    
+                                    if followingSuggestions.count < 3{
+                                        gotUsers(followingSuggestions + suggestions[0..<3-followingSuggestions.count])
+                                    }
+                                }
+                                else if suggestions.count == 3{
+                                    suggestions = suggestions.sorted(by: {$0.matchingInterestCount > $1.matchingInterestCount})
+                                    
+                                    if followingSuggestions.count < 3{
+                                        gotUsers(followingSuggestions + suggestions[0..<3-followingSuggestions.count])
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        })
+    }
+    
     @IBAction func pinHerePressed(_ sender: Any) {
         self.pinButton.isSelected = !self.pinButton.isSelected
         if self.pinButton.isSelected{
@@ -467,7 +1084,6 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
     }
     
     @IBAction func inviteButtonClicked(_ sender: Any) {
-        
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "place"
@@ -476,6 +1092,136 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
         ivc.placeDetailsDelegate = self
         ivc.inviteFromPlaceDetails = true
         present(ivc, animated: true, completion: nil)
+    }
+    
+    func inviteUser(name: String) {
+        print("clicked \(name)")
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+        ivc.type = "place"
+        ivc.id = (place?.id)!
+        ivc.place = place
+        ivc.placeViewController = self
+        ivc.username = name
+        
+        
+        self.present(ivc, animated: true, completion: { _ in })
+    }
+    
+    func inviteTestMethod(){
+        
+        print("testing........")
+        let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+        let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+        ivc.type = "place"
+        ivc.id = (place?.id)!
+        ivc.place = place
+        ivc.placeDetailsDelegate = self
+        ivc.inviteFromPlaceDetails = true
+        ivc.username = AuthApi.getUserName()!
+        ivc.placeViewController = self
+        
+        self.present(ivc, animated: true, completion: { _ in })
+    }
+    
+    @IBAction func selectedRating(sender: UIButton){
+        self.starRatingTag = sender.tag
+        switch sender.tag{
+        case 1:
+            //            self.ratingsImage.image = #imageLiteral(resourceName: "Star light yellow")
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star light yellow"))
+            break
+        case 2:
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star dark yellow"))
+            //            self.ratingsImage.image = #imageLiteral(resourceName: "Star dark yellow")
+            break
+        case 3:
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star light orange"))
+            break
+        case 4:
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star dark orange"))
+            break
+        case 5:
+            self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star red"))
+            break
+        default:
+            break
+        }
+    }
+    
+    func setImage(select: Int, image: UIImage){
+        for select in 1...select{
+            let button = ratingView.viewWithTag(select) as! UIButton
+            button.setImage(image, for: .normal)
+        }
+        
+        if select < 5{
+            for unselected in select + 1...5{
+                let button = ratingView.viewWithTag(unselected) as! UIButton
+                button.setImage(#imageLiteral(resourceName: "Star white"), for: .normal)
+            }
+        }
+    }
+    
+    func checkRatingAmount(){
+        self.reviewAmountButton.setTitle("\(Int(self.averageReviewAmount)) reviews", for: .normal)
+        guard let reviewsStarImageView = self.reviewStars else{
+            return
+        }
+        switch self.averageRatingAmount{
+        case 0.0...0.9:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_0")
+        case 1.0...1.4:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_1")
+        case 1.5...1.9:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_1_half")
+        case 2.0...2.4:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_2")
+        case 2.5...2.9:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_2_half")
+        case 3.0...3.4:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_3")
+        case 3.5...3.9:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_3_half")
+        case 4.0...4.4:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_4")
+        case 4.5...4.9:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_4_half")
+        case 5.0:
+            reviewsStarImageView.image = #imageLiteral(resourceName: "small_5")
+        default:
+            break
+        }
+    }
+    
+    func checkFollowing(){
+        Constants.DB.following_place.child((place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            
+            self.followButton.setTitle("Following", for: .selected)
+            self.followButton.setTitle("Follow", for: .normal)
+            
+            if value != nil {
+                self.followButton.isSelected = true
+                self.followButton.layer.borderColor = UIColor.white.cgColor
+                self.followButton.layer.borderWidth = 1
+                //                self.placeVC?.followButton.layer.shadowOpacity = 1.0
+                //                self.placeVC?.followButton.layer.masksToBounds = false
+                //                self.placeVC?.followButton.layer.shadowColor = UIColor.black.cgColor
+                //                self.placeVC?.followButton.layer.shadowRadius = 5.0
+                self.followButton.backgroundColor = UIColor(red: 21/255.0, green: 41/255.0, blue: 65/255.0, alpha: 1.0)
+                self.isFollowing = true
+                
+            }else{
+                self.followButton.isSelected = false
+                self.followButton.layer.borderColor = UIColor.clear.cgColor
+                self.followButton.layer.borderWidth = 0
+                self.followButton.backgroundColor = UIColor(red: 122/225.0, green: 201/255.0, blue: 1/255.0, alpha: 1)
+                self.isFollowing = false
+                
+            }
+        })
+        
     }
     
     func showPopup(){
@@ -491,6 +1237,13 @@ class PlaceViewController: UIViewController, SendInviteFromPlaceDetailsDelegate{
             })
             self.showInvitePopup = false
         }
+    }
+    
+    func inviteSentToSingleUser(){
+        
+        //        TODO: need to send invite to single user, need to ask arya how to handle stack when invite sent
+        self.hasSentInvite()
+        self.showPopup()
     }
     
     func hasSentInvite(){
