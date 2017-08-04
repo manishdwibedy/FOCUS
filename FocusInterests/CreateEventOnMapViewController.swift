@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AMPopTip
 
 class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UISearchBarDelegate{
 
@@ -128,6 +129,16 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
 
     @IBAction func lockPressed(_ sender: Any) {
         print("locked pressed")
+        
+        if AuthApi.isNewToPage(index: 5){
+            let popTip = PopTip()
+            popTip.show(text: "Private to your followers", direction: .left, maxWidth: 500, in: lockButton, from: lockButton.frame, duration: 3)
+            popTip.entranceAnimation = .scale;
+            popTip.actionAnimation = .bounce(20)
+            popTip.shouldDismissOnTap = true
+            AuthApi.setIsNewToPage(index: 5)
+            
+        }
     }
     
     @IBAction func facebookPressed(_ sender: Any) {

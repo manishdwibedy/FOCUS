@@ -121,26 +121,22 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
-        if AuthApi.isNewToPage(index: item.tag){
+        if AuthApi.isNewToPage(index: item.tag) && item.tag != 0  && item.tag != 2 {
             let popTip = PopTip()
             if let view = item.value(forKey: "view") as? UIView{
                 var text = ""
                 switch(item.tag){
-                case 0:
-                    text = "Map"
                 case 1:
-                    text = "People"
-                case 2:
-                    text = "Create Pin"
+                    text = "See what your friends are upto and who's nearby!"
                 case 3:
-                    text = "Explore"
+                    text = "Your personalized list of Places and Events around you"
                 case 4:
-                    text = "Feed"
+                    text = "A Live look at everything going on in your world"
                 default :
                     break
                 }
                 
-                popTip.show(text: text, direction: .up, maxWidth: 200, in: view, from: view.frame, duration: 3)
+                popTip.show(text: text, direction: .up, maxWidth: 500, in: view, from: view.frame, duration: 3)
                 popTip.entranceAnimation = .scale;
                 popTip.actionAnimation = .bounce(20)
                 popTip.shouldDismissOnTap = true
