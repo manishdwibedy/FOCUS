@@ -919,7 +919,6 @@ func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
             let price = json["price"].stringValue
             let address_json = json["location"]["display_address"].arrayValue
             let phone = json["display_phone"].stringValue
-            let distance = json["distance"].doubleValue
             let categories_json = json["categories"].arrayValue
             let url = json["url"].stringValue
             let plain_phone = json["phone"].stringValue
@@ -935,6 +934,8 @@ func getYelpByID(ID:String,completion: @escaping (Place) -> Void){
                 let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
                 categories.append(category)
             }
+            
+            let distance = AuthApi.getLocation()!.distance(from: CLLocation(latitude: latitude, longitude: longitude))
             
             let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
             
