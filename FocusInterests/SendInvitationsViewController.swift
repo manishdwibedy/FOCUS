@@ -366,9 +366,13 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let user = self.filtered[section]?[indexPath.row]
             personToInviteCell.usernameLabel.text = user?.username
             personToInviteCell.fullNameLabel.text = user?.fullname
-//            personToInviteCell.usernameLabel.text = "Alex"
-//            personToInviteCell.fullNameLabel.text = "Alex Jang"
-
+            
+            if let image = user?.image_string{
+                if let url = URL(string: image){
+                personToInviteCell.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                }
+            }
+            
             cell = personToInviteCell
         }
         return cell
