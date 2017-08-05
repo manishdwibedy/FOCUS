@@ -421,15 +421,10 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                         }
                         
                         if let image_string = info?["image_string"] as? String{
-                            if image_string.isEmpty{
-                                Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 375).absoluteString)
-                                AuthApi.set(userImage: googleUser.profile.imageURL(withDimension: 375).absoluteString)
+                            if !image_string.isEmpty{
+                                AuthApi.set(userImage: image_string)
                             }
-                            AuthApi.set(userImage: image_string)
-                        }
-                        else{
-                            Constants.DB.user.child("\(fireId)/image_string").setValue(googleUser.profile.imageURL(withDimension: 375).absoluteString)
-                            AuthApi.set(userImage: googleUser.profile.imageURL(withDimension: 375).absoluteString)
+                            
                         }
                         
                         if let email = info?["email"] as? String{
