@@ -160,7 +160,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                                         return $0.hasPin
                                                     }
                                                     else{
-                                                        return $0.username < $1.username
+                                                        return $0.username! < $1.username!
                                                     }
                                                     
                                                 }
