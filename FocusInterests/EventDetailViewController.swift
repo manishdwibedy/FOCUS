@@ -520,6 +520,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                                 
             ])
         
+        sendNotification(to: event!.creator!, title: "New Comment", body: "\(AuthApi.getUserName()!)", actionType: "", type: "", item_id: "", item_name: "")
+        
         let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextField.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
         if self.commentsCList.count != 0{
             self.commentsCList.removeObject(at: 0)
@@ -530,9 +532,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.noCommentLabel.isHidden = true
         self.commentsTableViewHeight.constant = 44 * CGFloat(self.commentsCList.count)
         commentsTableView.reloadData()
-        //tableView.beginUpdates()self.commentsTableView.cellForRow
-        //tableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
-        //tableView.endUpdates()
+     
         commentTextField.resignFirstResponder()
         commentTextField.text = ""
         self.scrollView.frame.origin.y = 0
