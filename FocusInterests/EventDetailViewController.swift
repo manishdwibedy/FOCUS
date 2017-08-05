@@ -701,7 +701,14 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if tableView.tag == 1{
+            let suggestion = self.suggestions[indexPath.row]
+            
+            let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
+            controller.event = suggestion
+            self.present(controller, animated: true, completion: nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
