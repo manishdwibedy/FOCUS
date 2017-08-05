@@ -18,7 +18,7 @@ class NewUserPopupViewController: UIViewController {
     var delegate: switchPinTabDelegate?
     
     let info = [
-        ["", "What if you could have an all-in-one view of the people, places and events YOU care about?", "Well, now YOU can.", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
+        ["", "What if you could have an all-in-one view of the people, places and events YOU care about.", "Well, now YOU can.", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
         
         ["intro_greenpin", "People", "People are shown on your Map when they Pin their location and FOCUS. You can choose to view activities and places you'll both like.", "people", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
