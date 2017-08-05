@@ -703,6 +703,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.tag == 1{
             let suggestion = self.suggestions[indexPath.row]
+            tableView.deselectRow(at: indexPath, animated: false)
             
             let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
