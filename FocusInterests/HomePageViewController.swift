@@ -133,17 +133,16 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
             if let view = item.value(forKey: "view") as? UIView{
                 var text = ""
                 var width = 300
-//                var ps = CGRect(x: 400, 400, 10, 10)
 
                 switch(item.tag){
                 case 1:
-                    text = "See what your friends are upto and who's nearby!"
+                    text = "See what your friends are up to and who's nearby!"
                     width = 125
                 case 3:
-                    text = "Your personalized list of Places and Events around you"
+                    text = "Your personalized list of Places and Events around you!"
                     var width = 350
                 case 4:
-                    text = "A Live look at everything going on in your world"
+                    text = "A Live look at everything going on in your world!"
                     width = 400
                 default :
                     break
