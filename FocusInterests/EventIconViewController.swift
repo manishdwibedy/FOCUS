@@ -26,6 +26,7 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     //
     var flipCameraButton: UIButton!
     var flashButton: UIButton!
+    var cancelButton: UIButton!
     var dismissButton: UIButton!
     var captureButton: SwiftyRecordButton!
     var lastImageButton: UIButton!
@@ -105,6 +106,10 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
         switchCamera()
     }
     
+    @objc private func goBack(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @objc private func dismiss(_ sender: Any) {
         self.performSegue(withIdentifier: "event_invite", sender: nil)
     }
@@ -131,26 +136,33 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     }
     
     private func addButtons() {
+        let right_x = CGFloat((view.frame.width - (view.frame.width / 2 + 37.5)) + ((view.frame.width / 2) - 37.5) - 9.0)
+        let left_x = ((view.frame.width / 2 - 37.5) / 2) - 25.0
         
         captureButton = SwiftyRecordButton(frame: CGRect(x: view.frame.midX - 37.5, y: view.frame.height - 100.0, width: 75.0, height: 75.0))
         self.view.addSubview(captureButton)
         captureButton.delegate = self
         
         // lower left -> last image
-        lastImageButton = UIButton(frame: CGRect(x: (((view.frame.width / 2 - 37.5) / 2) - 25.0), y: view.frame.height - 90.0, width: 50.0, height: 50.0))
+        lastImageButton = UIButton(frame: CGRect(x: left_x, y: view.frame.height - 90.0, width: 50.0, height: 50.0))
         lastImageButton.addTarget(self, action: #selector(showGallery(_:)), for: .touchUpInside)
         self.view.addSubview(lastImageButton)
         
         
-        // upper left -> flash
-        flashButton = UIButton(frame: CGRect(x: 30, y: 20, width: 50.0, height: 23.0))
+        
+        cancelButton = UIButton(frame: CGRect(x: left_x, y: 20, width: 50.0, height: 23.0))
+        cancelButton.setImage(#imageLiteral(resourceName: "cancel"), for: .normal)
+        cancelButton.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
+        self.view.addSubview(cancelButton)
+        
+        // upper right -> flash
+        flashButton = UIButton(frame: CGRect(x: right_x, y: 20, width: 50.0, height: 23.0))
         flashButton.setImage(#imageLiteral(resourceName: "flash"), for: .normal)
         flashButton.addTarget(self, action: #selector(toggleFlashAction(_:)), for: .touchUpInside)
         self.view.addSubview(flashButton)
         
         // lower right -> flip camera
-        let test = CGFloat((view.frame.width - (view.frame.width / 2 + 37.5)) + ((view.frame.width / 2) - 37.5) - 9.0)
-        flipCameraButton = UIButton(frame: CGRect(x: test, y: view.frame.height - 77.5, width: 30.0, height: 23.0))
+        flipCameraButton = UIButton(frame: CGRect(x: right_x, y: view.frame.height - 77.5, width: 30.0, height: 23.0))
         flipCameraButton.setImage(#imageLiteral(resourceName: "CameraSwitch"), for: UIControlState())
         flipCameraButton.addTarget(self, action: #selector(cameraSwitchAction(_:)), for: .touchUpInside)
         self.view.addSubview(flipCameraButton)

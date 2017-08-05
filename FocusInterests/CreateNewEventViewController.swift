@@ -60,7 +60,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     var filteredInterest = [String]()
     var interests_set = Set<String>()
 
-    let validatedFields = true
+    let validatedFields = false
     
     @IBOutlet weak var interestLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var guestListStackTopConstraint: NSLayoutConstraint!
@@ -343,8 +343,6 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
 //                    checkInterests[index] = true
 //                }
 //            }
-            //interestTableView.reloadData()
-            Event.clearCache()
         }
         registerKeyboardNotifications()
     }
