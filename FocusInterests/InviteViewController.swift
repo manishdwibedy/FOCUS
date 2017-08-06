@@ -54,6 +54,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let timePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
     let timeFormatter = DateFormatter()
+    var eventDateDF = DateFormatter()
+    var eventTimeDF = DateFormatter()
     
     var dateDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(InviteViewController.dateSelected))
     
@@ -112,22 +114,31 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat =  "h:mm a"
-        ticketMasterDF.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        dateFormatter.dateFormat =  "MMM dd, h:mm a"
+        ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        eventDateDF.dateFormat = "MMM dd"
+        eventTimeDF.dateFormat = "h:mm a"
         
         if type == "event"{
             if (event?.date?.contains(","))!{
-                let startDate = event?.date?.components(separatedBy: ",")[1].trimmingCharacters(in: .whitespaces)
-                timeButton.setTitle(startDate, for: .normal)
+                let eventDateTime = event?.date?.components(separatedBy: ",")
+                let startDate = eventDateTime?[0].trimmingCharacters(in: .whitespaces)
                 
-                let startDate1 = dateFormatter.date(from: startDate!)
+                let startTime = eventDateTime?[1].trimmingCharacters(in: .whitespaces)
+                timeButton.setTitle(startTime, for: .normal)
+                
+                let startDate1 = dateFormatter.date(from: event!.date!)
                 timePicker.date = startDate1!
+                
+                dayTextField.text = startDate
             }
             else{
                 let startDate = ticketMasterDF.date(from: event!.date!)
                 timeButton.setTitle(dateFormatter.string(for: startDate), for: .normal)
                 
-                timePicker.date = startDate!
+                dayTextField.text = eventDateDF.string(from: startDate!)
+                timeButton.setTitle(eventTimeDF.string(from: startDate!), for: .normal)
+                timePicker.date = startDate!  
             }
             
         }
