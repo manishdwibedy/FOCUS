@@ -134,8 +134,8 @@ class NotificationUtil{
                                     
                                     let invite_place = ItemOfInterest(itemName: user.username, imageURL: nil, type: "")
                                     
-                                    if let time_followed = Date(timeIntervalSince1970: time){
-                                        let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: invite_place, time: time_followed)
+                                    if let time = time{
+                                        let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: invite_place, time: Date(timeIntervalSince1970: time))
                                         event_comment.notif_type = .notification
                                         followers.append(event_comment)
                                     }
