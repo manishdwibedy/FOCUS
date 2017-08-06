@@ -128,7 +128,28 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
     }
     
     @IBAction func postButtonPressed(_ sender: Any) {
-        print("post button pressed")
+        if self.commentTextView.text == "" || self.commentTextView.text == "Add a comment"{
+            self.postButton.isEnabled = false
+        }else{
+            self.postButton.isEnabled = true
+            let time = NSDate().timeIntervalSince1970
+            
+            let UID = self.pin!.fromUID
+            
+            Constants.DB.pins.child(UID).child("comments").childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "comment": commentTextView.text!, "date": Double(time)])
+            
+            commentTextView.resignFirstResponder()
+            
+            commentTextView.text = ""
+            
+            sendNotification(to: UID, title: "New Comment", body: "\(AuthApi.getUserName()!) commented on your Pin", actionType: "", type: "", item_id: "", item_name: "")
+            
+            Answers.logCustomEvent(withName: "Comment Pin",
+                                   customAttributes: [
+                                    "user": AuthApi.getFirebaseUid()!,
+                                    "comment": commentTextView.text
+                ])
+        }
     }
     
     @IBAction func commentPressed(_ sender: Any) {
