@@ -468,7 +468,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     feedPlaceCell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
                     
                     let caption = pinData["pin"] as! String
-                    feedPlaceCell.placeBeingLiked.setTitle("\(caption)", for: .normal)
+                    feedPlaceCell.placeBeingLiked.setTitle("\"\(caption)\"", for: .normal)
                     if let images = pinData["images"] as? NSDictionary{
                         var firstVal = ""
                         for (key,_) in images
