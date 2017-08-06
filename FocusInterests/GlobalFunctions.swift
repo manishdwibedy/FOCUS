@@ -1097,7 +1097,10 @@ func getSuggestedPlaces(interests: String, limit: Int, gotPlaces: @escaping (_ u
                     if hours != nil && !is_closed{
                         place.hours = hours
                         place.is_closed = is_closed
-                        suggestions.append(place)
+                        
+                        if !place.is_closed{
+                            suggestions.append(place)
+                        }
                         
                         if suggestions.count == limit{
                             gotPlaces(suggestions)
