@@ -16,7 +16,10 @@ class Follow{
             let value = snapshot.value as? [String:Any]
             
             if value == nil{
-                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").childByAutoId().updateChildValues(["UID": uid])
+                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").childByAutoId().updateChildValues([
+                        "UID": uid,
+                        "time": Date().timeIntervalSince1970
+                    ])
                 
                 
                 sendNotification(to: uid, title: "New Follower", body: "\(AuthApi.getUserName()!) started following you", actionType: "", type: "", item_id: "", item_name: "")
