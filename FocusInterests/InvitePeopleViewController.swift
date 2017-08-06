@@ -494,8 +494,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             
             let day = calendar.component(.weekday, from: date)
             
-            if let hour = place_cell.getHour(day: day){
-                cell.dateAndTimeLabel.text = "\(convert24HourTo12Hour(hour.start)) - \(convert24HourTo12Hour(hour.end))"
+            if !place_cell.is_closed{
+                if let hour = place_cell.getHour(day: day){
+                    cell.dateAndTimeLabel.text = "\(convert24HourTo12Hour(hour.start)) - \(convert24HourTo12Hour(hour.end))"
+                }
+            }
+            else{
+                cell.dateAndTimeLabel.text = "Closed"
             }
             
             let place_location = CLLocation(latitude: place_cell.latitude, longitude: place_cell.longitude)
