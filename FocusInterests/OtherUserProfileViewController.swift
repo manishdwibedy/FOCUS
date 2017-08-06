@@ -1015,6 +1015,15 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 
             })
             
+            self.pinInfo?.dbPath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                if value != nil
+                {
+                    
+                    recentPostCell.likeButton.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
+                }
+            })
+            
             let pinLocation = CLLocation(latitude: pinInfo!.coordinates.latitude, longitude: pinInfo!.coordinates.longitude)
             recentPostCell.distanceLabel.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
             
