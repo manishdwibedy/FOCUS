@@ -306,6 +306,273 @@ func sendNotification(to id: String, title: String, body: String, actionType: St
     })
 }
 
+func getAllActivity(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvents: @escaping (_ events: [FocusNotification]) -> Void, gotInvitations: @escaping (_ invitations: [FocusNotification]) -> Void){
+    let userID = AuthApi.getFirebaseUid()
+    var pins = [FocusNotification]()
+    var events = [FocusNotification]()
+    var invitations_event = [FocusNotification]()
+    
+    var pinCount = 0
+    var followerCount = 0
+    var invitationCount = 0
+    var eventCount = 0
+    var totalInvitation = 0
+    
+    var pinImageMap = [String:String]()
+    var pinImageCount = 0
+    var totalPins = 0
+    Constants.DB.user.observeSingleEvent(of: .value, with: { snapshot in
+        if let users = snapshot.value as? [String : [String:Any]]{
+            for (_, userData) in users{
+                if let user = User.toUser(info: userData){
+                    let UID = user.uuid
+                    
+                    let user = NotificationUser(username: user.username, uuid: UID, imageURL: nil)
+                    Constants.DB.pins.child(UID!).observeSingleEvent(of: .value, with: { snapshot in
+                        let pin11 = snapshot.value as? [String : Any]
+                        let pinID = snapshot.key
+                        if let pin = pin11{
+                            let time = Date(timeIntervalSince1970: pin["time"] as! Double)
+                            _ = pin["formattedAddress"] as! String
+                            let place = ItemOfInterest(itemName: pin["pin"] as? String, imageURL: nil, type: "pin")
+                            
+                            pinCount += 1
+                            totalPins += 1
+                            
+                            place.data = [
+                                "pin": pin,
+                                "key": pinID
+                            ]
+                            place.id = pinID
+                            
+                            let pinFeed = FocusNotification(type: NotificationType.Pin, sender: user, item: place, time: time)
+                            
+                            
+                            pins.append(pinFeed)
+                            if let images = pin["images"] as? [String:Any]{
+                                let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String
+                                let pinImage = Constants.storage.pins.child(imageURL!)
+                                
+                                
+                                // Fetch the download URL
+                                pinImage.downloadURL { url, error in
+                                    if error != nil {
+                                        // Handle any errors
+                                    } else {
+                                        pinImageMap[place.id] = url?.absoluteString
+                                        pinImageCount += 1
+                                        if pinCount == pins.count && pinImageCount == totalPins{
+                                            // attach images for all pins
+                                            
+                                            for pin in pins{
+                                                if let image = pinImageMap[(pin.item?.id)!]{
+                                                    pin.item?.imageURL = image
+                                                }
+                                            }
+                                            gotPins(pins)
+                                            print("pin done \(pinCount)")
+                                        }
+                                    }
+                                }
+                                
+                                
+                            }
+                            else{
+                                pinImageCount += 1
+                                if pinCount == pins.count && pinImageCount == totalPins{
+                                    // attach images for all pins
+                                    
+                                    for pin in pins{
+                                        if let image = pinImageMap[(pin.item?.id)!]{
+                                            pin.item?.imageURL = image
+                                        }
+                                    }
+                                    gotPins(pins)
+                                    print("pin done \(pinCount)")
+                                }
+                            }
+                            
+                            
+                            if let comments = pin["comments"] as? [String:Any]{
+                                pinCount += comments.count
+                                
+                                for (_, data) in comments{
+                                    let commentData = data as? [String:Any]
+                                    let commentInfo = ItemOfInterest(itemName: commentData?["comment"] as? String, imageURL: place.imageURL, type: "comment")
+                                    commentInfo.id = pinID
+                                    Constants.DB.user.child((commentData?["fromUID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
+                                        
+                                        if let data = snapshot.value as? [String:Any]{
+                                            let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: nil)
+                                            let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: time)
+                                            commentInfo.data = [
+                                                "pin": pin,
+                                                "key": pinID
+                                            ]
+                                            
+                                            pins.append(pinFeed)
+                                            
+                                            if pinCount == pins.count && pinImageCount == totalPins{
+                                                // attach images for all pins
+                                                
+                                                for pin in pins{
+                                                    if let image = pinImageMap[(pin.item?.id)!]{
+                                                        pin.item?.imageURL = image
+                                                    }
+                                                }
+                                                gotPins(pins)
+                                                print("pin done \(pinCount)")
+                                            }
+                                        }
+                                        
+                                    })
+                                    
+                                }
+                                
+                            }
+                            
+                            if let likes = pin["like"] as? [String:Any]{
+                                if let likeData = likes["likedBy"] as? [String:Any]{
+                                    if let likeCount = likes["num"] as? Int{
+                                        pinCount += likeCount
+                                    }
+                                    
+                                    for (_, data) in likeData{
+                                        if let likeData = data as? [String:Any]{
+                                            Constants.DB.user.child((likeData["UID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
+                                                
+                                                let data = snapshot.value as? [String:Any]
+                                                let user = NotificationUser(username: data?["username"] as? String, uuid: data?["firebaseUserId"] as? String, imageURL: nil)
+                                                let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
+                                                place.data = [
+                                                    "pin": pin,
+                                                    "key": pinID
+                                                ]
+                                                
+                                                pins.append(pinFeed)
+                                                
+                                                if pinCount == pins.count && pinImageCount == totalPins{
+                                                    // attach images for all pins
+                                                    
+                                                    for pin in pins{
+                                                        if let image = pinImageMap[(pin.item?.id)!]{
+                                                            pin.item?.imageURL = image
+                                                        }
+                                                    }
+                                                    gotPins(pins)
+                                                    print("pin done \(pinCount)")
+                                                }
+                                            })
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                        
+                    })
+                    
+                    
+                    Constants.DB.event.queryOrdered(byChild: "creator").queryEqual(toValue: UID).observeSingleEvent(of: .value, with: { snapshot in
+                        let eventInfo = snapshot.value as? [String : Any]
+                        
+                        if let eventInfo = eventInfo{
+                            for (id, event) in eventInfo{
+                                if let info = event as? [String:Any]{
+                                    let event = Event.toEvent(info: info)
+                                    event?.id = id
+                                    //                        MMM dd, hh:mm
+                                    let dateFormatter = DateFormatter()
+                                    dateFormatter.dateFormat = "MMM d, h:mm a"
+                                    
+                                    let time = dateFormatter.date(from: (event?.date!)!)
+                                    
+                                    let gregorianCalendar = Calendar(identifier: .gregorian)
+                                    var components = gregorianCalendar.dateComponents([.year, .month, .day], from: time!)
+                                    
+                                    components.year = 2017
+                                    let date = gregorianCalendar.date(from: components)!
+                                    
+                                    
+                                    
+                                    let address = event?.shortAddress
+                                    let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
+                                    place.id = snapshot.key
+                                    place.data = [
+                                        "event": event
+                                    ]
+                                    
+                                    if let time = time{
+                                        let eventFeed = FocusNotification(type: NotificationType.Created, sender: user, item: place, time: date)
+                                        events.append(eventFeed)
+                                        
+                                    }
+                                }
+                                
+                            }
+                        }
+                        eventCount += 1
+                        if eventCount == followerCount{
+                            gotEvents(events)
+                            print("event done \(eventCount)")
+                            print(events.count)
+                        }
+                    })
+                    
+                    Constants.DB.user.child(UID!).observeSingleEvent(of: .value, with: { snapshot in
+                        let data = snapshot.value as? [String : Any]
+                        
+                        if let invitations = data?["invitations"] as? [String:Any]{
+                            
+                            if let event = invitations["event"] as? [String:[String:Any]]{
+                                for (_,invite) in event{
+                                    if let status = invite["status"] as? String{
+                                        if status == "accepted"{
+                                            totalInvitation += 1
+                                            let id = invite["ID"]  as! String
+                                            
+                                            
+                                            Constants.DB.event.child(id).observeSingleEvent(of: .value, with: { snapshot in
+                                                let info = snapshot.value as? [String : Any]
+                                                
+                                                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as? String, longitude: (info?["longitude"])! as? String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
+                                                
+                                                let dateFormatter = DateFormatter()
+                                                dateFormatter.dateFormat = "MMM d, h:mm a"
+                                                
+                                                let time = dateFormatter.date(from: event.date!)
+                                                let address = event.shortAddress
+                                                let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
+                                                place.id = snapshot.key
+                                                place.data = [
+                                                    "event": event
+                                                ]
+                                                
+                                                if let time = time{
+                                                    let eventFeed = FocusNotification(type: NotificationType.Going, sender: user, item: place, time: time)
+                                                    invitations_event.append(eventFeed)
+                                                    
+                                                }
+                                                invitationCount += 1
+                                                if invitationCount == totalInvitation{
+                                                    gotInvitations(invitations_event)
+                                                    print("invitation done \(invitationCount)")
+                                                }
+                                            })
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    })
+                }
+                
+            }
+        }
+    })
+}
+   
 func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvents: @escaping (_ events: [FocusNotification]) -> Void, gotInvitations: @escaping (_ invitations: [FocusNotification]) -> Void){
     
     let userID = AuthApi.getFirebaseUid()
