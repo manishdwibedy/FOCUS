@@ -744,11 +744,13 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             
             if let eventInfo = eventInfo{
                 _ = eventInfo.count
-                for (id, event) in eventInfo{
-                    let info = event as? [String:Any]
-                    let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as? String, shortAddress: (info?["shortAddress"])! as? String, latitude: (info?["latitude"])! as? String, longitude: (info?["longitude"])! as? String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
-                    
-                    self.suggestion.append(event)
+                for (id, eventData) in eventInfo{
+                    if let info = eventData as? [String:Any]{
+                        if let event = Event.toEvent(info: info){
+                            event.id = id
+                            self.suggestion.append(event)
+                        }
+                    }
                 }
             }
             
@@ -1031,6 +1033,15 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
             recentPostCell.nameDescriptionLabel.text = self.pinInfo?.pinMessage
             return recentPostCell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.tag == 2{
+            let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+            ivc.data = self.pinInfo
+            self.present(ivc, animated: true, completion: { _ in })
         }
     }
     
