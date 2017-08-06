@@ -292,7 +292,17 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     }
                 }
                 
-                self.events = uniqueEvents + self.otherEvents!
+                let events = uniqueEvents + self.otherEvents!
+                self.events = events.sorted(by: {
+                    if $0.category == $1.category{
+                        return $0.distance < $1.distance
+                    }
+                    else{
+                       return $0.category! < $1.category!
+                    }
+                })
+                
+                
                 self.tableView.reloadData()
             }
         })
