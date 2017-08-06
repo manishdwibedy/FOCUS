@@ -532,7 +532,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
 ////////////// ADDED TO PLACEVIEWLCONTROLLER ////////////////
 /////////////////////////////////////
     func inviteUser(name: String) {
-        print("clicked \(name)")
         let storyboard = UIStoryboard(name: "Invites", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "place"

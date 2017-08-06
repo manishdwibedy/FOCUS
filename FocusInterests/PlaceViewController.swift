@@ -824,18 +824,21 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             completeLabel.textColor = .white
             
             if index == 0 {
-                addGreenDot(label: completeLabel, content: category)
                 addGreenDot(label: (self.interestLabel)!, content: category)
             }
             
         }
+        
+        if place.categories.count == 0{
+            addGreenDot(label: (self.interestLabel)!, content: "Community")
+        }
+        
         streetAddress.text = place.address[0]
-        if place
-            .address.count == 2{
+        if place.address.count == 2{
             cityStateLabel.text = place.address[1]
         }
         else{
-            cityStateLabel.text = ""
+            cityStateLabel.text = place.address.last!
         }
         
         phoneLabel.text = place.phone

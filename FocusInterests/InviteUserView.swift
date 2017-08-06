@@ -50,7 +50,7 @@ class InviteUserView: UIView {
     
     @IBAction func invite(_ sender: UIButton) {
         print("sent user invite")
-//        delegate?.inviteUser(name: self.userName.text!)
+        delegate?.inviteUser(name: self.userName.text!)
     }
     
     func showProfile(sender: UITapGestureRecognizer)
