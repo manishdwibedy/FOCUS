@@ -49,6 +49,7 @@ class Event: NSObject, NSCoding{
         
         let event = [
             "title": self.title!,
+            "title_lowered": self.title!.lowercased(),
             "description": self.eventDescription!,
             "fullAddress": self.fullAddress!,
             "shortAddress": self.shortAddress!,

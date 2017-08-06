@@ -113,7 +113,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat =  "h:mm a"
-        ticketMasterDF.dateFormat = "yyyy-MM-d hh:mm:ss"
+        ticketMasterDF.dateFormat = "yyyy-MM-dd hh:mm:ss"
         
         if type == "event"{
             if (event?.date?.contains(","))!{
@@ -124,7 +124,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 timePicker.date = startDate1!
             }
             else{
-                let startDate = ticketMasterDF.date(from: (event?.date)!)
+                let startDate = ticketMasterDF.date(from: event!.date!)
                 timeButton.setTitle(dateFormatter.string(for: startDate), for: .normal)
                 
                 timePicker.date = startDate!

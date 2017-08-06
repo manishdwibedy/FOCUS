@@ -644,124 +644,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if segmentedOut.selectedSegmentIndex == 0
         {
-            if(searchText.characters.count > 0){
-                self.filtered.removeAll()
-                let url = "https://api.yelp.com/v3/businesses/search"
-                
-                let headers: HTTPHeaders = [
-                    "authorization": "Bearer \(AuthApi.getYelpToken()!)",
-                    "cache-contro": "no-cache"
-                ]
-                
-                var parameters = [String:Any]()
-                if self.place != nil {
-                    parameters = [
-                        "latitude": self.place?.coordinate.latitude,
-                        "longitude": self.place?.coordinate.longitude,
-                        "term": searchText
-                        ] as [String : Any]
-                }
-                else{
-                    if let data = self.pinData{
-                        currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
-                        
-                        parameters = [
-                            "latitude": data.coordinates.latitude ?? 0,
-                            "longitude": data.coordinates.longitude ?? 0,
-                            "term": searchText
-                            ] as [String : Any]
-                    }
-                    else{
-                        parameters = [
-                            "latitude": location?.coordinate.latitude ?? 0,
-                            "longitude": location?.coordinate.longitude ?? 0,
-                            "term": searchText
-                            ] as [String : Any]
-                    }
-                }
-                
-                Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
-                    let json = JSON(data: response.data!)
-                    print(json)
-                    _ = self.places.count
-                    for (_, business) in json["businesses"].enumerated(){
-                        let id = business.1["id"].stringValue
-                        let name = business.1["name"].stringValue
-                        let image_url = business.1["image_url"].stringValue
-                        let isClosed = business.1["is_closed"].boolValue
-                        let reviewCount = business.1["review_count"].intValue
-                        let rating = business.1["rating"].floatValue
-                        let latitude = business.1["coordinates"]["latitude"].doubleValue
-                        let longitude = business.1["coordinates"]["longitude"].doubleValue
-                        let price = business.1["price"].stringValue
-                        let address_json = business.1["location"]["display_address"].arrayValue
-                        let phone = business.1["display_phone"].stringValue
-                        let distance = business.1["distance"].doubleValue
-                        let categories_json = business.1["categories"].arrayValue
-                        let url = business.1["url"].stringValue
-                        let plain_phone = business.1["phone"].stringValue
-                        let is_closed = business.1["is_closed"].boolValue
-                        
-                        var address = [String]()
-                        for raw_address in address_json{
-                            address.append(raw_address.stringValue)
-                        }
-                        
-                        var categories = [Category]()
-                        for raw_category in categories_json as [JSON]{
-                            let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
-                            categories.append(category)
-                        }
-                        
-                        let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
-                        
-                        self.placeMapping[place.id] = place
-                        self.getPlaceHours(id: place.id)
-                        self.filtered.append(place)
-                    }
-                    self.tableView.reloadData()
-                }
-            }
-            else{
-                self.filtered = self.places
-                self.tableView.reloadData()
-            }
-        }else if segmentedOut.selectedSegmentIndex == 1
+            self.searchPlaces(query: searchText)
+        }
+        else if segmentedOut.selectedSegmentIndex == 1
         {
-            if(searchText.characters.count > 0){
-                let DF = DateFormatter()
-                DF.dateFormat = "MMM d, h:mm a"
-                
-                self.filtered.removeAll()
-                Constants.DB.event.queryOrdered(byChild: "title").queryStarting(atValue: searchText.lowercased()).queryEnding(atValue: searchText.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let value = snapshot.value as? NSDictionary
-                    self.filtered.removeAll()
-                    if let value = value
-                    {
-                        for (id, event) in value
-                        {
-                            if let info = event as? [String:Any]{
-                                let event = Event.toEvent(info: info)
-                                event?.id = id as? String
-                                
-                                //                            if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
-                                self.filtered.append(event)
-                                //                            }
-                                
-                            }
-                            
-                        }
-                        self.tableView.reloadData()
-                    }
-                    
-                })
-            }
-            else{
-                self.filtered = self.events
-                self.tableView.reloadData()
-            }
-            
-            
+            self.searchEvents(query: searchText)
         }
         
     }
@@ -973,7 +860,15 @@ extension InvitePeopleViewController: GMSAutocompleteViewControllerDelegate {
         else{
             self.currentLocation.text = "\(first.joined(separator: " "))"
         }
-        
+     
+        if segmentedOut.selectedSegmentIndex == 0
+        {
+            self.searchPlaces(query: searchBar.text!)
+        }
+        else if segmentedOut.selectedSegmentIndex == 1
+        {
+            self.searchEvents(query: searchBar.text!)
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -1026,6 +921,148 @@ extension InvitePeopleViewController: GMSAutocompleteViewControllerDelegate {
     func showPopupView() {
         print("back in invitepeoplevc")
         self.showInvitePopup = true
+    }
+}
+
+extension InvitePeopleViewController{
+    func searchPlaces(query: String){
+        if(query.characters.count > 0){
+            self.filtered.removeAll()
+            let url = "https://api.yelp.com/v3/businesses/search"
+            
+            let headers: HTTPHeaders = [
+                "authorization": "Bearer \(AuthApi.getYelpToken()!)",
+                "cache-contro": "no-cache"
+            ]
+            
+            var parameters = [String:Any]()
+            if self.place != nil {
+                parameters = [
+                    "latitude": self.place?.coordinate.latitude,
+                    "longitude": self.place?.coordinate.longitude,
+                    "term": query
+                    ] as [String : Any]
+            }
+            else{
+                if let data = self.pinData{
+                    currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
+                    
+                    parameters = [
+                        "latitude": data.coordinates.latitude ?? 0,
+                        "longitude": data.coordinates.longitude ?? 0,
+                        "term": query
+                        ] as [String : Any]
+                }
+                else{
+                    parameters = [
+                        "latitude": location?.coordinate.latitude ?? 0,
+                        "longitude": location?.coordinate.longitude ?? 0,
+                        "term": query
+                        ] as [String : Any]
+                }
+            }
+            
+            Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
+                let json = JSON(data: response.data!)
+                print(json)
+                _ = self.places.count
+                for (_, business) in json["businesses"].enumerated(){
+                    let id = business.1["id"].stringValue
+                    let name = business.1["name"].stringValue
+                    let image_url = business.1["image_url"].stringValue
+                    let isClosed = business.1["is_closed"].boolValue
+                    let reviewCount = business.1["review_count"].intValue
+                    let rating = business.1["rating"].floatValue
+                    let latitude = business.1["coordinates"]["latitude"].doubleValue
+                    let longitude = business.1["coordinates"]["longitude"].doubleValue
+                    let price = business.1["price"].stringValue
+                    let address_json = business.1["location"]["display_address"].arrayValue
+                    let phone = business.1["display_phone"].stringValue
+                    let distance = business.1["distance"].doubleValue
+                    let categories_json = business.1["categories"].arrayValue
+                    let url = business.1["url"].stringValue
+                    let plain_phone = business.1["phone"].stringValue
+                    let is_closed = business.1["is_closed"].boolValue
+                    
+                    var address = [String]()
+                    for raw_address in address_json{
+                        address.append(raw_address.stringValue)
+                    }
+                    
+                    var categories = [Category]()
+                    for raw_category in categories_json as [JSON]{
+                        let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                        categories.append(category)
+                    }
+                    
+                    let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
+                    
+                    self.placeMapping[place.id] = place
+                    self.getPlaceHours(id: place.id)
+                    self.filtered.append(place)
+                }
+                
+                let filteredArray = self.followingPlaces.filter() {
+                    if let name = $0.name as? String{
+                        return name.hasPrefix(query)
+                    } else {
+                        return false
+                    }
+                }
+                
+                self.filtered = filteredArray + self.filtered
+                self.tableView.reloadData()
+            }
+        }
+        else{
+            self.filtered = self.places
+            self.tableView.reloadData()
+        }
+    }
+    
+    func searchEvents(query: String){
+        if(query.characters.count > 0){
+            let DF = DateFormatter()
+            DF.dateFormat = "MMM d, h:mm a"
+            
+            self.filtered.removeAll()
+            Constants.DB.event.queryOrdered(byChild: "title_lowered").queryStarting(atValue: query.lowercased()).queryEnding(atValue: query.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? NSDictionary
+                self.filtered.removeAll()
+                if let value = value
+                {
+                    for (id, event) in value
+                    {
+                        if let info = event as? [String:Any]{
+                            let event = Event.toEvent(info: info)
+                            event?.id = id as? String
+                            
+                            //                            if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
+                            self.filtered.append(event)
+                            //                            }
+                            
+                        }
+                        
+                    }
+                    
+                    let filteredArray = self.attendingEvent.filter() {
+                        if let name = $0.title as? String{
+                            return name.hasPrefix(query)
+                        } else {
+                            return false
+                        }
+                    }
+                    
+                    self.filtered = filteredArray + self.filtered
+                    self.tableView.reloadData()
+                }
+                
+            })
+        }
+        else{
+            self.filtered = self.events
+            self.tableView.reloadData()
+        }
     }
 }
 
