@@ -127,6 +127,9 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
 //        popTip.hide()
+        let vc = self.viewControllers![3] as! InvitePeopleViewController
+        vc.clearSearch = true
+        
         if AuthApi.isNewToPage(index: item.tag) && item.tag != 0  && item.tag != 2 {
             
             

@@ -40,6 +40,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var inviteFromOtherUserProfile = false
     var UID = ""
     var username = ""
+    var clearSearch = false
     
     var filtered = [Any]()
     var places = [Place]()
@@ -184,11 +185,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         if let data = self.pinData{
             currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
         }
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
             self.followingPlaces = places.sorted(by: {
@@ -358,7 +354,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 }
             })
         }
-
+        
         
         Event.getNearyByEvents(gotEvents: {events in
             self.otherEvents = events
@@ -382,7 +378,23 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 self.tableView.reloadData()
             }
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        if clearSearch{
+            searchBar.text = ""
+            if segmentedOut.selectedSegmentIndex == 0{
+                self.filtered = self.places
+                self.tableView.reloadData()
+            }
+            else{
+                self.filtered = self.events
+                self.tableView.reloadData()
+            }
+            clearSearch = false
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
