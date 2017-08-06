@@ -71,6 +71,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var otherAttendingEvents: [Event]? = nil
     var otherEvents: [Event]? = nil
     
+    var ticketMasterDF = DateFormatter()
+    var eventDF = DateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -181,6 +184,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         currentLocation.delegate = self
         hideKeyboardWhenTappedAround()
+        
+        ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        eventDF.dateFormat = "MMM d, hh:mm a"
         
         if let data = self.pinData{
             currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
@@ -557,7 +563,14 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.parentVC = self
             cell.guestCount.text = "\(event.attendeeCount) guests"
             
-            cell.dateAndTimeLabel.text = event.date!
+            
+            if let date = self.ticketMasterDF.date(from: event.date!){
+                cell.dateAndTimeLabel.text = eventDF.string(from: date)
+            }
+            else{
+                cell.dateAndTimeLabel.text = event.date!
+            }
+            
 //            Date formatter for date and time label in event
             cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price!)"
             
