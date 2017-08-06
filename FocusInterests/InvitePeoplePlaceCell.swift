@@ -196,8 +196,8 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
         if isMeetup{
             self.parentVC.performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegueWithSegue", sender: self.parentVC)
         }else if inviteFromOtherUserProfile{
-            self.parentVC.otherUserProfileDelegate?.hasSentUserAnInvite()
-            self.parentVC.dismiss(animated: true, completion: nil)
+            self.otherUser.otherUserProfileDelegate?.hasSentUserAnInvite()
+            self.otherUser.dismiss(animated: true, completion: nil)
         }else{
             let storyboard = UIStoryboard(name: "Invites", bundle: nil)
             let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
