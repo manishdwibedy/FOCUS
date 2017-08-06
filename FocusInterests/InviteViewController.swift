@@ -149,7 +149,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let nextDiff = 5 - calendar.component(.minute, from: currentTime) % 5
             let nextDate = calendar.date(byAdding: .minute, value: nextDiff, to: currentTime) ?? Date()
 
-            timeButton.setTitle(dateFormatter.string(from: nextDate), for: .normal)
+            timeButton.setTitle(eventTimeDF.string(from: nextDate), for: .normal)
             timePicker.date = nextDate
         }
         

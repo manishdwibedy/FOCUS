@@ -195,10 +195,8 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
         print("sending invite")
         if isMeetup{
             self.parentVC.performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegueWithSegue", sender: self.parentVC)
-        }else if inviteFromOtherUserProfile{
-            self.otherUser.otherUserProfileDelegate?.hasSentUserAnInvite()
-            self.otherUser.dismiss(animated: true, completion: nil)
-        }else{
+        }
+        else{
             let storyboard = UIStoryboard(name: "Invites", bundle: nil)
             let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
             ivc.type = "place"
@@ -206,8 +204,11 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
             ivc.place = place
             ivc.username = self.username
             ivc.searchPeoplePlaceDelegate = self
-//            ivc.needToGoBackToSearchPeopleViewController = self.needToGoBackToSearchPeopleViewController
+
             if let VC = self.parentVC{
+                VC.present(ivc, animated: true, completion: nil)
+            }
+            else if let VC = self.otherUser{
                 VC.present(ivc, animated: true, completion: nil)
             }
         }
