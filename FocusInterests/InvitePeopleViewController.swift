@@ -1072,7 +1072,7 @@ extension InvitePeopleViewController{
             let DF = DateFormatter()
             DF.dateFormat = "MMM d, h:mm a"
             
-            self.filtered.removeAll()
+            
             Constants.DB.event.queryOrdered(byChild: "title_lowered").queryStarting(atValue: query.lowercased()).queryEnding(atValue: query.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 self.filtered.removeAll()
@@ -1105,11 +1105,27 @@ extension InvitePeopleViewController{
                 }
                 
             })
+            
+            if self.place != nil {
+                Event.getNearyByEvents(query: query, location: self.place?.coordinate, gotEvents: {events in
+                    self.filtered = self.filtered + events
+                    self.tableView.reloadData()
+                })
+            }
+            else{
+                Event.getNearyByEvents(query: query, gotEvents: {events in
+                    self.filtered = self.filtered + events
+                    self.tableView.reloadData()
+                })
+            }
+            
         }
         else{
             self.filtered = self.events
             self.tableView.reloadData()
         }
+        
+        
     }
 }
 
