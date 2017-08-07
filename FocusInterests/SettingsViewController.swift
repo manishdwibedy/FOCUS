@@ -63,27 +63,56 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     
     // TableView datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if AuthApi.getLoginType() == .Facebook || AuthApi.getLoginType() == LoginTypes.Google{
+            return Constants.settings.cellTitles.count - 1
+        }
         return Constants.settings.cellTitles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.row == 2{
-            let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
-            swCell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
-            swCell?.titleLabel.text = Constants.settings.cellTitles[indexPath.row]
-            return swCell!
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-            cell?.textLabel?.text = Constants.settings.cellTitles[indexPath.row]
-            cell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
+        if AuthApi.getLoginType() == .Facebook || AuthApi.getLoginType() == LoginTypes.Google{
+            var row = indexPath.row
             
-            cell?.textLabel?.font = UIFont(name: "Avenir-Book", size: 18)!
-            cell?.textLabel?.textColor = UIColor.white
-            
-            cell?.accessoryType = .disclosureIndicator
-            return cell!
+            if row >= 1{
+                row += 1
+            }
+            if row == 1{
+                let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
+                swCell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
+                swCell?.titleLabel.text = Constants.settings.cellTitles[row]
+                return swCell!
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
+                cell?.textLabel?.text = Constants.settings.cellTitles[row]
+                cell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
+                
+                cell?.textLabel?.font = UIFont(name: "Avenir-Book", size: 18)!
+                cell?.textLabel?.textColor = UIColor.white
+                
+                cell?.accessoryType = .disclosureIndicator
+                return cell!
+            }
         }
+        else{
+            if indexPath.row == 2{
+                let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
+                swCell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
+                swCell?.titleLabel.text = Constants.settings.cellTitles[indexPath.row]
+                return swCell!
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
+                cell?.textLabel?.text = Constants.settings.cellTitles[indexPath.row]
+                cell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
+                
+                cell?.textLabel?.font = UIFont(name: "Avenir-Book", size: 18)!
+                cell?.textLabel?.textColor = UIColor.white
+                
+                cell?.accessoryType = .disclosureIndicator
+                return cell!
+            }
+        }
+        
     }
     
     // TableView delegate
