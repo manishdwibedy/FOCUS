@@ -1284,7 +1284,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         pcv.shadowEnabled   = true
         pcv.shadowColor     = UIColor.black
         
-        
         // Create a custom view controller
         let onboardingVC = NewUserPopupViewController(nibName: "NewUserPopupViewController", bundle: nil)
         onboardingVC.arrowImage = self.popupArrowImage
@@ -1296,7 +1295,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         
         popup.view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
-        
 
         AuthApi.setNewUser()
         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/isNewUser").setValue(false)
@@ -1485,8 +1483,8 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
                 
             }
         }
-        self.photoInputView.isHidden = true
-        self.photoInputView.sendSubview(toBack: mapView)
+//        self.photoInputView.isHidden = true
+//        self.mapView.sendSubview(toBack: self.photoInputView)
         
         
         if self.friends.count > 0{

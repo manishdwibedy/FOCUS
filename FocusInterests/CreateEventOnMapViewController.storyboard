@@ -22,46 +22,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="u7X-5B-efw" userLabel="Change Location Stack View">
-                                <rect key="frame" x="17" y="7" width="311" height="340"/>
+                                <rect key="frame" x="17" y="7" width="311" height="35"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76g-Pp-wee" userLabel="Main Change Location View">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="35"/>
                                         <subviews>
-                                            <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="Current Location" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko5-G5-a63">
-                                                <rect key="frame" x="4" y="0.0" width="303" height="35"/>
-                                                <color key="backgroundColor" red="0.0" green="0.22916191820000001" blue="0.34128814940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="dqv-4y-kJP"/>
-                                                </constraints>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                                <scopeButtonTitles>
-                                                    <string>Title</string>
-                                                    <string>Title</string>
-                                                </scopeButtonTitles>
-                                            </searchBar>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Current Location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wqT-Sd-r7q">
+                                                <rect key="frame" x="0.0" y="2" width="311" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="1DG-L8-yV3"/>
-                                            <constraint firstItem="Ko5-G5-a63" firstAttribute="leading" secondItem="76g-Pp-wee" secondAttribute="leading" constant="4" id="J7H-eA-T8h"/>
-                                            <constraint firstAttribute="bottom" secondItem="Ko5-G5-a63" secondAttribute="bottom" id="YFq-AT-Hs3"/>
-                                            <constraint firstItem="Ko5-G5-a63" firstAttribute="top" secondItem="76g-Pp-wee" secondAttribute="top" id="cGH-V7-k4t"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ko5-G5-a63" secondAttribute="trailing" constant="4" id="jmd-aw-cMC"/>
+                                            <constraint firstAttribute="trailing" secondItem="wqT-Sd-r7q" secondAttribute="trailing" id="2a4-rq-1rl"/>
+                                            <constraint firstItem="wqT-Sd-r7q" firstAttribute="top" secondItem="76g-Pp-wee" secondAttribute="top" constant="2" id="IK8-IE-kHE"/>
+                                            <constraint firstAttribute="bottom" secondItem="wqT-Sd-r7q" secondAttribute="bottom" constant="3" id="aAB-5F-nWo"/>
+                                            <constraint firstItem="wqT-Sd-r7q" firstAttribute="leading" secondItem="76g-Pp-wee" secondAttribute="leading" id="vwc-e4-qEl"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Tj-th-oyA">
-                                        <rect key="frame" x="0.0" y="40" width="311" height="300"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="uvW-M6-WEf"/>
-                                        </constraints>
-                                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -323,8 +305,7 @@
                         <outlet property="mainStackView" destination="H8o-Di-dF4" id="oss-ZS-hnQ"/>
                         <outlet property="pinButton" destination="AbZ-cw-RUL" id="osg-Ty-O5F"/>
                         <outlet property="pinImageButton" destination="oQD-CH-dmk" id="NdM-Bc-rEa"/>
-                        <outlet property="searchLocationSearchBar" destination="Ko5-G5-a63" id="fBw-tW-8zA"/>
-                        <outlet property="searchLocationTableView" destination="6Tj-th-oyA" id="Rya-Gy-bBy"/>
+                        <outlet property="searchLocationTextField" destination="wqT-Sd-r7q" id="hXM-KA-foq"/>
                         <outlet property="twitterButton" destination="nt9-DK-y4i" id="yRg-Aa-l0L"/>
                         <outlet property="userStatusTextView" destination="DhO-Qs-r8n" id="OqO-hx-Upl"/>
                     </connections>
