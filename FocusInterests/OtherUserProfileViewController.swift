@@ -989,7 +989,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 }
             })
             
+            
             recentPostCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (self.pinInfo!.dateTimeStamp)), numericDates: true, shortVersion: true)
+            recentPostCell.pin = self.pinInfo
             
             self.pinInfo?.dbPath.observeSingleEvent(of: .value, with: {snapshot in
                 if let value = snapshot.value as? [String:Any]{
