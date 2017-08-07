@@ -221,21 +221,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             
         }
         
-        if let date = eventDateDF.date(from: (event?.date)!){
-            if date < Date(){
-                self.attendButton.isEnabled = false
-                self.pinHereButton.isEnabled = false
-                self.inviteButton.isEnabled = false
-            }
-            
-        }
-        else if let date = ticketMasterDF.date(from: (event?.date)!){
-            if date < Date(){
-                self.attendButton.isEnabled = false
-                self.pinHereButton.isEnabled = false
-                self.inviteButton.isEnabled = false
-            }
-        }
         
         if event?.id != nil{
             let fullRef = ref.child("events").child((event?.id)!).child("comments")
@@ -425,6 +410,20 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func inviteEvent(_ sender: UIButton) {
+        
+        if let date = eventDateDF.date(from: (event?.date)!){
+            if date < Date(){
+                showError(message: "Event is over")
+                return
+            }
+            
+        }
+        else if let date = ticketMasterDF.date(from: (event?.date)!){
+            if date < Date(){
+                showError(message: "Event is over")
+                return
+            }
+        }
         let ivc = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "home") as! InviteViewController
         ivc.type = "event"
         ivc.id = (event?.id!)!
@@ -435,6 +434,21 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func attendEvent(_ sender: UIButton) {
+        
+        if let date = eventDateDF.date(from: (event?.date)!){
+            if date < Date(){
+                showError(message: "Event is over")
+                return
+            }
+
+        }
+        else if let date = ticketMasterDF.date(from: (event?.date)!){
+            if date < Date(){
+                showError(message: "Event is over")
+                return
+            }
+        }
+        
         if sender.isSelected == false{
             self.isAttending = true
             
@@ -886,6 +900,21 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func pinButtonPressed(_ sender: Any) {
+        
+        if let date = eventDateDF.date(from: (event?.date)!){
+            if date < Date(){
+                showError(message: "Event is over")
+                return
+            }
+            
+        }
+        else if let date = ticketMasterDF.date(from: (event?.date)!){
+            if date < Date(){
+                showError(message: "Event is over")
+                return
+            }
+        }
+        
         self.pinHereButton.isSelected = !self.pinHereButton.isSelected
         
         let createEventStoryboard = UIStoryboard.init(name: "CreateEvent", bundle: nil)
