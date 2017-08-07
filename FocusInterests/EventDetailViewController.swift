@@ -84,10 +84,13 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     var commentDF = DateFormatter()
     var eventDateDF = DateFormatter()
-    var ticketMasterDF = DateFormatter()
     let screenSize = UIScreen.main.bounds
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
+    
+    
+    var ticketMasterDF = DateFormatter()
+    var eventDF = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,7 +162,18 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardDidShow, object: nil)
         
         navTitle.title = event?.title
-        timeLabel.text = event?.date
+        
+        ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        eventDF.dateFormat = "MMM d, hh:mm a"
+        
+        
+        if let date = self.ticketMasterDF.date(from: (event?.date!)!){
+            timeLabel.text = eventDF.string(from: date)
+        }
+        else{
+            timeLabel.text = event?.date!
+        }
+        
         addressLabel.text = event?.fullAddress?.replacingOccurrences(of: ";;", with: ", ")
         self.descriptionTextView.text = event?.eventDescription
 
@@ -170,7 +184,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         self.descriptionTextView.frame = frame
         
         eventDateDF.dateFormat = "MMM d, hh:mm a"
-        ticketMasterDF.dateFormat = "yyyy-MM-d hh:mm:ss"
         if (event?.creator?.characters.count)! > 0{
             let reference = Constants.storage.event.child("\(event!.id!).jpg")
             reference.downloadURL(completion: { (url, error) in
