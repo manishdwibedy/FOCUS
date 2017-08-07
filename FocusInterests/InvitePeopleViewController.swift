@@ -1107,7 +1107,7 @@ extension InvitePeopleViewController{
             })
             
             if self.place != nil {
-                Event.getNearyByEvents(query: query, location: self.place?.coordinate, gotEvents: {events in
+                Event.getNearyByEvents(query: query, location: (self.place?.coordinate)!, gotEvents: {events in
                     self.filtered = self.filtered + events
                     self.tableView.reloadData()
                 })
