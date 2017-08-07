@@ -185,7 +185,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         self.inviteButton.roundCorners(radius: 5.0)
         
         self.messageButton.roundCorners(radius: 5.0)
-        self.messageButton.addTarget(self, action: #selector(OtherUserProfileViewController.messageUser), for: .touchUpInside)
         hideKeyboardWhenTappedAround()
         
         let eventsCollectionNib = UINib(nibName: "UserProfileCollectionViewCell", bundle: nil)
@@ -488,18 +487,17 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         
                         print("final_interest \(final_interest)")
                         
+                        print("selected \(selected)")
                         
-                        for view in self.interestStackView.arrangedSubviews{
-                            self.interestStackView.removeArrangedSubview(view)
+                        for interestViews in self.interestStackView.arrangedSubviews{
+                            self.interestStackView.removeArrangedSubview(interestViews)
+                            interestViews.removeFromSuperview()
                         }
                         
                         let user_interest = Set(getUserInterests().components(separatedBy: ","))
                         
                         for (index, interest) in (final_interest.enumerated()){
-//                            MARK: ARE WE KEEPING THE LIST TO MORE THAN THREE OR NOT?! IF WE R THEN REMOVE THE FOLLOWING COMMENTED LINES
-//                            if index == 3{
-//                                break
-//                            }
+
                             let interestLabelView = InterestStackViewLabel(frame: CGRect(x: 0, y: 0, width: self.interestStackView.bounds.width, height: 30))
                             
                             if interest.characters.count > 0{
@@ -535,6 +533,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         }
                         
                         if selected.count > 3 {
+                            self.containerStackForMoreOrLessButtons.isHidden = false
                             self.focusStackView.addArrangedSubview(self.containerStackForMoreOrLessButtons)
                             self.moreOrLessButtonStack.removeArrangedSubview(self.lessButton)
                             self.lessButton.isHidden = true
@@ -542,8 +541,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                             self.moreOrLessButtonStackHeight.constant = 20.0
 //                            self.lessButton.removeFromSuperview()
                         }else{
+                            self.containerStackForMoreOrLessButtons.isHidden = true
                             self.focusStackView.removeArrangedSubview(self.containerStackForMoreOrLessButtons)
-                            self.containerStackForMoreOrLessButtons.removeFromSuperview()
+
                         }
                         
                     }
@@ -1051,18 +1051,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         return rowHeight
     }
     
-    
-    func messageUser(){
-        let storyboard = UIStoryboard(name: "Messages", bundle: nil)
-        let root = storyboard.instantiateViewController(withIdentifier: "Home") as! UINavigationController
-        
-        let VC = storyboard.instantiateViewController(withIdentifier: "chat") as? ChatViewController
-        VC?.user = self.userInfo
-        VC?.messageUser = true
-        
-        self.present(VC!, animated: true, completion: nil)
-    }
-    
     @IBAction func inviteClicked(_ sender: Any) {
         let storyboard = UIStoryboard(name: "search_people", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
@@ -1117,11 +1105,19 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         }
     }
     
-//    @IBAction func unwindToOtherUserProfile(segue:UIStoryboardSegue) {}
     @IBAction func sendMessage(_ sender: Any) {
-        let messageVC = UIStoryboard.init(name: "Messages", bundle: nil).instantiateViewController(withIdentifier: "chat") as? ChatViewController
-        messageVC?.user = userInfo
-        self.present(messageVC!, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Messages", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "chat") as? ChatViewController
+        let root = storyboard.instantiateViewController(withIdentifier: "otherUserProfileNavigation") as! UINavigationController
+        VC?.user = self.userInfo
+        VC?.messageUser = true
+        
+        root.navigationItem.hidesBackButton = true
+        root.navigationBar.barTintColor = Constants.color.navy
+        root.navigationBar.isTranslucent = false
+        
+        root.pushViewController(VC!, animated: true)
+        self.present(root, animated: true, completion: nil)
     }
     
     func hasSentUserAnInvite(){

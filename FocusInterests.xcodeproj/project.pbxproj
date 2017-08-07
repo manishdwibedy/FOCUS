@@ -235,6 +235,8 @@
 		EB0578601EECBE74000B0413 /* PinPlaceReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB05785E1EECBE74000B0413 /* PinPlaceReviewTableViewCell.xib */; };
 		EB0578631EECCD49000B0413 /* TipPlaceReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0578611EECCD49000B0413 /* TipPlaceReviewTableViewCell.swift */; };
 		EB0578641EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB0578621EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib */; };
+		EB1AF60D1F3900260005D97B /* ChooseLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AF60B1F3900260005D97B /* ChooseLocationViewController.swift */; };
+		EB1AF60E1F3900260005D97B /* ChooseLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1AF60C1F3900260005D97B /* ChooseLocationViewController.xib */; };
 		EB2203871F1DE9D000F86B73 /* FollowersRequest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2203861F1DE9D000F86B73 /* FollowersRequest.storyboard */; };
 		EB2203891F1DEA8000F86B73 /* FollowersRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2203881F1DEA8000F86B73 /* FollowersRequestViewController.swift */; };
 		EB252F0B1EE9E9F7001C163D /* NewMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */; };
@@ -632,6 +634,8 @@
 		EB05785E1EECBE74000B0413 /* PinPlaceReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinPlaceReviewTableViewCell.xib; sourceTree = "<group>"; };
 		EB0578611EECCD49000B0413 /* TipPlaceReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipPlaceReviewTableViewCell.swift; sourceTree = "<group>"; };
 		EB0578621EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipPlaceReviewTableViewCell.xib; sourceTree = "<group>"; };
+		EB1AF60B1F3900260005D97B /* ChooseLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseLocationViewController.swift; sourceTree = "<group>"; };
+		EB1AF60C1F3900260005D97B /* ChooseLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseLocationViewController.xib; sourceTree = "<group>"; };
 		EB2203861F1DE9D000F86B73 /* FollowersRequest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FollowersRequest.storyboard; sourceTree = "<group>"; };
 		EB2203881F1DEA8000F86B73 /* FollowersRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersRequestViewController.swift; sourceTree = "<group>"; };
 		EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -1350,6 +1354,7 @@
 		D2ECAC511E7A2471006FFA1A /* NibVCs */ = {
 			isa = PBXGroup;
 			children = (
+				EB1AF6061F38FEE70005D97B /* ChooseLocationView */,
 				EB694F421F21591D00C0690A /* Invite View */,
 				5B69158A1ED7D80100093AD5 /* NewUserPopupViewController.swift */,
 				5B69158B1ED7D80100093AD5 /* NewUserPopupViewController.xib */,
@@ -1366,6 +1371,15 @@
 				D2C785511E9337B700BFF0E3 /* InterestListViewController.xib */,
 			);
 			name = NibVCs;
+			sourceTree = "<group>";
+		};
+		EB1AF6061F38FEE70005D97B /* ChooseLocationView */ = {
+			isa = PBXGroup;
+			children = (
+				EB1AF60B1F3900260005D97B /* ChooseLocationViewController.swift */,
+				EB1AF60C1F3900260005D97B /* ChooseLocationViewController.xib */,
+			);
+			name = ChooseLocationView;
 			sourceTree = "<group>";
 		};
 		EB2203811F1DDCD500F86B73 /* FollowersRequest */ = {
@@ -1758,6 +1772,7 @@
 				5BE30DD01F0AF20500ECE7EF /* day_style.json in Resources */,
 				EBB6B32E1F0E1224000C8133 /* FeedOneTableViewCell.xib in Resources */,
 				D2B9B0451E5A047C0002F1B1 /* Main.storyboard in Resources */,
+				EB1AF60E1F3900260005D97B /* ChooseLocationViewController.xib in Resources */,
 				5B34A6F51EE72B0800D16842 /* FollowingTableViewCell.xib in Resources */,
 				5B959FE91ECC14D200094FE6 /* PinTableViewCell.xib in Resources */,
 				EB5891CE1EE7E5B300C35EE9 /* Comments.storyboard in Resources */,
@@ -2098,6 +2113,7 @@
 				EB819E691F180D2900F5AA94 /* RecentPostTableViewCell.swift in Sources */,
 				5B634C851ED19A6900EBCC29 /* GMUPoint.m in Sources */,
 				5B634C841ED19A6300EBCC29 /* GMUPoint.h in Sources */,
+				EB1AF60D1F3900260005D97B /* ChooseLocationViewController.swift in Sources */,
 				D2C785521E9337B700BFF0E3 /* InterestListViewController.swift in Sources */,
 				5B6AFA6D1ED1906900A82104 /* GMUKMLParser.m in Sources */,
 				D2A173551E5E911500C7724B /* SignUpViewController.swift in Sources */,

@@ -13,7 +13,7 @@
         <scene sceneID="I3R-J9-Vsb">
             <objects>
                 <navigationController storyboardIdentifier="Home" id="5uk-yf-boc" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5jN-Kp-ofZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="5jN-Kp-ofZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -144,6 +144,22 @@
             </objects>
             <point key="canvasLocation" x="845.60000000000002" y="-99.400299850074973"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="edu-6i-C9a">
+            <objects>
+                <navigationController storyboardIdentifier="otherUserProfileNavigation" id="42W-3u-pxn" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cSU-qe-A5U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="sg1-OE-hfb" kind="relationship" relationship="rootViewController" id="Zr3-oA-Bne"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ptb-8O-g0j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1382" y="749"/>
+        </scene>
         <!--Chat View Controller-->
         <scene sceneID="hcf-Nx-xt7">
             <objects>
@@ -157,6 +173,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="QpT-HH-Tm3">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="iZq-Ev-WLX">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IHa-Xe-rrw">
+                                <rect key="frame" x="16" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="BackArrow"/>
+                                <connections>
+                                    <action selector="backToOtherUserProfile:" destination="sg1-OE-hfb" eventType="touchUpInside" id="5H3-D0-TkK"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="69g-gY-an3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
