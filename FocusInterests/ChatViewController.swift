@@ -40,6 +40,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     
     var inviteUser = false
     var messageUser = false
+    var goBackToOtherUser = false
     
     var nofArray = [FocusNotification]()
     var invArray = [FocusNotification]()
@@ -49,6 +50,12 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        if self.goBackToOtherUser{
+//            self.backButton.isHidden = false
+//        }else{
+//            self.backButton.isHidden = true
+//        }
+        
         self.senderId = AuthApi.getFirebaseUid()
         self.senderDisplayName = ""
         
@@ -113,10 +120,6 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         markUnread()
         getMessageID()
         
-        let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "BackArrow"), style: .plain, target: self, action: #selector(back))
-        backButton.tintColor = UIColor.white
-        self.navigationItem.leftBarButtonItem = backButton
-
         self.collectionView.bounces = false
         loadingMessages = false
         
@@ -158,6 +161,10 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
             
         }
         
+    }
+    
+    @IBAction func backToOtherUserProfile(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func keyboardWillAppear(notification: NSNotification){

@@ -22,6 +22,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 	@IBOutlet var userScrollView: UIScrollView!
     
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var mainStackView: UIStackView!
     
     @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
     @IBOutlet weak var navBarItem: UINavigationItem!
@@ -48,6 +49,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     // border between user info and pin stack
     @IBOutlet weak var firstBorderHeight: NSLayoutConstraint!
+    @IBOutlet weak var secondBorderHeight: NSLayoutConstraint!
     
     // User Pin Stack
     @IBOutlet weak var createPinAndUpdatePinStack: UIStackView!
@@ -77,8 +79,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     // recent post stack
     @IBOutlet weak var recentPostTableView: UITableView!
+    @IBOutlet weak var recentPostTableViewHeight: NSLayoutConstraint!
     
-//    Events Stack
+    // Events Stack
 	// Location Description (would this be location description?)
 	// Location FOCUS button (what would this be for?)
 	// Collection view See more... button
@@ -163,11 +166,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         self.recentPostTableView.delegate = self
         self.recentPostTableView.dataSource = self
         self.recentPostTableView.rowHeight = UITableViewAutomaticDimension
-        self.recentPostTableView.estimatedRowHeight = 100
+        self.recentPostTableView.estimatedRowHeight = 150
         
         Answers.logCustomEvent(withName: "Screen",
                                customAttributes: [
@@ -186,8 +189,17 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
         hideKeyboardWhenTappedAround()
         
-        let recentPostNib = UINib(nibName: "FeedOneTableViewCell", bundle: nil)
-        self.recentPostTableView.register(recentPostNib, forCellReuseIdentifier: "recentPostCell")
+        self.recentPostTableView.register(UINib(nibName: "FeedOneTableViewCell", bundle: nil), forCellReuseIdentifier: "recentPostCell")
+        
+        self.recentPostTableView.register(UINib(nibName: "FeedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTwoCell")
+        
+        self.recentPostTableView.register(UINib(nibName: "FeedPlaceTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedThreeCell")
+        
+        self.recentPostTableView.register(UINib(nibName: "FeedCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFourCell")
+        
+        self.recentPostTableView.register(UINib(nibName: "FeedPlaceImageTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFiveCell")
+        
+        self.recentPostTableView.register(UINib(nibName: "FeedCreatedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedSixCell")
         
         self.moreButton.layer.borderWidth = 1.0
         self.moreButton.layer.borderColor = UIColor.white.cgColor
@@ -196,9 +208,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.lessButton.layer.borderColor = UIColor.white.cgColor
         self.lessButton.roundCorners(radius: 5.0)
         
-        self.eventsStackView.translatesAutoresizingMaskIntoConstraints = false;
         let eventsCollectionNib = UINib(nibName: "UserProfileCollectionViewCell", bundle: nil)
         self.eventsCollectionView.register(eventsCollectionNib, forCellWithReuseIdentifier: "eventsCollectionCell")
+        
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.showFollowing))
         followingStackView.isUserInteractionEnabled = true
@@ -301,9 +313,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     self.createPinView.removeFromSuperview()
                 }
                 self.firstBorderHeight.constant = 5
-                
+                self.secondBorderHeight.constant = 5
             }else{
                 self.firstBorderHeight.constant = 20
+                self.secondBorderHeight.constant = 20
                 self.createPinAndUpdatePinStack.removeArrangedSubview(self.pinView)
                 self.pinView.removeFromSuperview()
                 self.createPinButton.isHidden = false
@@ -769,25 +782,32 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let recentPostCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell", for: indexPath) as! FeedOneTableViewCell
-//        recentPostCell.commentButton.addTarget(self, action: #selector(commentButtonPressed), for: .touchUpInside)
         recentPostCell.commentTextView.delegate = self
+        recentPostCell.commentButton.addTarget(self, action: #selector(UserProfileViewController.commentPressed(_:)), for: .touchUpInside)
+//        self.recentPostTableViewHeight.constant = recentPostCell.contentView.frame.height
         return recentPostCell
     }
     
+    func commentPressed(_ sender: Any) {
+        self.recentPostTableView.beginUpdates()
+        self.recentPostTableView.endUpdates()
+    }
     
     func textViewDidChange(_ textView: UITextView) {
         var textFrame = textView.frame
         textFrame.size.height = textView.contentSize.height
         textView.frame = textFrame
         
+//        self.recentPostTableViewHeight.constant += textView.contentSize.height
         self.recentPostTableView.beginUpdates()
         self.recentPostTableView.endUpdates()
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let myCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell") as! FeedOneTableViewCell
-//        return myCell.bounds.size.height;
-//    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Add a comment"{
+            textView.text = ""
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let storyboard = UIStoryboard(name: "Pin", bundle: nil)

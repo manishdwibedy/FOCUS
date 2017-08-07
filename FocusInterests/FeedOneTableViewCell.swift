@@ -11,6 +11,7 @@ import Crashlytics
 
 class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
     
+    @IBOutlet weak var feedOneStackView: UIStackView!
     @IBOutlet weak var dateAndTimeLabel: UILabel!
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var mainStack: UIStackView!
@@ -43,18 +44,18 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
         self.commentTextView.layer.borderWidth = 1.0
         self.commentTextView.layer.borderColor = UIColor.white.cgColor
         self.commentTextView.layer.cornerRadius = 5.0
-//        self.commentTextView.contentInset = UIEdgeInsetsMake(-7.0,0.0,0,0.0)
         self.userImage.roundButton()
         
         self.postButton.allCornersRounded(radius: 5.0)
         
         let placeholderAttributes: [String : AnyObject] = [
-            NSForegroundColorAttributeName: Constants.color.navy,
+            NSForegroundColorAttributeName: UIColor.white,
             NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!
         ]
         let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Add a comment", attributes: placeholderAttributes)
-        
         self.commentTextView.attributedText = placeholderTextAttributes
+        
+        self.feedOneStackView.translatesAutoresizingMaskIntoConstraints = false
         self.commentPostView.isHidden = true
     }
 

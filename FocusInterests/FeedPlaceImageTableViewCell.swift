@@ -41,7 +41,8 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
         self.commentTextView.layer.borderWidth = 1.0
         self.commentTextView.layer.borderColor = UIColor.white.cgColor
         self.commentTextView.layer.cornerRadius = 5.0
-//        self.commentTextView.contentInset = UIEdgeInsetsMake(-7.0,0.0,0,0.0)
+        self.commentPostView.isHidden = true
+        
         self.usernameLabel.setTitle("arya", for: .normal)
         self.addressLabel.setTitle("1001 Rose Bowl Dr", for: .normal)
         self.postButton.allCornersRounded(radius: 4.0)
@@ -106,6 +107,7 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
     @IBAction func likeButtonPressed(_ sender: Any) {
         self.likeButton.isSelected = !self.likeButton.isSelected
     }
+    
     @IBAction func goBackToMap(_ sender: Any){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
@@ -117,11 +119,6 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
     
     @IBAction func postButtonPressed(_ sender: Any) {
         print("post button pressed")
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        var textFrame = textView.frame
-        self.commentViewHeightConstraint.constant = textView.contentSize.height + 9
     }
     
     @IBAction func showUserProfile(){
