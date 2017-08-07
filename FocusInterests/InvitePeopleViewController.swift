@@ -404,8 +404,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         if clearSearch{
             searchBar.text = ""
+            self.currentLocation.text = "Current Location"
+            
             if segmentedOut.selectedSegmentIndex == 0{
                 self.filtered = self.places
+                
                 self.tableView.reloadData()
             }
             else{
@@ -972,6 +975,7 @@ extension InvitePeopleViewController{
     func searchPlaces(query: String){
         if(query.characters.count > 0){
             self.filtered.removeAll()
+            tableView.reloadData()
             let url = "https://api.yelp.com/v3/businesses/search"
             
             let headers: HTTPHeaders = [
