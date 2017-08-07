@@ -345,6 +345,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventsCollectionCell", for: indexPath) as!UserProfileCollectionViewCell
         
+        if indexPath.row == 1{
+            self.eventsViewHeight.constant = eventCell.frame.height
+        }else if indexPath.row == 3 || indexPath.row == 5{
+            self.eventsViewHeight.constant += (eventCell.frame.height + 20)
+        }
+        
         let suggestion = self.suggestion[indexPath.row]
 //        eventCell.userEventsLabel.text = suggestion.title
         

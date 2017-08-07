@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,14 +20,14 @@
                         <viewControllerLayoutGuide type="bottom" id="NZS-fS-QjD"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="ce2-DV-VQr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1175"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="989"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pca-sC-jif">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1111"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="924"/>
                                 <subviews>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="167-Kd-xcs" userLabel="Main Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1103"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="924"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dsa-iR-ute">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
@@ -488,10 +488,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfu-XU-At8" userLabel="Events View">
-                                                <rect key="frame" x="0.0" y="693" width="375" height="410"/>
+                                                <rect key="frame" x="0.0" y="693" width="375" height="231"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Qr1-yI-fZj">
-                                                        <rect key="frame" x="8" y="7.5" width="359" height="395"/>
+                                                        <rect key="frame" x="8" y="7.5" width="359" height="216"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5W2-Ad-9ar">
                                                                 <rect key="frame" x="14.5" y="0.0" width="330" height="10"/>
@@ -544,8 +544,11 @@
                                                                 </connections>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F09-6U-2YX">
-                                                                <rect key="frame" x="10" y="83" width="339" height="312"/>
+                                                                <rect key="frame" x="10" y="83" width="339" height="133"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="133" id="0lC-f4-FA1"/>
+                                                                </constraints>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sfc-Qz-9LF">
                                                                     <size key="itemSize" width="90" height="90"/>
                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -572,7 +575,6 @@
                                                 <constraints>
                                                     <constraint firstItem="Qr1-yI-fZj" firstAttribute="leading" secondItem="Yfu-XU-At8" secondAttribute="leading" constant="8" id="0Uo-EF-wYF"/>
                                                     <constraint firstAttribute="bottom" secondItem="Qr1-yI-fZj" secondAttribute="bottom" constant="7.5" id="Atx-Lf-RwS"/>
-                                                    <constraint firstAttribute="height" constant="410" id="DVv-ZY-mPT"/>
                                                     <constraint firstItem="Qr1-yI-fZj" firstAttribute="centerX" secondItem="Yfu-XU-At8" secondAttribute="centerX" id="dUM-lt-sBB"/>
                                                     <constraint firstItem="Qr1-yI-fZj" firstAttribute="top" secondItem="Yfu-XU-At8" secondAttribute="top" constant="7.5" id="lUL-Ui-65U"/>
                                                     <constraint firstAttribute="trailing" secondItem="Qr1-yI-fZj" secondAttribute="trailing" constant="8" id="xWo-un-hvg"/>
@@ -583,7 +585,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="167-Kd-xcs" secondAttribute="bottom" constant="8" id="F9a-yW-LXW"/>
+                                    <constraint firstAttribute="bottom" secondItem="167-Kd-xcs" secondAttribute="bottom" id="F9a-yW-LXW"/>
                                     <constraint firstItem="167-Kd-xcs" firstAttribute="width" secondItem="pca-sC-jif" secondAttribute="width" id="Qh5-0X-bU8"/>
                                     <constraint firstAttribute="trailing" secondItem="167-Kd-xcs" secondAttribute="trailing" id="ZMB-fH-3rC"/>
                                     <constraint firstItem="167-Kd-xcs" firstAttribute="leading" secondItem="pca-sC-jif" secondAttribute="leading" id="eXJ-ca-4qw"/>
@@ -620,7 +622,7 @@
                         <constraints>
                             <constraint firstItem="Oi3-pC-q5R" firstAttribute="leading" secondItem="ce2-DV-VQr" secondAttribute="leading" id="5bv-nN-VN6"/>
                             <constraint firstItem="pca-sC-jif" firstAttribute="leading" secondItem="ce2-DV-VQr" secondAttribute="leading" id="DIf-We-7MF"/>
-                            <constraint firstItem="NZS-fS-QjD" firstAttribute="top" secondItem="pca-sC-jif" secondAttribute="bottom" id="J5N-ws-vsP"/>
+                            <constraint firstItem="NZS-fS-QjD" firstAttribute="top" secondItem="pca-sC-jif" secondAttribute="bottom" constant="1" id="J5N-ws-vsP"/>
                             <constraint firstAttribute="trailing" secondItem="pca-sC-jif" secondAttribute="trailing" id="JJ3-5C-jgM"/>
                             <constraint firstItem="Oi3-pC-q5R" firstAttribute="top" secondItem="6Tl-cH-doQ" secondAttribute="bottom" constant="-20" id="TGP-YU-8Jv"/>
                             <constraint firstItem="pca-sC-jif" firstAttribute="top" secondItem="Oi3-pC-q5R" secondAttribute="bottom" id="qk3-yZ-sD5"/>
@@ -629,7 +631,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="1175"/>
+                    <size key="freeformSize" width="375" height="989"/>
                     <connections>
                         <outlet property="createEventButton" destination="ofW-bn-GIG" id="5wh-e0-VrE"/>
                         <outlet property="createPinAndUpdatePinStack" destination="OXJ-kh-5zc" id="nrW-Lx-2Jb"/>
@@ -641,7 +643,7 @@
                         <outlet property="eventView" destination="Yfu-XU-At8" id="Dvo-kp-kNp"/>
                         <outlet property="eventsCollectionView" destination="F09-6U-2YX" id="pSk-oS-s7g"/>
                         <outlet property="eventsStackView" destination="Qr1-yI-fZj" id="ft1-3A-Lsz"/>
-                        <outlet property="eventsViewHeight" destination="DVv-ZY-mPT" id="XZ2-eO-gNf"/>
+                        <outlet property="eventsViewHeight" destination="0lC-f4-FA1" id="7VJ-Bj-o1z"/>
                         <outlet property="firstBorderHeight" destination="SM0-fb-g7W" id="sDL-RY-mo3"/>
                         <outlet property="focusHeader" destination="lgR-nk-9yp" id="6Vt-5R-NJb"/>
                         <outlet property="focusView" destination="SF4-Kb-s3b" id="vYx-0p-v3e"/>

@@ -293,7 +293,6 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
             let VC = segue.destination as! ChatViewController
             VC.user = sender as! [String:Any]
         }
-        
     }
     /*
     // MARK: - Navigation

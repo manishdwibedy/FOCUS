@@ -66,13 +66,13 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         self.addFocusStack.removeArrangedSubview(self.addFocusTableView)
         
         self.searchLocationTextField.delegate = self
-        self.searchLocationTextField.backgroundColor = UIColor(red: 38/255.0, green: 83/255.0, blue: 126/255.0, alpha: 1.0)
-        self.searchLocationTextField.attributedPlaceholder = NSAttributedString(string: "Current Location", attributes: [NSForegroundColorAttributeName: UIColor.white])
+
+        self.searchLocationTextField.attributedPlaceholder = NSAttributedString(string: "Current Location", attributes: [NSForegroundColorAttributeName: Constants.color.navy, NSFontAttributeName: UIFont(name: "Avenir Book", size: 17)!])
         
         let locationImageView = UIImageView(image: #imageLiteral(resourceName: "location").withRenderingMode(UIImageRenderingMode.alwaysTemplate))
         locationImageView.backgroundColor = UIColor.white
         self.searchLocationTextField.leftView = locationImageView
-        
+        self.searchLocationTextField.layer.borderWidth = 0.0
         hideKeyboardWhenTappedAround()
     }
 
@@ -210,6 +210,13 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+        let chooseLocationVC = ChooseLocationViewController(nibName: "ChooseLocationViewController", bundle: nil)
+        
+        self.present(chooseLocationVC, animated: true, completion: nil)
+    }
+    
 //    MARK: TextView delegate methods
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
@@ -217,13 +224,8 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        
         textView.text = ""
         textView.textColor = Constants.color.navy
-        
-        let chooseLocationVC = ChooseLocationViewController(nibName: "ChooseLocationViewController", bundle: nil)
-        
-        self.present(chooseLocationVC, animated: true, completion: nil)
     }
     
     /*
