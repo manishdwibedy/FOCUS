@@ -684,6 +684,17 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if segmentedOut.selectedSegmentIndex == 0
+        {
+            self.searchPlaces(query: searchBar.text!)
+        }
+        else if segmentedOut.selectedSegmentIndex == 1
+        {
+            self.searchEvents(query: searchBar.text!)
+        }
+    }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }
