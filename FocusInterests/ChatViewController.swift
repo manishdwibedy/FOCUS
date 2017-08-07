@@ -126,8 +126,9 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
         self.view.backgroundColor = Constants.color.navy
         self.navigationController?.navigationBar.titleTextAttributes = Constants.navBar.attrs
         self.navigationController?.navigationBar.barTintColor = Constants.color.navy
-        
         self.navigationItem.title = self.user["username"]! as? String
+        
+        print("\(self.navigationItem.backBarButtonItem?.target)")
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: .UIKeyboardWillHide, object: nil)
@@ -158,13 +159,17 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
                 VC.previous = .people
                 dropfromTop(view: self.view)
             }
-            
         }
         
     }
     
     @IBAction func backToOtherUserProfile(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        print("back to other user profile")
+        if goBackToOtherUser{
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func keyboardWillAppear(notification: NSNotification){

@@ -1133,6 +1133,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         let root = storyboard.instantiateViewController(withIdentifier: "otherUserProfileNavigation") as! UINavigationController
         VC?.user = self.userInfo
         VC?.messageUser = true
+        VC?.goBackToOtherUser = true
         
         root.navigationItem.hidesBackButton = true
         root.navigationBar.barTintColor = Constants.color.navy

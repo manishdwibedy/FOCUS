@@ -19,6 +19,8 @@ class ChooseLocationTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.contentView.backgroundColor = Constants.color.navy
+        self.tintColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

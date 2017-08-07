@@ -18,6 +18,9 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
         
         self.view.backgroundColor = Constants.color.navy
         
+        self.locationTableView.rowHeight = UITableViewAutomaticDimension
+        self.locationTableView.estimatedRowHeight = 70.0
+        
         self.locationSearchBar.delegate = self
         // search bar attributes
         let placeholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!]
@@ -51,6 +54,7 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
         
         UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonsInSearchBar, for: .normal)
         self.navBar.barTintColor = Constants.color.navy
+        self.navBar.titleTextAttributes = Constants.navBar.attrs
         
         self.locationTableView.delegate = self
         self.locationTableView.dataSource = self
@@ -76,8 +80,6 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
             locationCell.locationNameLabel.isHidden = true
             locationCell.locationAddressLabel.isHidden = true
             locationCell.locationDistanceLabel.isHidden = true
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-            tableView.cellForRow(at: indexPath)?.isSelected = true
         }else{
             locationCell.currentLocationLabel.isHidden = true
             locationCell.locationNameLabel.isHidden = false
@@ -89,7 +91,42 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0{
+            return 50
+        }else{
+            return 65
+        }
+    }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.endEditing(true)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.endEditing(true)
     }
     
     /*
