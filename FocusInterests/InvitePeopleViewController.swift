@@ -227,6 +227,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 self.updatePlaces()
             }
             if !self.isMeetup{
+                self.followingPlaces = self.followingPlaces.sorted(by: {
+                    $0.distance < $1.distance
+                })
                 self.places = self.followingPlaces + self.places
                 
                 self.filtered = self.places
@@ -780,8 +783,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
                 
-                self.places.append(place)
-                self.filtered.append(place)
+                if !self.places.contains(place){
+                    self.places.append(place)
+                    self.filtered.append(place)
+                }
             }
             self.tableView.reloadData()
         }
