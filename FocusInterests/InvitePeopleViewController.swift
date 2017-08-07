@@ -972,8 +972,6 @@ extension InvitePeopleViewController: GMSAutocompleteViewControllerDelegate {
 extension InvitePeopleViewController{
     func searchPlaces(query: String){
         if(query.characters.count > 0){
-            self.filtered.removeAll()
-            tableView.reloadData()
             let url = "https://api.yelp.com/v3/businesses/search"
             
             let headers: HTTPHeaders = [
@@ -1012,6 +1010,9 @@ extension InvitePeopleViewController{
                 let json = JSON(data: response.data!)
                 print(json)
                 _ = self.places.count
+                
+                self.filtered.removeAll()
+                
                 for (_, business) in json["businesses"].enumerated(){
                     let id = business.1["id"].stringValue
                     let name = business.1["name"].stringValue
