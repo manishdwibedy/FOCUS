@@ -77,7 +77,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             if row >= 1{
                 row += 1
             }
-            if row == 1{
+            if row == 2{
                 let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
                 swCell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
                 swCell?.titleLabel.text = Constants.settings.cellTitles[row]
@@ -117,8 +117,13 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     
     // TableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var row = indexPath.row
+        if AuthApi.getLoginType() == .Facebook || AuthApi.getLoginType() == LoginTypes.Google{
+            row += 1
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
-        switch indexPath.row{
+        switch row{
             case 0:
                 let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
                 self.present(selectInterests, animated: true, completion: nil)
