@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="chooseLocationCell" rowHeight="66" id="KGk-i7-Jjw" customClass="ChooseLocationTableViewCell" customModule="FocusInterests" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="370" height="64.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aON-SE-nd6">
+                        <rect key="frame" x="8" y="9" width="354" height="24"/>
+                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNM-k8-2Xa">
+                        <rect key="frame" x="8" y="34" width="37" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20.5" id="wIh-Se-KO8"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                        <color key="textColor" red="0.32934069633483887" green="0.46749716997146606" blue="0.62508267164230347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72Z-yz-oqP">
+                        <rect key="frame" x="52" y="34" width="37" height="21"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                        <color key="textColor" red="0.32934069633483887" green="0.46749716997146606" blue="0.62508267164230347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAk-PS-YBw">
+                        <rect key="frame" x="8" y="21" width="354" height="23.5"/>
+                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aON-SE-nd6" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="9UE-WU-Smg"/>
+                    <constraint firstItem="KNM-k8-2Xa" firstAttribute="leading" secondItem="aON-SE-nd6" secondAttribute="leading" id="JoN-dN-NJT"/>
+                    <constraint firstItem="aON-SE-nd6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="R0U-0f-OEC"/>
+                    <constraint firstItem="aON-SE-nd6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="SJA-sS-VhZ"/>
+                    <constraint firstItem="aON-SE-nd6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="YtG-q4-ymG"/>
+                    <constraint firstItem="KNM-k8-2Xa" firstAttribute="top" secondItem="aON-SE-nd6" secondAttribute="bottom" constant="1.5" id="cRL-aB-tl1"/>
+                    <constraint firstItem="eAk-PS-YBw" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="keb-su-P4G"/>
+                    <constraint firstItem="72Z-yz-oqP" firstAttribute="leading" secondItem="KNM-k8-2Xa" secondAttribute="trailing" constant="7.5" id="ktS-bP-UGe"/>
+                    <constraint firstItem="eAk-PS-YBw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="lDU-Lq-vKc"/>
+                    <constraint firstItem="eAk-PS-YBw" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="sTD-aM-pGF"/>
+                    <constraint firstItem="eAk-PS-YBw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xCs-fe-hgF"/>
+                    <constraint firstItem="72Z-yz-oqP" firstAttribute="baseline" secondItem="KNM-k8-2Xa" secondAttribute="baseline" id="ySL-ra-mon"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="currentLocationLabel" destination="eAk-PS-YBw" id="ns3-rF-tUb"/>
+                <outlet property="locationAddressLabel" destination="KNM-k8-2Xa" id="LRu-Z4-GSg"/>
+                <outlet property="locationDistanceLabel" destination="72Z-yz-oqP" id="6sc-V1-msQ"/>
+                <outlet property="locationNameLabel" destination="aON-SE-nd6" id="Q4c-X8-5KY"/>
+            </connections>
+            <point key="canvasLocation" x="49" y="48.5"/>
+        </tableViewCell>
+    </objects>
+</document>

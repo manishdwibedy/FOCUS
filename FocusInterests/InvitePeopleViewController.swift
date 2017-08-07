@@ -95,8 +95,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         let nib2 = UINib(nibName: "InvitePeopleEventCell", bundle: nil)
         tableView.register(nib2, forCellReuseIdentifier: "InvitePeopleEventCell")
-
-        searchBar.delegate = self
         
 //        MARK: Event and Location Bars
         self.currentLocation.backgroundColor = UIColor(red: 38/255.0, green: 83/255.0, blue: 126/255.0, alpha: 1.0)

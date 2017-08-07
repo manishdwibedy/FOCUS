@@ -237,6 +237,8 @@
 		EB0578641EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB0578621EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib */; };
 		EB1AF60D1F3900260005D97B /* ChooseLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AF60B1F3900260005D97B /* ChooseLocationViewController.swift */; };
 		EB1AF60E1F3900260005D97B /* ChooseLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1AF60C1F3900260005D97B /* ChooseLocationViewController.xib */; };
+		EB1AF6111F39041F0005D97B /* ChooseLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1AF60F1F39041F0005D97B /* ChooseLocationTableViewCell.swift */; };
+		EB1AF6121F39041F0005D97B /* ChooseLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1AF6101F39041F0005D97B /* ChooseLocationTableViewCell.xib */; };
 		EB2203871F1DE9D000F86B73 /* FollowersRequest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2203861F1DE9D000F86B73 /* FollowersRequest.storyboard */; };
 		EB2203891F1DEA8000F86B73 /* FollowersRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2203881F1DEA8000F86B73 /* FollowersRequestViewController.swift */; };
 		EB252F0B1EE9E9F7001C163D /* NewMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */; };
@@ -636,6 +638,8 @@
 		EB0578621EECCD49000B0413 /* TipPlaceReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipPlaceReviewTableViewCell.xib; sourceTree = "<group>"; };
 		EB1AF60B1F3900260005D97B /* ChooseLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseLocationViewController.swift; sourceTree = "<group>"; };
 		EB1AF60C1F3900260005D97B /* ChooseLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseLocationViewController.xib; sourceTree = "<group>"; };
+		EB1AF60F1F39041F0005D97B /* ChooseLocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseLocationTableViewCell.swift; sourceTree = "<group>"; };
+		EB1AF6101F39041F0005D97B /* ChooseLocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseLocationTableViewCell.xib; sourceTree = "<group>"; };
 		EB2203861F1DE9D000F86B73 /* FollowersRequest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FollowersRequest.storyboard; sourceTree = "<group>"; };
 		EB2203881F1DEA8000F86B73 /* FollowersRequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersRequestViewController.swift; sourceTree = "<group>"; };
 		EB252F091EE9E9F7001C163D /* NewMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -1378,6 +1382,8 @@
 			children = (
 				EB1AF60B1F3900260005D97B /* ChooseLocationViewController.swift */,
 				EB1AF60C1F3900260005D97B /* ChooseLocationViewController.xib */,
+				EB1AF60F1F39041F0005D97B /* ChooseLocationTableViewCell.swift */,
+				EB1AF6101F39041F0005D97B /* ChooseLocationTableViewCell.xib */,
 			);
 			name = ChooseLocationView;
 			sourceTree = "<group>";
@@ -1740,6 +1746,7 @@
 				5B71D7081ED1837A0093A3F5 /* commentView.xib in Resources */,
 				5B3F05761ED907B10057F596 /* Settings.storyboard in Resources */,
 				5BAB87A61EC972890064E5EC /* search_people.storyboard in Resources */,
+				EB1AF6121F39041F0005D97B /* ChooseLocationTableViewCell.xib in Resources */,
 				5B33C05C1EE113CA007A8188 /* MapPinInfoView.xib in Resources */,
 				EBD980881EEB64C400FC54C1 /* OtherLikesTableViewCell.xib in Resources */,
 				EB3EA2431EE7707500F61D38 /* InviteListTableViewCell.xib in Resources */,
@@ -2188,6 +2195,7 @@
 				5B71D6FA1ED181D10093A3F5 /* SendInvitationsViewController.swift in Sources */,
 				5B71D70D1ED184880093A3F5 /* FollowProfileCell.swift in Sources */,
 				EB252F0B1EE9E9F7001C163D /* NewMessageTableViewCell.swift in Sources */,
+				EB1AF6111F39041F0005D97B /* ChooseLocationTableViewCell.swift in Sources */,
 				5B69158C1ED7D80100093AD5 /* NewUserPopupViewController.swift in Sources */,
 				5B6AFA741ED1906900A82104 /* GMUPolygon.m in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,

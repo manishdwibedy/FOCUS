@@ -9,11 +9,11 @@
 import UIKit
 import AMPopTip
 
-class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UISearchBarDelegate{
+class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate{
 
     // change location stack
     @IBOutlet weak var currentLocationStack: UIStackView!
-    @IBOutlet weak var searchLocationSearchBar: UISearchBar!
+    @IBOutlet weak var searchLocationTextField: UITextField!
     @IBOutlet weak var currentLocationButton: UIButton!
     @IBOutlet weak var mainChangeLocationView: UIView!
     @IBOutlet weak var searchLocationTableView: UITableView!
@@ -50,45 +50,6 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         // Do any additional setup after loading the view.
         
         
-        let searchBarPlaceholderlaceholderAttributes: [String : AnyObject] = [NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!]
-        
-        self.searchLocationSearchBar.delegate = self
-        self.searchLocationSearchBar.layer.borderWidth = 1
-        self.searchLocationSearchBar.layer.borderColor = UIColor.white.cgColor
-        self.addFocusButton.setTitle("Add FOCUS", for: .normal)
-        self.addFocusButton.setTitleColor(Constants.color.navy, for: .normal)
-        self.addFocusButton.setTitle("Add FOCUS", for: .selected)
-        self.addFocusButton.setTitleColor(Constants.color.navy, for: .selected)
-        
-        guard let textFieldInsideSearchBar = self.searchLocationSearchBar.value(forKey: "_searchField") as? UITextField else {
-            return
-        }
-        
-        self.searchLocationSearchBar.setValue("Cancel", forKey:"_cancelButtonText")
-        
-        let cancelButtonsInSearchBar: [String: AnyObject] = [NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!]
-        
-        let attributedPlaceholder: NSAttributedString = NSAttributedString(string: "Change Location", attributes: searchBarPlaceholderlaceholderAttributes)
-        
-        textFieldInsideSearchBar.attributedPlaceholder = attributedPlaceholder
-        textFieldInsideSearchBar.textAlignment = .left
-        textFieldInsideSearchBar.textColor = UIColor.lightGray
-        textFieldInsideSearchBar.tintColor = UIColor.lightGray
-        textFieldInsideSearchBar.backgroundColor = UIColor.white
-        
-        let glassIconView = textFieldInsideSearchBar.leftView as! UIImageView
-        glassIconView.frame = CGRect(x: 0, y: 0, width: 13, height: 18)
-        glassIconView.image = #imageLiteral(resourceName: "Pin icon x1")
-        
-        glassIconView.tintColor = UIColor.red
-        
-        textFieldInsideSearchBar.clearButtonMode = .whileEditing
-        let clearButton = textFieldInsideSearchBar.value(forKey: "clearButton") as! UIButton
-        clearButton.setImage(clearButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: .normal)
-        clearButton.tintColor = UIColor.lightGray
-        
-        UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonsInSearchBar, for: .normal)
-        
         self.mainStackView.layer.cornerRadius = 5.0
         self.mainAddFocusView.layer.cornerRadius = 5.0
         self.mainChangeLocationView.layer.cornerRadius = 5.0
@@ -104,16 +65,13 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         self.addFocusTableView.register(interestCell, forCellReuseIdentifier: "singleInterestCell")
         self.addFocusStack.removeArrangedSubview(self.addFocusTableView)
         
-        self.searchLocationTableView.delegate = self
-        self.searchLocationTableView.dataSource = self
-        self.searchLocationTableView.layer.cornerRadius = 5.0
+        self.searchLocationTextField.delegate = self
+        self.searchLocationTextField.backgroundColor = UIColor(red: 38/255.0, green: 83/255.0, blue: 126/255.0, alpha: 1.0)
+        self.searchLocationTextField.attributedPlaceholder = NSAttributedString(string: "Current Location", attributes: [NSForegroundColorAttributeName: UIColor.white])
         
-        
-        let currentLocationNib = UINib(nibName: "SingleInterestTableViewCell", bundle: nil)
-        self.searchLocationTableView.register(currentLocationNib, forCellReuseIdentifier: "singleInterestCell")
-        let searchPlaceCell = UINib(nibName: "SearchPlaceCell", bundle: nil)
-        self.searchLocationTableView.register(searchPlaceCell, forCellReuseIdentifier: "SearchPlaceCell")
-        self.currentLocationStack.removeArrangedSubview(self.searchLocationTableView)
+        let locationImageView = UIImageView(image: #imageLiteral(resourceName: "location").withRenderingMode(UIImageRenderingMode.alwaysTemplate))
+        locationImageView.backgroundColor = UIColor.white
+        self.searchLocationTextField.leftView = locationImageView
         
         hideKeyboardWhenTappedAround()
     }
@@ -252,41 +210,6 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
-    
-//    MARK: Search Bar Delegate Methods
-
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        self.addFocusStack.removeArrangedSubview(self.addFocusTableView)
-        self.addFocusStack.sendSubview(toBack: self.addFocusTableView)
-        self.searchLocationSearchBar.setShowsCancelButton(true, animated: true)
-        self.currentLocationStack.addArrangedSubview(self.searchLocationTableView)
-        self.view.bringSubview(toFront: self.currentLocationStack)
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.searchLocationSearchBar.text = ""
-        self.searchLocationSearchBar.setShowsCancelButton(false, animated: true)
-        self.currentLocationStack.endEditing(true)
-        self.currentLocationStack.removeArrangedSubview(self.searchLocationTableView)
-        self.view.sendSubview(toBack: self.currentLocationStack)
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.searchLocationSearchBar.text = ""
-        self.searchLocationSearchBar.setShowsCancelButton(false, animated: true)
-        self.currentLocationStack.removeArrangedSubview(self.searchLocationTableView)
-        self.view.sendSubview(toBack: self.currentLocationStack)
-        self.view.endEditing(true)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.searchLocationSearchBar.text = ""
-        self.searchLocationSearchBar.setShowsCancelButton(false, animated: true)
-        self.currentLocationStack.removeArrangedSubview(self.searchLocationTableView)
-        self.view.sendSubview(toBack: self.currentLocationStack)
-        self.view.endEditing(true)
-    }
-    
 //    MARK: TextView delegate methods
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
@@ -294,10 +217,13 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text != "" {
-            textView.text = ""
-        }
+        
+        textView.text = ""
         textView.textColor = Constants.color.navy
+        
+        let chooseLocationVC = ChooseLocationViewController(nibName: "ChooseLocationViewController", bundle: nil)
+        
+        self.present(chooseLocationVC, animated: true, completion: nil)
     }
     
     /*
