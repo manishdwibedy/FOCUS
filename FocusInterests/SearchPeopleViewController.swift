@@ -142,12 +142,20 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                                 self.followers.append(user)
                                             }
                                             
-                                            
-                                            self.followers.sort {
+                                            self.followers = self.followers.sorted {
                                                 if $0.hasPin && $1.hasPin{
                                                     return $0.pinDistance < $1.pinDistance
                                                 }
-                                                return $0.hasPin && !$1.hasPin
+                                                if $0.hasPin{
+                                                    return $0.hasPin
+                                                }
+                                                else if $1.hasPin{
+                                                    return $1.hasPin
+                                                }
+                                                else{
+                                                    return $0.username! < $1.username!
+                                                }
+                                                
                                             }
                                             
                                             if self.followers.count == followingCount && self.people.count > 0{
@@ -158,6 +166,9 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                                     }
                                                     if $0.hasPin{
                                                         return $0.hasPin
+                                                    }
+                                                    else if $1.hasPin{
+                                                        return $1.hasPin
                                                     }
                                                     else{
                                                         return $0.username! < $1.username!
@@ -240,6 +251,21 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                             }
                                         }
                                         
+                                        self.followers = self.followers.sorted {
+                                            if $0.hasPin && $1.hasPin{
+                                                return $0.pinDistance < $1.pinDistance
+                                            }
+                                            if $0.hasPin{
+                                                return $0.hasPin
+                                            }
+                                            else if $1.hasPin{
+                                                return $1.hasPin
+                                            }
+                                            else{
+                                                return $0.username! < $1.username!
+                                            }
+                                            
+                                        }
                                         
                                         self.people = self.followers + self.people
                                         self.filtered = self.people
