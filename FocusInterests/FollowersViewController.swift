@@ -10,7 +10,8 @@ import UIKit
 import Contacts
 
 class FollowersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var inviteContactsButton: UIButton!
+    
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     
@@ -34,8 +35,6 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         
         navBar.titleTextAttributes = Constants.navBar.attrs
-        
-        self.inviteContactsButton.roundCorners(radius: 9.0)
         
         let nib = UINib(nibName: "FollowProfileCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "FollowProfileCell")
@@ -180,19 +179,5 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func backPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    @IBAction func inviteUsers(_ sender: Any) {
-        if CNContactStore.authorizationStatus(for: .contacts) == .authorized{
-            let ivc = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "home") as! InviteViewController
-            ivc.type = "invite"
-            self.present(ivc, animated: true, completion: { _ in })
-        }
-        else{
-            self.store.requestAccess(for: CNEntityType.contacts) { (isGranted, error) in
-                let ivc = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "home") as! InviteViewController
-                ivc.type = "invite"
-                self.present(ivc, animated: true, completion: { _ in })
-            }
-        }
-    }
-    
+   
 }

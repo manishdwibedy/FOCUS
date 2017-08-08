@@ -94,10 +94,6 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
         self.endEditing(true)
     }
     
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        return true
-    }
-    
     @IBAction func commentButtonPressed(_ sender: Any) {
         UIView.animate(withDuration: 0.3) {
             self.commentPostView.isHidden = !self.commentPostView.isHidden

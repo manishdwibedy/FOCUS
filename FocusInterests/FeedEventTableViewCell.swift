@@ -10,11 +10,15 @@ import UIKit
 
 class FeedEventTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabelButton: UIButton!
+    @IBOutlet weak var nameLabelButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var usernameImage: UIButton!
     @IBOutlet weak var eventNameLabelButton: UIButton!
+    
     @IBOutlet weak var attendButton: UIButton!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var eventImage: UIButton!
+    @IBOutlet weak var isAttendLabel: UILabel!
+    @IBOutlet weak var isAttendingLabelWidth: NSLayoutConstraint!
     
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var interestLabel: UILabel!
@@ -25,6 +29,12 @@ class FeedEventTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.nameLabelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.eventNameLabelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.isAttendLabel.adjustsFontSizeToFitWidth = true
+        self.isAttendingLabelWidth.constant = self.isAttendLabel.intrinsicContentSize.width
+        
         self.nameLabelButton.setTitle("arya", for: .normal)
         self.eventNameLabelButton.setTitle("Event B", for: .normal)
         addGreenDot(label: self.interestLabel, content: "Food")

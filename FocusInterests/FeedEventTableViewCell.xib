@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -111,14 +111,20 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKT-hd-BMb">
                                                         <rect key="frame" x="0.0" y="0.0" width="69" height="45"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="69" id="awg-4n-tJB"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
                                                         <inset key="imageEdgeInsets" minX="-3" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Button">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is attending" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUT-hG-PZG">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is attending" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUT-hG-PZG">
                                                         <rect key="frame" x="72" y="0.0" width="74" height="45"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="74" id="rD3-mo-62b"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -203,8 +209,12 @@
                 </subviews>
                 <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
+                    <constraint firstItem="xWk-g0-bs7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17.5" id="1xS-3W-3En"/>
+                    <constraint firstAttribute="trailing" secondItem="xWk-g0-bs7" secondAttribute="trailing" constant="17.5" id="AiO-to-LZs"/>
+                    <constraint firstAttribute="bottom" secondItem="xWk-g0-bs7" secondAttribute="bottom" constant="5" id="QZI-yP-Aig"/>
                     <constraint firstItem="xWk-g0-bs7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Sl9-xw-dmN"/>
                     <constraint firstItem="xWk-g0-bs7" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="agF-UA-MdP"/>
+                    <constraint firstItem="xWk-g0-bs7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="y6S-FL-UYO"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -217,7 +227,10 @@
                 <outlet property="globeImage" destination="NH6-6I-bPM" id="T08-gg-nM6"/>
                 <outlet property="interestLabel" destination="FaT-ew-COK" id="M0f-ln-znn"/>
                 <outlet property="inviteButton" destination="6h9-Za-eIz" id="fFo-oD-2Ox"/>
+                <outlet property="isAttendLabel" destination="PUT-hG-PZG" id="bep-S0-FxU"/>
+                <outlet property="isAttendingLabelWidth" destination="rD3-mo-62b" id="SfN-aw-kal"/>
                 <outlet property="nameLabelButton" destination="rKT-hd-BMb" id="JRb-gk-RHh"/>
+                <outlet property="nameLabelButtonWidth" destination="awg-4n-tJB" id="1K9-YD-uhu"/>
                 <outlet property="timeSince" destination="R6k-rZ-uId" id="Lnf-am-lNz"/>
                 <outlet property="usernameImage" destination="aFf-ur-QOn" id="QVq-j8-BfR"/>
             </connections>

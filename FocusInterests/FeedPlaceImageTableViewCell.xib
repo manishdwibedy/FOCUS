@@ -173,7 +173,7 @@
                                             <action selector="postButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vbn-fQ-DeI"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="asdfkjas;dlkfja;sldfkj;aslkdfasfd" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TKb-iz-bg6">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKb-iz-bg6">
                                         <rect key="frame" x="4" y="1" width="284" height="29"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,7 +187,6 @@
                                     <constraint firstAttribute="bottom" secondItem="TKb-iz-bg6" secondAttribute="bottom" constant="5" id="IyM-Hk-1hC"/>
                                     <constraint firstItem="TKb-iz-bg6" firstAttribute="top" secondItem="yWv-EF-ORj" secondAttribute="top" constant="1" id="SVh-Sn-8dL"/>
                                     <constraint firstItem="BZf-bF-Dsd" firstAttribute="leading" secondItem="TKb-iz-bg6" secondAttribute="trailing" constant="4" id="TBp-xi-WKS"/>
-                                    <constraint firstAttribute="height" constant="35" id="bBQ-Tl-p7A"/>
                                     <constraint firstItem="TKb-iz-bg6" firstAttribute="leading" secondItem="yWv-EF-ORj" secondAttribute="leading" constant="4" id="ba3-MJ-DC2"/>
                                     <constraint firstAttribute="trailing" secondItem="BZf-bF-Dsd" secondAttribute="trailing" id="nIG-EM-wad"/>
                                 </constraints>

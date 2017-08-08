@@ -263,7 +263,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
          FeedSixCell - event like
          */
         var cell: UITableViewCell?
-        //2 and 6
+        
         
         let feed = self.feeds[indexPath.row]
         
@@ -407,6 +407,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             let feedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
             feedEventCell.globeImage.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
             feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
+            feedEventCell.nameLabelButtonWidth.constant = feedEventCell.nameLabelButton.intrinsicContentSize.width
+            
             cell = feedEventCell
         }
         else if feed.type == .Like{

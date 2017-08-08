@@ -52,7 +52,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="K9d-P1-Kvv" firstAttribute="leading" secondItem="Hgf-jU-x0C" secondAttribute="trailing" constant="8" id="3K1-K0-602"/>
                                     <constraint firstAttribute="trailing" secondItem="K9d-P1-Kvv" secondAttribute="trailing" constant="1" id="LoC-9w-mtT"/>
@@ -206,6 +206,7 @@
                     <constraint firstItem="czB-DF-TUO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="PdW-LD-OMs"/>
                     <constraint firstItem="czB-DF-TUO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UbH-dB-MlU"/>
                     <constraint firstAttribute="trailingMargin" secondItem="czB-DF-TUO" secondAttribute="trailing" constant="1" id="XRG-OH-uyx"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="czB-DF-TUO" secondAttribute="bottom" constant="6" id="hDM-V2-bdg"/>
                     <constraint firstItem="czB-DF-TUO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5.5" id="miC-hM-Hgr"/>
                 </constraints>
             </tableViewCellContentView>
