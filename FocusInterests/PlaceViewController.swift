@@ -32,6 +32,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     
     var place: Place?
     var rating = [PlaceRating]()
+    var selectedCommentRating = 0
     var currentLocation: CLLocation?
     var map: MapViewController? = nil
     
@@ -635,7 +636,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         
         if let rating = self.ratingID{
             comments.child(rating).setValue([
-                "rating": self.rating ?? 0,
+                "rating": self.selectedCommentRating ?? 0,
                 "comment": reviewsTextView.text,
                 "date": Date().timeIntervalSince1970,
                 "user": AuthApi.getFirebaseUid()!
@@ -643,7 +644,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         }
         else{
             comment.setValue([
-                "rating": self.rating ?? 0,
+                "rating": self.selectedCommentRating ?? 0,
                 "comment": reviewsTextView.text,
                 "date": Date().timeIntervalSince1970,
                 "user": AuthApi.getFirebaseUid()!
@@ -1131,21 +1132,24 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         self.starRatingTag = sender.tag
         switch sender.tag{
         case 1:
-            //            self.ratingsImage.image = #imageLiteral(resourceName: "Star light yellow")
             self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star light yellow"))
+            self.selectedCommentRating = 1
             break
         case 2:
             self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star dark yellow"))
-            //            self.ratingsImage.image = #imageLiteral(resourceName: "Star dark yellow")
+            self.selectedCommentRating = 2
             break
         case 3:
             self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star light orange"))
+            self.selectedCommentRating = 3
             break
         case 4:
             self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star dark orange"))
+            self.selectedCommentRating = 4
             break
         case 5:
             self.setImage(select: sender.tag, image: #imageLiteral(resourceName: "Star red"))
+            self.selectedCommentRating = 5
             break
         default:
             break
