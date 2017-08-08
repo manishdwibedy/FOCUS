@@ -524,7 +524,18 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             }
             
             let place_location = CLLocation(latitude: place_cell.latitude, longitude: place_cell.longitude)
-            cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
+            
+            if self.place != nil{
+                let location = CLLocation(latitude: (self.place?.coordinate.latitude)!, longitude: (self.place?.coordinate.longitude)!)
+                cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation:
+                location)
+                
+            }
+            else{
+                cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
+                
+            }
+            
             if place_cell.categories.count > 0{
                 addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place_cell.categories[0].alias))
             }
@@ -589,8 +600,17 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price!)"
             
             let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-            cell.distance.text = getDistance(fromLocation: eventLocation, toLocation: AuthApi.getLocation()!)
-        
+            
+            if self.place != nil{
+                let location = CLLocation(latitude: (self.place?.coordinate.latitude)!, longitude: (self.place?.coordinate.longitude)!)
+                cell.distanceLabel.text = getDistance(fromLocation: eventLocation, toLocation:
+                    location)
+                
+            }
+            else{
+                cell.distanceLabel.text = getDistance(fromLocation: eventLocation, toLocation: AuthApi.getLocation()!)
+                
+            }
             
             if (event.creator?.characters.count)! > 0{
                 let reference = Constants.storage.event.child("\(event.id!).jpg")
@@ -706,6 +726,16 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        
+        self.searchBar.text = ""
+        if segmentedOut.selectedSegmentIndex == 0{
+            self.filtered = self.places
+            self.tableView.reloadData()
+        }
+        else{
+            self.filtered = self.events
+            self.tableView.reloadData()
+        }
     }
     
     @IBAction func back(_ sender: Any) {
