@@ -88,7 +88,18 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         self.distanceLabel.text = cell.distance.text
         cell.interest.text = "\(event!.attendeeCount) attendees"
         cell.guestCount.isHidden = true
-        addGreenDot(label: self.interestLabel, content: (event?.category)!)
+        if let pinFocus = event?.category{
+            if pinFocus.characters.first == "●"{
+                let startIndex = pinFocus.index(pinFocus.startIndex, offsetBy: 2)
+                let interestStringWithoutDot = pinFocus.substring(from: startIndex)
+                addGreenDot(label: self.interestLabel, content: interestStringWithoutDot)
+            }else{
+                addGreenDot(label: self.interestLabel, content: pinFocus)
+            }
+        }else{
+            addGreenDot(label: self.interestLabel, content: "N.A.")
+        }
+//        addGreenDot(label: self.interestLabel, content: (event?.category)!)
         cell.price.text = event?.price == 0 ? "Free" : "$\(event?.price)"
         
         cell.inviteButton.addTarget(self, action: #selector(self.goToInvitePage), for: .touchUpInside)

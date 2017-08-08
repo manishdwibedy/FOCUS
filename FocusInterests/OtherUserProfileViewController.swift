@@ -347,7 +347,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventsCollectionCell", for: indexPath) as!UserProfileCollectionViewCell
         
-        if indexPath.row == 1{
+        if indexPath.row == 0{
             self.eventsCollectionViewHeight.constant = eventCell.frame.height
         }else if indexPath.row == 3 || indexPath.row == 5{
             self.eventsCollectionViewHeight.constant += (eventCell.frame.height + 20)

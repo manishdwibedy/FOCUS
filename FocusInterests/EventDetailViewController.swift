@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import SDWebImage
 import Firebase
 import GeoFire
@@ -42,7 +43,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var eventsTableView: UITableView!
     @IBOutlet weak var addCommentView: UIView!
-    @IBOutlet weak var userProfileImage: UIImageView!
     
     @IBOutlet weak var moreCommentsButton: UIButton!
     @IBOutlet weak var postCommentsButton: UIButton!
@@ -175,13 +175,19 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
         
         addressLabel.text = event?.fullAddress?.replacingOccurrences(of: ";;", with: ", ")
-        self.descriptionTextView.text = event?.eventDescription
+        self.descriptionTextView.textContainer.maximumNumberOfLines = 0
+        self.descriptionTextView.textContainer.lineBreakMode = .byTruncatingTail
+    
+        guard let eventDescription = event?.eventDescription else {
+            return
+        }
+        
+        let newEventDescription = eventDescription.replacingOccurrences(of: "^\\s*", with: "", options: .regularExpression, range: nil)
+        self.descriptionTextView.text = newEventDescription
+        
 
-        var frame = self.descriptionTextView.frame
-        
-        frame.size = self.descriptionTextView.contentSize
-        
-        self.descriptionTextView.frame = frame
+        self.descriptionTextView.textContainerInset = .zero
+        self.descriptionTextView.textContainer.lineFragmentPadding = 0
         
         eventDateDF.dateFormat = "MMM d, hh:mm a"
         if (event?.creator?.characters.count)! > 0{
@@ -231,16 +237,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     if value != nil
                     {
                         let placeString = "Add a comment"
-                        self.hostNameLabel.text = value?["username"] as? String
-                        self.fullnameLabel.text = value?["fullname"] as? String
+                        
                         var placeHolder = NSMutableAttributedString()
                         placeHolder = NSMutableAttributedString(string:placeString, attributes: [NSFontAttributeName:UIFont(name: "Avenir Book", size: 15.0)!])
                         placeHolder.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 255, green: 255, blue: 255, alpha: 0.8), range:NSRange(location:0,length:placeString.characters.count))
                         self.commentTextField.attributedPlaceholder = placeHolder
                         
-                        if let url = URL(string: (value?["image_string"] as? String)!){
-                            self.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
-                        }
                     }
                     
                 })
@@ -365,23 +367,28 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         titlelabel.textColor = UIColor.white
         titlelabel.font = UIFont(name: "Avenir-Black", size: 18.0)
         titlelabel.backgroundColor = UIColor.clear
+        titlelabel.baselineAdjustment = .alignCenters
         titlelabel.adjustsFontSizeToFitWidth = true
         titlelabel.textAlignment = .center
         self.navBar.topItem?.titleView = titlelabel
         
         let eventLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double((event?.longitude!)!)!)
         
-        self.distanceLabelInNavBar.titleLabel?.adjustsFontSizeToFitWidth = true
+        if titlelabel.intrinsicContentSize.width <= 100{
+            self.distanceLabelInNavBar.frame.size.width = 70
+            self.distanceLabelInNavBar.titleLabel?.textAlignment = .right
+            self.distanceLabelInNavBar.titleLabel?.baselineAdjustment = .alignCenters
+        }else{
+            self.distanceLabelInNavBar.titleLabel?.adjustsFontSizeToFitWidth = true
+        }
+    
         self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: eventLocation,addBracket: false, precision: 1), for: .normal)
         
         hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.descriptionTextView.textContainer.maximumNumberOfLines = 3
-        self.descriptionTextView.textContainer.lineBreakMode = .byTruncatingTail
-        
+        super.viewWillAppear(animated)        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -710,7 +717,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     return
                 }
                 
-                eventCell?.userProfileImage.sd_setImage(with: url, placeholderImage: placeholderImage, options: SDWebImageOptions.highPriority, completed: nil)
+                
                 
                 
             })
@@ -820,7 +827,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     func setupViewsAndButton(){
-        userProfileImage.roundedImage()
         
         moreCommentsButton.layer.borderWidth = 1
         postCommentsButton.layer.borderWidth = 1
@@ -849,7 +855,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     @IBAction func showComments(_ sender: Any) {
         
-        
+    
         let storyboard = UIStoryboard(name: "Comments", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
         ivc.type = "event"
