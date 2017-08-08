@@ -1314,7 +1314,7 @@ func matchingUserInterest(user: User) -> Int{
 }
 
 func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ user: [Event]) -> Void){
-
+    var eventCount = 0
     var suggestions = [Event]()
     var eventDF = DateFormatter()
     eventDF.dateFormat = "MMM d, h:mm a"
@@ -1333,11 +1333,18 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
                                             event.id = id
                                             
                                             if let startDate = eventDF.date(from: event.date!), startDate > Date(){
+                                                eventCount += 1
                                                 suggestions.append(event)
                                             }
                                         }
                                         
-                                        if suggestions.count == limit{
+                                        if eventCount == suggestions.count || suggestions.count == limit{
+                                            suggestions.sort(by: {
+                                                if let event1 = eventDF.date(from: $0.date!), let event2 = eventDF.date(from: $1.date!){
+                                                    return event1 < event2
+                                                }
+                                                return true
+                                            })
                                             gotEvents(suggestions)
                                         }
                                     }
