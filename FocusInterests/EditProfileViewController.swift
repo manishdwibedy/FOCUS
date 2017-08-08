@@ -8,6 +8,7 @@
 
 import UIKit
 import SCLAlertView
+import SDWebImage
 
 class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
 
@@ -97,6 +98,27 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
         toolBar.isUserInteractionEnabled = true
         self.genderTf.inputAccessoryView = toolBar
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.profilePhotoView.image = #imageLiteral(resourceName: "placeholder_people")
+        self.profilePhotoView.roundedImage()
+        if let url = URL(string: AuthApi.getUserImage()!){
+            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                (receivedSize :Int, ExpectedSize :Int) in
+                
+            }, completed: {
+                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                
+                if image != nil && finished{
+                    self.profilePhotoView.roundedImage()
+                    self.profilePhotoView.image = crop(image: image!, width: 85, height: 85)
+                }
+            })
+        }
+
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -160,13 +182,6 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
                 self.emailTf.text = email_str
                 self.phoneTf.text = phone_str
                 self.genderTf.text = gender_str
-                
-                // SET PROFILE PHOTO
-                let image_str = dictionnary!["image_string"] as! String
-                self.profilePhotoView.roundedImage()
-                self.profilePhotoView.sd_setImage(with: URL(string: image_str), placeholderImage: UIImage(named: "empty_event"))
-                
-                
             }
             
         }

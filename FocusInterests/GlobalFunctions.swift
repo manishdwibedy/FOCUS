@@ -249,7 +249,14 @@ func uploadImage(image:UIImage, path: StorageReference)
     metadata.contentType = "image/jpeg"
     
     _ = AuthApi.getFirebaseUid()
-    let uploadTask = path.putData(localFile!, metadata: metadata)
+    let uploadTask = path.putData(localFile!, metadata: metadata, completion: {metadata, error in
+        if error == nil{
+            AuthApi.set(userImage: metadata?.downloadURLs?[0].absoluteString)
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues([
+                "image_string": metadata?.downloadURLs?[0].absoluteString
+                ])
+        }
+    })
     
     uploadTask.observe(.progress) { snapshot in
         if let progress = snapshot.progress {

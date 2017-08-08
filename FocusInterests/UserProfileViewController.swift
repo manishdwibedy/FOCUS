@@ -330,6 +330,20 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.userImage.image = #imageLiteral(resourceName: "placeholder_people")
+        if let url = URL(string: AuthApi.getUserImage()!){
+            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                (receivedSize :Int, ExpectedSize :Int) in
+                
+            }, completed: {
+                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                
+                if image != nil && finished{
+                    self.userImage.image = crop(image: image!, width: 85, height: 85)
+                }
+            })
+        }
     }
     
 //    MARK: COLLECTIONVIEW DELEGATE METHODS
@@ -483,24 +497,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                         
                     }
                 }
-                
-                self.userImage.image = #imageLiteral(resourceName: "empty_event")
-                if let url = URL(string: image_string){
-                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                        (receivedSize :Int, ExpectedSize :Int) in
-                        
-                    }, completed: {
-                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                        
-                        if image != nil && finished{
-                            self.userImage.image = crop(image: image!, width: 85, height: 85)
-                        }
-                    })
-                }
-//                self.userImage.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
-                
             }
-
         })
         
         if !otherUser{
