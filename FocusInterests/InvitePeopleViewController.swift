@@ -603,12 +603,12 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             
             if self.place != nil{
                 let location = CLLocation(latitude: (self.place?.coordinate.latitude)!, longitude: (self.place?.coordinate.longitude)!)
-                cell.distanceLabel.text = getDistance(fromLocation: eventLocation, toLocation:
+                cell.distance.text = getDistance(fromLocation: eventLocation, toLocation:
                     location)
                 
             }
             else{
-                cell.distanceLabel.text = getDistance(fromLocation: eventLocation, toLocation: AuthApi.getLocation()!)
+                cell.distance.text = getDistance(fromLocation: eventLocation, toLocation: AuthApi.getLocation()!)
                 
             }
             
