@@ -549,7 +549,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                     }
                 }
                 
-                self.userImage.image = #imageLiteral(resourceName: "empty_event")
+                self.userImage.image = #imageLiteral(resourceName: "placeholder_people")
                 if let url = URL(string: image_string){
                     SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
                         (receivedSize :Int, ExpectedSize :Int) in
@@ -561,9 +561,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                             self.userImage.image = crop(image: image!, width: 85, height: 85)
                         }
                     })
-                }
-                //                self.userImage.sd_setImage(with: URL(string: image_string), placeholderImage: UIImage(named: "empty_event"))
-                
+                }                
             }
             
         })
