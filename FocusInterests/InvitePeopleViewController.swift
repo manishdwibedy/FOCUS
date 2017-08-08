@@ -797,7 +797,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 if !self.places.contains(place){
                     self.places.append(place)
-                    self.filtered.append(place)
                 }
             }
             self.tableView.reloadData()
