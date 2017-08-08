@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -26,21 +26,27 @@
                             <constraint firstAttribute="width" constant="41" id="VX6-mE-TFA"/>
                         </constraints>
                     </imageView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="comment" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yco-yJ-cBW">
-                        <rect key="frame" x="75" y="12" width="226" height="41"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="comment" translatesAutoresizingMaskIntoConstraints="NO" id="Yco-yJ-cBW">
+                        <rect key="frame" x="75" y="12" width="226" height="36.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RB-L1-Zih">
-                        <rect key="frame" x="81" y="61" width="28.5" height="19.5"/>
+                        <rect key="frame" x="81" y="59" width="28.5" height="19.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19.5" id="Udl-Ab-Q5w"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASS-f0-e5q">
-                        <rect key="frame" x="9" y="61" width="65" height="19"/>
+                        <rect key="frame" x="9" y="59" width="65" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="uL6-LC-58r"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -48,20 +54,20 @@
                 </subviews>
                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="Yco-yJ-cBW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-11.25" id="4G1-q2-iL3"/>
+                    <constraint firstItem="xn0-vb-Ke6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="0tT-a6-3K2"/>
                     <constraint firstItem="7RB-L1-Zih" firstAttribute="leading" secondItem="ASS-f0-e5q" secondAttribute="trailing" constant="7" id="C0o-GH-Uft"/>
-                    <constraint firstItem="7RB-L1-Zih" firstAttribute="height" secondItem="ASS-f0-e5q" secondAttribute="height" id="DOP-yA-3mh"/>
+                    <constraint firstItem="ASS-f0-e5q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xn0-vb-Ke6" secondAttribute="bottom" constant="6" id="DcI-8Z-IHd"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="7RB-L1-Zih" secondAttribute="bottom" constant="1" id="GS3-jh-vcF"/>
                     <constraint firstItem="Yco-yJ-cBW" firstAttribute="leading" secondItem="7RB-L1-Zih" secondAttribute="leading" constant="-6" id="IbA-U0-mqh"/>
-                    <constraint firstItem="Yco-yJ-cBW" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="34" id="JtA-fA-VhP"/>
                     <constraint firstItem="Yco-yJ-cBW" firstAttribute="leading" secondItem="xn0-vb-Ke6" secondAttribute="trailing" constant="13" id="RUj-sI-rLw"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ASS-f0-e5q" secondAttribute="bottom" constant="1.5" id="S1p-cY-cbk"/>
                     <constraint firstItem="ASS-f0-e5q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="SC1-EA-1Mx"/>
-                    <constraint firstItem="ASS-f0-e5q" firstAttribute="top" secondItem="xn0-vb-Ke6" secondAttribute="bottom" constant="8" id="SWZ-Yb-Yzr"/>
-                    <constraint firstItem="7RB-L1-Zih" firstAttribute="top" secondItem="Yco-yJ-cBW" secondAttribute="bottom" constant="8" id="bn1-S9-Eh1"/>
-                    <constraint firstItem="xn0-vb-Ke6" firstAttribute="centerY" secondItem="Yco-yJ-cBW" secondAttribute="centerY" id="fJG-hg-cBT"/>
+                    <constraint firstItem="xn0-vb-Ke6" firstAttribute="top" secondItem="Yco-yJ-cBW" secondAttribute="top" id="Sds-cL-M4G"/>
+                    <constraint firstItem="Yco-yJ-cBW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="b4R-o8-xax"/>
+                    <constraint firstItem="7RB-L1-Zih" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Yco-yJ-cBW" secondAttribute="bottom" constant="6" id="bn1-S9-Eh1"/>
                     <constraint firstItem="7RB-L1-Zih" firstAttribute="centerY" secondItem="ASS-f0-e5q" secondAttribute="centerY" constant="0.25" id="kTa-CB-aBN"/>
-                    <constraint firstItem="7RB-L1-Zih" firstAttribute="top" secondItem="ASS-f0-e5q" secondAttribute="top" id="tvA-3H-dms"/>
                     <constraint firstItem="xn0-vb-Ke6" firstAttribute="centerX" secondItem="ASS-f0-e5q" secondAttribute="centerX" id="vgw-J9-nZS"/>
-                    <constraint firstItem="7RB-L1-Zih" firstAttribute="bottom" secondItem="ASS-f0-e5q" secondAttribute="bottom" constant="0.5" id="y7v-r9-Yag"/>
+                    <constraint firstItem="Yco-yJ-cBW" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="wCO-FD-c7B"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0035624755349816838" green="0.80395383883248728" blue="0.37541098387195382" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

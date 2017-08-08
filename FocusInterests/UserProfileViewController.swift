@@ -347,7 +347,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         
         if indexPath.row == 0{
             self.eventsViewHeight.constant = eventCell.frame.height
-        }else if indexPath.row == 3 || indexPath.row == 5{
+        }else if indexPath.row == 2 || indexPath.row == 4{
             self.eventsViewHeight.constant += (eventCell.frame.height + 20)
         }
         
