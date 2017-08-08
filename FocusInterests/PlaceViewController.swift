@@ -654,7 +654,6 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     }
 
     func checkIfFollowing(){
-        print("checking if being following")
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").queryOrdered(byChild: "placeID").queryEqual(toValue: place!.id).observeSingleEvent(of: .value, with: {snapshot in
             
             if let data = snapshot.value as? [String:Any]{
