@@ -155,6 +155,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                                                 message?.type = .image
                                             }
                                             
+                                            userMessage.lastMessageDate = Date(timeIntervalSince1970: (message_data?["date"] as? Double)!)
                                             self._messages.append(userMessage)
                                             
                                             if self._messages.count == self.userInfo.count{
