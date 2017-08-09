@@ -57,6 +57,7 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         parentVC?.present(VC, animated:true, completion:nil)
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -79,15 +80,16 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         cell.inviteButton.layer.shadowColor = UIColor.black.cgColor
         cell.inviteButton.layer.shadowRadius = 5.0
         self.eventNameLabel.setTitle(event!.title, for: .normal)
-        cell.dateAndTimeLabel.text = "7/20 9:00 P.M."
+        cell.dateAndTimeLabel.text = event?.date
         cell.placeDateAndTimeStack.addArrangedSubview(cell.dateAndTimeLabel)
         cell.dateAndTimeLabel.isHidden = false
-        cell.address.text = event?.shortAddress
-        cell.name.text = event?.title
-        cell.distance.text = "4.6 mi"
-        self.distanceLabel.text = cell.distance.text
+        cell.address.text = event!.shortAddress
+        cell.name.text = event!.title
+        
+        
         cell.interest.text = "\(event!.attendeeCount) attendees"
         cell.guestCount.isHidden = true
+        
         if let pinFocus = event?.category{
             if pinFocus.characters.first == "●"{
                 let startIndex = pinFocus.index(pinFocus.startIndex, offsetBy: 2)
@@ -99,7 +101,7 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         }else{
             addGreenDot(label: self.interestLabel, content: "N.A.")
         }
-//        addGreenDot(label: self.interestLabel, content: (event?.category)!)
+
         cell.price.text = event?.price == 0 ? "Free" : "$\(event?.price)"
         
         cell.inviteButton.addTarget(self, action: #selector(self.goToInvitePage), for: .touchUpInside)
@@ -111,12 +113,10 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         let reference = Constants.storage.event.child("\(event!.id!).jpg")
         
         reference.downloadURL(completion: { (url, error) in
-            
             if error != nil {
                 print(error?.localizedDescription ?? "")
                 return
             }
-            
             
             SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
                 (receivedSize :Int, ExpectedSize :Int) in
@@ -131,9 +131,8 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
                     cell.eventImage.addGestureRecognizer(tapGesture)
                 }
             })
-            
-            
         })
+        
         self.searchEventTableViewHeightConstraint.constant = cell.contentView.frame.size.height
         return cell
     }
@@ -146,13 +145,12 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         return 100
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        print("did select event detail cell")
-//        print("\(tableView.cellForRow(at: indexPath)?)")
 //        let inviteVC = UIStoryboard(name: "eventDetailVC", bundle: nil).instantiateViewController(withIdentifier: "EventDetailViewController") as! EventDetailViewController
-//        
+//        inviteVC.event = self.event
 //        parentVC?.present(inviteVC, animated: true, completion: nil)
-//    }
+    }
 
     func goToEventDetail(){
         let inviteVC = UIStoryboard(name: "eventDetailVC", bundle: nil).instantiateViewController(withIdentifier: "EventDetailViewController") as! EventDetailViewController

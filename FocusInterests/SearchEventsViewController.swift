@@ -378,10 +378,12 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             }
         }
         else if feed.type == .Created{
-            
             let feedCreatedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
-            feedCreatedEventCell.event = feed.item?.data["event"] as? Event
+            
+            let event = feed.item?.data["event"] as? Event
+            feedCreatedEventCell.event = event
             feedCreatedEventCell.timeSince.text = DateFormatter().timeSince(from: feed.time!, numericDates: true, shortVersion: true)
+            
             getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                 feedCreatedEventCell.usernameLabel.setTitle(user.username, for: .normal)
                 if let image = user.image_string{
@@ -390,12 +392,14 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                         feedCreatedEventCell.usernameImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
                     }
                 }
-                
             })
             
+            feedCreatedEventCell.eventNameLabel.setTitle(event?.title!, for: .normal)
             feedCreatedEventCell.actionLabel.text = "created"
             feedCreatedEventCell.parentVC = self
             feedCreatedEventCell.globeButton.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
+            
+            feedCreatedEventCell.searchEventTableView.reloadData()
             cell = feedCreatedEventCell
         }
         else if feed.type == .Going{
