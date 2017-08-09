@@ -221,7 +221,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
                 
                 else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
-                    if Calendar.current.dateComponents([.hour], from: DF.date(from: event.date!)!, to: Date()).hour ?? 0 < 24{
+                    if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
                         let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
                         let marker = GMSMarker(position: position)
                         marker.icon = UIImage(named: "Event")
