@@ -83,13 +83,28 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
     
     func getNotifications(){
+        
         NotificationUtil.getNotificationCount(gotNotification: {notif in
-            self.nofArray.removeAll()
-            self.nofArray.append(contentsOf: Array(Set<FocusNotification>(notif)))
+            for notification in Array(Set<FocusNotification>(notif)){
+                if !self.nofArray.contains(notification){
+                    self.nofArray.append(notification)
+                }
+            }
+            
+            self.nofArray = self.nofArray.sorted(by: {
+                $0.time! > $1.time!
+            })
             self.tableView.reloadData()
         }, gotInvites: {invites in
-            self.invArray.removeAll()
-            self.invArray.append(contentsOf: Array(Set<FocusNotification>(invites)))
+            for notification in Array(Set<FocusNotification>(invites)){
+                if !self.nofArray.contains(notification){
+                    self.nofArray.append(notification)
+                }
+            }
+            
+            self.nofArray = self.nofArray.sorted(by: {
+                $0.time! > $1.time!
+            })
             self.tableView.reloadData()
         } , gotFeed: {feed in
             
