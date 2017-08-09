@@ -581,7 +581,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         let lastIndex = IndexPath(row: self.commentsCList.count-1, section: 0)
         print("og num of rows \(self.commentsTableView.numberOfRows(inSection: 0))")
-        print("og num of rows \(self.commentMockList)")
         self.commentsTableView.insertRows(at: [IndexPath(row: self.commentsCList.count-1, section: 0)], with: .automatic)
         print("og num of rows in table \(self.commentsTableView.numberOfRows(inSection: 0))")
         
@@ -661,8 +660,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rowCount: Int = 0
         if(tableView.tag == 0){
-//            rowCount = commentsCList.count
-            rowCount = commentMockList.count
+            rowCount = commentsCList.count
         }else if(tableView.tag == 1){
             rowCount = self.suggestions.count
 //            rowCount = 3
@@ -677,35 +675,26 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         if(tableView.tag == 0){
             let commentCell = self.commentsTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? commentCell
-//            let comment = commentMockList[indexPath.row]
-            commentCell?.commentLabel.text = commentMockList[indexPath.row]["comment"]
-            commentCell?.dateLabel.text = commentMockList[indexPath.row]["date"]
-            commentCell?.usernameLabel.text = commentMockList[indexPath.row]["username"]
-//            commentCell?.data = (commentsCList[indexPath.row] as! commentCellData)
-//            let comment = commentsCList[indexPath.row] as! commentCellData
-//            commentCell?.commentLabel.text = comment.comment
-//            commentCell?.dateLabel.text = commentDF.string(from: comment.date)
+            commentCell?.data = (commentsCList[indexPath.row] as! commentCellData)
+            let comment = commentsCList[indexPath.row] as! commentCellData
+            commentCell?.commentLabel.text = comment.comment
+            commentCell?.dateLabel.text = commentDF.string(from: comment.date)
             
-//            Constants.DB.user.child(comment.from).observeSingleEvent(of: .value, with: {snapshot in
-//                if let data = snapshot.value as? [String:Any]{
-//                    if let username = data["username"] as? String{
-//                        commentCell?.usernameLabel.text = username
-//                    }
-//                    
-//                    if let image = data["image_string"] as? String{
-//                        if let url = URL(string: image){
-//                            commentCell?.userProfilePhoto.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
-//                        }
-//                    }
-//                }
-//                
-//            })
-            print("reloading")
-//            if indexPath.row == 0{
-//                self.commentsTableViewHeight.constant = (commentCell?.frame.size.height)!
-//            }else{
-//                self.commentsTableViewHeight.constant += (commentCell?.frame.size.height)!
-//            }
+            Constants.DB.user.child(comment.from).observeSingleEvent(of: .value, with: {snapshot in
+                if let data = snapshot.value as? [String:Any]{
+                    if let username = data["username"] as? String{
+                        commentCell?.usernameLabel.text = username
+                    }
+                    
+                    if let image = data["image_string"] as? String{
+                        if let url = URL(string: image){
+                            commentCell?.userProfilePhoto.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                }
+                
+            })
+            
             tableCell = commentCell!
         }
         
