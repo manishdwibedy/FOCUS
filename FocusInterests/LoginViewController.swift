@@ -160,6 +160,16 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                 
                             })
                             
+                            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("blocked/people").observeSingleEvent(of: .value, with: { (snapshot) in
+                                let value = snapshot.value as? [String:Any]
+                                
+                                if let value = value{
+                                    for (_, userInfo) in value{
+                                        let UID = userInfo["UID"] as? String
+                                        print("blocked..")
+                                    }
+                                }
+                            })
                             Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/email").setValue(email)
                             
                             self.emailTextField.text = ""
