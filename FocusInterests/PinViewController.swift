@@ -571,7 +571,6 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
 
 //        TODO: need to send invite to single user, need to ask arya how to handle stack when invite sent
         self.placeVC?.hasSentInvite()
-        self.placeVC?.showPopup()
     }
     
     override func didReceiveMemoryWarning() {
