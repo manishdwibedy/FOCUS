@@ -566,7 +566,6 @@
                         </subviews>
                         <color key="backgroundColor" red="0.078431372549019607" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="c9J-nb-3gW" firstAttribute="top" secondItem="Nua-yT-tK6" secondAttribute="bottom" constant="510" id="6Lc-cr-4Ch"/>
                             <constraint firstAttribute="trailing" secondItem="Nua-yT-tK6" secondAttribute="trailing" id="6Mq-ie-dhj"/>
                             <constraint firstItem="Nua-yT-tK6" firstAttribute="leading" secondItem="TIk-cf-GC3" secondAttribute="leading" id="Ac5-pi-ZAH"/>
                             <constraint firstItem="riT-ox-QXj" firstAttribute="top" secondItem="Jsv-zr-udl" secondAttribute="bottom" constant="-1" id="DHL-UU-6l0"/>
@@ -576,6 +575,7 @@
                             <constraint firstAttribute="trailing" secondItem="c9J-nb-3gW" secondAttribute="trailing" constant="8" id="es4-00-aba"/>
                             <constraint firstItem="c9J-nb-3gW" firstAttribute="leading" secondItem="TIk-cf-GC3" secondAttribute="leading" constant="8" id="t6m-dl-ayw"/>
                             <constraint firstItem="Jsv-zr-udl" firstAttribute="top" secondItem="Nua-yT-tK6" secondAttribute="bottom" id="u6K-HV-VL5"/>
+                            <constraint firstItem="c9J-nb-3gW" firstAttribute="top" secondItem="ETs-q1-Nft" secondAttribute="bottom" constant="554" id="xma-0K-tuc"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -601,7 +601,7 @@
                         <outlet property="globeButton" destination="cvH-kn-SV6" id="vxD-Fs-OvF"/>
                         <outlet property="guestButtonOut" destination="ULE-Ez-XED" id="6Uc-DU-Q45"/>
                         <outlet property="inviteButton" destination="Wrq-Oc-JQE" id="vKO-nA-xAN"/>
-                        <outlet property="invitePopupTopConstraint" destination="6Lc-cr-4Ch" id="T6L-pJ-efk"/>
+                        <outlet property="invitePopupTopConstraint" destination="xma-0K-tuc" id="AfW-i7-zYG"/>
                         <outlet property="invitePopupView" destination="c9J-nb-3gW" id="P2y-QA-C2E"/>
                         <outlet property="mainStack" destination="wGI-Zf-q9k" id="DC0-6s-ePT"/>
                         <outlet property="moreCommentsButton" destination="FIV-ud-JxK" id="0IH-55-Za7"/>
