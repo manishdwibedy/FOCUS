@@ -287,7 +287,8 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     }
     
     func haveInvitedSomeoneToAnEvent() {
-        print("in invitePeopleEventCell")
-        self.invitePeopleVCDelegate.showPopupView()
+        if self.invitePeopleVCDelegate != nil{
+            self.invitePeopleVCDelegate.showPopupView()
+        }
     }
 }
