@@ -65,8 +65,8 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
         loginView.loginBehavior = .web
         
         self.regularSignInButton.roundCorners(radius: 9.0)
-        self.facebookLoginButton.roundCorners(radius: 27.5)
-        self.googleLoginButton.roundCorners(radius: 27.5)
+        self.facebookLoginButton.imageView?.layer.cornerRadius = 15.0
+        self.googleLoginButton.imageView?.layer.cornerRadius = 15.0
         setUpTextFields()
         hideKeyboardWhenTappedAround()
         

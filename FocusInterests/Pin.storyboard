@@ -489,7 +489,7 @@ line 2</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="EWS-Xj-2Kw" firstAttribute="leading" secondItem="eFv-QC-3S7" secondAttribute="leading" id="1I3-mY-ief"/>
                                     <constraint firstItem="kkD-5i-HNW" firstAttribute="top" secondItem="EWS-Xj-2Kw" secondAttribute="bottom" constant="10.5" id="DaC-hB-O69"/>
