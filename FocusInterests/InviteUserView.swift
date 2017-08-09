@@ -37,6 +37,9 @@ class InviteUserView: UIView {
         Bundle.main.loadNibNamed("InviteUserView", owner: self, options: nil)
         self.image.roundedImage()
         self.inviteButton.roundCorners(radius: 5.0)
+        self.inviteButton.setTitle("Invited!", for: .selected)
+        self.inviteButton.setTitleColor(UIColor.white, for: .selected)
+        
         self.view.addSubview(userName)
         self.view.addSubview(image)
         self.view.addSubview(inviteButton)
@@ -50,7 +53,15 @@ class InviteUserView: UIView {
     
     @IBAction func invite(_ sender: UIButton) {
         print("sent user invite")
-        delegate?.inviteUser(name: self.userName.text!)
+        print(sender.isSelected)
+        if self.inviteButton.isSelected == false{
+            self.inviteButton.isSelected = true
+            self.inviteButton.layer.borderColor = UIColor.white.cgColor
+            self.inviteButton.layer.borderWidth = 1
+            self.inviteButton.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
+            self.inviteButton.isUserInteractionEnabled = false
+            print(sender.isSelected)
+        }
     }
     
     func showProfile(sender: UITapGestureRecognizer)

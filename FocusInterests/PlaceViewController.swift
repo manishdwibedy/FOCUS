@@ -1236,10 +1236,25 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         
     }
     
-    
     func inviteSentToSingleUser(){
 //        TODO: need to send invite to single user, need to ask arya how to handle stack when invite sent
         self.hasSentInvite()
+        self.showPopup()
+    }
+    
+    func showPopup(){
+        if showInvitePopup {
+            UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= self.invitePopupView.frame.size.height
+                self.invitePopupTopConstraint.constant -= self.invitePopupView.frame.size.height
+            }, completion: { animate in
+                UIView.animate(withDuration: 1, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += self.invitePopupView.frame.size.height
+                    self.invitePopupTopConstraint.constant += self.invitePopupView.frame.size.height
+                }, completion: nil)
+            })
+            self.showInvitePopup = false
+        }
     }
     
     func hasSentInvite(){
