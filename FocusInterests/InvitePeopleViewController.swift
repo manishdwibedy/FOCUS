@@ -376,24 +376,24 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         Event.getNearyByEvents(gotEvents: {events in
             self.otherEvents = events
             
-            if self.attendingEvents != nil && self.followingAttendingEvents != nil{
-                var uniqueEvents = self.attendingEvents!
-                
-                for event in self.followingAttendingEvents!{
-                    if !uniqueEvents.contains(event){
-                        uniqueEvents.append(event)
-                    }
-                }
-                
-                for event in self.events{
-                    if !uniqueEvents.contains(event){
-                        uniqueEvents.append(event)
-                    }
-                }
-                
-                self.events = uniqueEvents + self.otherEvents!
+//            if self.attendingEvents != nil && self.followingAttendingEvents != nil{
+//                var uniqueEvents = self.attendingEvents!
+//                
+//                for event in self.followingAttendingEvents!{
+//                    if !uniqueEvents.contains(event){
+//                        uniqueEvents.append(event)
+//                    }
+//                }
+//                
+//                for event in self.events{
+//                    if !uniqueEvents.contains(event){
+//                        uniqueEvents.append(event)
+//                    }
+//                }
+            
+                self.events = self.events + self.otherEvents!
                 self.tableView.reloadData()
-            }
+//            }
         })
     }
     

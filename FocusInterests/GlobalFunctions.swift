@@ -1580,7 +1580,7 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
                     
                     if let end = timeDF.date(from: (event?.endTime)!){
                         let start = DF.date(from: (event?.date!)!)!
-                        if start < Date() && end > Date() && !event.privateEvent{
+                        if start < Date() && end > Date() && !(event?.privateEvent)!{
                             
                         event?.id = event_id as! String
                         
@@ -1589,7 +1589,7 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
                         }
                     }
                         
-                    else if DF.date(from: (event?.date!)!)! > Date() && !event?.privateEvent{
+                    else if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
                         if Calendar.current.dateComponents([.day], from: DF.date(from: (event?.date!)!)!, to: Date()).day ?? 0 <= 7{
                             
                             event?.id = event_id as! String
