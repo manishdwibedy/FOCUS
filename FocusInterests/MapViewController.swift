@@ -256,10 +256,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
         })
         
+        
+        Event.getNearyByEvents(gotEvents: {events in
+            for event in events{
+                if !(self.exploreTab?.events.contains(event))!{
+                    self.exploreTab?.events.append(event)
+                }
+            }
+            
+        })
+        
         self.exploreTab = self.tabBarController?.viewControllers?[3] as? InvitePeopleViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
-        let token = Messaging.messaging().fcmToken
         
         UITabBarItem.appearance().setTitleTextAttributes([
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
