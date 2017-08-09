@@ -1456,6 +1456,12 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
     var eventCount = 0
     var events = [Event]()
     
+    let DF = DateFormatter()
+    DF.dateFormat = "MMM d, h:mm a"
+    
+    let timeDF = DateFormatter()
+    timeDF.dateFormat = "h:mm a"
+    
     Constants.DB.user.child(uid).child("invitations/event").observeSingleEvent(of: .value, with: { (snapshot) in
         let value = snapshot.value as? NSDictionary
         
@@ -1468,9 +1474,24 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
                     let info = snapshot.value as? [String : Any]
                     
                     let event = Event.toEvent(info: info!)
-                    event?.id = event_id as! String
                     
-                    events.append(event!)
+                    if let end = timeDF.date(from: (event?.endTime)!){
+                        let start = DF.date(from: (event?.date!)!)!
+                        if start < Date() && end > Date() && !(event?.privateEvent)!{
+                            event?.id = event_id as! String
+                            
+                            events.append(event!)
+                        }
+                    }
+                        
+                    else if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
+                        if Calendar.current.dateComponents([.day], from: DF.date(from: (event?.date!)!)!, to: Date()).day ?? 0 <= 7{
+                            event?.id = event_id as! String
+                            
+                            events.append(event!)
+                        }
+                    }
+                    
                     if eventCount == events.count{
                         gotEvents(events)
                     }
@@ -1488,8 +1509,15 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
 func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> Void){
     var eventCount = 0
     var followers = [String]()
-    var events = [Event]()
+    var followingAttendingEvents = [Event]()
     var gotPlace = 0
+    
+    let DF = DateFormatter()
+    DF.dateFormat = "MMM d, h:mm a"
+    
+    let timeDF = DateFormatter()
+    timeDF.dateFormat = "h:mm a"
+    
     
     Constants.DB.user.child(uid).child("following/people").observeSingleEvent(of: .value, with: { (snapshot) in
         if let value = snapshot.value as? [String:Any]{
@@ -1499,11 +1527,30 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
                     let UID = peopleData["UID"] as! String
                     followers.append(UID)
                     
-                    getAttendingEvent(uid: UID, gotEvents: { event in
-                        events.append(contentsOf: event)
+                    getAttendingEvent(uid: UID, gotEvents: { events in
+                        
+                        for event in events{
+                            if let end = timeDF.date(from: event.endTime){
+                                let start = DF.date(from: event.date!)!
+                                if start < Date() && end > Date() && !event.privateEvent{
+                                    
+                                    followingAttendingEvents.append(event)
+                                }
+                            }
+                                
+                            else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
+                                if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
+                                    
+                                    followingAttendingEvents.append(event)
+                                }
+                            }
+                            
+                        }
+                        
+                        
                         
                         if followers.count == followingCount{
-                            gotEvents(events)
+                            gotEvents(followingAttendingEvents)
                         }
                     })
                 }
@@ -1513,7 +1560,7 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
             gotPlace += 1
             
             if gotPlace == 2{
-                gotEvents(events)
+                gotEvents(followingAttendingEvents)
             }
         }
     })
@@ -1530,11 +1577,29 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
                     let info = snapshot.value as? [String : Any]
                     
                     let event = Event.toEvent(info: info!)
-                    event?.id = event_id as! String
                     
-                    events.append(event!)
-                    if eventCount == events.count{
-                        gotEvents(events)
+                    if let end = timeDF.date(from: (event?.endTime)!){
+                        let start = DF.date(from: (event?.date!)!)!
+                        if start < Date() && end > Date() && !event.privateEvent{
+                            
+                        event?.id = event_id as! String
+                        
+                        followingAttendingEvents.append(event!)
+                            
+                        }
+                    }
+                        
+                    else if DF.date(from: (event?.date!)!)! > Date() && !event?.privateEvent{
+                        if Calendar.current.dateComponents([.day], from: DF.date(from: (event?.date!)!)!, to: Date()).day ?? 0 <= 7{
+                            
+                            event?.id = event_id as! String
+                            
+                            followingAttendingEvents.append(event!)
+                            
+                        }
+                    }
+                    if eventCount == followingAttendingEvents.count{
+                        gotEvents(followingAttendingEvents)
                     }
                 })
             }
@@ -1544,7 +1609,7 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
             gotPlace += 1
             
             if gotPlace == 2{
-                gotEvents(events)
+                gotEvents(followingAttendingEvents)
             }
         }
     })
