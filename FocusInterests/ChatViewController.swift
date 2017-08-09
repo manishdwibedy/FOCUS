@@ -165,7 +165,7 @@ class ChatViewController: JSQMessagesViewController, UIImagePickerControllerDele
     
     @IBAction func backToOtherUserProfile(_ sender: Any) {
         print("back to other user profile")
-        if goBackToOtherUser{
+        if goBackToOtherUser || inviteUser{
             self.dismiss(animated: true, completion: nil)
         }else{
             self.navigationController?.popViewController(animated: true)
