@@ -19,6 +19,7 @@ enum SelectedIndex: Int {
 
 class NotificationFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var noNotificationsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: CustomSegmentedControl!
     @IBOutlet weak var backButtonItem: UIBarButtonItem!
@@ -40,25 +41,35 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         AuthApi.clearNotifications()
         
-        self.nofArray = Array(Set<FocusNotification>(self.nofArray))
-        self.invArray = Array(Set<FocusNotification>(self.invArray))
-        self.feedAray = Array(Set<FocusNotification>(self.feedAray))
         
-        self.nofArray = self.nofArray.sorted(by: {
-            $0.time! > $1.time!
-        })
-        
-        self.invArray = self.invArray.sorted(by: {
-            $0.time! > $1.time!
-        })
-        
-        
-        tableView.reloadData()
-        AuthApi.set(read: nofArray.count + invArray.count)
-        
-        tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
-        
-        tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
+        if self.nofArray.isEmpty && self.invArray.isEmpty && self.feedAray.isEmpty{
+            self.noNotificationsLabel.isHidden = false
+            self.tableView.isHidden = true
+        }else{
+            self.noNotificationsLabel.isHidden = true
+            self.tableView.isHidden = false
+            self.nofArray = Array(Set<FocusNotification>(self.nofArray))
+            self.invArray = Array(Set<FocusNotification>(self.invArray))
+            self.feedAray = Array(Set<FocusNotification>(self.feedAray))
+            
+            self.nofArray = self.nofArray.sorted(by: {
+                $0.time! > $1.time!
+            })
+            
+            self.invArray = self.invArray.sorted(by: {
+                $0.time! > $1.time!
+            })
+            
+            
+            tableView.reloadData()
+            AuthApi.set(read: nofArray.count + invArray.count)
+            
+            
+            tableView.register(UINib(nibName: "NotificationFeedCellTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifFeedCell")
+            
+            tableView.register(UINib(nibName: "notificationTabCell", bundle: Bundle.main), forCellReuseIdentifier: "NotifTabCell")
+            
+        }
         
         navBar.titleTextAttributes = Constants.navBar.attrs
         navBar.barTintColor = Constants.color.navy
