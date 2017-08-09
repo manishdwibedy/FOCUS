@@ -238,6 +238,8 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     
     func checkIfAttending(){
         //attending
+        
+        var isAttending = false
         Constants.DB.event.child((event?.id)!).child("attendingList").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? [String:[String:String]]
             if let value = value
@@ -248,13 +250,18 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
                         self.attendButton.layer.borderWidth = 1
                         self.attendButton.layer.borderColor = Constants.color.navy.cgColor
                         self.attendButton.backgroundColor = UIColor.white
+                        
+                        isAttending = true
                         break
                     }
                 }
-                self.attendButton.isSelected = false
-                self.attendButton.layer.borderWidth = 0
-                self.attendButton.layer.borderColor = UIColor.clear.cgColor
-                self.attendButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+                
+                if !isAttending{
+                    self.attendButton.isSelected = false
+                    self.attendButton.layer.borderWidth = 0
+                    self.attendButton.layer.borderColor = UIColor.clear.cgColor
+                    self.attendButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+                }
             }
             else{
                 self.attendButton.isSelected = false
