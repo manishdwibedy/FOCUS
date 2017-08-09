@@ -68,12 +68,37 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         self.view.backgroundColor = Constants.color.navy
     }
     
+    var gameTimer: Timer!
+
     override func viewDidAppear(_ animated: Bool) {
         
         Answers.logCustomEvent(withName: "Screen",
                                customAttributes: [
                                 "Name": "Notifications"
             ])
+        
+        gameTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(getNotifications), userInfo: nil, repeats: true)
+
+
+    }
+    
+    func getNotifications(){
+        NotificationUtil.getNotificationCount(gotNotification: {notif in
+            self.nofArray.removeAll()
+            self.nofArray.append(contentsOf: Array(Set<FocusNotification>(notif)))
+            self.tableView.reloadData()
+        }, gotInvites: {invites in
+            self.invArray.removeAll()
+            self.invArray.append(contentsOf: Array(Set<FocusNotification>(invites)))
+            self.tableView.reloadData()
+        } , gotFeed: {feed in
+            
+        })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        gameTimer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
