@@ -216,7 +216,9 @@ class InvitePeoplePlaceCell: UITableViewCell, InvitePeoplePlaceCellDelegate{
     
     func haveInvitedSomeoneToAPlace() {
         print("going back to invitepeoplevc")
-        self.invitePeopleVCDelegate.showPopupView()
+        if self.invitePeopleVCDelegate != nil{
+            self.invitePeopleVCDelegate.showPopupView()
+        }
     }
     
     func checkForFollow(){
