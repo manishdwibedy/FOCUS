@@ -405,10 +405,57 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         }
         else if feed.type == .Going{
             let feedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
+            
             feedEventCell.globeImage.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
             feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
-            feedEventCell.nameLabelButtonWidth.constant = feedEventCell.nameLabelButton.intrinsicContentSize.width
             
+            feedEventCell.nameLabelButton.setTitle(feed.sender?.username, for: .normal)
+            
+            if let event = feed.item?.data["event"] as? Event{
+                feedEventCell.eventNameLabelButton.setTitle(event.title, for: .normal)
+            }
+            
+            feedEventCell.timeSince.text = DateFormatter().timeSince(from: feed.time!, numericDates: true, shortVersion: true)
+            
+            Constants.DB.user.child((feed.sender?.uuid)!).observeSingleEvent(of: .value, with: {snapshot in
+                if let data = snapshot.value as? [String:Any]{
+                    if let image = data["image_string"] as? String{
+                        if let url = URL(string: image){
+                            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                                (receivedSize :Int, ExpectedSize :Int) in
+                                
+                            }, completed: {
+                                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                                
+                                if image != nil && finished{
+                                    feedEventCell.usernameImage.setImage(image, for: .normal)
+                                }
+                            })
+                            
+                        }
+                    }
+                }
+            })
+            
+            let reference = Constants.storage.event.child("\(feed.item!.id).jpg")
+            reference.downloadURL(completion: { (url, error) in
+                
+                if error != nil {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        feedEventCell.eventImage.setImage(crop(image: image!, width: 50, height: 50), for: .normal)
+                    }
+                })
+            })
             cell = feedEventCell
         }
         else if feed.type == .Like{

@@ -555,8 +555,15 @@ func getAllActivity(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, go
                                                     "event": event
                                                 ]
                                                 
-                                                if let time = time{
-                                                    let eventFeed = FocusNotification(type: NotificationType.Going, sender: user, item: place, time: time)
+                                                let eventDF = DateFormatter()
+                                                eventDF.dateFormat = "MMM d, h:mm a"
+
+                                                if let time = eventDF.date(from: event.date!){
+                                                    let gregorianCalendar = Calendar(identifier: .gregorian)
+                                                    var components = gregorianCalendar.dateComponents([.year, .month, .day], from: time)
+                                                    components.year = 2017
+                                                    
+                                                    let eventFeed = FocusNotification(type: NotificationType.Going, sender: user, item: place, time: gregorianCalendar.date(from: components)!)
                                                     invitations_event.append(eventFeed)
                                                     
                                                 }
@@ -839,8 +846,13 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                             "event": event
                                         ]
                                         
+                                        let eventDF = DateFormatter()
+                                        eventDF.dateFormat = "MMM d, h:mm a"
+                                        
                                         if let time = time{
-                                            let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: time)
+                                            
+                                            let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: eventDF.date(from: event.date!)!)
+                                            invitations_event.append(eventFeed)
                                             invitations_event.append(eventFeed)
                                             
                                         }
