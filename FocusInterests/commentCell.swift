@@ -16,8 +16,8 @@ class commentCell: UITableViewCell {
 //    @IBOutlet weak var likeOut: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
-    
     var data: commentCellData!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.userProfilePhoto.roundedImage()
