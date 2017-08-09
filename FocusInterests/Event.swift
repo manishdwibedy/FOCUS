@@ -29,6 +29,7 @@ class Event: NSObject, NSCoding{
     var price: Double? = 0
     var distance = 0.0
     var privateEvent = true
+    var url: String? = nil
     
     init(title: String, description: String, fullAddress: String?, shortAddress: String?, latitude: String?, longitude: String?, date: String, creator: String?, id: String? = nil, category: String?, privateEvent: Bool) {
         self.title = title
@@ -272,8 +273,11 @@ extension Event{
                 let pleaseNoteInfo = data.1["pleaseNote"].stringValue
                 let desc = "\(info)\n\(pleaseNoteInfo)\n\(boxOfficeInfo)\(parkingInfo)"
                 
+                let url = data.1["url"].stringValue
+                
                 let event = Event(title: name, description: desc, fullAddress: fullAddress, shortAddress: shortAddress, latitude: lat, longitude: long, date: date, creator: "", id: data.1["id"].stringValue, category: category, privateEvent: false)
                 
+                event.url = url
                 event.price = price
                 event.image_url = image
                 
