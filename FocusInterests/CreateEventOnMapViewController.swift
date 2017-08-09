@@ -178,10 +178,6 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func pinPressed(_ sender: Any) {
-        if userStatusTextView.text == "What are you up to? Type here."{
-            SCLAlertView().showCustom("Oops!", subTitle: "Please enter your caption", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
-            return
-        }
         if addFocusButton.titleLabel?.text == "Add FOCUS"{
             SCLAlertView().showCustom("Oops!", subTitle: "Please enter your FOCUS", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
             return
@@ -192,7 +188,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).removeValue()
 
         let time = NSDate().timeIntervalSince1970
-        if userStatusTextView.text != nil && userStatusTextView.text != ""
+        if true
         {
 //            let imagePaths = NSMutableDictionary()
 //            for image in galleryPicArray
