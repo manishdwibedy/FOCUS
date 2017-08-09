@@ -165,8 +165,11 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                 
                                 if let value = value{
                                     for (_, userInfo) in value{
-                                        let UID = userInfo["UID"] as? String
-                                        print("blocked..")
+                                        if let userInfo = userInfo as? [String:Any]{
+                                            let UID = userInfo["UID"] as? String
+                                            print("blocked..")
+                                        }
+                                        
                                     }
                                 }
                             })
