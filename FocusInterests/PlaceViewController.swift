@@ -137,10 +137,9 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         
         self.screenWidth = self.screenSize.width
         self.screenHeight = self.screenSize.height
-        self.invitePopupView.center.y = self.screenHeight - 20
-        self.invitePopupTopConstraint.constant = self.screenHeight - 20
+        self.invitePopupView.center.y = self.screenHeight-20
+        self.invitePopupTopConstraint.constant = self.screenHeight-20
         self.invitePopupView.layer.cornerRadius = 10.0
-        self.invitePopupView.isHidden = true
         
         self.mainStackView.removeArrangedSubview(self.reviewsStack)
         self.reviewsStack.isHidden = true
@@ -359,8 +358,19 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if showInvitePopup {
+            UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= self.invitePopupView.frame.size.height
+                self.invitePopupTopConstraint.constant -= self.invitePopupView.frame.size.height
+            }, completion: { animate in
+                UIView.animate(withDuration: 1, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += self.invitePopupView.frame.size.height
+                    self.invitePopupTopConstraint.constant += self.invitePopupView.frame.size.height
+                }, completion: nil)
+            })
+            self.showInvitePopup = false
+        }
         
-        self.showPopup()
         getSuggestedPlaces(interests: getInterest(yelpCategory: (place?.categories[0].alias)!), limit: 3, gotPlaces: {places in
             self.suggestedPlaces = places
             self.peopleAlsoLikedTableView.reloadData()
@@ -569,7 +579,6 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             unfollowAlertController.addAction(unfollowAction)
             unfollowAlertController.addAction(cancelAction)
             self.present(unfollowAlertController, animated: true, completion: nil)
-            
         }else{
             let time = NSDate().timeIntervalSince1970
             Follow.followPlace(id: (place?.id)!)
@@ -717,6 +726,9 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
                     map?.eventPlaceMarker = marker
                 }
             }
+        }else if segue.identifier == "unwindToMapViewControllerFromPlaceDetailsWithSegue"{
+            let map = self.map
+            map?.locationFromPlaceDetails = (place?.name)!
         }
     }
     
@@ -1069,7 +1081,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         }else{
             self.pinButton.backgroundColor = Constants.color.green
         }
-        performSegue(withIdentifier: "unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails", sender: self)
+        performSegue(withIdentifier: "unwindToMapViewControllerFromPlaceDetailsWithSegue", sender: self)
     }
     
     @IBAction func reviewButon(_ sender: Any) {
@@ -1099,10 +1111,9 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         ivc.type = "place"
         ivc.id = (place?.id)!
         ivc.place = place
-        ivc.placeViewController = self
         ivc.username = name
-        
-        
+        ivc.placeDetailsDelegate = self
+        ivc.inviteFromPlaceDetails = true
         self.present(ivc, animated: true, completion: { _ in })
     }
     
@@ -1225,26 +1236,10 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         
     }
     
-    func showPopup(){
-        if showInvitePopup {
-            UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.invitePopupView.center.y -= self.invitePopupView.frame.size.height
-                self.invitePopupTopConstraint.constant -= self.invitePopupView.frame.size.height
-            }, completion: { animate in
-                UIView.animate(withDuration: 1, delay: 3.0, options: .curveEaseInOut, animations: {
-                    self.invitePopupView.center.y += self.invitePopupView.frame.size.height
-                    self.invitePopupTopConstraint.constant += self.invitePopupView.frame.size.height
-                }, completion: nil)
-            })
-            self.showInvitePopup = false
-        }
-    }
     
     func inviteSentToSingleUser(){
-        
-        //        TODO: need to send invite to single user, need to ask arya how to handle stack when invite sent
+//        TODO: need to send invite to single user, need to ask arya how to handle stack when invite sent
         self.hasSentInvite()
-        self.showPopup()
     }
     
     func hasSentInvite(){
