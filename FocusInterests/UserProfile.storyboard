@@ -216,7 +216,7 @@
                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <action selector="createPin:" destination="cU2-hP-1h7" eventType="touchUpInside" id="U9g-gG-sxX"/>
+                                                                            <segue destination="wE6-V0-ufv" kind="unwind" identifier="unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails" unwindAction="unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetailsWithSegue:" id="nzp-xk-fEs"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -292,7 +292,8 @@
                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <action selector="updatePin:" destination="cU2-hP-1h7" eventType="touchUpInside" id="Dup-SJ-d6t"/>
+                                                                            <action selector="updatePin:" destination="cU2-hP-1h7" eventType="touchUpInside" id="09K-BT-zcD"/>
+                                                                            <segue destination="wE6-V0-ufv" kind="unwind" identifier="unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails" unwindAction="unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetailsWithSegue:" id="5ei-sn-k8b"/>
                                                                         </connections>
                                                                     </button>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="hH3-Cy-m4h">
@@ -682,6 +683,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nD5-vH-ssF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="wE6-V0-ufv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-90.400000000000006" y="-459.22038980509751"/>
         </scene>
@@ -2158,9 +2160,6 @@
                                                         <state key="normal" title="Update Pin">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="updatePin:" destination="cU2-hP-1h7" eventType="touchUpInside" id="k82-QQ-buI"/>
-                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000 mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sy5-cr-s82">
                                                         <rect key="frame" x="245" y="12" width="88" height="20.5"/>

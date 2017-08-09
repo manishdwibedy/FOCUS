@@ -129,17 +129,20 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Qtr-5y-RQq">
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Qtr-5y-RQq">
                                                 <rect key="frame" x="0.0" y="22" width="224" height="19"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pin: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A52-Fz-c9k">
                                                         <rect key="frame" x="0.0" y="0.0" width="33" height="19"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="33" id="xJz-OM-Oi4"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psY-R2-Cnt">
-                                                        <rect key="frame" x="37" y="0.0" width="187" height="19"/>
+                                                        <rect key="frame" x="35" y="0.0" width="189" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="19" id="5Uk-Ma-mnt"/>
                                                         </constraints>

@@ -103,19 +103,18 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
             print(newRect)
             
             let popController = UIStoryboard(name: "CreateEventOnMapViewController", bundle: nil).instantiateViewController(withIdentifier: "CreateEventOnMapViewController") as! CreateEventOnMapViewController
-                
-                popController.modalPresentationStyle = UIModalPresentationStyle.popover
-                
-                popController.preferredContentSize = CGSize(width: 345, height: 354)
-                
-                // set up the popover presentation controller
-                popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
-                popController.popoverPresentationController?.delegate = self
-                popController.popoverPresentationController?.sourceView = self.tabBar
-                popController.popoverPresentationController?.sourceRect = newRect
-                tabBarController.present(popController, animated: true, completion: nil)
-                return false
-
+            popController.modalPresentationStyle = UIModalPresentationStyle.popover
+            
+            popController.preferredContentSize = CGSize(width: 345, height: 354)
+            
+            // set up the popover presentation controller
+            popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+            popController.popoverPresentationController?.delegate = self
+            popController.popoverPresentationController?.sourceView = self.tabBar
+            popController.popoverPresentationController?.sourceRect = newRect
+            tabBarController.present(popController, animated: true, completion: nil)
+            return false
+            
         }
         return true
     }
@@ -155,6 +154,10 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
             AuthApi.setIsNewToPage(index: item.tag)
 
         }
+    }
+    
+    @IBAction func unwindToMapViewControllerFromProfile(segue:UIStoryboardSegue) {
+    
     }
     
     // MARK: - Navigation

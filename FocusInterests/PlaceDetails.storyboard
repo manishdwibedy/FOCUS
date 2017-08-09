@@ -259,6 +259,7 @@
                                                                                         </state>
                                                                                         <connections>
                                                                                             <action selector="pinHerePressed:" destination="4C0-xu-no6" eventType="touchUpInside" id="cuI-QQ-fDe"/>
+                                                                                            <segue destination="iUz-bQ-APi" kind="unwind" identifier="unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails" unwindAction="unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetailsWithSegue:" id="1QS-Gd-3zz"/>
                                                                                         </connections>
                                                                                     </button>
                                                                                 </subviews>

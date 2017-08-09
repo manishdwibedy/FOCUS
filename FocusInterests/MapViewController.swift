@@ -1312,6 +1312,32 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBAction func unwindToMapViewController(segue:UIStoryboardSegue) { }
     
+    @IBAction func unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails(segue:UIStoryboardSegue) {
+        
+        let tabBarItemWidth = Int((self.tabBarController?.tabBar.frame.size.width)!) / (self.tabBarController?.tabBar.items?.count)!
+        let x = tabBarItemWidth * 2
+        let newRect = CGRect(x: x, y: 0, width: tabBarItemWidth, height: Int((self.tabBarController?.tabBar.frame.size.height)!))
+        
+        let popController = UIStoryboard(name: "CreateEventOnMapViewController", bundle: nil).instantiateViewController(withIdentifier: "CreateEventOnMapViewController") as! CreateEventOnMapViewController
+        
+        popController.modalPresentationStyle = UIModalPresentationStyle.popover
+        
+        popController.preferredContentSize = CGSize(width: 345, height: 354)
+        
+        // set up the popover presentation controller
+        popController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+        popController.popoverPresentationController?.delegate = self
+        popController.popoverPresentationController?.sourceView = self.tabBarController?.tabBar
+        
+        popController.popoverPresentationController?.sourceRect = newRect
+        
+        self.tabBarController?.present(popController, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+    
     @IBAction func mapSettingsPressed(_ sender: Any) {
         self.settingGearButton.isHidden = true
         self.mapViewSettings.isHidden = false

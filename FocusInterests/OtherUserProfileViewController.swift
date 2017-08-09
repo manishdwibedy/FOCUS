@@ -15,7 +15,7 @@ protocol OtherUserProfileViewControllerDelegate {
     func hasSentUserAnInvite()
 }
 
-class OtherUserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDataSource, UITableViewDelegate, OtherUserProfileViewControllerDelegate{
+class OtherUserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, OtherUserProfileViewControllerDelegate{
     
     @IBOutlet weak var invitePopupTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var invitePopupView: UIView!
@@ -987,7 +987,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 }
             })
             
-            
+            recentPostCell.commentTextView.delegate = self
             recentPostCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (self.pinInfo!.dateTimeStamp)), numericDates: true, shortVersion: true)
             recentPostCell.pin = self.pinInfo
             
@@ -1069,6 +1069,12 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         }
         
         return rowHeight
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Add a comment"{
+            textView.text = ""
+        }
     }
     
     @IBAction func inviteClicked(_ sender: Any) {

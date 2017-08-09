@@ -186,6 +186,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.view.backgroundColor = Constants.color.navy
         self.navBar.barTintColor = Constants.color.navy
         self.navBar.titleTextAttributes = attrs
+        self.navBar.addBottomBorderWithColor(color: UIColor.white, width: 0.7)
         
         hideKeyboardWhenTappedAround()
         
@@ -332,6 +333,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         super.viewWillAppear(animated)
         
         self.userImage.image = #imageLiteral(resourceName: "placeholder_people")
+//        TODO: line 336 is returning nil.  You can test when signing into the focusdummy@gmail.com account
         if let url = URL(string: AuthApi.getUserImage()!){
             SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
                 (receivedSize :Int, ExpectedSize :Int) in
@@ -646,9 +648,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
 
     @IBAction func updatePin(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-        let VC = storyboard.instantiateViewController(withIdentifier: "Home") as? PinScreenViewController
-        self.present(VC!, animated: true, completion: nil)
+        performSegue(withIdentifier: "unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails", sender: self)
     }
     
     func getEventSuggestions(){
@@ -761,10 +761,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     @IBAction func createPin(_ sender: Any) {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc: UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "home") as! UITabBarController
-        vc.selectedIndex = 2
-        self.present(vc, animated: true, completion: nil)
+        performSegue(withIdentifier: "unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails", sender: self)
     }
     
     @IBAction func createEvent(_ sender: Any) {
@@ -817,7 +814,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 //        let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -825,5 +822,5 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+ 
 }

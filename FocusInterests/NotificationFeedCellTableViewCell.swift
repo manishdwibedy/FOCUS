@@ -325,7 +325,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         }
         else if seeYouThereButton.titleLabel?.text == "Message"{
             let storyboard = UIStoryboard(name: "Messages", bundle: nil)
-            let root = storyboard.instantiateViewController(withIdentifier: "Home") as! UINavigationController
+            let root = storyboard.instantiateViewController(withIdentifier: "otherUserProfileNavigation") as! UINavigationController
 
             let VC = storyboard.instantiateViewController(withIdentifier: "chat") as? ChatViewController
             VC?.user = self.userInfo
@@ -336,7 +336,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             
             root.pushViewController(VC!, animated: true)
             
-            self.window?.rootViewController = root
+            self.parentVC.present(root, animated: true, completion: nil)
         }
         else if seeYouThereButton.titleLabel?.text == "Undo"{
             statusLabel.text = ""

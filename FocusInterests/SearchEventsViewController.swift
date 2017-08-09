@@ -346,6 +346,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     
                     feedFiveCell.commentTextView.delegate = self
                     feedFiveCell.globeButton.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
+                    feedFiveCell.addressLabel.titleLabel?.lineBreakMode = .byTruncatingTail
                     feedFiveCell.addressLabel.setTitle((pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0], for: .normal)
                     feedFiveCell.pinCaptionLabel.text = pinData["pin"] as? String
                     feedFiveCell.commentButton.addTarget(self, action: #selector(SearchEventsViewController.commentPressed(_:)), for: .touchUpInside)
@@ -443,7 +444,22 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     feedPlaceCell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)
                     
                     let caption = pinData["pin"] as! String
-                    feedPlaceCell.placeBeingLiked.setTitle("\"\(caption)\"", for: .normal)
+                    
+                    
+                    let mainString = "Pin: \"\(caption)\""
+                    let captionString = "\"\(caption)\""
+                    
+                    let range = (mainString as NSString).range(of: captionString)
+                    
+                    let pinAttributeText = NSMutableAttributedString.init(string: mainString)
+                    
+                    pinAttributeText.addAttributes([
+                        NSForegroundColorAttributeName: Constants.color.green,
+                        NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!
+                        ], range: range)
+
+                    feedPlaceCell.placeBeingLiked.titleLabel?.numberOfLines = 0
+                    feedPlaceCell.placeBeingLiked.setAttributedTitle(pinAttributeText, for: .normal)
                     if let images = pinData["images"] as? NSDictionary{
                         var firstVal = ""
                         for (key,_) in images

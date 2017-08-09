@@ -1069,12 +1069,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         }else{
             self.pinButton.backgroundColor = Constants.color.green
         }
-        
-        let createEventStoryboard = UIStoryboard.init(name: "CreateEvent", bundle: nil)
-        let createEventVC = createEventStoryboard.instantiateViewController(withIdentifier: "createEvent") as! CreateNewEventViewController
-        
-        createEventVC.specifiedLocationFromPlaceOrEventDetail = true
-        self.present(createEventVC, animated: true, completion: nil)
+        performSegue(withIdentifier: "unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails", sender: self)
     }
     
     @IBAction func reviewButon(_ sender: Any) {

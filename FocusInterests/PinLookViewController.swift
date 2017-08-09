@@ -50,19 +50,25 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         self.navBar.barTintColor = Constants.color.navy
         navBar.titleTextAttributes = attrs
         
+        self.moreOut.layer.borderWidth = 1.0
+        self.moreOut.layer.borderColor = UIColor.white.cgColor
+        self.moreOut.layer.cornerRadius = 5.0
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        let imageAttachment = NSTextAttachment()
-        
-        imageAttachment.image = UIImage(image: UIImage(named: "Green.png"), scaledTo: CGSize(width: 12.0, height: 12.0))
-        
-        let attachmentString = NSAttributedString(attachment: imageAttachment)
-        let primaryFocus = NSMutableAttributedString(string: "")
-        primaryFocus.append(attachmentString)
-        primaryFocus.append(NSMutableAttributedString(string: " \(data.focus) "))
-        interestsLabel.attributedText = primaryFocus
+
+        if data.focus == ""{
+            addGreenDot(label: self.interestsLabel, content: "N.A")
+        }else{
+            if data.focus.characters.first == "●"{
+                let startIndex = data.focus.index(data.focus.startIndex, offsetBy: 2)
+                let interestStringWithoutDot = data.focus.substring(from: startIndex)
+                addGreenDot(label: self.interestsLabel, content: interestStringWithoutDot)
+            }else{
+                addGreenDot(label: self.interestsLabel, content: data.focus)
+            }
+        }
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(didDoubletap(sender:)))
         doubleTap.numberOfTapsRequired = 2
@@ -220,7 +226,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             if let value = value
             {
                 if value.count > 3{
-                    let textLabel = UILabel()
+                    let textLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.commentsStackView.frame.size.width, height: 25))
 
                     textLabel.textColor = .white
                     textLabel.font = UIFont(name: "Avenir-Book", size: 15)
@@ -288,11 +294,12 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     
                 }
                 
-                if value.count < 4{
-                    self.commentHeight.constant = CGFloat(20 * (value.count))
-                }
-                else{
-                    self.commentHeight.constant = CGFloat(20 * 4)
+                self.commentHeight.constant = CGFloat(25 * (value.count))
+                print("value\(value)")
+                if value.count < 3{
+                    self.moreOut.isHidden = true
+                }else{
+                    self.moreOut.isHidden = false
                 }
                 
 //                for (index, category) in (place.categories.enumerated()){
@@ -440,10 +447,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     
     @IBAction func send(_ sender: Any) {
     }
-    
-    @IBAction func more(_ sender: Any) {
-    }
-    
 
     @IBAction func back(_ sender: Any) {
         if let parent = mapView{

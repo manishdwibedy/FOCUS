@@ -340,6 +340,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             var address = pin?.locationAddress
             address = address?.replacingOccurrences(of: ";;", with: "\n")
             cell?.whiteBorder.isHidden = false
+            cell?.cellContentView.layer.cornerRadius = 10.0
+            cell?.cellContentView.backgroundColor = UIColor.white
             cell?.address.text = pin?.pinMessage
             cell?.pinSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pin?.dateTimeStamp)!), numericDates: true, shortVersion: true)
             print("this is the focus \(pin?.focus)!")
@@ -350,8 +352,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             addGreenDot(label: (cell?.interest)!, content: interestStringWithoutDot!)
             let pinLocation = CLLocation(latitude: (pin?.coordinates.latitude)!, longitude: (pin?.coordinates.longitude)!)
             cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
-        }
-        else{
+        }else{
             cell?.whiteBorder.isHidden = true
             cell?.address.text = ""
             cell?.distance.text = ""
@@ -432,7 +433,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         let people = filtered[indexPath.row]
         if people.hasPin{
-            return 110
+            return 105
         }
         else{
             return 75
