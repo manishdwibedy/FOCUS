@@ -76,6 +76,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
+    
     var keyboardUp = false
     var attendingAmount = 0
     var isAttending = false
@@ -393,18 +394,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        if commentsCList.count > 0{
-            for rowIndex in 0...self.commentsTableView.numberOfRows(inSection: 0)-1{
-                if let commentsCell = self.commentsTableView.cellForRow(at: IndexPath(row: rowIndex, section: 0)){
-                    if rowIndex == 0{
-                        self.commentsTableViewHeight.constant = commentsCell.frame.size.height
-                    }else{
-                        self.commentsTableViewHeight.constant += commentsCell.frame.size.height
-                    }
-                }
-            }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -561,38 +550,46 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func postComment(_ sender: Any) {
-        let unixDate = NSDate().timeIntervalSince1970
-        let fullRef = ref.child("events").child((event?.id)!).child("comments").childByAutoId()
-        fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextView.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
+//        let unixDate = NSDate().timeIntervalSince1970
+//        let fullRef = ref.child("events").child((event?.id)!).child("comments").childByAutoId()
+//        fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextView.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
+//        
+//        Answers.logCustomEvent(withName: "Event Comment",
+//                               customAttributes: [
+//                                "user": AuthApi.getFirebaseUid()!,
+//                                "comment": commentTextView.text!,
+//                                
+//            ])
+//        
+//        sendNotification(to: event!.creator!, title: "New Comment", body: "\(AuthApi.getUserName()!)", actionType: "", type: "", item_id: "", item_name: "")
+//        
+//        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextView.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
+//        if self.commentsCList.count != 0{
+//            self.commentsCList.removeObject(at: 0)
+//        }
         
-        Answers.logCustomEvent(withName: "Event Comment",
-                               customAttributes: [
-                                "user": AuthApi.getFirebaseUid()!,
-                                "comment": commentTextView.text!,
-                                
-            ])
+//        if self.commentsCList.count <= 0{
+//            self.commentsStack.removeArrangedSubview(self.noCommentLabel)
+//            self.noCommentLabel.isHidden = true
+//        }
         
-        sendNotification(to: event!.creator!, title: "New Comment", body: "\(AuthApi.getUserName()!)", actionType: "", type: "", item_id: "", item_name: "")
+//        self.commentsCList.add(self.commentTextView.text)
         
-        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextView.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
-        if self.commentsCList.count != 0{
-            self.commentsCList.removeObject(at: 0)
-        }
         
-        self.commentsCList.add(data)
-//        self.commentsStack.removeArrangedSubview(self.noCommentLabel)
-//        self.noCommentLabel.isHidden = true
-//        self.commentsTableViewHeight.constant = 44 * CGFloat(self.commentsCList.count)
-     
         self.commentTextView.resignFirstResponder()
         self.commentTextView.text = "Add a comment"
-//        self.scrollView.frame.origin.y = 0
-//        self.view.frame.origin.y = 0
-//        let oldLastCellIndexPath = NSIndexPath(row: commentsCList.count-1, section: 0)
         
-        self.commentsTableView.beginUpdates()
-        self.commentsTableView.insertRows(at: [IndexPath(row: commentsCList.count-1, section: 0)], with: .automatic)
-        self.commentsTableView.endUpdates()
+        let lastIndex = IndexPath(row: self.commentsCList.count-1, section: 0)
+        print("og num of rows \(self.commentsTableView.numberOfRows(inSection: 0))")
+        print("og num of rows \(self.commentMockList)")
+        self.commentsTableView.insertRows(at: [IndexPath(row: self.commentsCList.count-1, section: 0)], with: .automatic)
+        print("og num of rows in table \(self.commentsTableView.numberOfRows(inSection: 0))")
+        
+        if let commentsCell = self.commentsTableView.cellForRow(at: lastIndex){
+            self.commentsTableViewHeight.constant += commentsCell.frame.size.height
+            self.mainStack.frame.size.height += commentsCell.frame.size.height
+        }
+        self.commentsTableView.reloadData()
     }
     
     
@@ -664,7 +661,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rowCount: Int = 0
         if(tableView.tag == 0){
-            rowCount = commentsCList.count
+//            rowCount = commentsCList.count
+            rowCount = commentMockList.count
         }else if(tableView.tag == 1){
             rowCount = self.suggestions.count
 //            rowCount = 3
@@ -679,27 +677,35 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         
         if(tableView.tag == 0){
             let commentCell = self.commentsTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? commentCell
-            commentCell?.data = (commentsCList[indexPath.row] as! commentCellData)
+//            let comment = commentMockList[indexPath.row]
+            commentCell?.commentLabel.text = commentMockList[indexPath.row]["comment"]
+            commentCell?.dateLabel.text = commentMockList[indexPath.row]["date"]
+            commentCell?.usernameLabel.text = commentMockList[indexPath.row]["username"]
+//            commentCell?.data = (commentsCList[indexPath.row] as! commentCellData)
+//            let comment = commentsCList[indexPath.row] as! commentCellData
+//            commentCell?.commentLabel.text = comment.comment
+//            commentCell?.dateLabel.text = commentDF.string(from: comment.date)
             
-            let comment = commentsCList[indexPath.row] as! commentCellData
-            commentCell?.commentLabel.text = comment.comment
-            commentCell?.dateLabel.text = commentDF.string(from: comment.date)
-            
-            Constants.DB.user.child(comment.from).observeSingleEvent(of: .value, with: {snapshot in
-                if let data = snapshot.value as? [String:Any]{
-                    if let username = data["username"] as? String{
-                        commentCell?.usernameLabel.text = username
-                    }
-                    
-                    if let image = data["image_string"] as? String{
-                        if let url = URL(string: image){
-                            commentCell?.userProfilePhoto.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
-                        }
-                    }
-                }
-                
-            })
-            
+//            Constants.DB.user.child(comment.from).observeSingleEvent(of: .value, with: {snapshot in
+//                if let data = snapshot.value as? [String:Any]{
+//                    if let username = data["username"] as? String{
+//                        commentCell?.usernameLabel.text = username
+//                    }
+//                    
+//                    if let image = data["image_string"] as? String{
+//                        if let url = URL(string: image){
+//                            commentCell?.userProfilePhoto.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+//                        }
+//                    }
+//                }
+//                
+//            })
+            print("reloading")
+//            if indexPath.row == 0{
+//                self.commentsTableViewHeight.constant = (commentCell?.frame.size.height)!
+//            }else{
+//                self.commentsTableViewHeight.constant += (commentCell?.frame.size.height)!
+//            }
             tableCell = commentCell!
         }
         
