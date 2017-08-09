@@ -309,7 +309,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
         
         let unfollowAction = UIAlertAction(title: "Block", style: .destructive) { action in
-            print("now blocking user!!!!!!!! :(")
+            User.blockUser(uid: self.userID)
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in

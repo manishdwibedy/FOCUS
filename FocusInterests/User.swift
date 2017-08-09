@@ -69,4 +69,42 @@ class User: Equatable {
     static func == (lhs: User, rhs: User) -> Bool {
         return lhs.uuid == rhs.uuid
     }
+    
+    static func blockUser(uid: String){
+        
+        Constants.DB.user.child(uid).child("blocked/people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? [String:Any]
+            
+            if value == nil{
+                Constants.DB.user.child(uid).child("blocked/people").childByAutoId().updateChildValues([
+                    "UID": AuthApi.getFirebaseUid()!,
+                    "time": Date().timeIntervalSince1970
+                    ])
+            }
+        })
+        
+    }
+    
+//    static func unFollowUser(uid: String){
+//        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").queryOrdered(byChild: "UID").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { (snapshot) in
+//            let value = snapshot.value as? [String:Any]
+//            
+//            for (id, _) in value!{
+//                Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people/\(id)").removeValue()
+//            }
+//            
+//        })
+//        Constants.DB.user.child(uid).child("followers").child("people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
+//            let value = snapshot.value as? [String:Any]
+//            
+//            if let value = value{
+//                for (id, _) in value{
+//                    Constants.DB.user.child(uid).child("followers/people/\(id)").removeValue()
+//                    
+//                }
+//            }
+//            
+//            
+//        })
+//    }
 }
