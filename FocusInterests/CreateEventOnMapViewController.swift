@@ -8,6 +8,10 @@
 
 import UIKit
 import AMPopTip
+import Crashlytics
+import SCLAlertView
+import FBSDKLoginKit
+import FirebaseAuth
 
 class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate{
 
@@ -43,6 +47,13 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var lockButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var twitterButton: UIButton!
+    
+    let loginView = FBSDKLoginManager()
+    var pinType: PinType = .normal
+    var isPublic = false
+    var isTwitter = false
+    var isFacebook = false
+    var placeEventID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +97,16 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
 
     @IBAction func lockPressed(_ sender: Any) {
-        print("locked pressed")
+        if isPublic == false
+        {
+            isPublic = true
+            lockButton.setImage(UIImage(named: "LockGreen"), for: UIControlState.normal)
+            
+        }else
+        {
+            isPublic = false
+            lockButton.setImage(UIImage(named: "LockGray"), for: UIControlState.normal)
+        }
         
         if AuthApi.isNewToPage(index: 5){
             let popTip = PopTip()
@@ -100,15 +120,171 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func facebookPressed(_ sender: Any) {
-        print("facebook pressed")
+        if isFacebook == false
+        {
+            if AuthApi.getFacebookToken() == nil{
+                
+                loginView.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
+                    if error != nil {
+                        print(error?.localizedDescription ?? "")
+                        self.showLoginFailedAlert(loginType: "Facebook")
+                    } else {
+                        if let res = result {
+                            if res.isCancelled {
+                                return
+                            }
+                            if let tokenString = FBSDKAccessToken.current().tokenString {
+                                let credential = FacebookAuthProvider.credential(withAccessToken: tokenString)
+                                Auth.auth().currentUser?.link(with: credential) { (user, error) in
+                                    if error != nil {
+                                        AuthApi.set(facebookToken: tokenString)
+                                        self.isFacebook = true
+                                        self.facebookButton.setImage(UIImage(named: "facebookGreen"), for: UIControlState.normal)
+                                        return
+                                    }
+                                }
+                            }
+                        } else {
+                            self.showLoginFailedAlert(loginType: "Facebook")
+                        }
+                    }
+                }
+            }
+            else{
+                self.isFacebook = true
+                self.facebookButton.setImage(UIImage(named: "facebookGreen"), for: UIControlState.normal)
+            }
+            
+        }else
+        {
+            isFacebook = false
+            facebookButton.setImage(UIImage(named: "facebookGray"), for: UIControlState.normal)
+        }
     }
     
     @IBAction func twitterPressed(_ sender: Any) {
-        print("twitter pressed")
+        if isTwitter == false
+        {
+            if AuthApi.getTwitterToken() == nil{
+                Share.loginTwitter()
+            }
+            isTwitter = true
+            twitterButton.setImage(UIImage(named: "TwitterGreen"), for: UIControlState.normal)
+        }else
+        {
+            isTwitter = false
+            twitterButton.setImage(UIImage(named: "TwitterGray"), for: UIControlState.normal)
+        }
     }
     
     @IBAction func pinPressed(_ sender: Any) {
-        print("pin pressed")
+        if userStatusTextView.text == "What are you up to? Type here."{
+            SCLAlertView().showCustom("Oops!", subTitle: "Please enter your caption", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
+            return
+        }
+        if addFocusButton.titleLabel?.text == "Add FOCUS"{
+            SCLAlertView().showCustom("Oops!", subTitle: "Please enter your FOCUS", color: UIColor.orange, icon: #imageLiteral(resourceName: "placeholder_people"))
+            return
+        }
+        
+        var coordinates = AuthApi.getLocation()!.coordinate
+        
+        Constants.DB.pins.child(AuthApi.getFirebaseUid()!).removeValue()
+
+        let time = NSDate().timeIntervalSince1970
+        if userStatusTextView.text != nil && userStatusTextView.text != ""
+        {
+//            let imagePaths = NSMutableDictionary()
+//            for image in galleryPicArray
+//            {
+//                let random = Int(time) + Int(arc4random_uniform(10000000))
+//                let path = AuthApi.getFirebaseUid()!+"/"+String(random)
+//                imagePaths.addEntries(from: [String(random):["imagePath": path]])
+//                uploadImage(image: image, path: Constants.storage.pins.child(path))
+//                
+//            }
+            var formmatedAddress = "Santa Monica"
+            
+            
+            if formmatedAddress.characters.count > 0{
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": "", "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                
+                Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
+                    if (error != nil) {
+                        debugPrint("An error occured: \(String(describing: error))")
+                    } else {
+                        print("Saved location successfully!")
+                    }
+                }
+                
+                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+                    let value = snapshot.value as? [String:Any]
+                    
+                    if let pinCount = value?["pinCount"] as? Int{
+                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["pinCount": pinCount + 1])
+                    }
+                    else{
+                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["pinCount": 1])
+                    }
+                })
+                
+                if self.pinType == .place{
+                    Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": "", "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                    
+                }
+                else if self.pinType == .event{
+                    Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": "", "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                }
+                Answers.logCustomEvent(withName: "Pin",
+                                       customAttributes: [
+                                        "user": AuthApi.getFirebaseUid()!,
+                                        "interest": addFocusButton.titleLabel?.text,
+                                        "address": formmatedAddress,
+                                        "imageSelected": false,
+                                        "public": isPublic
+                    ])
+            }
+            if isTwitter == true
+            {
+                Share.postToTwitter(withStatus: userStatusTextView.text!)
+            }
+            if isFacebook == true
+            {
+                try! Share.facebookShare(with: URL(string: "http://mapofyourworld.com")!, description: userStatusTextView.text!)
+            }
+        }
+        userStatusTextView.text = "What are you up to? Type here."
+        userStatusTextView.font = UIFont(name: "Avenir Book", size: 15)
+        
+        userStatusTextView.resignFirstResponder()
+        
+        isPublic = false
+        isTwitter = false
+        isFacebook = false
+        
+        
+        lockButton.setImage(UIImage(named: "LockGray"), for: UIControlState.normal)
+        facebookButton.setImage(UIImage(named: "facebookGray"), for: UIControlState.normal)
+        twitterButton.setImage(UIImage(named: "TwitterGray"), for: UIControlState.normal)
+        
+//        for cell in cellArray
+//        {
+//            cell.imageView.layer.borderWidth = 0
+//        }
+        
+        if self.pinType != .normal{
+            dismiss(animated: true, completion: nil)
+        }
+        else{
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+            vc.willShowPin = true
+            //vc.showPin = pinData
+            vc.location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
+            vc.selectedIndex = 0
+            self.present(vc, animated: true, completion: nil)
+        }
+
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -238,4 +414,11 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     */
 
+    func showLoginFailedAlert(loginType: String) {
+        let alert = UIAlertController(title: "Login error", message: "There has been an error logging in with \(loginType). Please try again.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
+        alert.view.tintColor = UIColor.primaryGreen()
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
