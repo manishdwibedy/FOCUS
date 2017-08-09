@@ -389,8 +389,21 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 feedCreatedEventCell.usernameLabel.setTitle(user.username, for: .normal)
                 if let image = user.image_string{
                     if let url = URL(string: image){
-                        feedCreatedEventCell.usernameImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
-                        feedCreatedEventCell.usernameImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        
+                        SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                            (receivedSize :Int, ExpectedSize :Int) in
+                            
+                        }, completed: {
+                            (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                            
+                            if image != nil && finished{
+                                feedCreatedEventCell.usernameImage.setImage(crop(image: image!, width: 50, height: 50), for: .normal)
+                            }
+                            else{
+                                feedCreatedEventCell.usernameImage.setImage(crop(image: #imageLiteral(resourceName: "placeholder_people"), width: 50, height: 50), for: .normal)
+                            }
+                        })
+                        
                     }
                 }
             })
