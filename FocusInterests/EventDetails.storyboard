@@ -146,7 +146,8 @@
                                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 </state>
                                                                                 <connections>
-                                                                                    <action selector="pinButtonPressed:" destination="AZe-9E-xBf" eventType="touchUpInside" id="bL2-s7-coD"/>
+                                                                                    <action selector="pinButtonPressed:" destination="AZe-9E-xBf" eventType="touchUpInside" id="BWb-UU-Gh7"/>
+                                                                                    <segue destination="PAO-Zw-glf" kind="unwind" identifier="unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails" unwindAction="unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetailsWithSegue:" id="ycA-2E-RV3"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>

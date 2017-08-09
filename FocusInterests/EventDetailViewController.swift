@@ -916,32 +916,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func pinButtonPressed(_ sender: Any) {
-        
-        if let date = eventDateDF.date(from: (event?.date)!){
-            if date < Date(){
-                showError(message: "Event is over")
-                return
-            }
-            
-        }
-        else if let date = ticketMasterDF.date(from: (event?.date)!){
-            if date < Date(){
-                showError(message: "Event is over")
-                return
-            }
-        }
-        
-        self.pinHereButton.isSelected = !self.pinHereButton.isSelected
-        
-        let createEventStoryboard = UIStoryboard.init(name: "CreateEvent", bundle: nil)
-        let createEventVC = createEventStoryboard.instantiateViewController(withIdentifier: "createEvent") as! CreateNewEventViewController
-        
-        if let specificAddress = self.addressLabel.text{
-            createEventVC.specifiedLocation =  specificAddress
-        }
-        
-        createEventVC.specifiedLocationFromPlaceOrEventDetail = true
-        self.present(createEventVC, animated: true, completion: nil)
+        performSegue(withIdentifier: "unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails", sender: self)
     }
     
     func checkIfAttending(){
