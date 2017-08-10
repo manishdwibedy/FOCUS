@@ -288,32 +288,11 @@
                         <viewControllerLayoutGuide type="bottom" id="k4d-2y-QOs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="89H-gt-97y">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="614"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJE-2j-BeM">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="barTintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Pin" id="gG3-OF-paB">
-                                        <barButtonItem key="leftBarButtonItem" image="BackArrow" id="a0z-8p-Mqv">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="back:" destination="Wnn-ii-34g" id="ykD-ot-DkT"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="8zW-dn-FAh">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7f7-dj-AgA">
-                                <rect key="frame" x="0.0" y="64" width="375" height="626"/>
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7f7-dj-AgA">
+                                <rect key="frame" x="0.0" y="64" width="375" height="549"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9XK-WR-zAj">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="423"/>
@@ -421,7 +400,7 @@ line 2</string>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="EWS-Xj-2Kw">
-                                        <rect key="frame" x="13" y="477" width="346" height="101.5"/>
+                                        <rect key="frame" x="13" y="477" width="346" height="51.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="C6k-hv-B8V" userLabel="Interest Likes and Time Stack View">
                                                 <rect key="frame" x="0.0" y="0.0" width="346" height="20"/>
@@ -466,60 +445,60 @@ line 2</string>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="0si-vv-Uym">
-                                                <rect key="frame" x="0.0" y="51.5" width="346" height="50"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="0si-vv-Uym">
+                                                <rect key="frame" x="0.0" y="51.5" width="346" height="0.0"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="gYk-5c-yWj"/>
+                                                    <constraint firstAttribute="height" id="gYk-5c-yWj"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkD-5i-HNW">
-                                        <rect key="frame" x="314" y="589" width="45" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="2np-qo-n46"/>
-                                            <constraint firstAttribute="width" constant="45" id="VDC-rm-htl"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                        <state key="normal" title="More">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="comment:" destination="Wnn-ii-34g" eventType="touchUpInside" id="efz-pR-swY"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="EWS-Xj-2Kw" firstAttribute="leading" secondItem="eFv-QC-3S7" secondAttribute="leading" id="1I3-mY-ief"/>
-                                    <constraint firstItem="kkD-5i-HNW" firstAttribute="top" secondItem="EWS-Xj-2Kw" secondAttribute="bottom" constant="10.5" id="DaC-hB-O69"/>
-                                    <constraint firstAttribute="trailing" secondItem="kkD-5i-HNW" secondAttribute="trailing" constant="16" id="EO2-ie-Jje"/>
+                                    <constraint firstAttribute="bottom" secondItem="EWS-Xj-2Kw" secondAttribute="bottom" constant="20.5" id="COo-ck-GAN"/>
                                     <constraint firstAttribute="trailing" secondItem="9XK-WR-zAj" secondAttribute="trailing" id="Jj4-T6-5Mb"/>
                                     <constraint firstItem="bZe-CO-fzE" firstAttribute="leading" secondItem="7f7-dj-AgA" secondAttribute="leading" constant="8" id="P2n-0S-f4b"/>
                                     <constraint firstItem="9XK-WR-zAj" firstAttribute="leading" secondItem="7f7-dj-AgA" secondAttribute="leading" id="WBW-Mi-KVc"/>
                                     <constraint firstItem="EWS-Xj-2Kw" firstAttribute="top" secondItem="bZe-CO-fzE" secondAttribute="bottom" constant="6" id="mFs-XC-FcZ"/>
                                     <constraint firstItem="9XK-WR-zAj" firstAttribute="top" secondItem="7f7-dj-AgA" secondAttribute="top" id="odp-mW-DO0"/>
                                     <constraint firstAttribute="trailing" secondItem="EWS-Xj-2Kw" secondAttribute="trailing" constant="16" id="p3k-x5-qzf"/>
-                                    <constraint firstAttribute="bottom" secondItem="kkD-5i-HNW" secondAttribute="bottom" constant="19" id="pAK-Mj-TjT"/>
                                     <constraint firstItem="bZe-CO-fzE" firstAttribute="top" secondItem="9XK-WR-zAj" secondAttribute="bottom" constant="8" id="rwI-ee-mLo"/>
                                 </constraints>
                             </scrollView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2E-SG-bxp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="uQq-Xy-B7T"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Pin" id="SNE-jy-v8v">
+                                        <barButtonItem key="leftBarButtonItem" image="BackArrow" id="Xvf-WC-lNj">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="back:" destination="Wnn-ii-34g" id="eYR-zR-X3q"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="7f7-dj-AgA" firstAttribute="top" secondItem="hJE-2j-BeM" secondAttribute="bottom" id="B3M-vU-Yrc"/>
-                            <constraint firstItem="hJE-2j-BeM" firstAttribute="top" secondItem="89H-gt-97y" secondAttribute="top" constant="20" id="GwN-4o-Osp"/>
-                            <constraint firstAttribute="trailing" secondItem="hJE-2j-BeM" secondAttribute="trailing" id="U8p-2P-9Um"/>
+                            <constraint firstItem="k4d-2y-QOs" firstAttribute="top" secondItem="7f7-dj-AgA" secondAttribute="bottom" constant="1" id="DdF-cp-09B"/>
+                            <constraint firstItem="I2E-SG-bxp" firstAttribute="leading" secondItem="89H-gt-97y" secondAttribute="leading" id="HC3-kg-y63"/>
                             <constraint firstItem="7f7-dj-AgA" firstAttribute="leading" secondItem="89H-gt-97y" secondAttribute="leading" id="Y2u-Wc-6lA"/>
-                            <constraint firstItem="k4d-2y-QOs" firstAttribute="top" secondItem="7f7-dj-AgA" secondAttribute="bottom" id="gRC-3z-eCc"/>
-                            <constraint firstItem="hJE-2j-BeM" firstAttribute="centerX" secondItem="7f7-dj-AgA" secondAttribute="centerX" id="hvr-Kj-g3p"/>
                             <constraint firstAttribute="trailing" secondItem="7f7-dj-AgA" secondAttribute="trailing" id="kgh-aw-C5a"/>
-                            <constraint firstItem="hJE-2j-BeM" firstAttribute="leading" secondItem="89H-gt-97y" secondAttribute="leading" id="o9Q-kf-TFN"/>
+                            <constraint firstItem="I2E-SG-bxp" firstAttribute="top" secondItem="89H-gt-97y" secondAttribute="top" id="pvu-wr-rFd"/>
+                            <constraint firstAttribute="trailing" secondItem="I2E-SG-bxp" secondAttribute="trailing" id="ssb-4f-zJT"/>
+                            <constraint firstItem="7f7-dj-AgA" firstAttribute="top" secondItem="I2E-SG-bxp" secondAttribute="bottom" id="xFy-3U-Ygx"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="690"/>
+                    <size key="freeformSize" width="375" height="614"/>
                     <connections>
                         <outlet property="addressTopOut" destination="tVa-3J-grt" id="LhB-FQ-D5P"/>
                         <outlet property="commentHeight" destination="gYk-5c-yWj" id="fz8-4H-yPp"/>
@@ -529,8 +508,7 @@ line 2</string>
                         <outlet property="interestsLabel" destination="rpQ-O8-xtN" id="uWr-p2-uxG"/>
                         <outlet property="likeOut" destination="eFv-QC-3S7" id="PNJ-Ab-N5t"/>
                         <outlet property="likesLabel" destination="j0G-WK-LPf" id="9Th-tQ-nQI"/>
-                        <outlet property="moreOut" destination="kkD-5i-HNW" id="roZ-6C-A40"/>
-                        <outlet property="navBar" destination="hJE-2j-BeM" id="Qd3-jJ-9XU"/>
+                        <outlet property="navBar" destination="I2E-SG-bxp" id="4oV-9f-0Ua"/>
                         <outlet property="pinMessageLabel" destination="kSX-QC-Op4" id="ONd-y0-Jre"/>
                         <outlet property="profileImage" destination="cQ3-SI-V2f" id="x62-RK-RTK"/>
                         <outlet property="sendOut" destination="CsI-L6-VgU" id="2kw-qA-0hl"/>

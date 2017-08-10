@@ -22,7 +22,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var interestsLabel: UILabel!
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var pinMessageLabel: UILabel!
-    @IBOutlet weak var moreOut: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var navBar: UINavigationBar!
     
@@ -50,14 +49,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         self.navBar.barTintColor = Constants.color.navy
         navBar.titleTextAttributes = attrs
         
-        self.moreOut.layer.borderWidth = 1.0
-        self.moreOut.layer.borderColor = UIColor.white.cgColor
-        self.moreOut.layer.cornerRadius = 5.0
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-
         if data.focus == ""{
             addGreenDot(label: self.interestsLabel, content: "N.A")
         }else{
@@ -94,7 +85,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     let range = NSMakeRange(0, length)
                     
                     self.pinMessageLabel.attributedText = attributedString(from: messageText, boldRange: range)
-
+                    
                 }
                 else{
                     self.usernameLabel.text = "N.A."
@@ -160,9 +151,9 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                         //        let longP = UILongPressGestureRecognizer(target: self, action: #selector(longP(sender:)))
                         //        longP.minimumPressDuration = 0.3
                         //        self.addGestureRecognizer(longP)
-                    
-                    
-                    
+                        
+                        
+                        
                     })
                     
                 }else
@@ -226,18 +217,20 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             if let value = value
             {
                 if value.count > 3{
-                    let textLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.commentsStackView.frame.size.width, height: 25))
-
-                    textLabel.textColor = .white
-                    textLabel.font = UIFont(name: "Avenir-Book", size: 15)
-                    textLabel.text  = "View \(value.count) comments"
-                    textLabel.textAlignment = .left
+                    let seeMoreCommentsButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.commentsStackView.frame.size.width, height: 30))
                     
-                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.showComments(sender:)))
-                    textLabel.addGestureRecognizer(tap)
-
-                    self.commentsStackView.addArrangedSubview(textLabel)
-                    self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false;
+                    seeMoreCommentsButton.titleLabel?.font = UIFont(name: "Avenir-Book", size: 14)
+                    seeMoreCommentsButton.setTitle("View \(value.count) comments", for: .normal)
+                    seeMoreCommentsButton.setTitleColor(UIColor.white, for: .normal)
+                    seeMoreCommentsButton.setTitle("View \(value.count) comments", for: .selected)
+                    seeMoreCommentsButton.setTitleColor(UIColor.white, for: .selected)
+                    seeMoreCommentsButton.backgroundColor = UIColor.clear
+                    seeMoreCommentsButton.contentHorizontalAlignment = .left
+                    
+                    seeMoreCommentsButton.addTarget(self, action: #selector(PinLookViewController.showComments(_:)), for: .touchUpInside)
+                    
+                    self.commentsStackView.addArrangedSubview(seeMoreCommentsButton)
+                    self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false
                 }
                 
                 let myArr = Array(value.keys)
@@ -270,8 +263,12 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                             let username = value?["username"] as! String
                             
                             let textLabel = UILabel()
-                            
                             textLabel.textColor = .white
+                            textLabel.numberOfLines = 0
+                            textLabel.lineBreakMode = .byClipping
+                            let labelSizeWithFixedWith = CGSize(width: self.commentsStackView.frame.width, height: CGFloat.greatestFiniteMagnitude)
+                            let exactLabelsize = textLabel.sizeThatFits(labelSizeWithFixedWith)
+                            textLabel.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: exactLabelsize)
                             
                             let messageText = "\(username) \(data?["comment"] as! String)"
                             
@@ -281,42 +278,30 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                             textLabel.attributedText = attributedString(from: messageText, nonBoldRange: range)
                             textLabel.textAlignment = .left
                             
-                            
-                            
                             self.commentsStackView.addArrangedSubview(textLabel)
-                            self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false;
-
-                            let tap = UITapGestureRecognizer(target: self, action: #selector(self.showComments(sender:)))
+                            self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false
+                            let tap = UITapGestureRecognizer(target: self, action: #selector(self.showComments(_:)))
                             self.commentsStackView.addGestureRecognizer(tap)
-
+                            
                         }
                     })
                     
                 }
                 
-                self.commentHeight.constant = CGFloat(25 * (value.count))
-                print("value\(value)")
-                if value.count < 3{
-                    self.moreOut.isHidden = true
-                }else{
-                    self.moreOut.isHidden = false
-                }
                 
-//                for (index, category) in (place.categories.enumerated()){
-//                    let textLabel = UILabel()
-//                    
-//                    textLabel.textColor = .white
-//                    textLabel.text  = getInterest(yelpCategory: category.alias)
-//                    textLabel.textAlignment = .left
-//                    
-//                    
-//                    commentsStackView.addArrangedSubview(textLabel)
-//                    commentsStackView.translatesAutoresizingMaskIntoConstraints = false;
-//                }
             }
         })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        
+        if self.commentsStackView.arrangedSubviews.count > 0{
+            for labelIndex in 0...self.commentsStackView.arrangedSubviews.count-1{
+                print(self.commentsStackView.subviews[labelIndex].intrinsicContentSize)
+                self.commentHeight.constant += CGFloat(self.commentsStackView.subviews[labelIndex].intrinsicContentSize.height)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -459,13 +444,12 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    func showComments(sender:UITapGestureRecognizer) {
+    func showComments(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Comments", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
         ivc.type = "pin"
         ivc.data = dictData
         self.present(ivc, animated: true, completion: { _ in })
-        
     }
 
 }

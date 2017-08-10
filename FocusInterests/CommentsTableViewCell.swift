@@ -11,13 +11,15 @@ import UIKit
 class CommentsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userProfileImage: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.userNameLabel.textContainer.maximumNumberOfLines = 0
         self.setupCell()
+        self.userNameLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,8 +28,7 @@ class CommentsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadInfo(UID:String, text: String)
-    {
+    func loadInfo(UID:String, text: String){
         Constants.DB.user.child(UID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
@@ -38,13 +39,16 @@ class CommentsTableViewCell: UITableViewCell {
                 var finalText = NSMutableAttributedString()
                 finalText = NSMutableAttributedString(string:content)
                 
-                finalText.setAttributes([NSFontAttributeName : UIFont(name: "Avenir Book", size: 15.0)!], range: NSRange(location:username.characters.count + 2,length:(text.characters.count)))
+                finalText.addAttributes([NSForegroundColorAttributeName: UIColor.white ,NSFontAttributeName : UIFont(name: "Avenir-Black", size: 15.0)!], range: NSRange(location:0,length:(username.characters.count)))
+                
+                finalText.addAttributes([NSForegroundColorAttributeName: UIColor.white ,NSFontAttributeName : UIFont(name: "Avenir Book", size: 15.0)!], range: NSRange(location:username.characters.count + 2,length:(text.characters.count)))
 
                 if let image = value?["image_string"] as? String{
                     if let url = URL(string: image){
                         self.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
                     }
                 }
+                
                 self.userNameLabel.attributedText = finalText
             }
         })

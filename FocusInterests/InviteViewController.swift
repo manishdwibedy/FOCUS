@@ -40,6 +40,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var inviteFromMapView = false
     var inviteFromPlaceDetails = false
     var inviteFromEventDetails = false
+    var inviteFromOtherUserProfile = false
     var place: Place?
     var event: Event?
     var dayText = ""
@@ -640,6 +641,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.mapView?.showInvitePopup()
                     print("going back to map view")
                     self.inviteFromMapView = false
+                }else if self.inviteFromOtherUserProfile{
+                    performSegue(withIdentifier: "unwindToOtherUserProfile", sender: self)
                 }else{
                     self.searchPeoplePlaceDelegate?.haveInvitedSomeoneToAPlace()
                 }
@@ -652,6 +655,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.mapView?.showInvitePopup()
                     print("going back to map view")
                     self.inviteFromMapView = false
+                }else if self.inviteFromOtherUserProfile{
+                    performSegue(withIdentifier: "unwindToOtherUserProfile", sender: self)
                 }else{
                     self.searchPeopleEventDelegate?.haveInvitedSomeoneToAnEvent()
                 }

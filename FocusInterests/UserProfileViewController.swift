@@ -48,7 +48,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var followingCount: UIButton!
     
     // border between user info and pin stack
-    @IBOutlet weak var firstBorderHeight: NSLayoutConstraint!
     @IBOutlet weak var secondBorderHeight: NSLayoutConstraint!
     
     // User Pin Stack
@@ -313,10 +312,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     self.createPinAndUpdatePinStack.removeArrangedSubview(self.createPinView)
                     self.createPinView.removeFromSuperview()
                 }
-                self.firstBorderHeight.constant = 5
+                
                 self.secondBorderHeight.constant = 5
             }else{
-                self.firstBorderHeight.constant = 20
+                
                 self.secondBorderHeight.constant = 20
                 self.createPinAndUpdatePinStack.removeArrangedSubview(self.pinView)
                 self.pinView.removeFromSuperview()

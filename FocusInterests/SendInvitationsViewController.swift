@@ -70,6 +70,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         formatNavBar()
         
+        self.contactList.textColor = UIColor.white
         self.createEventButton.roundCorners(radius: 10.0)
         
         self.bottomHeight.constant -= self.facebookTwitterStackHeight.constant
@@ -399,11 +400,11 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
         if friendList.count > 0{
             contactListView.isHidden = false
+            contactList.text = friendList.joined(separator: ",")
         }
         else{
             contactListView.isHidden = true
         }
-        contactList.text = friendList.joined(separator: ",")
     }
     
     func contactHasBeenRemoved(contact: String, index: Int){
