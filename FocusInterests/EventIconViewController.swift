@@ -107,7 +107,7 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     }
     
     @objc private func goBack(_ sender: Any) {
-        self.performSegue(withIdentifier: "details", sender: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func dismiss(_ sender: Any) {
