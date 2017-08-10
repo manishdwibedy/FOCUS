@@ -761,7 +761,12 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
         Event.clearCache()
-        self.dismiss(animated: true, completion: nil)
+        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+        vc.selectedIndex = 3
+        self.present(vc, animated: true, completion: nil)
+        
     }
     
     // MARK: - Navigation
