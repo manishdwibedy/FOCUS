@@ -948,7 +948,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             cell.guestCount.text = "\(event.attendeeCount) guests"
             
             //            Date formatter for date and time label in event
-            cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price)"
+            cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price!)"
             
             let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
             cell.distance.text = getDistance(fromLocation: eventLocation, toLocation: AuthApi.getLocation()!)
