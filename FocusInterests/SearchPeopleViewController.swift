@@ -478,7 +478,13 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     }
                                     
                                     if usernameSearch.count + fullnameSearch.count == username_count + fullname_count{
-                                        self.filtered = usernameSearch + fullnameSearch
+                                        self.filtered = usernameSearch
+                                        for user in fullnameSearch{
+                                            if !usernameSearch.contains(user){
+                                                self.filtered.append(user)
+                                            }
+                                        }
+                                        
                                         self.filtered.sort {
                                             if $0.hasPin && $1.hasPin{
                                                 return $0.pinDistance < $1.pinDistance
@@ -531,7 +537,13 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     }
                                     
                                     if usernameSearch.count + fullnameSearch.count == username_count + fullname_count{
-                                        self.filtered = usernameSearch + fullnameSearch
+                                        self.filtered = usernameSearch
+                                        for user in fullnameSearch{
+                                            if !usernameSearch.contains(user){
+                                                self.filtered.append(user)
+                                            }
+                                        }
+                                        
                                         self.filtered.sort {
                                             if $0.hasPin && $1.hasPin{
                                                 return $0.pinDistance < $1.pinDistance
