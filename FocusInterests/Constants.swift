@@ -79,6 +79,27 @@ struct Constants {
             "Outdoors": "118,119",
         ]
         
+        public static let ticketMasterMapping: [String:String] = [
+            "Music": "Music",
+            "Films": "Entertainment",
+            "Sports": "Sports",
+            "Art & Theatre": "Arts",
+            "Casino/Gaming": "Entertainment",
+            "Comedy": "Entertainment",
+            "Community/Civic": "Community",
+            "Community/Cultural": "Community",
+            "Fairs & Festivals": "Entertainment",
+            "Family": "Community",
+            "Food & Drink": "Food",
+            "Health/Wellness": "Fitness",
+            "Hobby/Special Interest Expos": "Community",
+            "Holiday": "Community",
+            "Ice Shows": "Entertainment",
+            "Multimedia": "Entertainment",
+            "Psychics/Mediums/Hypnotists": "Community",
+            "Special Interest/Hobby": "Community"
+        ]
+        
         public static let yelpMapping = [
             "Community": "homeservices,localservices,pets,publicservicesgovt,localflavor,auto",
             "Learn": "education",

@@ -982,6 +982,26 @@ func getInterest(yelpCategory: String) -> String{
     }
     return ""
 }
+   
+func getInterest(ticketMasterCategory: String) -> String{
+    _ = ticketMasterCategory
+    let parent = ticketMasterCategory
+    
+//    while let ticketMasterParent = Constants.interests.ticketMasterParent[category]{
+//        category = ticketMasterParent
+//        parent = ticketMasterParent
+//    }
+    
+    for (interest, ids) in Constants.interests.ticketMasterMapping{
+        let id_list = ids.components(separatedBy: ",")
+        for id in id_list{
+            if id == parent{
+                return interest
+            }
+        }
+    }
+    return ""
+}
 
 func getEventBriteCategories() -> String{
     let interests = getUserInterests().components(separatedBy: ",")
@@ -1338,6 +1358,14 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
     var eventDF = DateFormatter()
     eventDF.dateFormat = "MMM d, h:mm a"
     
+    var categories = Set<String>()
+    
+    for interest in interests.components(separatedBy: ","){
+        if let category = Constants.interests.ticketMasterMapping[interest]{
+            categories.insert(category)
+        }
+    }
+    
     for interest in interests.components(separatedBy: ","){
         if interest.characters.count > 0{
             Constants.DB.event_interests.child(interest).observeSingleEvent(of: .value, with: {snapshot in
@@ -1375,6 +1403,23 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
                 }       
             })
         }
+    }
+    
+    for category in categories{
+        Event.getNearyByEvents(query: "", category: category, location: AuthApi.getLocation()!.coordinate, gotEvents: { events in
+            suggestions.append(contentsOf: events)
+            
+            if eventCount == suggestions.count || suggestions.count >= limit{
+                suggestions.sort(by: {
+                    if let event1 = eventDF.date(from: $0.date!), let event2 = eventDF.date(from: $1.date!){
+                        return event1 < event2
+                    }
+                    return true
+                })
+                gotEvents(Array(suggestions[0..<limit]))
+            }
+        })
+    
     }
 }
    

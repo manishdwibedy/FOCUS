@@ -235,7 +235,7 @@ extension Event{
         })
     }
     
-    static func getNearyByEvents(query: String = "", location: CLLocationCoordinate2D = (AuthApi.getLocation()?.coordinate)!, gotEvents: @escaping (_ result: [Event]) -> Void){
+    static func getNearyByEvents(query: String = "", category: String = "", location: CLLocationCoordinate2D = (AuthApi.getLocation()?.coordinate)!, gotEvents: @escaping (_ result: [Event]) -> Void){
         var events = [Event]()
         
         let url = "https://app.ticketmaster.com/discovery/v2/events.json"
@@ -244,6 +244,7 @@ extension Event{
             "size": 20,
             "latlong": "\(location.latitude),\(location.longitude)",
             "radius": 20,
+            "classificationName": category,
             "apikey": "dScAOnFScudDodKZDJ47ehxcJ1pXnihD"
         ]
         
