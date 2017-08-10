@@ -155,7 +155,7 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
                                     }
                                     if newData.username == self.username{
                                         self.selected[newData] = true
-                                        self.contactHasBeenSelected(contact: username, index: (self.users[first]?.count)! - 1)
+                                        self.contactHasBeenSelected(contact: newData, index: (self.users[first]?.count)! - 1)
                                     }
                                     
                                 }
@@ -335,18 +335,18 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
         
         if !self.selected[user!]!{
             personToInviteCell.inviteConfirmationButton.isSelected = true
-            contactHasBeenSelected(contact: (user?.username)!, index: index)
+            contactHasBeenSelected(contact: user!, index: index)
         }
         else{
             personToInviteCell.inviteConfirmationButton.isSelected = false
-            contactHasBeenRemoved(contact: (user?.username)!, index: index)
+            contactHasBeenRemoved(contact: user!, index: index)
         }
     }
     
-    func contactHasBeenSelected(contact: String, index: Int){
+    func contactHasBeenSelected(contact: InviteUser, index: Int){
         contactListView.isHidden = false
         
-        let section = String(describing: contact.characters.first!)
+        let section = String(describing: contact.username.characters.first!)
         let user = self.users[section.uppercased()]?[index]
         
         var selectedFriends = [String]()
@@ -378,8 +378,8 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func contactHasBeenRemoved(contact: String, index: Int) {
-        let section = String(describing: contact.characters.first!)
+    func contactHasBeenRemoved(contact: InviteUser, index: Int) {
+        let section = String(describing: contact.username.characters.first!)
         let user = self.users[section.uppercased()]?[index]
         
         if self.selected[user!]! == true

@@ -52,11 +52,11 @@ class InviteListTableViewCell: UITableViewCell {
     @IBAction func contactSelectedAction(_ sender: Any) {
         if self.inviteConfirmationButton.isSelected == false{
             self.inviteConfirmationButton.isSelected = true
-             delegate?.contactHasBeenSelected(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
+             delegate?.contactHasBeenSelected(contact: user!, index: self.inviteConfirmationButton.tag)
             
         }else{
             self.inviteConfirmationButton.isSelected = false
-            delegate?.contactHasBeenRemoved(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
+            delegate?.contactHasBeenRemoved(contact: user!, index: self.inviteConfirmationButton.tag)
             
         }
         

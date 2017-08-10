@@ -22,11 +22,12 @@ protocol SelectAllContactsDelegate {
 }
 
 protocol SendInvitationsViewControllerDelegate {
-    func contactHasBeenSelected(contact: String, index: Int)
-    func contactHasBeenRemoved(contact: String, index: Int)
+    func contactHasBeenSelected(contact: InviteUser, index: Int)
+    func contactHasBeenRemoved(contact: InviteUser, index: Int)
 }
 
-class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SendInvitationsViewControllerDelegate, SelectAllContactsDelegate, MFMessageComposeViewControllerDelegate{
+class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SendInvitationsViewControllerDelegate, SelectAllContactsDelegate//, MFMessageComposeViewControllerDelegate
+{
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var createEventButton: UIButton!
@@ -65,6 +66,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     var isTwitter = false
     let loginView = FBSDKLoginManager()
     
+    var selectedUsers = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -267,6 +269,34 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             }
         }
         
+        let time = NSDate().timeIntervalSince1970
+        for UID in self.selectedUsers{
+            var name = (event?.title)!
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+                let user = snapshot.value as? [String : Any] ?? [:]
+                
+                let username = user["username"] as! String
+                sendNotification(to: UID, title: "New Invite", body: "\(String(describing: username)) invited you to \(String(describing: name))", actionType: "", type: "event", item_id: "", item_name: "")
+            })
+            Constants.DB.event.child(id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
+        
+            Constants.DB.user.child(UID).child("invitations/event").queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
+                
+                if snapshot.value == nil{
+                    Constants.DB.user.child(UID).child("invitations/event").childByAutoId().updateChildValues(["ID":self.event?.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": time])
+                    
+                }
+            })
+            Answers.logCustomEvent(withName: "Invite User",
+                                   customAttributes: [
+                                    "type": "event",
+                                    "user": AuthApi.getFirebaseUid()!,
+                                    "invited": UID,
+                                    "name": name
+            ])
+            
+        }
+    
 //        Messaging
 //        let messageVC = MFMessageComposeViewController()
 //        
@@ -295,22 +325,22 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         self.present(VC!, animated: true, completion: nil)
     }
     
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        switch (result) {
-        case .cancelled:
-            print("Message was cancelled")
-            self.dismiss(animated: true, completion: nil)
-        case .failed:
-            print("Message failed")
-            self.dismiss(animated: true, completion: nil)
-        case .sent:
-            print("Message was sent")
-            self.dismiss(animated: true, completion: nil)
-        default:
-            break;
-        }
-    }
-    
+//    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+//        switch (result) {
+//        case .cancelled:
+//            print("Message was cancelled")
+//            self.dismiss(animated: true, completion: nil)
+//        case .failed:
+//            print("Message failed")
+//            self.dismiss(animated: true, completion: nil)
+//        case .sent:
+//            print("Message was sent")
+//            self.dismiss(animated: true, completion: nil)
+//        default:
+//            break;
+//        }
+//    }
+ 
     private func formatNavBar(){
         self.navigationItem.title = "Send Invites"
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
@@ -364,6 +394,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             let section = filteredSection[indexPath.section-1]
             
             let user = self.filtered[section]?[indexPath.row]
+            personToInviteCell.user = user
             personToInviteCell.usernameLabel.text = user?.username
             personToInviteCell.fullNameLabel.text = user?.fullname
             
@@ -394,7 +425,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //        }
 //    }
     
-    func contactHasBeenSelected(contact: String, index: Int){
+    func contactHasBeenSelected(contact: InviteUser, index: Int){
         selectedFriend[index] = true
         let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
         if friendList.count > 0{
@@ -403,10 +434,11 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         else{
             contactListView.isHidden = true
         }
+        self.selectedUsers.append(contact.UID)
         contactList.text = friendList.joined(separator: ",")
     }
     
-    func contactHasBeenRemoved(contact: String, index: Int){
+    func contactHasBeenRemoved(contact: InviteUser, index: Int){
         selectedFriend[index] = false
         let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
         if friendList.count > 0{
@@ -414,6 +446,10 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         }
         else{
             contactListView.isHidden = true
+        }
+        
+        if let index = self.selectedUsers.index(of: contact.UID) {
+            self.selectedUsers.remove(at: index)
         }
         contactList.text = friendList.joined(separator: ",")
     }
