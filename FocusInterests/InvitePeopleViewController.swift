@@ -702,14 +702,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
-    }
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        
         self.searchBar.text = ""
+        self.searchBar.setShowsCancelButton(false, animated: true)
         if segmentedOut.selectedSegmentIndex == 0{
             self.filtered = self.places
             self.tableView.reloadData()
@@ -718,6 +713,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.filtered = self.events
             self.tableView.reloadData()
         }
+        searchBar.resignFirstResponder()
     }
     
     @IBAction func back(_ sender: Any) {
