@@ -1071,12 +1071,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         return rowHeight
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Add a comment"{
-            textView.text = ""
-        }
-    }
-    
     @IBAction func inviteClicked(_ sender: Any) {
         let storyboard = UIStoryboard(name: "search_people", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
@@ -1128,6 +1122,12 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             unfollowAlertController.addAction(unfollowAction)
             unfollowAlertController.addAction(cancelAction)
             self.present(unfollowAlertController, animated: true, completion: nil)
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Add a comment"{
+            textView.text = ""
         }
     }
     

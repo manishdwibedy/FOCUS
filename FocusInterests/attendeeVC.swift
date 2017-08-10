@@ -26,11 +26,10 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.clear
-        tableView.backgroundView?.backgroundColor = UIColor.clear
         let nib = UINib(nibName: "FollowProfileCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "FollowProfileCell")
         
+        print("\(navTitle.titleView?.subviews)")
         navTitle.title = parentEvent?.title
         
         self.attendingLabel.text = "\((guestList?.count)!) Attending"
@@ -45,7 +44,7 @@ class attendeeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         self.view.backgroundColor = Constants.color.navy
-        self.navBar.backgroundColor = Constants.color.navy
+        self.navBar.barTintColor = Constants.color.navy
         self.navBar.titleTextAttributes = Constants.navBar.attrs
         hideKeyboardWhenTappedAround()
         

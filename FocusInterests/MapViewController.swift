@@ -51,6 +51,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var placeMapping = [String: Place]()
     var hasCustomProfileImage = false
     
+    var locationFromPlaceDetails = ""
     
     var willShowEvent = false
     var showEvent: Event? = nil
@@ -1322,15 +1323,25 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     @IBAction func unwindToMapViewController(segue:UIStoryboardSegue) { }
     
     @IBAction func unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails(segue:UIStoryboardSegue) {
-        
+        let popController = self.createPopOver()
+        self.tabBarController?.present(popController, animated: true, completion: nil)
+    }
+    
+    @IBAction func unwindToMapViewControllerFromPlaceDetails(segue: UIStoryboardSegue){
+        let popController = self.createPopOver()
+        self.tabBarController?.present(popController, animated: true, completion: { completed in
+            popController.searchLocationTextField.text = self.locationFromPlaceDetails
+        })
+    }
+    
+    func createPopOver() -> CreateEventOnMapViewController{
         let tabBarItemWidth = Int((self.tabBarController?.tabBar.frame.size.width)!) / (self.tabBarController?.tabBar.items?.count)!
         let x = tabBarItemWidth * 2
         let newRect = CGRect(x: x, y: 0, width: tabBarItemWidth, height: Int((self.tabBarController?.tabBar.frame.size.height)!))
         
         let popController = UIStoryboard(name: "CreateEventOnMapViewController", bundle: nil).instantiateViewController(withIdentifier: "CreateEventOnMapViewController") as! CreateEventOnMapViewController
-        
+
         popController.modalPresentationStyle = UIModalPresentationStyle.popover
-        
         popController.preferredContentSize = CGSize(width: 345, height: 354)
         
         // set up the popover presentation controller
@@ -1339,8 +1350,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         popController.popoverPresentationController?.sourceView = self.tabBarController?.tabBar
         
         popController.popoverPresentationController?.sourceRect = newRect
-        
-        self.tabBarController?.present(popController, animated: true, completion: nil)
+        return popController
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {

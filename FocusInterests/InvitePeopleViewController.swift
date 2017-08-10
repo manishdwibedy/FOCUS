@@ -562,7 +562,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.username = username
             cell.invitePeopleVCDelegate = self
             cell.parentVC = self
-            cell.guestCount.text = "\(event.attendeeCount) guests"
+            
+            if isMeetup{
+                cell.guestCount.isHidden = true
+            }else{
+                cell.guestCount.isHidden = false
+                cell.guestCount.text = "\(event.attendeeCount) guests"
+            }
             
             
             if let date = self.ticketMasterDF.date(from: event.date!){
