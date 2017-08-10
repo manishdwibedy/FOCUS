@@ -174,6 +174,9 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
                         let attendingAmount = value?["amount"] as! Int
                         Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount":attendingAmount + 1])
                     }
+                    else{
+                        Constants.DB.event.child((event.id)!).child("attendingAmount").updateChildValues(["amount": 1])
+                    }
                 })
                 
                 Answers.logCustomEvent(withName: "Attend Event",
