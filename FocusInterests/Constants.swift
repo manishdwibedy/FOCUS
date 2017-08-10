@@ -81,23 +81,12 @@ struct Constants {
         
         public static let ticketMasterMapping: [String:String] = [
             "Music": "Music",
-            "Films": "Entertainment",
+            "Entertainment": "Films,Fairs & Festivals,Ice Shows,Multimedia,Casino/Gaming,Comedy",
             "Sports": "Sports",
-            "Art & Theatre": "Arts",
-            "Casino/Gaming": "Entertainment",
-            "Comedy": "Entertainment",
-            "Community/Civic": "Community",
-            "Community/Cultural": "Community",
-            "Fairs & Festivals": "Entertainment",
-            "Family": "Community",
-            "Food & Drink": "Food",
-            "Health/Wellness": "Fitness",
-            "Hobby/Special Interest Expos": "Community",
-            "Holiday": "Community",
-            "Ice Shows": "Entertainment",
-            "Multimedia": "Entertainment",
-            "Psychics/Mediums/Hypnotists": "Community",
-            "Special Interest/Hobby": "Community"
+            "Arts": "Art & Theatre",
+            "Food": "Food & Drink",
+            "Fitness": "Health/Wellness",
+            "Community": "Community/Cultural,Community/Civic,Family,Hobby/Special Interest Expos,Psychics/Mediums/Hypnotists,Special Interest/Hobby,Holiday",
         ]
         
         public static let yelpMapping = [

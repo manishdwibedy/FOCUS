@@ -1349,7 +1349,7 @@ func matchingUserInterest(user: User) -> [Interest]{
     let other_user:Set<Interest> = Set<Interest>(user.interests!)
 
     
-    return other_user.intersection(user_interest_set)
+    return Array(other_user.intersection(user_interest_set))
 }
 
 func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ user: [Event]) -> Void){
@@ -1357,6 +1357,8 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
     var suggestions = [Event]()
     var eventDF = DateFormatter()
     eventDF.dateFormat = "MMM d, h:mm a"
+    var ticketMasterDF = DateFormatter()
+    ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
     
     var categories = Set<String>()
     
@@ -1411,7 +1413,7 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
             
             if eventCount == suggestions.count || suggestions.count >= limit{
                 suggestions.sort(by: {
-                    if let event1 = eventDF.date(from: $0.date!), let event2 = eventDF.date(from: $1.date!){
+                    if let event1 = ticketMasterDF.date(from: $0.date!), let event2 = ticketMasterDF.date(from: $1.date!){
                         return event1 < event2
                     }
                     return true

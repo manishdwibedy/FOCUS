@@ -62,7 +62,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 
     @IBOutlet weak var pinCount: UIButton!
     var pinInfo: pinData? = nil
-    
+    var userData: User? = nil
     
     // user interests
     
@@ -476,12 +476,14 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 if self.otherUser{
                     if let interests = dictionnary["interests"] as? String{
                         let selected = interests.components(separatedBy: ",")
+                        let matching = matchingUserInterest(user: self.userData!)
                         
                         var final_interest = [String]()
-                        for interest in selected{
-                            final_interest.append(interest.components(separatedBy: "-")[0])
+                        for interest in matching{
+                            final_interest.append(interest.name!)
                         }
                 
+                        
                         getSuggestedEvents(interests: final_interest.joined(separator: ","), limit: 3, gotEvents: {events in
                             self.suggestedEvents = events
                             self.eventsTableView.reloadData()
