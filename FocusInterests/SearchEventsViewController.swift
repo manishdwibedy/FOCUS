@@ -409,6 +409,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             })
             
             feedCreatedEventCell.eventNameLabel.setTitle(event?.title!, for: .normal)
+            feedCreatedEventCell.eventNameLabel.setTitleColor(Constants.color.pink, for: .normal)
             feedCreatedEventCell.actionLabel.text = "created"
             feedCreatedEventCell.parentVC = self
             feedCreatedEventCell.globeButton.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
