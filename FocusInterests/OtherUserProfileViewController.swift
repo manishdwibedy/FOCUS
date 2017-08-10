@@ -253,16 +253,16 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                     }
                     
         
-                    if value["images"] != nil
+                    if let images = value["images"] as? NSDictionary
                     {
                         var firstVal = ""
-                        for (key,_) in (value["images"] as! NSDictionary)
+                        for (key,_) in images
                         {
                             firstVal = key as! String
                             break
                         }
                         
-                        let reference = Constants.storage.pins.child(((value["images"] as! NSDictionary)[firstVal] as! NSDictionary)["imagePath"] as! String)
+                        let reference = Constants.storage.pins.child((images[firstVal] as! NSDictionary)["imagePath"] as! String)
                         reference.downloadURL(completion: { (url, error) in
                             
                             if error != nil {
