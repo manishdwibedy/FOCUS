@@ -20,6 +20,7 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
         
         self.locationTableView.rowHeight = UITableViewAutomaticDimension
         self.locationTableView.estimatedRowHeight = 70.0
+        self.locationTableView.tableFooterView = UIView()
         
         self.locationSearchBar.delegate = self
         // search bar attributes
