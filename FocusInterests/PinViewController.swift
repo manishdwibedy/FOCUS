@@ -847,9 +847,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                                 if let user = User.toUser(info: user){
                                     if user.uuid != AuthApi.getFirebaseUid(){
                                         let matchingInterest = matchingUserInterest(user: user)
-                                        if matchingInterest > 0{
+                                        if matchingInterest.count > 0{
                                             followingCount += 1
-                                            user.matchingInterestCount = matchingInterest
+                                            user.matchingInterestCount = matchingInterest.count
                                             if user.uuid != AuthApi.getFirebaseUid(){
                                                 if !followingSuggestions.contains(user){
                                                     followingSuggestions.append(user)
@@ -888,9 +888,9 @@ class PinViewController: UIViewController, InviteUsers, UITableViewDelegate,UITa
                 if let info = info{
                     if let user = User.toUser(info: info){
                         let matchingInterest = matchingUserInterest(user: user)
-                        if matchingInterest > 0{
+                        if matchingInterest.count > 0{
                             userCount += 1
-                            user.matchingInterestCount = matchingInterest
+                            user.matchingInterestCount = matchingInterest.count
                             if user.uuid != AuthApi.getFirebaseUid(){
                                 if !suggestions.contains(user){
                                     suggestions.append(user)

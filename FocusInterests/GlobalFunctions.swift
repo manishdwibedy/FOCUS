@@ -1335,7 +1335,7 @@ func getUserData(uid: String, gotInfo: @escaping (_ user: NotificationUser) -> V
     })
 }
 
-func matchingUserInterest(user: User) -> Int{
+func matchingUserInterest(user: User) -> [Interest]{
     let user_interest = AuthApi.getInterests()
     
     var user_interests = [Interest]()
@@ -1349,7 +1349,7 @@ func matchingUserInterest(user: User) -> Int{
     let other_user:Set<Interest> = Set<Interest>(user.interests!)
 
     
-    return other_user.intersection(user_interest_set).count
+    return other_user.intersection(user_interest_set)
 }
 
 func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ user: [Event]) -> Void){
