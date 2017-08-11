@@ -462,6 +462,7 @@ line 2</string>
                                     <constraint firstItem="bZe-CO-fzE" firstAttribute="leading" secondItem="7f7-dj-AgA" secondAttribute="leading" constant="8" id="P2n-0S-f4b"/>
                                     <constraint firstItem="9XK-WR-zAj" firstAttribute="leading" secondItem="7f7-dj-AgA" secondAttribute="leading" id="WBW-Mi-KVc"/>
                                     <constraint firstItem="EWS-Xj-2Kw" firstAttribute="top" secondItem="bZe-CO-fzE" secondAttribute="bottom" constant="6" id="mFs-XC-FcZ"/>
+                                    <constraint firstItem="9XK-WR-zAj" firstAttribute="centerX" secondItem="7f7-dj-AgA" secondAttribute="centerX" id="nSx-DL-cQb"/>
                                     <constraint firstItem="9XK-WR-zAj" firstAttribute="top" secondItem="7f7-dj-AgA" secondAttribute="top" id="odp-mW-DO0"/>
                                     <constraint firstAttribute="trailing" secondItem="EWS-Xj-2Kw" secondAttribute="trailing" constant="16" id="p3k-x5-qzf"/>
                                     <constraint firstItem="bZe-CO-fzE" firstAttribute="top" secondItem="9XK-WR-zAj" secondAttribute="bottom" constant="8" id="rwI-ee-mLo"/>
@@ -490,6 +491,7 @@ line 2</string>
                             <constraint firstItem="k4d-2y-QOs" firstAttribute="top" secondItem="7f7-dj-AgA" secondAttribute="bottom" constant="1" id="DdF-cp-09B"/>
                             <constraint firstItem="I2E-SG-bxp" firstAttribute="leading" secondItem="89H-gt-97y" secondAttribute="leading" id="HC3-kg-y63"/>
                             <constraint firstItem="7f7-dj-AgA" firstAttribute="leading" secondItem="89H-gt-97y" secondAttribute="leading" id="Y2u-Wc-6lA"/>
+                            <constraint firstItem="7f7-dj-AgA" firstAttribute="width" secondItem="89H-gt-97y" secondAttribute="width" id="e71-sv-zEH"/>
                             <constraint firstAttribute="trailing" secondItem="7f7-dj-AgA" secondAttribute="trailing" id="kgh-aw-C5a"/>
                             <constraint firstItem="I2E-SG-bxp" firstAttribute="top" secondItem="89H-gt-97y" secondAttribute="top" id="pvu-wr-rFd"/>
                             <constraint firstAttribute="trailing" secondItem="I2E-SG-bxp" secondAttribute="trailing" id="ssb-4f-zJT"/>
