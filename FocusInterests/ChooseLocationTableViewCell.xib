@@ -20,51 +20,49 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aON-SE-nd6">
-                        <rect key="frame" x="8" y="9" width="354" height="24"/>
+                        <rect key="frame" x="8" y="9" width="307" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="mb6-fV-FZH"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNM-k8-2Xa">
-                        <rect key="frame" x="8" y="34" width="37" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20.5" id="wIh-Se-KO8"/>
-                        </constraints>
+                        <rect key="frame" x="8" y="34" width="354" height="21"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                         <color key="textColor" red="0.32934069633483887" green="0.46749716997146606" blue="0.62508267164230347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72Z-yz-oqP">
-                        <rect key="frame" x="52" y="34" width="37" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72Z-yz-oqP">
+                        <rect key="frame" x="320" y="10" width="37" height="21"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                         <color key="textColor" red="0.32934069633483887" green="0.46749716997146606" blue="0.62508267164230347" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAk-PS-YBw">
-                        <rect key="frame" x="8" y="21" width="354" height="23.5"/>
-                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYK-Ca-oEQ">
+                        <rect key="frame" x="13" y="21" width="127" height="23.5"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="aON-SE-nd6" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="9UE-WU-Smg"/>
-                    <constraint firstItem="KNM-k8-2Xa" firstAttribute="leading" secondItem="aON-SE-nd6" secondAttribute="leading" id="JoN-dN-NJT"/>
-                    <constraint firstItem="aON-SE-nd6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="R0U-0f-OEC"/>
-                    <constraint firstItem="aON-SE-nd6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="SJA-sS-VhZ"/>
-                    <constraint firstItem="aON-SE-nd6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="YtG-q4-ymG"/>
-                    <constraint firstItem="KNM-k8-2Xa" firstAttribute="top" secondItem="aON-SE-nd6" secondAttribute="bottom" constant="1.5" id="cRL-aB-tl1"/>
-                    <constraint firstItem="eAk-PS-YBw" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="keb-su-P4G"/>
-                    <constraint firstItem="72Z-yz-oqP" firstAttribute="leading" secondItem="KNM-k8-2Xa" secondAttribute="trailing" constant="7.5" id="ktS-bP-UGe"/>
-                    <constraint firstItem="eAk-PS-YBw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="lDU-Lq-vKc"/>
-                    <constraint firstItem="eAk-PS-YBw" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="sTD-aM-pGF"/>
-                    <constraint firstItem="eAk-PS-YBw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xCs-fe-hgF"/>
-                    <constraint firstItem="72Z-yz-oqP" firstAttribute="baseline" secondItem="KNM-k8-2Xa" secondAttribute="baseline" id="ySL-ra-mon"/>
+                    <constraint firstItem="aON-SE-nd6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="1aP-54-HZQ"/>
+                    <constraint firstItem="KNM-k8-2Xa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="CPD-2Z-plQ"/>
+                    <constraint firstItem="SYK-Ca-oEQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LOC-oS-Imb"/>
+                    <constraint firstItem="KNM-k8-2Xa" firstAttribute="top" secondItem="aON-SE-nd6" secondAttribute="bottom" constant="2" id="Nh6-mw-Lf3"/>
+                    <constraint firstItem="72Z-yz-oqP" firstAttribute="centerY" secondItem="aON-SE-nd6" secondAttribute="centerY" id="Vng-Q1-QzG"/>
+                    <constraint firstItem="SYK-Ca-oEQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="bP9-nh-FI5"/>
+                    <constraint firstItem="72Z-yz-oqP" firstAttribute="leading" secondItem="aON-SE-nd6" secondAttribute="trailing" constant="5" id="cwq-XJ-9nb"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="72Z-yz-oqP" secondAttribute="trailing" constant="5" id="drn-dr-7m6"/>
+                    <constraint firstItem="aON-SE-nd6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="jBo-hC-gwM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="KNM-k8-2Xa" secondAttribute="trailing" id="tX2-sE-GGF"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="currentLocationLabel" destination="eAk-PS-YBw" id="ns3-rF-tUb"/>
+                <outlet property="currentLocationLabel" destination="SYK-Ca-oEQ" id="gtx-Jf-JEs"/>
                 <outlet property="locationAddressLabel" destination="KNM-k8-2Xa" id="LRu-Z4-GSg"/>
                 <outlet property="locationDistanceLabel" destination="72Z-yz-oqP" id="6sc-V1-msQ"/>
                 <outlet property="locationNameLabel" destination="aON-SE-nd6" id="Q4c-X8-5KY"/>
