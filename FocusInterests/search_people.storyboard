@@ -294,6 +294,7 @@
                         <outlet property="tableView" destination="nv6-wn-SdN" id="8AF-Ei-bI4"/>
                         <outlet property="tableViewBottomConstraint" destination="bhC-wc-UgV" id="5Ef-rC-s0Q"/>
                         <segue destination="HM6-cm-OHM" kind="unwind" identifier="unwindBackToSearchPeopleViewControllerSegueWithSegue" unwindAction="unwindBackToSearchPeopleViewControllerSegueWithSegue:" id="E5B-L8-Zo0"/>
+                        <segue destination="HM6-cm-OHM" kind="unwind" identifier="unwindToOtherUserProfile" unwindAction="unwindToOtherUserProfile:" id="8IK-SU-JQN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOX-NZ-jU5" userLabel="First Responder" sceneMemberID="firstResponder"/>

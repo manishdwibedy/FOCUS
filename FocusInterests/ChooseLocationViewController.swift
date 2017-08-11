@@ -20,6 +20,7 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
         
         self.locationTableView.rowHeight = UITableViewAutomaticDimension
         self.locationTableView.estimatedRowHeight = 70.0
+        self.locationTableView.tableFooterView = UIView()
         
         self.locationSearchBar.delegate = self
         // search bar attributes
@@ -120,13 +121,11 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
-    }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
-        searchBar.endEditing(true)
     }
     
     /*

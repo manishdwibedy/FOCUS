@@ -337,7 +337,6 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         cell?.fullName.text = people.fullname
         let pin = user_pins[people.uuid!]
         
-        
         if people.hasPin{
             cell?.pinAvailable = true
             cell?.shortBackground.isHidden = true
@@ -350,10 +349,18 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             cell?.pinSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pin?.dateTimeStamp)!), numericDates: true, shortVersion: true)
             print("this is the focus \(pin?.focus)!")
             
-            let startIndex = pin?.focus.index((pin?.focus.startIndex)!, offsetBy: 2)
-            var interestStringWithoutDot = pin?.focus.substring(from: startIndex!)
-            
-            addGreenDot(label: (cell?.interest)!, content: interestStringWithoutDot!)
+            if pin?.focus == ""{
+                addGreenDot(label: (cell?.interest)!, content: "N.A")
+            }else{
+                if pin?.focus.characters.first == "●"{
+                    let startIndex = pin?.focus.index((pin?.focus.startIndex)!, offsetBy: 2)
+                    let interestStringWithoutDot = pin?.focus.substring(from: startIndex!)
+                    addGreenDot(label: (cell?.interest)!, content: interestStringWithoutDot!)
+                }else{
+                    addGreenDot(label: (cell?.interest)!, content: (pin?.focus)!)
+                }
+            }
+
             let pinLocation = CLLocation(latitude: (pin?.coordinates.latitude)!, longitude: (pin?.coordinates.longitude)!)
             cell?.distance.text = getDistance(fromLocation: pinLocation, toLocation: AuthApi.getLocation()!)
         }else{

@@ -153,6 +153,12 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.screenWidth = self.screenSize.width
+        self.screenHeight = self.screenSize.height
+        self.invitePopupView.center.y = self.screenHeight - 20
+        self.invitePopupTopConstraint.constant = self.screenHeight - 20
+        self.invitePopupView.layer.cornerRadius = 10.0
+        
         self.recentPostTableView.dataSource = self
         self.recentPostTableView.delegate = self
 
@@ -219,8 +225,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
         getEvents()
 //        getPin()
-        
-        self.invitePopupView.layer.cornerRadius = 10.0
         
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").queryOrdered(byChild: "UID").queryEqual(toValue: userID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? [String:Any]
@@ -726,23 +730,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             print("nothing to add")
         }
         
-//        MARK: POSSIBLY ADD ANIMATION?
-//        UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
-//            if self.placesTableView.isHidden{
-//                if !self.peopleTableView.isHidden{
-//                    self.peopleTableView.isHidden = true
-//                }
-//                
-//                if !self.eventsTableView.isHidden{
-//                    self.eventsTableView.isHidden = true
-//                }
-//                
-//                self.placesTableView.isHidden = false
-//                self.placeTableViewHeight.constant = 100
-//            }else{
-//                self.placesTableView.isHidden = true
-//            }
-//        }, completion: nil)
     }
     
     @IBAction func lessInterestsButtonPressed(_ sender: Any) {
@@ -773,13 +760,14 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         super.viewDidAppear(animated)
         
         if showInvitePopup {
-            UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.invitePopupView.center.y -= 100
-                self.invitePopupTopConstraint.constant -= 100
+            //            self.view.bringSubview(toFront: self.invitePopupView)
+            UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y -= self.invitePopupView.frame.size.height
+                self.invitePopupTopConstraint.constant -= self.invitePopupView.frame.size.height
             }, completion: { animate in
-                UIView.animate(withDuration: 2.5, delay: 3.0, options: .curveEaseInOut, animations: {
-                    self.invitePopupView.center.y += 100
-                    self.invitePopupTopConstraint.constant += 100
+                UIView.animate(withDuration: 1, delay: 3.0, options: .curveEaseInOut, animations: {
+                    self.invitePopupView.center.y += self.invitePopupView.frame.size.height
+                    self.invitePopupTopConstraint.constant += self.invitePopupView.frame.size.height
                 }, completion: nil)
             })
             self.showInvitePopup = false
@@ -1009,6 +997,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             }
             
             cell.inviteFromOtherUserProfile = true
+            cell.inPlacesTheyllLike = true
             cell.UID = (self.userInfo["firebaseUserId"] as? String)!
             cell.username = (self.userInfo["username"] as? String)!
             cell.otherUser = self
@@ -1033,6 +1022,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             }
             
             cell.inviteFromOtherUserProfile = true
+            cell.inEventsTheyllLike = true
+            
             cell.event = event
             cell.UID = self.userInfo["firebaseUserId"] as? String
             cell.username = (self.userInfo["username"] as? String)!
@@ -1270,6 +1261,22 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         
         root.pushViewController(VC!, animated: true)
         self.present(root, animated: true, completion: nil)
+    }
+    
+    @IBAction func unwindToOtherUserProfile(_ sender: UIStoryboardSegue){
+        self.hasSentUserAnInvite()
+    }
+    
+    func showPopup(){
+        UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.invitePopupView.center.y -= self.invitePopupView.frame.size.height
+            self.invitePopupTopConstraint.constant -= self.invitePopupView.frame.size.height
+        }, completion: { animate in
+            UIView.animate(withDuration: 1, delay: 3.0, options: .curveEaseInOut, animations: {
+                self.invitePopupView.center.y += self.invitePopupView.frame.size.height
+                self.invitePopupTopConstraint.constant += self.invitePopupView.frame.size.height
+            }, completion: nil)
+        })
     }
     
     func hasSentUserAnInvite(){

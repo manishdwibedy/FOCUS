@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -26,7 +26,7 @@
                             <constraint firstAttribute="height" constant="40" id="Zkc-oN-fY9"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEr-CA-0g0">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEr-CA-0g0">
                         <rect key="frame" x="63" y="11" width="294" height="18"/>
                         <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -41,22 +41,33 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <textView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7U-7E-xvf">
+                        <rect key="frame" x="63" y="0.0" width="294" height="29"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <attributedString key="attributedText"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="vIN-FT-tus" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="30r-AQ-GNl"/>
-                    <constraint firstItem="oLV-MH-uUG" firstAttribute="top" secondItem="KEr-CA-0g0" secondAttribute="bottom" constant="1" id="HaY-g6-8EE"/>
                     <constraint firstItem="KEr-CA-0g0" firstAttribute="leading" secondItem="vIN-FT-tus" secondAttribute="trailing" constant="5" id="IdX-OS-Eh2"/>
+                    <constraint firstItem="oLV-MH-uUG" firstAttribute="top" secondItem="KEr-CA-0g0" secondAttribute="bottom" constant="1" id="L22-9J-esd"/>
                     <constraint firstItem="vIN-FT-tus" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="Ler-dj-3ad"/>
+                    <constraint firstItem="m7U-7E-xvf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="N8w-YK-Wj4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="KEr-CA-0g0" secondAttribute="trailing" constant="10" id="RbJ-n9-gTu"/>
+                    <constraint firstAttribute="trailing" secondItem="m7U-7E-xvf" secondAttribute="trailing" constant="18" id="S7A-8L-bCH"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="oLV-MH-uUG" secondAttribute="bottom" constant="5.5" id="mBg-aG-7rt"/>
                     <constraint firstItem="KEr-CA-0g0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="n7D-W1-Aoc"/>
                     <constraint firstItem="oLV-MH-uUG" firstAttribute="leading" secondItem="vIN-FT-tus" secondAttribute="trailing" constant="7" id="uaH-dp-aZ7"/>
+                    <constraint firstItem="m7U-7E-xvf" firstAttribute="leading" secondItem="vIN-FT-tus" secondAttribute="trailing" constant="5" id="xgt-DR-7T6"/>
+                    <constraint firstItem="oLV-MH-uUG" firstAttribute="top" secondItem="m7U-7E-xvf" secondAttribute="bottom" constant="1" id="yf6-sV-aB7"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="dateLabel" destination="oLV-MH-uUG" id="4Xj-6S-KGM"/>
-                <outlet property="userNameLabel" destination="KEr-CA-0g0" id="3uX-FF-O27"/>
+                <outlet property="userNameLabel" destination="m7U-7E-xvf" id="F5x-nm-vC7"/>
                 <outlet property="userProfileImage" destination="vIN-FT-tus" id="ba1-Bb-yH8"/>
             </connections>
             <point key="canvasLocation" x="60.5" y="67"/>

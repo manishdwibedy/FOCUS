@@ -107,7 +107,7 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     }
     
     @objc private func goBack(_ sender: Any) {
-        self.performSegue(withIdentifier: "details", sender: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func dismiss(_ sender: Any) {
@@ -149,8 +149,7 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
         self.view.addSubview(lastImageButton)
         
         
-        
-        cancelButton = UIButton(frame: CGRect(x: left_x, y: 20, width: 50.0, height: 23.0))
+        cancelButton = UIButton(frame: CGRect(x: left_x+15, y: 20, width: 22.0, height: 22.0))
         cancelButton.setImage(#imageLiteral(resourceName: "cancel"), for: .normal)
         cancelButton.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
         self.view.addSubview(cancelButton)

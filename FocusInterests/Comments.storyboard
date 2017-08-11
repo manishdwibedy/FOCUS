@@ -62,63 +62,69 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jb-ox-m8H">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nor-xQ-mzc">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="546"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="546" id="oiL-vT-0B8"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dataSource" destination="MO9-xI-UHS" id="GWZ-r7-dmy"/>
-                                            <outlet property="delegate" destination="MO9-xI-UHS" id="Iig-J6-2JG"/>
-                                        </connections>
-                                    </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWn-nL-sQi">
-                                        <rect key="frame" x="0.0" y="546" width="375" height="55"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TGb-da-yif">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6a-of-LZd">
-                                                <rect key="frame" x="307" y="11" width="52" height="30"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="52" id="98G-sp-341"/>
-                                                    <constraint firstAttribute="height" constant="30" id="VQz-u9-dws"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="13"/>
-                                                <state key="normal" title="Post">
-                                                    <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="post:" destination="MO9-xI-UHS" eventType="touchUpInside" id="er7-oG-2o3"/>
-                                                </connections>
-                                            </button>
-                                            <textView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iI6-Pm-eWl">
-                                                <rect key="frame" x="16" y="9" width="283" height="36"/>
+                                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nor-xQ-mzc">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="548"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="MO9-xI-UHS" id="GWZ-r7-dmy"/>
+                                                    <outlet property="delegate" destination="MO9-xI-UHS" id="Iig-J6-2JG"/>
+                                                </connections>
+                                            </tableView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWn-nL-sQi">
+                                                <rect key="frame" x="0.0" y="548" width="375" height="55"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6a-of-LZd">
+                                                        <rect key="frame" x="307" y="12" width="52" height="30"/>
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="52" id="98G-sp-341"/>
+                                                            <constraint firstAttribute="height" constant="30" id="VQz-u9-dws"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="13"/>
+                                                        <state key="normal" title="Post">
+                                                            <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="post:" destination="MO9-xI-UHS" eventType="touchUpInside" id="er7-oG-2o3"/>
+                                                        </connections>
+                                                    </button>
+                                                    <textView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iI6-Pm-eWl">
+                                                        <rect key="frame" x="16" y="9" width="283" height="36"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="iI6-Pm-eWl" firstAttribute="leading" secondItem="uWn-nL-sQi" secondAttribute="leading" constant="16" id="0U0-JI-Qpr"/>
+                                                    <constraint firstItem="iI6-Pm-eWl" firstAttribute="top" secondItem="uWn-nL-sQi" secondAttribute="top" constant="9" id="3iB-J7-EkC"/>
+                                                    <constraint firstItem="l6a-of-LZd" firstAttribute="centerY" secondItem="iI6-Pm-eWl" secondAttribute="centerY" id="GpS-Um-rlq"/>
+                                                    <constraint firstItem="l6a-of-LZd" firstAttribute="leading" secondItem="iI6-Pm-eWl" secondAttribute="trailing" constant="8" id="f4E-Tk-hjA"/>
+                                                    <constraint firstAttribute="trailing" secondItem="l6a-of-LZd" secondAttribute="trailing" constant="16" id="nG5-Op-Ji8"/>
+                                                    <constraint firstAttribute="bottom" secondItem="iI6-Pm-eWl" secondAttribute="bottom" constant="10" id="zSq-Uh-5uZ"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="iI6-Pm-eWl" firstAttribute="leading" secondItem="uWn-nL-sQi" secondAttribute="leading" constant="16" id="0U0-JI-Qpr"/>
-                                            <constraint firstItem="iI6-Pm-eWl" firstAttribute="top" secondItem="uWn-nL-sQi" secondAttribute="top" constant="9" id="3iB-J7-EkC"/>
-                                            <constraint firstItem="l6a-of-LZd" firstAttribute="top" secondItem="uWn-nL-sQi" secondAttribute="top" constant="11" id="FPh-ly-fbE"/>
-                                            <constraint firstItem="l6a-of-LZd" firstAttribute="leading" secondItem="iI6-Pm-eWl" secondAttribute="trailing" constant="8" id="f4E-Tk-hjA"/>
-                                            <constraint firstAttribute="trailing" secondItem="l6a-of-LZd" secondAttribute="trailing" constant="16" id="nG5-Op-Ji8"/>
-                                            <constraint firstAttribute="bottom" secondItem="iI6-Pm-eWl" secondAttribute="bottom" constant="10" id="zSq-Uh-5uZ"/>
+                                            <constraint firstItem="uWn-nL-sQi" firstAttribute="centerX" secondItem="TGb-da-yif" secondAttribute="centerX" id="G5l-PP-tlt"/>
+                                            <constraint firstItem="nor-xQ-mzc" firstAttribute="centerX" secondItem="uWn-nL-sQi" secondAttribute="centerX" id="Yht-9a-lod"/>
                                         </constraints>
-                                    </view>
+                                    </stackView>
                                 </subviews>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="nor-xQ-mzc" firstAttribute="leading" secondItem="1jb-ox-m8H" secondAttribute="leading" id="1bQ-0s-kXP"/>
-                                    <constraint firstAttribute="trailing" secondItem="uWn-nL-sQi" secondAttribute="trailing" id="58V-YQ-jaJ"/>
-                                    <constraint firstItem="uWn-nL-sQi" firstAttribute="leading" secondItem="1jb-ox-m8H" secondAttribute="leading" id="Aij-dy-dmE"/>
-                                    <constraint firstAttribute="trailing" secondItem="nor-xQ-mzc" secondAttribute="trailing" id="MCY-bL-gx8"/>
-                                    <constraint firstItem="uWn-nL-sQi" firstAttribute="centerX" secondItem="1jb-ox-m8H" secondAttribute="centerX" id="ZXu-uU-WnY"/>
-                                    <constraint firstItem="uWn-nL-sQi" firstAttribute="top" secondItem="nor-xQ-mzc" secondAttribute="bottom" id="jFo-JD-voL"/>
-                                    <constraint firstAttribute="bottom" secondItem="uWn-nL-sQi" secondAttribute="bottom" constant="2" id="orf-C8-KlY"/>
-                                    <constraint firstItem="nor-xQ-mzc" firstAttribute="top" secondItem="1jb-ox-m8H" secondAttribute="top" id="q35-wL-3S4"/>
+                                    <constraint firstItem="TGb-da-yif" firstAttribute="height" secondItem="1jb-ox-m8H" secondAttribute="height" id="8zX-zZ-9HD"/>
+                                    <constraint firstItem="TGb-da-yif" firstAttribute="leading" secondItem="1jb-ox-m8H" secondAttribute="leading" id="F47-wa-rKa"/>
+                                    <constraint firstAttribute="bottom" secondItem="TGb-da-yif" secondAttribute="bottom" constant="2" id="Fml-yT-m7D"/>
+                                    <constraint firstAttribute="trailing" secondItem="TGb-da-yif" secondAttribute="trailing" id="Pro-cN-FzT"/>
+                                    <constraint firstItem="TGb-da-yif" firstAttribute="top" secondItem="1jb-ox-m8H" secondAttribute="top" id="jht-fJ-BcK"/>
+                                    <constraint firstItem="TGb-da-yif" firstAttribute="centerX" secondItem="1jb-ox-m8H" secondAttribute="centerX" id="ugf-98-bR8"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -139,12 +145,13 @@
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="addCommentView" destination="uWn-nL-sQi" id="zVk-DZ-oao"/>
-                        <outlet property="addCommentsViewBottomConstraint" destination="orf-C8-KlY" id="Z9e-PX-Vx5"/>
                         <outlet property="commentTextView" destination="iI6-Pm-eWl" id="kV2-UK-heh"/>
                         <outlet property="commentsTableView" destination="nor-xQ-mzc" id="84T-ig-Kha"/>
-                        <outlet property="commentsTableViewHeight" destination="oiL-vT-0B8" id="GPO-4P-gRN"/>
                         <outlet property="navBar" destination="mUN-Hw-R4h" id="IQ6-44-lkX"/>
                         <outlet property="postButton" destination="l6a-of-LZd" id="hsG-pu-IhC"/>
                         <outlet property="scrollView" destination="1jb-ox-m8H" id="YYJ-Yh-Iul"/>

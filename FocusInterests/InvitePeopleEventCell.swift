@@ -33,7 +33,10 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     var username = ""
     var invitePeopleVCDelegate: InvitePeopleViewControllerDelegate!
     var isMeetup = false
+    
     var inviteFromOtherUserProfile = false
+    var inEventsTheyllLike = false
+    
     var parentVC: InvitePeopleViewController!
     var otherUser: OtherUserProfileViewController? = nil
     
@@ -127,19 +130,23 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
     }
     
     @IBAction func invite(_ sender: Any) {
-        print("sending invite")
+        print("sending invite in event")
         if isMeetup {
             self.parentVC.performSegue(withIdentifier: "unwindBackToSearchPeopleViewControllerSegueWithSegue", sender: self.parentVC)
         }else if inviteFromOtherUserProfile{
-            let storyboard = UIStoryboard(name: "Invites", bundle: nil)
-            let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
-            ivc.type = "event"
-            ivc.id = self.event.id!
-            ivc.username = self.username
-            ivc.event = event
-            ivc.searchPeopleEventDelegate = self
-            if let VC = self.otherUser{
-                VC.present(ivc, animated: true, completion: nil)
+            if self.inEventsTheyllLike{
+                let storyboard = UIStoryboard(name: "Invites", bundle: nil)
+                let ivc = storyboard.instantiateViewController(withIdentifier: "home") as! InviteViewController
+                ivc.type = "event"
+                ivc.id = self.event.id!
+                ivc.username = self.username
+                ivc.event = event
+                ivc.inviteFromOtherUserProfile = true
+                if let VC = self.otherUser{
+                    VC.present(ivc, animated: true, completion: nil)
+                }
+            }else{
+                self.parentVC.performSegue(withIdentifier: "unwindToOtherUserProfile", sender: self.parentVC)
             }
         }else{
             let storyboard = UIStoryboard(name: "Invites", bundle: nil)

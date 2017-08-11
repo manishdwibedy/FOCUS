@@ -116,9 +116,7 @@ extension CreateEventViewController: GMSAutocompleteViewControllerDelegate {
     // User canceled the operation.
     
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        
         dismiss(animated: true, completion: nil)
-        
     }
     
     

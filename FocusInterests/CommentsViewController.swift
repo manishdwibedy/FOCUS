@@ -19,6 +19,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var commentsTableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var addCommentsViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mainStackHeight: NSLayoutConstraint!
     
     var data: NSDictionary!
     var commentData = [[String:Any]]()
@@ -40,7 +41,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         // Do any additional setup after loading the view.
         let commentsNib = UINib(nibName: "CommentsTableViewCell", bundle: nil)
         self.commentsTableView.register(commentsNib, forCellReuseIdentifier: "commentsCell")
-        
+        self.commentsTableView.tableFooterView = UIView()
         self.postButton.roundCorners(radius: 5.0)
         
         if type == "pin"{
@@ -80,8 +81,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         self.addCommentView.frame.origin.y = self.screenSize.height - self.addCommentView.frame.size.height
 //        self.scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: (self.view.frame.size.height - self.navBar.frame.height))
         
-        self.commentsTableView.tableFooterView = UIView()
-        
         self.commentTextView.delegate = self
         self.commentTextView.textContainer.maximumNumberOfLines = 0
         self.commentTextView.layer.borderWidth = 1.0
@@ -108,7 +107,14 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         commentDF.dateFormat = "hh:mm a MM/dd"
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.commentsTableView.reloadData()
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -130,7 +136,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let commentCell = tableView.dequeueReusableCell(withIdentifier: "commentsCell", for: indexPath) as! CommentsTableViewCell
-        
         if type == "pin"{
             let comment = commentData[indexPath.row]
             commentCell.dateLabel.text = commentDF.string(for: Date(timeIntervalSince1970: comment["date"] as! Double))
@@ -141,7 +146,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 commentCell.loadInfo(UID: comment.from, text: comment.comment)
                 commentCell.dateLabel.text = commentDF.string(from: comment.date)
-                
                 return commentCell
             }
             
@@ -149,10 +153,13 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         return commentCell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-     }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     
     @IBAction func post(_ sender: Any) {
         
@@ -170,7 +177,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                 "date": Double(time),
                 "fromUID": AuthApi.getFirebaseUid()!
                 ])
-            commentTextView.text = ""
+            commentTextView.text = "Add a comment"
             self.commentsTableView.reloadData()
             
             sendNotification(to: data["fromUID"] as! String, title: "New Comment", body: "\(AuthApi.getUserName()!) commented on your Pin", actionType: "", type: "", item_id: "", item_name: "")
@@ -189,34 +196,21 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func keyboardWillShow(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//            let keyboardHeight = keyboardSize.height
-//            if self.view.frame.origin.y == 0{
-//                self.view.frame.origin.y -= keyboardHeight
-//            }
-//            self.addCommentView.frame.origin.y = self.view.frame.height - self.addCommentView.frame.height - 10 - keyboardHeight
-//            
-//            
-//        }
-        
-        //Need to calculate keyboard exact size due to Apple suggestions
-        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
-//        keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey
         var userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         var contentInset:UIEdgeInsets = self.scrollView.contentInset
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-        contentInset.bottom = keyboardFrame.size.height
+        
+        var tableContentInset:UIEdgeInsets = self.commentsTableView.contentInset
+        tableContentInset.bottom = keyboardFrame.size.height
+        self.commentsTableView.contentInset = tableContentInset
+        
+        //get indexpath
+        let indexpath = IndexPath(row: 0, section: 0)
+        self.commentsTableView.scrollToRow(at: indexpath, at: .top, animated: true)
+        contentInset.bottom = keyboardFrame.size.height + 10
         self.scrollView.contentInset = contentInset
     }
-    
-//    func keyboardDidShow(notification: NSNotification) {
-//        let oldLastCellIndexPath = NSIndexPath(row: commentData.count-1, section: 0)
-//        if commentData.count != 0{
-//            self.commentsTableView.scrollToRow(at: oldLastCellIndexPath as IndexPath, at: .bottom, animated: true)
-//        }
-//        
-//    }
     
     func keyboardWillHide(notification: NSNotification) {
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
@@ -241,7 +235,6 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             textView.resignFirstResponder()
         }
     }
-    
     
     func cancelPressed(){
         self.commentTextView.endEditing(true)

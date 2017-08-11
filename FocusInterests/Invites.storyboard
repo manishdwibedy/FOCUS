@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ii7-3r-SGo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ii7-3r-SGo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -163,9 +163,11 @@
                         <outlet property="timeButton" destination="7de-LD-Fht" id="SaA-Gz-AJG"/>
                         <outlet property="timeLabel" destination="nru-7F-n9l" id="x3h-tn-Bih"/>
                         <outlet property="timeOut" destination="7de-LD-Fht" id="1vg-YI-yIf"/>
+                        <segue destination="ZUs-y9-8K7" kind="unwind" identifier="unwindToOtherUserProfile" unwindAction="unwindToOtherUserProfile:" id="Q51-jd-Bvq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFL-YH-r49" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ZUs-y9-8K7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2273" y="107"/>
         </scene>
