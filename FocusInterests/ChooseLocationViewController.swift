@@ -96,6 +96,7 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
             locationCell.locationNameLabel.isHidden = true
             locationCell.locationAddressLabel.isHidden = true
             locationCell.locationDistanceLabel.isHidden = true
+            locationCell.locationNameLabel.text = "Current Location"
         }else{
             let suggestion = self.suggestions[indexPath.row]
             locationCell.currentLocationLabel.isHidden = true
