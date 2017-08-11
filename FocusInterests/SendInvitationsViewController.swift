@@ -38,11 +38,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     
     //    facebook and twitter stack
     @IBOutlet weak var twitterFacebookCreateEventStack: UIStackView!
-    @IBOutlet weak var facebookTwitterStackHeight: NSLayoutConstraint!
-    @IBOutlet weak var facebookSwitch: UISwitch!
-    @IBOutlet weak var twitterSwitch: UISwitch!
+    
     @IBOutlet weak var bottomHeight: NSLayoutConstraint!
-    @IBOutlet weak var facebookTwitterStack: UIStackView!
     
     let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
@@ -74,10 +71,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         self.contactList.textColor = UIColor.white
         self.createEventButton.roundCorners(radius: 10.0)
-        
-        self.bottomHeight.constant -= self.facebookTwitterStackHeight.constant
-        self.twitterFacebookCreateEventStack.removeArrangedSubview(self.facebookTwitterStack)
-        self.facebookTwitterStack.removeFromSuperview()
         
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
@@ -381,7 +374,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cell with path: \(indexPath.row)")
         var cell = UITableViewCell()
         if(indexPath.section == 0){
             let selectedAllFollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "selectAllContactsCell", for: indexPath) as! SelectAllContactsTableViewCell
@@ -390,7 +382,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         } else {
             let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
             personToInviteCell.delegate = self
-            personToInviteCell.inviteConfirmationButton.tag = indexPath.row
+            personToInviteCell.cellIndexTag = indexPath.row
             
             let section = filteredSection[indexPath.section-1]
             
@@ -410,52 +402,134 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.section == 0{
-//            tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.setSelected(true, animated: false)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexRow = indexPath.row
+        let indexSection = indexPath.section
+        
+        guard let indexPathForSelectedRows = tableView.indexPathsForSelectedRows?.sorted() else {
+            print("no index path")
+            return
+        }
+        
+        let amountOfSelectedRows = indexPathForSelectedRows.count
+        
+        
+        if indexPath.section == 0 && indexPath.row == 0{
+            
+//            let section = sections[indexPath.section]
+//            let user = self.users[section]?[indexPath.row]
+            
+            let selectAllCell = tableView.cellForRow(at: IndexPath(row: indexRow, section: indexSection)) as? SelectAllContactsTableViewCell
+            selectAllCell?.selectAllFollowersButton.isSelected = true
+            
+            if amountOfSelectedRows <= 1{
+                print("do not need to deselectcells")
+            }else{
+//old selected row [[0, 0], [1, 1], [1, 2], [1, 3], [1, 4], [6, 0], [7, 0], [8, 0], [8, 1], [8, 2], [8, 3], [8, 5], [9, 0], [11, 0], [11, 1]]
+                print("old selected row \(indexPathForSelectedRows)")
+                for cellIndex in 1...indexPathForSelectedRows.count-1{
+                    print("row: \(indexPathForSelectedRows[cellIndex][1]), section: \(indexPathForSelectedRows[cellIndex][0])")
+                    tableView.deselectRow(at: IndexPath(row: indexPathForSelectedRows[cellIndex][1], section: indexPathForSelectedRows[cellIndex][0]), animated: false)
+                    print("row: \(indexPathForSelectedRows[cellIndex][1]), section: \(indexPathForSelectedRows[cellIndex][0])")
+                    print("\(indexPathForSelectedRows)")
+                }
+                
+                for visibleCellsIndex in 1...tableView.visibleCells.count-1{
+                    let singleFollowerCell = tableView.visibleCells[visibleCellsIndex] as? InviteListTableViewCell
+                    singleFollowerCell?.inviteConfirmationButton.isSelected = false
+                }
+            }
+        }else{
+            
+            let singleFollowerCell = tableView.cellForRow(at: IndexPath(row: indexRow, section: indexSection)) as? InviteListTableViewCell
+            
+            print("selected cell not at row: \(indexRow), section: \(indexSection)")
+            singleFollowerCell?.inviteConfirmationButton.isSelected = true
+            
+            
+            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+            guard let zeroIndex = tableView.indexPathsForVisibleRows?.sorted()[0] else{
+                return
+            }
+            if zeroIndex[0] == 0 && zeroIndex[1] == 0{
+                let selectAllCell = tableView.cellForRow(at: IndexPath(row: zeroIndex[1], section: zeroIndex[0])) as? SelectAllContactsTableViewCell
+                selectAllCell?.selectAllFollowersButton.isSelected = false
+            }
+            
+        }
+        print("new selected row \(indexPathForSelectedRows)")
+//        if !self.selected[user!]!{
+//            personToInviteCell.inviteConfirmationButton.isSelected = true
+//            contactHasBeenSelected(contact: (user?.username)!, index: index)
 //        }
-//    }
+//        else{
+//            personToInviteCell.inviteConfirmationButton.isSelected = false
+//            contactHasBeenRemoved(contact: (user?.username)!, index: index)
+//        }
+    }
+
     
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        if indexPath.section == 0{
-//            tableView.deselectRow(at: self.friendsTableView.indexPathForSelectedRow!, animated: false)
-//            let selectedAllFollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "selectAllContactsCell", for: indexPath) as! SelectAllContactsTableViewCell
-//            selectedAllFollowersTableCell.setSelected(false, animated: false)
-//        }else if indexPath.section == 1{
-//            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
-//        }
-//    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            if let selectAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell{
+                selectAllCell.selectAllFollowersButton.isSelected = false
+            }
+        }else{
+            if let singleFollowerCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell{
+                singleFollowerCell.inviteConfirmationButton.isSelected = false
+            }
+        }
+    }
+        
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            if let selectAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell{
+                if selectAllCell.isSelected{
+                    selectAllCell.selectAllFollowersButton.isSelected = true
+                }else{
+                    selectAllCell.selectAllFollowersButton.isSelected = false
+                }
+                
+            }
+        }else{
+            if let singleFollowerCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell {
+                if singleFollowerCell.isSelected{
+                    singleFollowerCell.inviteConfirmationButton.isSelected = true
+                }else{
+                    singleFollowerCell.inviteConfirmationButton.isSelected = false
+                }
+            }
+        }
+    }
     
     func contactHasBeenSelected(contact: InviteUser, index: Int){
-        selectedFriend[index] = true
-        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
-        if friendList.count > 0{
-            contactListView.isHidden = false
-            contactList.text = friendList.joined(separator: ",")
-        }
-        else{
-            contactListView.isHidden = true
-        }
-        self.selectedUsers.append(contact.UID)
-        contactList.text = friendList.joined(separator: ",")
+//        selectedFriend[index] = true
+//        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
+//        if friendList.count > 0{
+//            contactListView.isHidden = false
+//            contactList.text = friendList.joined(separator: ",")
+//        }
+//        self.selectedUsers.append(contact.UID)
+//        contactList.text = friendList.joined(separator: ",")
+        print("contact: \(contact)")
     }
     
     func contactHasBeenRemoved(contact: InviteUser, index: Int){
-        selectedFriend[index] = false
-        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
-        if friendList.count > 0{
-            contactListView.isHidden = false
-        }
-        else{
-            contactListView.isHidden = true
-        }
-        
-        if let index = self.selectedUsers.index(of: contact.UID) {
-            self.selectedUsers.remove(at: index)
-        }
-        contactList.text = friendList.joined(separator: ",")
+//        selectedFriend[index] = false
+//        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
+//        if friendList.count > 0{
+//            contactListView.isHidden = false
+//        }
+//        else{
+//            contactListView.isHidden = true
+//        }
+//        
+//        if let index = self.selectedUsers.index(of: contact.UID) {
+//            self.selectedUsers.remove(at: index)
+//        }
+//        contactList.text = friendList.joined(separator: ",")
+        print("contact: \(contact)")
     }
-    
     func deselectAllFollowers() {
         contactListView.isHidden = true
         contactList.text = ""
@@ -510,58 +584,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //        }
 //    }
 //    
-    @IBAction func shareOnFB(_ sender: Any) {
-        if AuthApi.getFacebookToken() == nil{
-            
-            loginView.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
-                if error != nil {
-                    print(error?.localizedDescription ?? "")
-                    self.showLoginFailedAlert(loginType: "Facebook")
-                } else {
-                    if let res = result {
-                        if res.isCancelled {
-                            return
-                        }
-                        if let tokenString = FBSDKAccessToken.current().tokenString {
-                            let credential = FacebookAuthProvider.credential(withAccessToken: tokenString)
-                            Auth.auth().currentUser?.link(with: credential) { (user, error) in
-                                if error != nil {
-                                    AuthApi.set(facebookToken: tokenString)
-                                    self.isFacebook = true
-                                    self.facebookSwitch.isOn = true
-                                    return
-                                }
-                            }
-                        }
-                    } else {
-                        self.isFacebook = false
-                        self.facebookSwitch.isOn = false
-                        self.showLoginFailedAlert(loginType: "Facebook")
-                    }
-                }
-            }
-        }
-        else{
-            self.isFacebook = true
-            self.facebookSwitch.isOn = true
-        }
-    }
-    
-    @IBAction func shareOnTwitter(_ sender: Any) {
-        if AuthApi.getTwitterToken() == nil{
-            Share.loginTwitter()
-        }
-        
-        if AuthApi.getTwitterToken() != nil{
-            isTwitter = true
-            self.twitterSwitch.isOn = true
-        }
-        else{
-            isTwitter = true
-            self.twitterSwitch.isOn = true
-            
-        }
-    }
     
     func sortContacts(){
 //        if(searchingForContact){

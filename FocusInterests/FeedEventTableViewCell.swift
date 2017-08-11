@@ -33,7 +33,7 @@ class FeedEventTableViewCell: UITableViewCell {
         self.nameLabelButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.eventNameLabelButton.titleLabel?.adjustsFontSizeToFitWidth = true
         self.isAttendLabel.adjustsFontSizeToFitWidth = true
-        self.isAttendingLabelWidth.constant = self.isAttendLabel.intrinsicContentSize.width
+//        self.isAttendingLabelWidth.constant = self.isAttendLabel.intrinsicContentSize.width
         
         self.nameLabelButton.setTitle("arya", for: .normal)
         self.eventNameLabelButton.setTitle("Event B", for: .normal)

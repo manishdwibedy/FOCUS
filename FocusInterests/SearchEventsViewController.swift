@@ -349,6 +349,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     feedFiveCell.addressLabel.titleLabel?.lineBreakMode = .byTruncatingTail
                     feedFiveCell.addressLabel.setTitle((pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0], for: .normal)
                     feedFiveCell.pinCaptionLabel.text = pinData["pin"] as? String
+                    feedFiveCell.sizeToFit()
                     feedFiveCell.commentButton.addTarget(self, action: #selector(SearchEventsViewController.commentPressed(_:)), for: .touchUpInside)
                     let pinLocation = CLLocation(latitude: Double((pinData["lat"] as? Double)!), longitude: Double((pinData["lng"] as? Double)!))
                     feedFiveCell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: pinLocation,addBracket: false)

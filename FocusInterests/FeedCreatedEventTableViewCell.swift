@@ -68,6 +68,8 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
         cell.event = event
         cell.parentVC = parentVC
         
+        cell.attendButton.setTitleColor(UIColor.white, for: .normal)
+        cell.attendButton.setTitleColor(Constants.color.navy, for: .selected)
         cell.attendButton.roundCorners(radius: 5.0)
         cell.attendButton.layer.shadowOpacity = 0.5
         cell.attendButton.layer.masksToBounds = false

@@ -301,7 +301,7 @@
         <!--Send Invites-->
         <scene sceneID="Rv5-r4-cOe">
             <objects>
-                <viewController title="Send Invites" id="xxR-Li-4ZG" customClass="SendInvitationsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SendInvitations" title="Send Invites" id="xxR-Li-4ZG" customClass="SendInvitationsViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7iv-yV-Zt5"/>
                         <viewControllerLayoutGuide type="bottom" id="x2N-eM-M3F"/>

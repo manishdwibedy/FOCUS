@@ -528,9 +528,6 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="TeY-dh-uvU" firstAttribute="centerX" secondItem="5Zx-Eu-99x" secondAttribute="centerX" id="2ES-dt-Emo"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>

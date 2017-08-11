@@ -1028,7 +1028,12 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             cell.UID = self.userInfo["firebaseUserId"] as? String
             cell.username = (self.userInfo["username"] as? String)!
             cell.otherUser = self
-            cell.guestCount.text = "\(event.attendeeCount) guests"
+            
+            if event.attendeeCount < 20{
+                cell.guestCount.isHidden = true
+            }else{
+                cell.guestCount.text = "\(event.attendeeCount) guests"
+            }
             
             //            Date formatter for date and time label in event
             cell.price.text = event.price == nil || event.price == 0 ? "Free" : "$\(event.price!)"

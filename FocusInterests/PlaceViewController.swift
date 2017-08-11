@@ -151,8 +151,6 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showRating(sender:)))
         
         
-        self.topView.addTopBorderWithColor(color: UIColor.white, width: 1.0)
-        
         self.placeImage.layer.borderWidth = 1.0
         self.placeImage.layer.borderColor = Constants.color.lightBlue.cgColor
         self.placeImage.roundedImage()
@@ -213,6 +211,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         self.view.backgroundColor = Constants.color.navy
         self.navigationBar.barTintColor = Constants.color.navy
         self.navigationBar.titleTextAttributes = attrs
+        self.navigationBar.addBottomBorderWithColor(color: UIColor.white, width: 0.7)
         
         self.pinAmountLabel.setTitle("0", for: .normal)
         self.followersAmountLabel.setTitle("0", for: .normal)

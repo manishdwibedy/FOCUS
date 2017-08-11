@@ -170,7 +170,7 @@
                                         <rect key="frame" x="0.0" y="72" width="338" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6q-yc-JMs">
-                                                <rect key="frame" x="297" y="2.5" width="41" height="20"/>
+                                                <rect key="frame" x="297" y="6.5" width="41" height="20"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="ArE-f7-gkN"/>
@@ -194,7 +194,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="j6q-yc-JMs" firstAttribute="top" secondItem="VRF-gN-UzM" secondAttribute="top" constant="0.5" id="CRn-XC-4Es"/>
+                                            <constraint firstItem="j6q-yc-JMs" firstAttribute="centerY" secondItem="VRF-gN-UzM" secondAttribute="centerY" id="DAT-iO-6jM"/>
                                             <constraint firstAttribute="bottom" secondItem="VRF-gN-UzM" secondAttribute="bottom" constant="3" id="GDj-Tg-QXT"/>
                                             <constraint firstItem="VRF-gN-UzM" firstAttribute="leading" secondItem="gvG-LU-Fph" secondAttribute="leading" constant="8" id="Kzh-Lh-XrY"/>
                                             <constraint firstItem="j6q-yc-JMs" firstAttribute="leading" secondItem="VRF-gN-UzM" secondAttribute="trailing" constant="5" id="hCu-73-Og6"/>
