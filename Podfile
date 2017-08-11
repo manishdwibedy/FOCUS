@@ -54,6 +54,7 @@ target 'FocusInterests' do
     pod 'MIBadgeButton-Swift', :git => 'https://github.com/mustafaibrahim989/MIBadgeButton-Swift.git', :branch => 'master'
     pod 'DataCache'
     pod 'AMPopTip'
+    pod 'Mapbox-iOS-SDK', '~> 3.6'
 end
 
 target 'FocusInterestsTests' do
