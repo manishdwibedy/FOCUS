@@ -148,6 +148,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Add a comment", attributes: placeholderAttributes)
         self.commentTextView.attributedText = placeholderTextAttributes
         
+        
+
         self.navBar.addBottomBorderWithColor(color: UIColor.white, width: 0.7)
         
         self.eventImage.layer.borderWidth = 1
@@ -373,19 +375,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         titlelabel.font = UIFont(name: "Avenir-Black", size: 18.0)
         titlelabel.backgroundColor = UIColor.clear
         titlelabel.baselineAdjustment = .alignCenters
-        titlelabel.adjustsFontSizeToFitWidth = true
+        titlelabel.adjustsFontSizeToFitWidth = false
         titlelabel.textAlignment = .center
         self.navBar.topItem?.titleView = titlelabel
         
         let eventLocation = CLLocation(latitude: Double((event?.latitude!)!)!, longitude: Double((event?.longitude!)!)!)
-        
-        if titlelabel.intrinsicContentSize.width <= 100{
-            self.distanceLabelInNavBar.frame.size.width = 70
-            self.distanceLabelInNavBar.titleLabel?.textAlignment = .right
-            self.distanceLabelInNavBar.titleLabel?.baselineAdjustment = .alignCenters
-        }else{
-            self.distanceLabelInNavBar.titleLabel?.adjustsFontSizeToFitWidth = true
-        }
     
         self.distanceLabelInNavBar.setTitle(getDistance(fromLocation: AuthApi.getLocation()!, toLocation: eventLocation,addBracket: false, precision: 1), for: .normal)
         
@@ -550,31 +544,30 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func postComment(_ sender: Any) {
-//        let unixDate = NSDate().timeIntervalSince1970
-//        let fullRef = ref.child("events").child((event?.id)!).child("comments").childByAutoId()
-//        fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextView.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
-//        
-//        Answers.logCustomEvent(withName: "Event Comment",
-//                               customAttributes: [
-//                                "user": AuthApi.getFirebaseUid()!,
-//                                "comment": commentTextView.text!,
-//                                
-//            ])
-//        
-//        sendNotification(to: event!.creator!, title: "New Comment", body: "\(AuthApi.getUserName()!)", actionType: "", type: "", item_id: "", item_name: "")
-//        
-//        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextView.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
-//        if self.commentsCList.count != 0{
-//            self.commentsCList.removeObject(at: 0)
-//        }
+        let unixDate = NSDate().timeIntervalSince1970
+        let fullRef = ref.child("events").child((event?.id)!).child("comments").childByAutoId()
+        fullRef.updateChildValues(["fromUID":AuthApi.getFirebaseUid()!, "comment":commentTextView.text!, "like":["num":0], "date": NSNumber(value: Double(unixDate))])
         
-//        if self.commentsCList.count <= 0{
-//            self.commentsStack.removeArrangedSubview(self.noCommentLabel)
-//            self.noCommentLabel.isHidden = true
-//        }
+        Answers.logCustomEvent(withName: "Event Comment",
+                               customAttributes: [
+                                "user": AuthApi.getFirebaseUid()!,
+                                "comment": commentTextView.text!,
+                                
+            ])
         
-//        self.commentsCList.add(self.commentTextView.text)
+        sendNotification(to: event!.creator!, title: "New Comment", body: "\(AuthApi.getUserName()!)", actionType: "", type: "", item_id: "", item_name: "")
         
+        let data = commentCellData(from: AuthApi.getFirebaseUid()!, comment: commentTextView.text!, commentFirePath: fullRef, likeCount: 0, date: Date(timeIntervalSince1970: TimeInterval(unixDate)))
+        if self.commentsCList.count != 0{
+            self.commentsCList.removeObject(at: 0)
+        }
+        
+        if self.commentsCList.count <= 0{
+            self.commentsStack.removeArrangedSubview(self.noCommentLabel)
+            self.noCommentLabel.isHidden = true
+        }
+        
+        self.commentsCList.add(self.commentTextView.text)
         
         self.commentTextView.resignFirstResponder()
         self.commentTextView.text = "Add a comment"
