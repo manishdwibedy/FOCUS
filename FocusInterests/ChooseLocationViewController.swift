@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol gotLocationDelegate{
+    func gotSelectedLocation(location: LocationSuggestion)
+}
+
 class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate{
 
     @IBOutlet weak var locationTableView: UITableView!
@@ -15,6 +19,9 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var navBar: UINavigationBar!
     
     var suggestions = [LocationSuggestion]()
+    var selectedLocation: LocationSuggestion?
+    var delegate: gotLocationDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -107,10 +114,12 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedLocation = self.suggestions[indexPath.row]
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        selectedLocation = nil
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
     
@@ -124,7 +133,10 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        LocationSuggestion.getNearbyPlaces(query: searchText, location: AuthApi.getLocation()!, gotSuggestions: {suggestions in
+            self.suggestions = suggestions
+            self.locationTableView.reloadData()
+        })
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -153,6 +165,7 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     }
     */
     @IBAction func backPressed(_ sender: Any) {
+        delegate.gotSelectedLocation(location: self.selectedLocation!)
         self.dismiss(animated: true, completion: nil)
     }
 

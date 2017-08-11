@@ -25,10 +25,11 @@ class LocationSuggestion{
         self.long = long
     }
     
-    static func getNearbyPlaces(location: CLLocation, gotSuggestions: @escaping (_ suggestions: [LocationSuggestion]) -> Void){
+    static func getNearbyPlaces(query: String? = "", location: CLLocation, gotSuggestions: @escaping (_ suggestions: [LocationSuggestion]) -> Void){
         var locationSuggestions = [LocationSuggestion]()
         let url = "https://api.foursquare.com/v2/venues/search"
         let parameters: [String: Any] = [
+            "query": query ?? "",
             "v": "20161016",
             "ll": "\(location.coordinate.latitude),\(location.coordinate.longitude)",
             "client_id": Constants.keys.fourSquareClientID,
@@ -46,9 +47,15 @@ class LocationSuggestion{
                 let distance = (location["distance"]?.doubleValue)!/1609.344
                 
                 var adddress = [String]()
-                for addressPart in (location["formattedAddress"]?.arrayValue)!{
-                    adddress.append(addressPart.stringValue)
+                if let streetAddress = location["address"]?.stringValue{
+                    adddress.append(streetAddress)
                 }
+                else{
+                    for addressPart in (location["formattedAddress"]?.arrayValue)!{
+                        adddress.append(addressPart.stringValue)
+                    }
+                }
+                
                 
                 let lat = location["lat"]?.doubleValue
                 let long = location["lng"]?.doubleValue

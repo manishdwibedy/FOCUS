@@ -13,7 +13,7 @@ import SCLAlertView
 import FBSDKLoginKit
 import FirebaseAuth
 
-class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate{
+class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, gotLocationDelegate{
 
     // change location stack
     @IBOutlet weak var currentLocationStack: UIStackView!
@@ -385,6 +385,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text = ""
         let chooseLocationVC = ChooseLocationViewController(nibName: "ChooseLocationViewController", bundle: nil)
+        chooseLocationVC.delegate = self
         
         self.present(chooseLocationVC, animated: true, completion: nil)
     }
@@ -398,6 +399,10 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
         textView.textColor = Constants.color.navy
+    }
+    
+    func gotSelectedLocation(location: LocationSuggestion) {
+        self.searchLocationTextField.text = location.name
     }
     
     /*
@@ -417,4 +422,6 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
 }
