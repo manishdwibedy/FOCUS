@@ -29,10 +29,11 @@ class SelectAllContactsTableViewCell: UITableViewCell {
     
     @IBAction func selectedAllFollowers(_ sender: Any) {
         self.selectAllFollowersButton.isSelected = !self.selectAllFollowersButton.isSelected
-        self.setSelected(self.selectAllFollowersButton.isSelected, animated: false)
-        if (self.selectAllFollowersButton.isSelected == true){
+        if self.selectAllFollowersButton.isSelected{
+            self.isSelected = true
             delegate?.selectedAllFollowers()
         }else{
+            self.isSelected = false
             delegate?.deselectAllFollowers()
         }
     }

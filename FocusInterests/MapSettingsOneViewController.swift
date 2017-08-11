@@ -123,9 +123,7 @@ class MapSettingsOneViewController: UIViewController, UITableViewDelegate, UITab
         }
         selectedCell.accessoryType = .none
     }
-    
-
-    
+        
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell.isSelected{
             cell.accessoryType = .checkmark

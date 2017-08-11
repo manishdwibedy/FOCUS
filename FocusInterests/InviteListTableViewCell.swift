@@ -16,7 +16,7 @@ class InviteListTableViewCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var inviteConfirmationButton: UIButton!
     var delegate: SendInvitationsViewControllerDelegate?
-    
+    var cellIndexTag = Int()
     var user: InviteUser? = nil
     
     override func awakeFromNib() {
@@ -32,6 +32,8 @@ class InviteListTableViewCell: UITableViewCell {
     }
     
     func setupCell(){
+        print("render \(self) ")
+        
         self.inviteConfirmationButton.layer.borderWidth = 1
         self.inviteConfirmationButton.layer.borderColor = UIColor.white.cgColor
         self.inviteConfirmationButton.roundButton()
@@ -40,8 +42,8 @@ class InviteListTableViewCell: UITableViewCell {
         self.userProfileImage.layer.borderColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0).cgColor
         self.userProfileImage.roundedImage()
         
-        self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Green.png"), for: .selected)
         self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
+        self.inviteConfirmationButton.setImage(#imageLiteral(resourceName: "Green.png"), for: .selected)
     }
     
     func setUserNameAndFullNameValues(userName: String, fullName: String){
@@ -50,16 +52,17 @@ class InviteListTableViewCell: UITableViewCell {
     }
     
     @IBAction func contactSelectedAction(_ sender: Any) {
-        if self.inviteConfirmationButton.isSelected == false{
-            self.inviteConfirmationButton.isSelected = true
-             delegate?.contactHasBeenSelected(contact: user!, index: self.inviteConfirmationButton.tag)
-            
-        }else{
-            self.inviteConfirmationButton.isSelected = false
-            delegate?.contactHasBeenRemoved(contact: user!, index: self.inviteConfirmationButton.tag)
-            
-        }
         
-       
+        if self.inviteConfirmationButton.isSelected == false{
+            self.isSelected = true
+            self.inviteConfirmationButton.isSelected = true
+            delegate?.contactHasBeenSelected(contact: user!, index: self.cellIndexTag)
+//             delegate?.contactHasBeenSelectedString(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
+        }else{
+            self.isSelected = false
+            self.inviteConfirmationButton.isSelected = false
+            delegate?.contactHasBeenRemoved(contact: user!, index: self.cellIndexTag)
+//            delegate?.contactHasBeenRemovedString(contact: self.usernameLabel.text!, index: self.inviteConfirmationButton.tag)
+        }
     }
 }

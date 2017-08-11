@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -63,7 +63,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="DXu-4K-Wqf" firstAttribute="centerX" secondItem="vkF-rm-0g8" secondAttribute="centerX" id="3Wb-29-Dpj"/>
                     <constraint firstItem="vkF-rm-0g8" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Niq-WL-Ejl" secondAttribute="trailing" constant="138" id="3fl-Xk-YBZ"/>
@@ -74,6 +74,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="vkF-rm-0g8" secondAttribute="trailing" constant="10" id="K3A-ha-3re"/>
                     <constraint firstItem="vkF-rm-0g8" firstAttribute="centerY" secondItem="Niq-WL-Ejl" secondAttribute="centerY" id="O1x-4o-TfY"/>
                     <constraint firstItem="DXu-4K-Wqf" firstAttribute="leading" secondItem="vkF-rm-0g8" secondAttribute="leading" id="WI9-Af-vhh"/>
+                    <constraint firstAttribute="bottom" secondItem="otm-Pt-SGC" secondAttribute="bottom" constant="5" id="WUd-Vd-Lzt"/>
                     <constraint firstItem="Niq-WL-Ejl" firstAttribute="leading" secondItem="ZXN-2H-D6t" secondAttribute="trailing" constant="7" id="Xjg-Ks-1oH"/>
                     <constraint firstItem="OIK-kL-n5V" firstAttribute="trailing" secondItem="Niq-WL-Ejl" secondAttribute="trailing" id="Ym9-Ez-JSz"/>
                     <constraint firstItem="vkF-rm-0g8" firstAttribute="baseline" secondItem="Niq-WL-Ejl" secondAttribute="baseline" id="a3H-4j-M1D"/>
@@ -85,9 +86,10 @@
                     <constraint firstItem="DXu-4K-Wqf" firstAttribute="trailing" secondItem="vkF-rm-0g8" secondAttribute="trailing" id="ooV-m6-dIf"/>
                     <constraint firstItem="otm-Pt-SGC" firstAttribute="centerX" secondItem="Niq-WL-Ejl" secondAttribute="centerX" id="uum-HL-GeM"/>
                     <constraint firstItem="OIK-kL-n5V" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wze-KT-yUf"/>
+                    <constraint firstItem="Niq-WL-Ejl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="xrv-3Z-Mhm"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="addressLabel" destination="otm-Pt-SGC" id="1T2-lM-t92"/>
                 <outlet property="categoryLabel" destination="DXu-4K-Wqf" id="YZg-qV-cPz"/>

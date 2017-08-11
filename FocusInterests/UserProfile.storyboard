@@ -20,14 +20,14 @@
                         <viewControllerLayoutGuide type="bottom" id="NZS-fS-QjD"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="ce2-DV-VQr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="989"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pca-sC-jif">
-                                <rect key="frame" x="0.0" y="64" width="375" height="924"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="785"/>
                                 <subviews>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="167-Kd-xcs" userLabel="Main Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="904"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="754"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dsa-iR-ute">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
@@ -344,20 +344,8 @@
                                                     <constraint firstItem="OXJ-kh-5zc" firstAttribute="top" secondItem="52h-IQ-bfp" secondAttribute="bottom" constant="6" id="m6l-mG-yDy"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="twS-S2-HCT">
-                                                <rect key="frame" x="0.0" y="355" width="375" height="150"/>
-                                                <subviews>
-                                                    <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RWd-Y5-KXe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
-                                                        <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </tableView>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="xF9-IK-E2e"/>
-                                                </constraints>
-                                            </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SF4-Kb-s3b" userLabel="FOCUS View">
-                                                <rect key="frame" x="0.0" y="505" width="375" height="168"/>
+                                                <rect key="frame" x="0.0" y="355" width="375" height="168"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rWm-rQ-eGU" userLabel="Focus Stack View">
                                                         <rect key="frame" x="7.5" y="5" width="359" height="157"/>
@@ -480,7 +468,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfu-XU-At8" userLabel="Events View">
-                                                <rect key="frame" x="0.0" y="673" width="375" height="231"/>
+                                                <rect key="frame" x="0.0" y="523" width="375" height="231"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Qr1-yI-fZj">
                                                         <rect key="frame" x="8" y="7.5" width="359" height="216"/>
@@ -567,7 +555,6 @@
                                                 <constraints>
                                                     <constraint firstItem="Qr1-yI-fZj" firstAttribute="leading" secondItem="Yfu-XU-At8" secondAttribute="leading" constant="8" id="0Uo-EF-wYF"/>
                                                     <constraint firstAttribute="bottom" secondItem="Qr1-yI-fZj" secondAttribute="bottom" constant="7.5" id="Atx-Lf-RwS"/>
-                                                    <constraint firstItem="Qr1-yI-fZj" firstAttribute="centerX" secondItem="Yfu-XU-At8" secondAttribute="centerX" id="dUM-lt-sBB"/>
                                                     <constraint firstItem="Qr1-yI-fZj" firstAttribute="top" secondItem="Yfu-XU-At8" secondAttribute="top" constant="7.5" id="lUL-Ui-65U"/>
                                                     <constraint firstAttribute="trailing" secondItem="Qr1-yI-fZj" secondAttribute="trailing" constant="8" id="xWo-un-hvg"/>
                                                 </constraints>
@@ -577,11 +564,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="167-Kd-xcs" secondAttribute="bottom" id="F9a-yW-LXW"/>
+                                    <constraint firstAttribute="bottom" secondItem="167-Kd-xcs" secondAttribute="bottom" constant="50" id="EJJ-1W-Soi"/>
                                     <constraint firstItem="167-Kd-xcs" firstAttribute="width" secondItem="pca-sC-jif" secondAttribute="width" id="Qh5-0X-bU8"/>
                                     <constraint firstAttribute="trailing" secondItem="167-Kd-xcs" secondAttribute="trailing" id="ZMB-fH-3rC"/>
                                     <constraint firstItem="167-Kd-xcs" firstAttribute="leading" secondItem="pca-sC-jif" secondAttribute="leading" id="eXJ-ca-4qw"/>
-                                    <constraint firstItem="167-Kd-xcs" firstAttribute="centerX" secondItem="pca-sC-jif" secondAttribute="centerX" id="pNv-Yj-dLv"/>
                                     <constraint firstItem="167-Kd-xcs" firstAttribute="top" secondItem="pca-sC-jif" secondAttribute="top" id="zWa-bh-9aj"/>
                                 </constraints>
                             </scrollView>
@@ -623,7 +609,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="989"/>
+                    <size key="freeformSize" width="375" height="850"/>
                     <connections>
                         <outlet property="createEventButton" destination="ofW-bn-GIG" id="5wh-e0-VrE"/>
                         <outlet property="createPinAndUpdatePinStack" destination="OXJ-kh-5zc" id="nrW-Lx-2Jb"/>
@@ -662,8 +648,6 @@
                         <outlet property="pinImage" destination="hH3-Cy-m4h" id="0l3-67-1kU"/>
                         <outlet property="pinLikesLabel" destination="VK7-Ea-kjC" id="GZa-IM-E8i"/>
                         <outlet property="pinView" destination="zs8-eT-TCa" id="oes-nI-sbz"/>
-                        <outlet property="recentPostTableView" destination="RWd-Y5-KXe" id="ZWK-gm-N7o"/>
-                        <outlet property="recentPostTableViewHeight" destination="xF9-IK-E2e" id="4nP-4P-wDh"/>
                         <outlet property="secondBorderHeight" destination="hK1-uA-GRU" id="9Jn-2z-zXg"/>
                         <outlet property="settingButton" destination="Niz-Af-QYR" id="d6m-ZH-fN6"/>
                         <outlet property="updatePinButton" destination="H4s-5t-g9h" id="fWD-De-0vz"/>

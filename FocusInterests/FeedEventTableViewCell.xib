@@ -106,38 +106,46 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5bh-w3-m9d">
                                         <rect key="frame" x="69" y="0.0" width="197" height="75"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="mLZ-kz-DZm">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6QO-XI-6Tb">
                                                 <rect key="frame" x="0.0" y="0.0" width="197" height="45"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKT-hd-BMb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="45"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="69" id="awg-4n-tJB"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
-                                                        <inset key="imageEdgeInsets" minX="-3" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        <state key="normal" title="Button">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                    </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is attending" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUT-hG-PZG">
-                                                        <rect key="frame" x="72" y="0.0" width="74" height="45"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="74" id="rD3-mo-62b"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAk-oJ-FIc">
-                                                        <rect key="frame" x="149" y="0.0" width="48" height="45"/>
-                                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
-                                                        <state key="normal" title="Button">
-                                                            <color key="titleColor" red="1" green="0.0" blue="0.47024197049999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
-                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="mLZ-kz-DZm">
+                                                        <rect key="frame" x="1" y="6" width="195" height="33"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKT-hd-BMb">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="33"/>
+                                                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
+                                                                <inset key="imageEdgeInsets" minX="-3" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                <state key="normal" title="Button">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is attending" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUT-hG-PZG">
+                                                                <rect key="frame" x="51" y="0.0" width="74" height="33"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="74" id="cgp-Vf-W5u"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="150" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAk-oJ-FIc">
+                                                                <rect key="frame" x="128" y="0.0" width="67" height="33"/>
+                                                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
+                                                                <state key="normal" title="Button">
+                                                                    <color key="titleColor" red="1" green="0.0" blue="0.47024197049999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
-                                            </stackView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="mLZ-kz-DZm" firstAttribute="leading" secondItem="6QO-XI-6Tb" secondAttribute="leading" constant="1" id="1Gp-hi-WTz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mLZ-kz-DZm" secondAttribute="trailing" constant="1" id="4pS-iX-TYQ"/>
+                                                    <constraint firstItem="mLZ-kz-DZm" firstAttribute="centerY" secondItem="6QO-XI-6Tb" secondAttribute="centerY" id="OO0-nt-6m3"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgG-65-yI5">
                                                 <rect key="frame" x="0.0" y="45" width="197" height="30"/>
                                                 <subviews>
@@ -228,9 +236,7 @@
                 <outlet property="interestLabel" destination="FaT-ew-COK" id="M0f-ln-znn"/>
                 <outlet property="inviteButton" destination="6h9-Za-eIz" id="fFo-oD-2Ox"/>
                 <outlet property="isAttendLabel" destination="PUT-hG-PZG" id="bep-S0-FxU"/>
-                <outlet property="isAttendingLabelWidth" destination="rD3-mo-62b" id="SfN-aw-kal"/>
                 <outlet property="nameLabelButton" destination="rKT-hd-BMb" id="JRb-gk-RHh"/>
-                <outlet property="nameLabelButtonWidth" destination="awg-4n-tJB" id="1K9-YD-uhu"/>
                 <outlet property="timeSince" destination="R6k-rZ-uId" id="Lnf-am-lNz"/>
                 <outlet property="usernameImage" destination="aFf-ur-QOn" id="QVq-j8-BfR"/>
             </connections>

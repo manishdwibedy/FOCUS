@@ -237,10 +237,33 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Ff-P3-9B6" userLabel="Google Maps and Uber Stack">
-                                                                        <rect key="frame" x="0.0" y="108" width="121" height="57"/>
+                                                                        <rect key="frame" x="0.0" y="108" width="185" height="57"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oo-yz-7N6">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecg-hJ-KLH">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="56" height="57"/>
+                                                                                <subviews>
+                                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJ6-CV-oP9">
+                                                                                        <rect key="frame" x="4.6666666666666679" y="4.6666666666666856" width="47" height="47"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="47" id="m5a-Qs-Pws"/>
+                                                                                            <constraint firstAttribute="height" constant="47" id="x4d-dh-ixD"/>
+                                                                                        </constraints>
+                                                                                        <state key="normal" image="TicketMaster"/>
+                                                                                        <connections>
+                                                                                            <action selector="openTicketMaster:" destination="AZe-9E-xBf" eventType="touchUpInside" id="ilb-Dy-9xt"/>
+                                                                                        </connections>
+                                                                                    </button>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                                <constraints>
+                                                                                    <constraint firstItem="tJ6-CV-oP9" firstAttribute="centerX" secondItem="ecg-hJ-KLH" secondAttribute="centerX" id="7Pv-iU-uAi"/>
+                                                                                    <constraint firstItem="tJ6-CV-oP9" firstAttribute="centerY" secondItem="ecg-hJ-KLH" secondAttribute="centerY" id="B2r-uH-Tht"/>
+                                                                                    <constraint firstAttribute="height" constant="57" id="Mhv-T7-p93"/>
+                                                                                    <constraint firstAttribute="width" constant="56" id="hmS-3L-65V"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oo-yz-7N6">
+                                                                                <rect key="frame" x="64" y="0.0" width="56" height="57"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="57" id="aMU-Ch-VWX"/>
                                                                                     <constraint firstAttribute="width" constant="56" id="qhS-6o-oY5"/>
@@ -251,7 +274,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uRh-AH-1F4">
-                                                                                <rect key="frame" x="64" y="0.0" width="57" height="57"/>
+                                                                                <rect key="frame" x="128" y="0.0" width="57" height="57"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="57" id="8pL-5d-joo"/>
                                                                                     <constraint firstAttribute="height" constant="57" id="VlO-oc-Dm5"/>
@@ -528,9 +551,6 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="TeY-dh-uvU" firstAttribute="centerX" secondItem="5Zx-Eu-99x" secondAttribute="centerX" id="2ES-dt-Emo"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -811,6 +831,7 @@
     <resources>
         <image name="BackArrow" width="30" height="30"/>
         <image name="Large_Apple_Maps.png" width="123" height="123"/>
+        <image name="TicketMaster" width="630" height="630"/>
         <image name="uber" width="123" height="123"/>
     </resources>
 </document>

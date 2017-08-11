@@ -100,8 +100,6 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
             controller.map = parentVC.tabBarController?.viewControllers?[0] as? MapViewController    
         }
         
-        
-        
         if let VC = parentVC{
             VC.present(controller, animated: true, completion: nil)
         }

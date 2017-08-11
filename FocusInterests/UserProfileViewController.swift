@@ -17,7 +17,7 @@ enum previousScreen{
     case notification
 }
 
-class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
+class UserProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationBarDelegate, UITextViewDelegate{
     
 	@IBOutlet var userScrollView: UIScrollView!
     
@@ -166,11 +166,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.recentPostTableView.delegate = self
-        self.recentPostTableView.dataSource = self
-        self.recentPostTableView.rowHeight = UITableViewAutomaticDimension
-        self.recentPostTableView.estimatedRowHeight = 150
-        
         Answers.logCustomEvent(withName: "Screen",
                                customAttributes: [
                                 "Name": "User Profile"
@@ -188,18 +183,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.navBar.addBottomBorderWithColor(color: UIColor.white, width: 0.7)
         
         hideKeyboardWhenTappedAround()
-        
-        self.recentPostTableView.register(UINib(nibName: "FeedOneTableViewCell", bundle: nil), forCellReuseIdentifier: "recentPostCell")
-        
-        self.recentPostTableView.register(UINib(nibName: "FeedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTwoCell")
-        
-        self.recentPostTableView.register(UINib(nibName: "FeedPlaceTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedThreeCell")
-        
-        self.recentPostTableView.register(UINib(nibName: "FeedCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFourCell")
-        
-        self.recentPostTableView.register(UINib(nibName: "FeedPlaceImageTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedFiveCell")
-        
-        self.recentPostTableView.register(UINib(nibName: "FeedCreatedEventTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedSixCell")
         
         self.moreButton.layer.borderWidth = 1.0
         self.moreButton.layer.borderColor = UIColor.white.cgColor
@@ -358,7 +341,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventsCollectionCell", for: indexPath) as!UserProfileCollectionViewCell
+        let eventCell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventsCollectionCell", for: indexPath) as! UserProfileCollectionViewCell
         
         if indexPath.row == 0{
             self.eventsViewHeight.constant = eventCell.frame.height
@@ -768,49 +751,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
         self.present(controller, animated: true, completion: nil)
 
-    }
-    
-//    MARK: Table View Data Source and Delegate Methods
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let recentPostCell = tableView.dequeueReusableCell(withIdentifier: "recentPostCell", for: indexPath) as! FeedOneTableViewCell
-        recentPostCell.commentTextView.delegate = self
-        recentPostCell.commentButton.addTarget(self, action: #selector(UserProfileViewController.commentPressed(_:)), for: .touchUpInside)
-//        self.recentPostTableViewHeight.constant = recentPostCell.contentView.frame.height
-        return recentPostCell
-    }
-    
-    func commentPressed(_ sender: Any) {
-        self.recentPostTableView.beginUpdates()
-        self.recentPostTableView.endUpdates()
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        var textFrame = textView.frame
-        textFrame.size.height = textView.contentSize.height
-        textView.frame = textFrame
-        
-//        self.recentPostTableViewHeight.constant += textView.contentSize.height
-        self.recentPostTableView.beginUpdates()
-        self.recentPostTableView.endUpdates()
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Add a comment"{
-            textView.text = ""
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let storyboard = UIStoryboard(name: "Pin", bundle: nil)
-//        let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
     }
     
     

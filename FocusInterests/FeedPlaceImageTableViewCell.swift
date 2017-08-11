@@ -42,13 +42,8 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
         self.commentTextView.layer.borderColor = UIColor.white.cgColor
         self.commentTextView.layer.cornerRadius = 5.0
         self.commentPostView.isHidden = true
-        
-        self.usernameLabel.setTitle("arya", for: .normal)
-        self.addressLabel.setTitle("1001 Rose Bowl Dr", for: .normal)
+    
         self.postButton.allCornersRounded(radius: 4.0)
-        self.distanceLabel.text = "10 mi"
-        self.pinCaptionLabel.text = "Rose Bowl"
-        addGreenDot(label: self.interestLabel, content: "Sports")
         let placeholderAttributes: [String : AnyObject] = [
             NSForegroundColorAttributeName: UIColor.white,
             NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!
