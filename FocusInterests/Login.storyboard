@@ -23,10 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FOCUS_login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rY1-XT-C2R">
-                                <rect key="frame" x="62" y="71" width="252" height="101"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FOCUS Logo" translatesAutoresizingMaskIntoConstraints="NO" id="rY1-XT-C2R">
+                                <rect key="frame" x="62" y="31" width="252" height="182"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="101" id="Bp3-tP-cQn"/>
+                                    <constraint firstAttribute="height" constant="182" id="Bp3-tP-cQn"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="K5z-Xh-TOp">
@@ -241,12 +241,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="rY1-XT-C2R" firstAttribute="leading" secondItem="HGh-z7-isQ" secondAttribute="leadingMargin" constant="46" id="0J6-FX-kET"/>
                             <constraint firstItem="K5z-Xh-TOp" firstAttribute="centerX" secondItem="HGh-z7-isQ" secondAttribute="centerX" id="2A7-lu-39I"/>
-                            <constraint firstItem="rY1-XT-C2R" firstAttribute="leading" secondItem="K5z-Xh-TOp" secondAttribute="leading" id="3vd-hY-Szq"/>
                             <constraint firstItem="KD0-S0-07M" firstAttribute="leading" secondItem="HGh-z7-isQ" secondAttribute="leading" id="63f-vV-sxv"/>
-                            <constraint firstItem="rY1-XT-C2R" firstAttribute="top" secondItem="lEF-pk-Jwk" secondAttribute="bottom" constant="51" id="9ef-Zd-4fw"/>
-                            <constraint firstItem="K5z-Xh-TOp" firstAttribute="top" secondItem="rY1-XT-C2R" secondAttribute="bottom" constant="11" id="N1Z-RE-yon"/>
-                            <constraint firstItem="rY1-XT-C2R" firstAttribute="trailing" secondItem="K5z-Xh-TOp" secondAttribute="trailing" id="Rc7-nn-bP7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rY1-XT-C2R" secondAttribute="trailing" constant="45" id="7xK-mA-lXB"/>
+                            <constraint firstItem="rY1-XT-C2R" firstAttribute="top" secondItem="lEF-pk-Jwk" secondAttribute="bottom" constant="11" id="9ef-Zd-4fw"/>
+                            <constraint firstItem="K5z-Xh-TOp" firstAttribute="top" secondItem="rY1-XT-C2R" secondAttribute="bottom" constant="-30" id="N1Z-RE-yon"/>
                             <constraint firstItem="rY1-XT-C2R" firstAttribute="centerX" secondItem="HGh-z7-isQ" secondAttribute="centerX" id="TBd-hy-7BX"/>
                             <constraint firstItem="vbA-Iy-ofu" firstAttribute="top" secondItem="KD0-S0-07M" secondAttribute="bottom" constant="-81" id="aH9-sx-xUs"/>
                             <constraint firstAttribute="trailing" secondItem="KD0-S0-07M" secondAttribute="trailing" constant="1" id="bTl-gw-ahv"/>
@@ -613,7 +613,7 @@
     </scenes>
     <resources>
         <image name="BackArrow" width="30" height="30"/>
-        <image name="FOCUS_login_logo" width="250" height="100"/>
+        <image name="FOCUS Logo" width="1000" height="750"/>
         <image name="GoogleSignIn" width="252" height="46"/>
         <image name="signInWithFacebook" width="252" height="46"/>
     </resources>
