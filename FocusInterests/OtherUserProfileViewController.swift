@@ -1196,8 +1196,12 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         let storyboard = UIStoryboard(name: "search_people", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "invitePeople") as! InvitePeopleViewController
         ivc.inviteFromOtherUserProfile = true
+        ivc.UID = self.userID
+        ivc.isMeetup = true
         ivc.otherUserProfile = self
         ivc.otherUserProfileDelegate = self
+        ivc.attendingEvent = self.eventsIAttend
+        ivc.followingPlaces = self.placesIFollow
         
         self.present(ivc, animated: true, completion: nil)
     }

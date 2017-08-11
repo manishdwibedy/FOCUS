@@ -1387,7 +1387,7 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
                                             }
                                         }
                                         
-                                        if eventCount == suggestions.count || suggestions.count == limit{
+                                        if eventCount == suggestions.count || suggestions.count >= limit{
                                             suggestions.sort(by: {
                                                 if let event1 = eventDF.date(from: $0.date!), let event2 = eventDF.date(from: $1.date!){
                                                     return event1 < event2
@@ -1426,6 +1426,7 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
 }
    
 func getSuggestedPlaces(interests: String, limit: Int, gotPlaces: @escaping (_ user: [Place]) -> Void){
+    
     var suggestions = [Place]()
     var categories = Set<String>()
     
@@ -1447,7 +1448,7 @@ func getSuggestedPlaces(interests: String, limit: Int, gotPlaces: @escaping (_ u
                             suggestions.append(place)
                         }
                         
-                        if suggestions.count == limit{
+                        if suggestions.count >= limit{
                             gotPlaces(suggestions)
                         }
                     }

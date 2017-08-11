@@ -299,7 +299,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                         return $0.distance < $1.distance
                     }
                     else{
-                       return $0.category! < $1.category!
+                        return $0.category! < $1.category!
                     }
                 })
                 
@@ -371,6 +371,213 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 }
             })
         }
+
+        
+//        if !isMeetup{
+//            getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
+//                self.followingPlaces = places.sorted(by: {
+//                    $0.distance < $1.distance
+//                })
+//                
+//                if self.otherFollowingPlaces != nil{
+//                    if self.isMeetup{
+//                        var uniquePlaces = self.places
+//                        for place in self.followingPlaces{
+//                            if !uniquePlaces.contains(place){
+//                                uniquePlaces.append(place)
+//                            }
+//                        }
+//                        
+//                        for place in self.otherFollowingPlaces!{
+//                            if !uniquePlaces.contains(place){
+//                                uniquePlaces.append(place)
+//                            }
+//                        }
+//                        
+//                        
+//                        self.places = uniquePlaces
+//                        
+//                        self.filtered = self.places
+//                        self.tableView.reloadData()
+//                    }
+//                    else{
+//                        self.places = self.followingPlaces + self.places
+//                        self.filtered = self.places
+//                        self.tableView.reloadData()
+//                    }
+//                    
+//                    self.updatePlaces()
+//                }
+//                if !self.isMeetup{
+//                    self.followingPlaces = self.followingPlaces.sorted(by: {
+//                        $0.distance < $1.distance
+//                    })
+//                    self.places = self.followingPlaces + self.places
+//                    
+//                    self.filtered = self.places
+//                    self.tableView.reloadData()
+//                }
+//                
+//                if self.segmentedOut.selectedSegmentIndex == 0{
+//                    self.updatePlaces()
+//                }
+//            })
+//            
+//            getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
+//                self.attendingEvents = events
+//                
+//                if self.followingAttendingEvents != nil && self.otherEvents != nil{
+//                    var uniqueEvents = self.attendingEvents!
+//                    
+//                    for event in self.followingAttendingEvents!{
+//                        if !uniqueEvents.contains(event){
+//                            uniqueEvents.append(event)
+//                        }
+//                    }
+//                    
+//                    if !self.isMeetup, let otherAttendingEvents = self.otherAttendingEvents{
+//                        for event in otherAttendingEvents{
+//                            if !uniqueEvents.contains(event){
+//                                uniqueEvents.append(event)
+//                            }
+//                        }
+//                    }
+//                    for event in self.events{
+//                        if !uniqueEvents.contains(event){
+//                            uniqueEvents.append(event)
+//                        }
+//                    }
+//                    
+//                    let events = uniqueEvents + self.otherEvents!
+//                    self.events = events.sorted(by: {
+//                        if $0.category == $1.category{
+//                            return $0.distance < $1.distance
+//                        }
+//                        else{
+//                            return $0.category! < $1.category!
+//                        }
+//                    })
+//                    
+//                    
+//                    self.tableView.reloadData()
+//                }
+//            })
+//            
+//            getFollowingAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
+//                self.followingAttendingEvents = events
+//                
+//                if self.attendingEvents != nil && self.otherEvents != nil{
+//                    var uniqueEvents = self.attendingEvents!
+//                    
+//                    for event in self.followingAttendingEvents!{
+//                        if !uniqueEvents.contains(event){
+//                            uniqueEvents.append(event)
+//                        }
+//                    }
+//                    
+//                    if !self.isMeetup, let otherAttendingEvents = self.otherAttendingEvents{
+//                        for event in otherAttendingEvents{
+//                            if !uniqueEvents.contains(event){
+//                                uniqueEvents.append(event)
+//                            }
+//                        }
+//                    }
+//                    
+//                    for event in self.events{
+//                        if !uniqueEvents.contains(event){
+//                            uniqueEvents.append(event)
+//                        }
+//                    }
+//                    
+//                    self.events = uniqueEvents + self.otherEvents!
+//                    self.tableView.reloadData()
+//                }
+//            })
+//        }
+//        else{
+//            getFollowingPlace(uid: UID, gotPlaces: { placesUserFollows in
+//                print(placesUserFollows)
+//                let user_interest_set = Set<Place>(self.followingPlaces)
+//                let other_user = Set<Place>(placesUserFollows)
+//                
+//                let common = Array(other_user.intersection(user_interest_set))
+//                if common.count > 0{
+//                    self.places = Array(common)
+//                    self.tableView.reloadData()
+//                }
+//                else{
+//                    self.places.append(contentsOf: placesUserFollows)
+//                    self.places.append(contentsOf: self.followingPlaces)
+//                    
+//                    Constants.DB.user.child(self.UID).observeSingleEvent(of: .value, with: {snapshot in
+//                        if let data = snapshot.value as? [String:Any]{
+//                            if let interests = data["interests"] as? String{
+//                                
+//                                var categories = [String]()
+//                                for interest in interests.components(separatedBy: ","){
+//                                    let interest_name = interest.components(separatedBy: "-")[0]
+//                                    categories.append(interest_name)
+//                                }
+//                                
+//                                getSuggestedPlaces(interests: categories.joined(separator: ","), limit: 30, gotPlaces: {places in
+//                                    self.places.append(contentsOf: places)
+//                                    
+//                                    
+//                                    if self.segmentedOut.selectedSegmentIndex == 0{
+//                                        self.filtered = self.places
+//                                    }
+//                                    self.tableView.reloadData()
+//                                    
+//                                })
+//                                
+//                                
+//                            }
+//                        }
+//                    })
+//                }
+//            })
+//            
+//            
+//            getAttendingEvent(uid: UID, gotEvents: { eventsUserAttends in
+//                let user_interest_set = Set<Event>(self.attendingEvent)
+//                let other_user = Set<Event>(eventsUserAttends)
+//                
+//                let common = Array(other_user.intersection(user_interest_set))
+//                if common.count > 0{
+//                    self.events = Array(common)
+//                }
+//                else{
+//                    self.events.append(contentsOf: self.attendingEvent)
+//                    
+//                    Constants.DB.user.child(self.UID).observeSingleEvent(of: .value, with: {snapshot in
+//                        if let data = snapshot.value as? [String:Any]{
+//                            if let interests = data["interests"] as? String{
+//                                
+//                                var categories = [String]()
+//                                for interest in interests.components(separatedBy: ","){
+//                                    let interest_name = interest.components(separatedBy: "-")[0]
+//                                    categories.append(interest_name)
+//                                }
+//                                
+//                                getSuggestedEvents(interests: categories.joined(separator: ","), limit: 30, gotEvents: {events in
+//                                    self.events.append(contentsOf: events)
+//                                    
+//                                    
+//                                    if self.segmentedOut.selectedSegmentIndex == 0{
+//                                        self.filtered = self.events
+//                                    }
+//                                    self.tableView.reloadData()
+//                                    
+//                                })
+//                                
+//                                
+//                            }
+//                        }
+//                    })
+//                }
+//            })
+//        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
