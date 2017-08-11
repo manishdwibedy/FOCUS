@@ -134,6 +134,10 @@
 	<string>Focus would like access to your device's current position</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Focus would like access to your device's photo library for this feature.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

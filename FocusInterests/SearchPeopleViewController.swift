@@ -34,6 +34,9 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     var location: CLLocation?
     var showInvitePopup = false
     
+    var placesIFollow = [Place]()
+    var eventsIAttend = [Event]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -283,6 +286,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             }
             
         })
+     
         
     }
     
@@ -424,6 +428,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         VC.userID = people.uuid!
         VC.userData = people
         VC.previous = .people
+        VC.placesIFollow = self.placesIFollow
+        VC.eventsIAttend = self.eventsIAttend
         dropfromTop(view: self.view)
         
         self.present(VC, animated:true, completion:nil)

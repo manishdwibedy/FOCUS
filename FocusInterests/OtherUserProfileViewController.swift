@@ -1,4 +1,4 @@
-//
+    //
 //  OtherUserProfileViewController.swift
 //  FocusInterests
 //
@@ -113,6 +113,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var ticketMasterDF = DateFormatter()
     var eventDF = DateFormatter()
     
+    var placesIFollow = [Place]()
+    var eventsIAttend = [Event]()
     // Back button
     @IBAction func backButton(_ sender: Any) {
         if otherUser, let previous = previous{
@@ -483,16 +485,104 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                             final_interest.append(interest.name!)
                         }
                 
+                        if self.suggestedPlaces.count < 3{
+                            getFollowingPlace(uid: self.userID, gotPlaces: { placesUserFollows in
+                                print(placesUserFollows)
+                                let user_interest_set = Set<Place>(self.placesIFollow)
+                                let other_user = Set<Place>(placesUserFollows)
+                                
+                                let common = Array(other_user.intersection(user_interest_set))
+                                if common.count >= 3{
+                                    if self.suggestedPlaces.count < 3{
+                                        self.suggestedPlaces = Array(common[0..<3])
+                                        self.placesTableView.reloadData()
+                                    }
+                                }
+                                else{
+                                    if other_user.count >= 3{
+                                        if self.suggestedPlaces.count < 3{
+                                            self.suggestedPlaces = Array(placesUserFollows[0..<3])
+                                            self.placesTableView.reloadData()
+                                        }
+                                    }
+                                    else if user_interest_set.count >= 3{
+                                        if self.suggestedPlaces.count < 3{
+                                            self.suggestedPlaces = Array(self.placesIFollow[0..<3])
+                                            self.placesTableView.reloadData()
+                                        }
+                                        
+                                    }
+                                    else{
+                                        getSuggestedPlaces(interests: final_interest.joined(separator: ","), limit: 3, gotPlaces: {places in
+                                            if places.count >= 3{
+                                                if self.suggestedPlaces.count < 3{
+                                                    self.suggestedPlaces = places
+                                                    self.placesTableView.reloadData()
+                                                }
+                                            }
+                                            else{
+                                                getSuggestedPlaces(interests: "Food", limit: 3, gotPlaces: {places in
+                                                    if self.suggestedPlaces.count < 3{
+                                                        self.suggestedPlaces = places
+                                                        self.placesTableView.reloadData()
+                                                    }
+                                                    
+                                                })
+                                            }
+                                        })
+                                    }
+                                }
+                            })
+                        }
                         
-                        getSuggestedEvents(interests: final_interest.joined(separator: ","), limit: 3, gotEvents: {events in
-                            self.suggestedEvents = events
-                            self.eventsTableView.reloadData()
-                        })
+                        if self.suggestedEvents.count < 3{
+                            getAttendingEvent(uid: self.userID, gotEvents: { placesUserFollows in
+                                let user_interest_set = Set<Event>(self.eventsIAttend)
+                                let other_user = Set<Event>(placesUserFollows)
+                                
+                                let common = Array(other_user.intersection(user_interest_set))
+                                if common.count >= 3{
+                                    self.suggestedEvents = Array(common[0..<3])
+                                    self.eventsTableView.reloadData()
+                                }
+                                else{
+                                    if other_user.count >= 3{
+                                        self.suggestedEvents = Array(placesUserFollows[0..<3])
+                                        self.eventsTableView.reloadData()
+                                    }
+                                    else if user_interest_set.count >= 3{
+                                        self.suggestedEvents = Array(self.eventsIAttend[0..<3])
+                                        self.eventsTableView.reloadData()
+                                    }
+                                    else{
+                                        getSuggestedEvents(interests: final_interest.joined(separator: ","), limit: 3, gotEvents: {events in
+                                            if events.count >= 3{
+                                                self.suggestedEvents = events
+                                                self.eventsTableView.reloadData()
+                                            }
+                                            else{
+                                                getSuggestedEvents(interests: "Food", limit: 3, gotEvents: {events in
+                                                    self.suggestedEvents = events
+                                                    self.eventsTableView.reloadData()
+                                                })
+                                            }
+                                        })
+                                    }
+                                }
+                            })
+                        }
                         
-                        getSuggestedPlaces(interests: final_interest.joined(separator: ","), limit: 3, gotPlaces: {places in
-                            self.suggestedPlaces = places
-                            self.placesTableView.reloadData()
-                        })
+                       
+                    
+//                        getSuggestedEvents(interests: final_interest.joined(separator: ","), limit: 3, gotEvents: {events in
+//                            self.suggestedEvents = events
+//                            self.eventsTableView.reloadData()
+//                        })
+//                        
+//                        getSuggestedPlaces(interests: final_interest.joined(separator: ","), limit: 3, gotPlaces: {places in
+//                            self.suggestedPlaces = places
+//                            self.placesTableView.reloadData()
+//                        })
                         
                         print("final_interest \(final_interest)")
                         

@@ -1525,7 +1525,6 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
         let value = snapshot.value as? NSDictionary
         
         if let value = value{
-            eventCount = value.count
             for (_,event) in value{
                 let event_id = (event as? [String:Any])?["ID"]
                 
@@ -1540,6 +1539,7 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
                             event?.id = event_id as! String
                             
                             events.append(event!)
+                            eventCount += 1
                         }
                     }
                         
@@ -1548,6 +1548,7 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
                             event?.id = event_id as! String
                             
                             events.append(event!)
+                            eventCount += 1
                         }
                     }
                     
@@ -1682,7 +1683,6 @@ func getFollowingPlace(uid: String, gotPlaces: @escaping (_ place: [Place]) -> V
         let value = snapshot.value as? NSDictionary
         
         if let placeData = value{
-            placeCount = placeData.count
             //                self.places.removeAll()
             for (_,place) in placeData
             {
@@ -1694,9 +1694,12 @@ func getFollowingPlace(uid: String, gotPlaces: @escaping (_ place: [Place]) -> V
                             place.hours = hours
                             place.set_is_open(is_open: open)
                             places.append(place)
+                            
+                            placeCount += 1
                         }
                         
                         if places.count == placeCount{
+                            print(uid)
                             gotPlaces(places)
                         }
                     })
@@ -1704,6 +1707,7 @@ func getFollowingPlace(uid: String, gotPlaces: @escaping (_ place: [Place]) -> V
             }
         }
         else{
+            print(uid)
             gotPlaces(places)
         }
     })

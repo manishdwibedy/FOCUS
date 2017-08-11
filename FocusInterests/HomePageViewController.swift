@@ -68,6 +68,14 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
         popTip.actionAnimation = .bounce(20)
         popTip.shouldDismissOnTap = true
         
+        let search_people = self.viewControllers![1] as! SearchPeopleViewController
+        getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
+            search_people.placesIFollow = places
+        })
+        
+        getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
+            search_people.eventsIAttend = events
+        })
     }
 
     override func didReceiveMemoryWarning() {

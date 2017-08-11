@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Place: Equatable, NSCoding{
+class Place: Equatable, NSCoding, Hashable{
     var id: String
     var name: String
     var image_url: String
@@ -51,6 +51,12 @@ class Place: Equatable, NSCoding{
     
     func setHours(hours: [Hours]){
         self.hours = hours
+    }
+    
+    var hashValue : Int {
+        get {
+            return "\(self.id)".hashValue
+        }
     }
     
     static func == (lhs: Place, rhs: Place) -> Bool {
