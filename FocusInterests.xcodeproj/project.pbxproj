@@ -27,6 +27,7 @@
 		5B2AEF491EFDA84D00B6E769 /* InvitePlaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */; };
 		5B2E5E051EF7974900F0BC1B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */; };
 		5B2E5E061EF7974900F0BC1B /* SwiftyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */; };
+		5B3023901F3E33C1007FF019 /* LocationSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B30238F1F3E33C0007FF019 /* LocationSuggestion.swift */; };
 		5B33C0191EDDF179007A8188 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */; };
 		5B33C0551EDF8CE3007A8188 /* general_search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B33C0541EDF8CE3007A8188 /* general_search.storyboard */; };
 		5B33C0571EDF8DF9007A8188 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */; };
@@ -384,6 +385,7 @@
 		5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePlaceTests.swift; sourceTree = "<group>"; };
 		5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyRecordButton.swift; sourceTree = "<group>"; };
+		5B30238F1F3E33C0007FF019 /* LocationSuggestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSuggestion.swift; sourceTree = "<group>"; };
 		5B33C0181EDDF179007A8188 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B33C0541EDF8CE3007A8188 /* general_search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = general_search.storyboard; sourceTree = "<group>"; };
 		5B33C0561EDF8DF9007A8188 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1053,6 +1055,7 @@
 				5B634C801ED1960000EBCC29 /* MapCluster.swift */,
 				5BFA009E1EDA8BC200F1ACBF /* EventLocation.swift */,
 				5BE772531F071D2200E7D579 /* PinData.swift */,
+				5B30238F1F3E33C0007FF019 /* LocationSuggestion.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2195,6 +2198,7 @@
 				D25370D21E885EE40071B115 /* FollowCell.swift in Sources */,
 				EBE7AE4D1F16142600901F9F /* FollowAllYourFriendsTableViewCell.swift in Sources */,
 				5B6AFA6B1ED1906900A82104 /* GMUGeoJSONParser.m in Sources */,
+				5B3023901F3E33C1007FF019 /* LocationSuggestion.swift in Sources */,
 				5B2E5E061EF7974900F0BC1B /* SwiftyRecordButton.swift in Sources */,
 				D2FDB69A1E89F73800D62DC2 /* SocialGroupViewController.swift in Sources */,
 				D21975451E61F20D00ED3345 /* BaseViewController.swift in Sources */,

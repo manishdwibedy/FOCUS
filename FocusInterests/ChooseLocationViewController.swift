@@ -13,6 +13,8 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var locationTableView: UITableView!
     @IBOutlet weak var locationSearchBar: UISearchBar!
     @IBOutlet weak var navBar: UINavigationBar!
+    
+    var suggestions = [LocationSuggestion]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,6 +64,12 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
         
         self.locationTableView.register(UINib(nibName: "ChooseLocationTableViewCell", bundle: nil), forCellReuseIdentifier: "chooseLocationCell")
         
+        
+        LocationSuggestion.getNearbyPlaces(location: AuthApi.getLocation()!, gotSuggestions: { suggestions in
+            self.suggestions = suggestions
+            self.locationTableView.reloadData()
+        })
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,7 +78,7 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.suggestions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,10 +90,17 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
             locationCell.locationAddressLabel.isHidden = true
             locationCell.locationDistanceLabel.isHidden = true
         }else{
+            let suggestion = self.suggestions[indexPath.row]
             locationCell.currentLocationLabel.isHidden = true
             locationCell.locationNameLabel.isHidden = false
             locationCell.locationAddressLabel.isHidden = false
             locationCell.locationDistanceLabel.isHidden = false
+            
+            locationCell.locationNameLabel.text = suggestion.name
+            locationCell.locationAddressLabel.text = suggestion.address
+            locationCell.locationDistanceLabel.text = suggestion.distance
+            
+            
         }
         
         return locationCell

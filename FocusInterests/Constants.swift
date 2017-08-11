@@ -39,6 +39,9 @@ struct Constants {
     struct keys {
         public static let googleMapsAPIKey = "AIzaSyCcfvYP6NRSYLJkvf3SAmIGBiQfdLWRqEM"
         public static let eventBriteToken = "366MU6UCBA72BO3LJTHL"
+        public static let mapBoxAPIKey = "pk.eyJ1IjoiYXJ5YWdoYXZhbWkiLCJhIjoiY2o0c3E0dDV3MDBjajJ3cjRjaHd6YXhneSJ9.McS1cTVWGCCgOrCgJkV-ow"
+        public static let fourSquareClientID = "VFISJE4KGHQJNER43ITRMQ2FZKOKDSFIGUU5OCMJIYJZFW4K"
+        public static let fourSquareClientSecret = "XQCJUTLTYYPEGYBPT0T1THDTNWBAEBLHKRB30122Q4AIKLWM"
     }
     
     struct color{
