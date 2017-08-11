@@ -908,6 +908,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         }
     }
     
+    @IBAction func openTicketMaster(_ sender: Any) {
+        
+    }
+    
     @IBAction func pinButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails", sender: self)
     }
