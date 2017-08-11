@@ -40,8 +40,8 @@ struct Constants {
         public static let googleMapsAPIKey = "AIzaSyCcfvYP6NRSYLJkvf3SAmIGBiQfdLWRqEM"
         public static let eventBriteToken = "366MU6UCBA72BO3LJTHL"
         public static let mapBoxAPIKey = "pk.eyJ1IjoiYXJ5YWdoYXZhbWkiLCJhIjoiY2o0c3E0dDV3MDBjajJ3cjRjaHd6YXhneSJ9.McS1cTVWGCCgOrCgJkV-ow"
-        public static let fourSquareClientID = "VFISJE4KGHQJNER43ITRMQ2FZKOKDSFIGUU5OCMJIYJZFW4K"
-        public static let fourSquareClientSecret = "XQCJUTLTYYPEGYBPT0T1THDTNWBAEBLHKRB30122Q4AIKLWM"
+        public static let fourSquareClientID = "LZJXCOSN0N2CNLZXH2CD4W1MEHU2NKXPMBN3RHNDMK3DQWDP"
+        public static let fourSquareClientSecret = "CTRQ2TGH2JAL22EIUHZPQNH53TXTWNAW03QHO2YEQR4S11GX"
     }
     
     struct color{
