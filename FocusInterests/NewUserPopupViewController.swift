@@ -114,7 +114,7 @@ class NewUserPopupViewController: UIViewController {
         if index == 0{
             titleTop.constant = -70
             buttonTop.constant = 50
-            self.titleText.font = UIFont(name: "Avenir-Book", size: 18)
+            self.titleText.font = UIFont(name: "Avenir-Book", size: 17)
         }
         else{
             titleTop.constant = 0

@@ -139,6 +139,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
                 ivc.id = self.event.id!
                 ivc.username = self.username
                 ivc.event = event
+                print("date and time: \(self.dateAndTimeLabel.text)")
                 ivc.inviteFromOtherUserProfile = true
                 if let VC = self.otherUser{
                     VC.present(ivc, animated: true, completion: nil)
@@ -153,6 +154,7 @@ class InvitePeopleEventCell: UITableViewCell, InvitePeopleEventCellDelegate{
             ivc.id = self.event.id!
             ivc.username = self.username
             ivc.event = event
+            print("date and time: \(self.dateAndTimeLabel.text)")
             ivc.searchPeopleEventDelegate = self
             if let VC = self.parentVC{
                 VC.present(ivc, animated: true, completion: nil)

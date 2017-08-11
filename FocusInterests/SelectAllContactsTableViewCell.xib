@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="51.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esw-UB-46z">
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esw-UB-46z">
                         <rect key="frame" x="287" y="13" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="Jz6-to-rjk"/>
@@ -28,26 +28,21 @@
                         <state key="normal" image="Interest_blank">
                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
-                        <connections>
-                            <action selector="selectedAllFollowers:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Rrm-bO-cyw"/>
-                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tr8-xc-Ajp">
-                        <rect key="frame" x="8" y="14" width="149" height="23"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite All Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ump-AR-JgG">
+                        <rect key="frame" x="9" y="16" width="143" height="19"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="149" id="Phn-wc-qew"/>
-                            <constraint firstAttribute="height" constant="23" id="sF1-r8-xkW"/>
+                            <constraint firstAttribute="height" constant="19" id="hBY-qD-Oii"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                        <state key="normal" title="Invite All Followers">
-                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                    </button>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="tr8-xc-Ajp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="DCF-rc-7rV"/>
+                    <constraint firstItem="Ump-AR-JgG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="8Ot-5k-dtl"/>
+                    <constraint firstItem="Ump-AR-JgG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="BLA-dO-8Nt"/>
                     <constraint firstItem="Esw-UB-46z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="FKm-SN-4tL"/>
-                    <constraint firstItem="tr8-xc-Ajp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gvY-Fi-Bhm"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Esw-UB-46z" secondAttribute="trailing" id="icA-D4-fc2"/>
                 </constraints>
             </tableViewCellContentView>

@@ -45,7 +45,7 @@
                                             <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetTop">
-                                            <real key="value" value="0.0"/>
+                                            <real key="value" value="3"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetRight">
                                             <real key="value" value="10"/>
@@ -119,7 +119,7 @@
                     </connections>
                 </searchBar>
             </subviews>
-            <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="avP-NM-JE1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Hdn-VD-cHW"/>
