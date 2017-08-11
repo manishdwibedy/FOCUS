@@ -250,7 +250,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
             }
         }
         userStatusTextView.text = "What are you up to? Type here."
-        userStatusTextView.font = UIFont(name: "Avenir Book", size: 15)
+        userStatusTextView.font = UIFont(name: "Avenir Book", size: 16)
         
         userStatusTextView.resignFirstResponder()
         

@@ -17,6 +17,10 @@ class SelectAllContactsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.selectAllFollowersButton.layer.borderWidth = 1
+        self.selectAllFollowersButton.layer.borderColor = UIColor.white.cgColor
+        self.selectAllFollowersButton.roundButton()
+        
         self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Interest_blank"), for: .normal)
         self.selectAllFollowersButton.setImage(#imageLiteral(resourceName: "Green.png"), for: .selected)
         

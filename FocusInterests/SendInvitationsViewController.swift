@@ -62,6 +62,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     var isFacebook = false
     var isTwitter = false
     let loginView = FBSDKLoginManager()
+    var selectedRow = [IndexPath]()
+    
     
     var selectedUsers = [String]()
     override func viewDidLoad() {
@@ -378,11 +380,40 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         if(indexPath.section == 0){
             let selectedAllFollowersTableCell = tableView.dequeueReusableCell(withIdentifier: "selectAllContactsCell", for: indexPath) as! SelectAllContactsTableViewCell
             selectedAllFollowersTableCell.delegate = self
+            
+            if selectedRow.contains(indexPath){
+                
+                selectedAllFollowersTableCell.selectAllFollowersButton.isSelected = true
+//                selectedAllFollowersTableCell.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Green")
+                
+                print("all cell \(indexPath)")
+                print("found all selected cell at section: \(indexPath.section) row: \(indexPath.row)")
+                
+            }else{
+                
+                selectedAllFollowersTableCell.selectAllFollowersButton.isSelected = false
+//                selectedAllFollowersTableCell.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
+                
+            }
+            
             cell = selectedAllFollowersTableCell
         } else {
             let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
             personToInviteCell.delegate = self
             personToInviteCell.cellIndexTag = indexPath.row
+            if selectedRow.contains(indexPath){
+                personToInviteCell.inviteConfirmationButton.isSelected = true
+                
+//                personToInviteCell.inviteConfirmationButton.imageView?.image = #imageLiteral(resourceName: "Green")
+                
+                print("single cell \(indexPath)")
+                print("found single selected cell at section: \(indexPath.section) row: \(indexPath.row)")
+            }else{
+                
+                personToInviteCell.inviteConfirmationButton.isSelected = false
+//                personToInviteCell.inviteConfirmationButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
+                
+            }
             
             let section = filteredSection[indexPath.section-1]
             
@@ -397,15 +428,18 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }
             
+            
+            
             cell = personToInviteCell
         }
         return cell
     }
     
+//    MARK: SELECT CELL
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexRow = indexPath.row
         let indexSection = indexPath.section
-        
+        print("selecting in didselect")
         guard let indexPathForSelectedRows = tableView.indexPathsForSelectedRows?.sorted() else {
             print("no index path")
             return
@@ -413,93 +447,97 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         let amountOfSelectedRows = indexPathForSelectedRows.count
         
-        
         if indexPath.section == 0 && indexPath.row == 0{
             
 //            let section = sections[indexPath.section]
 //            let user = self.users[section]?[indexPath.row]
-            
-            let selectAllCell = tableView.cellForRow(at: IndexPath(row: indexRow, section: indexSection)) as? SelectAllContactsTableViewCell
+            selectedRow = [[0,0]]
+            let selectAllCell = tableView.cellForRow(at: indexPath) as? SelectAllContactsTableViewCell
             selectAllCell?.selectAllFollowersButton.isSelected = true
-            
+            self.selectedAllFollowers()
             if amountOfSelectedRows <= 1{
                 print("do not need to deselectcells")
             }else{
-//old selected row [[0, 0], [1, 1], [1, 2], [1, 3], [1, 4], [6, 0], [7, 0], [8, 0], [8, 1], [8, 2], [8, 3], [8, 5], [9, 0], [11, 0], [11, 1]]
-                print("old selected row \(indexPathForSelectedRows)")
+                print("erasing all cells below now")
                 for cellIndex in 1...indexPathForSelectedRows.count-1{
-                    print("row: \(indexPathForSelectedRows[cellIndex][1]), section: \(indexPathForSelectedRows[cellIndex][0])")
-                    tableView.deselectRow(at: IndexPath(row: indexPathForSelectedRows[cellIndex][1], section: indexPathForSelectedRows[cellIndex][0]), animated: false)
-                    print("row: \(indexPathForSelectedRows[cellIndex][1]), section: \(indexPathForSelectedRows[cellIndex][0])")
-                    print("\(indexPathForSelectedRows)")
+                    tableView.deselectRow(at: indexPathForSelectedRows[cellIndex], animated: false)
+                    let singleFollowerCell = tableView.cellForRow(at: indexPath) as? InviteListTableViewCell
+                    singleFollowerCell?.inviteConfirmationButton.isSelected = false
                 }
                 
                 for visibleCellsIndex in 1...tableView.visibleCells.count-1{
                     let singleFollowerCell = tableView.visibleCells[visibleCellsIndex] as? InviteListTableViewCell
                     singleFollowerCell?.inviteConfirmationButton.isSelected = false
                 }
+                print("new selected row when choosing invite all \(self.selectedRow)")
             }
         }else{
-            
-            let singleFollowerCell = tableView.cellForRow(at: IndexPath(row: indexRow, section: indexSection)) as? InviteListTableViewCell
-            
-            print("selected cell not at row: \(indexRow), section: \(indexSection)")
-            singleFollowerCell?.inviteConfirmationButton.isSelected = true
+            let singleFollowerCell = tableView.cellForRow(at: indexPath) as? InviteListTableViewCell
             
             
-            tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
-            guard let zeroIndex = tableView.indexPathsForVisibleRows?.sorted()[0] else{
-                return
+            if !self.selectedRow.contains(indexPath){
+                print("found single cell \(indexPath)")
+                singleFollowerCell?.inviteConfirmationButton.isSelected = true
+//                singleFollowerCell?.inviteConfirmationButton.imageView?.image = #imageLiteral(resourceName: "Green")
+                selectedRow = indexPathForSelectedRows
+                if self.selectedRow.contains(IndexPath(row: 0, section: 0)){
+                    tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
+                    selectedRow.remove(at: 0)
+                    let selectAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell
+                    selectAllCell?.selectAllFollowersButton.isSelected = false
+//                    selectAllCell?.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
+                    selectedRow = indexPathForSelectedRows
+                }
             }
-            if zeroIndex[0] == 0 && zeroIndex[1] == 0{
-                let selectAllCell = tableView.cellForRow(at: IndexPath(row: zeroIndex[1], section: zeroIndex[0])) as? SelectAllContactsTableViewCell
-                selectAllCell?.selectAllFollowersButton.isSelected = false
-            }
-            
         }
-        print("new selected row \(indexPathForSelectedRows)")
-//        if !self.selected[user!]!{
-//            personToInviteCell.inviteConfirmationButton.isSelected = true
-//            contactHasBeenSelected(contact: (user?.username)!, index: index)
-//        }
-//        else{
-//            personToInviteCell.inviteConfirmationButton.isSelected = false
-//            contactHasBeenRemoved(contact: (user?.username)!, index: index)
-//        }
+        print("new selected row \(indexPathForSelectedRows.sorted())")
+        
     }
-
     
+    //        if !self.selected[user!]!{
+    //            personToInviteCell.inviteConfirmationButton.isSelected = true
+    //            contactHasBeenSelected(contact: (user?.username)!, index: index)
+    //        }
+    //        else{
+    //            personToInviteCell.inviteConfirmationButton.isSelected = false
+    //            contactHasBeenRemoved(contact: (user?.username)!, index: index)
+    //        }
+    
+//    MARK: DESELECT CELL
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        print("deselecting in diddeSelect")
+        guard let indexPathForSelectedRows = tableView.indexPathsForSelectedRows?.sorted() else {
+            if indexPath.section == 0 && indexPath.row == 0{
+                if let selectAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell{
+                    selectAllCell.selectAllFollowersButton.isSelected = false
+                    //                selectAllCell.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
+                }
+                self.deselectAllFollowers()
+            }else{
+                if let singleFollowerCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell{
+                    singleFollowerCell.inviteConfirmationButton.isSelected = false
+                    //                singleFollowerCell.inviteConfirmationButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
+                }
+            }
+            print("no index path")
+            selectedRow = [[]]
+            return
+        }
+        
+        if indexPath.section == 0 && indexPath.row == 0{
             if let selectAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell{
                 selectAllCell.selectAllFollowersButton.isSelected = false
+                self.deselectAllFollowers()
+//                selectAllCell.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
             }
         }else{
             if let singleFollowerCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell{
                 singleFollowerCell.inviteConfirmationButton.isSelected = false
+//                singleFollowerCell.inviteConfirmationButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
             }
         }
-    }
-        
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            if let selectAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell{
-                if selectAllCell.isSelected{
-                    selectAllCell.selectAllFollowersButton.isSelected = true
-                }else{
-                    selectAllCell.selectAllFollowersButton.isSelected = false
-                }
-                
-            }
-        }else{
-            if let singleFollowerCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell {
-                if singleFollowerCell.isSelected{
-                    singleFollowerCell.inviteConfirmationButton.isSelected = true
-                }else{
-                    singleFollowerCell.inviteConfirmationButton.isSelected = false
-                }
-            }
-        }
+        print("new selected row \(indexPathForSelectedRows.sorted())")
+        selectedRow = indexPathForSelectedRows
     }
     
     func contactHasBeenSelected(contact: InviteUser, index: Int){
@@ -537,6 +575,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     
     func selectedAllFollowers() {
         contactListView.isHidden = false
+        contactList.text = "Follow All"
 //        for contactIndex in 0..<selectedFriend.count{
 //            contactList.text = contactList.text! + ",\(contacts[contactIndex].givenName)"
 //        }

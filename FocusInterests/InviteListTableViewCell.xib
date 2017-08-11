@@ -49,16 +49,13 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbA-id-Ycz">
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbA-id-Ycz">
                         <rect key="frame" x="287" y="8.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="3Ed-6t-KSc"/>
                             <constraint firstAttribute="width" constant="25" id="UDw-Rq-PcF"/>
                         </constraints>
                         <state key="normal" image="Interest_blank"/>
-                        <connections>
-                            <action selector="contactSelectedAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aBm-o0-prS"/>
-                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
