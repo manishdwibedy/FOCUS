@@ -947,7 +947,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBAction func createEventButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
-//        let controller = storyboard.instantiateViewController(withIdentifier: "SendInvitations")
         let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
         self.present(controller, animated: true, completion: nil)
     }
@@ -1339,8 +1338,10 @@ extension InvitePeopleViewController{
             self.filtered = self.events
             self.tableView.reloadData()
         }
-        
-        
+    }
+    
+    @IBAction func unwindBackToExplorePage(_ sender: UIStoryboardSegue){
+        self.showPopupView()
     }
 }
 

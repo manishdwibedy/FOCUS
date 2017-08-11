@@ -26,8 +26,7 @@ protocol SendInvitationsViewControllerDelegate {
     func contactHasBeenRemoved(contact: InviteUser, index: Int)
 }
 
-class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SendInvitationsViewControllerDelegate, SelectAllContactsDelegate//, MFMessageComposeViewControllerDelegate
-{
+class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SelectAllContactsDelegate{
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var createEventButton: UIButton!
@@ -36,10 +35,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var contactListView: UIView!
     @IBOutlet weak var navBar: UINavigationBar!
     
-    //    facebook and twitter stack
-    @IBOutlet weak var twitterFacebookCreateEventStack: UIStackView!
-    
-    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
     
     let alphabeticalSections = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     
@@ -72,7 +67,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         formatNavBar()
         
         self.contactList.textColor = UIColor.white
-        self.createEventButton.roundCorners(radius: 10.0)
+        self.createEventButton.roundCorners(radius: 9.0)
         
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
@@ -226,72 +221,72 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //    }
 
     @IBAction func createEvent(_ sender: Any) {
-        Event.clearCache()
-        let id = self.event?.saveToDB(ref: Constants.DB.event)
-        
-        
-        Answers.logCustomEvent(withName: "Create Event",
-                               customAttributes: [
-                                "FOCUS": event?.category!
-            ])
-        
-        Constants.DB.event_locations!.setLocation(CLLocation(latitude: Double(event!.latitude!)!, longitude: Double(event!.longitude!)!), forKey: id) { (error) in
-            if (error != nil) {
-                debugPrint("An error occured: \(String(describing: error))")
-            } else {
-                print("Saved location successfully!")
-            }
-        }
-    
-        for interest in event!.category!.components(separatedBy: ";"){
-            Constants.DB.event_interests.child(interest).childByAutoId().setValue(["event-id": id])
-        }
-        
-        if let data = self.image{
-            let imageRef = Constants.storage.event.child("\(id!).jpg")
-            
-            // Create file metadata including the content type
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/jpeg"
-            
-            let _ = imageRef.putData(data, metadata: metadata) { (metadata, error) in
-                guard let metadata = metadata else {
-                    // Uh-oh, an error occurred!
-                    print("\(error!)")
-                    return
-                }
-                // Metadata contains file metadata such as size, content-type, and download URL.
-                let _ = metadata.downloadURL
-            }
-        }
-        
-        let time = NSDate().timeIntervalSince1970
-        for UID in self.selectedUsers{
-            var name = (event?.title)!
-            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-                let user = snapshot.value as? [String : Any] ?? [:]
-                
-                let username = user["username"] as! String
-                sendNotification(to: UID, title: "New Invite", body: "\(String(describing: username)) invited you to \(String(describing: name))", actionType: "", type: "event", item_id: "", item_name: "")
-            })
-            Constants.DB.event.child(id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
-        
-            Constants.DB.user.child(UID).child("invitations/event").queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
-                
-                if snapshot.value == nil{
-                    Constants.DB.user.child(UID).child("invitations/event").childByAutoId().updateChildValues(["ID":self.event?.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": time])
-                    
-                }
-            })
-            Answers.logCustomEvent(withName: "Invite User",
-                                   customAttributes: [
-                                    "type": "event",
-                                    "user": AuthApi.getFirebaseUid()!,
-                                    "invited": UID,
-                                    "name": name
-            ])
-            
-        }
+//        Event.clearCache()
+//        let id = self.event?.saveToDB(ref: Constants.DB.event)
+//        
+//        
+//        Answers.logCustomEvent(withName: "Create Event",
+//                               customAttributes: [
+//                                "FOCUS": event?.category!
+//            ])
+//        
+//        Constants.DB.event_locations!.setLocation(CLLocation(latitude: Double(event!.latitude!)!, longitude: Double(event!.longitude!)!), forKey: id) { (error) in
+//            if (error != nil) {
+//                debugPrint("An error occured: \(String(describing: error))")
+//            } else {
+//                print("Saved location successfully!")
+//            }
+//        }
+//    
+//        for interest in event!.category!.components(separatedBy: ";"){
+//            Constants.DB.event_interests.child(interest).childByAutoId().setValue(["event-id": id])
+//        }
+//        
+//        if let data = self.image{
+//            let imageRef = Constants.storage.event.child("\(id!).jpg")
+//            
+//            // Create file metadata including the content type
+//            let metadata = StorageMetadata()
+//            metadata.contentType = "image/jpeg"
+//            
+//            let _ = imageRef.putData(data, metadata: metadata) { (metadata, error) in
+//                guard let metadata = metadata else {
+//                    // Uh-oh, an error occurred!
+//                    print("\(error!)")
+//                    return
+//                }
+//                // Metadata contains file metadata such as size, content-type, and download URL.
+//                let _ = metadata.downloadURL
+//            }
+//        }
+//        
+//        let time = NSDate().timeIntervalSince1970
+//        for UID in self.selectedUsers{
+//            var name = (event?.title)!
+//            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+//                let user = snapshot.value as? [String : Any] ?? [:]
+//                
+//                let username = user["username"] as! String
+//                sendNotification(to: UID, title: "New Invite", body: "\(String(describing: username)) invited you to \(String(describing: name))", actionType: "", type: "event", item_id: "", item_name: "")
+//            })
+//            Constants.DB.event.child(id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
+//        
+//            Constants.DB.user.child(UID).child("invitations/event").queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
+//                
+//                if snapshot.value == nil{
+//                    Constants.DB.user.child(UID).child("invitations/event").childByAutoId().updateChildValues(["ID":self.event?.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": time])
+//                    
+//                }
+//            })
+//            Answers.logCustomEvent(withName: "Invite User",
+//                                   customAttributes: [
+//                                    "type": "event",
+//                                    "user": AuthApi.getFirebaseUid()!,
+//                                    "invited": UID,
+//                                    "name": name
+//            ])
+//            
+//        }
     
 //        Messaging
 //        let messageVC = MFMessageComposeViewController()
@@ -314,11 +309,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //            
 //        }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
-        
-        
-        self.present(VC!, animated: true, completion: nil)
+        performSegue(withIdentifier: "unwindBackToExplorePage", sender: self)
     }
     
 //    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
@@ -382,29 +373,18 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             selectedAllFollowersTableCell.delegate = self
             
             if selectedRow.contains(indexPath){
-                
                 selectedAllFollowersTableCell.selectAllFollowersButton.isSelected = true
-//                selectedAllFollowersTableCell.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Green")
-                
-                print("all cell \(indexPath)")
-                print("found all selected cell at section: \(indexPath.section) row: \(indexPath.row)")
-                
             }else{
-                
                 selectedAllFollowersTableCell.selectAllFollowersButton.isSelected = false
-//                selectedAllFollowersTableCell.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
-                
             }
             
             cell = selectedAllFollowersTableCell
         } else {
             let personToInviteCell = tableView.dequeueReusableCell(withIdentifier: "personToInvite", for: indexPath) as! InviteListTableViewCell
-            personToInviteCell.delegate = self
+            
             personToInviteCell.cellIndexTag = indexPath.row
             if selectedRow.contains(indexPath){
                 personToInviteCell.inviteConfirmationButton.isSelected = true
-                
-//                personToInviteCell.inviteConfirmationButton.imageView?.image = #imageLiteral(resourceName: "Green")
                 
                 print("single cell \(indexPath)")
                 print("found single selected cell at section: \(indexPath.section) row: \(indexPath.row)")
@@ -451,14 +431,14 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             
 //            let section = sections[indexPath.section]
 //            let user = self.users[section]?[indexPath.row]
+//            resetting the selected rows
             selectedRow = [[0,0]]
-            let selectAllCell = tableView.cellForRow(at: indexPath) as? SelectAllContactsTableViewCell
-            selectAllCell?.selectAllFollowersButton.isSelected = true
+            let selectedAllFollowersTableCell = tableView.cellForRow(at: indexPath) as? SelectAllContactsTableViewCell
+            selectedAllFollowersTableCell?.selectAllFollowersButton.isSelected = true
             self.selectedAllFollowers()
             if amountOfSelectedRows <= 1{
                 print("do not need to deselectcells")
             }else{
-                print("erasing all cells below now")
                 for cellIndex in 1...indexPathForSelectedRows.count-1{
                     tableView.deselectRow(at: indexPathForSelectedRows[cellIndex], animated: false)
                     let singleFollowerCell = tableView.cellForRow(at: indexPath) as? InviteListTableViewCell
@@ -469,78 +449,68 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
                     let singleFollowerCell = tableView.visibleCells[visibleCellsIndex] as? InviteListTableViewCell
                     singleFollowerCell?.inviteConfirmationButton.isSelected = false
                 }
-                print("new selected row when choosing invite all \(self.selectedRow)")
+                self.deselectAllFollowers()
             }
         }else{
-            let singleFollowerCell = tableView.cellForRow(at: indexPath) as? InviteListTableViewCell
-            
+            let personToInviteCell = tableView.cellForRow(at: indexPath) as? InviteListTableViewCell
             
             if !self.selectedRow.contains(indexPath){
+                
                 print("found single cell \(indexPath)")
-                singleFollowerCell?.inviteConfirmationButton.isSelected = true
-//                singleFollowerCell?.inviteConfirmationButton.imageView?.image = #imageLiteral(resourceName: "Green")
+                personToInviteCell?.inviteConfirmationButton.isSelected = true
+                self.contactHasBeenSelectedAtIndex(contact: (personToInviteCell?.user)!, index: indexPath)
                 selectedRow = indexPathForSelectedRows
+                
                 if self.selectedRow.contains(IndexPath(row: 0, section: 0)){
                     tableView.deselectRow(at: IndexPath(row: 0, section: 0), animated: false)
                     selectedRow.remove(at: 0)
-                    let selectAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell
-                    selectAllCell?.selectAllFollowersButton.isSelected = false
-//                    selectAllCell?.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
+                    let selectedAllFollowersTableCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell
+                    selectedAllFollowersTableCell?.selectAllFollowersButton.isSelected = false
                     selectedRow = indexPathForSelectedRows
                 }
             }
         }
         print("new selected row \(indexPathForSelectedRows.sorted())")
-        
     }
     
-    //        if !self.selected[user!]!{
-    //            personToInviteCell.inviteConfirmationButton.isSelected = true
-    //            contactHasBeenSelected(contact: (user?.username)!, index: index)
-    //        }
-    //        else{
-    //            personToInviteCell.inviteConfirmationButton.isSelected = false
-    //            contactHasBeenRemoved(contact: (user?.username)!, index: index)
-    //        }
     
 //    MARK: DESELECT CELL
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print("deselecting in diddeSelect")
         guard let indexPathForSelectedRows = tableView.indexPathsForSelectedRows?.sorted() else {
+//            here we are resetting the entire selected row.  this accounts for when there's only been one cell selected
             if indexPath.section == 0 && indexPath.row == 0{
-                if let selectAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell{
-                    selectAllCell.selectAllFollowersButton.isSelected = false
-                    //                selectAllCell.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
+                if let selectedAllFollowersTableCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell{
+                    selectedAllFollowersTableCell.selectAllFollowersButton.isSelected = false
                 }
                 self.deselectAllFollowers()
             }else{
-                if let singleFollowerCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell{
-                    singleFollowerCell.inviteConfirmationButton.isSelected = false
-                    //                singleFollowerCell.inviteConfirmationButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
+                if let personToInviteCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell{
+                    personToInviteCell.inviteConfirmationButton.isSelected = false
+                    self.contactHasBeenRemovedAtIndex(contact: personToInviteCell.user!, index: indexPath)
                 }
             }
-            print("no index path")
             selectedRow = [[]]
             return
         }
         
+//            here if there is more than 1 cell selected then we are removing each cell one by one depending if invite all is clicked or a single user
         if indexPath.section == 0 && indexPath.row == 0{
-            if let selectAllCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell{
-                selectAllCell.selectAllFollowersButton.isSelected = false
+            if let selectedAllFollowersTableCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? SelectAllContactsTableViewCell{
+                selectedAllFollowersTableCell.selectAllFollowersButton.isSelected = false
                 self.deselectAllFollowers()
-//                selectAllCell.selectAllFollowersButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
             }
         }else{
-            if let singleFollowerCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell{
-                singleFollowerCell.inviteConfirmationButton.isSelected = false
-//                singleFollowerCell.inviteConfirmationButton.imageView?.image = #imageLiteral(resourceName: "Interest_blank")
+            if let personToInviteCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell{
+                personToInviteCell.inviteConfirmationButton.isSelected = false
+                self.contactHasBeenRemovedAtIndex(contact: personToInviteCell.user!, index: indexPath)
             }
         }
         print("new selected row \(indexPathForSelectedRows.sorted())")
         selectedRow = indexPathForSelectedRows
     }
     
-    func contactHasBeenSelected(contact: InviteUser, index: Int){
+    func contactHasBeenSelectedAtIndex(contact: InviteUser, index: IndexPath){
 //        selectedFriend[index] = true
 //        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
 //        if friendList.count > 0{
@@ -549,10 +519,10 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //        }
 //        self.selectedUsers.append(contact.UID)
 //        contactList.text = friendList.joined(separator: ",")
-        print("contact: \(contact)")
+//        print("contact: \(contact)")
     }
     
-    func contactHasBeenRemoved(contact: InviteUser, index: Int){
+    func contactHasBeenRemovedAtIndex(contact: InviteUser, index: IndexPath){
 //        selectedFriend[index] = false
 //        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.givenName }
 //        if friendList.count > 0{
@@ -566,7 +536,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //            self.selectedUsers.remove(at: index)
 //        }
 //        contactList.text = friendList.joined(separator: ",")
-        print("contact: \(contact)")
     }
     func deselectAllFollowers() {
         contactListView.isHidden = true
@@ -575,7 +544,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     
     func selectedAllFollowers() {
         contactListView.isHidden = false
-        contactList.text = "Follow All"
 //        for contactIndex in 0..<selectedFriend.count{
 //            contactList.text = contactList.text! + ",\(contacts[contactIndex].givenName)"
 //        }
