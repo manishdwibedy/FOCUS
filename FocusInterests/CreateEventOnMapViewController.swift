@@ -212,9 +212,9 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
 //                
 //            }
             if formmatedAddress.characters.count > 0{
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":self.formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":self.formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinate.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                 
-                Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
+                Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(self.location.coordinate.latitude), longitude: Double(self.location.coordinate.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
                     if (error != nil) {
                         debugPrint("An error occured: \(String(describing: error))")
                     } else {
@@ -234,11 +234,11 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
                 })
                 
                 if self.pinType == .place{
-                    Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinat.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                    Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinate.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                     
                 }
                 else if self.pinType == .event{
-                    Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(self.location.coordinat.latitude), "lng": Double(self.location.coordinat.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                    Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinate.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                 }
                 Answers.logCustomEvent(withName: "Pin",
                                        customAttributes: [
@@ -280,14 +280,14 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         if self.pinType != .normal{
             dismiss(animated: true, completion: nil)
             
-            delegate?.showPinMarker(pin: pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: userStatusTextView.text, location: (currentLocationButton.titleLabel?.text!)!, lat: (location.coordinate.latitude), lng: (location?.coordinate.latitude)!, path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text!)!))
+            delegate?.showPinMarker(pin: pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: userStatusTextView.text, location: (currentLocationButton.titleLabel?.text!)!, lat: (location.coordinate.latitude), lng: (location.coordinate.latitude), path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text!)!))
         }
         else{
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
             let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
             vc.willShowPin = true
             //vc.showPin = pinData
-            vc.location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
+            vc.location = CLLocation(latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude)
             vc.selectedIndex = 0
             self.present(vc, animated: true, completion: nil)
         }

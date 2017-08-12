@@ -574,7 +574,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 self.eventPlaceMarker?.title = place.name
                 self.eventPlaceMarker?.map = self.mapView
                 
-                eventPlaceMarker?.accessibilityLabel = "place_\(self.pins.count)"
+                eventPlaceMarker?.accessibilityLabel = "place_\(self.places.count)"
                 
                 self.places.append(place)
                 
@@ -592,7 +592,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 self.eventPlaceMarker?.title = event?.title
                 self.eventPlaceMarker?.map = self.mapView
                 
-                eventPlaceMarker?.accessibilityLabel = "event_\(self.pins.count)"
+                eventPlaceMarker?.accessibilityLabel = "event_\(self.events.count)"
                 
                 self.events.append(event!)
                 

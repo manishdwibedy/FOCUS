@@ -1745,13 +1745,12 @@ func getPlaceHours(id: String, gotHour: @escaping (_ hour: [Hours]?, _ open: Boo
    
 func fetchAllPins(gotPin: @escaping (_ place: [pinData]) -> Void){
     var pins = [pinData]()
+    var pinCount = 0
     
     Constants.DB.pins.observeSingleEvent(of: .value, with: { (snapshot) in
         let value = snapshot.value as? NSDictionary
         if value != nil
         {
-           
-            
             for (key,_) in (value)!
             {
                 let data = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String), focus: (value?[key] as! NSDictionary)["focus"] as? String ?? "")
@@ -1761,10 +1760,25 @@ func fetchAllPins(gotPin: @escaping (_ place: [pinData]) -> Void){
                     if let info = snapshot.value as? [String:Any]{
                         if let username = info["username"] as? String{
                             
+                            if let privateProfile = info["private"] as? Bool{
+                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                    data.username = username
+                                    if !privateProfile{
+                                        pinCount += 1
+                                        pins.append(data)
+                                    }
+                                }
+                            }
+                            else{
+                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                    data.username = username
+                                    
+                                    
+                                }
+                            }
                             
-                            if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
-                                data.username = username
-                                pins.append(data)
+                            if pinCount == pins.count{
+                                gotPin(pins)
                             }
                         }
                     }
