@@ -519,12 +519,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     
                     
                     if index < 3{
-                        print("adding interests less than 3")
                         interestLabelView.addButton.isSelected = true
                         self.interestStackView.addArrangedSubview(interestLabelView)
                         self.interestStackView.translatesAutoresizingMaskIntoConstraints = false
                     }else{
-                        print("adding interests to hidingInterests array")
+                        interestLabelView.addButton.isSelected = true
                         self.hiddenInterests.append(interestLabelView)
                     }
                 }
@@ -547,7 +546,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     @IBAction func moreInterestsButtonPressed(_ sender: Any) {
-        print("adding these interests \(self.hiddenInterests)")
         if self.hiddenInterests.count > 0{
             for interestViewIndex in 0...self.hiddenInterests.count-1{
                 self.interestStackView.addArrangedSubview(self.hiddenInterests[interestViewIndex])
@@ -564,17 +562,10 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             self.moreOrLessButtonStack.removeArrangedSubview(self.moreButton)
             self.moreButton.isHidden = true
             self.moreOrLessButtonStackHeight.constant = 20.0
-        }else{
-            print("nothing to add")
         }
     }
     
     @IBAction func lessButtonPressed(_ sender: Any) {
-        print("")
-        print("")
-        print("removing these interests from stackview \(self.hiddenInterests)")
-        print("")
-        print("")
         for arrangedInterestIndex in 0...self.hiddenInterests.count-1{
             self.interestStackView.removeArrangedSubview(self.hiddenInterests[arrangedInterestIndex])
         }
