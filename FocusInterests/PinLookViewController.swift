@@ -110,12 +110,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             if value != nil
             {
                 
-                if value?["images"] != nil
+                if let image = value?["images"] as? NSDictionary
                 {
                     var firstVal = ""
-                    print("images")
-                    print((value?["images"])!)
-                    for (key,_) in (value?["images"] as! NSDictionary)
+                    for (key,_) in image
                     {
                         firstVal = key as! String
                         break

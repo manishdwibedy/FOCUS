@@ -25,7 +25,11 @@ import FirebaseStorage
 import Crashlytics
 import GeoFire
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate, UIPopoverPresentationControllerDelegate{
+protocol showMarkerDelegate{
+    func showPinMarker(pin: pinData)
+}
+
+class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate, UIPopoverPresentationControllerDelegate, showMarkerDelegate{
     
     @IBOutlet weak var settingGearButton: UIButton!
     @IBOutlet weak var mapViewSettings: UIView!
@@ -506,15 +510,49 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         if willShowEvent || willShowPin || willShowPlace || AuthApi.showPin(){
             
-            let camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!,
-                                                  longitude: (currentLocation?.coordinate.longitude)!,
-                                                  zoom: 13)
-            if mapView.isHidden {
-                mapView.isHidden = false
-                mapView.camera = camera
-            } else {
-                mapView.animate(to: camera)
+            var camera: GMSCameraPosition? = nil
+            
+            if willShowPin{
+                let pin = self.showPin!
+                
+                let position = CLLocationCoordinate2D(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+                camera = GMSCameraPosition.camera(withLatitude: pin.coordinates.latitude,
+                                         longitude: pin.coordinates.longitude,
+                                         zoom: 13)
+                self.eventPlaceMarker = GMSMarker(position: position)
+                self.eventPlaceMarker?.icon = #imageLiteral(resourceName: "pin")
+                self.eventPlaceMarker?.title = pin.pinMessage
+                self.eventPlaceMarker?.map = self.mapView
+
+                eventPlaceMarker?.accessibilityLabel = "pin_\(self.pins.count)"
+                
+                self.pins.append(showPin!)
+                
+                tapPin(pin: self.showPin!)
             }
+            
+            if let camera = camera{
+                if mapView.isHidden {
+                    mapView.isHidden = false
+                    mapView.camera = camera
+                } else {
+                    mapView.animate(to: camera)
+                }
+            }
+            else{
+                camera = GMSCameraPosition.camera(withLatitude: AuthApi.getLocation()!.coordinate.latitude,
+                                                  longitude: AuthApi.getLocation()!.coordinate.longitude,
+                                                  zoom: 13)
+                
+                if mapView.isHidden {
+                    mapView.isHidden = false
+                    mapView.camera = camera!
+                } else {
+                    mapView.animate(to: camera!)
+                }
+
+            }
+            
             currentLocation = AuthApi.getLocation()
         }
         
@@ -1550,5 +1588,10 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
     func showInvitePopup(){
         self.showInvitePopupView = true
         self.popUpView.isHidden = true
+    }
+    
+    func showPinMarker(pin: pinData){
+        willShowPin = true
+        showPin = pin
     }
 }

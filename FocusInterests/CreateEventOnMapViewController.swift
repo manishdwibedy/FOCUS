@@ -203,7 +203,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
             
             
             if formmatedAddress.characters.count > 0{
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": "", "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                 
                 Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
                     if (error != nil) {
@@ -225,11 +225,11 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
                 })
                 
                 if self.pinType == .place{
-                    Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": "", "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                    Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                     
                 }
                 else if self.pinType == .event{
-                    Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "images": "", "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                    Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                 }
                 Answers.logCustomEvent(withName: "Pin",
                                        customAttributes: [

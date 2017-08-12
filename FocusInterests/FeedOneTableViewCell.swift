@@ -34,6 +34,7 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
     
     var pin: pinData? = nil
     var parentVC: SearchEventsViewController? = nil
+    var delegate: showMarkerDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -168,6 +169,8 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
         vc.selectedIndex = 0
         vc.showPin = pin
         AuthApi.setShowPin(show: true)
+        
+        delegate?.showPinMarker(pin: pin!)
         //parentVC?.present(vc, animated: true, completion: nil)
         
 //        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
