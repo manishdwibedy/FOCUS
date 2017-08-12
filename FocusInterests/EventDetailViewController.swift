@@ -911,7 +911,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
     @IBAction func openTicketMaster(_ sender: Any) {
-        
+        UIApplication.shared.openURL(NSURL(string: (event?.url)!)! as URL)
+
     }
     
     @IBAction func pinButtonPressed(_ sender: Any) {
