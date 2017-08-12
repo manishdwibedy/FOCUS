@@ -21,6 +21,7 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     var suggestions = [LocationSuggestion]()
     var selectedLocation: LocationSuggestion?
     var delegate: gotLocationDelegate!
+    var selectedRow: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,11 +121,13 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedLocation = self.suggestions[indexPath.row]
+        selectedRow = indexPath
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         selectedLocation = nil
+        selectedRow = nil
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
     
@@ -138,6 +141,7 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
         LocationSuggestion.getNearbyPlaces(query: searchText, location: AuthApi.getLocation()!, gotSuggestions: {suggestions in
             self.suggestions = suggestions.sorted(by: {
                 let distance_1 = Double($0.0.distance.components(separatedBy: " ")[0])!
@@ -146,6 +150,9 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
                 return distance_1 < distance_2
             })
             
+            if let row = self.selectedRow{
+                self.locationTableView.cellForRow(at: row)?.accessoryType = .none
+            }
             self.locationTableView.reloadData()
         })
     }
