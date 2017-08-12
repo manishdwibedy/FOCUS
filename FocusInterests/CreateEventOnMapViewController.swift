@@ -54,6 +54,8 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     var isTwitter = false
     var isFacebook = false
     var placeEventID = ""
+    var delegate: showMarkerDelegate?
+    var location: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -270,6 +272,8 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         
         if self.pinType != .normal{
             dismiss(animated: true, completion: nil)
+            
+            delegate?.showPinMarker(pin: pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: userStatusTextView.text, location: (currentLocationButton.titleLabel?.text!)!, lat: (location?.coordinate.latitude)!, lng: (location?.coordinate.latitude)!, path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text!)!))
         }
         else{
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -402,6 +406,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func gotSelectedLocation(location: LocationSuggestion) {
+        self.location = CLLocation(latitude: location.lat, longitude: location.long)
         self.searchLocationTextField.text = location.name
     }
     

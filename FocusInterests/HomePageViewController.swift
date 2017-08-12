@@ -112,7 +112,7 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
             
             let popController = UIStoryboard(name: "CreateEventOnMapViewController", bundle: nil).instantiateViewController(withIdentifier: "CreateEventOnMapViewController") as! CreateEventOnMapViewController
             popController.modalPresentationStyle = UIModalPresentationStyle.popover
-            
+            popController.delegate = self.viewControllers![0] as! MapViewController
             popController.preferredContentSize = CGSize(width: 345, height: 354)
             
             // set up the popover presentation controller
