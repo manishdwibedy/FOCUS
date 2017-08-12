@@ -576,6 +576,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.invites.removeAll()
         self.notifs.removeAll()
         
+        willShowPin = false
+        willShowPlace = false
+        willShowEvent = false
+        popUpView.isHidden = true
+        eventPlaceMarker.map = nil
+        eventPlaceMarker = nil
+        
         if self.eventPlaceMarker != nil{
             eventPlaceMarker?.map = nil
             
