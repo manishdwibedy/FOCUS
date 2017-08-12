@@ -174,6 +174,7 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createEventPopover" {
             let popoverViewController = segue.destination as! CreateEventOnMapViewController
+            popoverViewController.delegate = self.viewControllers![0] as! MapViewController
             popoverViewController.modalPresentationStyle = .popover
             popoverViewController.popoverPresentationController!.delegate = self
         }

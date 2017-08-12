@@ -277,10 +277,18 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
 //            cell.imageView.layer.borderWidth = 0
 //        }
         
+        var caption = ""
+        
+        if userStatusTextView.text != "What are you up to? Type Here"{
+            caption = userStatusTextView.text
+        }
+        
+        let pin = pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: caption, location: searchLocationTextField.text!, lat: (location.coordinate.latitude), lng: (location.coordinate.latitude), path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text) ?? "Meet up")
+        
         if self.pinType != .normal{
             dismiss(animated: true, completion: nil)
             
-            delegate?.showPinMarker(pin: pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: userStatusTextView.text, location: (currentLocationButton.titleLabel?.text!)!, lat: (location.coordinate.latitude), lng: (location.coordinate.latitude), path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text!)!))
+            delegate?.showPinMarker(pin: pin)
         }
         else{
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -289,6 +297,11 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
             //vc.showPin = pinData
             vc.location = CLLocation(latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude)
             vc.selectedIndex = 0
+            
+            delegate?.showPinMarker(pin: pin)
+            dismiss(animated: true, completion: nil)
+          
+            
             self.present(vc, animated: true, completion: nil)
         }
 

@@ -1768,11 +1768,35 @@ func fetchAllPins(gotPin: @escaping (_ place: [pinData]) -> Void){
                                         pins.append(data)
                                     }
                                 }
+                                if let uid = info["firebaseUserId"] as? String{
+                                    if uid == AuthApi.getFirebaseUid()!{
+                                        if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                            data.username = username
+                                            
+                                            pinCount += 1
+                                            pins.append(data)
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                            else if let uid = info["firebaseUserId"] as? String{
+                                if uid == AuthApi.getFirebaseUid()!{
+                                    if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                        data.username = username
+                                        
+                                        pinCount += 1
+                                        pins.append(data)
+                                        
+                                    }
+                                }
                             }
                             else{
                                 if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
                                     data.username = username
                                     
+                                    pinCount += 1
+                                    pins.append(data)
                                     
                                 }
                             }
