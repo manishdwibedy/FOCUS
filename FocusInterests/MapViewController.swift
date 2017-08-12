@@ -550,6 +550,24 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 tapPlace(place: place, marker: self.eventPlaceMarker!)
             }
+            else if willShowEvent{
+                let event = self.showEvent
+                
+                let position = CLLocationCoordinate2D(latitude: Double(event!.latitude!)!, longitude: Double(event!.longitude!)!)
+                camera = GMSCameraPosition.camera(withLatitude: Double(event!.latitude!)!,
+                                                  longitude: Double((event?.longitude!)!)!,
+                                                  zoom: 13)
+                self.eventPlaceMarker = GMSMarker(position: position)
+                self.eventPlaceMarker?.icon = #imageLiteral(resourceName: "Event")
+                self.eventPlaceMarker?.title = event?.title
+                self.eventPlaceMarker?.map = self.mapView
+                
+                eventPlaceMarker?.accessibilityLabel = "event_\(self.pins.count)"
+                
+                self.events.append(event!)
+                
+                tapEvent(event: event!)
+            }
 
             
             if let camera = camera{
@@ -1440,27 +1458,34 @@ extension MapViewController{
         var timeString = ""
         var distance = ""
         var start = ""
+        var ticketMasterDF = DateFormatter()
+        ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
         
         if event.date?.range(of:",") != nil{
             let time = event.date?.components(separatedBy: ",")[1]
             start = time!
             
         }
-        else{
-            let time = event.date?.components(separatedBy: "T")[1]
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm:ss"
-            let date = dateFormatter.date(from: time!)
-            
-            dateFormatter.dateFormat = "h:mm a"
-            
-            start = dateFormatter.string(from: date!)
+        else if let time = event.date?.components(separatedBy: "T"), time.count > 1{
+                let date = dateFormatter.date(from: time[1])
+                dateFormatter.dateFormat = "h:mm a"
+                
+                start = dateFormatter.string(from: date!)
         }
-        
-        
+        else{
+            if let time = ticketMasterDF.date(from: event.date!){
+                
+                start = dateFormatter.string(from: time)
+            }
+            
+            
+        }
+    
         let placeholderImage = UIImage(named: "empty_event")
-        
+
         if let id = event.id{
             let reference = Constants.storage.event.child("\(id).jpg")
             

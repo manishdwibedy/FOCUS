@@ -91,7 +91,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
     
-    
+    var delegate: showMarkerDelegate?
     var ticketMasterDF = DateFormatter()
     var eventDF = DateFormatter()
     
@@ -643,6 +643,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     
                     map?.viewingEvent = event
                     map?.eventPlaceMarker = marker
+                    
+                    delegate?.showEventMarker(event: self.event!)
                 }
             }
         }
