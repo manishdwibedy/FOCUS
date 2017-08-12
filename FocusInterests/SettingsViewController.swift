@@ -119,7 +119,10 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var row = indexPath.row
         if AuthApi.getLoginType() == .Facebook || AuthApi.getLoginType() == LoginTypes.Google{
-            row += 1
+            if row > 0{
+                row += 1
+            }
+            
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
