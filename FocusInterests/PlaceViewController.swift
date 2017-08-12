@@ -429,11 +429,14 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
             otherPlacesCell.placeViewController = self
             let place = suggestedPlaces[indexPath.row]
-            otherPlacesCell.dateAndTimeLabel.text = "7/20 10:00 P.M."
             otherPlacesCell.placeNameLabel.text = place.name
             otherPlacesCell.ratingLabel.text = "\(place.rating) (\(place.reviewCount) reviews)"
             otherPlacesCell.setRatingAmountForSearchPlaceCell(ratingAmount: Double(place.rating))
             let address = place.address.joined(separator: "\n")
+            
+            let placeLocation = CLLocation(latitude: Double(place.latitude), longitude: Double(place.longitude))
+            
+            otherPlacesCell.distanceLabel.text = getDistance(fromLocation: AuthApi.getLocation()!, toLocation: placeLocation,addBracket: false, precision: 1)
             
             if let url = URL(string: place.image_url){
                 
