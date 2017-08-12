@@ -35,7 +35,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     var selectedCommentRating = 0
     var currentLocation: CLLocation?
     var map: MapViewController? = nil
-    
+    var delegate: showMarkerDelegate?
     var data = [NSDictionary]()
     var isFollowing = false
     var place_focus = ""
@@ -723,6 +723,8 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
                     map?.tapPlace(place: place, marker: marker)
                     
                     map?.eventPlaceMarker = marker
+                    
+                    delegate?.showPlaceMarker(place: self.place!)
                 }
             }
         }else if segue.identifier == "unwindToMapViewControllerFromPlaceDetailsWithSegue"{

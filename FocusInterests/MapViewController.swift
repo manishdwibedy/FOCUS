@@ -532,6 +532,25 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 tapPin(pin: self.showPin!)
             }
+            else if willShowPlace{
+                let place = self.showPlace!
+                
+                let position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+                camera = GMSCameraPosition.camera(withLatitude: place.latitude,
+                                                  longitude: place.longitude,
+                                                  zoom: 13)
+                self.eventPlaceMarker = GMSMarker(position: position)
+                self.eventPlaceMarker?.icon = #imageLiteral(resourceName: "place_icon")
+                self.eventPlaceMarker?.title = place.name
+                self.eventPlaceMarker?.map = self.mapView
+                
+                eventPlaceMarker?.accessibilityLabel = "place_\(self.pins.count)"
+                
+                self.places.append(place)
+                
+                tapPlace(place: place, marker: self.eventPlaceMarker!)
+            }
+
             
             if let camera = camera{
                 if mapView.isHidden {
