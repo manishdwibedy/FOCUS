@@ -73,7 +73,12 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
         
         
         LocationSuggestion.getNearbyPlaces(location: AuthApi.getLocation()!, gotSuggestions: { suggestions in
-            self.suggestions = suggestions
+            self.suggestions = suggestions.sorted(by: {
+                let distance_1 = Double($0.0.distance.components(separatedBy: " ")[0])!
+                let distance_2 = Double($0.1.distance.components(separatedBy: " ")[0])!
+                
+                return distance_1 < distance_2
+            })
             self.locationTableView.reloadData()
         })
 
@@ -134,7 +139,13 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         LocationSuggestion.getNearbyPlaces(query: searchText, location: AuthApi.getLocation()!, gotSuggestions: {suggestions in
-            self.suggestions = suggestions
+            self.suggestions = suggestions.sorted(by: {
+                let distance_1 = Double($0.0.distance.components(separatedBy: " ")[0])!
+                let distance_2 = Double($0.1.distance.components(separatedBy: " ")[0])!
+                
+                return distance_1 < distance_2
+            })
+            
             self.locationTableView.reloadData()
         })
     }
