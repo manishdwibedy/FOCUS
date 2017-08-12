@@ -55,7 +55,9 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     var isFacebook = false
     var placeEventID = ""
     var delegate: showMarkerDelegate?
-    var location: CLLocation?
+    var location = AuthApi.getLocation()!
+    var formmatedAddress = ""
+    var selectedLocation = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +89,15 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         self.searchLocationTextField.leftView = locationImageView
         self.searchLocationTextField.layer.borderWidth = 0.0
         hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !selectedLocation{
+            getPlaceName(location: AuthApi.getLocation()!, completion: {address in
+                self.formmatedAddress = address
+                self.searchLocationTextField.text = address
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -185,7 +196,6 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
             return
         }
         
-        var coordinates = AuthApi.getLocation()!.coordinate
         
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).removeValue()
 
@@ -201,11 +211,8 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
 //                uploadImage(image: image, path: Constants.storage.pins.child(path))
 //                
 //            }
-            var formmatedAddress = "Santa Monica"
-            
-            
             if formmatedAddress.characters.count > 0{
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":self.formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                 
                 Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(coordinates.latitude), longitude: Double(coordinates.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
                     if (error != nil) {
@@ -227,11 +234,11 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
                 })
                 
                 if self.pinType == .place{
-                    Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                    Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinat.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                     
                 }
                 else if self.pinType == .event{
-                    Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(coordinates.latitude), "lng": Double(coordinates.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
+                    Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(self.location.coordinat.latitude), "lng": Double(self.location.coordinat.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                 }
                 Answers.logCustomEvent(withName: "Pin",
                                        customAttributes: [
@@ -273,7 +280,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         if self.pinType != .normal{
             dismiss(animated: true, completion: nil)
             
-            delegate?.showPinMarker(pin: pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: userStatusTextView.text, location: (currentLocationButton.titleLabel?.text!)!, lat: (location?.coordinate.latitude)!, lng: (location?.coordinate.latitude)!, path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text!)!))
+            delegate?.showPinMarker(pin: pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: userStatusTextView.text, location: (currentLocationButton.titleLabel?.text!)!, lat: (location.coordinate.latitude), lng: (location?.coordinate.latitude)!, path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text!)!))
         }
         else{
             let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -406,6 +413,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func gotSelectedLocation(location: LocationSuggestion) {
+        self.selectedLocation = true
         self.location = CLLocation(latitude: location.lat, longitude: location.long)
         self.searchLocationTextField.text = location.name
     }
