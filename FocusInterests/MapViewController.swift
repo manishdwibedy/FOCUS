@@ -14,7 +14,6 @@ import MapKit
 import FirebaseDatabase
 import Alamofire
 import SwiftyJSON
-import Solar
 import PopupDialog
 import FirebaseMessaging
 import SDWebImage
@@ -321,6 +320,37 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         var not_count = 0
         var count_received = 0
         var read_notifications = AuthApi.getUnreadNotifications()
+        
+        let now = Date()
+        let six_am = now.dateAt(hours: 6, minutes: 0)
+        let six_pm = now.dateAt(hours: 18, minutes: 0)
+        
+        if now > six_pm &&
+            now < six_am{
+            
+            do {
+                // Set the map style by passing the URL of the local file.
+                if let styleURL = Bundle.main.url(forResource: "night_style", withExtension: "json") {
+                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
+            }
+        }
+        else{
+            do {
+                // Set the map style by passing the URL of the local file.
+                if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
+                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
+            }
+        }
         
         if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
             getYelpToken(completion: { token in
@@ -887,44 +917,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                               longitude: location.coordinate.longitude,
                                               zoom: 13)
         
-        //let position = CLLocationCoordinate2D(latitude: Double(location.coordinate.latitude), longitude: Double(location.coordinate.longitude))
-//        if self.userLocation == nil{
-//            self.userLocation = GMSMarker(position: position)
-//            self.userLocation?.icon = UIImage(named: "self_location")
-//            self.userLocation?.map = self.mapView
-//            self.userLocation?.zIndex = 1
-//        }
-//        else{
-//            self.userLocation?.map = nil
-//            
-//            self.userLocation = GMSMarker(position: position)
-//            self.userLocation?.icon = UIImage(named: "self_location")
-//            self.userLocation?.map = self.mapView
-//            self.userLocation?.zIndex = 1
-//            
-//        }
-        
-        
-        
         AuthApi.set(location: location)
         
         let current = changeTimeZone(of: Date(), from: TimeZone(abbreviation: "GMT")!, to: TimeZone.current)
         
-        let solar = Solar(for: current, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let now = Date()
+        let six_am = now.dateAt(hours: 6, minutes: 0)
+        let six_pm = now.dateAt(hours: 18, minutes: 0)
         
-        if (solar?.isNighttime)!{
+        
+        if now > six_pm &&
+            now < six_am{
             
-//            if !hasCustomProfileImage{
-//                navigationView.userProfileButton.setImage(UIImage(named: "User_Profile"), for: .normal)
-//            }
-//            
-//            navigationView.messagesButton.setImage(UIImage(named: "Messages"), for: .normal)
-//            navigationView.searchButton.setImage(UIImage(named: "Search"), for: .normal)
-//            navigationView.notificationsButton.setImage(UIImage(named: "Notifications"), for: .normal)
-            
-//            self.tabBarController!.tabBar.backgroundColor = UIColor(hexString: "435366")
-
-
             do {
                 // Set the map style by passing the URL of the local file.
                 if let styleURL = Bundle.main.url(forResource: "night_style", withExtension: "json") {
@@ -939,7 +943,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         else{
             do {
                 // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "night_style", withExtension: "json") {
+                if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
                     mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
                 } else {
                     NSLog("Unable to find style.json")

@@ -25,6 +25,7 @@
 		5B251E8F1ED2775B0075B57A /* InterestViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */; };
 		5B251E911ED278A70075B57A /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B251E901ED278A70075B57A /* UserProfileViewController.swift */; };
 		5B2AEF491EFDA84D00B6E769 /* InvitePlaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */; };
+		5B2E205D1F3F7D74000B23E9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E205C1F3F7D74000B23E9 /* Date+Extensions.swift */; };
 		5B2E5E051EF7974900F0BC1B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */; };
 		5B2E5E061EF7974900F0BC1B /* SwiftyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */; };
 		5B3023901F3E33C1007FF019 /* LocationSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B30238F1F3E33C0007FF019 /* LocationSuggestion.swift */; };
@@ -383,6 +384,7 @@
 		5B251E8D1ED2775B0075B57A /* InterestViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InterestViewCell.xib; sourceTree = "<group>"; };
 		5B251E901ED278A70075B57A /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		5B2AEF481EFDA84D00B6E769 /* InvitePlaceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePlaceTests.swift; sourceTree = "<group>"; };
+		5B2E205C1F3F7D74000B23E9 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		5B2E5E031EF7974900F0BC1B /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		5B2E5E041EF7974900F0BC1B /* SwiftyRecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyRecordButton.swift; sourceTree = "<group>"; };
 		5B30238F1F3E33C0007FF019 /* LocationSuggestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSuggestion.swift; sourceTree = "<group>"; };
@@ -1193,6 +1195,7 @@
 				617C33BC1F194B7F003EEADF /* String+Extensions.swift */,
 				617C33BE1F194B94003EEADF /* Character+Extensions.swift */,
 				5BD457BD1F1F386E00E18B50 /* UIImage+Extensions.swift */,
+				5B2E205C1F3F7D74000B23E9 /* Date+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2139,6 +2142,7 @@
 				5B6AFA6D1ED1906900A82104 /* GMUKMLParser.m in Sources */,
 				D2A173551E5E911500C7724B /* SignUpViewController.swift in Sources */,
 				5B71D6F81ED180F00093A3F5 /* InterestTableViewCell.swift in Sources */,
+				5B2E205D1F3F7D74000B23E9 /* Date+Extensions.swift in Sources */,
 				D2D0A3EC1E7F49ED00B43689 /* UserDescriptionCell.swift in Sources */,
 				D2ECAC581E7CD9F8006FFA1A /* UserPhotoCell.swift in Sources */,
 				61C6096F1ED572AC004098BA /* EditProfileViewController.swift in Sources */,
