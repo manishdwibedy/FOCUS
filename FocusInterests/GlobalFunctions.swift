@@ -110,6 +110,7 @@ func getOpenHours(_ hours: [Hours]) -> [String]{
             last_end = hour.end
         }
     }
+    result.append("\(days[last_day_start]) - \(days[last_day_end]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end))")
     return result
 }
 
