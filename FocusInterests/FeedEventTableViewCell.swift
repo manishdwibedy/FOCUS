@@ -25,6 +25,8 @@ class FeedEventTableViewCell: UITableViewCell {
     @IBOutlet weak var timeSince: UILabel!
     @IBOutlet weak var globeImage: UIButton!
     
+    var delegate: showMarkerDelegate?
+    var event: Event?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,9 +59,9 @@ class FeedEventTableViewCell: UITableViewCell {
     @IBAction func goBackToMap(_ sender: Any){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
-        vc.willShowPin = true
-        //        vc.showPin = pin
-        //        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)
+        vc.willShowEvent = true
+        
+        delegate?.showEventMarker(event: event!)
         vc.selectedIndex = 0
     }
     

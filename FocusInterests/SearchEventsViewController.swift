@@ -315,6 +315,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         else if feed.type == .Pin && feed.item?.imageURL != nil{
             if let feedFiveCell = tableView.dequeueReusableCell(withIdentifier: "FeedFiveCell", for: indexPath) as? FeedPlaceImageTableViewCell{
                 
+                feedFiveCell.delegate = self.tabBarController?.viewControllers![0] as! MapViewController
+                
                 let data = feed.item?.data["pin"] as! [String:Any]
                 feedFiveCell.pin = data
                 feedFiveCell.parentVC = self
@@ -384,6 +386,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         else if feed.type == .Created{
             let feedCreatedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedSixCell", for: indexPath) as! FeedCreatedEventTableViewCell
             
+            feedCreatedEventCell.delegate = self.tabBarController?.viewControllers![0] as! MapViewController
+            
             let event = feed.item?.data["event"] as? Event
             feedCreatedEventCell.event = event
             feedCreatedEventCell.timeSince.text = DateFormatter().timeSince(from: feed.time!, numericDates: true, shortVersion: true)
@@ -423,12 +427,16 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         else if feed.type == .Going{
             let feedEventCell = tableView.dequeueReusableCell(withIdentifier: "FeedTwoCell", for: indexPath) as! FeedEventTableViewCell
             
+            
+            feedEventCell.delegate = self.tabBarController?.viewControllers![0] as! MapViewController
+            
             feedEventCell.globeImage.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
             feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
             
             feedEventCell.nameLabelButton.setTitle(feed.sender?.username, for: .normal)
             
             if let event = feed.item?.data["event"] as? Event{
+                feedEventCell.event = event
                 feedEventCell.eventNameLabelButton.setTitle(event.title, for: .normal)
             }
             
@@ -482,6 +490,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 feedPlaceCell.parentVC = self
                 feedPlaceCell.feed = feed
                 
+                feedPlaceCell.delegate = self.tabBarController?.viewControllers![0] as! MapViewController
                 
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     feedPlaceCell.usernameWhoLikedLabel.setTitle(user.username, for: .normal)
@@ -563,6 +572,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 feedFourCell.pin = data
                 feedFourCell.parentVC = self
                 feedFourCell.feed = feed
+                
+                feedFourCell.delegate = self.tabBarController?.viewControllers![0] as! MapViewController
                 
                 getUserData(id: (feed.sender?.uuid)!, gotUser: {user in
                     feedFourCell.usernameWhoCommentedLabel.setTitle(user.username, for: .normal)

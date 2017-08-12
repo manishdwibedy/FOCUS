@@ -27,6 +27,8 @@ import GeoFire
 
 protocol showMarkerDelegate{
     func showPinMarker(pin: pinData)
+    func showPlaceMarker(place: Place)
+    func showEventMarker(event: Event)
 }
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate, UIPopoverPresentationControllerDelegate, showMarkerDelegate{
@@ -580,7 +582,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         willShowPlace = false
         willShowEvent = false
         popUpView.isHidden = true
-        eventPlaceMarker.map = nil
+        eventPlaceMarker?.map = nil
         eventPlaceMarker = nil
         
         if self.eventPlaceMarker != nil{
@@ -1600,5 +1602,15 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
     func showPinMarker(pin: pinData){
         willShowPin = true
         showPin = pin
+    }
+    
+    func showPlaceMarker(place: Place){
+        willShowPlace = true
+        showPlace = place
+    }
+    
+    func showEventMarker(event: Event){
+        willShowEvent = true
+        showEvent = event
     }
 }

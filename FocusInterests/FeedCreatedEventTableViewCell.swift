@@ -24,6 +24,7 @@ class FeedCreatedEventTableViewCell: UITableViewCell, UITableViewDelegate, UITab
     
     var event: Event? = nil
     var parentVC: SearchEventsViewController? = nil
+    var delegate: showMarkerDelegate?
     
     @IBOutlet weak var actionLabel: UILabel!
     override func awakeFromNib() {

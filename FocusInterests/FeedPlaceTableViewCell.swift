@@ -23,6 +23,7 @@ class FeedPlaceTableViewCell: UITableViewCell {
     var pin: [String:Any]? = nil
     var parentVC: SearchEventsViewController? = nil
     var feed: FocusNotification? = nil
+    var delegate: showMarkerDelegate? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,6 +50,10 @@ class FeedPlaceTableViewCell: UITableViewCell {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
         vc.willShowPin = true
+        
+        let pinInfo = pinData(UID: self.pin?["fromUID"] as! String, dateTS: self.pin?["time"] as! Double, pin: self.pin?["pin"] as! String, location: self.pin?["formattedAddress"] as! String, lat: self.pin?["lat"] as! Double, lng: self.pin?["lng"] as! Double, path: Constants.DB.pins.child(self.pin!["fromUID"] as! String), focus: self.pin?["focus"] as? String ?? "")
+        delegate?.showPinMarker(pin: pinInfo)
+        
         //        vc.showPin = pin
         //        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)
         vc.selectedIndex = 0
