@@ -40,6 +40,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     @IBOutlet weak var userInfoView: UIView!
     
+    // private user profile view
+    var profileIsSetToPrivate = true
+    @IBOutlet weak var privateUserProfileView: UIView!
+    
     // User data
     //	@IBOutlet var userName: UILabel!
     @IBOutlet var descriptionText: UITextView!
@@ -86,8 +90,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var eventView: UIView!
     @IBOutlet weak var eventsStackView: UIStackView!
     @IBOutlet weak var moreEventsStack: UIView!
-    
     @IBOutlet weak var eventHeader: UILabel!
+    
     var followers = [User]()
     var following = [User]()
     var interestArray = [Interest]()
@@ -337,14 +341,23 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.displayUserData()
-        var eventTableFrame = self.eventsTableView.frame
-        eventTableFrame.size.height = self.eventsTableView.contentSize.height
-        self.eventsTableView.frame = eventTableFrame
-        
-        var placesTableFrame = self.placesTableView.frame
-        placesTableFrame.size.height = self.placesTableView.contentSize.height
-        self.placesTableView.frame = placesTableFrame
-        
+        if self.profileIsSetToPrivate{
+            self.otherPlaceStackView.isHidden = true
+            self.otherEventStackView.isHidden = true
+            self.eventsStackView.isHidden = true
+            self.recentPostTableView.isHidden = true
+            self.focusView.isHidden = true
+            self.eventView.isHidden = true
+        }else{
+            self.privateUserProfileView.isHidden = true
+            var eventTableFrame = self.eventsTableView.frame
+            eventTableFrame.size.height = self.eventsTableView.contentSize.height
+            self.eventsTableView.frame = eventTableFrame
+            
+            var placesTableFrame = self.placesTableView.frame
+            placesTableFrame.size.height = self.placesTableView.contentSize.height
+            self.placesTableView.frame = placesTableFrame
+        }
     }
     
     //    MARK: COLLECTIONVIEW DELEGATE METHODS

@@ -83,6 +83,8 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         let interestCell = UINib(nibName: "SingleInterestTableViewCell", bundle: nil)
         self.addFocusTableView.register(interestCell, forCellReuseIdentifier: "singleInterestCell")
         self.addFocusStack.removeArrangedSubview(self.addFocusTableView)
+        self.addFocusButton.setTitleColor(Constants.color.navy, for: .normal)
+        self.addFocusButton.setTitleColor(Constants.color.navy, for: .selected)
         
         self.searchLocationTextField.delegate = self
 
@@ -269,7 +271,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
             }
         }
         userStatusTextView.text = "What are you up to? Type here."
-        userStatusTextView.font = UIFont(name: "Avenir Book", size: 16)
+        userStatusTextView.font = UIFont(name: "Avenir Book", size: 17)
         
         userStatusTextView.resignFirstResponder()
         

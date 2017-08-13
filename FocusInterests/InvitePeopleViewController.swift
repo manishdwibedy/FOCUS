@@ -19,6 +19,7 @@ protocol InvitePeopleViewControllerDelegate {
 
 class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, InvitePeopleViewControllerDelegate{
 
+    @IBOutlet weak var animationGif: UIImageView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var createEventButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -577,7 +578,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
 //                }
 //            })
 //        }
-        
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -633,6 +634,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             })
             self.showInvitePopup = false
         }
+        
     }
     
     override func didReceiveMemoryWarning() {

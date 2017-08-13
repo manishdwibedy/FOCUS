@@ -643,6 +643,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         if showTutorial{
             self.showPopup()
         }
+        
+        self.mapViewSettings.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
