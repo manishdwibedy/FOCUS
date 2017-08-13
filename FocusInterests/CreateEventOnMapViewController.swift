@@ -12,8 +12,9 @@ import Crashlytics
 import SCLAlertView
 import FBSDKLoginKit
 import FirebaseAuth
+import Gallery
 
-class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, gotLocationDelegate{
+class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, GalleryControllerDelegate, gotLocationDelegate{
 
     // change location stack
     @IBOutlet weak var currentLocationStack: UIStackView!
@@ -58,6 +59,9 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     var location = AuthApi.getLocation()!
     var formmatedAddress = ""
     var selectedLocation = false
+    let gallery = GalleryController()
+    var galleryPicArray = [UIImage]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +93,8 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         self.searchLocationTextField.leftView = locationImageView
         self.searchLocationTextField.layer.borderWidth = 0.0
         hideKeyboardWhenTappedAround()
+        
+        gallery.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -196,21 +202,21 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
             return
         }
         
-        
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).removeValue()
 
         let time = NSDate().timeIntervalSince1970
         if true
         {
-//            let imagePaths = NSMutableDictionary()
-//            for image in galleryPicArray
-//            {
-//                let random = Int(time) + Int(arc4random_uniform(10000000))
-//                let path = AuthApi.getFirebaseUid()!+"/"+String(random)
-//                imagePaths.addEntries(from: [String(random):["imagePath": path]])
-//                uploadImage(image: image, path: Constants.storage.pins.child(path))
-//                
-//            }
+            let imagePaths = NSMutableDictionary()
+            for image in galleryPicArray
+            {
+                let random = Int(time) + Int(arc4random_uniform(10000000))
+                let path = AuthApi.getFirebaseUid()!+"/"+String(random)
+                imagePaths.addEntries(from: [String(random):["imagePath": path]])
+                uploadImage(image: image, path: Constants.storage.pins.child(path))
+                
+            }
+            
             if formmatedAddress.characters.count > 0{
                 Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":self.formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinate.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
                 
@@ -309,7 +315,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func cameraPressed(_ sender: Any) {
-        print("camera pressed")
+        present(gallery, animated: true, completion: nil)
     }
     
     @IBAction func addAFocus(_ sender: Any) {
@@ -431,6 +437,23 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         self.searchLocationTextField.text = location.name
     }
     
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+        gallery.dismiss(animated: true, completion: nil)
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
+        galleryPicArray = images
+        gallery.dismiss(animated: true, completion: nil)        
+    }
+    
+    func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
+        
+    }
+
     /*
     // MARK: - Navigation
 
