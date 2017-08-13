@@ -447,7 +447,10 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     
     func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
         galleryPicArray = images
-        gallery.dismiss(animated: true, completion: nil)        
+        
+        cameraButton.setImage(crop(image: images[0], width: 50, height: 50), for: .normal)
+        cameraButton.roundButton()
+        gallery.dismiss(animated: true, completion: nil)
     }
     
     func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
