@@ -95,6 +95,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         hideKeyboardWhenTappedAround()
         
         gallery.delegate = self
+        
         Config.Camera.imageLimit = 1
         Config.showsVideoTab = false
 
@@ -318,7 +319,9 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func cameraPressed(_ sender: Any) {
-        present(gallery, animated: true, completion: nil)
+        present(gallery, animated: true, completion: {
+            self.gallery.cart.images = []
+        })
     }
     
     @IBAction func addAFocus(_ sender: Any) {
@@ -451,8 +454,11 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
         galleryPicArray = images
         
-        cameraButton.setImage(crop(image: images[0], width: 50, height: 50), for: .normal)
-        cameraButton.roundButton()
+        if let image = images[0] as? UIImage{
+            cameraButton.setImage(crop(image: image, width: 50, height: 50), for: .normal)
+            cameraButton.roundButton()
+            
+        }
         gallery.dismiss(animated: true, completion: nil)
     }
     
