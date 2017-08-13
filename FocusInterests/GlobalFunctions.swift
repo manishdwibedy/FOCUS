@@ -241,7 +241,7 @@ func getDistance(fromLocation: CLLocation, toLocation: CLLocation, addBracket: B
     
 }
 
-func uploadImage(image:UIImage, path: StorageReference)
+   func uploadImage(isProfile: Bool = false, image:UIImage, path: StorageReference)
 {
     
     let localFile = UIImageJPEGRepresentation(image, 0.5)
@@ -253,9 +253,12 @@ func uploadImage(image:UIImage, path: StorageReference)
     let uploadTask = path.putData(localFile!, metadata: metadata, completion: {metadata, error in
         if error == nil{
             AuthApi.set(userImage: metadata?.downloadURLs?[0].absoluteString)
-            Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues([
-                "image_string": metadata?.downloadURLs?[0].absoluteString
-                ])
+            
+            if isProfile{
+                Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues([
+                    "image_string": metadata?.downloadURLs?[0].absoluteString
+                    ])
+            }
         }
     })
     
