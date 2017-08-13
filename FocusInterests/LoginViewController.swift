@@ -158,6 +158,13 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                     AuthApi.set(userImage: nil)
                                 }
                                 
+                                if let privateProfile = info?["private"] as? Bool{
+                                    AuthApi.set(privateProfile: privateProfile)
+                                }
+                                else{
+                                    Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/private").setValue(false)
+                                }
+                                
                             })
                             
                             Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("blocked/people").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -470,6 +477,13 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             AuthApi.setNewUser()
                         }
                         
+                        if let privateProfile = info?["private"] as? Bool{
+                            AuthApi.set(privateProfile: privateProfile)
+                        }
+                        else{
+                            Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/private").setValue(false)
+                        }
+                        
                         let token = Messaging.messaging().fcmToken
                         Constants.DB.user.child("\(fireId)/token").setValue(token)
                         AuthApi.set(FCMToken: token)
@@ -560,6 +574,13 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
             
             if let isNewUser = info?["isNewUser"] as? Bool{
                 AuthApi.setNewUser()
+            }
+            
+            if let privateProfile = info?["private"] as? Bool{
+                AuthApi.set(privateProfile: privateProfile)
+            }
+            else{
+                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/private").setValue(false)
             }
             
             let token = Messaging.messaging().fcmToken

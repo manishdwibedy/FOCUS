@@ -33,6 +33,17 @@ struct AuthApi {
         return nil
     }
     
+    static func set(privateProfile: Bool) {
+        defaults.set(privateProfile, forKey: "private")
+    }
+    
+    static func getPrivate() -> Bool {
+        if let privateProfile = defaults.object(forKey: "private") as? Bool {
+            return privateProfile
+        }
+        return false
+    }
+    
     static func set(userEmail: String?) {
         if let email = userEmail {
             defaults.set(email, forKey: "userEmail")
