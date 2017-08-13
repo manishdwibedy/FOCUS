@@ -95,6 +95,9 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         hideKeyboardWhenTappedAround()
         
         gallery.delegate = self
+        Config.Camera.imageLimit = 1
+        Config.showsVideoTab = false
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
