@@ -262,15 +262,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
         })
         
-        
-        Event.getNearyByEvents(gotEvents: {events in
-            for event in events{
-                if !(self.exploreTab?.events.contains(event))!{
-                    self.exploreTab?.events.append(event)
+        if let location = AuthApi.getLocation(){
+            Event.getNearyByEvents(query: "", category: "", location: location.coordinate, gotEvents: {events in
+                for event in events{
+                    if !(self.exploreTab?.events.contains(event))!{
+                        self.exploreTab?.events.append(event)
+                    }
                 }
-            }
-            
-        })
+                
+            })
+        }
         
         self.exploreTab = self.tabBarController?.viewControllers?[3] as? InvitePeopleViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
@@ -532,7 +533,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
         saveUserInfo()
-        showEvents()
+        
+        if AuthApi.getLocation() != nil{
+            showEvents()    
+        }
+        
         
         let token = Messaging.messaging().fcmToken
         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
