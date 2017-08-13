@@ -209,7 +209,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).removeValue()
 
         let time = NSDate().timeIntervalSince1970
-        if true
+        if galleryPicArray.count > 0
         {
             let imagePaths = NSMutableDictionary()
             for image in galleryPicArray
