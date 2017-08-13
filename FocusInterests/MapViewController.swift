@@ -1323,6 +1323,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
             else{
                 getYelpToken(completion: {(token) in
+                    AuthApi.set(yelpAccessToken: token)
                     self.fetchPlaces(around:
                         self.currentLocation!, token: token)
                 })
