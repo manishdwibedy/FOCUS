@@ -29,12 +29,12 @@
                             <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZk-k0-NPd" customClass="MIBadgeButton" customModule="MIBadgeButton_Swift">
-                                    <rect key="frame" x="0.0" y="4" width="48" height="32"/>
+                                    <rect key="frame" x="1" y="-5" width="47" height="51"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="48" id="GIZ-Tl-zGI"/>
-                                        <constraint firstAttribute="height" constant="32" id="uTF-jJ-Agj"/>
+                                        <constraint firstAttribute="width" constant="47" id="GIZ-Tl-zGI"/>
+                                        <constraint firstAttribute="height" constant="51" id="uTF-jJ-Agj"/>
                                     </constraints>
-                                    <state key="normal" image="Chat Bubble">
+                                    <state key="normal" image="Comment">
                                         <color key="titleColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -45,7 +45,7 @@
                                             <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetTop">
-                                            <real key="value" value="3"/>
+                                            <real key="value" value="12"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="edgeInsetRight">
                                             <real key="value" value="10"/>
@@ -130,7 +130,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Chat Bubble" width="60" height="45"/>
+        <image name="Comment" width="74" height="74"/>
         <image name="FOCUS_maps_logo" width="150" height="40"/>
         <image name="Map_Notifications" width="30" height="30"/>
     </resources>

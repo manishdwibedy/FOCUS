@@ -264,6 +264,7 @@
 		EB5891D71EE7EE0A00C35EE9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */; };
 		EB694F551F21A9E200C0690A /* InvitationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB694F531F21A9E200C0690A /* InvitationsViewController.swift */; };
 		EB694F561F21A9E200C0690A /* InvitationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB694F541F21A9E200C0690A /* InvitationsViewController.xib */; };
+		EB6E2E8B1F3E9A0300265EB8 /* idea-gif.gif in Resources */ = {isa = PBXBuildFile; fileRef = EB6E2E8A1F3E9A0300265EB8 /* idea-gif.gif */; };
 		EB71AC041F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC021F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift */; };
 		EB71AC051F1EA1700024FE95 /* SelectAllInterestsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB71AC031F1EA1700024FE95 /* SelectAllInterestsTableViewCell.xib */; };
 		EB71AC081F1EA17E0024FE95 /* SingleInterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB71AC061F1EA17E0024FE95 /* SingleInterestTableViewCell.swift */; };
@@ -667,6 +668,7 @@
 		EB5891D61EE7EE0A00C35EE9 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		EB694F531F21A9E200C0690A /* InvitationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationsViewController.swift; sourceTree = "<group>"; };
 		EB694F541F21A9E200C0690A /* InvitationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitationsViewController.xib; sourceTree = "<group>"; };
+		EB6E2E8A1F3E9A0300265EB8 /* idea-gif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "idea-gif.gif"; sourceTree = "<group>"; };
 		EB71AC021F1EA1700024FE95 /* SelectAllInterestsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAllInterestsTableViewCell.swift; sourceTree = "<group>"; };
 		EB71AC031F1EA1700024FE95 /* SelectAllInterestsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectAllInterestsTableViewCell.xib; sourceTree = "<group>"; };
 		EB71AC061F1EA17E0024FE95 /* SingleInterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInterestTableViewCell.swift; sourceTree = "<group>"; };
@@ -1133,6 +1135,7 @@
 			isa = PBXGroup;
 			children = (
 				D296F5D41E7628B6007EC393 /* FocusInterests.entitlements */,
+				EB6E2E8A1F3E9A0300265EB8 /* idea-gif.gif */,
 				D296F5D11E75BB3B007EC393 /* Authentication */,
 				D28EAFBE1E5E7C4C001EA7E5 /* Resources */,
 				D252206F1E5A894300EC2014 /* Models */,
@@ -1775,6 +1778,7 @@
 				D216482B1E9735AC00AE021B /* SelectedInterestCell.xib in Resources */,
 				FF8F7C291EECD0EE00AEC685 /* MapPopUpScreenView.xib in Resources */,
 				D24716841E90504B00FF389D /* DisplayInterestsCell.xib in Resources */,
+				EB6E2E8B1F3E9A0300265EB8 /* idea-gif.gif in Resources */,
 				5B519E7B1ED677D800B36110 /* SearchPeopleTableViewCell.xib in Resources */,
 				5B519E751ED667D000B36110 /* Pin.storyboard in Resources */,
 				D2B9B04A1E5A047C0002F1B1 /* Assets.xcassets in Resources */,

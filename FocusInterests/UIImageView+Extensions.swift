@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ImageIO
 
 extension UIImageView {
     
@@ -49,7 +50,15 @@ extension UIImageView {
             }
             task.resume()
         }
-        
+    }
+    
+    public func loadGif(name: String) {
+        DispatchQueue.global().async {
+            let image = UIImage.gif(name: name)
+            DispatchQueue.main.async {
+                self.image = image
+            }
+        }
     }
 }
 
