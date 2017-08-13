@@ -532,6 +532,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
         saveUserInfo()
+        showEvents()
         
         let token = Messaging.messaging().fcmToken
         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
@@ -1447,6 +1448,29 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     @IBAction func mapSettingsPressed(_ sender: Any) {
         self.settingGearButton.isHidden = true
         self.mapViewSettings.isHidden = false
+    }
+    
+    func showEvents(){
+        for interest in AuthApi.getInterests()!.components(separatedBy: ","){
+            if let ticketmaster_interest = Constants.interests.ticketMasterMapping[interest.components(separatedBy: "-")[0]]{
+                Event.getNearyByEvents(query: "", category: ticketmaster_interest, location: AuthApi.getLocation()!.coordinate, gotEvents: { events in
+                    for event in events{
+                        let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                        
+                        let marker = GMSMarker(position: position)
+                        marker.icon = #imageLiteral(resourceName: "Event")
+                        marker.title = event.title
+                        marker.map = self.mapView
+                        
+                        marker.accessibilityLabel = "event_\(self.events.count)"
+                        
+                        self.events.append(event)
+                    }
+                })
+            }
+            
+        }
+        
     }
 }
 
