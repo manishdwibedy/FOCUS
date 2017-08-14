@@ -427,6 +427,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func dateSelected(){
         self.dayTextField.text = "\(self.dateFormatter.string(from: self.datePicker.date))"
         self.view.endEditing(true)
+        
+        self.friendsTableView.allowsSelection = true
     }
     
     // MARK: - Tableview Delegate Methods
@@ -718,6 +720,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func screenTapWithPicker(sender: UITapGestureRecognizer)
     {
         timePicker.removeFromSuperview()
+        
+        self.friendsTableView.allowsSelection = true
     }
     
     func pickerChange(sender: UIDatePicker)
