@@ -1284,13 +1284,28 @@ extension InvitePeopleViewController{
             
             if self.place != nil {
                 Event.getNearyByEvents(query: query, location: (self.place?.coordinate)!, gotEvents: {events in
-                    self.filtered = self.filtered + events
+                    var DF = DateFormatter()
+                    DF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    self.filtered = self.filtered + events.sorted(by: {
+                        let date1 = DF.date(from: $0.0.date!)
+                        let date2 = DF.date(from: $0.1.date!)
+                        return date1! < date2!
+                    })
                     self.tableView.reloadData()
                 })
             }
             else{
                 Event.getNearyByEvents(query: query, gotEvents: {events in
-                    self.filtered = self.filtered + events
+                    var DF = DateFormatter()
+                    DF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    
+                    
+                    self.filtered = self.filtered + events.sorted(by: {
+                        let date1 = DF.date(from: $0.0.date!)
+                        let date2 = DF.date(from: $0.1.date!)
+                        return date1! < date2!
+                    })
+
                     self.tableView.reloadData()
                 })
             }

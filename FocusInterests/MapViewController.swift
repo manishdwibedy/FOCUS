@@ -264,7 +264,32 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         if let location = AuthApi.getLocation(){
             Event.getNearyByEvents(query: "", category: "", location: location.coordinate, gotEvents: {events in
-                for event in events{
+                
+                var DF = DateFormatter()
+                DF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                var dateOnlyDF = DateFormatter()
+                dateOnlyDF.dateFormat = "yyyy-MM-dd "
+                
+                var sortedEvents = events.sorted(by: {
+                    var date1: Date?, date2: Date?
+                    if let date = DF.date(from: $0.0.date!){
+                        date1 = date
+                    }
+                    else{
+                        date1 = dateOnlyDF.date(from: $0.0.date!)
+                    }
+                    
+                    if let date = DF.date(from: $0.1.date!){
+                        date2 = date
+                    }
+                    else{
+                        date2 = dateOnlyDF.date(from: $0.1.date!)
+                    }
+                    
+                    return date1! < date2!
+                })
+                
+                for event in sortedEvents{
                     if !(self.exploreTab?.events.contains(event))!{
                         self.exploreTab?.events.append(event)
                     }
