@@ -191,54 +191,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
         }
         
-        getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
-            self.followingPlaces = places.sorted(by: {
-                $0.distance < $1.distance
-            })
-            
-            if self.otherFollowingPlaces != nil{
-                if self.isMeetup{
-                    var uniquePlaces = self.places
-                    for place in self.followingPlaces{
-                        if !uniquePlaces.contains(place){
-                            uniquePlaces.append(place)
-                        }
-                    }
-                    
-                    for place in self.otherFollowingPlaces!{
-                        if !uniquePlaces.contains(place){
-                            uniquePlaces.append(place)
-                        }
-                    }
-                    
-                    
-                    self.places = uniquePlaces
-                    
-                    self.filtered = self.places
-                    self.tableView.reloadData()
-                }
-                else{
-                    self.places = self.followingPlaces + self.places
-                    self.filtered = self.places
-                    self.tableView.reloadData()
-                }
-                
-                self.updatePlaces()
-            }
-            if !self.isMeetup{
-                self.followingPlaces = self.followingPlaces.sorted(by: {
-                    $0.distance < $1.distance
-                })
-                self.places = self.followingPlaces + self.places
-                
-                self.filtered = self.places
-                self.tableView.reloadData()
-            }
-            
-            if self.segmentedOut.selectedSegmentIndex == 0{
-                self.updatePlaces()
-            }
-        })
+        
         
         if isMeetup{
             getFollowingPlace(uid: UID, gotPlaces: {places in
@@ -583,6 +536,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.updatePlaces()
         
         if clearSearch{
             searchBar.text = ""
@@ -1015,6 +970,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 if !self.places.contains(place){
                     self.places.append(place)
                 }
+            }
+            
+            if self.segmentedOut.selectedSegmentIndex == 0
+            {
+                self.filtered = self.places
             }
             self.tableView.reloadData()
         }

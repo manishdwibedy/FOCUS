@@ -1111,6 +1111,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                             self.places.append(place)
                             if !(self.exploreTab?.followingPlaces.contains(place))!{
                                 self.exploreTab?.followingPlaces.append(place)
+                                self.exploreTab?.places.append(place)
                             }
                             print("places count - \(self.places.count)")
                         }
@@ -1309,6 +1310,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         self.places.append(place)
                         if !(self.exploreTab?.followingPlaces.contains(place))!{
                             self.exploreTab?.followingPlaces.append(place)
+                            self.exploreTab?.places.append(place)
                         }
                     }
                 })
