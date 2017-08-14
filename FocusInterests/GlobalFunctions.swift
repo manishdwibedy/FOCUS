@@ -87,6 +87,8 @@ func getOpenHours(_ hours: [Hours]) -> [String]{
     var last_day_end = hours[0].day
     var last_start = hours[0].start
     var last_end = hours[0].end
+    var last_start_other = ""
+    var last_end_other = ""
     
     
     for (_, hour) in hours.dropFirst().enumerated(){
@@ -95,14 +97,37 @@ func getOpenHours(_ hours: [Hours]) -> [String]{
         if hour.start == last_start && hour.end == last_end && hour.day == last_day_end + 1{
             last_day_end = hour.day
         }
-            //last day doesn't match to the current day
+        //last day is the same as before
+        else if hour.day == last_day_end{
+            last_start_other = convert24HourTo12Hour(hour.start)
+            last_end_other = convert24HourTo12Hour(hour.end)
+        }
+            
         else{
             // if only day was there a
             if last_day_end == last_day_start{
-                result.append("\(days[last_day_start]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end))")
+                if last_start_other.characters.count > 0{
+                    result.append("\(days[last_day_start]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end)) \(last_start_other) - \(last_end_other)")
+                    last_start_other = ""
+                    last_end_other = ""
+
+                }
+                else{
+                    result.append("\(days[last_day_start]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end))")
+                }
+                
             }
             else{
+                if last_start_other.characters.count > 0{
+                    result.append("\(days[last_day_start]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end)) \(last_start_other) - \(last_end_other)")
+                    last_start_other = ""
+                    last_end_other = ""
+
+                }
+                else{
                 result.append("\(days[last_day_start]) - \(days[last_day_end]) \(convert24HourTo12Hour(last_start)) - \(convert24HourTo12Hour(last_end))")
+                }
+                
             }
             last_day_start = hour.day
             last_day_end = hour.day
