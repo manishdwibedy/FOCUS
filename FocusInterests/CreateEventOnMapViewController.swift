@@ -13,8 +13,9 @@ import SCLAlertView
 import FBSDKLoginKit
 import FirebaseAuth
 import Gallery
+import Lightbox
 
-class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, GalleryControllerDelegate, gotLocationDelegate{
+class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, GalleryControllerDelegate, gotLocationDelegate, LightboxControllerDismissalDelegate{
 
     // change location stack
     @IBOutlet weak var currentLocationStack: UIStackView!
@@ -465,9 +466,17 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
+        LightboxConfig.DeleteButton.enabled = true
         
+        let lightbox = LightboxController(images: images.map({ LightboxImage(image: $0) }), startIndex: 0)
+        lightbox.dismissalDelegate = self
+        
+        controller.present(lightbox, animated: true, completion: nil)
     }
 
+    public func lightboxControllerWillDismiss(_ controller: Lightbox.LightboxController){
+        controller.dismiss(animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
