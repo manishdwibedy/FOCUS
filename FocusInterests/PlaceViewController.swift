@@ -729,6 +729,33 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
                     
                     delegate?.showPlaceMarker(place: self.place!)
                 }
+                else{
+                    let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
+                    let marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: "place_icon")
+                    marker.title = place.name
+                    marker.map = map?.mapView
+                    marker.isTappable = true
+                    
+                    let index = map?.places.count
+                    marker.accessibilityLabel = "place_\(index!)"
+                    
+                    map?.placePins[place.id] = marker
+                    
+                    map?.placeMapping[place.id] = place
+                    map?.getPlaceHours(id: place.id)
+                    map?.places.append(place)
+                    
+                    map?.viewingPlace = place
+                    
+                    map?.currentLocation = CLLocation(latitude: position.latitude, longitude: position.longitude)
+                    map?.willShowPlace = true
+                    map?.tapPlace(place: place, marker: marker)
+                    
+                    map?.eventPlaceMarker = marker
+                    
+                    delegate?.showPlaceMarker(place: self.place!)
+                }
             }
         }else if segue.identifier == "unwindToMapViewControllerFromPlaceDetailsWithSegue"{
             let map = self.map
