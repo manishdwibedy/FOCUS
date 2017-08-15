@@ -73,7 +73,7 @@ class notificationTabCell: UITableViewCell {
             
             self.usernameLabel.attributedText = attrString
             self.typePic.isHidden = true
-            self.timeLabel.text = ""
+            self.timeLabel.text = DateFormatter().timeSince(from: notif.time!, numericDates: true, shortVersion: true)
             
             return
         }
