@@ -334,6 +334,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         getUnreadCount(count: {number in
             if number > 0{
                 self.navigationView.messagesButton.badgeString = "\(number)"
+                
+                let application = UIApplication.shared
+                application.applicationIconBadgeNumber = number + application.applicationIconBadgeNumber
             }
             else{
                 self.navigationView.messagesButton.badgeString = ""
@@ -392,6 +395,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
                         not_count -= read_notifications
+
+                        let application = UIApplication.shared
+                        application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
+                        
                         if not_count > 0{
                             if not_count > 9{
                                 self.navigationView.notificationsButton.badgeString = "9+"
@@ -424,6 +431,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         }
                         
                         not_count -= read_notifications
+                        
+                        let application = UIApplication.shared
+                        application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
+                        
                         if not_count > 0{
                             if not_count > 9{
                                 self.navigationView.notificationsButton.badgeString = "9+"
@@ -444,6 +455,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         not_count += Array(Set<FocusNotification>(self.notifs)).count
                         
                         not_count -= read_notifications
+                        
+                        let application = UIApplication.shared
+                        application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
+                        
                         if not_count > 0{
                             if not_count > 9{
                                 self.navigationView.notificationsButton.badgeString = "9+"
@@ -485,6 +500,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     }
                     
                     not_count -= read_notifications
+                    
+                    let application = UIApplication.shared
+                    application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
+                    
                     if not_count > 0{
                         if not_count > 9{
                             self.navigationView.notificationsButton.badgeString = "9+"
@@ -520,6 +539,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     }
                     
                     not_count -= read_notifications
+                    
+                    let application = UIApplication.shared
+                    application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
+                    
                     if not_count > 0{
                         if not_count > 9{
                             self.navigationView.notificationsButton.badgeString = "9+"
@@ -541,6 +564,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                     not_count += Array(Set<FocusNotification>(self.notifs)).count
                     
                     not_count -= read_notifications
+                    
+                    let application = UIApplication.shared
+                    application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
+                    
                     if not_count > 0{
                         if not_count > 9{
                             self.navigationView.notificationsButton.badgeString = "9+"
