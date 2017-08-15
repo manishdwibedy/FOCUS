@@ -275,7 +275,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         }
         self.averageRatingAmount = Double(ratingAmount)
 
-        Constants.DB.pins.queryOrdered(byChild: "formattedAddress").queryEqual(toValue: address).observeSingleEvent(of: .value, with: { (snapshot) in
+        Constants.DB.pins.queryOrdered(byChild: "formattedAddress").queryEqual(toValue: place!.name).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
