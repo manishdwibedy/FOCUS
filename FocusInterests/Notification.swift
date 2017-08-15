@@ -133,7 +133,7 @@ class NotificationUtil{
                                     let user = NotificationUser(username: value["username"] as? String, uuid: value["firebaseUserId"] as? String, imageURL: value["image_string"] as? String)
                                     
                                     let followerUser = ItemOfInterest(itemName: user.username, imageURL: nil, type: "")
-                                    followerUser.id = (value["UID"] as? String)!
+                                    followerUser.id = (value["firebaseUserId"] as? String)!
                                     
                                     if let time = time{
                                         let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: followerUser, time: Date(timeIntervalSince1970: time))
