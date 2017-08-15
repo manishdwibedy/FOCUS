@@ -57,6 +57,7 @@ target 'FocusInterests' do
     pod 'AMPopTip'
     pod 'Mapbox-iOS-SDK', '~> 3.6'
     pod 'MapboxGeocoder.swift', '~> 0.6'
+    pod 'SwiftGifOrigin', '~> 1.6.1'
 end
 
 target 'FocusInterestsTests' do
