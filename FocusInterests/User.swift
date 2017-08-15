@@ -21,6 +21,7 @@ class User: Equatable {
     var pinDistance = 0.0
     var pinCaption = ""
     var matchingInterestCount = 0
+    var isPrivate = false
     
     init(username: String?, fullname: String?, uuid: String?, userImage: UIImage?, interests: [Interest]?, image_string: String?, hasPin: Bool?) {
         self.username =  username
@@ -59,9 +60,15 @@ class User: Equatable {
             
             user_interests.append(Interest(name: interest_name, category: nil, image: nil, imageString: nil))
         }
+        let user = User(username: username, fullname: fullname, uuid: id, userImage: nil, interests: user_interests, image_string: image, hasPin: false)
         
-        
-        return User(username: username, fullname: fullname, uuid: id, userImage: nil, interests: user_interests, image_string: image, hasPin: false)
+        if let isPrivate = info["private"] as? Bool{
+            user.isPrivate = isPrivate
+        }
+        else{
+            user.isPrivate = false
+        }
+        return user
         
     }
     

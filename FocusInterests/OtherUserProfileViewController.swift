@@ -243,6 +243,37 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 self.followButton.layer.masksToBounds = false
                 self.followButton.layer.shadowColor = UIColor.black.cgColor
                 self.followButton.layer.shadowRadius = 5.0
+                
+                self.privateUserProfileView.isHidden = true
+                var eventTableFrame = self.eventsTableView.frame
+                eventTableFrame.size.height = self.eventsTableView.contentSize.height
+                self.eventsTableView.frame = eventTableFrame
+                
+                var placesTableFrame = self.placesTableView.frame
+                placesTableFrame.size.height = self.placesTableView.contentSize.height
+                self.placesTableView.frame = placesTableFrame
+            }
+            else{
+                if self.userData!.isPrivate{
+                    if self.profileIsSetToPrivate{
+                        self.otherPlaceStackView.isHidden = true
+                        self.otherEventStackView.isHidden = true
+                        self.eventsStackView.isHidden = true
+                        self.recentPostTableView.isHidden = true
+                        self.focusView.isHidden = true
+                        self.eventView.isHidden = true
+                    }
+                    else{
+                        self.privateUserProfileView.isHidden = true
+                        var eventTableFrame = self.eventsTableView.frame
+                        eventTableFrame.size.height = self.eventsTableView.contentSize.height
+                        self.eventsTableView.frame = eventTableFrame
+                        
+                        var placesTableFrame = self.placesTableView.frame
+                        placesTableFrame.size.height = self.placesTableView.contentSize.height
+                        self.placesTableView.frame = placesTableFrame
+                    }
+                }
             }
         })
         
@@ -341,23 +372,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.displayUserData()
-        if self.profileIsSetToPrivate{
-            self.otherPlaceStackView.isHidden = true
-            self.otherEventStackView.isHidden = true
-            self.eventsStackView.isHidden = true
-            self.recentPostTableView.isHidden = true
-            self.focusView.isHidden = true
-            self.eventView.isHidden = true
-        }else{
-            self.privateUserProfileView.isHidden = true
-            var eventTableFrame = self.eventsTableView.frame
-            eventTableFrame.size.height = self.eventsTableView.contentSize.height
-            self.eventsTableView.frame = eventTableFrame
-            
-            var placesTableFrame = self.placesTableView.frame
-            placesTableFrame.size.height = self.placesTableView.contentSize.height
-            self.placesTableView.frame = placesTableFrame
-        }
     }
     
     //    MARK: COLLECTIONVIEW DELEGATE METHODS
