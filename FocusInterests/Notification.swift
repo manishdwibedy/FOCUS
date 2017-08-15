@@ -132,15 +132,16 @@ class NotificationUtil{
                                 if let value = snapshot.value as? [String:Any]{
                                     let user = NotificationUser(username: value["username"] as? String, uuid: value["firebaseUserId"] as? String, imageURL: value["image_string"] as? String)
                                     
-                                    let invite_place = ItemOfInterest(itemName: user.username, imageURL: nil, type: "")
+                                    let followerUser = ItemOfInterest(itemName: user.username, imageURL: nil, type: "")
+                                    followerUser.id = (value["firebaseUserId"] as? String)!
                                     
                                     if let time = time{
-                                        let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: invite_place, time: Date(timeIntervalSince1970: time))
+                                        let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: followerUser, time: Date(timeIntervalSince1970: time))
                                         event_comment.notif_type = .notification
                                         followers.append(event_comment)
                                     }
                                     else{
-                                        let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: invite_place, time: Date())
+                                        let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: followerUser, time: Date())
                                         event_comment.notif_type = .notification
                                         followers.append(event_comment)
                                     }
