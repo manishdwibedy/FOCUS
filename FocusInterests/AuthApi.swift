@@ -292,6 +292,9 @@ struct AuthApi {
     }
     
     static func clearNotifications(){
+        let application = UIApplication.shared
+        application.applicationIconBadgeNumber = 0
+        
         defaults.set(false, forKey: "notification")
     }
     
