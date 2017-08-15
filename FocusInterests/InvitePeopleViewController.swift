@@ -1295,7 +1295,7 @@ extension InvitePeopleViewController{
                 })
             }
             else{
-                Event.getNearyByEvents(query: query, gotEvents: {events in
+                Event.getNearyByEvents(query: query, location: (AuthApi.getLocation()?.coordinate)!, gotEvents: {events in
                     var DF = DateFormatter()
                     DF.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     

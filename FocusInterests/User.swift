@@ -22,6 +22,8 @@ class User: Equatable {
     var pinCaption = ""
     var matchingInterestCount = 0
     var isPrivate = false
+    var readNotifications = 0
+    var unreadNotifications = 0
     
     init(username: String?, fullname: String?, uuid: String?, userImage: UIImage?, interests: [Interest]?, image_string: String?, hasPin: Bool?) {
         self.username =  username
@@ -90,6 +92,21 @@ class User: Equatable {
             }
         })
         
+    }
+    
+    static func setReadNotifications(read: Int){
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues([
+            "readCount" : read
+            ])
+        
+        AuthApi.set(read: read)
+    }
+    
+    static func setUnReadNotifications(unread: Int){
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues([
+            "unreadCount" : unread
+            ])
+        AuthApi.set(unread: unread)
     }
     
 //    static func unFollowUser(uid: String){

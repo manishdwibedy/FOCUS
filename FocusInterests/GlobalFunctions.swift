@@ -326,10 +326,15 @@ func sendNotification(to id: String, title: String, body: String, actionType: St
         let user = snapshot.value as? [String : Any] ?? [:]
         
         let token = user["token"] as? String
+        var count = 1
+        if let unread = user["unreadCount"] as? Int{
+            count = unread
+        }
         
         let parameters = [
             "to":token ?? "",
             "title": title,
+            "count": count,
             "body": body
             
             ] as [String : Any]

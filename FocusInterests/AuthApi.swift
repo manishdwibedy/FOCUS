@@ -44,6 +44,28 @@ struct AuthApi {
         return false
     }
     
+    static func set(unread: Int) {
+        defaults.set(unread, forKey: "unread")
+    }
+    
+    static func getUnread() -> Int {
+        if let unread = defaults.object(forKey: "unread") as? Int {
+            return unread
+        }
+        return 0
+    }
+    
+    static func set(read: Int) {
+        defaults.set(read, forKey: "read")
+    }
+    
+    static func getRead() -> Int {
+        if let read = defaults.object(forKey: "read") as? Int {
+            return read
+        }
+        return 0
+    }
+    
     static func set(userEmail: String?) {
         if let email = userEmail {
             defaults.set(email, forKey: "userEmail")
@@ -280,9 +302,6 @@ struct AuthApi {
         return 0
     }
     
-    static func set(read: Int){
-        defaults.set(read, forKey: "notification_count")
-    }
     
     static func showPin() -> Bool{
         if let showPin = defaults.object(forKey: "show_pin") as? Bool {

@@ -354,6 +354,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let six_am = now.dateAt(hours: 6, minutes: 0)
         let six_pm = now.dateAt(hours: 18, minutes: 0)
         
+        // Night mode
         if now > six_pm &&
             now < six_am{
             
@@ -368,6 +369,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 NSLog("One or more of the map styles failed to load. \(error)")
             }
         }
+            
+        // Day mode
         else{
             do {
                 // Set the map style by passing the URL of the local file.
@@ -985,7 +988,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let six_am = now.dateAt(hours: 6, minutes: 0)
         let six_pm = now.dateAt(hours: 18, minutes: 0)
         
-        
+        // Night mode
         if now > six_pm &&
             now < six_am{
             
@@ -1000,6 +1003,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 NSLog("One or more of the map styles failed to load. \(error)")
             }
         }
+        // Day Mode
         else{
             do {
                 // Set the map style by passing the URL of the local file.

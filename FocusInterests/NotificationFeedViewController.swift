@@ -39,8 +39,8 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         tableView.dataSource = self
         tableView.cellLayoutMarginsFollowReadableWidth = false
         
-        AuthApi.clearNotifications()
         
+        AuthApi.clearNotifications()
         
         if self.nofArray.isEmpty && self.invArray.isEmpty && self.feedAray.isEmpty{
             self.noNotificationsLabel.isHidden = false
@@ -95,6 +95,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     
     func getNotifications(){
         
+        AuthApi.set(unread: 0)
         NotificationUtil.getNotificationCount(gotNotification: {notif in
             for notification in Array(Set<FocusNotification>(notif)){
                 if !self.nofArray.contains(notification){
@@ -105,6 +106,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             self.nofArray = self.nofArray.sorted(by: {
                 $0.time! > $1.time!
             })
+            AuthApi.set(read: self.nofArray.count)
             self.tableView.reloadData()
         }, gotInvites: {invites in
             for notification in Array(Set<FocusNotification>(invites)){
@@ -116,6 +118,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             self.nofArray = self.nofArray.sorted(by: {
                 $0.time! > $1.time!
             })
+            AuthApi.set(read: self.nofArray.count)
             self.tableView.reloadData()
         } , gotFeed: {feed in
             
