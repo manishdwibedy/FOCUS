@@ -49,10 +49,10 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIq-Pr-ji4" customClass="MapNavigationView" customModule="FocusInterests" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="ENT-vO-Ph2"/>
+                                    <constraint firstAttribute="height" constant="44" id="ENT-vO-Ph2"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9GY-g7-gUF">
@@ -93,19 +93,29 @@
                                     <constraint firstItem="qaM-yH-rOB" firstAttribute="centerX" secondItem="Gfa-vo-Zxo" secondAttribute="centerX" id="amk-Bk-lbg"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmw-Ze-TNB">
+                                <rect key="frame" x="0.0" y="20" width="375" height="641"/>
+                                <connections>
+                                    <segue destination="SsS-7f-VWV" kind="embed" id="lUM-hy-jR2"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="2x6-qQ-iyw"/>
                             <constraint firstItem="05W-Qw-2Y5" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="3r4-0c-HZ5"/>
                             <constraint firstAttribute="bottom" secondItem="Gfa-vo-Zxo" secondAttribute="bottom" constant="-121" id="586-3p-Y7P"/>
+                            <constraint firstItem="Gfa-vo-Zxo" firstAttribute="top" secondItem="dmw-Ze-TNB" secondAttribute="bottom" constant="8" id="6sc-2D-Ye8"/>
                             <constraint firstAttribute="trailing" secondItem="05W-Qw-2Y5" secondAttribute="trailing" id="DHn-cC-Nm9"/>
                             <constraint firstItem="to3-UK-Oze" firstAttribute="centerX" secondItem="wPw-hG-pw7" secondAttribute="centerX" id="EN5-nb-BSt"/>
+                            <constraint firstItem="dmw-Ze-TNB" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="GQ2-ab-5p6"/>
                             <constraint firstAttribute="trailing" secondItem="bIq-Pr-ji4" secondAttribute="trailing" id="H69-6o-iu0"/>
+                            <constraint firstItem="dmw-Ze-TNB" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="ISI-aN-D7G"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="VpH-45-PKf" secondAttribute="bottom" constant="38" id="LM0-Ym-nZL"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="to3-UK-Oze" secondAttribute="bottom" constant="-20" id="MIK-K5-avi"/>
-                            <constraint firstItem="bIq-Pr-ji4" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" constant="4" id="Pe2-YI-lSy"/>
+                            <constraint firstItem="bIq-Pr-ji4" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="Pe2-YI-lSy"/>
                             <constraint firstItem="Gfa-vo-Zxo" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" constant="5" id="Srs-34-UVg"/>
+                            <constraint firstAttribute="trailing" secondItem="dmw-Ze-TNB" secondAttribute="trailing" id="bLC-gM-S2x"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="05W-Qw-2Y5" secondAttribute="bottom" id="dIH-f6-lgF"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="9GY-g7-gUF" secondAttribute="bottom" id="ndc-Hh-qgn"/>
                             <constraint firstItem="9GY-g7-gUF" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="p0d-Ju-lSt"/>
@@ -123,6 +133,7 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="animationContainterView" destination="dmw-Ze-TNB" id="oOR-S1-SMt"/>
                         <outlet property="followYourFriendsView" destination="4Vi-EG-jX7" id="j50-mt-ejv"/>
                         <outlet property="invitePopupView" destination="Gfa-vo-Zxo" id="5Sv-ob-Uin"/>
                         <outlet property="invitePopupViewBottomConstraint" destination="586-3p-Y7P" id="v5S-sY-j3x"/>
@@ -227,7 +238,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ODR-ok-zdv" customClass="MapViewSettingPageViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mY4-zh-1jM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2367" y="918"/>
+            <point key="canvasLocation" x="2529" y="1008"/>
         </scene>
         <!--Map Settings Two View Controller-->
         <scene sceneID="fFl-nb-kdM">
@@ -742,6 +753,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7a-Ig-FmW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="558" y="1996"/>
+        </scene>
+        <!--Animation View Controller-->
+        <scene sceneID="SKB-70-dqY">
+            <objects>
+                <viewController id="SsS-7f-VWV" customClass="AnimationViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zDG-7N-r2g">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TFH-tE-io8">
+                                <rect key="frame" x="157.5" y="290" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="5Jj-rB-S4q"/>
+                                    <constraint firstAttribute="height" constant="60" id="u2l-IT-MWY"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TFH-tE-io8" firstAttribute="centerX" secondItem="zDG-7N-r2g" secondAttribute="centerX" id="Ugu-09-Lpv"/>
+                            <constraint firstItem="TFH-tE-io8" firstAttribute="centerY" secondItem="zDG-7N-r2g" secondAttribute="centerY" id="kju-dS-yvh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AM7-B3-2eN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1620.8" y="1770.7646176911546"/>
         </scene>
     </scenes>
     <resources>
