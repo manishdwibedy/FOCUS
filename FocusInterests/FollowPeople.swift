@@ -33,7 +33,10 @@ class Follow{
             let value = snapshot.value as? [String:Any]
             
             if value == nil{
-                Constants.DB.user.child(uid).child("followers/people").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+                Constants.DB.user.child(uid).child("followers/people").childByAutoId().updateChildValues([
+                    "UID": AuthApi.getFirebaseUid()!,
+                    "time": Date().timeIntervalSince1970
+                    ])
             }
         })
         
