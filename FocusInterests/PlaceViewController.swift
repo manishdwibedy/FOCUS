@@ -416,11 +416,18 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             Constants.DB.user.child((data["fromUID"] as? String)!).observeSingleEvent(of: .value, with: {snapshot in
                 if let data = snapshot.value as? [String:Any]{
                     pinCell.usernameLabel.text = data["username"] as? String
+                    
+                    if let image = data["image_string"] as? String{
+                        if let url = URL(string: image){
+                            pinCell.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                        }
+                    }
+                    
                 }
             })
             
             addGreenDot(label: pinCell.categoryLabel, content:(data["focus"] as? String)!)
-            pinCell.timeOfPinLabel.text = pinDF.string(from: Date(timeIntervalSince1970: (data["time"] as? Double)!))
+            pinCell.timeOfPinLabel.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (data["time"] as? Double)!), numericDates: true, shortVersion: true)
             pinCell.commentsTextView.text = data["pin"] as? String
             self.pinTableView.frame.size.height = (pinCell.frame.height * CGFloat(indexPath.row + 1))
             return pinCell
