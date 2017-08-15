@@ -68,23 +68,28 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         getAllActivity(gotPins: { pins in
                 self.feeds.append(contentsOf: pins)
             
-                self.feeds = self.feeds.sorted(by: {
+                var uniqueFeeds = Array(Set(self.feeds))
+                self.feeds = uniqueFeeds.sorted(by: {
                     $0.time! >= $1.time!
                 })
                 self.tableView.reloadData()
             }, gotEvents: { events in
                 self.feeds.append(contentsOf: events)
                 
-                self.feeds = self.feeds.sorted(by: {
+                var uniqueFeeds = Array(Set(self.feeds))
+                self.feeds = uniqueFeeds.sorted(by: {
                     $0.time! >= $1.time!
                 })
+                
                 self.tableView.reloadData()
             }, gotInvitations: { invites in
                 self.feeds.append(contentsOf: invites)
                 
-                self.feeds = self.feeds.sorted(by: {
+                var uniqueFeeds = Array(Set(self.feeds))
+                self.feeds = uniqueFeeds.sorted(by: {
                     $0.time! >= $1.time!
                 })
+                
                 self.tableView.reloadData()
             }
         )
@@ -95,7 +100,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         super.viewWillAppear(animated)
         self.location = AuthApi.getLocation()
         
-        self.feeds = self.feeds.sorted(by: {
+        var uniqueFeeds = Array(Set(self.feeds))
+        self.feeds = uniqueFeeds.sorted(by: {
             $0.time! >= $1.time!
         })
         
