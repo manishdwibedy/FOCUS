@@ -183,8 +183,10 @@ class ChooseLocationViewController: UIViewController, UITableViewDelegate, UITab
     }
     */
     @IBAction func backPressed(_ sender: Any) {
+        if let loc = self.selectedLocation{
+            delegate.gotSelectedLocation(location: self.selectedLocation!)
+        }
         
-        delegate.gotSelectedLocation(location: self.selectedLocation!)
         self.dismiss(animated: true, completion: nil)
     }
 
