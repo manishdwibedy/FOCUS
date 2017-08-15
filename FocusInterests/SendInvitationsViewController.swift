@@ -98,11 +98,6 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         UIBarButtonItem.appearance().setTitleTextAttributes(placeholderAttributes, for: .normal)
         
-        if contacts.count <= 0 {
-            contactListView.isHidden = true
-        }else{
-            contactListView.isHidden = false
-        }
         
         let inviteListCellNib = UINib(nibName: "InviteListTableViewCell", bundle: nil)
         friendsTableView.register(inviteListCellNib, forCellReuseIdentifier: "personToInvite")
@@ -536,12 +531,11 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //        contactList.text = friendList.joined(separator: ",")
     }
     func deselectAllFollowers() {
-        contactListView.isHidden = true
         contactList.text = ""
     }
     
     func selectedAllFollowers() {
-        contactListView.isHidden = false
+        
 //        for contactIndex in 0..<selectedFriend.count{
 //            contactList.text = contactList.text! + ",\(contacts[contactIndex].givenName)"
 //        }
