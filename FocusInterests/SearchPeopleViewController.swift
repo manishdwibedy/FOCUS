@@ -135,7 +135,10 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                                         user.hasPin = true
                                                         
                                                         let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
-                                                        user.pinDistance = pinLocation.distance(from: AuthApi.getLocation()!)
+                                                        if let location = AuthApi.getLocation(){
+                                                            user.pinDistance = pinLocation.distance(from: location)
+                                                        }
+                                                        
                                                     }
                                                     
                                                 }
