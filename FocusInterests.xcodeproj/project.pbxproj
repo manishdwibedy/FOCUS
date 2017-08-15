@@ -318,6 +318,7 @@
 		EBE7AE4A1F16141700901F9F /* FollowYourSpecificFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE7AE481F16141700901F9F /* FollowYourSpecificFriendTableViewCell.xib */; };
 		EBE7AE4D1F16142600901F9F /* FollowAllYourFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE7AE4B1F16142600901F9F /* FollowAllYourFriendsTableViewCell.swift */; };
 		EBE7AE4E1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE7AE4C1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib */; };
+		EBEBFBD51F43714C004CCE47 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEBFBD41F43714C004CCE47 /* AnimationViewController.swift */; };
 		EFC3711F629A30861AC0A8E7 /* Pods_FocusInterestsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C4DDD8071149FE52DC74D /* Pods_FocusInterestsTests.framework */; };
 		FF0F9D581ECFA0C6004E2C90 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */; };
 		FF0F9D5B1ECFA4A6004E2C90 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */; };
@@ -722,6 +723,7 @@
 		EBE7AE481F16141700901F9F /* FollowYourSpecificFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowYourSpecificFriendTableViewCell.xib; sourceTree = "<group>"; };
 		EBE7AE4B1F16142600901F9F /* FollowAllYourFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowAllYourFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		EBE7AE4C1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowAllYourFriendsTableViewCell.xib; sourceTree = "<group>"; };
+		EBEBFBD41F43714C004CCE47 /* AnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		F90FEEC1EA7C65BBE03148CB /* Pods_FocusInterests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FocusInterests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0F9D571ECFA0C6004E2C90 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchPlacesViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FF0F9D591ECFA4A5004E2C90 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
@@ -1262,6 +1264,7 @@
 		D2B9B0731E5A0A270002F1B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EBEBFBD31F43712A004CCE47 /* AnimationView */,
 				EB426A721F2B2A0A008DBEF5 /* CreateEventMapView */,
 				EB71ABFD1F1E990F0024FE95 /* Map Settings */,
 				EB2203811F1DDCD500F86B73 /* FollowersRequest */,
@@ -1540,6 +1543,14 @@
 				EBE7AE4C1F16142600901F9F /* FollowAllYourFriendsTableViewCell.xib */,
 			);
 			name = FollowYourFriends;
+			sourceTree = "<group>";
+		};
+		EBEBFBD31F43712A004CCE47 /* AnimationView */ = {
+			isa = PBXGroup;
+			children = (
+				EBEBFBD41F43714C004CCE47 /* AnimationViewController.swift */,
+			);
+			name = AnimationView;
 			sourceTree = "<group>";
 		};
 		FF7C87481ED7324C004ABB1B /* Pin */ = {
@@ -2229,6 +2240,7 @@
 				5B69158C1ED7D80100093AD5 /* NewUserPopupViewController.swift in Sources */,
 				5B6AFA741ED1906900A82104 /* GMUPolygon.m in Sources */,
 				D28C89A01E5E862E009DB8C1 /* FirstLoginVC.swift in Sources */,
+				EBEBFBD51F43714C004CCE47 /* AnimationViewController.swift in Sources */,
 				5B5906431EC28FEC00466AAC /* DateFormatter+Extensions.swift in Sources */,
 				5B33C05E1EE113D3007A8188 /* MapPinInfoView.swift in Sources */,
 				5B634C831ED196BE00EBCC29 /* CustomClusterRenderer.swift in Sources */,
