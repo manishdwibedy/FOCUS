@@ -235,7 +235,7 @@ extension Event{
         })
     }
     
-    static func getNearyByEvents(query: String = "", category: String = "", location: CLLocationCoordinate2D = (AuthApi.getLocation()?.coordinate)!, gotEvents: @escaping (_ result: [Event]) -> Void){
+    static func getNearyByEvents(query: String = "", category: String = "", location: CLLocationCoordinate2D, gotEvents: @escaping (_ result: [Event]) -> Void){
         var events = [Event]()
         
         let url = "https://app.ticketmaster.com/discovery/v2/events.json"
