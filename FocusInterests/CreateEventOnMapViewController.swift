@@ -212,65 +212,78 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).removeValue()
 
         let time = NSDate().timeIntervalSince1970
+        let imagePaths = NSMutableDictionary()
+        var pinInfo: [String:Any]?
         if galleryPicArray.count > 0
         {
-            let imagePaths = NSMutableDictionary()
+            
             for image in galleryPicArray
             {
                 let random = Int(time) + Int(arc4random_uniform(10000000))
                 let path = AuthApi.getFirebaseUid()!+"/"+String(random)
                 imagePaths.addEntries(from: [String(random):["imagePath": path]])
                 uploadImage(image: image, path: Constants.storage.pins.child(path))
-                
             }
-            
-            if formmatedAddress.characters.count > 0{
-                Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":self.formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinate.longitude), "images": imagePaths, "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
-                
-                Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(self.location.coordinate.latitude), longitude: Double(self.location.coordinate.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
-                    if (error != nil) {
-                        debugPrint("An error occured: \(String(describing: error))")
-                    } else {
-                        print("Saved location successfully!")
-                    }
-                }
-                
-                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-                    let value = snapshot.value as? [String:Any]
-                    
-                    if let pinCount = value?["pinCount"] as? Int{
-                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["pinCount": pinCount + 1])
-                    }
-                    else{
-                        Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["pinCount": 1])
-                    }
-                })
-                
-                if self.pinType == .place{
-                    Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinate.longitude), "images": imagePaths, "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
-                    
-                }
-                else if self.pinType == .event{
-                    Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": userStatusTextView.text!,"formattedAddress":formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinate.longitude), "images": imagePaths, "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""] )
-                }
-                Answers.logCustomEvent(withName: "Pin",
-                                       customAttributes: [
-                                        "user": AuthApi.getFirebaseUid()!,
-                                        "interest": addFocusButton.titleLabel?.text,
-                                        "address": formmatedAddress,
-                                        "imageSelected": false,
-                                        "public": isPublic
-                    ])
-            }
-            if isTwitter == true
-            {
-                Share.postToTwitter(withStatus: userStatusTextView.text!)
-            }
-            if isFacebook == true
-            {
-                try! Share.facebookShare(with: URL(string: "http://mapofyourworld.com")!, description: userStatusTextView.text!)
+            if galleryPicArray.count > 0{
+                pinInfo?["images"] = imagePaths
             }
         }
+        
+        var caption = ""
+        
+        if userStatusTextView.text != "What are you up to? Type Here"{
+            caption = userStatusTextView.text
+        }
+        
+        if formmatedAddress.characters.count > 0{
+            pinInfo = ["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": caption ,"formattedAddress":self.formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinate.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""]
+            Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(pinInfo!)
+            
+            Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(self.location.coordinate.latitude), longitude: Double(self.location.coordinate.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
+                if (error != nil) {
+                    debugPrint("An error occured: \(String(describing: error))")
+                } else {
+                    print("Saved location successfully!")
+                }
+            }
+            
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? [String:Any]
+                
+                if let pinCount = value?["pinCount"] as? Int{
+                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["pinCount": pinCount + 1])
+                }
+                else{
+                    Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["pinCount": 1])
+                }
+            })
+            
+            if self.pinType == .place{
+                Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(pinInfo! )
+            }
+            else if self.pinType == .event{
+                Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(pinInfo!)
+            }
+                
+            
+            Answers.logCustomEvent(withName: "Pin",
+                                   customAttributes: [
+                                    "user": AuthApi.getFirebaseUid()!,
+                                    "interest": addFocusButton.titleLabel?.text,
+                                    "address": formmatedAddress,
+                                    "imageSelected": false,
+                                    "public": isPublic
+                ])
+        }
+        if isTwitter == true
+        {
+            Share.postToTwitter(withStatus: userStatusTextView.text!)
+        }
+        if isFacebook == true
+        {
+            try! Share.facebookShare(with: URL(string: "http://mapofyourworld.com")!, description: userStatusTextView.text!)
+        }
+        
         userStatusTextView.text = "What are you up to? Type here."
         userStatusTextView.font = UIFont(name: "Avenir Book", size: 17)
         
@@ -290,11 +303,6 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
 //            cell.imageView.layer.borderWidth = 0
 //        }
         
-        var caption = ""
-        
-        if userStatusTextView.text != "What are you up to? Type Here"{
-            caption = userStatusTextView.text
-        }
         
         let pin = pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: caption, location: searchLocationTextField.text!, lat: (location.coordinate.latitude), lng: (location.coordinate.latitude), path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text) ?? "Meet up")
         

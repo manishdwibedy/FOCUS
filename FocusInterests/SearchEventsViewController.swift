@@ -65,40 +65,41 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         hideKeyboardWhenTappedAround()
 //        tableView.tableFooterView = UIView()
         
-        getAllActivity(gotPins: { pins in
-                self.feeds.append(contentsOf: pins)
-            
-                var uniqueFeeds = Array(Set(self.feeds))
-                self.feeds = uniqueFeeds.sorted(by: {
-                    $0.time! >= $1.time!
-                })
-                self.tableView.reloadData()
-            }, gotEvents: { events in
-                self.feeds.append(contentsOf: events)
-                
-                var uniqueFeeds = Array(Set(self.feeds))
-                self.feeds = uniqueFeeds.sorted(by: {
-                    $0.time! >= $1.time!
-                })
-                
-                self.tableView.reloadData()
-            }, gotInvitations: { invites in
-                self.feeds.append(contentsOf: invites)
-                
-                var uniqueFeeds = Array(Set(self.feeds))
-                self.feeds = uniqueFeeds.sorted(by: {
-                    $0.time! >= $1.time!
-                })
-                
-                self.tableView.reloadData()
-            }
-        )
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.location = AuthApi.getLocation()
+        
+        getAllActivity(gotPins: { pins in
+            self.feeds.append(contentsOf: pins)
+            
+            var uniqueFeeds = Array(Set(self.feeds))
+            self.feeds = uniqueFeeds.sorted(by: {
+                $0.time! >= $1.time!
+            })
+            self.tableView.reloadData()
+        }, gotEvents: { events in
+            self.feeds.append(contentsOf: events)
+            
+            var uniqueFeeds = Array(Set(self.feeds))
+            self.feeds = uniqueFeeds.sorted(by: {
+                $0.time! >= $1.time!
+            })
+            
+            self.tableView.reloadData()
+        }, gotInvitations: { invites in
+            self.feeds.append(contentsOf: invites)
+            
+            var uniqueFeeds = Array(Set(self.feeds))
+            self.feeds = uniqueFeeds.sorted(by: {
+                $0.time! >= $1.time!
+            })
+            
+            self.tableView.reloadData()
+        })
         
         var uniqueFeeds = Array(Set(self.feeds))
         self.feeds = uniqueFeeds.sorted(by: {
