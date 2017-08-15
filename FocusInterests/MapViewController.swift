@@ -1484,8 +1484,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBAction func unwindToMapViewControllerFromPlaceDetails(segue: UIStoryboardSegue){
         let popController = self.createPopOver()
+        popController.pinType = .place
+        popController.formmatedAddress = self.locationFromPlaceDetails
         self.tabBarController?.present(popController, animated: true, completion: { completed in
-            popController.searchLocationTextField.text = self.locationFromPlaceDetails
+            
         })
     }
     

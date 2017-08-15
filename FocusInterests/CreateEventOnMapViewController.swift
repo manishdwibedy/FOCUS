@@ -105,11 +105,14 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if !selectedLocation{
+        if !selectedLocation && self.pinType == .normal{
             getPlaceName(location: AuthApi.getLocation()!, completion: {address in
                 self.formmatedAddress = address
                 self.searchLocationTextField.text = address
             })
+        }
+        else if pinType == .place || pinType == .event{
+                self.searchLocationTextField.text = formmatedAddress
         }
     }
 
