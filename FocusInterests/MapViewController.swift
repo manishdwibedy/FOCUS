@@ -39,6 +39,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var popUpView: UIView!
     @IBOutlet weak var usernameInputView: UIView!
+    @IBOutlet weak var animationContainterView: UIView!
     
     @IBOutlet weak var popupArrowImage: UIImageView!
     var createdEvent: Event?
@@ -318,10 +319,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.settingGearButton.isHidden = false
-        self.mapViewSettings.isHidden = true
-        
+    
         Answers.logCustomEvent(withName: "Screen",
                                        customAttributes: [
                                         "Name": "Map View"
@@ -362,6 +360,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 // Set the map style by passing the URL of the local file.
                 if let styleURL = Bundle.main.url(forResource: "night_style", withExtension: "json") {
                     mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
+                    self.navigationView.focusLogo.image = logo
+                    
+                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .normal)
+                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .selected)
+                    
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .normal)
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .selected)
+                    
                 } else {
                     NSLog("Unable to find style.json")
                 }
@@ -375,6 +382,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             do {
                 // Set the map style by passing the URL of the local file.
                 if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
+                    
+                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
+                    self.navigationView.focusLogo.image = logo
+                    
+                    let navyChatIcon = UIImage(image: #imageLiteral(resourceName: "navy chat button"), scaledTo: CGSize(width: 35, height: 35))
+                    
+                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .normal)
+                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .selected)
+                    
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .normal)
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .selected)
                     mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
                 } else {
                     NSLog("Unable to find style.json")
@@ -699,7 +717,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             self.showPopup()
         }
         
-        self.mapViewSettings.isHidden = true
+        self.settingGearButton.isHidden = true
+        self.animationContainterView.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -866,16 +885,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         
-        if self.mapViewSettings.isHidden == true{
-            self.settingGearButton.isHidden = false
-        }else{
-            self.settingGearButton.isHidden = true
-        }
-        
-        if self.settingGearButton.isHidden && self.popUpView.isHidden && (self.mapViewSettings.isHidden == false){
-            self.mapViewSettings.isHidden = true
-            self.settingGearButton.isHidden = false
-        }
         
         popUpView.isHidden = true
         
@@ -885,7 +894,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        self.settingGearButton.isHidden = true
+        
     
         let accessibilityLabel = marker.accessibilityLabel
         marker.tracksInfoWindowChanges = true
