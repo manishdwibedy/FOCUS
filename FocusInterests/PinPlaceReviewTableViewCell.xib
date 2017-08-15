@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOb-cp-CN3">
-                        <rect key="frame" x="15" y="52" width="60" height="16"/>
+                        <rect key="frame" x="96.5" y="52" width="60" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="bBS-U6-SBe"/>
                         </constraints>
@@ -29,14 +29,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="sadfasdff" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUP-hT-Wgi">
-                        <rect key="frame" x="82" y="9" width="225" height="34"/>
+                        <rect key="frame" x="163.5" y="9" width="62" height="34"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4h-w0-fFe">
-                        <rect key="frame" x="269" y="52" width="36" height="16"/>
+                        <rect key="frame" x="327" y="52" width="36" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="f9D-Wo-DYe"/>
                         </constraints>
@@ -44,23 +44,15 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TU6-bO-fdY">
-                        <rect key="frame" x="315" y="4.5" width="46" height="46"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="46" id="Dun-5f-ur6"/>
-                            <constraint firstAttribute="width" constant="46" id="rUY-UR-JBL"/>
-                        </constraints>
-                        <state key="normal" image="User Icon white 30x30.png"/>
-                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="kv9-cL-deN">
-                        <rect key="frame" x="22" y="3" width="46" height="46"/>
+                        <rect key="frame" x="103.5" y="3" width="46" height="46"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="46" id="8cb-Jg-qJH"/>
                             <constraint firstAttribute="width" constant="46" id="eg2-I5-gu7"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIk-g6-gAo">
-                        <rect key="frame" x="99" y="52" width="54" height="16"/>
+                        <rect key="frame" x="168.5" y="52" width="54" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="ncd-2a-hld"/>
                         </constraints>
@@ -75,16 +67,13 @@
                     <constraint firstItem="T4h-w0-fFe" firstAttribute="top" secondItem="EUP-hT-Wgi" secondAttribute="bottom" constant="9" id="D9e-eT-AJi"/>
                     <constraint firstItem="gIk-g6-gAo" firstAttribute="centerY" secondItem="yOb-cp-CN3" secondAttribute="centerY" id="DxO-tC-OcQ"/>
                     <constraint firstItem="EUP-hT-Wgi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="Eze-t3-lWg"/>
-                    <constraint firstItem="T4h-w0-fFe" firstAttribute="trailing" secondItem="EUP-hT-Wgi" secondAttribute="trailing" constant="-2" id="HS7-2D-e6E"/>
                     <constraint firstItem="yOb-cp-CN3" firstAttribute="top" secondItem="kv9-cL-deN" secondAttribute="bottom" constant="3" id="VUg-3e-JHg"/>
-                    <constraint firstItem="EUP-hT-Wgi" firstAttribute="centerY" secondItem="TU6-bO-fdY" secondAttribute="centerY" constant="-1.5" id="WZu-bp-wfq"/>
-                    <constraint firstItem="EUP-hT-Wgi" firstAttribute="leading" secondItem="gIk-g6-gAo" secondAttribute="trailing" constant="-71" id="c7C-jc-zLF"/>
-                    <constraint firstItem="TU6-bO-fdY" firstAttribute="leading" secondItem="EUP-hT-Wgi" secondAttribute="trailing" constant="8" id="eoZ-gh-1rk"/>
+                    <constraint firstItem="gIk-g6-gAo" firstAttribute="leading" secondItem="EUP-hT-Wgi" secondAttribute="leading" constant="5" id="a3q-bR-edf"/>
+                    <constraint firstAttribute="trailing" secondItem="T4h-w0-fFe" secondAttribute="trailing" constant="5" id="aYK-m2-LXa"/>
                     <constraint firstItem="EUP-hT-Wgi" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="10.5" id="jjm-33-k3N"/>
                     <constraint firstItem="gIk-g6-gAo" firstAttribute="centerY" secondItem="T4h-w0-fFe" secondAttribute="centerY" id="mnC-TJ-WPI"/>
                     <constraint firstItem="yOb-cp-CN3" firstAttribute="centerX" secondItem="kv9-cL-deN" secondAttribute="centerX" id="uuU-PX-xOx"/>
                     <constraint firstItem="EUP-hT-Wgi" firstAttribute="leading" secondItem="kv9-cL-deN" secondAttribute="trailing" constant="14" id="yMr-Db-4S3"/>
-                    <constraint firstAttribute="trailing" secondItem="TU6-bO-fdY" secondAttribute="trailing" constant="7" id="zBH-a5-mm8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -98,7 +87,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="User Icon white 30x30.png" width="30" height="30"/>
         <image name="UserPhoto" width="102" height="102"/>
     </resources>
 </document>
