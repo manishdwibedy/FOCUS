@@ -10,8 +10,10 @@ import UIKit
 
 class AnimationViewController: UIViewController {
 
+    @IBOutlet weak var loadingImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingImage.loadGif(name: "loading")
 
         // Do any additional setup after loading the view.
     }

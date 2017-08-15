@@ -766,7 +766,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TFH-tE-io8">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TFH-tE-io8">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="641"/>
                             </imageView>
                         </subviews>
@@ -778,6 +778,9 @@
                             <constraint firstItem="TFH-tE-io8" firstAttribute="leading" secondItem="zDG-7N-r2g" secondAttribute="leadingMargin" constant="-20" id="v9N-2r-CJ8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loadingImage" destination="TFH-tE-io8" id="X8I-xd-emQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AM7-B3-2eN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
