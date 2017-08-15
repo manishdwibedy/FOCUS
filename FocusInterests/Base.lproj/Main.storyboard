@@ -758,22 +758,24 @@
         <scene sceneID="SKB-70-dqY">
             <objects>
                 <viewController id="SsS-7f-VWV" customClass="AnimationViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4fq-TJ-68B"/>
+                        <viewControllerLayoutGuide type="bottom" id="TqA-B7-lnX"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zDG-7N-r2g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TFH-tE-io8">
-                                <rect key="frame" x="157.5" y="290" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="5Jj-rB-S4q"/>
-                                    <constraint firstAttribute="height" constant="60" id="u2l-IT-MWY"/>
-                                </constraints>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="641"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="TFH-tE-io8" firstAttribute="centerX" secondItem="zDG-7N-r2g" secondAttribute="centerX" id="Ugu-09-Lpv"/>
-                            <constraint firstItem="TFH-tE-io8" firstAttribute="centerY" secondItem="zDG-7N-r2g" secondAttribute="centerY" id="kju-dS-yvh"/>
+                            <constraint firstItem="TqA-B7-lnX" firstAttribute="top" secondItem="TFH-tE-io8" secondAttribute="bottom" id="DNU-b1-Yec"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TFH-tE-io8" secondAttribute="trailing" constant="-20" id="XZg-wq-bhq"/>
+                            <constraint firstItem="TFH-tE-io8" firstAttribute="top" secondItem="4fq-TJ-68B" secondAttribute="bottom" id="k5v-8A-3t8"/>
+                            <constraint firstItem="TFH-tE-io8" firstAttribute="leading" secondItem="zDG-7N-r2g" secondAttribute="leadingMargin" constant="-20" id="v9N-2r-CJ8"/>
                         </constraints>
                     </view>
                 </viewController>
