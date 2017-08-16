@@ -550,8 +550,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 // Set the map style by passing the URL of the local file.
                 if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
                     
-//                    let logo = UIImage(image: focus, scaledTo: CGSize(width: 175, height: 40))
-//                    self.navigationView.focusLogo.image = logo
+                    let logo = UIImage(image: #imageLiteral(resourceName: "navy_focus_logo"), scaledTo: CGSize(width: 175, height: 40))
+                    self.navigationView.focusLogo.image = logo
                     
                     let navyChatIcon = UIImage(image: #imageLiteral(resourceName: "navy chat button"), scaledTo: CGSize(width: 35, height: 35))
                     
@@ -1161,7 +1161,7 @@ extension MapViewController{
             let value = snapshot.value as? NSDictionary
             if let value = value
             {
-                
+                print("name \(name)")
                 self.popUpScreen.loadPin(name: name, pin: pinMessage, distance: distance, focus: interest, address: pin.locationAddress.components(separatedBy: ";;")[0], time: pin.dateTimeStamp, username: (value["username"] as? String)!, userImage: (value["image_string"] as? String)!)
             }
         })
