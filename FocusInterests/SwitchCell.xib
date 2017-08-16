@@ -19,13 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9of-ne-jYm">
-                        <rect key="frame" x="250" y="6" width="51" height="31"/>
-                    </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ziZ-SE-jri">
-                        <rect key="frame" x="17" y="11" width="215" height="21"/>
+                        <rect key="frame" x="17" y="11" width="237" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="215" id="F5d-Ls-qYo"/>
+                            <constraint firstAttribute="width" constant="237" id="F5d-Ls-qYo"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -33,15 +30,12 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="9of-ne-jYm" secondAttribute="trailing" constant="13" id="9xe-3e-xgD"/>
                     <constraint firstItem="ziZ-SE-jri" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="UFL-M4-q8C"/>
-                    <constraint firstItem="9of-ne-jYm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="V8t-A1-ZCE"/>
                     <constraint firstItem="ziZ-SE-jri" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="9" id="nEY-b9-ZHZ"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
-                <outlet property="cellSwitch" destination="9of-ne-jYm" id="ZFK-wX-rWI"/>
                 <outlet property="titleLabel" destination="ziZ-SE-jri" id="eSt-dm-fM7"/>
             </connections>
         </tableViewCell>

@@ -81,18 +81,14 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
                 swCell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
                 swCell?.titleLabel.text = Constants.settings.cellTitles[row]
-                
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
                     if let data = snapshot.value as? [String:Any]{
                         if let privateProfile = data["private"] as? Bool{
-                            DispatchQueue.main.async {
-                                swCell?.cellSwitch.setOn(privateProfile, animated: false)
-                            }
+                            swCell?.accessoryType = .checkmark
                         }
                         else{
-                            DispatchQueue.main.async {
-                                swCell?.cellSwitch.setOn(false, animated: false)
-                            }
+                            print("didn't find state")
+                            swCell?.accessoryType = .none
                         }
                     }
                 })
@@ -114,6 +110,18 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
                 swCell?.backgroundColor = UIColor(red: 25/255.0, green: 53/255.0, blue: 81/255.0, alpha: 1.0)
                 swCell?.titleLabel.text = Constants.settings.cellTitles[indexPath.row]
+                Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
+                    if let data = snapshot.value as? [String:Any]{
+                        if let privateProfile = data["private"] as? Bool{
+                            swCell?.tintColor = Constants.color.green
+                            swCell?.accessoryType = .checkmark
+                        }
+                        else{
+                            print("didn't find state")
+                            swCell?.accessoryType = .none
+                        }
+                    }
+                })
                 return swCell!
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
@@ -139,8 +147,8 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
             }
             
         }
-        
         tableView.deselectRow(at: indexPath, animated: true)
+        
         switch row{
             case 0:
                 let selectInterests = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
@@ -150,20 +158,15 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 let VC = storyboard.instantiateViewController(withIdentifier: "Change_username_password") as? ChangeUsernamePasswordViewController
                 self.present(VC!, animated: true, completion: nil)
             case 2:
-                let swCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as? SwitchCell
-                if !(swCell?.cellSwitch.isOn)!{
-                    DispatchQueue.main.async {
-                        swCell?.cellSwitch.setOn(false, animated: false)
-                    }
-                    
+                let swCell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! SwitchCell
+                if swCell.accessoryType == .checkmark {
+                    swCell.accessoryType = .none
                     Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["private": false])
-                }
-                else{
-                    DispatchQueue.main.async {
-                        swCell?.cellSwitch.setOn(true, animated: false)
-                    }
+                }else if swCell.accessoryType == .none{
+                    swCell.accessoryType = .checkmark
                     Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["private": true])
                 }
+            break
             case 3:
                 let pushNotificationViewController = UIStoryboard(name: "PushNotifications", bundle: nil).instantiateViewController(withIdentifier: "PushNotifications") as? PushNotificationsViewController
                 self.present(pushNotificationViewController!, animated: true, completion: nil)
@@ -173,6 +176,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 VC?.showTutorial = true
                 
                 self.present(VC!, animated: true, completion: nil)
+            
             case 5:
                 let storyboard = UIStoryboard(name: "Settings", bundle: nil)
                 let VC = storyboard.instantiateViewController(withIdentifier: "Feedback") as? FeedbackViewController
