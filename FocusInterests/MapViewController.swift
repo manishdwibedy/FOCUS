@@ -248,7 +248,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         for (index, event) in self.events.enumerated(){
             let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
             let marker = GMSMarker(position: position)
-            marker.icon = #imageLiteral(resourceName: "Event")
+            let eventMarker = UIImage(image: #imageLiteral(resourceName: "intro_event"), scaledTo: CGSize(width: 60, height: 60))
+            marker.icon = eventMarker
             marker.title = event.title
             marker.map = self.mapView
             marker.accessibilityLabel = "event_\(index)"
@@ -334,7 +335,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                                   longitude: Double((event?.longitude!)!)!,
                                                   zoom: 13)
                 self.eventPlaceMarker = GMSMarker(position: position)
-                self.eventPlaceMarker?.icon = #imageLiteral(resourceName: "Event")
+                let eventMarker = UIImage(image: #imageLiteral(resourceName: "intro_event"), scaledTo: CGSize(width: 60, height: 60))
+                self.eventPlaceMarker?.icon = eventMarker
                 self.eventPlaceMarker?.title = event?.title
                 self.eventPlaceMarker?.map = self.mapView
                 
@@ -998,7 +1000,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
                         
                         let marker = GMSMarker(position: position)
-                        marker.icon = #imageLiteral(resourceName: "Event")
+                        let eventMarker = UIImage(image: #imageLiteral(resourceName: "intro_event"), scaledTo: CGSize(width: 60, height: 60))
+                        marker.icon = eventMarker
                         marker.title = event.title
                         marker.map = self.mapView
                         
