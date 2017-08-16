@@ -503,7 +503,8 @@ class AnimationViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let mapVC = segue.destination as! MapViewController
+        let tab = segue.destination as! UITabBarController
+        let mapVC = tab.viewControllers?[0] as! MapViewController
         
 //        if self.messageCount == 0{
 //            mapVC.navigationView.messagesButton.badgeString = ""
