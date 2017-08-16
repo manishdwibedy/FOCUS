@@ -11,6 +11,7 @@ import FirebaseMessaging
 import Alamofire
 import FirebaseDatabase
 import SwiftyJSON
+import DataCache
 
 class AnimationViewController: UIViewController {
 
@@ -531,6 +532,7 @@ class AnimationViewController: UIViewController {
 //        else if self.notificationCount < 10{
 //            mapVC.navigationView.notificationsButton.badgeString = "\(self.notificationCount)"
 //        }
+        
 //        else{
 //            mapVC.navigationView.notificationsButton.badgeString = "9+"
 //        }
@@ -538,6 +540,11 @@ class AnimationViewController: UIViewController {
         mapVC.events = self.events
         mapVC.places = self.places
         mapVC.pins = self.pins
+        
+//        DataCache.instance.write(object: events as NSCoding, forKey: "events")
+//        DataCache.instance.write(object: places as NSCoding, forKey: "places")
+//        DataCache.instance.write(object: pins as NSCoding, forKey: "pins")
+
         mapVC.followingPlaces = self.followingPlaces
     }
     

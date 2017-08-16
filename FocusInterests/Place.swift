@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Place: Equatable, NSCoding, Hashable{
+class Place: NSObject, NSCoding{
     var id: String
     var name: String
     var image_url: String
@@ -53,7 +53,7 @@ class Place: Equatable, NSCoding, Hashable{
         self.hours = hours
     }
     
-    var hashValue : Int {
+    override var hashValue : Int {
         get {
             return "\(self.id)".hashValue
         }
