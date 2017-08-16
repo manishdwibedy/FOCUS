@@ -9,8 +9,7 @@
 import Foundation
 import FirebaseDatabase
 
-class pinData
-{
+class pinData: NSObject, NSCoding{
     var fromUID = String()
     var dateTimeStamp = Double()
     var pinMessage = String()
@@ -30,6 +29,35 @@ class pinData
         self.dbPath = path
         self.focus = focus
         
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.fromUID = aDecoder.decodeObject(forKey: "fromUID") as! String
+
+        self.dateTimeStamp = aDecoder.decodeDouble(forKey: "date") as! Double
+        self.pinMessage = aDecoder.decodeObject(forKey: "pinMessage") as! String
+        self.locationAddress = aDecoder.decodeObject(forKey: "locationAddress") as! String
+        
+        let lat = aDecoder.decodeDouble(forKey: "lat") as! Double
+        let long = aDecoder.decodeDouble(forKey: "long") as! Double
+        self.coordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        
+        
+        self.focus = aDecoder.decodeObject(forKey: "focus") as! String
+        self.username = aDecoder.decodeObject(forKey: "username") as! String
+        self.dbPath = Constants.DB.pins.child(self.username)
+       
+    }
+    
+    open func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.fromUID, forKey: "fromUID")
+        aCoder.encode(self.dateTimeStamp, forKey: "date")
+        aCoder.encode(self.pinMessage, forKey: "pinMessage")
+        aCoder.encode(self.locationAddress, forKey: "locationAddress")
+        aCoder.encode(self.coordinates.latitude, forKey: "lat")
+        aCoder.encode(self.coordinates.longitude, forKey: "long")
+        aCoder.encode(self.focus, forKey: "focus")
+        aCoder.encode(self.username, forKey: "username")
     }
     
     public static func toPin(user: User, value: NSDictionary) -> pinData?{

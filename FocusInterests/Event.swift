@@ -98,6 +98,7 @@ class Event: NSObject, NSCoding{
         self.category = decoder.decodeObject(forKey: "category") as? String ?? ""
         self.endTime = decoder.decodeObject(forKey: "endTime") as? String ?? ""
         self.price = decoder.decodeObject(forKey: "price") as? Double ?? 0
+        self.image_url = decoder.decodeObject(forKey: "image_url") as? String
         self.privateEvent = decoder.decodeObject(forKey: "privateEvent") as? Bool ?? true
     }
     
@@ -116,6 +117,7 @@ class Event: NSObject, NSCoding{
         coder.encode(self.endTime, forKey: "endTime")
         coder.encode(self.price, forKey: "price")
         coder.encode(self.price, forKey: "privateEvent")
+        coder.encode(self.image_url, forKey: "image_url")
     }
     
     static func cacheEvent(event: Event){

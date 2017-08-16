@@ -432,11 +432,16 @@ class AnimationViewController: UIViewController {
                     
                     var categories = [Category]()
                     for raw_category in categories_json as [JSON]{
-                        let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                        let name = raw_category["title"].stringValue
+                        let alias = raw_category["alias"].stringValue
+                        let category = Category(name: name, alias: alias)
                         categories.append(category)
                     }
                     
                     let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
+                    
+                    self.placeMapping[place.id] = place
+                    self.getPlaceHours(id: place.id)
                     self.places.append(place)
                     
                 }
@@ -540,12 +545,13 @@ class AnimationViewController: UIViewController {
         mapVC.events = self.events
         mapVC.places = self.places
         mapVC.pins = self.pins
-        
-//        DataCache.instance.write(object: events as NSCoding, forKey: "events")
-//        DataCache.instance.write(object: places as NSCoding, forKey: "places")
-//        DataCache.instance.write(object: pins as NSCoding, forKey: "pins")
-
         mapVC.followingPlaces = self.followingPlaces
+        
+        DataCache.instance.write(object: events as NSCoding, forKey: "events")
+        DataCache.instance.write(object: places as NSCoding, forKey: "places")
+        DataCache.instance.write(object: pins as NSCoding, forKey: "pins")
+        DataCache.instance.write(object: self.followingPlaces as NSCoding, forKey: "following_places")
+        
     }
     
     func moveToMap(){

@@ -12,6 +12,7 @@ import Alamofire
 import CoreLocation
 import SwiftyJSON
 import GooglePlaces
+import DataCache
 
 protocol InvitePeopleViewControllerDelegate {
     func showPopupView()
@@ -538,6 +539,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.places = (DataCache.instance.readObject(forKey: "places") as? [Place])!
+        self.followingPlaces = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
+        self.events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+
         self.updatePlaces()
         
         if clearSearch{
@@ -1248,6 +1253,8 @@ extension InvitePeopleViewController{
             let DF = DateFormatter()
             DF.dateFormat = "MMM d, h:mm a"
             
+            let dateOnlyDF = DateFormatter()
+            dateOnlyDF.dateFormat = "yyyy-MM-dd "
             
             Constants.DB.event.queryOrdered(byChild: "title_lowered").queryStarting(atValue: query.lowercased()).queryEnding(atValue: query.lowercased()+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
@@ -1296,13 +1303,25 @@ extension InvitePeopleViewController{
             }
             else{
                 Event.getNearyByEvents(query: query, location: (AuthApi.getLocation()?.coordinate)!, gotEvents: {events in
-                    var DF = DateFormatter()
+                    let DF = DateFormatter()
                     DF.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     
                     
                     self.filtered = self.filtered + events.sorted(by: {
-                        let date1 = DF.date(from: $0.0.date!)
-                        let date2 = DF.date(from: $0.1.date!)
+                        var date1:Date?, date2:Date?
+                        if let date = DF.date(from: $0.0.date!){
+                            date1 = date
+                        }
+                        else if let date = dateOnlyDF.date(from: $0.0.date!){
+                            date1 = date
+                        }
+                        if let date = DF.date(from: $0.1.date!){
+                            date2 = date
+                        }
+                        else if let date = dateOnlyDF.date(from: $0.1.date!){
+                            date2 = date
+                        }
+                        
                         return date1! < date2!
                     })
 

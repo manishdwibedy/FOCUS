@@ -316,4 +316,14 @@ struct AuthApi {
     static func setShowPin(show: Bool){
         defaults.set(show, forKey: "show_pin")
     }
+    
+    static func savePlace(places: [Place]){
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: places)
+        defaults.set(encodedData, forKey: "places")
+        
+    }
+    
+    static func getPlaces() -> [Place]{
+        return (defaults.object(forKey: "places") as? [Place])!
+    }
 }

@@ -23,6 +23,7 @@ import SCLAlertView
 import FirebaseStorage
 import Crashlytics
 import GeoFire
+import DataCache
 
 protocol showMarkerDelegate{
     func showPinMarker(pin: pinData, show: Bool)
@@ -206,9 +207,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.exploreTab = self.tabBarController?.viewControllers?[3] as? InvitePeopleViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
-        self.exploreTab?.events = events
-        self.exploreTab?.places = places
-        
+//        self.exploreTab?.events = events
+//        self.exploreTab?.places = places
+//        
         UITabBarItem.appearance().setTitleTextAttributes([
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
             NSForegroundColorAttributeName : UIColor(hexString: "7ac901")
@@ -231,6 +232,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             marker.map = nil
         }
         
+        self.pins = (DataCache.instance.readObject(forKey: "pins") as? [pinData])!
+        self.followingPlaces = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
+        self.events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+
         for (index, pin) in self.pins.enumerated(){
             let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
             let marker = GMSMarker(position: position)
@@ -542,8 +547,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 // Set the map style by passing the URL of the local file.
                 if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
                     
-                    let logo = UIImage(image: #imageLiteral(resourceName: "navy_focus_logo"), scaledTo: CGSize(width: 175, height: 40))
-                    self.navigationView.focusLogo.image = logo
+//                    let logo = UIImage(image: focus, scaledTo: CGSize(width: 175, height: 40))
+//                    self.navigationView.focusLogo.image = logo
                     
                     let navyChatIcon = UIImage(image: #imageLiteral(resourceName: "navy chat button"), scaledTo: CGSize(width: 35, height: 35))
                     

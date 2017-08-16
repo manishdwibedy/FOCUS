@@ -593,7 +593,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UISearchBar
                 
                 var categories = [Category]()
                 for raw_category in categories_json as [JSON]{
-                    let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
+                    let name = raw_category["title"].stringValue
+                    let alias = raw_category["alias"].stringValue
+                    let category = Category(name: name, alias: alias)
                     categories.append(category)
                 }
                 

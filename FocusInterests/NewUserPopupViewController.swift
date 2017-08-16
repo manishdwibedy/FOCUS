@@ -18,15 +18,15 @@ class NewUserPopupViewController: UIViewController {
     var delegate: switchPinTabDelegate?
     
     let info = [
-        ["", "What if you could have an all-in-one view of the people, places and events YOU care about.", "Well, now YOU can.", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
+        ["", "", "Well, now YOU can.", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
         
         ["intro_greenpin", "People", "People are shown on your Map when they Pin their location and FOCUS. You can choose to view activities and places you'll both like.", "people", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
-        ["intro_place", "Places", "You now have a personalized Map of all the places that you follow. Rather than having to search for individual places every time, you'll always be able to see which of your favorite spots is nearby.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
+        ["intro_place", "Places", "Simply follow your favorite Places and they’ll always appear on your Map so you can see what’s nearby!", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
-        ["intro_event", "Events", "A real-time look at the events that match your FOCUS. As new events are created, they'll be added to your Map. You can even move around the map to find cool events around town.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
+        ["intro_event", "Events", "What’s going on tonight? As soon as a new Event is added, you’ll find it on your Map so you’re always in the know about what there is to do.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
-        ["intro_whitepin", "Pin", "Create your first Pin now and connect with others who have a similar FOCUS!", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)]
+        ["intro_whitepin", "Pin", "Create your first Pin now to show your friends what you’re up to!", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)]
     ]
     
     var index = 0

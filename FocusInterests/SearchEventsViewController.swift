@@ -522,9 +522,15 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     
                     let caption = pinData["pin"] as! String
                     
-                    
-                    let mainString = "Pin: \"\(caption)\""
-                    let captionString = "\"\(caption)\""
+                    var mainString = "", captionString = ""
+                    if caption.characters.count > 0{
+                        mainString = "Pin: \"\(caption)\""
+                        captionString = "\"\(caption)\""
+                    }
+                    else{
+                        mainString = "Pin"
+                        captionString = ""
+                    }
                     
                     let range = (mainString as NSString).range(of: captionString)
                     
