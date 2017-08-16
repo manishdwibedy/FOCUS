@@ -637,7 +637,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         else if parts?[0] == "place"{
             let index:Int! = Int(parts![1])
-            let place = self.places[index]
+            let place = self.followingPlaces[index]
             
             tapPlace(place: place, marker: marker)
             return true

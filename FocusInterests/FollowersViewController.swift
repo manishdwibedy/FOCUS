@@ -22,6 +22,9 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     let store = CNContactStore()
     var ID = ""
     
+    var followersData = [User]()
+    var followingData = [User]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -55,6 +58,14 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
                             let data = followProfileCellData()
                             data.uid = (value["UID"] as? String)!
                             
+                            Constants.DB.user.child(data.uid).observeSingleEvent(of: .value, with: {snapshot in
+                                if let data = snapshot.value as? [String:Any]{
+                                    if let user = User.toUser(info: data){
+                                        self.followersData.append(user)
+                                    }
+                                }
+                            })
+                            
                             self.followers.append(data)
                             
                             if self.windowTitle == "Followers" && self.followers.count == count{
@@ -74,6 +85,14 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
                             let data = followProfileCellData()
                             data.uid = (value["UID"] as? String)!
                             self.following.append(data)
+                            
+                            Constants.DB.user.child(data.uid).observeSingleEvent(of: .value, with: {snapshot in
+                                if let data = snapshot.value as? [String:Any]{
+                                    if let user = User.toUser(info: data){
+                                        self.followersData.append(user)
+                                    }
+                                }
+                            })
                             
                             if self.windowTitle == "Following" && self.following.count == count{
                                 self.tableView.reloadData()
@@ -142,17 +161,22 @@ class FollowersViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var user: followProfileCellData? = nil
+        var userData: User?
         if windowTitle == "Followers"{
             user = self.followers[indexPath.row]
+            userData = self.followersData[indexPath.row]
         }
         else{
             user = self.following[indexPath.row]
+            userData = self.followingData[indexPath.row]
         }
         
         let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
         
         VC.otherUser = true
         VC.userID = (user?.uid)!
+        VC.userData = userData
+        
         dropfromTop(view: self.view)
         
         self.present(VC, animated:true, completion:nil)

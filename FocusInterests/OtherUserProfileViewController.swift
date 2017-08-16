@@ -488,17 +488,38 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 
                 self.navBarItem.title = username_str
                 
-                if let followers = dictionnary["followers"] as? [String:Any]{
-                    if let people = followers["people"] as? [String:[String:Any]]{
-                        let count = people.count
+                if let followersData = dictionnary["followers"] as? [String:Any]{
+                    if let users = followersData["people"] as? [String:[String:Any]]{
+                        let count = users.count
+                        
+                        for (_,user) in users{
+                            Constants.DB.user.child(user["UID"] as! String).observeSingleEvent(of: .value, with: {snapshot in
+                                if let data = snapshot.value as? [String:Any]{
+                                    if let user = User.toUser(info: data){
+                                        self.followers.append(user)
+                                    }
+                                }
+                            })
+                        }
+                        
                         
                         self.followerCount.setTitle("\(count)", for: .normal)
                     }
                 }
                 
-                if let followers = dictionnary["following"] as? [String:Any]{
-                    if let people = followers["people"] as? [String:[String:Any]]{
-                        let count = people.count
+                if let followersData = dictionnary["following"] as? [String:Any]{
+                    if let users = followersData["people"] as? [String:[String:Any]]{
+                        let count = users.count
+                        
+                        for (_,user) in users{
+                            Constants.DB.user.child(user["UID"] as! String).observeSingleEvent(of: .value, with: {snapshot in
+                                if let data = snapshot.value as? [String:Any]{
+                                    if let user = User.toUser(info: data){
+                                        self.followers.append(user)
+                                    }
+                                }
+                            })
+                        }
                         
                         self.followingCount.setTitle("\(count)", for: .normal)
                     }
