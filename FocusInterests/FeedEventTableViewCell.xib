@@ -160,6 +160,7 @@
                                                                     <constraint firstAttribute="width" constant="67" id="mqI-DQ-gGD"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" title="Attend">
                                                                     <color key="titleColor" red="0.08235294118" green="0.16078431369999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </state>
