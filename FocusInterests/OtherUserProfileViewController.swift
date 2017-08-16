@@ -105,6 +105,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var userID = ""
     var previous: previousScreen? = nil
     var userInfo = [String:Any]()
+    var userImageURL = ""
     
     let screenSize = UIScreen.main.bounds
     var screenWidth: CGFloat = 0.0
@@ -465,6 +466,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 let username_str = dictionnary["username"] as? String ?? ""
                 let description_str = dictionnary["description"] as? String ?? ""
                 let image_string = dictionnary["image_string"] as? String ?? ""
+                self.userImageURL = image_string
                 let fullname = dictionnary["fullname"] as? String ?? ""
                 
                 
@@ -1136,7 +1138,21 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             recentPostCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (self.pinInfo!.dateTimeStamp)), numericDates: true, shortVersion: true)
             recentPostCell.pin = self.pinInfo
             
-            self.pinInfo?.dbPath.observeSingleEvent(of: .value, with: {snapshot in
+            if let url = URL(string: self.userImageURL){
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        recentPostCell.userImage.setImage(image, for: .normal)
+                        recentPostCell.userImage.setImage(image, for: .selected)
+                    }
+                })
+            }
+            
+            /*self.pinInfo?.dbPath.observeSingleEvent(of: .value, with: {snapshot in
                 if let value = snapshot.value as? [String:Any]{
                     if value["images"] != nil{
                         if let images = value["images"] as? [String:Any]{
@@ -1148,9 +1164,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                         print(error?.localizedDescription ?? "")
                                         return
                                     }
-                                    
-                                    recentPostCell.userImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
-                                    recentPostCell.userImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                                    recentPostCell.userImage.sd_setImage(with: url, for: .normal)
+                                    recentPostCell.userImage.sd_setImage(with: url, for: .selected)
+//                                    recentPostCell.userImage.sd_setImage(with: url, for: .normal, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+//                                    recentPostCell.userImage.sd_setImage(with: url, for: .selected, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
                 
                                 })
                             }
@@ -1158,7 +1175,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                     }
                 }
                 
-            })
+            })*/
             
             self.pinInfo?.dbPath.child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
