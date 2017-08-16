@@ -410,60 +410,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 }
             }
         }
-        
-        let now = Date()
-        let six_am = now.dateAt(hours: 6, minutes: 0)
-        let six_pm = now.dateAt(hours: 18, minutes: 0)
-        
-        // Night mode
-        if now > six_pm &&
-            now < six_am{
-            
-            do {
-                // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "night_style", withExtension: "json") {
-                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
-                    //self.navigationView.focusLogo.image = logo
-                    
-                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .normal)
-                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .selected)
-                    
-                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .normal)
-                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .selected)
-                    
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
-        }
-            
-            // Day mode
-        else{
-            do {
-                // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
-                    
-                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
-                    //self.navigationView.focusLogo.image = logo
-                    
-                    let navyChatIcon = UIImage(image: #imageLiteral(resourceName: "navy chat button"), scaledTo: CGSize(width: 35, height: 35))
-                    
-                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .normal)
-                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .selected)
-                    
-                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .normal)
-                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .selected)
-                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -556,6 +502,60 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         else if AuthApi.isNewUser(){
             self.showPopup()
+        }
+        
+        let now = Date()
+        let six_am = now.dateAt(hours: 6, minutes: 0)
+        let six_pm = now.dateAt(hours: 18, minutes: 0)
+        
+        // Night mode
+        if now > six_pm &&
+            now < six_am{
+            
+            do {
+                // Set the map style by passing the URL of the local file.
+                if let styleURL = Bundle.main.url(forResource: "night_style", withExtension: "json") {
+                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
+                    //self.navigationView.focusLogo.image = logo
+                    
+                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .normal)
+                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .selected)
+                    
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .normal)
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .selected)
+                    
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
+            }
+        }
+            
+            // Day mode
+        else{
+            do {
+                // Set the map style by passing the URL of the local file.
+                if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
+                    
+                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
+                    //self.navigationView.focusLogo.image = logo
+                    
+                    let navyChatIcon = UIImage(image: #imageLiteral(resourceName: "navy chat button"), scaledTo: CGSize(width: 35, height: 35))
+                    
+                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .normal)
+                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .selected)
+                    
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .normal)
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .selected)
+                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
+            }
         }
     }
     
