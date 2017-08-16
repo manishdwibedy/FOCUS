@@ -54,7 +54,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var zoomLevel: Float = 15.0
     var events = [Event]()
     var places = [Place]()
-    var placeMapping = [String: Place]()
+    var followingPlaces = [Place]()
+    
     var hasCustomProfileImage = false
     
     var locationFromPlaceDetails = ""
@@ -98,6 +99,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var placePins = [String:GMSMarker]()
     var lastPins = [GMSMarker]()
     var friends = [FollowNewUser]()
+    var placeMapping = [String: Place]()
     
     func hideFollowFriendPopup(){
         self.followYourFriendsView.isHidden = true
@@ -200,108 +202,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let timeDF = DateFormatter()
         timeDF.dateFormat = "h:mm a"
         
-        Constants.DB.event.keepSynced(true)
-        Constants.DB.pins.child(AuthApi.getFirebaseUid()!).keepSynced(true)
-        
-        Constants.DB.event.observe(DataEventType.childAdded, with: { (snapshot) in
-            let events = snapshot.value as? [String : Any] ?? [:]
-            let info = events// as? [String:Any]
-//            for (id, event) in events{
-            
-            if let event = Event.toEvent(info: info){
-                if let attending = info["attendingList"] as? [String:Any]{
-                    event.setAttendessCount(count: attending.count)
-                }
                 
-                if let end = timeDF.date(from: event.endTime){
-                    let start = DF.date(from: event.date!)!
-                    if start < Date() && end > Date() && !event.privateEvent{
-                        let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                        let marker = GMSMarker(position: position)
-                        marker.icon = UIImage(named: "Event")
-                        marker.title = event.title
-                        marker.map = self.mapView
-                        marker.accessibilityLabel = "event_\(self.events.count)"
-                        
-                        self.events.append(event)
-                    }
-                }
-                
-                else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
-                    if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
-                        let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-                        let marker = GMSMarker(position: position)
-                        marker.icon = UIImage(named: "Event")
-                        marker.title = event.title
-                        marker.map = self.mapView
-                        marker.accessibilityLabel = "event_\(self.events.count)"
-                        
-                        self.events.append(event)
-                    }
-                    if !(self.exploreTab?.attendingEvent.contains(event))!{
-                        self.exploreTab?.attendingEvent.append(event)
-                    }
-                    
-                    
-                }
-            }
-//            let event = Event(title: (info["title"])! as! String, description: (info["description"])! as! String, fullAddress: (info["fullAddress"])! as! String, shortAddress: (info["shortAddress"])! as! String, latitude: (info["latitude"])! as? String, longitude: (info["longitude"])! as? String, date: (info["date"])! as! String, creator: (info["creator"])! as? String, id: snapshot.key, category: info["interests"] as? String, privateEvent: (info["private"] as? Bool)!)
-//        
-            
-            
-                
-//                let item = MapCluster(position: position, name: event.title!, icon: UIImage(named: "Event")!, id: String(describing: self.events.count), type: "event")
-//                self.clusterManager.add(item)
-//                self.searchEventsTab?.events.append(event)
-//            }
-            
-//            // Call cluster() after items have been added to perform the clustering and rendering on map.
-//            self.clusterManager.cluster()
-//            
-//            // Register self to listen to both GMUClusterManagerDelegate and GMSMapViewDelegate events.
-//            self.clusterManager.setDelegate(self, mapDelegate: self)
-            
-        })
-        
-        if let location = AuthApi.getLocation(){
-            Event.getNearyByEvents(query: "", category: "", location: location.coordinate, gotEvents: {events in
-                
-                var DF = DateFormatter()
-                DF.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                var dateOnlyDF = DateFormatter()
-                dateOnlyDF.dateFormat = "yyyy-MM-dd "
-                
-                var sortedEvents = events.sorted(by: {
-                    var date1: Date?, date2: Date?
-                    if let date = DF.date(from: $0.0.date!){
-                        date1 = date
-                    }
-                    else{
-                        date1 = dateOnlyDF.date(from: $0.0.date!)
-                    }
-                    
-                    if let date = DF.date(from: $0.1.date!){
-                        date2 = date
-                    }
-                    else{
-                        date2 = dateOnlyDF.date(from: $0.1.date!)
-                    }
-                    
-                    return date1! < date2!
-                })
-                
-                for event in sortedEvents{
-                    if !(self.exploreTab?.events.contains(event))!{
-                        self.exploreTab?.events.append(event)
-                    }
-                }
-                
-            })
-        }
-        
         self.exploreTab = self.tabBarController?.viewControllers?[3] as? InvitePeopleViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
+        self.exploreTab?.events = events
+        self.exploreTab?.places = places
         
         UITabBarItem.appearance().setTitleTextAttributes([
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
@@ -320,291 +226,53 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
+        // remove any old pins
+        for marker in self.lastPins{
+            marker.map = nil
+        }
+        
+        for (index, pin) in self.pins.enumerated(){
+            let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
+            let marker = GMSMarker(position: position)
+            marker.title = pin.pinMessage
+            marker.map = self.mapView
+            let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+            image.image = UIImage(named: "pin")
+            image.contentMode = .scaleAspectFit
+            marker.iconView = image
+            marker.accessibilityLabel = "pin_\(index)"
+            
+            self.lastPins.append(marker)
+        }
+        
+        for (index, event) in self.events.enumerated(){
+            let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+            let marker = GMSMarker(position: position)
+            marker.icon = #imageLiteral(resourceName: "Event")
+            marker.title = event.title
+            marker.map = self.mapView
+            marker.accessibilityLabel = "event_\(index)"
+            
+        }
+        
+        for (index, place) in self.followingPlaces.enumerated(){
+            let position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+            
+            let marker = GMSMarker(position: position)
+            marker.icon = #imageLiteral(resourceName: "place_icon")
+            marker.title = place.name
+            marker.map = self.mapView
+            marker.accessibilityLabel = "place_\(index)"
+            
+        }
+        
+        
         Answers.logCustomEvent(withName: "Screen",
                                        customAttributes: [
                                         "Name": "Map View"
             ])
         
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).keepSynced(true)
-        Constants.DB.pins.keepSynced(true)
-        
-        navigationView.messagesButton.badgeString = ""
-        getUnreadCount(count: {number in
-            if number > 0{
-                self.navigationView.messagesButton.badgeString = "\(number)"
                 
-                let application = UIApplication.shared
-                application.applicationIconBadgeNumber = number + application.applicationIconBadgeNumber
-            }
-            else{
-                self.navigationView.messagesButton.badgeString = ""
-            }
-            
-        })
-        self.searchEventsTab?.feeds.removeAll()
-        
-        navigationView.notificationsButton.badgeString = ""
-        var not_count = 0
-        var count_received = 0
-        var read_notifications = AuthApi.getUnreadNotifications()
-        
-        let now = Date()
-        let six_am = now.dateAt(hours: 6, minutes: 0)
-        let six_pm = now.dateAt(hours: 18, minutes: 0)
-        
-        // Night mode
-        if now > six_pm &&
-            now < six_am{
-            
-            do {
-                // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "night_style", withExtension: "json") {
-                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
-                    //self.navigationView.focusLogo.image = logo
-                    
-                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .normal)
-                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .selected)
-                    
-                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .normal)
-                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .selected)
-                    
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
-        }
-            
-        // Day mode
-        else{
-            do {
-                // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
-                    
-                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
-                    //self.navigationView.focusLogo.image = logo
-                    
-                    let navyChatIcon = UIImage(image: #imageLiteral(resourceName: "navy chat button"), scaledTo: CGSize(width: 35, height: 35))
-                    
-                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .normal)
-                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .selected)
-                    
-                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .normal)
-                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .selected)
-                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
-        }
-        
-        if AuthApi.getYelpToken() == nil || AuthApi.getYelpToken()?.characters.count == 0{
-            getYelpToken(completion: { token in
-                AuthApi.set(yelpAccessToken: token)
-                
-                not_count = 0
-                NotificationUtil.getNotificationCount(gotNotification: {notif in
-                    
-                    self.notifs.append(contentsOf: Array(Set<FocusNotification>(notif)))
-                    
-                    count_received += 1
-                    if count_received == 5 + 1{
-                        not_count += Array(Set<FocusNotification>(self.notifs)).count
-                        
-                        not_count -= read_notifications
-
-                        let application = UIApplication.shared
-                        application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
-                        
-                        if not_count > 0{
-                            if not_count > 9{
-                                self.navigationView.notificationsButton.badgeString = "9+"
-                            }
-                            else{
-                                self.navigationView.notificationsButton.badgeString = "\(not_count)"
-                            }
-                        }
-                        else{
-                            self.navigationView.notificationsButton.badgeString = ""
-                        }
-                        count_received = 0
-                    }
-                }, gotInvites: {invites in
-                    self.invites.append(contentsOf: Array(Set<FocusNotification>(invites)))
-                    
-                    count_received += 1
-                    if count_received == 5 + 1{
-                        not_count += Array(Set<FocusNotification>(self.notifs)).count
-                        
-                        for invite in (invites as? [FocusNotification])!{
-                            if let data = invite.item?.data as? [String:Any]{
-                                if let status = data["status"] as? String{
-                                    if status != "accepted" || status != "declined"{
-                                        not_count += 1
-                                    }
-                                }
-                            }
-                            
-                        }
-                        
-                        not_count -= read_notifications
-                        
-                        let application = UIApplication.shared
-                        application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
-                        
-                        if not_count > 0{
-                            if not_count > 9{
-                                self.navigationView.notificationsButton.badgeString = "9+"
-                            }
-                            else{
-                                self.navigationView.notificationsButton.badgeString = "\(not_count)"
-                            }
-                        }
-                        else{
-                            self.navigationView.notificationsButton.badgeString = ""
-                        }
-                        count_received = 0
-                    }
-                } , gotFeed: {feed in
-                    self.searchEventsTab?.feeds.append(contentsOf: Array(Set<FocusNotification>(feed)))
-                    
-                    if count_received == 5 + 1{
-                        not_count += Array(Set<FocusNotification>(self.notifs)).count
-                        
-                        not_count -= read_notifications
-                        
-                        let application = UIApplication.shared
-                        application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
-                        
-                        if not_count > 0{
-                            if not_count > 9{
-                                self.navigationView.notificationsButton.badgeString = "9+"
-                            }
-                            else{
-                                self.navigationView.notificationsButton.badgeString = "\(not_count)"
-                            }
-                        }
-                        else{
-                            self.navigationView.notificationsButton.badgeString = ""
-                        }
-                        count_received = 0
-                    }
-                })
-
-            })
-        }
-        else{
-            not_count = 0
-            NotificationUtil.getNotificationCount(gotNotification: {notif in
-                self.notifs.append(contentsOf: notif)
-                
-                count_received += 1
-                if count_received == 5 + 1{
-                    not_count += Array(Set<FocusNotification>(self.notifs)).count
-                    
-                    for invite in (self.invites as? [FocusNotification])!{
-                        if let data = invite.item?.data as? [String:Any]{
-                            if let status = data["status"] as? String{
-                                if status != "accepted" || status != "declined"{
-                                    not_count += 1
-                                }
-                            }
-                            else{
-                                not_count += 1
-                            }
-                        }
-                        
-                    }
-                    
-                    not_count -= read_notifications
-                    
-                    let application = UIApplication.shared
-                    application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
-                    
-                    if not_count > 0{
-                        if not_count > 9{
-                            self.navigationView.notificationsButton.badgeString = "9+"
-                        }
-                        else{
-                            self.navigationView.notificationsButton.badgeString = "\(not_count)"
-                        }
-                    }
-                    else{
-                        self.navigationView.notificationsButton.badgeString = ""
-                    }
-                    count_received = 0
-                }
-            }, gotInvites: {invite in
-                
-                self.invites.append(contentsOf: invite)
-                count_received += 1
-                if count_received == 5 + 1{
-                    not_count += Array(Set<FocusNotification>(self.notifs)).count
-                    
-                    for invite in (self.invites as? [FocusNotification])!{
-                        if let data = invite.item?.data as? [String:Any]{
-                            if let status = data["status"] as? String{
-                                if status != "accepted" || status != "declined"{
-                                    not_count += 1
-                                }
-                            }
-                            else{
-                                not_count += 1
-                            }
-                        }
-                        
-                    }
-                    
-                    not_count -= read_notifications
-                    
-                    let application = UIApplication.shared
-                    application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
-                    
-                    if not_count > 0{
-                        if not_count > 9{
-                            self.navigationView.notificationsButton.badgeString = "9+"
-                        }
-                        else{
-                            self.navigationView.notificationsButton.badgeString = "\(not_count)"
-                        }
-                    }
-                    else{
-                        self.navigationView.notificationsButton.badgeString = ""
-                    }
-                    count_received = 0
-                }
-                
-            } , gotFeed: {feed in
-                self.searchEventsTab?.feeds.append(contentsOf: feed)
-                
-                if count_received == 5 + 1{
-                    not_count += Array(Set<FocusNotification>(self.notifs)).count
-                    
-                    not_count -= read_notifications
-                    
-                    let application = UIApplication.shared
-                    application.applicationIconBadgeNumber = not_count + application.applicationIconBadgeNumber
-                    
-                    if not_count > 0{
-                        if not_count > 9{
-                            self.navigationView.notificationsButton.badgeString = "9+"
-                        }
-                        else{
-                            self.navigationView.notificationsButton.badgeString = "\(not_count)"
-                        }
-                    }
-                    else{
-                        self.navigationView.notificationsButton.badgeString = ""
-                    }
-                    count_received = 0
-                }
-            })
-        }
-        
         saveUserInfo()
         
         if AuthApi.getLocation() != nil{
@@ -612,9 +280,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
         
-        let token = Messaging.messaging().fcmToken
-        Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/token").setValue(token)
-        AuthApi.set(FCMToken: token)
         
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set
@@ -703,7 +368,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             currentLocation = AuthApi.getLocation()
         }
         
-        showPins(showAll: true, interests: "")
         
         if let token = AuthApi.getYelpToken(){
         }
@@ -744,6 +408,60 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 if let index = events.index(of: event){
                     events.remove(at: index)
                 }
+            }
+        }
+        
+        let now = Date()
+        let six_am = now.dateAt(hours: 6, minutes: 0)
+        let six_pm = now.dateAt(hours: 18, minutes: 0)
+        
+        // Night mode
+        if now > six_pm &&
+            now < six_am{
+            
+            do {
+                // Set the map style by passing the URL of the local file.
+                if let styleURL = Bundle.main.url(forResource: "night_style", withExtension: "json") {
+                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
+                    //self.navigationView.focusLogo.image = logo
+                    
+                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .normal)
+                    self.navigationView.messagesButton.setImage(#imageLiteral(resourceName: "Comment"), for: .selected)
+                    
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .normal)
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "Map_Notifications"), for: .selected)
+                    
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
+            }
+        }
+            
+            // Day mode
+        else{
+            do {
+                // Set the map style by passing the URL of the local file.
+                if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
+                    
+                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
+                    //self.navigationView.focusLogo.image = logo
+                    
+                    let navyChatIcon = UIImage(image: #imageLiteral(resourceName: "navy chat button"), scaledTo: CGSize(width: 35, height: 35))
+                    
+                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .normal)
+                    self.navigationView.messagesButton.setImage(navyChatIcon, for: .selected)
+                    
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .normal)
+                    self.navigationView.notificationsButton.setImage(#imageLiteral(resourceName: "navy notifications"), for: .selected)
+                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
             }
         }
     }
@@ -935,15 +653,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let currentLocation =  CLLocation(latitude: lat, longitude: long)
 
         
-        if let token = AuthApi.getYelpToken(){
-            self.fetchPlaces(around: currentLocation, token: token)
-        }
-        else{
-            getYelpToken(completion: {(token) in
-                AuthApi.set(yelpAccessToken: token)
-                self.fetchPlaces(around: currentLocation, token: token)
-            })
-        }
+//        if let token = AuthApi.getYelpToken(){
+//            self.fetchPlaces(around: currentLocation, token: token)
+//        }
+//        else{
+//            getYelpToken(completion: {(token) in
+//                AuthApi.set(yelpAccessToken: token)
+//                self.fetchPlaces(around: currentLocation, token: token)
+//            })
+//        }
         
         if AuthApi.getEventBriteToken() != nil{
             getEvents(around: currentLocation, completion: { events in
@@ -1028,14 +746,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.currentLocation = location
 //        self.searchPlacesTab?.location = location
         
-        if let token = AuthApi.getYelpToken(){
-            self.fetchPlaces(around: self.currentLocation!, token: token)
-        }
-        else{
-            getYelpToken(completion: {(token) in
-                self.fetchPlaces(around: self.currentLocation!, token: token)
-            })
-        }
+//        if let token = AuthApi.getYelpToken(){
+//            self.fetchPlaces(around: self.currentLocation!, token: token)
+//        }
+//        else{
+//            getYelpToken(completion: {(token) in
+//                self.fetchPlaces(around: self.currentLocation!, token: token)
+//            })
+//        }
         
         if !willShowEvent && !willShowPin && !willShowPlace{
             mapView.settings.myLocationButton = true
@@ -1144,262 +862,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
     }
     
-    func fetchPlaces(around location: CLLocation, token: String){
-        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/places").observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            
-            if let placeData = value{
-                for (_,place) in placeData
-                {
-                    let place_id = (place as? [String:Any])?["placeID"]
-                    getYelpByID(ID: place_id as! String, completion: {place in
-                        
-                        if !self.places.contains(place){
-                            
-                            
-                            let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
-                            let marker = GMSMarker(position: position)
-                            marker.icon = UIImage(named: "place_icon")
-                            marker.title = place.name
-                            marker.map = self.mapView
-                            marker.isTappable = true
-                            marker.accessibilityLabel = "place_\(self.places.count)"
-                            if let earlier = self.placePins[place.id]{
-                                earlier.map = nil
-                            }
-                            
-                            self.followingPlacesMarker.append(marker)
-                            self.placePins[place.id] = marker
-                            
-                            self.placeMapping[place.id] = place
-                            self.getPlaceHours(id: place.id)
-                            self.places.append(place)
-                            if !(self.exploreTab?.followingPlaces.contains(place))!{
-                                self.exploreTab?.followingPlaces.append(place)
-                                self.exploreTab?.places.append(place)
-                            }
-                            print("places count - \(self.places.count)")
-                        }
-                    })
-                    
-                }
-            }
-        })
-
-        for interest in getYelpCategories().components(separatedBy: ","){
-            let url = "https://api.yelp.com/v3/businesses/search"
-            let parameters: [String: Any] = [
-                "categories": interest,
-                "latitude" : Double(location.coordinate.latitude),
-                "longitude" : Double(location.coordinate.longitude)
-            ]
-            
-            let headers: HTTPHeaders = [
-                "authorization": "Bearer \(AuthApi.getYelpToken()!)",
-                "cache-contro": "no-cache"
-            ]
-            
-            Alamofire.request(url, method: .get, parameters:parameters, headers: headers).responseJSON { response in
-                let json = JSON(data: response.data!)
-                
-                let initial = self.places.count
-                for (index, business) in json["businesses"].enumerated(){
-                    let id = business.1["id"].stringValue
-                    let name = business.1["name"].stringValue
-                    let image_url = business.1["image_url"].stringValue
-                    let isClosed = business.1["is_closed"].boolValue
-                    let reviewCount = business.1["review_count"].intValue
-                    let rating = business.1["rating"].floatValue
-                    let latitude = business.1["coordinates"]["latitude"].doubleValue
-                    let longitude = business.1["coordinates"]["longitude"].doubleValue
-                    let price = business.1["price"].stringValue
-                    let address_json = business.1["location"]["display_address"].arrayValue
-                    let phone = business.1["display_phone"].stringValue
-                    let distance = business.1["distance"].doubleValue
-                    let categories_json = business.1["categories"].arrayValue
-                    let url = business.1["url"].stringValue
-                    let plain_phone = business.1["phone"].stringValue
-                    let is_closed = business.1["is_closed"].boolValue
-                    
-                    var address = [String]()
-                    for raw_address in address_json{
-                        address.append(raw_address.stringValue)
-                    }
-                    
-                    var categories = [Category]()
-                    for raw_category in categories_json as [JSON]{
-                        let category = Category(name: raw_category["title"].stringValue, alias: raw_category["alias"].stringValue)
-                        categories.append(category)
-                    }
-                    
-                    let place = Place(id: id, name: name, image_url: image_url, isClosed: isClosed, reviewCount: reviewCount, rating: rating, latitude: latitude, longitude: longitude, price: price, address: address, phone: phone, distance: distance, categories: categories, url: url, plainPhone: plain_phone)
-                    
-//                    if !(self.searchPlacesTab?.places.contains(place))!{
-                    
-//                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
-//                        let marker = GMSMarker(position: position)
-//                        marker.icon = UIImage(named: "place_icon")
-//                        marker.title = place.name
-//                        marker.map = self.mapView
-//                        marker.isTappable = true
-//                        marker.accessibilityLabel = "place_\(self.places.count)"
-                        
-                        //                    let item = MapCluster(position: position, name: place.name, icon: UIImage(named: "place_icon")!, id: String(self.places.count), type: "place")
-                        //                    self.clusterManager.add(item)
-//                        self.places.append(place)
-//                        self.placeMapping[place.id] = place
-//                        self.getPlaceHours(id: place.id)
-//                        
-//                        self.searchPlacesTab?.places.append(place)
-                    
-//                    }
-                }
-                //            self.clusterManager.cluster()
-            }
-        }
-    }
-    
-    func showPins(showAll: Bool, interests: String){
-        if showAll{
-            fetchAllPins(gotPin: {pins in
-                
-                // remove any old pins
-                for marker in self.lastPins{
-                    marker.map = nil
-                }
-                
-                for pin in pins{
-                    let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
-                    let marker = GMSMarker(position: position)
-                    marker.title = pin.pinMessage
-                    marker.map = self.mapView
-                    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
-                    image.image = UIImage(named: "pin")
-                    image.contentMode = .scaleAspectFit
-                    marker.iconView = image
-                    marker.accessibilityLabel = "pin_\(self.pins.count)"
-                    
-                    self.lastPins.append(marker)
-                    self.pins.append(pin)
-                }
-            })
-            
-        }
-        else{
-            // remove any old pins
-            for marker in self.lastPins{
-                marker.map = nil
-            }
-            
-            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
-                if let people = snapshot.value as? [String:[String:Any]]{
-                    let count = people.count
-                    
-                    for (id, value) in people{
-                        let UID = (value["UID"] as? String)!
-                        
-                        Constants.DB.user.child(UID).observeSingleEvent(of: .value, with: {snapshot in
-                            let value = snapshot.value as? NSDictionary
-                            if value != nil
-                            {
-                                
-                                
-                                for (key,_) in (value)!
-                                {
-                                    let pin = pinData(UID: (value?[key] as! NSDictionary)["fromUID"] as! String, dateTS: (value?[key] as! NSDictionary)["time"] as! Double, pin: (value?[key] as! NSDictionary)["pin"] as! String, location: (value?[key] as! NSDictionary)["formattedAddress"] as! String, lat: (value?[key] as! NSDictionary)["lat"] as! Double, lng: (value?[key] as! NSDictionary)["lng"] as! Double, path: Constants.DB.pins.child(key as! String), focus: (value?[key] as! NSDictionary)["focus"] as? String ?? "")
-                                    
-                                    Constants.DB.user.child(pin.fromUID).observeSingleEvent(of: .value, with: {snapshot in
-                                        
-                                        if let info = snapshot.value as? [String:Any]{
-                                            if let username = info["username"] as? String{
-                                                
-                                                
-                                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: pin.dateTimeStamp), to: Date()).hour ?? 0 < 24{
-                                                    pin.username = username
-                                                    
-                                                    let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
-                                                    let marker = GMSMarker(position: position)
-                                                    marker.title = pin.pinMessage
-                                                    marker.map = self.mapView
-                                                    let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
-                                                    image.image = UIImage(named: "pin")
-                                                    image.contentMode = .scaleAspectFit
-                                                    marker.iconView = image
-                                                    marker.accessibilityLabel = "pin_\(self.pins.count)"
-                                                    
-                                                    self.lastPins.append(marker)
-                                                    self.pins.append(pin)
-                                                }
-                                            }
-                                        }
-                                        
-                                    })
-                                    
-                                }
-                            }
-                        })
-                    }
-                }
-                
-            })
-        }
-    }
-    func showPlaces(showAll: Bool, interests: String){
-        if showAll{
-            // get all places on map of selected interest
-            for marker in self.followingPlacesMarker{
-                marker.map = nil
-            }
-            
-            for interest in interests.components(separatedBy: ","){
-                let yelpInterst = Constants.interests.yelpMapping[interest]
-            
-                yelpSearch(interest: yelpInterst!, location: currentLocation!, gotPlaces: {nearByPlaces in
-                    for place in nearByPlaces{
-                        let position = CLLocationCoordinate2D(latitude: Double(place.latitude), longitude: Double(place.longitude))
-                        let marker = GMSMarker(position: position)
-                        marker.icon = UIImage(named: "place_icon")
-                        marker.title = place.name
-                        marker.map = self.mapView
-                        marker.isTappable = true
-                        marker.accessibilityLabel = "place_\(self.places.count)"
-                        if let earlier = self.placePins[place.id]{
-                            earlier.map = nil
-                        }
-                        
-                        self.allPlacesMarker.append(marker)
-                        self.placePins[place.id] = marker
-                        
-                        self.placeMapping[place.id] = place
-                        self.getPlaceHours(id: place.id)
-                        self.places.append(place)
-                        if !(self.exploreTab?.followingPlaces.contains(place))!{
-                            self.exploreTab?.followingPlaces.append(place)
-                            self.exploreTab?.places.append(place)
-                        }
-                    }
-                })
-            }
-        }
-        else{
-            // pending remove all marker pins
-            for marker in self.allPlacesMarker{
-                marker.map = nil
-            }
-            
-            if let token = AuthApi.getYelpToken(){
-                self.fetchPlaces(around: currentLocation!, token: token)
-            }
-            else{
-                getYelpToken(completion: {(token) in
-                    AuthApi.set(yelpAccessToken: token)
-                    self.fetchPlaces(around:
-                        self.currentLocation!, token: token)
-                })
-            }
-        }
-    }
-    
     func getPlaceHours(id: String){
         if let token = AuthApi.getYelpToken(){
             let url = "https://api.yelp.com/v3/businesses/\(id)"
@@ -1428,8 +890,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
     }
-    
-    
+
     func showPopup(){
         
         let overlayAppearance = PopupDialogOverlayView.appearance()

@@ -138,8 +138,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     
     func login() {
         let storyboard = UIStoryboard(name: Constants.otherIds.mainSB, bundle: nil)
-        let tabContr = storyboard.instantiateInitialViewController() as! UITabBarController
-        self.window?.rootViewController = tabContr
+        let loading = storyboard.instantiateViewController(withIdentifier: "loading")
+        self.window?.rootViewController = loading
         self.window?.makeKeyAndVisible()
         
 //        let newView = InterestsViewController(nibName: "InterestsViewController", bundle: nil)
