@@ -533,9 +533,6 @@ class AnimationViewController: UIViewController {
     
     func moveToMap(){
 //        if self.dataCount == 3{
-            let storyboard = UIStoryboard(name: Constants.otherIds.mainSB, bundle: nil)
-            let VC = storyboard.instantiateInitialViewController() as! UITabBarController
-            
             self.performSegue(withIdentifier: "loaded", sender: nil)
 //        }
     }
