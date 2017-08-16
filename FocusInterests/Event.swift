@@ -240,6 +240,10 @@ extension Event{
     static func getNearyByEvents(query: String = "", category: String = "", location: CLLocationCoordinate2D, gotEvents: @escaping (_ result: [Event]) -> Void){
         var events = [Event]()
         
+        var ticketMasterDF = DateFormatter()
+        ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        
         let url = "https://app.ticketmaster.com/discovery/v2/events.json"
         let parameters: [String: Any] = [
             "keyword": query,
@@ -284,7 +288,10 @@ extension Event{
                 event.price = price
                 event.image_url = image
                 
-                events.append(event)
+                if let date = ticketMasterDF.date(from: event.date!), date > Date(){
+                    events.append(event)
+                }
+                
             }
             gotEvents(events)
             
