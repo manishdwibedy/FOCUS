@@ -1066,14 +1066,14 @@
                         <viewControllerLayoutGuide type="bottom" id="PQd-LO-CAk"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="d29-TI-Qpb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="2000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="2200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQF-jg-zLQ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1936"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="2136"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jX0-Sr-gqD">
-                                        <rect key="frame" x="2" y="3" width="375" height="2060"/>
+                                        <rect key="frame" x="2" y="3" width="375" height="2095"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ny-td-iO2">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
@@ -1388,15 +1388,29 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g6o-Fv-Ai8">
-                                                <rect key="frame" x="0.0" y="1464" width="375" height="169"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="169" id="4uA-6m-Fbq"/>
-                                                </constraints>
-                                            </tableView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Vjf-cd-1Tg">
+                                                <rect key="frame" x="0.0" y="1464" width="375" height="204"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Recent Posts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRb-8T-NRa">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="wdU-SF-ATj"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="21"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g6o-Fv-Ai8">
+                                                        <rect key="frame" x="0.0" y="35" width="375" height="169"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="169" id="4uA-6m-Fbq"/>
+                                                        </constraints>
+                                                    </tableView>
+                                                </subviews>
+                                            </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcz-6y-l6N" userLabel="FOCUS View">
-                                                <rect key="frame" x="0.0" y="1633" width="375" height="177"/>
+                                                <rect key="frame" x="0.0" y="1668" width="375" height="177"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Lc-dF-pxm" userLabel="Focus Stack View">
                                                         <rect key="frame" x="7.5" y="5" width="359" height="166"/>
@@ -1505,7 +1519,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1D-0y-Ho8" userLabel="Events View">
-                                                <rect key="frame" x="0.0" y="1810" width="375" height="250"/>
+                                                <rect key="frame" x="0.0" y="1845" width="375" height="250"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Oa-EW-WNa">
                                                         <rect key="frame" x="8" y="7.5" width="359" height="235"/>
@@ -1684,7 +1698,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="2000"/>
+                    <size key="freeformSize" width="375" height="2200"/>
                     <connections>
                         <outlet property="containStackForMoreOrLessButtonsHeight" destination="KJh-Ek-LSl" id="nJC-fv-SvR"/>
                         <outlet property="containerStackForMoreOrLessButtons" destination="xKW-CZ-zct" id="7Yt-QF-ZUA"/>
@@ -1720,6 +1734,7 @@
                         <outlet property="moreOrLessButtonStackHeight" destination="nQ3-Qf-aue" id="n8I-43-p09"/>
                         <outlet property="navBar" destination="e9i-G3-Hb7" id="DWe-hJ-khv"/>
                         <outlet property="navBarItem" destination="kge-L7-JD1" id="pBI-W7-IDF"/>
+                        <outlet property="noRecentPostLabel" destination="nRb-8T-NRa" id="M8s-r4-O1A"/>
                         <outlet property="otherEventStackView" destination="YBH-44-GmL" id="Xvg-fu-Qag"/>
                         <outlet property="otherPlaceStackView" destination="VJK-32-T8T" id="rBt-tz-coQ"/>
                         <outlet property="otherUserNameInterestTitleLabel" destination="Cjh-n3-JBi" id="4aA-99-29S"/>
@@ -1727,6 +1742,7 @@
                         <outlet property="placesTableView" destination="ePL-3c-W8w" id="RpQ-5v-L9O"/>
                         <outlet property="placesTableViewHeight" destination="4Iw-9w-e5M" id="CHU-9A-VUL"/>
                         <outlet property="privateUserProfileView" destination="Xp0-A2-Ayw" id="fkx-hh-hWd"/>
+                        <outlet property="recentPostStack" destination="Vjf-cd-1Tg" id="kMh-1u-xmS"/>
                         <outlet property="recentPostTableView" destination="g6o-Fv-Ai8" id="urr-ZN-pMJ"/>
                         <outlet property="recentPostTableViewHeight" destination="4uA-6m-Fbq" id="z3A-5U-qlA"/>
                         <outlet property="userImage" destination="GFR-me-ZIQ" id="JhW-P1-k2t"/>
@@ -1736,7 +1752,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cps-fE-QbC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-90.400000000000006" y="-2116.6416791604202"/>
+            <point key="canvasLocation" x="-530" y="-2255"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="dgX-G0-gEc">
