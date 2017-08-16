@@ -435,9 +435,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             pinCell?.dateAndTimeLabel.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (data["time"] as? Double)!), numericDates: true, shortVersion: true)
             
             pinCell?.nameDescriptionLabel.text = data["pin"] as? String
-            
-            pinCell?.commentButton.addTarget(self, action: #selector(PlaceViewController.goToPin(_:)), for: .touchUpInside)
-            
+            pinCell?.commentButton.isUserInteractionEnabled = false
             self.pinTableHeightConstraint.constant = (pinCell?.contentView.frame.height)! * CGFloat(indexPath.row + 1)
             return pinCell!
         }else{
@@ -506,11 +504,6 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     func textViewDidBeginEditing(_ textView: UITextView) {
         
         self.reviewsTextView.text = ""
-        
-    }
-    
-//    ADD pin view here
-    func goToPin(_ sender: Any) {
         
     }
     
