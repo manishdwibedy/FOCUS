@@ -889,6 +889,7 @@
                         <outlet property="mainStackView" destination="XSO-aS-WGc" id="sf8-Bs-wca"/>
                         <outlet property="mapButton" destination="aU2-ld-zGm" id="xeU-ll-XgB"/>
                         <outlet property="navigationBar" destination="ns3-qv-thK" id="SVc-bE-Al6"/>
+                        <outlet property="noPinsLabel" destination="34F-IF-kuC" id="BPz-YN-sUM"/>
                         <outlet property="peopleAlsoLikeTableViewHeight" destination="tAy-c0-6vE" id="yRg-0D-SnQ"/>
                         <outlet property="peopleAlsoLikedStack" destination="tYx-fB-dTU" id="d7j-4R-L4f"/>
                         <outlet property="peopleAlsoLikedTableView" destination="sM0-tQ-gCv" id="sph-3q-6vM"/>
