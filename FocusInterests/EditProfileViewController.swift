@@ -48,6 +48,7 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var userPickerView: UIPickerView!
     var userId: String!
     var hasSelectedGender: Bool!
+    var changingProfile = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,22 +103,23 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.profilePhotoView.image = #imageLiteral(resourceName: "placeholder_people")
-        self.profilePhotoView.roundedImage()
-        if let url = URL(string: AuthApi.getUserImage()!){
-            SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                (receivedSize :Int, ExpectedSize :Int) in
-                
-            }, completed: {
-                (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                
-                if image != nil && finished{
-                    self.profilePhotoView.roundedImage()
-                    self.profilePhotoView.image = crop(image: image!, width: 85, height: 85)
-                }
-            })
+        if !self.changingProfile{
+            self.profilePhotoView.image = #imageLiteral(resourceName: "placeholder_people")
+            self.profilePhotoView.roundedImage()
+            if let url = URL(string: AuthApi.getUserImage()!){
+                SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                    (receivedSize :Int, ExpectedSize :Int) in
+                    
+                }, completed: {
+                    (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                    
+                    if image != nil && finished{
+                        self.profilePhotoView.roundedImage()
+                        self.profilePhotoView.image = crop(image: image!, width: 85, height: 85)
+                    }
+                })
+            }
         }
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -204,7 +206,7 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
             "fullname_lowered": self.nameTf.text?.lowercased() ?? "",
             ])
         
-        uploadImage(image:profilePhotoView.image!, path: Constants.storage.user_profile.child(AuthApi.getFirebaseUid()!))
+        uploadImage(isProfile: true, image:profilePhotoView.image!, path: Constants.storage.user_profile.child(AuthApi.getFirebaseUid()!))
         
         self.dismiss(animated: true, completion: nil)
     }
@@ -264,7 +266,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         profilePhotoView.contentMode = UIViewContentMode.scaleAspectFit
         
         self.profilePhotoView.roundedImage()
-
+        self.changingProfile = true
         self.dismiss(animated: true, completion: nil)
     }
     

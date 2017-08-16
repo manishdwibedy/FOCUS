@@ -277,12 +277,11 @@ func getDistance(fromLocation: CLLocation, toLocation: CLLocation, addBracket: B
     _ = AuthApi.getFirebaseUid()
     let uploadTask = path.putData(localFile!, metadata: metadata, completion: {metadata, error in
         if error == nil{
-            AuthApi.set(userImage: metadata?.downloadURLs?[0].absoluteString)
-            
             if isProfile{
+                AuthApi.set(userImage: metadata?.downloadURLs?[0].absoluteString)
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues([
                     "image_string": metadata?.downloadURLs?[0].absoluteString
-                    ])
+                ])
             }
         }
     })
