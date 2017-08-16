@@ -69,9 +69,21 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
         popTip.shouldDismissOnTap = true
         
         let search_people = self.viewControllers![1] as! SearchPeopleViewController
-        getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
-            search_people.placesIFollow = places
-        })
+        
+        if let token = AuthApi.getYelpToken(){
+            getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
+                search_people.placesIFollow = places
+            })
+        }
+        else{
+            getYelpToken(completion: {(token) in
+                AuthApi.set(yelpAccessToken: token)
+                getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
+                    search_people.placesIFollow = places
+                })
+            })
+        }
+        
         
         getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
             search_people.eventsIAttend = events

@@ -25,7 +25,7 @@ import Crashlytics
 import GeoFire
 
 protocol showMarkerDelegate{
-    func showPinMarker(pin: pinData)
+    func showPinMarker(pin: pinData, show: Bool)
     func showPlaceMarker(place: Place)
     func showEventMarker(event: Event)
 }
@@ -295,7 +295,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                                          longitude: pin.coordinates.longitude,
                                          zoom: 13)
                 self.eventPlaceMarker = GMSMarker(position: position)
-                self.eventPlaceMarker?.icon = #imageLiteral(resourceName: "pin")
+                let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+                image.image = #imageLiteral(resourceName: "pin")
+                image.contentMode = .scaleAspectFit
+                self.eventPlaceMarker?.iconView = image    
                 self.eventPlaceMarker?.title = pin.pinMessage
                 self.eventPlaceMarker?.map = self.mapView
 
@@ -1207,9 +1210,29 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
         self.popUpView.isHidden = true
     }
     
-    func showPinMarker(pin: pinData){
+    func showPinMarker(pin: pinData, show: Bool = false){
         willShowPin = true
         showPin = pin
+        
+        
+        if let pin = self.showPin, willShowPin, show{
+            
+            let position = CLLocationCoordinate2D(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+            self.eventPlaceMarker = GMSMarker(position: position)
+            
+            let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+            image.image = #imageLiteral(resourceName: "pin")
+            image.contentMode = .scaleAspectFit
+            self.eventPlaceMarker?.iconView = image
+            
+            self.eventPlaceMarker?.title = pin.pinMessage
+            self.eventPlaceMarker?.map = self.mapView
+            
+            eventPlaceMarker?.accessibilityLabel = "pin_\(self.pins.count)"
+            
+            self.pins.append(showPin!)
+        }
+
     }
     
     func showPlaceMarker(place: Place){

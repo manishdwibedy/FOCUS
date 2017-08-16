@@ -45,7 +45,16 @@ class AnimationViewController: UIViewController {
         loadMap()
         showPins(showAll: true, interests: "")
         getEvents()
-        showPlaces(showAll: false, interests: "")
+        if let token = AuthApi.getYelpToken(){
+            showPlaces(showAll: false, interests: "")
+        }
+        else{
+            getYelpToken(completion: {(token) in
+                AuthApi.set(yelpAccessToken: token)
+                self.showPlaces(showAll: false, interests: "")
+            })
+        }
+        
         
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(moveToMap), userInfo: nil, repeats: false)
         

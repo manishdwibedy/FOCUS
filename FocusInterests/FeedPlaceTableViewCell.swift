@@ -52,7 +52,7 @@ class FeedPlaceTableViewCell: UITableViewCell {
         vc.willShowPin = true
         
         let pinInfo = pinData(UID: self.pin?["fromUID"] as! String, dateTS: self.pin?["time"] as! Double, pin: self.pin?["pin"] as! String, location: self.pin?["formattedAddress"] as! String, lat: self.pin?["lat"] as! Double, lng: self.pin?["lng"] as! Double, path: Constants.DB.pins.child(self.pin!["fromUID"] as! String), focus: self.pin?["focus"] as? String ?? "")
-        delegate?.showPinMarker(pin: pinInfo)
+        delegate?.showPinMarker(pin: pinInfo, show: false)
         
         //        vc.showPin = pin
         //        vc.location = CLLocation(latitude: pinData.coordinates.la, longitude: coordinates.longitude)

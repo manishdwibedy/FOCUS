@@ -171,7 +171,7 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
         vc.showPin = pin
         AuthApi.setShowPin(show: true)
         
-        delegate?.showPinMarker(pin: pin!)
+        delegate?.showPinMarker(pin: pin!, show: false)
         //parentVC?.present(vc, animated: true, completion: nil)
         
 //        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
