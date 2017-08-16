@@ -43,7 +43,8 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     
     var event: Event?
     var place: GMSPlace?
-    var selectedLocation = false
+    var isSelectedLocation = false
+    var selectedLocation: LocationSuggestion?
     var fullAddress = ""
     var hasNotChosenFocus = true
     let datePicker = UIDatePicker()
@@ -446,13 +447,10 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
                 
             }
             else{
-                guard let validPlace = self.place else {
+                if !self.isSelectedLocation{
                     presentNotification(title: "Choose a location", message: "Please choose a location for this event.")
-                    return
                 }
-                let locality = validPlace.addressComponents?[0].name
-                let street = validPlace.addressComponents?[1].name
-                let shortAddress = "\(locality!), \(street!)"
+                let locality = selectedLocation?.address
                 
                 
                 guard let name = eventNameTextField.text, !name.isEmpty else{
@@ -482,7 +480,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
                 let endTime = eventEndTimeTextField.text
                 
                 
-                self.event = Event(title: name, description: "", fullAddress: self.fullAddress, shortAddress: shortAddress, latitude: validPlace.coordinate.latitude.debugDescription, longitude: validPlace.coordinate.longitude.debugDescription, date: dateString, creator: creator, category: choseFocusButton.titleLabel?.text, privateEvent: publicOrPrivateSwitch.isOn)
+                self.event = Event(title: name, description: "", fullAddress: selectedLocation?.address, shortAddress: selectedLocation?.name, latitude: String(describing: selectedLocation?.lat), longitude: String(describing: selectedLocation?.long), date: dateString, creator: creator, category: choseFocusButton.titleLabel?.text, privateEvent: publicOrPrivateSwitch.isOn)
                 
                 let price = eventPriceTextView.text
                 if (price?.characters.count)! > 0{
@@ -944,7 +942,8 @@ extension CreateNewEventViewController {
     }
     
     func gotSelectedLocation(location: LocationSuggestion) {
-        self.selectedLocation = true
+        self.isSelectedLocation = true
+        self.selectedLocation = location
 //        self.location = CLLocation(latitude: location.lat, longitude: location.long)
         self.locationTextField.text = location.name
         self.view.endEditing(true)
