@@ -433,9 +433,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
             
             feedEventCell.delegate = self.tabBarController?.viewControllers![0] as! MapViewController
-            
+            feedEventCell.feedVC = self
             feedEventCell.globeImage.addTarget(self, action: #selector(SearchEventsViewController.goToMap), for: .touchUpInside)
-            feedEventCell.inviteButton.addTarget(self, action: #selector(SearchEventsViewController.goToInvitePage), for: .touchUpInside)
             
             feedEventCell.nameLabelButton.setTitle(feed.sender?.username, for: .normal)
             
@@ -641,11 +640,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             }
         }
         return cell!
-    }
-    
-    func goToInvitePage(){
-        let inviteVC = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "NewInviteViewController")
-        self.present(inviteVC, animated: true, completion: nil)
     }
     
     func getUserData(id: String, gotUser: @escaping (_ user: User) -> Void){

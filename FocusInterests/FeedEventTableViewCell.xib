@@ -175,6 +175,9 @@
                                                                 <state key="normal" title="Invite">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="invite:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4MP-yg-nuU"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>

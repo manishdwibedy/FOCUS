@@ -27,6 +27,7 @@ class FeedEventTableViewCell: UITableViewCell {
     
     var delegate: showMarkerDelegate?
     var event: Event?
+    var feedVC: SearchEventsViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,6 +56,11 @@ class FeedEventTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func invite(_ sender: Any) {
+        let inviteVC = UIStoryboard(name: "Invites", bundle: nil).instantiateViewController(withIdentifier: "NewInviteViewController") as? NewInviteViewController
+        inviteVC?.event = event
+        feedVC!.present(inviteVC!, animated: true, completion: nil)
+    }
     
     @IBAction func goBackToMap(_ sender: Any){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
