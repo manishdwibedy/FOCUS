@@ -180,7 +180,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.view.backgroundColor = Constants.color.navy
         self.navBar.barTintColor = Constants.color.navy
         self.navBar.titleTextAttributes = attrs
-        self.navBar.addBottomBorderWithColor(color: UIColor.white, width: 0.7)
         
         hideKeyboardWhenTappedAround()
         

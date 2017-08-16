@@ -60,7 +60,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="KNM-k8-2Xa" secondAttribute="trailing" id="tX2-sE-GGF"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="currentLocationLabel" destination="SYK-Ca-oEQ" id="gtx-Jf-JEs"/>
                 <outlet property="locationAddressLabel" destination="KNM-k8-2Xa" id="LRu-Z4-GSg"/>

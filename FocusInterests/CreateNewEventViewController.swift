@@ -12,7 +12,7 @@ import FirebaseDatabase
 import GeoFire
 import SCLAlertView
    
-class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate{
+class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate, gotLocationDelegate{
     
     @IBOutlet weak var privatePublicSwitch: UISwitch!
     //@IBOutlet weak var interestListView: UIView!
@@ -43,6 +43,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     
     var event: Event?
     var place: GMSPlace?
+    var selectedLocation = false
     var fullAddress = ""
     var hasNotChosenFocus = true
     let datePicker = UIDatePicker()
@@ -59,7 +60,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     var interests = [String]()
     var filteredInterest = [String]()
     var interests_set = Set<String>()
-
+    
     let validatedFields = true
     
     @IBOutlet weak var interestLabelBottomConstraint: NSLayoutConstraint!
@@ -530,8 +531,10 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     }
     
     @IBAction func addEventLocation(_ sender: UITextField) {
-        let autoCompleteController = self.createGMSViewController()
-        present(autoCompleteController, animated: true, completion: nil)
+        let chooseLocationVC = ChooseLocationViewController(nibName: "ChooseLocationViewController", bundle: nil)
+        chooseLocationVC.delegate = self
+        
+        self.present(chooseLocationVC, animated: true, completion: nil)
     }
     
     @IBAction func addEventDate(_ sender: UITextField) {
@@ -931,11 +934,20 @@ extension CreateNewEventViewController {
                 self.eventNameTextField.resignFirstResponder()
                 self.eventDateTextField.becomeFirstResponder()
             }else{
-                let autoCompleteController = self.createGMSViewController()
-                present(autoCompleteController, animated: true, completion: nil)
+                let chooseLocationVC = ChooseLocationViewController(nibName: "ChooseLocationViewController", bundle: nil)
+                chooseLocationVC.delegate = self
+                
+                self.present(chooseLocationVC, animated: true, completion: nil)
             }
         }
         return true
+    }
+    
+    func gotSelectedLocation(location: LocationSuggestion) {
+        self.selectedLocation = true
+//        self.location = CLLocation(latitude: location.lat, longitude: location.long)
+        self.locationTextField.text = location.name
+        self.view.endEditing(true)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -954,8 +966,10 @@ extension CreateNewEventViewController {
             self.eventEndTimeTextField.inputAccessoryView = self.endTimeToolbar
             self.eventEndTimeTextField.inputView = self.timePicker
         } else if textField == self.locationTextField {
-            let autoCompleteController = self.createGMSViewController()
-            present(autoCompleteController, animated: true, completion: nil)
+            let chooseLocationVC = ChooseLocationViewController(nibName: "ChooseLocationViewController", bundle: nil)
+            chooseLocationVC.delegate = self
+            
+            self.present(chooseLocationVC, animated: true, completion: nil)
         } else if textField == self.eventPriceTextView {
             self.eventPriceTextView.inputAccessoryView = self.priceToolbar
         }

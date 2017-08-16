@@ -54,6 +54,7 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
             NSFontAttributeName: UIFont(name: "Avenir Book", size: 15)!
         ]
         let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Add a comment", attributes: placeholderAttributes)
+        
         self.commentTextView.attributedText = placeholderTextAttributes
         
         self.feedOneStackView.translatesAutoresizingMaskIntoConstraints = false

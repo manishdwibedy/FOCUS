@@ -17,7 +17,7 @@ protocol InvitePeopleViewControllerDelegate {
     func showPopupView()
 }
 
-class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, InvitePeopleViewControllerDelegate{
+class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, gotLocationDelegate, InvitePeopleViewControllerDelegate{
 
     @IBOutlet weak var animationGif: UIImageView!
     @IBOutlet weak var backButton: UIBarButtonItem!
@@ -36,6 +36,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     var pinData: pinData? = nil
     var showInvitePopup = false
+    var selectedLocation = false
     var isMeetup = false
     var inviteFromMapView = false
     var inviteFromOtherUserProfile = false
@@ -838,7 +839,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
     }
     
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if segmentedOut.selectedSegmentIndex == 0
         {
@@ -983,9 +983,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
 
 extension InvitePeopleViewController: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let autoCompleteController = self.createGMSViewController()
-        textField.resignFirstResponder()
-        present(autoCompleteController, animated: true, completion: nil)
+        let chooseLocationVC = ChooseLocationViewController(nibName: "ChooseLocationViewController", bundle: nil)
+        chooseLocationVC.delegate = self
+        self.present(chooseLocationVC, animated: true, completion: nil)
     }
 }
 
@@ -1319,6 +1319,12 @@ extension InvitePeopleViewController{
     
     @IBAction func unwindBackToExplorePage(_ sender: UIStoryboardSegue){
         self.showPopupView()
+    }
+    
+    func gotSelectedLocation(location: LocationSuggestion) {
+        self.selectedLocation = true
+        self.location = CLLocation(latitude: location.lat, longitude: location.long)
+        self.currentLocation.text = location.name
     }
 }
 

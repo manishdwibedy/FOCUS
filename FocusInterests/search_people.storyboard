@@ -255,22 +255,13 @@
                                     <constraint firstItem="vyE-9N-gmk" firstAttribute="leading" secondItem="Za9-qc-nJr" secondAttribute="leadingMargin" id="Yem-QT-FjZ"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qBW-dw-bnf">
-                                <rect key="frame" x="154" y="301.5" width="66" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="7rF-hV-E6P"/>
-                                    <constraint firstAttribute="width" constant="66" id="UYu-Q9-3SW"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RME-pD-v8b" secondAttribute="trailing" id="1Zh-VX-YSN"/>
-                            <constraint firstItem="qBW-dw-bnf" firstAttribute="centerY" secondItem="YCB-Au-Xks" secondAttribute="centerY" id="33W-9A-1RN"/>
                             <constraint firstAttribute="trailing" secondItem="AYl-Yr-fFv" secondAttribute="trailing" id="3JP-Bk-dDQ"/>
                             <constraint firstItem="HTi-NK-gbC" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="3Q3-kk-PCV"/>
                             <constraint firstItem="Za9-qc-nJr" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" constant="5" id="4R7-mN-uuE"/>
-                            <constraint firstItem="qBW-dw-bnf" firstAttribute="centerX" secondItem="YCB-Au-Xks" secondAttribute="centerX" id="5Cj-oo-RLo"/>
                             <constraint firstItem="RME-pD-v8b" firstAttribute="leading" secondItem="YCB-Au-Xks" secondAttribute="leading" id="7bQ-sO-6CQ"/>
                             <constraint firstItem="HTi-NK-gbC" firstAttribute="top" secondItem="bgb-f2-cnn" secondAttribute="bottom" id="8Gh-Wj-tiB"/>
                             <constraint firstItem="AYl-Yr-fFv" firstAttribute="top" secondItem="RME-pD-v8b" secondAttribute="bottom" id="OgL-ds-gWv"/>

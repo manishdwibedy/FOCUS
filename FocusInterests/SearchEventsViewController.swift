@@ -302,9 +302,6 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                         addGreenDot(label: feedOneCell.interestLabel, content: "N.A")
                     }
                     
-                    
-                    
-                    
                     feedOneCell.addressLabel.text = (pinData["formattedAddress"] as? String)?.components(separatedBy: ";;")[0]
                     feedOneCell.nameDescriptionLabel.text = pinData["pin"] as? String
                     

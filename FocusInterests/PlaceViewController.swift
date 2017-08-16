@@ -120,6 +120,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     @IBOutlet weak var pinStackView: UIStackView!
     @IBOutlet weak var pinTableView: UITableView!
     @IBOutlet weak var pinTableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noPinsLabel: UILabel!
     
     // people also liked stack
     @IBOutlet weak var peopleAlsoLikedStack: UIView!
@@ -183,9 +184,10 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         
         self.pinTableView.delegate = self
         self.pinTableView.dataSource = self
-        let pinPlaceReviewNib = UINib(nibName: "PinPlaceReviewTableViewCell", bundle: nil)
-        self.pinTableView.register(pinPlaceReviewNib, forCellReuseIdentifier: "pinPlaceReviewCell")
-        
+        self.pinTableView.register(UINib(nibName: "FeedOneTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedOneCell")
+        self.pinTableView.rowHeight = UITableViewAutomaticDimension
+        self.pinTableView.estimatedRowHeight = 150.0
+    
         self.peopleAlsoLikedTableView.delegate = self
         self.peopleAlsoLikedTableView.dataSource = self
         self.peopleAlsoLikedTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -211,7 +213,6 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         self.view.backgroundColor = Constants.color.navy
         self.navigationBar.barTintColor = Constants.color.navy
         self.navigationBar.titleTextAttributes = attrs
-        self.navigationBar.addBottomBorderWithColor(color: UIColor.white, width: 0.7)
         
         self.pinAmountLabel.setTitle("0", for: .normal)
         self.followersAmountLabel.setTitle("0", for: .normal)
@@ -277,8 +278,10 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
 
         Constants.DB.pins.queryOrdered(byChild: "formattedAddress").queryEqual(toValue: place!.name).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            if value != nil
-            {
+            if value != nil{
+                self.pinStackView.removeArrangedSubview(self.noPinsLabel)
+                self.noPinsLabel.isHidden = true
+                
                 for (key,_) in value!
                 {
                     self.data.append(value?[key] as! NSDictionary)
@@ -315,7 +318,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             self.phoneLabel.addGestureRecognizer(tap)
         }
         
-        checkFollowing()
+        
         checkRatingAmount()
         
         self.loadInfoScreen(place: self.place!)
@@ -348,7 +351,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        self.peopleAlsoLikedStack.isHidden = true
 //        getSuggestedPlaces(interests: getInterest(yelpCategory: (place?.categories[0].alias)!), limit: 3, gotPlaces: {places in
 //            self.suggestedPlaces = places
 //            self.peopleAlsoLikedTableView.reloadData()
@@ -409,28 +412,32 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (tableView.tag == 0){
-            let pinCell = self.pinTableView.dequeueReusableCell(withIdentifier: "pinPlaceReviewCell", for: indexPath) as! PinPlaceReviewTableViewCell
+            
+            let pinCell = self.pinTableView.dequeueReusableCell(withIdentifier: "FeedOneCell", for: indexPath) as? FeedOneTableViewCell
             
             let data = self.data[indexPath.row]
             
             Constants.DB.user.child((data["fromUID"] as? String)!).observeSingleEvent(of: .value, with: {snapshot in
                 if let data = snapshot.value as? [String:Any]{
-                    pinCell.usernameLabel.text = data["username"] as? String
+                    pinCell?.usernameLabel.text = data["username"] as? String
                     
                     if let image = data["image_string"] as? String{
                         if let url = URL(string: image){
-                            pinCell.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
+                            pinCell?.userImage.sd_setImage(with: url, for: .normal)
+                            pinCell?.userImage.sd_setImage(with: url, for: .selected)
                         }
                     }
                     
                 }
             })
             
-            addGreenDot(label: pinCell.categoryLabel, content:(data["focus"] as? String)!)
-            pinCell.timeOfPinLabel.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (data["time"] as? Double)!), numericDates: true, shortVersion: true)
-            pinCell.commentsTextView.text = data["pin"] as? String
-            self.pinTableView.frame.size.height = (pinCell.frame.height * CGFloat(indexPath.row + 1))
-            return pinCell
+            addGreenDot(label: (pinCell?.interestLabel)!, content:(data["focus"] as? String)!)
+            pinCell?.dateAndTimeLabel.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (data["time"] as? Double)!), numericDates: true, shortVersion: true)
+            
+            pinCell?.nameDescriptionLabel.text = data["pin"] as? String
+            pinCell?.commentButton.isUserInteractionEnabled = false
+            self.pinTableHeightConstraint.constant = (pinCell?.contentView.frame.height)! * CGFloat(indexPath.row + 1)
+            return pinCell!
         }else{
             let otherPlacesCell = self.peopleAlsoLikedTableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell", for: indexPath) as! SearchPlaceCell
             otherPlacesCell.inviteButtonOut.addTarget(self, action: #selector(inviteTestMethod), for: .touchUpInside)
@@ -464,23 +471,22 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             addGreenDot(label: otherPlacesCell.categoryLabel, content: place_focus)
             otherPlacesCell.checkForFollow()
             
-            self.peopleAlsoLikedTableView.frame.size.height = (otherPlacesCell.frame.height * CGFloat(indexPath.row + 1))
-            
+            self.peopleAlsoLikeTableViewHeight.constant = otherPlacesCell.contentView.frame.height * CGFloat(indexPath.row + 1)
             return otherPlacesCell
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(tableView.tag == 0){
-            return 80
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
-            
-            self.peopleAlsoLikeTableViewHeight.constant = cell.contentView.frame.height * CGFloat(indexPath.row + 1)
-            
-            return cell.contentView.frame.height
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let rowHeight = CGFLoat()
+//        if tableView.tag == 1{
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchPlaceCell") as! SearchPlaceCell
+//            
+//            self.peopleAlsoLikeTableViewHeight.constant = cell.contentView.frame.height * CGFloat(indexPath.row + 1)
+//            
+//            rowHeight =  cell.contentView.frame.height
+//        }
+//        return rowHeight
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.tag == 1{
@@ -496,7 +502,9 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     
     // MARK: TEXT VIEW DELEGATE METHODS
     func textViewDidBeginEditing(_ textView: UITextView) {
+        
         self.reviewsTextView.text = ""
+        
     }
     
     @IBAction func showReviewBox(){
@@ -601,47 +609,48 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
     
     
     @IBAction func followPressed(){
-        if isFollowing == false{
+        
+//        self.followButton.isSelected = !self.followButton.isSelected
+        if self.followButton.isSelected == false{
             let time = NSDate().timeIntervalSince1970
             Constants.DB.following_place.child((place?.id)!).child("followers").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!, "time":Double(time)])
-            Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
-            
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following").child("places").childByAutoId().updateChildValues(["placeID":place?.id ?? "", "time":time])
             self.followButton.isSelected = true
-            self.followButton.backgroundColor = UIColor(red: 149/255.0, green: 166/255.0, blue: 181/255.0, alpha: 1.0)
-            self.followButton.tintColor = UIColor.clear
+            self.followButton.layer.borderWidth = 1
+            self.followButton.layer.borderColor = UIColor.white.cgColor
+            self.followButton.backgroundColor = Constants.color.navy
             self.followButton.setTitle("Following", for: UIControlState.selected)
-            isFollowing = true
-        }else
-        {
-            
+    
+        }else if self.followButton.isSelected == true{
             let unfollowAlertController = UIAlertController(title: "Are you sure you want to unfollow \(place!.name)?", message: nil, preferredStyle: .actionSheet)
             
             let unfollowAction = UIAlertAction(title: "Unfollow", style: .destructive) { action in
-                
-                self.followButton.setTitle("Follow", for: UIControlState.normal)
                 Constants.DB.following_place.child((self.place?.id)!).child("followers").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     if value != nil {
-                        for (key,_) in value!
-                        {
+                        for (key,_) in value!{
                             Constants.DB.following_place.child((self.place?.id)!).child("followers").child(key as! String).removeValue()
                         }
-                        
-                        
-                        
                     }
                 })
+                self.followButton.isSelected = false
+                self.followButton.setTitle("Follow", for: UIControlState.normal)
+                self.followButton.layer.borderWidth = 1
+                self.followButton.layer.borderColor = UIColor.clear.cgColor
+                self.followButton.backgroundColor = UIColor(red: 122/255.0, green: 201/255.0, blue: 1/255.0, alpha: 1.0)
             }
-            
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
                 print("cancel has been tapped")
+                self.followButton.isSelected = true
+//                self.followButton.layer.borderWidth = 1
+//                self.followButton.layer.borderColor = UIColor.white.cgColor
+//                self.followButton.backgroundColor = Constants.color.navy
             }
             
             unfollowAlertController.addAction(unfollowAction)
             unfollowAlertController.addAction(cancelAction)
             
             self.present(unfollowAlertController, animated: true, completion: nil)
-            
         }
     }
     
@@ -669,6 +678,8 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
                 ])
             self.ratingID = comment.key
         }
+        self.mainStackView.removeArrangedSubview(self.reviewsStack)
+        self.reviewsStack.isHidden = true
     }
 
     func checkIfFollowing(){

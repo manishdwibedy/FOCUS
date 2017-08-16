@@ -24,7 +24,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var dayTextField: UITextField!
     @IBOutlet weak var dayPickerView: UIPickerView!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var timeButton: UIButton!
+    @IBOutlet weak var timeTextField: UITextField!
     @IBOutlet weak var friendListBottom: NSLayoutConstraint!
     @IBOutlet weak var inviteTableTop: NSLayoutConstraint!
     
@@ -67,6 +67,20 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         toolbar.sizeToFit()
         
         toolbar.setItems([self.flexibleSpaceButton, self.dateDoneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        return toolbar
+    }()
+    
+    var timeDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(InviteViewController.dateSelected))
+    
+    lazy var timeToolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.isTranslucent = true
+        toolbar.sizeToFit()
+        
+        toolbar.setItems([self.flexibleSpaceButton, self.timeDoneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
         return toolbar
@@ -126,7 +140,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let startDate = eventDateTime?[0].trimmingCharacters(in: .whitespaces)
                 
                 let startTime = eventDateTime?[1].trimmingCharacters(in: .whitespaces)
-                timeButton.setTitle(startTime, for: .normal)
+
+                self.timeTextField.text = startTime
                 
                 let startDate1 = dateFormatter.date(from: event!.date!)
                 timePicker.date = startDate1!
@@ -135,10 +150,12 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             else{
                 let startDate = ticketMasterDF.date(from: event!.date!)
-                timeButton.setTitle(dateFormatter.string(for: startDate), for: .normal)
+
+                self.timeTextField.text = dateFormatter.string(for: startDate)
                 
                 dayTextField.text = eventDateDF.string(from: startDate!)
-                timeButton.setTitle(eventTimeDF.string(from: startDate!), for: .normal)
+
+                dateFormatter.string(for: startDate)
                 timePicker.date = startDate!  
             }
             
@@ -150,7 +167,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let nextDiff = 5 - calendar.component(.minute, from: currentTime) % 5
             let nextDate = calendar.date(byAdding: .minute, value: nextDiff, to: currentTime) ?? Date()
 
-            timeButton.setTitle(eventTimeDF.string(from: nextDate), for: .normal)
+
+            self.timeTextField.text = eventTimeDF.string(from: nextDate)
             timePicker.date = nextDate
         }
         
@@ -203,7 +221,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         else{
             inviteTableTop.constant = 0
             timeLabel.isHidden = true
-            timeButton.isHidden = true
+            self.timeTextField.isHidden = true
+            
             self.sections.removeAll()
             self.sectionMapping.removeAll()
             self.users.removeAll()
@@ -251,6 +270,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.timeFormatter.dateFormat = "h:mm a"
         
         self.timePicker.addTarget(self, action: #selector(pickerChange(sender:)), for: UIControlEvents.valueChanged)
+        
+        self.timeTextField.inputAccessoryView = self.timeToolbar
+        self.timeTextField.inputView = self.timePicker
         
         self.friendsTableView.tableFooterView = UIView()
         hideKeyboardWhenTappedAround()
@@ -417,9 +439,13 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        self.dayTextField.inputAccessoryView = self.dateToolbar
-        self.dayTextField.inputView = self.datePicker
+        if textField == self.dayTextField{
+            self.dayTextField.inputAccessoryView = self.dateToolbar
+            self.dayTextField.inputView = self.datePicker
+        }else if textField == self.timeTextField{
+            self.timeTextField.inputAccessoryView = self.timeToolbar
+            self.timeTextField.inputView = self.timePicker
+        }
 //        eventDateTextField.inputView = self.datePicker
         return true
     }
@@ -596,9 +622,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     Constants.DB.places.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"inviteTime":inviteTime,"status": "sent"])
 //                    searchPlace?.showPopup = true
                     
-                    Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeButton.titleLabel?.text!])
                     
-                    
+                     Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeTextField.text!])
                     Answers.logCustomEvent(withName: "Invite User",
                                            customAttributes: [
                                             "type": "place",
@@ -620,8 +645,8 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     Constants.DB.user.child(UID).child("invitations").child(self.type).queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
                     
                         if snapshot.value == nil{
-                        Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":self.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeButton.titleLabel?.text!])
                             
+                        Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":self.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeTextField.text!])
                         }
                     })
                     Answers.logCustomEvent(withName: "Invite User",
@@ -708,7 +733,6 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         timePicker.frame = CGRect(x: 0, y: (self.view.frame.height)-(timePicker.frame.height), width: self.view.frame.width, height: timePicker.frame.height)
         timePicker.backgroundColor = UIColor.white
-        timePicker.inputAccessoryView
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(screenTapWithPicker(sender:)))
         self.view.addGestureRecognizer(tap)
@@ -729,7 +753,7 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         let dateString = dateFormatter.string(from: sender.date)
-        timeOut.setTitle(dateString, for: UIControlState.normal)
+        self.timeTextField.text = dateString
         inviteTime = dateString
     }
     

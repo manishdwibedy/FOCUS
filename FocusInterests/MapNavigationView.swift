@@ -18,6 +18,7 @@ protocol NavigationInteraction {
 class MapNavigationView: UIView, UISearchBarDelegate{
     var delegate: NavigationInteraction?
     
+    @IBOutlet weak var focusLogo: UIImageView!
     @IBOutlet weak var userProfileButton: UIButton!
     @IBOutlet var view: MapNavigationView!
     @IBOutlet weak var messagesButton: MIBadgeButton!
