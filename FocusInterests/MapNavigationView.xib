@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapNavigationView" customModule="FocusInterests" customModuleProvider="target">
             <connections>
+                <outlet property="focusLogo" destination="iPI-ZI-bnz" id="9uy-c8-jJo"/>
                 <outlet property="messagesButton" destination="CZk-k0-NPd" id="SlS-Dv-yom"/>
                 <outlet property="notificationsButton" destination="NJp-MD-iuK" id="P7c-Ck-nvS"/>
                 <outlet property="searchBar" destination="clg-Ba-1dC" id="pCU-Ia-ING"/>
@@ -64,12 +65,20 @@
                                 <constraint firstItem="CZk-k0-NPd" firstAttribute="centerY" secondItem="aVi-yT-Cyr" secondAttribute="centerY" id="JN1-Rz-IPP"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FOCUS_maps_logo" translatesAutoresizingMaskIntoConstraints="NO" id="iPI-ZI-bnz">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQI-5n-4UU">
                             <rect key="frame" x="92" y="0.0" width="150" height="40"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FOCUS_maps_logo" translatesAutoresizingMaskIntoConstraints="NO" id="iPI-ZI-bnz">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="40"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="150" id="lAj-2U-715"/>
+                                <constraint firstItem="iPI-ZI-bnz" firstAttribute="centerX" secondItem="ZQI-5n-4UU" secondAttribute="centerX" id="LPb-cM-nP8"/>
+                                <constraint firstAttribute="width" constant="150" id="WXu-o1-8le"/>
+                                <constraint firstItem="iPI-ZI-bnz" firstAttribute="centerY" secondItem="ZQI-5n-4UU" secondAttribute="centerY" id="nYT-2I-Zoh"/>
                             </constraints>
-                        </imageView>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sv1-Oy-9us" userLabel="Notifications View">
                             <rect key="frame" x="284" y="0.0" width="50" height="40"/>
                             <subviews>

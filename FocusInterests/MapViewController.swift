@@ -383,7 +383,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 // Set the map style by passing the URL of the local file.
                 if let styleURL = Bundle.main.url(forResource: "day_style", withExtension: "json") {
                     
-                    let logo = UIImage(image: #imageLiteral(resourceName: "FOCUS_maps_logo"), scaledTo: CGSize(width: 175, height: 40))
+                    let logo = UIImage(image: #imageLiteral(resourceName: "navy focus logo"), scaledTo: CGSize(width: 175, height: 40))
                     self.navigationView.focusLogo.image = logo
                     
                     let navyChatIcon = UIImage(image: #imageLiteral(resourceName: "navy chat button"), scaledTo: CGSize(width: 35, height: 35))
