@@ -70,6 +70,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var moreCommentsView: UIView!
     @IBOutlet weak var commentsTextViewContainerHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var youMayAlsoLikeView: UIView!
     var invitePeopleEventDelegate: InvitePeopleEventCellDelegate?
     var event: Event?
     var showInvitePopup = false
@@ -147,10 +148,6 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         ]
         let placeholderTextAttributes: NSAttributedString = NSAttributedString(string: "Add a comment", attributes: placeholderAttributes)
         self.commentTextView.attributedText = placeholderTextAttributes
-        
-        
-
-        self.navBar.addBottomBorderWithColor(color: UIColor.white, width: 0.7)
         
         self.eventImage.layer.borderWidth = 1
         self.eventImage.layer.borderColor = Constants.color.pink.cgColor
@@ -388,6 +385,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.youMayAlsoLikeView.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
