@@ -951,6 +951,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     func changeTab(){
         showTutorial = false
         let popController = self.createPopOver()
+        popController.delegate = self
         self.tabBarController?.present(popController, animated: true, completion: nil)
     }
     
@@ -958,6 +959,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBAction func unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails(segue:UIStoryboardSegue) {
         let popController = self.createPopOver()
+        popController.delegate = self
         self.tabBarController?.present(popController, animated: true, completion: nil)
     }
     
@@ -965,7 +967,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let popController = self.createPopOver()
         popController.pinType = .place
         popController.formmatedAddress = (self.pinPlace?.name)!
-        popController.location = CLLocation(latitude: (pinPlace?.latitude)!, longitude: (pinPlace?.latitude)!)
+        popController.location = CLLocation(latitude: (pinPlace?.latitude)!, longitude: (pinPlace?.longitude)!)
         self.tabBarController?.present(popController, animated: true, completion: { completed in
             
         })

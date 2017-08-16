@@ -301,26 +301,11 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         facebookButton.setImage(UIImage(named: "facebookGray"), for: UIControlState.normal)
         twitterButton.setImage(UIImage(named: "TwitterGray"), for: UIControlState.normal)
         
-//        for cell in cellArray
-//        {
-//            cell.imageView.layer.borderWidth = 0
-//        }
-        
-        
         let pin = pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: caption, location: searchLocationTextField.text!, lat: (location.coordinate.latitude), lng: (location.coordinate.longitude), path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text) ?? "Meet up")
         
-        
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
-        vc.willShowPin = true
-        //vc.showPin = pinData
-        vc.location = CLLocation(latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude)
-        vc.selectedIndex = 0
-    
         delegate?.showPinMarker(pin: pin, show: true)
         
-        self.present(vc, animated: true, completion: nil)
-    
+        
         self.dismiss(animated: true, completion: nil)
     }
     

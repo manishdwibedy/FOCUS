@@ -777,6 +777,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             }
         }else if segue.identifier == "unwindToMapViewControllerFromPlaceDetailsWithSegue"{
             let map = self.map
+            
             map?.pinPlace = self.place
         }
     }
