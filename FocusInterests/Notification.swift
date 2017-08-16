@@ -124,7 +124,7 @@ class NotificationUtil{
         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/followers/people").observeSingleEvent(of: .value, with: { snapshot in
             if let value = snapshot.value as? [String:Any]{
                 
-                    let user_count = value.count
+                    var user_count = 0
                     for (_, user) in value{
                         if let user = user as? [String:Any]{
                             let time = user["time"] as? Double
@@ -133,19 +133,23 @@ class NotificationUtil{
                                     let user = NotificationUser(username: value["username"] as? String, uuid: value["firebaseUserId"] as? String, imageURL: value["image_string"] as? String)
                                     
                                     let followerUser = ItemOfInterest(itemName: user.username, imageURL: nil, type: "")
-                                    followerUser.id = (value["firebaseUserId"] as? String)!
-                                    
-                                    if let time = time{
-                                        let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: followerUser, time: Date(timeIntervalSince1970: time))
-                                        event_comment.notif_type = .notification
-                                        followers.append(event_comment)
+                                    if let UID = value["firebaseUserId"] as? String{
+                                        followerUser.id = (value["firebaseUserId"] as? String)!
+                                        
+                                        if let time = time{
+                                            let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: followerUser, time: Date(timeIntervalSince1970: time))
+                                            event_comment.notif_type = .notification
+                                            user_count += 1
+                                            followers.append(event_comment)
+                                        }
+                                        else{
+                                            let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: followerUser, time: Date())
+                                            event_comment.notif_type = .notification
+                                            
+                                            user_count += 1
+                                            followers.append(event_comment)
+                                        }
                                     }
-                                    else{
-                                        let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: followerUser, time: Date())
-                                        event_comment.notif_type = .notification
-                                        followers.append(event_comment)
-                                    }
-                                    
                                     
                                     if followers.count == user_count{
                                         gotFollowers(followers)
