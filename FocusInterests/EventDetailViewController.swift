@@ -645,6 +645,23 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     
                     delegate?.showEventMarker(event: self.event!)
                 }
+                else{
+                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                    let marker = GMSMarker(position: position)
+                    marker.icon = #imageLiteral(resourceName: "Event")
+                    marker.title = event.title
+                    marker.map = map?.mapView
+                    marker.isTappable = true
+                    
+                    map?.currentLocation = CLLocation(latitude: position.latitude, longitude: position.longitude)
+                    map?.willShowEvent = true
+                    map?.tapEvent(event: event)
+                    
+                    map?.viewingEvent = event
+                    map?.eventPlaceMarker = marker
+                    
+                    delegate?.showEventMarker(event: self.event!)
+                }
             }
         }
     }
