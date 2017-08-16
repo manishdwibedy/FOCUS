@@ -59,6 +59,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         self.navigationController?.navigationBar.barTintColor = Constants.color.navy
         hideKeyboardWhenTappedAround()
         
+        loadInitialTable()
     }
     
     func goBack(){
@@ -68,7 +69,7 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.usersInMemory.insert(AuthApi.getFirebaseUid()!)
-        loadInitialTable()
+        
         //loadRestUsers()
         
     }
