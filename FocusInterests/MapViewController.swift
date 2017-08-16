@@ -60,6 +60,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var hasCustomProfileImage = false
     
     var locationFromPlaceDetails = ""
+    var pinPlace: Place?
     
     var willShowEvent = false
     var showEvent: Event? = nil
@@ -963,7 +964,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     @IBAction func unwindToMapViewControllerFromPlaceDetails(segue: UIStoryboardSegue){
         let popController = self.createPopOver()
         popController.pinType = .place
-        popController.formmatedAddress = self.locationFromPlaceDetails
+        popController.formmatedAddress = (self.pinPlace?.name)!
+        popController.location = CLLocation(latitude: (pinPlace?.latitude)!, longitude: (pinPlace?.latitude)!)
         self.tabBarController?.present(popController, animated: true, completion: { completed in
             
         })
