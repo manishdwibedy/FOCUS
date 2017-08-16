@@ -472,7 +472,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             let attributeText = NSAttributedString(string: guestText, attributes: [NSForegroundColorAttributeName : UIColor.white])
             self.guestButtonOut.setAttributedTitle(attributeText, for: UIControlState.normal)
             
-            sendNotification(to: event!.creator!, title: "New Attendee", body: "\(AuthApi.getUserName()!)", actionType: "", type: "", item_id: "", item_name: "")
+            if let user = event?.creator, user.characters.count > 0{
+                sendNotification(to: event!.creator!, title: "New Attendee", body: "\(AuthApi.getUserName()!)", actionType: "", type: "", item_id: "", item_name: "")
+            }
             
             sender.isSelected = true
             sender.layer.borderWidth = 1
