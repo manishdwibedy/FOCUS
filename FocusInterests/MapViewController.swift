@@ -938,6 +938,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func changeTab(){
+        showTutorial = false
         let popController = self.createPopOver()
         self.tabBarController?.present(popController, animated: true, completion: nil)
     }
