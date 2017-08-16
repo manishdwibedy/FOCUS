@@ -302,7 +302,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         twitterButton.setImage(UIImage(named: "TwitterGray"), for: UIControlState.normal)
         
         let pin = pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: caption, location: searchLocationTextField.text!, lat: (location.coordinate.latitude), lng: (location.coordinate.longitude), path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text) ?? "Meet up")
-        
+        pin.username = AuthApi.getUserName()!
         delegate?.showPinMarker(pin: pin, show: true)
         
         
