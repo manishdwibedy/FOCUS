@@ -149,15 +149,15 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgG-65-yI5">
                                                 <rect key="frame" x="0.0" y="45" width="197" height="30"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="NzJ-7f-3vH">
-                                                        <rect key="frame" x="34" y="5" width="129" height="21"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="eGi-6T-qbM">
+                                                        <rect key="frame" x="25" y="4" width="146" height="21"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTH-Pf-Z3F">
-                                                                <rect key="frame" x="0.0" y="0.0" width="56" height="21"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="67" height="21"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="AJ8-AE-wd5"/>
-                                                                    <constraint firstAttribute="width" constant="56" id="lef-FH-Yxi"/>
+                                                                    <constraint firstAttribute="width" constant="67" id="mqI-DQ-gGD"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                                                 <state key="normal" title="Attend">
@@ -168,11 +168,11 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6h9-Za-eIz">
-                                                                <rect key="frame" x="73" y="0.0" width="56" height="21"/>
+                                                                <rect key="frame" x="79" y="0.0" width="67" height="21"/>
                                                                 <color key="backgroundColor" red="0.4785205126" green="0.78952473400000001" blue="0.0048054424109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="7sh-16-YCb"/>
-                                                                    <constraint firstAttribute="width" constant="56" id="ffG-cf-4yf"/>
+                                                                    <constraint firstAttribute="width" constant="67" id="ffG-cf-4yf"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                                                 <state key="normal" title="Invite">
@@ -187,10 +187,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="NzJ-7f-3vH" firstAttribute="centerY" secondItem="UgG-65-yI5" secondAttribute="centerY" id="0Bl-w6-R22"/>
                                                     <constraint firstAttribute="height" constant="30" id="6li-4U-FiX"/>
+                                                    <constraint firstItem="eGi-6T-qbM" firstAttribute="centerY" secondItem="UgG-65-yI5" secondAttribute="centerY" id="8Zs-TG-OOh"/>
                                                     <constraint firstAttribute="width" constant="197" id="Ie8-FU-GYV"/>
-                                                    <constraint firstItem="NzJ-7f-3vH" firstAttribute="centerX" secondItem="UgG-65-yI5" secondAttribute="centerX" id="WDp-t1-Nnt"/>
+                                                    <constraint firstItem="eGi-6T-qbM" firstAttribute="centerX" secondItem="UgG-65-yI5" secondAttribute="centerX" id="WlM-QK-LE9"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
