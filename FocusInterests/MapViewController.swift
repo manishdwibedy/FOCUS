@@ -968,6 +968,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         popController.pinType = .place
         popController.formmatedAddress = (self.pinPlace?.name)!
         popController.location = CLLocation(latitude: (pinPlace?.latitude)!, longitude: (pinPlace?.longitude)!)
+        popController.delegate = self
         self.tabBarController?.present(popController, animated: true, completion: { completed in
             
         })
