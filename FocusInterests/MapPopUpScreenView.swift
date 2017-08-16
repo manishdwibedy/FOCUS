@@ -77,6 +77,12 @@ class MapPopUpScreenView: UIView {
         
         captionLeading.constant = -25
         
+        if let image = event.image_url{
+            if let url = URL(string: image){
+                self.profileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_event"))
+            }
+        }
+        
         self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
         self.profileImage.layer.borderColor = UIColor(red: 254/255, green: 55/255, blue: 103/255, alpha: 1).cgColor
         self.profileImage.layer.borderWidth = 1
