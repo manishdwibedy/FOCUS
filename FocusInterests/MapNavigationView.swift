@@ -27,6 +27,7 @@ class MapNavigationView: UIView, UISearchBarDelegate{
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var invatationButton: MIBadgeButton!
     
+    @IBOutlet weak var logo: UIImageView!
     var showSearchBar = true
     
     required init?(coder aDecoder: NSCoder) {

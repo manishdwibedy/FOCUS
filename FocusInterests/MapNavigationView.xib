@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapNavigationView" customModule="FocusInterests" customModuleProvider="target">
             <connections>
                 <outlet property="focusLogo" destination="iPI-ZI-bnz" id="9uy-c8-jJo"/>
+                <outlet property="logo" destination="iPI-ZI-bnz" id="38H-pW-Hxa"/>
                 <outlet property="messagesButton" destination="CZk-k0-NPd" id="SlS-Dv-yom"/>
                 <outlet property="notificationsButton" destination="NJp-MD-iuK" id="P7c-Ck-nvS"/>
                 <outlet property="searchBar" destination="clg-Ba-1dC" id="pCU-Ia-ING"/>
