@@ -922,6 +922,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let onboardingVC = NewUserPopupViewController(nibName: "NewUserPopupViewController", bundle: nil)
         onboardingVC.arrowImage = self.popupArrowImage
         onboardingVC.delegate = self
+        onboardingVC.mapVC = self
 //        onboardingVC.testImage = self.testImage
         
         // Create the dialog
@@ -937,11 +938,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func changeTab(){
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc: UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "home") as! UITabBarController
-        vc.selectedIndex = 2
-        self.present(vc, animated: true, completion: nil)
-
+        let popController = self.createPopOver()
+        self.tabBarController?.present(popController, animated: true, completion: nil)
     }
     
     @IBAction func unwindToMapViewController(segue:UIStoryboardSegue) { }

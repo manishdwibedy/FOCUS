@@ -47,6 +47,7 @@ class NewUserPopupViewController: UIViewController {
     @IBOutlet weak var descriptionTop: NSLayoutConstraint!
     @IBOutlet weak var buttonTop: NSLayoutConstraint!
     
+    var mapVC: MapViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -98,9 +99,9 @@ class NewUserPopupViewController: UIViewController {
         
         if index == info.count - 1{
             self.arrowImage?.alpha = 0
-            self.dismiss(animated: true, completion: nil)
-            delegate?.changeTab()
-            
+            self.dismiss(animated: true, completion: {
+                self.delegate?.changeTab()
+            })
         }
         else{
             index += 1
