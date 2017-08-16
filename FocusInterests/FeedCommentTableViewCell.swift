@@ -39,8 +39,7 @@ class FeedCommentTableViewCell: UITableViewCell {
         var eventName = "Rose Bowl"
         var eventPin = "Event: \(eventName)"
         self.eventNameLabel.setTitle(eventPin, for: .normal)
-        self.distanceLabel.text = "15 mi"
-        self.commentLabel.text = "\"sum has been the industry's standard dummy\""
+        
         addGreenDot(label: self.interestLabel, content: "Meet up")
         
         

@@ -40,12 +40,15 @@ class FeedEventTableViewCell: UITableViewCell {
         self.isAttendLabel.adjustsFontSizeToFitWidth = true
 //        self.isAttendingLabelWidth.constant = self.isAttendLabel.intrinsicContentSize.width
         
-        self.nameLabelButton.setTitle("arya", for: .normal)
-        self.eventNameLabelButton.setTitle("Event B", for: .normal)
-        addGreenDot(label: self.interestLabel, content: "Food")
-        self.distanceLabel.text = "21 mi"
         self.usernameImage.roundButton()
         self.eventImage.roundButton()
+        
+        self.attendButton.setTitle("Attend", for: .normal)
+        self.attendButton.setTitleColor(Constants.color.navy, for: .normal)
+        
+        self.attendButton.setTitle("Attending", for: .selected)
+        self.attendButton.setTitleColor(UIColor.white, for: .selected)
+        
         self.attendButton.layer.borderWidth = 1.0
         self.attendButton.layer.borderColor = UIColor.white.cgColor
         self.attendButton.roundCorners(radius: 6.0)
@@ -61,32 +64,34 @@ class FeedEventTableViewCell: UITableViewCell {
     func checkIfAttending(){
         Constants.DB.event.child((event?.id)!).child("attendingList").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? [String:[String:String]]
-            if let value = value
-            {
+            if let value = value{
                 for (_, guest) in value{
                     if guest["UID"] == AuthApi.getFirebaseUid()!{
                         self.attendButton.isSelected = true
                         self.attendButton.layer.borderWidth = 1
-                        self.attendButton.layer.borderColor = Constants.color.navy.cgColor
-                        self.attendButton.backgroundColor = UIColor.white
-                        
+                        self.attendButton.layer.borderColor = UIColor.white.cgColor
+                        self.attendButton.backgroundColor = Constants.color.navy
                         self.isAttending = true
+                        
                         break
                     }
                 }
                 
                 if !self.isAttending{
+                    self.isAttending = false
                     self.attendButton.isSelected = false
-                    self.attendButton.layer.borderWidth = 0
-                    self.attendButton.layer.borderColor = UIColor.clear.cgColor
-                    self.attendButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+                    self.attendButton.layer.borderWidth = 1.0
+                    self.attendButton.layer.borderColor = Constants.color.navy.cgColor
+                    self.attendButton.backgroundColor = UIColor.white
+                    self.attendButton.tintColor = UIColor.clear
                 }
-            }
-            else{
+            }else{
+                self.isAttending = false
                 self.attendButton.isSelected = false
-                self.attendButton.layer.borderWidth = 0
-                self.attendButton.layer.borderColor = UIColor.clear.cgColor
+                self.attendButton.layer.borderWidth = 1.0
+                self.attendButton.layer.borderColor = Constants.color.navy.cgColor
                 self.attendButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+                self.attendButton.tintColor = UIColor.clear
             }
             
         })
@@ -94,15 +99,15 @@ class FeedEventTableViewCell: UITableViewCell {
     }
     
     @IBAction func attend(_ sender: Any) {
-        self.attendButton.isSelected = !self.attendButton.isSelected
         if let event = self.event{
-            if self.attendButton.isSelected{
+            if self.attendButton.isSelected == false{
+            attendButton.isSelected = true
+            attendButton.layer.borderWidth = 0
+            attendButton.backgroundColor = Constants.color.navy
+            attendButton.tintColor = UIColor.clear
+            self.isAttending = true
                 
-                attendButton.layer.borderWidth = 1
-                attendButton.layer.borderColor = Constants.color.navy.cgColor
-                attendButton.backgroundColor = UIColor.white
-                
-                Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
+            Constants.DB.event.child((event.id)!).child("attendingList").childByAutoId().updateChildValues(["UID":AuthApi.getFirebaseUid()!])
                 
                 
                 Constants.DB.event.child((event.id)!).child("attendingAmount").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -124,12 +129,11 @@ class FeedEventTableViewCell: UITableViewCell {
                                         "attend": true
                     ])
                 
-            }else{
+            }else if attendButton.isSelected == true{
                 
                 let alertController = UIAlertController(title: "Unattend \(event.title!)?", message: nil, preferredStyle: .actionSheet)
                 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                alertController.addAction(cancelAction)
                 
                 let OKAction = UIAlertAction(title: "Unattend", style: .destructive) { action in
                     Constants.DB.event.child((event.id)!).child("attendingList").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -152,17 +156,22 @@ class FeedEventTableViewCell: UITableViewCell {
                         }
                     })
                     
-                    self.attendButton.layer.borderWidth = 0
-                    self.attendButton.layer.borderColor = UIColor.clear.cgColor
-                    self.attendButton.backgroundColor = UIColor(red: 20/255.0, green: 40/255.0, blue: 64/255.0, alpha: 1.0)
+                    self.isAttending = false
+                    self.attendButton.isSelected = false
+                    self.attendButton.layer.borderWidth = 1
+                    self.attendButton.layer.borderColor = Constants.color.navy.cgColor
+                    self.attendButton.backgroundColor = UIColor.white
+                    self.attendButton.tintColor = UIColor.clear
                     
                     Answers.logCustomEvent(withName: "Attend Event",
                                            customAttributes: [
                                             "user": AuthApi.getFirebaseUid()!,
                                             "event": event.title,
                                             "attend": false
-                        ])
+                    ])
                 }
+                
+                alertController.addAction(cancelAction)
                 alertController.addAction(OKAction)
                 
                 if let VC = feedVC{
@@ -170,7 +179,6 @@ class FeedEventTableViewCell: UITableViewCell {
                 }
                 
             }
-            
         }
     }
     
