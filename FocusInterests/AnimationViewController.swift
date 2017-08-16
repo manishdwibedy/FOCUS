@@ -41,6 +41,7 @@ class AnimationViewController: UIViewController {
         self.timeDF.dateFormat = "h:mm a"
         
         loadingImage.loadGif(name: "loading")
+        loadingImage.backgroundColor = UIColor(hex: "8a94a0")
         loadMap()
         showPins(showAll: true, interests: "")
         getEvents()
