@@ -622,7 +622,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let parts = accessibilityLabel?.components(separatedBy: "_")
         if parts?[0] == "event"{
             let index: Int! = Int(parts![1])
-            let event = self.events[index-1]
+            let event = self.events[index]
             
             tapEvent(event: event)
             return true
