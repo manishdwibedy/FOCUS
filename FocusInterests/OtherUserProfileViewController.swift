@@ -32,8 +32,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     @IBOutlet weak var eventsTableView: UITableView!
     @IBOutlet weak var eventsTableViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var recentPostStack: UIStackView!
     @IBOutlet weak var recentPostTableView: UITableView!
     @IBOutlet weak var recentPostTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var noRecentPostLabel: UILabel!
     
     @IBOutlet weak var navBarItem: UINavigationItem!
     @IBOutlet weak var navBar: UINavigationBar!
@@ -281,7 +283,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             let value = snapshot.value as? NSDictionary
             if let value = value
             {
-                
+                self.recentPostStack.removeArrangedSubview(self.noRecentPostLabel)
+                self.noRecentPostLabel.isHidden = true
                 self.pinInfo = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(ID ), focus: value["focus"] as? String ?? "")
                 self.recentPostTableView.reloadData()
 //                    self.emptyPinButton.isHidden = true
@@ -329,6 +332,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                             })
                         })
                     }
+            }else{
+                self.recentPostStack.removeArrangedSubview(self.recentPostTableView)
+                self.recentPostTableView.isHidden = true
             }
         })
         
