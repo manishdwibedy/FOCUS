@@ -71,6 +71,7 @@ class FeedEventTableViewCell: UITableViewCell {
                         self.attendButton.layer.borderWidth = 1
                         self.attendButton.layer.borderColor = UIColor.white.cgColor
                         self.attendButton.backgroundColor = Constants.color.navy
+                        self.attendButton.tintColor = UIColor.clear
                         self.isAttending = true
                         
                         break
@@ -102,7 +103,8 @@ class FeedEventTableViewCell: UITableViewCell {
         if let event = self.event{
             if self.attendButton.isSelected == false{
             attendButton.isSelected = true
-            attendButton.layer.borderWidth = 0
+            attendButton.layer.borderWidth = 1
+            attendButton.layer.borderColor = UIColor.white.cgColor
             attendButton.backgroundColor = Constants.color.navy
             attendButton.tintColor = UIColor.clear
             self.isAttending = true
