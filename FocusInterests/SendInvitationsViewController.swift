@@ -417,33 +417,28 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         if indexPath.section == 0 && indexPath.row == 0{
             
-//            let section = sections[indexPath.section]
-//            let user = self.users[section]?[indexPath.row]
-//            resetting the selected rows
             selectedRow = [[0,0]]
             let selectedAllFollowersTableCell = tableView.cellForRow(at: indexPath) as? SelectAllContactsTableViewCell
-            selectedAllFollowersTableCell?.selectAllFollowersButton.isSelected = !(selectedAllFollowersTableCell?.selectAllFollowersButton.isSelected)!
-            self.selectedAllFollowers()
-            tableView.deselectRow(at: indexPath, animated: false)
+            selectedAllFollowersTableCell?.selectAllFollowersButton.isSelected = true
             
-            for section in 1..<tableView.numberOfSections{
-                var otherRows = tableView.numberOfRows(inSection: section)
-                
-                for row in 0..<otherRows{
-                    let index = IndexPath(row: row, section: section)
-                    tableView.deselectRow(at: index, animated: false)
-                    if let singleFollowerCell = tableView.cellForRow(at: index) as? InviteListTableViewCell{
-                        singleFollowerCell.inviteConfirmationButton.isSelected = (selectedAllFollowersTableCell?.selectAllFollowersButton.isSelected)!
-                        
-                        if singleFollowerCell.inviteConfirmationButton.isSelected{
-                            self.selectedRow.append(index)
-                        }
-                    }
-                    
+            self.selectedAllFollowers()
+            if amountOfSelectedRows <= 1{
+                print("do not need to deselectcells")
+            }else{
+                for cellIndex in 1...indexPathForSelectedRows.count-1{
+                    tableView.deselectRow(at: indexPathForSelectedRows[cellIndex], animated: false)
+                    let singleFollowerCell = tableView.cellForRow(at: indexPath) as? InviteListTableViewCell
+                    singleFollowerCell?.inviteConfirmationButton.isSelected = false
                 }
                 
+                for visibleCellsIndex in 1...tableView.visibleCells.count-1{
+                    let singleFollowerCell = tableView.visibleCells[visibleCellsIndex] as? InviteListTableViewCell
+                    singleFollowerCell?.inviteConfirmationButton.isSelected = false
+                    
+                    
+                }
+                self.deselectAllFollowers()
             }
-            self.selectedRow.removeAll()
         }else{
             let personToInviteCell = tableView.cellForRow(at: indexPath) as? InviteListTableViewCell
             
