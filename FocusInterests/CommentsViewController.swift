@@ -21,7 +21,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var addCommentsViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainStackHeight: NSLayoutConstraint!
     
-    var data: NSDictionary!
+    var data: pinData?
     var commentData = [[String:Any]]()
     var eventComments = NSMutableArray()
     var type = ""
@@ -45,7 +45,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         self.postButton.roundCorners(radius: 5.0)
         
         if type == "pin"{
-            Constants.DB.pins.child(data["fromUID"] as! String).child("comments").queryOrdered(byChild: "date").observeSingleEvent(of: .value, with: { (snapshot) in
+            Constants.DB.pins.child((data?.fromUID)!).child("comments").queryOrdered(byChild: "date").observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? [String:Any]
                 var info = [String:Any]()
                 if value != nil
@@ -168,7 +168,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         }else{
             self.postButton.isEnabled = true
             let time = NSDate().timeIntervalSince1970
-            Constants.DB.pins.child(data["fromUID"] as! String).child("comments").childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "comment": commentTextView.text!, "date": Double(time)])
+            Constants.DB.pins.child((data?.fromUID)!).child("comments").childByAutoId().updateChildValues(["fromUID": AuthApi.getFirebaseUid()!, "comment": commentTextView.text!, "date": Double(time)])
             
             commentTextView.resignFirstResponder()
             
@@ -180,7 +180,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
             commentTextView.text = "Add a comment"
             self.commentsTableView.reloadData()
             
-            sendNotification(to: data["fromUID"] as! String, title: "New Comment", body: "\(AuthApi.getUserName()!) commented on your Pin", actionType: "", type: "", item_id: "", item_name: "")
+            sendNotification(to: (data?.fromUID)!, title: "New Comment", body: "\(AuthApi.getUserName()!) commented on your Pin", actionType: "", type: "", item_id: "", item_name: "")
             
             Answers.logCustomEvent(withName: "Comment Pin",
                                    customAttributes: [
@@ -205,11 +205,13 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         tableContentInset.bottom = keyboardFrame.size.height
         self.commentsTableView.contentInset = tableContentInset
         
-        //get indexpath
-        let indexpath = IndexPath(row: 0, section: 0)
-        self.commentsTableView.scrollToRow(at: indexpath, at: .top, animated: true)
-        contentInset.bottom = keyboardFrame.size.height + 10
-        self.scrollView.contentInset = contentInset
+        if commentsTableView.numberOfRows(inSection: 0) > 0{
+            let indexpath = IndexPath(row: 0, section: 0)
+            self.commentsTableView.scrollToRow(at: indexpath, at: .top, animated: true)
+            contentInset.bottom = keyboardFrame.size.height + 10
+            self.scrollView.contentInset = contentInset
+        }
+        
     }
     
     func keyboardWillHide(notification: NSNotification) {

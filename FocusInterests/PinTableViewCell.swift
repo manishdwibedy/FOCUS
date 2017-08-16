@@ -18,7 +18,7 @@ class PinTableViewCell: UITableViewCell {
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var likeOut: UIButton!
     
-    var data: NSDictionary!
+    var data: pinData?
     var likeCount = 0
     var parentVC: UIViewController!
     override func awakeFromNib() {
@@ -36,15 +36,15 @@ class PinTableViewCell: UITableViewCell {
     
     func loadLikes()
     {
-        if data != nil
-        {
-            if data["like"] != nil
-            {
-                likeCount = (data["like"] as? NSDictionary)?["num"] as! Int
-                likeAmountLabel.text = String(likeCount)
-            }
-        }
-        Constants.DB.pins.child(data["fromUID"] as! String).child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
+//        if data != nil
+//        {
+//            if data["like"] != nil
+//            {
+//                likeCount = (data["like"] as? NSDictionary)?["num"] as! Int
+//                likeAmountLabel.text = String(likeCount)
+//            }
+//        }
+        Constants.DB.pins.child((data?.fromUID)!).child("like").child("likedBy").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
@@ -58,8 +58,8 @@ class PinTableViewCell: UITableViewCell {
     
     @IBAction func like(_ sender: Any) {
         likeCount = likeCount + 1
-        Constants.DB.pins.child(data["fromUID"] as! String).child("like").updateChildValues(["num": likeCount])
-        Constants.DB.pins.child(data["fromUID"] as! String).child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+        Constants.DB.pins.child((data?.fromUID)!).child("like").updateChildValues(["num": likeCount])
+        Constants.DB.pins.child((data?.fromUID)!).child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
         likeOut.isEnabled = false
         likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
         likeAmountLabel.text = String(likeCount)

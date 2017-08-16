@@ -104,9 +104,8 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         dateLabel.text = formatter.timeSince(from: date, numericDates: true, shortVersion: true)
         
         //check for images
-        data.dbPath.observeSingleEvent(of: .value, with: { (snapshot) in
+        Constants.DB.pins.child(data.fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
-            self.dictData = value!
             if value != nil
             {
                 
@@ -144,14 +143,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                         tap.numberOfTapsRequired = 2
                         bigImage.isUserInteractionEnabled = true
                         bigImage.addGestureRecognizer(tap)
-                        
-                        
-                        //        let longP = UILongPressGestureRecognizer(target: self, action: #selector(longP(sender:)))
-                        //        longP.minimumPressDuration = 0.3
-                        //        self.addGestureRecognizer(longP)
-                        
-                        
-                        
                     })
                     
                 }else
@@ -423,7 +414,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         let storyboard = UIStoryboard(name: "Comments", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
         ivc.type = "pin"
-        ivc.data = dictData
+        ivc.data = data
         self.present(ivc, animated: true, completion: { _ in })
         
     }
@@ -446,7 +437,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         let storyboard = UIStoryboard(name: "Comments", bundle: nil)
         let ivc = storyboard.instantiateViewController(withIdentifier: "comments") as! CommentsViewController
         ivc.type = "pin"
-        ivc.data = dictData
+        ivc.data = data
         self.present(ivc, animated: true, completion: { _ in })
     }
 

@@ -12,7 +12,7 @@ class PlaceAllPinsViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
-    var data = [NSDictionary]()
+    var data = [pinData]()
     var placeID = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class PlaceAllPinsViewController: UIViewController, UITableViewDelegate, UITable
             {
                 for (key,_) in value!
                 {
-                    self.data.append(value?[key] as! NSDictionary)
+                    self.data.append(value?[key] as! pinData)
                 }
             }
             self.tableView.reloadData()
@@ -48,11 +48,11 @@ class PlaceAllPinsViewController: UIViewController, UITableViewDelegate, UITable
         
         let cell = Bundle.main.loadNibNamed("PinTableViewCell", owner: self, options: nil)?.first as! PinTableViewCell
         cell.data = data[indexPath.row]
-        cell.comment.text = data[indexPath.row]["pin"] as! String
+        cell.comment.text = data[indexPath.row].pinMessage
         cell.loadLikes()
         //cell.focus.text = ""
         //cell.time.text = ""
-        Constants.DB.user.child(data[indexPath.row]["fromUID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+        Constants.DB.user.child(data[indexPath.row].fromUID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if value != nil
             {
