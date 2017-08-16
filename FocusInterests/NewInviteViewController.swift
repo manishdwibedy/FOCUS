@@ -450,10 +450,10 @@ class NewInviteViewController: UIViewController, UITableViewDelegate, UITableVie
                         let username = user["username"] as! String
                         sendNotification(to: UID, title: "New Invite", body: "\(String(describing: username)) invited you to \(String(describing: self.place?.name))", actionType: "", type: "event", item_id: "", item_name: "")
                     })
-                    Constants.DB.event.child(id).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
+                    Constants.DB.event.child((event?.id)!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
                     searchEvent?.showInvitePopup = true
                     
-                    Constants.DB.user.child(UID).child("invitations").child(self.type).queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
+                    Constants.DB.user.child(UID).child("invitations/event").queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
                         
                         if snapshot.value == nil{
 //                            Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":self.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeOut.titleLabel?.text!])

@@ -484,6 +484,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                     }
                 })
             })
+            feedEventCell.checkIfAttending()
             cell = feedEventCell
         }
         else if feed.type == .Like{
