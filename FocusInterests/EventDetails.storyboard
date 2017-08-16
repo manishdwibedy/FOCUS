@@ -637,6 +637,7 @@
                         <outlet property="timeAmountAddressStack" destination="48a-oA-P91" id="ggg-UI-43J"/>
                         <outlet property="timeLabel" destination="zk6-V7-o1e" id="ioq-ZQ-W2x"/>
                         <outlet property="topView" destination="olO-Ay-Igx" id="bOH-6m-4Ph"/>
+                        <outlet property="youMayAlsoLikeView" destination="sG6-5F-fdt" id="5de-cM-Qbd"/>
                         <segue destination="PAO-Zw-glf" kind="unwind" identifier="unwindToMapViewControllerWithSegue" unwindAction="unwindToMapViewControllerWithSegue:" id="gCI-RW-Sa7"/>
                     </connections>
                 </viewController>

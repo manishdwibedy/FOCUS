@@ -268,7 +268,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         var eventTableFrame = self.eventsTableView.frame
                         eventTableFrame.size.height = self.eventsTableView.contentSize.height
                         self.eventsTableView.frame = eventTableFrame
-                        
                         var placesTableFrame = self.placesTableView.frame
                         placesTableFrame.size.height = self.placesTableView.contentSize.height
                         self.placesTableView.frame = placesTableFrame
