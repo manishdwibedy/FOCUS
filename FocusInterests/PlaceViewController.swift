@@ -434,8 +434,13 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             addGreenDot(label: (pinCell?.interestLabel)!, content:(data["focus"] as? String)!)
             pinCell?.dateAndTimeLabel.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (data["time"] as? Double)!), numericDates: true, shortVersion: true)
             
-            let pinLocation = CLLocation(latitude: data["lat"] as! Double, longitude: Double(data["lng"] as! Double))
-            pinCell?.distanceLabel.text = getDistance(fromLocation: self.location!, toLocation: pinLocation,addBracket: false)
+            let pinLocation = CLLocation(latitude: data["lat"] as! Double, longitude: data["lng"] as! Double!)
+            if let location = AuthApi.getLocation(){
+                pinCell?.distanceLabel.text = getDistance(fromLocation: location, toLocation: pinLocation,addBracket: false)
+            }
+            else{
+                pinCell?.distanceLabel.text = "N.A."
+            }
             
             pinCell?.nameDescriptionLabel.text = data["pin"] as? String
             pinCell?.commentButton.isUserInteractionEnabled = false
