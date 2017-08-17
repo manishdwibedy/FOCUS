@@ -1453,6 +1453,15 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
                     }
                     return true
                 })
+                
+                suggestions = suggestions.sorted(by: {
+                    $0.0.distance < $0.1.distance
+                })
+                for i in (0..<suggestions.count).reversed() {
+                    let ix1 = i
+                    let ix2 = Int(arc4random_uniform(UInt32(i+1)))
+                    (suggestions[ix1], suggestions[ix2]) = (suggestions[ix2], suggestions[ix1])
+                }
                 gotEvents(Array(suggestions[0..<limit]))
             }
         })
@@ -1479,12 +1488,15 @@ func getSuggestedPlaces(interests: String, limit: Int, gotPlaces: @escaping (_ u
                         place.hours = hours
                         place.is_closed = is_closed
                         
-                        if !place.is_closed{
+                        if !place.is_closed && !suggestions.contains(place){
                             suggestions.append(place)
                         }
                         
+                        
                         if suggestions.count >= limit{
-                            gotPlaces(suggestions)
+                            gotPlaces(suggestions.sorted(by: {
+                                $0.0.distance < $0.1.distance
+                            }))
                         }
                     }
                 })
