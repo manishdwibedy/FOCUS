@@ -1041,15 +1041,15 @@ extension MapViewController{
         var start = ""
         var ticketMasterDF = DateFormatter()
         ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
-        
+        print("map date \(event.date)")
         if event.date?.range(of:",") != nil{
             let time = event.date?.components(separatedBy: ",")[1]
             start = time!
-            
         }
+            
         else if let time = event.date?.components(separatedBy: "T"), time.count > 1{
                 let date = dateFormatter.date(from: time[1])
                 dateFormatter.dateFormat = "h:mm a"
@@ -1058,12 +1058,20 @@ extension MapViewController{
         }
         else{
             if let time = ticketMasterDF.date(from: event.date!){
+                print(time)
+                let ticketMasterDateFormatter = DateFormatter()
+                ticketMasterDateFormatter.dateFormat = "MMM d, h:mm a"
+                start = ticketMasterDateFormatter.string(from: time)
                 
-                start = dateFormatter.string(from: time)
             }
-            
-            
         }
+        
+//        if let date = self.ticketMasterDF.date(from: event.date!){
+//            cell.dateAndTimeLabel.text = eventDF.string(from: date)
+//        }
+//        else{
+//            cell.dateAndTimeLabel.text = event.date!
+//        }
     
         let placeholderImage = UIImage(named: "empty_event")
 
@@ -1098,6 +1106,7 @@ extension MapViewController{
         if let category = event.category{
             interestText = category.components(separatedBy: ",")[0]
         }
+        
         popUpScreen.loadEvent(name: event.title!, date: start, miles: distance, interest: interestText, address: (event.fullAddress?.components(separatedBy: ";;")[0])!, event: event)
         
     }
