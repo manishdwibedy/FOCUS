@@ -1344,6 +1344,9 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
         showEvent = event
         
         let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+        let camera = GMSCameraPosition.camera(withLatitude: Double(event!.latitude!)!,
+                                          longitude: Double((event?.longitude!)!)!,
+                                          zoom: 13)
         
         self.eventPlaceMarker = GMSMarker(position: position)
         let eventMarker = UIImage(image: #imageLiteral(resourceName: "intro_event"), scaledTo: CGSize(width: 60, height: 60))
@@ -1354,6 +1357,13 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
         eventPlaceMarker?.accessibilityLabel = "event_\(self.events.count)"
         
         self.events.append(event)
+        
+        if mapView.isHidden {
+            mapView.isHidden = false
+            mapView.camera = camera!
+        } else {
+            mapView.animate(to: camera!)
+        }
         
         tapEvent(event: event)
     }
