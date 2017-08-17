@@ -8,6 +8,7 @@
 
 import Foundation
 import Crashlytics
+import DataCache
 
 class Follow{
     static func followUser(uid: String){
@@ -106,7 +107,6 @@ class Follow{
                 }
             }
         })
-        
     }
     
     static func unFollowPlace(id: String){
@@ -134,7 +134,18 @@ class Follow{
                     
                     
                 }
-            })   
+            })
+            
+            
+            let following = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
+            
+            for (index,place) in following.enumerated(){
+                if place.id == id{
+                    following.remove(at: index)
+                    break
+                }
+            }
+            DataCache.instance.write(object: self.followingPlaces as NSCoding, forKey: "following_places")
         }
         
     }
