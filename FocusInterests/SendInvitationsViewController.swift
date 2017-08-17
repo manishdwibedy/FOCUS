@@ -210,77 +210,77 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //    }
 
     @IBAction func createEvent(_ sender: Any) {
-//        Event.clearCache()
-//        let id = self.event?.saveToDB(ref: Constants.DB.event)
-//        
-//        var events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
-//        events.append(event!)
-//        DataCache.instance.write(object: events as NSCoding, forKey: "events")
-//        
-//        
-//        Answers.logCustomEvent(withName: "Create Event",
-//                               customAttributes: [
-//                                "FOCUS": event?.category!
-//            ])
-//        
-////        nil is in line below
-//        Constants.DB.event_locations!.setLocation(CLLocation(latitude: Double(event!.latitude!)!, longitude: Double(event!.longitude!)!), forKey: id) { (error) in
-//            if (error != nil) {
-//                debugPrint("An error occured: \(String(describing: error))")
-//            } else {
-//                print("Saved location successfully!")
-//            }
-//        }
-//    
-//        for interest in event!.category!.components(separatedBy: ";"){
-//            Constants.DB.event_interests.child(interest).childByAutoId().setValue(["event-id": id])
-//        }
-//        
-//        if let data = self.image{
-//            let imageRef = Constants.storage.event.child("\(id!).jpg")
-//            
-//            // Create file metadata including the content type
-//            let metadata = StorageMetadata()
-//            metadata.contentType = "image/jpeg"
-//            
-//            let _ = imageRef.putData(data, metadata: metadata) { (metadata, error) in
-//                guard let metadata = metadata else {
-//                    // Uh-oh, an error occurred!
-//                    print("\(error!)")
-//                    return
-//                }
-//                // Metadata contains file metadata such as size, content-type, and download URL.
-//                let _ = metadata.downloadURL
-//            }
-//        }
-//        
-//        let time = NSDate().timeIntervalSince1970
-//        for UID in self.selectedUsers{
-//            var name = (event?.title)!
-//            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
-//                let user = snapshot.value as? [String : Any] ?? [:]
-//                
-//                let username = user["username"] as! String
-//                sendNotification(to: UID, title: "New Invite", body: "\(String(describing: username)) invited you to \(String(describing: name))", actionType: "", type: "event", item_id: "", item_name: "")
-//            })
-//            Constants.DB.event.child(id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
-//        
-//            Constants.DB.user.child(UID).child("invitations/event").queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
-//                
-//                if snapshot.value == nil{
-//                    Constants.DB.user.child(UID).child("invitations/event").childByAutoId().updateChildValues(["ID":self.event?.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": time])
-//                    
-//                }
-//            })
-//            Answers.logCustomEvent(withName: "Invite User",
-//                                   customAttributes: [
-//                                    "type": "event",
-//                                    "user": AuthApi.getFirebaseUid()!,
-//                                    "invited": UID,
-//                                    "name": name
-//            ])
-//            
-//        }
+        Event.clearCache()
+        let id = self.event?.saveToDB(ref: Constants.DB.event)
+        
+        var events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+        events.append(event!)
+        DataCache.instance.write(object: events as NSCoding, forKey: "events")
+        
+        
+        Answers.logCustomEvent(withName: "Create Event",
+                               customAttributes: [
+                                "FOCUS": event?.category!
+            ])
+        
+//        nil is in line below
+        Constants.DB.event_locations!.setLocation(CLLocation(latitude: Double(event!.latitude!)!, longitude: Double(event!.longitude!)!), forKey: id) { (error) in
+            if (error != nil) {
+                debugPrint("An error occured: \(String(describing: error))")
+            } else {
+                print("Saved location successfully!")
+            }
+        }
+    
+        for interest in event!.category!.components(separatedBy: ";"){
+            Constants.DB.event_interests.child(interest).childByAutoId().setValue(["event-id": id])
+        }
+        
+        if let data = self.image{
+            let imageRef = Constants.storage.event.child("\(id!).jpg")
+            
+            // Create file metadata including the content type
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            let _ = imageRef.putData(data, metadata: metadata) { (metadata, error) in
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    print("\(error!)")
+                    return
+                }
+                // Metadata contains file metadata such as size, content-type, and download URL.
+                let _ = metadata.downloadURL
+            }
+        }
+        
+        let time = NSDate().timeIntervalSince1970
+        for UID in self.selectedUsers{
+            var name = (event?.title)!
+            Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
+                let user = snapshot.value as? [String : Any] ?? [:]
+                
+                let username = user["username"] as! String
+                sendNotification(to: UID, title: "New Invite", body: "\(String(describing: username)) invited you to \(String(describing: name))", actionType: "", type: "event", item_id: "", item_name: "")
+            })
+            Constants.DB.event.child(id!).child("invitations").childByAutoId().updateChildValues(["toUID":UID, "fromUID":AuthApi.getFirebaseUid()!,"time": Double(time),"status": "sent"])
+        
+            Constants.DB.user.child(UID).child("invitations/event").queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
+                
+                if snapshot.value == nil{
+                    Constants.DB.user.child(UID).child("invitations/event").childByAutoId().updateChildValues(["ID":self.event?.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": time])
+                    
+                }
+            })
+            Answers.logCustomEvent(withName: "Invite User",
+                                   customAttributes: [
+                                    "type": "event",
+                                    "user": AuthApi.getFirebaseUid()!,
+                                    "invited": UID,
+                                    "name": name
+            ])
+            
+        }
     
 //        Messaging
 //        let messageVC = MFMessageComposeViewController()
