@@ -137,7 +137,7 @@ class Follow{
             })
             
             
-            let following = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
+            var following = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
             
             for (index,place) in following.enumerated(){
                 if place.id == id{
@@ -145,7 +145,7 @@ class Follow{
                     break
                 }
             }
-            DataCache.instance.write(object: self.followingPlaces as NSCoding, forKey: "following_places")
+            DataCache.instance.write(object: following as NSCoding, forKey: "following_places")
         }
         
     }
