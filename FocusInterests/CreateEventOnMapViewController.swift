@@ -112,7 +112,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
             })
         }
         else if pinType == .place || pinType == .event{
-                self.searchLocationTextField.text = formmatedAddress
+            self.searchLocationTextField.text = formmatedAddress
         }
     }
 
@@ -439,6 +439,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     
     func gotSelectedLocation(location: LocationSuggestion) {
         self.selectedLocation = true
+        self.formmatedAddress = location.name
         self.location = CLLocation(latitude: location.lat, longitude: location.long)
         self.searchLocationTextField.text = location.name
     }

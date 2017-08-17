@@ -105,6 +105,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var placeMapping = [String: Place]()
     var pinRef: UInt?
     
+    var markerDataMapping = [GMSMarker:pinData]()
+    
     func hideFollowFriendPopup(){
         self.followYourFriendsView.isHidden = true
         self.followYourFriendsView.sendSubview(toBack: self.followYourFriendsView)
@@ -269,8 +271,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             image.contentMode = .scaleAspectFit
             marker.iconView = image
             marker.accessibilityHint = pin.username
-            marker.accessibilityLabel = "pin_\(index)"
-            
+            marker.accessibilityLabel = "pin_dummy"
+            markerDataMapping[marker] = pin
             self.lastPins.append(marker)
         }
         
@@ -332,7 +334,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 self.eventPlaceMarker?.title = pin.pinMessage
                 self.eventPlaceMarker?.map = self.mapView
 
-                eventPlaceMarker?.accessibilityLabel = "pin_\(self.pins.count)"
+                eventPlaceMarker?.accessibilityLabel = "pin_dummy"
+                markerDataMapping[eventPlaceMarker!] = showPin!
                 
                 self.pins.append(showPin!)
                 
@@ -473,19 +476,36 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         
         self.pinRef = pinData.getPins(gotPin: {pin in
-            let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
-            let marker = GMSMarker(position: position)
-            marker.title = pin.pinMessage
-            marker.map = self.mapView
-            let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
-            image.image = UIImage(named: "pin")
-            image.contentMode = .scaleAspectFit
-            marker.iconView = image
-            marker.accessibilityHint = pin.username
-            marker.accessibilityLabel = "pin_\(self.pins.count)"
             
-            self.pins.append(pin)
-            self.lastPins.append(marker)
+            if pin.username != AuthApi.getUserName(){
+                let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
+                let marker = GMSMarker(position: position)
+                marker.title = pin.pinMessage
+                marker.map = self.mapView
+                let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+                image.image = UIImage(named: "pin")
+                image.contentMode = .scaleAspectFit
+                marker.iconView = image
+                marker.accessibilityHint = pin.username
+                
+                marker.accessibilityLabel = "pin_dummy"
+                self.markerDataMapping[marker] = pin
+                
+                self.pins.append(pin)
+                self.lastPins.append(marker)
+            }
+            else{
+                let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
+                let marker = GMSMarker(position: position)
+                marker.title = pin.pinMessage
+                
+                marker.accessibilityHint = pin.username
+                
+                marker.accessibilityLabel = "pin_dummy"
+                
+                self.lastPins.append(marker)
+
+            }
         })
         
         if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil{
@@ -665,7 +685,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-    
+        
         let accessibilityLabel = marker.accessibilityLabel
         marker.tracksInfoWindowChanges = true
         
@@ -685,10 +705,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             return true
         }
         else if parts?[0] == "pin"{
-            let index:Int! = Int(parts![1])
-            let pin = self.pins[index]
+            let pin = markerDataMapping[marker]
+            tapPin(pin: pin!)
             
-            tapPin(pin: pin)
             return true
         }
         
@@ -1292,14 +1311,24 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
             self.eventPlaceMarker?.title = pin.pinMessage
             self.eventPlaceMarker?.map = self.mapView
             
-            eventPlaceMarker?.accessibilityLabel = "pin_\(self.pins.count)"
             
-            for pin in self.lastPins{
-                if pin.accessibilityHint == AuthApi.getUserName()!{
-                    pin.map = nil
-                    break
+            markerDataMapping[eventPlaceMarker!] = showPin!
+            eventPlaceMarker?.accessibilityLabel = "pin_dummy"
+            
+            for marker in self.lastPins{
+                if marker.accessibilityHint == AuthApi.getUserName()!{
+                    marker.map = nil
                 }
             }
+            
+            for pin in self.pins{
+                if pin.username == AuthApi.getUserName()!{
+                    if let index = self.pins.index(of: pin) {
+                        self.pins.remove(at: index)
+                    }
+                }
+            }
+            self.lastPins.append(eventPlaceMarker!)
             self.pins.append(showPin!)
         }
 
