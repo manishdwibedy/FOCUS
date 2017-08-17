@@ -550,7 +550,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.currentLocation.text = "Current Location"
             
             if segmentedOut.selectedSegmentIndex == 0{
-                self.filtered = self.places
+                self.filtered =  self.followingPlaces + self.places
                 
                 self.tableView.reloadData()
             }
@@ -979,7 +979,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             
             if self.segmentedOut.selectedSegmentIndex == 0
             {
-                self.filtered = self.places
+                self.filtered = self.followingPlaces + self.places
             }
             self.tableView.reloadData()
         }
