@@ -406,9 +406,8 @@ line 2</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="346" height="20"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fixed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpQ-O8-xtN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="110" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="130" height="20"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="110" id="NUF-xb-npW"/>
                                                             <constraint firstAttribute="height" constant="20" id="nwv-9v-ktC"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
@@ -416,9 +415,9 @@ line 2</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 likes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0G-WK-LPf">
-                                                        <rect key="frame" x="113" y="0.0" width="120" height="20"/>
+                                                        <rect key="frame" x="133" y="0.0" width="100" height="20"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="120" id="MtQ-QT-9HH"/>
+                                                            <constraint firstAttribute="width" constant="100" id="MtQ-QT-9HH"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
