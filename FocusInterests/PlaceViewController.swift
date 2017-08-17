@@ -858,7 +858,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
         // Do any additional setup after loading the view.
         
         if place.price.characters.count == 0{
-            self.dollarLabel.text = "N.A."
+            self.dollarLabel.text = "$"
             
         }
         else{
@@ -895,6 +895,7 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             
             if index == 0 {
                 addGreenDot(label: (self.interestLabel)!, content: category)
+                break
             }
             
         }
