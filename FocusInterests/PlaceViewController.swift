@@ -434,6 +434,9 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
             addGreenDot(label: (pinCell?.interestLabel)!, content:(data["focus"] as? String)!)
             pinCell?.dateAndTimeLabel.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (data["time"] as? Double)!), numericDates: true, shortVersion: true)
             
+            let pinLocation = CLLocation(latitude: data["lat"] as! Double, longitude: Double(data["lng"] as! Double))
+            pinCell?.distanceLabel.text = getDistance(fromLocation: self.location!, toLocation: pinLocation,addBracket: false)
+            
             pinCell?.nameDescriptionLabel.text = data["pin"] as? String
             pinCell?.commentButton.isUserInteractionEnabled = false
             self.pinTableHeightConstraint.constant = (pinCell?.contentView.frame.height)! * CGFloat(indexPath.row + 1)
