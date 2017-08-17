@@ -441,6 +441,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             if let event = feed.item?.data["event"] as? Event{
                 feedEventCell.event = event
                 feedEventCell.eventNameLabelButton.setTitle(event.title, for: .normal)
+                feedEventCell.interestLabel.text = event.shortAddress
+                feedEventCell.distanceLabel.text = String(event.distance)
+                
             }
             
             feedEventCell.timeSince.text = DateFormatter().timeSince(from: feed.time!, numericDates: true, shortVersion: true)
