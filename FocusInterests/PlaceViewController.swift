@@ -489,7 +489,15 @@ class PlaceViewController: UIViewController, InviteUsers,UITableViewDelegate,UIT
 //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.tag == 1{
+        if tableView.tag == 0{
+            let pin = self.data[indexPath.row]
+            let storyboard = UIStoryboard(name: "Pin", bundle: nil)
+            let ivc = storyboard.instantiateViewController(withIdentifier: "PinLookViewController") as! PinLookViewController
+            ivc.data = pinData(UID: pin["fromUID"] as! String, dateTS: pin["time"] as! Double, pin: pin["pin"] as? String ?? "", location: pin["formattedAddress"] as! String, lat: pin["lat"] as! Double, lng: pin["lng"] as! Double, path: Constants.DB.pins.child(pin["fromUID"] as! String), focus: pin["focus"] as! String)
+            self.present(ivc, animated: true, completion: nil)
+            
+        }
+        else if tableView.tag == 1{
             let place = suggestedPlaces[indexPath.row]
             print(place)
             let storyboard = UIStoryboard(name: "PlaceDetails", bundle: nil)

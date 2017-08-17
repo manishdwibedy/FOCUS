@@ -246,6 +246,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             image.image = UIImage(named: "pin")
             image.contentMode = .scaleAspectFit
             marker.iconView = image
+            marker.accessibilityHint = pin.username
             marker.accessibilityLabel = "pin_\(index)"
             
             self.lastPins.append(marker)
@@ -1243,6 +1244,12 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
             
             eventPlaceMarker?.accessibilityLabel = "pin_\(self.pins.count)"
             
+            for pin in self.lastPins{
+                if pin.accessibilityHint == AuthApi.getUserName()!{
+                    pin.map = nil
+                    break
+                }
+            }
             self.pins.append(showPin!)
         }
 
