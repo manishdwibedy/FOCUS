@@ -440,6 +440,11 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
             if let event = feed.item?.data["event"] as? Event{
                 feedEventCell.event = event
+                feedEventCell.interestLabel.text = event.category
+                
+                let eventLocation = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                feedEventCell.distanceLabel.text = getDistance(fromLocation: self.location!, toLocation: eventLocation,addBracket: false)
+
                 feedEventCell.eventNameLabelButton.setTitle(event.title, for: .normal)
             }
             
