@@ -104,7 +104,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     var otherUser = false
     var userID = ""
     var previous: previousScreen? = nil
-    
+    var hasPinImage = false
     
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
@@ -264,6 +264,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     }
                     
                     if let images = value["images"] as? [String:Any]{
+                        self.hasPinImage = true
                         let imageURL = (images[images.keys.first!] as? [String:Any])?["imagePath"] as? String
                         let pinImage = Constants.storage.pins.child(imageURL!)
                         
@@ -324,6 +325,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 
                 if image != nil && finished{
                     self.userImage.image = crop(image: image!, width: 85, height: 85)
+                    self.pinImage.image = crop(image: image!, width: 85, height: 85)
                 }
             })
         }
@@ -610,6 +612,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                         self.pinLikesLabel.text = "\(likeCount) \(likeLabel)"
                     }
                     
+                }
+                if let images = value["images"] as? [String:Any]{
+                    self.hasPinImage = true
                 }
                 
                 let pin_location = CLLocation(latitude: value["lat"] as! Double, longitude: value["lng"] as! Double)

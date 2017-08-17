@@ -122,6 +122,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     
     var placesIFollow = [Place]()
     var eventsIAttend = [Event]()
+    var hasPinImage = false
+    
     // Back button
     @IBAction func backButton(_ sender: Any) {
         if otherUser, let previous = previous{
@@ -288,11 +290,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 self.noRecentPostLabel.isHidden = true
                 self.pinInfo = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(ID ), focus: value["focus"] as? String ?? "")
                 self.recentPostTableView.reloadData()
-//                    self.emptyPinButton.isHidden = true
-                    
-//                    self.pinCategoryLabel.text = value["focus"] as? String
-//                    self.pinAddress2Label.text = value["pin"] as? String
-                    
                     if let likes = value["like"] as? [String:Any]{
                         let count = likes["num"] as? Int
                         
@@ -300,12 +297,12 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         if count! > 1{
                             label = "likes"
                         }
-//                        self.pinLikesLabel.text = "\(count!) \(label)"
                     }
                     
         
                     if let images = value["images"] as? NSDictionary
                     {
+                        self.hasPinImage = true
                         var firstVal = ""
                         for (key,_) in images
                         {
