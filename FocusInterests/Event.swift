@@ -65,6 +65,11 @@ class Event: NSObject, NSCoding{
         ] as [String : Any] 
         newEvent.setValue(event)
         
+        var events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+        events.append(event)
+        
+        DataCache.instance.write(object: following as NSCoding, forKey: "events")
+        
         return newEvent.key
     }
     
