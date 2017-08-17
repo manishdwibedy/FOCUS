@@ -935,7 +935,9 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                     self.moreEventsButton.isHidden = false
                                 }
                                 else{
-                                    self.moreEventsButton.isHidden = true
+                                    if self.moreEventsButton != nil{
+                                        self.moreEventsButton.isHidden = true
+                                    }
                                 }
                                 
                                 self.eventsCollectionView.reloadData()
