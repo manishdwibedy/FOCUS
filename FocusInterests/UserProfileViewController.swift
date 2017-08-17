@@ -287,9 +287,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                             }
                         }
                     }
-                    else{
-                        self.pinImage.image = #imageLiteral(resourceName: "placeholder_pin")
-                    }
                 }else{ // FOR OLD PIN
                     self.createPinAndUpdatePinStack.addArrangedSubview(self.pinView)
                     self.createPinAndUpdatePinStack.removeArrangedSubview(self.createPinView)
