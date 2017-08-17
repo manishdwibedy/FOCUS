@@ -575,8 +575,9 @@ func getAllActivity(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, go
                                             Constants.DB.event.child(id).observeSingleEvent(of: .value, with: { snapshot in
                                                 let info = snapshot.value as? [String : Any]
                                                 
-                                                let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as? String, longitude: (info?["longitude"])! as? String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
+                                                let event = Event.toEvent(info: info!)!
                                                 
+                                                event.id = id
                                                 let dateFormatter = DateFormatter()
                                                 dateFormatter.dateFormat = "MMM d, h:mm a"
                                                 
