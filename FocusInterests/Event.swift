@@ -11,6 +11,7 @@ import GooglePlaces
 import FirebaseDatabase
 import Alamofire
 import SwiftyJSON
+import DataCache
 
 class Event: NSObject, NSCoding{
     var title: String?

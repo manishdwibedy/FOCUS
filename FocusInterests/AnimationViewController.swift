@@ -43,6 +43,11 @@ class AnimationViewController: UIViewController {
         
         loadingImage.loadGif(name: "loading")
         loadingImage.backgroundColor = UIColor(hex: "8a94a0")
+        
+        DataCache.instance.write(object: events as NSCoding, forKey: "events")
+        DataCache.instance.write(object: places as NSCoding, forKey: "places")
+        DataCache.instance.write(object: pins as NSCoding, forKey: "pins")
+        DataCache.instance.write(object: followingPlaces as NSCoding, forKey: "following_places")
         loadMap()
         showPins(showAll: true, interests: "")
         getEvents()
@@ -541,11 +546,6 @@ class AnimationViewController: UIViewController {
 //        else{
 //            mapVC.navigationView.notificationsButton.badgeString = "9+"
 //        }
-        
-        mapVC.events = self.events
-        mapVC.places = self.places
-        mapVC.pins = self.pins
-        mapVC.followingPlaces = self.followingPlaces
         
         DataCache.instance.write(object: events as NSCoding, forKey: "events")
         DataCache.instance.write(object: places as NSCoding, forKey: "places")
