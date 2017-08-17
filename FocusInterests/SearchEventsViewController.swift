@@ -446,6 +446,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 feedEventCell.distanceLabel.text = getDistance(fromLocation: self.location!, toLocation: eventLocation,addBracket: false)
 
                 feedEventCell.eventNameLabelButton.setTitle(event.title, for: .normal)
+                feedEventCell.interestLabel.text = event.shortAddress
+                feedEventCell.distanceLabel.text = String(event.distance)
+                
             }
             
             feedEventCell.timeSince.text = DateFormatter().timeSince(from: feed.time!, numericDates: true, shortVersion: true)

@@ -73,13 +73,13 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwT-QA-9Ah">
-                            <rect key="frame" x="88" y="111" width="277" height="0.0"/>
+                            <rect key="frame" x="88" y="112" width="277" height="0.0"/>
                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5k-7E-BtB">
-                            <rect key="frame" x="61" y="69.5" width="224" height="23.5"/>
+                            <rect key="frame" x="65" y="70" width="220" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="23.5" id="ki0-hY-jBF"/>
                             </constraints>
@@ -107,7 +107,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star" translatesAutoresizingMaskIntoConstraints="NO" id="uIs-UL-3v9">
-                            <rect key="frame" x="8" y="104" width="82" height="14"/>
+                            <rect key="frame" x="8" y="105" width="82" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="3zB-J2-gzi"/>
                                 <constraint firstAttribute="width" constant="82" id="wtZ-HT-W5y"/>
@@ -130,7 +130,7 @@
                         <constraint firstItem="xg5-Ky-QMS" firstAttribute="top" secondItem="IGc-ka-8U9" secondAttribute="top" constant="8" id="U2L-gg-ZXH"/>
                         <constraint firstItem="uIs-UL-3v9" firstAttribute="leading" secondItem="IGc-ka-8U9" secondAttribute="leading" constant="8" id="Vzq-NJ-Art"/>
                         <constraint firstItem="QwT-QA-9Ah" firstAttribute="leading" secondItem="uIs-UL-3v9" secondAttribute="trailing" constant="-2" id="XGf-8R-eVN"/>
-                        <constraint firstItem="T5k-7E-BtB" firstAttribute="leading" secondItem="Ebi-Z1-NiF" secondAttribute="trailing" constant="8" id="Xor-FI-jKG"/>
+                        <constraint firstItem="T5k-7E-BtB" firstAttribute="leading" secondItem="Ebi-Z1-NiF" secondAttribute="trailing" constant="12" id="Xor-FI-jKG"/>
                         <constraint firstItem="Ebi-Z1-NiF" firstAttribute="leading" secondItem="IGc-ka-8U9" secondAttribute="leading" constant="8" id="XsD-gw-wTV"/>
                         <constraint firstItem="gm1-iz-FXs" firstAttribute="trailing" secondItem="FE3-LU-8We" secondAttribute="trailing" id="ap4-nm-4Oz"/>
                         <constraint firstItem="LeW-7c-Np1" firstAttribute="leading" secondItem="FE3-LU-8We" secondAttribute="leading" id="eil-uo-Glp"/>
