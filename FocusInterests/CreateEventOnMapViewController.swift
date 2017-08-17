@@ -216,7 +216,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
 
         let time = NSDate().timeIntervalSince1970
         let imagePaths = NSMutableDictionary()
-        var pinInfo: [String:Any]?
+        var pinInfo = [String:Any]()
         if galleryPicArray.count > 0
         {
             
@@ -228,7 +228,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
                 uploadImage(image: image, path: Constants.storage.pins.child(path))
             }
             if galleryPicArray.count > 0{
-                pinInfo?["images"] = imagePaths
+                pinInfo["images"] = imagePaths
             }
         }
         
@@ -239,8 +239,17 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         if formmatedAddress.characters.count > 0{
-            pinInfo = ["fromUID": AuthApi.getFirebaseUid()!, "time": Double(time), "pin": caption ,"formattedAddress":self.formmatedAddress, "lat": Double(self.location.coordinate.latitude), "lng": Double(self.location.coordinate.longitude), "public": isPublic, "focus": addFocusButton.titleLabel?.text ?? ""]
-            Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(pinInfo!)
+            pinInfo["fromUID"] = AuthApi.getFirebaseUid()!
+            pinInfo["time"] = Double(time)
+            pinInfo["pin"] = caption
+            pinInfo["formattedAddress"] = self.formmatedAddress
+            pinInfo["lat"] = Double(self.location.coordinate.latitude)
+            pinInfo["lng"] = Double(self.location.coordinate.longitude)
+            pinInfo["public"] = isPublic
+            pinInfo["focus"] = addFocusButton.titleLabel!.text
+            
+            
+            Constants.DB.pins.child(AuthApi.getFirebaseUid()!).updateChildValues(pinInfo)
             
             Constants.DB.pin_locations!.setLocation(CLLocation(latitude: Double(self.location.coordinate.latitude), longitude: Double(self.location.coordinate.longitude)), forKey: AuthApi.getFirebaseUid()!) { (error) in
                 if (error != nil) {
@@ -262,10 +271,10 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
             })
             
             if self.pinType == .place{
-                Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(pinInfo! )
+                Constants.DB.places.child("\(placeEventID)/pins").updateChildValues(pinInfo)
             }
             else if self.pinType == .event{
-                Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(pinInfo!)
+                Constants.DB.event.child("\(placeEventID)/pins").updateChildValues(pinInfo)
             }
                 
             
