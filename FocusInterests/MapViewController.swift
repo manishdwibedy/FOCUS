@@ -96,7 +96,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
     
-    
+    var notificationCount = 0
+    var messageCount = 0
     var popUpScreen: MapPopUpScreenView!
     var placePins = [String:GMSMarker]()
     var lastPins = [GMSMarker]()
@@ -232,6 +233,26 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         // remove any old pins
         for marker in self.lastPins{
             marker.map = nil
+        }
+        
+        if self.notificationCount == 0{
+            self.navigationView.notificationsButton.badgeString = ""
+        }
+        else if self.notificationCount < 10{
+            self.navigationView.notificationsButton.badgeString = "\(self.notificationCount)"
+        }
+        else{
+            self.navigationView.notificationsButton.badgeString = "9+"
+        }
+        
+        if self.messageCount == 0{
+            self.navigationView.messagesButton.badgeString = ""
+        }
+        else if self.messageCount < 10{
+            self.navigationView.messagesButton.badgeString = "\(self.messageCount)"
+        }
+        else{
+            self.navigationView.messagesButton.badgeString = "9+"
         }
         
         self.pins = (DataCache.instance.readObject(forKey: "pins") as? [pinData])!

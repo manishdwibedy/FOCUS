@@ -547,6 +547,9 @@ class AnimationViewController: UIViewController {
 //            mapVC.navigationView.notificationsButton.badgeString = "9+"
 //        }
         
+        mapVC.notificationCount = self.notificationCount
+        mapVC.messageCount = self.messageCount
+        
         DataCache.instance.write(object: self.events as NSCoding, forKey: "events")
         DataCache.instance.write(object: self.places as NSCoding, forKey: "places")
         DataCache.instance.write(object: self.pins as NSCoding, forKey: "pins")
