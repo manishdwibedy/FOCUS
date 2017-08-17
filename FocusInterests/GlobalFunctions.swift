@@ -866,13 +866,14 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                     Constants.DB.event.child(id).observeSingleEvent(of: .value, with: { snapshot in
                                         let info = snapshot.value as? [String : Any]
                                         
-                                        let event = Event(title: (info?["title"])! as! String, description: (info?["description"])! as! String, fullAddress: (info?["fullAddress"])! as! String, shortAddress: (info?["shortAddress"])! as! String, latitude: (info?["latitude"])! as? String, longitude: (info?["longitude"])! as? String, date: (info?["date"])! as! String, creator: (info?["creator"])! as? String, id: id, category: info?["interest"] as? String, privateEvent: (info?["private"] as? Bool)!)
+                                        let event = Event.toEvent(info: info!)
+                                        event?.id = id
                                         
                                         let dateFormatter = DateFormatter()
                                         dateFormatter.dateFormat = "MMM d, h:mm a"
                                         
-                                        let time = dateFormatter.date(from: event.date!)
-                                        let address = event.shortAddress
+                                        let time = dateFormatter.date(from: (event?.date!)!)
+                                        let address = event?.shortAddress
                                         let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
                                         place.id = snapshot.key
                                         place.data = [
@@ -884,7 +885,7 @@ func getFeeds(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotEvent
                                         
                                         if let time = time{
                                             
-                                            let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: eventDF.date(from: event.date!)!)
+                                            let eventFeed = FocusNotification(type: NotificationType.Going, sender: followerUser, item: place, time: eventDF.date(from: (event?.date!)!)!)
                                             invitations_event.append(eventFeed)
                                             invitations_event.append(eventFeed)
                                             
