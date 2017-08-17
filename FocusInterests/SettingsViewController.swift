@@ -84,7 +84,9 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
                     if let data = snapshot.value as? [String:Any]{
                         if let privateProfile = data["private"] as? Bool{
-                            swCell?.accessoryType = .checkmark
+                            if privateProfile{
+                                swCell?.accessoryType = .checkmark
+                            }
                         }
                         else{
                             print("didn't find state")
@@ -113,8 +115,10 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
                     if let data = snapshot.value as? [String:Any]{
                         if let privateProfile = data["private"] as? Bool{
-                            swCell?.tintColor = Constants.color.green
-                            swCell?.accessoryType = .checkmark
+                            if privateProfile{
+                                swCell?.tintColor = Constants.color.green
+                                swCell?.accessoryType = .checkmark
+                            }
                         }
                         else{
                             print("didn't find state")
@@ -158,7 +162,7 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 let VC = storyboard.instantiateViewController(withIdentifier: "Change_username_password") as? ChangeUsernamePasswordViewController
                 self.present(VC!, animated: true, completion: nil)
             case 2:
-                let swCell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! SwitchCell
+                let swCell = tableView.cellForRow(at: indexPath) as! SwitchCell
                 if swCell.accessoryType == .checkmark {
                     swCell.accessoryType = .none
                     Constants.DB.user.child(AuthApi.getFirebaseUid()!).updateChildValues(["private": false])
