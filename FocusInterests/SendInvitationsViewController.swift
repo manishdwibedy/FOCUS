@@ -15,6 +15,7 @@ import MessageUI
 import Crashlytics
 import FBSDKLoginKit
 import FirebaseAuth
+import DataCache
  
 protocol SelectAllContactsDelegate {
     func selectedAllFollowers()
@@ -211,6 +212,10 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     @IBAction func createEvent(_ sender: Any) {
         Event.clearCache()
         let id = self.event?.saveToDB(ref: Constants.DB.event)
+        
+        var events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+        events.append(event!)
+        DataCache.instance.write(object: events as NSCoding, forKey: "events")
         
         
         Answers.logCustomEvent(withName: "Create Event",

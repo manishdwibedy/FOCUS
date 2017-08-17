@@ -11,7 +11,6 @@ import GooglePlaces
 import FirebaseDatabase
 import Alamofire
 import SwiftyJSON
-import DataCache
 
 class Event: NSObject, NSCoding{
     var title: String?
@@ -65,11 +64,6 @@ class Event: NSObject, NSCoding{
             "private": privateEvent
         ] as [String : Any] 
         newEvent.setValue(event)
-        
-        var events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
-        events.append(event)
-        
-        DataCache.instance.write(object: following as NSCoding, forKey: "events")
         
         return newEvent.key
     }
