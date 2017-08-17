@@ -169,7 +169,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         navBar.barTintColor = Constants.color.navy
         navBar.titleTextAttributes = attrs
         
-        if isMeetup || inviteFromOtherUserProfile{
+        if isMeetup || inviteFromOtherUserProfile || inviteFromMapView{
             navBar.topItem?.title = "Meet up"
             self.backButton.isEnabled = true
             self.backButton.tintColor = UIColor.white
