@@ -20,7 +20,6 @@ class AnimationViewController: UIViewController {
     var notificationCount = 0
     var messageCount = 0
     var notifications = [FocusNotification]()
-    var invites = [FocusNotification]()
     var feeds = [FocusNotification]()
     
     
@@ -48,6 +47,8 @@ class AnimationViewController: UIViewController {
         DataCache.instance.write(object: places as NSCoding, forKey: "places")
         DataCache.instance.write(object: pins as NSCoding, forKey: "pins")
         DataCache.instance.write(object: followingPlaces as NSCoding, forKey: "following_places")
+        DataCache.instance.write(object: notifications as NSCoding, forKey: "notifications")
+        
         loadMap()
         showPins(showAll: true, interests: "")
         getEvents()
@@ -107,7 +108,7 @@ class AnimationViewController: UIViewController {
                         self.notificationCount = not_count
                     }
                 }, gotInvites: {invites in
-                    self.invites.append(contentsOf: Array(Set<FocusNotification>(invites)))
+                    self.notifications.append(contentsOf: Array(Set<FocusNotification>(invites)))
                     
                     count_received += 1
                     if count_received == 5 + 1{
@@ -157,7 +158,7 @@ class AnimationViewController: UIViewController {
                 if count_received == 5 + 1{
                     not_count += Array(Set<FocusNotification>(self.notifications)).count
                     
-                    for invite in (self.invites as? [FocusNotification])!{
+                    for invite in (self.notifications as? [FocusNotification])!{
                         if let data = invite.item?.data as? [String:Any]{
                             if let status = data["status"] as? String{
                                 if status != "accepted" || status != "declined"{
@@ -180,13 +181,12 @@ class AnimationViewController: UIViewController {
                     count_received = 0
                 }
             }, gotInvites: {invite in
-                
-                self.invites.append(contentsOf: invite)
+                self.notifications.append(contentsOf: invite)
                 count_received += 1
                 if count_received == 5 + 1{
                     not_count += Array(Set<FocusNotification>(self.notifications)).count
                     
-                    for invite in (self.invites as? [FocusNotification])!{
+                    for invite in (self.notifications as? [FocusNotification])!{
                         if let data = invite.item?.data as? [String:Any]{
                             if let status = data["status"] as? String{
                                 if status != "accepted" || status != "declined"{
@@ -547,10 +547,11 @@ class AnimationViewController: UIViewController {
 //            mapVC.navigationView.notificationsButton.badgeString = "9+"
 //        }
         
-        DataCache.instance.write(object: events as NSCoding, forKey: "events")
-        DataCache.instance.write(object: places as NSCoding, forKey: "places")
-        DataCache.instance.write(object: pins as NSCoding, forKey: "pins")
+        DataCache.instance.write(object: self.events as NSCoding, forKey: "events")
+        DataCache.instance.write(object: self.places as NSCoding, forKey: "places")
+        DataCache.instance.write(object: self.pins as NSCoding, forKey: "pins")
         DataCache.instance.write(object: self.followingPlaces as NSCoding, forKey: "following_places")
+        DataCache.instance.write(object: self.notifications as NSCoding, forKey: "notifications")
         
     }
     

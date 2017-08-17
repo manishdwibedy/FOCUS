@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ItemOfInterest {
+class ItemOfInterest: NSObject, NSCoding {
     
     var itemName: String?
     var imageURL: String?
@@ -21,5 +21,22 @@ class ItemOfInterest {
         self.itemName = itemName
         self.imageURL = imageURL
         self.type = type
+    }
+    
+    required init(coder decoder: NSCoder) {
+        self.itemName = decoder.decodeObject(forKey: "itemName") as? String
+        self.imageURL = decoder.decodeObject(forKey: "imageURL") as? String
+        self.type = decoder.decodeObject(forKey: "type") as? String ?? ""
+        self.id = decoder.decodeObject(forKey: "id") as? String ?? ""
+        self.data = decoder.decodeObject(forKey: "data") as? NSDictionary
+        
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.itemName, forKey: "itemName")
+        coder.encode(self.imageURL, forKey: "imageURL")
+        coder.encode(self.type, forKey: "type")
+        coder.encode(self.id, forKey: "id")
+        coder.encode(self.data, forKey: "data")
     }
 }

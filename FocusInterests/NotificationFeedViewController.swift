@@ -10,6 +10,7 @@
 
 import UIKit
 import Crashlytics
+import DataCache
 
 enum SelectedIndex: Int {
     case NOTIF = 0
@@ -42,6 +43,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         
         AuthApi.clearNotifications()
         
+        self.nofArray = (DataCache.instance.readObject(forKey: "notifications") as? [FocusNotification])!
         if self.nofArray.isEmpty && self.invArray.isEmpty && self.feedAray.isEmpty{
             self.noNotificationsLabel.isHidden = false
             self.tableView.isHidden = true
