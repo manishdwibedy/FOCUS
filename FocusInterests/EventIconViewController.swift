@@ -32,7 +32,8 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
     var lastImageButton: UIButton!
     var imagePicker = UIImagePickerController()
     var selected = false
-    //
+    var delegate: showMarkerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -274,6 +275,7 @@ class EventIconViewController: SwiftyCamViewController, SwiftyCamViewControllerD
         if segue.identifier == "event_invite"{
             let destinationVC = segue.destination as! SendInvitationsViewController
             destinationVC.event = self.event
+            destinationVC.delegate = self.delegate
             destinationVC.image = self.imageData
         }
     }

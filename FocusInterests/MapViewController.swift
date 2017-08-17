@@ -1342,5 +1342,19 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
     func showEventMarker(event: Event){
         willShowEvent = true
         showEvent = event
+        
+        let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+        
+        self.eventPlaceMarker = GMSMarker(position: position)
+        let eventMarker = UIImage(image: #imageLiteral(resourceName: "intro_event"), scaledTo: CGSize(width: 60, height: 60))
+        self.eventPlaceMarker?.icon = eventMarker
+        self.eventPlaceMarker?.title = event.title
+        self.eventPlaceMarker?.map = self.mapView
+        
+        eventPlaceMarker?.accessibilityLabel = "event_\(self.events.count)"
+        
+        self.events.append(event)
+        
+        tapEvent(event: event)
     }
 }

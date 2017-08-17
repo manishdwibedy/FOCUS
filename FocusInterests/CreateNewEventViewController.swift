@@ -62,7 +62,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     var filteredInterest = [String]()
     var interests_set = Set<String>()
     
-    let validatedFields = true
+    let validatedFields = false
     
     @IBOutlet weak var interestLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var guestListStackTopConstraint: NSLayoutConstraint!
@@ -110,6 +110,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     var endDate: Date? = nil
     var startTime: Date? = nil
     var endTime: Date? = nil
+    var delegate: showMarkerDelegate?
     
     lazy var dateToolbar: UIToolbar = {
         let toolbar = UIToolbar()
@@ -417,6 +418,10 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as! EventIconViewController
+        destination.delegate = self.delegate
+        
+        
         if segue.identifier == "chooseIcon" && validatedFields {
             if self.event != nil{
                 guard let name = eventNameTextField.text, !name.isEmpty else{
@@ -491,7 +496,6 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
             }
             
             Event.cacheEvent(event: self.event!)
-            let destination = segue.destination as! EventIconViewController
             destination.event = self.event
             
             

@@ -914,9 +914,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBAction func createEventButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "CreateEvent", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent")
-        
-        self.present(controller, animated: true, completion: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "createEvent") as? CreateNewEventViewController
+        controller?.delegate = self.tabBarController?.viewControllers?[0] as? MapViewController
+        self.present(controller!, animated: true, completion: nil)
     }
     
     func updatePlaces()
