@@ -678,8 +678,13 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
             }
             else{
-                cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
-                
+                if let data = self.pinData{
+                    let current = CLLocation(latitude: data.coordinates.latitude, longitude: data.coordinates.longitude)
+                    cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: current)
+                }
+                else{
+                    cell.distanceLabel.text = getDistance(fromLocation: place_location, toLocation: AuthApi.getLocation()!)
+                }
             }
             
             if place_cell.categories.count > 0{

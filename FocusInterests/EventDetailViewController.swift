@@ -13,6 +13,7 @@ import Firebase
 import GeoFire
 import ChameleonFramework
 import Crashlytics
+import DataCache
 
 protocol EventDetailViewControllerDelegate{
     func showPopup()
@@ -625,7 +626,9 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
         if segue.identifier == "unwindToMapViewControllerWithSegue"{
             let map = self.map
             if let event = event{
-                if !(map?.events.contains(event))!{
+                
+                let events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+                if !events.contains(event){
                     map?.events.append(event)
                     
                     let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
