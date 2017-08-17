@@ -522,11 +522,12 @@
                     <connections>
                         <outlet property="eventIcon" destination="NBd-WG-8rv" id="aqa-7x-oBC"/>
                         <segue destination="xxR-Li-4ZG" kind="show" identifier="event_invite" id="Ich-4n-xap"/>
+                        <segue destination="3TX-Ww-Aks" kind="show" identifier="backToDetails" id="kOU-2I-22J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4aQ-k2-RNC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1199" y="134"/>
+            <point key="canvasLocation" x="1319" y="104"/>
         </scene>
     </scenes>
     <resources>
