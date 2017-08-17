@@ -278,6 +278,16 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         self.placesTableView.frame = placesTableFrame
                     }
                 }
+                else{
+                    self.privateUserProfileView.isHidden = true
+                    var eventTableFrame = self.eventsTableView.frame
+                    eventTableFrame.size.height = self.eventsTableView.contentSize.height
+                    self.eventsTableView.frame = eventTableFrame
+                    
+                    var placesTableFrame = self.placesTableView.frame
+                    placesTableFrame.size.height = self.placesTableView.contentSize.height
+                    self.placesTableView.frame = placesTableFrame
+                }
             }
         })
         
