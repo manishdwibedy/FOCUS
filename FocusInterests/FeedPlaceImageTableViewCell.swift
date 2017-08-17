@@ -121,7 +121,14 @@ class FeedPlaceImageTableViewCell: UITableViewCell, UITextViewDelegate{
         VC.otherUser = true
         VC.userID = pin?["fromUID"] as! String
         
-        parentVC?.present(VC, animated:true, completion:nil)
+        Constants.DB.user.child(pin?["fromUID"] as! String).observeSingleEvent(of: .value, with: {snapshot in
+            if let info = snapshot.value as? [String:Any]{
+                if let user = User.toUser(info: info){
+                    VC.userData = user
+                    self.parentVC?.present(VC, animated:true, completion:nil)
+                }
+            }
+        })
     }
     
 }

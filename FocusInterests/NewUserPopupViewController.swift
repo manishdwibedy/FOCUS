@@ -18,15 +18,15 @@ class NewUserPopupViewController: UIViewController {
     var delegate: switchPinTabDelegate?
     
     let info = [
-        ["", "", "Well, now YOU can.", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
+        ["", "What if you could have an all-in-one view of the people, places, and event YOU care about?", "Well, now YOU can.", "addUser", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.systemFont(ofSize: 15),UIFont.boldSystemFont(ofSize: 10)],
         
-        ["intro_greenpin", "People", "People are shown on your Map when they Pin their location and FOCUS. You can choose to view activities and places you'll both like.", "people", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
+        ["intro_greenpin", "People", "See your friends and others who share your interest as soon as they Pin their location. Click Meet up to find places and events you’ll enjoy!", "people", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
         ["intro_place", "Places", "Simply follow your favorite Places and they’ll always appear on your Map so you can see what’s nearby!", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
         ["intro_event", "Events", "What’s going on tonight? As soon as a new Event is added, you’ll find it on your Map so you’re always in the know about what there is to do.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)],
         
-        ["intro_whitepin", "Pin", "Create your first Pin now to show your friends what you’re up to!", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)]
+        ["intro_whitepin", "Pin", "Create your first Pin now to show your friends what you’re up to! Pins are deleted when you Pin at a new location or after 24 hours.", "place", UIColor.lightGray, UIColor.black, UIColor.black, UIFont.boldSystemFont(ofSize: 20),UIFont.systemFont(ofSize: 15)]
     ]
     
     var index = 0
