@@ -99,4 +99,58 @@ class pinData: NSObject, NSCoding{
         
         return data
     }
+    
+    public static func getPins(gotPin: @escaping (_ pin: pinData) -> Void) -> UInt{
+        let ref = Constants.DB.pins.observe(.childAdded, with: {snapshot in
+            if let value = snapshot.value as? [String:Any]{
+                let data = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(value["fromUID"] as! String), focus: value["focus"] as? String ?? "")
+                
+                Constants.DB.user.child(value["fromUID"] as! String).observeSingleEvent(of: .value, with: {snapshot in
+                    
+                    if let info = snapshot.value as? [String:Any]{
+                        if let username = info["username"] as? String{
+                            
+                            if let privateProfile = info["private"] as? Bool{
+                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                    data.username = username
+                                    if !privateProfile{
+                                        gotPin(data)
+                                    }
+                                }
+                                if let uid = info["firebaseUserId"] as? String{
+                                    if uid == AuthApi.getFirebaseUid()!{
+                                        if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                            data.username = username
+                                            
+                                            gotPin(data)
+                                        }
+                                    }
+                                }
+                            }
+                            else if let uid = info["firebaseUserId"] as? String{
+                                if uid == AuthApi.getFirebaseUid()!{
+                                    if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                        data.username = username
+                                        
+                                        gotPin(data)
+                                    }
+                                }
+                            }
+                            else{
+                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                    data.username = username
+                                    
+                                    gotPin(data)
+                                }
+                            }
+                        }
+                    }
+                    
+                })
+                
+            }
+        })
+        
+        return ref
+    }
 }

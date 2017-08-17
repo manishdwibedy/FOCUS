@@ -102,6 +102,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var lastPins = [GMSMarker]()
     var friends = [FollowNewUser]()
     var placeMapping = [String: Place]()
+    var pinRef: UInt?
     
     func hideFollowFriendPopup(){
         self.followYourFriendsView.isHidden = true
@@ -401,6 +402,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.invites.removeAll()
         self.notifs.removeAll()
         
+        Constants.DB.pins.removeObserver(withHandle: self.pinRef!)
+        
         willShowPin = false
         willShowPlace = false
         willShowEvent = false
@@ -445,6 +448,23 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         Share.getFacebookFriends(completion: {friends in
         
+        })
+        
+        
+        self.pinRef = pinData.getPins(gotPin: {pin in
+            let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
+            let marker = GMSMarker(position: position)
+            marker.title = pin.pinMessage
+            marker.map = self.mapView
+            let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+            image.image = UIImage(named: "pin")
+            image.contentMode = .scaleAspectFit
+            marker.iconView = image
+            marker.accessibilityHint = pin.username
+            marker.accessibilityLabel = "pin_\(self.pins.count)"
+            
+            self.pins.append(pin)
+            self.lastPins.append(marker)
         })
         
         if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil{
