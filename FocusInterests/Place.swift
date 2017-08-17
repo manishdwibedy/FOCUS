@@ -91,10 +91,10 @@ class Place: NSObject, NSCoding{
         self.distance = aDecoder.decodeDouble(forKey: "distance") as! Double
         self.categories = aDecoder.decodeObject(forKey: "categories") as! [Category]
         
-//        if let hours = aDecoder.decodeObject(forKey: "hours") as? [Hours]{
-//            self.hours = hours
-//        }
-//        
+        if let hours = aDecoder.decodeObject(forKey: "hours") as? [Hours]{
+            self.hours = hours
+        }
+        
         self.url = aDecoder.decodeObject(forKey: "url") as! String
         self.is_closed = aDecoder.decodeBool(forKey: "is_closed") as! Bool
     }
