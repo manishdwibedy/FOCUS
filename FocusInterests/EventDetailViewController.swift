@@ -76,6 +76,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var event: Event?
     var showInvitePopup = false
     
+    @IBOutlet weak var ticketMasterButton: UIButton!
     let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
     
@@ -237,6 +238,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     }
                 })
             }
+            
+            ticketMasterButton.isHidden = true
             
         }
         
