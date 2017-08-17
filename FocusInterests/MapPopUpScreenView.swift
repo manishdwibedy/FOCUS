@@ -135,22 +135,21 @@ class MapPopUpScreenView: UIView {
         
     }
     
-    func loadPin(name: String, pin: String, distance: String, focus: String, address: String, time: Double, username: String, userImage: String)
-    {
+    func loadPin(name: String, pin: String, distance: String, focus: String, address: String, time: Double, username: String, userImage: String){
         
         self.startImage.isHidden = true
         boldLabel.text = name
+        bottomText.textColor = Constants.color.green
         bottomText.text = pin
         addressLabel.text = address
         mileLabel.text = distance
         
         addGreenDot(label: interestLabel, content: focus)
         
-        captionLeading.constant = -20
+        captionLeading.constant = -23
         inviteButton.setTitle("Meet up", for: .normal)
         
         self.profileImage.image = #imageLiteral(resourceName: "placeholder_pin")
-        
         
         if let data = object as? pinData{
             print(data)
