@@ -480,7 +480,7 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
                 let endTime = eventEndTimeTextField.text
                 
                 
-                self.event = Event(title: name, description: "", fullAddress: selectedLocation?.address, shortAddress: selectedLocation?.name, latitude: String(describing: selectedLocation?.lat), longitude: String(describing: selectedLocation?.long), date: dateString, creator: creator, category: choseFocusButton.titleLabel?.text, privateEvent: publicOrPrivateSwitch.isOn)
+                self.event = Event(title: name, description: "", fullAddress: selectedLocation?.address, shortAddress: selectedLocation?.name, latitude: String(describing: selectedLocation!.lat), longitude: String(describing: selectedLocation!.long), date: dateString, creator: creator, category: choseFocusButton.titleLabel?.text, privateEvent: publicOrPrivateSwitch.isOn)
                 
                 let price = eventPriceTextView.text
                 if (price?.characters.count)! > 0{
