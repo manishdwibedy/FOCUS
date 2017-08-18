@@ -84,8 +84,11 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
                     if let data = snapshot.value as? [String:Any]{
                         if let privateProfile = data["private"] as? Bool{
+                            print("statement \(privateProfile)")
                             if privateProfile{
                                 swCell?.accessoryType = .checkmark
+                            }else{
+                                swCell?.accessoryType = .none
                             }
                         }
                         else{
@@ -115,13 +118,15 @@ class SettingsViewController: BaseViewController, UITableViewDataSource, UITable
                 Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: {snapshot in
                     if let data = snapshot.value as? [String:Any]{
                         if let privateProfile = data["private"] as? Bool{
+                            print("statement \(privateProfile)")
+                            swCell?.tintColor = Constants.color.green
                             if privateProfile{
-                                swCell?.tintColor = Constants.color.green
                                 swCell?.accessoryType = .checkmark
+                            }else{
+                                swCell?.accessoryType = .none
                             }
                         }
                         else{
-                            print("didn't find state")
                             swCell?.accessoryType = .none
                         }
                     }
