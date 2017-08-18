@@ -644,9 +644,9 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                     Constants.DB.user.child(UID).child("invitations").child(self.type).queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
                     
-                        if snapshot.value == nil{
+                        if snapshot.value as? [String:Any] == nil{
                             
-                        Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":self.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeTextField.text!])
+                            Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":self.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeTextField.text!])
                         }
                     })
                     Answers.logCustomEvent(withName: "Invite User",
