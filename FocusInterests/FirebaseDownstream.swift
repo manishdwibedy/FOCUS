@@ -72,6 +72,7 @@ class FirebaseDownstream {
                                                     "invite": inValue[inKey] as? [String:Any]
                                                 ]
                                                 let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
+                                                notification.notif_type = .invite
                                                 returnableNotif.append(notification)
                                                 
                                             }
@@ -97,6 +98,7 @@ class FirebaseDownstream {
                                             "invite": inValue[inKey] as? [String:Any]
                                         ]
                                         let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: place_invite["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: (place_invite["time"] as? Double)!) as Date)
+                                        notification.notif_type = .invite
                                         returnableNotif.append(notification)
                                         
                                     

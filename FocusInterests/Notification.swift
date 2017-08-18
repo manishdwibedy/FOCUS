@@ -10,14 +10,14 @@ import Foundation
 
 class NotificationUtil{
     
-    static func getNotificationCount(gotNotification: @escaping (_ comments: [FocusNotification]) -> Void,
+    static func getNotificationCount(avoidMissing: Bool = false, gotNotification: @escaping (_ comments: [FocusNotification]) -> Void,
                             gotInvites: @escaping (_ comments: [FocusNotification]) -> Void,
                             gotFeed: @escaping (_ comments: [FocusNotification]) -> Void){
         var nofArray = [FocusNotification]()
         var invArray = [FocusNotification]()
         var feedArray = [FocusNotification]()
         
-        NotificationUtil.getNotifications(gotEventComments: {comments in
+        NotificationUtil.getNotifications(avoidMissing: avoidMissing, gotEventComments: {comments in
             nofArray.append(contentsOf: comments)
             gotNotification(nofArray)
         }, gotEventLikes: {likes in
@@ -53,7 +53,7 @@ class NotificationUtil{
 
     }
     
-    static func getNotifications(gotEventComments: @escaping (_ comments: [FocusNotification]) -> Void, gotEventLikes: @escaping (_ comments: [FocusNotification]) -> Void, gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotAcceptedInvites: @escaping (_ comments: [FocusNotification]) -> Void, gotFollowers: @escaping (_ followers: [FocusNotification]) -> Void){
+    static func getNotifications(avoidMissing: Bool = false, gotEventComments: @escaping (_ comments: [FocusNotification]) -> Void, gotEventLikes: @escaping (_ comments: [FocusNotification]) -> Void, gotPins: @escaping (_ pins: [FocusNotification]) -> Void, gotAcceptedInvites: @escaping (_ comments: [FocusNotification]) -> Void, gotFollowers: @escaping (_ followers: [FocusNotification]) -> Void){
         
         var place_count = 0
         var place_invites = [FocusNotification]()
@@ -142,7 +142,7 @@ class NotificationUtil{
                                             user_count += 1
                                             followers.append(event_comment)
                                         }
-                                        else{
+                                        else if !avoidMissing{
                                             let event_comment = FocusNotification(type: NotificationType.Following, sender: user, item: followerUser, time: Date())
                                             event_comment.notif_type = .notification
                                             

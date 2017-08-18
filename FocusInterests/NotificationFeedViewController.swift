@@ -98,7 +98,8 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     func getNotifications(){
         AuthApi.clearNotifications()
         AuthApi.set(unread: 0)
-        NotificationUtil.getNotificationCount(gotNotification: {notif in
+        
+        NotificationUtil.getNotificationCount(avoidMissing: true, gotNotification: {notif in
             for notification in Array(Set<FocusNotification>(notif)){
                 if !self.nofArray.contains(notification){
                     self.nofArray.append(notification)

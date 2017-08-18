@@ -21,17 +21,17 @@ enum NotificationType: String {
 import Foundation
 
 class FocusNotification: NSObject, NSCoding{
-    /// Returns a Boolean value indicating whether two values are equal.
-    ///
-    /// Equality is the inverse of inequality. For any values `a` and `b`,
-    /// `a == b` implies that `a != b` is `false`.
-    ///
-    /// - Parameters:
-    ///   - lhs: A value to compare.
-    ///   - rhs: Another value to compare.
-    static func ==(lhs: FocusNotification, rhs: FocusNotification) -> Bool {
-        return lhs.type == rhs.type && lhs.item?.id == rhs.item?.id && lhs.time == rhs.time
-        
+    override func isEqual(_ object: Any?) -> Bool{
+        if let rhs = object as? FocusNotification{
+            if self.type == .Following{
+                return self.type == rhs.type && self.item?.id == rhs.item?.id
+            }
+            else{
+                return self.type == rhs.type && self.item?.id == rhs.item?.id && self.time == rhs.time
+            }
+            
+        }
+        return false
     }
 
     enum notif_type{
