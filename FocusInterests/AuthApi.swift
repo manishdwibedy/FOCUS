@@ -283,8 +283,7 @@ struct AuthApi {
             let coord = location.components(separatedBy: ";;")
             return CLLocation(latitude: Double(coord[0])!, longitude: Double(coord[1])!)
         }
-        return nil
-
+        return CLLocation(latitude: 34.062149, longitude: -118.448056)
     }
     
     static func set(location: CLLocation){
