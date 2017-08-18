@@ -329,9 +329,10 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
         
         if let cached = Event.fetchEvent() {
             self.event = cached
+            choseFocusButton.titleLabel?.text = cached.category!
             eventNameTextField.text = cached.title
             eventDescriptionTextView.text = cached.eventDescription! 
-            locationTextField.text = cached.fullAddress
+            locationTextField.text = cached.shortAddress
             
             let dateTime = cached.date?.components(separatedBy: ",")
             eventDateTextField.text = dateTime?[0]
