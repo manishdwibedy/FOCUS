@@ -547,6 +547,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                         })
                         print("Text value: \(username)")
                         
+                        if AuthApi.getLoginType() == .Facebook && self.friends.count > 0{
+                            let followYourFriendsSubView = FollowYourFriendsView(frame: CGRect(x: 0, y: 0, width: self.followYourFriendsView.frame.size.width, height: self.followYourFriendsView.frame.size.height))
+                            followYourFriendsSubView.users = self.friends
+                            followYourFriendsSubView.closeButton.addTarget(self, action: #selector(MapViewController.hideFollowFriendPopup), for: .touchUpInside)
+                            self.followYourFriendsView.addSubview(followYourFriendsSubView)
+                            self.followYourFriendsView.allCornersRounded(radius: 8.0)
+                        }
                         if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0{
                             let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
                             
