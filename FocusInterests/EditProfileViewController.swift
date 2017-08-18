@@ -160,7 +160,7 @@ class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIPicke
                 self.userId = dictionnary!["firebaseUserId"] as? String ?? nil
                 
                 guard (self.userId != nil) else {
-                    self.dismiss(animated: true, completion: nil)
+//                    self.dismiss(animated: true, completion: nil)
                     return
                 }
                 
