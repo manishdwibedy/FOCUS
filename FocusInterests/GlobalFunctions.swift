@@ -1395,6 +1395,8 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
     eventDF.dateFormat = "MMM d, h:mm a"
     var ticketMasterDF = DateFormatter()
     ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    var dateOnlyDF = DateFormatter()
+    dateOnlyDF.dateFormat = "yyyy-MM-dd "
     
     var categories = Set<String>()
     
@@ -1449,10 +1451,22 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
             
             if eventCount == suggestions.count || suggestions.count >= limit{
                 suggestions.sort(by: {
-                    if let event1 = ticketMasterDF.date(from: $0.date!), let event2 = ticketMasterDF.date(from: $1.date!){
-                        return event1 < event2
+                    var date1: Date?, date2: Date?
+                    if let date = ticketMasterDF.date(from: $0.date!){
+                        date1 = date
                     }
-                    return true
+                    else{
+                        date1 = dateOnlyDF.date(from: $0.date!)
+                    }
+                    
+                    if let date = ticketMasterDF.date(from: $1.date!){
+                        date2 = date
+                    }
+                    else{
+                        date2 = dateOnlyDF.date(from: $1.date!)
+                    }
+                    
+                    return date1! < date2!
                 })
                 
                 suggestions = suggestions.sorted(by: {
