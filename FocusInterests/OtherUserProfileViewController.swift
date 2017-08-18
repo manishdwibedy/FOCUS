@@ -1179,6 +1179,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             })
             
             recentPostCell.commentTextView.delegate = self
+            recentPostCell.mapButton.addTarget(self, action: #selector(OtherUserProfileViewController.globeButtonPressed(_:)), for: .touchUpInside)
             recentPostCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (self.pinInfo!.dateTimeStamp)), numericDates: true, shortVersion: true)
             recentPostCell.pin = self.pinInfo
             
@@ -1376,6 +1377,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     func hasSentUserAnInvite(){
         self.showInvitePopup = true
         print("in other user profile")
+    }
+    
+    func globeButtonPressed(_ sender: UIButton) {
+        
     }
 }
 
