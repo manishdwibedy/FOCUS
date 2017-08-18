@@ -1477,7 +1477,13 @@ func getSuggestedEvents(interests: String, limit: Int, gotEvents: @escaping (_ u
                     let ix2 = Int(arc4random_uniform(UInt32(i+1)))
                     (suggestions[ix1], suggestions[ix2]) = (suggestions[ix2], suggestions[ix1])
                 }
-                gotEvents(Array(suggestions[0..<limit]))
+                if suggestions.count > limit{
+                    gotEvents(Array(suggestions[0..<limit]))
+                }
+                else{
+                    gotEvents(suggestions)
+                }
+                
             }
         })
     
