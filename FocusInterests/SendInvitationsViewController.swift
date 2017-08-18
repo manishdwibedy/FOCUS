@@ -462,6 +462,8 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
                     selectedAllFollowersTableCell?.selectAllFollowersButton.isSelected = false
                     selectedRow = indexPathForSelectedRows
                 }
+                
+                self.selectedUsers.append((personToInviteCell?.user?.UID)!)
             }
         }
         print("new selected row \(indexPathForSelectedRows.sorted())")
@@ -478,13 +480,20 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
                     selectedAllFollowersTableCell.selectAllFollowersButton.isSelected = false
                 }
                 self.deselectAllFollowers()
+                selectedRow = [[]]
+
             }else{
                 if let personToInviteCell = tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section)) as? InviteListTableViewCell{
                     personToInviteCell.inviteConfirmationButton.isSelected = false
-                    self.contactHasBeenRemovedAtIndex(contact: personToInviteCell.user!, index: indexPath)
+                    
+                    print("found single cell \(indexPath)")
+                    personToInviteCell.inviteConfirmationButton.isSelected = false
+                    
+                    if let index = self.selectedUsers.index(of: (personToInviteCell.user?.UID)!){
+                        self.selectedUsers.remove(at: index)
+                    }
                 }
             }
-            selectedRow = [[]]
             return
         }
         
