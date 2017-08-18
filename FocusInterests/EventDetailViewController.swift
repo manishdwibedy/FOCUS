@@ -646,12 +646,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     
                     map?.currentLocation = CLLocation(latitude: position.latitude, longitude: position.longitude)
                     map?.willShowEvent = true
-                    map?.tapEvent(event: event)
+                    map?.tapEvent(event: event, data: nil)
                     
                     map?.viewingEvent = event
                     map?.eventPlaceMarker = marker
                     
-                    delegate?.showEventMarker(event: self.event!)
+                    delegate?.showEventMarker(event: self.event!, data: nil)
                 }
                 else{
                     let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
@@ -663,12 +663,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     
                     map?.currentLocation = CLLocation(latitude: position.latitude, longitude: position.longitude)
                     map?.willShowEvent = true
-                    map?.tapEvent(event: event)
+                    map?.tapEvent(event: event, data: nil)
                     
                     map?.viewingEvent = event
                     map?.eventPlaceMarker = marker
                     
-                    delegate?.showEventMarker(event: self.event!)
+                    delegate?.showEventMarker(event: self.event!, data: nil)
                 }
             }
         }

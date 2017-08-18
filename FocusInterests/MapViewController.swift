@@ -28,7 +28,7 @@ import DataCache
 protocol showMarkerDelegate{
     func showPinMarker(pin: pinData, show: Bool)
     func showPlaceMarker(place: Place)
-    func showEventMarker(event: Event)
+    func showEventMarker(event: Event, data: Data?)
 }
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, NavigationInteraction,GMUClusterManagerDelegate, GMUClusterRendererDelegate, switchPinTabDelegate, UIPopoverPresentationControllerDelegate, showMarkerDelegate{
@@ -383,7 +383,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 self.events.append(event!)
                 
-                tapEvent(event: event!)
+                tapEvent(event: event!, data: nil)
             }
 
             
@@ -708,7 +708,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             let index: Int! = Int(parts![1])
             let event = self.events[index]
             
-            tapEvent(event: event)
+            tapEvent(event: event, data: nil)
             return true
         }
         else if parts?[0] == "place"{
@@ -1103,7 +1103,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 }
 
 extension MapViewController{
-    func tapEvent(event: Event){
+    func tapEvent(event: Event, data: Data?){
     
         popUpView.isHidden = false
         
@@ -1167,9 +1167,24 @@ extension MapViewController{
             
         }
         else{
-            popUpScreen.profileImage.sd_setImage(with: URL(string:(event.image_url)!), placeholderImage: placeholderImage)
-            popUpScreen.profileImage.setShowActivityIndicator(true)
-            popUpScreen.profileImage.setIndicatorStyle(.gray)
+            if let url = URL(string: event.image_url!){
+                popUpScreen.profileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_event"))
+                popUpScreen.profileImage.setShowActivityIndicator(true)
+                popUpScreen.profileImage.setIndicatorStyle(.gray)
+            }
+            else{
+                if let image = UIImage(data:data!,scale:1.0){
+                    popUpScreen.profileImage.image = image
+                    popUpScreen.profileImage.setShowActivityIndicator(true)
+                    popUpScreen.profileImage.setIndicatorStyle(.gray)
+                }
+                else{
+                    popUpScreen.profileImage.image = #imageLiteral(resourceName: "placeholder_event")
+                    popUpScreen.profileImage.setShowActivityIndicator(true)
+                    popUpScreen.profileImage.setIndicatorStyle(.gray)
+                }
+                
+            }
             
         }
         
@@ -1353,7 +1368,7 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
         showPlace = place
     }
     
-    func showEventMarker(event: Event){
+    func showEventMarker(event: Event, data: Data){
         willShowEvent = true
         showEvent = event
         
@@ -1379,6 +1394,6 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
             mapView.animate(to: camera)
         }
         
-        tapEvent(event: event)
+        tapEvent(event: event, data: data)
     }
 }

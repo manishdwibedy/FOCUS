@@ -302,7 +302,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //            
 //        }
         
-        delegate?.showEventMarker(event: event!)
+        delegate?.showEventMarker(event: event!, data: self.image!)
         performSegue(withIdentifier: "unwindBackToExplorePage", sender: self)
     }
     

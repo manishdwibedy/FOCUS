@@ -195,7 +195,7 @@ class FeedEventTableViewCell: UITableViewCell {
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
         vc.willShowEvent = true
         
-        delegate?.showEventMarker(event: event!)
+        delegate?.showEventMarker(event: event!, data: nil)
         vc.selectedIndex = 0
     }
     
