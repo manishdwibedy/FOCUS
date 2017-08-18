@@ -128,7 +128,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                             let value = snapshot.value as? NSDictionary
                                             if let value = value
                                             {
-                                                if let pin = pinData.toPin(user: user, value: value){
+                                                if let pin = pinData.toPin(uuid: user.uuid!, value: value){
                                                     
                                                     if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
                                                         self.user_pins[user.uuid!] = pin
@@ -236,7 +236,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     
                                     if let value = value
                                     {
-                                        if let pin = pinData.toPin(user: user, value: value){
+                                        if let pin = pinData.toPin(uuid: user.uuid!, value: value){
                                             
                                             if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
                                                 self.user_pins[user.uuid!] = pin
@@ -495,7 +495,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     let value = snapshot.value as? NSDictionary
                                     if let value = value
                                     {
-                                        if let pin = pinData.toPin(user: user, value: value){
+                                        if let pin = pinData.toPin(uuid: user.uuid!, value: value){
                                             if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
                                                 self.user_pins[user.uuid!] = pin
                                                 user.hasPin = true
@@ -554,7 +554,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                                     let value = snapshot.value as? NSDictionary
                                     if let value = value
                                     {
-                                        if let pin = pinData.toPin(user: user, value: value){
+                                        if let pin = pinData.toPin(uuid: user.uuid!, value: value){
                                             if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
                                                 self.user_pins[user.uuid!] = pin
                                                 user.hasPin = true

@@ -60,7 +60,7 @@ class pinData: NSObject, NSCoding{
         aCoder.encode(self.username, forKey: "username")
     }
     
-    public static func toPin(user: User, value: NSDictionary) -> pinData?{
+    public static func toPin(uuid: String, value: NSDictionary) -> pinData?{
         
         guard let time = value["time"] as? Double else{
             return nil
@@ -86,16 +86,12 @@ class pinData: NSObject, NSCoding{
             return nil
         }
         
-        guard let uuid = user.uuid else{
-            return nil
-        }
-        
         guard let focus = value["focus"] as? String else{
             return nil
         }
         address = address.replacingOccurrences(of: ";;", with: "\n")
         
-        let data = pinData(UID: uid, dateTS: time, pin: caption, location: address, lat: lat, lng: lng, path: Constants.DB.pins.child(uuid), focus: focus)
+        let data = pinData(UID: uuid, dateTS: time, pin: caption, location: address, lat: lat, lng: lng, path: Constants.DB.pins.child(uuid), focus: focus)
         
         return data
     }
@@ -103,22 +99,40 @@ class pinData: NSObject, NSCoding{
     public static func getPins(gotPin: @escaping (_ pin: pinData) -> Void) -> UInt{
         let ref = Constants.DB.pins.observe(.childAdded, with: {snapshot in
             if let value = snapshot.value as? [String:Any]{
-                let data = pinData(UID: value["fromUID"] as! String, dateTS: value["time"] as! Double, pin: value["pin"] as! String, location: value["formattedAddress"] as! String, lat: value["lat"] as! Double, lng: value["lng"] as! Double, path: Constants.DB.pins.child(value["fromUID"] as! String), focus: value["focus"] as? String ?? "")
-                
-                Constants.DB.user.child(value["fromUID"] as! String).observeSingleEvent(of: .value, with: {snapshot in
-                    
-                    if let info = snapshot.value as? [String:Any]{
-                        if let username = info["username"] as? String{
+                if let uuid = value["fromUID"] as? String{
+                    if let data = pinData.toPin(uuid: uuid, value: value as NSDictionary){
+                        Constants.DB.user.child(value["fromUID"] as! String).observeSingleEvent(of: .value, with: {snapshot in
                             
-                            if let privateProfile = info["private"] as? Bool{
-                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
-                                    data.username = username
-                                    if !privateProfile{
-                                        gotPin(data)
+                            if let info = snapshot.value as? [String:Any]{
+                                if let username = info["username"] as? String{
+                                    
+                                    if let privateProfile = info["private"] as? Bool{
+                                        if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                            data.username = username
+                                            if !privateProfile{
+                                                gotPin(data)
+                                            }
+                                        }
+                                        if let uid = info["firebaseUserId"] as? String{
+                                            if uid == AuthApi.getFirebaseUid()!{
+                                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                                    data.username = username
+                                                    
+                                                    gotPin(data)
+                                                }
+                                            }
+                                        }
                                     }
-                                }
-                                if let uid = info["firebaseUserId"] as? String{
-                                    if uid == AuthApi.getFirebaseUid()!{
+                                    else if let uid = info["firebaseUserId"] as? String{
+                                        if uid == AuthApi.getFirebaseUid()!{
+                                            if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
+                                                data.username = username
+                                                
+                                                gotPin(data)
+                                            }
+                                        }
+                                    }
+                                    else{
                                         if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
                                             data.username = username
                                             
@@ -127,27 +141,10 @@ class pinData: NSObject, NSCoding{
                                     }
                                 }
                             }
-                            else if let uid = info["firebaseUserId"] as? String{
-                                if uid == AuthApi.getFirebaseUid()!{
-                                    if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
-                                        data.username = username
-                                        
-                                        gotPin(data)
-                                    }
-                                }
-                            }
-                            else{
-                                if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: data.dateTimeStamp), to: Date()).hour ?? 0 < 24{
-                                    data.username = username
-                                    
-                                    gotPin(data)
-                                }
-                            }
-                        }
+                            
+                        })
                     }
-                    
-                })
-                
+                }
             }
         })
         
