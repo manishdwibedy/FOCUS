@@ -203,6 +203,7 @@ struct AuthApi {
         defaults.set(nil, forKey: "facebookAccessToken")
         defaults.set(nil, forKey: "googleAccessToken")
         defaults.set(nil, forKey: "yelpAccessToken")
+        defaults.set(nil, forKey: "Login")
         
         DataCache.instance.cleanAll()
         

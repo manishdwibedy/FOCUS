@@ -257,9 +257,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             self.navigationView.messagesButton.badgeString = "9+"
         }
         
-        self.pins = (DataCache.instance.readObject(forKey: "pins") as? [pinData])!
-        self.followingPlaces = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
-        self.events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+        if let pins = (DataCache.instance.readObject(forKey: "pins") as? [pinData]){
+            self.pins = pins
+        }
+        if let following = (DataCache.instance.readObject(forKey: "following_places") as? [Place]){
+            self.followingPlaces = following
+        }
+        if let events = (DataCache.instance.readObject(forKey: "events") as? [Event]){
+            self.events = events
+        }
+        
 
         for (index, pin) in self.pins.enumerated(){
             let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))

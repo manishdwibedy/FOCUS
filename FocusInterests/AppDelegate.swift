@@ -140,17 +140,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDele
     func login() {
         let storyboard = UIStoryboard(name: Constants.otherIds.mainSB, bundle: nil)
         
-        var places = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
-        var pins = (DataCache.instance.readObject(forKey: "pins") as? [pinData])!
-        var followingPlaces = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
-        var events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+        var places = (DataCache.instance.readObject(forKey: "following_places") as? [Place])
+        var pins = (DataCache.instance.readObject(forKey: "pins") as? [pinData])
+        var followingPlaces = (DataCache.instance.readObject(forKey: "following_places") as? [Place])
+        var events = (DataCache.instance.readObject(forKey: "events") as? [Event])
 
-        if places.count + pins.count + followingPlaces.count + events.count > 0{
-            let storyboard = UIStoryboard(name: Constants.otherIds.mainSB, bundle: nil)
-            let loading = storyboard.instantiateViewController(withIdentifier: "loading")
-            self.window?.rootViewController = loading
-            self.window?.makeKeyAndVisible()
-            
+        if let places = places, let pins = pins, let following = followingPlaces, let events = events, places.count > 0{
             
             let tabContr = storyboard.instantiateInitialViewController() as! UITabBarController
             self.window?.rootViewController = tabContr
