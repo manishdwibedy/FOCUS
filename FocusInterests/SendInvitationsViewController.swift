@@ -212,7 +212,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
     @IBAction func createEvent(_ sender: Any) {
         Event.clearCache()
         let id = self.event?.saveToDB(ref: Constants.DB.event)
-        event.id = id
+        event?.id = id
         
         var events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
         events.append(self.event!)
