@@ -302,8 +302,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
 //            
 //        }
         
-        let event = Event(title: "", description: "", fullAddress: "", shortAddress: "", latitude: "", longitude: "", date: "", creator: "", category: "", privateEvent: false)
-        delegate?.showEventMarker(event: event)
+        delegate?.showEventMarker(event: event!)
         performSegue(withIdentifier: "unwindBackToExplorePage", sender: self)
     }
     
