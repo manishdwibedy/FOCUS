@@ -477,6 +477,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         Constants.DB.user_mapping.keepSynced(true)
         
+        
+        getUnreadCount(count: {number in
+            if number == 0{
+                self.navigationView.messagesButton.badgeString = ""
+            }
+            else if number < 10{
+                self.navigationView.messagesButton.badgeString = "\(number)"
+            }
+            else{
+                self.navigationView.messagesButton.badgeString = "9+"
+            }
+            
+        })
+        
         Share.getFacebookFriends(completion: {friends in
         
         })
