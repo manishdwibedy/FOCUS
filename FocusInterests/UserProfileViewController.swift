@@ -761,6 +761,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
 
     }
     
+    @IBAction func editUserProfile(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "UserProfile", bundle: nil)
+        let editProfileVC = storyBoard.instantiateViewController(withIdentifier: "EditProfile") as! EditProfileViewController
+        self.present(editProfileVC, animated: true, completion: nil)
+    }
     
     // MARK: - Navigation
 

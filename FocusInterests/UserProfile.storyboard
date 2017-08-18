@@ -116,7 +116,7 @@
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <segue destination="fzK-Fg-Tt6" kind="show" id="FLC-lH-ABo"/>
+                                                                    <action selector="editUserProfile:" destination="cU2-hP-1h7" eventType="touchUpInside" id="ji1-5e-eH8"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Niz-Af-QYR">
@@ -644,7 +644,7 @@
         <!--Edit Profile-->
         <scene sceneID="8nX-yx-J3m">
             <objects>
-                <viewController title="Edit Profile" id="fzK-Fg-Tt6" customClass="EditProfileViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfile" title="Edit Profile" id="fzK-Fg-Tt6" customClass="EditProfileViewController" customModule="FocusInterests" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="In7-19-0RN"/>
                         <viewControllerLayoutGuide type="bottom" id="uNu-9Q-QQ4"/>
@@ -668,7 +668,7 @@
                                         <barButtonItem key="leftBarButtonItem" image="BackArrow" id="fx3-it-pAZ">
                                             <color key="tintColor" red="0.85098039215686272" green="0.84705882352941175" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <segue destination="cU2-hP-1h7" kind="show" id="M2L-qO-6Lb"/>
+                                                <action selector="cancelAction:" destination="fzK-Fg-Tt6" id="Yl0-q2-G4S"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Rcn-6k-OwC">
