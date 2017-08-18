@@ -14,6 +14,7 @@ import FBSDKLoginKit
 import FirebaseAuth
 import Gallery
 import Lightbox
+import DataCache
 
 class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, GalleryControllerDelegate, gotLocationDelegate, LightboxControllerDismissalDelegate{
 
@@ -312,6 +313,20 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         
         let pin = pinData(UID: AuthApi.getFirebaseUid()!, dateTS: Date().timeIntervalSince1970, pin: caption, location: searchLocationTextField.text!, lat: (location.coordinate.latitude), lng: (location.coordinate.longitude), path: Constants.DB.pins.child(AuthApi.getFirebaseUid()!), focus: (addFocusDropdownButton.titleLabel?.text) ?? "Meet up")
         pin.username = AuthApi.getUserName()!
+        
+        if let pins = (DataCache.instance.readObject(forKey: "pins") as? [pinData]){
+            var originalPins = pins
+            for pin in pins{
+                if pin.username == AuthApi.getUserName()!{
+                    if let index = originalPins.index(of: pin){
+                        originalPins.remove(at: index)
+                    }
+                }
+            }
+            originalPins.append(pin)
+            DataCache.instance.write(object: originalPins as NSCoding, forKey: "pins")
+        }
+        
         delegate?.showPinMarker(pin: pin, show: true)
         
         
