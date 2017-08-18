@@ -572,7 +572,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         }
                 
                         if self.suggestedPlaces.count < 3{
-                            getFollowingPlace(uid: self.userID, gotPlaces: { placesUserFollows in
+                            getFollowingPlace(uid: self.userID, limit: 3, gotPlaces: { placesUserFollows in
                                 print(placesUserFollows)
                                 let user_interest_set = Set<Place>(self.placesIFollow)
                                 let other_user = Set<Place>(placesUserFollows)

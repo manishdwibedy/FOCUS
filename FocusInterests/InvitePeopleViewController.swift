@@ -214,7 +214,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         
         if isMeetup{
-            getFollowingPlace(uid: UID, gotPlaces: {places in
+            getFollowingPlace(uid: UID, limit: 20, gotPlaces: {places in
                 self.otherFollowingPlaces = places
                 
                 if self.followingPlaces != nil{

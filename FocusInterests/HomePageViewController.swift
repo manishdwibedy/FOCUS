@@ -71,14 +71,14 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
         let search_people = self.viewControllers![1] as! SearchPeopleViewController
         
         if let token = AuthApi.getYelpToken(){
-            getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
+            getFollowingPlace(uid: AuthApi.getFirebaseUid()!, limit: 20, gotPlaces: {places in
                 search_people.placesIFollow = places
             })
         }
         else{
             getYelpToken(completion: {(token) in
                 AuthApi.set(yelpAccessToken: token)
-                getFollowingPlace(uid: AuthApi.getFirebaseUid()!, gotPlaces: {places in
+                getFollowingPlace(uid: AuthApi.getFirebaseUid()!, limit: 20, gotPlaces: {places in
                     search_people.placesIFollow = places
                 })
             })

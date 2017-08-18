@@ -1724,7 +1724,7 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
     })
 }
    
-func getFollowingPlace(uid: String, gotPlaces: @escaping (_ place: [Place]) -> Void){
+   func getFollowingPlace(uid: String, limit: Int, gotPlaces: @escaping (_ place: [Place]) -> Void){
     var places = [Place]()
     var placeCount = 0
     
@@ -1739,7 +1739,7 @@ func getFollowingPlace(uid: String, gotPlaces: @escaping (_ place: [Place]) -> V
                 getYelpByID(ID: place_id as! String, completion: {place in
                     
                     getPlaceHours(id: place.id, gotHour: {hours, open in
-                        if !places.contains(place){
+                        if !places.contains(place), place.id.characters.count > 0{
                             place.hours = hours
                             place.set_is_open(is_open: open)
                             places.append(place)
@@ -1747,7 +1747,7 @@ func getFollowingPlace(uid: String, gotPlaces: @escaping (_ place: [Place]) -> V
                             placeCount += 1
                         }
                         
-                        if places.count == placeCount{
+                        if places.count == limit{
                             print(uid)
                             gotPlaces(places)
                         }
