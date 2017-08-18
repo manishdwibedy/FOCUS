@@ -704,6 +704,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             if place_cell.categories.count > 0{
                 addGreenDot(label: cell.categoryLabel, content: getInterest(yelpCategory: place_cell.categories[0].alias))
             }
+            else{
+                addGreenDot(label: cell.categoryLabel, content: "Community")
+            }
         
             
             cell.checkForFollow()
