@@ -1301,13 +1301,14 @@ func dropfromTop(view: UIView){
 
 func getUserInterests() -> String{
     if let interests = AuthApi.getInterests(){
+        var unique = Set<String>()
         let selected = interests.components(separatedBy: ",")
         
-        var final_interest = [String]()
         for interest in selected{
-            final_interest.append(interest.components(separatedBy: "-")[0])
+            unique.insert(interest.components(separatedBy: "-")[0])
         }
-        return final_interest.joined(separator: ",")
+        
+        return unique.joined(separator: ",")
     }
     return ""
 }
