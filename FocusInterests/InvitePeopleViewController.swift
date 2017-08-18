@@ -193,9 +193,15 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
         }
         
-        self.places = (DataCache.instance.readObject(forKey: "places") as? [Place])!
-        self.followingPlaces = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
-        self.events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+        if let places = (DataCache.instance.readObject(forKey: "places") as? [pinData]){
+            self.places = places
+        }
+        if let following = (DataCache.instance.readObject(forKey: "following_places") as? [Place]){
+            self.followingPlaces = following
+        }
+        if let events = (DataCache.instance.readObject(forKey: "events") as? [Event]){
+            self.events = events
+        }
         
         for place in self.places{
             self.placeMapping[place.id] = place
