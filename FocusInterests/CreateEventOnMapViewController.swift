@@ -140,6 +140,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         
         if AuthApi.isNewToPage(index: 5){
             let popTip = PopTip()
+            popTip.bubbleColor = Constants.color.green
             popTip.show(text: "Private to your followers", direction: .left, maxWidth: 500, in: lockButton, from: lockButton.frame, duration: 3)
             popTip.entranceAnimation = .scale;
             popTip.actionAnimation = .bounce(20)

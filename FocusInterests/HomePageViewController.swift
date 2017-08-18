@@ -169,6 +169,7 @@ class HomePageViewController: UITabBarController, UITabBarControllerDelegate,UIP
                 default :
                     break
                 }
+                popTip.bubbleColor = Constants.color.green
                 popTip.show(text: text, direction: .up, maxWidth: CGFloat(width), in: view, from: view.frame, duration: 3)
             }
             AuthApi.setIsNewToPage(index: item.tag)
