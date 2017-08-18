@@ -47,6 +47,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followingCount: UIButton!
     
+    @IBOutlet weak var fullNameDescriptionTextStack: UIStackView!
     // border between user info and pin stack
     @IBOutlet weak var secondBorderHeight: NSLayoutConstraint!
     
@@ -56,15 +57,18 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var createPinView: UIView!
     @IBOutlet weak var pinView: UIView!
     @IBOutlet weak var pinImage: UIImageView!
+    @IBOutlet weak var pinAddressLabel: UILabel!
     @IBOutlet weak var pinCategoryLabel: UILabel!
-    @IBOutlet weak var pinLikesLabel: UILabel!
-    @IBOutlet weak var pinAddress2Label: UILabel!
+    @IBOutlet weak var pinDescriptionLabel: UILabel!
     @IBOutlet weak var updatePinButtonView: UIView!
     @IBOutlet weak var updatePinButton: UIButton!
     @IBOutlet weak var createPinButton: UIButton!
     @IBOutlet weak var pinDistanceLabel: UILabel!
     @IBOutlet weak var pinCount: UIButton!
     var pinInfo: pinData? = nil
+    @IBOutlet weak var pinNameLabel: UILabel!
+    @IBOutlet weak var pinTimeLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
     
     // user interests
     var hiddenInterests = [UIView]()
@@ -217,6 +221,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         getEventSuggestions()
         getPin()
         
+        
         self.navigationItem.title = ""
         
         self.createEventButton.roundCorners(radius: 10.0)
@@ -253,17 +258,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     }else{
                         addGreenDot(label: self.pinCategoryLabel, content: "N.A.")
                     }
-                    self.pinAddress2Label.text = value["pin"] as? String
+                    self.pinDescriptionLabel.text = value["pin"] as? String
                     
-                    if let likes = value["like"] as? [String:Any]{
-                        let count = likes["num"] as? Int
-                        
-                        var label = "like"
-                        if count! > 1{
-                            label = "likes"
-                        }
-                        self.pinLikesLabel.text = "\(count!) \(label)"
-                    }
                     
                     if let images = value["images"] as? [String:Any]{
                         self.hasPinImage = true
@@ -306,11 +302,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     self.createPinAndUpdatePinStack.removeArrangedSubview(self.createPinView)
                     self.createPinView.removeFromSuperview()
                 }
-                
-                
             }else{
-                
-                
                 self.createPinAndUpdatePinStack.removeArrangedSubview(self.pinView)
                 self.createPinAndUpdatePinStack.removeArrangedSubview(self.updatePinButtonView)
                 self.pinView.isHidden = true
@@ -319,7 +311,12 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             }
         })
         self.createPinAndUpdatePinStack.translatesAutoresizingMaskIntoConstraints = true
-        self.pinAddress2Label.sizeToFit()
+        self.createPinAndUpdatePinStack.frame.size.width = self.view.frame.width
+        self.pinDescriptionLabel.sizeToFit()
+        
+        self.likeButton.setImage(#imageLiteral(resourceName: "Like"), for: .normal)
+        self.likeButton.setImage(#imageLiteral(resourceName: "Liked"), for: .selected)
+        
         let pinDetail = UITapGestureRecognizer(target: self, action: #selector(self.showPin))
         pinView.isUserInteractionEnabled = true
         pinView.addGestureRecognizer(pinDetail)
@@ -430,7 +427,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 let fullname = dictionnary["fullname"] as? String ?? ""
                 
                 self.fullNameLabel.text = fullname
+                self.fullNameDescriptionTextStack.addArrangedSubview(self.descriptionText)
                 self.descriptionText.text = description_str
+                
                 
                 self.navBarItem.title = username_str
                 
@@ -615,17 +614,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             let value = snapshot.value as? NSDictionary
             if let value = value
             {
-                self.pinAddress2Label.text = value["pin"] as? String
-                if let likes = value["like"] as? NSDictionary{
-                    if let likeCount = likes["num"] as? Int{
-                        var likeLabel = "like"
-                        if likeCount > 1{
-                            likeLabel.append("s")
-                        }
-                        self.pinLikesLabel.text = "\(likeCount) \(likeLabel)"
-                    }
-                    
-                }
+                self.pinDescriptionLabel.text = value["pin"] as? String
+                
                 if let images = value["images"] as? [String:Any]{
                     self.hasPinImage = true
                 }
@@ -767,8 +757,25 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         self.present(editProfileVC, animated: true, completion: nil)
     }
     
+    @IBAction func commentButtonPressed(_ sender: Any) {
+    
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        self.likeButton.isSelected = !self.likeButton.isSelected
+        
+        if self.likeButton.isSelected{
+            self.likeButton.isSelected = false
+        }else{
+            self.likeButton.isSelected = true
+        }
+    }
+    
+    @IBAction func globeButtonPressed(_ sender: Any) {
+        
+    }
+    
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
