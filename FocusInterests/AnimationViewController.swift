@@ -517,8 +517,7 @@ class AnimationViewController: UIViewController {
                 }
                 place?.set_is_open(is_open: json["hours"][0]["is_open_now"].boolValue)
             }
-        }
-        
+        }   
     }
     
     

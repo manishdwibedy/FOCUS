@@ -195,6 +195,8 @@ struct AuthApi {
     }
     
     static func setDefaultsForLogout() {
+        defaults.set(nil, forKey: "userImage")
+        defaults.set(nil, forKey: "interests")
         defaults.set(nil, forKey: "userEmail")
         defaults.set(nil, forKey: "facebookAccessToken")
         defaults.set(nil, forKey: "googleAccessToken")
