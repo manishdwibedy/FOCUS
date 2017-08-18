@@ -1173,15 +1173,16 @@ extension MapViewController{
                 popUpScreen.profileImage.setIndicatorStyle(.gray)
             }
             else{
-                if let image = UIImage(data:data!,scale:1.0){
-                    popUpScreen.profileImage.image = image
-                    popUpScreen.profileImage.setShowActivityIndicator(true)
-                    popUpScreen.profileImage.setIndicatorStyle(.gray)
+                if let data = data{
+                    if let image = UIImage(data:data,scale:1.0){
+                        popUpScreen.profileImage.image = image
+                    }
+                    else{
+                        popUpScreen.profileImage.image = #imageLiteral(resourceName: "placeholder_event")
+                    }
                 }
                 else{
                     popUpScreen.profileImage.image = #imageLiteral(resourceName: "placeholder_event")
-                    popUpScreen.profileImage.setShowActivityIndicator(true)
-                    popUpScreen.profileImage.setIndicatorStyle(.gray)
                 }
                 
             }
@@ -1368,7 +1369,7 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
         showPlace = place
     }
     
-    func showEventMarker(event: Event, data: Data){
+    func showEventMarker(event: Event, data: Data?){
         willShowEvent = true
         showEvent = event
         
