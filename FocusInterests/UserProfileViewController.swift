@@ -55,7 +55,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var createPinMainView: UIView!
     @IBOutlet weak var createPinAndUpdatePinStack: UIStackView!
     @IBOutlet weak var createPinView: UIView!
-    @IBOutlet weak var pinView: UIView!
+    @IBOutlet weak var pinView: UIStackView!
     @IBOutlet weak var pinImage: UIImageView!
     @IBOutlet weak var pinAddressLabel: UILabel!
     @IBOutlet weak var pinCategoryLabel: UILabel!
@@ -278,7 +278,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                     (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
                                     
                                     if image != nil && finished{
-                                        self.createPinAndUpdatePinStack.removeArrangedSubview(self.updatePinButton)
+                                        
                                         self.pinImage.image = image
                                         
                                         let pinImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.createPinAndUpdatePinStack.frame.width, height: 345))
@@ -288,8 +288,8 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                         pinImageView.center = CGPoint(x: recentPostImageView.bounds.size.width  / 2, y: recentPostImageView.bounds.size.height / 2)
                                         
                                         recentPostImageView.addSubview(pinImageView)
-                                        self.createPinAndUpdatePinStack.insertArrangedSubview(recentPostImageView, at: 2)
-                                        self.createPinAndUpdatePinStack.insertArrangedSubview(self.updatePinButtonView, at: 3)
+                                        self.pinView.insertArrangedSubview(recentPostImageView, at: 1)
+                                        
                                         self.createPinAndUpdatePinStack.frame.size.height += 335
                                         print("images \(self.pinImage)")
                                     }
