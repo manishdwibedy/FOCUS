@@ -619,7 +619,11 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                 if let images = value["images"] as? [String:Any]{
                     self.hasPinImage = true
                 }
+                self.pinAddressLabel.text = value["formattedAddress"] as? String
+                self.pinNameLabel.text = AuthApi.getUserName()!
                 
+                let pinDate = Date(timeIntervalSince1970: (value["time"] as? Double)!)
+                self.pinTimeLabel.text = DateFormatter().timeSince(from: pinDate, numericDates: true, shortVersion: true)
                 let pin_location = CLLocation(latitude: value["lat"] as! Double, longitude: value["lng"] as! Double)
                 self.pinDistanceLabel.text = getDistance(fromLocation: pin_location, toLocation: AuthApi.getLocation()!)
             }
