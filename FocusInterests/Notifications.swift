@@ -30,7 +30,7 @@ class FocusNotification: NSObject, NSCoding{
     ///   - lhs: A value to compare.
     ///   - rhs: Another value to compare.
     static func ==(lhs: FocusNotification, rhs: FocusNotification) -> Bool {
-        return lhs.type == rhs.type && lhs.item?.id == rhs.item?.id
+        return lhs.type == rhs.type && lhs.item?.id == rhs.item?.id && lhs.time == rhs.time
         
     }
 

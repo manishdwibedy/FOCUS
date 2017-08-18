@@ -1181,10 +1181,12 @@ extension MapViewController{
             
         }
         else{
-            if let url = URL(string: event.image_url!){
-                popUpScreen.profileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_event"))
-                popUpScreen.profileImage.setShowActivityIndicator(true)
-                popUpScreen.profileImage.setIndicatorStyle(.gray)
+            if let image = event.image_url{
+                if let url = URL(string: image){
+                    popUpScreen.profileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_event"))
+                    popUpScreen.profileImage.setShowActivityIndicator(true)
+                    popUpScreen.profileImage.setIndicatorStyle(.gray)
+                }
             }
             else{
                 if let data = data{
