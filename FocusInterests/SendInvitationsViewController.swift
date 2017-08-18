@@ -214,17 +214,17 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         let id = self.event?.saveToDB(ref: Constants.DB.event)
         
         var events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
-        events.append(event!)
+        events.append(self.event!)
         DataCache.instance.write(object: events as NSCoding, forKey: "events")
         
         
         Answers.logCustomEvent(withName: "Create Event",
                                customAttributes: [
-                                "FOCUS": event?.category!
+                                "FOCUS": self.event?.category!
             ])
         
 //        nil is in line below
-        Constants.DB.event_locations!.setLocation(CLLocation(latitude: Double(event!.latitude!)!, longitude: Double(event!.longitude!)!), forKey: id) { (error) in
+        Constants.DB.event_locations!.setLocation(CLLocation(latitude: Double(self.event!.latitude!)!, longitude: Double(self.event!.longitude!)!), forKey: id) { (error) in
             if (error != nil) {
                 debugPrint("An error occured: \(String(describing: error))")
             } else {
@@ -232,7 +232,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             }
         }
     
-        for interest in event!.category!.components(separatedBy: ";"){
+        for interest in self.event!.category!.components(separatedBy: ";"){
             Constants.DB.event_interests.child(interest).childByAutoId().setValue(["event-id": id])
         }
         
@@ -256,7 +256,7 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
         
         let time = NSDate().timeIntervalSince1970
         for UID in self.selectedUsers{
-            var name = (event?.title)!
+            var name = (self.event?.title)!
             Constants.DB.user.child(AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { snapshot in
                 let user = snapshot.value as? [String : Any] ?? [:]
                 
