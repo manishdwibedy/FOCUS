@@ -350,9 +350,10 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                     pinImageView.center = CGPoint(x: recentPostImageView.bounds.size.width  / 2, y: recentPostImageView.bounds.size.height / 2)
                                     
                                     recentPostImageView.addSubview(pinImageView)
-                                    recentPostCell.mainStack.insertArrangedSubview(recentPostImageView, at: 1)
-                                    
-                                    self.recentPostTableViewHeight.constant += 345
+                                    recentPostCell.feedOneStackView.insertArrangedSubview(recentPostImageView, at: 1)
+                                    recentPostCell.frame.size.width = self.view.frame.width
+                                    recentPostCell.frame.size.height += 335
+                                    self.recentPostTableViewHeight.constant += 335
                                     print("images \(self.pinImage)")
                                 }
                             })
@@ -368,7 +369,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
 //        pinView.isUserInteractionEnabled = true
 //        pinView.addGestureRecognizer(pinDetail)
         self.eventView.bounds.size.height += (self.eventsCollectionView.contentSize.height)
-        
         let infoButton = UIButton(type: .infoLight)
         
         // You will need to configure the target action for the button itself, not the bar button itemr

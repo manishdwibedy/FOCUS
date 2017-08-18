@@ -710,7 +710,7 @@
                         <outlet property="pinImage" destination="hH3-Cy-m4h" id="0l3-67-1kU"/>
                         <outlet property="pinNameLabel" destination="raI-uG-XL3" id="T7F-F9-20W"/>
                         <outlet property="pinTimeLabel" destination="0Fa-7x-jYr" id="rQj-kV-l0J"/>
-                        <outlet property="pinView" destination="yg1-9n-7gr" id="5ht-j6-t3g"/>
+                        <outlet property="pinView" destination="yg1-9n-7gr" id="UhH-mV-vui"/>
                         <outlet property="settingButton" destination="Niz-Af-QYR" id="d6m-ZH-fN6"/>
                         <outlet property="updatePinButton" destination="H4s-5t-g9h" id="fWD-De-0vz"/>
                         <outlet property="updatePinButtonView" destination="qxb-gy-PDk" id="UGh-Zh-iqu"/>
