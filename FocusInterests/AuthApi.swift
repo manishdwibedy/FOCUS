@@ -206,6 +206,9 @@ struct AuthApi {
         
         DataCache.instance.cleanAll()
         
+        let application = UIApplication.shared
+        application.applicationIconBadgeNumber = 0
+        
     }
     
     static func setEmailConfirmationSent() {
