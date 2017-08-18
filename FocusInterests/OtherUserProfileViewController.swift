@@ -115,7 +115,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var suggestedEvents = [Event]()
     var suggestedPlaces = [Place]()
     
-    var pinImage: UIImage? = nil
+    var pinImage: UIImage?
     
     var ticketMasterDF = DateFormatter()
     var eventDF = DateFormatter()
@@ -310,8 +310,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                     }
                     
         
-                    if let images = value["images"] as? NSDictionary
-                    {
+                    if let images = value["images"] as? NSDictionary{
+                        print("images \(images)")
                         self.hasPinImage = true
                         var firstVal = ""
                         for (key,_) in images
@@ -327,7 +327,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                 print(error?.localizedDescription ?? "")
                                 return
                             }
-                            
+                            print("images \(url)")
                             SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
                                 (receivedSize :Int, ExpectedSize :Int) in
                                 
@@ -336,6 +336,24 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                 
                                 if image != nil && finished{
                                     self.pinImage = image
+                                    
+                                    guard let recentPostCell = self.recentPostTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? FeedOneTableViewCell else{
+                                        print("no recent post ")
+                                        return
+                                    }
+                                    
+                                    
+                                    let pinImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: recentPostCell.feedOneStackView.frame.width, height: 345))
+                                    let recentPostImageView = UIView(frame: CGRect(x: 0, y: 0, width: recentPostCell.feedOneStackView.frame.width, height: 355))
+                                    
+                                    pinImageView.image = image
+                                    pinImageView.center = CGPoint(x: recentPostImageView.bounds.size.width  / 2, y: recentPostImageView.bounds.size.height / 2)
+                                    
+                                    recentPostImageView.addSubview(pinImageView)
+                                    recentPostCell.mainStack.insertArrangedSubview(recentPostImageView, at: 1)
+                                    
+                                    self.recentPostTableViewHeight.constant += 345
+                                    print("images \(self.pinImage)")
                                 }
                             })
                         })
@@ -385,6 +403,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.displayUserData()
+        
+        print("has pin image \(self.hasPinImage)")
     }
     
     //    MARK: COLLECTIONVIEW DELEGATE METHODS
@@ -834,12 +854,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
             })
             self.showInvitePopup = false
         }
-        
-//        self.displayUserData()
-        
-//        self.placesTableViewHeight.constant = self.placesTableView.contentSize.height
-//        self.eventsTableViewHeight.constant = self.eventsTableView.contentSize.height
-        self.recentPostTableViewHeight.constant = self.recentPostTableView.contentSize.height
     }
     
     override func didReceiveMemoryWarning() {

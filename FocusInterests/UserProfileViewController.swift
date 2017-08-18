@@ -51,6 +51,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var secondBorderHeight: NSLayoutConstraint!
     
     // User Pin Stack
+    @IBOutlet weak var createPinMainView: UIView!
     @IBOutlet weak var createPinAndUpdatePinStack: UIStackView!
     @IBOutlet weak var createPinView: UIView!
     @IBOutlet weak var pinView: UIView!
@@ -58,6 +59,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var pinCategoryLabel: UILabel!
     @IBOutlet weak var pinLikesLabel: UILabel!
     @IBOutlet weak var pinAddress2Label: UILabel!
+    @IBOutlet weak var updatePinButtonView: UIView!
     @IBOutlet weak var updatePinButton: UIButton!
     @IBOutlet weak var createPinButton: UIButton!
     @IBOutlet weak var pinDistanceLabel: UILabel!
@@ -240,9 +242,9 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     if value["images"] != nil{
                         
                     }
-                    
-                    self.createPinAndUpdatePinStack.addArrangedSubview(self.pinView)
                     self.createPinAndUpdatePinStack.removeArrangedSubview(self.createPinView)
+                    self.createPinAndUpdatePinStack.insertArrangedSubview(self.pinView, at: 1)
+                    self.createPinAndUpdatePinStack.insertArrangedSubview(self.updatePinButtonView, at: 2)
                     self.createPinView.removeFromSuperview()
                     self.createPinButton.isHidden = true
 
@@ -280,10 +282,22 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                     (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
                                     
                                     if image != nil && finished{
+                                        self.createPinAndUpdatePinStack.removeArrangedSubview(self.updatePinButton)
                                         self.pinImage.image = image
+                                        
+                                        let pinImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.createPinAndUpdatePinStack.frame.width, height: 345))
+                                        let recentPostImageView = UIView(frame: CGRect(x: 0, y: 0, width: self.createPinAndUpdatePinStack.frame.width, height: 355))
+                                        
+                                        pinImageView.image = image
+                                        pinImageView.center = CGPoint(x: recentPostImageView.bounds.size.width  / 2, y: recentPostImageView.bounds.size.height / 2)
+                                        
+                                        recentPostImageView.addSubview(pinImageView)
+                                        self.createPinAndUpdatePinStack.insertArrangedSubview(recentPostImageView, at: 2)
+                                        self.createPinAndUpdatePinStack.insertArrangedSubview(self.updatePinButtonView, at: 3)
+                                        self.createPinAndUpdatePinStack.frame.size.height += 335
+                                        print("images \(self.pinImage)")
                                     }
                                 })
-                                
                             }
                         }
                     }
@@ -293,16 +307,19 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                     self.createPinView.removeFromSuperview()
                 }
                 
-                self.secondBorderHeight.constant = 5
+                
             }else{
                 
-                self.secondBorderHeight.constant = 20
+                
                 self.createPinAndUpdatePinStack.removeArrangedSubview(self.pinView)
-                self.pinView.removeFromSuperview()
+                self.createPinAndUpdatePinStack.removeArrangedSubview(self.updatePinButtonView)
+                self.pinView.isHidden = true
+                self.updatePinButtonView.isHidden = true
                 self.createPinButton.isHidden = false
             }
         })
-        
+        self.createPinAndUpdatePinStack.translatesAutoresizingMaskIntoConstraints = true
+        self.pinAddress2Label.sizeToFit()
         let pinDetail = UITapGestureRecognizer(target: self, action: #selector(self.showPin))
         pinView.isUserInteractionEnabled = true
         pinView.addGestureRecognizer(pinDetail)
@@ -310,7 +327,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.userImage.image = #imageLiteral(resourceName: "placeholder_people")
 //        TODO: line 336 is returning nil.  You can test when signing into the focusdummy@gmail.com account
         if let url = URL(string: AuthApi.getUserImage()!){
