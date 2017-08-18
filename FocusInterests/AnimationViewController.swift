@@ -383,7 +383,7 @@ class AnimationViewController: UIViewController {
                     let place_id = (place as? [String:Any])?["placeID"]
                     getYelpByID(ID: place_id as! String, completion: {place in
                         
-                        if !self.followingPlaces.contains(place){
+                        if !self.followingPlaces.contains(place), place.id.characters.count > 0{
                             self.followingPlaces.append(place)
                         }
                     })
