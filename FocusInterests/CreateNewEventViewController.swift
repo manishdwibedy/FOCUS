@@ -655,10 +655,16 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
         if let startTimeVal = self.startTime{
             if let startDate = self.startDate{
                 var current = Date()
-                let calendar = NSCalendar.autoupdatingCurrent
-                current = calendar.date(byAdding:.hour, value: -9, to: current)!
-
-                if startDate < current{
+                
+                let gregorianCalendar = Calendar(identifier: .gregorian)
+                var dateSelected = gregorianCalendar.dateComponents([.year, .month, .day], from: startDate)
+                var timeSelected = gregorianCalendar.dateComponents([.hour, .minute], from: startTimeVal)
+                
+                dateSelected.hour = timeSelected.hour
+                dateSelected.minute = timeSelected.minute
+                let date = gregorianCalendar.date(from: dateSelected)!
+           
+                if date < current{
                     showError(message: "Please enter a valid time")
                     return
                 }
