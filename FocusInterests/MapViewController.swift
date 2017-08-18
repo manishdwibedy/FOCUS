@@ -1299,8 +1299,9 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
                 
             }
         }
-//        self.photoInputView.isHidden = true
-//        self.mapView.sendSubview(toBack: self.photoInputView)
+        
+        self.photoInputView.isHidden = true
+        self.photoInputView.removeFromSuperview()
         
         
         if self.friends.count > 0{
