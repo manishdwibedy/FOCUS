@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import DataCache
 
 struct AuthApi {
     
@@ -195,12 +196,16 @@ struct AuthApi {
     }
     
     static func setDefaultsForLogout() {
+        defaults.set(nil, forKey: "username")
         defaults.set(nil, forKey: "userImage")
         defaults.set(nil, forKey: "interests")
         defaults.set(nil, forKey: "userEmail")
         defaults.set(nil, forKey: "facebookAccessToken")
         defaults.set(nil, forKey: "googleAccessToken")
         defaults.set(nil, forKey: "yelpAccessToken")
+        
+        DataCache.instance.cleanAll()
+        
     }
     
     static func setEmailConfirmationSent() {

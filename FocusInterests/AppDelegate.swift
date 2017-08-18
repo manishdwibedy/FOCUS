@@ -19,6 +19,7 @@ import FirebaseDatabase
 import Google
 import UserNotifications
 import Crashlytics
+import DataCache
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, LoginDelegate, LogoutDelegate, GIDSignInDelegate {
