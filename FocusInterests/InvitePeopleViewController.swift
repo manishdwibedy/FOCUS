@@ -193,6 +193,18 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
         }
         
+        self.places = (DataCache.instance.readObject(forKey: "places") as? [Place])!
+        self.followingPlaces = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
+        self.events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
+        
+        for place in self.places{
+            self.placeMapping[place.id] = place
+            getPlaceHours(id: place.id)
+        }
+        for place in self.followingPlaces{
+            self.placeMapping[place.id] = place
+            getPlaceHours(id: place.id)
+        }
         
         
         if isMeetup{
@@ -539,10 +551,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.places = (DataCache.instance.readObject(forKey: "places") as? [Place])!
-        self.followingPlaces = (DataCache.instance.readObject(forKey: "following_places") as? [Place])!
-        self.events = (DataCache.instance.readObject(forKey: "events") as? [Event])!
-
         self.updatePlaces()
         
         if clearSearch{
@@ -1128,6 +1136,7 @@ extension InvitePeopleViewController: GMSAutocompleteViewControllerDelegate {
                     place?.setHours(hours: hours)
                 }
                 place?.set_is_open(is_open: json["hours"][0]["is_open_now"].boolValue)
+                self.tableView.reloadData()
             }
         }
     }
