@@ -738,14 +738,20 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.name.text = event.title
             cell.address.text = event.fullAddress?.replacingOccurrences(of: ";;", with: "\n")
             
-            if let category = event.category{
-                if category.contains(","){
-                    addGreenDot(label: cell.interest, content: category.components(separatedBy: ",")[0])
-                }
-                else{
-                    addGreenDot(label: cell.interest, content: category)
+            if (event.creator?.characters.count)! > 0{
+                if let category = event.category{
+                    if category.contains(","){
+                        addGreenDot(label: cell.interest, content: category.components(separatedBy: ",")[0])
+                    }
+                    else{
+                        addGreenDot(label: cell.interest, content: category)
+                    }
                 }
             }
+            else{
+                addGreenDot(label: cell.interest, content: getInterest(ticketMasterCategory: event.category!))
+            }
+            
             
             cell.isMeetup = self.isMeetup
             cell.inviteFromOtherUserProfile = self.inviteFromOtherUserProfile
