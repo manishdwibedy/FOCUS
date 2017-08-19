@@ -440,11 +440,16 @@ func getAllActivity(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, go
                                     let commentData = data as? [String:Any]
                                     let commentInfo = ItemOfInterest(itemName: commentData?["comment"] as? String, imageURL: place.imageURL, type: "comment")
                                     commentInfo.id = pinID
+                                    
+                                    var pinCommented = Date()
+                                    if let time = likeData["time"] as? Double{
+                                        pinCommented = Date(timeIntervalSince1970: pin["time"] as! Double)
+                                    }
                                     Constants.DB.user.child((commentData?["fromUID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
                                         
                                         if let data = snapshot.value as? [String:Any]{
                                             let user = NotificationUser(username: data["username"] as? String, uuid: data["firebaseUserId"] as? String, imageURL: nil)
-                                            let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: time)
+                                            let pinFeed = FocusNotification(type: NotificationType.Comment, sender: user, item: commentInfo, time: pinCommented)
                                             commentInfo.data = [
                                                 "pin": pin,
                                                 "key": pinID
@@ -479,11 +484,16 @@ func getAllActivity(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, go
                                     
                                     for (_, data) in likeData{
                                         if let likeData = data as? [String:Any]{
+                                            var pinLiked = Date()
+                                            if let time = likeData["time"] as? Double{
+                                                pinLiked = Date(timeIntervalSince1970: pin["time"] as! Double)
+                                            }
+                                            
                                             Constants.DB.user.child((likeData["UID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
                                                 
                                                 let data = snapshot.value as? [String:Any]
                                                 let user = NotificationUser(username: data?["username"] as? String, uuid: data?["firebaseUserId"] as? String, imageURL: nil)
-                                                let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: time)
+                                                let pinFeed = FocusNotification(type: NotificationType.Like, sender: user, item: place, time: pinLiked)
                                                 place.data = [
                                                     "pin": pin,
                                                     "key": pinID
