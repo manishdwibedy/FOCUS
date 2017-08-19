@@ -1739,30 +1739,30 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
                 Constants.DB.event.child((event_id as? String)!).observeSingleEvent(of: .value, with: {snapshot in
                     let info = snapshot.value as? [String : Any]
                     
-                    let event = Event.toEvent(info: info!)
-                    
-                    if let end = timeDF.date(from: (event?.endTime)!){
-                        let start = DF.date(from: (event?.date!)!)!
-                        if start < Date() && end > Date() && !(event?.privateEvent)!{
-                            
-                        event?.id = event_id as! String
-                        
-                        followingAttendingEvents.append(event!)
-                            
+                    if let event = Event.toEvent(info: info!){
+                        if let end = timeDF.date(from: (event.endTime)){
+                            let start = DF.date(from: (event.date!))!
+                            if start < Date() && end > Date() && !(event.privateEvent){
+                                
+                                event.id = event_id as! String
+                                
+                                followingAttendingEvents.append(event)
+                                
+                            }
                         }
-                    }
-                        
-                    else if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
-                        if Calendar.current.dateComponents([.day], from: DF.date(from: (event?.date!)!)!, to: Date()).day ?? 0 <= 7{
                             
-                            event?.id = event_id as! String
-                            
-                            followingAttendingEvents.append(event!)
-                            
+                        else if DF.date(from: (event.date!))! > Date() && !(event.privateEvent){
+                            if Calendar.current.dateComponents([.day], from: DF.date(from: (event.date!))!, to: Date()).day ?? 0 <= 7{
+                                
+                                event.id = event_id as! String
+                                
+                                followingAttendingEvents.append(event)
+                                
+                            }
                         }
-                    }
-                    if eventCount == followingAttendingEvents.count{
-                        gotEvents(followingAttendingEvents)
+                        if eventCount == followingAttendingEvents.count{
+                            gotEvents(followingAttendingEvents)
+                        }
                     }
                 })
             }
