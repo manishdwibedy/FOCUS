@@ -105,23 +105,31 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
             else if notif.item?.type == "event"{
                 let eventID = notif.item?.id
                 
-                let reference = Constants.storage.event.child("\(eventID!).jpg")
-                print(reference.fullPath)
-                let placeholderImage = UIImage(named: "empty_event")
-                
-                self.locationImage.image = placeholderImage
-                reference.downloadURL(completion: { (url, error) in
-                    
-                    if error != nil {
-                        print(error?.localizedDescription ?? "")
-                        return
+                if let image = notif.item?.data["image"] as? String{
+                    if let url = URL(string: image){
+                        self.locationImage.sd_setImage(with: url, placeholderImage: placeholderImage)
                     }
+                }
+                else{
+                    let reference = Constants.storage.event.child("\(eventID!).jpg")
+                    print(reference.fullPath)
+                    let placeholderImage = UIImage(named: "empty_event")
                     
-                    self.locationImage.sd_setImage(with: url, placeholderImage: placeholderImage)
-                    self.locationImage.setShowActivityIndicator(true)
-                    self.locationImage.setIndicatorStyle(.gray)
-                    
-                })
+                    self.locationImage.image = placeholderImage
+                    reference.downloadURL(completion: { (url, error) in
+                        
+                        if error != nil {
+                            print(error?.localizedDescription ?? "")
+                            return
+                        }
+                        
+                        self.locationImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                        self.locationImage.setShowActivityIndicator(true)
+                        self.locationImage.setIndicatorStyle(.gray)
+                        
+                    })
+                }
+                
 
             }
         }

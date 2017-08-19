@@ -85,7 +85,7 @@ class FirebaseDownstream {
                                                     item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
                                                     item.data = [
                                                         "invite": inValue[inKey] as? [String:Any],
-                                                        "imageURL": ""
+                                                        "image": inviteInfo["image"] as! String
                                                     ]
                                                     let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: (inviteInfo["time"] as? Double)!) as Date)
                                                     notification.notif_type = .invite
