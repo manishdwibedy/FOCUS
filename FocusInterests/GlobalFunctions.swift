@@ -1633,21 +1633,22 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
                         }
                         
                     }
-                        
-                    else if DF.date(from: (event?.date!)!)! > Date(){
-                        if let isPrivate = event?.privateEvent{
-                            if !isPrivate && Calendar.current.dateComponents([.day], from: DF.date(from: (event?.date!)!)!, to: Date()).day ?? 0 <= 7{
+                    else{
+                        if let date = DF.date(from: (event?.date!)!){
+                            if let isPrivate = event?.privateEvent{
+                                if !isPrivate && Calendar.current.dateComponents([.day], from: DF.date(from: (event?.date!)!)!, to: Date()).day ?? 0 <= 7{
+                                    event?.id = event_id as! String
+                                    
+                                    events.append(event!)
+                                    eventCount += 1
+                                }
+                            }
+                            else{
                                 event?.id = event_id as! String
                                 
                                 events.append(event!)
                                 eventCount += 1
                             }
-                        }
-                        else{
-                            event?.id = event_id as! String
-                            
-                            events.append(event!)
-                            eventCount += 1
                         }
                     }
                     
