@@ -293,7 +293,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
         var post = "\(userStatusTextView.text!) (\(addFocusButton.titleLabel!.text))\n\(self.formmatedAddress)"
         if isTwitter == true
         {
-            Share.postToTwitter(withStatus: post)
+            Share.postToTwitter(withStatus: post, lat: Double(self.location.coordinate.latitude), long: Double(self.location.coordinate.longitude))
         }
         if isFacebook == true
         {

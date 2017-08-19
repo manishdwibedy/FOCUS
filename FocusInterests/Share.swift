@@ -72,14 +72,18 @@ class Share{
         }
     }
     
-    static func postToTwitter(withStatus text: String){
+    static func postToTwitter(withStatus text: String, lat: Double, long: Double){
         if AuthApi.getTwitterToken() != nil{
             let cc = (key: Constants.Twitter.consumerKey, secret: Constants.Twitter.consumerSecret)
             let uc = (key: AuthApi.getTwitterToken()!, secret: AuthApi.gettwitterTokenSecret()!)
             
             var req = URLRequest(url: URL(string: "https://api.twitter.com/1.1/statuses/update.json")!)
             
-            let paras = ["status": text]
+            let paras = [
+                "status": text,
+                "lat": lat,
+                "long": long
+            ]
             
             req.oAuthSign(method: "POST", urlFormParameters: paras, consumerCredentials: cc, userCredentials: uc)
             
