@@ -1610,53 +1610,53 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
                 Constants.DB.event.child((event_id as? String)!).observeSingleEvent(of: .value, with: {snapshot in
                     let info = snapshot.value as? [String : Any]
                     
-                    let event = Event.toEvent(info: info!)
-                    
-                    if let endTime = event?.endTime{
-                        if let end = timeDF.date(from: endTime){
-                            let start = DF.date(from: (event?.date!)!)!
-                            if let isPrivate = event?.privateEvent{
-                                if start < Date() && end > Date() && !isPrivate{
-                                    event?.id = event_id as! String
-                                    
-                                    events.append(event!)
-                                    eventCount += 1
-                                }
-                            }
-                            else{
-                                event?.id = event_id as! String
-                                
-                                events.append(event!)
-                                eventCount += 1
-                            }
-                            
-                        }
-                        
-                    }
-                    else{
-                        if let dateString = event!.date{
-                            if let date = DF.date(from: dateString){
-                                if let isPrivate = event?.privateEvent{
-                                    if !isPrivate && Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0 <= 7{
-                                        event?.id = event_id as! String
+                    if let event = Event.toEvent(info: info!){
+                        if let endTime = event.endTime as? String{
+                            if let end = timeDF.date(from: endTime){
+                                let start = DF.date(from: (event.date!))!
+                                if let isPrivate = event.privateEvent as? Bool{
+                                    if start < Date() && end > Date() && !isPrivate{
+                                        event.id = event_id as! String
                                         
-                                        events.append(event!)
+                                        events.append(event)
                                         eventCount += 1
                                     }
                                 }
                                 else{
-                                    event?.id = event_id as! String
+                                    event.id = event_id as! String
                                     
-                                    events.append(event!)
+                                    events.append(event)
                                     eventCount += 1
                                 }
+                                
                             }
+                            
+                        }
+                        else{
+                            if let dateString = event.date{
+                                if let date = DF.date(from: dateString){
+                                    if let isPrivate = event.privateEvent as? Bool{
+                                        if !isPrivate && Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0 <= 7{
+                                            event.id = event_id as! String
+                                            
+                                            events.append(event)
+                                            eventCount += 1
+                                        }
+                                    }
+                                    else{
+                                        event.id = event_id as! String
+                                        
+                                        events.append(event)
+                                        eventCount += 1
+                                    }
+                                }
+                            }
+                            
                         }
                         
-                    }
-                    
-                    if eventCount == events.count{
-                        gotEvents(events)
+                        if eventCount == events.count{
+                            gotEvents(events)
+                        }
                     }
                 })
             }
