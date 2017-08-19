@@ -78,7 +78,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
             var uniqueFeeds = Array(Set(self.feeds))
             self.feeds = uniqueFeeds.sorted(by: {
-                $0.time! >= $1.time!
+                $0.time! > $1.time!
             })
             self.tableView.reloadData()
         }, gotEvents: { events in
@@ -86,7 +86,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
             var uniqueFeeds = Array(Set(self.feeds))
             self.feeds = uniqueFeeds.sorted(by: {
-                $0.time! >= $1.time!
+                $0.time! > $1.time!
             })
             
             self.tableView.reloadData()
@@ -95,7 +95,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
             
             var uniqueFeeds = Array(Set(self.feeds))
             self.feeds = uniqueFeeds.sorted(by: {
-                $0.time! >= $1.time!
+                $0.time! > $1.time!
             })
             
             self.tableView.reloadData()
@@ -103,7 +103,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
         
         var uniqueFeeds = Array(Set(self.feeds))
         self.feeds = uniqueFeeds.sorted(by: {
-            $0.time! >= $1.time!
+            $0.time! > $1.time!
         })
         
         tableView.reloadData()
@@ -518,7 +518,8 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
                     let user = pinData["fromUID"] as? String
                     
-                    feedPlaceCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
+                    feedPlaceCell.timeSince.text = DateFormatter().timeSince(from: feed.time!, numericDates: true, shortVersion: true)
+                    
                     
                     
                     getUserData(id: user!, gotUser: {user in
@@ -607,7 +608,7 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate,UITableV
                 if let pinData = feed.item?.data["pin"] as? [String: Any]{
                     let user = pinData["fromUID"] as? String
                     
-                    feedFourCell.timeSince.text = DateFormatter().timeSince(from: Date(timeIntervalSince1970: (pinData["time"] as! Double)), numericDates: true, shortVersion: true)
+                    feedFourCell.timeSince.text = DateFormatter().timeSince(from: feed.time!, numericDates: true, shortVersion: true)
                     
                     getUserData(id: user!, gotUser: {user in
                         feedFourCell.usernameReceivingCommentLabel.setTitle("\(user.username!)'s", for: .normal)

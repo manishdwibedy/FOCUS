@@ -442,7 +442,7 @@ func getAllActivity(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, go
                                     commentInfo.id = pinID
                                     
                                     var pinCommented = Date()
-                                    if let time = likeData["time"] as? Double{
+                                    if let time = commentData?["time"] as? Double{
                                         pinCommented = Date(timeIntervalSince1970: pin["time"] as! Double)
                                     }
                                     Constants.DB.user.child((commentData?["fromUID"] as? String)!).observeSingleEvent(of: .value, with: { snapshot in
