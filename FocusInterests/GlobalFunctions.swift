@@ -1602,14 +1602,17 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
                     
                     let event = Event.toEvent(info: info!)
                     
-                    if let end = timeDF.date(from: (event?.endTime)!){
-                        let start = DF.date(from: (event?.date!)!)!
-                        if start < Date() && end > Date() && !(event?.privateEvent)!{
-                            event?.id = event_id as! String
-                            
-                            events.append(event!)
-                            eventCount += 1
+                    if let endTime = event.endTime{
+                        if let end = timeDF.date(from: endTime){
+                            let start = DF.date(from: (event?.date!)!)!
+                            if start < Date() && end > Date() && !(event?.privateEvent)!{
+                                event?.id = event_id as! String
+                                
+                                events.append(event!)
+                                eventCount += 1
+                            }
                         }
+                        
                     }
                         
                     else if DF.date(from: (event?.date!)!)! > Date() && !(event?.privateEvent)!{
