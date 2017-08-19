@@ -107,7 +107,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
                 
                 if let image = notif.item?.data["image"] as? String{
                     if let url = URL(string: image){
-                        self.locationImage.sd_setImage(with: url, placeholderImage: placeholderImage)
+                        self.locationImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_event"))
                     }
                 }
                 else{
