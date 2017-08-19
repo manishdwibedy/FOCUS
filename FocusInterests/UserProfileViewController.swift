@@ -279,8 +279,6 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                     
                                     if image != nil && finished{
                                         
-                                        self.pinImage.image = image
-                                        
                                         let pinImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.createPinAndUpdatePinStack.frame.width, height: 345))
                                         let recentPostImageView = UIView(frame: CGRect(x: 0, y: 0, width: self.createPinAndUpdatePinStack.frame.width, height: 355))
                                         
