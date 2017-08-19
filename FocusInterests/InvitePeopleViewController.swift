@@ -1313,6 +1313,29 @@ extension InvitePeopleViewController{
                 
             })
             
+            for interest in Constants.interests.interests{
+                if interest.hasPrefix(query){
+                    Constants.DB.event_interests.child(interest).observeSingleEvent(of: .value, with: {snapshot in
+                    
+                        if let info = snapshot.value as? [String:Any]{
+                            for (_, eventInfo) in info{
+                                if let event = eventInfo as? [String:Any]{
+                                    let id = event["event-id"] as! String
+                                    
+                                    Constants.DB.event.child(id).observeSingleEvent(of: .value, with: {snapshot in
+                                        if let info = snapshot.value as? [String:Any]{
+                                            if let event = Event.toEvent(info: info){
+                                                self.filtered.append(event)
+                                            }
+                                        }
+                                    })
+                                }
+                                
+                            }
+                        }
+                    })
+                }
+            }
             if self.place != nil {
                 Event.getNearyByEvents(query: query, location: (self.place?.coordinate)!, gotEvents: {events in
                     var DF = DateFormatter()
