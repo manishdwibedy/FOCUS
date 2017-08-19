@@ -62,19 +62,36 @@ class FirebaseDownstream {
                                     if key as! String == "event"{
                                         
                                         dbKey = "events"
-                                        self.ref.child(dbKey).child((inValue[inKey] as! NSDictionary)["ID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                                        let inviteInfo = inValue[inKey] as! [String:Any]
+                                        self.ref.child(dbKey).child(inviteInfo["ID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                             if let valueInviteID = snapshot.value as? NSDictionary {
-                                                let itemName = valueInviteID["title"] as! String
-                                                let item = ItemOfInterest(itemName: itemName, imageURL: "", type: "event")
-                                                item.type = "event"
-                                                item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
-                                                item.data = [
-                                                    "invite": inValue[inKey] as? [String:Any]
-                                                ]
-                                                let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
-                                                notification.notif_type = .invite
-                                                returnableNotif.append(notification)
-                                                
+                                                if let event = Event.toEvent(info: valueInviteID as! [String : Any]){
+                                                    let itemName = event.title
+                                                    let item = ItemOfInterest(itemName: itemName, imageURL: "", type: "event")
+                                                    item.type = "event"
+                                                    item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
+                                                    item.data = [
+                                                        "invite": inviteInfo
+                                                    ]
+                                                    let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: ((inValue[inKey] as! NSDictionary)["time"] as? Double)!) as Date)
+                                                    notification.notif_type = .invite
+                                                    returnableNotif.append(notification)
+    
+                                                }
+                                                else{
+                                                    let itemName = inviteInfo["name"] as! String
+                                                    let item = ItemOfInterest(itemName: itemName, imageURL: "", type: "event")
+                                                    item.type = "event"
+                                                    item.id = (inValue[inKey] as! NSDictionary)["ID"] as! String
+                                                    item.data = [
+                                                        "invite": inValue[inKey] as? [String:Any],
+                                                        "imageURL": ""
+                                                    ]
+                                                    let notification = FocusNotification(type: NotificationType.Invite, sender: NotificationUser(username: valueUID["username"] as? String, uuid: (inValue[inKey] as! NSDictionary)["fromUID"] as? String, imageURL: ""), item: item, time: NSDate(timeIntervalSince1970: (inviteInfo["time"] as? Double)!) as Date)
+                                                    notification.notif_type = .invite
+                                                    returnableNotif.append(notification)
+
+                                                }
                                             }
                                             valueCount = valueCount + 1
                                             if valueCount == totalCount
