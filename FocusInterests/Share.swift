@@ -81,8 +81,8 @@ class Share{
             
             let paras = [
                 "status": text,
-                "lat": lat,
-                "long": long
+//                "lat": lat,
+//                "long": long
             ]
             
             req.oAuthSign(method: "POST", urlFormParameters: paras, consumerCredentials: cc, userCredentials: uc)

@@ -370,7 +370,7 @@ class PinScreenViewController: UIViewController, UICollectionViewDelegate, UICol
             }
             if isTwitter == true
             {
-                Share.postToTwitter(withStatus: pinTextView.text!)
+                //Share.postToTwitter(withStatus: pinTextView.text!, lat: <#Double#>)
             }
             if isFacebook == true
             {
