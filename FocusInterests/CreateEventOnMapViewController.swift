@@ -290,7 +290,7 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
                 ])
         }
         
-        var post = "\(addFocusButton.titleLabel!.text!.uppercased()): \(userStatusTextView.text!)\n\(self.formmatedAddress)"
+        var post = "FOCUS: \(userStatusTextView.text!)\n\(self.formmatedAddress)"
         if isTwitter == true
         {
             Share.postToTwitter(withStatus: "\(post) \(Constants.links.appID)", lat: Double(self.location.coordinate.latitude), long: Double(self.location.coordinate.longitude))
