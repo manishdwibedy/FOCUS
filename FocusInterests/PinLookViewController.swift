@@ -280,8 +280,30 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                 
             }
         })
+        
+        var tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.goToUserProfile))
+        tapGesture.numberOfTapsRequired = 1
+        self.profileImage.isUserInteractionEnabled = true
+        
+        self.usernameLabel.addGestureRecognizer(tapGesture)
+        self.profileImage.addGestureRecognizer(tapGesture)
     }
     
+    func goToUserProfile(){
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "OtherUser") as! OtherUserProfileViewController
+        
+        VC.otherUser = true
+        VC.userID = self.data.fromUID
+        
+        Constants.DB.user.child(self.data.fromUID).observeSingleEvent(of: .value, with: {snapshot in
+            if let info = snapshot.value as? [String:Any]{
+                if let user = User.toUser(info: info){
+                    VC.userData = user
+                    self.present(VC, animated:true, completion:nil)
+                }
+            }
+        })
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
