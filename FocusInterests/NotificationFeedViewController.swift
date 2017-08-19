@@ -50,15 +50,22 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
         }else{
             self.noNotificationsLabel.isHidden = true
             self.tableView.isHidden = false
-            self.nofArray = Array(Set<FocusNotification>(self.nofArray))
-            self.invArray = Array(Set<FocusNotification>(self.invArray))
-            self.feedAray = Array(Set<FocusNotification>(self.feedAray))
             
-            self.nofArray = self.nofArray.sorted(by: {
-                $0.time! > $1.time!
-            })
+            var unique = [FocusNotification]()
             
-            self.invArray = self.invArray.sorted(by: {
+            for nof in self.nofArray{
+                if !unique.contains(nof){
+                    unique.append(nof)
+                }
+            }
+            
+            for nof in self.invArray{
+                if !unique.contains(nof){
+                    unique.append(nof)
+                }
+            }
+            
+            self.nofArray = unique.sorted(by: {
                 $0.time! > $1.time!
             })
             
@@ -182,7 +189,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.nofArray.count + self.invArray.count
+        return self.nofArray.count
 //        if self.selectedSegmentIndex == 0{
 //        }else if self.selectedSegmentIndex == 1{
 //            return invArray.count
