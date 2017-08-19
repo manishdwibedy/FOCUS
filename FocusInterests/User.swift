@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class User: Equatable {
+class User: NSObject, NSCoding {
     
     var username: String?
     var fullname: String?
@@ -79,6 +79,38 @@ class User: Equatable {
         return lhs.uuid == rhs.uuid
     }
     
+    required init(coder decoder: NSCoder) {
+        self.username = decoder.decodeObject(forKey: "username") as? String ?? ""
+        self.fullname = decoder.decodeObject(forKey: "fullname") as? String ?? ""
+        self.uuid = decoder.decodeObject(forKey: "uuid") as? String ?? ""
+        self.userImage = decoder.decodeObject(forKey: "userImage") as? UIImage ?? ""
+        self.interests = decoder.decodeObject(forKey: "interests") as? String ?? ""
+        self.image_string = decoder.decodeObject(forKey: "image_string") as? String ?? ""
+        self.hasPin = decoder.decodeObject(forKey: "hasPin") as? Bool ?? false
+        self.pinDistance = decoder.decodeDouble(forKey: "pinDistance") as? Double ?? 0.0
+        self.pinCaption = decoder.decodeObject(forKey: "pinCaption") as? String ?? ""
+        self.matchingInterestCount = decoder.decodeObject(forKey: "matchingInterestCount") as? Int ?? 0
+        self.isPrivate = decoder.decodeBool(forKey: "isPrivate") as? Bool ?? false
+        self.readNotifications = decoder.decodeInteger(forKey: "readNotifications") as? Int ?? 0
+        self.unreadNotifications = decoder.decodeInteger(forKey: "unreadNotifications") as? Int ?? 0
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.username, forKey: "username")
+        coder.encode(self.fullname, forKey: "fullname")
+        coder.encode(self.uuid, forKey: "uuid")
+        coder.encode(self.userImage, forKey: "userImage")
+        coder.encode(self.interests, forKey: "interests")
+        coder.encode(self.image_string, forKey: "image_string")
+        coder.encode(self.hasPin, forKey: "hasPin")
+        coder.encode(self.pinDistance, forKey: "pinDistance")
+        coder.encode(self.pinCaption, forKey: "pinCaption")
+        coder.encode(self.matchingInterestCount, forKey: "matchingInterestCount")
+        coder.encode(self.isPrivate, forKey: "isPrivate")
+        coder.encode(self.readNotifications, forKey: "readNotifications")
+        coder.encode(self.unreadNotifications, forKey: "unreadNotifications")
+    }
+    
     static func blockUser(uid: String){
         
         Constants.DB.user.child(uid).child("blocked/people").queryOrdered(byChild: "UID").queryEqual(toValue: AuthApi.getFirebaseUid()!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -107,6 +139,55 @@ class User: Equatable {
             "unreadCount" : unread
             ])
         AuthApi.set(unread: unread)
+    }
+    
+    static func getFollowing(gotFollowing: @escaping (_ result: [User]) -> Void){
+        var following = [User]()
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
+            
+            if let people = snapshot.value as? [String:[String:Any]]{
+                var count = 0
+                
+                for (id, value) in people{
+                    let uid = value["UID"] as! String
+                    
+                    Constants.DB.user.child(uid).observeSingleEvent(of: .value, with: {snapshot in
+                        if let value = snapshot.value as? [String:Any]{
+                            if let user = User.toUser(info: value){
+                                count += 1
+                                following.append(user)
+                                
+                                if following.count == count{
+                                    gotFollowing(following)
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
+    
+    static func getFollowers(gotFollowers: @escaping (_ result: [User]) -> Void){
+        var followers = [User]()
+        Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("followers/people").observeSingleEvent(of: .value, with: {snapshot in
+            
+            
+            if let people = snapshot.value as? [String:[String:Any]]{
+                var count = 0
+                
+                for (id, value) in people{
+                    if let user = User.toUser(info: value){
+                        count += 1
+                        followers.append(user)
+                        
+                        if followers.count == count{
+                            gotFollowers(followers)
+                        }
+                    }
+                }
+            }
+        })
     }
     
 //    static func unFollowUser(uid: String){

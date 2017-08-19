@@ -52,6 +52,15 @@ class AnimationViewController: UIViewController {
         loadMap()
         showPins(showAll: true, interests: "")
         getEvents()
+        
+//        User.getFollowing(gotFollowing: {users in
+//            DataCache.instance.write(object: users as NSCoding, forKey: "following_users")
+//        })
+//        
+//        User.getFollowers(gotFollowers: {users in
+//            DataCache.instance.write(object: users as NSCoding, forKey: "followers_users")
+//        })
+        
         if let token = AuthApi.getYelpToken(){
             showPlaces(showAll: false, interests: "")
         }

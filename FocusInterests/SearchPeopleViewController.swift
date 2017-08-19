@@ -12,6 +12,8 @@ import Alamofire
 import CoreLocation
 import SwiftyJSON
 import Crashlytics
+import DataCache
+
 
 protocol SearchPeopleViewControllerDelegate {
     func haveInvitedSomeoneToAPlaceOrAnEvent()
@@ -114,6 +116,102 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         let ref = Constants.DB.user
         
         var followingCount = 0
+        
+//        if let following = (DataCache.instance.readObject(forKey: "following_users") as? [User]){
+//            for user in following{
+//                Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
+//                    let value = snapshot.value as? NSDictionary
+//                    if let value = value
+//                    {
+//                        if let pin = pinData.toPin(uuid: user.uuid!, value: value){
+//                            
+//                            if Calendar.current.dateComponents([.hour], from: Date(timeIntervalSince1970: (pin.dateTimeStamp)), to: Date()).hour ?? 0 < 24{
+//                                self.user_pins[user.uuid!] = pin
+//                                user.hasPin = true
+//                                
+//                                let pinLocation = CLLocation(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
+//                                if let location = AuthApi.getLocation(){
+//                                    user.pinDistance = pinLocation.distance(from: location)
+//                                }
+//                                
+//                            }
+//                            
+//                        }
+//                    }
+//                    
+//                    if !self.followers.contains(user){
+//                        self.followers.append(user)
+//                    }
+//                    
+//                    self.followers = self.followers.sorted {
+//                        if $0.hasPin && $1.hasPin{
+//                            return $0.pinDistance < $1.pinDistance
+//                        }
+//                        if $0.hasPin{
+//                            return $0.hasPin
+//                        }
+//                        else if $1.hasPin{
+//                            return $1.hasPin
+//                        }
+//                        else{
+//                            return $0.username! < $1.username!
+//                        }
+//                        
+//                    }
+//                    
+//                    if self.followers.count == followingCount && self.people.count > 0{
+//                        
+//                        self.people.sort {
+//                            if $0.hasPin && $1.hasPin{
+//                                return $0.pinDistance < $1.pinDistance
+//                            }
+//                            if $0.hasPin{
+//                                return $0.hasPin
+//                            }
+//                            else if $1.hasPin{
+//                                return $1.hasPin
+//                            }
+//                            else{
+//                                return $0.username! < $1.username!
+//                            }
+//                            
+//                        }
+//                        
+//                        for user in self.followers{
+//                            if let index = self.people.index(where: { $0.uuid == user.uuid }) {
+//                                self.people.remove(at: index)
+//                            }
+//                        }
+//                        
+//                        self.followers = self.followers.sorted {
+//                            if $0.hasPin && $1.hasPin{
+//                                return $0.pinDistance < $1.pinDistance
+//                            }
+//                            if $0.hasPin{
+//                                return $0.hasPin
+//                            }
+//                            else if $1.hasPin{
+//                                return $1.hasPin
+//                            }
+//                            else{
+//                                return $0.username! < $1.username!
+//                            }
+//                            
+//                        }
+//                        
+//                        self.people = self.followers + self.people
+//                        self.filtered = self.people
+//                        self.tableView.reloadData()
+//                    }
+//                    
+//                })
+//            }
+//        }
+        
+        
+        
+        
+        
         ref.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
             if let value = snapshot.value as? [String:Any]{
                 for (_, people) in value{
