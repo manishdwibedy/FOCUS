@@ -289,13 +289,15 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
                                     "public": isPublic
                 ])
         }
+        
+        var post = "\(userStatusTextView.text!) (\(addFocusButton.titleLabel!.text))\n\(self.formmatedAddress)"
         if isTwitter == true
         {
-            Share.postToTwitter(withStatus: userStatusTextView.text!)
+            Share.postToTwitter(withStatus: post)
         }
         if isFacebook == true
         {
-            try! Share.facebookShare(with: URL(string: "http://mapofyourworld.com")!, description: userStatusTextView.text!)
+            try! Share.facebookShare(with: URL(string: Constants.links.appID)!, description: post)
         }
         
         userStatusTextView.text = "What are you up to? Type here."

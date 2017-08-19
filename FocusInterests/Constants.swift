@@ -16,6 +16,10 @@ import DataCache
 
 struct Constants {
     
+    struct links{
+        public static let appID = "http://itunes.apple.com/app/id1236603648"
+    }
+    
     struct Cache {
         public static var placeCache = DataCache(name: "Place")
         
