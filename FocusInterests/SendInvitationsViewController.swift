@@ -282,29 +282,13 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             ])
             
         }
-    
-//        Messaging
-//        let messageVC = MFMessageComposeViewController()
-//        
-//        let friendList = zip(selectedFriend,self.contacts ).filter { $0.0 }.map { $1.phoneNumbers }
-//        
-//        var phoneNumbers = [String]()
-//        for friendPhoneList in friendList{
-//            for number in friendPhoneList{
-//                phoneNumbers.append((number.value.value(forKey: "digits") as? String)!)
-//            }
-//        }
-//        
-//        if phoneNumbers.count > 0{
-//            messageVC.body = "Please come to \(String(describing: self.event?.title))"
-//            messageVC.recipients = phoneNumbers
-//            messageVC.messageComposeDelegate = self;
-//
-//            
-//        }
         
         delegate?.showEventMarker(event: event!, data: self.image!)
-        performSegue(withIdentifier: "unwindBackToExplorePage", sender: self)
+        
+        print("going back to page")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
+        self.present(VC!, animated: true, completion: nil)
     }
     
 //    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {

@@ -352,8 +352,8 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                                     recentPostImageView.addSubview(pinImageView)
                                     recentPostCell.feedOneStackView.insertArrangedSubview(recentPostImageView, at: 1)
                                     recentPostCell.frame.size.width = self.view.frame.width
-                                    recentPostCell.frame.size.height += 335
-                                    self.recentPostTableViewHeight.constant += 335
+                                    recentPostCell.frame.size.height += 325
+                                    self.recentPostTableViewHeight.constant += 325
                                     print("images \(self.pinImage)")
                                 }
                             })
