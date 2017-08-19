@@ -224,6 +224,8 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                     }
                 })
             })
+            
+            ticketMasterButton.isHidden = true
         }
         else{
             if let url = URL(string: (event?.image_url!)!){
@@ -239,7 +241,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 })
             }
             
-            ticketMasterButton.isHidden = true
+            
             
         }
         
