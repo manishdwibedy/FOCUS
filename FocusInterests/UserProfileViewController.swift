@@ -290,7 +290,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
                                         recentPostImageView.addSubview(pinImageView)
                                         self.pinView.insertArrangedSubview(recentPostImageView, at: 1)
                                         
-                                        self.createPinAndUpdatePinStack.frame.size.height += 335
+                                        self.createPinAndUpdatePinStack.frame.size.height += 325
                                         print("images \(self.pinImage)")
                                     }
                                 })
