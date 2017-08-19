@@ -61,6 +61,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     var locationFromPlaceDetails = ""
     var pinPlace: Place?
+    var pinEvent: Event?
     
     var willShowEvent = false
     var showEvent: Event? = nil
@@ -1036,15 +1037,23 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBAction func unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails(segue:UIStoryboardSegue) {
         let popController = self.createPopOver()
+        if let event = self.pinEvent{
+            popController.pinType = .event
+            popController.formmatedAddress = event.title!
+            popController.location = CLLocation(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+        }
         popController.delegate = self
         self.tabBarController?.present(popController, animated: true, completion: nil)
     }
     
     @IBAction func unwindToMapViewControllerFromPlaceDetails(segue: UIStoryboardSegue){
         let popController = self.createPopOver()
-        popController.pinType = .place
-        popController.formmatedAddress = (self.pinPlace?.name)!
-        popController.location = CLLocation(latitude: (pinPlace?.latitude)!, longitude: (pinPlace?.longitude)!)
+        
+        if let place = self.pinPlace{
+            popController.pinType = .place
+            popController.formmatedAddress = place.name
+            popController.location = CLLocation(latitude: (pinPlace?.latitude)!, longitude: (pinPlace?.longitude)!)
+        }
         popController.delegate = self
         self.tabBarController?.present(popController, animated: true, completion: { completed in
             

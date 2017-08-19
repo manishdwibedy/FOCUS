@@ -672,6 +672,11 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 }
             }
         }
+        else if segue.identifier == "unwindToMapViewControllerFromPersonalUserProfilePlaceDetailsOrEventDetails"{
+            let map = self.map
+            
+            map?.pinEvent = self.event
+        }
     }
 
     
