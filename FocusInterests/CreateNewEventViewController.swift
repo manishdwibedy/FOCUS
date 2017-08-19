@@ -685,15 +685,44 @@ class CreateNewEventViewController: UIViewController,UITextFieldDelegate,UITextV
         print("endDate: \(endDate)")
         self.endTime = endDate!
         
-        if self.endTime! > self.startTime! {
-            self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.endTime!))"
-            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-10), animated: true)
-            self.eventPriceTextView.becomeFirstResponder()
-            self.view.endEditing(true)
-        }else{
-            self.view.endEditing(true)
-            showError(message: "Please enter an end time after the start time")
+        if let endTimeVal = self.endTime{
+            if let endDate = self.endDate{
+                
+                let gregorianCalendar = Calendar(identifier: .gregorian)
+                var dateSelected = gregorianCalendar.dateComponents([.year, .month, .day], from: endDate)
+                var timeSelected = gregorianCalendar.dateComponents([.hour, .minute], from: endTimeVal)
+                
+                dateSelected.hour = timeSelected.hour
+                dateSelected.minute = timeSelected.minute
+                let date = gregorianCalendar.date(from: dateSelected)!
+           
+                
+                if let startTimeVal = self.startTime{
+                    if let startDate = self.startTime{
+                        if date > self.startTime! {
+                            self.eventEndTimeTextField.text = "\(self.timeFormatter.string(from: self.endTime!))"
+                            self.scrollView.setContentOffset(CGPoint(x: 0, y: self.scrollView.contentOffset.y-10), animated: true)
+                            self.eventPriceTextView.becomeFirstResponder()
+                            self.view.endEditing(true)
+                        }else{
+                            self.view.endEditing(true)
+                            showError(message: "Please enter an end time after the start time")
+                        }
+                        
+                    }
+                    else{
+                        showError(message: "Please choose the start date")
+                    }
+                }
+            }
+            else{
+                showError(message: "Please choose the end date")
+            }
+            
         }
+
+        
+        
     }
     
     func priceSelected(){
