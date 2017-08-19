@@ -645,8 +645,20 @@ class InviteViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     Constants.DB.user.child(UID).child("invitations").child(self.type).queryOrdered(byChild: "ID").queryEqual(toValue: id).observeSingleEvent(of: .value, with: {snapshot in
                     
                         if snapshot.value as? [String:Any] == nil{
+                            var inviteInfo = [
+                                "ID":self.id,
+                                "time":time,
+                                "fromUID":AuthApi.getFirebaseUid()!,
+                                "name": name,
+                                "status": "unknown",
+                                "inviteTime": self.timeTextField.text!
+                            ] as [String : Any]
                             
-                            Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(["ID":self.id, "time":time,"fromUID":AuthApi.getFirebaseUid()!, "name": name, "status": "unknown", "inviteTime": self.timeTextField.text!])
+                            if let image = self.event?.image_url{
+                                inviteInfo["image"] = image
+                            }
+                            
+                            Constants.DB.user.child(UID).child("invitations").child(self.type).childByAutoId().updateChildValues(inviteInfo)
                         }
                     })
                     Answers.logCustomEvent(withName: "Invite User",
