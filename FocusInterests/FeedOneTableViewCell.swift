@@ -92,7 +92,10 @@ class FeedOneTableViewCell: UITableViewCell, UITextViewDelegate{
                         ])
                 }
             })
-            pin?.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+            pin?.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues([
+                "UID": AuthApi.getFirebaseUid()!,
+                "time": Date().timeIntervalSince1970
+            ])
             
             self.likeButton.setImage(#imageLiteral(resourceName: "Liked"), for: UIControlState.normal)
             
