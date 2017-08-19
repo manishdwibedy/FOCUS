@@ -360,7 +360,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
        {
             self.likes = self.likes + 1
             data.dbPath.child("like").updateChildValues(["num": likes])
-            data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+            data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues([
+                "UID": AuthApi.getFirebaseUid()!,
+                "time": Date().timeIntervalSince1970
+                ])
         
             if self.likes > 1{
                 self.likesLabel.text = String(self.likes) + " likes"
@@ -423,7 +426,10 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
         if self.likeOut.isEnabled == true{
             self.likes = self.likes + 1
             data.dbPath.child("like").updateChildValues(["num": likes])
-            data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+            data.dbPath.child("like").child("likedBy").childByAutoId().updateChildValues([
+                "UID": AuthApi.getFirebaseUid()!,
+                "time": Date().timeIntervalSince1970
+                ])
             self.likeOut.isEnabled = false
             self.likesLabel.text = String(self.likes) + " likes"
             self.likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)

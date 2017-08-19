@@ -59,7 +59,10 @@ class PinTableViewCell: UITableViewCell {
     @IBAction func like(_ sender: Any) {
         likeCount = likeCount + 1
         Constants.DB.pins.child((data?.fromUID)!).child("like").updateChildValues(["num": likeCount])
-        Constants.DB.pins.child((data?.fromUID)!).child("like").child("likedBy").childByAutoId().updateChildValues(["UID": AuthApi.getFirebaseUid()!])
+        Constants.DB.pins.child((data?.fromUID)!).child("like").child("likedBy").childByAutoId().updateChildValues([
+            "UID": AuthApi.getFirebaseUid()!,
+            "time": Date().timeIntervalSince1970
+            ])
         likeOut.isEnabled = false
         likeOut.setImage(UIImage(named: "Liked"), for: UIControlState.normal)
         likeAmountLabel.text = String(likeCount)
