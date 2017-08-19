@@ -235,7 +235,11 @@ class AnimationViewController: UIViewController {
         Constants.DB.event.keepSynced(true)
         Constants.DB.pins.child(AuthApi.getFirebaseUid()!).keepSynced(true)
         
-        Constants.DB.event.observeSingleEvent(.value, with: { (snapshot) in
+        getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
+            DataCache.instance.write(object: events as NSCoding, forKey: "attending_events")
+        })
+        
+        Constants.DB.event.observeSingleEvent(of:.value, with: { (snapshot) in
             let events = snapshot.value as? [String : Any] ?? [:]
             let info = events// as? [String:Any]
             //            for (id, event) in events{

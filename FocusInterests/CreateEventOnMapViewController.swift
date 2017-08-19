@@ -483,8 +483,9 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     
     func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
         LightboxConfig.DeleteButton.enabled = true
-        
         let lightbox = LightboxController(images: images.map({ LightboxImage(image: $0) }), startIndex: 0)
+        
+        lightbox.headerView.deleteButton.addTarget(self, action: #selector(deleteImage), for: .touchUpInside)
         lightbox.dismissalDelegate = self
         
         controller.present(lightbox, animated: true, completion: nil)
@@ -493,6 +494,12 @@ class CreateEventOnMapViewController: UIViewController, UITableViewDelegate, UIT
     public func lightboxControllerWillDismiss(_ controller: Lightbox.LightboxController){
         controller.dismiss(animated: true, completion: nil)
     }
+    
+    func deleteImage(){
+        gallery.dismiss(animated: true, completion: nil)
+    }
+    
+    
     /*
     // MARK: - Navigation
 

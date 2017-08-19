@@ -199,9 +199,16 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         if let following = (DataCache.instance.readObject(forKey: "following_places") as? [Place]){
             self.followingPlaces = following
         }
+        
         if let events = (DataCache.instance.readObject(forKey: "events") as? [Event]){
             self.events = events
         }
+        
+        if let events = (DataCache.instance.readObject(forKey: "attending_events") as? [Event]){
+            self.attendingEvents = events
+        }
+        
+        self.events = self.attendingEvents! + self.events
         
         for place in self.places{
             self.placeMapping[place.id] = place
@@ -241,46 +248,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             })
         }
         
-        
-        getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
-            self.attendingEvents = events
-            
-            if self.followingAttendingEvents != nil && self.otherEvents != nil{
-                var uniqueEvents = self.attendingEvents!
-                
-                for event in self.followingAttendingEvents!{
-                    if !uniqueEvents.contains(event){
-                        uniqueEvents.append(event)
-                    }
-                }
-                
-                if !self.isMeetup, let otherAttendingEvents = self.otherAttendingEvents{
-                    for event in otherAttendingEvents{
-                        if !uniqueEvents.contains(event){
-                            uniqueEvents.append(event)
-                        }
-                    }
-                }
-                for event in self.events{
-                    if !uniqueEvents.contains(event){
-                        uniqueEvents.append(event)
-                    }
-                }
-                
-                let events = uniqueEvents + self.otherEvents!
-                self.events = events.sorted(by: {
-                    if $0.category == $1.category{
-                        return $0.distance < $1.distance
-                    }
-                    else{
-                        return $0.category! < $1.category!
-                    }
-                })
-                
-                
-                self.tableView.reloadData()
-            }
-        })
         
         getFollowingAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
             self.followingAttendingEvents = events

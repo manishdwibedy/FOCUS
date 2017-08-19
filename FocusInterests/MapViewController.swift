@@ -319,7 +319,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             showEvents()    
         }
         
-        
+        Event.getEvents(gotEvents: { events in
+            for event in events{
+                if !self.events.contains(event){
+                    let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+                    let marker = GMSMarker(position: position)
+                    let eventMarker = UIImage(image: #imageLiteral(resourceName: "intro_event"), scaledTo: CGSize(width: 60, height: 60))
+                    marker.icon = eventMarker
+                    marker.title = event.title
+                    marker.map = self.mapView
+                    self.events.append(event)
+                    marker.accessibilityLabel = "event_\(self.events.count)"
+                }
+            }
+        })
         
         if AuthApi.isNotificationAvailable(){
 //            navigationView.notificationsButton.set

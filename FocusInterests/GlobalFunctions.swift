@@ -1655,6 +1655,7 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
                             
                             if eventCount == events.count{
                                 gotEvents(events)
+                                DataCache.instance.write(object: events as NSCoding, forKey: "attending_events")
                             }
                         }
                     }
