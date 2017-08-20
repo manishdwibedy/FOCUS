@@ -60,6 +60,8 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
         hideKeyboardWhenTappedAround()
         
         loadInitialTable()
+        
+        tableView.tableFooterView = UIView()
     }
     
     func goBack(){
