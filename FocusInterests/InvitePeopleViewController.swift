@@ -204,11 +204,11 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.events = events
         }
         
-        if let events = (DataCache.instance.readObject(forKey: "attending_events") as? [Event]){
-            self.attendingEvents = events
-        }
-        
-        self.events = self.attendingEvents! + self.events
+//        if let events = (DataCache.instance.readObject(forKey: "attending_events") as? [Event]){
+//            self.attendingEvents = events
+//        }
+//        
+//        self.events = self.attendingEvents! + self.events
         
         for place in self.places{
             self.placeMapping[place.id] = place

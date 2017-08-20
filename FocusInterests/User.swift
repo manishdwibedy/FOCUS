@@ -83,8 +83,8 @@ class User: NSObject, NSCoding {
         self.username = decoder.decodeObject(forKey: "username") as? String ?? ""
         self.fullname = decoder.decodeObject(forKey: "fullname") as? String ?? ""
         self.uuid = decoder.decodeObject(forKey: "uuid") as? String ?? ""
-        self.userImage = decoder.decodeObject(forKey: "userImage") as? UIImage ?? ""
-        self.interests = decoder.decodeObject(forKey: "interests") as? String ?? ""
+        self.userImage = decoder.decodeObject(forKey: "userImage") as? UIImage ?? #imageLiteral(resourceName: "placeholder_people")
+        self.interests = decoder.decodeObject(forKey: "interests") as? [Interest]
         self.image_string = decoder.decodeObject(forKey: "image_string") as? String ?? ""
         self.hasPin = decoder.decodeObject(forKey: "hasPin") as? Bool ?? false
         self.pinDistance = decoder.decodeDouble(forKey: "pinDistance") as? Double ?? 0.0
