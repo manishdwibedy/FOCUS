@@ -49,7 +49,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     var places = [Place]()
     var placeMapping = [String: Place]()
     
-    var attendingEvent = [Event]()
     var events = [Event]()
     
     
@@ -522,10 +521,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.attendingEvents = events
         }
         
-        
-        
-        
-                self.events = self.attendingEvents! + self.events
+        self.events = self.attendingEvents! + self.events
         
         self.updatePlaces()
         
@@ -562,7 +558,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.tableView.reloadData()
         }
         else{
-            self.filtered = self.attendingEvent + self.filtered
+            self.filtered = self.attendingEvents! + self.filtered
             self.tableView.reloadData()
         }
         
@@ -762,8 +758,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
             }
             
-            if (event.creator?.characters.count)! > 0 && event.id != nil{
-                let reference = Constants.storage.event.child("\(event.id!).jpg")
+            if (event.creator?.characters.count)! > 0, let id = event.id, id.characters.count > 0{
+                let reference = Constants.storage.event.child("\(id).jpg")
                 
                 cell.eventImage.image = crop(image: #imageLiteral(resourceName: "empty_event"), width: 50, height: 50)
                 
@@ -805,7 +801,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
             }
             
-            if event.id != nil{
+            if event.id != nil && (event.id?.characters.count)! > 0{
                 cell.checkIfAttending()
                 cell.loadLikes()    
             }
@@ -1277,7 +1273,7 @@ extension InvitePeopleViewController{
                         
                     }
                     
-                    let filteredArray = self.attendingEvent.filter() {
+                    let filteredArray = self.attendingEvents?.filter() {
                         if let name = $0.title as? String{
                             return name.hasPrefix(query)
                         } else {
@@ -1285,7 +1281,7 @@ extension InvitePeopleViewController{
                         }
                     }
                     
-                    self.filtered = filteredArray + self.filtered
+                    self.filtered = filteredArray! + self.filtered
                     self.tableView.reloadData()
                 }
                 

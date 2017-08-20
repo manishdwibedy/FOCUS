@@ -1603,8 +1603,9 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
     
     Constants.DB.event.observeSingleEvent(of: .value, with: {snapshot in
         if let info = snapshot.value as? [String:[String:Any]]{
-            for (_, eventInfo) in info{
+            for (id, eventInfo) in info{
                 if let event = Event.toEvent(info: eventInfo){
+                    event.id = id
                     if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
                         for (_, attendingInfo) in attending{
                             if attendingInfo["UID"] as! String == uid{

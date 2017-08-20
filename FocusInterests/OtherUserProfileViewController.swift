@@ -1286,7 +1286,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         ivc.isMeetup = true
         ivc.otherUserProfile = self
         ivc.otherUserProfileDelegate = self
-        ivc.attendingEvent = self.eventsIAttend
+        ivc.attendingEvents = self.eventsIAttend
         ivc.followingPlaces = self.placesIFollow
         
         self.present(ivc, animated: true, completion: nil)
