@@ -759,7 +759,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
             }
             
-            if (event.creator?.characters.count)! > 0{
+            if (event.creator?.characters.count)! > 0 && event.id != nil{
                 let reference = Constants.storage.event.child("\(event.id!).jpg")
                 
                 cell.eventImage.image = crop(image: #imageLiteral(resourceName: "empty_event"), width: 50, height: 50)
@@ -786,8 +786,8 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                     
                 })
             }
-            else{
-                if let url = URL(string: event.image_url!){
+            else if let image = event.image_url{
+                if let url = URL(string: image){
                     SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
                         (receivedSize :Int, ExpectedSize :Int) in
                         
@@ -802,8 +802,10 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
                 
             }
             
-            cell.checkIfAttending()
-            cell.loadLikes()
+            if event.id != nil{
+                cell.checkIfAttending()
+                cell.loadLikes()    
+            }
             return cell
             
         }
