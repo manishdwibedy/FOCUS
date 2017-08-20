@@ -780,7 +780,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         vc.selectedIndex = 0
         vc.showPin = self.pinInfo
         
-        delegate?.showPinMarker(pin: self.pinInfo!, show: false)
+        delegate?.showPinMarker(pin: self.pinInfo!, show: true)
         self.present(vc, animated: true, completion: nil)
     }
     
