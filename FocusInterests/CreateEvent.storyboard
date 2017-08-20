@@ -388,7 +388,6 @@
                                         </state>
                                         <connections>
                                             <action selector="createEvent:" destination="xxR-Li-4ZG" eventType="touchUpInside" id="b6N-GJ-Bog"/>
-                                            <segue destination="Nm4-t4-Sfi" kind="unwind" identifier="unwindBackToExplorePage" unwindAction="unwindBackToExplorePage:" id="gLs-rf-6XE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -439,7 +438,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajl-2Z-7Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Nm4-t4-Sfi" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2357.5999999999999" y="115.59220389805098"/>
         </scene>
@@ -535,7 +533,7 @@
         <image name="Left back arrow icon 30x30 white.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eLh-9t-fEY"/>
-        <segue reference="amW-Q6-Hfg"/>
+        <segue reference="Ich-4n-xap"/>
+        <segue reference="FwC-UK-p9H"/>
     </inferredMetricsTieBreakers>
 </document>

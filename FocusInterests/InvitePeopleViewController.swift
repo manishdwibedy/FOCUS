@@ -1357,10 +1357,6 @@ extension InvitePeopleViewController{
         }
     }
     
-    @IBAction func unwindBackToExplorePage(_ sender: UIStoryboardSegue){
-        self.showPopupView()
-    }
-    
     func gotSelectedLocation(location: LocationSuggestion) {
         self.selectedLocation = true
         self.location = CLLocation(latitude: location.lat, longitude: location.long)

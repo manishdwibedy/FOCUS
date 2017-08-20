@@ -132,13 +132,13 @@
                                                     <action selector="showUserProfile" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jMw-jF-oPy"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcD-F0-OVs">
-                                                <rect key="frame" x="1" y="60" width="50" height="12"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcD-F0-OVs">
+                                                <rect key="frame" x="1" y="57" width="50" height="13"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="12" id="ak4-x9-c20"/>
+                                                    <constraint firstAttribute="height" constant="13" id="ak4-x9-c20"/>
                                                     <constraint firstAttribute="width" constant="50" id="f0g-Q4-S1y"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -158,7 +158,7 @@
                                             <constraint firstItem="GKR-F7-hVw" firstAttribute="centerY" secondItem="eUI-Ij-6uy" secondAttribute="centerY" id="dse-FF-z8v"/>
                                             <constraint firstItem="eUI-Ij-6uy" firstAttribute="leading" secondItem="GKR-F7-hVw" secondAttribute="trailing" constant="7" id="eNU-zv-hKg"/>
                                             <constraint firstItem="OS0-sF-aLV" firstAttribute="leading" secondItem="eUI-Ij-6uy" secondAttribute="trailing" constant="5" id="gvb-JI-DbS"/>
-                                            <constraint firstItem="VcD-F0-OVs" firstAttribute="top" secondItem="P8u-dn-fBs" secondAttribute="bottom" constant="9" id="hDw-9p-xVQ"/>
+                                            <constraint firstItem="VcD-F0-OVs" firstAttribute="top" secondItem="P8u-dn-fBs" secondAttribute="bottom" constant="6" id="hDw-9p-xVQ"/>
                                             <constraint firstItem="P8u-dn-fBs" firstAttribute="top" secondItem="24f-Wl-gke" secondAttribute="top" constant="1" id="luj-5L-wT4"/>
                                             <constraint firstItem="OS0-sF-aLV" firstAttribute="top" secondItem="24f-Wl-gke" secondAttribute="top" constant="-3" id="mDg-3C-27N"/>
                                             <constraint firstItem="P8u-dn-fBs" firstAttribute="leading" secondItem="24f-Wl-gke" secondAttribute="leading" constant="1" id="pRm-Mz-LaX"/>

@@ -72,12 +72,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFU-AZ-YSA">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2x0-4a-smJ">
-                                                <rect key="frame" x="0.0" y="60" width="60" height="9"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2x0-4a-smJ">
+                                                <rect key="frame" x="0.0" y="58" width="60" height="12"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="9" id="vyX-kL-HDP"/>
+                                                    <constraint firstAttribute="height" constant="12" id="vyX-kL-HDP"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -97,10 +97,11 @@
                                         <constraints>
                                             <constraint firstItem="hN6-KP-fMy" firstAttribute="top" secondItem="TFU-AZ-YSA" secondAttribute="top" constant="2" id="0Ll-Ua-nsa"/>
                                             <constraint firstAttribute="height" constant="70" id="76i-xt-xIJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="2x0-4a-smJ" secondAttribute="bottom" constant="1" id="BCe-BV-eG3"/>
+                                            <constraint firstAttribute="bottom" secondItem="2x0-4a-smJ" secondAttribute="bottom" id="BCe-BV-eG3"/>
                                             <constraint firstItem="2x0-4a-smJ" firstAttribute="leading" secondItem="TFU-AZ-YSA" secondAttribute="leading" id="FN0-IO-gxW"/>
                                             <constraint firstItem="hN6-KP-fMy" firstAttribute="centerX" secondItem="TFU-AZ-YSA" secondAttribute="centerX" id="WtV-0g-Yhe"/>
                                             <constraint firstAttribute="trailing" secondItem="2x0-4a-smJ" secondAttribute="trailing" id="ikg-8p-V6S"/>
+                                            <constraint firstItem="2x0-4a-smJ" firstAttribute="centerX" secondItem="hN6-KP-fMy" secondAttribute="centerX" id="lji-lM-H89"/>
                                             <constraint firstAttribute="width" constant="60" id="r4e-O0-edE"/>
                                         </constraints>
                                     </view>
