@@ -53,6 +53,7 @@ class AnimationViewController: UIViewController {
         showPins(showAll: true, interests: "")
         getEvents()
         
+    
 //        User.getFollowing(gotFollowing: {users in
 //            DataCache.instance.write(object: users as NSCoding, forKey: "following_users")
 //        })

@@ -233,6 +233,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
+        getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
+            print(events)
+        })
         // remove any old pins
         for marker in self.lastPins{
             marker.map = nil

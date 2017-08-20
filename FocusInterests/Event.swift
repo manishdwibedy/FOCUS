@@ -299,4 +299,59 @@ extension Event{
         }
 
     }
+    
+    static func getTicketMasterEvent(id: String, gotEvents: @escaping (_ result: Event) -> Void){
+        var events = [Event]()
+        
+        let ticketMasterDF = DateFormatter()
+        ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        
+        let url = "https://app.ticketmaster.com/discovery/v2/events/\(id)"
+        let parameters: [String: Any] = [
+            "apikey": "dScAOnFScudDodKZDJ47ehxcJ1pXnihD"
+        ]
+        
+        print(id)
+        Alamofire.request(url, method: .get, parameters:parameters, headers: nil).responseJSON { response in
+            let data = JSON(data: response.data!)
+            
+            let name = data["name"].stringValue
+            let address = data["_embedded"]["venues"].arrayValue[0]
+            let fullAddress = "\(address["address"]["line1"].stringValue);;\(address["city"]["name"].stringValue)"
+            let shortAddress = "\(address["name"].stringValue)"
+            let lat = address["location"]["latitude"].stringValue
+            let long = address["location"]["longitude"].stringValue
+            let category = data["classifications"][0]["segment"]["name"].stringValue
+
+            let start = data["dates"]["start"]
+            let date = "\(start["localDate"].stringValue) \(start["localTime"].stringValue)"
+
+            let price = data["priceRanges"][0]["min"].doubleValue
+            let image = data["images"][0]["url"].stringValue
+
+            let parkingInfo = address["parkingDetail"].stringValue
+            let info = data["info"].stringValue
+            let boxOfficeInfo = address["boxOfficeInfo"].stringValue
+            let pleaseNoteInfo = data["pleaseNote"].stringValue
+            let desc = "\(info)\n\(pleaseNoteInfo)\n\(boxOfficeInfo)\(parkingInfo)"
+
+            let url = data["url"].stringValue
+
+            let event = Event(title: name, description: desc, fullAddress: fullAddress, shortAddress: shortAddress, latitude: lat, longitude: long, date: date, creator: "", id: id, category: category, privateEvent: false)
+
+            event.url = url
+            event.price = price
+            event.image_url = image
+            
+            if let date = ticketMasterDF.date(from: event.date!), date > Date(){
+                events.append(event)
+            }
+
+            gotEvents(event)
+            
+            
+        }
+        
+    }
 }

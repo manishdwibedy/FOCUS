@@ -1600,54 +1600,137 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
     let timeDF = DateFormatter()
     timeDF.dateFormat = "h:mm a"
     
+    let ticketMasterDF = DateFormatter()
+    ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    
+    let dateOnlyDF = DateFormatter()
+    dateOnlyDF.dateFormat = "yyyy-MM-dd "
+    
     
     Constants.DB.event.observeSingleEvent(of: .value, with: {snapshot in
         if let info = snapshot.value as? [String:[String:Any]]{
             for (id, eventInfo) in info{
-                if let event = Event.toEvent(info: eventInfo){
-                    event.id = id
-                    
-                    if let end = timeDF.date(from: event.endTime){
-                        let start = DF.date(from: event.date!)!
-                        if start < Date() && end > Date() && !event.privateEvent{
-                            if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
-                                for (_, attendingInfo) in attending{
-                                    if attendingInfo["UID"] as! String == uid{
+                
+                if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
+                    for (_, attendingInfo) in attending{
+                        if attendingInfo["UID"] as! String == uid{
+                            if let event = Event.toEvent(info: eventInfo){
+                                if let end = timeDF.date(from: event.endTime){
+                                    let start = DF.date(from: event.date!)!
+                                    if start < Date() && end > Date() && !event.privateEvent{
+                                        eventCount += 1
                                         events.append(event)
                                     }
                                 }
+                                    
+                                else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
+                                    if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
+                                        if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
+                                            eventCount += 1
+                                            events.append(event)
+                                        }
+                                    }
+                                    if !events.contains(event){
+                                        eventCount += 1
+                                        events.append(event)
+                                    }
+                                }
+                                
+                                
+                                if events.count == eventCount{
+                                    gotEvents(events)
+                                }
+                            }
+                            else{
+                                print(id)
+                                Event.getTicketMasterEvent(id: id, gotEvents: {event in
+                                    if let end = timeDF.date(from: event.endTime){
+                                        let start = DF.date(from: event.date!)!
+                                        if start < Date() && end > Date() && !event.privateEvent{
+                                            eventCount += 1
+                                            events.append(event)
+                                        }
+                                    }
+                                    if let date = ticketMasterDF.date(from: event.date!){
+                                        if date > Date() && !event.privateEvent{
+                                            if Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0 <= 7{
+                                                eventCount += 1
+                                                events.append(event)
+                                            }
+                                            if !events.contains(event){
+                                                eventCount += 1
+                                                events.append(event)
+                                            }
+                                        }
+                                    }
+                                    else if let date = dateOnlyDF.date(from: event.date!){
+                                        if date > Date() && !event.privateEvent{
+                                            if Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0 <= 7{
+                                                eventCount += 1
+                                                events.append(event)
+                                            }
+                                            if !events.contains(event){
+                                                eventCount += 1
+                                                events.append(event)
+                                            }
+                                        }
+                                    }
+                                    
+                                    if events.count == eventCount{
+                                        gotEvents(events)
+                                    }
+                                })
                             }
                         }
                     }
-                        
-                    else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
-                        if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
-                            if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
-                                for (_, attendingInfo) in attending{
-                                    if attendingInfo["UID"] as! String == uid{
-                                        events.append(event)
-                                    }
-                                }
-                            }
-                        }
-                        if !events.contains(event){
-                            if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
-                                for (_, attendingInfo) in attending{
-                                    if attendingInfo["UID"] as! String == uid{
-                                        events.append(event)
-                                    }
-                                }
-                            }
-                        }
-                        
-                        
-                    }
-
-                    
                 }
+                
+//                if let event = Event.toEvent(info: eventInfo){
+//                    event.id = id
+//                    
+//                    if let end = timeDF.date(from: event.endTime){
+//                        let start = DF.date(from: event.date!)!
+//                        if start < Date() && end > Date() && !event.privateEvent{
+//                            if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
+//                                for (_, attendingInfo) in attending{
+//                                    if attendingInfo["UID"] as! String == uid{
+//                                        events.append(event)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                        
+//                    else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
+//                        if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
+//                            if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
+//                                for (_, attendingInfo) in attending{
+//                                    if attendingInfo["UID"] as! String == uid{
+//                                        events.append(event)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if !events.contains(event){
+//                            if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
+//                                for (_, attendingInfo) in attending{
+//                                    if attendingInfo["UID"] as! String == uid{
+//                                        events.append(event)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        
+//                        
+//                    }
+//                }
+//                else{
+//                    // ticketmaster
+//                    
+//                }
             }
             
-            gotEvents(events)
+            
         }
         else{
             gotEvents(events)
@@ -1660,7 +1743,7 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
 //        if let value = value{
 //            for (_,event) in value{
 //                let event_id = (event as? [String:Any])?["ID"]
-//                
+//
 //                Constants.DB.event.child((event_id as? String)!).observeSingleEvent(of: .value, with: {snapshot in
 //                    if let info = snapshot.value as? [String : Any]{
 //                        if let event = Event.toEvent(info: info){
@@ -1736,6 +1819,10 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
     let timeDF = DateFormatter()
     timeDF.dateFormat = "h:mm a"
     
+    var ticketMasterDF = DateFormatter()
+    ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    var dateOnlyDF = DateFormatter()
+    dateOnlyDF.dateFormat = "yyyy-MM-dd "
     
     Constants.DB.user.child(uid).child("following/people").observeSingleEvent(of: .value, with: { (snapshot) in
         if let value = snapshot.value as? [String:Any]{
@@ -1755,14 +1842,33 @@ func getFollowingAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Ev
                                     followingAttendingEvents.append(event)
                                 }
                             }
-                                
-                            else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
-                                if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
-                                    
-                                    followingAttendingEvents.append(event)
+                            if let date = DF.date(from: event.date!){
+                                if date > Date() && !event.privateEvent{
+                                    if Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0 <= 7{
+                                        
+                                        followingAttendingEvents.append(event)
+                                    }
                                 }
                             }
                             
+                            if let date = ticketMasterDF.date(from: event.date!){
+                                if date > Date() && !event.privateEvent{
+                                    if Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0 <= 7{
+                                        
+                                        followingAttendingEvents.append(event)
+                                    }
+                                }
+                            }
+                            
+                            if let date = dateOnlyDF.date(from: event.date!){
+                                if date > Date() && !event.privateEvent{
+                                    if Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0 <= 7{
+                                        
+                                        followingAttendingEvents.append(event)
+                                    }
+                                }
+                            }
+
                         }
                         
                         
