@@ -424,7 +424,15 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBAction func inviteEvent(_ sender: UIButton) {
         
         if let date = eventDateDF.date(from: (event?.date)!){
-            if date < Date(){
+            
+            let gregorianCalendar = Calendar(identifier: .gregorian)
+            var dateSelected = gregorianCalendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+            
+            dateSelected.year = 2017
+            
+            let eventDate = gregorianCalendar.date(from: dateSelected)!
+            
+            if eventDate < Date(){
                 showError(message: "Event is over")
                 return
             }
@@ -448,7 +456,14 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBAction func attendEvent(_ sender: UIButton) {
         
         if let date = eventDateDF.date(from: (event?.date)!){
-            if date < Date(){
+            let gregorianCalendar = Calendar(identifier: .gregorian)
+            var dateSelected = gregorianCalendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+            
+            dateSelected.year = 2017
+            
+            let eventDate = gregorianCalendar.date(from: dateSelected)!
+            
+            if eventDate < Date(){
                 showError(message: "Event is over")
                 return
             }
@@ -472,6 +487,10 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
             let newEntry = fullRef.child("attendingList").childByAutoId()
             newEntry.updateChildValues(entry)
             fullRef.child("attendingAmount").updateChildValues(["amount":newAmount])
+            
+            var attending = (DataCache.instance.readObject(forKey: "attending_events") as? [Event])!
+            attending.append(self.event!)
+            DataCache.instance.write(object: attending as NSCoding, forKey: "attending_events")
             
             self.guestList[newEntry.key] = entry
             
@@ -508,6 +527,12 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                             
                         }
                         
+                        var attending = (DataCache.instance.readObject(forKey: "attending_events") as? [Event])!
+                        if let index = attending.index(of: self.event!){
+                            attending.remove(at: index)
+                        }
+                        DataCache.instance.write(object: attending as NSCoding, forKey: "attending_events")
+            
                         let newAmount = self.attendingAmount - 1
                         self.attendingAmount = newAmount
                         let fullRef = self.ref.child("events").child((self.event?.id)!)

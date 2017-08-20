@@ -501,10 +501,14 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
 //            })
 //        }
     
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
+        
+        let DF = DateFormatter()
+        DF.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateOnlyDF = DateFormatter()
+        dateOnlyDF.dateFormat = "yyyy-MM-dd "
+        let focusDF = DateFormatter()
+        focusDF.dateFormat =  "MMM dd, h:mm a"
         
         if let places = (DataCache.instance.readObject(forKey: "places") as? [Place]){
             self.places = places
@@ -521,18 +525,51 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.attendingEvents = events
         }
         
-        
-        var uniqueEvents = self.attendingEvents!
+        var uniqueEvents = attendingEvents?.sorted(by: {
+            var date1: Date?, date2: Date?
+            if let date = DF.date(from: $0.0.date!){
+                date1 = date
+            }
+            else if let date = dateOnlyDF.date(from: $0.0.date!){
+                date1 = date
+            }
+            else if let date = focusDF.date(from: $0.0.date!){
+                date1 = date
+            }
+            
+            
+            if let date = DF.date(from: $0.1.date!){
+                date2 = date
+            }
+            else if let date = dateOnlyDF.date(from: $0.1.date!){
+                date2 = date
+            }
+            else if let date = focusDF.date(from: $0.1.date!){
+                date2 = date
+            }
+            
+            return date1! < date2!
+        })
         
         for event in self.events{
-            if !uniqueEvents.contains(event){
-                uniqueEvents.append(event)
+            if !(uniqueEvents?.contains(event))!{
+                uniqueEvents?.append(event)
             }
         }
+        self.events = uniqueEvents!
         
-       
+        if segmentedOut.selectedSegmentIndex == 1{
+            self.filtered = events
+            tableView.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.events = uniqueEvents
+        
+        
+        
         
         self.updatePlaces()
         

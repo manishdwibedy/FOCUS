@@ -1373,7 +1373,18 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
             self.eventPlaceMarker?.title = pin.pinMessage
             //self.eventPlaceMarker?.map = self.mapView
             
+            tapPin(pin: pin)
             
+            let camera = GMSCameraPosition.camera(withLatitude: pin.coordinates.latitude,
+                                                  longitude: pin.coordinates.longitude,
+                                                  zoom: 13)
+            
+            if mapView.isHidden {
+                mapView.isHidden = false
+                mapView.camera = camera
+            } else {
+                mapView.animate(to: camera)
+            }
             markerDataMapping[eventPlaceMarker!] = showPin!
             eventPlaceMarker?.accessibilityLabel = "pin_dummy"
             
