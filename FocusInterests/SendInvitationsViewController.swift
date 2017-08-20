@@ -283,12 +283,14 @@ class SendInvitationsViewController: UIViewController, UITableViewDelegate, UITa
             
         }
         
-        delegate?.showEventMarker(event: event!, data: self.image!)
-        
         print("going back to page")
+        delegate?.showEventMarker(event: self.event!, data: self.image!)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
-        self.present(VC!, animated: true, completion: nil)
+        self.present(VC!, animated: true, completion: { completed in
+            let mapVC = VC!.viewControllers![0] as! MapViewController
+            mapVC.tapEvent(event: self.event!, data: self.image!)
+        })
     }
     
 //    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
