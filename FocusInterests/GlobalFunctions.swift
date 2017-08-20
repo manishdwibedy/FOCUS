@@ -1606,13 +1606,44 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
             for (id, eventInfo) in info{
                 if let event = Event.toEvent(info: eventInfo){
                     event.id = id
-                    if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
-                        for (_, attendingInfo) in attending{
-                            if attendingInfo["UID"] as! String == uid{
-                                events.append(event)
+                    
+                    if let end = timeDF.date(from: event.endTime){
+                        let start = DF.date(from: event.date!)!
+                        if start < Date() && end > Date() && !event.privateEvent{
+                            if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
+                                for (_, attendingInfo) in attending{
+                                    if attendingInfo["UID"] as! String == uid{
+                                        events.append(event)
+                                    }
+                                }
                             }
                         }
                     }
+                        
+                    else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
+                        if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
+                            if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
+                                for (_, attendingInfo) in attending{
+                                    if attendingInfo["UID"] as! String == uid{
+                                        events.append(event)
+                                    }
+                                }
+                            }
+                        }
+                        if !events.contains(event){
+                            if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
+                                for (_, attendingInfo) in attending{
+                                    if attendingInfo["UID"] as! String == uid{
+                                        events.append(event)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+
+                    
                 }
             }
             
