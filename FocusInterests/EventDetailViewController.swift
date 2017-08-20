@@ -76,6 +76,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
     var event: Event?
     var showInvitePopup = false
     
+    @IBOutlet weak var ticketMasterView: UIView!
     @IBOutlet weak var ticketMasterButton: UIButton!
     let ref = Database.database().reference()
     let commentsCList = NSMutableArray()
@@ -225,7 +226,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 })
             })
             
-            ticketMasterButton.removeFromSuperview()
+            ticketMasterView.removeFromSuperview()
         }
         else{
             if let url = URL(string: (event?.image_url!)!){

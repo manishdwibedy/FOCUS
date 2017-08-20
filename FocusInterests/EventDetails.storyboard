@@ -635,6 +635,7 @@
                         <outlet property="postCommentsButton" destination="T2u-sp-0TX" id="aSJ-Hf-XA9"/>
                         <outlet property="scrollView" destination="Jsv-zr-udl" id="Xqw-5o-c7l"/>
                         <outlet property="ticketMasterButton" destination="tJ6-CV-oP9" id="xaE-qi-Uoj"/>
+                        <outlet property="ticketMasterView" destination="ecg-hJ-KLH" id="Anc-EO-2U1"/>
                         <outlet property="timeAmountAddressStack" destination="48a-oA-P91" id="ggg-UI-43J"/>
                         <outlet property="timeLabel" destination="zk6-V7-o1e" id="ioq-ZQ-W2x"/>
                         <outlet property="topView" destination="olO-Ay-Igx" id="bOH-6m-4Ph"/>
