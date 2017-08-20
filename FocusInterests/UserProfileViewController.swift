@@ -137,10 +137,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
             }
         }
         else{
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let VC = storyboard.instantiateViewController(withIdentifier: "home") as? HomePageViewController
-            
-            self.present(VC!, animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
 	}

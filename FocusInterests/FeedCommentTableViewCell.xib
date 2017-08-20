@@ -70,13 +70,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="79.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N73-dJ-V1m">
-                                                <rect key="frame" x="5" y="54" width="54" height="19.5"/>
+                                                <rect key="frame" x="1" y="58" width="62" height="13"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="13" id="MAz-E7-Sv0"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDG-xf-c2M">
-                                                <rect key="frame" x="7" y="2" width="50" height="50"/>
+                                                <rect key="frame" x="6.5" y="2" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="PgS-sL-TvI"/>
                                                     <constraint firstAttribute="height" constant="50" id="vua-0g-IjD"/>
@@ -89,13 +92,13 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="N73-dJ-V1m" firstAttribute="top" secondItem="QDG-xf-c2M" secondAttribute="bottom" constant="2" id="5QB-y8-Obl"/>
+                                            <constraint firstItem="N73-dJ-V1m" firstAttribute="top" secondItem="QDG-xf-c2M" secondAttribute="bottom" constant="6" id="5QB-y8-Obl"/>
                                             <constraint firstItem="N73-dJ-V1m" firstAttribute="centerX" secondItem="QDG-xf-c2M" secondAttribute="centerX" id="ECb-lu-RYN"/>
                                             <constraint firstAttribute="width" constant="64" id="HJt-W2-52H"/>
                                             <constraint firstItem="QDG-xf-c2M" firstAttribute="top" secondItem="x9c-9y-rgJ" secondAttribute="top" constant="2" id="dNb-va-RlT"/>
                                             <constraint firstItem="QDG-xf-c2M" firstAttribute="centerX" secondItem="x9c-9y-rgJ" secondAttribute="centerX" id="gEk-4Y-v87"/>
-                                            <constraint firstItem="N73-dJ-V1m" firstAttribute="leading" secondItem="x9c-9y-rgJ" secondAttribute="leading" constant="5" id="oSQ-3D-voe"/>
-                                            <constraint firstAttribute="trailing" secondItem="N73-dJ-V1m" secondAttribute="trailing" constant="5" id="p8y-5t-4cI"/>
+                                            <constraint firstItem="N73-dJ-V1m" firstAttribute="leading" secondItem="x9c-9y-rgJ" secondAttribute="leading" constant="1" id="oSQ-3D-voe"/>
+                                            <constraint firstAttribute="trailing" secondItem="N73-dJ-V1m" secondAttribute="trailing" constant="1" id="p8y-5t-4cI"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="2wa-hV-y5V">

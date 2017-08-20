@@ -872,6 +872,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         {
             self.searchEvents(query: searchBar.text!)
         }
+        
+        searchBar.setShowsCancelButton(false, animated: true)
+        self.view.endEditing(true)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -1366,10 +1369,6 @@ extension InvitePeopleViewController{
             self.filtered = self.events
             self.tableView.reloadData()
         }
-    }
-    
-    @IBAction func unwindBackToExplorePage(_ sender: UIStoryboardSegue){
-        self.showPopupView()
     }
     
     func gotSelectedLocation(location: LocationSuggestion) {
