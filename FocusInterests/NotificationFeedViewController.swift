@@ -116,6 +116,8 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             self.nofArray = self.nofArray.sorted(by: {
                 $0.time! > $1.time!
             })
+            
+            DataCache.instance.write(object: nofArray as NSCoding, forKey: "notifications")
             AuthApi.set(read: self.nofArray.count)
             self.tableView.reloadData()
         }, gotInvites: {invites in
@@ -129,6 +131,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
                 $0.time! > $1.time!
             })
             AuthApi.set(read: self.nofArray.count)
+            DataCache.instance.write(object: nofArray as NSCoding, forKey: "notifications")
             self.tableView.reloadData()
         } , gotFeed: {feed in
             
