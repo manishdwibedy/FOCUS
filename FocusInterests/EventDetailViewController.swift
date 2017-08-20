@@ -225,7 +225,7 @@ class EventDetailViewController: UIViewController, UITableViewDelegate,UITableVi
                 })
             })
             
-            ticketMasterButton.isHidden = true
+            ticketMasterButton.removeFromSuperview()
         }
         else{
             if let url = URL(string: (event?.image_url!)!){
