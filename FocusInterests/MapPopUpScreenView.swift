@@ -217,6 +217,7 @@ class MapPopUpScreenView: UIView {
                 let storyboard = UIStoryboard(name: "EventDetails", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "eventDetailVC") as! EventDetailViewController
                 controller.event = object as? Event
+                controller.map = parentVC
                 parentVC.present(controller, animated: true, completion: nil)
                 
             }else if type == "place"{

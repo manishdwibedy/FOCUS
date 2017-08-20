@@ -524,7 +524,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         
         var uniqueEvents = self.attendingEvents!
         
-        for event in self.events!{
+        for event in self.events{
             if !uniqueEvents.contains(event){
                 uniqueEvents.append(event)
             }

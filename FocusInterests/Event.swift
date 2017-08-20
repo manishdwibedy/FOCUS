@@ -138,6 +138,12 @@ class Event: NSObject, NSCoding{
         UserDefaults.standard.set(nil, forKey: "new_event")
     }
     
+    override func isEqual(_ object: Any?) -> Bool{
+        if let rhs = object as? Event{
+            return self.id == rhs.id
+        }
+        return false
+    }
     
     static func == (lhs: Event, rhs: Event) -> Bool {
         return lhs.id == rhs.id
