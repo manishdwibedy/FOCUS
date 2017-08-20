@@ -861,6 +861,9 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
         {
             self.searchEvents(query: searchBar.text!)
         }
+        
+        searchBar.setShowsCancelButton(false, animated: true)
+        self.view.endEditing(true)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
