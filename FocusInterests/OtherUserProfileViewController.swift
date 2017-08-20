@@ -123,6 +123,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     var placesIFollow = [Place]()
     var eventsIAttend = [Event]()
     var hasPinImage = false
+    var delegate: showMarkerDelegate?
     
     // Back button
     @IBAction func backButton(_ sender: Any) {
@@ -1380,7 +1381,16 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
     }
     
     func globeButtonPressed(_ sender: UIButton) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+        vc.willShowPin = true
         
+        vc.location = CLLocation(latitude: (self.pinInfo?.coordinates.latitude)!, longitude: (self.pinInfo?.coordinates.longitude)!)
+        vc.selectedIndex = 0
+        vc.showPin = self.pinInfo
+        
+        delegate?.showPinMarker(pin: self.pinInfo!, show: false)
+        self.present(vc, animated: true, completion: nil)
     }
 }
 

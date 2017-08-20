@@ -554,6 +554,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         VC.previous = .people
         VC.placesIFollow = self.placesIFollow
         VC.eventsIAttend = self.eventsIAttend
+        VC.delegate = self.tabBarController?.viewControllers![0] as! MapViewController
         dropfromTop(view: self.view)
         
         self.present(VC, animated:true, completion:nil)

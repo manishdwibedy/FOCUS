@@ -781,6 +781,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         vc.showPin = self.pinInfo
         
         delegate?.showPinMarker(pin: self.pinInfo!, show: false)
+        self.present(vc, animated: true, completion: nil)
     }
     
     // MARK: - Navigation
