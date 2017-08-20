@@ -246,8 +246,7 @@ class NotificationFeedCellTableViewCell: UITableViewCell {
         
         if !isFeed{
             let notif_time = notif.time!
-            let plain_time = "\(time.string(from: notif_time)) \(date.string(from: notif_time))"
-            self.timeLabel.text = plain_time
+            self.timeLabel.text = DateFormatter().timeSince(from: notif_time)
         }
         
         
