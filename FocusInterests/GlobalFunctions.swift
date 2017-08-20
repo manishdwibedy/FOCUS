@@ -1600,73 +1600,95 @@ func getAttendingEvent(uid: String, gotEvents: @escaping (_ events: [Event]) -> 
     let timeDF = DateFormatter()
     timeDF.dateFormat = "h:mm a"
     
-    Constants.DB.user.child(uid).child("invitations/event").observeSingleEvent(of: .value, with: { (snapshot) in
-        let value = snapshot.value as? NSDictionary
-        
-        if let value = value{
-            for (_,event) in value{
-                let event_id = (event as? [String:Any])?["ID"]
-                
-                Constants.DB.event.child((event_id as? String)!).observeSingleEvent(of: .value, with: {snapshot in
-                    if let info = snapshot.value as? [String : Any]{
-                        if let event = Event.toEvent(info: info){
-                            if let endTime = event.endTime as? String{
-                                if let end = timeDF.date(from: endTime){
-                                    let start = DF.date(from: (event.date!))!
-                                    if let isPrivate = event.privateEvent as? Bool{
-                                        if start < Date() && end > Date() && !isPrivate{
-                                            event.id = event_id as! String
-                                            
-                                            events.append(event)
-                                            eventCount += 1
-                                        }
-                                    }
-                                    else{
-                                        event.id = event_id as! String
-                                        
-                                        events.append(event)
-                                        eventCount += 1
-                                    }
-                                    
-                                }
-                                
-                            }
-                            else{
-                                if let dateString = event.date{
-                                    if let date = DF.date(from: dateString){
-                                        if let isPrivate = event.privateEvent as? Bool{
-                                            if !isPrivate && Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0 <= 7{
-                                                event.id = event_id as! String
-                                                
-                                                events.append(event)
-                                                eventCount += 1
-                                            }
-                                        }
-                                        else{
-                                            event.id = event_id as! String
-                                            
-                                            events.append(event)
-                                            eventCount += 1
-                                        }
-                                    }
-                                }
-                                
-                            }
-                            
-                            if eventCount == events.count{
-                                gotEvents(events)
-                                DataCache.instance.write(object: events as NSCoding, forKey: "attending_events")
+    
+    Constants.DB.event.observeSingleEvent(of: .value, with: {snapshot in
+        if let info = snapshot.value as? [String:[String:Any]]{
+            for (_, eventInfo) in info{
+                if let event = Event.toEvent(info: eventInfo){
+                    if let attending = eventInfo["attendingList"] as? [String:[String:Any]]{
+                        for (_, attendingInfo) in attending{
+                            if attendingInfo["UID"] as! String == uid{
+                                events.append(event)
                             }
                         }
                     }
-                })
+                }
             }
             
+            gotEvents(events)
         }
         else{
             gotEvents(events)
         }
     })
+    
+//    Constants.DB.user.child(uid).child("invitations/event").observeSingleEvent(of: .value, with: { (snapshot) in
+//        let value = snapshot.value as? NSDictionary
+//        
+//        if let value = value{
+//            for (_,event) in value{
+//                let event_id = (event as? [String:Any])?["ID"]
+//                
+//                Constants.DB.event.child((event_id as? String)!).observeSingleEvent(of: .value, with: {snapshot in
+//                    if let info = snapshot.value as? [String : Any]{
+//                        if let event = Event.toEvent(info: info){
+//                            if let endTime = event.endTime as? String{
+//                                if let end = timeDF.date(from: endTime){
+//                                    let start = DF.date(from: (event.date!))!
+//                                    if let isPrivate = event.privateEvent as? Bool{
+//                                        if start < Date() && end > Date() && !isPrivate{
+//                                            event.id = event_id as! String
+//                                            
+//                                            events.append(event)
+//                                            eventCount += 1
+//                                        }
+//                                    }
+//                                    else{
+//                                        event.id = event_id as! String
+//                                        
+//                                        events.append(event)
+//                                        eventCount += 1
+//                                    }
+//                                    
+//                                }
+//                                
+//                            }
+//                            else{
+//                                if let dateString = event.date{
+//                                    if let date = DF.date(from: dateString){
+//                                        if let isPrivate = event.privateEvent as? Bool{
+//                                            if !isPrivate && Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0 <= 7{
+//                                                event.id = event_id as! String
+//                                                
+//                                                events.append(event)
+//                                                eventCount += 1
+//                                            }
+//                                        }
+//                                        else{
+//                                            event.id = event_id as! String
+//                                            
+//                                            events.append(event)
+//                                            eventCount += 1
+//                                        }
+//                                    }
+//                                }
+//                                
+//                            }
+//                            
+//                            if eventCount == events.count{
+//                                gotEvents(events)
+//                                DataCache.instance.write(object: events as NSCoding, forKey: "attending_events")
+//                            }
+//                        }
+//                    }
+//                })
+//            }
+//            
+//        }
+//        else{
+//            gotEvents(events)
+//        }
+//    })
 }
    
    

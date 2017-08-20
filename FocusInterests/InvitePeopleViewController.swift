@@ -193,23 +193,6 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             currentLocation.text = data.locationAddress.components(separatedBy: ";;")[0]
         }
         
-        if let places = (DataCache.instance.readObject(forKey: "places") as? [Place]){
-            self.places = places
-        }
-        if let following = (DataCache.instance.readObject(forKey: "following_places") as? [Place]){
-            self.followingPlaces = following
-        }
-        
-        if let events = (DataCache.instance.readObject(forKey: "events") as? [Event]){
-            self.events = events
-        }
-        
-//        if let events = (DataCache.instance.readObject(forKey: "attending_events") as? [Event]){
-//            self.attendingEvents = events
-//        }
-//        
-//        self.events = self.attendingEvents! + self.events
-        
         for place in self.places{
             self.placeMapping[place.id] = place
             getPlaceHours(id: place.id)
@@ -523,6 +506,26 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let places = (DataCache.instance.readObject(forKey: "places") as? [Place]){
+            self.places = places
+        }
+        if let following = (DataCache.instance.readObject(forKey: "following_places") as? [Place]){
+            self.followingPlaces = following
+        }
+        
+        if let events = (DataCache.instance.readObject(forKey: "events") as? [Event]){
+            self.events = events
+        }
+        
+        if let events = (DataCache.instance.readObject(forKey: "attending_events") as? [Event]){
+            self.attendingEvents = events
+        }
+        
+        
+        
+        
+                self.events = self.attendingEvents! + self.events
         
         self.updatePlaces()
         
