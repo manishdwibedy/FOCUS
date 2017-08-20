@@ -122,6 +122,9 @@ class NewMessageViewController: UIViewController, UITableViewDataSource, UITable
                 cell.userProfileImage.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_people"))
             }
         }
+        else{
+            cell.userProfileImage.image = #imageLiteral(resourceName: "placeholder_people")
+        }
         
         return cell
     }
