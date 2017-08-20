@@ -254,7 +254,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
                 cell.userImage.setIndicatorStyle(.gray)
             }
             if message.type == .image{
-                if message.id == AuthApi.getFirebaseUid()!{
+                if message.sender_id == AuthApi.getFirebaseUid()!{
                     cell.content.text = "you sent a photo"
                 }
                 else{
