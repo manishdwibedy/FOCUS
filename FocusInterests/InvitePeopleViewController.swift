@@ -521,7 +521,18 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
             self.attendingEvents = events
         }
         
-        self.events = self.attendingEvents! + self.events
+        
+        var uniqueEvents = self.attendingEvents!
+        
+        for event in self.events!{
+            if !uniqueEvents.contains(event){
+                uniqueEvents.append(event)
+            }
+        }
+        
+       
+        
+        self.events = uniqueEvents
         
         self.updatePlaces()
         
