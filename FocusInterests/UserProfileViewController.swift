@@ -111,6 +111,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     var userID = ""
     var previous: previousScreen? = nil
     var hasPinImage = false
+    var delegate: showMarkerDelegate?
     
     @IBAction func settingButtonPressed(_ sender: Any) {
         let vc = SettingsViewController(nibName: "SettingsViewController", bundle: nil)
@@ -774,7 +775,15 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     @IBAction func globeButtonPressed(_ sender: Any) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "home") as! HomePageViewController
+        vc.willShowPin = true
         
+        vc.location = CLLocation(latitude: (self.pinInfo?.coordinates.latitude)!, longitude: (self.pinInfo?.coordinates.longitude)!)
+        vc.selectedIndex = 0
+        vc.showPin = self.pinInfo
+        
+        delegate?.showPinMarker(pin: self.pinInfo!, show: false)
     }
     
     // MARK: - Navigation

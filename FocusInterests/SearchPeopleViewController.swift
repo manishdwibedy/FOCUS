@@ -731,8 +731,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
     }
     
     @IBAction func goToUserProfile(_ sender: Any) {
-        let VC:UIViewController = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
-        
+        let VC = UIStoryboard(name: "UserProfile", bundle: nil).instantiateViewController(withIdentifier: "Home") as! UserProfileViewController
+        VC.delegate = self.tabBarController?.viewControllers![0] as! MapViewController
         dropfromTop(view: self.view)
         
         self.present(VC, animated:true, completion:nil)
