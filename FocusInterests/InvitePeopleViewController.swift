@@ -891,7 +891,7 @@ class InvitePeopleViewController: UIViewController,UITableViewDelegate,UITableVi
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if segmentedOut.selectedSegmentIndex == 0
         {
-            self.searchPlaces(query: searchText)
+            //self.searchPlaces(query: searchText)
         }
         else if segmentedOut.selectedSegmentIndex == 1
         {
