@@ -2,7 +2,7 @@
 //  MapViewController.swift
 //  FocusInterests
 //
-//  Created by jonathan thornburg on 2/19/17.
+//  Created by FOCUS Team on 2/19/17.
 //  Copyright © 2017 singlefocusinc. All rights reserved.
 //
 
@@ -47,7 +47,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     private var clusterManager: GMUClusterManager!
     @IBOutlet weak var photoInputView: UIView!
-
+    @IBOutlet weak var takeAPhotoButton: UIButton!
+    @IBOutlet weak var cameraRollButton: UIButton!
+    var hasChosenPhoto = false
     
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
@@ -85,6 +87,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var viewingPlace: Place? = nil
     var viewingEvent: Event? = nil
     
+    
     var followingPlacesMarker = [GMSMarker]()
     var allPlacesMarker = [GMSMarker]()
     
@@ -92,6 +95,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBOutlet weak var invitePopupView: UIView!
     @IBOutlet weak var invitePopupViewBottomConstraint: NSLayoutConstraint!
+    
     var showInvitePopupView = false
     let screenSize = UIScreen.main.bounds
     var screenWidth: CGFloat = 0.0
@@ -443,10 +447,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
         self.settingGearButton.isHidden = true
+        self.takeAPhotoButton.layer.cornerRadius = 10
+        self.cameraRollButton.layer.cornerRadius = 10
+        self.photoInputView.layer.cornerRadius = 15
+        self.photoInputView.clipsToBounds = true
+        
+        if self.hasChosenPhoto{
+            self.photoInputView.isHidden = true
+        }else{
+            self.photoInputView.isHidden = false
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillDisappear(animated)
         self.invites.removeAll()
         self.notifs.removeAll()
         
@@ -574,15 +589,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                             self.followYourFriendsView.allCornersRounded(radius: 8.0)
                         }
                         if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0{
-                            let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
-                            
-                            photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
-                            
-                            
-                            photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
-                            
-                            
-                            self.view.addSubview(photoViewInput)
+                            if self.hasChosenPhoto{
+                                self.photoInputView.isHidden = true
+                            }else{
+                                self.photoInputView.isHidden = false
+                            }
+//                            self.view.bringSubview(toFront: self.photoInputView)
                         }
                         
                         //self.photoView.isHidden = false
@@ -596,17 +608,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
         }
         else if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0 {
-            let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
-            
-            photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
-            
-            
-            photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
-            
-            
-            self.view.addSubview(photoViewInput)
-        }
-        else if AuthApi.isNewUser(){
+            if self.hasChosenPhoto{
+                self.photoInputView.isHidden = true
+            }else{
+                self.photoInputView.isHidden = false
+            }
+        }else if AuthApi.isNewUser(){
             self.showPopup()
         }
         
@@ -665,7 +672,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
     }
     
-    func showCameraRoll() {
+    @IBAction func showCameraRoll() {
         let photoPicker = UIImagePickerController()
         photoPicker.delegate = self
         self.present(photoPicker, animated: true, completion: {
@@ -673,7 +680,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         })
     }
     
-    func showCamera() {
+    @IBAction func showCamera() {
         let picker = UIImagePickerController()
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.allowsEditing = false
@@ -707,8 +714,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
 
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        
-        
         popUpView.isHidden = true
         
         if let username = usernameInputView as? UsernameInputView{
@@ -1299,6 +1304,7 @@ extension MapViewController{
 
 extension MapViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.hasChosenPhoto = true
         self.dismiss(animated: true, completion: { () -> Void in
             
         })
@@ -1325,16 +1331,8 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
                 }
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 AuthApi.set(userImage: metadata.downloadURL()?.absoluteString)
-                
             }
         }
-        
-        self.photoInputView.isHidden = true
-        self.mapView.sendSubview(toBack: self.photoInputView)
-        
-//        self.photoInputView.isHidden = true
-//        self.photoInputView.removeFromSuperview()
-        
         
         if self.friends.count > 0{
             let followYourFriendsSubView = FollowYourFriendsView(frame: CGRect(x: 0, y: 0, width: self.followYourFriendsView.frame.size.width, height: self.followYourFriendsView.frame.size.height))

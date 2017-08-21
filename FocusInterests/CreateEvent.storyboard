@@ -356,7 +356,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xYK-Z5-9fw">
-                                <rect key="frame" x="0.0" y="129" width="375" height="534"/>
+                                <rect key="frame" x="0.0" y="129" width="375" height="476"/>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -411,9 +411,9 @@
                             <constraint firstItem="u0X-XZ-Qz2" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leading" id="6tb-rh-HFk"/>
                             <constraint firstAttribute="trailing" secondItem="kpU-5M-zQz" secondAttribute="trailing" id="B3s-Li-NCx"/>
                             <constraint firstItem="x2N-eM-M3F" firstAttribute="top" secondItem="upw-Ob-YFg" secondAttribute="bottom" constant="-3" id="BKE-DL-EXV"/>
-                            <constraint firstItem="x2N-eM-M3F" firstAttribute="top" secondItem="xYK-Z5-9fw" secondAttribute="bottom" id="HeA-WU-tce"/>
                             <constraint firstItem="xYK-Z5-9fw" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leading" id="KXL-fL-JxE"/>
                             <constraint firstItem="xYK-Z5-9fw" firstAttribute="top" secondItem="u0X-XZ-Qz2" secondAttribute="bottom" id="OlC-eu-fhR"/>
+                            <constraint firstItem="upw-Ob-YFg" firstAttribute="top" secondItem="xYK-Z5-9fw" secondAttribute="bottom" id="TgU-NZ-aOH"/>
                             <constraint firstAttribute="trailing" secondItem="xYK-Z5-9fw" secondAttribute="trailing" id="UHX-8G-et8"/>
                             <constraint firstItem="kpU-5M-zQz" firstAttribute="top" secondItem="7iv-yV-Zt5" secondAttribute="bottom" id="Wsx-lB-nBJ"/>
                             <constraint firstItem="kpU-5M-zQz" firstAttribute="leading" secondItem="bOU-eS-8QM" secondAttribute="leading" id="abT-YD-uFU"/>
@@ -450,7 +450,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eYW-PJ-Iy8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y9s-5u-ROX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7SC-b0-CUZ">
@@ -477,10 +477,10 @@
                                 </items>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-WG-8rv">
-                                <rect key="frame" x="0.0" y="64" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXV-Yc-qSe">
-                                <rect key="frame" x="0.0" y="711" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="Camera" id="5Ww-Fo-APP">
                                         <connections>
