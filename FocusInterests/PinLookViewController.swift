@@ -256,13 +256,13 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                             let length = messageText.characters.count - username.characters.count
                             let range = NSMakeRange(username.characters.count, length)
                             
-                            let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.commentsStackView.frame.width, height: 25))
+                            let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.commentsStackView.frame.width, height: .greatestFiniteMagnitude))
                             commentLabel.textColor = .white
                             commentLabel.numberOfLines = 0
                             commentLabel.lineBreakMode = .byWordWrapping
                             commentLabel.textAlignment = .left
                             commentLabel.attributedText = attributedString(from: messageText, nonBoldRange: range)
-                            commentLabel.sizeToFit()
+//                            commentLabel.sizeToFit()
                             
                             self.commentsStackView.addArrangedSubview(commentLabel)
                             self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -301,28 +301,11 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.pinMessageLabelHeight.constant = self.pinMessageLabel.intrinsicContentSize.height
-//        if self.commentsStackView.arrangedSubviews.count == 1{
-//            self.commentHeight.constant = CGFloat(commentsStackView.arrangedSubviews[0].intrinsicContentSize.height)
-//        }else if self.commentsStackView.arrangedSubviews.count > 1{
-//            self.commentHeight.constant += CGFloat(30)
-//        }
-//        for commentIndex in 0...self.commentsStackView.arrangedSubviews.count-1{
-//            if self.commentsStackView.arrangedSubviews.count == 1{
-//                self.commentHeight.constant = CGFloat(commentsStackView.arrangedSubviews[commentIndex].intrinsicContentSize.height)
-//            }else if self.commentsStackView.arrangedSubviews.count > 1{
-//                self.commentHeight.constant += CGFloat(commentsStackView.arrangedSubviews[commentIndex].intrinsicContentSize.height)
-//            }
-//        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if commentsStackView.arrangedSubviews.count > 0 {
-            for commentIndex in 0...self.commentsStackView.arrangedSubviews.count-1{
-                self.commentHeight.constant += CGFloat(commentsStackView.arrangedSubviews[commentIndex].intrinsicContentSize.height)
-            }
-        }
     }
 
     override func didReceiveMemoryWarning() {
