@@ -149,10 +149,12 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                 let info = snapshot.value as? [String:Any]
                                 
                                 if let image_string = info?["image_string"] as? String{
-                                    if image_string.isEmpty{
+                                    if !image_string.isEmpty{
                                         AuthApi.set(userImage: image_string)
                                     }
-                                    AuthApi.set(userImage: nil)
+                                    else{
+                                        AuthApi.set(userImage: nil)
+                                    }
                                 }
                                 else{
                                     AuthApi.set(userImage: nil)

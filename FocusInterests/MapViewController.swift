@@ -1335,6 +1335,7 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
                 }
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 AuthApi.set(userImage: metadata.downloadURL()?.absoluteString)
+                Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/image_string").setValue(metadata.downloadURL()?.absoluteString)
                 self.hasChosenPhoto = true
                 self.view.setNeedsDisplay()
             }
