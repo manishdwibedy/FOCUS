@@ -2,7 +2,7 @@
 //  MapViewController.swift
 //  FocusInterests
 //
-//  Created by jonathan thornburg on 2/19/17.
+//  Created by FOCUS Team on 2/19/17.
 //  Copyright © 2017 singlefocusinc. All rights reserved.
 //
 
@@ -47,7 +47,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     private var clusterManager: GMUClusterManager!
     @IBOutlet weak var photoInputView: UIView!
-
+    @IBOutlet weak var takeAPhotoButton: UIButton!
+    @IBOutlet weak var cameraRollButton: UIButton!
+    var hasChosenPhoto = false
     
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
@@ -85,6 +87,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     var viewingPlace: Place? = nil
     var viewingEvent: Event? = nil
     
+    
     var followingPlacesMarker = [GMSMarker]()
     var allPlacesMarker = [GMSMarker]()
     
@@ -92,6 +95,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBOutlet weak var invitePopupView: UIView!
     @IBOutlet weak var invitePopupViewBottomConstraint: NSLayoutConstraint!
+    
     var showInvitePopupView = false
     let screenSize = UIScreen.main.bounds
     var screenWidth: CGFloat = 0.0
@@ -131,8 +135,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         self.popUpView.addSubview(popUpScreen)
         self.mapViewSettings.layer.cornerRadius = 10.0
         
-        if AuthApi.getUserImage() != nil && (AuthApi.getUserImage()?.characters.count)! > 0{
-            
+        if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0{
+            print("no image found")
+            self.hasChosenPhoto = false
+        }else if AuthApi.getUserImage() != nil && (AuthApi.getUserImage()?.characters.count)! > 0{
+            print("image found")
+            self.hasChosenPhoto = true
             SDWebImageManager.shared().downloadImage(with: URL(string: AuthApi.getUserImage()!), options: .continueInBackground, progress: {
                 (receivedSize :Int, ExpectedSize :Int) in
                 
@@ -195,12 +203,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         
         // Set up the cluster manager with default icon generator and renderer.
-//        let iconGenerator = GMUDefaultClusterIconGenerator()
-//        
-//        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
-//        
-//        let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
-//        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
+        //        let iconGenerator = GMUDefaultClusterIconGenerator()
+        //
+        //        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+        //
+        //        let renderer = CustomClusterRenderer(mapView: mapView, clusterIconGenerator: iconGenerator)
+        //        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
         
         
         let DF = DateFormatter()
@@ -209,18 +217,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let timeDF = DateFormatter()
         timeDF.dateFormat = "h:mm a"
         
-                
+        
         self.exploreTab = self.tabBarController?.viewControllers?[3] as? InvitePeopleViewController
         self.searchEventsTab = self.tabBarController?.viewControllers?[4] as? SearchEventsViewController
         
-//        self.exploreTab?.events = events
-//        self.exploreTab?.places = places
-//        
+        //        self.exploreTab?.events = events
+        //        self.exploreTab?.places = places
+        //
         UITabBarItem.appearance().setTitleTextAttributes([
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
             NSForegroundColorAttributeName : UIColor(hexString: "7ac901")
             ], for: .selected)
-
+        
         UITabBarItem.appearance().setTitleTextAttributes([
             NSFontAttributeName: UIFont(name: "Avenir-Black", size: 15)!,
             NSForegroundColorAttributeName : UIColor.white
@@ -228,7 +236,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         self.invitePopupView.isHidden = true
     }
-   
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -268,7 +276,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             self.events = events
         }
         
-
+        
         for (index, pin) in self.pins.enumerated(){
             let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
             let marker = GMSMarker(position: position)
@@ -308,15 +316,15 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         
         Answers.logCustomEvent(withName: "Screen",
-                                       customAttributes: [
-                                        "Name": "Map View"
+                               customAttributes: [
+                                "Name": "Map View"
             ])
         
-                
+        
         saveUserInfo()
         
         if AuthApi.getLocation() != nil{
-            showEvents()    
+            showEvents()
         }
         
         Event.getEvents(gotEvents: { events in
@@ -335,7 +343,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         })
         
         if AuthApi.isNotificationAvailable(){
-//            navigationView.notificationsButton.set
+            //            navigationView.notificationsButton.set
         }
         if willShowEvent || willShowPin || willShowPlace || AuthApi.showPin(){
             
@@ -350,16 +358,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 let position = CLLocationCoordinate2D(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)
                 camera = GMSCameraPosition.camera(withLatitude: pin.coordinates.latitude,
-                                         longitude: pin.coordinates.longitude,
-                                         zoom: 13)
+                                                  longitude: pin.coordinates.longitude,
+                                                  zoom: 13)
                 self.eventPlaceMarker = GMSMarker(position: position)
                 let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
                 image.image = #imageLiteral(resourceName: "pin")
                 image.contentMode = .scaleAspectFit
-                self.eventPlaceMarker?.iconView = image    
+                self.eventPlaceMarker?.iconView = image
                 self.eventPlaceMarker?.title = pin.pinMessage
                 self.eventPlaceMarker?.map = self.mapView
-
+                
                 eventPlaceMarker?.accessibilityLabel = "pin_dummy"
                 markerDataMapping[eventPlaceMarker!] = showPin!
                 
@@ -404,7 +412,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 tapEvent(event: event!, data: nil)
             }
-
+            
             
             if let camera = camera{
                 if mapView.isHidden {
@@ -425,7 +433,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 } else {
                     mapView.animate(to: camera!)
                 }
-
+                
             }
             
             currentLocation = AuthApi.getLocation()
@@ -445,10 +453,21 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
         self.settingGearButton.isHidden = true
+        self.takeAPhotoButton.layer.cornerRadius = 10
+        self.cameraRollButton.layer.cornerRadius = 10
+        self.photoInputView.layer.cornerRadius = 15
+        self.photoInputView.clipsToBounds = true
+        
+        if self.hasChosenPhoto{
+            self.photoInputView.isHidden = true
+        }else{
+            self.photoInputView.isHidden = false
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillDisappear(animated)
         self.invites.removeAll()
         self.notifs.removeAll()
         
@@ -511,29 +530,29 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         })
         
         Share.getFacebookFriends(completion: {friends in
-        
+            
         })
         
         
         self.pinRef = pinData.getPins(gotPin: {pin in
             
-//            if pin.username != AuthApi.getUserName(){
-                let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
-                let marker = GMSMarker(position: position)
-                marker.title = pin.pinMessage
-                marker.map = self.mapView
-                let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
-                image.image = UIImage(named: "pin")
-                image.contentMode = .scaleAspectFit
-                marker.iconView = image
-                marker.accessibilityHint = pin.username
-                
-                marker.accessibilityLabel = "pin_dummy"
-                self.markerDataMapping[marker] = pin
-                
-                self.pins.append(pin)
-                self.lastPins.append(marker)
-//            }
+            //            if pin.username != AuthApi.getUserName(){
+            let position = CLLocationCoordinate2D(latitude: Double(pin.coordinates.latitude), longitude: Double(pin.coordinates.longitude))
+            let marker = GMSMarker(position: position)
+            marker.title = pin.pinMessage
+            marker.map = self.mapView
+            let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 40))
+            image.image = UIImage(named: "pin")
+            image.contentMode = .scaleAspectFit
+            marker.iconView = image
+            marker.accessibilityHint = pin.username
+            
+            marker.accessibilityLabel = "pin_dummy"
+            self.markerDataMapping[marker] = pin
+            
+            self.pins.append(pin)
+            self.lastPins.append(marker)
+            //            }
         })
         
         if AuthApi.getUserName()?.characters.count == 0 || AuthApi.getUserName() == nil{
@@ -543,7 +562,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             self.usernameInputView = usernameView
             self.view.addSubview(usernameView)
-
+            
             
             usernameView.completion = { (username) in
                 print(username)
@@ -575,19 +594,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                             self.followYourFriendsView.addSubview(followYourFriendsSubView)
                             self.followYourFriendsView.allCornersRounded(radius: 8.0)
                         }
-                        if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0{
-                            let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
-                            
-                            photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
-                            
-                            
-                            photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
-                            
-                            
-                            self.view.addSubview(photoViewInput)
-                        }
-                        
-                        //self.photoView.isHidden = false
+//                        if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0{
+//                            if self.hasChosenPhoto{
+//                                self.photoInputView.isHidden = true
+//                            }else{
+//                                self.photoInputView.isHidden = false
+//                            }
+//                        }
                     }
                 })
             }
@@ -597,17 +610,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 
             }
         }
-        else if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0 {
-            let photoViewInput = PhotoInputView(frame: CGRect(x: self.photoInputView.frame.origin.x, y:self.photoInputView.frame.origin.y, width: self.photoInputView.frame.size.width, height: self.photoInputView.frame.size.height))
-            
-            photoViewInput.cameraRollButton.addTarget(self, action: #selector(MapViewController.showCameraRoll), for: UIControlEvents.touchUpInside)
-            
-            
-            photoViewInput.takePhotoButton.addTarget(self, action: #selector(MapViewController.showCamera), for: UIControlEvents.touchUpInside)
-            
-            
-            self.view.addSubview(photoViewInput)
-        }
+//        else if AuthApi.getUserImage() == nil || AuthApi.getUserImage()?.characters.count == 0 {
+//            if self.hasChosenPhoto{
+//                self.photoInputView.isHidden = true
+//            }else{
+//                self.photoInputView.isHidden = false
+//            }
+//        }
         else if AuthApi.isNewUser(){
             self.showPopup()
         }
@@ -667,7 +676,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
     }
     
-    func showCameraRoll() {
+    @IBAction func showCameraRoll() {
         let photoPicker = UIImagePickerController()
         photoPicker.delegate = self
         self.present(photoPicker, animated: true, completion: {
@@ -675,7 +684,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         })
     }
     
-    func showCamera() {
+    @IBAction func showCamera() {
         let picker = UIImagePickerController()
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.allowsEditing = false
@@ -707,10 +716,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             completion: nil)
     }
     
-
+    
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        
-        
         popUpView.isHidden = true
         
         if let username = usernameInputView as? UsernameInputView{
@@ -747,7 +754,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
         return true
-
+        
         
     }
     
@@ -758,17 +765,17 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         
         
         let currentLocation =  CLLocation(latitude: lat, longitude: long)
-
         
-//        if let token = AuthApi.getYelpToken(){
-//            self.fetchPlaces(around: currentLocation, token: token)
-//        }
-//        else{
-//            getYelpToken(completion: {(token) in
-//                AuthApi.set(yelpAccessToken: token)
-//                self.fetchPlaces(around: currentLocation, token: token)
-//            })
-//        }
+        
+        //        if let token = AuthApi.getYelpToken(){
+        //            self.fetchPlaces(around: currentLocation, token: token)
+        //        }
+        //        else{
+        //            getYelpToken(completion: {(token) in
+        //                AuthApi.set(yelpAccessToken: token)
+        //                self.fetchPlaces(around: currentLocation, token: token)
+        //            })
+        //        }
         
         if AuthApi.getEventBriteToken() != nil{
             getEvents(around: currentLocation, completion: { events in
@@ -790,8 +797,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         switch status {
         case .notDetermined:
             print("NotDetermined")
-        
-        
+            
+            
         case .restricted:
             print("Restricted")
         case .denied:
@@ -836,7 +843,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
                 NSLog("One or more of the map styles failed to load. \(error)")
             }
         }
-        // Day Mode
+            // Day Mode
         else{
             do {
                 // Set the map style by passing the URL of the local file.
@@ -851,20 +858,20 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
         self.currentLocation = location
-//        self.searchPlacesTab?.location = location
+        //        self.searchPlacesTab?.location = location
         
-//        if let token = AuthApi.getYelpToken(){
-//            self.fetchPlaces(around: self.currentLocation!, token: token)
-//        }
-//        else{
-//            getYelpToken(completion: {(token) in
-//                self.fetchPlaces(around: self.currentLocation!, token: token)
-//            })
-//        }
+        //        if let token = AuthApi.getYelpToken(){
+        //            self.fetchPlaces(around: self.currentLocation!, token: token)
+        //        }
+        //        else{
+        //            getYelpToken(completion: {(token) in
+        //                self.fetchPlaces(around: self.currentLocation!, token: token)
+        //            })
+        //        }
         
         if !willShowEvent && !willShowPin && !willShowPlace{
             mapView.settings.myLocationButton = true
-
+            
             if mapView.isHidden {
                 mapView.isHidden = false
                 mapView.camera = camera
@@ -873,7 +880,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             }
         }
         
-
+        
     }
     
     func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
@@ -881,7 +888,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let status = CLLocationManager.authorizationStatus()
         
         print("The status of autjorization is \(status.rawValue)")
-    
+        
         if (!(status == CLAuthorizationStatus.authorizedWhenInUse || status == CLAuthorizationStatus.authorizedAlways)) {
             let alert = UIAlertController(title: "Location Authorization", message:"Please authorize use of your location in settings" , preferredStyle: UIAlertControllerStyle.alert)
             
@@ -997,7 +1004,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         }
         
     }
-
+    
     func showPopup(){
         
         let overlayAppearance = PopupDialogOverlayView.appearance()
@@ -1030,14 +1037,14 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         onboardingVC.arrowImage = self.popupArrowImage
         onboardingVC.delegate = self
         onboardingVC.mapVC = self
-//        onboardingVC.testImage = self.testImage
+        //        onboardingVC.testImage = self.testImage
         
         // Create the dialog
         let popup = PopupDialog(viewController: onboardingVC, buttonAlignment: .horizontal, transitionStyle: .bounceDown, gestureDismissal: false)
         
         
         popup.view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
-
+        
         AuthApi.setNewUser()
         Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/isNewUser").setValue(false)
         // Present dialog
@@ -1084,7 +1091,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
         let newRect = CGRect(x: x, y: 0, width: tabBarItemWidth, height: Int((self.tabBarController?.tabBar.frame.size.height)!))
         
         let popController = UIStoryboard(name: "CreateEventOnMapViewController", bundle: nil).instantiateViewController(withIdentifier: "CreateEventOnMapViewController") as! CreateEventOnMapViewController
-
+        
         popController.modalPresentationStyle = UIModalPresentationStyle.popover
         popController.preferredContentSize = CGSize(width: 345, height: 354)
         
@@ -1133,7 +1140,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
 
 extension MapViewController{
     func tapEvent(event: Event, data: Data?){
-    
+        
         popUpView.isHidden = false
         
         popUpScreen.object = event
@@ -1144,7 +1151,7 @@ extension MapViewController{
         var start = ""
         var ticketMasterDF = DateFormatter()
         ticketMasterDF.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         print("map date \(event.date)")
@@ -1154,10 +1161,10 @@ extension MapViewController{
         }
             
         else if let time = event.date?.components(separatedBy: "T"), time.count > 1{
-                let date = dateFormatter.date(from: time[1])
-                dateFormatter.dateFormat = "h:mm a"
-                
-                start = dateFormatter.string(from: date!)
+            let date = dateFormatter.date(from: time[1])
+            dateFormatter.dateFormat = "h:mm a"
+            
+            start = dateFormatter.string(from: date!)
         }
         else{
             if let time = ticketMasterDF.date(from: event.date!){
@@ -1169,15 +1176,15 @@ extension MapViewController{
             }
         }
         
-//        if let date = self.ticketMasterDF.date(from: event.date!){
-//            cell.dateAndTimeLabel.text = eventDF.string(from: date)
-//        }
-//        else{
-//            cell.dateAndTimeLabel.text = event.date!
-//        }
-    
+        //        if let date = self.ticketMasterDF.date(from: event.date!){
+        //            cell.dateAndTimeLabel.text = eventDF.string(from: date)
+        //        }
+        //        else{
+        //            cell.dateAndTimeLabel.text = event.date!
+        //        }
+        
         let placeholderImage = UIImage(named: "empty_event")
-
+        
         if let id = event.id{
             let reference = Constants.storage.event.child("\(id).jpg")
             
@@ -1233,7 +1240,7 @@ extension MapViewController{
     }
     
     func tapPlace(place: Place, marker: GMSMarker){
-
+        
         popUpView.isHidden = false
         
         popUpScreen.object = place
@@ -1301,6 +1308,7 @@ extension MapViewController{
 
 extension MapViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.hasChosenPhoto = true
         self.dismiss(animated: true, completion: { () -> Void in
             
         })
@@ -1327,16 +1335,10 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
                 }
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 AuthApi.set(userImage: metadata.downloadURL()?.absoluteString)
-                
+                self.hasChosenPhoto = true
+                self.view.setNeedsDisplay()
             }
         }
-        
-        self.photoInputView.isHidden = true
-        self.mapView.sendSubview(toBack: self.photoInputView)
-        
-//        self.photoInputView.isHidden = true
-//        self.photoInputView.removeFromSuperview()
-        
         
         if self.friends.count > 0{
             let followYourFriendsSubView = FollowYourFriendsView(frame: CGRect(x: 0, y: 0, width: self.followYourFriendsView.frame.size.width, height: self.followYourFriendsView.frame.size.height))
@@ -1415,7 +1417,7 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
                 //self.lastPins.append(marker)
             }
         }
-
+        
     }
     
     func showPlaceMarker(place: Place){
@@ -1429,8 +1431,8 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
         
         let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
         let camera = GMSCameraPosition.camera(withLatitude: Double(event.latitude!)!,
-                                          longitude: Double((event.longitude!))!,
-                                          zoom: 13)
+                                              longitude: Double((event.longitude!))!,
+                                              zoom: 13)
         
         self.eventPlaceMarker = GMSMarker(position: position)
         let eventMarker = UIImage(image: #imageLiteral(resourceName: "intro_event"), scaledTo: CGSize(width: 60, height: 60))
@@ -1452,3 +1454,4 @@ extension MapViewController: UIImagePickerControllerDelegate, UINavigationContro
         tapEvent(event: event, data: data)
     }
 }
+
