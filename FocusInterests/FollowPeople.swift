@@ -54,8 +54,17 @@ class Follow{
                         ])
                     
                 }
+                
+                if let user = User.toUser(info: data){
+                    var following = (DataCache.instance.readObject(forKey: "following_users") as? [User])!
+                    
+                    following.append(user)
+                    DataCache.instance.write(object: following as NSCoding, forKey: "following_users")
+                }
             }
         })
+        
+        
         
     }
     
@@ -77,9 +86,17 @@ class Follow{
                     
                 }
             }
-            
-            
         })
+        
+        var following = (DataCache.instance.readObject(forKey: "following_users") as? [User])!
+        
+        for (index,user) in following.enumerated(){
+            if user.uuid == uid{
+                following.remove(at: index)
+                break
+            }
+        }
+        DataCache.instance.write(object: following as NSCoding, forKey: "following_users")
     }
     
     static func followPlace(id: String){

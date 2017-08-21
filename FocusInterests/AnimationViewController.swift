@@ -54,13 +54,13 @@ class AnimationViewController: UIViewController {
         getEvents()
         
     
-//        User.getFollowing(gotFollowing: {users in
-//            DataCache.instance.write(object: users as NSCoding, forKey: "following_users")
-//        })
-//        
-//        User.getFollowers(gotFollowers: {users in
-//            DataCache.instance.write(object: users as NSCoding, forKey: "followers_users")
-//        })
+        User.getFollowing(gotFollowing: {users in
+            DataCache.instance.write(object: users as NSCoding, forKey: "following_users")
+        })
+        
+        User.getFollowers(gotFollowers: {users in
+            DataCache.instance.write(object: users as NSCoding, forKey: "followers_users")
+        })
         
         if let token = AuthApi.getYelpToken(){
             showPlaces(showAll: false, interests: "")
