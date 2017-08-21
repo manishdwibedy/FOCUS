@@ -74,9 +74,11 @@ class User: NSObject, NSCoding {
         
     }
     
-    
-    static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.uuid == rhs.uuid
+    override func isEqual(_ object: Any?) -> Bool{
+        if let rhs = object as? User{
+            return self.uuid == rhs.uuid
+        }
+        return false
     }
     
     required init(coder decoder: NSCoder) {
@@ -143,6 +145,7 @@ class User: NSObject, NSCoding {
     
     static func getFollowing(gotFollowing: @escaping (_ result: [User]) -> Void){
         var following = [User]()
+        var count = 0
         Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("following/people").observeSingleEvent(of: .value, with: {snapshot in
             
             if let people = snapshot.value as? [String:[String:Any]]{
@@ -154,8 +157,9 @@ class User: NSObject, NSCoding {
                     Constants.DB.user.child(uid).observeSingleEvent(of: .value, with: {snapshot in
                         if let value = snapshot.value as? [String:Any]{
                             if let user = User.toUser(info: value){
-                                
-                                following.append(user)
+                                if !following.contains(user){
+                                    following.append(user)
+                                }
                                 
                                 if following.count == count{
                                     gotFollowing(following)
