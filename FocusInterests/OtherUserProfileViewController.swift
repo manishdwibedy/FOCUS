@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import GeoFire
 import FirebaseDatabase
+import DataCache
 
 protocol OtherUserProfileViewControllerDelegate {
     func hasSentUserAnInvite()
@@ -1389,6 +1390,7 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
         vc.selectedIndex = 0
         vc.showPin = self.pinInfo
         
+        DataCache.instance.write(object: self.pinInfo! as NSCoding, forKey: "view_pin")
         delegate?.showPinMarker(pin: self.pinInfo!, show: true)
         self.present(vc, animated: true, completion: nil)
     }

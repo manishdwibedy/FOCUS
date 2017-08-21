@@ -11,6 +11,7 @@ import SDWebImage
 import GeoFire
 import FirebaseDatabase
 import Crashlytics
+import DataCache
 
 enum previousScreen{
     case people
