@@ -158,6 +158,20 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                     AuthApi.set(userImage: nil)
                                 }
                                 
+                                if let interests = info?["interests"] as? String{
+                                    AuthApi.set(interests: interests)
+                                }
+                                else{
+                                    AuthApi.set(interests: "")
+                                }
+                                
+                                if let username = info?["username"] as? String{
+                                    AuthApi.set(username: username)
+                                }
+                                else{
+                                    AuthApi.set(username: "")
+                                }
+                                
                                 if let privateProfile = info?["private"] as? Bool{
                                     AuthApi.set(privateProfile: privateProfile)
                                 }
@@ -165,6 +179,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                                     Constants.DB.user.child("\(AuthApi.getFirebaseUid()!)/private").setValue(false)
                                 }
                                 
+                                self.showHomeVC()
                             })
                             
                             Constants.DB.user.child(AuthApi.getFirebaseUid()!).child("blocked/people").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -186,7 +201,7 @@ class LoginViewController: UIViewController,GIDSignInUIDelegate, GIDSignInDelega
                             self.passwordTextField.text = ""
                             self.defaults.set(user?.uid, forKey: "firebaseEmailLogin")
                             AuthApi.set(userEmail: email)
-                            self.showHomeVC()
+                            
                             
                             
                         } else {
