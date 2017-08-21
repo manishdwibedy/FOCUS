@@ -213,33 +213,48 @@ extension Event{
         
         let timeDF = DateFormatter()
         timeDF.dateFormat = "h:mm a"
-        
         var count = 0
-        Constants.DB.event.observe(DataEventType.childAdded, with: { (snapshot) in
-            let events = snapshot.value as? [String : Any] ?? [:]
-            let info = events// as? [String:Any]
-            
-            if let event = Event.toEvent(info: info){
-                
-                if let end = timeDF.date(from: event.endTime){
-                    count += 1
-                    let start = DF.date(from: event.date!)!
-                    if start < Date() && end > Date() && !event.privateEvent{
-                        eventList.append(event)
+        
+        Constants.DB.event.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let events = snapshot.value as? [String : Any]{
+                for (id, eventInfo) in events{
+                    if let event = Event.toEvent(info: eventInfo as! [String : Any]){
+                        event.id = id
+                        let date = DF.date(from: event.date!)!
+                        let gregorianCalendar = Calendar(identifier: .gregorian)
+                        var dateSelected = gregorianCalendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+                        
+                        dateSelected.year = 2017
+                        
+                        let event_date = gregorianCalendar.date(from: dateSelected)!
+                        
+                        
+                        if let end = timeDF.date(from: event.endTime){
+                            let start = DF.date(from: event.date!)!
+                            if start < Date() && end > Date() && !event.privateEvent{
+                                eventList.append(event)
+                            }
+                        }
+                            
+                        else if event_date > Date() && !event.privateEvent{
+                            if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
+                                eventList.append(event)
+                            }
+                            else if !eventList.contains(event){
+                                eventList.append(event)
+                            }
+                            
+                            
+                        }
+                        
                     }
                 }
-                    
-                else if DF.date(from: event.date!)! > Date() && !event.privateEvent{
-                    if Calendar.current.dateComponents([.hour], from: DF.date(from: event.date!)!, to: Date()).hour ?? 0 < 24{
-                        count += 1
-                        eventList.append(event)
-                    }
-                }
+                gotEvents(eventList)
                 
-                if count == eventList.count{
-                    gotEvents(eventList)
-                }
             }
+            
+            
+            
         })
     }
     
