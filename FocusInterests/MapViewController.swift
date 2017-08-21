@@ -233,9 +233,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        getAttendingEvent(uid: AuthApi.getFirebaseUid()!, gotEvents: {events in
-            print(events)
-        })
         // remove any old pins
         for marker in self.lastPins{
             marker.map = nil
@@ -287,16 +284,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             self.lastPins.append(marker)
         }
         
-        for (index, event) in self.events.enumerated(){
-            let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
-            let marker = GMSMarker(position: position)
-            let eventMarker = UIImage(image: #imageLiteral(resourceName: "intro_event"), scaledTo: CGSize(width: 60, height: 60))
-            marker.icon = eventMarker
-            marker.title = event.title
-            marker.map = self.mapView
-            marker.accessibilityLabel = "event_\(index)"
-            
-        }
+//        for (index, event) in self.events.enumerated(){
+//            let position = CLLocationCoordinate2D(latitude: Double(event.latitude!)!, longitude: Double(event.longitude!)!)
+//            let marker = GMSMarker(position: position)
+//            let eventMarker = UIImage(image: #imageLiteral(resourceName: "intro_event"), scaledTo: CGSize(width: 60, height: 60))
+//            marker.icon = eventMarker
+//            marker.title = event.title
+//            marker.map = self.mapView
+//            marker.accessibilityLabel = "event_\(index)"
+//            
+//        }
         
         for (index, place) in self.followingPlaces.enumerated(){
             let position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)

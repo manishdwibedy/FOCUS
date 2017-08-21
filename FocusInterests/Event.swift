@@ -220,6 +220,10 @@ extension Event{
                 for (id, eventInfo) in events{
                     if let event = Event.toEvent(info: eventInfo as! [String : Any]){
                         event.id = id
+                        if event.title! == "Beach Day"{
+                            print(event.title!)
+                        }
+                        
                         let date = DF.date(from: event.date!)!
                         let gregorianCalendar = Calendar(identifier: .gregorian)
                         var dateSelected = gregorianCalendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
@@ -237,7 +241,7 @@ extension Event{
                         }
                             
                         else if event_date > Date() && !event.privateEvent{
-                            if Calendar.current.dateComponents([.day], from: DF.date(from: event.date!)!, to: Date()).day ?? 0 <= 7{
+                            if Calendar.current.dateComponents([.day], from: event_date, to: Date()).day ?? 0 <= 7{
                                 eventList.append(event)
                             }
                             else if !eventList.contains(event){

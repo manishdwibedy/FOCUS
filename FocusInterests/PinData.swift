@@ -45,7 +45,7 @@ class pinData: NSObject, NSCoding{
         
         self.focus = aDecoder.decodeObject(forKey: "focus") as! String
         self.username = aDecoder.decodeObject(forKey: "username") as! String
-        self.dbPath = Constants.DB.pins.child(self.username)
+//        self.dbPath = Constants.DB.pins.child(self.username)
        
     }
     
