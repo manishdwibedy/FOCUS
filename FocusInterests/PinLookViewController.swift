@@ -25,8 +25,11 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var navBar: UINavigationBar!
     
+    @IBOutlet weak var pinMessageLabelHeight: NSLayoutConstraint!
     @IBOutlet weak var commentsStackView: UIStackView!
     @IBOutlet weak var commentHeight: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewHeight: NSLayoutConstraint!
+    
     var data: pinData!
     var dictData = NSDictionary()
     var likes = 0
@@ -85,7 +88,6 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                     let range = NSMakeRange(0, length)
                     
                     self.pinMessageLabel.attributedText = attributedString(from: messageText, boldRange: range)
-                    
                 }
                 else{
                     self.usernameLabel.text = "N.A."
@@ -97,7 +99,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             }
         })
         
-        addressTopOut.setTitle(data.locationAddress.replacingOccurrences(of: ";;", with: "\n", options: .literal, range: nil), for: UIControlState.normal)
+        addressTopOut.setTitle(data.locationAddress.replacingOccurrences(of: ";;", with: " ", options: .literal, range: nil), for: UIControlState.normal)
         
         let formatter = DateFormatter()
         let date = Date(timeIntervalSince1970: data.dateTimeStamp)
@@ -117,7 +119,7 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                         firstVal = key as! String
                         break
                     }
-                    let bigImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.viewForMap.frame.width, height: self.viewForMap.frame.height))
+                    let bigImage = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.viewForMap.frame.height))
                     
                     bigImage.contentMode = UIViewContentMode.scaleAspectFill
                     bigImage.clipsToBounds = true
@@ -250,34 +252,25 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
                         if value != nil
                         {
                             let username = value?["username"] as! String
-                            
-                            let textLabel = UILabel()
-                            textLabel.textColor = .white
-                            textLabel.numberOfLines = 0
-                            textLabel.lineBreakMode = .byClipping
-                            let labelSizeWithFixedWith = CGSize(width: self.commentsStackView.frame.width, height: CGFloat.greatestFiniteMagnitude)
-                            let exactLabelsize = textLabel.sizeThatFits(labelSizeWithFixedWith)
-                            textLabel.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: exactLabelsize)
-                            
                             let messageText = "\(username) \(data?["comment"] as! String)"
-                            
                             let length = messageText.characters.count - username.characters.count
                             let range = NSMakeRange(username.characters.count, length)
                             
-                            textLabel.attributedText = attributedString(from: messageText, nonBoldRange: range)
-                            textLabel.textAlignment = .left
+                            let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.commentsStackView.frame.width, height: 25))
+                            commentLabel.textColor = .white
+                            commentLabel.numberOfLines = 0
+                            commentLabel.lineBreakMode = .byWordWrapping
+                            commentLabel.textAlignment = .left
+                            commentLabel.attributedText = attributedString(from: messageText, nonBoldRange: range)
+                            commentLabel.sizeToFit()
                             
-                            self.commentsStackView.addArrangedSubview(textLabel)
+                            self.commentsStackView.addArrangedSubview(commentLabel)
                             self.commentsStackView.translatesAutoresizingMaskIntoConstraints = false
                             let tap = UITapGestureRecognizer(target: self, action: #selector(self.showComments(_:)))
                             self.commentsStackView.addGestureRecognizer(tap)
-                            
                         }
                     })
-                    
                 }
-                
-                
             }
         })
         
@@ -304,13 +297,30 @@ class PinLookViewController: UIViewController, GMSMapViewDelegate {
             }
         })
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.pinMessageLabelHeight.constant = self.pinMessageLabel.intrinsicContentSize.height
+//        if self.commentsStackView.arrangedSubviews.count == 1{
+//            self.commentHeight.constant = CGFloat(commentsStackView.arrangedSubviews[0].intrinsicContentSize.height)
+//        }else if self.commentsStackView.arrangedSubviews.count > 1{
+//            self.commentHeight.constant += CGFloat(30)
+//        }
+//        for commentIndex in 0...self.commentsStackView.arrangedSubviews.count-1{
+//            if self.commentsStackView.arrangedSubviews.count == 1{
+//                self.commentHeight.constant = CGFloat(commentsStackView.arrangedSubviews[commentIndex].intrinsicContentSize.height)
+//            }else if self.commentsStackView.arrangedSubviews.count > 1{
+//                self.commentHeight.constant += CGFloat(commentsStackView.arrangedSubviews[commentIndex].intrinsicContentSize.height)
+//            }
+//        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.commentsStackView.arrangedSubviews.count > 0{
-            for labelIndex in 0...self.commentsStackView.arrangedSubviews.count-1{
-                print(self.commentsStackView.subviews[labelIndex].intrinsicContentSize)
-                self.commentHeight.constant += CGFloat(self.commentsStackView.subviews[labelIndex].intrinsicContentSize.height)
+        if commentsStackView.arrangedSubviews.count > 0 {
+            for commentIndex in 0...self.commentsStackView.arrangedSubviews.count-1{
+                self.commentHeight.constant += CGFloat(commentsStackView.arrangedSubviews[commentIndex].intrinsicContentSize.height)
             }
         }
     }
