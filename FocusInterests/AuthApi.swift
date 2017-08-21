@@ -308,6 +308,18 @@ struct AuthApi {
         defaults.set(false, forKey: "notification")
     }
     
+    static func getViewPin() -> pinData?{
+        if let pin = defaults.object(forKey: "view_pin") as? pinData {
+            defaults.set(nil, forKey: "view_pin")
+            return pin
+        }
+        return nil
+    }
+    
+    static func setViewPin(pin: pinData?){
+        defaults.set(pin, forKey: "view_pin")
+    }
+    
     static func getUnreadNotifications() -> Int{
         if let count = defaults.object(forKey: "notification_count") as? Int {
             return count

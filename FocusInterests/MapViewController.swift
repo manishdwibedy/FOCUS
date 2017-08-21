@@ -341,6 +341,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, GMSMapVi
             
             var camera: GMSCameraPosition? = nil
             
+            
+            if let pin = (DataCache.instance.readObject(forKey: "view_pin") as? pinData){
+                self.showPin = pin
+            }
+            
             if let pin = self.showPin, willShowPin{
                 
                 let position = CLLocationCoordinate2D(latitude: pin.coordinates.latitude, longitude: pin.coordinates.longitude)

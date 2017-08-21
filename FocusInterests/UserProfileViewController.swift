@@ -779,6 +779,7 @@ class UserProfileViewController: UIViewController, UICollectionViewDataSource, U
         vc.location = CLLocation(latitude: (self.pinInfo?.coordinates.latitude)!, longitude: (self.pinInfo?.coordinates.longitude)!)
         vc.selectedIndex = 0
         vc.showPin = self.pinInfo
+        DataCache.instance.write(object: self.pinInfo! as NSCoding, forKey: "view_pin")
         
         self.present(vc, animated: true, completion: {
             self.delegate?.showPinMarker(pin: self.pinInfo!, show: true)
