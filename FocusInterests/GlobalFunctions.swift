@@ -529,40 +529,44 @@ func getAllActivity(gotPins: @escaping (_ pins: [FocusNotification]) -> Void, go
                         if let eventInfo = eventInfo{
                             for (id, event) in eventInfo{
                                 if let info = event as? [String:Any]{
-                                    let event = Event.toEvent(info: info)
-                                    event?.id = id
-                                    //                        MMM dd, hh:mm
-                                    let dateFormatter = DateFormatter()
-                                    dateFormatter.dateFormat = "MMM d, h:mm a"
-                                    
-                                    let time = dateFormatter.date(from: (event?.date!)!)
-                                    
-                                    let gregorianCalendar = Calendar(identifier: .gregorian)
-                                    var components = gregorianCalendar.dateComponents([.year, .month, .day], from: time!)
-                                    
-                                    components.year = 2017
-                                    let date = gregorianCalendar.date(from: components)!
-                                    
-                                    
-                                    
-                                    let address = event?.shortAddress
-                                    let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
-                                    place.id = snapshot.key
-                                    place.data = [
-                                        "event": event
-                                    ]
-                                    
-                                    if let time = time{
-                                        let eventFeed = FocusNotification(type: NotificationType.Created, sender: user, item: place, time: date)
-                                        events.append(eventFeed)
+                                    if let event = Event.toEvent(info: info){
+                                        eventCount += 1
                                         
+                                        event.id = id
+                                        //                        MMM dd, hh:mm
+                                        let dateFormatter = DateFormatter()
+                                        dateFormatter.dateFormat = "MMM d, h:mm a"
+                                        
+                                        let time = dateFormatter.date(from: (event.date!))
+                                        
+                                        let gregorianCalendar = Calendar(identifier: .gregorian)
+                                        var components = gregorianCalendar.dateComponents([.year, .month, .day], from: time!)
+                                        
+                                        components.year = 2017
+                                        let date = gregorianCalendar.date(from: components)!
+                                        
+                                        
+                                        
+                                        let address = event.shortAddress
+                                        let place = ItemOfInterest(itemName: address, imageURL: nil, type: "event")
+                                        place.id = snapshot.key
+                                        place.data = [
+                                            "event": event
+                                        ]
+                                        
+                                        if let time = time{
+                                            let eventFeed = FocusNotification(type: NotificationType.Created, sender: user, item: place, time: date)
+                                            events.append(eventFeed)
+                                            
+                                        }
                                     }
+                                    
                                 }
                                 
                             }
                         }
-                        eventCount += 1
-                        if eventCount == followerCount{
+                        
+                        if eventCount == events.count{
                             gotEvents(events)
                             print("event done \(eventCount)")
                             print(events.count)
