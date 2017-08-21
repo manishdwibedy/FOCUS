@@ -134,7 +134,7 @@ class NotificationFeedViewController: UIViewController, UITableViewDataSource, U
             DataCache.instance.write(object: self.nofArray as NSCoding, forKey: "notifications")
             self.tableView.reloadData()
         } , gotFeed: {feed in
-            if feed.count > 0 && feed[0].type == .Pin{
+            if feed.count > 0 && (feed[0].type == .Pin || feed[0].type == .Going){
                 for notification in Array(Set<FocusNotification>(feed)){
                     if !self.nofArray.contains(notification){
                         self.nofArray.append(notification)
