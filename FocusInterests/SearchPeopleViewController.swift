@@ -117,6 +117,8 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
         
         var followingCount = 0
         
+        var userCount = 0
+        
         if let following = (DataCache.instance.readObject(forKey: "following_users") as? [User]){
             for user in following{
                 Constants.DB.pins.child(user.uuid!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -141,25 +143,10 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
                     
                     if !self.followers.contains(user){
                         self.followers.append(user)
+                        followingCount += 1
                     }
                     
-                    self.followers = self.followers.sorted {
-                        if $0.hasPin && $1.hasPin{
-                            return $0.pinDistance < $1.pinDistance
-                        }
-                        if $0.hasPin{
-                            return $0.hasPin
-                        }
-                        else if $1.hasPin{
-                            return $1.hasPin
-                        }
-                        else{
-                            return $0.username! < $1.username!
-                        }
-                        
-                    }
-                    
-                    if self.followers.count == followingCount && self.people.count > 0{
+                    if self.followers.count == followingCount && (self.people.count > 0 || userCount == 0) {
                         
                         self.people.sort {
                             if $0.hasPin && $1.hasPin{
@@ -318,7 +305,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
 //            }
 //        })
         
-        var userCount = 0
+    
         _ = ref.observeSingleEvent(of: .value, with: { snapshot in
             let users = snapshot.value as? [String : Any] ?? [:]
             
@@ -326,6 +313,7 @@ class SearchPeopleViewController: UIViewController, UITableViewDelegate,UITableV
             for (_, user) in users{
                 if let info = user as? [String:Any]{
                     if let user = User.toUser(info: info){
+                        
                         if matchingUserInterest(user: user).count > 0{
                             userCount += 1
                             if user.uuid != AuthApi.getFirebaseUid(){

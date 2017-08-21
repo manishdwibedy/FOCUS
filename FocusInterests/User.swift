@@ -150,11 +150,11 @@ class User: NSObject, NSCoding {
                 
                 for (id, value) in people{
                     let uid = value["UID"] as! String
-                    
+                    count += 1
                     Constants.DB.user.child(uid).observeSingleEvent(of: .value, with: {snapshot in
                         if let value = snapshot.value as? [String:Any]{
                             if let user = User.toUser(info: value){
-                                count += 1
+                                
                                 following.append(user)
                                 
                                 if following.count == count{

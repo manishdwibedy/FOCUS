@@ -35,7 +35,7 @@ enum InterestStatus{
     }
 }
 
-class Interest: Equatable, Hashable {
+class Interest:NSObject, NSCoding {
     
     var name: String?
     var category: InterestCategory?
@@ -55,7 +55,15 @@ class Interest: Equatable, Hashable {
         
     }
     
-    var hashValue : Int {
+    required init(coder decoder: NSCoder) {
+        self.name = decoder.decodeObject(forKey: "name") as? String ?? ""
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.name, forKey: "name")
+    }
+    
+    override var hashValue : Int {
         get {
             return "\(self.name)".hashValue
         }
