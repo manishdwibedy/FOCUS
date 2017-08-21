@@ -27,11 +27,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GbE-L0-a00" userLabel="Photo Input View">
-                                <rect key="frame" x="56" y="229" width="262" height="208"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05W-Qw-2Y5" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -93,6 +88,61 @@
                                     <constraint firstItem="qaM-yH-rOB" firstAttribute="centerX" secondItem="Gfa-vo-Zxo" secondAttribute="centerX" id="amk-Bk-lbg"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GbE-L0-a00" userLabel="Photo Input View">
+                                <rect key="frame" x="29" y="205" width="318" height="208"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4x-02-YOZ">
+                                        <rect key="frame" x="95" y="33" width="128" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="aYT-x7-U3x"/>
+                                            <constraint firstAttribute="width" constant="128" id="nxd-bV-4es"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                        <color key="textColor" red="0.33725490200000002" green="0.3921568627" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dZ-k5-zFP">
+                                        <rect key="frame" x="18" y="81" width="281" height="46"/>
+                                        <color key="backgroundColor" red="0.50196078430000002" green="0.76078431369999999" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="ibN-xE-qwJ"/>
+                                        </constraints>
+                                        <state key="normal" title="Take a Photo">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showCamera" destination="VEY-4A-vsU" eventType="touchUpInside" id="bHb-5F-jON"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bt-2N-xLU">
+                                        <rect key="frame" x="18" y="135" width="281" height="46"/>
+                                        <color key="backgroundColor" red="0.50196078430000002" green="0.76078431369999999" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="gB0-Pz-Vzp"/>
+                                        </constraints>
+                                        <state key="normal" title="Camera Roll">
+                                            <color key="titleColor" red="0.97213039739999996" green="1" blue="0.98946931100000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showCameraRoll" destination="VEY-4A-vsU" eventType="touchUpInside" id="KAT-zt-mle"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="8dZ-k5-zFP" firstAttribute="centerY" secondItem="GbE-L0-a00" secondAttribute="centerY" id="1Yl-FN-QdN"/>
+                                    <constraint firstItem="2bt-2N-xLU" firstAttribute="centerX" secondItem="8dZ-k5-zFP" secondAttribute="centerX" id="BWe-wu-aoJ"/>
+                                    <constraint firstItem="8dZ-k5-zFP" firstAttribute="centerX" secondItem="GbE-L0-a00" secondAttribute="centerX" id="Ed1-de-PqL"/>
+                                    <constraint firstItem="8dZ-k5-zFP" firstAttribute="top" secondItem="X4x-02-YOZ" secondAttribute="bottom" constant="24" id="GHz-Qw-Ich"/>
+                                    <constraint firstItem="8dZ-k5-zFP" firstAttribute="leading" secondItem="GbE-L0-a00" secondAttribute="leading" constant="18" id="QXg-7A-zmt"/>
+                                    <constraint firstAttribute="height" constant="208" id="Rlx-9C-aF1"/>
+                                    <constraint firstItem="X4x-02-YOZ" firstAttribute="centerX" secondItem="8dZ-k5-zFP" secondAttribute="centerX" id="h5u-Lr-7eU"/>
+                                    <constraint firstAttribute="trailing" secondItem="8dZ-k5-zFP" secondAttribute="trailing" constant="19" id="ntW-RR-Mgh"/>
+                                    <constraint firstItem="2bt-2N-xLU" firstAttribute="top" secondItem="8dZ-k5-zFP" secondAttribute="bottom" constant="8" id="pcD-Yk-Jz4"/>
+                                    <constraint firstItem="8dZ-k5-zFP" firstAttribute="width" secondItem="2bt-2N-xLU" secondAttribute="width" id="psf-LI-2Ah"/>
+                                    <constraint firstAttribute="width" constant="318" id="qpd-wU-wkz"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.15686274510000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -104,9 +154,11 @@
                             <constraint firstAttribute="trailing" secondItem="bIq-Pr-ji4" secondAttribute="trailing" id="H69-6o-iu0"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="VpH-45-PKf" secondAttribute="bottom" constant="38" id="LM0-Ym-nZL"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="to3-UK-Oze" secondAttribute="bottom" constant="-20" id="MIK-K5-avi"/>
+                            <constraint firstItem="GbE-L0-a00" firstAttribute="centerX" secondItem="wPw-hG-pw7" secondAttribute="centerX" id="PPI-rw-l9P"/>
                             <constraint firstItem="bIq-Pr-ji4" firstAttribute="top" secondItem="Qds-eU-oPP" secondAttribute="bottom" id="Pe2-YI-lSy"/>
                             <constraint firstItem="Gfa-vo-Zxo" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" constant="5" id="Srs-34-UVg"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="05W-Qw-2Y5" secondAttribute="bottom" id="dIH-f6-lgF"/>
+                            <constraint firstItem="GbE-L0-a00" firstAttribute="centerY" secondItem="wPw-hG-pw7" secondAttribute="centerY" id="kuU-YR-hKH"/>
                             <constraint firstItem="eXg-e1-3g9" firstAttribute="top" secondItem="9GY-g7-gUF" secondAttribute="bottom" id="ndc-Hh-qgn"/>
                             <constraint firstItem="9GY-g7-gUF" firstAttribute="leading" secondItem="wPw-hG-pw7" secondAttribute="leading" id="p0d-Ju-lSt"/>
                             <constraint firstAttribute="trailing" secondItem="Gfa-vo-Zxo" secondAttribute="trailing" constant="5" id="pHB-Ty-8fI"/>
@@ -123,6 +175,7 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="cameraRollButton" destination="2bt-2N-xLU" id="cAZ-Kd-w4R"/>
                         <outlet property="followYourFriendsView" destination="4Vi-EG-jX7" id="j50-mt-ejv"/>
                         <outlet property="invitePopupView" destination="Gfa-vo-Zxo" id="5Sv-ob-Uin"/>
                         <outlet property="invitePopupViewBottomConstraint" destination="586-3p-Y7P" id="v5S-sY-j3x"/>
@@ -133,6 +186,7 @@
                         <outlet property="popUpView" destination="9GY-g7-gUF" id="0KR-mZ-pkT"/>
                         <outlet property="popupArrowImage" destination="to3-UK-Oze" id="5nh-bb-S3E"/>
                         <outlet property="settingGearButton" destination="VpH-45-PKf" id="aVl-X2-Iqc"/>
+                        <outlet property="takeAPhotoButton" destination="8dZ-k5-zFP" id="ELo-bl-iAA"/>
                         <outlet property="usernameInputView" destination="4lZ-Kb-68f" id="OGO-WP-XTU"/>
                     </connections>
                 </viewController>
