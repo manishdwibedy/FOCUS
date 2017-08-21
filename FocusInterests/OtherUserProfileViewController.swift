@@ -499,6 +499,20 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                 let fullname = dictionnary["fullname"] as? String ?? ""
                 
                 
+                self.userImage.image = #imageLiteral(resourceName: "placeholder_people")
+                if let url = URL(string: image_string){
+                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
+                        (receivedSize :Int, ExpectedSize :Int) in
+                        
+                    }, completed: {
+                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
+                        
+                        if image != nil && finished{
+                            self.userImage.image = crop(image: image!, width: 85, height: 85)
+                        }
+                    })
+                }
+                
 //                SAMPLE description text
 
                 self.fullNameLabel.text = fullname
@@ -735,20 +749,6 @@ class OtherUserProfileViewController: UIViewController, UICollectionViewDataSour
                         
                     }
                 }
-                
-                self.userImage.image = #imageLiteral(resourceName: "placeholder_people")
-                if let url = URL(string: image_string){
-                    SDWebImageManager.shared().downloadImage(with: url, options: .continueInBackground, progress: {
-                        (receivedSize :Int, ExpectedSize :Int) in
-                        
-                    }, completed: {
-                        (image : UIImage?, error : Error?, cacheType : SDImageCacheType, finished : Bool, url : URL?) in
-                        
-                        if image != nil && finished{
-                            self.userImage.image = crop(image: image!, width: 85, height: 85)
-                        }
-                    })
-                }                
             }
             
         })
